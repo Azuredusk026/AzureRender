@@ -1,0 +1,1430 @@
+{
+  "status": "qualified-projected-hair-point-mip",
+  "overallStatus": "failed-user-review",
+  "cases": {
+    "release-nvidia": {
+      "configuration": "Release",
+      "device": "nvidia",
+      "pci": [
+        4318,
+        10464
+      ],
+      "descriptorIndexing": false,
+      "attachments": {
+        "raster": {
+          "exact": true,
+          "sha256": "f1ef0ea6a727554f6593b2c2333e49650eec5c8f2b25acb03d8e250ae8ce35a2",
+          "baselineSha256": "f1ef0ea6a727554f6593b2c2333e49650eec5c8f2b25acb03d8e250ae8ce35a2"
+        },
+        "hardware": {
+          "exact": true,
+          "sha256": "f1ef0ea6a727554f6593b2c2333e49650eec5c8f2b25acb03d8e250ae8ce35a2",
+          "baselineSha256": "f1ef0ea6a727554f6593b2c2333e49650eec5c8f2b25acb03d8e250ae8ce35a2"
+        },
+        "packedNormals": {
+          "exact": true,
+          "sha256": "37df16157c41a1ffdacb7b2ad21e9d84d7a0b81612e7b79c0bc294c496c1c424",
+          "baselineSha256": "37df16157c41a1ffdacb7b2ad21e9d84d7a0b81612e7b79c0bc294c496c1c424"
+        },
+        "objectIds": {
+          "exact": true,
+          "sha256": "d14ae2982d8d7b1f99c93572ba6d0ce9f9af3643cd250a2636b3c4b765a62a10",
+          "baselineSha256": "d14ae2982d8d7b1f99c93572ba6d0ce9f9af3643cd250a2636b3c4b765a62a10"
+        },
+        "objectVisibility": {
+          "exact": true,
+          "sha256": "1010efb44d81c2bef5c0384cd50844a97537cf79c5750f35220b4b0e2cae8336",
+          "baselineSha256": "1010efb44d81c2bef5c0384cd50844a97537cf79c5750f35220b4b0e2cae8336"
+        }
+      },
+      "colors": [
+        {
+          "exactDiagnosticPng": true,
+          "sha256": "e7673fd8104605089e3cfec894dd2337acd7579569be86a23683ed1cb6f622a4",
+          "expectedSha256": "e7673fd8104605089e3cfec894dd2337acd7579569be86a23683ed1cb6f622a4",
+          "overOne": 0,
+          "maximum": 1
+        },
+        {
+          "exactDiagnosticPng": true,
+          "sha256": "e7673fd8104605089e3cfec894dd2337acd7579569be86a23683ed1cb6f622a4",
+          "expectedSha256": "e7673fd8104605089e3cfec894dd2337acd7579569be86a23683ed1cb6f622a4",
+          "overOne": 0,
+          "maximum": 1
+        },
+        {
+          "exactDiagnosticPng": true,
+          "sha256": "e7673fd8104605089e3cfec894dd2337acd7579569be86a23683ed1cb6f622a4",
+          "expectedSha256": "e7673fd8104605089e3cfec894dd2337acd7579569be86a23683ed1cb6f622a4",
+          "overOne": 0,
+          "maximum": 1
+        }
+      ],
+      "validationClean": true,
+      "allocatorZero": true,
+      "playerSha256": "31164f34b76b1c23e2a2ad9ac6c489b93c21eb97c89a4495563600a44774b357",
+      "receiver": {
+        "samples": 49384,
+        "baselineOverOne": 237,
+        "overOne": 237,
+        "introduced": 0,
+        "closed": 0,
+        "normalsChanged": 0
+      },
+      "hairVisibility": {
+        "overOne": 0,
+        "baselineOverOne": 0,
+        "closed": 0,
+        "introduced": 0
+      },
+      "referenceNormal": {
+        "baselineExact": 16967,
+        "exact": 16967,
+        "baselineOverOne": 0,
+        "overOne": 0,
+        "maximum": 1,
+        "changed": 0
+      }
+    },
+    "release-intel": {
+      "configuration": "Release",
+      "device": "intel",
+      "pci": [
+        32902,
+        42888
+      ],
+      "descriptorIndexing": false,
+      "attachments": {
+        "raster": {
+          "exact": true,
+          "sha256": "d2dbed224741d08e346cd7a30f2feed0b3883bb5346d42c7889d84df8d241a45",
+          "baselineSha256": "d2dbed224741d08e346cd7a30f2feed0b3883bb5346d42c7889d84df8d241a45"
+        },
+        "hardware": {
+          "exact": true,
+          "sha256": "d2dbed224741d08e346cd7a30f2feed0b3883bb5346d42c7889d84df8d241a45",
+          "baselineSha256": "d2dbed224741d08e346cd7a30f2feed0b3883bb5346d42c7889d84df8d241a45"
+        },
+        "packedNormals": {
+          "exact": true,
+          "sha256": "cc379c0b311eaf6c4d28093c88adf642190ee5b694d1a9b32d98a811fab73132",
+          "baselineSha256": "cc379c0b311eaf6c4d28093c88adf642190ee5b694d1a9b32d98a811fab73132"
+        },
+        "objectIds": {
+          "exact": true,
+          "sha256": "f831b78c8c2d0242fb00e5530f59791d952141d85fa02bf41e1aa2387bc7248b",
+          "baselineSha256": "f831b78c8c2d0242fb00e5530f59791d952141d85fa02bf41e1aa2387bc7248b"
+        },
+        "objectVisibility": {
+          "exact": true,
+          "sha256": "6e7b8e5a946cd8758a935462ae68e1bc6d25c6b9ab2a2e54ce8bfb8b2ad7e4c3",
+          "baselineSha256": "6e7b8e5a946cd8758a935462ae68e1bc6d25c6b9ab2a2e54ce8bfb8b2ad7e4c3"
+        }
+      },
+      "colors": [
+        {
+          "exactDiagnosticPng": true,
+          "sha256": "282969ea1d2cb48896ed20d9104e8422fe6fa70bb12f404e9af908c03e9463df",
+          "expectedSha256": "282969ea1d2cb48896ed20d9104e8422fe6fa70bb12f404e9af908c03e9463df",
+          "overOne": 32,
+          "maximum": 29
+        },
+        {
+          "exactDiagnosticPng": true,
+          "sha256": "282969ea1d2cb48896ed20d9104e8422fe6fa70bb12f404e9af908c03e9463df",
+          "expectedSha256": "282969ea1d2cb48896ed20d9104e8422fe6fa70bb12f404e9af908c03e9463df",
+          "overOne": 32,
+          "maximum": 29
+        },
+        {
+          "exactDiagnosticPng": true,
+          "sha256": "282969ea1d2cb48896ed20d9104e8422fe6fa70bb12f404e9af908c03e9463df",
+          "expectedSha256": "282969ea1d2cb48896ed20d9104e8422fe6fa70bb12f404e9af908c03e9463df",
+          "overOne": 32,
+          "maximum": 29
+        }
+      ],
+      "validationClean": true,
+      "allocatorZero": true,
+      "playerSha256": "31164f34b76b1c23e2a2ad9ac6c489b93c21eb97c89a4495563600a44774b357",
+      "receiver": {
+        "samples": 49384,
+        "baselineOverOne": 608,
+        "overOne": 494,
+        "introduced": 1,
+        "closed": 115,
+        "normalsChanged": 1034
+      },
+      "hairVisibility": {
+        "overOne": 111,
+        "baselineOverOne": 208,
+        "closed": 98,
+        "introduced": 1
+      },
+      "referenceNormal": {
+        "baselineExact": 15274,
+        "exact": 16135,
+        "baselineOverOne": 886,
+        "overOne": 25,
+        "maximum": 93,
+        "changed": 904
+      }
+    },
+    "debug-nvidia": {
+      "configuration": "Debug",
+      "device": "nvidia",
+      "pci": [
+        4318,
+        10464
+      ],
+      "descriptorIndexing": false,
+      "attachments": {
+        "raster": {
+          "exact": true,
+          "sha256": "f1ef0ea6a727554f6593b2c2333e49650eec5c8f2b25acb03d8e250ae8ce35a2",
+          "baselineSha256": "f1ef0ea6a727554f6593b2c2333e49650eec5c8f2b25acb03d8e250ae8ce35a2"
+        },
+        "hardware": {
+          "exact": true,
+          "sha256": "f1ef0ea6a727554f6593b2c2333e49650eec5c8f2b25acb03d8e250ae8ce35a2",
+          "baselineSha256": "f1ef0ea6a727554f6593b2c2333e49650eec5c8f2b25acb03d8e250ae8ce35a2"
+        },
+        "packedNormals": {
+          "exact": true,
+          "sha256": "37df16157c41a1ffdacb7b2ad21e9d84d7a0b81612e7b79c0bc294c496c1c424",
+          "baselineSha256": "37df16157c41a1ffdacb7b2ad21e9d84d7a0b81612e7b79c0bc294c496c1c424"
+        },
+        "objectIds": {
+          "exact": true,
+          "sha256": "d14ae2982d8d7b1f99c93572ba6d0ce9f9af3643cd250a2636b3c4b765a62a10",
+          "baselineSha256": "d14ae2982d8d7b1f99c93572ba6d0ce9f9af3643cd250a2636b3c4b765a62a10"
+        },
+        "objectVisibility": {
+          "exact": true,
+          "sha256": "1010efb44d81c2bef5c0384cd50844a97537cf79c5750f35220b4b0e2cae8336",
+          "baselineSha256": "1010efb44d81c2bef5c0384cd50844a97537cf79c5750f35220b4b0e2cae8336"
+        }
+      },
+      "colors": [
+        {
+          "exactDiagnosticPng": true,
+          "sha256": "e7673fd8104605089e3cfec894dd2337acd7579569be86a23683ed1cb6f622a4",
+          "expectedSha256": "e7673fd8104605089e3cfec894dd2337acd7579569be86a23683ed1cb6f622a4",
+          "overOne": 0,
+          "maximum": 1
+        },
+        {
+          "exactDiagnosticPng": true,
+          "sha256": "e7673fd8104605089e3cfec894dd2337acd7579569be86a23683ed1cb6f622a4",
+          "expectedSha256": "e7673fd8104605089e3cfec894dd2337acd7579569be86a23683ed1cb6f622a4",
+          "overOne": 0,
+          "maximum": 1
+        },
+        {
+          "exactDiagnosticPng": true,
+          "sha256": "e7673fd8104605089e3cfec894dd2337acd7579569be86a23683ed1cb6f622a4",
+          "expectedSha256": "e7673fd8104605089e3cfec894dd2337acd7579569be86a23683ed1cb6f622a4",
+          "overOne": 0,
+          "maximum": 1
+        }
+      ],
+      "validationClean": true,
+      "allocatorZero": true,
+      "playerSha256": "fde9c9ac29d425db0acc30ea47ca6358fdda34a2272e3a46b4c1c02b51d3f775",
+      "receiver": {
+        "samples": 49384,
+        "baselineOverOne": 237,
+        "overOne": 237,
+        "introduced": 0,
+        "closed": 0,
+        "normalsChanged": 0
+      },
+      "hairVisibility": {
+        "overOne": 0,
+        "baselineOverOne": 0,
+        "closed": 0,
+        "introduced": 0
+      },
+      "referenceNormal": {
+        "baselineExact": 16967,
+        "exact": 16967,
+        "baselineOverOne": 0,
+        "overOne": 0,
+        "maximum": 1,
+        "changed": 0
+      }
+    },
+    "debug-intel": {
+      "configuration": "Debug",
+      "device": "intel",
+      "pci": [
+        32902,
+        42888
+      ],
+      "descriptorIndexing": false,
+      "attachments": {
+        "raster": {
+          "exact": true,
+          "sha256": "d2dbed224741d08e346cd7a30f2feed0b3883bb5346d42c7889d84df8d241a45",
+          "baselineSha256": "d2dbed224741d08e346cd7a30f2feed0b3883bb5346d42c7889d84df8d241a45"
+        },
+        "hardware": {
+          "exact": true,
+          "sha256": "d2dbed224741d08e346cd7a30f2feed0b3883bb5346d42c7889d84df8d241a45",
+          "baselineSha256": "d2dbed224741d08e346cd7a30f2feed0b3883bb5346d42c7889d84df8d241a45"
+        },
+        "packedNormals": {
+          "exact": true,
+          "sha256": "cc379c0b311eaf6c4d28093c88adf642190ee5b694d1a9b32d98a811fab73132",
+          "baselineSha256": "cc379c0b311eaf6c4d28093c88adf642190ee5b694d1a9b32d98a811fab73132"
+        },
+        "objectIds": {
+          "exact": true,
+          "sha256": "f831b78c8c2d0242fb00e5530f59791d952141d85fa02bf41e1aa2387bc7248b",
+          "baselineSha256": "f831b78c8c2d0242fb00e5530f59791d952141d85fa02bf41e1aa2387bc7248b"
+        },
+        "objectVisibility": {
+          "exact": true,
+          "sha256": "6e7b8e5a946cd8758a935462ae68e1bc6d25c6b9ab2a2e54ce8bfb8b2ad7e4c3",
+          "baselineSha256": "6e7b8e5a946cd8758a935462ae68e1bc6d25c6b9ab2a2e54ce8bfb8b2ad7e4c3"
+        }
+      },
+      "colors": [
+        {
+          "exactDiagnosticPng": true,
+          "sha256": "282969ea1d2cb48896ed20d9104e8422fe6fa70bb12f404e9af908c03e9463df",
+          "expectedSha256": "282969ea1d2cb48896ed20d9104e8422fe6fa70bb12f404e9af908c03e9463df",
+          "overOne": 32,
+          "maximum": 29
+        },
+        {
+          "exactDiagnosticPng": true,
+          "sha256": "282969ea1d2cb48896ed20d9104e8422fe6fa70bb12f404e9af908c03e9463df",
+          "expectedSha256": "282969ea1d2cb48896ed20d9104e8422fe6fa70bb12f404e9af908c03e9463df",
+          "overOne": 32,
+          "maximum": 29
+        },
+        {
+          "exactDiagnosticPng": true,
+          "sha256": "282969ea1d2cb48896ed20d9104e8422fe6fa70bb12f404e9af908c03e9463df",
+          "expectedSha256": "282969ea1d2cb48896ed20d9104e8422fe6fa70bb12f404e9af908c03e9463df",
+          "overOne": 32,
+          "maximum": 29
+        }
+      ],
+      "validationClean": true,
+      "allocatorZero": true,
+      "playerSha256": "fde9c9ac29d425db0acc30ea47ca6358fdda34a2272e3a46b4c1c02b51d3f775",
+      "receiver": {
+        "samples": 49384,
+        "baselineOverOne": 608,
+        "overOne": 494,
+        "introduced": 1,
+        "closed": 115,
+        "normalsChanged": 1034
+      },
+      "hairVisibility": {
+        "overOne": 111,
+        "baselineOverOne": 208,
+        "closed": 98,
+        "introduced": 1
+      },
+      "referenceNormal": {
+        "baselineExact": 15274,
+        "exact": 16135,
+        "baselineOverOne": 886,
+        "overOne": 25,
+        "maximum": 93,
+        "changed": 904
+      }
+    },
+    "release-nvidia-indexed": {
+      "configuration": "Release",
+      "device": "nvidia",
+      "pci": [
+        4318,
+        10464
+      ],
+      "descriptorIndexing": true,
+      "attachments": {
+        "raster": {
+          "exact": true,
+          "sha256": "f1ef0ea6a727554f6593b2c2333e49650eec5c8f2b25acb03d8e250ae8ce35a2",
+          "baselineSha256": "f1ef0ea6a727554f6593b2c2333e49650eec5c8f2b25acb03d8e250ae8ce35a2"
+        },
+        "hardware": {
+          "exact": true,
+          "sha256": "f1ef0ea6a727554f6593b2c2333e49650eec5c8f2b25acb03d8e250ae8ce35a2",
+          "baselineSha256": "f1ef0ea6a727554f6593b2c2333e49650eec5c8f2b25acb03d8e250ae8ce35a2"
+        },
+        "packedNormals": {
+          "exact": true,
+          "sha256": "37df16157c41a1ffdacb7b2ad21e9d84d7a0b81612e7b79c0bc294c496c1c424",
+          "baselineSha256": "37df16157c41a1ffdacb7b2ad21e9d84d7a0b81612e7b79c0bc294c496c1c424"
+        },
+        "objectIds": {
+          "exact": true,
+          "sha256": "d14ae2982d8d7b1f99c93572ba6d0ce9f9af3643cd250a2636b3c4b765a62a10",
+          "baselineSha256": "d14ae2982d8d7b1f99c93572ba6d0ce9f9af3643cd250a2636b3c4b765a62a10"
+        },
+        "objectVisibility": {
+          "exact": true,
+          "sha256": "1010efb44d81c2bef5c0384cd50844a97537cf79c5750f35220b4b0e2cae8336",
+          "baselineSha256": "1010efb44d81c2bef5c0384cd50844a97537cf79c5750f35220b4b0e2cae8336"
+        }
+      },
+      "colors": [
+        {
+          "exactDiagnosticPng": true,
+          "sha256": "e7673fd8104605089e3cfec894dd2337acd7579569be86a23683ed1cb6f622a4",
+          "expectedSha256": "e7673fd8104605089e3cfec894dd2337acd7579569be86a23683ed1cb6f622a4",
+          "overOne": 0,
+          "maximum": 1
+        },
+        {
+          "exactDiagnosticPng": true,
+          "sha256": "e7673fd8104605089e3cfec894dd2337acd7579569be86a23683ed1cb6f622a4",
+          "expectedSha256": "e7673fd8104605089e3cfec894dd2337acd7579569be86a23683ed1cb6f622a4",
+          "overOne": 0,
+          "maximum": 1
+        },
+        {
+          "exactDiagnosticPng": true,
+          "sha256": "e7673fd8104605089e3cfec894dd2337acd7579569be86a23683ed1cb6f622a4",
+          "expectedSha256": "e7673fd8104605089e3cfec894dd2337acd7579569be86a23683ed1cb6f622a4",
+          "overOne": 0,
+          "maximum": 1
+        }
+      ],
+      "validationClean": true,
+      "allocatorZero": true,
+      "playerSha256": "31164f34b76b1c23e2a2ad9ac6c489b93c21eb97c89a4495563600a44774b357",
+      "receiver": {
+        "samples": 49384,
+        "baselineOverOne": 237,
+        "overOne": 237,
+        "introduced": 0,
+        "closed": 0,
+        "normalsChanged": 0
+      },
+      "hairVisibility": {
+        "overOne": 0,
+        "baselineOverOne": 0,
+        "closed": 0,
+        "introduced": 0
+      },
+      "referenceNormal": {
+        "baselineExact": 16967,
+        "exact": 16967,
+        "baselineOverOne": 0,
+        "overOne": 0,
+        "maximum": 1,
+        "changed": 0
+      }
+    }
+  },
+  "verification": {
+    "release": {
+      "configuration": "Release",
+      "shaderCount": 895,
+      "changedShaders": {
+        "mesh_bindless_clipmap_coverage_uvquad.frag.spv": {
+          "before": "1e7a8e6212c34e2675efd5be1766e768629d7072afb1cb72b3802d11083516d4",
+          "after": "b6f36139ae0cbdff9954d55b8ecad4c089ae6cc1a03e8b930cc8495b815991f8"
+        },
+        "mesh_bindless_clipmap_field_coverage_uvquad.frag.spv": {
+          "before": "98641e7764199ad780e232e8d277dd82edf1d559160121976623f2987e22a180",
+          "after": "054cd1f4f86e4c97a76944822821241eecd5b3dfa7a4cd94d2481c1efd3d7ac3"
+        },
+        "mesh_bindless_clipmap_field_uvquad.frag.spv": {
+          "before": "ec89c977c9b9ad2c22bcbb188289e36c1f743615457d1a9739443337cf35dfdc",
+          "after": "a61ab4ed121ef940d9d09789670105e11c2179156c89211103ceb20ebefcbdae"
+        },
+        "mesh_bindless_clipmap_uvquad.frag.spv": {
+          "before": "6d11424c5dce96f67c0efe5c179910ee1c54e6ba9111f96d5d4463fb8ae6f00b",
+          "after": "7a9ec9f9472a8034c9997efda02727710b0e7b9b14e68979003813126595d630"
+        },
+        "mesh_bindless_coverage_uvquad.frag.spv": {
+          "before": "a032e66b9c389233a01b63c7728accc022be0a617bf883ae7dea8bcc524b5b25",
+          "after": "ed7413a6cc5df3e5b3208540b0d671d3fd13f5e7e4749442b8547a695f899cfa"
+        },
+        "mesh_bindless_field_coverage_uvquad.frag.spv": {
+          "before": "d11fbd8012365690a2cbd3dc086b1170ff0632f0b1af8079e1dfaef5ddbdaa96",
+          "after": "c5893729807c275bfc6f803882b3b30514737efd336c1198da85f2f8f1965f34"
+        },
+        "mesh_bindless_field_uvquad.frag.spv": {
+          "before": "7818b01bd97460e47e6aab57f540300071777e485d24055043c0a1b386fc608e",
+          "after": "bbdf93e1bafa236993c6a4f6084d77c2a76867a132b23441e2219190b4c9692f"
+        },
+        "mesh_bindless_uvquad.frag.spv": {
+          "before": "67b45380a9ca6c5ee92de99fd32396c5fba8ff4d259213cbaba2203bf530b6eb",
+          "after": "c974bfcacbe1bd9e09cf138ca79648f0ba23f0baacae9f6c51c0d0f23166e8a2"
+        },
+        "mesh_clipmap_coverage_uvquad.frag.spv": {
+          "before": "eca7fbc4c6d8236040f6623eb62be6f9ec79b8d2931b2cb4d4435c3b5594cae2",
+          "after": "02a7e88855d9b072d54f52c826b6b4b7248e68c00ebdf33c26ecfc93a16f1ed0"
+        },
+        "mesh_clipmap_field_coverage_uvquad.frag.spv": {
+          "before": "ce22410e0210c9dd2ffbc66e9321c3e4dc34b3add81ee61bbe86bc7ffec233de",
+          "after": "f0edbe7c6f8111534ae7a74121e9ab97322716b1a059354464d4816b9d9a6007"
+        },
+        "mesh_clipmap_field_uvquad.frag.spv": {
+          "before": "c0db3f79e19a024806d107dc2a24f72ba6519864baad7ff79e4ef42cd1c65b1c",
+          "after": "886063b9b7d83edae2fe6a3c443dd75f7f794cb99a89613820fda40cbe7535d0"
+        },
+        "mesh_clipmap_uvquad.frag.spv": {
+          "before": "8a4bcfe7cbd380d6f98980c44e44d169d76e8aa6d741f10d8090025019e05160",
+          "after": "939f92844bf27ad1be22cfba51796e385ba5732909c4345baddfea6f48bf7b61"
+        },
+        "mesh_coverage_uvquad.frag.spv": {
+          "before": "d2c700b3ba3113d064ef07de3cc182dc4d00a7ab0df3e0b4b8c0630e39a49660",
+          "after": "0d71d2492913a1e3e1cd4df1acb23a47bbb2b7e34c457e829e423c9ba6f146d3"
+        },
+        "mesh_field_coverage_uvquad.frag.spv": {
+          "before": "563916c2930f397513fe55c4bac67d4c54f291b5cadddfd184c25c439193e5bc",
+          "after": "a3b0a7e3df58dc98fe02bf7bbb1b3dca9df938bce1039d5b4c128f6e8921b70f"
+        },
+        "mesh_field_uvquad.frag.spv": {
+          "before": "b7a6b8245d47474379caff0423036b4ec5032c825f503b2820f42b469e03e166",
+          "after": "0b0ee699f0a26595a2473d9347f3450044e761afb45f814e191396b83e86cfc1"
+        },
+        "mesh_object_bindless_clipmap_coverage_uvquad.frag.spv": {
+          "before": "7caaa482ed8036497019ed71859fdbb0809757e7f899392157d37f29df2dbf26",
+          "after": "42d075dc996a3b69374d01a7ec9c3c58f9051be07d4e0cfadf22b75f5dc14b27"
+        },
+        "mesh_object_bindless_clipmap_field_coverage_uvquad.frag.spv": {
+          "before": "8dc374b54f7b1e8f2325f4278fce142973f99a7c432d64e597b063ff84ffb33a",
+          "after": "f771de27f1091f57a73f158a3fcd24f309d4dde8aec94c3c8145aba50575482b"
+        },
+        "mesh_object_bindless_clipmap_field_uvquad.frag.spv": {
+          "before": "c2a8455bf8e189fca83a5dc88352fe6271be0698921c22064987c088122029b2",
+          "after": "04f1841d6ef82625ace10de1388f8d758f6d89cb913dfbfd4cb56c8487204e4b"
+        },
+        "mesh_object_bindless_clipmap_uvquad.frag.spv": {
+          "before": "51b5bd885d831db2958cfbe7fec1410b65eadfff2081695363c473578c7c0dcf",
+          "after": "3affc2e30f7118d354dfdcc8cf43f6ad56aa84e866822771b09d90f1f41564d8"
+        },
+        "mesh_object_bindless_coverage_uvquad.frag.spv": {
+          "before": "497b2af642a85b8c5938a2ad692bdf8d55209358935709357f13bd6ef519b753",
+          "after": "d42a3b50878e0dd7b9c732fde5288c512a42229b9e9dda2cb6cfe3d75b240aa3"
+        },
+        "mesh_object_bindless_field_coverage_uvquad.frag.spv": {
+          "before": "bdde749750bcf78efb42ab48ef0f11aec6cd49490ae3bb8f1e9ae3b00fcaa1bf",
+          "after": "76639a2e5ac96053ea0024a3bb2050a27818447db3d115d1061f5e708fe72f61"
+        },
+        "mesh_object_bindless_field_uvquad.frag.spv": {
+          "before": "08234b7eafa40cbec6609845bc48af3298d32926dfbb9f53cd3da55ff9d39da2",
+          "after": "959dc4f1234b1213465467a3aec790da1c00b9fa4310148cb75e24cd91e23e2b"
+        },
+        "mesh_object_bindless_uvquad.frag.spv": {
+          "before": "d04a6c9d1be618b0f9f9feaae5e1b95bcb5a1a4de7d7c84f080aac78d7424976",
+          "after": "f2fef2b8d44a3ec9a4ab291e3c0935ee0be0bf2a0e531e8b93fde28a970b8d2d"
+        },
+        "mesh_object_clipmap_coverage_uvquad.frag.spv": {
+          "before": "135f94112e61884d6c98452405f07882c8b6213399e1299b03370a8925e58703",
+          "after": "cbe68f3d2364692f9648dd811bac4b24cd646133547b24f817032d6dbbbf5a8c"
+        },
+        "mesh_object_clipmap_field_coverage_uvquad.frag.spv": {
+          "before": "32dffa06aaee284c55e105eda5395fdc443794cd141c6cba19a9bee498a906a1",
+          "after": "432f475565900988fe773ed0e0421566824c9e33f7860e94faa8e17cbfd7cea6"
+        },
+        "mesh_object_clipmap_field_uvquad.frag.spv": {
+          "before": "aa807715c442d4ce719915eb7b3c91f127370991a4744cf8b70c7af430138932",
+          "after": "a6c101062aa7f593e61921d019f3ec11e9bd65fb77e746f58af445976b3c4adf"
+        },
+        "mesh_object_clipmap_uvquad.frag.spv": {
+          "before": "f57d399581977b4f95bf8f62d1dccc9a8141028f59f02cc79369d7060485529d",
+          "after": "3a265484fe684988b2e1984a4b3c4b28bad926db7c60935b666c8434bb9bcb38"
+        },
+        "mesh_object_coverage_uvquad.frag.spv": {
+          "before": "52dfd7cbace94ce5276113e7ed2054ad4cb4e1c9a034af16403d8b5424d994b6",
+          "after": "29530b858ce7b24d0c60698d8814c1b923fe7d6eb3d858e2981617db57c32783"
+        },
+        "mesh_object_field_coverage_uvquad.frag.spv": {
+          "before": "162f42b0e85d8ccef003a81d443447a2e4a4c7613fc2ddeaa4271dd64f665811",
+          "after": "02ed4cfaf4d2777a450b34c2d409861d92268a8ba77917172ad46819b61b55ff"
+        },
+        "mesh_object_field_uvquad.frag.spv": {
+          "before": "e42da9bacf11f5f5c27e4b7595354e663fa202d9f1b76f861d6f4920363ec5d9",
+          "after": "8abc1bf6155685aeb20e83b8af5f1edc6e980b09e00485ac6f3cc228ab809827"
+        },
+        "mesh_object_uvquad.frag.spv": {
+          "before": "e382889c1811148238e1fa773931b7e463ef6fd1dd45ab0c8f67abeee2c683d9",
+          "after": "3be2833182af1db4d5b97b0b40b1f0baab70061cd2d7e0b4243d7c42057a3f72"
+        },
+        "mesh_uvquad.frag.spv": {
+          "before": "75bb50ebd43432787e326699b5abe64347b7ac79e65a209b7a774b956596b536",
+          "after": "6b15b47dc4520d5957ffb491f9e92f1b1a00d787018d35281f057d395251ec35"
+        }
+      },
+      "ctestCommand": [
+        "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+        "--test-dir",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\release",
+        "-R",
+        "^(AzureRender[.](ReferenceCameraView|ReferenceCameraBinding|ExtensionRegistry|ScreenObjectVisibility|MaterialCoverage|CharacterRepair|MaterialUvPolicy)|AzureEngine[.]ProjectReferenceViews|AzureAssets[.](MaterialDocument|MaterialUvImport)|AzureEditor[.]ProjectFlow)$",
+        "--no-tests=error",
+        "--output-on-failure",
+        "--output-junit",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-182312-projected-hair-point-mip-82adc1\\release-ctest.xml"
+      ],
+      "ctestExit": 0,
+      "tests": 11,
+      "playerSha256": "31164f34b76b1c23e2a2ad9ac6c489b93c21eb97c89a4495563600a44774b357"
+    },
+    "debug": {
+      "configuration": "Debug",
+      "shaderCount": 895,
+      "changedShaders": {
+        "mesh_bindless_clipmap_coverage_uvquad.frag.spv": {
+          "before": "1e7a8e6212c34e2675efd5be1766e768629d7072afb1cb72b3802d11083516d4",
+          "after": "b6f36139ae0cbdff9954d55b8ecad4c089ae6cc1a03e8b930cc8495b815991f8"
+        },
+        "mesh_bindless_clipmap_field_coverage_uvquad.frag.spv": {
+          "before": "98641e7764199ad780e232e8d277dd82edf1d559160121976623f2987e22a180",
+          "after": "054cd1f4f86e4c97a76944822821241eecd5b3dfa7a4cd94d2481c1efd3d7ac3"
+        },
+        "mesh_bindless_clipmap_field_uvquad.frag.spv": {
+          "before": "ec89c977c9b9ad2c22bcbb188289e36c1f743615457d1a9739443337cf35dfdc",
+          "after": "a61ab4ed121ef940d9d09789670105e11c2179156c89211103ceb20ebefcbdae"
+        },
+        "mesh_bindless_clipmap_uvquad.frag.spv": {
+          "before": "6d11424c5dce96f67c0efe5c179910ee1c54e6ba9111f96d5d4463fb8ae6f00b",
+          "after": "7a9ec9f9472a8034c9997efda02727710b0e7b9b14e68979003813126595d630"
+        },
+        "mesh_bindless_coverage_uvquad.frag.spv": {
+          "before": "a032e66b9c389233a01b63c7728accc022be0a617bf883ae7dea8bcc524b5b25",
+          "after": "ed7413a6cc5df3e5b3208540b0d671d3fd13f5e7e4749442b8547a695f899cfa"
+        },
+        "mesh_bindless_field_coverage_uvquad.frag.spv": {
+          "before": "d11fbd8012365690a2cbd3dc086b1170ff0632f0b1af8079e1dfaef5ddbdaa96",
+          "after": "c5893729807c275bfc6f803882b3b30514737efd336c1198da85f2f8f1965f34"
+        },
+        "mesh_bindless_field_uvquad.frag.spv": {
+          "before": "7818b01bd97460e47e6aab57f540300071777e485d24055043c0a1b386fc608e",
+          "after": "bbdf93e1bafa236993c6a4f6084d77c2a76867a132b23441e2219190b4c9692f"
+        },
+        "mesh_bindless_uvquad.frag.spv": {
+          "before": "67b45380a9ca6c5ee92de99fd32396c5fba8ff4d259213cbaba2203bf530b6eb",
+          "after": "c974bfcacbe1bd9e09cf138ca79648f0ba23f0baacae9f6c51c0d0f23166e8a2"
+        },
+        "mesh_clipmap_coverage_uvquad.frag.spv": {
+          "before": "eca7fbc4c6d8236040f6623eb62be6f9ec79b8d2931b2cb4d4435c3b5594cae2",
+          "after": "02a7e88855d9b072d54f52c826b6b4b7248e68c00ebdf33c26ecfc93a16f1ed0"
+        },
+        "mesh_clipmap_field_coverage_uvquad.frag.spv": {
+          "before": "ce22410e0210c9dd2ffbc66e9321c3e4dc34b3add81ee61bbe86bc7ffec233de",
+          "after": "f0edbe7c6f8111534ae7a74121e9ab97322716b1a059354464d4816b9d9a6007"
+        },
+        "mesh_clipmap_field_uvquad.frag.spv": {
+          "before": "c0db3f79e19a024806d107dc2a24f72ba6519864baad7ff79e4ef42cd1c65b1c",
+          "after": "886063b9b7d83edae2fe6a3c443dd75f7f794cb99a89613820fda40cbe7535d0"
+        },
+        "mesh_clipmap_uvquad.frag.spv": {
+          "before": "8a4bcfe7cbd380d6f98980c44e44d169d76e8aa6d741f10d8090025019e05160",
+          "after": "939f92844bf27ad1be22cfba51796e385ba5732909c4345baddfea6f48bf7b61"
+        },
+        "mesh_coverage_uvquad.frag.spv": {
+          "before": "d2c700b3ba3113d064ef07de3cc182dc4d00a7ab0df3e0b4b8c0630e39a49660",
+          "after": "0d71d2492913a1e3e1cd4df1acb23a47bbb2b7e34c457e829e423c9ba6f146d3"
+        },
+        "mesh_field_coverage_uvquad.frag.spv": {
+          "before": "563916c2930f397513fe55c4bac67d4c54f291b5cadddfd184c25c439193e5bc",
+          "after": "a3b0a7e3df58dc98fe02bf7bbb1b3dca9df938bce1039d5b4c128f6e8921b70f"
+        },
+        "mesh_field_uvquad.frag.spv": {
+          "before": "b7a6b8245d47474379caff0423036b4ec5032c825f503b2820f42b469e03e166",
+          "after": "0b0ee699f0a26595a2473d9347f3450044e761afb45f814e191396b83e86cfc1"
+        },
+        "mesh_object_bindless_clipmap_coverage_uvquad.frag.spv": {
+          "before": "7caaa482ed8036497019ed71859fdbb0809757e7f899392157d37f29df2dbf26",
+          "after": "42d075dc996a3b69374d01a7ec9c3c58f9051be07d4e0cfadf22b75f5dc14b27"
+        },
+        "mesh_object_bindless_clipmap_field_coverage_uvquad.frag.spv": {
+          "before": "8dc374b54f7b1e8f2325f4278fce142973f99a7c432d64e597b063ff84ffb33a",
+          "after": "f771de27f1091f57a73f158a3fcd24f309d4dde8aec94c3c8145aba50575482b"
+        },
+        "mesh_object_bindless_clipmap_field_uvquad.frag.spv": {
+          "before": "c2a8455bf8e189fca83a5dc88352fe6271be0698921c22064987c088122029b2",
+          "after": "04f1841d6ef82625ace10de1388f8d758f6d89cb913dfbfd4cb56c8487204e4b"
+        },
+        "mesh_object_bindless_clipmap_uvquad.frag.spv": {
+          "before": "51b5bd885d831db2958cfbe7fec1410b65eadfff2081695363c473578c7c0dcf",
+          "after": "3affc2e30f7118d354dfdcc8cf43f6ad56aa84e866822771b09d90f1f41564d8"
+        },
+        "mesh_object_bindless_coverage_uvquad.frag.spv": {
+          "before": "497b2af642a85b8c5938a2ad692bdf8d55209358935709357f13bd6ef519b753",
+          "after": "d42a3b50878e0dd7b9c732fde5288c512a42229b9e9dda2cb6cfe3d75b240aa3"
+        },
+        "mesh_object_bindless_field_coverage_uvquad.frag.spv": {
+          "before": "bdde749750bcf78efb42ab48ef0f11aec6cd49490ae3bb8f1e9ae3b00fcaa1bf",
+          "after": "76639a2e5ac96053ea0024a3bb2050a27818447db3d115d1061f5e708fe72f61"
+        },
+        "mesh_object_bindless_field_uvquad.frag.spv": {
+          "before": "08234b7eafa40cbec6609845bc48af3298d32926dfbb9f53cd3da55ff9d39da2",
+          "after": "959dc4f1234b1213465467a3aec790da1c00b9fa4310148cb75e24cd91e23e2b"
+        },
+        "mesh_object_bindless_uvquad.frag.spv": {
+          "before": "d04a6c9d1be618b0f9f9feaae5e1b95bcb5a1a4de7d7c84f080aac78d7424976",
+          "after": "f2fef2b8d44a3ec9a4ab291e3c0935ee0be0bf2a0e531e8b93fde28a970b8d2d"
+        },
+        "mesh_object_clipmap_coverage_uvquad.frag.spv": {
+          "before": "135f94112e61884d6c98452405f07882c8b6213399e1299b03370a8925e58703",
+          "after": "cbe68f3d2364692f9648dd811bac4b24cd646133547b24f817032d6dbbbf5a8c"
+        },
+        "mesh_object_clipmap_field_coverage_uvquad.frag.spv": {
+          "before": "32dffa06aaee284c55e105eda5395fdc443794cd141c6cba19a9bee498a906a1",
+          "after": "432f475565900988fe773ed0e0421566824c9e33f7860e94faa8e17cbfd7cea6"
+        },
+        "mesh_object_clipmap_field_uvquad.frag.spv": {
+          "before": "aa807715c442d4ce719915eb7b3c91f127370991a4744cf8b70c7af430138932",
+          "after": "a6c101062aa7f593e61921d019f3ec11e9bd65fb77e746f58af445976b3c4adf"
+        },
+        "mesh_object_clipmap_uvquad.frag.spv": {
+          "before": "f57d399581977b4f95bf8f62d1dccc9a8141028f59f02cc79369d7060485529d",
+          "after": "3a265484fe684988b2e1984a4b3c4b28bad926db7c60935b666c8434bb9bcb38"
+        },
+        "mesh_object_coverage_uvquad.frag.spv": {
+          "before": "52dfd7cbace94ce5276113e7ed2054ad4cb4e1c9a034af16403d8b5424d994b6",
+          "after": "29530b858ce7b24d0c60698d8814c1b923fe7d6eb3d858e2981617db57c32783"
+        },
+        "mesh_object_field_coverage_uvquad.frag.spv": {
+          "before": "162f42b0e85d8ccef003a81d443447a2e4a4c7613fc2ddeaa4271dd64f665811",
+          "after": "02ed4cfaf4d2777a450b34c2d409861d92268a8ba77917172ad46819b61b55ff"
+        },
+        "mesh_object_field_uvquad.frag.spv": {
+          "before": "e42da9bacf11f5f5c27e4b7595354e663fa202d9f1b76f861d6f4920363ec5d9",
+          "after": "8abc1bf6155685aeb20e83b8af5f1edc6e980b09e00485ac6f3cc228ab809827"
+        },
+        "mesh_object_uvquad.frag.spv": {
+          "before": "e382889c1811148238e1fa773931b7e463ef6fd1dd45ab0c8f67abeee2c683d9",
+          "after": "3be2833182af1db4d5b97b0b40b1f0baab70061cd2d7e0b4243d7c42057a3f72"
+        },
+        "mesh_uvquad.frag.spv": {
+          "before": "75bb50ebd43432787e326699b5abe64347b7ac79e65a209b7a774b956596b536",
+          "after": "6b15b47dc4520d5957ffb491f9e92f1b1a00d787018d35281f057d395251ec35"
+        }
+      },
+      "ctestCommand": [
+        "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+        "--test-dir",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\debug",
+        "-R",
+        "^(AzureRender[.](ReferenceCameraView|ReferenceCameraBinding|ExtensionRegistry|ScreenObjectVisibility|MaterialCoverage|CharacterRepair|MaterialUvPolicy)|AzureEngine[.]ProjectReferenceViews|AzureAssets[.](MaterialDocument|MaterialUvImport))$",
+        "--no-tests=error",
+        "--output-on-failure",
+        "--output-junit",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-182312-projected-hair-point-mip-82adc1\\debug-ctest.xml"
+      ],
+      "ctestExit": 0,
+      "tests": 10,
+      "playerSha256": "fde9c9ac29d425db0acc30ea47ca6358fdda34a2272e3a46b4c1c02b51d3f775"
+    }
+  },
+  "layout": {
+    "release": {
+      "size": 3720,
+      "fields": {
+        "blendDepth": 0,
+        "unlitTextureLayers": 4,
+        "authoredMipLevels": 376,
+        "textureSettings": 416,
+        "name": 2288,
+        "slotId": 2320,
+        "materialClass": 2352,
+        "materialFeatures": 2356,
+        "materialProfileVersion": 2360,
+        "materialProfileExplicit": 2364,
+        "radianceScale": 2368,
+        "displayTransform": 2372,
+        "environmentLighting": 2376,
+        "mainLightShadow": 2404,
+        "coverageTexture": 2408,
+        "sampledReferenceNormal": 2411,
+        "referenceDepthStencil": 2412,
+        "baseColorPixels": 2416,
+        "baseColorWidth": 2440,
+        "baseColorHeight": 2444,
+        "normalPixels": 2448,
+        "normalWidth": 2472,
+        "normalHeight": 2476,
+        "metallicRoughnessPixels": 2480,
+        "metallicRoughnessWidth": 2504,
+        "metallicRoughnessHeight": 2508,
+        "specularEmissivePixels": 2512,
+        "specularEmissiveWidth": 2536,
+        "specularEmissiveHeight": 2540,
+        "styleMaskPixels": 2544,
+        "styleMaskWidth": 2568,
+        "styleMaskHeight": 2572,
+        "matcapPixels": 2576,
+        "matcapWidth": 2600,
+        "matcapHeight": 2604,
+        "hairDataPixels": 2608,
+        "hairDataWidth": 2632,
+        "hairDataHeight": 2636,
+        "shadowColorLutPixels": 2640,
+        "shadowColorLutWidth": 2664,
+        "shadowColorLutHeight": 2668,
+        "transmission": 2672,
+        "ior": 2676,
+        "thickness": 2680,
+        "attenuationDistance": 2684,
+        "attenuationColor": 2688,
+        "transmissionPixels": 2704,
+        "transmissionWidth": 2728,
+        "transmissionHeight": 2732,
+        "emissiveStrength": 2736,
+        "aoColor": 2740,
+        "lamShadowColor": 2756,
+        "matcapColor": 2772,
+        "hairParameters": 2788,
+        "hairViewParameters": 2804,
+        "projectedHairRamp": 2824,
+        "outlineSurface": 3184,
+        "eyeSurface": 3272,
+        "nprDiffuse": 3392,
+        "specularInput": 3528,
+        "specularRamp": 3536,
+        "styleParameters": 3544,
+        "featureParameters": 3560,
+        "faceSdf": 3576,
+        "showcasePlatform": 3704,
+        "alphaMode": 3708,
+        "alphaCutoff": 3712,
+        "doubleSided": 3716,
+        "geometricReferenceNormal": 3717,
+        "hairPointMipReferenceNormal": 3718
+      }
+    },
+    "debug": {
+      "size": 4296,
+      "fields": {
+        "blendDepth": 0,
+        "unlitTextureLayers": 4,
+        "authoredMipLevels": 376,
+        "textureSettings": 416,
+        "name": 2720,
+        "slotId": 2760,
+        "materialClass": 2800,
+        "materialFeatures": 2804,
+        "materialProfileVersion": 2808,
+        "materialProfileExplicit": 2812,
+        "radianceScale": 2816,
+        "displayTransform": 2820,
+        "environmentLighting": 2824,
+        "mainLightShadow": 2852,
+        "coverageTexture": 2856,
+        "sampledReferenceNormal": 2859,
+        "referenceDepthStencil": 2860,
+        "baseColorPixels": 2864,
+        "baseColorWidth": 2896,
+        "baseColorHeight": 2900,
+        "normalPixels": 2904,
+        "normalWidth": 2936,
+        "normalHeight": 2940,
+        "metallicRoughnessPixels": 2944,
+        "metallicRoughnessWidth": 2976,
+        "metallicRoughnessHeight": 2980,
+        "specularEmissivePixels": 2984,
+        "specularEmissiveWidth": 3016,
+        "specularEmissiveHeight": 3020,
+        "styleMaskPixels": 3024,
+        "styleMaskWidth": 3056,
+        "styleMaskHeight": 3060,
+        "matcapPixels": 3064,
+        "matcapWidth": 3096,
+        "matcapHeight": 3100,
+        "hairDataPixels": 3104,
+        "hairDataWidth": 3136,
+        "hairDataHeight": 3140,
+        "shadowColorLutPixels": 3144,
+        "shadowColorLutWidth": 3176,
+        "shadowColorLutHeight": 3180,
+        "transmission": 3184,
+        "ior": 3188,
+        "thickness": 3192,
+        "attenuationDistance": 3196,
+        "attenuationColor": 3200,
+        "transmissionPixels": 3216,
+        "transmissionWidth": 3248,
+        "transmissionHeight": 3252,
+        "emissiveStrength": 3256,
+        "aoColor": 3260,
+        "lamShadowColor": 3276,
+        "matcapColor": 3292,
+        "hairParameters": 3308,
+        "hairViewParameters": 3324,
+        "projectedHairRamp": 3344,
+        "outlineSurface": 3728,
+        "eyeSurface": 3824,
+        "nprDiffuse": 3944,
+        "specularInput": 4088,
+        "specularRamp": 4096,
+        "styleParameters": 4104,
+        "featureParameters": 4120,
+        "faceSdf": 4136,
+        "showcasePlatform": 4280,
+        "alphaMode": 4284,
+        "alphaCutoff": 4288,
+        "doubleSided": 4292,
+        "geometricReferenceNormal": 4293,
+        "hairPointMipReferenceNormal": 4294
+      }
+    }
+  },
+  "defaultFour": {
+    "exitCode": 0,
+    "frames": [
+      {
+        "frame": "frame_000000.png",
+        "sha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "expectedSha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "pngExact": true
+      },
+      {
+        "frame": "frame_000001.png",
+        "sha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "expectedSha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "pngExact": true
+      },
+      {
+        "frame": "frame_000002.png",
+        "sha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "expectedSha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "pngExact": true
+      },
+      {
+        "frame": "frame_000003.png",
+        "sha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "expectedSha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "pngExact": true
+      }
+    ],
+    "validationClean": true,
+    "allocatorZero": true,
+    "depthCaptureAbsent": true,
+    "allExact": true,
+    "playerSha256": "31164f34b76b1c23e2a2ad9ac6c489b93c21eb97c89a4495563600a44774b357",
+    "projectSha256": "13638585d18092a315bd7586a88b349fe256c468eb9090ccb6189232b8209d78",
+    "taskBytes": 469406057,
+    "taskBudgetBytes": 536870912
+  },
+  "fixture": [
+    {
+      "relative": "character/hair-coverage.glb",
+      "originalSha256": "b87e639e9c9ae0d92cdf637c03f5f125e6d80b297a5043b245ac85daff12c073",
+      "candidateSha256": "9aba6b5a8e67919ad6bb22ae7524639c39b4466e3f52058bd4c3dfc8e80d7285",
+      "unchangedPayloadSha256": "187c43e2756ed8a9c3fcc05246c4e7df9ee41ee499a8e850edf3833e5d2026ca"
+    }
+  ],
+  "leases": {
+    "debug-build": {
+      "owner": "01a1c099-8121-7be3-b0b8-7af2f9a06b2a",
+      "task": "quality-projected-hair-point-mip-debug-build",
+      "output": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-182312-projected-hair-point-mip-82adc1",
+      "pid": 46072,
+      "token": "300d3e595fbc4a27906df2098bc2eb63",
+      "started": 1794489238.0907824,
+      "state": "released",
+      "ended": 1794489542.0775928
+    },
+    "debug-capture": {
+      "owner": "01a1c099-8121-7be3-b0b8-7af2f9a06b2a",
+      "task": "quality-projected-hair-point-mip-debug-capture",
+      "output": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-182312-projected-hair-point-mip-82adc1",
+      "pid": 32388,
+      "token": "d1941a38b40c41bdbb481204748afdd6",
+      "started": 1794490184.9886882,
+      "state": "released",
+      "ended": 1794490331.7255633
+    },
+    "original-four": {
+      "owner": "01a1c099-8121-7be3-b0b8-7af2f9a06b2a",
+      "task": "quality-projected-hair-point-mip-original-four",
+      "output": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-182312-projected-hair-point-mip-82adc1",
+      "pid": 52180,
+      "token": "bc4d3f545ba4403b8b20d3ba58f28d5f",
+      "started": 1794490440.9051802,
+      "state": "released",
+      "ended": 1794490587.70382
+    },
+    "release-capture-all": {
+      "owner": "01a1c099-8121-7be3-b0b8-7af2f9a06b2a",
+      "task": "quality-projected-hair-point-mip-release-capture-all",
+      "output": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-182312-projected-hair-point-mip-82adc1",
+      "pid": 24228,
+      "token": "258dd889cd3744efb84b65d8eb8f699a",
+      "started": 1794487973.7800338,
+      "state": "released",
+      "ended": 1794488197.1119828
+    },
+    "release-final": {
+      "owner": "01a1c099-8121-7be3-b0b8-7af2f9a06b2a",
+      "task": "quality-projected-hair-point-mip-release-final",
+      "output": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-182312-projected-hair-point-mip-82adc1",
+      "pid": 21320,
+      "token": "88f0f95649da4068b4a98f759795cb12",
+      "started": 1794487156.2161427,
+      "state": "released",
+      "ended": 1794487467.8574653
+    }
+  },
+  "execution": {
+    "debug-build": {
+      "status": "exited",
+      "exitCode": 0,
+      "reason": null,
+      "seconds": 12.812999999965541,
+      "logTruncated": false,
+      "samplingSeconds": 1,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-B",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-182312-projected-hair-point-mip-82adc1\\recover-debug.py"
+      ],
+      "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-182312-projected-hair-point-mip-82adc1\\tmp"
+    },
+    "debug-cpu-tests": {
+      "status": "exited",
+      "exitCode": 0,
+      "reason": null,
+      "seconds": 54.73399999993853,
+      "logTruncated": false,
+      "samplingSeconds": 1,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-B",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-182312-projected-hair-point-mip-82adc1\\verify-build.py",
+        "Debug"
+      ],
+      "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-182312-projected-hair-point-mip-82adc1\\tmp"
+    },
+    "debug-intel-capture": {
+      "status": "exited",
+      "exitCode": 0,
+      "reason": null,
+      "seconds": 65.43700000003446,
+      "logTruncated": false,
+      "samplingSeconds": 1,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-B",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-182312-projected-hair-point-mip-82adc1\\capture.py",
+        "Debug",
+        "intel"
+      ],
+      "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-182312-projected-hair-point-mip-82adc1\\tmp"
+    },
+    "debug-intel-gpu-tests": {
+      "status": "exited",
+      "exitCode": 0,
+      "reason": null,
+      "seconds": 2.2820000000065193,
+      "logTruncated": false,
+      "samplingSeconds": 1,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-B",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-182312-projected-hair-point-mip-82adc1\\verify-build.py",
+        "Debug",
+        "intel"
+      ],
+      "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-182312-projected-hair-point-mip-82adc1\\tmp"
+    },
+    "debug-nvidia-capture": {
+      "status": "exited",
+      "exitCode": 0,
+      "reason": null,
+      "seconds": 69.20299999997951,
+      "logTruncated": false,
+      "samplingSeconds": 1,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-B",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-182312-projected-hair-point-mip-82adc1\\capture.py",
+        "Debug",
+        "nvidia"
+      ],
+      "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-182312-projected-hair-point-mip-82adc1\\tmp"
+    },
+    "debug-nvidia-gpu-tests": {
+      "status": "exited",
+      "exitCode": 0,
+      "reason": null,
+      "seconds": 8.562999999965541,
+      "logTruncated": false,
+      "samplingSeconds": 1,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-B",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-182312-projected-hair-point-mip-82adc1\\verify-build.py",
+        "Debug",
+        "nvidia"
+      ],
+      "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-182312-projected-hair-point-mip-82adc1\\tmp"
+    },
+    "debug-prepare": {
+      "status": "exited",
+      "exitCode": 0,
+      "reason": null,
+      "seconds": 5.032000000006519,
+      "logTruncated": false,
+      "samplingSeconds": 1,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-B",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-182312-projected-hair-point-mip-82adc1\\prepare-debug-budget.py"
+      ],
+      "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\tmp"
+    },
+    "original-four": {
+      "status": "exited",
+      "exitCode": 0,
+      "reason": null,
+      "seconds": 146.5470000000205,
+      "logTruncated": false,
+      "samplingSeconds": 1,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-B",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-182312-projected-hair-point-mip-82adc1\\default-four.py"
+      ],
+      "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-182312-projected-hair-point-mip-82adc1\\tmp"
+    },
+    "release-build": {
+      "status": "exited",
+      "exitCode": 0,
+      "reason": null,
+      "seconds": 288.43699999991804,
+      "logTruncated": false,
+      "samplingSeconds": 1,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-B",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-182312-projected-hair-point-mip-82adc1\\build.py",
+        "Release"
+      ],
+      "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\tmp"
+    },
+    "release-cpu-tests": {
+      "status": "exited",
+      "exitCode": 0,
+      "reason": null,
+      "seconds": 21.43799999996554,
+      "logTruncated": false,
+      "samplingSeconds": 1,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-B",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-182312-projected-hair-point-mip-82adc1\\verify-build.py",
+        "Release"
+      ],
+      "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-182312-projected-hair-point-mip-82adc1\\tmp"
+    },
+    "release-intel-capture": {
+      "status": "exited",
+      "exitCode": 0,
+      "reason": null,
+      "seconds": 57.59400000004098,
+      "logTruncated": false,
+      "samplingSeconds": 1,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-B",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-182312-projected-hair-point-mip-82adc1\\capture.py",
+        "Release",
+        "intel"
+      ],
+      "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-182312-projected-hair-point-mip-82adc1\\tmp"
+    },
+    "release-intel-gpu-tests": {
+      "status": "exited",
+      "exitCode": 0,
+      "reason": null,
+      "seconds": 2.234000000054948,
+      "logTruncated": false,
+      "samplingSeconds": 1,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-B",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-182312-projected-hair-point-mip-82adc1\\verify-build.py",
+        "Release",
+        "intel"
+      ],
+      "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-182312-projected-hair-point-mip-82adc1\\tmp"
+    },
+    "release-nvidia-capture": {
+      "status": "exited",
+      "exitCode": 0,
+      "reason": null,
+      "seconds": 45.71899999992456,
+      "logTruncated": false,
+      "samplingSeconds": 1,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-B",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-182312-projected-hair-point-mip-82adc1\\capture.py",
+        "Release",
+        "nvidia"
+      ],
+      "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-182312-projected-hair-point-mip-82adc1\\tmp"
+    },
+    "release-nvidia-gpu-tests": {
+      "status": "exited",
+      "exitCode": 0,
+      "reason": null,
+      "seconds": 10.718999999924563,
+      "logTruncated": false,
+      "samplingSeconds": 1,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-B",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-182312-projected-hair-point-mip-82adc1\\verify-build.py",
+        "Release",
+        "nvidia"
+      ],
+      "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-182312-projected-hair-point-mip-82adc1\\tmp"
+    },
+    "release-nvidia-indexed-capture": {
+      "status": "exited",
+      "exitCode": 0,
+      "reason": null,
+      "seconds": 105.29700000002049,
+      "logTruncated": false,
+      "samplingSeconds": 1,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-B",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-182312-projected-hair-point-mip-82adc1\\capture.py",
+        "Release",
+        "nvidia",
+        "indexed"
+      ],
+      "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-182312-projected-hair-point-mip-82adc1\\tmp"
+    }
+  },
+  "firstBuild": {
+    "status": "exited",
+    "exitCode": 1,
+    "reason": null,
+    "seconds": 20.81200000003446,
+    "logTruncated": false,
+    "samplingSeconds": 1,
+    "command": [
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+      "-B",
+      "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-182312-projected-hair-point-mip-82adc1\\build.py",
+      "Release"
+    ],
+    "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\tmp"
+  },
+  "firstCpuFixture": {
+    "status": "exited",
+    "exitCode": 1,
+    "reason": null,
+    "seconds": 23.093999999924563,
+    "logTruncated": false,
+    "samplingSeconds": 1,
+    "command": [
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+      "-B",
+      "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-182312-projected-hair-point-mip-82adc1\\verify-build.py",
+      "Release"
+    ],
+    "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-182312-projected-hair-point-mip-82adc1\\tmp"
+  },
+  "firstDebugBuild": {
+    "status": "budget-stopped",
+    "exitCode": 1,
+    "reason": "managed-pool-limit",
+    "seconds": 298.8280000000959,
+    "logTruncated": false,
+    "samplingSeconds": 1,
+    "command": [
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+      "-B",
+      "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-182312-projected-hair-point-mip-82adc1\\build.py",
+      "Debug"
+    ],
+    "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\tmp"
+  },
+  "debugRecovery": {
+    "status": "recovered",
+    "playerSha256": "fde9c9ac29d425db0acc30ea47ca6358fdda34a2272e3a46b4c1c02b51d3f775",
+    "rawSymbols": {
+      "file": "AzurePlayer.pdb",
+      "bytes": 122793984,
+      "sha256": "04e974b1325ddf9867f130d8a2cba26ffdc486ead8d12cc1f26c991b0853bd3a",
+      "archive": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-182312-projected-hair-point-mip-82adc1\\build-symbols\\AzurePlayer.pdb.gz"
+    },
+    "interruptedBytes": 3763785,
+    "symbols": [
+      {
+        "file": "AzureCharacterRepairTests.pdb",
+        "bytes": 24154112,
+        "sha256": "5d0392ee698e0f87d7f0072d99ba06fd1e1c777c0ba73ed9f6a9f0d4d3c651cc",
+        "archive": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-182312-projected-hair-point-mip-82adc1\\build-symbols\\AzureCharacterRepairTests.pdb.gz"
+      },
+      {
+        "file": "AzureMaterialCoverageTests.pdb",
+        "bytes": 22032384,
+        "sha256": "77668e3531bac3c44bc6f843bed429afbf28946853f2d6a9141ac7687cdd623f",
+        "archive": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-182312-projected-hair-point-mip-82adc1\\build-symbols\\AzureMaterialCoverageTests.pdb.gz"
+      },
+      {
+        "file": "AzureMaterialDocumentTests.pdb",
+        "bytes": 22106112,
+        "sha256": "b70b77d15a2889275228ab05408c357549947e3730aaa49f7839e2f2c665f07d",
+        "archive": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-182312-projected-hair-point-mip-82adc1\\build-symbols\\AzureMaterialDocumentTests.pdb.gz"
+      },
+      {
+        "file": "AzureMaterialUvGradientsGpuTests.pdb",
+        "bytes": 9342976,
+        "sha256": "98c21153a11746cb7a213b83309ade348c884e9c6840d18a458884fb8d6d26bd",
+        "archive": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-182312-projected-hair-point-mip-82adc1\\build-symbols\\AzureMaterialUvGradientsGpuTests.pdb.gz"
+      },
+      {
+        "file": "AzureMaterialUvImportTests.pdb",
+        "bytes": 19353600,
+        "sha256": "5e96c81f85098d59a4a872d8f987f5991fd7da198b4f8ef93e73fe539c9111d2",
+        "archive": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-182312-projected-hair-point-mip-82adc1\\build-symbols\\AzureMaterialUvImportTests.pdb.gz"
+      },
+      {
+        "file": "AzureMaterialUvPolicyTests.pdb",
+        "bytes": 3796992,
+        "sha256": "0af9c4cfbd68ef44cfc95e4b7699c87ec3e977a326832370974a278854b75dbc",
+        "archive": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-182312-projected-hair-point-mip-82adc1\\build-symbols\\AzureMaterialUvPolicyTests.pdb.gz"
+      },
+      {
+        "file": "AzurePlayer.pdb",
+        "bytes": 122793984,
+        "sha256": "04e974b1325ddf9867f130d8a2cba26ffdc486ead8d12cc1f26c991b0853bd3a",
+        "archive": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-182312-projected-hair-point-mip-82adc1\\build-symbols\\AzurePlayer.pdb.gz"
+      },
+      {
+        "file": "AzureReferenceCameraViewTests.pdb",
+        "bytes": 8728576,
+        "sha256": "28b6ab0c9c5063da6702fcf751adf7453c8738575ee2047e2b3fee6f7880e4d3",
+        "archive": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-182312-projected-hair-point-mip-82adc1\\build-symbols\\AzureReferenceCameraViewTests.pdb.gz"
+      },
+      {
+        "file": "AzureReferenceDepthCoverageGpuTests.pdb",
+        "bytes": 10489856,
+        "sha256": "743fa717a40869bda056a409e6560fe6a71d72679376ec0bc2d6e5355ca298be",
+        "archive": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-182312-projected-hair-point-mip-82adc1\\build-symbols\\AzureReferenceDepthCoverageGpuTests.pdb.gz"
+      },
+      {
+        "file": "AzureReferenceDepthGpuTests.pdb",
+        "bytes": 10194944,
+        "sha256": "47cc52702a498b5e370257609aedf3500e794267d2462644fb4b17a1e0c98be3",
+        "archive": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-182312-projected-hair-point-mip-82adc1\\build-symbols\\AzureReferenceDepthGpuTests.pdb.gz"
+      },
+      {
+        "file": "AzureScreenObjectVisibilityGpuTests.pdb",
+        "bytes": 9883648,
+        "sha256": "e442f44ab27fe327be35b90605d3f7a7ef5e7660ce2dd1cea35a88b8898a9c1d",
+        "archive": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-182312-projected-hair-point-mip-82adc1\\build-symbols\\AzureScreenObjectVisibilityGpuTests.pdb.gz"
+      },
+      {
+        "file": "AzureScreenObjectVisibilityTests.pdb",
+        "bytes": 4059136,
+        "sha256": "e39ecaaa58ec4562a955cd606293339f53b261930d594da6121d0ccec8944bc7",
+        "archive": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-182312-projected-hair-point-mip-82adc1\\build-symbols\\AzureScreenObjectVisibilityTests.pdb.gz"
+      },
+      {
+        "file": "AzureSurfaceResponseGpuTests.pdb",
+        "bytes": 10489856,
+        "sha256": "752d057e8d25ebae08651e61611a8a9bef0e9f47dac73e8f1cbcd6939950ba9e",
+        "archive": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-182312-projected-hair-point-mip-82adc1\\build-symbols\\AzureSurfaceResponseGpuTests.pdb.gz"
+      }
+    ],
+    "dryRun": "ninja: Entering directory `D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\debug'\n[1/1] C:\\WINDOWS\\system32\\cmd.exe /C \"cd /D D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\debug && D:\\Tools\\Python311\\python.exe D:/Projects/FYP-worktrees/nr-quality/Project/AzureRender/tools/generate_script_bindings.py --check\"\n",
+    "command": [
+      "D:/Projects/FYP/Project/AzureRender/tools/msvc_env.bat",
+      "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/cmake.exe",
+      "--build",
+      "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\debug",
+      "--target",
+      "AzurePlayer",
+      "AzureReferenceCameraViewTests",
+      "AzureProjectReferenceViewsTests",
+      "AzureRenderExtensionRegistryTests",
+      "AzureReferenceCameraBindingTests",
+      "AzureScreenObjectVisibilityTests",
+      "AzureScreenObjectVisibilityGpuTests",
+      "AzureReferenceDepthGpuTests",
+      "AzureReferenceDepthCoverageGpuTests",
+      "AzureSurfaceResponseGpuTests",
+      "AzureMaterialCoverageTests",
+      "AzureMaterialDocumentTests",
+      "AzureCharacterRepairTests",
+      "AzureMaterialUvPolicyTests",
+      "AzureMaterialUvImportTests",
+      "AzureMaterialUvGradientsGpuTests",
+      "--parallel",
+      "1"
+    ]
+  },
+  "scope": {
+    "local": "external-input-1133da5649764919b264b0aa9d99097e",
+    "main": "external-input-e0af4436b2714045afc464cab6d9db9a",
+    "sourceBase": "2f52c6052918584fbccc13624a92fa5a2e188501",
+    "plannedBytes": 536870912,
+    "localInputs": [
+      "20261112-010418-scene-reference-object-visibility-709f68",
+      "20261112-013522-scene-visibility-atlas-source-33c6c3",
+      "20261111-232828-scene-reference-normal-60ddfa",
+      "20261110-030251-hair-main-chroma-public-9e799c",
+      "20261110-031856-hair-main-chroma-debug-668bf2",
+      "20261110-003435-visibility-numeric-contract-4f95e7",
+      "20261110-003031-reciprocal-compact-profile-4e7929",
+      "20261110-112309-hair-relative-projection-control-b9da17",
+      "20261111-213928-scene-reference-depth-728062",
+      "20261112-020715-scene-visibility-reference-calibration-f77af1",
+      "20261112-024632-native-atlas-and-receiver-producers-d5e705",
+      "20261112-025941-visibility-projection-depth-c1c792",
+      "20261112-032619-native-object-record-calibration-19d2f9",
+      "20261112-033450-native-object-record-source-capture-071c26",
+      "20261112-040725-reference-object-shadow-raster-2c9e58",
+      "20261112-041837-reference-object-shadow-raster-capture-60f161",
+      "20261112-044926-material-reference-object-visibility-344def",
+      "20261112-053111-intel-reference-visibility-sources-5238e2",
+      "20261112-061922-project-reference-visibility-profile-47902e",
+      "20261112-072016-native-receiver-producer-replay-523058",
+      "20261112-073905-reference-scene-outline-depth-d97cff",
+      "20261112-083618-native-cloth-receiver-normal-input-a94a9c",
+      "20261112-084230-cloth-receiver-authored-mips-a73d87",
+      "20261112-090101-cloth-receiver-native-sampler-e301d1",
+      "20261112-091515-cloth-receiver-normal-y-29da47",
+      "20261112-093321-reference-normal-sampled-rg-ceb2c6",
+      "20261112-103417-eyebrow-receiver-producer-1f8f43",
+      "20261112-104825-native-hair-normal-mip-bias-883aba",
+      "20261112-105542-native-eyebrow-hair-stencil-8ad501",
+      "20261112-110307-reference-depth-stencil-coverage-198047",
+      "20261112-114419-reference-geometric-normal-3e57b5",
+      "20261112-133809-reference-receiver-source-isolation-6cdff0",
+      "20261112-135432-reference-outline-projection-d784cf",
+      "20261112-143340-native-texture-sampling-footprint-750e56",
+      "20261112-153052-reference-hair-mip-footprint-510ded",
+      "20261112-155601-reference-hair-live-lod-2d2bfd",
+      "20261112-164303-reference-hair-mip-boundary-342000",
+      "20261112-173549-reference-hair-color-source-196fbc",
+      "20261112-174157-reference-hair-color-pair-8d76da",
+      "20261112-175619-reference-hair-color-triple-d2d080",
+      "20261112-180345-native-body-normal-source-43299d"
+    ],
+    "mainInputs": [
+      "20261103-234012-character-reference-stages-5abe6c",
+      "20261022-201845-endfield-capture-954719",
+      "20261027-022702-object-visibility-depth-reconstruction-c7312f"
+    ],
+    "change": "Opt-in projected hair primary texture footprint",
+    "gate": "Exact reproduction of the qualified three-texture readbacks, original default four PNGs, and dual configuration regression"
+  },
+  "archive": {
+    "sha256": "0476a617abdda7b1c9dfcc4a566b9ebdac34bc37c9d542a582406c85ca7a0486",
+    "bytes": 854031,
+    "members": 158
+  }
+}

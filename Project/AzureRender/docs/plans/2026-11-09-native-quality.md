@@ -170,6 +170,8 @@ Intel 头发颜色继续核对纹理梯度与层级选择。
 
 [参考头发近邻层级](../acceptance/nr/reference-hair-mip-boundary.md)完成双配置、双设备和原始四帧回归。NVIDIA 的冻结头发可见量及 RGB 全部满足一字节门槛。Intel 分别有 111 处和 568 处超差，完整接收有 494 处超差。接收附件和着色阶段的纹理采样继续按原门槛核对。
 
+[投影头发主纹理层级](../acceptance/nr/projected-hair-point-mip.md)完成材质接入及生产回归。NVIDIA 冻结 RGB 逐通道满足一字节门槛，Intel 有 32 处超差。剩余颜色、参考可见量和体表法线按实际光栅输入继续核对。
+
 ## 后续外观
 
 - [ ] 按原计划核对皮肤、眼睛、GI 与反射。

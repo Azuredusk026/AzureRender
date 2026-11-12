@@ -1160,7 +1160,8 @@ int loadProjectedHairRamp(const tinygltf::Material& material,const tinygltf::Mod
         throw std::invalid_argument("Unsupported projectedRamp schemaVersion");
     const std::vector<std::string> fields={"schemaVersion","parameterTexture","rampTexture","primaryShift",
         "secondaryShift","intensity","secondaryRange","edgeFade","specularNormalScale","surfaceNormalScale",
-        "directionX","secondaryColor","objectBasis","surfaceResponse","diffuseScale","frame","virtualLight","line","tangentSign","lighting","snapshotNormal"};
+        "directionX","secondaryColor","objectBasis","surfaceResponse","diffuseScale","frame","virtualLight","line","tangentSign",
+        "lighting","snapshotNormal","primaryTextureFootprint"};
     // TinyGLTF omits null extras. Retain the authored object so optional typed
     // fields cannot silently turn invalid null values into their defaults.
     if(!material.extras_json_string.empty()) {
@@ -1183,6 +1184,12 @@ int loadProjectedHairRamp(const tinygltf::Material& material,const tinygltf::Mod
         return static_cast<float>(number);
     };
     auto& target=result.projectedHairRamp;
+    if (source.Has("primaryTextureFootprint")) {
+        const auto& footprint = source.Get("primaryTextureFootprint");
+        if (!footprint.IsString() || footprint.Get<std::string>() != "axis-diagonal")
+            throw std::invalid_argument("Invalid projectedRamp.primaryTextureFootprint");
+        target.axisDiagonalPrimaryTextureFootprint = true;
+    }
     if(source.Has("snapshotNormal")) {
         const auto& mode=source.Get("snapshotNormal");
         if(!mode.IsString()||(mode.Get<std::string>()!="lighting"&&mode.Get<std::string>()!="material-normal-rg"))
@@ -2341,6 +2348,7 @@ AssetMaterial loadMaterial(
     azurerender::validateMaterialBlendDepth(result);
     azurerender::validateMaterialOutputPrecision(result);
     azurerender::validateMaterialUvPolicy(result);
+    validateProjectedHairPrimaryTextureFootprint(result);
     azurerender::validateMaterialRimResponse(result);
     return result;
 }

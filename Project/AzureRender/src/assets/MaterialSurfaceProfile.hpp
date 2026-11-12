@@ -87,6 +87,7 @@ inline PackedMaterialSurfaceProfile packMaterialSurfaceProfile(const AssetMateri
         throw std::invalid_argument("Transparent highlights require a lit projected hair profile on a transparent receiver");
     validateMaterialCoverage(material);
     validateHairPointMipReferenceNormal(material);
+    validateProjectedHairPrimaryTextureFootprint(material);
     const bool lit=(material.materialFeatures&(MaterialFeatureUnlitSurface|MaterialFeatureMultiplyComposite|MaterialFeatureOverlay))==0
         &&!material.unlitTextureLayers.present&&material.materialClass!=AssetMaterialClass::Overlay;
     const bool microfacetClass=(material.materialClass==AssetMaterialClass::Generic||material.materialClass==AssetMaterialClass::Fabric
@@ -176,6 +177,11 @@ inline PackedMaterialSurfaceProfile packMaterialSurfaceProfile(const AssetMateri
             const auto& ramp=material.specularRamp;
             result.rows[4]={0,0,ramp.iridescence,ramp.flipV?-1.F:1.F};
         }
+    }
+    if (material.projectedHairRamp.axisDiagonalPrimaryTextureFootprint) {
+        result.rows[6][3] += 16.F;
+        result.rows[12] = {material.textureSettings[0].mipBias, material.textureSettings[6].mipBias,
+            material.textureSettings[7].mipBias, 0.F};
     }
     result.rows[19][3]=material.radianceScale;
     result.rows[21][0]=static_cast<float>(material.displayTransform);

@@ -202,6 +202,7 @@ struct AssetMaterial {
         float diffuseScale=1;
         float tangentSign=1;
         bool materialSnapshotNormal=false;
+        bool axisDiagonalPrimaryTextureFootprint=false;
         struct Lighting {
             bool present=false,transparentHighlights=false,mainBrightnessSaturation=false;
             float shadowBrightness=1,shadowSaturation=1,shadowScale=1;
@@ -298,17 +299,34 @@ struct AssetMaterial {
     bool hairPointMipReferenceNormal = false;
 };
 
+inline bool usesLinearPointMipSampling(const azurerender::TextureImportSettings& settings) {
+    using Settings = azurerender::TextureImportSettings;
+    return settings.filter == "linear" && (settings.magFilter == Settings::MagFilter::Linear
+        || settings.magFilter == Settings::MagFilter::MatchFilter)
+        && settings.mipFilter == Settings::MipFilter::Nearest && settings.anisotropy == 1.F
+        && settings.mipPolicy != "none";
+}
+
+inline void validateProjectedHairPrimaryTextureFootprint(const AssetMaterial& material) {
+    const auto& hair = material.projectedHairRamp;
+    if (!hair.axisDiagonalPrimaryTextureFootprint) return;
+    if (!hair.present || material.materialClass != AssetMaterialClass::Hair || material.materialProfileVersion != 2
+        || (material.materialFeatures & MaterialFeatureMirroredCoarseUv) == 0
+        || material.alphaMode == AssetAlphaMode::Blend)
+        throw std::invalid_argument("projectedRamp.primaryTextureFootprint requires version two hair with mirrored-coarse-uv");
+    for (const unsigned slot : {0U, 6U, 7U}) {
+        if (!usesLinearPointMipSampling(material.textureSettings[slot]))
+            throw std::invalid_argument("projectedRamp.primaryTextureFootprint requires linear filtering, nearest mip and anisotropy one");
+    }
+}
+
 inline void validateHairPointMipReferenceNormal(const AssetMaterial& material) {
     if (!material.hairPointMipReferenceNormal) return;
-    const auto& normal = material.textureSettings[1];
-    using Settings = azurerender::TextureImportSettings;
     if (material.materialProfileVersion != 2 || material.materialClass != AssetMaterialClass::Hair
         || !material.projectedHairRamp.present || !material.projectedHairRamp.materialSnapshotNormal
         || material.alphaMode == AssetAlphaMode::Blend)
         throw std::invalid_argument("hair-point-mip referenceNormal requires a version two hair receiver with material-normal-rg");
-    if (normal.filter != "linear" || (normal.magFilter != Settings::MagFilter::Linear
-        && normal.magFilter != Settings::MagFilter::MatchFilter) || normal.mipFilter != Settings::MipFilter::Nearest
-        || normal.anisotropy != 1.F || normal.mipPolicy == "none")
+    if (!usesLinearPointMipSampling(material.textureSettings[1]))
         throw std::invalid_argument("hair-point-mip referenceNormal requires linear filtering, nearest mip and anisotropy one");
 }
 
