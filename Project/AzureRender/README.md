@@ -5,6 +5,7 @@
 [主线联合场景短测](docs/acceptance/nr/performance-bottlenecks.md#主线联合场景短测)记录帧耗时、渲染通道及显存峰值。
 
 [可玩包关卡提交](docs/acceptance/p1/2026-11-13-level-commit.md)通过隔离运行、切关和重启验收。
+[可玩包三十分钟长跑](docs/acceptance/p1/2026-11-13-playable-30min.md)通过 67 次关卡提交、窗口恢复及资源释放检查。
 
 [空白视口选择](docs/acceptance/nr/editor-empty-viewport-selection.md)通过两种配置的实际编辑输入核对。
 

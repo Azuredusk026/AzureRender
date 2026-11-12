@@ -57,6 +57,13 @@
   },
   "milestones": [
     {
+      "path": "runs/20261113-032750-playable-release-30min-85dc35f-886a32",
+      "name": "可玩包三十分钟长跑",
+      "sourceBase": "85dc35f",
+      "evidence": "docs/acceptance/p1/2026-11-13-playable-30min.md",
+      "results": "docs/acceptance/p1/evidence/2026-11-13/playable-30min/results.json"
+    },
+    {
       "path": "runs/20261113-022822-nr-material-viewquad-main-integration-e65379",
       "name": "主线材质候选采样",
       "sourceBase": "01cc6b2",

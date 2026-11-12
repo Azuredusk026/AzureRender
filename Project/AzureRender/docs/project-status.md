@@ -9,6 +9,8 @@
 
 [可玩包关卡提交](acceptance/p1/2026-11-13-level-commit.md)完成四十次切关与重启。
 提交 P99 为 1.79 毫秒，提交帧 P99 为 31.13 毫秒。
+[可玩包三十分钟长跑](acceptance/p1/2026-11-13-playable-30min.md)通过窗口恢复、驻留及资源释放检查。
+长跑 GPU P95 为 6.22 毫秒，关卡提交额外耗时 P99 为 2.47 毫秒。
 
 [空白视口选择](acceptance/nr/editor-empty-viewport-selection.md)通过双配置的项目编辑输入和可玩编辑流程。
 
