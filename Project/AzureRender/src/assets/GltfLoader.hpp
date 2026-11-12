@@ -294,6 +294,7 @@ struct AssetMaterial {
     AssetAlphaMode alphaMode = AssetAlphaMode::Opaque;
     float alphaCutoff = 0.5F;
     bool doubleSided = false;
+    bool geometricReferenceNormal = false;
 };
 
 inline void validateMaterialCoverage(const AssetMaterial& material) {

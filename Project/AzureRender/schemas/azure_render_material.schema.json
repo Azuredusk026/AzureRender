@@ -399,7 +399,7 @@
         },
         "encoding": {
           "type": "string",
-          "const": "sampled-rg"
+          "enum": ["sampled-rg", "geometry"]
         }
       }
     },

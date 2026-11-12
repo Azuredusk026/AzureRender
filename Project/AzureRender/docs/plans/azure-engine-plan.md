@@ -1370,3 +1370,5 @@ Intel 头发颜色继续按冻结区域核对纹理选级。
 [原生眉部与头发模板](../acceptance/nr/native-eyebrow-hair-stencil.md)确认 135 个重叠位置的原生模板保护与参考附件要求。
 
 [参考深度模板覆盖](../acceptance/nr/reference-depth-stencil-coverage.md)接入保护位及场景扩展 API 17。完整接收超差为 NVIDIA 410 处和 Intel 742 处，眉部各 30 处。
+
+[参考几何法线](../acceptance/nr/reference-geometric-normal.md)核对眉部和脸部的原生几何法线。完整接收超差为 NVIDIA 284 处和 Intel 632 处，新增位置纳入同一验收范围。

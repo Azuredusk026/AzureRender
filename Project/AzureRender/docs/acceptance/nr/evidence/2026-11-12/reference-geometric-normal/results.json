@@ -1,0 +1,2230 @@
+{
+  "status": "qualified-reference-geometric-normal",
+  "overall": "failed-user-review",
+  "sceneRendererApi": 17,
+  "baseCommit": "3b907dca3433d86db4825f02b7612c3657dff04c",
+  "acceptedMaximumByteError": 1,
+  "fixture": {
+    "files": [
+      {
+        "relative": "assets/captured-rim-policy.azurematerial",
+        "bytes": 146,
+        "sha256": "ce7baa8b50676f0a625656be9658a885864aa008bdc8cf0916fdd368ef322610"
+      },
+      {
+        "relative": "assets/captured-rim-policy.azurematerial.azmeta",
+        "bytes": 102,
+        "sha256": "9713de607cbd28be933ca04d4538b4482da8aa060b27e728748008134fba4963"
+      },
+      {
+        "relative": "assets/hair-coverage.azurelevel",
+        "bytes": 15661,
+        "sha256": "85d82573dca382b236ba1e54f83e22625f703092ca9c6225c3b04fc6705c2c2d"
+      },
+      {
+        "relative": "character/captured-hair-normal.dds",
+        "bytes": 5592580,
+        "sha256": "876179d4707dfd219f8100a656ff602807535f601888165caf77282f58deda54"
+      },
+      {
+        "relative": "character/captured-hair-normal.dds.azmeta",
+        "bytes": 449,
+        "sha256": "bc0ceb65e52c31e1beec370ab08324c9f78d36da9f74ea0602ffd8485cda00e0"
+      },
+      {
+        "relative": "character/cloth-receiver-normal-authored.dds",
+        "bytes": 5592580,
+        "sha256": "34bbb19e3e85d2477a2c657e6956514b62866424982584b5c92df8d90bbbcf26"
+      },
+      {
+        "relative": "character/cloth-receiver-normal-authored.dds.azmeta",
+        "bytes": 449,
+        "sha256": "3729331732c863451c67cd47c568c7dfdbd8ebf99065214e7340744cffc8134a"
+      },
+      {
+        "relative": "character/hair-base-coverage.dds",
+        "bytes": 22369768,
+        "sha256": "0bf35700e233f4b70351b604ac5e2a187fc5bddcc3a4805e68d105178d387cdf"
+      },
+      {
+        "relative": "character/hair-base-coverage.dds.azmeta",
+        "bytes": 276,
+        "sha256": "89f3a09368493d4152d2cc2e9eb1358bd7aa57c0e47bd178d818c3b02370606a"
+      },
+      {
+        "relative": "character/hair-coverage.glb",
+        "bytes": 118803432,
+        "sha256": "2c2e47d1be8c511a3fa1b0d2a6b01f61169a3540fb375ae07417c28fece2f2cb"
+      },
+      {
+        "relative": "character/hair-native-mask.dds",
+        "bytes": 349700,
+        "sha256": "afcc37dc11b59e370e722f99c800702288d6cd0db4f1ee62c4bf9ab6ca0e453e"
+      },
+      {
+        "relative": "character/hair-native-mask.dds.azmeta",
+        "bytes": 284,
+        "sha256": "fda0cd1353d35fc30499bababe7108dc7b55f1953a7d888327cb13e08715dc38"
+      },
+      {
+        "relative": "character/native-captured-body/t12.dds",
+        "bytes": 32916,
+        "sha256": "6cf915c33198d3afd064ab182e0378e96a1daea49e6ab2dd52ffc9f376d68b86"
+      },
+      {
+        "relative": "character/native-captured-body/t12.dds.azmeta",
+        "bytes": 248,
+        "sha256": "c9d6333d1c222df672cc44a3bd2a04f4c3b38a69ea52776e7acc61da82988efc"
+      },
+      {
+        "relative": "character/native-captured-body/t14.dds",
+        "bytes": 1398276,
+        "sha256": "2ac9344b3693fefd3b74ecfc2b4f6212920b1754173b8212a8f35fcea634a068"
+      },
+      {
+        "relative": "character/native-captured-body/t14.dds.azmeta",
+        "bytes": 313,
+        "sha256": "40e77548c2e30bf462b0c73b7682fcdbb809cc36a5a1ccf44ab9b982d9e354af"
+      },
+      {
+        "relative": "character/native-captured-body/t15.dds",
+        "bytes": 1398256,
+        "sha256": "3d16ddcced1a4f482f969250b835c5ea569ce620d8ef16cc465fc19cbb266a9e"
+      },
+      {
+        "relative": "character/native-captured-body/t15.dds.azmeta",
+        "bytes": 315,
+        "sha256": "34d6e6c85fb219367669af101852aa97e69b50aa6f86259c78647fe9fd38667b"
+      },
+      {
+        "relative": "character/native-cloth-04/t11.dds",
+        "bytes": 1152,
+        "sha256": "40a1ad06cc99d97a74848aa64bbabd00861559c0a6aa4a58e14034a783995653"
+      },
+      {
+        "relative": "character/native-cloth-04/t11.dds.azmeta",
+        "bytes": 308,
+        "sha256": "5e236bb42f260f9d93ebfb96ad00cde286b8c7696a9db54b566d226efccdcf62"
+      },
+      {
+        "relative": "character/native-cloth-04/t12.dds",
+        "bytes": 262272,
+        "sha256": "b23e301482461a8b4ef44ac875cb9883e11aa507273413e42171dd0b8c113e1a"
+      },
+      {
+        "relative": "character/native-cloth-04/t12.dds.azmeta",
+        "bytes": 308,
+        "sha256": "5721acbb474adc88f7aced20f4469abe0afdf8a733e44936c063c9fcf780fbea"
+      },
+      {
+        "relative": "character/native-cloth-04/t16.dds",
+        "bytes": 5592580,
+        "sha256": "c7ea4150acd1461cfe37bf7bfacdb197dd05ab7193e1ca245ab445c4e2fb2324"
+      },
+      {
+        "relative": "character/native-cloth-04/t16.dds.azmeta",
+        "bytes": 313,
+        "sha256": "da711fd4600449805a0ecd012d47fb995744e9ce5d83c5d53775a3d24626b17e"
+      },
+      {
+        "relative": "character/native-cloth-04/t17.dds",
+        "bytes": 22369748,
+        "sha256": "38a520d6eca0f00bb8cb852679ddcd2fe1bf9c6cac7fa725c5918a5d8139dedd"
+      },
+      {
+        "relative": "character/native-cloth-04/t17.dds.azmeta",
+        "bytes": 315,
+        "sha256": "3219753dc58632e55ffb6382a03ae121b8f975fee7605179d076c93a953979fd"
+      },
+      {
+        "relative": "character/native-cloth-04/t18.dds",
+        "bytes": 5592560,
+        "sha256": "434c6c5aad9ba8fe14a594e86f331d1d0a0bad72f6fc5b1e7579c12dc1595b2a"
+      },
+      {
+        "relative": "character/native-cloth-04/t18.dds.azmeta",
+        "bytes": 315,
+        "sha256": "cd2b4563b895a54aa2fd7d66b1845f6034ae7c39e2cfb76eb731461af8357da5"
+      },
+      {
+        "relative": "character/native-coverage.dds",
+        "bytes": 349700,
+        "sha256": "a093f699c9c13b33a5943dedb93be626dea9ba5f60b715d44f5f8c54bbd2327a"
+      },
+      {
+        "relative": "character/native-coverage.dds.azmeta",
+        "bytes": 447,
+        "sha256": "049a068f29023607ac692fd6ec1f3c06cd95ce3b5758f544ea298dd898a6300b"
+      },
+      {
+        "relative": "character/native-textures/t12.dds",
+        "bytes": 349700,
+        "sha256": "388813b5465244f3f07a2a383021ca470f60bbd08aa3d4d7daa801a8c09aeaa4"
+      },
+      {
+        "relative": "character/native-textures/t12.dds.azmeta",
+        "bytes": 275,
+        "sha256": "26b33755b6147c0ccd111c34135d2e672f8bcc382a4543b0c7ad7d306aab0feb"
+      },
+      {
+        "relative": "character/native-textures/t13.dds",
+        "bytes": 1152,
+        "sha256": "6f0bdcb7d4da88f997622f690688683380a208bf7bd929ef55522e5edadace05"
+      },
+      {
+        "relative": "character/native-textures/t13.dds.azmeta",
+        "bytes": 275,
+        "sha256": "6685acf498b42fac7a5c835a7d05d825357dae277f9208703f6dd81cc0595878"
+      },
+      {
+        "relative": "character/native-textures/t14.dds",
+        "bytes": 262272,
+        "sha256": "cb0c4a5bf2eb2dcf6b4abc7bec66fe1b7dc6400a79efc49811484b35d17993d4"
+      },
+      {
+        "relative": "character/native-textures/t14.dds.azmeta",
+        "bytes": 275,
+        "sha256": "199e566d2b499f5f0e6e14d62d4bfbde1c0eb38ab117d0ec2bc07d475984bad5"
+      },
+      {
+        "relative": "character/native-textures/t16.dds",
+        "bytes": 5592580,
+        "sha256": "4a382264f75c816ccf8fdf70c5e4bccfcf6dc5b31d74c1fcb92b29a9bd556643"
+      },
+      {
+        "relative": "character/native-textures/t16.dds.azmeta",
+        "bytes": 276,
+        "sha256": "dacb8a62aa4be5365c908e59ad3b2c1986bb989f47a77cbd96334aca8cb5c85a"
+      },
+      {
+        "relative": "character/native-textures/t17.dds",
+        "bytes": 5592580,
+        "sha256": "12df068935abc56ac44d86c08a5b342e748f85f5ef3b6d2048485064d8292995"
+      },
+      {
+        "relative": "character/native-textures/t17.dds.azmeta",
+        "bytes": 276,
+        "sha256": "bac274600e7eb80e83ec42184de60626ca36ed5d8aa2e27d7ca16c14952f55fd"
+      },
+      {
+        "relative": "character/native-textures/t18.dds",
+        "bytes": 5592580,
+        "sha256": "876179d4707dfd219f8100a656ff602807535f601888165caf77282f58deda54"
+      },
+      {
+        "relative": "character/native-textures/t18.dds.azmeta",
+        "bytes": 276,
+        "sha256": "424080184b3c22c286c90596bc4e843a0beedb5d5801be069539208b84a6a33d"
+      },
+      {
+        "relative": "config/object-visibility-profile-v1.bin",
+        "bytes": 2097152,
+        "sha256": "bbda0d685ab5a66767c2c3881a67dff147e1f5a2c766db1f6dd5b63fecedcf2c"
+      },
+      {
+        "relative": "config/reference-views.json",
+        "bytes": 3691,
+        "sha256": "16835eb74fe5af7cb9a6f0df2f6309016f6d0d945293bc985d146f73639333bb"
+      },
+      {
+        "relative": "hair-coverage.azureproject",
+        "bytes": 312,
+        "sha256": "2fa150253f5641bd67c1da3bb854efb1acd90c7dd90e76232996e63ce043c393"
+      }
+    ],
+    "binarySha256": "b62271e93723e77dc58cee463b5607ee1bfa011b6dd44deb7448c8ca1203fe76",
+    "onlyGeometricReferenceNormalChanged": true,
+    "policies": {
+      "M_actor_laevat_brow_01": {
+        "schemaVersion": 1,
+        "encoding": "geometry"
+      },
+      "M_actor_laevat_face_01": {
+        "schemaVersion": 1,
+        "encoding": "geometry"
+      }
+    },
+    "sameDdsSha256": "34bbb19e3e85d2477a2c657e6956514b62866424982584b5c92df8d90bbbcf26",
+    "sameSamplerSha256": "3729331732c863451c67cd47c568c7dfdbd8ebf99065214e7340744cffc8134a"
+  },
+  "schema": {
+    "schemaSha256": "bbcdcff90a8f71febe35bbe3c1696e16dda94fc4a8bf4e2b011eaca0e6f6412a",
+    "scope": "Profile version gate and referenceNormal property",
+    "cases": {
+      "ordinaryVersionOne": true,
+      "ordinaryVersionTwo": true,
+      "sampledVersionTwo": true,
+      "geometricVersionTwo": true,
+      "geometricVersionOne": false,
+      "sampledVersionOne": false,
+      "unknownVersion": false,
+      "unknownEncoding": false,
+      "unknownField": false,
+      "missingEncoding": false
+    }
+  },
+  "layout": {
+    "release": {
+      "size": 3720,
+      "oldFieldCount": 68,
+      "newOffset": 3717
+    },
+    "debug": {
+      "size": 4296,
+      "oldFieldCount": 68,
+      "newOffset": 4293
+    }
+  },
+  "red": {
+    "configuration": "Release",
+    "device": "nvidia",
+    "mode": "red",
+    "default": {
+      "code": [
+        673,
+        243
+      ],
+      "word": 3221474977
+    },
+    "selected": {
+      "exitCode": 1,
+      "diagnostic": "referenceNormal"
+    },
+    "playerSha256": "a3ad2745d042202b51de8abeabc8ce5e1ad768400d7ce2ac6b6fbd4995d851c2"
+  },
+  "controls": {
+    "release-nvidia": {
+      "configuration": "Release",
+      "device": "nvidia",
+      "mode": "green",
+      "default": {
+        "code": [
+          673,
+          243
+        ],
+        "word": 3221474977
+      },
+      "selected": {
+        "code": [
+          585,
+          804
+        ],
+        "word": 3222049353
+      },
+      "indexed": {
+        "code": [
+          585,
+          804
+        ],
+        "word": 3222049353
+      },
+      "untextured": {
+        "code": [
+          585,
+          804
+        ],
+        "word": 3222049353
+      },
+      "sampledRg": {
+        "code": [
+          675,
+          777
+        ],
+        "word": 3222021795
+      },
+      "invalid": {
+        "exitCode": 1,
+        "diagnostic": "referenceNormal"
+      },
+      "playerSha256": "fdcfde65b9d39943567b5891aac9017572da4622113eb1eb80f6433f0fb8b4bd"
+    },
+    "release-intel": {
+      "configuration": "Release",
+      "device": "intel",
+      "mode": "green",
+      "default": {
+        "code": [
+          673,
+          243
+        ],
+        "word": 3221474977
+      },
+      "selected": {
+        "code": [
+          585,
+          804
+        ],
+        "word": 3222049353
+      },
+      "indexed": {
+        "code": [
+          585,
+          804
+        ],
+        "word": 3222049353
+      },
+      "untextured": {
+        "code": [
+          585,
+          804
+        ],
+        "word": 3222049353
+      },
+      "sampledRg": {
+        "code": [
+          675,
+          777
+        ],
+        "word": 3222021795
+      },
+      "invalid": {
+        "exitCode": 1,
+        "diagnostic": "referenceNormal"
+      },
+      "playerSha256": "fdcfde65b9d39943567b5891aac9017572da4622113eb1eb80f6433f0fb8b4bd"
+    },
+    "debug-nvidia": {
+      "configuration": "Debug",
+      "device": "nvidia",
+      "mode": "green",
+      "default": {
+        "code": [
+          673,
+          243
+        ],
+        "word": 3221474977
+      },
+      "selected": {
+        "code": [
+          585,
+          804
+        ],
+        "word": 3222049353
+      },
+      "indexed": {
+        "code": [
+          585,
+          804
+        ],
+        "word": 3222049353
+      },
+      "untextured": {
+        "code": [
+          585,
+          804
+        ],
+        "word": 3222049353
+      },
+      "sampledRg": {
+        "code": [
+          675,
+          777
+        ],
+        "word": 3222021795
+      },
+      "invalid": {
+        "exitCode": 1,
+        "diagnostic": "referenceNormal"
+      },
+      "playerSha256": "01ecf9f60f0d866c42d3d3880bb7d6ac4d2b2150a1cb077898d6b46a29ec760c"
+    },
+    "debug-intel": {
+      "configuration": "Debug",
+      "device": "intel",
+      "mode": "green",
+      "default": {
+        "code": [
+          673,
+          243
+        ],
+        "word": 3221474977
+      },
+      "selected": {
+        "code": [
+          585,
+          804
+        ],
+        "word": 3222049353
+      },
+      "indexed": {
+        "code": [
+          585,
+          804
+        ],
+        "word": 3222049353
+      },
+      "untextured": {
+        "code": [
+          585,
+          804
+        ],
+        "word": 3222049353
+      },
+      "sampledRg": {
+        "code": [
+          675,
+          777
+        ],
+        "word": 3222021795
+      },
+      "invalid": {
+        "exitCode": 1,
+        "diagnostic": "referenceNormal"
+      },
+      "playerSha256": "01ecf9f60f0d866c42d3d3880bb7d6ac4d2b2150a1cb077898d6b46a29ec760c"
+    }
+  },
+  "builds": {
+    "release": {
+      "configuration": "Release",
+      "shaderCount": 895,
+      "changedShaders": {
+        "reference_scene_visibility.frag.spv": {
+          "before": "ec290e43fd26c5d16497a72c9d91804ecea441d9c1a3af31939075e5677452e3",
+          "after": "bccd46480c788d7a3033eaa007c5b885a5101d20e0d12adc86207e06c45ef082"
+        },
+        "reference_scene_visibility_bindless.frag.spv": {
+          "before": "545a57449975a70da592fc713da5969c4fbb00cc80499ddcfb78e6a099eb60b9",
+          "after": "987f290ad0b612a031d363141045b44977a97113a9ad10e501f743d90501111c"
+        }
+      },
+      "ctestCommand": [
+        "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+        "--test-dir",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\release",
+        "-R",
+        "^(AzureRender[.](ReferenceCameraView|ReferenceCameraBinding|ExtensionRegistry|ScreenObjectVisibility|MaterialCoverage)|AzureEngine[.]ProjectReferenceViews|AzureAssets[.]MaterialDocument|AzureEditor[.]ProjectFlow)$",
+        "--no-tests=error",
+        "--output-on-failure",
+        "--output-junit",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-114419-reference-geometric-normal-3e57b5\\release-ctest.xml"
+      ],
+      "ctestExit": 0,
+      "tests": 8,
+      "playerSha256": "fdcfde65b9d39943567b5891aac9017572da4622113eb1eb80f6433f0fb8b4bd"
+    },
+    "debug": {
+      "configuration": "Debug",
+      "shaderCount": 895,
+      "changedShaders": {
+        "reference_scene_visibility.frag.spv": {
+          "before": "ec290e43fd26c5d16497a72c9d91804ecea441d9c1a3af31939075e5677452e3",
+          "after": "bccd46480c788d7a3033eaa007c5b885a5101d20e0d12adc86207e06c45ef082"
+        },
+        "reference_scene_visibility_bindless.frag.spv": {
+          "before": "545a57449975a70da592fc713da5969c4fbb00cc80499ddcfb78e6a099eb60b9",
+          "after": "987f290ad0b612a031d363141045b44977a97113a9ad10e501f743d90501111c"
+        }
+      },
+      "ctestCommand": [
+        "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+        "--test-dir",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\debug",
+        "-R",
+        "^(AzureRender[.](ReferenceCameraView|ReferenceCameraBinding|ExtensionRegistry|ScreenObjectVisibility|MaterialCoverage)|AzureEngine[.]ProjectReferenceViews|AzureAssets[.]MaterialDocument)$",
+        "--no-tests=error",
+        "--output-on-failure",
+        "--output-junit",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-114419-reference-geometric-normal-3e57b5\\debug-ctest.xml"
+      ],
+      "ctestExit": 0,
+      "tests": 7,
+      "playerSha256": "01ecf9f60f0d866c42d3d3880bb7d6ac4d2b2150a1cb077898d6b46a29ec760c"
+    },
+    "release-nvidia-gpu": {
+      "configuration": "Release",
+      "shaderCount": 895,
+      "changedShaders": {
+        "reference_scene_visibility.frag.spv": {
+          "before": "ec290e43fd26c5d16497a72c9d91804ecea441d9c1a3af31939075e5677452e3",
+          "after": "bccd46480c788d7a3033eaa007c5b885a5101d20e0d12adc86207e06c45ef082"
+        },
+        "reference_scene_visibility_bindless.frag.spv": {
+          "before": "545a57449975a70da592fc713da5969c4fbb00cc80499ddcfb78e6a099eb60b9",
+          "after": "987f290ad0b612a031d363141045b44977a97113a9ad10e501f743d90501111c"
+        }
+      },
+      "ctestCommand": [
+        "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+        "--test-dir",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\release",
+        "-R",
+        "^AzureRender[.](ScreenObjectVisibility(Gpu|ReferenceGpu)|ReferenceDepth(Coverage)?Gpu|SurfaceResponseGpu)$",
+        "--no-tests=error",
+        "--output-on-failure",
+        "--output-junit",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-114419-reference-geometric-normal-3e57b5\\release-nvidia-gpu-ctest.xml"
+      ],
+      "ctestExit": 0,
+      "tests": 5,
+      "playerSha256": "fdcfde65b9d39943567b5891aac9017572da4622113eb1eb80f6433f0fb8b4bd"
+    },
+    "release-intel-gpu": {
+      "configuration": "Release",
+      "shaderCount": 895,
+      "changedShaders": {
+        "reference_scene_visibility.frag.spv": {
+          "before": "ec290e43fd26c5d16497a72c9d91804ecea441d9c1a3af31939075e5677452e3",
+          "after": "bccd46480c788d7a3033eaa007c5b885a5101d20e0d12adc86207e06c45ef082"
+        },
+        "reference_scene_visibility_bindless.frag.spv": {
+          "before": "545a57449975a70da592fc713da5969c4fbb00cc80499ddcfb78e6a099eb60b9",
+          "after": "987f290ad0b612a031d363141045b44977a97113a9ad10e501f743d90501111c"
+        }
+      },
+      "ctestCommand": [
+        "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+        "--test-dir",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\release",
+        "-R",
+        "^AzureRender[.](ScreenObjectVisibility(Gpu|ReferenceGpu)|ReferenceDepth(Coverage)?Gpu|SurfaceResponseGpu)$",
+        "--no-tests=error",
+        "--output-on-failure",
+        "--output-junit",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-114419-reference-geometric-normal-3e57b5\\release-intel-gpu-ctest.xml"
+      ],
+      "ctestExit": 0,
+      "tests": 5,
+      "playerSha256": "fdcfde65b9d39943567b5891aac9017572da4622113eb1eb80f6433f0fb8b4bd"
+    },
+    "debug-nvidia-gpu": {
+      "configuration": "Debug",
+      "shaderCount": 895,
+      "changedShaders": {
+        "reference_scene_visibility.frag.spv": {
+          "before": "ec290e43fd26c5d16497a72c9d91804ecea441d9c1a3af31939075e5677452e3",
+          "after": "bccd46480c788d7a3033eaa007c5b885a5101d20e0d12adc86207e06c45ef082"
+        },
+        "reference_scene_visibility_bindless.frag.spv": {
+          "before": "545a57449975a70da592fc713da5969c4fbb00cc80499ddcfb78e6a099eb60b9",
+          "after": "987f290ad0b612a031d363141045b44977a97113a9ad10e501f743d90501111c"
+        }
+      },
+      "ctestCommand": [
+        "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+        "--test-dir",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\debug",
+        "-R",
+        "^AzureRender[.](ScreenObjectVisibility(Gpu|ReferenceGpu)|ReferenceDepth(Coverage)?Gpu|SurfaceResponseGpu)$",
+        "--no-tests=error",
+        "--output-on-failure",
+        "--output-junit",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-114419-reference-geometric-normal-3e57b5\\debug-nvidia-gpu-ctest.xml"
+      ],
+      "ctestExit": 0,
+      "tests": 5,
+      "playerSha256": "01ecf9f60f0d866c42d3d3880bb7d6ac4d2b2150a1cb077898d6b46a29ec760c"
+    },
+    "debug-intel-gpu": {
+      "configuration": "Debug",
+      "shaderCount": 895,
+      "changedShaders": {
+        "reference_scene_visibility.frag.spv": {
+          "before": "ec290e43fd26c5d16497a72c9d91804ecea441d9c1a3af31939075e5677452e3",
+          "after": "bccd46480c788d7a3033eaa007c5b885a5101d20e0d12adc86207e06c45ef082"
+        },
+        "reference_scene_visibility_bindless.frag.spv": {
+          "before": "545a57449975a70da592fc713da5969c4fbb00cc80499ddcfb78e6a099eb60b9",
+          "after": "987f290ad0b612a031d363141045b44977a97113a9ad10e501f743d90501111c"
+        }
+      },
+      "ctestCommand": [
+        "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+        "--test-dir",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\debug",
+        "-R",
+        "^AzureRender[.](ScreenObjectVisibility(Gpu|ReferenceGpu)|ReferenceDepth(Coverage)?Gpu|SurfaceResponseGpu)$",
+        "--no-tests=error",
+        "--output-on-failure",
+        "--output-junit",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-114419-reference-geometric-normal-3e57b5\\debug-intel-gpu-ctest.xml"
+      ],
+      "ctestExit": 0,
+      "tests": 5,
+      "playerSha256": "01ecf9f60f0d866c42d3d3880bb7d6ac4d2b2150a1cb077898d6b46a29ec760c"
+    }
+  },
+  "buildExecution": {
+    "release-build": {
+      "status": "exited",
+      "exitCode": 0,
+      "reason": null,
+      "seconds": 198.46900000004098,
+      "logTruncated": false,
+      "samplingSeconds": 1,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-B",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-114419-reference-geometric-normal-3e57b5\\build.py",
+        "Release"
+      ],
+      "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\tmp"
+    },
+    "release-cpu-tests": {
+      "status": "exited",
+      "exitCode": 0,
+      "reason": null,
+      "seconds": 21.219000000040978,
+      "logTruncated": false,
+      "samplingSeconds": 1,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-B",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-114419-reference-geometric-normal-3e57b5\\verify-build.py",
+        "Release"
+      ],
+      "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-114419-reference-geometric-normal-3e57b5\\tmp"
+    },
+    "debug-build": {
+      "status": "exited",
+      "exitCode": 0,
+      "reason": null,
+      "seconds": 73.28200000000652,
+      "logTruncated": false,
+      "samplingSeconds": 1,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-B",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-114419-reference-geometric-normal-3e57b5\\build.py",
+        "Debug"
+      ],
+      "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\tmp"
+    },
+    "debug-cpu-tests": {
+      "status": "exited",
+      "exitCode": 0,
+      "reason": null,
+      "seconds": 8.0,
+      "logTruncated": false,
+      "samplingSeconds": 1,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-B",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-114419-reference-geometric-normal-3e57b5\\verify-build.py",
+        "Debug"
+      ],
+      "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-114419-reference-geometric-normal-3e57b5\\tmp"
+    },
+    "release-nvidia-geometric-normal-control": {
+      "status": "exited",
+      "exitCode": 0,
+      "reason": null,
+      "seconds": 47.92200000002049,
+      "logTruncated": false,
+      "samplingSeconds": 1,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-B",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-114419-reference-geometric-normal-3e57b5\\geometric-normal-control.py",
+        "green",
+        "Release",
+        "nvidia"
+      ],
+      "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-114419-reference-geometric-normal-3e57b5\\tmp"
+    },
+    "release-nvidia-gpu-tests": {
+      "status": "exited",
+      "exitCode": 0,
+      "reason": null,
+      "seconds": 5.7189999999827705,
+      "logTruncated": false,
+      "samplingSeconds": 1,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-B",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-114419-reference-geometric-normal-3e57b5\\verify-build.py",
+        "Release",
+        "nvidia"
+      ],
+      "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-114419-reference-geometric-normal-3e57b5\\tmp"
+    },
+    "release-nvidia-capture": {
+      "status": "exited",
+      "exitCode": 0,
+      "reason": null,
+      "seconds": 51.65599999995902,
+      "logTruncated": false,
+      "samplingSeconds": 1,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-B",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-114419-reference-geometric-normal-3e57b5\\capture.py",
+        "Release",
+        "nvidia"
+      ],
+      "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-114419-reference-geometric-normal-3e57b5\\tmp"
+    },
+    "release-intel-geometric-normal-control": {
+      "status": "exited",
+      "exitCode": 0,
+      "reason": null,
+      "seconds": 51.46899999998277,
+      "logTruncated": false,
+      "samplingSeconds": 1,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-B",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-114419-reference-geometric-normal-3e57b5\\geometric-normal-control.py",
+        "green",
+        "Release",
+        "intel"
+      ],
+      "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-114419-reference-geometric-normal-3e57b5\\tmp"
+    },
+    "release-intel-gpu-tests": {
+      "status": "exited",
+      "exitCode": 0,
+      "reason": null,
+      "seconds": 2.5619999999762513,
+      "logTruncated": false,
+      "samplingSeconds": 1,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-B",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-114419-reference-geometric-normal-3e57b5\\verify-build.py",
+        "Release",
+        "intel"
+      ],
+      "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-114419-reference-geometric-normal-3e57b5\\tmp"
+    },
+    "release-intel-capture": {
+      "status": "exited",
+      "exitCode": 0,
+      "reason": null,
+      "seconds": 27.375,
+      "logTruncated": false,
+      "samplingSeconds": 1,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-B",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-114419-reference-geometric-normal-3e57b5\\capture.py",
+        "Release",
+        "intel"
+      ],
+      "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-114419-reference-geometric-normal-3e57b5\\tmp"
+    },
+    "debug-nvidia-geometric-normal-control": {
+      "status": "exited",
+      "exitCode": 0,
+      "reason": null,
+      "seconds": 33.42200000002049,
+      "logTruncated": false,
+      "samplingSeconds": 1,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-B",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-114419-reference-geometric-normal-3e57b5\\geometric-normal-control.py",
+        "green",
+        "Debug",
+        "nvidia"
+      ],
+      "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-114419-reference-geometric-normal-3e57b5\\tmp"
+    },
+    "debug-nvidia-gpu-tests": {
+      "status": "exited",
+      "exitCode": 0,
+      "reason": null,
+      "seconds": 5.921999999962281,
+      "logTruncated": false,
+      "samplingSeconds": 1,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-B",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-114419-reference-geometric-normal-3e57b5\\verify-build.py",
+        "Debug",
+        "nvidia"
+      ],
+      "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-114419-reference-geometric-normal-3e57b5\\tmp"
+    },
+    "debug-nvidia-capture": {
+      "status": "exited",
+      "exitCode": 0,
+      "reason": null,
+      "seconds": 66.56200000003446,
+      "logTruncated": false,
+      "samplingSeconds": 1,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-B",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-114419-reference-geometric-normal-3e57b5\\capture.py",
+        "Debug",
+        "nvidia"
+      ],
+      "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-114419-reference-geometric-normal-3e57b5\\tmp"
+    },
+    "debug-intel-geometric-normal-control": {
+      "status": "exited",
+      "exitCode": 0,
+      "reason": null,
+      "seconds": 34.32799999997951,
+      "logTruncated": false,
+      "samplingSeconds": 1,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-B",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-114419-reference-geometric-normal-3e57b5\\geometric-normal-control.py",
+        "green",
+        "Debug",
+        "intel"
+      ],
+      "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-114419-reference-geometric-normal-3e57b5\\tmp"
+    },
+    "debug-intel-gpu-tests": {
+      "status": "exited",
+      "exitCode": 0,
+      "reason": null,
+      "seconds": 2.7189999999827705,
+      "logTruncated": false,
+      "samplingSeconds": 1,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-B",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-114419-reference-geometric-normal-3e57b5\\verify-build.py",
+        "Debug",
+        "intel"
+      ],
+      "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-114419-reference-geometric-normal-3e57b5\\tmp"
+    },
+    "debug-intel-capture": {
+      "status": "exited",
+      "exitCode": 0,
+      "reason": null,
+      "seconds": 64.45299999997951,
+      "logTruncated": false,
+      "samplingSeconds": 1,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-B",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-114419-reference-geometric-normal-3e57b5\\capture.py",
+        "Debug",
+        "intel"
+      ],
+      "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-114419-reference-geometric-normal-3e57b5\\tmp"
+    }
+  },
+  "captures": {
+    "release-nvidia": {
+      "configuration": "Release",
+      "device": "nvidia",
+      "playerSha256": "fdcfde65b9d39943567b5891aac9017572da4622113eb1eb80f6433f0fb8b4bd",
+      "receiver": {
+        "pixels": 49384,
+        "overOne": 284,
+        "baselineOverOne": 410,
+        "closed": 136,
+        "introduced": 10,
+        "maximum": 44,
+        "changed": 189
+      },
+      "receiverByOwner": {
+        "296": {
+          "pixels": 496,
+          "overOne": 2,
+          "baselineOverOne": 30,
+          "closed": 29,
+          "introduced": 1,
+          "maximum": 9,
+          "changed": 41
+        },
+        "310": {
+          "pixels": 255,
+          "overOne": 0,
+          "baselineOverOne": 0,
+          "closed": 0,
+          "introduced": 0,
+          "maximum": 1,
+          "changed": 0
+        },
+        "328": {
+          "pixels": 9116,
+          "overOne": 46,
+          "baselineOverOne": 46,
+          "closed": 0,
+          "introduced": 0,
+          "maximum": 23,
+          "changed": 0
+        },
+        "345": {
+          "pixels": 3825,
+          "overOne": 32,
+          "baselineOverOne": 130,
+          "closed": 107,
+          "introduced": 9,
+          "maximum": 28,
+          "changed": 148
+        },
+        "377": {
+          "pixels": 16629,
+          "overOne": 158,
+          "baselineOverOne": 158,
+          "closed": 0,
+          "introduced": 0,
+          "maximum": 44,
+          "changed": 0
+        },
+        "422": {
+          "pixels": 19063,
+          "overOne": 46,
+          "baselineOverOne": 46,
+          "closed": 0,
+          "introduced": 0,
+          "maximum": 23,
+          "changed": 0
+        }
+      },
+      "normalSource": {
+        "296": {
+          "before": {
+            "exact": 1,
+            "withinOne": 224,
+            "median": 2.0,
+            "p95": 2.0,
+            "maximum": 3
+          },
+          "after": {
+            "exact": 496,
+            "withinOne": 496,
+            "median": 0.0,
+            "p95": 0.0,
+            "maximum": 0
+          }
+        },
+        "345": {
+          "before": {
+            "exact": 1,
+            "withinOne": 1848,
+            "median": 2.0,
+            "p95": 2.0,
+            "maximum": 341
+          },
+          "after": {
+            "exact": 3576,
+            "withinOne": 3823,
+            "median": 0.0,
+            "p95": 1.0,
+            "maximum": 3
+          }
+        }
+      },
+      "normalChangedPixels": 4320,
+      "depthExact": true,
+      "idsExact": true,
+      "referenceDepthSha256": "bc832118865b9ffbe6ce78ae04b668e0f0c751662c2d674ef12bd8976df96fa4",
+      "objectIdsSha256": "d14ae2982d8d7b1f99c93572ba6d0ce9f9af3643cd250a2636b3c4b765a62a10",
+      "hairVisibilityExact": true,
+      "hairColorExact": true,
+      "hairVisibilityOverOne": 0,
+      "hairColorOverOne": 0,
+      "validationClean": true,
+      "allocatorZero": true,
+      "visibilitySha256": "de828206a8d8f1a1a245cb970712bf78b44c8de2be51c9672db19360ec6df170",
+      "normalsSha256": "37df16157c41a1ffdacb7b2ad21e9d84d7a0b81612e7b79c0bc294c496c1c424",
+      "colorSha256": [
+        "a16d0bb6c7cd89894a4ed3da564010c4915265c1c3844bba6e35ba39df3ad4b1",
+        "a16d0bb6c7cd89894a4ed3da564010c4915265c1c3844bba6e35ba39df3ad4b1",
+        "a16d0bb6c7cd89894a4ed3da564010c4915265c1c3844bba6e35ba39df3ad4b1"
+      ]
+    },
+    "release-intel": {
+      "configuration": "Release",
+      "device": "intel",
+      "playerSha256": "fdcfde65b9d39943567b5891aac9017572da4622113eb1eb80f6433f0fb8b4bd",
+      "receiver": {
+        "pixels": 49384,
+        "overOne": 632,
+        "baselineOverOne": 742,
+        "closed": 131,
+        "introduced": 21,
+        "maximum": 201,
+        "changed": 201
+      },
+      "receiverByOwner": {
+        "296": {
+          "pixels": 496,
+          "overOne": 9,
+          "baselineOverOne": 30,
+          "closed": 25,
+          "introduced": 4,
+          "maximum": 12,
+          "changed": 42
+        },
+        "310": {
+          "pixels": 255,
+          "overOne": 2,
+          "baselineOverOne": 2,
+          "closed": 0,
+          "introduced": 0,
+          "maximum": 6,
+          "changed": 0
+        },
+        "328": {
+          "pixels": 9116,
+          "overOne": 77,
+          "baselineOverOne": 77,
+          "closed": 0,
+          "introduced": 0,
+          "maximum": 34,
+          "changed": 0
+        },
+        "345": {
+          "pixels": 3825,
+          "overOne": 46,
+          "baselineOverOne": 135,
+          "closed": 106,
+          "introduced": 17,
+          "maximum": 28,
+          "changed": 159
+        },
+        "377": {
+          "pixels": 16629,
+          "overOne": 224,
+          "baselineOverOne": 224,
+          "closed": 0,
+          "introduced": 0,
+          "maximum": 201,
+          "changed": 0
+        },
+        "422": {
+          "pixels": 19063,
+          "overOne": 274,
+          "baselineOverOne": 274,
+          "closed": 0,
+          "introduced": 0,
+          "maximum": 93,
+          "changed": 0
+        }
+      },
+      "normalSource": {
+        "296": {
+          "before": {
+            "exact": 1,
+            "withinOne": 225,
+            "median": 2.0,
+            "p95": 2.0,
+            "maximum": 3
+          },
+          "after": {
+            "exact": 470,
+            "withinOne": 496,
+            "median": 0.0,
+            "p95": 1.0,
+            "maximum": 1
+          }
+        },
+        "345": {
+          "before": {
+            "exact": 1,
+            "withinOne": 1850,
+            "median": 2.0,
+            "p95": 2.0,
+            "maximum": 341
+          },
+          "after": {
+            "exact": 3503,
+            "withinOne": 3823,
+            "median": 0.0,
+            "p95": 1.0,
+            "maximum": 3
+          }
+        }
+      },
+      "normalChangedPixels": 4320,
+      "depthExact": true,
+      "idsExact": true,
+      "referenceDepthSha256": "1b7784f61a5638fd4c52491f829b46dfdb05fd74decc612c3810a3ea080b83a5",
+      "objectIdsSha256": "f831b78c8c2d0242fb00e5530f59791d952141d85fa02bf41e1aa2387bc7248b",
+      "hairVisibilityExact": true,
+      "hairColorExact": true,
+      "hairVisibilityOverOne": 208,
+      "hairColorOverOne": 575,
+      "validationClean": true,
+      "allocatorZero": true,
+      "visibilitySha256": "cdc36c32e1e0e409f9d57354a08aafda95269630eb02fdf1bb3a9f12a809df59",
+      "normalsSha256": "6aa1b32993d925878c45924616da263a9d2c5807ca34cb24c531970e8d741e22",
+      "colorSha256": [
+        "8826da1912ffa5e337940e67f17b10ade46376a56bc06eaa06808a3a176f0c0e",
+        "8826da1912ffa5e337940e67f17b10ade46376a56bc06eaa06808a3a176f0c0e",
+        "8826da1912ffa5e337940e67f17b10ade46376a56bc06eaa06808a3a176f0c0e"
+      ]
+    },
+    "debug-nvidia": {
+      "configuration": "Debug",
+      "device": "nvidia",
+      "playerSha256": "01ecf9f60f0d866c42d3d3880bb7d6ac4d2b2150a1cb077898d6b46a29ec760c",
+      "receiver": {
+        "pixels": 49384,
+        "overOne": 284,
+        "baselineOverOne": 410,
+        "closed": 136,
+        "introduced": 10,
+        "maximum": 44,
+        "changed": 189
+      },
+      "receiverByOwner": {
+        "296": {
+          "pixels": 496,
+          "overOne": 2,
+          "baselineOverOne": 30,
+          "closed": 29,
+          "introduced": 1,
+          "maximum": 9,
+          "changed": 41
+        },
+        "310": {
+          "pixels": 255,
+          "overOne": 0,
+          "baselineOverOne": 0,
+          "closed": 0,
+          "introduced": 0,
+          "maximum": 1,
+          "changed": 0
+        },
+        "328": {
+          "pixels": 9116,
+          "overOne": 46,
+          "baselineOverOne": 46,
+          "closed": 0,
+          "introduced": 0,
+          "maximum": 23,
+          "changed": 0
+        },
+        "345": {
+          "pixels": 3825,
+          "overOne": 32,
+          "baselineOverOne": 130,
+          "closed": 107,
+          "introduced": 9,
+          "maximum": 28,
+          "changed": 148
+        },
+        "377": {
+          "pixels": 16629,
+          "overOne": 158,
+          "baselineOverOne": 158,
+          "closed": 0,
+          "introduced": 0,
+          "maximum": 44,
+          "changed": 0
+        },
+        "422": {
+          "pixels": 19063,
+          "overOne": 46,
+          "baselineOverOne": 46,
+          "closed": 0,
+          "introduced": 0,
+          "maximum": 23,
+          "changed": 0
+        }
+      },
+      "normalSource": {
+        "296": {
+          "before": {
+            "exact": 1,
+            "withinOne": 224,
+            "median": 2.0,
+            "p95": 2.0,
+            "maximum": 3
+          },
+          "after": {
+            "exact": 496,
+            "withinOne": 496,
+            "median": 0.0,
+            "p95": 0.0,
+            "maximum": 0
+          }
+        },
+        "345": {
+          "before": {
+            "exact": 1,
+            "withinOne": 1848,
+            "median": 2.0,
+            "p95": 2.0,
+            "maximum": 341
+          },
+          "after": {
+            "exact": 3576,
+            "withinOne": 3823,
+            "median": 0.0,
+            "p95": 1.0,
+            "maximum": 3
+          }
+        }
+      },
+      "normalChangedPixels": 4320,
+      "depthExact": true,
+      "idsExact": true,
+      "referenceDepthSha256": "bc832118865b9ffbe6ce78ae04b668e0f0c751662c2d674ef12bd8976df96fa4",
+      "objectIdsSha256": "d14ae2982d8d7b1f99c93572ba6d0ce9f9af3643cd250a2636b3c4b765a62a10",
+      "hairVisibilityExact": true,
+      "hairColorExact": true,
+      "hairVisibilityOverOne": 0,
+      "hairColorOverOne": 0,
+      "validationClean": true,
+      "allocatorZero": true,
+      "visibilitySha256": "de828206a8d8f1a1a245cb970712bf78b44c8de2be51c9672db19360ec6df170",
+      "normalsSha256": "37df16157c41a1ffdacb7b2ad21e9d84d7a0b81612e7b79c0bc294c496c1c424",
+      "colorSha256": [
+        "a16d0bb6c7cd89894a4ed3da564010c4915265c1c3844bba6e35ba39df3ad4b1",
+        "a16d0bb6c7cd89894a4ed3da564010c4915265c1c3844bba6e35ba39df3ad4b1",
+        "a16d0bb6c7cd89894a4ed3da564010c4915265c1c3844bba6e35ba39df3ad4b1"
+      ]
+    },
+    "debug-intel": {
+      "configuration": "Debug",
+      "device": "intel",
+      "playerSha256": "01ecf9f60f0d866c42d3d3880bb7d6ac4d2b2150a1cb077898d6b46a29ec760c",
+      "receiver": {
+        "pixels": 49384,
+        "overOne": 632,
+        "baselineOverOne": 742,
+        "closed": 131,
+        "introduced": 21,
+        "maximum": 201,
+        "changed": 201
+      },
+      "receiverByOwner": {
+        "296": {
+          "pixels": 496,
+          "overOne": 9,
+          "baselineOverOne": 30,
+          "closed": 25,
+          "introduced": 4,
+          "maximum": 12,
+          "changed": 42
+        },
+        "310": {
+          "pixels": 255,
+          "overOne": 2,
+          "baselineOverOne": 2,
+          "closed": 0,
+          "introduced": 0,
+          "maximum": 6,
+          "changed": 0
+        },
+        "328": {
+          "pixels": 9116,
+          "overOne": 77,
+          "baselineOverOne": 77,
+          "closed": 0,
+          "introduced": 0,
+          "maximum": 34,
+          "changed": 0
+        },
+        "345": {
+          "pixels": 3825,
+          "overOne": 46,
+          "baselineOverOne": 135,
+          "closed": 106,
+          "introduced": 17,
+          "maximum": 28,
+          "changed": 159
+        },
+        "377": {
+          "pixels": 16629,
+          "overOne": 224,
+          "baselineOverOne": 224,
+          "closed": 0,
+          "introduced": 0,
+          "maximum": 201,
+          "changed": 0
+        },
+        "422": {
+          "pixels": 19063,
+          "overOne": 274,
+          "baselineOverOne": 274,
+          "closed": 0,
+          "introduced": 0,
+          "maximum": 93,
+          "changed": 0
+        }
+      },
+      "normalSource": {
+        "296": {
+          "before": {
+            "exact": 1,
+            "withinOne": 225,
+            "median": 2.0,
+            "p95": 2.0,
+            "maximum": 3
+          },
+          "after": {
+            "exact": 470,
+            "withinOne": 496,
+            "median": 0.0,
+            "p95": 1.0,
+            "maximum": 1
+          }
+        },
+        "345": {
+          "before": {
+            "exact": 1,
+            "withinOne": 1850,
+            "median": 2.0,
+            "p95": 2.0,
+            "maximum": 341
+          },
+          "after": {
+            "exact": 3503,
+            "withinOne": 3823,
+            "median": 0.0,
+            "p95": 1.0,
+            "maximum": 3
+          }
+        }
+      },
+      "normalChangedPixels": 4320,
+      "depthExact": true,
+      "idsExact": true,
+      "referenceDepthSha256": "1b7784f61a5638fd4c52491f829b46dfdb05fd74decc612c3810a3ea080b83a5",
+      "objectIdsSha256": "f831b78c8c2d0242fb00e5530f59791d952141d85fa02bf41e1aa2387bc7248b",
+      "hairVisibilityExact": true,
+      "hairColorExact": true,
+      "hairVisibilityOverOne": 208,
+      "hairColorOverOne": 575,
+      "validationClean": true,
+      "allocatorZero": true,
+      "visibilitySha256": "cdc36c32e1e0e409f9d57354a08aafda95269630eb02fdf1bb3a9f12a809df59",
+      "normalsSha256": "6aa1b32993d925878c45924616da263a9d2c5807ca34cb24c531970e8d741e22",
+      "colorSha256": [
+        "8826da1912ffa5e337940e67f17b10ade46376a56bc06eaa06808a3a176f0c0e",
+        "8826da1912ffa5e337940e67f17b10ade46376a56bc06eaa06808a3a176f0c0e",
+        "8826da1912ffa5e337940e67f17b10ade46376a56bc06eaa06808a3a176f0c0e"
+      ]
+    }
+  },
+  "introducedReceiverSamples": {
+    "nvidia": {
+      "count": 10,
+      "normalExact": 8,
+      "normalWithinOne": 10,
+      "normalCloser": 8,
+      "depthExact": 3,
+      "depthWithinOne": 4,
+      "bothExact": 1,
+      "bothWithinOne": 4,
+      "maximum": 17,
+      "samples": [
+        {
+          "pixel": [
+            1320,
+            1178
+          ],
+          "event": 296,
+          "frozen": 169,
+          "before": 169,
+          "after": 160,
+          "depthUlp": 0,
+          "normalBefore": 2,
+          "normalAfter": 0
+        },
+        {
+          "pixel": [
+            1295,
+            1174
+          ],
+          "event": 345,
+          "frozen": 238,
+          "before": 238,
+          "after": 235,
+          "depthUlp": 2,
+          "normalBefore": 1,
+          "normalAfter": 0
+        },
+        {
+          "pixel": [
+            1295,
+            1173
+          ],
+          "event": 345,
+          "frozen": 227,
+          "before": 227,
+          "after": 223,
+          "depthUlp": 1,
+          "normalBefore": 2,
+          "normalAfter": 0
+        },
+        {
+          "pixel": [
+            1298,
+            1168
+          ],
+          "event": 345,
+          "frozen": 249,
+          "before": 250,
+          "after": 247,
+          "depthUlp": 0,
+          "normalBefore": 1,
+          "normalAfter": 1
+        },
+        {
+          "pixel": [
+            1288,
+            1166
+          ],
+          "event": 345,
+          "frozen": 228,
+          "before": 228,
+          "after": 232,
+          "depthUlp": 5,
+          "normalBefore": 2,
+          "normalAfter": 0
+        },
+        {
+          "pixel": [
+            1294,
+            1166
+          ],
+          "event": 345,
+          "frozen": 244,
+          "before": 244,
+          "after": 248,
+          "depthUlp": 0,
+          "normalBefore": 1,
+          "normalAfter": 1
+        },
+        {
+          "pixel": [
+            1282,
+            1164
+          ],
+          "event": 345,
+          "frozen": 248,
+          "before": 248,
+          "after": 250,
+          "depthUlp": 39,
+          "normalBefore": 2,
+          "normalAfter": 0
+        },
+        {
+          "pixel": [
+            1314,
+            1151
+          ],
+          "event": 345,
+          "frozen": 239,
+          "before": 239,
+          "after": 242,
+          "depthUlp": 92,
+          "normalBefore": 1,
+          "normalAfter": 0
+        },
+        {
+          "pixel": [
+            1316,
+            1151
+          ],
+          "event": 345,
+          "frozen": 186,
+          "before": 186,
+          "after": 169,
+          "depthUlp": 12,
+          "normalBefore": 2,
+          "normalAfter": 0
+        },
+        {
+          "pixel": [
+            1312,
+            1143
+          ],
+          "event": 345,
+          "frozen": 150,
+          "before": 150,
+          "after": 139,
+          "depthUlp": 44,
+          "normalBefore": 1,
+          "normalAfter": 0
+        }
+      ]
+    },
+    "intel": {
+      "count": 21,
+      "normalExact": 19,
+      "normalWithinOne": 21,
+      "normalCloser": 20,
+      "depthExact": 1,
+      "depthWithinOne": 11,
+      "bothExact": 0,
+      "bothWithinOne": 11,
+      "maximum": 17,
+      "samples": [
+        {
+          "pixel": [
+            1293,
+            1191
+          ],
+          "event": 345,
+          "frozen": 248,
+          "before": 248,
+          "after": 244,
+          "depthUlp": 14,
+          "normalBefore": 1,
+          "normalAfter": 0
+        },
+        {
+          "pixel": [
+            1298,
+            1185
+          ],
+          "event": 296,
+          "frozen": 228,
+          "before": 228,
+          "after": 235,
+          "depthUlp": 2,
+          "normalBefore": 1,
+          "normalAfter": 0
+        },
+        {
+          "pixel": [
+            1235,
+            1184
+          ],
+          "event": 296,
+          "frozen": 224,
+          "before": 224,
+          "after": 213,
+          "depthUlp": 1,
+          "normalBefore": 1,
+          "normalAfter": 0
+        },
+        {
+          "pixel": [
+            1240,
+            1182
+          ],
+          "event": 296,
+          "frozen": 219,
+          "before": 219,
+          "after": 208,
+          "depthUlp": 1,
+          "normalBefore": 1,
+          "normalAfter": 0
+        },
+        {
+          "pixel": [
+            1298,
+            1179
+          ],
+          "event": 345,
+          "frozen": 169,
+          "before": 169,
+          "after": 160,
+          "depthUlp": 15,
+          "normalBefore": 1,
+          "normalAfter": 0
+        },
+        {
+          "pixel": [
+            1243,
+            1174
+          ],
+          "event": 345,
+          "frozen": 246,
+          "before": 246,
+          "after": 244,
+          "depthUlp": 1,
+          "normalBefore": 2,
+          "normalAfter": 0
+        },
+        {
+          "pixel": [
+            1277,
+            1174
+          ],
+          "event": 345,
+          "frozen": 48,
+          "before": 48,
+          "after": 36,
+          "depthUlp": 1,
+          "normalBefore": 2,
+          "normalAfter": 0
+        },
+        {
+          "pixel": [
+            1293,
+            1174
+          ],
+          "event": 345,
+          "frozen": 150,
+          "before": 150,
+          "after": 160,
+          "depthUlp": 1,
+          "normalBefore": 2,
+          "normalAfter": 1
+        },
+        {
+          "pixel": [
+            1295,
+            1173
+          ],
+          "event": 345,
+          "frozen": 227,
+          "before": 228,
+          "after": 223,
+          "depthUlp": 1,
+          "normalBefore": 2,
+          "normalAfter": 0
+        },
+        {
+          "pixel": [
+            1296,
+            1173
+          ],
+          "event": 345,
+          "frozen": 248,
+          "before": 249,
+          "after": 244,
+          "depthUlp": 1,
+          "normalBefore": 1,
+          "normalAfter": 0
+        },
+        {
+          "pixel": [
+            1295,
+            1172
+          ],
+          "event": 345,
+          "frozen": 238,
+          "before": 238,
+          "after": 235,
+          "depthUlp": 8,
+          "normalBefore": 1,
+          "normalAfter": 0
+        },
+        {
+          "pixel": [
+            1313,
+            1172
+          ],
+          "event": 296,
+          "frozen": 242,
+          "before": 242,
+          "after": 246,
+          "depthUlp": 1,
+          "normalBefore": 2,
+          "normalAfter": 0
+        },
+        {
+          "pixel": [
+            1296,
+            1168
+          ],
+          "event": 345,
+          "frozen": 231,
+          "before": 231,
+          "after": 227,
+          "depthUlp": 1,
+          "normalBefore": 2,
+          "normalAfter": 0
+        },
+        {
+          "pixel": [
+            1288,
+            1166
+          ],
+          "event": 345,
+          "frozen": 228,
+          "before": 228,
+          "after": 232,
+          "depthUlp": 5,
+          "normalBefore": 2,
+          "normalAfter": 0
+        },
+        {
+          "pixel": [
+            1294,
+            1166
+          ],
+          "event": 345,
+          "frozen": 244,
+          "before": 244,
+          "after": 248,
+          "depthUlp": 0,
+          "normalBefore": 1,
+          "normalAfter": 1
+        },
+        {
+          "pixel": [
+            1244,
+            1164
+          ],
+          "event": 345,
+          "frozen": 178,
+          "before": 178,
+          "after": 194,
+          "depthUlp": 1,
+          "normalBefore": 2,
+          "normalAfter": 0
+        },
+        {
+          "pixel": [
+            1282,
+            1164
+          ],
+          "event": 345,
+          "frozen": 248,
+          "before": 248,
+          "after": 250,
+          "depthUlp": 39,
+          "normalBefore": 2,
+          "normalAfter": 0
+        },
+        {
+          "pixel": [
+            1314,
+            1151
+          ],
+          "event": 345,
+          "frozen": 239,
+          "before": 239,
+          "after": 242,
+          "depthUlp": 93,
+          "normalBefore": 1,
+          "normalAfter": 0
+        },
+        {
+          "pixel": [
+            1316,
+            1151
+          ],
+          "event": 345,
+          "frozen": 186,
+          "before": 186,
+          "after": 169,
+          "depthUlp": 12,
+          "normalBefore": 2,
+          "normalAfter": 0
+        },
+        {
+          "pixel": [
+            1246,
+            1149
+          ],
+          "event": 345,
+          "frozen": 249,
+          "before": 249,
+          "after": 251,
+          "depthUlp": 120,
+          "normalBefore": 2,
+          "normalAfter": 0
+        },
+        {
+          "pixel": [
+            1312,
+            1149
+          ],
+          "event": 345,
+          "frozen": 246,
+          "before": 246,
+          "after": 250,
+          "depthUlp": 30,
+          "normalBefore": 1,
+          "normalAfter": 0
+        }
+      ]
+    }
+  },
+  "crossConfigurationExact": true,
+  "originalFour": {
+    "exitCode": 0,
+    "frames": [
+      {
+        "frame": "frame_000000.png",
+        "sha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "expectedSha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "pngExact": true
+      },
+      {
+        "frame": "frame_000001.png",
+        "sha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "expectedSha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "pngExact": true
+      },
+      {
+        "frame": "frame_000002.png",
+        "sha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "expectedSha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "pngExact": true
+      },
+      {
+        "frame": "frame_000003.png",
+        "sha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "expectedSha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "pngExact": true
+      }
+    ],
+    "validationClean": true,
+    "allocatorZero": true,
+    "depthCaptureAbsent": true,
+    "allExact": true,
+    "playerSha256": "fdcfde65b9d39943567b5891aac9017572da4622113eb1eb80f6433f0fb8b4bd",
+    "projectSha256": "13638585d18092a315bd7586a88b349fe256c468eb9090ccb6189232b8209d78",
+    "taskBytes": 447252592,
+    "taskBudgetBytes": 536870912
+  },
+  "archive": {
+    "bytes": 502025,
+    "sha256": "2bee60c1fe70408f91b7dda0ae814c6fd1dcac6317dbeb925d9978be5e1c0c0b",
+    "contents": {
+      "run/analyze-introduced.py": "f95ff2fca89ff21641ce1f5fc8c4723c757db622553b41a4935e2d5651e1be3c",
+      "run/analyze-residuals.py": "4e905e41187279d806124b98099e16c58114c522fdb1b2210c2fd287f82f1dbf",
+      "run/archive_debug_symbols.py": "02117e35d91028ad384ffa62766e3a35552e72fe6d6fba7e4b7377a7a7e94863",
+      "run/budget.json": "491e8ed34e46c4a5ee106d80a71372a51b27d050a591b76b19e5cb8a4f518582",
+      "run/build.py": "6db582adc15612c4559cd5dbb9bf01b27ef5214481c1c887e3c444ca6e796bde",
+      "run/capture.py": "8cc5e702388405284d5c99bcd07fdee1a823031ec7d153f1f69a687244bb7256",
+      "run/CharacterSceneRenderer-typecheck.log": "54d23819c0081d5ff1a0a31d86acd76392df31c3433f0e3dab220bd0e8d13ab7",
+      "run/claim-inputs.py": "fa0d291a06c812d48215a9e7f8eb9e2dc482034795fa48cfa66e8453263dfd23",
+      "run/compact-capture.py": "fef2983594dc535968b6b1dfe29b4510d02901dd2e51110ffe4148a53cdfd6a9",
+      "run/debug-baseline-shaders.json": "750cfcad7706655ee3f21bda80f3ea7f485b8efe876455632af08ccddc0153c7",
+      "run/debug-budget-preparation.json": "698b9c86a7201e4de3cc77c5f835ed22033da38431063f60ffe9b4a4137269bc",
+      "run/debug-build-commands.json": "b771490ea8085a1afcdc120feacab746805d3ebcb52a91dd14b3cbd9220d2c5d",
+      "run/debug-build-execution.json": "c34cc73c5cf769819616eb49d9156f029a5b657d454b7ea9573d417c7800ceeb",
+      "run/debug-build-lease-held.json": "b68e336db1f2570d986246d420850f1359a3f902d538143478aecd528e14699d",
+      "run/debug-build-lease-released.json": "a5e9735279f522ea9547df980fb34a6765f6f16613e03a69bd7db110481905a6",
+      "run/debug-build.log": "4c5c5eadabe592802524cbcc7a27f50fc0b21a2c0e48065bb89b1b902bd96865",
+      "run/debug-capture-lease-held.json": "af5334b392234d563d01fcccf965d85e70d7d58b28436d46378113a17b020dc7",
+      "run/debug-capture-lease-released.json": "35d2ae7e79a47f0a3014f8c22a08829dd8dbe2fdaa303b77de4ae69aa3f0894b",
+      "run/debug-cpu-tests-execution.json": "1b3367fc1bd3939583efad9136b6b9b4390518eb5b04b3cf668922926e21f1bd",
+      "run/debug-ctest.log": "4277eae75b9b43b35228c6761e33cc34f9902dfafe9aac1b7496a06a91ee238c",
+      "run/debug-ctest.xml": "d779efd8144138e570c129e5cbc9e674c6e228c4de7a945bdaabe4b828d517f8",
+      "run/debug-intel-capture-execution.json": "adc32d42521bead16aa68921dc1faf7e40f26d2b32f312c1cb4c2fe26ba483b1",
+      "run/debug-intel-command.json": "b99b277a91690e673f792035e1f9a32cac3a5e27a5c7c17907e83019c0e7d205",
+      "run/debug-intel-geometric-normal-control-execution.json": "9255684e9af35ef4a9360aba5cde9e8bf61bcd20b29fcbb14edab619f93eb22f",
+      "run/debug-intel-gpu-ctest.log": "18b543ab3d58609c3b0bc484d36f6b0930521ba257d22fa22bff2cde1b839c25",
+      "run/debug-intel-gpu-ctest.xml": "d3662fa068243668d711f256d97a5f01ec52984606c35662368ceeea3242b22e",
+      "run/debug-intel-gpu-tests-execution.json": "463485870dc2ddc98162cf363ff9d8bef970f9c60003fb09d09f1ffa01dd5ce4",
+      "run/debug-intel-gpu-verification.json": "63ccf16f9bf373c866a0ea903667fc519778353d08b78a1591030285369b9989",
+      "run/debug-intel-results.json": "7ed9a5f65ea5e7b2801543d0a0b4adda803e30a612bef0ec0e4e84e4afafce41",
+      "run/debug-intel.log": "fd1a94e2d8c8d675ea1b9ad6202f859a603a93ed40ce61ce0c1b73796d8293cd",
+      "run/debug-nvidia-capture-execution.json": "203d6deabe28668bbf2b040db178a0ba2cc5d6f4e50300c9dda16be91673df0c",
+      "run/debug-nvidia-command.json": "15325c16f832ef546007c988ebcac46c758c721b7ebd1860e833993cbdfd626c",
+      "run/debug-nvidia-geometric-normal-control-execution.json": "cb5d0686e7e1df18b124248435dc8884504bac4c34fd0c7e47e0229e2aedcc9b",
+      "run/debug-nvidia-gpu-ctest.log": "72622ec96eedd7e2d10c7984388d3231dc35d0edbf7d1644f4c653234949fc24",
+      "run/debug-nvidia-gpu-ctest.xml": "13c2dcaef85354d657554776b62f12f3c25c4f9acf5418fbcb852ab781955fe3",
+      "run/debug-nvidia-gpu-tests-execution.json": "f44d6f8f0dd209797c5e70b00e9ea54fd8fd3f617d7d02f05929469fa50167ae",
+      "run/debug-nvidia-gpu-verification.json": "d734ae25a8563e640a1c80c1163c122d4b193abfba05e97da62437f47f243e3d",
+      "run/debug-nvidia-results.json": "79d61f82ab9aafd0f2d06bab393c6e86752c26cfaf06a99a5f59d3d0296b00d8",
+      "run/debug-nvidia.log": "a1e8b302d8a56e2640f90c55418fa61b36d93d63c5fa8a65675edd44e81a52e6",
+      "run/debug-prepare-execution.json": "26aa5ede5c34214bdb3a482e4da5303c77b61d22eab7c56c84450187fcb38b28",
+      "run/debug-symbols.json": "d1c06345300914e3c1af5576c8b1c0f4723d1219e5b553da641ad8acf6572b71",
+      "run/debug-verification.json": "9899038691912596fc42e77d12d69cba79c1d8f58e9ff3e68f62f32d3b5bc46f",
+      "run/default-four-command.json": "90c0ad316efdb709214553e008d78efca97d7962154b5fa34cabfda2e6e4f5d9",
+      "run/default-four-results.json": "c69345f4fed4145388cfa02df36c0833d24420e5d45b9dac4e5a29dec2fa10a1",
+      "run/default-four.log": "6d1fe781b6f68b1f5a9b96ab77f898c417434b20606afcea9905140d70586e90",
+      "run/default-four.py": "f3d9d1fcf1d9a36b187f58e83f4f36b30140641c387701fa817ae39547636da9",
+      "run/default-runtime.json": "7ff244d1d9a486e6599144304d203ba7eb7a7408f14a0cbc7ca01e8a12eb750c",
+      "run/fixture-inputs.json": "16a7f11f42fdf131fd7f09d934e0911138f6d1da2fd2bba6f003758da141fa46",
+      "run/geometric-normal-control.py": "85d499f48ed428a1cb2bcd9c7ae503d5d01d7e494b3d8216082d58d0fe758c83",
+      "run/geometric-normal-introduced-attribution.json": "2806b0d76e5dbad9065c30d6f610d43ed842efb03732c784b1d86d3f7bccae9e",
+      "run/GltfLoader-typecheck.log": "822143bb2b6571a6de6d33df959e967be4f284883696dbccca95168b88df1b14",
+      "run/implement.py": "b4e36c15033c792fd556019ff5baffd4a92d000b3e3b67d7c6066b26c6f42036",
+      "run/implementation-plan.md": "f6be66e7ad29d3e211318f8c52368f8d4e3779bd81be1596a801ca943ec3101b",
+      "run/material-layout-before.log": "2445bbbe047456e21d58a208bb46215f89a2682387c367ea5ddd1e7c836c0e1c",
+      "run/material-layout-debug-after.json": "824e7e6b4741fd972a25769aabfb7d79d246860eb7853e35733175e0a46ef5c7",
+      "run/material-layout-debug-after.log": "9460edff9869e0e96082af545050c62383ac6b01b1fe21254b53f8518af6c73c",
+      "run/material-layout-debug-before.json": "7eaf37ecff8e988b980e182cbd24999429d8631e5dc88e419c8b20a53234e428",
+      "run/material-layout-debug-before.log": "b0962c455f2a2c217a2e0f4f1c4fa2c56a46b9dcb84f8b892aff61c061b3b2ec",
+      "run/material-layout-release-after.json": "e9f86eecbc9421dcfb6e8aa7394f4c039637a9ffbc482d5eb7855873dbb6c742",
+      "run/material-layout-release-after.log": "30720d66b10879aa398b94a5de877cec8d517b46fc85431b51dcf438a5c2f051",
+      "run/material-layout-release-before.json": "ff670684ad10c60a904ccc493aaae192f29b5bd3556c0ec2a0374dedbd71b765",
+      "run/material-layout-release-before.log": "2445bbbe047456e21d58a208bb46215f89a2682387c367ea5ddd1e7c836c0e1c",
+      "run/original-four-execution.json": "7fc8e967354eae35b80d65f41379e656d1c5753924bf14a4dcd8c9fbd3fbb59d",
+      "run/original-four-lease-held.json": "01840444e7e60bdbfded25b8c5c8c3c431563e21fe260b6cbe7719bf812ce08b",
+      "run/original-four-lease-released.json": "52d06f0a336c7fd057cd8cc6137986dc9f3a225fd665fd8db0a6589618445a10",
+      "run/package-evidence.py": "6b3a2a54477c3ec3f4a21becec15e0c7920c452e1af4f272591a3d0f8c9aaaa1",
+      "run/prepare-capture.py": "9fe475c520d0c70638245589dbb9d894fabefe1c4cb83664c17fba1c770c7c15",
+      "run/prepare-control.py": "4ef5c52934f125dc0ac04c5cacbd4c804e320e616a076d2efcb18d8dc76d1ca0",
+      "run/prepare-debug-budget.py": "3337bfde7672af8bdab6f1a7723cecbfbc5323d4431d6d0c620b3edc97adb14f",
+      "run/prepare-fixture.py": "b4631f2795cf337527df83f6eb09f680f3657d6349ae901957edfb80b936c891",
+      "run/process.log": "c69345f4fed4145388cfa02df36c0833d24420e5d45b9dac4e5a29dec2fa10a1",
+      "run/queued-build.py": "e9010990e28e08055d69d2c395955203778cbaf7ec034e7137eea4ead9204510",
+      "run/queued-control.py": "fbb9a0d8c41b79e37b03020c766bcbb2071f48edd36a0098a66dd812d1c5c436",
+      "run/receiver-residual-attribution.json": "f8bab913a14eb2d4298f53a4a46519887a33b941835d6641d8115183b2e61685",
+      "run/red-geometric-normal-control-release-execution.json": "62f9cb652645ee825eb19ccfa6e9f83f928bc69b37dae4eeaa2fc8ac5628d660",
+      "run/red-geometric-normal-control-release-lease-held.json": "a36c2e0996b26787d3c8736b0b41a179118e3bc61320422672728c0a19d5f274",
+      "run/red-geometric-normal-control-release-lease-released.json": "b51444623c748d7b794a62cfac476ab569a5cad7f07c2e6c0d7283211242b0db",
+      "run/release-baseline-shaders.json": "750cfcad7706655ee3f21bda80f3ea7f485b8efe876455632af08ccddc0153c7",
+      "run/release-build-commands.json": "cd33053b855f42e298ac1f0c8db397e454e5fc90d949ab0211c5966c9a1a9d09",
+      "run/release-build-execution.json": "ab4f63f396e613c9ecb612c1c47052b9d2dbe7054768986bf8a360cc97291b6e",
+      "run/release-build-lease-held.json": "c0e493c5d16738f02ffd58f71537fcfcce88e133dc5655f6b92d3db54c621201",
+      "run/release-build-lease-released.json": "17b3c6b73e0ab04838764c2e47b4f5d00a4b84254c7905043c82743e84314c60",
+      "run/release-build.log": "1709d8b8962fb8159fb814182bb8c43a4ef63844d27b993d13ddebde50439fd9",
+      "run/release-capture-axis-tie-lease-held.json": "1ce18d58c5565afe64c5f20c5f5844e4646bef7fc5837ad1208c05b01bd0ad35",
+      "run/release-capture-axis-tie-lease-released.json": "ef2d53ae8c03f5a7d0892f2a55ce5b840f25eeb416e5045f5a44e2976aafd43a",
+      "run/release-capture-lease-held.json": "10b45a2f29f4a81631991a2602ab8d5be3bf114a35af3f47574bb4b95b59686d",
+      "run/release-capture-lease-released.json": "848c88d01ef67561df63976d1f3f49257a34028ff9da8174bbf1d7fbf1794e1f",
+      "run/release-cpu-tests-execution.json": "ea4182185db5ddb8057fa8cdaaa11ee74a0ce5e39e2b24a85af3e1731f89fd04",
+      "run/release-ctest.log": "a7e5d5230dc8159ebfa7f0ecd4b4f4dc6445d8e73c72f33a97a73d20cc51acbd",
+      "run/release-ctest.xml": "1dd3e198e33452e4216a0db0e44bf8c085e3a8e9d5f0455cb4ef79a3ce016b27",
+      "run/release-intel-capture-execution.json": "4da11dc715b744698db5ed37f2ced7a225f11f4e9876d6a1757055a331ab29b3",
+      "run/release-intel-command.json": "b0540c38fcd0a0786af3b3d774c33dbd39825375521cbadc81ce0cfcc87a0f93",
+      "run/release-intel-geometric-normal-control-execution.json": "bab00311e3fa52f52b1442b86daaf6184ed52b080b13a299cc011f716a044417",
+      "run/release-intel-gpu-ctest.log": "2de1abce82f23578abd110de2e5c756821e35d93082e7bc13168cfacd546d01a",
+      "run/release-intel-gpu-ctest.xml": "ff77198424707c5bd68d44917f76340dce59e6d9598c0f754d6269b81a671b56",
+      "run/release-intel-gpu-tests-execution.json": "7d56c2667873292bb089f94a9e836dd677f28848a0b42bcbf7dfcd617dab569e",
+      "run/release-intel-gpu-verification.json": "f080e1926f00de1425415268a147e171f62e762f690694009b29926f04f2a89c",
+      "run/release-intel-results.json": "df7315f0955841e367f90083e5b948a64b1b0805aa3c387f74904168cf1954ba",
+      "run/release-intel.log": "03252a886882ca0d7e01ee36987d58b05d26978a6941d5f11f651a8e6745f46d",
+      "run/release-nvidia-capture-execution.json": "ae6787bf6d916fd3e929cb454de72785e7ff5fc679ea723566a69f96e36feb79",
+      "run/release-nvidia-command.json": "ced8c35d02bead55603131765bb5e0039b80083dea55851414e7eeaa12f6bfc5",
+      "run/release-nvidia-geometric-normal-axis-tie-execution.json": "0d467724a7d9c01832614c4193c4cdf47c27e2ae899e9582957e3c6dbacd55e3",
+      "run/release-nvidia-geometric-normal-axis-tie.log": "22dd4f55b64cb67fa834e7a7cf7fc2f5810fb37f6e37bf9f208d9bf2680ef87e",
+      "run/release-nvidia-geometric-normal-control-execution.json": "fe0e5d4901bbc8d9eefa4bec4f6ab50cb5f0af32a3e1ff0078cff7ec00959771",
+      "run/release-nvidia-gpu-ctest.log": "ce15d41ebe7aee60da8cdbf9efd4f79dafb0fd5bc0750f9ae80d2dd69cc03c76",
+      "run/release-nvidia-gpu-ctest.xml": "fc47dc151a262d9d58ed4753ccfd25a50dfece1816b6c929da5b16b76316528d",
+      "run/release-nvidia-gpu-tests-execution.json": "022f5916c76e6eb54a749e47757f7c834a96051cd446d582d5e4da3dbf050c89",
+      "run/release-nvidia-gpu-verification.json": "575c0ba1d702c366ab49ef5d4c2ba96406af6d46b65de65f08e73b98db96de4e",
+      "run/release-nvidia-results.json": "31d15f2b6f030a798f4d7f6bc6008ce3343ca032f5cdb3879de3c6e77c09a6ba",
+      "run/release-nvidia.log": "e293c70fd5071853523a6ad7d8c1e4218330de92cbbfa5b32d0e783f1093b178",
+      "run/release-verification.json": "fbb78a0a759ab1039a3fd609a7ff2ade2e1eca0619a6b9f3c4135fefe76afb90",
+      "run/schema-verification.json": "5632fb863a7d499eaba83277b0fafb32252304cb202a175b5fa92630596c59e9",
+      "run/task-card.json": "06ea319d745d17f6c7ce8ebad581e3ccd7c8717d38cffbd2162b84809eb9879e",
+      "run/typecheck.json": "03e3631e49a010194eee51b0482b5e880bca278c4d56824bb20768955ecf6afd",
+      "run/typecheck.py": "4d989aee4950d9aac598f730edb22fb0ef8b255f5fb4914d1e4bfb5771014f17",
+      "run/verify-build.py": "b27fb8de3ff6c6cd06aa0b70f2e1f1e76cd781a6847215e2f70a00cda073acaf",
+      "run/verify-layout.py": "1edb25673ee9cd2c4ccb1f1f3333306f8f447cfd9d2f334d19c5b4dab96b4d86",
+      "run/verify-schema.ps1": "764ca6b7fcf94c8a3c424d46190a452985df8f84a5f85ca94c04bf03f3bc26f9",
+      "run/release-nvidia-frames/capture_manifest.json": "7aca7009f9985645f3dd468f034e50149be1c7d747db41d761748301f33473fc",
+      "run/release-nvidia-frames/gpu_capabilities.json": "7c45c92b4b5d17e94eb68ace460ebeb959a2da6b27474d1b7d64a7d7522c0d54",
+      "run/release-nvidia-frames/reference-planes.json": "80b136da39226f0f6e2b1c6a5ce0a659b3de47dcca55ffc21071ac91e3ccf8f0",
+      "run/release-intel-frames/capture_manifest.json": "8d3e5fb1c0b9598b1751a9ea57a0cbf5e26419fa7691bfa2b1492da0113d3292",
+      "run/release-intel-frames/gpu_capabilities.json": "a38eaca3509b417cfe23614fe415bd9ccc5622fc682d8623142cdeb7dc3d85cc",
+      "run/release-intel-frames/reference-planes.json": "a55f6ee3686230facf820bcf673970ee84eac99209b8a0bca19e6284f3e840f8",
+      "run/debug-nvidia-frames/capture_manifest.json": "eca77afa773df6feabdad9da112a33b6e2e4ca1a459498402048eb8d40a7d636",
+      "run/debug-nvidia-frames/gpu_capabilities.json": "7c45c92b4b5d17e94eb68ace460ebeb959a2da6b27474d1b7d64a7d7522c0d54",
+      "run/debug-nvidia-frames/reference-planes.json": "80b136da39226f0f6e2b1c6a5ce0a659b3de47dcca55ffc21071ac91e3ccf8f0",
+      "run/debug-intel-frames/capture_manifest.json": "c99609a645e03414d5954e614f2cf40a5ef4fc82c1fe29093b497e77e1bc7327",
+      "run/debug-intel-frames/gpu_capabilities.json": "a38eaca3509b417cfe23614fe415bd9ccc5622fc682d8623142cdeb7dc3d85cc",
+      "run/debug-intel-frames/reference-planes.json": "a55f6ee3686230facf820bcf673970ee84eac99209b8a0bca19e6284f3e840f8",
+      "run/red-geometric-normal-control-release-nvidia/default-fixed/command.json": "7a30d3de56f2da90ff39cac0247738b94fc40c2055bbad2191fb388280614ebe",
+      "run/red-geometric-normal-control-release-nvidia/default-fixed/config/reference-views.json": "95ee4636066fb85b7a412c1b87d9f16173da8df546647ac1159a37e6d08021bd",
+      "run/red-geometric-normal-control-release-nvidia/default-fixed/frames/capture_manifest.json": "9adc5aec6e989d0973b75818aa361958cda66f921479fe9597356ff36f4e67b2",
+      "run/red-geometric-normal-control-release-nvidia/default-fixed/frames/reference-normals-a2b10g10r10.bin": "47ebd0277558006a30be06263b60dca35a0c23b8f643fc82a4cbeb3171a6db81",
+      "run/red-geometric-normal-control-release-nvidia/default-fixed/lab.azureproject": "fabadebfc78ccfcd83765bd2ab631acb93bbc031ee8ea8fd587c23a444bfd7d5",
+      "run/red-geometric-normal-control-release-nvidia/default-fixed/level.azurelevel": "fcb42780eb1e2a6adb903582dd2379f7896651b32f16566d2e21404144bd7a0a",
+      "run/red-geometric-normal-control-release-nvidia/default-fixed/normal.png": "741090756ce26daaffb4fe628f4fb45f79e9f78da458a3591545872dd8b9f3f4",
+      "run/red-geometric-normal-control-release-nvidia/default-fixed/plane.gltf": "73023f709b12dd075d9eb7b28da8b629cafd47b4f2e023e599c30101e2ab80d2",
+      "run/red-geometric-normal-control-release-nvidia/default-fixed/player.log": "009f8247568b535303ac5891e4bdc1a3eb9b21b2b61c1064212ff1769c227f0c",
+      "run/red-geometric-normal-control-release-nvidia/geometric-fixed/command.json": "e6681ff90aebfe9f1db2f20d090f70d61f557767cc966cbc58c938f44769ae05",
+      "run/red-geometric-normal-control-release-nvidia/geometric-fixed/config/reference-views.json": "95ee4636066fb85b7a412c1b87d9f16173da8df546647ac1159a37e6d08021bd",
+      "run/red-geometric-normal-control-release-nvidia/geometric-fixed/lab.azureproject": "fabadebfc78ccfcd83765bd2ab631acb93bbc031ee8ea8fd587c23a444bfd7d5",
+      "run/red-geometric-normal-control-release-nvidia/geometric-fixed/level.azurelevel": "fcb42780eb1e2a6adb903582dd2379f7896651b32f16566d2e21404144bd7a0a",
+      "run/red-geometric-normal-control-release-nvidia/geometric-fixed/normal.png": "741090756ce26daaffb4fe628f4fb45f79e9f78da458a3591545872dd8b9f3f4",
+      "run/red-geometric-normal-control-release-nvidia/geometric-fixed/plane.gltf": "b8ac80f8f0016fe1903693459035ca1cdbd79fa24ad1f4502eb3a81d38e8eb41",
+      "run/red-geometric-normal-control-release-nvidia/geometric-fixed/player.log": "0dc1045f058747d111a30295c4d4a8a22d7222b15123ebe0f8988d7438623a48",
+      "run/red-geometric-normal-control-release-nvidia/summary.json": "f8eef2b55e5e8ff14002db126aa900ea280ed30c2a540bcd29e1647aa7d0dacd",
+      "run/green-geometric-normal-control-release-nvidia/default-fixed/command.json": "c28a380714704adb81ecdae353f1fa4c91ada830950807884f361ed3da6b306a",
+      "run/green-geometric-normal-control-release-nvidia/default-fixed/config/reference-views.json": "95ee4636066fb85b7a412c1b87d9f16173da8df546647ac1159a37e6d08021bd",
+      "run/green-geometric-normal-control-release-nvidia/default-fixed/frames/capture_manifest.json": "fa1e90224bd9ba800d0acdd79a89f2ba2b43446caf1c09111923f33edb91c0c2",
+      "run/green-geometric-normal-control-release-nvidia/default-fixed/frames/reference-normals-a2b10g10r10.bin": "47ebd0277558006a30be06263b60dca35a0c23b8f643fc82a4cbeb3171a6db81",
+      "run/green-geometric-normal-control-release-nvidia/default-fixed/lab.azureproject": "fabadebfc78ccfcd83765bd2ab631acb93bbc031ee8ea8fd587c23a444bfd7d5",
+      "run/green-geometric-normal-control-release-nvidia/default-fixed/level.azurelevel": "fcb42780eb1e2a6adb903582dd2379f7896651b32f16566d2e21404144bd7a0a",
+      "run/green-geometric-normal-control-release-nvidia/default-fixed/normal.png": "741090756ce26daaffb4fe628f4fb45f79e9f78da458a3591545872dd8b9f3f4",
+      "run/green-geometric-normal-control-release-nvidia/default-fixed/plane.gltf": "73023f709b12dd075d9eb7b28da8b629cafd47b4f2e023e599c30101e2ab80d2",
+      "run/green-geometric-normal-control-release-nvidia/default-fixed/player.log": "1bec133d8d4ce6914fddd736d676f34cc068da1902e6fcb930649fb644c52f7a",
+      "run/green-geometric-normal-control-release-nvidia/geometric-fixed/command.json": "dd52779d674ed1e0a08bce2748ddd6aabe1fc26f9d04b6c4c22037232904db58",
+      "run/green-geometric-normal-control-release-nvidia/geometric-fixed/config/reference-views.json": "95ee4636066fb85b7a412c1b87d9f16173da8df546647ac1159a37e6d08021bd",
+      "run/green-geometric-normal-control-release-nvidia/geometric-fixed/frames/capture_manifest.json": "1ad9c171cd7dd5a6fa179d6f45c6d0382405e806e6a77bcd7f5e3b91aaaff6d1",
+      "run/green-geometric-normal-control-release-nvidia/geometric-fixed/frames/reference-normals-a2b10g10r10.bin": "3cfc9faf65c8d21bce90430dd51c072f59897eb6071588de87a8d67b205c1f87",
+      "run/green-geometric-normal-control-release-nvidia/geometric-fixed/lab.azureproject": "fabadebfc78ccfcd83765bd2ab631acb93bbc031ee8ea8fd587c23a444bfd7d5",
+      "run/green-geometric-normal-control-release-nvidia/geometric-fixed/level.azurelevel": "fcb42780eb1e2a6adb903582dd2379f7896651b32f16566d2e21404144bd7a0a",
+      "run/green-geometric-normal-control-release-nvidia/geometric-fixed/normal.png": "741090756ce26daaffb4fe628f4fb45f79e9f78da458a3591545872dd8b9f3f4",
+      "run/green-geometric-normal-control-release-nvidia/geometric-fixed/plane.gltf": "ccbb0f479e777869cc7de902c1497d4d1d35d93cc48165e9af1c5b9c94a33c21",
+      "run/green-geometric-normal-control-release-nvidia/geometric-fixed/player.log": "dcd60626c7d85358a5709dd57fc1e54b64eaafc794a4e37d6b7c4e0eae4da9ff",
+      "run/green-geometric-normal-control-release-nvidia/geometric-indexed/command.json": "6aba40dc43bacef61c4a13489ce95e865156cac5d1fc8b6bdebdaa38ff725fb4",
+      "run/green-geometric-normal-control-release-nvidia/geometric-indexed/config/reference-views.json": "95ee4636066fb85b7a412c1b87d9f16173da8df546647ac1159a37e6d08021bd",
+      "run/green-geometric-normal-control-release-nvidia/geometric-indexed/frames/capture_manifest.json": "63363a501727c9bb0456b03324547f65f926f93683fc62bdc9545e7a81cb0015",
+      "run/green-geometric-normal-control-release-nvidia/geometric-indexed/frames/reference-normals-a2b10g10r10.bin": "3cfc9faf65c8d21bce90430dd51c072f59897eb6071588de87a8d67b205c1f87",
+      "run/green-geometric-normal-control-release-nvidia/geometric-indexed/lab.azureproject": "fabadebfc78ccfcd83765bd2ab631acb93bbc031ee8ea8fd587c23a444bfd7d5",
+      "run/green-geometric-normal-control-release-nvidia/geometric-indexed/level.azurelevel": "fcb42780eb1e2a6adb903582dd2379f7896651b32f16566d2e21404144bd7a0a",
+      "run/green-geometric-normal-control-release-nvidia/geometric-indexed/normal.png": "741090756ce26daaffb4fe628f4fb45f79e9f78da458a3591545872dd8b9f3f4",
+      "run/green-geometric-normal-control-release-nvidia/geometric-indexed/plane.gltf": "ccbb0f479e777869cc7de902c1497d4d1d35d93cc48165e9af1c5b9c94a33c21",
+      "run/green-geometric-normal-control-release-nvidia/geometric-indexed/player.log": "0e313870bcca32f5db488eeb2de1e9c92a6b3bcf6fde2456611882a8c97a466c",
+      "run/green-geometric-normal-control-release-nvidia/geometric-untextured/command.json": "9cf72eb4f26e92a3ca99e981b8525899c08365cbb60eca814b15c0dbda41c0ef",
+      "run/green-geometric-normal-control-release-nvidia/geometric-untextured/config/reference-views.json": "95ee4636066fb85b7a412c1b87d9f16173da8df546647ac1159a37e6d08021bd",
+      "run/green-geometric-normal-control-release-nvidia/geometric-untextured/frames/capture_manifest.json": "222f98ddc9a6221aaafc7a04daeeb36cd3c7ab4d98d707bee678d8fbbf67dc91",
+      "run/green-geometric-normal-control-release-nvidia/geometric-untextured/frames/reference-normals-a2b10g10r10.bin": "3cfc9faf65c8d21bce90430dd51c072f59897eb6071588de87a8d67b205c1f87",
+      "run/green-geometric-normal-control-release-nvidia/geometric-untextured/lab.azureproject": "fabadebfc78ccfcd83765bd2ab631acb93bbc031ee8ea8fd587c23a444bfd7d5",
+      "run/green-geometric-normal-control-release-nvidia/geometric-untextured/level.azurelevel": "fcb42780eb1e2a6adb903582dd2379f7896651b32f16566d2e21404144bd7a0a",
+      "run/green-geometric-normal-control-release-nvidia/geometric-untextured/normal.png": "741090756ce26daaffb4fe628f4fb45f79e9f78da458a3591545872dd8b9f3f4",
+      "run/green-geometric-normal-control-release-nvidia/geometric-untextured/plane.gltf": "20655285c167504b0e2478c757b47de0c250d5d6a03d3aa3376cd2e4fe6bbdf5",
+      "run/green-geometric-normal-control-release-nvidia/geometric-untextured/player.log": "2e6025b1bc6d0e80613299af47355466c6b4b1254d91b9f6bd375b93e0d95fce",
+      "run/green-geometric-normal-control-release-nvidia/invalid-encoding/command.json": "1642972d842dfd26ee3d55502673b1bd273a3532b5736d8c5162c0a4b5d77923",
+      "run/green-geometric-normal-control-release-nvidia/invalid-encoding/config/reference-views.json": "95ee4636066fb85b7a412c1b87d9f16173da8df546647ac1159a37e6d08021bd",
+      "run/green-geometric-normal-control-release-nvidia/invalid-encoding/lab.azureproject": "fabadebfc78ccfcd83765bd2ab631acb93bbc031ee8ea8fd587c23a444bfd7d5",
+      "run/green-geometric-normal-control-release-nvidia/invalid-encoding/level.azurelevel": "fcb42780eb1e2a6adb903582dd2379f7896651b32f16566d2e21404144bd7a0a",
+      "run/green-geometric-normal-control-release-nvidia/invalid-encoding/normal.png": "741090756ce26daaffb4fe628f4fb45f79e9f78da458a3591545872dd8b9f3f4",
+      "run/green-geometric-normal-control-release-nvidia/invalid-encoding/plane.gltf": "05ce9b4a08fe745e76fa659216398fe8590a71d9c67afa3d4b18b408a0b7f620",
+      "run/green-geometric-normal-control-release-nvidia/invalid-encoding/player.log": "50dbbb62220aa8a56a2944732ea14d2238ad718292f7b5de32110060cd91f1de",
+      "run/green-geometric-normal-control-release-nvidia/sampled-rg/command.json": "9c8af385de8a12253a43d416ad7262a1d5add34fd60fd783e9425b2bd710760c",
+      "run/green-geometric-normal-control-release-nvidia/sampled-rg/config/reference-views.json": "95ee4636066fb85b7a412c1b87d9f16173da8df546647ac1159a37e6d08021bd",
+      "run/green-geometric-normal-control-release-nvidia/sampled-rg/frames/capture_manifest.json": "4d92a9cae7b77e921e2b70daef123a4fc969ccd576bfc3778dff02f097a4fbdf",
+      "run/green-geometric-normal-control-release-nvidia/sampled-rg/frames/reference-normals-a2b10g10r10.bin": "06e999f883cfdbd1799f39b2b325b6c220392c8c4ae62f1d621e3e257c22a361",
+      "run/green-geometric-normal-control-release-nvidia/sampled-rg/lab.azureproject": "fabadebfc78ccfcd83765bd2ab631acb93bbc031ee8ea8fd587c23a444bfd7d5",
+      "run/green-geometric-normal-control-release-nvidia/sampled-rg/level.azurelevel": "fcb42780eb1e2a6adb903582dd2379f7896651b32f16566d2e21404144bd7a0a",
+      "run/green-geometric-normal-control-release-nvidia/sampled-rg/normal.png": "741090756ce26daaffb4fe628f4fb45f79e9f78da458a3591545872dd8b9f3f4",
+      "run/green-geometric-normal-control-release-nvidia/sampled-rg/plane.gltf": "658403adc5f403d267a5dd7c228e2ee470d11d5fd7fe99cba2695f957d04bc9c",
+      "run/green-geometric-normal-control-release-nvidia/sampled-rg/player.log": "f05cc50547b2bce17c0f9b944ca938e65b90538234cd3acb9f9bed608f81c7b6",
+      "run/green-geometric-normal-control-release-nvidia/summary.json": "d7c83e294b0d9b2f4d57b018d31119d883a4a18d86b053c90fd9e03147bb89ff",
+      "run/green-geometric-normal-control-release-intel/default-fixed/command.json": "3f01aef15b74c9d2f938254a103a1b1288627ec5acc51807516d9a8968ea3d89",
+      "run/green-geometric-normal-control-release-intel/default-fixed/config/reference-views.json": "95ee4636066fb85b7a412c1b87d9f16173da8df546647ac1159a37e6d08021bd",
+      "run/green-geometric-normal-control-release-intel/default-fixed/frames/capture_manifest.json": "0814a8ac78ada9c42e244b9182b743838a4f4c9451274fb68add98b943274c5e",
+      "run/green-geometric-normal-control-release-intel/default-fixed/frames/reference-normals-a2b10g10r10.bin": "47ebd0277558006a30be06263b60dca35a0c23b8f643fc82a4cbeb3171a6db81",
+      "run/green-geometric-normal-control-release-intel/default-fixed/lab.azureproject": "fabadebfc78ccfcd83765bd2ab631acb93bbc031ee8ea8fd587c23a444bfd7d5",
+      "run/green-geometric-normal-control-release-intel/default-fixed/level.azurelevel": "fcb42780eb1e2a6adb903582dd2379f7896651b32f16566d2e21404144bd7a0a",
+      "run/green-geometric-normal-control-release-intel/default-fixed/normal.png": "741090756ce26daaffb4fe628f4fb45f79e9f78da458a3591545872dd8b9f3f4",
+      "run/green-geometric-normal-control-release-intel/default-fixed/plane.gltf": "73023f709b12dd075d9eb7b28da8b629cafd47b4f2e023e599c30101e2ab80d2",
+      "run/green-geometric-normal-control-release-intel/default-fixed/player.log": "a8720ffb6fa0e88a15a19c4be13a6df19e6936e0ca0aa190763dc7a5c882f9b3",
+      "run/green-geometric-normal-control-release-intel/geometric-fixed/command.json": "fb522cf7e3b79137c2d7e3fc10e9699026421d105f4c34a33624d642bf7ae633",
+      "run/green-geometric-normal-control-release-intel/geometric-fixed/config/reference-views.json": "95ee4636066fb85b7a412c1b87d9f16173da8df546647ac1159a37e6d08021bd",
+      "run/green-geometric-normal-control-release-intel/geometric-fixed/frames/capture_manifest.json": "f1c0d297d840027dc2be83538ef526043125886198debead32fad367c41a08df",
+      "run/green-geometric-normal-control-release-intel/geometric-fixed/frames/reference-normals-a2b10g10r10.bin": "3cfc9faf65c8d21bce90430dd51c072f59897eb6071588de87a8d67b205c1f87",
+      "run/green-geometric-normal-control-release-intel/geometric-fixed/lab.azureproject": "fabadebfc78ccfcd83765bd2ab631acb93bbc031ee8ea8fd587c23a444bfd7d5",
+      "run/green-geometric-normal-control-release-intel/geometric-fixed/level.azurelevel": "fcb42780eb1e2a6adb903582dd2379f7896651b32f16566d2e21404144bd7a0a",
+      "run/green-geometric-normal-control-release-intel/geometric-fixed/normal.png": "741090756ce26daaffb4fe628f4fb45f79e9f78da458a3591545872dd8b9f3f4",
+      "run/green-geometric-normal-control-release-intel/geometric-fixed/plane.gltf": "ccbb0f479e777869cc7de902c1497d4d1d35d93cc48165e9af1c5b9c94a33c21",
+      "run/green-geometric-normal-control-release-intel/geometric-fixed/player.log": "92bbafe4a3eae303fa787b963da470d8db38ad8908be1bc29c914185e667dc9a",
+      "run/green-geometric-normal-control-release-intel/geometric-indexed/command.json": "e5b01efa2348492809617a71c9b908a85f27b63767bc2131733e6adc61f9379a",
+      "run/green-geometric-normal-control-release-intel/geometric-indexed/config/reference-views.json": "95ee4636066fb85b7a412c1b87d9f16173da8df546647ac1159a37e6d08021bd",
+      "run/green-geometric-normal-control-release-intel/geometric-indexed/frames/capture_manifest.json": "9089999a45dad5f4b44da549e3c4fe53393f29515b6a8cc116adfb3fe8dd427f",
+      "run/green-geometric-normal-control-release-intel/geometric-indexed/frames/reference-normals-a2b10g10r10.bin": "3cfc9faf65c8d21bce90430dd51c072f59897eb6071588de87a8d67b205c1f87",
+      "run/green-geometric-normal-control-release-intel/geometric-indexed/lab.azureproject": "fabadebfc78ccfcd83765bd2ab631acb93bbc031ee8ea8fd587c23a444bfd7d5",
+      "run/green-geometric-normal-control-release-intel/geometric-indexed/level.azurelevel": "fcb42780eb1e2a6adb903582dd2379f7896651b32f16566d2e21404144bd7a0a",
+      "run/green-geometric-normal-control-release-intel/geometric-indexed/normal.png": "741090756ce26daaffb4fe628f4fb45f79e9f78da458a3591545872dd8b9f3f4",
+      "run/green-geometric-normal-control-release-intel/geometric-indexed/plane.gltf": "ccbb0f479e777869cc7de902c1497d4d1d35d93cc48165e9af1c5b9c94a33c21",
+      "run/green-geometric-normal-control-release-intel/geometric-indexed/player.log": "66036a90213e0673f0f38b67e882efbe28a0266a068790c610b3cbcec0ada05d",
+      "run/green-geometric-normal-control-release-intel/geometric-untextured/command.json": "90f38d2bc97f92dc8f40ac4c1bab383a1b9500aae5606d4fe07049122eb99b4a",
+      "run/green-geometric-normal-control-release-intel/geometric-untextured/config/reference-views.json": "95ee4636066fb85b7a412c1b87d9f16173da8df546647ac1159a37e6d08021bd",
+      "run/green-geometric-normal-control-release-intel/geometric-untextured/frames/capture_manifest.json": "5d66236a1858a4104ab5c8bdfa050919cd1f356a80da0c08da9c8f7c2c25cf4c",
+      "run/green-geometric-normal-control-release-intel/geometric-untextured/frames/reference-normals-a2b10g10r10.bin": "3cfc9faf65c8d21bce90430dd51c072f59897eb6071588de87a8d67b205c1f87",
+      "run/green-geometric-normal-control-release-intel/geometric-untextured/lab.azureproject": "fabadebfc78ccfcd83765bd2ab631acb93bbc031ee8ea8fd587c23a444bfd7d5",
+      "run/green-geometric-normal-control-release-intel/geometric-untextured/level.azurelevel": "fcb42780eb1e2a6adb903582dd2379f7896651b32f16566d2e21404144bd7a0a",
+      "run/green-geometric-normal-control-release-intel/geometric-untextured/normal.png": "741090756ce26daaffb4fe628f4fb45f79e9f78da458a3591545872dd8b9f3f4",
+      "run/green-geometric-normal-control-release-intel/geometric-untextured/plane.gltf": "20655285c167504b0e2478c757b47de0c250d5d6a03d3aa3376cd2e4fe6bbdf5",
+      "run/green-geometric-normal-control-release-intel/geometric-untextured/player.log": "993cb98ebb5f3758f77407da4563ce16099fbc9ec2899fc3494abea3445e1fb1",
+      "run/green-geometric-normal-control-release-intel/invalid-encoding/command.json": "949c6233fba1198b0a0462e8d1ed97699f48a14954d5e81cc81258408f414d14",
+      "run/green-geometric-normal-control-release-intel/invalid-encoding/config/reference-views.json": "95ee4636066fb85b7a412c1b87d9f16173da8df546647ac1159a37e6d08021bd",
+      "run/green-geometric-normal-control-release-intel/invalid-encoding/lab.azureproject": "fabadebfc78ccfcd83765bd2ab631acb93bbc031ee8ea8fd587c23a444bfd7d5",
+      "run/green-geometric-normal-control-release-intel/invalid-encoding/level.azurelevel": "fcb42780eb1e2a6adb903582dd2379f7896651b32f16566d2e21404144bd7a0a",
+      "run/green-geometric-normal-control-release-intel/invalid-encoding/normal.png": "741090756ce26daaffb4fe628f4fb45f79e9f78da458a3591545872dd8b9f3f4",
+      "run/green-geometric-normal-control-release-intel/invalid-encoding/plane.gltf": "05ce9b4a08fe745e76fa659216398fe8590a71d9c67afa3d4b18b408a0b7f620",
+      "run/green-geometric-normal-control-release-intel/invalid-encoding/player.log": "612bde1d242202b36efa62838810732f79f10ec62cde127e5cb1b48675937346",
+      "run/green-geometric-normal-control-release-intel/sampled-rg/command.json": "365a78f9c663cf7eddb901eb730798dbeb0d2b7ef95113ac420a619a5cbb0a5d",
+      "run/green-geometric-normal-control-release-intel/sampled-rg/config/reference-views.json": "95ee4636066fb85b7a412c1b87d9f16173da8df546647ac1159a37e6d08021bd",
+      "run/green-geometric-normal-control-release-intel/sampled-rg/frames/capture_manifest.json": "243398a301ca52a69a2bdd4c4f10fb0b185aa225dedcde07e188bf94833e855b",
+      "run/green-geometric-normal-control-release-intel/sampled-rg/frames/reference-normals-a2b10g10r10.bin": "06e999f883cfdbd1799f39b2b325b6c220392c8c4ae62f1d621e3e257c22a361",
+      "run/green-geometric-normal-control-release-intel/sampled-rg/lab.azureproject": "fabadebfc78ccfcd83765bd2ab631acb93bbc031ee8ea8fd587c23a444bfd7d5",
+      "run/green-geometric-normal-control-release-intel/sampled-rg/level.azurelevel": "fcb42780eb1e2a6adb903582dd2379f7896651b32f16566d2e21404144bd7a0a",
+      "run/green-geometric-normal-control-release-intel/sampled-rg/normal.png": "741090756ce26daaffb4fe628f4fb45f79e9f78da458a3591545872dd8b9f3f4",
+      "run/green-geometric-normal-control-release-intel/sampled-rg/plane.gltf": "658403adc5f403d267a5dd7c228e2ee470d11d5fd7fe99cba2695f957d04bc9c",
+      "run/green-geometric-normal-control-release-intel/sampled-rg/player.log": "60ce88bf9ec01b942df7317a9e33c015aad0008a4e2bb95e590e762c0a1b03e2",
+      "run/green-geometric-normal-control-release-intel/summary.json": "842eb3d43e4c4e64031243c93624eacbfaf6dd26bcdb07f3b76bc3664fd54c64",
+      "run/green-geometric-normal-control-debug-nvidia/default-fixed/command.json": "fe0fe1075783f64885d10d8c5e966cb2b3bdb87f5fde2771cd4163d7c1ed6ed8",
+      "run/green-geometric-normal-control-debug-nvidia/default-fixed/config/reference-views.json": "95ee4636066fb85b7a412c1b87d9f16173da8df546647ac1159a37e6d08021bd",
+      "run/green-geometric-normal-control-debug-nvidia/default-fixed/frames/capture_manifest.json": "c825381ae0b21773c682dfd07df17cdfece124fd8fa129ead867d296805104f4",
+      "run/green-geometric-normal-control-debug-nvidia/default-fixed/frames/reference-normals-a2b10g10r10.bin": "47ebd0277558006a30be06263b60dca35a0c23b8f643fc82a4cbeb3171a6db81",
+      "run/green-geometric-normal-control-debug-nvidia/default-fixed/lab.azureproject": "fabadebfc78ccfcd83765bd2ab631acb93bbc031ee8ea8fd587c23a444bfd7d5",
+      "run/green-geometric-normal-control-debug-nvidia/default-fixed/level.azurelevel": "fcb42780eb1e2a6adb903582dd2379f7896651b32f16566d2e21404144bd7a0a",
+      "run/green-geometric-normal-control-debug-nvidia/default-fixed/normal.png": "741090756ce26daaffb4fe628f4fb45f79e9f78da458a3591545872dd8b9f3f4",
+      "run/green-geometric-normal-control-debug-nvidia/default-fixed/plane.gltf": "73023f709b12dd075d9eb7b28da8b629cafd47b4f2e023e599c30101e2ab80d2",
+      "run/green-geometric-normal-control-debug-nvidia/default-fixed/player.log": "1f3461be03cdd186040a819a779961b3c0c37feb6253ddb4944d22e0fcca2911",
+      "run/green-geometric-normal-control-debug-nvidia/geometric-fixed/command.json": "34e9212fc59839df82f5cefbedbb45e7296959f5753a6d3e9e9465479bd67934",
+      "run/green-geometric-normal-control-debug-nvidia/geometric-fixed/config/reference-views.json": "95ee4636066fb85b7a412c1b87d9f16173da8df546647ac1159a37e6d08021bd",
+      "run/green-geometric-normal-control-debug-nvidia/geometric-fixed/frames/capture_manifest.json": "916198e53b48af304f9f36debcad8625925b674b4faac7904e0165ceea32d095",
+      "run/green-geometric-normal-control-debug-nvidia/geometric-fixed/frames/reference-normals-a2b10g10r10.bin": "3cfc9faf65c8d21bce90430dd51c072f59897eb6071588de87a8d67b205c1f87",
+      "run/green-geometric-normal-control-debug-nvidia/geometric-fixed/lab.azureproject": "fabadebfc78ccfcd83765bd2ab631acb93bbc031ee8ea8fd587c23a444bfd7d5",
+      "run/green-geometric-normal-control-debug-nvidia/geometric-fixed/level.azurelevel": "fcb42780eb1e2a6adb903582dd2379f7896651b32f16566d2e21404144bd7a0a",
+      "run/green-geometric-normal-control-debug-nvidia/geometric-fixed/normal.png": "741090756ce26daaffb4fe628f4fb45f79e9f78da458a3591545872dd8b9f3f4",
+      "run/green-geometric-normal-control-debug-nvidia/geometric-fixed/plane.gltf": "ccbb0f479e777869cc7de902c1497d4d1d35d93cc48165e9af1c5b9c94a33c21",
+      "run/green-geometric-normal-control-debug-nvidia/geometric-fixed/player.log": "82ab6a52b0db49886b00120b5e05b547332f83ba15e94bccca236eb1a4256cb8",
+      "run/green-geometric-normal-control-debug-nvidia/geometric-indexed/command.json": "54696795986acf314fe8afa898a846c8abe639cc56866e93299a9472d7eb4a37",
+      "run/green-geometric-normal-control-debug-nvidia/geometric-indexed/config/reference-views.json": "95ee4636066fb85b7a412c1b87d9f16173da8df546647ac1159a37e6d08021bd",
+      "run/green-geometric-normal-control-debug-nvidia/geometric-indexed/frames/capture_manifest.json": "46dbf16f4b8cb65cf5224b9b04b9d4d4eec55d85ae8f517f4b745f11dd50b2c8",
+      "run/green-geometric-normal-control-debug-nvidia/geometric-indexed/frames/reference-normals-a2b10g10r10.bin": "3cfc9faf65c8d21bce90430dd51c072f59897eb6071588de87a8d67b205c1f87",
+      "run/green-geometric-normal-control-debug-nvidia/geometric-indexed/lab.azureproject": "fabadebfc78ccfcd83765bd2ab631acb93bbc031ee8ea8fd587c23a444bfd7d5",
+      "run/green-geometric-normal-control-debug-nvidia/geometric-indexed/level.azurelevel": "fcb42780eb1e2a6adb903582dd2379f7896651b32f16566d2e21404144bd7a0a",
+      "run/green-geometric-normal-control-debug-nvidia/geometric-indexed/normal.png": "741090756ce26daaffb4fe628f4fb45f79e9f78da458a3591545872dd8b9f3f4",
+      "run/green-geometric-normal-control-debug-nvidia/geometric-indexed/plane.gltf": "ccbb0f479e777869cc7de902c1497d4d1d35d93cc48165e9af1c5b9c94a33c21",
+      "run/green-geometric-normal-control-debug-nvidia/geometric-indexed/player.log": "dbe2652b9c4357d276da263e2a2bdb7dadf6450f79043a6898d1161eada284d1",
+      "run/green-geometric-normal-control-debug-nvidia/geometric-untextured/command.json": "f67bc20a0837e67bb66686514bf298d4bb40ee0c5fdc49df3a75a744ce8389c0",
+      "run/green-geometric-normal-control-debug-nvidia/geometric-untextured/config/reference-views.json": "95ee4636066fb85b7a412c1b87d9f16173da8df546647ac1159a37e6d08021bd",
+      "run/green-geometric-normal-control-debug-nvidia/geometric-untextured/frames/capture_manifest.json": "d84cd83f9b03f529fd5302fac2ff351a9ced519f55214a350f78b7e79beab746",
+      "run/green-geometric-normal-control-debug-nvidia/geometric-untextured/frames/reference-normals-a2b10g10r10.bin": "3cfc9faf65c8d21bce90430dd51c072f59897eb6071588de87a8d67b205c1f87",
+      "run/green-geometric-normal-control-debug-nvidia/geometric-untextured/lab.azureproject": "fabadebfc78ccfcd83765bd2ab631acb93bbc031ee8ea8fd587c23a444bfd7d5",
+      "run/green-geometric-normal-control-debug-nvidia/geometric-untextured/level.azurelevel": "fcb42780eb1e2a6adb903582dd2379f7896651b32f16566d2e21404144bd7a0a",
+      "run/green-geometric-normal-control-debug-nvidia/geometric-untextured/normal.png": "741090756ce26daaffb4fe628f4fb45f79e9f78da458a3591545872dd8b9f3f4",
+      "run/green-geometric-normal-control-debug-nvidia/geometric-untextured/plane.gltf": "20655285c167504b0e2478c757b47de0c250d5d6a03d3aa3376cd2e4fe6bbdf5",
+      "run/green-geometric-normal-control-debug-nvidia/geometric-untextured/player.log": "ed4b8dbb63b71cae28ce6658fcd50c90fad5681200c5a401551c24020d301a58",
+      "run/green-geometric-normal-control-debug-nvidia/invalid-encoding/command.json": "a4bbe9dab55efa419b135fdcf5c796374ad03cf1dc5f599c9f6e6ad054511793",
+      "run/green-geometric-normal-control-debug-nvidia/invalid-encoding/config/reference-views.json": "95ee4636066fb85b7a412c1b87d9f16173da8df546647ac1159a37e6d08021bd",
+      "run/green-geometric-normal-control-debug-nvidia/invalid-encoding/lab.azureproject": "fabadebfc78ccfcd83765bd2ab631acb93bbc031ee8ea8fd587c23a444bfd7d5",
+      "run/green-geometric-normal-control-debug-nvidia/invalid-encoding/level.azurelevel": "fcb42780eb1e2a6adb903582dd2379f7896651b32f16566d2e21404144bd7a0a",
+      "run/green-geometric-normal-control-debug-nvidia/invalid-encoding/normal.png": "741090756ce26daaffb4fe628f4fb45f79e9f78da458a3591545872dd8b9f3f4",
+      "run/green-geometric-normal-control-debug-nvidia/invalid-encoding/plane.gltf": "05ce9b4a08fe745e76fa659216398fe8590a71d9c67afa3d4b18b408a0b7f620",
+      "run/green-geometric-normal-control-debug-nvidia/invalid-encoding/player.log": "94c4d13480ef41089643a0166bac2fe5a25c5a3fb7065b14f684e3ae910f9bd8",
+      "run/green-geometric-normal-control-debug-nvidia/sampled-rg/command.json": "b7b8043edd104946bff9fe3b1b45cda6669d8b8971b2ac2f2a892eab85d4f662",
+      "run/green-geometric-normal-control-debug-nvidia/sampled-rg/config/reference-views.json": "95ee4636066fb85b7a412c1b87d9f16173da8df546647ac1159a37e6d08021bd",
+      "run/green-geometric-normal-control-debug-nvidia/sampled-rg/frames/capture_manifest.json": "e5f9a1673843b8cb63a3d44a7e2645d483d31a2a3a2f0912ba2a5ae490a4fa90",
+      "run/green-geometric-normal-control-debug-nvidia/sampled-rg/frames/reference-normals-a2b10g10r10.bin": "06e999f883cfdbd1799f39b2b325b6c220392c8c4ae62f1d621e3e257c22a361",
+      "run/green-geometric-normal-control-debug-nvidia/sampled-rg/lab.azureproject": "fabadebfc78ccfcd83765bd2ab631acb93bbc031ee8ea8fd587c23a444bfd7d5",
+      "run/green-geometric-normal-control-debug-nvidia/sampled-rg/level.azurelevel": "fcb42780eb1e2a6adb903582dd2379f7896651b32f16566d2e21404144bd7a0a",
+      "run/green-geometric-normal-control-debug-nvidia/sampled-rg/normal.png": "741090756ce26daaffb4fe628f4fb45f79e9f78da458a3591545872dd8b9f3f4",
+      "run/green-geometric-normal-control-debug-nvidia/sampled-rg/plane.gltf": "658403adc5f403d267a5dd7c228e2ee470d11d5fd7fe99cba2695f957d04bc9c",
+      "run/green-geometric-normal-control-debug-nvidia/sampled-rg/player.log": "ab90f244a534dd16e6491ac5ff4f2ef877443200c7943830739af75f94b8f490",
+      "run/green-geometric-normal-control-debug-nvidia/summary.json": "c24f6d20f55753b5965edd291c131cfb431e1eb38bba43ae29352dd33fa74b49",
+      "run/green-geometric-normal-control-debug-intel/default-fixed/command.json": "e80f4d3a0251208d98f4649929f85b4246da19978a9951ac555d7b8eee202c37",
+      "run/green-geometric-normal-control-debug-intel/default-fixed/config/reference-views.json": "95ee4636066fb85b7a412c1b87d9f16173da8df546647ac1159a37e6d08021bd",
+      "run/green-geometric-normal-control-debug-intel/default-fixed/frames/capture_manifest.json": "375297774f06dcaedf1b1a702ba8911ccb2e8b4593c2f839b86a8113d9e9ad3f",
+      "run/green-geometric-normal-control-debug-intel/default-fixed/frames/reference-normals-a2b10g10r10.bin": "47ebd0277558006a30be06263b60dca35a0c23b8f643fc82a4cbeb3171a6db81",
+      "run/green-geometric-normal-control-debug-intel/default-fixed/lab.azureproject": "fabadebfc78ccfcd83765bd2ab631acb93bbc031ee8ea8fd587c23a444bfd7d5",
+      "run/green-geometric-normal-control-debug-intel/default-fixed/level.azurelevel": "fcb42780eb1e2a6adb903582dd2379f7896651b32f16566d2e21404144bd7a0a",
+      "run/green-geometric-normal-control-debug-intel/default-fixed/normal.png": "741090756ce26daaffb4fe628f4fb45f79e9f78da458a3591545872dd8b9f3f4",
+      "run/green-geometric-normal-control-debug-intel/default-fixed/plane.gltf": "73023f709b12dd075d9eb7b28da8b629cafd47b4f2e023e599c30101e2ab80d2",
+      "run/green-geometric-normal-control-debug-intel/default-fixed/player.log": "d64a6261973f238255d13204ce39bd6789712e1f5a25d7d826dbf678107bd193",
+      "run/green-geometric-normal-control-debug-intel/geometric-fixed/command.json": "ca22fc661118e524adcae42844445a94ab02bf59b9814363a8074f6bfe345861",
+      "run/green-geometric-normal-control-debug-intel/geometric-fixed/config/reference-views.json": "95ee4636066fb85b7a412c1b87d9f16173da8df546647ac1159a37e6d08021bd",
+      "run/green-geometric-normal-control-debug-intel/geometric-fixed/frames/capture_manifest.json": "8a17f85338483b38b6dfb7c79723249aaa5a24dfdeb5f784f29aef322be9a582",
+      "run/green-geometric-normal-control-debug-intel/geometric-fixed/frames/reference-normals-a2b10g10r10.bin": "3cfc9faf65c8d21bce90430dd51c072f59897eb6071588de87a8d67b205c1f87",
+      "run/green-geometric-normal-control-debug-intel/geometric-fixed/lab.azureproject": "fabadebfc78ccfcd83765bd2ab631acb93bbc031ee8ea8fd587c23a444bfd7d5",
+      "run/green-geometric-normal-control-debug-intel/geometric-fixed/level.azurelevel": "fcb42780eb1e2a6adb903582dd2379f7896651b32f16566d2e21404144bd7a0a",
+      "run/green-geometric-normal-control-debug-intel/geometric-fixed/normal.png": "741090756ce26daaffb4fe628f4fb45f79e9f78da458a3591545872dd8b9f3f4",
+      "run/green-geometric-normal-control-debug-intel/geometric-fixed/plane.gltf": "ccbb0f479e777869cc7de902c1497d4d1d35d93cc48165e9af1c5b9c94a33c21",
+      "run/green-geometric-normal-control-debug-intel/geometric-fixed/player.log": "8e11fb9fe17cb68343da3a75e6fbfc52cd16d4573f75c341f48f0b34c56c320f",
+      "run/green-geometric-normal-control-debug-intel/geometric-indexed/command.json": "14dd262c644d4a5c33c37c6d6a96298d86bf32075ca93c857a2958994635e403",
+      "run/green-geometric-normal-control-debug-intel/geometric-indexed/config/reference-views.json": "95ee4636066fb85b7a412c1b87d9f16173da8df546647ac1159a37e6d08021bd",
+      "run/green-geometric-normal-control-debug-intel/geometric-indexed/frames/capture_manifest.json": "da88b51e4bd134209094d62ff64bb94c439a8c0d9e8fb83348b63187a3846a7a",
+      "run/green-geometric-normal-control-debug-intel/geometric-indexed/frames/reference-normals-a2b10g10r10.bin": "3cfc9faf65c8d21bce90430dd51c072f59897eb6071588de87a8d67b205c1f87",
+      "run/green-geometric-normal-control-debug-intel/geometric-indexed/lab.azureproject": "fabadebfc78ccfcd83765bd2ab631acb93bbc031ee8ea8fd587c23a444bfd7d5",
+      "run/green-geometric-normal-control-debug-intel/geometric-indexed/level.azurelevel": "fcb42780eb1e2a6adb903582dd2379f7896651b32f16566d2e21404144bd7a0a",
+      "run/green-geometric-normal-control-debug-intel/geometric-indexed/normal.png": "741090756ce26daaffb4fe628f4fb45f79e9f78da458a3591545872dd8b9f3f4",
+      "run/green-geometric-normal-control-debug-intel/geometric-indexed/plane.gltf": "ccbb0f479e777869cc7de902c1497d4d1d35d93cc48165e9af1c5b9c94a33c21",
+      "run/green-geometric-normal-control-debug-intel/geometric-indexed/player.log": "90b3b97511706c805e33745541886dcd39d73f2b3e16dedf9cb2508ea342b19d",
+      "run/green-geometric-normal-control-debug-intel/geometric-untextured/command.json": "77833201c7d58dc0bd176175e1d0a85707c954961dededf56b64bb62bac4b60d",
+      "run/green-geometric-normal-control-debug-intel/geometric-untextured/config/reference-views.json": "95ee4636066fb85b7a412c1b87d9f16173da8df546647ac1159a37e6d08021bd",
+      "run/green-geometric-normal-control-debug-intel/geometric-untextured/frames/capture_manifest.json": "abe37c606e3b1e8cd412fbbbb103ea5ab5f7e11a0fb016d86f8ac03bb2aae3e3",
+      "run/green-geometric-normal-control-debug-intel/geometric-untextured/frames/reference-normals-a2b10g10r10.bin": "3cfc9faf65c8d21bce90430dd51c072f59897eb6071588de87a8d67b205c1f87",
+      "run/green-geometric-normal-control-debug-intel/geometric-untextured/lab.azureproject": "fabadebfc78ccfcd83765bd2ab631acb93bbc031ee8ea8fd587c23a444bfd7d5",
+      "run/green-geometric-normal-control-debug-intel/geometric-untextured/level.azurelevel": "fcb42780eb1e2a6adb903582dd2379f7896651b32f16566d2e21404144bd7a0a",
+      "run/green-geometric-normal-control-debug-intel/geometric-untextured/normal.png": "741090756ce26daaffb4fe628f4fb45f79e9f78da458a3591545872dd8b9f3f4",
+      "run/green-geometric-normal-control-debug-intel/geometric-untextured/plane.gltf": "20655285c167504b0e2478c757b47de0c250d5d6a03d3aa3376cd2e4fe6bbdf5",
+      "run/green-geometric-normal-control-debug-intel/geometric-untextured/player.log": "1543a8ba13696ecc44deeab8d22525b46272f969f52f5abe89d058305f280e45",
+      "run/green-geometric-normal-control-debug-intel/invalid-encoding/command.json": "31812260f31175fe27de53d474330a781875d655302a2377f007be7185c4a1ee",
+      "run/green-geometric-normal-control-debug-intel/invalid-encoding/config/reference-views.json": "95ee4636066fb85b7a412c1b87d9f16173da8df546647ac1159a37e6d08021bd",
+      "run/green-geometric-normal-control-debug-intel/invalid-encoding/lab.azureproject": "fabadebfc78ccfcd83765bd2ab631acb93bbc031ee8ea8fd587c23a444bfd7d5",
+      "run/green-geometric-normal-control-debug-intel/invalid-encoding/level.azurelevel": "fcb42780eb1e2a6adb903582dd2379f7896651b32f16566d2e21404144bd7a0a",
+      "run/green-geometric-normal-control-debug-intel/invalid-encoding/normal.png": "741090756ce26daaffb4fe628f4fb45f79e9f78da458a3591545872dd8b9f3f4",
+      "run/green-geometric-normal-control-debug-intel/invalid-encoding/plane.gltf": "05ce9b4a08fe745e76fa659216398fe8590a71d9c67afa3d4b18b408a0b7f620",
+      "run/green-geometric-normal-control-debug-intel/invalid-encoding/player.log": "1388f384f0ba45e50449c9b3d0b2635d015e84a3fc8e52bc56c47a93250a0232",
+      "run/green-geometric-normal-control-debug-intel/sampled-rg/command.json": "97d80b392928221c4e59d93db79d95b53ea0ad9f74167dd9e1368d7ce3ea8d6d",
+      "run/green-geometric-normal-control-debug-intel/sampled-rg/config/reference-views.json": "95ee4636066fb85b7a412c1b87d9f16173da8df546647ac1159a37e6d08021bd",
+      "run/green-geometric-normal-control-debug-intel/sampled-rg/frames/capture_manifest.json": "4ea9c74539eda4a4136c234b538f77f16aaaac67e3f0078692c1bf6151b21cfc",
+      "run/green-geometric-normal-control-debug-intel/sampled-rg/frames/reference-normals-a2b10g10r10.bin": "06e999f883cfdbd1799f39b2b325b6c220392c8c4ae62f1d621e3e257c22a361",
+      "run/green-geometric-normal-control-debug-intel/sampled-rg/lab.azureproject": "fabadebfc78ccfcd83765bd2ab631acb93bbc031ee8ea8fd587c23a444bfd7d5",
+      "run/green-geometric-normal-control-debug-intel/sampled-rg/level.azurelevel": "fcb42780eb1e2a6adb903582dd2379f7896651b32f16566d2e21404144bd7a0a",
+      "run/green-geometric-normal-control-debug-intel/sampled-rg/normal.png": "741090756ce26daaffb4fe628f4fb45f79e9f78da458a3591545872dd8b9f3f4",
+      "run/green-geometric-normal-control-debug-intel/sampled-rg/plane.gltf": "658403adc5f403d267a5dd7c228e2ee470d11d5fd7fe99cba2695f957d04bc9c",
+      "run/green-geometric-normal-control-debug-intel/sampled-rg/player.log": "bfe88c60d0147efdec925bdb44665102cdad5bf946625880be2cf53024a1e3cb",
+      "run/green-geometric-normal-control-debug-intel/summary.json": "5ace8d15ac62df6f22b0209d800bad1bc4eb0f8184f94a8fb9a29624e9bf7d7a",
+      "run/default-four-frames/capture_manifest.json": "669b16bc4b7eb91063dbbbf9194746886b0da8381d2622be7f5f065518fd5c75"
+    }
+  }
+}

@@ -222,13 +222,15 @@ void loadMaterialProfile(
             }
             if(profile.contains("referenceNormal")) {
                 const auto& value=profile.at("referenceNormal");
-                if(profile.at("schemaVersion")!=2||!value.is_object()||value.size()!=2
-                    ||!value.contains("schemaVersion")||!value.at("schemaVersion").is_number_integer()||value.at("schemaVersion")!=1
-                    ||!value.contains("encoding")||value.at("encoding")!="sampled-rg")
-                    throw std::invalid_argument(context+": referenceNormal requires schemaVersion one, sampled-rg and profile version two");
-                if(material.normalTexture.index<0)
-                    throw std::invalid_argument(context+": referenceNormal requires a standard normal texture");
-                result.sampledReferenceNormal=true;
+                if (profile.at("schemaVersion") != 2 || !value.is_object() || value.size() != 2
+                    || !value.contains("schemaVersion") || !value.at("schemaVersion").is_number_integer()
+                    || value.at("schemaVersion") != 1 || !value.contains("encoding")
+                    || (value.at("encoding") != "sampled-rg" && value.at("encoding") != "geometry"))
+                    throw std::invalid_argument(context + ": referenceNormal requires schemaVersion one, sampled-rg or geometry, and profile version two");
+                result.sampledReferenceNormal = value.at("encoding") == "sampled-rg";
+                result.geometricReferenceNormal = value.at("encoding") == "geometry";
+                if (result.sampledReferenceNormal && material.normalTexture.index < 0)
+                    throw std::invalid_argument(context + ": sampled-rg referenceNormal requires a standard normal texture");
             }
             if(profile.contains("blendDepth")) {
                 const auto& value=profile.at("blendDepth");

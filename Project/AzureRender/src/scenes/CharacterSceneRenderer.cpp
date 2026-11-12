@@ -3378,8 +3378,9 @@ void CharacterSceneRenderer::recordDepthCoverage(const RenderContext& context,co
                 static_cast<std::uint32_t>((materialBase+primitive.materialIndex)<<1U)};
             if(visibilityInputs){
                 const auto& hair=m.projectedHairRamp;
-                const float hairNormalMode=hair.present?(hair.materialSnapshotNormal?2.F:1.F):0.F;
-                const float normalMode=m.sampledReferenceNormal?3.F:hairNormalMode;
+                float normalMode=hair.present?(hair.materialSnapshotNormal?2.F:1.F):0.F;
+                if (m.sampledReferenceNormal) normalMode = 3.F;
+                if (m.geometricReferenceNormal) normalMode = 4.F;
                 material.hairParameters={normalMode,hair.surfaceNormalScale,hair.tangentSign,normalAxes};
             }
             commands.pushConstants(pipelineLayout_,VK_SHADER_STAGE_VERTEX_BIT|VK_SHADER_STAGE_FRAGMENT_BIT,0,&material,sizeof(material));

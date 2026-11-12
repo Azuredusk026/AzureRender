@@ -892,3 +892,5 @@ Intel 实际 Player 的完整可见量附件逐字节匹配固定输入的 `Prof
 [原生眉部与头发模板](docs/acceptance/nr/native-eyebrow-hair-stencil.md)记录双设备模板状态、附件和像素历史。
 
 [参考深度模板覆盖](docs/acceptance/nr/reference-depth-stencil-coverage.md)记录保护位材质入口、实际接收附件和双配置回归。
+
+[参考几何法线](docs/acceptance/nr/reference-geometric-normal.md)记录眉部、脸部及其剩余接收超差。
