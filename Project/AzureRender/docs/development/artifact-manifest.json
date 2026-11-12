@@ -57,6 +57,13 @@
   },
   "milestones": [
     {
+      "path": "runs/20261113-011746-nr-main-joint-scene-diagnostic-c840ed",
+      "name": "主线联合场景短测",
+      "sourceBase": "a148668",
+      "evidence": "docs/acceptance/nr/performance-bottlenecks.md",
+      "results": "docs/acceptance/nr/evidence/2026-11-13/main-joint-scene-diagnostic/results.json"
+    },
+    {
       "path": "runs/20261112-213746-nr-projected-hair-integration-b5c673",
       "name": "三纹理采样与视口选择集成",
       "sourceBase": "0909e26",

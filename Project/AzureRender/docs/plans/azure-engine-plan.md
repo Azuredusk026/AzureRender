@@ -32,6 +32,10 @@ Player 的 CPU 工作 P95 至多为八毫秒。
 
 [三纹理采样与视口选择集成](../acceptance/nr/projected-hair-viewport-integration.md)通过所属构建和双显卡复验。
 
+[主线联合场景短测](../acceptance/nr/performance-bottlenecks.md#主线联合场景短测)记录标准构建的场景阶段成本。
+CPU 工作 P95 为 5.90 毫秒，GPU 帧 P95 为 20.33 毫秒。
+正式性能仍需满足固定功率和热状态条件。
+
 [空白视口选择](../acceptance/nr/editor-empty-viewport-selection.md)通过探索项目和场景检视项目的所属回归。
 
 [参考头发半层采样集成](../acceptance/nr/reference-hair-boundary-integration.md)通过所属构建和双显卡复验。

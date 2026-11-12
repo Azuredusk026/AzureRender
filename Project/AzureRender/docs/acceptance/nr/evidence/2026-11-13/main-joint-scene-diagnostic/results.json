@@ -1,0 +1,333 @@
+{
+  "scope": "standard-main-1080p60-diagnostic",
+  "source": "a148668f77206e44a9cf89c1d2fb37436c1a6956",
+  "warmupFrames": 300,
+  "measuredFrames": 120,
+  "timings": {
+    "frameMs": {
+      "samples": 120,
+      "mean": 19.239906400000002,
+      "p95": 20.3285968,
+      "maximum": 20.816032
+    },
+    "sceneMs": {
+      "samples": 120,
+      "mean": 16.86683306666667,
+      "p95": 17.911193599999997,
+      "maximum": 18.187264
+    },
+    "shadowMs": {
+      "samples": 120,
+      "mean": 2.0870018666666668,
+      "p95": 2.2038368000000004,
+      "maximum": 2.23008
+    },
+    "postProcessMs": {
+      "samples": 120,
+      "mean": 0.28607146666666666,
+      "p95": 0.3000832,
+      "maximum": 0.516096
+    },
+    "cpuWorkMs": {
+      "samples": 120,
+      "mean": 5.457687499999971,
+      "p95": 5.900465000000871,
+      "maximum": 13.22720000000129
+    }
+  },
+  "peakWorkingSetBytes": 2017456128,
+  "deviceLocalPeakBytes": 2784680768,
+  "fixed80Observed": false,
+  "observedWatts": [
+    75.0,
+    75.17,
+    75.5,
+    75.62,
+    75.63,
+    75.85,
+    75.93,
+    76.62,
+    76.72,
+    76.89,
+    76.91,
+    76.93,
+    77.43,
+    77.53,
+    77.62,
+    78.03,
+    78.22,
+    79.16,
+    79.26,
+    79.28,
+    79.32,
+    79.33,
+    79.49,
+    79.81,
+    79.97,
+    80.05,
+    80.27,
+    80.29,
+    80.33,
+    80.34,
+    80.49,
+    80.51,
+    80.65,
+    80.95,
+    81.29,
+    81.33,
+    81.67,
+    81.75,
+    82.1,
+    82.83,
+    83.46,
+    83.82,
+    85.0,
+    87.42
+  ],
+  "environmentErrors": [
+    "run observation 48: driver relative thermal headroom is insufficient",
+    "run observation 49: driver relative thermal headroom is insufficient",
+    "run observation 49: software thermal slowdown is active"
+  ],
+  "allocatorZero": true,
+  "formalAcceptance": false,
+  "programSha256": "9a5888e96ba0c8a4149f2a6b6c8916b8e39587efe24adaba0608d8003fd7f254",
+  "inputCount": 1729,
+  "runtimeConfiguration": "Release",
+  "archive": {
+    "path": "validation.zip",
+    "sha256": "90e39dd8c913c399bcd1824347be3d6b0ee15dbfc8420467e0d97ad26c3a0390",
+    "bytes": 625417,
+    "members": {
+      "command.json": "e1884cbc2e7645e44d654bfa5f985e55597b115b8c3a6b5f4762ac14d9492261",
+      "diagnose.py": "59bde64a92886694fafecee763303a5c4415c847cbad4a06eee7215579bb97a3",
+      "environment.json": "691ab0142c6dc782246cfac5cb22e69bcf3ee097b4f429ebbfb9a546885cd300",
+      "memory-observations.json": "368045ddf932923cd04161f03af5b1745d470c577c837fade7e853ed78f1ef68",
+      "player.log": "b26ea9c4b373584084d705d453e40b233061b7f52f323aa5b0ca83b752a1eb1a",
+      "results.json": "8c54d969c5da9a215520ba1a386ff57e307b5e994472c009be5ee2ac5985c97d",
+      "timing.csv": "5aa59f1ddcc6581e74d313b7685bda05ee12bc208852ffa50d212a09fa7beeb5",
+      "timing.json": "f08ecfd8c3d2f87db29cb276aa08ab0eeb918fda7ef252cfcd276906922834d1",
+      "diagnose_passes.py": "5df0149235c12e2f78e1d9143fa585b03fc7747124a773e1806504664ade0c03",
+      "passes/command.json": "f81e9764b54ef648a65cad244e22780d7d034b2f3303fac78bcde802e24c9782",
+      "passes/environment.json": "8b79ba119d7926c61d5ab611a17cbf1534663a6883b8ba159e1da6782244a6fa",
+      "passes/memory-observations.json": "7d1d7ebc631ce438f89dda00fb1e4293939a083733ae6c555d7d96fa4789c69e",
+      "passes/player.log": "a2ed8c478308aa075ee452ccdc5d5f09bf6fbe32fa1b4a22b232bcc2aca429bf",
+      "passes/results.json": "2828a2ae714af76899d71e44871fae6e400ff699913c7ce6f3caf955c07b751b",
+      "passes/timing.csv": "cf0b5400e7c6694014a5c82596da5c2a53100664c4e9c5469c2086ecb3ab5560",
+      "passes/timing.json": "f6cdb199be816f96571a18b6ccdb3ca5b1537371363c1e9eea3d3fbbc1dc41f9",
+      "passes/timing.passes.jsonl": "79f13ac31bf8288abce98f8ba8fabb93272448aec44a2e84f171627092abe98f"
+    }
+  },
+  "instrumentedPassCapture": {
+    "scope": "standard-main-1080p60-diagnostic",
+    "source": "2e5cdff9d4731bc518eb1dba58a859d88c5610bc",
+    "warmupFrames": 300,
+    "measuredFrames": 120,
+    "timings": {
+      "frameMs": {
+        "samples": 120,
+        "mean": 19.443086133333335,
+        "p95": 20.797585599999998,
+        "maximum": 21.186496
+      },
+      "sceneMs": {
+        "samples": 120,
+        "mean": 16.97342293333333,
+        "p95": 18.2491136,
+        "maximum": 18.72896
+      },
+      "shadowMs": {
+        "samples": 120,
+        "mean": 2.1794616,
+        "p95": 2.2385536,
+        "maximum": 2.274336
+      },
+      "postProcessMs": {
+        "samples": 120,
+        "mean": 0.29020159999999995,
+        "p95": 0.310272,
+        "maximum": 0.315392
+      },
+      "cpuWorkMs": {
+        "samples": 120,
+        "mean": 5.6746091666666665,
+        "p95": 6.30125000000018,
+        "maximum": 11.456700000000744
+      }
+    },
+    "passTimings": {
+      "character-transparent-prepare": {
+        "samples": 120,
+        "mean": 0.14051066666666664,
+        "p95": 0.322584,
+        "maximum": 0.34224
+      },
+      "character-skinning": {
+        "samples": 120,
+        "mean": 0.26156186666666664,
+        "p95": 0.405504,
+        "maximum": 0.421888
+      },
+      "character-gpu-culling": {
+        "samples": 120,
+        "mean": 0.0076408,
+        "p95": 0.006144,
+        "maximum": 0.23151999999999998
+      },
+      "character-shadow": {
+        "samples": 120,
+        "mean": 1.7676714666666664,
+        "p95": 1.9026944,
+        "maximum": 1.946624
+      },
+      "object-shadow-atlas": {
+        "samples": 120,
+        "mean": 0.0741376,
+        "p95": 0.078848,
+        "maximum": 0.080896
+      },
+      "character-outline-mask": {
+        "samples": 120,
+        "mean": 0.043571200000000004,
+        "p95": 0.046079999999999996,
+        "maximum": 0.048128
+      },
+      "character-main-depth": {
+        "samples": 120,
+        "mean": 0.2723157333333334,
+        "p95": 0.273408,
+        "maximum": 0.274432
+      },
+      "shadow-tile-bounds": {
+        "samples": 120,
+        "mean": 0.12206933333333332,
+        "p95": 0.130048,
+        "maximum": 0.13312
+      },
+      "character-depth-hierarchy": {
+        "samples": 120,
+        "mean": 0.11572906666666666,
+        "p95": 0.12185599999999999,
+        "maximum": 0.123904
+      },
+      "character-opaque-depth": {
+        "samples": 120,
+        "mean": 5.2806656,
+        "p95": 5.696665599999999,
+        "maximum": 5.819392
+      },
+      "character-occlusion": {
+        "samples": 120,
+        "mean": 0.013096799999999997,
+        "p95": 0.014336,
+        "maximum": 0.015359999999999999
+      },
+      "character-reflection-motion": {
+        "samples": 120,
+        "mean": 0.5639167999999999,
+        "p95": 0.5765632,
+        "maximum": 0.584704
+      },
+      "character-main-depth-resume": {
+        "samples": 120,
+        "mean": 0.001245866666666667,
+        "p95": 0.002048,
+        "maximum": 0.002048
+      },
+      "character-compute-reflection": {
+        "samples": 120,
+        "mean": 1.7244490666666663,
+        "p95": 1.8341375999999998,
+        "maximum": 1.8524159999999998
+      },
+      "character-main": {
+        "samples": 120,
+        "mean": 8.754150399999999,
+        "p95": 9.450547199999999,
+        "maximum": 10.659839999999999
+      },
+      "post-process-grade": {
+        "samples": 120,
+        "mean": 0.16411306666666667,
+        "p95": 0.17510399999999998,
+        "maximum": 0.178176
+      },
+      "post-process-hud": {
+        "samples": 120,
+        "mean": 0.12145493333333333,
+        "p95": 0.131072,
+        "maximum": 0.13312
+      },
+      "editor-ui": {
+        "samples": 120,
+        "mean": 0.0006741333333333333,
+        "p95": 0.001024,
+        "maximum": 0.001024
+      },
+      "capture": {
+        "samples": 120,
+        "mean": 0.00128,
+        "p95": 0.002048,
+        "maximum": 0.002048
+      }
+    },
+    "peakWorkingSetBytes": 2017062912,
+    "deviceLocalPeakBytes": 2784680768,
+    "fixed80Observed": false,
+    "observedWatts": [
+      75.0,
+      75.9,
+      76.4,
+      76.46,
+      77.42,
+      77.72,
+      77.88,
+      78.04,
+      78.2,
+      78.36,
+      78.57,
+      78.76,
+      79.03,
+      79.06,
+      79.19,
+      79.27,
+      79.34,
+      79.39,
+      79.41,
+      79.47,
+      79.51,
+      79.57,
+      79.58,
+      79.68,
+      79.78,
+      79.85,
+      79.9,
+      80.04,
+      80.1,
+      80.26,
+      80.33,
+      80.35,
+      80.36,
+      80.59,
+      80.87,
+      80.9,
+      80.96,
+      81.08,
+      81.21,
+      81.33,
+      81.58,
+      81.77,
+      82.24,
+      83.06,
+      83.57,
+      85.46
+    ],
+    "environmentErrors": [
+      "run observation 50: software thermal slowdown is active",
+      "run observation 51: software thermal slowdown is active"
+    ],
+    "allocatorZero": true,
+    "formalAcceptance": false,
+    "dominantPassShare": 0.7218409620651031
+  }
+}

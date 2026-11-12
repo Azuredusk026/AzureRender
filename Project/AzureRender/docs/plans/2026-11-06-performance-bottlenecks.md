@@ -14,6 +14,11 @@ GPU 继续区分着色、缓存、显存带宽和传输。
 
 ## 当前状态
 
+[主线联合场景短测](../acceptance/nr/performance-bottlenecks.md#主线联合场景短测)取得当前 GPU 和 CPU 数据。
+主颜色及不透明快照占通道采集 GPU 帧均值的 72.2%。
+实际通道时间用于安排材质着色优化。
+正式环境和长跑继续按所属门禁核验。
+
 主线运行时来源为 `6721bde`。
 [参考相机视图集成](../acceptance/nr/reference-camera-view-main-integration.md)通过两配置二十项检查。
 八次设备检查、实际射线及重采原始四帧均通过。
