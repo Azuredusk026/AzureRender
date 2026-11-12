@@ -1388,3 +1388,5 @@ Intel 头发颜色继续按冻结区域核对纹理选级。
 [头发着色双法线采样](../acceptance/nr/reference-hair-color-source.md)核对原生纹理 t18 的单变量控制。Intel RGB 超差 449 处，参数纹理继续按同一冻结范围核对。
 
 [头发参数与双法线选层](../acceptance/nr/reference-hair-color-pair.md)核对冻结 RGB，Intel 联合控制有 393 处超差。基色选层按同一原生采样器继续核对。
+
+[头发基色与三纹理选层](../acceptance/nr/reference-hair-color-triple.md)核对原生同采样器的三份纹理。Intel 冻结 RGB 超差为 32 处，继续按一字节门槛验收。
