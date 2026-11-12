@@ -4,10 +4,12 @@ import argparse
 import hashlib
 import json
 import math
+import os
 import pathlib
 import shutil
 import subprocess
 import tempfile
+import time
 import uuid
 
 REQUIRED_LICENSES = [name + "-LICENSE.txt" for name in [
@@ -108,6 +110,22 @@ def verify_package(directory):
             if relative.parts[0] != "captures" and relative.parts[:2] != ("game", ".azure"):
                 raise ValueError(f"Unlisted game package file: {relative}")
     return manifest
+
+
+def _rename_package_directory(source, destination):
+    deadline = time.monotonic() + 2.0
+    while True:
+        try:
+            source.rename(destination)
+            return
+        except OSError as error:
+            if os.name != "nt" or getattr(error, "winerror", None) not in (5, 32, 33):
+                raise
+            # A directory scan can briefly hold an open handle to a descendant.
+            remaining = deadline - time.monotonic()
+            if remaining <= 0:
+                raise
+            time.sleep(min(0.05, remaining))
 
 
 def build_game(project, install, output, replace=False, validator=None, *, validation_timeout=DEFAULT_VALIDATION_TIMEOUT_SECONDS):
@@ -233,12 +251,12 @@ def build_game(project, install, output, replace=False, validator=None, *, valid
         print("[stage] Checking hashes and committing package",flush=True)
         verify_package(candidate)
         if output.exists():
-            output.rename(backup)
+            _rename_package_directory(output, backup)
         try:
-            candidate.rename(output)
+            _rename_package_directory(candidate, output)
         except OSError:
             if backup.exists():
-                backup.rename(output)
+                _rename_package_directory(backup, output)
             raise
         committed = True
         if backup.exists():

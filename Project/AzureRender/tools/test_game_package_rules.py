@@ -1,5 +1,6 @@
 """Check package transactions, portable mounts, provenance and immutable hashes."""
 import json
+import os
 import pathlib
 import subprocess
 import sys
@@ -51,6 +52,30 @@ class GamePackageRules(unittest.TestCase):
         self.assertEqual(manifest['entry'], 'Game.exe')
         self.assertTrue((self.output/'Game.exe').is_file())
         self.assertEqual(json.loads((self.output/'game-launch.json').read_text())['project'], 'game/project.azureproject')
+
+    @unittest.skipUnless(os.name == "nt", "Windows directory enumeration sharing")
+    def test_publish_retries_after_a_directory_scan_releases_its_handle(self):
+        rename = pathlib.Path.rename
+        blocked = []
+
+        def rename_with_scan(source, destination):
+            if destination != self.output or blocked:
+                return rename(source, destination)
+            with os.scandir(source / "game") as entries:
+                next(entries)
+                try:
+                    return rename(source, destination)
+                except PermissionError as error:
+                    blocked.append(error.winerror)
+                    raise
+
+        with patch.object(pathlib.Path, "rename", rename_with_scan):
+            self.build()
+
+        self.assertEqual(len(blocked), 1)
+        self.assertIn(blocked[0], (5, 32, 33))
+        build_game.verify_package(self.output)
+        self.assertFalse(list(self.root.glob(".published-candidate-*")))
 
     def test_project_settings_survive_portable_packaging(self):
         settings = self.project.parent / "config/engine-settings.json"
