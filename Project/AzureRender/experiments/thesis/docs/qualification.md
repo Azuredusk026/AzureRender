@@ -81,4 +81,4 @@ Pixel 6 使用 Android 17（`CP2A.260705.006`）及 Mali-G78。
 原生程序读取 Vulkan 1.4.305、图形队列 0 及 DRLR 功能位 `true`。
 启用局部读取的设备创建返回 `VK_SUCCESS`。
 实际组合用途检查覆盖 2560 × 1440，三路径均符合能力要求。
-设备信息、原生结果和判定记录见 [Pixel 6 资格证据](../evidence/pixel6-qualification/) 。
+设备信息、原生结果和判定记录见 [Pixel 6 资格证据](../evidence/pixel6-qualification/)。
