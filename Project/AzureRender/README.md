@@ -884,3 +884,5 @@ Intel 实际 Player 的完整可见量附件逐字节匹配固定输入的 `Prof
 [服饰接收法线绿色方向](docs/acceptance/nr/cloth-receiver-normal-y.md)记录切线空间转换和剩余误差。
 
 [参考法线采样后重建](docs/acceptance/nr/reference-normal-sampled-rg.md)记录材质入口、参考附件及双设备回归。
+
+[眉部接收深度与法线来源](docs/acceptance/nr/eyebrow-receiver-producer.md)记录实际附件写入顺序和对应顶点。

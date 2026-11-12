@@ -1363,4 +1363,4 @@ Intel 头发颜色继续按冻结区域核对纹理选级。
 [服饰接收法线绿色方向](../acceptance/nr/cloth-receiver-normal-y.md)核对切线空间方向。
 
 [参考法线采样后重建](../acceptance/nr/reference-normal-sampled-rg.md)接入材质画像及两份参考片元程序。
-眉部参考绘制、头发纹理选级及图集输入继续按原门槛验收。
+[眉部接收深度与法线来源](../acceptance/nr/eyebrow-receiver-producer.md)核对 496 个位置的实际绘制与附件。头发裁剪、纹理选级及图集输入继续按原门槛验收。
