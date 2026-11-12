@@ -1355,3 +1355,6 @@ Intel 头发颜色继续按冻结区域核对纹理选级。
 
 [原生服饰接收法线输入](../acceptance/nr/native-cloth-receiver-normal-input.md)核对十二级 BC5 与材质 UV 方向。
 服饰一按原生层级、采样参数及法线重建分别验收。
+
+[服饰接收法线层级](../acceptance/nr/cloth-receiver-authored-mips.md)核对现有采样器读取原生十二级的实际结果。
+下一项使用同一层级链核对原生采样配置。

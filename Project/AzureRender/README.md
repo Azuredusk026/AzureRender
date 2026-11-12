@@ -876,3 +876,5 @@ Intel 实际 Player 的完整可见量附件逐字节匹配固定输入的 `Prof
 完整接收可见量和 Intel 头发颜色继续按冻结区域验收。
 
 [原生服饰接收法线输入](docs/acceptance/nr/native-cloth-receiver-normal-input.md)记录双设备一致的原生层级与 UV 方向。
+
+[服饰接收法线层级](docs/acceptance/nr/cloth-receiver-authored-mips.md)记录原生层级输入的双配置实测。
