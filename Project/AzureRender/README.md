@@ -912,3 +912,5 @@ Intel 实际 Player 的完整可见量附件逐字节匹配固定输入的 `Prof
 [头发参数与双法线选层](docs/acceptance/nr/reference-hair-color-pair.md)记录着色纹理的独立和联合对照。
 
 [头发基色与三纹理选层](docs/acceptance/nr/reference-hair-color-triple.md)记录基色和三纹理的实际着色对照。
+
+[体表接收法线纹理](docs/acceptance/nr/native-body-normal-source.md)记录原生和夹具的法线层级内容。
