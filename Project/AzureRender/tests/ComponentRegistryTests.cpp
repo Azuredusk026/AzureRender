@@ -49,6 +49,12 @@ int main() {
         require(registry.describe("azure.rigid-body").value("conflicts",Json::array())==Json::array({"azure.character"}),"Component conflicts must be discoverable");
         require(registry.describe("azure.audio-source").value("enabledField",std::string())=="enabled","Only supported behavior state is exposed");
         require(registry.describe("tool.counter").value("label",std::string())=="tool.counter","External registrations have a usable fallback label");
+        registry.validateComposition({{"tool.label", label}});
+        rejects([&] { registry.validateComposition({{"unknown", label}}); });
+        rejects([&] {
+            registry.validateComposition({{"azure.rigid-body", registry.defaults("azure.rigid-body")},
+                                          {"azure.character", registry.defaults("azure.character")}});
+        });
         require(description.at("properties")[0].at("readOnly") == true, "Read-only metadata missing");
         require(description.at("properties")[0].at("toolVisible") == false, "Visibility metadata missing");
         rejects([&] { registry.validateWrite("tool.counter", "value", 8); });

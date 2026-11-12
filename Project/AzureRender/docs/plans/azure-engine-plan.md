@@ -36,6 +36,9 @@ Player 的 CPU 工作 P95 至多为八毫秒。
 CPU 工作 P95 为 5.90 毫秒，GPU 帧 P95 为 20.33 毫秒。
 正式性能仍需满足固定功率和热状态条件。
 
+[可玩包关卡提交](../acceptance/p1/2026-11-13-level-commit.md)通过提交耗时和资源驻留门槛。
+完整注册回归使用当前受检产物。
+
 [空白视口选择](../acceptance/nr/editor-empty-viewport-selection.md)通过探索项目和场景检视项目的所属回归。
 
 [参考头发半层采样集成](../acceptance/nr/reference-hair-boundary-integration.md)通过所属构建和双显卡复验。

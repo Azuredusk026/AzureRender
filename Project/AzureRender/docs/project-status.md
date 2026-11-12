@@ -7,6 +7,9 @@
 主颜色与不透明快照占 GPU 帧平均耗时的 72.2%。
 正式性能与长跑按固定功率和热状态条件验收。
 
+[可玩包关卡提交](acceptance/p1/2026-11-13-level-commit.md)完成四十次切关与重启。
+提交 P99 为 1.79 毫秒，提交帧 P99 为 31.13 毫秒。
+
 [空白视口选择](acceptance/nr/editor-empty-viewport-selection.md)通过双配置的项目编辑输入和可玩编辑流程。
 
 [参考头发半层采样集成](acceptance/nr/reference-hair-boundary-integration.md)通过双显卡和原始四帧回归。

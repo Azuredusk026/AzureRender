@@ -67,12 +67,19 @@ Json ComponentRegistry::describe(const std::string& type) const {
         {"removable",info.removable},{"multiple",false},{"enabledField",enabled},{"visibleField",visible}};
 }
 void ComponentRegistry::validateComposition(const Json& components) const {
-    for(const auto& component:components.items()){
-        const auto info=describe(component.key());
-        for(const auto& required:info.at("requires"))if(!components.contains(required.get<std::string>()))
-            throw std::invalid_argument(component.key()+": missing component "+required.get<std::string>());
-        for(const auto& conflict:info.at("conflicts"))if(components.contains(conflict.get<std::string>()))
-            throw std::invalid_argument(component.key()+": incompatible component "+conflict.get<std::string>());
+    for (const auto& component : components.items()) {
+        const auto& type = component.key();
+        binding(type);
+        const auto presentation = presentations_.find(type);
+        if (presentation == presentations_.end()) continue;
+        for (const auto& required : presentation->second.requires) {
+            if (!components.contains(required))
+                throw std::invalid_argument(type + ": missing component " + required);
+        }
+        for (const auto& conflict : presentation->second.conflicts) {
+            if (components.contains(conflict))
+                throw std::invalid_argument(type + ": incompatible component " + conflict);
+        }
     }
 }
 ComponentRegistry makeRuntimeComponentRegistry() {
