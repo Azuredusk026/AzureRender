@@ -57,6 +57,13 @@
   },
   "milestones": [
     {
+      "path": "runs/20261112-173937-nr-hair-boundary-integration-6ceb4f",
+      "name": "参考头发半层采样集成",
+      "sourceBase": "9d5de3d",
+      "evidence": "docs/acceptance/nr/reference-hair-boundary-integration.md",
+      "results": "docs/acceptance/nr/evidence/2026-11-12/reference-hair-boundary-integration/results.json"
+    },
+    {
       "path": "runs/20261112-141547-nr-combination-59f28b",
       "name": "画质与性能集成",
       "sourceBase": "b10997b",

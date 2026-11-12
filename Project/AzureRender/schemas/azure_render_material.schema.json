@@ -399,7 +399,7 @@
         },
         "encoding": {
           "type": "string",
-          "enum": ["sampled-rg", "geometry"]
+          "enum": ["sampled-rg", "geometry", "hair-point-mip"]
         }
       }
     },

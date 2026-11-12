@@ -1,5 +1,7 @@
 # AzureRender 工程
 
+[参考头发半层采样集成](docs/acceptance/nr/reference-hair-boundary-integration.md)通过两种配置及双显卡参考附件核对。
+
 [画质与性能集成验收](docs/acceptance/nr/quality-performance-integration.md)通过两种配置的构建、双显卡参考附件及原始四帧核对。
 
 [材质组合管线范围验收](docs/acceptance/nr/material-viewquad-pipeline-scope.md)通过原始四帧、工作集和短时净收益检查。
@@ -1063,3 +1065,5 @@ Intel 实际 Player 的完整可见量附件逐字节匹配固定输入的 `Prof
 [参考头发选层边界](docs/acceptance/nr/reference-hair-mip-footprint.md)记录实际场景的双设备选层候选及未通过的字节门槛。
 
 [参考头发片元层级](docs/acceptance/nr/reference-hair-live-lod.md)记录实际片元层级和半层边界读回。
+
+[参考头发近邻层级](docs/acceptance/nr/reference-hair-mip-boundary.md)记录参考法线的边界采样和双设备场景验收。

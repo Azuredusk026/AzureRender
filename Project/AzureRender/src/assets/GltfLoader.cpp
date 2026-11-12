@@ -225,12 +225,14 @@ void loadMaterialProfile(
                 if (profile.at("schemaVersion") != 2 || !value.is_object() || value.size() != 2
                     || !value.contains("schemaVersion") || !value.at("schemaVersion").is_number_integer()
                     || value.at("schemaVersion") != 1 || !value.contains("encoding")
-                    || (value.at("encoding") != "sampled-rg" && value.at("encoding") != "geometry"))
-                    throw std::invalid_argument(context + ": referenceNormal requires schemaVersion one, sampled-rg or geometry, and profile version two");
+                    || (value.at("encoding") != "sampled-rg" && value.at("encoding") != "geometry"
+                        && value.at("encoding") != "hair-point-mip"))
+                    throw std::invalid_argument(context + ": referenceNormal requires schemaVersion one, a supported encoding, and profile version two");
                 result.sampledReferenceNormal = value.at("encoding") == "sampled-rg";
                 result.geometricReferenceNormal = value.at("encoding") == "geometry";
-                if (result.sampledReferenceNormal && material.normalTexture.index < 0)
-                    throw std::invalid_argument(context + ": sampled-rg referenceNormal requires a standard normal texture");
+                result.hairPointMipReferenceNormal = value.at("encoding") == "hair-point-mip";
+                if ((result.sampledReferenceNormal || result.hairPointMipReferenceNormal) && material.normalTexture.index < 0)
+                    throw std::invalid_argument(context + ": sampled referenceNormal requires a standard normal texture");
             }
             if(profile.contains("blendDepth")) {
                 const auto& value=profile.at("blendDepth");
@@ -2332,6 +2334,7 @@ AssetMaterial loadMaterial(
     const bool ordinary=microfacetClass&&!result.nprDiffuse.present&&!result.projectedHairRamp.present&&!result.eyeSurface.present;
     azurerender::validateMaterialLighting(result.environmentLighting,result.mainLightShadow,result.materialProfileVersion,lit,ordinary,microfacetClass);
     validateMaterialCoverage(result);
+    validateHairPointMipReferenceNormal(result);
     if (result.referenceDepthStencil != AssetMaterial::ReferenceDepthStencil::Ordinary
         && (result.alphaMode == AssetAlphaMode::Blend || result.materialClass == AssetMaterialClass::Overlay))
         throw std::invalid_argument(result.name + ": referenceDepthStencil requires a reference depth surface");

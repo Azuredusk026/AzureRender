@@ -302,8 +302,23 @@ struct AssetMaterial {
     float alphaCutoff = 0.5F;
     bool doubleSided = false;
     bool geometricReferenceNormal = false;
+    bool hairPointMipReferenceNormal = false;
     std::array<std::shared_ptr<const azurerender::ImmutableBytes>,static_cast<std::size_t>(PixelKind::Count)> preparedPixels{};
 };
+
+inline void validateHairPointMipReferenceNormal(const AssetMaterial& material) {
+    if (!material.hairPointMipReferenceNormal) return;
+    const auto& normal = material.textureSettings[1];
+    using Settings = azurerender::TextureImportSettings;
+    if (material.materialProfileVersion != 2 || material.materialClass != AssetMaterialClass::Hair
+        || !material.projectedHairRamp.present || !material.projectedHairRamp.materialSnapshotNormal
+        || material.alphaMode == AssetAlphaMode::Blend)
+        throw std::invalid_argument("hair-point-mip referenceNormal requires a version two hair receiver with material-normal-rg");
+    if (normal.filter != "linear" || (normal.magFilter != Settings::MagFilter::Linear
+        && normal.magFilter != Settings::MagFilter::MatchFilter) || normal.mipFilter != Settings::MipFilter::Nearest
+        || normal.anisotropy != 1.F || normal.mipPolicy == "none")
+        throw std::invalid_argument("hair-point-mip referenceNormal requires linear filtering, nearest mip and anisotropy one");
+}
 
 inline void validateMaterialCoverage(const AssetMaterial& material) {
     azurerender::validateMaterialCoverageTexture(material.coverageTexture,material.materialProfileVersion,material.alphaMode==AssetAlphaMode::Mask,

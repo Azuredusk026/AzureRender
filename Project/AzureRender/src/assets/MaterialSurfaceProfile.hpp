@@ -86,6 +86,7 @@ inline PackedMaterialSurfaceProfile packMaterialSurfaceProfile(const AssetMateri
         (!material.projectedHairRamp.present||!material.projectedHairRamp.lighting.present||material.alphaMode!=AssetAlphaMode::Blend))
         throw std::invalid_argument("Transparent highlights require a lit projected hair profile on a transparent receiver");
     validateMaterialCoverage(material);
+    validateHairPointMipReferenceNormal(material);
     const bool lit=(material.materialFeatures&(MaterialFeatureUnlitSurface|MaterialFeatureMultiplyComposite|MaterialFeatureOverlay))==0
         &&!material.unlitTextureLayers.present&&material.materialClass!=AssetMaterialClass::Overlay;
     const bool microfacetClass=(material.materialClass==AssetMaterialClass::Generic||material.materialClass==AssetMaterialClass::Fabric

@@ -168,6 +168,8 @@ Intel 头发颜色继续核对纹理梯度与层级选择。
 [原生接收输入来源](../acceptance/nr/native-receiver-producer-replay.md)记录服饰双通道法线和头发外扩写入。
 参考场景外扩深度与服饰法线分别进入生产验证。
 
+[参考头发近邻层级](../acceptance/nr/reference-hair-mip-boundary.md)完成双配置、双设备和原始四帧回归。NVIDIA 的冻结头发可见量及 RGB 全部满足一字节门槛。Intel 分别有 111 处和 568 处超差，完整接收有 494 处超差。接收附件和着色阶段的纹理采样继续按原门槛核对。
+
 ## 后续外观
 
 - [ ] 按原计划核对皮肤、眼睛、GI 与反射。

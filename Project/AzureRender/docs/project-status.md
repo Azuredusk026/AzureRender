@@ -1,5 +1,8 @@
 # 项目现状
 
+[参考头发半层采样集成](acceptance/nr/reference-hair-boundary-integration.md)通过双显卡和原始四帧回归。
+完整参考接收超差为 NVIDIA 237 处和 Intel 494 处。
+
 [画质与性能集成](acceptance/nr/quality-performance-integration.md)通过双配置和双设备的所属检查。
 原始四帧逐字节一致，完整画质和正式性能继续验收。
 
