@@ -1,5 +1,7 @@
 # 项目现状
 
+[空白视口选择](acceptance/nr/editor-empty-viewport-selection.md)通过双配置的项目编辑输入和可玩编辑流程。
+
 [材质组合管线范围](acceptance/nr/material-viewquad-pipeline-scope.md)通过工作集及短时成本检查。
 正式固定功率、长窗口 GPU 帧预算及完整交付继续验收。
 

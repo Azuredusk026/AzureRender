@@ -541,6 +541,45 @@ void AzureRenderApp::pickPrimitive(
     selectedPrimitiveIndex_ = -1;
     const azurerender::RendererSceneState* sceneState =
         sceneRenderer_ != nullptr ? sceneRenderer_->sceneState() : nullptr;
+    const auto makePickRay = [&] {
+        const float aspect = static_cast<float>(renderExtent_.width)
+            / static_cast<float>(renderExtent_.height);
+        if (effectiveRenderSettings_.cameraView) {
+            return azurerender::cameraPickRay(*effectiveRenderSettings_.cameraView, viewportX, viewportY, aspect);
+        }
+        return azurerender::CameraPickRay{
+            cameraPosition_, pickRayDirection(cameraPosition_, cameraTarget_, viewportX, viewportY, aspect)};
+    };
+#if AZURE_WITH_EDITOR
+    if (auto* session = runOptions_.editorSession.get(); session && session->context().isProject()) {
+        std::string selected;
+        if (sceneState && !sceneState->pickables.empty()) {
+            const auto ray = makePickRay();
+            float bestDistance = std::numeric_limits<float>::max();
+            for (const auto& entry : sceneState->pickables) {
+                const auto& mesh = *entry.asset;
+                for (std::size_t index = 0; index + 2 < mesh.indices.size(); index += 3) {
+                    const auto a = transformPosition(entry.model, azurerender::deformedVertexPosition(mesh, mesh.indices[index], entry.pose, entry.morph));
+                    const auto b = transformPosition(entry.model, azurerender::deformedVertexPosition(mesh, mesh.indices[index + 1], entry.pose, entry.morph));
+                    const auto c = transformPosition(entry.model, azurerender::deformedVertexPosition(mesh, mesh.indices[index + 2], entry.pose, entry.morph));
+                    const float distance = rayTriangleDistance(ray.origin, ray.direction, a, b, c);
+                    if (distance > 0 && distance < bestDistance) {
+                        bestDistance = distance;
+                        selected = entry.node;
+                    }
+                }
+            }
+        }
+        if (session->references().active()) {
+            if (!selected.empty()) {
+                session->edit("reference.deliver", {{"kind", "node"}, {"id", selected}});
+            }
+        } else {
+            session->edit("selection.click", {{"id", selected}, {"ctrl", pendingPickAdditive_}});
+        }
+        return;
+    }
+#endif
     if (sceneState == nullptr || sceneState->asset == nullptr
         || sceneState->modelMatrix == nullptr) {
         return;
@@ -551,33 +590,10 @@ void AzureRenderApp::pickPrimitive(
     }
     Matrix4 currentModel{};
     std::memcpy(currentModel.data(), sceneState->modelMatrix, sizeof(Matrix4));
-    // 从相机构建拾取射线(与 updateUniformBuffer 相同的 fov/aspect)。
-    const float aspect =
-        static_cast<float>(renderExtent_.width)
-        / static_cast<float>(renderExtent_.height);
-    const azurerender::CameraPickRay ray=effectiveRenderSettings_.cameraView?azurerender::cameraPickRay(*effectiveRenderSettings_.cameraView,viewportX,viewportY,aspect):
-        azurerender::CameraPickRay{cameraPosition_,pickRayDirection(cameraPosition_,cameraTarget_,viewportX,viewportY,aspect)};
-    const auto& direction=ray.direction;
+    // The pick ray uses the same camera and aspect ratio as rendering.
+    const auto ray = makePickRay();
+    const auto& direction = ray.direction;
     float bestDistance = std::numeric_limits<float>::max();
-#if AZURE_WITH_EDITOR
-    if(runOptions_.editorSession && runOptions_.editorSession->context().isProject()) {
-        std::string selected;
-        for(const auto& entry:sceneState->pickables) {
-            const auto& mesh=*entry.asset;
-            for(std::size_t index=0;index+2<mesh.indices.size();index+=3) {
-                const auto a=transformPosition(entry.model,azurerender::deformedVertexPosition(mesh,mesh.indices[index],entry.pose,entry.morph));
-                const auto b=transformPosition(entry.model,azurerender::deformedVertexPosition(mesh,mesh.indices[index+1],entry.pose,entry.morph));
-                const auto c=transformPosition(entry.model,azurerender::deformedVertexPosition(mesh,mesh.indices[index+2],entry.pose,entry.morph));
-                const float distance=rayTriangleDistance(ray.origin,direction,a,b,c);
-                if(distance>0 && distance<bestDistance){bestDistance=distance;selected=entry.node;}
-            }
-        }
-        if(runOptions_.editorSession->references().active()) {
-            if(!selected.empty())runOptions_.editorSession->edit("reference.deliver",{{"kind","node"},{"id",selected}});
-        }else runOptions_.editorSession->edit("selection.click",{{"id",selected},{"ctrl",pendingPickAdditive_}});
-        return;
-    }
-#endif
     for (std::size_t primitiveIndex = 0;
          primitiveIndex < asset.primitives.size();
          ++primitiveIndex) {

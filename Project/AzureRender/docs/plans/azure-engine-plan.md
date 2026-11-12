@@ -30,6 +30,8 @@ Player 的 CPU 工作 P95 至多为八毫秒。
 
 ## 当前执行顺序
 
+[空白视口选择](../acceptance/nr/editor-empty-viewport-selection.md)通过探索项目和场景检视项目的所属回归。
+
 [材质组合管线范围验收](../acceptance/nr/material-viewquad-pipeline-scope.md)通过原始四帧及短时净收益。
 候选四帧加载的峰值工作集约为 2.047 GB。
 1080p60 联合场景诊断的 GPU P95 约为 18.04 毫秒，设备本地内存高水位约为 2.593 GiB。

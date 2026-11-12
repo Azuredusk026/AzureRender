@@ -57,6 +57,13 @@
   },
   "milestones": [
     {
+      "path": "runs/20261112-011326-handoff-final-regression-e2e260/editor-empty-viewport-green",
+      "name": "空白视口选择",
+      "sourceBase": "b10997b",
+      "evidence": "docs/acceptance/nr/editor-empty-viewport-selection.md",
+      "results": "docs/acceptance/nr/evidence/2026-11-12/editor-empty-viewport-selection/results.json"
+    },
+    {
       "path": "runs/20261112-011326-handoff-final-regression-e2e260/depth-split-range-recovery",
       "name": "主深度颜色附件范围",
       "sourceBase": "ae2af1a",

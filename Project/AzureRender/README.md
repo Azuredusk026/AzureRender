@@ -1,5 +1,7 @@
 # AzureRender 工程
 
+[空白视口选择](docs/acceptance/nr/editor-empty-viewport-selection.md)通过两种配置的实际编辑输入核对。
+
 [材质组合管线范围验收](docs/acceptance/nr/material-viewquad-pipeline-scope.md)通过原始四帧、工作集和短时净收益检查。
 1080p60 联合场景诊断记录到约 2.593 GiB 的设备本地内存高水位，正式帧预算与功率条件继续验收。
 
