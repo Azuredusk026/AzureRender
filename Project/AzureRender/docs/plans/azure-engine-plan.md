@@ -1396,3 +1396,5 @@ Intel 头发颜色继续按冻结区域核对纹理选级。
 [投影头发主纹理层级](../acceptance/nr/projected-hair-point-mip.md)完成两配置、双设备和原始四帧专项回归。Intel 冻结 RGB 仍有 32 处超差，按原门槛继续验收。
 
 [头发光栅量化与体表法线](../acceptance/nr/reference-raster-source.md)记录双设备来源对照。顶点精度传播和体表可见量分别持有后续验证项，整体画质按原条件验收。
+
+[量化精度隔离与接收输入](../acceptance/nr/reference-raster-isolated.md)核对完整帧与五类参考附件，并以实际 GPU 复算确认体表可见量的图集来源。Intel 冻结 RGB 和生产接收输入按原条件继续验收。
