@@ -23,9 +23,15 @@ struct SceneReferenceObjectVisibilitySettings {
     std::array<float,2> pixelOffset{.5F,.5F};
     std::optional<SceneReferenceObjectVisibilityCalibration> calibration;
 };
+struct ReferenceOutlineDepthProjection {
+    std::uint32_t schemaVersion=0;
+    float clipWSlope=0;
+    float clipZIntercept=0;
+};
+static_assert(sizeof(ReferenceOutlineDepthProjection)==3*sizeof(std::uint32_t));
 struct ReferenceCameraView {
     std::uint32_t schemaVersion=1;
-    std::array<std::uint32_t,3> reserved{};
+    ReferenceOutlineDepthProjection outlineDepthProjection;
     ReferencePositionFrame frame;
     ReferenceClipProjectionProfile projection;
     std::array<unsigned,2> extent{1,1};
@@ -101,13 +107,22 @@ class PreparedReferenceCameraView final {
     }
 public:
     explicit PreparedReferenceCameraView(const ReferenceCameraView& view):view_(view){
-        require(view.schemaVersion==1,"Unsupported reference camera view version");for(auto v:view.reserved)require(v==0,"Reference camera view reserves must be zero");
+        require(view.schemaVersion==1,"Unsupported reference camera view version");
         require(view.extent[0]&&view.extent[1]&&view.extent[0]<=8192&&view.extent[1]<=8192,"Reference view extent must be1..8192");
         require(view.depthConvention==ReferenceDepthConvention::Forward||view.depthConvention==ReferenceDepthConvention::Reversed,"Unknown reference camera depth convention");
         require(!view.produceSceneDepth||view.depthConvention==ReferenceDepthConvention::Reversed,
             "Scene reference depth requires reversed depth");
         require(!view.produceSceneVisibilityInputs||view.produceSceneDepth,
             "Scene visibility inputs require scene reference depth");
+        const auto& outline=view.outlineDepthProjection;
+        require(outline.schemaVersion<=1,"Unsupported reference outline depth projection version");
+        if(outline.schemaVersion==1){
+            require(view.produceSceneDepth,"Reference outline projection requires scene reference depth");
+            require(std::isfinite(outline.clipWSlope)&&std::isfinite(outline.clipZIntercept)&&outline.clipZIntercept>0,
+                "Reference outline depth projection requires finite coefficients and a positive clip Z intercept");
+        }else{
+            require(outline.clipWSlope==0&&outline.clipZIntercept==0,"Disabled reference outline depth projection coefficients must be zero");
+        }
         if(view.objectVisibility){
             require(view.produceSceneVisibilityInputs,"Scene object visibility requires scene visibility inputs");
             for(const float offset:view.objectVisibility->pixelOffset)

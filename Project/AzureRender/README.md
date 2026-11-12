@@ -896,3 +896,5 @@ Intel 实际 Player 的完整可见量附件逐字节匹配固定输入的 `Prof
 [参考几何法线](docs/acceptance/nr/reference-geometric-normal.md)记录眉部、脸部及其剩余接收超差。
 
 [参考接收输入对照](docs/acceptance/nr/reference-receiver-source-isolation.md)记录双设备完整可见量附件复现及深度、法线和阴影图集的独立影响。
+
+[参考外壳深度投影](docs/acceptance/nr/reference-outline-projection.md)记录独立深度系数及双设备冻结外壳对照。

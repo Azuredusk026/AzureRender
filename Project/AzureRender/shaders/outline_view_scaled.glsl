@@ -21,7 +21,16 @@ vec4 outlineReferenceScenePosition(vec3 world,vec4 deviceBase,vec4 deviceFinal,f
         clip.xy=clip.xy+offset;
     }
     clip.y=-clip.y;
-    if(depthOffset!=0.0){
+    if((flags&4u)!=0u&&clip.w>0.0){
+        precise float shiftedW=clip.w;
+        if(depthOffset!=0.0){
+            vec3 forward=azureReferenceRelativePosition(camera.cameraForward.xyz,axes,vec3(0));
+            vec3 rowW=vec3(camera.referenceColumns[0].w,camera.referenceColumns[1].w,camera.referenceColumns[2].w);
+            shiftedW=fma(dot(rowW,forward),depthOffset,clip.w);
+        }
+        precise float numerator=fma(camera.referenceJitter.z,shiftedW,camera.referenceJitter.w)*clip.w;
+        clip.z=shiftedW>1e-6?numerator/shiftedW:-clip.w;
+    }else if(depthOffset!=0.0){
         vec3 forward=azureReferenceRelativePosition(camera.cameraForward.xyz,axes,vec3(0));
         vec3 rowZ=vec3(camera.referenceColumns[0].z,camera.referenceColumns[1].z,camera.referenceColumns[2].z);
         vec3 rowW=vec3(camera.referenceColumns[0].w,camera.referenceColumns[1].w,camera.referenceColumns[2].w);

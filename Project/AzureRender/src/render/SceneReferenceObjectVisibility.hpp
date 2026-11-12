@@ -93,6 +93,7 @@ inline std::optional<SceneReferenceObjectShadowRasterParameters> sceneReferenceO
     SceneReferenceObjectShadowRasterParameters result;
     result.raster=referenceRasterProjectionParameters(camera);
     result.raster.projection.jitter={};
+    result.raster.control[2]&=3U;
     for(unsigned axis=0;axis<3;++axis){
         result.absoluteOrigin[axis]=calibration.positionOffset[axis]-result.raster.offset[axis];
         if(!std::isfinite(result.absoluteOrigin[axis]))throw std::invalid_argument("Reference object raster origin exceeds binary32");

@@ -21,6 +21,9 @@ void to_json(nlohmann::json& j,const ReferenceCameraView& v){
         {"extent",v.extent},{"depthConvention",v.depthConvention==ReferenceDepthConvention::Forward?"forward":"reversed"},{"flipNdcY",v.flipNdcY}};
     if(v.produceSceneDepth)j["produceSceneDepth"]=true;
     if(v.produceSceneVisibilityInputs)j["produceSceneVisibilityInputs"]=true;
+    const auto& outline=v.outlineDepthProjection;
+    if(outline.schemaVersion==1)
+        j["outlineDepthProjection"]={{"schemaVersion",1},{"clipWSlope",outline.clipWSlope},{"clipZIntercept",outline.clipZIntercept}};
     if(v.objectVisibility){
         j["objectVisibility"]={{"pixelOffset",v.objectVisibility->pixelOffset}};
         if(const auto& calibration=v.objectVisibility->calibration){
@@ -37,7 +40,7 @@ void to_json(nlohmann::json& j,const ReferenceCameraView& v){
 }
 void from_json(const nlohmann::json& j,ReferenceCameraView& value){
     fields(j,{"schemaVersion","frame","projection","extent","depthConvention","flipNdcY"},
-        {"produceSceneDepth","produceSceneVisibilityInputs","objectVisibility"});
+        {"produceSceneDepth","produceSceneVisibilityInputs","outlineDepthProjection","objectVisibility"});
     version(j);ReferenceCameraView v;
     const auto& frame=j.at("frame");fields(frame,{"schemaVersion","axes","offset"});version(frame);
     const auto& axes=frame.at("axes");if(!axes.is_array()||axes.size()!=3)throw std::invalid_argument("Invalid reference camera axis count");
@@ -59,6 +62,11 @@ void from_json(const nlohmann::json& j,ReferenceCameraView& value){
     if(j.contains("produceSceneVisibilityInputs")){
         if(!j.at("produceSceneVisibilityInputs").is_boolean())throw std::invalid_argument("Scene visibility input flag must be boolean");
         v.produceSceneVisibilityInputs=j.at("produceSceneVisibilityInputs").get<bool>();
+    }
+    if(j.contains("outlineDepthProjection")){
+        const auto& outline=j.at("outlineDepthProjection");
+        fields(outline,{"schemaVersion","clipWSlope","clipZIntercept"});version(outline);
+        v.outlineDepthProjection={1,number(outline.at("clipWSlope")),number(outline.at("clipZIntercept"))};
     }
     if(j.contains("objectVisibility")){
         const auto& settings=j.at("objectVisibility");

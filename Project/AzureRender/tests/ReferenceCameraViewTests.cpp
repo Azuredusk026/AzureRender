@@ -1,6 +1,7 @@
 #include "render/ReferenceCameraView.hpp"
 #include "render/ReferenceCameraDepth.hpp"
 #include "render/ReferenceCameraViewJson.hpp"
+#include "render/ReferenceRasterProjection.hpp"
 #include "render/SceneReferenceObjectVisibility.hpp"
 #include "render/CameraProjection.hpp"
 #include <nlohmann/json.hpp>
@@ -35,6 +36,15 @@ int main(int argc,char** argv)try{
     const auto depthView=depthDocument.get<ReferenceCameraView>();
     check(depthView.produceSceneDepth&&nlohmann::json(depthView)==depthDocument,
         "Scene reference depth must survive view persistence");
+    auto outlineDocument=depthDocument;
+    outlineDocument["outlineDepthProjection"]={{"schemaVersion",1},{"clipWSlope",-.125F},{"clipZIntercept",.25F}};
+    const PreparedReferenceCameraView outline(outlineDocument.get<ReferenceCameraView>());
+    check(nlohmann::json(outline.descriptor())==outlineDocument,
+        "Outline depth projection must survive view persistence");
+    const auto raster=referenceRasterProjectionParameters(outline);
+    check(raster.control[2]==5&&raster.projection.jitter==std::array<float,4>{0,0,-.125F,.25F}
+        &&outline.clip({.25F,.5F,.75F})==identity.clip({.25F,.5F,.75F}),
+        "Outline depth coefficients must only reach the reference outline upload");
     auto visibilityDocument=depthDocument;
     visibilityDocument["produceSceneVisibilityInputs"]=true;
     const auto visibilityView=visibilityDocument.get<ReferenceCameraView>();
@@ -49,6 +59,15 @@ int main(int argc,char** argv)try{
         try{(void)document.get<ReferenceCameraView>();}catch(const std::invalid_argument&){return true;}
         return false;
     };
+    auto invalidOutline=outlineDocument;
+    invalidOutline.erase("produceSceneDepth");
+    check(rejectsObjectDocument(invalidOutline),"Outline depth projection requires scene depth");
+    for(const auto& [field,value]:std::array<std::pair<const char*,nlohmann::json>,4>{{
+        {"schemaVersion",2},{"clipWSlope","invalid"},{"clipZIntercept",0},{"unexpected",true}}}){
+        invalidOutline=outlineDocument;
+        invalidOutline["outlineDepthProjection"][field]=value;
+        check(rejectsObjectDocument(invalidOutline),"Invalid outline depth projection");
+    }
     auto missingVisibility=objectDocument;
     missingVisibility.erase("produceSceneVisibilityInputs");
     check(rejectsObjectDocument(missingVisibility),"Scene object visibility requires scene visibility inputs");
@@ -243,7 +262,7 @@ int main(int argc,char** argv)try{
     check(identity.intersectsBounds({1,0,.5F},{1,0,.5F}),"Touching bounds retained");const float adjacent=std::nextafter(1.F,2.F);check(identity.intersectsBounds({adjacent,0,.5F},{adjacent,0,.5F}),"Rounding uncertainty retained");check(!identity.intersectsBounds({1.01F,0,.5F},{1.02F,0,.5F}),"Separated bounds rejected");
     {auto small=ReferenceCameraView{};for(auto& column:small.projection.parameters.columns)for(auto& value:column)value*=1.e-37F;PreparedReferenceCameraView tiny(small);check(tiny.intersectsBounds({-.5F,-.5F,-.01F},{.5F,.5F,-.01F}),"Subnormal projection flush uncertainty must retain bounds");}
     unsigned rejected=0;auto reject=[&](auto operation){try{operation();}catch(const std::invalid_argument&){++rejected;}};
-    for(unsigned kind=0;kind<9;++kind)reject([&]{auto bad=ReferenceCameraView{};if(kind==0)bad.schemaVersion=0;if(kind==1)bad.reserved[1]=1;if(kind==2)bad.extent[0]=0;if(kind==3)bad.extent[1]=8193;if(kind==4)bad.depthConvention=static_cast<ReferenceDepthConvention>(99);if(kind==5)bad.frame.schemaVersion=0;if(kind==6)bad.projection.schemaVersion=0;if(kind==7)for(auto& c:bad.projection.parameters.columns)c={};if(kind==8)bad.projection.parameters.columns[0][0]=1.e-13F;(void)PreparedReferenceCameraView(bad);});
+    for(unsigned kind=0;kind<9;++kind)reject([&]{auto bad=ReferenceCameraView{};if(kind==0)bad.schemaVersion=0;if(kind==1)bad.outlineDepthProjection.clipWSlope=1;if(kind==2)bad.extent[0]=0;if(kind==3)bad.extent[1]=8193;if(kind==4)bad.depthConvention=static_cast<ReferenceDepthConvention>(99);if(kind==5)bad.frame.schemaVersion=0;if(kind==6)bad.projection.schemaVersion=0;if(kind==7)for(auto& c:bad.projection.parameters.columns)c={};if(kind==8)bad.projection.parameters.columns[0][0]=1.e-13F;(void)PreparedReferenceCameraView(bad);});
     reject([&]{(void)identity.pickRay(std::numeric_limits<double>::quiet_NaN(),.5);});reject([&]{(void)identity.unproject(.5,.5,1.1);});reject([&]{(void)identity.project({std::numeric_limits<float>::infinity(),0,0});});reject([&]{(void)identity.intersectsBounds({1,0,0},{0,1,1});});reject([&]{(void)identity.intersectsBounds({0,0,0},{std::numeric_limits<float>::infinity(),1,1});});reject([&]{(void)perspective.project({0,0,0});});reject([&]{auto bad=view;bad.projection.parameters.columns[0][0]=std::numeric_limits<float>::quiet_NaN();(void)PreparedReferenceCameraView(bad);});check(rejected==16,"Camera rejection cases");
     std::size_t nativeRays=0,visibleVertices=0;double maximumPixelError=0;
     if(argc==5){auto p=read(argv[1]),f=read(argv[2]),v=read(argv[3]),q=read(argv[4]);check(p.size()==80&&f.size()==32&&v.size()%16==0&&q.size()%16==0,"Native camera fixture layout");ReferenceCameraView native;native.extent={2560,1440};native.flipNdcY=true;std::memcpy(&native.projection.parameters,p.data(),80);std::memcpy(&native.frame.parameters,f.data(),32);PreparedReferenceCameraView camera(native);const auto config=referenceCameraDepthConfig(camera);check(config.schemaVersion==2&&config.flipNdcY&&config.positionFrame&&config.convention==native.depthConvention,"Prepared camera depth adaptation");
