@@ -29,6 +29,9 @@ GPU 继续区分着色、缓存、显存带宽和传输。
 新的原生性能批次需要达到既有热点收益门槛。
 正式 CPU、GPU 及长跑保持所属采样条件。
 
+[材质组合级联成本](../acceptance/nr/computed-cascade-demand-comparison.md)在已合格的组合路径中测得约 0.34% 的材质耗时降幅。
+同批参考漂移约为 0.53%，候选保留在局部证据范围。
+
 [驻留色彩图像](../acceptance/nr/resident-srgb-channel-scope.md)完成 180 份图像的全部层级核对。
 四十份满足单通道关系，乐观差额约为 113.70 MB。
 [块存储调查](../acceptance/nr/dds-block-storage-scope.md)记录来源容量及设备格式能力。

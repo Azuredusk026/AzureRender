@@ -3,6 +3,8 @@
 [材质组合管线范围](acceptance/nr/material-viewquad-pipeline-scope.md)通过工作集及短时成本检查。
 正式固定功率、长窗口 GPU 帧预算及完整交付继续验收。
 
+[材质组合级联成本](acceptance/nr/computed-cascade-demand-comparison.md)的六份附件逐字节一致，局部耗时降幅低于准入门槛。
+
 [参考相机渲染主线](acceptance/nr/reference-camera-binding-main-integration.md)通过保守剔除、实际光栅及拾取检查。
 双配置、双设备与重采原始四帧通过。
 

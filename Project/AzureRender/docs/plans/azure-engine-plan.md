@@ -42,6 +42,8 @@ Player 的 CPU 工作 P95 至多为八毫秒。
 [NPR 渐变组合回归矩阵](../acceptance/nr/npr-ramp-regression.md)通过双配置四项测试及 104 个采集用例。
 完整项目回归按两种配置执行。
 
+[材质组合级联成本](../acceptance/nr/computed-cascade-demand-comparison.md)通过六附件核对，局部耗时降幅低于准入门槛。
+
 [椭圆覆盖选级主线验收](../acceptance/nr/material-ellipse-coverage-main-integration.md)通过二十二项自动检查、双设备头发采集及原始四帧。
 
 [场景参考法线与对象身份主线验收](../acceptance/nr/scene-reference-normal-main-integration.md)通过三十项检查及双设备四附件读回。

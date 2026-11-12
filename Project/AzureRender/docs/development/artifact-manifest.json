@@ -748,6 +748,13 @@
       "sourceBase": "4a1c933",
       "evidence": "docs/acceptance/nr/npr-ramp-regression.md",
       "results": "docs/acceptance/nr/evidence/2026-11-12/npr-ramp-regression/results.json"
+    },
+    {
+      "path": "runs/20261112-011326-handoff-final-regression-e2e260/computed-cascade-demand-evidence",
+      "name": "材质组合级联成本",
+      "sourceBase": "bfe700e",
+      "evidence": "docs/acceptance/nr/computed-cascade-demand-comparison.md",
+      "results": "docs/acceptance/nr/evidence/2026-11-12/computed-cascade-demand-comparison/results.json"
     }
   ],
   "preservedBuilds": [
