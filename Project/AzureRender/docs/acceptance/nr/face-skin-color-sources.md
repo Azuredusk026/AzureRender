@@ -205,3 +205,10 @@ Release 的 `FaceMaskedRimGpu` 和 `DualFaceSdfGpu` 在 NVIDIA 与 Intel 上均�
 逐点跟踪保存四处颜色和中间寄存器，供描边照明对照使用。
 
 [顶点与线色结果](evidence/2026-11-14/body-outline-native-stream/results.json)和[验证归档](evidence/2026-11-14/body-outline-native-stream/validation.zip)保存原生顶点流、着色指令及双设备采集。
+
+以原生常量计算全部顶点的投影，横向最大误差低于 0.0001 像素，深度最大误差低于 `1e-8`。
+将原生壳体深度转换到 Player 的投影后，1,184 处中有 1,170 处通过实际描边前的深度测试。
+两块显卡均有 879 处通过标记对照，差值继续按实际顶点与片元提交核对。
+线色对照在 NVIDIA 和 Intel 上分别缩小 1,008 和 1,013 处误差，原生覆盖内分别还有 1,034 和 1,032 处超出八字节。
+
+[深度与线色结果](evidence/2026-11-14/body-outline-depth-attribution/results.json)和[验证归档](evidence/2026-11-14/body-outline-depth-attribution/validation.zip)保存投影重建、遮挡位置及整区误差。

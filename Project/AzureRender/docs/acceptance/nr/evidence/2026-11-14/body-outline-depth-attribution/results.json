@@ -1,0 +1,97 @@
+{
+  "status": "depth-source-qualified",
+  "overallStatus": "failed-user-review",
+  "nativePositions": 1184,
+  "originalOutlineDepthSha256": "1c0381b3cce19cddb682c98ec3dc4fa2afd17221ecb556689c98c643a8fcf2de",
+  "authoredProjectionMaximumPixelError": 2.594572155051632e-05,
+  "authoredDepthMaximumError": 5.4143581736110225e-09,
+  "nativeTestPassed": 1184,
+  "playerDepthTestWithNativeShell": 1170,
+  "closePlayerDepthBefore": 486,
+  "hostOcclusionPositions": [
+    [
+      1260,
+      321
+    ],
+    [
+      1301,
+      323
+    ],
+    [
+      1193,
+      390
+    ],
+    [
+      1174,
+      391
+    ],
+    [
+      1381,
+      405
+    ],
+    [
+      1346,
+      443
+    ],
+    [
+      1313,
+      483
+    ],
+    [
+      1023,
+      657
+    ],
+    [
+      1251,
+      817
+    ],
+    [
+      1161,
+      828
+    ],
+    [
+      1250,
+      843
+    ],
+    [
+      1250,
+      853
+    ],
+    [
+      1171,
+      861
+    ],
+    [
+      1229,
+      1098
+    ]
+  ],
+  "devices": {
+    "nvidia": {
+      "markerMatches": 879,
+      "markerMatchesPlayerDepthHypothesis": 879,
+      "changedAtNativePositions": 1137,
+      "changedOutsideNative": 6,
+      "improvedAtNativePositions": 1008,
+      "nativePositionsOverEight": [
+        1136,
+        1034
+      ]
+    },
+    "intel": {
+      "markerMatches": 879,
+      "markerMatchesPlayerDepthHypothesis": 879,
+      "changedAtNativePositions": 1135,
+      "changedOutsideNative": 5,
+      "improvedAtNativePositions": 1013,
+      "nativePositionsOverEight": [
+        1136,
+        1032
+      ]
+    }
+  },
+  "archive": {
+    "members": 2,
+    "sha256": "e77bd02f6d2e278efc44b03f10ac99bcbce1b75eaa7ea6ceb1126255df82170c"
+  }
+}
