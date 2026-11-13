@@ -1,0 +1,572 @@
+{
+  "status": "native-bloom-pass-chain-qualified",
+  "overallStatus": "failed-user-review",
+  "captures": {
+    "10401": {
+      "output": "ResourceId::141910",
+      "stages": [
+        {
+          "event": 1589,
+          "id": "ResourceId::160188",
+          "width": 1280,
+          "height": 720,
+          "format": "R11G11B10_FLOAT",
+          "stage": "ShaderStage.Compute",
+          "inputs": [
+            {
+              "binding": 0,
+              "id": "ResourceId::141843",
+              "width": 2560,
+              "height": 1440,
+              "format": "R16G16B16A16_FLOAT"
+            }
+          ],
+          "sha256": "39388f8e94375515fe28888ae11b9263b485141bd7acbd90540265d42c70b9a7"
+        },
+        {
+          "event": 1598,
+          "id": "ResourceId::141906",
+          "width": 640,
+          "height": 360,
+          "format": "R11G11B10_FLOAT",
+          "stage": "ShaderStage.Compute",
+          "inputs": [
+            {
+              "binding": 0,
+              "id": "ResourceId::160188",
+              "width": 1280,
+              "height": 720,
+              "format": "R11G11B10_FLOAT"
+            }
+          ],
+          "sha256": "13d9669c80934a2ea22ee30509cbeb06a3b04af0ec947a10f6c0c343b02ebdab"
+        },
+        {
+          "event": 1607,
+          "id": "ResourceId::141902",
+          "width": 320,
+          "height": 180,
+          "format": "R11G11B10_FLOAT",
+          "stage": "ShaderStage.Compute",
+          "inputs": [
+            {
+              "binding": 0,
+              "id": "ResourceId::141906",
+              "width": 640,
+              "height": 360,
+              "format": "R11G11B10_FLOAT"
+            }
+          ],
+          "sha256": "13d9669c80934a2ea22ee30509cbeb06a3b04af0ec947a10f6c0c343b02ebdab"
+        },
+        {
+          "event": 1616,
+          "id": "ResourceId::141898",
+          "width": 160,
+          "height": 90,
+          "format": "R11G11B10_FLOAT",
+          "stage": "ShaderStage.Compute",
+          "inputs": [
+            {
+              "binding": 0,
+              "id": "ResourceId::141902",
+              "width": 320,
+              "height": 180,
+              "format": "R11G11B10_FLOAT"
+            }
+          ],
+          "sha256": "13d9669c80934a2ea22ee30509cbeb06a3b04af0ec947a10f6c0c343b02ebdab"
+        },
+        {
+          "event": 1625,
+          "id": "ResourceId::141894",
+          "width": 80,
+          "height": 45,
+          "format": "R11G11B10_FLOAT",
+          "stage": "ShaderStage.Compute",
+          "inputs": [
+            {
+              "binding": 0,
+              "id": "ResourceId::141898",
+              "width": 160,
+              "height": 90,
+              "format": "R11G11B10_FLOAT"
+            }
+          ],
+          "sha256": "13d9669c80934a2ea22ee30509cbeb06a3b04af0ec947a10f6c0c343b02ebdab"
+        },
+        {
+          "event": 1634,
+          "id": "ResourceId::141886",
+          "width": 40,
+          "height": 23,
+          "format": "R11G11B10_FLOAT",
+          "stage": "ShaderStage.Compute",
+          "inputs": [
+            {
+              "binding": 0,
+              "id": "ResourceId::141894",
+              "width": 80,
+              "height": 45,
+              "format": "R11G11B10_FLOAT"
+            }
+          ],
+          "sha256": "13d9669c80934a2ea22ee30509cbeb06a3b04af0ec947a10f6c0c343b02ebdab"
+        },
+        {
+          "event": 1679,
+          "id": "ResourceId::141874",
+          "width": 20,
+          "height": 11,
+          "format": "R11G11B10_FLOAT",
+          "stage": "ShaderStage.Compute",
+          "inputs": [
+            {
+              "binding": 1,
+              "id": "ResourceId::141878",
+              "width": 20,
+              "height": 11,
+              "format": "R11G11B10_FLOAT"
+            }
+          ],
+          "sha256": "9fca13c52e51e35da8a52533228e82b78d151c2c0ee3a5c3f689ea8d2933c3e4"
+        },
+        {
+          "event": 1688,
+          "id": "ResourceId::141882",
+          "width": 40,
+          "height": 23,
+          "format": "R11G11B10_FLOAT",
+          "stage": "ShaderStage.Compute",
+          "inputs": [
+            {
+              "binding": 0,
+              "id": "ResourceId::141874",
+              "width": 20,
+              "height": 11,
+              "format": "R11G11B10_FLOAT"
+            },
+            {
+              "binding": 1,
+              "id": "ResourceId::141886",
+              "width": 40,
+              "height": 23,
+              "format": "R11G11B10_FLOAT"
+            }
+          ],
+          "sha256": "9fca13c52e51e35da8a52533228e82b78d151c2c0ee3a5c3f689ea8d2933c3e4"
+        },
+        {
+          "event": 1697,
+          "id": "ResourceId::141890",
+          "width": 80,
+          "height": 45,
+          "format": "R11G11B10_FLOAT",
+          "stage": "ShaderStage.Compute",
+          "inputs": [
+            {
+              "binding": 0,
+              "id": "ResourceId::141882",
+              "width": 40,
+              "height": 23,
+              "format": "R11G11B10_FLOAT"
+            },
+            {
+              "binding": 1,
+              "id": "ResourceId::141894",
+              "width": 80,
+              "height": 45,
+              "format": "R11G11B10_FLOAT"
+            }
+          ],
+          "sha256": "9fca13c52e51e35da8a52533228e82b78d151c2c0ee3a5c3f689ea8d2933c3e4"
+        },
+        {
+          "event": 1706,
+          "id": "ResourceId::15881",
+          "width": 160,
+          "height": 90,
+          "format": "R11G11B10_FLOAT",
+          "stage": "ShaderStage.Compute",
+          "inputs": [
+            {
+              "binding": 0,
+              "id": "ResourceId::141890",
+              "width": 80,
+              "height": 45,
+              "format": "R11G11B10_FLOAT"
+            },
+            {
+              "binding": 1,
+              "id": "ResourceId::141898",
+              "width": 160,
+              "height": 90,
+              "format": "R11G11B10_FLOAT"
+            }
+          ],
+          "sha256": "9fca13c52e51e35da8a52533228e82b78d151c2c0ee3a5c3f689ea8d2933c3e4"
+        },
+        {
+          "event": 1715,
+          "id": "ResourceId::15873",
+          "width": 320,
+          "height": 180,
+          "format": "R11G11B10_FLOAT",
+          "stage": "ShaderStage.Compute",
+          "inputs": [
+            {
+              "binding": 0,
+              "id": "ResourceId::15881",
+              "width": 160,
+              "height": 90,
+              "format": "R11G11B10_FLOAT"
+            },
+            {
+              "binding": 1,
+              "id": "ResourceId::141902",
+              "width": 320,
+              "height": 180,
+              "format": "R11G11B10_FLOAT"
+            }
+          ],
+          "sha256": "9fca13c52e51e35da8a52533228e82b78d151c2c0ee3a5c3f689ea8d2933c3e4"
+        },
+        {
+          "event": 1724,
+          "id": "ResourceId::15865",
+          "width": 640,
+          "height": 360,
+          "format": "R11G11B10_FLOAT",
+          "stage": "ShaderStage.Compute",
+          "inputs": [
+            {
+              "binding": 0,
+              "id": "ResourceId::15873",
+              "width": 320,
+              "height": 180,
+              "format": "R11G11B10_FLOAT"
+            },
+            {
+              "binding": 1,
+              "id": "ResourceId::141906",
+              "width": 640,
+              "height": 360,
+              "format": "R11G11B10_FLOAT"
+            }
+          ],
+          "sha256": "9fca13c52e51e35da8a52533228e82b78d151c2c0ee3a5c3f689ea8d2933c3e4"
+        },
+        {
+          "event": 1733,
+          "id": "ResourceId::141910",
+          "width": 1280,
+          "height": 720,
+          "format": "R11G11B10_FLOAT",
+          "stage": "ShaderStage.Compute",
+          "inputs": [
+            {
+              "binding": 0,
+              "id": "ResourceId::15865",
+              "width": 640,
+              "height": 360,
+              "format": "R11G11B10_FLOAT"
+            },
+            {
+              "binding": 1,
+              "id": "ResourceId::160188",
+              "width": 1280,
+              "height": 720,
+              "format": "R11G11B10_FLOAT"
+            }
+          ],
+          "sha256": "9fca13c52e51e35da8a52533228e82b78d151c2c0ee3a5c3f689ea8d2933c3e4"
+        }
+      ]
+    },
+    "6834": {
+      "output": "ResourceId::141858",
+      "stages": [
+        {
+          "event": 1410,
+          "id": "ResourceId::141910",
+          "width": 1280,
+          "height": 720,
+          "format": "R11G11B10_FLOAT",
+          "stage": "ShaderStage.Compute",
+          "inputs": [
+            {
+              "binding": 0,
+              "id": "ResourceId::16349",
+              "width": 2560,
+              "height": 1440,
+              "format": "R16G16B16A16_FLOAT"
+            }
+          ],
+          "sha256": "39388f8e94375515fe28888ae11b9263b485141bd7acbd90540265d42c70b9a7"
+        },
+        {
+          "event": 1419,
+          "id": "ResourceId::141906",
+          "width": 640,
+          "height": 360,
+          "format": "R11G11B10_FLOAT",
+          "stage": "ShaderStage.Compute",
+          "inputs": [
+            {
+              "binding": 0,
+              "id": "ResourceId::141910",
+              "width": 1280,
+              "height": 720,
+              "format": "R11G11B10_FLOAT"
+            }
+          ],
+          "sha256": "13d9669c80934a2ea22ee30509cbeb06a3b04af0ec947a10f6c0c343b02ebdab"
+        },
+        {
+          "event": 1428,
+          "id": "ResourceId::141902",
+          "width": 320,
+          "height": 180,
+          "format": "R11G11B10_FLOAT",
+          "stage": "ShaderStage.Compute",
+          "inputs": [
+            {
+              "binding": 0,
+              "id": "ResourceId::141906",
+              "width": 640,
+              "height": 360,
+              "format": "R11G11B10_FLOAT"
+            }
+          ],
+          "sha256": "13d9669c80934a2ea22ee30509cbeb06a3b04af0ec947a10f6c0c343b02ebdab"
+        },
+        {
+          "event": 1437,
+          "id": "ResourceId::141898",
+          "width": 160,
+          "height": 90,
+          "format": "R11G11B10_FLOAT",
+          "stage": "ShaderStage.Compute",
+          "inputs": [
+            {
+              "binding": 0,
+              "id": "ResourceId::141902",
+              "width": 320,
+              "height": 180,
+              "format": "R11G11B10_FLOAT"
+            }
+          ],
+          "sha256": "13d9669c80934a2ea22ee30509cbeb06a3b04af0ec947a10f6c0c343b02ebdab"
+        },
+        {
+          "event": 1446,
+          "id": "ResourceId::141894",
+          "width": 80,
+          "height": 45,
+          "format": "R11G11B10_FLOAT",
+          "stage": "ShaderStage.Compute",
+          "inputs": [
+            {
+              "binding": 0,
+              "id": "ResourceId::141898",
+              "width": 160,
+              "height": 90,
+              "format": "R11G11B10_FLOAT"
+            }
+          ],
+          "sha256": "13d9669c80934a2ea22ee30509cbeb06a3b04af0ec947a10f6c0c343b02ebdab"
+        },
+        {
+          "event": 1455,
+          "id": "ResourceId::141886",
+          "width": 40,
+          "height": 23,
+          "format": "R11G11B10_FLOAT",
+          "stage": "ShaderStage.Compute",
+          "inputs": [
+            {
+              "binding": 0,
+              "id": "ResourceId::141894",
+              "width": 80,
+              "height": 45,
+              "format": "R11G11B10_FLOAT"
+            }
+          ],
+          "sha256": "13d9669c80934a2ea22ee30509cbeb06a3b04af0ec947a10f6c0c343b02ebdab"
+        },
+        {
+          "event": 1500,
+          "id": "ResourceId::141874",
+          "width": 20,
+          "height": 11,
+          "format": "R11G11B10_FLOAT",
+          "stage": "ShaderStage.Compute",
+          "inputs": [
+            {
+              "binding": 1,
+              "id": "ResourceId::141878",
+              "width": 20,
+              "height": 11,
+              "format": "R11G11B10_FLOAT"
+            }
+          ],
+          "sha256": "9fca13c52e51e35da8a52533228e82b78d151c2c0ee3a5c3f689ea8d2933c3e4"
+        },
+        {
+          "event": 1509,
+          "id": "ResourceId::141882",
+          "width": 40,
+          "height": 23,
+          "format": "R11G11B10_FLOAT",
+          "stage": "ShaderStage.Compute",
+          "inputs": [
+            {
+              "binding": 0,
+              "id": "ResourceId::141874",
+              "width": 20,
+              "height": 11,
+              "format": "R11G11B10_FLOAT"
+            },
+            {
+              "binding": 1,
+              "id": "ResourceId::141886",
+              "width": 40,
+              "height": 23,
+              "format": "R11G11B10_FLOAT"
+            }
+          ],
+          "sha256": "9fca13c52e51e35da8a52533228e82b78d151c2c0ee3a5c3f689ea8d2933c3e4"
+        },
+        {
+          "event": 1518,
+          "id": "ResourceId::141890",
+          "width": 80,
+          "height": 45,
+          "format": "R11G11B10_FLOAT",
+          "stage": "ShaderStage.Compute",
+          "inputs": [
+            {
+              "binding": 0,
+              "id": "ResourceId::141882",
+              "width": 40,
+              "height": 23,
+              "format": "R11G11B10_FLOAT"
+            },
+            {
+              "binding": 1,
+              "id": "ResourceId::141894",
+              "width": 80,
+              "height": 45,
+              "format": "R11G11B10_FLOAT"
+            }
+          ],
+          "sha256": "9fca13c52e51e35da8a52533228e82b78d151c2c0ee3a5c3f689ea8d2933c3e4"
+        },
+        {
+          "event": 1527,
+          "id": "ResourceId::15881",
+          "width": 160,
+          "height": 90,
+          "format": "R11G11B10_FLOAT",
+          "stage": "ShaderStage.Compute",
+          "inputs": [
+            {
+              "binding": 0,
+              "id": "ResourceId::141890",
+              "width": 80,
+              "height": 45,
+              "format": "R11G11B10_FLOAT"
+            },
+            {
+              "binding": 1,
+              "id": "ResourceId::141898",
+              "width": 160,
+              "height": 90,
+              "format": "R11G11B10_FLOAT"
+            }
+          ],
+          "sha256": "9fca13c52e51e35da8a52533228e82b78d151c2c0ee3a5c3f689ea8d2933c3e4"
+        },
+        {
+          "event": 1536,
+          "id": "ResourceId::15873",
+          "width": 320,
+          "height": 180,
+          "format": "R11G11B10_FLOAT",
+          "stage": "ShaderStage.Compute",
+          "inputs": [
+            {
+              "binding": 0,
+              "id": "ResourceId::15881",
+              "width": 160,
+              "height": 90,
+              "format": "R11G11B10_FLOAT"
+            },
+            {
+              "binding": 1,
+              "id": "ResourceId::141902",
+              "width": 320,
+              "height": 180,
+              "format": "R11G11B10_FLOAT"
+            }
+          ],
+          "sha256": "9fca13c52e51e35da8a52533228e82b78d151c2c0ee3a5c3f689ea8d2933c3e4"
+        },
+        {
+          "event": 1545,
+          "id": "ResourceId::15865",
+          "width": 640,
+          "height": 360,
+          "format": "R11G11B10_FLOAT",
+          "stage": "ShaderStage.Compute",
+          "inputs": [
+            {
+              "binding": 0,
+              "id": "ResourceId::15873",
+              "width": 320,
+              "height": 180,
+              "format": "R11G11B10_FLOAT"
+            },
+            {
+              "binding": 1,
+              "id": "ResourceId::141906",
+              "width": 640,
+              "height": 360,
+              "format": "R11G11B10_FLOAT"
+            }
+          ],
+          "sha256": "9fca13c52e51e35da8a52533228e82b78d151c2c0ee3a5c3f689ea8d2933c3e4"
+        },
+        {
+          "event": 1554,
+          "id": "ResourceId::141858",
+          "width": 1280,
+          "height": 720,
+          "format": "R11G11B10_FLOAT",
+          "stage": "ShaderStage.Compute",
+          "inputs": [
+            {
+              "binding": 0,
+              "id": "ResourceId::15865",
+              "width": 640,
+              "height": 360,
+              "format": "R11G11B10_FLOAT"
+            },
+            {
+              "binding": 1,
+              "id": "ResourceId::141910",
+              "width": 1280,
+              "height": 720,
+              "format": "R11G11B10_FLOAT"
+            }
+          ],
+          "sha256": "9fca13c52e51e35da8a52533228e82b78d151c2c0ee3a5c3f689ea8d2933c3e4"
+        }
+      ]
+    }
+  },
+  "archive": {
+    "members": 30,
+    "sha256": "7e460b4044d728959cd04f94ea626250d2038434869b3b04345a1bf5195465ae"
+  }
+}

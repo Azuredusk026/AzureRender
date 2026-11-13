@@ -65,3 +65,12 @@ NVIDIA 的关闭对照全部在一字节内，独立眼部夹具逐像素一致�
 该帧的相机和姿态独立于 Player 眼部验收夹具。
 
 [原生合成结果](evidence/2026-11-14/portrait-native-bloom-composition/results.json)和[验证归档](evidence/2026-11-14/portrait-native-bloom-composition/validation.zip)保存程序、纹理摘要和采集常量。
+
+## 原生泛光生成
+
+两帧的泛光生成使用相同的三类计算程序。
+首级从完整分辨率场景进行十三次采样，使用亮通道阈值、软阈值与亮度权重。
+后续阶段逐级降采样，重建阶段采用四次双线性取样实现三次滤波，再与同尺寸层混合。
+合成程序读取重建完成的半分辨率纹理。
+
+[泛光生成结果](evidence/2026-11-14/native-bloom-pass-chain/results.json)和[验证归档](evidence/2026-11-14/native-bloom-pass-chain/validation.zip)保存两帧的资源依赖、着色程序及尺寸。
