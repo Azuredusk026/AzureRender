@@ -42,3 +42,12 @@ Player 与编辑器的双配置构建通过。
 正式原作像素等价、资源激活状态与完整照明继续验收。
 本项只改变报告及指纹的输入解释。
 结构化结果见[来源收据](evidence/2026-10-27/capture-camera.json)。
+
+## 主线清单版本
+
+捕获清单使用相机投影布局三，记录实际 NDC 偏移。
+Release 和 Debug 各通过相机投影、捕获相机和三项构建契约检查。
+GPU 用例检查透视与正交偏移、路径追踪、相机指纹和画面位移。
+
+[结果清单](evidence/2026-11-13/camera-projection-layout/results.json)及
+[验证归档](evidence/2026-11-13/camera-projection-layout/validation.zip)保存测试和构建摘要。

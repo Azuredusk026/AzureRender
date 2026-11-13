@@ -9,6 +9,7 @@ import tempfile
 import numpy as np
 from PIL import Image
 from native_render.light_lab import generate
+from render_capture_layout import CAMERA_PROJECTION_LAYOUT_VERSION
 
 
 def run(player, output, expected_validation):
@@ -60,7 +61,9 @@ def run(player, output, expected_validation):
             assert 'Allocator after unload: buffers=0 images=0' in log, name
             assert ('Validation layer: enabled' in log) == (expected_validation == 'enabled'), name
             manifest = json.loads((folder/'frames/capture_manifest.json').read_text())
-            assert manifest['cameraProjection'] == {'schemaVersion': 2, 'offsetNdc': offset}, manifest['cameraProjection']
+            assert manifest['cameraProjection'] == {
+                'schemaVersion': CAMERA_PROJECTION_LAYOUT_VERSION, 'offsetNdc': offset,
+            }, manifest['cameraProjection']
             if renderer == 'pathtracing':
                 assert manifest['pathTracingCameraLayoutVersion'] == 2
             frame = folder/'frames/frame_000000.png'

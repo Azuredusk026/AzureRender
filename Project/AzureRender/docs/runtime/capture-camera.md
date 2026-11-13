@@ -16,14 +16,14 @@
 镜头对象及上向量按完整单精度值序列化。
 未选定显式视图时，两处字段保存 `null`。
 
-`cameraProjection` 保留版本二的偏移描述。
+`cameraProjection` 使用版本三，记录选定视图的 NDC 偏移。
 偏移单位及方向见[相机投影偏移](camera-projection-offset.md)。
 报告字段描述捕获时的选定视图。
 各渲染器按已声明的相机能力消费该视图。
 
 ## 状态指纹
 
-`qaStateFingerprintVersion` 为二。
+`qaStateFingerprintVersion` 为四。
 指纹纳入实际裁剪、镜头及完整精度的姿态。
 姿态包含位置、目标点与上向量。
 镜头与姿态以独立版本标记进入既有 FNV-1a-64 输入。

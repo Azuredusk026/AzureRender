@@ -58,6 +58,13 @@
   "milestones": [
     {
       "path": "runs/20261113-005205-nr-main-registered-regression-c82feb",
+      "name": "相机投影清单回归",
+      "sourceBase": "1b71afd",
+      "evidence": "docs/acceptance/nr/capture-camera.md",
+      "results": "docs/acceptance/nr/evidence/2026-11-13/camera-projection-layout/results.json"
+    },
+    {
+      "path": "runs/20261113-005205-nr-main-registered-regression-c82feb",
       "name": "投影头发主线注册用例",
       "sourceBase": "e972e76",
       "evidence": "docs/acceptance/nr/projected-hair-viewport-integration.md",

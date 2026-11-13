@@ -11,6 +11,7 @@ import tempfile
 
 import numpy as np
 from PIL import Image
+from render_capture_layout import CAMERA_PROJECTION_LAYOUT_VERSION
 from test_character_probe_gpu import prepare
 
 
@@ -62,7 +63,7 @@ def run(player,output):
             assert manifest['qaStateFingerprintVersion']==4
             angle=math.radians(case.get('roll',0));expected_up=[math.sin(angle),math.cos(angle),0]
             assert max(abs(a-b) for a,b in zip(manifest['cameraUp'],expected_up))<1e-6
-            assert manifest['cameraProjection']==dict(schemaVersion=2,offsetNdc=[0,0])
+            assert manifest['cameraProjection']==dict(schemaVersion=CAMERA_PROJECTION_LAYOUT_VERSION,offsetNdc=[0,0])
             image=np.asarray(Image.open(folder/'frames/frame_000000.png').convert('RGB'));images[case['name']]=image
             mask=(image[:,:,0]>20)&(image[:,:,0].astype(float)>image[:,:,1]*1.8)
             area=int(np.count_nonzero(mask));assert area>100,(renderer,case['name'],area)

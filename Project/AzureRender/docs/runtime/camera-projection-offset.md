@@ -34,8 +34,8 @@
 聚簇覆盖和级联阴影范围消费实际投影。
 天空与路径追踪使用共享射线偏移函数。
 
-`CameraViewDescriptor::kLayoutVersion` 为二。
-渲染器注册 API 为二，工厂声明须与注册器一致。
+`CameraViewDescriptor::kLayoutVersion` 为三。
+渲染器工厂按注册器的 API 版本声明能力。
 支持者通过 `supportsProjectionOffset` 声明能力。
 不支持该能力的渲染器遇到非零偏移时给出诊断。
 

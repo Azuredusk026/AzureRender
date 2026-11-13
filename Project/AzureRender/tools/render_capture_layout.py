@@ -5,3 +5,6 @@ MATERIAL_SURFACE_PROFILE_LAYOUT_VERSION = 22
 
 # sizeof(UniformBufferObject) in CharacterSceneRenderer.hpp.
 CAMERA_UNIFORM_BYTES = 800
+
+# CameraViewDescriptor::kLayoutVersion in CameraViewDescriptor.hpp.
+CAMERA_PROJECTION_LAYOUT_VERSION = 3
