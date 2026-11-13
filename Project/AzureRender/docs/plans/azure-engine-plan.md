@@ -37,7 +37,9 @@ Player 的 CPU 工作 P95 至多为八毫秒。
 
 [主线联合场景短测](../acceptance/nr/performance-bottlenecks.md#主线联合场景短测)记录标准构建的场景阶段成本。
 CPU 工作 P95 为 5.90 毫秒，GPU 帧 P95 为 20.33 毫秒。
-正式性能仍需满足固定功率和热状态条件。
+[联合场景 80 W 采样](../acceptance/nr/joint-59579-qualification.md)记录两轮 1800 帧及风扇对照。
+最高风扇档 CPU 工作 P95 为 6.98 毫秒，GPU 帧 P95 为 19.99 毫秒。
+正式 GPU 帧耗时、热状态和设备本地容量仍待验收。
 
 [可玩包关卡提交](../acceptance/p1/2026-11-13-level-commit.md)通过提交耗时和资源驻留门槛。
 [可玩包三十分钟长跑](../acceptance/p1/2026-11-13-playable-30min.md)完成 33 次切关和 34 次重启，全部分钟窗口满足 GPU 预算。
@@ -1449,7 +1451,7 @@ NVIDIA 完整原生深度与可见量精确一致，Intel 九十七处超差继�
 
 [正式功率核定](../acceptance/nr/gpu-power-limit-qualification.md)记录 592.82 的设置结果。
 正式采样须核定负载下的实际固定 80 W。
-[595.79 启动检查](../acceptance/nr/joint-59579-qualification.md)记录空闲门槛、功率观测及复测条件。
+[595.79 联合场景采样](../acceptance/nr/joint-59579-qualification.md)记录空闲门槛、80 W 读数及热状态对照。
 
 NPR 光照和角色局部光照夹具在 Debug 下分别用时 207.17 秒和 130.90 秒，均通过原 300 秒注册限时。
 [GPU 光照夹具运行时间](../acceptance/nr/gpu-lighting-fixture-runtime.md)记录两种构建配置与跨场景比较证据。

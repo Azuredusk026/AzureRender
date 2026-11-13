@@ -22,5 +22,526 @@
     "liveImageAllocationBytes": 2500562944,
     "sourceTimingSha256": "f08ecfd8c3d2f87db29cb276aa08ab0eeb918fda7ef252cfcd276906922834d1"
   },
-  "archiveSha256": "96b419daa890fda44daa6bb3c048e7986eed63b286b49b2b380d394d6846264c"
+  "retry": {
+    "scope": "standard-main-joint-1080p60",
+    "source": "a5821e0263cf8012497f3a9c82a5697a81e8af66",
+    "driver": "595.79",
+    "warmup": 300,
+    "frames": 1800,
+    "gpuPowerLimitWatts": [
+      80.0
+    ],
+    "environmentFailures": [
+      "run observation 123: driver relative thermal headroom is insufficient",
+      "run observation 124: driver relative thermal headroom is insufficient",
+      "run observation 124: software thermal slowdown is active",
+      "run observation 125: software thermal slowdown is active",
+      "run observation 126: software thermal slowdown is active",
+      "run observation 127: software thermal slowdown is active",
+      "run observation 128: software thermal slowdown is active",
+      "run observation 129: software thermal slowdown is active",
+      "run observation 130: software thermal slowdown is active",
+      "run observation 131: driver relative thermal headroom is insufficient",
+      "run observation 131: software thermal slowdown is active",
+      "run observation 132: driver relative thermal headroom is insufficient",
+      "run observation 132: software thermal slowdown is active",
+      "run observation 133: driver relative thermal headroom is insufficient",
+      "run observation 133: software thermal slowdown is active",
+      "run observation 134: driver relative thermal headroom is insufficient",
+      "run observation 134: software thermal slowdown is active",
+      "run observation 135: driver relative thermal headroom is insufficient",
+      "run observation 135: software thermal slowdown is active",
+      "run observation 136: driver relative thermal headroom is insufficient",
+      "run observation 136: software thermal slowdown is active",
+      "run observation 137: software thermal slowdown is active",
+      "run observation 138: software thermal slowdown is active"
+    ],
+    "observationCount": 145,
+    "timings": {
+      "frameMs": {
+        "mean": 19.956655235555555,
+        "p95": 20.9848016,
+        "peak": 22.410016
+      },
+      "sceneMs": {
+        "mean": 17.512486684444443,
+        "p95": 18.484275200000003,
+        "peak": 19.801088
+      },
+      "shadowMs": {
+        "mean": 2.147076,
+        "p95": 2.1986656,
+        "peak": 2.275072
+      },
+      "postProcessMs": {
+        "mean": 0.2970925511111111,
+        "p95": 0.31441919999999995,
+        "peak": 0.338944
+      },
+      "cpuWorkMs": {
+        "mean": 10.675675722222216,
+        "p95": 15.743119999997921,
+        "peak": 59.21420000000062
+      }
+    },
+    "deviceLocalPeakBytes": 2784680768,
+    "workingSetPeakBytes": 2079924224,
+    "allocatorZero": true,
+    "gates": {
+      "fixed80W": true,
+      "thermalAndAC": false,
+      "gpuP95": false,
+      "cpuP95": false,
+      "deviceLocal": false,
+      "workingSet": true
+    },
+    "windows": [
+      {
+        "frameMs": {
+          "mean": 19.12135392,
+          "p95": 19.499528,
+          "peak": 19.911872
+        },
+        "sceneMs": {
+          "mean": 16.721800533333333,
+          "p95": 17.0895872,
+          "peak": 17.470464
+        },
+        "shadowMs": {
+          "mean": 2.1161579733333333,
+          "p95": 2.1449056,
+          "peak": 2.15344
+        },
+        "postProcessMs": {
+          "mean": 0.28339541333333335,
+          "p95": 0.289792,
+          "peak": 0.294912
+        },
+        "cpuWorkMs": {
+          "mean": 8.868579000000027,
+          "p95": 12.33627999999918,
+          "peak": 18.45059999999953
+        }
+      },
+      {
+        "frameMs": {
+          "mean": 19.498538666666665,
+          "p95": 19.852068799999998,
+          "peak": 19.904224
+        },
+        "sceneMs": {
+          "mean": 17.08553216,
+          "p95": 17.4040064,
+          "peak": 17.478656
+        },
+        "shadowMs": {
+          "mean": 2.1233885866666666,
+          "p95": 2.1567728,
+          "peak": 2.170528
+        },
+        "postProcessMs": {
+          "mean": 0.28961792000000003,
+          "p95": 0.294912,
+          "peak": 0.29696
+        },
+        "cpuWorkMs": {
+          "mean": 12.354322333333307,
+          "p95": 15.959705000001518,
+          "peak": 38.33480000000029
+        }
+      },
+      {
+        "frameMs": {
+          "mean": 19.83729216,
+          "p95": 20.058958399999998,
+          "peak": 20.709632
+        },
+        "sceneMs": {
+          "mean": 17.40501333333333,
+          "p95": 17.614233600000002,
+          "peak": 18.210816
+        },
+        "shadowMs": {
+          "mean": 2.1370152533333338,
+          "p95": 2.1662128000000003,
+          "peak": 2.192128
+        },
+        "postProcessMs": {
+          "mean": 0.29526357333333336,
+          "p95": 0.2990592,
+          "peak": 0.309248
+        },
+        "cpuWorkMs": {
+          "mean": 14.4736963333333,
+          "p95": 16.90515499999812,
+          "peak": 59.21420000000062
+        }
+      },
+      {
+        "frameMs": {
+          "mean": 20.160144213333332,
+          "p95": 20.8460016,
+          "peak": 20.9936
+        },
+        "sceneMs": {
+          "mean": 17.700160853333333,
+          "p95": 18.3409152,
+          "peak": 18.507776
+        },
+        "shadowMs": {
+          "mean": 2.15940864,
+          "p95": 2.1915296,
+          "peak": 2.20848
+        },
+        "postProcessMs": {
+          "mean": 0.30057472,
+          "p95": 0.311296,
+          "peak": 0.314368
+        },
+        "cpuWorkMs": {
+          "mean": 9.914240333333325,
+          "p95": 13.37532499999851,
+          "peak": 17.00770000000017
+        }
+      },
+      {
+        "frameMs": {
+          "mean": 20.459932373333334,
+          "p95": 21.3573648,
+          "peak": 22.410016
+        },
+        "sceneMs": {
+          "mean": 17.985918293333338,
+          "p95": 18.8326912,
+          "peak": 19.801088
+        },
+        "shadowMs": {
+          "mean": 2.16893376,
+          "p95": 2.2119264000000003,
+          "peak": 2.275072
+        },
+        "postProcessMs": {
+          "mean": 0.30508032,
+          "p95": 0.319488,
+          "peak": 0.338944
+        },
+        "cpuWorkMs": {
+          "mean": 9.741061000000007,
+          "p95": 13.258065000001656,
+          "peak": 19.258400000000876
+        }
+      },
+      {
+        "frameMs": {
+          "mean": 20.66267008,
+          "p95": 21.404435199999998,
+          "peak": 22.096
+        },
+        "sceneMs": {
+          "mean": 18.176494933333334,
+          "p95": 18.8745728,
+          "peak": 19.534848
+        },
+        "shadowMs": {
+          "mean": 2.177551786666667,
+          "p95": 2.2185216,
+          "peak": 2.236544
+        },
+        "postProcessMs": {
+          "mean": 0.30862336,
+          "p95": 0.320512,
+          "peak": 0.32768
+        },
+        "cpuWorkMs": {
+          "mean": 8.702155333333334,
+          "p95": 11.18210999999731,
+          "peak": 13.781700000000239
+        }
+      }
+    ],
+    "startTemperatureC": 61.0,
+    "peakTemperatureC": 88.0,
+    "softwareThermalSlowdownObservations": 15,
+    "hardwareThermalSlowdownObservations": 0,
+    "cpuWarmupP95Ms": 6.684879999999771,
+    "physicsP95Ms": 0.1095,
+    "drawCallsPerFrame": 1843.933333,
+    "materialResidentTexelBytes": 1852081920,
+    "liveImageAllocationBytes": 2500562944,
+    "liveBufferAllocationBytes": 219448128
+  },
+  "maximumFan": {
+    "scope": "standard-main-joint-1080p60",
+    "source": "a5821e0263cf8012497f3a9c82a5697a81e8af66",
+    "driver": "595.79",
+    "warmup": 300,
+    "frames": 1800,
+    "gpuPowerLimitWatts": [
+      80.0
+    ],
+    "environmentFailures": [
+      "run observation 52: software thermal slowdown is active",
+      "run observation 53: driver relative thermal headroom is insufficient",
+      "run observation 53: software thermal slowdown is active",
+      "run observation 54: software thermal slowdown is active",
+      "run observation 55: software thermal slowdown is active",
+      "run observation 56: software thermal slowdown is active",
+      "run observation 57: software thermal slowdown is active",
+      "run observation 58: software thermal slowdown is active",
+      "run observation 59: software thermal slowdown is active",
+      "run observation 60: driver relative thermal headroom is insufficient",
+      "run observation 60: software thermal slowdown is active",
+      "run observation 61: driver relative thermal headroom is insufficient",
+      "run observation 61: software thermal slowdown is active",
+      "run observation 62: software thermal slowdown is active",
+      "run observation 63: driver relative thermal headroom is insufficient",
+      "run observation 63: software thermal slowdown is active",
+      "run observation 64: driver relative thermal headroom is insufficient",
+      "run observation 64: software thermal slowdown is active"
+    ],
+    "observationCount": 71,
+    "timings": {
+      "frameMs": {
+        "mean": 19.327711573333335,
+        "p95": 19.9922976,
+        "peak": 20.96992
+      },
+      "sceneMs": {
+        "mean": 16.918922239999997,
+        "p95": 17.5616512,
+        "peak": 18.46272
+      },
+      "shadowMs": {
+        "mean": 2.1222934755555554,
+        "p95": 2.1588528,
+        "peak": 2.208736
+      },
+      "postProcessMs": {
+        "mean": 0.28649585777777775,
+        "p95": 0.29696,
+        "peak": 0.313344
+      },
+      "cpuWorkMs": {
+        "mean": 5.912943944444473,
+        "p95": 6.976925000004941,
+        "peak": 17.26520000000197
+      }
+    },
+    "deviceLocalPeakBytes": 2784680768,
+    "workingSetPeakBytes": 2126643200,
+    "allocatorZero": true,
+    "gates": {
+      "fixed80W": true,
+      "thermalAndAC": false,
+      "gpuP95": false,
+      "cpuP95": true,
+      "deviceLocal": false,
+      "workingSet": true
+    },
+    "windows": [
+      {
+        "frameMs": {
+          "mean": 18.827786346666667,
+          "p95": 19.0012704,
+          "peak": 19.078688
+        },
+        "sceneMs": {
+          "mean": 16.449949013333335,
+          "p95": 16.611584,
+          "peak": 16.90624
+        },
+        "shadowMs": {
+          "mean": 2.0994458666666667,
+          "p95": 2.1229792,
+          "peak": 2.14352
+        },
+        "postProcessMs": {
+          "mean": 0.27839146666666664,
+          "p95": 0.280576,
+          "peak": 0.295936
+        },
+        "cpuWorkMs": {
+          "mean": 5.520930666666691,
+          "p95": 6.427419999999466,
+          "peak": 11.774500000000895
+        }
+      },
+      {
+        "frameMs": {
+          "mean": 19.007810880000005,
+          "p95": 19.356152,
+          "peak": 19.465888
+        },
+        "sceneMs": {
+          "mean": 16.61367296,
+          "p95": 16.9360384,
+          "peak": 17.060864
+        },
+        "shadowMs": {
+          "mean": 2.112766613333333,
+          "p95": 2.1339759999999997,
+          "peak": 2.151776
+        },
+        "postProcessMs": {
+          "mean": 0.28137130666666665,
+          "p95": 0.28672,
+          "peak": 0.288768
+        },
+        "cpuWorkMs": {
+          "mean": 5.561429666666675,
+          "p95": 6.452744999999367,
+          "peak": 10.831099999999644
+        }
+      },
+      {
+        "frameMs": {
+          "mean": 19.23863018666666,
+          "p95": 19.533672,
+          "peak": 19.685696
+        },
+        "sceneMs": {
+          "mean": 16.831979519999997,
+          "p95": 17.127475200000003,
+          "peak": 17.273856
+        },
+        "shadowMs": {
+          "mean": 2.1215144533333334,
+          "p95": 2.1457072,
+          "peak": 2.166016
+        },
+        "postProcessMs": {
+          "mean": 0.28513621333333333,
+          "p95": 0.289792,
+          "peak": 0.29184
+        },
+        "cpuWorkMs": {
+          "mean": 5.854408666666684,
+          "p95": 7.039569999999804,
+          "peak": 8.83270000000083
+        }
+      },
+      {
+        "frameMs": {
+          "mean": 19.508423573333335,
+          "p95": 19.9478016,
+          "peak": 20.201888
+        },
+        "sceneMs": {
+          "mean": 17.092676266666665,
+          "p95": 17.5166464,
+          "peak": 17.775616
+        },
+        "shadowMs": {
+          "mean": 2.1266004266666663,
+          "p95": 2.151624,
+          "peak": 2.173024
+        },
+        "postProcessMs": {
+          "mean": 0.28914688,
+          "p95": 0.295936,
+          "peak": 0.29696
+        },
+        "cpuWorkMs": {
+          "mean": 6.049704333333288,
+          "p95": 6.9608800000013495,
+          "peak": 13.135500000000778
+        }
+      },
+      {
+        "frameMs": {
+          "mean": 19.605275093333333,
+          "p95": 20.1473824,
+          "peak": 20.334944
+        },
+        "sceneMs": {
+          "mean": 17.178617173333333,
+          "p95": 17.6908288,
+          "peak": 17.85856
+        },
+        "shadowMs": {
+          "mean": 2.1353265066666665,
+          "p95": 2.1660896,
+          "peak": 2.186304
+        },
+        "postProcessMs": {
+          "mean": 0.29133141333333334,
+          "p95": 0.2990592,
+          "peak": 0.305152
+        },
+        "cpuWorkMs": {
+          "mean": 6.28972266666677,
+          "p95": 7.547624999999403,
+          "peak": 14.49870000000141
+        }
+      },
+      {
+        "frameMs": {
+          "mean": 19.778343359999997,
+          "p95": 20.6210976,
+          "peak": 20.96992
+        },
+        "sceneMs": {
+          "mean": 17.346638506666665,
+          "p95": 18.1325312,
+          "peak": 18.46272
+        },
+        "shadowMs": {
+          "mean": 2.138106986666666,
+          "p95": 2.1697328000000002,
+          "peak": 2.208736
+        },
+        "postProcessMs": {
+          "mean": 0.29359786666666665,
+          "p95": 0.3031552,
+          "peak": 0.313344
+        },
+        "cpuWorkMs": {
+          "mean": 6.201467666666731,
+          "p95": 6.911929999999731,
+          "peak": 17.26520000000197
+        }
+      }
+    ],
+    "startTemperatureC": 55.0,
+    "peakTemperatureC": 88.0,
+    "softwareThermalSlowdownObservations": 13,
+    "hardwareThermalSlowdownObservations": 0,
+    "cpuWarmupP95Ms": 6.33591000000026,
+    "physicsP95Ms": 0.0735,
+    "drawCallsPerFrame": 1843.879048,
+    "materialResidentTexelBytes": 1852081920,
+    "liveImageAllocationBytes": 2500562944,
+    "liveBufferAllocationBytes": 219448128,
+    "configuration": {
+      "started": "2026-11-14T01:23:31.7939199+08:00",
+      "control": "maximum",
+      "observedOnSelectionRpm": 4100,
+      "powerMode": "balanced",
+      "expectedMaximumRpm": 6000,
+      "observedBeforeRpm": 3300,
+      "original": "automatic"
+    },
+    "observedAtSpeed": {
+      "fanRpm": 6000,
+      "observed": "2026-11-14T01:25:10.9246716+08:00",
+      "powerMode": "balanced",
+      "panelCpuUtilizationPercent": 10,
+      "panelCpuTemperatureC": 92,
+      "control": "maximum"
+    },
+    "restoration": {
+      "restored": "2026-11-14T01:26:49.7934190+08:00",
+      "confirmed": true,
+      "powerMode": "balanced",
+      "mode": "automatic",
+      "observedRpmOnSelection": 6000
+    }
+  },
+  "capacityEnvelope": {
+    "sRgbChannelUpperBoundBytes": 113700984,
+    "ddsBlockUpperBoundBytes": 141848232,
+    "peakOverLimitBytes": 1174068032,
+    "remainingAfterCombinedOptimisticSavingsBytes": 918518816
+  },
+  "archiveSha256": "8355a3d6aacf8c158fc7e35a5aa87cea9c31e33cbc2c906827709a0b2dd02250"
 }
