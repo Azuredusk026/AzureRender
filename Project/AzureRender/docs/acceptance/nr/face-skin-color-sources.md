@@ -150,3 +150,12 @@ Player 的原生壳夹具与原生深度覆盖交集为 498 个位置，生产�
 法线重建与切线输入按两处峰值的实际片元继续核对。
 
 [法线结果](evidence/2026-11-14/transparent-cloth-normal-mips/results.json)和[验证归档](evidence/2026-11-14/transparent-cloth-normal-mips/validation.zip)保存十二级摘要、双设备指标及运行记录。
+
+## Player 体表描边提交
+
+Player 绘制 940 在体表主体和场景深度之后提交。
+该绘制使用正面剔除、严格小于深度比较及只读深度。
+原生改写的 1,184 个位置在 Player 的描边前后深度完全一致。
+生产壳的深度、模板及后续合成以实际绘制顺序为验收输入。
+
+[提交结果](evidence/2026-11-14/body-outline-player-depth/results.json)和[验证归档](evidence/2026-11-14/body-outline-player-depth/validation.zip)保存状态和逐点深度。

@@ -1,0 +1,70 @@
+{
+  "status": "body-outline-player-state-qualified",
+  "overallStatus": "failed-user-review",
+  "events": [
+    {
+      "event": 674,
+      "shaders": [
+        "character_snapshot_object_early.frag.spv",
+        "mesh_object_projected.vert.spv"
+      ],
+      "target": "ResourceId::1261",
+      "raster": {
+        "cullMode": "CullMode.NoCull",
+        "frontCCW": "True",
+        "depthBias": "0.0"
+      },
+      "depth": {
+        "depthTestEnable": "True",
+        "depthWriteEnable": "True",
+        "depthFunction": "CompareFunction.Less",
+        "stencilTestEnable": "False"
+      },
+      "nativePositionsChanged": 90
+    },
+    {
+      "event": 825,
+      "shaders": [
+        "mesh_object_early.frag.spv",
+        "mesh_object_projected.vert.spv"
+      ],
+      "target": "ResourceId::184",
+      "raster": {
+        "cullMode": "CullMode.NoCull",
+        "frontCCW": "True",
+        "depthBias": "0.0"
+      },
+      "depth": {
+        "depthTestEnable": "True",
+        "depthWriteEnable": "True",
+        "depthFunction": "CompareFunction.Less",
+        "stencilTestEnable": "False"
+      },
+      "nativePositionsChanged": 89
+    },
+    {
+      "event": 940,
+      "shaders": [
+        "outline_view_scaled.frag.spv",
+        "outline_view_scaled.vert.spv"
+      ],
+      "target": "ResourceId::184",
+      "raster": {
+        "cullMode": "CullMode.Front",
+        "frontCCW": "True",
+        "depthBias": "0.0"
+      },
+      "depth": {
+        "depthTestEnable": "True",
+        "depthWriteEnable": "False",
+        "depthFunction": "CompareFunction.Less",
+        "stencilTestEnable": "False"
+      },
+      "nativePositionsChanged": 0
+    }
+  ],
+  "archive": {
+    "members": 11,
+    "sha256": "a324b2dca8d54196c50c65cffab54fcf5c7bcd373c9fd888e9efad7466651125"
+  }
+}
