@@ -147,9 +147,13 @@ Player 的原生壳夹具与原生深度覆盖交集为 498 个位置，生产�
 | 原生绿色方向及原生层级 | 27 | 27 | 42 | 4,707、4,627 |
 
 材质继续使用现行法线配置。
-法线重建与切线输入按两处峰值的实际片元继续核对。
+透明衣料的原生片元先对 RG 进行滤波，再重建 Z，并使用插值后的切线帧。
+双设备固定姿态对照中，按此顺序重建并接入原生法线层级后，重点区域均有 29 个像素超出八字节，峰差均为 38 字节。
+NVIDIA 与 Intel 全图分别新增 404 和 444 个超出一字节的像素。
+该组合保留在验证夹具中。
 
 [法线结果](evidence/2026-11-14/transparent-cloth-normal-mips/results.json)和[验证归档](evidence/2026-11-14/transparent-cloth-normal-mips/validation.zip)保存十二级摘要、双设备指标及运行记录。
+[重建结果](evidence/2026-11-14/cloth-sampled-normal-lighting/results.json)和[验证归档](evidence/2026-11-14/cloth-sampled-normal-lighting/validation.zip)保存对照程序、逐点误差和双设备运行记录。
 
 ## Player 体表描边提交
 
