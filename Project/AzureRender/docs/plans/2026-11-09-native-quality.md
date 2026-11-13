@@ -176,6 +176,9 @@ Intel 头发颜色继续核对纹理梯度与层级选择。
 
 [量化精度隔离与接收输入](../acceptance/nr/reference-raster-isolated.md)核对双设备整帧，Intel 冻结 RGB 有 31 处超差，区域外变化均在一字节内。原生深度、法线和图集的联合输入通过接收门槛，生产输入及共同图元继续验收。
 
+[投影头发参考光栅网格](../acceptance/nr/projected-hair-reference-grid.md)完成可选材质路径的回归。
+全身虹膜和生产接收继续按各自门槛验收。
+
 [体表法线原生选层](../acceptance/nr/native-body-explicit-mips.md)核对体表实际选层与解码。
 生产可见量及共同图元按原门槛继续验收。
 

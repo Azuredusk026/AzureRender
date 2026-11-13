@@ -88,6 +88,7 @@ inline PackedMaterialSurfaceProfile packMaterialSurfaceProfile(const AssetMateri
     validateMaterialCoverage(material);
     validateHairPointMipReferenceNormal(material);
     validateProjectedHairPrimaryTextureFootprint(material);
+    validateProjectedHairReferenceRasterGrid(material);
     const bool lit=(material.materialFeatures&(MaterialFeatureUnlitSurface|MaterialFeatureMultiplyComposite|MaterialFeatureOverlay))==0
         &&!material.unlitTextureLayers.present&&material.materialClass!=AssetMaterialClass::Overlay;
     const bool microfacetClass=(material.materialClass==AssetMaterialClass::Generic||material.materialClass==AssetMaterialClass::Fabric

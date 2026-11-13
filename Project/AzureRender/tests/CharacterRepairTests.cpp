@@ -326,6 +326,26 @@ void testProjectedHairRamp(const nlohmann::json& fixture,const std::filesystem::
     const auto pointMipPacked=packMaterialSurfaceProfile(load(pointMipSource).materials[0]);
     require(pointMipPacked.rows[6][3]==16&&pointMipPacked.rows[12]==std::array<float,4>{-1,-1,-1,0},
         "Projected hair primary footprint must retain its flag and three sampler biases");
+    require((load(pointMipSource).materials[0].materialFeatures&MaterialFeatureHairReferenceRasterGrid)==0,
+        "Projected hair must retain its reference vertex positions by default");
+    auto rasterGridSource=pointMipSource;
+    auto& rasterGridProfile=rasterGridSource["materials"][0]["extras"]["azureRenderMaterial"];
+    rasterGridProfile["hair"]["projectedRamp"]["referenceRasterGrid"]="nearest-8";
+    const auto rasterGridMaterial=load(rasterGridSource).materials[0];
+    require((rasterGridMaterial.materialFeatures&MaterialFeatureHairReferenceRasterGrid)!=0,
+        "The projected hair reference raster grid must reach the vertex feature word");
+    require(packMaterialSurfaceProfile(rasterGridMaterial).rows==pointMipPacked.rows,
+        "The reference raster grid must preserve the fragment surface profile");
+    for(const auto& value:Json::array({nullptr,true,8,"floor-8"})) {
+        auto invalid=rasterGridSource;
+        invalid["materials"][0]["extras"]["azureRenderMaterial"]["hair"]["projectedRamp"]["referenceRasterGrid"]=value;
+        reject(invalid,"referenceRasterGrid");
+    }
+    auto unsupportedRasterGrid=rasterGridSource;
+    auto& unsupportedGridProfile=unsupportedRasterGrid["materials"][0]["extras"]["azureRenderMaterial"];
+    unsupportedGridProfile["hair"]["projectedRamp"].erase("primaryTextureFootprint");
+    unsupportedGridProfile["features"]={"hair-anisotropy","hair-projected-ramp"};
+    reject(unsupportedRasterGrid,"referenceRasterGrid");
     auto invalidFootprint=pointMipSource;
     invalidFootprint["materials"][0]["extras"]["azureRenderMaterial"]["features"]={"hair-anisotropy","hair-projected-ramp"};
     reject(invalidFootprint,"primaryTextureFootprint");

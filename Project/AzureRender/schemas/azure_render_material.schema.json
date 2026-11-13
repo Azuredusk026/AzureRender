@@ -226,6 +226,11 @@
               "const": "axis-diagonal",
               "description": "使用轴向与对角足迹选择头发基色 RGB、参数和双法线的纹理层级。"
             },
+            "referenceRasterGrid": {
+              "type": "string",
+              "const": "nearest-8",
+              "description": "按最近八位子像素网格放置参考相机的投影头发颜色顶点。"
+            },
             "snapshotNormal": {
               "type": "string",
               "enum": [

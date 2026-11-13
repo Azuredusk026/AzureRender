@@ -1161,7 +1161,7 @@ int loadProjectedHairRamp(const tinygltf::Material& material,const tinygltf::Mod
     const std::vector<std::string> fields={"schemaVersion","parameterTexture","rampTexture","primaryShift",
         "secondaryShift","intensity","secondaryRange","edgeFade","specularNormalScale","surfaceNormalScale",
         "directionX","secondaryColor","objectBasis","surfaceResponse","diffuseScale","frame","virtualLight","line","tangentSign",
-        "lighting","snapshotNormal","primaryTextureFootprint"};
+        "lighting","snapshotNormal","primaryTextureFootprint","referenceRasterGrid"};
     // TinyGLTF omits null extras. Retain the authored object so optional typed
     // fields cannot silently turn invalid null values into their defaults.
     if(!material.extras_json_string.empty()) {
@@ -1189,6 +1189,12 @@ int loadProjectedHairRamp(const tinygltf::Material& material,const tinygltf::Mod
         if (!footprint.IsString() || footprint.Get<std::string>() != "axis-diagonal")
             throw std::invalid_argument("Invalid projectedRamp.primaryTextureFootprint");
         target.axisDiagonalPrimaryTextureFootprint = true;
+    }
+    if (source.Has("referenceRasterGrid")) {
+        const auto& grid = source.Get("referenceRasterGrid");
+        if (!grid.IsString() || grid.Get<std::string>() != "nearest-8")
+            throw std::invalid_argument("Invalid projectedRamp.referenceRasterGrid");
+        result.materialFeatures |= MaterialFeatureHairReferenceRasterGrid;
     }
     if(source.Has("snapshotNormal")) {
         const auto& mode=source.Get("snapshotNormal");
@@ -2349,6 +2355,7 @@ AssetMaterial loadMaterial(
     azurerender::validateMaterialOutputPrecision(result);
     azurerender::validateMaterialUvPolicy(result);
     validateProjectedHairPrimaryTextureFootprint(result);
+    validateProjectedHairReferenceRasterGrid(result);
     azurerender::validateMaterialRimResponse(result);
     return result;
 }

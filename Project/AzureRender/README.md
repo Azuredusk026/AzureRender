@@ -918,3 +918,5 @@ Intel 实际 Player 的完整可见量附件逐字节匹配固定输入的 `Prof
 [体表法线原生选层](docs/acceptance/nr/native-body-explicit-mips.md)记录双设备的十一层实际读回。
 
 [投影头发主纹理层级](docs/acceptance/nr/projected-hair-point-mip.md)记录可选材质路径及双设备生产回归。
+
+[投影头发参考光栅网格](docs/acceptance/nr/projected-hair-reference-grid.md)记录顶点子像素策略、双设备回归及静态区域。

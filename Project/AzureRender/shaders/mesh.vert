@@ -24,6 +24,9 @@ layout(binding = 0) uniform CameraData {
 } camera;
 #if defined(AZURE_REFERENCE_CAMERA)
 #include "reference_camera_vertex.glsl"
+#if !defined(AZURE_SNAPSHOT_DEPTH) && !defined(AZURE_OUTLINE_MASK)
+#define AZURE_HAIR_REFERENCE_RASTER_GRID
+#endif
 #endif
 
 layout(std430, binding = 10) readonly buffer JointData {
@@ -123,6 +126,17 @@ vec3 posedVector(uint offset) { return vec3(posedFloat(offset),posedFloat(offset
 #if defined(AZURE_PROJECTED_SURFACE)
 #include "outline_projected_surface.glsl"
 #endif
+
+#if defined(AZURE_HAIR_REFERENCE_RASTER_GRID)
+vec2 azureQuantizedHairRasterXY(vec4 clip, vec2 halfViewport) {
+    precise vec2 window = (clip.xy / clip.w) * halfViewport + halfViewport;
+    // Place the position inside the selected grid cell after the clip-space round trip.
+    precise vec2 snapped = roundEven(window * 256.0) / 256.0 + vec2(1.0 / 2048.0);
+    precise vec2 ndc = (snapped - halfViewport) / halfViewport;
+    return ndc * clip.w;
+}
+#endif
+
 void main() {
 #if defined(AZURE_SURFACE_RADIANCE_REUSE)
     surfaceRadianceSource=uvec2(uint(gl_InstanceIndex),morphWeights.surfaceFirstIndex);
@@ -200,6 +214,12 @@ void main() {
     worldPosition = (instanceData.instances[gl_InstanceIndex].model * gizmoPosition).xyz;
 #if defined(AZURE_REFERENCE_CAMERA)
     gl_Position=azureCameraRasterPosition(worldPosition,referenceDeviceBase,gl_Position);
+#if defined(AZURE_HAIR_REFERENCE_RASTER_GRID)
+    const uint hairReferenceRasterGrid = 1u << 29u;
+    if ((camera.referenceControl.z & 1u) != 0u && (morphWeights.materialFeatures & hairReferenceRasterGrid) != 0u
+        && gl_Position.w > 0.0)
+        gl_Position.xy = azureQuantizedHairRasterXY(gl_Position, camera.clusterDepth.zw * .5);
+#endif
 #endif
     for (int cascadeIndex = 0; cascadeIndex < 4; ++cascadeIndex) {
         shadowPositions[cascadeIndex] =

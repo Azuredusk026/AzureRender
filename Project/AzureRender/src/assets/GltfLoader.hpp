@@ -79,6 +79,7 @@ enum AssetMaterialFeature : std::uint32_t {
     MaterialFeatureR11G11B10Output = 1U << 26U,
     MaterialFeatureMirroredCoarseUv = 1U << 27U,
     MaterialFeatureEllipseMajorCoverage = 1U << 28U,
+    MaterialFeatureHairReferenceRasterGrid = 1U << 29U,
     MaterialFeatureShadowCoverageMask = MaterialFeatureGeometryShadow|MaterialFeatureSqrtAlphaShadow,
 };
 
@@ -318,6 +319,15 @@ inline void validateProjectedHairPrimaryTextureFootprint(const AssetMaterial& ma
         if (!usesLinearPointMipSampling(material.textureSettings[slot]))
             throw std::invalid_argument("projectedRamp.primaryTextureFootprint requires linear filtering, nearest mip and anisotropy one");
     }
+}
+
+inline void validateProjectedHairReferenceRasterGrid(const AssetMaterial& material) {
+    if ((material.materialFeatures & MaterialFeatureHairReferenceRasterGrid) == 0) return;
+    constexpr auto required = MaterialFeatureHairAnisotropy | MaterialFeatureHairProjectedRamp | MaterialFeatureMirroredCoarseUv;
+    if (!material.projectedHairRamp.present || material.materialClass != AssetMaterialClass::Hair
+        || material.materialProfileVersion != 2 || (material.materialFeatures & required) != required
+        || material.alphaMode == AssetAlphaMode::Blend)
+        throw std::invalid_argument("projectedRamp.referenceRasterGrid requires version two hair with mirrored-coarse-uv and opaque or mask alpha");
 }
 
 inline void validateHairPointMipReferenceNormal(const AssetMaterial& material) {
