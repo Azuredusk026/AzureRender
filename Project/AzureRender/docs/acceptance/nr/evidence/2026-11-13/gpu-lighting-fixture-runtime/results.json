@@ -1,0 +1,27 @@
+{
+  "Release": {
+    "executable": "ba6f9f1a9790be0b5027cba0d7c9a396d5d3ea70fed80bf266584af7effa472b",
+    "tests": {
+      "AzureEngine.NprIlluminationGpu": 123.132,
+      "AzureRender.ProjectedHairLightingGpu": 86.7976,
+      "AzureRender.CharacterLocalLightGpu": 71.3303,
+      "AzureRender.ClusteredLightProjectionGpu": 8.4391
+    }
+  },
+  "Debug": {
+    "executable": "5a5a4552d167ba86d9e0e4431a63fbb156ea2395f9cc9197a61af36769b86619",
+    "tests": {
+      "AzureEngine.NprIlluminationGpu": 207.174,
+      "AzureRender.ProjectedHairLightingGpu": 130.97,
+      "AzureRender.CharacterLocalLightGpu": 130.904,
+      "AzureRender.ClusteredLightProjectionGpu": 16.6258
+    }
+  },
+  "calibrationSeconds": {
+    "0-workers-1": 93.98499999998603,
+    "1-workers-4": 26.17200000002049,
+    "2-workers-4": 26.406000000075437,
+    "3-workers-1": 91.0
+  },
+  "evidenceSha256": "59b115e70640bbfa956bbd3292ce173b5b8880cff34d2ff3810c18b4d21e839d"
+}

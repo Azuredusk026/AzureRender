@@ -1,6 +1,8 @@
 """Measure explicit character local-light color through production scene inputs."""
 import argparse
+from concurrent.futures import ThreadPoolExecutor
 import copy
+import os
 import hashlib
 import json
 from pathlib import Path
@@ -35,7 +37,7 @@ def run(player,output,selected=None,expected_validation=None):
         assert set(selected)<=set(names);names=tuple(n for n in names if n in selected)
     report={'schemaVersion':1,'status':'running','playerSha256':hashlib.sha256(player.read_bytes()).hexdigest(),'captures':[]};frames={}
     try:
-        for name in names:
+        def capture(name):
             print(name,flush=True);folder=output/name;generate(folder,'point')
             model_path=folder/'plane.gltf';model=json.loads(model_path.read_text())
             for key,color,size in [('base',(90,80,70,204),(1,1)),('lut',(60,50,40,255),(4,2)),('ramp',(180,150,170,153),(2,1))]:Image.new('RGBA',size,color).save(folder/(key+'.png'))
@@ -100,12 +102,14 @@ def run(player,output,selected=None,expected_validation=None):
                 '--capture-dir',str(folder/'frames'),'--capture-frames','2' if name in ('front','fixed') else '1','--fixed-frame-step','--qa-camera','scene','--qa-light','scene','--qa-isolation','direct-diffuse']
             if name in ('fixed','line-fixed','wrap-fixed','pbr-zero-box-fixed'):command+=['--disable-bindless','--disable-compute-skinning','--disable-parallel-recording']
             (folder/'command.json').write_text(json.dumps(command,indent=2),encoding='utf-8')
-            with (folder/'player.log').open('w',encoding='utf-8') as log:subprocess.run(command,stdout=log,stderr=subprocess.STDOUT,check=True,timeout=120)
+            temporary=folder/'tmp';temporary.mkdir()
+            environment=dict(os.environ,TEMP=str(temporary),TMP=str(temporary),TMPDIR=str(temporary))
+            with (folder/'player.log').open('w',encoding='utf-8') as log:subprocess.run(command,stdout=log,stderr=subprocess.STDOUT,check=True,timeout=120,env=environment,cwd=folder)
             log=(folder/'player.log').read_text(encoding='utf-8',errors='replace');assert not re.search(r'VUID-|Validation (?:Error|Warning)|\[error\]',log),name
             assert 'Allocator after unload: buffers=0 images=0' in log
             validation='Validation layer: enabled' in log
             if expected_validation:assert validation==(expected_validation=='enabled')
-            frame=folder/'frames/frame_000000.png';pixels=np.asarray(Image.open(frame).convert('RGB'));frames[name]=pixels
+            frame=folder/'frames/frame_000000.png';pixels=np.asarray(Image.open(frame).convert('RGB'))
             first_frame_stable=None
             if name in ('front','fixed'):
                 following=np.asarray(Image.open(folder/'frames/frame_000001.png').convert('RGB'));first_frame_stable=bool(np.array_equal(pixels,following))
@@ -140,9 +144,14 @@ def run(player,output,selected=None,expected_validation=None):
                 if name=='no-receiver':expected[:]=0
                 if name in ('side','back','upper-light','lower-light','offset-camera'):assert max(expected)>.015,'Positive control must exceed output quantization and comparison budget'
                 error=float(np.abs(measured-expected).max())
-            report['captures'].append({'name':name,'maximumLinearError':error,'measured':measured.tolist(),
-                'expected':None if expected is None else expected.tolist(),'imageSha256':hashlib.sha256(frame.read_bytes()).hexdigest(),'validationEnabled':validation,'firstFrameStable':first_frame_stable})
+            result={'name':name,'maximumLinearError':error,'measured':measured.tolist(),
+                'expected':None if expected is None else expected.tolist(),'imageSha256':hashlib.sha256(frame.read_bytes()).hexdigest(),'validationEnabled':validation,'firstFrameStable':first_frame_stable}
             if error is not None:assert error<=.008,(name,error,measured,expected)
+            return name,pixels,result
+
+        with ThreadPoolExecutor(max_workers=4) as pool:
+            for name,pixels,result in pool.map(capture,names):
+                frames[name]=pixels;report['captures'].append(result)
         for a,b in (('front','fixed'),('front','disabled-scene-npr'),('pbr','pbr-control'),('line-light','line-fixed'),('line-pbr','line-pbr-control')):
             if a in frames and b in frames:assert np.array_equal(frames[a],frames[b]),(a,b)
         for a,b in [('back','wrap-identity'),('wrap-double','wrap-fixed'),('wrap-double','wrap-document')]:

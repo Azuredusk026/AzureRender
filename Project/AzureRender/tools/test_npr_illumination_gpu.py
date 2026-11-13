@@ -1,7 +1,9 @@
 """Measure scene-owned NPR illumination independently of material color."""
 import argparse
 import base64
+from concurrent.futures import ThreadPoolExecutor
 import copy
+import os
 import hashlib
 import json
 from pathlib import Path
@@ -47,7 +49,7 @@ def run(player,output,require_validation=False,selected=None,expected_validation
     summary={'schemaVersion':1,'status':'running','playerSha256':hashlib.sha256(player.read_bytes()).hexdigest(),
         'linearErrorBudget':.008,'captures':[]};frames={};state_hashes={}
     try:
-        for name in names:
+        def capture(name):
             print(name,flush=True);folder=output/name;generate(folder,'point' if name=='point-only' else 'directional-near')
             settings=copy.deepcopy(default)
             material_colors=name.startswith('material-colors')
@@ -144,7 +146,9 @@ def run(player,output,require_validation=False,selected=None,expected_validation
             if name in ('fixed','material-colors-fixed','material-colors-main-ramp-fixed','material-colors-character-main-shadow-fixed','receiver-main-fixed','receiver-main-strong-shadow-fixed'):command+=['--disable-bindless','--disable-compute-skinning','--disable-parallel-recording']
             if name in ('material-colors-direct','material-colors-ambient'):command+=['--qa-isolation','direct-diffuse' if name.endswith('direct') else 'ambient']
             (folder/'command.json').write_text(json.dumps(command,indent=2))
-            with (folder/'player.log').open('w',encoding='utf-8') as log:subprocess.run(command,stdout=log,stderr=subprocess.STDOUT,check=True,timeout=120,cwd=folder)
+            temporary=folder/'tmp';temporary.mkdir()
+            environment=dict(os.environ,TEMP=str(temporary),TMP=str(temporary),TMPDIR=str(temporary))
+            with (folder/'player.log').open('w',encoding='utf-8') as log:subprocess.run(command,stdout=log,stderr=subprocess.STDOUT,check=True,timeout=120,env=environment,cwd=folder)
             log=(folder/'player.log').read_text(encoding='utf-8',errors='replace');assert not re.search(r'VUID-|Validation (?:Error|Warning)|\[error\]',log),name
             diagnostics=[json.loads(line) for line in (folder/'captures/azureplayer.log.jsonl').read_text(encoding='utf-8').splitlines()]
             assert not any(item['level']=='error' for item in diagnostics),name
@@ -156,8 +160,7 @@ def run(player,output,require_validation=False,selected=None,expected_validation
             assert manifest['nprLighting']['schemaVersion']==1
             assert manifest['nprLighting']['ambientWeight']==settings.get('ambientWeight',1)
             if material_colors:assert manifest['materialSurfaceProfileLayoutVersion']==MATERIAL_SURFACE_PROFILE_LAYOUT_VERSION
-            state_hashes[name]=manifest['qaStateHash']
-            frame=folder/'frames/frame_000000.png';pixels=np.asarray(Image.open(frame).convert('RGB'));frames[name]=pixels
+            frame=folder/'frames/frame_000000.png';pixels=np.asarray(Image.open(frame).convert('RGB'))
             measured=linear(pixels[96 if name.startswith('offset-') else 64,96 if name.startswith('offset-') else 64]);color=reference(linear([90,80,70]),linear([60,50,40]),np.array([180,150,170,153])/255,204/255,.55)
             if view_tint:color=reference(linear([90,80,70])*(1-.595+.595*np.array([.38,.12,.14])),linear([60,50,40]),np.array([180,150,170,153])/255,204/255,.55)
             main=np.array([.8,.6,.4]);intensity=.7
@@ -202,11 +205,16 @@ def run(player,output,require_validation=False,selected=None,expected_validation
             if receiver_guard:
                 guard=linear(pixels[96,64]).tolist()
                 assert max(guard)<=.008,(name,'surface key shadow guard',guard)
-            summary['captures'].append({'name':name,'maximumLinearError':error,'validationEnabled':validation,
+            result={'name':name,'maximumLinearError':error,'validationEnabled':validation,
                 'surfaceShadowGuard':guard,
                 'imageSha256':hashlib.sha256(frame.read_bytes()).hexdigest(),'measured':measured.tolist(),'expected':expected.tolist(),
-                'allocatorAfterUnload':{'buffers':0,'images':0}})
+                'allocatorAfterUnload':{'buffers':0,'images':0}}
             if error is not None:assert error<=.008,(name,error,measured,expected)
+            return name,pixels,manifest['qaStateHash'],result
+
+        with ThreadPoolExecutor(max_workers=4) as pool:
+            for name,pixels,state_hash,result in pool.map(capture,names):
+                frames[name]=pixels;state_hashes[name]=state_hash;summary['captures'].append(result)
         if 'composed' in frames and 'fixed' in frames:assert np.array_equal(frames['composed'],frames['fixed'])
         if 'receiver-main' in frames and 'receiver-main-fixed' in frames:assert np.array_equal(frames['receiver-main'],frames['receiver-main-fixed'])
         if 'receiver-main-strong-shadow' in frames and 'receiver-main-strong-shadow-fixed' in frames:assert np.array_equal(frames['receiver-main-strong-shadow'],frames['receiver-main-strong-shadow-fixed'])
