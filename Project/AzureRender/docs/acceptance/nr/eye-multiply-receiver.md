@@ -74,3 +74,13 @@ NVIDIA 的关闭对照全部在一字节内，独立眼部夹具逐像素一致�
 合成程序读取重建完成的半分辨率纹理。
 
 [泛光生成结果](evidence/2026-11-14/native-bloom-pass-chain/results.json)和[验证归档](evidence/2026-11-14/native-bloom-pass-chain/validation.zip)保存两帧的资源依赖、着色程序及尺寸。
+
+原生近景第 6834 帧保存了泛光提取、八级降采样及八级回升的全部中间纹理。
+降采样使用九点可分离二项核，回升将四次双线性采样的三次滤波结果与同尺寸层按 0.77 混合。
+所有采样器使用边缘钳制和层内线性过滤。
+
+CPU 从原生线性场景重建最终 921,600 个泛光图素，其中 826,024 个打包值一致，1,149 个超过一个格式编码单位，最大差为两个单位。
+逐级传入原生输入时，最终层有 906,193 个打包值一致，所有图素均在一个编码单位内。
+该核验覆盖原生泛光纹理，近景 Player 的完整后处理对照保持开放。
+
+[逐级重建结果](evidence/2026-11-14/native-bloom-pixel-reconstruction/results.json)和[验证归档](evidence/2026-11-14/native-bloom-pixel-reconstruction/validation.zip)保存原生绑定、常量与误差统计。
