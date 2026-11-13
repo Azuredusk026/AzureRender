@@ -43,10 +43,12 @@
 ## 主线级联阴影对照
 
 候选在展台捕获路径采用对应的级联深度范围、遮挡采样和圆盘权重。
-七张输出与同机历史宿主的 PNG 逐字节一致。
+默认索引描述符、固定描述符和 CPU 蒙皮的七张输出均与同机历史宿主的 PNG 逐字节一致。
 与冻结原图的差异保留在成片 3 个像素及直射漫反射 6 个像素，均为单通道一个色阶。
 严格零像素门槛待用冻结驱动复测。
 [阴影对照归档](evidence/2026-11-13/frozen-public-visual/shadow-control.zip)保存两种入口的像素结果、构建摘要与候选补丁。
+
+[回退路径归档](evidence/2026-11-13/frozen-public-visual/fallbacks.zip)保存固定描述符和 CPU 蒙皮的逐图复测。
 
 [重放归档](evidence/2026-11-13/frozen-public-visual/replay.zip)保存构建来源、显示设备、严格比对和逐像素证据。
 [复验计划](../../plans/2026-11-13-frozen-public-visual-regression.md)记录后续验证条件。
