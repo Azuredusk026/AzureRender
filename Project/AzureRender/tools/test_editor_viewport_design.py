@@ -1,5 +1,6 @@
 """Check viewport projection controls and image bounds through real UI."""
 import argparse
+from concurrent.futures import ThreadPoolExecutor
 import json
 import shutil
 import uuid
@@ -11,8 +12,8 @@ from create_playable_project import create
 def run(executable, root):
     root = root / ('run-' + uuid.uuid4().hex[:8])
     root.mkdir(parents=True)
-    results=[]
-    for workflow in ('scene_inspector','exploration'):
+    def check_workflow(workflow):
+        results=[]
         work=root/workflow
         if workflow=='exploration':create(work/'game')
         else:shutil.copytree(Path(__file__).resolve().parents[1]/'assets_public/scene_inspector',work/'game',ignore=shutil.ignore_patterns('.azure'))
@@ -35,6 +36,11 @@ def run(executable, root):
             assert perspective['viewportView']['projection']=='perspective' and not perspective['dirty']
             assert perspective['feedback']==[]
             results.append(dict(workflow=workflow,size=size,dpi=dpi,projectionSwitch=True,imageBounds=True,toolbarBounds=True))
+        return results
+
+    with ThreadPoolExecutor(max_workers=2) as pool:
+        project_results = pool.map(check_workflow, ('scene_inspector', 'exploration'))
+        results = [case for project in project_results for case in project]
     result=dict(passed=True,cases=results,input='production ImGui replay',physicalInput='not performed')
     (root/'summary.json').write_text(json.dumps(result,indent=2),encoding='utf-8')
     print(json.dumps(result))

@@ -1,0 +1,47 @@
+{
+  "Debug": {
+    "executable": "045694d5bc06e8e02822d895de7d42654a478e29d62bcb6495bc3f2bc94139e5",
+    "code": 0,
+    "tests": {
+      "AzureEditor.PanelDesignGpu": {
+        "seconds": 280.937,
+        "passed": true
+      },
+      "AzureEditor.PanelDiagnosticsGpu": {
+        "seconds": 73.4093,
+        "passed": true
+      },
+      "AzureEditor.SelectionDesignGpu": {
+        "seconds": 155.842,
+        "passed": true
+      },
+      "AzureEditor.ViewportDesignGpu": {
+        "seconds": 119.289,
+        "passed": true
+      }
+    }
+  },
+  "Release": {
+    "executable": "4b896ff9614785d8b0b9fd79c7727dfbbff1c57320f0f9ac027ff620095825cb",
+    "code": 0,
+    "tests": {
+      "AzureEditor.PanelDesignGpu": {
+        "seconds": 87.4607,
+        "passed": true
+      },
+      "AzureEditor.PanelDiagnosticsGpu": {
+        "seconds": 25.8763,
+        "passed": true
+      },
+      "AzureEditor.SelectionDesignGpu": {
+        "seconds": 52.2095,
+        "passed": true
+      },
+      "AzureEditor.ViewportDesignGpu": {
+        "seconds": 41.8914,
+        "passed": true
+      }
+    }
+  },
+  "archiveSha256": "aecdf9c8e9ecac0e6f8fd15646d0b99859d71a1f1e4de250a174b9025db1d4fc"
+}

@@ -1452,6 +1452,8 @@ NVIDIA 完整原生深度与可见量精确一致，Intel 九十七处超差继�
 NPR 光照和角色局部光照夹具在 Debug 下分别用时 207.17 秒和 130.90 秒，均通过原 300 秒注册限时。
 [GPU 光照夹具运行时间](../acceptance/nr/gpu-lighting-fixture-runtime.md)记录两种构建配置与跨场景比较证据。
 
+[编辑器夹具运行时间](../acceptance/nr/editor-fixture-runtime.md)记录面板、诊断、选择与视口用例在两种配置的注册复测。
+
 [完整管线成本](../acceptance/nr/complete-capture-cost-map.md)完成全部 3453 个事件的实际绑定归因。
 材质绘制占 74.41%，当前评估普通不透明快照的视图常量。
 

@@ -1,5 +1,6 @@
 """Check content and console controls through production ImGui input."""
 import argparse
+from concurrent.futures import ThreadPoolExecutor
 import json
 import shutil
 import uuid
@@ -10,9 +11,10 @@ from test_editor_workspace import launch
 def run(executable, output, cases=None):
     root = output / ('run-' + uuid.uuid4().hex[:8])
     root.mkdir(parents=True)
-    results = []
     sources = Path(__file__).resolve().parents[1] / 'assets_public'
-    for project in ('scene_inspector', 'exploration'):
+
+    def check_project(project):
+        results = []
         work = root / project
         source = sources / project
         if project == 'exploration':
@@ -74,13 +76,18 @@ def run(executable, output, cases=None):
             assert not dismissed['feedback'], 'Compact diagnostic popup must dismiss the selected error'
             results.append(dict(project=project, size=[1120,720], activeError=True, toolbarAccessible=True, errorDismiss=True))
         if cases == ['diagnostics']:
-            continue
+            return results
         level = launch(executable, work, 'console-level', (1920,1080), 1, [
             dict(frame=25, action='click', target='tool.console'),
             dict(frame=29, action='click', target='console.level'),
             dict(frame=34, action='click', target='console.level.error')], capture=False)
         assert level['consoleView']['minimum'] == 'error'
         assert all(row['level'] == 'error' for row in level['consoleView']['visible'])
+        return results
+
+    with ThreadPoolExecutor(max_workers=2) as pool:
+        project_results = pool.map(check_project, ('scene_inspector', 'exploration'))
+        results = [case for project in project_results for case in project]
     summary = dict(passed=True, workflows=results, levelFilter=cases != ['diagnostics'],
                    input='production ImGui replay', physicalInput='not performed')
     (root / 'summary.json').write_text(json.dumps(summary, ensure_ascii=False, indent=2), encoding='utf-8')
