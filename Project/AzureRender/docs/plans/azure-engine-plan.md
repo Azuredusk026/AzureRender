@@ -1406,6 +1406,8 @@ Intel 头发颜色继续按冻结区域核对纹理选级。
 
 [固定姿态眼部阴影几何](../acceptance/nr/iris-overlay-geometry.md)通过双设备虹膜区域门槛，逐像素遮挡与乘色继续验收。
 
+[眼部阴影纹理与遮挡](../acceptance/nr/iris-overlay-source.md)核对原生纹理、乘色及完整几何覆盖。
+
 [体表法线原生选层](../acceptance/nr/native-body-explicit-mips.md)核对双设备选层。
 7,997 处合格深度位置均可用显式样本复现隐式法线。
 
