@@ -54,5 +54,14 @@
 
 [纹理结果](evidence/2026-11-14/face-native-texture-mips/results.json)和[纹理归档](evidence/2026-11-14/face-native-texture-mips/validation.zip)保存源摘要、装载失败及复测记录。
 
+## 透明衣料着色
+
+Player 绘制 967 在 91 处体表重点位置中改变 30 处，位置与原生事件 1383 完全一致。
+实际着色器输出的 Alpha 中位比值为一，最大绝对差为 0.00135。
+线性 RGB 对应通道的中位比值为 0.63609、0.73534 和 0.85309。
+红通道最大绝对差为 0.12313，后续对照以透明衣料的照明贡献为核验输入。
+
+[衣料结果](evidence/2026-11-14/transparent-cloth-color/results.json)和[衣料归档](evidence/2026-11-14/transparent-cloth-color/validation.zip)保存绘制前后附件和片元输出。
+
 [结果清单](evidence/2026-11-13/face-skin-color-sources/results.json)记录区域、坐标及原生阶段摘要。
 [验证归档](evidence/2026-11-13/face-skin-color-sources/validation.zip)保存逐点索引及计算程序。
