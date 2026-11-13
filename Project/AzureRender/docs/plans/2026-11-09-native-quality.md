@@ -181,8 +181,12 @@ Intel 头发颜色继续核对纹理梯度与层级选择。
 
 [虹膜覆盖来源](../acceptance/nr/iris-native-overlay.md)核对原生覆盖对 94 个虹膜位置的影响。
 
+[固定姿态眼部阴影几何](../acceptance/nr/iris-overlay-geometry.md)通过双设备虹膜区域门槛，逐像素遮挡与乘色继续验收。
+
 [体表法线原生选层](../acceptance/nr/native-body-explicit-mips.md)核对体表实际选层与解码。
 生产可见量及共同图元按原门槛继续验收。
+
+[体表接收法线小数精度](../acceptance/nr/body-fractional-normal.md)核对生产 Player 及新增可见量超差。
 
 ## 后续外观
 

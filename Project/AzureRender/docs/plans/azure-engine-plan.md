@@ -1404,5 +1404,9 @@ Intel 头发颜色继续按冻结区域核对纹理选级。
 
 [虹膜覆盖来源](../acceptance/nr/iris-native-overlay.md)核对原生覆盖对 94 个虹膜位置的影响。
 
+[固定姿态眼部阴影几何](../acceptance/nr/iris-overlay-geometry.md)通过双设备虹膜区域门槛，逐像素遮挡与乘色继续验收。
+
 [体表法线原生选层](../acceptance/nr/native-body-explicit-mips.md)核对双设备选层。
 7,997 处合格深度位置均可用显式样本复现隐式法线。
+
+[体表接收法线小数精度](../acceptance/nr/body-fractional-normal.md)核对生产 Player 及新增可见量超差。
