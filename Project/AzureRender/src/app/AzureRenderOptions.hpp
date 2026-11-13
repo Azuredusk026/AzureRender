@@ -73,6 +73,7 @@ struct AzureRenderOptions {
     std::string qaEffectState;
     std::string qaIsolation;
     std::optional<float> qaExposureEv;
+    bool qaShowcasePresentation = false;
     std::string renderPathName;
     bool editorMode = false;
     std::string editorScenePath;

@@ -44,6 +44,21 @@ int main() try {
         "Component isolation accepts explicit diagnostic exposure");
     require(azurerender::parseCommandLine({"--qa-isolation","hair-kk","--qa-exposure","-4"}).options.qaExposureEv==-4.F,
         "Diagnostic exposure retains its signed EV value");
+    require(azurerender::parseCommandLine({
+        "--qa-presentation", "showcase", "--qa-isolation", "albedo",
+        "--capture-dir", "frames", "--capture-frames", "1"
+    }).options.qaShowcasePresentation, "Showcase capture retains authored presentation");
+    expectError(CommandLineErrorCode::InvalidValue, "--qa-presentation", {
+        "--qa-presentation", "missing", "--qa-isolation", "albedo",
+        "--capture-dir", "frames", "--capture-frames", "1"});
+    expectError(CommandLineErrorCode::InvalidCombination, "--qa-presentation", {
+        "--qa-presentation", "showcase", "--qa-isolation", "albedo", "--qa-exposure", "-1",
+        "--capture-dir", "frames", "--capture-frames", "1"});
+    expectError(CommandLineErrorCode::InvalidCombination, "--qa-presentation", {
+        "--qa-presentation", "showcase", "--qa-isolation", "albedo"});
+    expectError(CommandLineErrorCode::InvalidCombination, "--qa-presentation", {
+        "--qa-presentation", "showcase", "--qa-isolation", "albedo", "--project", "game.azureproject",
+        "--capture-dir", "frames", "--capture-frames", "1"});
     require(!azurerender::parseCommandLine({}).options.qaExposureEv,"Default diagnostic exposure remains implicit zero EV");
     require(azurerender::parseCommandLine({"--qa-isolation","rim","--qa-exposure","0"}).options.qaExposureEv==0.F,
         "Explicit zero diagnostic exposure is preserved");

@@ -106,6 +106,7 @@ struct BlackholeQualityParameters {
 struct CharacterPresentationSettings {
     bool backgroundEnabled = true;
     bool platformEnabled = true;
+    bool showcaseBackdrop = false;
 };
 
 enum class SkyMode : std::uint32_t { Procedural = 0, Environment = 1, Solid = 2 };

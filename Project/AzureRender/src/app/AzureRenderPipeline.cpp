@@ -235,7 +235,8 @@ void AzureRenderApp::createGraphicsPipeline() {
     const auto innerOutlineVertexCode =
         readBinaryFile(shaderDirectory + "/inner_outline.vert.spv");
     const auto innerOutlineFragmentCode =
-        readBinaryFile(shaderDirectory + "/inner_outline.frag.spv");
+        readBinaryFile(shaderDirectory + (runOptions_.qaShowcasePresentation
+            ? "/inner_outline_showcase.frag.spv" : "/inner_outline.frag.spv"));
     const auto hudVertexCode =
         readBinaryFile(shaderDirectory + "/hud.vert.spv");
     const auto hudFragmentCode =
@@ -365,7 +366,8 @@ void AzureRenderApp::createGraphicsPipeline() {
         pipelineInfo.pColorBlendState = &colorBlending;
         pipelineInfo.pDynamicState = &dynamicState;
         pipelineInfo.layout = postProcessPipelineLayout_;
-        pipelineInfo.renderPass = spatialAntiAliasing_.at(0)->inputPass();
+        pipelineInfo.renderPass = runOptions_.qaShowcasePresentation
+            ? postProcessRenderPass_ : spatialAntiAliasing_.at(0)->inputPass();
         pipelineInfo.subpass = 0;
         pipelineInfo.flags=pipelineInspection_?pipelineInspection_->creationFlags():0;
         vkCheck(
@@ -496,7 +498,7 @@ void AzureRenderApp::createPostProcessFramebuffers() {
 }
 
 void AzureRenderApp::createSpatialAntiAliasingResources(){
-    if(!spatialAntiAliasing_.empty())return;
+    if(runOptions_.qaShowcasePresentation || !spatialAntiAliasing_.empty())return;
     const auto shaders=resourceLocator_.shaderDirectory().u8string();
     for(std::size_t index=0;index<swapchainImages_.size();++index)
         spatialAntiAliasing_.push_back(std::make_unique<azurerender::SpatialAntiAliasing>(

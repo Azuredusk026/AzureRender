@@ -5,6 +5,8 @@
 
 [相机捕获清单](docs/acceptance/nr/capture-camera.md#主线清单版本)通过两种配置的投影偏移及镜头元数据检查。
 
+[公开角色冻结画面](docs/acceptance/nr/frozen-public-visual.md#冻结驱动复测)记录 595.79 下三条渲染路径的逐像素核对。
+
 [主线联合场景短测](docs/acceptance/nr/performance-bottlenecks.md#主线联合场景短测)记录帧耗时、渲染通道及显存峰值。
 
 [可玩包关卡提交](docs/acceptance/p1/2026-11-13-level-commit.md)通过隔离运行、切关和重启验收。

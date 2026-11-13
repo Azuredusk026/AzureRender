@@ -30,7 +30,7 @@ constexpr const char* kUsage =
     "[--qa-camera <preset>] [--qa-light <preset>] "
     "[--qa-morph-weights <w0> <w1>] "
     "[--qa-effect <effect> --qa-effect-state <state>] "
-    "[--qa-isolation <view>] [--qa-exposure <-8..8 EV>] [--render-path <traditional|subpasses|dynamic>] "
+    "[--qa-isolation <view>] [--qa-exposure <-8..8 EV>] [--qa-presentation showcase] [--render-path <traditional|subpasses|dynamic>] "
     "[--scene-type <character|blackhole>] "
     "[--blackhole-quality <performance|balanced|cinematic>] "
     "[--blackhole-camera <front|orbit-left|high|close|over-shoulder>] "
@@ -70,6 +70,7 @@ constexpr const char* kHelp =
     "  --qa-camera scene --qa-light scene Preserve authored scene conditions\n"
     "  --qa-isolation <view>             Includes roughness, metallic, direct-specular, reflection, shaded-normal, object-shadow-visibility\n"
     "  --qa-exposure <-8..8 EV>          Radiometric isolation exposure; default 0 EV\n"
+    "  --qa-presentation showcase       Authored character display for QA capture\n"
     "  --qa-light-scan                    Rotate the key light through 120 frames\n"
     "  --qa-animation                     Play animation with a fixed QA camera\n"
     "  --qa-isolation brow-mask           Show visible eyebrow regions\n"
@@ -274,6 +275,14 @@ void validate(const ParsedCommandLine& parsed) {
             "reflection", "shaded-normal", "shadow-color", "object-shadow-visibility"})) {
         fail(CommandLineErrorCode::InvalidValue, "--qa-isolation",
              "Unknown --qa-isolation: " + options.qaIsolation);
+    }
+    if (options.qaShowcasePresentation
+        && (options.qaIsolation.empty() || !hasCaptureFrames || options.qaExposureEv
+            || options.editorMode || !options.projectFile.empty() || !parsed.editorScenePath.empty()
+            || options.renderSettings.sceneType != SceneType::Character
+            || options.renderSettings.antiAliasing > 2)) {
+        fail(CommandLineErrorCode::InvalidCombination, "--qa-presentation",
+             "Showcase presentation requires standalone character isolation capture and spatial anti-aliasing");
     }
     if(options.qaExposureEv){
         if(*options.qaExposureEv < -8.F || *options.qaExposureEv > 8.F)
@@ -592,6 +601,11 @@ ParsedCommandLine parseCommandLine(
             }
         } else if (argument == "--qa-isolation") {
             parsed.options.qaIsolation = requireValue(arguments, index, argument);
+        } else if (argument == "--qa-presentation") {
+            if (requireValue(arguments, index, argument) != "showcase") {
+                fail(CommandLineErrorCode::InvalidValue, argument, "Expected showcase QA presentation");
+            }
+            parsed.options.qaShowcasePresentation = true;
         } else if (argument == "--qa-exposure") {
             parsed.options.qaExposureEv=parseFiniteFloat(requireValue(arguments,index,argument),argument);
         } else {

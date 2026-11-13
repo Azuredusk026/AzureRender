@@ -220,6 +220,7 @@ void AzureRenderApp::writeCaptureManifest(
         }
         }
     }
+    if (runOptions_.qaShowcasePresentation) qaState << "|showcase";
     const std::string qaStateHash = fnv1a64Hex(qaState.str());
     output
         << "{\n"
@@ -339,13 +340,14 @@ void AzureRenderApp::writeCaptureManifest(
         << "  \"qaIsolation\": "
         << std::quoted(qaIsolationName_) << ",\n"
         << "  \"qaExposureEv\": " << runOptions_.qaExposureEv.value_or(0.F) << ",\n"
+        << "  \"qaPresentation\": \"" << (runOptions_.qaShowcasePresentation ? "showcase" : "component") << "\",\n"
         << "  \"qaDisableFaceCulling\": " << (runOptions_.qaDisableFaceCulling ? "true" : "false") << ",\n"
         << "  \"qaDisableDepthTest\": " << (runOptions_.qaDisableDepthTest ? "true" : "false") << ",\n"
         << "  \"cameraNear\": " << captureNear << ",\n"
         << "  \"cameraFar\": " << captureFar << ",\n"
         << "  \"antiAliasing\": " << effectiveRenderSettings_.antiAliasing << ",\n"
         << "  \"nprLighting\": " << azurerender::encodeNprLighting(renderSettings_.nprLighting).dump() << ",\n"
-        << "  \"antiAliasingPipeline\": " << std::quoted(sceneMultisampling_?"native-hdr-multisample-v1":temporalReconstruction_&&sceneRenderer_&&sceneRenderer_->capabilities().supportsMotionVectors?"native-hdr-temporal-v4":"linear-display-spatial-v1") << ",\n"
+        << "  \"antiAliasingPipeline\": " << std::quoted(runOptions_.qaShowcasePresentation?"showcase-spatial-v1":sceneMultisampling_?"native-hdr-multisample-v1":temporalReconstruction_&&sceneRenderer_&&sceneRenderer_->capabilities().supportsMotionVectors?"native-hdr-temporal-v4":"linear-display-spatial-v1") << ",\n"
         << "  \"rasterizationSamples\": " << (sceneMultisampling_?4:1) << ",\n"
         << "  \"multisampleRequested\": " << (multisampleRequested_?"true":"false") << ",\n"
         << "  \"multisampleSourceSlots\": " << (sceneMultisampling_?kMaxFramesInFlight:0) << ",\n"

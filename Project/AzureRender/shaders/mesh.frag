@@ -597,10 +597,48 @@ float sampleCascadeShadow(int cascade,float normalDotLight,vec2 depthGradient,fl
     ivec2 lo=origin+ivec2(1),hi=origin+tile-ivec2(2);
     vec2 uv=(vec2(origin)+localUv*vec2(tile))/vec2(extent);
     float depthRange=camera.cascadeDepthRanges[cascade];
-    float worldTexel=camera.cascadeWorldDiameters[cascade]/float(tile.x);
+    bool showcaseShadow = camera.skyParameters.w > 0.5;
+    float worldTexel = showcaseShadow
+        ? depthRange / 4.1 * 2.0 / float(tile.x)
+        : camera.cascadeWorldDiameters[cascade] / float(tile.x);
     float maximumRadius=clamp(camera.renderingParameters.w,1.0,16.0);
     depthGradient*=shadowReceiverPlaneWeight(normalCurvature,worldTexel*maximumRadius);
     float receiver=p.z-shadowReceiverBias(normalDotLight,worldTexel)/depthRange;
+    if (showcaseShadow) {
+        float depthSum = 0.0;
+        float blockerMass = 0.0;
+        for (int y = -2; y <= 2; ++y) {
+            for (int x = -2; x <= 2; ++x) {
+                vec2 offset = vec2(x, y) / vec2(extent);
+                float planeOffset = dot(depthGradient, offset);
+                vec2 moments = filteredShadowBlockers(uv + offset, receiver + planeOffset, lo, hi, depthGradient);
+                depthSum += moments.x - planeOffset * moments.y;
+                blockerMass += moments.y;
+            }
+        }
+        float separation = blockerMass > 0.0 ? max(receiver - depthSum / blockerMass, 0.0) * depthRange : 0.0;
+        float contactRadius = shadowContactRadius(float(tile.x), maximumRadius);
+        float radius = clamp(contactRadius + separation * .035 / max(worldTexel, 1e-6), contactRadius, maximumRadius);
+        vec2 centre = uv * vec2(extent) - .5;
+        ivec2 base = ivec2(floor(centre));
+        vec2 fraction = fract(centre);
+        int bound = int(ceil(radius + .5));
+        float visible = 0.0;
+        float totalWeight = 0.0;
+        for (int y = -bound; y <= bound; y += 2) {
+            for (int x = -bound; x <= bound; x += 2) {
+                ivec2 block = base + ivec2(x, y);
+                vec4 weights = shadowDiskQuadWeights(vec2(x, y) - fraction, radius);
+                float weight = dot(weights, vec4(1.0));
+                if (weight <= 0.0) continue;
+                vec4 planeDepths = vec4(receiver) + shadowPlaneQuad(block, lo, hi, uv, vec2(extent), depthGradient);
+                vec4 depths = shadowTexelQuad(mainShadowDepth, sharedDepthSampler, block, lo, hi);
+                visible += dot(weights, step(planeDepths, depths));
+                totalWeight += weight;
+            }
+        }
+        return visible / max(totalWeight, 1e-6);
+    }
     vec2 centre=uv*vec2(extent)-.5;
     ivec2 base=ivec2(floor(centre));vec2 fraction=fract(centre);
     vec2 depthPerTexel=depthGradient/vec2(extent);

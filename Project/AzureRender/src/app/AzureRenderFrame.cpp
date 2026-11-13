@@ -1069,103 +1069,110 @@ void AzureRenderApp::recordCommandBuffer(
     if(renderViews_)renderViews_->schedule(graph,frame,sceneContext,graphicsSubmission_+1);
 #endif
     const auto scenePassCount = graph.passes().size();
-    auto& spatial=*spatialAntiAliasing_.at(imageIndex);
-    const auto linearDisplay=importAttachment("linear-display",spatial.inputImage().image,VK_IMAGE_ASPECT_COLOR_BIT);
-    const auto gradePass=graph.addPass("post-process-grade", [&] {
-    VkRenderPassBeginInfo postProcessPassInfo{
-        VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO};
-    postProcessPassInfo.renderPass = spatial.inputPass();
-    postProcessPassInfo.framebuffer = spatial.inputFramebuffer();
-
-    postProcessPassInfo.renderArea.extent = sceneRenderExtent_;
-    vkCmdBeginRenderPass(
-        commandBuffer,
-        &postProcessPassInfo,
-        VK_SUBPASS_CONTENTS_INLINE);
-    VkViewport viewport{};
-    viewport.width = static_cast<float>(sceneRenderExtent_.width);
-    viewport.height = static_cast<float>(sceneRenderExtent_.height);
-    viewport.maxDepth = 1.0F;
-    VkRect2D scissor{};
-    scissor.extent = sceneRenderExtent_;
-    vkCmdSetViewport(commandBuffer, 0, 1, &viewport);
-    vkCmdSetScissor(commandBuffer, 0, 1, &scissor);
-    vkCmdBindPipeline(
-        commandBuffer,
-        VK_PIPELINE_BIND_POINT_GRAPHICS,
-        innerOutlinePipeline_);
-    vkCmdBindDescriptorSets(
-        commandBuffer,
-        VK_PIPELINE_BIND_POINT_GRAPHICS,
-        postProcessPipelineLayout_,
-        0,
-        1,
-        &postProcessDescriptorSets_[imageIndex],
-        0,
-        nullptr);
-    const PostProcessPushConstants postProcessConstants{
-        effectiveRenderSettings_.diagnosticView == 2
-            ? 1.0F
-            : (effectiveRenderSettings_.innerOutlineEnabled
-                ? effectiveRenderSettings_.outline.strength : 0.0F),
-        effectiveRenderSettings_.outline.depthThreshold,
-        effectiveRenderSettings_.outline.normalThreshold,
-        static_cast<float>(effectiveRenderSettings_.diagnosticView),
-        effectiveRenderSettings_.grade.exposureEv,
-        effectiveRenderSettings_.grade.toneMappingEnabled ? 1.0F : 0.0F,
-        effectiveRenderSettings_.bloom.enabled
-            && !(qaEffectName_ == "bloom" && !qaEffectEnabled_)
-            ? effectiveRenderSettings_.bloom.strength : 0.0F,
-        qaEffectName_ == "bloom" && qaEffectStateName_ == "isolation"
-            ? 1.0F : 0.0F,
-        {
-            effectiveRenderSettings_.outline.color[0],
-            effectiveRenderSettings_.outline.color[1],
-            effectiveRenderSettings_.outline.color[2],
-            1.0F,
-        },
-        {
-            effectiveRenderSettings_.grade.saturation,
-            effectiveRenderSettings_.grade.contrast,
-            effectiveRenderSettings_.bloom.threshold,
-            displayMaskSelector,
-        },
-        {
-            effectiveRenderSettings_.grade.tint[0],
-            effectiveRenderSettings_.grade.tint[1],
-            effectiveRenderSettings_.grade.tint[2],
-            0.0F,
-        },
-        {static_cast<float>(effectiveRenderSettings_.antiAliasing),effectiveRenderSettings_.cameraNear,
-         effectiveRenderSettings_.cameraFar,effectiveRenderSettings_.antiAliasing==2?2.0F:1.0F},
-        {effectiveRenderSettings_.grade.lut.asset.empty()?0.0F:static_cast<float>(colorGradingLut_->dimension()),
-         effectiveRenderSettings_.grade.lut.exposureMultiplier,static_cast<float>(colorGradingLut_->inputDomain()),
-         swapchainFormat_==VK_FORMAT_B8G8R8A8_SRGB||swapchainFormat_==VK_FORMAT_R8G8B8A8_SRGB?0.0F:1.0F},
+    const bool showcaseDisplay=runOptions_.qaShowcasePresentation;
+    const bool encodeSrgb=swapchainFormat_!=VK_FORMAT_B8G8R8A8_SRGB && swapchainFormat_!=VK_FORMAT_R8G8B8A8_SRGB;
+    const auto drawGrade=[&] {
+        vkCmdBindPipeline(
+            commandBuffer,
+            VK_PIPELINE_BIND_POINT_GRAPHICS,
+            innerOutlinePipeline_);
+        vkCmdBindDescriptorSets(
+            commandBuffer,
+            VK_PIPELINE_BIND_POINT_GRAPHICS,
+            postProcessPipelineLayout_,
+            0,
+            1,
+            &postProcessDescriptorSets_[imageIndex],
+            0,
+            nullptr);
+        const PostProcessPushConstants postProcessConstants{
+            effectiveRenderSettings_.diagnosticView == 2
+                ? 1.0F
+                : (effectiveRenderSettings_.innerOutlineEnabled
+                    ? effectiveRenderSettings_.outline.strength : 0.0F),
+            effectiveRenderSettings_.outline.depthThreshold,
+            effectiveRenderSettings_.outline.normalThreshold,
+            static_cast<float>(effectiveRenderSettings_.diagnosticView),
+            effectiveRenderSettings_.grade.exposureEv,
+            effectiveRenderSettings_.grade.toneMappingEnabled ? 1.0F : 0.0F,
+            effectiveRenderSettings_.bloom.enabled
+                && !(qaEffectName_ == "bloom" && !qaEffectEnabled_)
+                ? effectiveRenderSettings_.bloom.strength : 0.0F,
+            qaEffectName_ == "bloom" && qaEffectStateName_ == "isolation"
+                ? 1.0F : 0.0F,
+            {
+                effectiveRenderSettings_.outline.color[0],
+                effectiveRenderSettings_.outline.color[1],
+                effectiveRenderSettings_.outline.color[2],
+                1.0F,
+            },
+            {
+                effectiveRenderSettings_.grade.saturation,
+                effectiveRenderSettings_.grade.contrast,
+                effectiveRenderSettings_.bloom.threshold,
+                showcaseDisplay ? 0.0F : displayMaskSelector,
+            },
+            {
+                effectiveRenderSettings_.grade.tint[0],
+                effectiveRenderSettings_.grade.tint[1],
+                effectiveRenderSettings_.grade.tint[2],
+                0.0F,
+            },
+            {static_cast<float>(effectiveRenderSettings_.antiAliasing),effectiveRenderSettings_.cameraNear,
+             effectiveRenderSettings_.cameraFar,effectiveRenderSettings_.antiAliasing==2?2.0F:1.0F},
+            {effectiveRenderSettings_.grade.lut.asset.empty()?0.0F:static_cast<float>(colorGradingLut_->dimension()),
+             effectiveRenderSettings_.grade.lut.exposureMultiplier,static_cast<float>(colorGradingLut_->inputDomain()),
+             encodeSrgb ? 1.0F : 0.0F},
+        };
+        vkCmdPushConstants(
+            commandBuffer,
+            postProcessPipelineLayout_,
+            VK_SHADER_STAGE_FRAGMENT_BIT,
+            0,
+            sizeof(postProcessConstants),
+            &postProcessConstants);
+        vkCmdDraw(commandBuffer, 3, 1, 0, 0);
     };
-    vkCmdPushConstants(
-        commandBuffer,
-        postProcessPipelineLayout_,
-        VK_SHADER_STAGE_FRAGMENT_BIT,
-        0,
-        sizeof(postProcessConstants),
-        &postProcessConstants);
-    vkCmdDraw(commandBuffer, 3, 1, 0, 0);
-    vkCmdEndRenderPass(commandBuffer);
-    });
-    graph.use(gradePass,resources.color,azurerender::RenderGraphUsage::Sampled,false);
-    graph.use(gradePass,resources.depth,azurerender::RenderGraphUsage::Sampled,false);
-    graph.use(gradePass,resources.normal,azurerender::RenderGraphUsage::Sampled,false);
-    graph.use(gradePass,displayMaskForGrade,azurerender::RenderGraphUsage::Sampled,false);
-    graph.use(gradePass,resources.shadow,azurerender::RenderGraphUsage::Sampled,false);
-    graph.attachment(gradePass,linearDisplay,azurerender::RenderGraphUsage::ColorAttachment,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
+    const auto gradeInputs=[&](auto pass) {
+        graph.use(pass,resources.color,azurerender::RenderGraphUsage::Sampled,false);
+        graph.use(pass,resources.depth,azurerender::RenderGraphUsage::Sampled,false);
+        graph.use(pass,resources.normal,azurerender::RenderGraphUsage::Sampled,false);
+        graph.use(pass,displayMaskForGrade,azurerender::RenderGraphUsage::Sampled,false);
+        graph.use(pass,resources.shadow,azurerender::RenderGraphUsage::Sampled,false);
+    };
+    auto* spatial=showcaseDisplay ? nullptr : spatialAntiAliasing_.at(imageIndex).get();
+    std::optional<std::uint32_t> linearDisplay;
+    if (spatial) {
+        linearDisplay=importAttachment("linear-display",spatial->inputImage().image,VK_IMAGE_ASPECT_COLOR_BIT);
+        const auto gradePass=graph.addPass("post-process-grade", [&] {
+            VkRenderPassBeginInfo pass{VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO};
+            pass.renderPass=spatial->inputPass();
+            pass.framebuffer=spatial->inputFramebuffer();
+            pass.renderArea.extent=sceneRenderExtent_;
+            vkCmdBeginRenderPass(commandBuffer,&pass,VK_SUBPASS_CONTENTS_INLINE);
+            VkViewport viewport{0,0,float(sceneRenderExtent_.width),float(sceneRenderExtent_.height),0,1};
+            VkRect2D scissor{{0,0},sceneRenderExtent_};
+            vkCmdSetViewport(commandBuffer,0,1,&viewport);
+            vkCmdSetScissor(commandBuffer,0,1,&scissor);
+            drawGrade();
+            vkCmdEndRenderPass(commandBuffer);
+        });
+        gradeInputs(gradePass);
+        graph.attachment(gradePass,*linearDisplay,azurerender::RenderGraphUsage::ColorAttachment,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
+    }
     const auto composite=graph.addPass("post-process-hud",[&]{
     VkRenderPassBeginInfo finalPass{VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO};
     finalPass.renderPass=postProcessRenderPass_;finalPass.framebuffer=postProcessFramebuffers_[imageIndex];
     finalPass.renderArea.extent=renderExtent_;vkCmdBeginRenderPass(commandBuffer,&finalPass,VK_SUBPASS_CONTENTS_INLINE);
     VkViewport finalViewport{};finalViewport.width=float(renderExtent_.width);finalViewport.height=float(renderExtent_.height);finalViewport.maxDepth=1;
     VkRect2D finalScissor{};finalScissor.extent=renderExtent_;vkCmdSetViewport(commandBuffer,0,1,&finalViewport);vkCmdSetScissor(commandBuffer,0,1,&finalScissor);
-    spatial.resolve(commandRecorder,azurerender::spatialAntiAliasingMode(effectiveRenderSettings_.antiAliasing,temporalReady,sceneMultisampling_!=nullptr),
-        swapchainFormat_!=VK_FORMAT_B8G8R8A8_SRGB&&swapchainFormat_!=VK_FORMAT_R8G8B8A8_SRGB,effectiveRenderSettings_.diagnosticView!=0);
+    if (spatial) {
+        spatial->resolve(commandRecorder,azurerender::spatialAntiAliasingMode(
+            effectiveRenderSettings_.antiAliasing,temporalReady,sceneMultisampling_!=nullptr),
+            encodeSrgb,effectiveRenderSettings_.diagnosticView!=0);
+    } else {
+        drawGrade();
+    }
     if ((hudEnabled_ || runOptions_.technicalSequence) &&
         hudVertexCounts_[currentFrame_] > 0) {
         vkCmdBindPipeline(
@@ -1189,7 +1196,8 @@ void AzureRenderApp::recordCommandBuffer(
     if(gameUiRenderer_ && gameUi_){const auto before=gameUiRenderer_->drawCalls();gameUiRenderer_->record(commandRecorder);uiDrawCalls_+=gameUiRenderer_->drawCalls()-before;}
     vkCmdEndRenderPass(commandBuffer);
     });
-    graph.use(composite,linearDisplay,azurerender::RenderGraphUsage::Sampled,false);
+    if (linearDisplay) graph.use(composite,*linearDisplay,azurerender::RenderGraphUsage::Sampled,false);
+    else gradeInputs(composite);
     graph.write(composite, output);
     const auto editor = graph.addPass("editor-ui", [&] {
 #if AZURE_WITH_EDITOR

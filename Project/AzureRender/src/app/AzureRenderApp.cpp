@@ -174,6 +174,13 @@ void AzureRenderApp::run(
             + runOptions_.gpuTimingOutput);
     }
     initializeSettings();
+    if (runOptions_.qaShowcasePresentation) {
+        const auto settings = azurerender::resolveRenderSettings(*engineSettings_, renderSettings_);
+        if (runOptions_.editorMode || levelSession_
+            || settings.sceneType != azurerender::SceneType::Character || settings.antiAliasing > 2) {
+            throw std::invalid_argument("Showcase presentation requires standalone character capture with spatial anti-aliasing");
+        }
+    }
     initWindow();
     initVulkan(runOptions_.assetPath);
 #if !AZURE_WITH_EDITOR
@@ -823,7 +830,8 @@ void AzureRenderApp::buildSceneFrameData(
         frame.timeSeconds = currentTime - pausedTimeOffset_;
     }
     effectiveRenderSettings_=azurerender::resolveRenderSettings(*engineSettings_,renderSettings_);
-    if(qaIsolationMode_>0){
+    effectiveRenderSettings_.characterPresentation.showcaseBackdrop = runOptions_.qaShowcasePresentation;
+    if(qaIsolationMode_>0 && !runOptions_.qaShowcasePresentation){
         // Apply component transfer after final frame-setting resolution.
         // Authored grades remain in the scene document and setting layers.
         effectiveRenderSettings_.grade=azurerender::GradeSettings{};
@@ -845,6 +853,11 @@ void AzureRenderApp::buildSceneFrameData(
     if(sceneRenderer_&&(frame.camera.view.projectionOffsetX!=0||frame.camera.view.projectionOffsetY!=0||frame.camera.view.referenceCalibration))
         azurerender::validateSceneRendererCamera(sceneRenderer_->capabilities(),frame.camera.view);
     effectiveRenderSettings_.cameraView=frame.camera.view;
+    if (runOptions_.qaShowcasePresentation
+        && frame.camera.source == azurerender::RenderCameraSource::Fallback) {
+        // The fixed showcase lens scales the two projection coefficients after construction.
+        effectiveRenderSettings_.cameraView.reset();
+    }
     effectiveRenderSettings_.cameraNear=frame.camera.view.nearPlane;
     effectiveRenderSettings_.cameraFar=frame.camera.view.farPlane;
     effectiveRenderSettings_.shadowDistance=std::clamp(effectiveRenderSettings_.shadowDistance,
@@ -1115,8 +1128,10 @@ void AzureRenderApp::configureQaHarness() {
         }
     }
     if (qaIsolationMode_ > 0) {
-        // Component isolation excludes the environment and both outline paths.
-        renderSettings_.characterPresentation.backgroundEnabled = false;
+        // Component isolation excludes both outline paths.
+        if (!runOptions_.qaShowcasePresentation) {
+            renderSettings_.characterPresentation.backgroundEnabled = false;
+        }
         renderSettings_.innerOutlineEnabled = false;
         renderSettings_.silhouetteOutlineEnabled = false;
     }

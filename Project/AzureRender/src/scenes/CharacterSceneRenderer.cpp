@@ -4678,7 +4678,9 @@ void CharacterSceneRenderer::updateUniformBuffer(
                 radius, vectorLength(subtract(corner, center)));
         }
         radius = std::max(std::ceil(radius * 16.0F) / 16.0F, 0.25F);
-        const auto depthFit=computeCascadeDepthFit(radius,settings.shadowDistance);
+        const auto depthFit = settings.characterPresentation.showcaseBackdrop
+            ? CascadeDepthFit{radius * 2.0F + 0.1F, 0.1F, radius * 4.1F}
+            : computeCascadeDepthFit(radius,settings.shadowDistance);
         cascadeDepthRanges[cascade]=depthFit.farPlane-depthFit.nearPlane;
         cascadeWorldDiameters[cascade]=radius*2.F;
         const Vector3 snapUp=std::abs(dot(lightDirection,worldUp))>.97F?Vector3{0,0,1}:worldUp;
@@ -4744,7 +4746,8 @@ void CharacterSceneRenderer::updateUniformBuffer(
     if(settings.cameraView){const auto shift=cameraProjectionRayOffset(*settings.cameraView,cameraRight,cameraUp,skyScale*aspect,skyScale);
         for(unsigned axis=0;axis<3;++axis)uniform.skyForward[axis]+=shift[axis];}
     uniform.skyColor={settings.sky.color[0],settings.sky.color[1],settings.sky.color[2],1};
-    uniform.skyParameters={static_cast<float>(settings.sky.mode),settings.sky.intensity,settings.sky.rotationDegrees*kPi/180.F,0};
+    uniform.skyParameters={static_cast<float>(settings.sky.mode),settings.sky.intensity,settings.sky.rotationDegrees*kPi/180.F,
+        settings.characterPresentation.showcaseBackdrop ? 1.F : 0.F};
     uniform.clusterLighting={settings.sceneLightingEnabled?1.F:0.F,settings.sky.intensity,settings.sky.rotationDegrees*kPi/180.F,float(settings.environmentSpecularModel)};
     uniform.cameraPosition = {
         cameraPosition_[0], cameraPosition_[1], cameraPosition_[2], 1.0F,

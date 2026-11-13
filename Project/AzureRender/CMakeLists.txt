@@ -577,6 +577,9 @@ compile_shader(
     OUTPUT_NAME shadow_bindless.frag)
 compile_shader("${SHADER_SOURCE_DIR}/inner_outline.vert")
 compile_shader("${SHADER_SOURCE_DIR}/inner_outline.frag")
+compile_shader("${SHADER_SOURCE_DIR}/inner_outline.frag"
+    DEFINES AZURE_SHOWCASE_DISPLAY=1
+    OUTPUT_NAME inner_outline_showcase.frag)
 compile_shader("${SHADER_SOURCE_DIR}/hud.vert")
 compile_shader("${SHADER_SOURCE_DIR}/hud.frag")
 compile_shader("${SHADER_SOURCE_DIR}/game-ui.vert")
@@ -2865,6 +2868,7 @@ if(BUILD_TESTING)
                 "${CMAKE_CURRENT_SOURCE_DIR}/tools/run_visual_regression.py"
                 --executable "$<TARGET_FILE:AzureRender>"
                 --tolerance strict
+                "--renderer-arg=--qa-presentation" "--renderer-arg=showcase"
                 --output-dir "${CMAKE_CURRENT_BINARY_DIR}/visual-regression"
                 --summary
                     "${CMAKE_CURRENT_BINARY_DIR}/visual-regression-summary.json")
@@ -2884,6 +2888,7 @@ if(BUILD_TESTING)
                 "${CMAKE_CURRENT_SOURCE_DIR}/tools/run_visual_regression.py"
                 --executable "$<TARGET_FILE:AzureRender>"
                 --tolerance strict
+                "--renderer-arg=--qa-presentation" "--renderer-arg=showcase"
                 "--renderer-arg=--disable-bindless"
                 --output-dir "${CMAKE_CURRENT_BINARY_DIR}/visual-regression-legacy"
                 --summary
@@ -2976,6 +2981,7 @@ if(BUILD_TESTING)
                 "${CMAKE_CURRENT_SOURCE_DIR}/tools/run_visual_regression.py"
                 --executable "$<TARGET_FILE:AzureRender>"
                 --tolerance strict
+                "--renderer-arg=--qa-presentation" "--renderer-arg=showcase"
                 "--renderer-arg=--disable-compute-skinning"
                 --output-dir "${CMAKE_CURRENT_BINARY_DIR}/visual-regression-legacy-skinning"
                 --summary

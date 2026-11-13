@@ -33,6 +33,7 @@ Player 的 CPU 工作 P95 至多为八毫秒。
 [三纹理采样与视口选择集成](../acceptance/nr/projected-hair-viewport-integration.md)通过所属构建和双显卡复验。
 [投影头发主线注册用例](../acceptance/nr/projected-hair-viewport-integration.md#主线注册用例)通过双配置 GPU 复测和构建契约核对。
 [相机捕获清单](../acceptance/nr/capture-camera.md#主线清单版本)通过投影布局三、镜头输入及画面偏移检查。
+[公开角色冻结画面](../acceptance/nr/frozen-public-visual.md#冻结驱动复测)按 NVIDIA 595.79 和 RGB 零差异门槛核验。
 
 [主线联合场景短测](../acceptance/nr/performance-bottlenecks.md#主线联合场景短测)记录标准构建的场景阶段成本。
 CPU 工作 P95 为 5.90 毫秒，GPU 帧 P95 为 20.33 毫秒。
