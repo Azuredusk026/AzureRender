@@ -162,6 +162,10 @@ inline PackedMaterialSurfaceProfile packMaterialSurfaceProfile(const AssetMateri
         if(material.nprDiffuse.viewTint.present) {
             const auto& tint=material.nprDiffuse.viewTint;
             result.rows[2]={tint.color[0],tint.color[1],tint.color[2],tint.scale};
+            if(tint.faceMask) {
+                result.rows[6][1]=1.F;
+                result.rows[6][2]=tint.geometryScale;
+            }
         }
         if(material.nprDiffuse.lighting.present) {
             const auto& light=material.nprDiffuse.lighting;

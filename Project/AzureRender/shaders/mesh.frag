@@ -533,7 +533,18 @@ vec4 materialDiffuseRampRgba(float coordinate) {
 }
 
 vec3 materialNprLitAlbedo(vec3 base,vec3 normal,vec3 view) {
-    vec4 tint=materialSurfaceProfiles.profiles[material.materialPadding>>1U].rows[2];
+    uint profileIndex=material.materialPadding>>1U;
+    vec4 tint=materialSurfaceProfiles.profiles[profileIndex].rows[2];
+#if defined(AZURE_EXTENDED_MATERIAL_LIGHTING)
+    vec2 maskPolicy=materialSurfaceProfiles.profiles[profileIndex].rows[6].yz;
+    if(maskPolicy.x>.5) {
+        vec2 mask=azureSamplePrimaryUv(AZ_TEX_STYLE_MASK,textureCoordinate).rg;
+        vec3 geometry=normalize(worldNormal)*(gl_FrontFacing?1.0:-1.0);
+        float maskInfluence=mix(maskPolicy.y,1.0,mask.g)*mask.r;
+        float weight=clamp(tint.w*(1.0-clamp(dot(geometry,view),0.0,1.0))*maskInfluence,0.0,1.0);
+        return base*mix(vec3(1),tint.rgb,weight);
+    }
+#endif
     return characterDiffuseViewTint(base,normal,view,tint);
 }
 CharacterDiffuseResponse materialNprDiffuseResponse(vec4 base,float metallic,vec4 ramp,float baseAo,float visibility,float mainShadow,vec3 normal,vec3 view) {

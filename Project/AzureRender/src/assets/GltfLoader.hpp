@@ -278,6 +278,8 @@ struct AssetMaterial {
             bool present=false;
             float scale=0;
             std::array<float,3> color{1,1,1};
+            bool faceMask=false;
+            float geometryScale=1;
         } viewTint;
         struct MainRamp {
             bool present=false;

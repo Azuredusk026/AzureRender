@@ -340,6 +340,43 @@
           "type": "boolean",
           "default": false
         },
+        "viewTint": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["schemaVersion", "scale", "color"],
+          "dependentRequired": {
+            "mode": ["geometryScale"],
+            "geometryScale": ["mode"]
+          },
+          "properties": {
+            "schemaVersion": {
+              "const": 1
+            },
+            "scale": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 64
+            },
+            "color": {
+              "type": "array",
+              "minItems": 3,
+              "maxItems": 3,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 64
+              }
+            },
+            "mode": {
+              "const": "face-mask"
+            },
+            "geometryScale": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            }
+          }
+        },
         "lightingNormal": {
           "type": "string",
           "enum": [

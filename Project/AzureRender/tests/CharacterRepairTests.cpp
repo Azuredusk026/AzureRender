@@ -928,6 +928,35 @@ void testFaceHighlightProfile(const nlohmann::json& fixture,const std::filesyste
     profile(saturated)["faceSdf"].erase("highlight");
     require(packMaterialSurfaceProfile(load(saturated)).rows[12][3]==1.F,
         "Face main brightness saturation must also support a face without a highlight texture");
+    auto maskedTint=source;
+    profile(maskedTint)["nprDiffuse"]["viewTint"]={{"schemaVersion",1},{"scale",.85},
+        {"color",{.38,.12,.14}},{"mode","face-mask"},{"geometryScale",.595}};
+    auto tintRows=packMaterialSurfaceProfile(load(maskedTint)).rows;
+    require(tintRows[2]==PackedMaterialSurfaceProfile::Row{.38F,.12F,.14F,.85F}
+        &&tintRows[6][1]==1.F&&tintRows[6][2]==.595F,
+        "Face view tint must carry its mask policy and geometry scale");
+    auto geometryTint=maskedTint;
+    auto& geometryViewTint=profile(geometryTint)["nprDiffuse"]["viewTint"];
+    geometryViewTint.erase("mode");
+    geometryViewTint.erase("geometryScale");
+    const auto geometryRows=packMaterialSurfaceProfile(load(geometryTint)).rows;
+    require(geometryRows[2]==tintRows[2]&&geometryRows[6][1]==0.F,
+        "Geometry view tint must preserve the existing material profile");
+    const auto rejectTint=[&](const Json& doc){
+        std::string message;
+        try{(void)load(doc);}catch(const std::exception& error){message=error.what();}
+        require(message.find("nprDiffuse.viewTint")!=std::string::npos,
+            "Invalid face view tint must report its own field");
+    };
+    auto invalidTint=maskedTint;
+    profile(invalidTint)["nprDiffuse"]["viewTint"]["geometryScale"]=1.01;
+    rejectTint(invalidTint);
+    invalidTint=maskedTint;
+    profile(invalidTint)["nprDiffuse"]["viewTint"].erase("geometryScale");
+    rejectTint(invalidTint);
+    invalidTint=maskedTint;
+    profile(invalidTint)["nprDiffuse"]["viewTint"]["mode"]="other";
+    rejectTint(invalidTint);
     const auto reject=[&](const Json& doc){
         std::string message;
         try{(void)load(doc);}catch(const std::exception& error){message=error.what();}

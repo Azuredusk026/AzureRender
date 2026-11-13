@@ -1,0 +1,171 @@
+{
+  "overallStatus": "failed-user-review",
+  "pixels": 1176,
+  "production": {
+    "playerSha256": "884b07184979b3cf02f250654556e64fceba9098ec531da905d4aa4ede312478",
+    "geometryScale": 0.9989546717452598,
+    "devices": {
+      "nvidia": {
+        "disabled": {
+          "frame": "59460c820e69efb4014786673a57ca1a0e8db2ff87f24614f7d9b2d34486f25b",
+          "overOne": 744,
+          "peak": 5,
+          "median": [
+            2.0,
+            2.0,
+            1.0
+          ],
+          "overEight": 0,
+          "expected": "59460c820e69efb4014786673a57ca1a0e8db2ff87f24614f7d9b2d34486f25b",
+          "exact": true,
+          "pixelsDifferent": 0,
+          "maximumDifference": 0
+        },
+        "enabled": {
+          "frame": "895cef54c5cb48da6b6748f112ad667b7541981bc10c5d117a4b19acd8d64e4b",
+          "overOne": 510,
+          "peak": 4,
+          "median": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "overEight": 0,
+          "expected": "9834d44c1b91c34bf748c9484ee1dc42c29db9d068f1b1c1290a4e573985b440",
+          "exact": false,
+          "pixelsDifferent": 3,
+          "maximumDifference": 1,
+          "newOutsideFaceOverOne": 0
+        }
+      },
+      "intel": {
+        "disabled": {
+          "frame": "1ac5e45a4fd107a495d329426cc3b66060e3a1e690161efad404bccfed0e46dd",
+          "overOne": 723,
+          "peak": 6,
+          "median": [
+            2.0,
+            2.0,
+            1.0
+          ],
+          "overEight": 0,
+          "expected": "1ac5e45a4fd107a495d329426cc3b66060e3a1e690161efad404bccfed0e46dd",
+          "exact": true,
+          "pixelsDifferent": 0,
+          "maximumDifference": 0
+        },
+        "enabled": {
+          "frame": "4b825f1becbc5b398d14e3f2443bfe51fccca87f9ece67d8b9a17e58ec40a5c6",
+          "overOne": 513,
+          "peak": 4,
+          "median": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "overEight": 0,
+          "expected": "835bc24a4124021623fc2db1d595809630eafab6dcc72c2ebe8ae607308adbe8",
+          "exact": false,
+          "pixelsDifferent": 6,
+          "maximumDifference": 1,
+          "newOutsideFaceOverOne": 0
+        }
+      }
+    }
+  },
+  "isolated": {
+    "shaders": {
+      "mesh_object_lighting.frag.spv": "6644cd4ab331f5d037dbcd6fb24c0d24333b2549169c5e44377edbc236e21434",
+      "mesh_object_early_lighting.frag.spv": "c68ced0bdecb775a9265dcd63cddf01eb82ad64b2b9a599a0f69351db5be2599"
+    },
+    "devices": {
+      "nvidia": {
+        "frame": "9834d44c1b91c34bf748c9484ee1dc42c29db9d068f1b1c1290a4e573985b440",
+        "faceOverOne": [
+          744,
+          510
+        ],
+        "facePeak": [
+          5,
+          4
+        ],
+        "faceMedian": [
+          [
+            2.0,
+            2.0,
+            1.0
+          ],
+          [
+            1.0,
+            1.0,
+            1.0
+          ]
+        ],
+        "faceMeanAbsolute": [
+          [
+            1.994047619047619,
+            1.8307823129251701,
+            1.6462585034013606
+          ],
+          [
+            1.3537414965986394,
+            1.1258503401360545,
+            1.1403061224489797
+          ]
+        ],
+        "newOutsideFaceOverOne": 0
+      },
+      "intel": {
+        "frame": "835bc24a4124021623fc2db1d595809630eafab6dcc72c2ebe8ae607308adbe8",
+        "faceOverOne": [
+          723,
+          513
+        ],
+        "facePeak": [
+          6,
+          4
+        ],
+        "faceMedian": [
+          [
+            2.0,
+            2.0,
+            1.0
+          ],
+          [
+            1.0,
+            1.0,
+            1.0
+          ]
+        ],
+        "faceMeanAbsolute": [
+          [
+            2.0909863945578233,
+            1.7210884353741496,
+            1.5408163265306123
+          ],
+          [
+            1.5051020408163265,
+            1.0399659863945578,
+            1.0212585034013606
+          ]
+        ],
+        "newOutsideFaceOverOne": 0
+      }
+    }
+  },
+  "build": {
+    "programs": 895,
+    "validated": 384,
+    "cpuPerConfiguration": 4,
+    "player": {
+      "Release": "884b07184979b3cf02f250654556e64fceba9098ec531da905d4aa4ede312478",
+      "Debug": "449fb6fd3573d2062fea04baafdbdd33761d20b81d73260dcb3ce8ede17132cd"
+    }
+  },
+  "vulkanVendors": {
+    "production-nvidia-disabled": 4318,
+    "production-nvidia-enabled": 4318,
+    "production-intel-disabled": 32902,
+    "production-intel-enabled": 32902
+  }
+}

@@ -2317,12 +2317,23 @@ AssetMaterial loadMaterial(
             }
             if(npr.contains("viewTint")) {
                 const auto& raw=npr.at("viewTint");
-                if(!raw.is_object()||raw.size()!=3||!raw.contains("schemaVersion")||!raw.at("schemaVersion").is_number_integer()
+                const bool masked=raw.is_object()&&raw.contains("mode")&&raw.at("mode")=="face-mask";
+                if(!raw.is_object()||raw.size()!=(masked?5:3)||!raw.contains("schemaVersion")||!raw.at("schemaVersion").is_number_integer()
                     ||raw.at("schemaVersion")!=1||!raw.contains("scale")||!raw.at("scale").is_number()
                     ||!std::isfinite(raw.at("scale").get<double>())||raw.at("scale").get<double>()<0||raw.at("scale").get<double>()>64
                     ||!raw.contains("color")||!raw.at("color").is_array()||raw.at("color").size()!=3)
                     throw std::invalid_argument("Invalid nprDiffuse.viewTint fields or scale");
-                auto& tint=result.nprDiffuse.viewTint;tint.scale=raw.at("scale").get<float>();
+                auto& tint=result.nprDiffuse.viewTint;
+                tint.scale=raw.at("scale").get<float>();
+                if(masked) {
+                    if(!raw.contains("geometryScale")||!raw.at("geometryScale").is_number())
+                        throw std::invalid_argument("Invalid nprDiffuse.viewTint.geometryScale");
+                    const double value=raw.at("geometryScale").get<double>();
+                    if(!std::isfinite(value)||value<0||value>1)
+                        throw std::invalid_argument("Invalid nprDiffuse.viewTint.geometryScale");
+                    tint.faceMask=true;
+                    tint.geometryScale=static_cast<float>(value);
+                }
                 for(unsigned i=0;i<3;++i) {
                     const auto& value=raw.at("color").at(i);
                     if(!value.is_number()||!std::isfinite(value.get<double>())||value.get<double>()<0||value.get<double>()>64)

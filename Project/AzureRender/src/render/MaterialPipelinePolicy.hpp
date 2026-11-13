@@ -57,6 +57,7 @@ inline bool integralMaterialProgram(const std::string& path) noexcept {
 }
 inline bool extendedMaterialLighting(const AssetMaterial& material) noexcept {
     return material.colorAdjustment.present||material.faceSdf.highlight.present||material.nprDiffuse.mainBrightnessSaturation
+        ||material.nprDiffuse.viewTint.faceMask
         ||material.environmentLighting.diffuse!=MaterialEnvironmentSource::Scene
         ||material.environmentLighting.reflection!=MaterialEnvironmentSource::Scene
         ||material.environmentLighting.fittedSpecular||material.environmentLighting.reflectionLayer.has_value()
