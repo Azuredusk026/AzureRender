@@ -34,3 +34,13 @@ NVIDIA 595.79 下，同一 Release Player 分别加载候选片元程序和改�
 [材质规则](../../runtime/character-material-profile.md)记录可选字段。
 [结果清单](evidence/2026-11-13/eye-multiply-receiver/results.json)记录逐设备采集和冻结对照。
 [验证归档](evidence/2026-11-13/eye-multiply-receiver/validation.zip)保存程序指纹、运行日志和逐点结果。
+
+## 近景泛光对照
+
+近景眼部与独立原生参考按相同矩形及一字节容差比较。
+Intel 完整场景有 415 个像素超差，峰差 90 字节。
+独立关闭泛光后有 7 个像素超差，峰差 13 字节。
+NVIDIA 的关闭对照全部在一字节内，独立眼部夹具逐像素一致。
+近景对照使用测试开关，生产场景使用现行泛光配置。
+
+[结果清单](evidence/2026-11-14/portrait-eye-bloom/results.json)和[验证归档](evidence/2026-11-14/portrait-eye-bloom/validation.zip)保存双设备结果及运行参数。

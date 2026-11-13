@@ -65,3 +65,20 @@ Player 绘制 967 在 91 处体表重点位置中改变 30 处，位置与原生
 
 [结果清单](evidence/2026-11-13/face-skin-color-sources/results.json)记录区域、坐标及原生阶段摘要。
 [验证归档](evidence/2026-11-13/face-skin-color-sources/validation.zip)保存逐点索引及计算程序。
+
+## 脸部阴影颜色查找表
+
+原生事件 804 与 Player 绘制 876 在十个重点位置使用相同图元。
+原生查找表为 1,024 × 32 的 BC7 sRGB 纹理。
+试验沿用材质声明的纵轴变换、查找坐标与采样方式。
+
+| 对照 | NVIDIA 超出八字节 | Intel 超出八字节 | NVIDIA 峰差 | Intel 峰差 |
+| --- | ---: | ---: | ---: | ---: |
+| 原生查找表 | 10 | 8 | 45 | 34 |
+| 原生查找表及底色层级 | 3 | 3 | 27 | 27 |
+
+联合对照在 Intel 上有 1,166 个位置超出一字节。
+原生底色单项为 1,165 个，当前查找表配置保留。
+三处峰值继续按脸部片元输入核对。
+
+[结果清单](evidence/2026-11-14/face-shadow-lut-control/results.json)和[验证归档](evidence/2026-11-14/face-shadow-lut-control/validation.zip)保存图元身份及双设备采集记录。
