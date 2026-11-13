@@ -887,6 +887,39 @@ void testMaterialUvPolicy(const nlohmann::json& fixture,const std::filesystem::p
     require((reopened.materialFeatures&MaterialFeatureMirroredCoarseUv)!=0,"Material save and reopen preserves UV policy");
 }
 
+void testMaterialColorAdjustment(const nlohmann::json& fixture,const std::filesystem::path& directory) {
+    using Json=nlohmann::json;
+    auto source=fixture;
+    auto& material=source["materials"][0];
+    material.erase("extensions");
+    material["alphaMode"]="BLEND";
+    material["extras"]["azureRenderMaterial"]={{"schemaVersion",2},{"class","fabric"},
+        {"features",Json::array()},
+        {"colorAdjustment",{{"schemaVersion",1},{"brightness",1},{"contrast",1},{"saturation",1},
+            {"tint",{1,1,1,0}},{"rim",{{"color",{.2,.02,.01}},{"intensity",2.5},{"width",.75}}}}}};
+    const auto path=directory/"color-adjustment.gltf";
+    const auto load=[&](const Json& doc){std::ofstream(path)<<doc.dump();return loadGltfAsset(path.string()).materials.at(0);};
+    const auto profile=[](Json& doc)->Json& {return doc["materials"][0]["extras"]["azureRenderMaterial"];};
+    const auto loaded=packMaterialSurfaceProfile(load(source));
+    require(loaded.rows[13]==PackedMaterialSurfaceProfile::Row{1,1,1,1}
+        &&loaded.rows[14]==PackedMaterialSurfaceProfile::Row{1,1,1,0}
+        &&loaded.rows[15]==PackedMaterialSurfaceProfile::Row{.2F,.02F,.01F,2.5F}
+        &&loaded.rows[16][0]==.75F,"Color adjustment must retain the public profile fields");
+    auto legacy=source;profile(legacy).erase("colorAdjustment");
+    require(packMaterialSurfaceProfile(load(legacy)).rows[13][3]==0,"Color adjustment must be opt-in");
+    const auto reject=[&](const Json& doc){
+        std::string message;
+        try{(void)load(doc);}catch(const std::exception& error){message=error.what();}
+        require(message.find("colorAdjustment")!=std::string::npos,"Invalid colorAdjustment must produce its own diagnostic");
+    };
+    auto bad=source;profile(bad)["colorAdjustment"]["rim"]["width"]=1.01;reject(bad);
+    bad=source;profile(bad)["colorAdjustment"]["rim"]["color"]={.2,.1};reject(bad);
+    bad=source;profile(bad)["colorAdjustment"]["tint"]={1,1,1,1.01};reject(bad);
+    bad=source;profile(bad)["colorAdjustment"]["extra"]=false;reject(bad);
+    bad=source;profile(bad)["schemaVersion"]=1;reject(bad);
+    bad=source;profile(bad)["class"]="hair";reject(bad);
+}
+
 void testMaterialRadianceScale(const nlohmann::json& fixture,const std::filesystem::path& directory) {
     using Json=nlohmann::json;
     auto source=fixture;
@@ -1336,6 +1369,7 @@ int main(int argc,char** argv) { try {
     testOutlineSurface(input,directory);
     testMaterialOutputPrecision(input,directory);
     testMaterialUvPolicy(input,directory);
+    testMaterialColorAdjustment(input,directory);
     testMaterialRadianceScale(input,directory);
     testMaterialDisplayTransform(input,directory);
     testEyeRadialSurface(input,directory);

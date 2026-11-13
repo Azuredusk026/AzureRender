@@ -1,6 +1,7 @@
 #pragma once
 #include "assets/GltfLoader.hpp"
 #include "assets/MaterialBlendDepth.hpp"
+#include "assets/MaterialColorAdjustment.hpp"
 #include "assets/MaterialOutputPrecision.hpp"
 #include "assets/MaterialUvPolicy.hpp"
 #include "assets/MaterialRimResponse.hpp"
@@ -73,6 +74,7 @@ inline PackedMaterialSurfaceProfile packMaterialSurfaceProfile(const AssetMateri
     validateMaterialOutputPrecision(material);
     validateMaterialUvPolicy(material);
     validateMaterialRimResponse(material);
+    validateMaterialColorAdjustment(material);
     if(material.projectedHairRamp.lighting.mainBrightnessSaturation&&
         (!material.projectedHairRamp.present||!material.projectedHairRamp.lighting.present
             ||material.projectedHairRamp.surfaceResponse!=AssetMaterial::ProjectedHairRamp::SurfaceResponse::StrandDiffuse
@@ -183,6 +185,13 @@ inline PackedMaterialSurfaceProfile packMaterialSurfaceProfile(const AssetMateri
         result.rows[6][3] += 16.F;
         result.rows[12] = {material.textureSettings[0].mipBias, material.textureSettings[6].mipBias,
             material.textureSettings[7].mipBias, 0.F};
+    }
+    if(material.colorAdjustment.present) {
+        const auto& adjustment=material.colorAdjustment;
+        result.rows[13]={adjustment.brightness,adjustment.contrast,adjustment.saturation,1.F};
+        result.rows[14]=adjustment.tint;
+        result.rows[15]={adjustment.rimColor[0],adjustment.rimColor[1],adjustment.rimColor[2],adjustment.rimIntensity};
+        result.rows[16][0]=adjustment.rimWidth;
     }
     result.rows[19][3]=material.radianceScale;
     if((material.materialFeatures&MaterialFeatureMultiplyComposite)!=0)

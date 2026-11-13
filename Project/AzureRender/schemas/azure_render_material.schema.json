@@ -38,6 +38,44 @@
       ],
       "default": "scene"
     },
+    "colorAdjustment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schemaVersion"],
+      "properties": {
+        "schemaVersion": {"type": "integer", "const": 1},
+        "brightness": {"type": "number", "minimum": 0, "maximum": 16, "default": 1},
+        "contrast": {"type": "number", "minimum": 0, "maximum": 16, "default": 1},
+        "saturation": {"type": "number", "minimum": 0, "maximum": 16, "default": 1},
+        "tint": {
+          "type": "array",
+          "minItems": 4,
+          "items": false,
+          "prefixItems": [
+            {"type": "number", "minimum": 0, "maximum": 16},
+            {"type": "number", "minimum": 0, "maximum": 16},
+            {"type": "number", "minimum": 0, "maximum": 16},
+            {"type": "number", "minimum": 0, "maximum": 1}
+          ],
+          "default": [1, 1, 1, 0]
+        },
+        "rim": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["color", "intensity", "width"],
+          "properties": {
+            "color": {
+              "type": "array",
+              "minItems": 3,
+              "maxItems": 3,
+              "items": {"type": "number", "minimum": 0, "maximum": 16}
+            },
+            "intensity": {"type": "number", "minimum": 0, "maximum": 16},
+            "width": {"type": "number", "minimum": 0, "exclusiveMaximum": 1}
+          }
+        }
+      }
+    },
     "environmentLighting": {
       "type": "object",
       "additionalProperties": false,
@@ -447,6 +485,16 @@
     }
   },
   "allOf": [
+    {
+      "if": {"required": ["colorAdjustment"]},
+      "then": {
+        "properties": {
+          "schemaVersion": {"const": 2},
+          "class": {"enum": ["generic", "skin", "face", "fabric", "metal"]},
+          "features": {"not": {"contains": {"enum": ["unlit-surface", "unlit-texture-layers", "overlay", "multiply-composite", "scene-refraction"]}}}
+        }
+      }
+    },
     {
       "if": {
         "anyOf": [

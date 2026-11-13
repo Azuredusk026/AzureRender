@@ -2140,6 +2140,28 @@ void main()
         ambientDiffuse*=characterBlend.a;directSpecular*=characterBlend.a;ambientSpecular*=characterBlend.a;
         kkSpecular*=characterBlend.a;secondaryKkSpecular*=characterBlend.a;rimLighting*=characterBlend.a;emissive*=characterBlend.a;
     }
+#if defined(AZURE_EXTENDED_MATERIAL_LIGHTING)
+    if(!azureOrdinaryOpaque&&materialFeatureEnabled(262144U)<.5&&AZURE_MATERIAL_CLASS<=5U&&AZURE_MATERIAL_CLASS!=3U) {
+        uint profileIndex=material.materialPadding>>1U;
+        vec4 adjustment=materialSurfaceProfiles.profiles[profileIndex].rows[13];
+        if(adjustment.w>.5) {
+            vec4 tint=materialSurfaceProfiles.profiles[profileIndex].rows[14];
+            if(any(notEqual(adjustment.xyz,vec3(1.0)))||tint.a!=0.0) {
+                beautyColor=characterDiffuseSaturation(beautyColor,adjustment.z);
+                beautyColor=(beautyColor-.5)*adjustment.y+.5;
+                beautyColor=mix(beautyColor*adjustment.x,tint.rgb,tint.a);
+            }
+            if(!(qaEffectMode==4&&qaEffectDisabled)) {
+                vec4 rim=materialSurfaceProfiles.profiles[profileIndex].rows[15];
+                float rimWidth=materialSurfaceProfiles.profiles[profileIndex].rows[16].x;
+                float facing=1.0-abs(dot(shadedNormal,viewDirection));
+                vec3 contribution=rim.rgb*(rim.w*smoothstep(rimWidth,1.0,facing));
+                beautyColor+=contribution;
+                rimLighting+=contribution;
+            }
+        }
+    }
+#endif
     float radianceScale=azureMaterialRadianceScale();
     if(radianceScale!=1.0) {
         beautyColor*=radianceScale;

@@ -48,6 +48,9 @@ int main(){
     if(sceneFragmentVariant("mesh.frag.spv",true,true,true,true,true)
         !="mesh_samples_clipmap_field_lighting_coverage.frag.spv")return 35;
     if(!ordinaryOpaqueMaterial(material))return 1;
+    material.colorAdjustment.present=true;
+    if(ordinaryOpaqueMaterial(material)||!extendedMaterialLighting(material))return 38;
+    material.colorAdjustment.present=false;
     material.materialFeatures=0xffffffffU;
     if(ordinaryOpaqueMaterial(material))return 2;
     material.materialFeatures=0;

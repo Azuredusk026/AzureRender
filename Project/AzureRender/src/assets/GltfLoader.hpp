@@ -143,6 +143,13 @@ struct AssetMaterial {
     bool materialProfileExplicit = false;
     float radianceScale = 1.0F;
     azurerender::MaterialDisplayTransform displayTransform=azurerender::MaterialDisplayTransform::Scene;
+    struct ColorAdjustment {
+        bool present=false;
+        float brightness=1.F,contrast=1.F,saturation=1.F;
+        std::array<float,4> tint{1.F,1.F,1.F,0.F};
+        std::array<float,3> rimColor{};
+        float rimIntensity=0.F,rimWidth=0.F;
+    } colorAdjustment;
     azurerender::MaterialEnvironmentLighting environmentLighting;
     azurerender::MaterialMainLightShadow mainLightShadow=azurerender::MaterialMainLightShadow::Scene;
     using CoverageTexture=azurerender::MaterialCoverageTexture;

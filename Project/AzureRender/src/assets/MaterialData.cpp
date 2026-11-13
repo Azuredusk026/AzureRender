@@ -126,7 +126,7 @@ AssetMaterial MaterialData::interpret(const std::function<std::filesystem::path(
     if(parameterOverride&&result.coverageTexture.present&&textures.contains("metallicRoughness"))
         throw std::invalid_argument("coverageTexture owns the metallicRoughness image slot during parameter overrides");
     if(parameterOverride&&(result.materialClass!=AssetMaterialClass::Generic
-        ||result.specularInput.present||result.nprDiffuse.present||result.eyeSurface.present
+        ||result.specularInput.present||result.nprDiffuse.present||result.eyeSurface.present||result.colorAdjustment.present
         ||result.projectedHairRamp.present||result.faceSdf.present||result.outlineSurface.present
         ||(result.materialFeatures&(MaterialFeatureUnlitSurface|MaterialFeatureSceneRefraction|MaterialFeatureMultiplyComposite)))
         &&(parameters.value("transmission",0.F)>0||parameters.value("thickness",0.F)>0))
@@ -227,6 +227,7 @@ void applyMaterialBindings(LoadedAsset& mesh,const std::map<std::string,Material
         lost(source.materialClass!=replacement.materialClass,"class");
         lost(source.faceSdf.present&&!replacement.faceSdf.present,"faceSdf");
         lost(source.nprDiffuse.present&&!replacement.nprDiffuse.present,"nprDiffuse");
+        lost(source.colorAdjustment.present&&!replacement.colorAdjustment.present,"colorAdjustment");
         lost(source.coverageTexture.present&&!replacement.coverageTexture.present,"coverageTexture");
         lost((source.sampledReferenceNormal && !replacement.sampledReferenceNormal)
             || (source.geometricReferenceNormal && !replacement.geometricReferenceNormal)

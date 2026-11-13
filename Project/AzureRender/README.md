@@ -169,6 +169,7 @@ GPU 可映射缓冲的用途选择及双设备检查见[内存分配](docs/accep
 
 材质环境来源、主光对象阴影及原生对照见[接收验证](docs/acceptance/nr/material-lighting-reception.md)。
 五份衣料的实际高光资源及参数差异见[原生输入核验](docs/acceptance/nr/native-cloth-inputs.md)。
+透明衣料的片元颜色、材质轮廓及双设备对照见[脸部与体表验收](docs/acceptance/nr/face-skin-color-sources.md)。
 视角色带、室内颜色及漫反射权重见[颜色合成核验](docs/acceptance/nr/npr-view-ramp-composition.md)。
 公共接入与三十六个匹配区域的检查见[运行时验证](docs/acceptance/nr/npr-ramp-runtime.md)。
 

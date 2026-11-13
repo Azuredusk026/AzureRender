@@ -1,5 +1,6 @@
 #include "GltfLoader.hpp"
 #include "assets/MaterialBlendDepth.hpp"
+#include "assets/MaterialColorAdjustment.hpp"
 #include "assets/MaterialOutputPrecision.hpp"
 #include "assets/MaterialUvPolicy.hpp"
 #include "assets/MaterialRimResponse.hpp"
@@ -208,7 +209,7 @@ void loadMaterialProfile(
                 ||(profile.at("schemaVersion")!=1&&profile.at("schemaVersion")!=2))
                 throw std::invalid_argument(context+": unsupported schemaVersion");
             const std::set<std::string> fields{"schemaVersion","class","features","styleParameters","featureParameters",
-                "faceSdf","hair","diffuseRamp","shadowColorLut","eyeSurface","outlineSurface","specularInput","specularRamp","nprDiffuse","surface","composite","sceneRefraction","radianceScale","displayTransform","environmentLighting","mainLightShadow","coverageTexture","blendDepth","referenceNormal","referenceDepthStencil"};
+                "faceSdf","hair","diffuseRamp","shadowColorLut","eyeSurface","outlineSurface","specularInput","specularRamp","nprDiffuse","surface","composite","sceneRefraction","radianceScale","displayTransform","colorAdjustment","environmentLighting","mainLightShadow","coverageTexture","blendDepth","referenceNormal","referenceDepthStencil"};
             for(const auto& field:profile.items())if(!fields.count(field.key()))throw std::invalid_argument(context+": unknown field "+field.key());
             if (profile.contains("referenceDepthStencil")) {
                 const auto& value = profile.at("referenceDepthStencil");
@@ -249,6 +250,41 @@ void loadMaterialProfile(
                 result.blendDepth.present=true;result.blendDepth.write=value.value("write",false);
                 result.blendDepth.compare=value.value("compare",std::string("less"))=="less"
                     ?AssetMaterial::BlendDepth::Compare::Less:AssetMaterial::BlendDepth::Compare::LessOrEqual;
+            }
+            if(profile.contains("colorAdjustment")) {
+                const auto& value=profile.at("colorAdjustment");
+                if(profile.at("schemaVersion")!=2||!value.is_object()||!value.contains("schemaVersion")
+                    ||!value.at("schemaVersion").is_number_integer()||value.at("schemaVersion")!=1)
+                    throw std::invalid_argument(context+": colorAdjustment requires schemaVersion one and profile version two");
+                for(const auto& field:value.items())if(field.key()!="schemaVersion"&&field.key()!="brightness"
+                    &&field.key()!="contrast"&&field.key()!="saturation"&&field.key()!="tint"&&field.key()!="rim")
+                    throw std::invalid_argument(context+": unknown colorAdjustment field "+field.key());
+                const auto number=[&](const nlohmann::json& entry,const char* name,double limit,bool exclusive=false) {
+                    if(!entry.is_number())throw std::invalid_argument(context+": invalid colorAdjustment."+name);
+                    const double v=entry.get<double>();
+                    if(!std::isfinite(v)||v<0.0||v>limit||(exclusive&&v==limit))
+                        throw std::invalid_argument(context+": invalid colorAdjustment."+name);
+                    return static_cast<float>(v);
+                };
+                const auto readColor=[&](const auto& entry,auto& color,const char* name) {
+                    if(!entry.is_array()||entry.size()!=color.size())
+                        throw std::invalid_argument(context+": invalid colorAdjustment."+name);
+                    for(std::size_t i=0;i<color.size();++i)color[i]=number(entry.at(i),name,i==3?1.0:16.0);
+                };
+                auto& adjustment=result.colorAdjustment;
+                adjustment.present=true;
+                if(value.contains("brightness"))adjustment.brightness=number(value.at("brightness"),"brightness",16.0);
+                if(value.contains("contrast"))adjustment.contrast=number(value.at("contrast"),"contrast",16.0);
+                if(value.contains("saturation"))adjustment.saturation=number(value.at("saturation"),"saturation",16.0);
+                if(value.contains("tint"))readColor(value.at("tint"),adjustment.tint,"tint");
+                if(value.contains("rim")) {
+                    const auto& rim=value.at("rim");
+                    if(!rim.is_object()||rim.size()!=3||!rim.contains("color")||!rim.contains("intensity")||!rim.contains("width"))
+                        throw std::invalid_argument(context+": colorAdjustment.rim requires color, intensity and width");
+                    readColor(rim.at("color"),adjustment.rimColor,"rim.color");
+                    adjustment.rimIntensity=number(rim.at("intensity"),"rim.intensity",16.0);
+                    adjustment.rimWidth=number(rim.at("width"),"rim.width",1.0,true);
+                }
             }
             if(profile.contains("environmentLighting")) {
                 const auto& value=profile.at("environmentLighting");
@@ -2361,6 +2397,7 @@ AssetMaterial loadMaterial(
         ||result.materialClass==AssetMaterialClass::Metal);
     const bool ordinary=microfacetClass&&!result.nprDiffuse.present&&!result.projectedHairRamp.present&&!result.eyeSurface.present;
     azurerender::validateMaterialLighting(result.environmentLighting,result.mainLightShadow,result.materialProfileVersion,lit,ordinary,microfacetClass);
+    azurerender::validateMaterialColorAdjustment(result);
     validateMaterialCoverage(result);
     validateHairPointMipReferenceNormal(result);
     if (result.referenceDepthStencil != AssetMaterial::ReferenceDepthStencil::Ordinary
