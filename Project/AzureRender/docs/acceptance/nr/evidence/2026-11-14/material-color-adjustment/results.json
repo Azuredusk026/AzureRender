@@ -760,5 +760,33 @@
   "archive": {
     "members": 69,
     "sha256": "c4a0e63a9fd642dae0c3eb8eb53347432c79df5d3840a3da01530fb3af6ef659"
+  },
+  "multiplyRegression": {
+    "runs": [
+      {
+        "name": "release-nvidia",
+        "exitCode": 0,
+        "passed": true
+      },
+      {
+        "name": "release-intel",
+        "exitCode": 0,
+        "passed": true
+      },
+      {
+        "name": "debug-nvidia",
+        "exitCode": 0,
+        "passed": true
+      },
+      {
+        "name": "debug-intel",
+        "exitCode": 0,
+        "passed": true
+      }
+    ],
+    "archive": {
+      "members": 9,
+      "sha256": "b4c2ec693b4517e88f26e0ee168fdd9298f844cad3f48330f13c918ac802f202"
+    }
   }
 }

@@ -113,6 +113,7 @@ Player 绘制 967 在 91 处体表重点位置中改变 30 处，位置与原生
 Release 和 Debug 各通过四项材质相关 CPU 检查。
 两份构建的 895 份着色程序逐字节一致，384 份受影响程序通过 SPIR-V 验证。
 NVIDIA 595.79 的冻结四帧与同驱动基准逐字节一致。
+两种构建在 NVIDIA 和 Intel 上均通过[眼部乘色回归](evidence/2026-11-14/material-color-adjustment/multiply-regression.zip)。
 
 [材质结果](evidence/2026-11-14/material-color-adjustment/results.json)及[验证归档](evidence/2026-11-14/material-color-adjustment/validation.zip)保存输入参数、双设备采集、失败复测和冻结回执。
 
