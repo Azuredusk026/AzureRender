@@ -192,3 +192,16 @@ NVIDIA 595.79 下的冻结四帧与同驱动基准逐字节一致。
 Release 的 `FaceMaskedRimGpu` 和 `DualFaceSdfGpu` 在 NVIDIA 与 Intel 上均通过。
 
 [材质结果](evidence/2026-11-14/face-highlight-material/results.json)及[验证归档](evidence/2026-11-14/face-highlight-material/validation.zip)保存材质输入、双设备固定姿态、通道误差和冻结回执。
+
+## 体表描边顶点流与线色
+
+原生事件 1018 从 `TEXCOORD2` 读取两个有符号八位分量，并以切线帧重建平滑方向。
+全部 3,289 个顶点使用导入网格的切线帧重建，最大方向误差为 `8.42e-8`。
+固定姿态夹具使用 `tangent-uv1`、0.6 宽度倍率和 8 毫米深度偏移。
+两块显卡的颜色壳都覆盖 1,184 个原生深度改写位置中的 879 个，以及全部 61 个重点像素。
+采用原生亮度和饱和度的线色对照缩小了全部 61 处误差，双设备峰差为 14 字节。
+
+原生片元先计算基础色的亮度和饱和度，再经阴影查找表和主光、环境光及局部灯光着色。
+逐点跟踪保存四处颜色和中间寄存器，供描边照明对照使用。
+
+[顶点与线色结果](evidence/2026-11-14/body-outline-native-stream/results.json)和[验证归档](evidence/2026-11-14/body-outline-native-stream/validation.zip)保存原生顶点流、着色指令及双设备采集。

@@ -1,0 +1,335 @@
+{
+  "mesh": {
+    "vertices": 3289,
+    "sourceSha256": "ff83e532fb5d03f899197bd9e495a4a97a16b65b3fcb77203e56e1bc9d836a90",
+    "targetSha256": "07af7906110463ea1629d37420c8cbd68a67c660347b2ec4d194d61209e9a010",
+    "coordinateSha256": "3690677ff24a27e73c7a0fa957628f5683961392f21247292d9a4fba9e9fe0bc",
+    "directionMaximumError": 8.417202633523304e-08
+  },
+  "nativeCoverage": 1184,
+  "devices": {
+    "nvidia": {
+      "geometry": {
+        "profile": {
+          "schemaVersion": 1,
+          "mode": "view-scaled",
+          "width": 0.6000000238418579,
+          "minimumPixels": 0.5,
+          "depthOffset": 0.007999999821186066,
+          "color": [
+            0.04,
+            4,
+            0.04
+          ],
+          "coverage": "depth-tested",
+          "depthPrepass": false,
+          "normalSource": "geometry",
+          "maskTexture": 4
+        },
+        "frameSha256": "6f640af1ebdcdee14df56ab7301ef04b17fc6cdc1a60ad7532385d4ee95bdf7a",
+        "green": 880,
+        "nativeOverlap": 878,
+        "focusOverlap": 61,
+        "focusOverOne": 61,
+        "focusPeak": 205,
+        "focusImproved": 0,
+        "newFrameOverOne": 4,
+        "frameOverOne": 182803,
+        "baselineFrameOverOne": 182799
+      },
+      "smooth": {
+        "profile": {
+          "schemaVersion": 1,
+          "mode": "view-scaled",
+          "width": 0.6000000238418579,
+          "minimumPixels": 0.5,
+          "depthOffset": 0.007999999821186066,
+          "color": [
+            0.04,
+            4,
+            0.04
+          ],
+          "coverage": "depth-tested",
+          "depthPrepass": false,
+          "normalSource": "tangent-uv1",
+          "maskTexture": 4
+        },
+        "frameSha256": "8ac5356daeba28ed42e105a2e78cc3390c841a7baa666b404dfaf6885e86055c",
+        "green": 880,
+        "nativeOverlap": 879,
+        "focusOverlap": 61,
+        "focusOverOne": 61,
+        "focusPeak": 205,
+        "focusImproved": 0,
+        "newFrameOverOne": 3,
+        "frameOverOne": 182802,
+        "baselineFrameOverOne": 182799
+      },
+      "authored": {
+        "profile": {
+          "schemaVersion": 1,
+          "mode": "view-scaled",
+          "width": 0.6000000238418579,
+          "minimumPixels": 0.5,
+          "depthOffset": 0.007999999821186066,
+          "color": [
+            0.5,
+            0.5,
+            0.5
+          ],
+          "coverage": "depth-tested",
+          "depthPrepass": true,
+          "normalSource": "tangent-uv1",
+          "baseColorSaturation": 1.5,
+          "maskTexture": 4
+        },
+        "frameSha256": "35e398bd2b8b98f5b5fedda8ec1bcc2a3a1746ba7cbe86aaffcb8d85f5ea27e9",
+        "green": 0,
+        "nativeOverlap": 0,
+        "focusOverlap": 0,
+        "focusOverOne": 61,
+        "focusPeak": 14,
+        "focusImproved": 61,
+        "newFrameOverOne": 5,
+        "frameOverOne": 182804,
+        "baselineFrameOverOne": 182799
+      }
+    },
+    "intel": {
+      "geometry": {
+        "profile": {
+          "schemaVersion": 1,
+          "mode": "view-scaled",
+          "width": 0.6000000238418579,
+          "minimumPixels": 0.5,
+          "depthOffset": 0.007999999821186066,
+          "color": [
+            0.04,
+            4,
+            0.04
+          ],
+          "coverage": "depth-tested",
+          "depthPrepass": false,
+          "normalSource": "geometry",
+          "maskTexture": 4
+        },
+        "frameSha256": "f90001aee91b94f7d6ea777ed3a1653f2800615c4e0df13d45f9f4f9930f4ed7",
+        "green": 879,
+        "nativeOverlap": 878,
+        "focusOverlap": 61,
+        "focusOverOne": 61,
+        "focusPeak": 205,
+        "focusImproved": 0,
+        "newFrameOverOne": 4,
+        "frameOverOne": 186343,
+        "baselineFrameOverOne": 186339
+      },
+      "smooth": {
+        "profile": {
+          "schemaVersion": 1,
+          "mode": "view-scaled",
+          "width": 0.6000000238418579,
+          "minimumPixels": 0.5,
+          "depthOffset": 0.007999999821186066,
+          "color": [
+            0.04,
+            4,
+            0.04
+          ],
+          "coverage": "depth-tested",
+          "depthPrepass": false,
+          "normalSource": "tangent-uv1",
+          "maskTexture": 4
+        },
+        "frameSha256": "bd6922666d5ba0a8becc5d6b19e7c4999b350951f99c15606620afb44c87e285",
+        "green": 879,
+        "nativeOverlap": 879,
+        "focusOverlap": 61,
+        "focusOverOne": 61,
+        "focusPeak": 205,
+        "focusImproved": 0,
+        "newFrameOverOne": 3,
+        "frameOverOne": 186342,
+        "baselineFrameOverOne": 186339
+      },
+      "authored": {
+        "profile": {
+          "schemaVersion": 1,
+          "mode": "view-scaled",
+          "width": 0.6000000238418579,
+          "minimumPixels": 0.5,
+          "depthOffset": 0.007999999821186066,
+          "color": [
+            0.5,
+            0.5,
+            0.5
+          ],
+          "coverage": "depth-tested",
+          "depthPrepass": true,
+          "normalSource": "tangent-uv1",
+          "baseColorSaturation": 1.5,
+          "maskTexture": 4
+        },
+        "frameSha256": "9d31ec1d1ec60050666574683c19e8d3fdd3f4e171e2e64cd1fb8b1398452cf7",
+        "green": 0,
+        "nativeOverlap": 0,
+        "focusOverlap": 0,
+        "focusOverOne": 61,
+        "focusPeak": 14,
+        "focusImproved": 61,
+        "newFrameOverOne": 5,
+        "frameOverOne": 186344,
+        "baselineFrameOverOne": 186339
+      }
+    }
+  },
+  "status": "failed-user-review",
+  "nativeLighting": {
+    "status": "qualified",
+    "samples": [
+      {
+        "x": 1270,
+        "y": 1037,
+        "primitive": 3671,
+        "hardware": [
+          0.359772652387619,
+          0.13606540858745575,
+          0.09039759635925293,
+          1.0
+        ],
+        "steps": 836,
+        "path": "1018-1270-1037.json",
+        "sha256": "df2895b339a66bdb16728a0d018a0ee5dc1c9f46ecaf475be94541376329af5f"
+      },
+      {
+        "x": 1270,
+        "y": 1047,
+        "primitive": 3675,
+        "hardware": [
+          0.3505594730377197,
+          0.1382666677236557,
+          0.09361565858125687,
+          1.0
+        ],
+        "steps": 836,
+        "path": "1018-1270-1047.json",
+        "sha256": "88eadf6e4614ecbb35ea14f396f5d25ff977eb39a1b8b52e4b3cbfcc0d7b0933"
+      },
+      {
+        "x": 1270,
+        "y": 1053,
+        "primitive": 3675,
+        "hardware": [
+          0.32447350025177,
+          0.1302337497472763,
+          0.09089410305023193,
+          1.0
+        ],
+        "steps": 836,
+        "path": "1018-1270-1053.json",
+        "sha256": "57319b667126122b9f6effc0b02ff6f56b7b7face7f35379be07281ba149cc3c"
+      },
+      {
+        "x": 1270,
+        "y": 1054,
+        "primitive": 3675,
+        "hardware": [
+          0.3164808452129364,
+          0.1278115212917328,
+          0.0899374783039093,
+          1.0
+        ],
+        "steps": 836,
+        "path": "1018-1270-1054.json",
+        "sha256": "8db568b9ecea5af6abec55e5f9e1b56977fd241d86ce2910fd11b859e178c6a4"
+      }
+    ],
+    "resources": {
+      "0": {
+        "resource": "ResourceId::141964",
+        "format": "Undefined"
+      },
+      "1": {
+        "resource": "ResourceId::399",
+        "format": "Undefined"
+      },
+      "2": {
+        "resource": "ResourceId::609",
+        "format": "R32_TYPELESS"
+      },
+      "3": {
+        "resource": "ResourceId::14647",
+        "format": "R16_UNORM"
+      },
+      "4": {
+        "resource": "ResourceId::141931",
+        "format": "R8G8_UNORM"
+      },
+      "5": {
+        "resource": "ResourceId::11293",
+        "format": "R11G11B10_FLOAT"
+      },
+      "6": {
+        "resource": "ResourceId::11296",
+        "format": "R8G8B8A8_UNORM"
+      },
+      "7": {
+        "resource": "ResourceId::11299",
+        "format": "R11G11B10_FLOAT"
+      },
+      "8": {
+        "resource": "ResourceId::11302",
+        "format": "R8G8B8A8_UNORM"
+      },
+      "9": {
+        "resource": "ResourceId::11305",
+        "format": "R11G11B10_FLOAT"
+      },
+      "10": {
+        "resource": "ResourceId::11308",
+        "format": "R8G8B8A8_UNORM"
+      },
+      "11": {
+        "resource": "ResourceId::6149",
+        "format": "R8G8B8A8_UNORM"
+      },
+      "12": {
+        "resource": "ResourceId::13500",
+        "format": "BC7_SRGB"
+      },
+      "13": {
+        "resource": "ResourceId::141946",
+        "format": "R10G10B10A2_UNORM"
+      },
+      "14": {
+        "resource": "ResourceId::85442",
+        "format": "BC7_SRGB"
+      },
+      "15": {
+        "resource": "ResourceId::345",
+        "format": "R8G8B8A8_SRGB"
+      }
+    },
+    "constants": {
+      "0": {
+        "bytes": 1536,
+        "path": "ps-cb0.bin",
+        "sha256": "04ac7183f0cf0853cc0484e799e35389d505116afb8ff4028e4124870ed02155"
+      },
+      "1": {
+        "bytes": 3328,
+        "path": "ps-cb1.bin",
+        "sha256": "30ed44bbe849bdb3a1cff0c94840eef52c79a6e412a126a3c7ee71d5546f8f55"
+      },
+      "6": {
+        "bytes": 512,
+        "path": "ps-cb6.bin",
+        "sha256": "06cf4e58d6ddb372c8ac2c405359e663deb370292f0ec7206898f698e41b292e"
+      }
+    }
+  },
+  "archive": {
+    "members": 36,
+    "sha256": "9a0421a7ce846f393f756dbe7c8e7fb6ac5a4a06ddc4fa8ec49c322dfc2b334b"
+  }
+}
