@@ -1398,3 +1398,6 @@ Intel 头发颜色继续按冻结区域核对纹理选级。
 [头发光栅量化与体表法线](../acceptance/nr/reference-raster-source.md)记录双设备来源对照。顶点精度传播和体表可见量分别持有后续验证项，整体画质按原条件验收。
 
 [量化精度隔离与接收输入](../acceptance/nr/reference-raster-isolated.md)核对完整帧与五类参考附件，并以实际 GPU 复算确认体表可见量的图集来源。Intel 冻结 RGB 和生产接收输入按原条件继续验收。
+
+[体表法线原生选层](../acceptance/nr/native-body-explicit-mips.md)核对双设备选层。
+7,997 处合格深度位置均可用显式样本复现隐式法线。
