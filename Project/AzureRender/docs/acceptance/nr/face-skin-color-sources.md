@@ -126,3 +126,11 @@ NVIDIA 595.79 的冻结四帧与同驱动基准逐字节一致。
 第 297 行的原生色带和 Player 色带均为白色，该处的剩余误差按主光及环境光合成核对。
 
 [片元结果](evidence/2026-11-14/face-fragment-samples/results.json)和[验证归档](evidence/2026-11-14/face-fragment-samples/validation.zip)保存读回和跟踪。
+
+## 体表描边参考深度覆盖
+
+原生事件 1018 改写 1,184 个深度像素，命中位置全部写入模板值 36。
+八位子像素网格、背面壳及绘制前深度的数值对照复现全部 1,184 个位置，额外覆盖为零。
+Player 的原生壳夹具与原生深度覆盖交集为 498 个位置，生产深度和提交顺序继续按原条件验收。
+
+[参考深度结果](evidence/2026-11-14/body-outline-reference-depth/results.json)和[验证归档](evidence/2026-11-14/body-outline-reference-depth/validation.zip)保存深度指纹、改写像素及数值对照。

@@ -1,0 +1,81 @@
+{
+  "status": "reference-coverage-qualified",
+  "overallStatus": "failed-user-review",
+  "coverage": {
+    "depthChanges": 1184,
+    "stencilChanges": 683,
+    "stencilAfterHistogram": {
+      "36": 1184
+    },
+    "targetDepthChanges": 61,
+    "fixtureChanges": 498,
+    "fixtureDepthIntersection": 498,
+    "nativeDepthChangesAbsentFromFixture": 686,
+    "missingBounds": [
+      1023,
+      307,
+      1382,
+      1121
+    ],
+    "minimumWrittenDepthDelta": 1.475214958190918e-06,
+    "maximumWrittenDepthDelta": 0.025637200102210045,
+    "pixelRecordSha256": "a1de0fce1d58e1f749918e7d7b7d3ee13b87837795714ba77382bc1297604f9d"
+  },
+  "raster": {
+    "0:-1": {
+      "covered": 131087,
+      "passed": 1183,
+      "matches": 1183,
+      "missing": 1,
+      "extra": 0,
+      "misses": [
+        [
+          1266,
+          1004
+        ]
+      ]
+    },
+    "0:1": {
+      "covered": 115953,
+      "passed": 1769,
+      "matches": 1182,
+      "missing": 2,
+      "extra": 587,
+      "misses": [
+        [
+          1023,
+          657
+        ],
+        [
+          1266,
+          1004
+        ]
+      ]
+    },
+    "256:-1": {
+      "covered": 131087,
+      "passed": 1184,
+      "matches": 1184,
+      "missing": 0,
+      "extra": 0,
+      "misses": []
+    },
+    "256:1": {
+      "covered": 115958,
+      "passed": 1769,
+      "matches": 1183,
+      "missing": 1,
+      "extra": 586,
+      "misses": [
+        [
+          1023,
+          657
+        ]
+      ]
+    }
+  },
+  "archive": {
+    "members": 8,
+    "sha256": "768c1deaaaa5dfdf6d2ed5b160288744f34a3625f5e6281ff26d566cdcf1c8c0"
+  }
+}
