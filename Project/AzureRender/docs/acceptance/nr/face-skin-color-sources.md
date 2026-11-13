@@ -235,3 +235,11 @@ Release 的 `FaceMaskedRimGpu` 与 `DualFaceSdfGpu` 在两块显卡上均通过�
 [主光饱和度结果](evidence/2026-11-14/face-main-saturation/results.json)和[验证归档](evidence/2026-11-14/face-main-saturation/validation.zip)保存原生片元、双设备图像摘要与构建收据。
 [冻结回归归档](evidence/2026-11-14/face-main-saturation/frozen-regression.zip)保存四帧摘要与采集记录。
 [脸部 GPU 回归归档](evidence/2026-11-14/face-main-saturation/face-gpu-regression.zip)保存双设备的检查记录。
+
+## 脸部视角染色
+
+两块显卡以通用 `viewTint` 代入原生色彩及视角系数，脸部峰差均为 30 字节。
+NVIDIA 有 955 处超出一字节，Intel 有 987 处。
+该组合保留在对照夹具中，原生脸部染色按风格遮罩红通道和几何法线参与计算。
+
+[视角染色对照](evidence/2026-11-14/face-view-tint-control/results.json)和[验证归档](evidence/2026-11-14/face-view-tint-control/validation.zip)保存双设备数据。
