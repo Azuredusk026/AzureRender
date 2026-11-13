@@ -24,3 +24,5 @@ GPU 帧均值为 16.74 毫秒，主颜色与快照的区间均值之和约占 69
 Intel 的参考取前后两轮中位数的平均值。候选为每个 512² 基础网格增加 12 MiB。NVIDIA 计入建表后耗时增加约 66.45%，保留隔离结果。算量变化属于历史可见快照的查询范围，整帧性能、热状态及原生冻结画面继续按原条件核验。
 
 [结果清单](evidence/2026-11-14/joint-gpu-pass-budget/results.json)和[验证归档](evidence/2026-11-14/joint-gpu-pass-budget/validation.zip)保存通道计时、环境观测、探针源码和两设备逐项结果。
+
+[单表范围查询](joint-shadow-single-range-table.md)记录两设备的精确查询和联合场景的隔离复测。
