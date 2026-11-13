@@ -185,5 +185,6 @@ Player 绘制 940 在体表主体和场景深度之后提交。
 Release 和 Debug 各通过四项材质 CPU 检查，895 份着色程序逐字节一致。
 384 份受影响程序通过 SPIR-V 验证。
 NVIDIA 595.79 下的冻结四帧与同驱动基准逐字节一致。
+Release 的 `FaceMaskedRimGpu` 和 `DualFaceSdfGpu` 在 NVIDIA 与 Intel 上均通过。
 
 [材质结果](evidence/2026-11-14/face-highlight-material/results.json)及[验证归档](evidence/2026-11-14/face-highlight-material/validation.zip)保存材质输入、双设备固定姿态、通道误差和冻结回执。
