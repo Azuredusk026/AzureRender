@@ -230,6 +230,8 @@ Release 的 `FaceMaskedRimGpu` 和 `DualFaceSdfGpu` 在 NVIDIA 与 Intel 上均�
 Release 和 Debug 各通过四项材质检查，895 份着色程序逐字节一致，384 份扩展照明程序通过 SPIR-V 验证。
 NVIDIA 595.79 的冻结四帧与同驱动基准逐字节一致。
 原始 592.82 的冻结图像继续作为跨环境验收参考。
+Release 的 `FaceMaskedRimGpu` 与 `DualFaceSdfGpu` 在两块显卡上均通过。
 
 [主光饱和度结果](evidence/2026-11-14/face-main-saturation/results.json)和[验证归档](evidence/2026-11-14/face-main-saturation/validation.zip)保存原生片元、双设备图像摘要与构建收据。
 [冻结回归归档](evidence/2026-11-14/face-main-saturation/frozen-regression.zip)保存四帧摘要与采集记录。
+[脸部 GPU 回归归档](evidence/2026-11-14/face-main-saturation/face-gpu-regression.zip)保存双设备的检查记录。

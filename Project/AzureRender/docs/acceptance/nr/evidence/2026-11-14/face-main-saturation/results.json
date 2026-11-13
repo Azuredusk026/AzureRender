@@ -539,5 +539,27 @@
       }
     ],
     "sha256": "5ccc350676bc89a2bf4eb72572e57f637e60aefca91914943d8cd78f66ea34b0"
+  },
+  "gpuRegression": {
+    "configuration": "Release",
+    "devices": [
+      {
+        "device": "nvidia",
+        "exitCode": 0,
+        "tests": {
+          "AzureEngine.FaceMaskedRimGpu": 99.5937,
+          "AzureEngine.DualFaceSdfGpu": 75.6584
+        }
+      },
+      {
+        "device": "intel",
+        "exitCode": 0,
+        "tests": {
+          "AzureEngine.FaceMaskedRimGpu": 160.993,
+          "AzureEngine.DualFaceSdfGpu": 153.638
+        }
+      }
+    ],
+    "sha256": "54b31bc75331e7b1ae89be027240da46ed19690009c2696eeb4bbfc83a2a3bdc"
   }
 }
