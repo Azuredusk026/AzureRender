@@ -118,4 +118,6 @@ NVIDIA 和 Intel 均通过 22 种实际尺寸及格式的图像创建查询。
 
 [全帧结果](evidence/2026-11-14/joint-sparse-texture-scope/results.json)与[验证归档](evidence/2026-11-14/joint-sparse-texture-scope/validation.zip)保存访问清单、设备布局和重复页统计。
 
+[材质纹理内存分配](joint-nonlocal-texture-placement.md)记录完整层级的非本地分配复测。候选在 1080p60 的设备本地高水位为 1.343 GiB，持续采样的 GPU 帧 P95 及热状态仍未通过。
+
 [结果清单](evidence/2026-11-14/joint-59579-qualification/results.json)及[验证归档](evidence/2026-11-14/joint-59579-qualification/validation.zip)保存采样命令、逐帧计时、设备和内存记录。
