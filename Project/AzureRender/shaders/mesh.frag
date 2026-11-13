@@ -1917,6 +1917,20 @@ void main()
             combinedDirect=characterDiffuseSaturation(eyeMainDirect,saturation)+clusteredDiffuse*eyeAlphaMultiplier;
             eyeHostMatcap=characterDiffuseSaturation(eyeHostMatcap,saturation);
         }
+#if defined(AZURE_EXTENDED_MATERIAL_LIGHTING)
+        if(dualFaceSdf) {
+            vec3 highlightProfile=materialSurfaceProfiles.profiles[material.materialPadding>>1U].rows[12].xyz;
+            if(highlightProfile.z>.5&&!(qaEffectMode==5&&qaEffectDisabled)) {
+                mat3 headFrame=mat3(instanceFaceFrame);
+                vec2 viewOffset=vec2(dot(viewDirection,normalize(headFrame[0])),
+                    -dot(viewDirection,normalize(headFrame[1])))*highlightProfile.xy;
+                vec3 highlight=texture(AZ_TEX_SPECULAR_EMISSIVE,textureCoordinate+viewOffset).rgb
+                    *(illumination.ambient+illumination.direct);
+                directSpecular+=highlight;
+                beautyColor+=highlight;
+            }
+        }
+#endif
         sceneMainDiffuse=response.color*illumination.direct;
         beautyColor+=combinedAmbient+combinedDirect-ambientDiffuse-directDiffuse;
         ambientDiffuse=combinedAmbient;directDiffuse=combinedDirect;

@@ -1688,6 +1688,8 @@ AssetMaterial loadMaterial(
                     return faceSdf.Get(key).Get<std::string>();
                 };
                 const int sdfVersion=requireNumber("schemaVersion");
+                if(sdfVersion!=2&&faceSdf.Has("highlight"))
+                    throw std::invalid_argument(result.name+" faceSdf.highlight requires faceSdf version two");
                 if (sdfVersion!=1 && sdfVersion!=2) {
                     throw std::runtime_error(
                         "Unsupported faceSdf schemaVersion for "
@@ -1726,6 +1728,37 @@ AssetMaterial loadMaterial(
                             throw std::runtime_error(std::string("Missing faceSdf.")+key+" image for "+result.name);
                         return image;};
                     styleMaskImage=imageFor("maskTexture");matcapImage=imageFor("rampTexture");
+                    if(faceSdf.Has("highlight")) {
+                        const auto& source=faceSdf.Get("highlight");
+                        const auto fail=[&](){throw std::invalid_argument(result.name+" invalid faceSdf.highlight");};
+                        if(!source.IsObject()||source.Keys().size()!=3||!source.Has("schemaVersion")
+                            ||!source.Get("schemaVersion").IsInt()||source.Get("schemaVersion").GetNumberAsInt()!=1
+                            ||!source.Has("texture")||!source.Get("texture").IsInt()||!source.Has("viewOffset")
+                            ||!source.Get("viewOffset").IsArray()||source.Get("viewOffset").ArrayLen()!=2)
+                            fail();
+                        const int index=source.Get("texture").GetNumberAsInt();
+                        if(index<0||static_cast<std::size_t>(index)>=model.textures.size()
+                            ||emissiveTexture>=0||result.emissiveStrength!=0.F
+                            ||(result.materialFeatures&MaterialFeatureEmissiveMask))
+                            fail();
+                        specularEmissiveImage=model.textures[static_cast<std::size_t>(index)].source;
+                        if(specularEmissiveImage<0||static_cast<std::size_t>(specularEmissiveImage)>=model.images.size())
+                            fail();
+                        auto& highlight=result.faceSdf.highlight;
+                        for(int axis=0;axis<2;++axis) {
+                            const auto& value=source.Get("viewOffset").Get(axis);
+                            if(!value.IsNumber()||!std::isfinite(value.GetNumberAsDouble())
+                                ||std::abs(value.GetNumberAsDouble())>1.0)fail();
+                            highlight.viewOffset[static_cast<std::size_t>(axis)]=static_cast<float>(value.GetNumberAsDouble());
+                        }
+                        highlight.present=true;
+                        auto& settings=result.textureSettings[3];
+                        settings.usage="linear";
+                        settings.colorSpace="linear";
+                        settings.anisotropy=1;
+                        settings.mipBias=-1.F;
+                        settings.mipFilter=azurerender::TextureImportSettings::MipFilter::Nearest;
+                    }
                     if(!faceSdf.Has("headBasis")||!faceSdf.Get("headBasis").IsArray()||faceSdf.Get("headBasis").ArrayLen()!=9)
                         throw std::runtime_error("faceSdf.headBasis requires nine numbers for "+result.name);
                     for(std::size_t i=0;i<9;++i){const auto& v=faceSdf.Get("headBasis").Get(static_cast<int>(i));
@@ -2375,6 +2408,7 @@ AssetMaterial loadMaterial(
                     ||(result.materialFeatures&MaterialFeatureDualFaceSdf)||(result.eyeSurface.present&&!result.eyeSurface.nprLighting)))
                 ||(slot==8&&shadowColorLutImage>=0);
             const bool typed=lookup||slot==6||slot==7||(slot==8&&!result.unlitTextureLayers.coverageLayer.present)
+                ||(slot==3&&result.faceSdf.highlight.present)
                 ||(slot==2&&result.coverageTexture.present);
             if(typed&&settings.colorSpace!=defaults.colorSpace)
                 throw std::invalid_argument(result.name+" typed texture color space violated at slot "+std::to_string(slot));

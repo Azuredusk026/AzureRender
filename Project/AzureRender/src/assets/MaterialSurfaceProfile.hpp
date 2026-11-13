@@ -181,6 +181,10 @@ inline PackedMaterialSurfaceProfile packMaterialSurfaceProfile(const AssetMateri
             result.rows[4]={0,0,ramp.iridescence,ramp.flipV?-1.F:1.F};
         }
     }
+    if(material.faceSdf.highlight.present) {
+        const auto& shift=material.faceSdf.highlight.viewOffset;
+        result.rows[12]={shift[0],shift[1],1.F,0.F};
+    }
     if (material.projectedHairRamp.axisDiagonalPrimaryTextureFootprint) {
         result.rows[6][3] += 16.F;
         result.rows[12] = {material.textureSettings[0].mipBias, material.textureSettings[6].mipBias,

@@ -226,6 +226,7 @@ void applyMaterialBindings(LoadedAsset& mesh,const std::map<std::string,Material
         const auto lost=[&](bool condition,const char* field){if(condition){if(!losses.empty())losses+=", ";losses+=field;}};
         lost(source.materialClass!=replacement.materialClass,"class");
         lost(source.faceSdf.present&&!replacement.faceSdf.present,"faceSdf");
+        lost(source.faceSdf.highlight.present&&!replacement.faceSdf.highlight.present,"faceSdf.highlight");
         lost(source.nprDiffuse.present&&!replacement.nprDiffuse.present,"nprDiffuse");
         lost(source.colorAdjustment.present&&!replacement.colorAdjustment.present,"colorAdjustment");
         lost(source.coverageTexture.present&&!replacement.coverageTexture.present,"coverageTexture");

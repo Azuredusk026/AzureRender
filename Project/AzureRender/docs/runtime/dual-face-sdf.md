@@ -128,3 +128,14 @@ ctest --test-dir build/ninja-msvc-debug -R 'AzureEngine.DualFaceSdfGpu|AzureRend
 皮肤镜面按其原生着色来源继续接入。
 原生参数和画面证据见[脸部证据](../acceptance/nr/character-face-sdf.md)。
 法线分项证据见[B 通道法线验证](../acceptance/nr/face-sdf-normal.md)。
+
+## 脸部高光
+
+版本二的不透明脸部材质可在 faceSdf 中声明 highlight，并同时配置 nprDiffuse。
+highlight 的版本为一，texture 引用线性高光纹理，viewOffset 由两个范围为负一至一的分量组成。
+加载器为高光使用材质槽 3。该槽在此材质由高光独占，普通自发光使用自身的材质配置。
+采样采用线性过滤、最近层级、重复寻址及负一层级偏移。纹理导入元数据可指定合法的线性采样参数。
+头部右轴和上轴与观察方向的点积控制纹理位移，V 分量遵循模型纹理纵轴。
+主光与环境光对纹理颜色共同调制，高光写入镜面分项。镜面诊断开关可关闭该贡献。
+
+[原生脸部高光对照](../acceptance/nr/face-skin-color-sources.md#脸部高光对照)记录固定姿态输入及双设备误差。

@@ -176,3 +176,14 @@ Player 绘制 940 在体表主体和场景深度之后提交。
 脸部原有一字节门槛继续用于正式验收。
 
 [高光结果](evidence/2026-11-14/face-highlight-control/results.json)和[验证归档](evidence/2026-11-14/face-highlight-control/validation.zip)保存片元程序、源纹理摘要及双设备采集。
+
+## 脸部高光材质接入
+
+正式 Player 通过材质高光字段读取十级纹理。
+两块显卡的固定姿态图像与各自的高光对照逐字节一致。
+脸部剩余绿、蓝通道中位偏差分别为正 2 和正 4 字节。
+Release 和 Debug 各通过四项材质 CPU 检查，895 份着色程序逐字节一致。
+384 份受影响程序通过 SPIR-V 验证。
+NVIDIA 595.79 下的冻结四帧与同驱动基准逐字节一致。
+
+[材质结果](evidence/2026-11-14/face-highlight-material/results.json)及[验证归档](evidence/2026-11-14/face-highlight-material/validation.zip)保存材质输入、双设备固定姿态、通道误差和冻结回执。

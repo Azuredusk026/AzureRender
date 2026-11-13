@@ -95,6 +95,10 @@ struct AssetFaceSdfProfile {
 
     bool present = false;
     std::uint32_t schemaVersion = kSchemaVersion;
+    struct Highlight {
+        bool present=false;
+        std::array<float,2> viewOffset{};
+    } highlight;
     std::array<float,9> headBasis{1,0,0,0,1,0,0,0,1};
     std::vector<std::uint8_t> pixels;
     std::uint32_t width = 0;

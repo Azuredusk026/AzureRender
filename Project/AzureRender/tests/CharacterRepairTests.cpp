@@ -887,6 +887,51 @@ void testMaterialUvPolicy(const nlohmann::json& fixture,const std::filesystem::p
     require((reopened.materialFeatures&MaterialFeatureMirroredCoarseUv)!=0,"Material save and reopen preserves UV policy");
 }
 
+void testFaceHighlightProfile(const nlohmann::json& fixture,const std::filesystem::path& directory) {
+    using Json=nlohmann::json;
+    auto source=fixture;
+    source["materials"]=Json::array({source["materials"][0]});
+    for(auto& mesh:source["meshes"])for(auto& primitive:mesh["primitives"])primitive["material"]=0;
+    auto& material=source["materials"][0];
+    material.erase("extensions");
+    material.erase("emissiveTexture");
+    material.erase("emissiveFactor");
+    const int image=static_cast<int>(source["images"].size());
+    const std::array<std::uint8_t,4> pixel{64,64,64,255};
+    require(stbi_write_png((directory/"face-highlight.png").string().c_str(),1,1,4,pixel.data(),4)!=0,
+        "Cannot write face highlight fixture");
+    source["images"].push_back({{"uri","face-highlight.png"}});
+    const int texture=static_cast<int>(source["textures"].size());
+    source["textures"].push_back({{"source",image}});
+    source["nodes"].push_back({{"name","HighlightHead"}});
+    const auto profile=[](Json& document)->Json& {return document["materials"][0]["extras"]["azureRenderMaterial"];};
+    profile(source)={{"schemaVersion",2},{"class","face"},{"features",{"face-sdf-eligible"}},
+        {"faceSdf",{{"schemaVersion",2},{"texture",texture},{"maskTexture",texture},{"rampTexture",texture},
+            {"texCoord",0},{"headNode","HighlightHead"},{"headBasis",{1,0,0,0,1,0,0,0,1}},
+            {"highlight",{{"schemaVersion",1},{"texture",texture},{"viewOffset",{.03,-.02}}}}}},
+        {"nprDiffuse",{{"schemaVersion",1},{"shadowScale",1},{"lightingInputs","host-scene-radiance"},
+            {"shadowMask","none"},{"baseAo","one"},{"shadowAlbedo","base-color"}}}};
+    const auto path=directory/"face-highlight.gltf";
+    const auto load=[&](const Json& doc){std::ofstream(path)<<doc.dump();return loadGltfAsset(path.string()).materials.at(0);};
+    const auto loaded=load(source);
+    require(loaded.specularEmissiveWidth==1&&loaded.specularEmissiveHeight==1
+        &&loaded.textureSettings[3].colorSpace=="linear"&&loaded.textureSettings[3].mipBias==-1.F,
+        "Face highlight must load its linear texture into the shared material slot");
+    require(packMaterialSurfaceProfile(loaded).rows[12]==PackedMaterialSurfaceProfile::Row{.03F,-.02F,1.F,0.F},
+        "Face highlight must retain the authored view shift and presence");
+    auto legacy=source;profile(legacy)["faceSdf"].erase("highlight");
+    require(packMaterialSurfaceProfile(load(legacy)).rows[12][2]==0.F,"Face highlight must be opt-in");
+    const auto reject=[&](const Json& doc){
+        std::string message;
+        try{(void)load(doc);}catch(const std::exception& error){message=error.what();}
+        require(message.find("highlight")!=std::string::npos,"Invalid face highlight must produce its own diagnostic");
+    };
+    auto bad=source;profile(bad)["faceSdf"]["highlight"]["viewOffset"]={.3};reject(bad);
+    bad=source;profile(bad)["faceSdf"]["highlight"]["texture"]=texture+100;reject(bad);
+    bad=source;profile(bad).erase("nprDiffuse");reject(bad);
+    bad=source;bad["materials"][0]["emissiveTexture"]={{"index",texture}};reject(bad);
+}
+
 void testMaterialColorAdjustment(const nlohmann::json& fixture,const std::filesystem::path& directory) {
     using Json=nlohmann::json;
     auto source=fixture;
@@ -1369,6 +1414,7 @@ int main(int argc,char** argv) { try {
     testOutlineSurface(input,directory);
     testMaterialOutputPrecision(input,directory);
     testMaterialUvPolicy(input,directory);
+    testFaceHighlightProfile(input,directory);
     testMaterialColorAdjustment(input,directory);
     testMaterialRadianceScale(input,directory);
     testMaterialDisplayTransform(input,directory);

@@ -56,7 +56,7 @@ inline bool integralMaterialProgram(const std::string& path) noexcept {
     return path.find("_integral",separator==std::string::npos?0:separator+1)!=std::string::npos;
 }
 inline bool extendedMaterialLighting(const AssetMaterial& material) noexcept {
-    return material.colorAdjustment.present
+    return material.colorAdjustment.present||material.faceSdf.highlight.present
         ||material.environmentLighting.diffuse!=MaterialEnvironmentSource::Scene
         ||material.environmentLighting.reflection!=MaterialEnvironmentSource::Scene
         ||material.environmentLighting.fittedSpecular||material.environmentLighting.reflectionLayer.has_value()

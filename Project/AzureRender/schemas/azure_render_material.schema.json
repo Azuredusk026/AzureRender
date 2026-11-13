@@ -250,6 +250,21 @@
         "headNode": {
           "type": "string",
           "minLength": 1
+        },
+        "highlight": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["schemaVersion", "texture", "viewOffset"],
+          "properties": {
+            "schemaVersion": {"type": "integer", "const": 1},
+            "texture": {"type": "integer", "minimum": 0},
+            "viewOffset": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {"type": "number", "minimum": -1, "maximum": 1}
+            }
+          }
         }
       }
     },
