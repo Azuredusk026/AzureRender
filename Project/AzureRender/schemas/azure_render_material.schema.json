@@ -336,6 +336,10 @@
           "maximum": 4,
           "default": 1
         },
+        "mainBrightnessSaturation": {
+          "type": "boolean",
+          "default": false
+        },
         "lightingNormal": {
           "type": "string",
           "enum": [

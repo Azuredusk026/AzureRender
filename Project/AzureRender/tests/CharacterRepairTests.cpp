@@ -921,6 +921,13 @@ void testFaceHighlightProfile(const nlohmann::json& fixture,const std::filesyste
         "Face highlight must retain the authored view shift and presence");
     auto legacy=source;profile(legacy)["faceSdf"].erase("highlight");
     require(packMaterialSurfaceProfile(load(legacy)).rows[12][2]==0.F,"Face highlight must be opt-in");
+    require(packMaterialSurfaceProfile(loaded).rows[12][3]==0.F,"Face main brightness saturation must be opt-in");
+    auto saturated=source;profile(saturated)["nprDiffuse"]["mainBrightnessSaturation"]=true;
+    require(packMaterialSurfaceProfile(load(saturated)).rows[12][3]==1.F,
+        "Face main brightness saturation must reach the lighting profile");
+    profile(saturated)["faceSdf"].erase("highlight");
+    require(packMaterialSurfaceProfile(load(saturated)).rows[12][3]==1.F,
+        "Face main brightness saturation must also support a face without a highlight texture");
     const auto reject=[&](const Json& doc){
         std::string message;
         try{(void)load(doc);}catch(const std::exception& error){message=error.what();}
@@ -930,6 +937,14 @@ void testFaceHighlightProfile(const nlohmann::json& fixture,const std::filesyste
     bad=source;profile(bad)["faceSdf"]["highlight"]["texture"]=texture+100;reject(bad);
     bad=source;profile(bad).erase("nprDiffuse");reject(bad);
     bad=source;bad["materials"][0]["emissiveTexture"]={{"index",texture}};reject(bad);
+    bad=source;profile(bad)["nprDiffuse"]["mainBrightnessSaturation"]="true";
+    try {
+        (void)load(bad);
+        require(false,"Face main brightness saturation must reject non-boolean inputs");
+    } catch(const std::exception& error) {
+        require(std::string(error.what()).find("nprDiffuse.mainBrightnessSaturation")!=std::string::npos,
+            "Face main brightness saturation must report its field name");
+    }
 }
 
 void testMaterialColorAdjustment(const nlohmann::json& fixture,const std::filesystem::path& directory) {

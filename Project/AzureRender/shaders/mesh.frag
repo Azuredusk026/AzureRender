@@ -1918,22 +1918,38 @@ void main()
             eyeHostMatcap=characterDiffuseSaturation(eyeHostMatcap,saturation);
         }
 #if defined(AZURE_EXTENDED_MATERIAL_LIGHTING)
+        float faceMainSaturation=1.0;
+        vec3 faceHighlight=vec3(0);
         if(dualFaceSdf) {
-            vec3 highlightProfile=materialSurfaceProfiles.profiles[material.materialPadding>>1U].rows[12].xyz;
+            vec4 highlightProfile=materialSurfaceProfiles.profiles[material.materialPadding>>1U].rows[12];
             if(highlightProfile.z>.5&&!(qaEffectMode==5&&qaEffectDisabled)) {
                 mat3 headFrame=mat3(instanceFaceFrame);
                 vec2 viewOffset=vec2(dot(viewDirection,normalize(headFrame[0])),
                     -dot(viewDirection,normalize(headFrame[1])))*highlightProfile.xy;
-                vec3 highlight=texture(AZ_TEX_SPECULAR_EMISSIVE,textureCoordinate+viewOffset).rgb
+                faceHighlight=texture(AZ_TEX_SPECULAR_EMISSIVE,textureCoordinate+viewOffset).rgb
                     *(illumination.ambient+illumination.direct);
-                directSpecular+=highlight;
-                beautyColor+=highlight;
+                directSpecular+=faceHighlight;
+                beautyColor+=faceHighlight;
+            }
+            if(highlightProfile.w>.5) {
+                vec3 mainColor=response.color*(illumination.ambient+illumination.direct)+faceHighlight;
+                faceMainSaturation=characterMainBrightnessSaturation(mainColor);
+                beautyColor+=characterDiffuseSaturation(mainColor,faceMainSaturation)-mainColor;
             }
         }
 #endif
         sceneMainDiffuse=response.color*illumination.direct;
         beautyColor+=combinedAmbient+combinedDirect-ambientDiffuse-directDiffuse;
         ambientDiffuse=combinedAmbient;directDiffuse=combinedDirect;
+#if defined(AZURE_EXTENDED_MATERIAL_LIGHTING)
+        if(faceMainSaturation>1.0) {
+            ambientDiffuse=characterDiffuseSaturation(ambientDiffuse,faceMainSaturation);
+            vec3 adjustedMain=characterDiffuseSaturation(sceneMainDiffuse,faceMainSaturation);
+            directDiffuse+=adjustedMain-sceneMainDiffuse;
+            sceneMainDiffuse=adjustedMain;
+            directSpecular+=characterDiffuseSaturation(faceHighlight,faceMainSaturation)-faceHighlight;
+        }
+#endif
         if(specularRamp&&!(qaEffectMode==5&&qaEffectDisabled)){
             float viewAlpha=textureLod(AZ_TEX_STYLE_MASK,
                 vec2(specularRampDot(shadedNormal,-camera.cameraForward.xyz)*.5+.5,.5),0).a;

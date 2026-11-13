@@ -2181,7 +2181,9 @@ AssetMaterial loadMaterial(
                 &&field.key()!="rimResponse"&&field.key()!="viewTint"&&field.key()!="mainRamp"
                 &&field.key()!="characterVisibility"&&field.key()!="localDiffuseFloorScale"
                 &&field.key()!="lightingNormal"&&field.key()!="transparentHighlights"
-                &&field.key()!="rimOrigin"&&field.key()!="shadowAlbedo"&&field.key()!="rampComposition"&&field.key()!="shadowSaturation")throw std::invalid_argument("Unknown nprDiffuse field");
+                &&field.key()!="rimOrigin"&&field.key()!="shadowAlbedo"&&field.key()!="rampComposition"
+                &&field.key()!="shadowSaturation"&&field.key()!="mainBrightnessSaturation")
+                throw std::invalid_argument("Unknown nprDiffuse field");
             if(!npr["schemaVersion"].is_number_integer()||npr["schemaVersion"]!=1
                 ||!npr["shadowScale"].is_number()||!std::isfinite(npr["shadowScale"].get<double>())
                 ||npr["shadowScale"].get<double>()<0||npr["shadowScale"].get<double>()>64
@@ -2236,6 +2238,11 @@ AssetMaterial loadMaterial(
                 if(!value.is_number()||!std::isfinite(value.get<double>())||value.get<double>()<0||value.get<double>()>4)
                     throw std::invalid_argument("Invalid nprDiffuse.shadowSaturation");
                 result.nprDiffuse.shadowSaturation=value.get<float>();
+            }
+            if(npr.contains("mainBrightnessSaturation")) {
+                const auto& value=npr.at("mainBrightnessSaturation");
+                if(!value.is_boolean())throw std::invalid_argument("Invalid nprDiffuse.mainBrightnessSaturation");
+                result.nprDiffuse.mainBrightnessSaturation=value.get<bool>();
             }
             if(npr.contains("characterVisibility")) {
                 result.nprDiffuse.characterVisibility=parseCharacterVisibility(

@@ -185,6 +185,7 @@ inline PackedMaterialSurfaceProfile packMaterialSurfaceProfile(const AssetMateri
         const auto& shift=material.faceSdf.highlight.viewOffset;
         result.rows[12]={shift[0],shift[1],1.F,0.F};
     }
+    if(material.nprDiffuse.mainBrightnessSaturation)result.rows[12][3]=1.F;
     if (material.projectedHairRamp.axisDiagonalPrimaryTextureFootprint) {
         result.rows[6][3] += 16.F;
         result.rows[12] = {material.textureSettings[0].mipBias, material.textureSettings[6].mipBias,

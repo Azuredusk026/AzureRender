@@ -212,3 +212,19 @@ Release 的 `FaceMaskedRimGpu` 和 `DualFaceSdfGpu` 在 NVIDIA 与 Intel 上均�
 线色对照在 NVIDIA 和 Intel 上分别缩小 1,008 和 1,013 处误差，原生覆盖内分别还有 1,034 和 1,032 处超出八字节。
 
 [深度与线色结果](evidence/2026-11-14/body-outline-depth-attribution/results.json)和[验证归档](evidence/2026-11-14/body-outline-depth-attribution/validation.zip)保存投影重建、遮挡位置及整区误差。
+
+## 脸部主光饱和度
+
+七处脸部片元的线性底色最大差为 0.00295，合成主光照明的最大差为 0.00780。
+原生事件 804 在局部灯光叠加前，根据合成主光亮度计算饱和度倍率。
+固定姿态夹具通过材质字段启用该步骤。
+
+| 设备 | 超出一字节 | 峰差 | 蓝通道中位偏差 |
+| --- | ---: | ---: | ---: |
+| NVIDIA | 744 | 5 | +1 |
+| Intel | 723 | 6 | +1 |
+
+两块显卡的正式 Player 与饱和度对照逐字节一致，脸部区域之外新增超差为零。
+Release 和 Debug 各通过四项材质检查，895 份着色程序逐字节一致，384 份扩展照明程序通过 SPIR-V 验证。
+
+[主光饱和度结果](evidence/2026-11-14/face-main-saturation/results.json)和[验证归档](evidence/2026-11-14/face-main-saturation/validation.zip)保存原生片元、双设备图像摘要与构建收据。

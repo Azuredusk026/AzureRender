@@ -289,6 +289,7 @@ struct AssetMaterial {
         using RampComposition=azurerender::NprRampComposition;
         RampComposition rampComposition=RampComposition::MaskVisibility;
         float shadowSaturation=1;
+        bool mainBrightnessSaturation=false;
     } nprDiffuse;
     struct SpecularInput {
         enum class Source : std::uint8_t { EmissiveAlpha, MetallicRoughnessAlpha };
