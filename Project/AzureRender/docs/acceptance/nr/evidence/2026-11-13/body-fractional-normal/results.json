@@ -1,0 +1,343 @@
+{
+  "status": "isolated-visible-error-remains",
+  "overallStatus": "failed-user-review",
+  "cases": {
+    "intel-fractional": {
+      "device": "intel",
+      "variant": "fractional",
+      "perOwner": {
+        "296": {
+          "samples": 496,
+          "before": 9,
+          "after": 9,
+          "introduced": 0,
+          "beforeNormal": 0,
+          "afterNormal": 0
+        },
+        "310": {
+          "samples": 255,
+          "before": 2,
+          "after": 2,
+          "introduced": 0,
+          "beforeNormal": 123,
+          "afterNormal": 123
+        },
+        "328": {
+          "samples": 9116,
+          "before": 77,
+          "after": 55,
+          "introduced": 9,
+          "beforeNormal": 276,
+          "afterNormal": 2
+        },
+        "345": {
+          "samples": 3825,
+          "before": 46,
+          "after": 46,
+          "introduced": 0,
+          "beforeNormal": 2,
+          "afterNormal": 2
+        },
+        "377": {
+          "samples": 16629,
+          "before": 223,
+          "after": 223,
+          "introduced": 0,
+          "beforeNormal": 3863,
+          "afterNormal": 3863
+        },
+        "422": {
+          "samples": 19063,
+          "before": 137,
+          "after": 137,
+          "introduced": 0,
+          "beforeNormal": 30,
+          "afterNormal": 30
+        }
+      },
+      "frames": {
+        "frame_000000.png": {
+          "sha256": "4be9c0f31bad74ea83f1bb7d1d5649494d50c0f27ad4232c5e967a0a495098c4",
+          "changed": 208,
+          "overOne": 67,
+          "maximum": 7
+        },
+        "frame_000001.png": {
+          "sha256": "4be9c0f31bad74ea83f1bb7d1d5649494d50c0f27ad4232c5e967a0a495098c4",
+          "changed": 208,
+          "overOne": 67,
+          "maximum": 7
+        },
+        "frame_000002.png": {
+          "sha256": "4be9c0f31bad74ea83f1bb7d1d5649494d50c0f27ad4232c5e967a0a495098c4",
+          "changed": 208,
+          "overOne": 67,
+          "maximum": 7
+        }
+      },
+      "receiverOverOne": 472,
+      "textureSha256": "7e57983966a786cf56fe0802c1eb417109f62df6673e3a4f678c7872d1a03c05",
+      "shaderSha256": "a5fefdde7552a6155d835f24d20352c962cdd5db9c7acb16d9a99fb1f6a01c64"
+    },
+    "intel-rounded": {
+      "device": "intel",
+      "variant": "rounded",
+      "perOwner": {
+        "296": {
+          "samples": 496,
+          "before": 9,
+          "after": 9,
+          "introduced": 0,
+          "beforeNormal": 0,
+          "afterNormal": 0
+        },
+        "310": {
+          "samples": 255,
+          "before": 2,
+          "after": 2,
+          "introduced": 0,
+          "beforeNormal": 123,
+          "afterNormal": 123
+        },
+        "328": {
+          "samples": 9116,
+          "before": 77,
+          "after": 76,
+          "introduced": 3,
+          "beforeNormal": 276,
+          "afterNormal": 104
+        },
+        "345": {
+          "samples": 3825,
+          "before": 46,
+          "after": 46,
+          "introduced": 0,
+          "beforeNormal": 2,
+          "afterNormal": 2
+        },
+        "377": {
+          "samples": 16629,
+          "before": 223,
+          "after": 223,
+          "introduced": 0,
+          "beforeNormal": 3863,
+          "afterNormal": 3863
+        },
+        "422": {
+          "samples": 19063,
+          "before": 137,
+          "after": 137,
+          "introduced": 0,
+          "beforeNormal": 30,
+          "afterNormal": 30
+        }
+      },
+      "frames": {
+        "frame_000000.png": {
+          "sha256": "e773f9a74e41cad878368daa7e916a30f80c99303930bc1c62cad6706841ac67",
+          "changed": 109,
+          "overOne": 18,
+          "maximum": 4
+        },
+        "frame_000001.png": {
+          "sha256": "e773f9a74e41cad878368daa7e916a30f80c99303930bc1c62cad6706841ac67",
+          "changed": 109,
+          "overOne": 18,
+          "maximum": 4
+        },
+        "frame_000002.png": {
+          "sha256": "e773f9a74e41cad878368daa7e916a30f80c99303930bc1c62cad6706841ac67",
+          "changed": 109,
+          "overOne": 18,
+          "maximum": 4
+        }
+      },
+      "receiverOverOne": 493,
+      "textureSha256": "7e57983966a786cf56fe0802c1eb417109f62df6673e3a4f678c7872d1a03c05",
+      "shaderSha256": "c5cfedb426aeffd21eca48465c16b86de6dabd2f871c5f3e718b9707591b8758"
+    },
+    "nvidia-fractional": {
+      "device": "nvidia",
+      "variant": "fractional",
+      "perOwner": {
+        "296": {
+          "samples": 496,
+          "before": 2,
+          "after": 2,
+          "introduced": 0,
+          "beforeNormal": 0,
+          "afterNormal": 0
+        },
+        "310": {
+          "samples": 255,
+          "before": 0,
+          "after": 0,
+          "introduced": 0,
+          "beforeNormal": 123,
+          "afterNormal": 123
+        },
+        "328": {
+          "samples": 9116,
+          "before": 46,
+          "after": 23,
+          "introduced": 7,
+          "beforeNormal": 141,
+          "afterNormal": 2
+        },
+        "345": {
+          "samples": 3825,
+          "before": 30,
+          "after": 30,
+          "introduced": 0,
+          "beforeNormal": 2,
+          "afterNormal": 2
+        },
+        "377": {
+          "samples": 16629,
+          "before": 158,
+          "after": 158,
+          "introduced": 0,
+          "beforeNormal": 2710,
+          "afterNormal": 2710
+        },
+        "422": {
+          "samples": 19063,
+          "before": 1,
+          "after": 1,
+          "introduced": 0,
+          "beforeNormal": 0,
+          "afterNormal": 0
+        }
+      },
+      "frames": {
+        "frame_000000.png": {
+          "sha256": "e75e439144fb097082e5c3a0989248f41e594867b5cab37d729005aa18810c65",
+          "changed": 180,
+          "overOne": 54,
+          "maximum": 6
+        },
+        "frame_000001.png": {
+          "sha256": "e75e439144fb097082e5c3a0989248f41e594867b5cab37d729005aa18810c65",
+          "changed": 180,
+          "overOne": 54,
+          "maximum": 6
+        },
+        "frame_000002.png": {
+          "sha256": "e75e439144fb097082e5c3a0989248f41e594867b5cab37d729005aa18810c65",
+          "changed": 180,
+          "overOne": 54,
+          "maximum": 6
+        }
+      },
+      "receiverOverOne": 214,
+      "textureSha256": "7e57983966a786cf56fe0802c1eb417109f62df6673e3a4f678c7872d1a03c05",
+      "shaderSha256": "a5fefdde7552a6155d835f24d20352c962cdd5db9c7acb16d9a99fb1f6a01c64"
+    },
+    "nvidia-rounded": {
+      "device": "nvidia",
+      "variant": "rounded",
+      "perOwner": {
+        "296": {
+          "samples": 496,
+          "before": 2,
+          "after": 2,
+          "introduced": 0,
+          "beforeNormal": 0,
+          "afterNormal": 0
+        },
+        "310": {
+          "samples": 255,
+          "before": 0,
+          "after": 0,
+          "introduced": 0,
+          "beforeNormal": 123,
+          "afterNormal": 123
+        },
+        "328": {
+          "samples": 9116,
+          "before": 46,
+          "after": 45,
+          "introduced": 4,
+          "beforeNormal": 141,
+          "afterNormal": 104
+        },
+        "345": {
+          "samples": 3825,
+          "before": 30,
+          "after": 30,
+          "introduced": 0,
+          "beforeNormal": 2,
+          "afterNormal": 2
+        },
+        "377": {
+          "samples": 16629,
+          "before": 158,
+          "after": 158,
+          "introduced": 0,
+          "beforeNormal": 2710,
+          "afterNormal": 2710
+        },
+        "422": {
+          "samples": 19063,
+          "before": 1,
+          "after": 1,
+          "introduced": 0,
+          "beforeNormal": 0,
+          "afterNormal": 0
+        }
+      },
+      "frames": {
+        "frame_000000.png": {
+          "sha256": "ad1733a2ba1b9618bba870b82d301656d2bcb774d81ee734df9a19c5174721e6",
+          "changed": 90,
+          "overOne": 21,
+          "maximum": 8
+        },
+        "frame_000001.png": {
+          "sha256": "ad1733a2ba1b9618bba870b82d301656d2bcb774d81ee734df9a19c5174721e6",
+          "changed": 90,
+          "overOne": 21,
+          "maximum": 8
+        },
+        "frame_000002.png": {
+          "sha256": "ad1733a2ba1b9618bba870b82d301656d2bcb774d81ee734df9a19c5174721e6",
+          "changed": 90,
+          "overOne": 21,
+          "maximum": 8
+        }
+      },
+      "receiverOverOne": 236,
+      "textureSha256": "7e57983966a786cf56fe0802c1eb417109f62df6673e3a4f678c7872d1a03c05",
+      "shaderSha256": "c5cfedb426aeffd21eca48465c16b86de6dabd2f871c5f3e718b9707591b8758"
+    }
+  },
+  "restoration": {
+    "shaders": 895,
+    "textureSha256": "3d16ddcced1a4f482f969250b835c5ea569ce620d8ef16cc465fc19cbb266a9e",
+    "verified": true
+  },
+  "queue": {
+    "id": 204,
+    "owner": "01a1d0a9-829a-7c11-a7a8-017e743887d9",
+    "task": "quality-reference-grid-pending-controls",
+    "kind": "gpu",
+    "priority": 1,
+    "estimate_seconds": 410.0,
+    "pid": 38560,
+    "state": "succeeded",
+    "submitted": 1794546578.5572197,
+    "started": 1794552633.0871167,
+    "ended": 1794552816.0612457,
+    "wait_seconds": 6054.515000000014,
+    "run_seconds": 182.95300000009593,
+    "lock_attempts": 865,
+    "exit_code": 0,
+    "reason": null,
+    "output": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-231945-projected-hair-reference-grid-4b775d",
+    "log_path": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-231945-projected-hair-reference-grid-4b775d\\process.log"
+  },
+  "archive": {
+    "members": 27,
+    "sha256": "c4d1e3e98b97aaf79aa86cbbd853fa714d546e12dd187f656e4e0fd8feba925a"
+  }
+}
