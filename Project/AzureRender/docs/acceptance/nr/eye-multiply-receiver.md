@@ -56,3 +56,12 @@ NVIDIA 的关闭对照全部在一字节内，独立眼部夹具逐像素一致�
 原生完整后处理的参考按实际画面及着色阶段采集。
 
 [采样结果](evidence/2026-11-14/portrait-eye-bloom-source/results.json)和[验证归档](evidence/2026-11-14/portrait-eye-bloom-source/validation.zip)保存双设备采样点、探针和运行记录。
+
+## 原生泛光合成
+
+原生第 10401 帧与角色近景第 6834 帧使用相同的全屏合成程序。
+程序读取 2560×1440 线性场景、1280×720 泛光纹理及 1024×32 调色查找表。
+第 6834 帧的泛光纹理在合成前各通道均有非零贡献，蓝通道峰值为 1.4375。
+该帧的相机和姿态独立于 Player 眼部验收夹具。
+
+[原生合成结果](evidence/2026-11-14/portrait-native-bloom-composition/results.json)和[验证归档](evidence/2026-11-14/portrait-native-bloom-composition/validation.zip)保存程序、纹理摘要和采集常量。
