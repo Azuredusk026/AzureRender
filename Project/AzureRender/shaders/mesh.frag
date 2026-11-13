@@ -2221,6 +2221,15 @@ void main()
     }
     if (AZURE_ALPHA_MODE == 2) outputColor.a *= material.nodeOpacity;
     if(multiplyComposite) {
+        vec2 compositeProfile=materialSurfaceProfiles.profiles[material.materialPadding>>1U].rows[20].xy;
+#if !defined(AZURE_OPAQUE_SNAPSHOT)
+        if (compositeProfile.x>.5) {
+            ivec2 pixel=ivec2(AZURE_FRAGMENT_COORD.xy);
+            if(texelFetch(opaqueSceneColor,pixel,0).a>.5 || texelFetch(overlaySceneDepth,pixel,0).r>=100000.0)
+                discard;
+        }
+#endif
+        compositeCoverage*=compositeProfile.y;
         outputColor.rgb=mix(vec3(1.0),outputColor.rgb,compositeCoverage);
         outputColor.a=0.0;
     }
@@ -2239,6 +2248,7 @@ void main()
     if(camera.clusterLighting.x>.5 && !sceneCharacter)innerOutlineParticipation=0.0;
     vec3 innerOutlineNormal = geometricNormal;
 #if defined(AZURE_OPAQUE_SNAPSHOT)
+    if(AZURE_MATERIAL_CLASS==6U)outputColor.a=0.0;
     vec3 snapshotNormal=shadedNormal;
     if(projectedHair&&(projectedHairFlags&4U)!=0U) {
         ProjectedHairProfile p=loadProjectedHairSurfaceProfile(material.materialPadding>>1U);

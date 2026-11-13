@@ -1053,7 +1053,7 @@ void loadUnlitSurface(const tinygltf::Material& material,const tinygltf::Model& 
             throw std::invalid_argument("Invalid unlit surface field: "+field.key());
 }
 
-void loadMaterialComposite(const tinygltf::Material& material, const AssetMaterial& result) {
+void loadMaterialComposite(const tinygltf::Material& material, AssetMaterial& result) {
     if(!material.extras.IsObject() || !material.extras.Has("azureRenderMaterial"))return;
     const auto& profile=material.extras.Get("azureRenderMaterial");
     const bool enabled=(result.materialFeatures&MaterialFeatureMultiplyComposite)!=0;
@@ -1072,9 +1072,24 @@ void loadMaterialComposite(const tinygltf::Material& material, const AssetMateri
         ||!composite.Has("mode")||!composite.Get("mode").IsString()
         ||composite.Get("mode").Get<std::string>()!="multiply")
         throw std::invalid_argument("Invalid composite schemaVersion or mode");
-    for(const auto& field:composite.Get<tinygltf::Value::Object>())
-        if(field.first!="schemaVersion"&&field.first!="mode")
-            throw std::invalid_argument("Unknown composite field: "+field.first);
+    const auto authored=nlohmann::json::parse(material.extras_json_string);
+    const auto& raw=authored.at("azureRenderMaterial").at("composite");
+    if(raw.contains("receiver")) {
+        const auto& receiver=raw.at("receiver");
+        if(!receiver.is_string()||receiver!="eye")
+            throw std::invalid_argument("Invalid multiply composite receiver");
+        result.multiplyEyeReceiver=true;
+    }
+    if(raw.contains("coverageScale")) {
+        const auto& scale=raw.at("coverageScale");
+        const double value=scale.is_number()?scale.get<double>():-1.;
+        if(!std::isfinite(value)||value<0.||value>1.)
+            throw std::invalid_argument("Invalid multiply composite coverageScale");
+        result.multiplyCoverageScale=static_cast<float>(value);
+    }
+    for(const auto& field:raw.items())
+        if(field.key()!="schemaVersion"&&field.key()!="mode"&&field.key()!="receiver"&&field.key()!="coverageScale")
+            throw std::invalid_argument("Unknown composite field: "+field.key());
 }
 
 int loadSceneRefraction(const tinygltf::Material& material,

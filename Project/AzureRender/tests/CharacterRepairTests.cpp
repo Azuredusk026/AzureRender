@@ -667,6 +667,26 @@ void testMultiplyComposite(const nlohmann::json& fixture, const std::filesystem:
     require(overlay.alphaMode==AssetAlphaMode::Blend
         &&(overlay.materialFeatures&MaterialFeatureMultiplyComposite)!=0,
         "Multiply composite must retain its explicit transparent feature");
+    auto eyeOverlay=source;
+    auto& eyeComposite=eyeOverlay["materials"][0]["extras"]["azureRenderMaterial"]["composite"];
+    eyeComposite["receiver"]="eye";
+    eyeComposite["coverageScale"]=.95;
+    const auto eyeProfile=azurerender::packMaterialSurfaceProfile(load(eyeOverlay).materials.at(0));
+    require(eyeProfile.rows[20][0]==1.F&&eyeProfile.rows[20][1]==.95F,
+        "Eye multiply composite must carry its receiver filter and coverage scale");
+    const auto defaultProfile=azurerender::packMaterialSurfaceProfile(overlay);
+    require(defaultProfile.rows[20][0]==0.F&&defaultProfile.rows[20][1]==1.F,
+        "Multiply composite defaults must preserve unrestricted coverage");
+    for(const auto& value:Json::array({"face",1,false,nullptr})) {
+        auto invalid=eyeOverlay;
+        invalid["materials"][0]["extras"]["azureRenderMaterial"]["composite"]["receiver"]=value;
+        reject(invalid);
+    }
+    for(const auto& value:Json::array({-.01,1.01,".95",nullptr})) {
+        auto invalid=eyeOverlay;
+        invalid["materials"][0]["extras"]["azureRenderMaterial"]["composite"]["coverageScale"]=value;
+        reject(invalid);
+    }
     auto generic=source;
     generic["materials"][0]["extras"]["azureRenderMaterial"]["class"]="generic";
     generic["materials"][0]["extras"]["azureRenderMaterial"]["features"]={"multiply-composite"};

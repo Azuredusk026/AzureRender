@@ -27,7 +27,6 @@ def run(player, root, *, legacy_alpha_red=False, expected_validation='any'):
     surface(assets / 'rear.gltf', double_sided=True)
     rear = json.loads((assets / 'rear.gltf').read_text())
     rear['materials'][0]['pbrMetallicRoughness']['baseColorFactor'] = [.64, .36, .16, 1]
-    (assets / 'rear.gltf').write_text(json.dumps(rear))
     surface(assets / 'overlay.gltf', sloped=True)
     template = json.loads((assets / 'overlay.gltf').read_text())
     Image.new('RGBA', (1, 1), (255, 255, 255, 128)).save(assets / 'alpha.png')
@@ -69,7 +68,8 @@ def run(player, root, *, legacy_alpha_red=False, expected_validation='any'):
                 mirror=False, reverse=False, double=False, behind=False,
                 fixed=False, isolation='albedo', material_class='overlay',
                 scene_lighting=True, texture_alpha=False, opaque=False,
-                lighting=False, light_enabled=True, coplanar=False):
+                lighting=False, light_enabled=True, coplanar=False,
+                rear_class='generic', eye_receiver=False, coverage_scale=1):
         assert not (opaque and multiply), 'opaque control must use the ordinary material path'
         assert not (coplanar and behind), 'a card cannot be both coplanar and behind'
         model = copy.deepcopy(rear if coplanar else template)
@@ -81,7 +81,14 @@ def run(player, root, *, legacy_alpha_red=False, expected_validation='any'):
         if multiply:
             profile['features'].append('multiply-composite')
             profile['composite'] = {'schemaVersion': 1, 'mode': 'multiply'}
+            if eye_receiver:
+                profile['composite'].update(receiver='eye', coverageScale=coverage_scale)
         material['extras'] = {'azureRenderMaterial': profile}
+        receiver = copy.deepcopy(rear)
+        if rear_class != 'generic':
+            receiver['materials'][0]['extras'] = {'azureRenderMaterial': {
+                'schemaVersion': 2, 'class': rear_class, 'features': []}}
+        (assets / 'rear.gltf').write_text(json.dumps(receiver))
         if texture_alpha:
             # A white texel isolates alpha; valid UVs keep the glTF self-contained.
             uv = struct.pack('<8f', 0, 0, 1, 0, 1, 1, 0, 1)
@@ -225,6 +232,18 @@ def run(player, root, *, legacy_alpha_red=False, expected_validation='any'):
     metrics['fallbackMaximumDifference'] = error
     if error > 1:
         failures.append('fixed descriptors and CPU skinning must match')
+    eye = capture('eye-receiver', rear_class='eye', eye_receiver=True, coverage_scale=.5)
+    error = float(np.abs(linear(eye) - destination * (.5 + tint * .5)).max())
+    metrics['eyeReceiverLinearMaximumError'] = error
+    if error > .008:
+        failures.append('eye receiver must apply the authored coverage scale')
+    for name, options in [('non-eye-receiver', {}),
+                          ('eye-receiver-occluded', {'rear_class': 'eye', 'behind': True})]:
+        pixels = capture(name, eye_receiver=True, **options)
+        error = int(np.abs(pixels - baseline).max())
+        metrics[name + 'MaximumDifference'] = error
+        if error > 1:
+            failures.append(name + ' must preserve the receiver')
     beauty_hidden = capture('beauty-hidden', visible=False, multiply=False,
                             isolation='beauty', lighting=True)
     beauty_light_off = capture('beauty-light-off', visible=False, multiply=False,

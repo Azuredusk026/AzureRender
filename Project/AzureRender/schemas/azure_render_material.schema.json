@@ -340,7 +340,14 @@
     },
     "composite": {
       "type": "object",
-      "description": "Typed fields and ownership are validated by the production material interpreter."
+      "additionalProperties": false,
+      "required": ["schemaVersion", "mode"],
+      "properties": {
+        "schemaVersion": {"const": 1},
+        "mode": {"const": "multiply"},
+        "receiver": {"const": "eye"},
+        "coverageScale": {"type": "number", "minimum": 0, "maximum": 1}
+      }
     },
     "sceneRefraction": {
       "type": "object",

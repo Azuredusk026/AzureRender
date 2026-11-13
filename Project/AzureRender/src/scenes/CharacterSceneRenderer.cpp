@@ -3278,6 +3278,7 @@ void CharacterSceneRenderer::recordOutlineMask(const RenderContext& context,cons
 
 void CharacterSceneRenderer::recordOverlayDepth(const RenderContext& context,const SceneInstanceSnapshot& snapshot,rhi::ICommandRecorder& commands){
     bool depthShell=false;
+    bool eyeReceiver=false;
     bool colorRequired=screenSpaceReflectionActive(snapshot.settings.screenSpaceReflection,
         snapshot.settings.sceneLightingEnabled,qaIsolationMode_,!(qaEffectMode_==5&&!qaEffectEnabled_));
     bool sampled=colorRequired||viewFog_!=nullptr;
@@ -3297,10 +3298,12 @@ void CharacterSceneRenderer::recordOverlayDepth(const RenderContext& context,con
             colorRequired|=material.nprDiffuse.screenLightingNormal;
             sampled|=(material.materialFeatures&(MaterialFeatureBrowOverlay|MaterialFeatureSceneTint|MaterialFeatureSceneRefraction|MaterialFeatureUnlitTextureLayers))!=0;
             colorRequired|=(material.materialFeatures&(MaterialFeatureSceneRefraction|MaterialFeatureSceneTint))!=0||opaqueSurfaceOverlay(material);
+            eyeReceiver|=material.multiplyEyeReceiver;
             depthShell|=material.outlineSurface.present&&material.outlineSurface.depthPrepass;
         }
     }
-    if(!sampled&&!depthShell)return;
+    if(!sampled&&!eyeReceiver&&!depthShell)return;
+    colorRequired|=eyeReceiver;
     if(colorRequired&&context.depthTestEnabled)
         recordDepthCoverage(context,snapshot,commands,DepthCoverageMode::SnapshotPrefill);
     recordDepthCoverage(context,snapshot,commands,colorRequired?DepthCoverageMode::SnapshotColor:DepthCoverageMode::SnapshotDepth);
