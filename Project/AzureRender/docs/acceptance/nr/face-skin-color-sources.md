@@ -115,3 +115,13 @@ Release 和 Debug 各通过四项材质相关 CPU 检查。
 NVIDIA 595.79 的冻结四帧与同驱动基准逐字节一致。
 
 [材质结果](evidence/2026-11-14/material-color-adjustment/results.json)及[验证归档](evidence/2026-11-14/material-color-adjustment/validation.zip)保存输入参数、双设备采集、失败复测和冻结回执。
+
+## 脸部片元输入
+
+实际 Vulkan 事件 876 的十个位置通过着色器替换及恢复核对。
+原生事件 804 的两处像素使用片元跟踪读取输入与颜色。
+两处距离场与遮罩的 RGB 绝对误差均低于 0.0001，色带 RGB 的峰差低于 0.005。
+第 296 行的底色红通道绝对误差为 0.25415。
+第 297 行的原生色带和 Player 色带均为白色，该处的剩余误差按主光及环境光合成核对。
+
+[片元结果](evidence/2026-11-14/face-fragment-samples/results.json)和[验证归档](evidence/2026-11-14/face-fragment-samples/validation.zip)保存读回和跟踪。
