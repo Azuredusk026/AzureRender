@@ -88,4 +88,34 @@ Vulkan 的常规统计跳过超过 1000 项的描述符数组。
 
 [访问结果](evidence/2026-11-14/joint-texture-usage/results.json)与[回放归档](evidence/2026-11-14/joint-texture-usage/validation.zip)保存描述符反馈、图像身份和失败复测记录。
 
+## 全帧描述符反馈
+
+第 320 帧的 3,453 个绘制及分派事件均已核对。
+364 张图像中，252 张取得描述符访问记录。
+其中 159 张在常规资源表中没有事件。
+其余 112 张的捕获容量为 472,807,424 字节。
+该值只覆盖冻结机位的一帧，动态可见范围需另行采集。
+
+关卡引用的 374 个资源包含 395 个显式 glTF 材质槽。
+这些槽均被各自默认场景内的几何图元引用。
+纹理容量分析继续使用实际采样和层级范围。
+
+## 稀疏页布局与重复
+
+NVIDIA 和 Intel 均通过 22 种实际尺寸及格式的图像创建查询。
+四种受检格式的稀疏页均为 64 KiB。
+364 张图像的层级尾部约占 23.3 MiB 和 22.8 MiB。
+尾部容量采用设备返回的绑定粒度。见 [Vulkan 稀疏资源规范](https://docs.vulkan.org/spec/latest/chapters/sparsemem.html#sparsememory-miptail)。
+
+双设备均可独立绑定的完整页共核对 27,951 张。
+同格式、同像素布局的 SHA-256 重复页为 3,432 张。
+重复页的潜在容量为 224,919,552 字节，约 214.5 MiB。
+回放读取逻辑纹素，实际页别名及采样仍需设备验证。
+
+按单帧无匹配访问图像和重复页的全部容量独立估算，
+合计为 697,726,976 字节，距分配缺口仍差 476,341,056 字节。
+候选继续核对可见图像内部的层级、页访问及运行时分配。
+
+[全帧结果](evidence/2026-11-14/joint-sparse-texture-scope/results.json)与[验证归档](evidence/2026-11-14/joint-sparse-texture-scope/validation.zip)保存访问清单、设备布局和重复页统计。
+
 [结果清单](evidence/2026-11-14/joint-59579-qualification/results.json)及[验证归档](evidence/2026-11-14/joint-59579-qualification/validation.zip)保存采样命令、逐帧计时、设备和内存记录。
