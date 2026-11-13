@@ -155,6 +155,12 @@ NVIDIA 与 Intel 全图分别新增 404 和 444 个超出一字节的像素。
 [法线结果](evidence/2026-11-14/transparent-cloth-normal-mips/results.json)和[验证归档](evidence/2026-11-14/transparent-cloth-normal-mips/validation.zip)保存十二级摘要、双设备指标及运行记录。
 [重建结果](evidence/2026-11-14/cloth-sampled-normal-lighting/results.json)和[验证归档](evidence/2026-11-14/cloth-sampled-normal-lighting/validation.zip)保存对照程序、逐点误差和双设备运行记录。
 
+透明衣料的打包参数按 `(B, 1 − A, R, G)` 转换，底层 4,194,304 个纹素均与 Player 参数图一致。
+完整十二级参数纹理使 NVIDIA 和 Intel 的最终画面分别变化 27 和 18 个像素。
+两块显卡的重点位置均有 28 处超出八字节，峰差为 39 字节。
+
+[打包参数结果](evidence/2026-11-14/cloth-packed-parameters/results.json)和[验证归档](evidence/2026-11-14/cloth-packed-parameters/validation.zip)保存逐级摘要和双设备采集。
+
 ## Player 体表描边提交
 
 Player 绘制 940 在体表主体和场景深度之后提交。
