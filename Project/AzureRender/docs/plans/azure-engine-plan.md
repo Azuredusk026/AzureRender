@@ -1402,5 +1402,7 @@ Intel 头发颜色继续按冻结区域核对纹理选级。
 [投影头发参考光栅网格](../acceptance/nr/projected-hair-reference-grid.md)完成双配置、双设备及冻结四帧。
 完整接收、Intel 头发和全身虹膜仍有超差。
 
+[虹膜覆盖来源](../acceptance/nr/iris-native-overlay.md)核对原生覆盖对 94 个虹膜位置的影响。
+
 [体表法线原生选层](../acceptance/nr/native-body-explicit-mips.md)核对双设备选层。
 7,997 处合格深度位置均可用显式样本复现隐式法线。

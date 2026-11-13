@@ -1,0 +1,195 @@
+{
+  "status": "qualified-native-source-control",
+  "overallStatus": "failed-user-review",
+  "ownership": {
+    "irisMask": {
+      "event": 846,
+      "pixels": 255,
+      "sha256": "3383359cfacf5dce9466be7a6a33e0bd0809158c33f532e2f226efeda9cd1b16"
+    },
+    "stages": {
+      "975": {
+        "changed": 0,
+        "samples": 255,
+        "attachment": "ResourceId::141976"
+      },
+      "1018": {
+        "changed": 0,
+        "samples": 255,
+        "attachment": "ResourceId::141976"
+      },
+      "1038": {
+        "changed": 0,
+        "samples": 255,
+        "attachment": "ResourceId::141976"
+      },
+      "1059": {
+        "changed": 0,
+        "samples": 255,
+        "attachment": "ResourceId::141976"
+      },
+      "1079": {
+        "changed": 0,
+        "samples": 255,
+        "attachment": "ResourceId::141976"
+      },
+      "1099": {
+        "changed": 0,
+        "samples": 255,
+        "attachment": "ResourceId::141976"
+      },
+      "1116": {
+        "changed": 0,
+        "samples": 255,
+        "attachment": "ResourceId::141976"
+      },
+      "1138": {
+        "changed": 0,
+        "samples": 255,
+        "attachment": "ResourceId::141976"
+      },
+      "1160": {
+        "changed": 0,
+        "samples": 255,
+        "attachment": "ResourceId::141976"
+      },
+      "1230": {
+        "changed": 0,
+        "samples": 255,
+        "attachment": "ResourceId::141925"
+      },
+      "1245": {
+        "changed": 94,
+        "samples": 255,
+        "attachment": "ResourceId::141925"
+      },
+      "1267": {
+        "changed": 0,
+        "samples": 255,
+        "attachment": "ResourceId::141925"
+      },
+      "1291": {
+        "changed": 0,
+        "samples": 255,
+        "attachment": "ResourceId::141925"
+      },
+      "1314": {
+        "changed": 0,
+        "samples": 255,
+        "attachment": "ResourceId::141925"
+      },
+      "1339": {
+        "changed": 0,
+        "samples": 255,
+        "attachment": "ResourceId::141925"
+      },
+      "1358": {
+        "changed": 0,
+        "samples": 255,
+        "attachment": "ResourceId::141925"
+      },
+      "1383": {
+        "changed": 0,
+        "samples": 255,
+        "attachment": "ResourceId::141925"
+      }
+    }
+  },
+  "comparison": {
+    "pixels": 255,
+    "nativeOverlayChanged": 94,
+    "nativeDisplayChanged": 94,
+    "devices": {
+      "nvidia": {
+        "covered": {
+          "before": {
+            "overOne": 3,
+            "maximum": 19,
+            "mean": 0.9787234042553191
+          },
+          "after": {
+            "overOne": 94,
+            "maximum": 95,
+            "mean": 26.93617021276596
+          }
+        },
+        "uncovered": {
+          "before": {
+            "overOne": 37,
+            "maximum": 20,
+            "mean": 1.9875776397515528
+          },
+          "after": {
+            "overOne": 37,
+            "maximum": 20,
+            "mean": 1.9875776397515528
+          }
+        }
+      },
+      "intel": {
+        "covered": {
+          "before": {
+            "overOne": 6,
+            "maximum": 18,
+            "mean": 0.9680851063829787
+          },
+          "after": {
+            "overOne": 94,
+            "maximum": 95,
+            "mean": 26.93617021276596
+          }
+        },
+        "uncovered": {
+          "before": {
+            "overOne": 39,
+            "maximum": 27,
+            "mean": 2.2422360248447206
+          },
+          "after": {
+            "overOne": 39,
+            "maximum": 27,
+            "mean": 2.2422360248447206
+          }
+        }
+      }
+    }
+  },
+  "attenuation": {
+    "scope": "native per-pixel attenuation source replacement",
+    "samples": 255,
+    "changed": 94,
+    "ratioRange": [
+      [
+        0.639344262295082,
+        0.22826086956521738,
+        0.39655172413793105
+      ],
+      [
+        0.9819819819819819,
+        0.9611650485436893,
+        0.9696969696969697
+      ]
+    ],
+    "ratioMedian": [
+      0.7419986380660538,
+      0.44209474885844746,
+      0.563508064516129
+    ],
+    "devices": {
+      "nvidia": {
+        "coveredOverOne": 8,
+        "totalOverOne": 45,
+        "peak": 39
+      },
+      "intel": {
+        "coveredOverOne": 11,
+        "totalOverOne": 50,
+        "peak": 39
+      }
+    }
+  },
+  "archive": {
+    "sha256": "c47611d01492eb363e2b22b7da76279d5aae285a3e41789662b46dfae2731b14",
+    "members": 10
+  }
+}

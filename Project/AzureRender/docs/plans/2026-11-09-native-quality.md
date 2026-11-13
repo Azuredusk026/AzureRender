@@ -179,6 +179,8 @@ Intel 头发颜色继续核对纹理梯度与层级选择。
 [投影头发参考光栅网格](../acceptance/nr/projected-hair-reference-grid.md)完成可选材质路径的回归。
 全身虹膜和生产接收继续按各自门槛验收。
 
+[虹膜覆盖来源](../acceptance/nr/iris-native-overlay.md)核对原生覆盖对 94 个虹膜位置的影响。
+
 [体表法线原生选层](../acceptance/nr/native-body-explicit-mips.md)核对体表实际选层与解码。
 生产可见量及共同图元按原门槛继续验收。
 
