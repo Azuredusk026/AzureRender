@@ -50,5 +50,12 @@
 
 [回退路径归档](evidence/2026-11-13/frozen-public-visual/fallbacks.zip)保存固定描述符和 CPU 蒙皮的逐图复测。
 
+## Debug 注册对照
+
+隔离 Debug 构建通过命令行测试，并使用 592.82 执行三个严格注册用例。
+每条路径的七张输出一致，成片有 3 个像素、直射漫反射有 6 个像素各相差一个色阶，其余五张达到零差异。
+切换 595.79 等待本机 Windows 管理员确认。
+[逐图结果](evidence/2026-11-13/frozen-public-visual/debug-59282.json)及[注册对照归档](evidence/2026-11-13/frozen-public-visual/debug-59282.zip)保存 21 张截图、捕获清单、设备报告和注册结果。
+
 [重放归档](evidence/2026-11-13/frozen-public-visual/replay.zip)保存构建来源、显示设备、严格比对和逐像素证据。
 [复验计划](../../plans/2026-11-13-frozen-public-visual-regression.md)记录后续验证条件。
