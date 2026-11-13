@@ -46,5 +46,18 @@ Player 着色仍按实际采样值和照明分项核对。
 
 [选层结果](evidence/2026-11-13/iris-native-base-mips/results.json)和[选层归档](evidence/2026-11-13/iris-native-base-mips/validation.zip)记录原生程序、固定层级与逐点数据。
 
+## Player 采样边界
+
+Player 的 Vulkan 采样查询返回 244 处第 4 级和 11 处第 5 级。
+按采样器的负一偏移补偿后，255 处均与显式选层的线性附件逐位一致。
+同设备原生选层在 `[1261,261]` 使用第 5 级，Player 的未取整层级为 4.4921875。
+回放中将该点切换至第 5 级，颜色峰差为一字节。
+
+实际材质将采样器偏移设为 −0.99 的对照，在两块显卡上各改变两个虹膜位置，覆盖区外变化为零。
+NVIDIA 的虹膜超差为 52 处，Intel 为 57 处，两设备各出现一处新增超差。
+正式材质的采样器偏移为 −1。
+
+[采样结果](evidence/2026-11-14/iris-sampler-boundary/results.json)和[采样归档](evidence/2026-11-14/iris-sampler-boundary/validation.zip)保存固定层级、偏移对照和实际 Player 收据。
+
 [结果清单](evidence/2026-11-13/iris-native-overlay/results.json)记录各阶段读回。
 [验证归档](evidence/2026-11-13/iris-native-overlay/validation.zip)保存遮罩及逐点计算程序。
