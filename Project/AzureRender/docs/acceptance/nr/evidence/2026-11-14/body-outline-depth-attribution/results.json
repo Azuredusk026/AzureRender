@@ -70,6 +70,15 @@
     "nvidia": {
       "markerMatches": 879,
       "markerMatchesPlayerDepthHypothesis": 879,
+      "visibleMarkerChangesAtNativePositions": 1171,
+      "visibleMarkerChangesPassingPlayerDepth": 1170,
+      "visibleMarkerChangesOutsideNative": 1,
+      "visibleMarkerChangesAtFailedDepth": [
+        [
+          1381,
+          405
+        ]
+      ],
       "changedAtNativePositions": 1137,
       "changedOutsideNative": 6,
       "improvedAtNativePositions": 1008,
@@ -81,6 +90,15 @@
     "intel": {
       "markerMatches": 879,
       "markerMatchesPlayerDepthHypothesis": 879,
+      "visibleMarkerChangesAtNativePositions": 1171,
+      "visibleMarkerChangesPassingPlayerDepth": 1170,
+      "visibleMarkerChangesOutsideNative": 0,
+      "visibleMarkerChangesAtFailedDepth": [
+        [
+          1381,
+          405
+        ]
+      ],
       "changedAtNativePositions": 1135,
       "changedOutsideNative": 5,
       "improvedAtNativePositions": 1013,
@@ -92,6 +110,6 @@
   },
   "archive": {
     "members": 2,
-    "sha256": "e77bd02f6d2e278efc44b03f10ac99bcbce1b75eaa7ea6ceb1126255df82170c"
+    "sha256": "b1a9d9b20b390986008f9723f97e598da3b457c8fa345d87e432c01ba18fbb6e"
   }
 }
