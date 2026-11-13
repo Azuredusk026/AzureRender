@@ -1447,8 +1447,9 @@ NVIDIA 完整原生深度与可见量精确一致，Intel 九十七处超差继�
 [阴影接收需求](../acceptance/nr/shadow-receiver-demand-scope.md)已核对光源及十四次实际材质绘制。
 当前输入没有可省接收工作，继续按实际热点选择优化。
 
-[正式功率核定](../acceptance/nr/gpu-power-limit-qualification.md)记录当前驱动在管理员入口下不支持设置。
-本机厂商控制面板要求更新，正式采样须先核定固定 80 W 的设备控制入口。
+[正式功率核定](../acceptance/nr/gpu-power-limit-qualification.md)记录 592.82 的设置结果。
+正式采样须核定负载下的实际固定 80 W。
+[595.79 启动检查](../acceptance/nr/joint-59579-qualification.md)记录空闲门槛、功率观测及复测条件。
 
 NPR 光照和角色局部光照夹具在 Debug 下分别用时 207.17 秒和 130.90 秒，均通过原 300 秒注册限时。
 [GPU 光照夹具运行时间](../acceptance/nr/gpu-lighting-fixture-runtime.md)记录两种构建配置与跨场景比较证据。

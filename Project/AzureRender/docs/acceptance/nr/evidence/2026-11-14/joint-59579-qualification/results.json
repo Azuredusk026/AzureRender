@@ -1,0 +1,26 @@
+{
+  "driver": "595.79",
+  "firstAttempt": {
+    "observations": 25,
+    "elapsedSeconds": 123.3130000000001,
+    "gpuUtilization": [
+      16.0,
+      42.0
+    ],
+    "idleLimitPercent": 10,
+    "observedPowerLimitsWatts": [
+      80.0
+    ],
+    "formalFrames": 0,
+    "failure": "GPU environment not ready: background GPU load exceeds the declared idle limit; background GPU load exceeds the declared idle limit; background GPU load exceeds the declared idle limit"
+  },
+  "priorCapacity": {
+    "deviceLocalPeakBytes": 2784680768,
+    "deviceLocalLimitBytes": 1610612736,
+    "materialResidentTexelBytes": 1852081920,
+    "materialTexelsOverLimitBytes": 241469184,
+    "liveImageAllocationBytes": 2500562944,
+    "sourceTimingSha256": "f08ecfd8c3d2f87db29cb276aa08ab0eeb918fda7ef252cfcd276906922834d1"
+  },
+  "archiveSha256": "96b419daa890fda44daa6bb3c048e7986eed63b286b49b2b380d394d6846264c"
+}
