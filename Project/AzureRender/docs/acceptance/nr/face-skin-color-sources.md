@@ -36,5 +36,23 @@
 
 [描边结果](evidence/2026-11-14/body-outline-coverage/results.json)和[描边归档](evidence/2026-11-14/body-outline-coverage/validation.zip)保存覆盖及运行收据。
 
+## 脸部底色纹理
+
+原生脸部绘制使用十一层 `t18` 底色和九层 `t20` 遮罩。
+纹理使用线性缩放、最近层级过滤和负一的着色器层级偏移。
+底色使用重复寻址，遮罩使用边缘钳制。
+固定姿态底色对照保留十一层原生纹理，并转换到现行模型的纹理纵轴。
+
+| 设备 | 脸部超出一字节 | 脸部超出八字节 | 峰差 | SSIM |
+| --- | ---: | ---: | ---: | ---: |
+| NVIDIA | 1,166 | 3 | 27 | 0.99574 |
+| Intel | 1,165 | 3 | 27 | 0.99558 |
+
+三处峰值均位于原生显示坐标的第 297 行。
+双图材质的固定遮罩采样器接受同尺寸遮罩输入。
+遮罩单项对照在两块显卡上与各自基准逐字节一致，联合对照与底色单项逐字节一致。
+
+[纹理结果](evidence/2026-11-14/face-native-texture-mips/results.json)和[纹理归档](evidence/2026-11-14/face-native-texture-mips/validation.zip)保存源摘要、装载失败及复测记录。
+
 [结果清单](evidence/2026-11-13/face-skin-color-sources/results.json)记录区域、坐标及原生阶段摘要。
 [验证归档](evidence/2026-11-13/face-skin-color-sources/validation.zip)保存逐点索引及计算程序。
