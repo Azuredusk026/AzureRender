@@ -159,3 +159,20 @@ Player 绘制 940 在体表主体和场景深度之后提交。
 生产壳的深度、模板及后续合成以实际绘制顺序为验收输入。
 
 [提交结果](evidence/2026-11-14/body-outline-player-depth/results.json)和[验证归档](evidence/2026-11-14/body-outline-player-depth/validation.zip)保存状态和逐点深度。
+
+## 脸部高光对照
+
+原生事件 804 通过独立的 t12 纹理采样脸部高光。
+纹理为 512 × 512 的十级线性 BC7 图像。
+观察方向按头部坐标调整采样位置，颜色由主光及环境光共同调制。
+第 297 行的原生抽查位置产生 0.11009 的线性红通道贡献。
+
+| 设备 | 高光对照超出八字节 | 峰差 | 超出一字节 |
+| --- | ---: | ---: | ---: |
+| NVIDIA | 0 | 6 | 1,166 |
+| Intel | 0 | 7 | 1,165 |
+
+对照使用原生底色层级、固定姿态和实际 Player 的隔离片元程序。
+脸部原有一字节门槛继续用于正式验收。
+
+[高光结果](evidence/2026-11-14/face-highlight-control/results.json)和[验证归档](evidence/2026-11-14/face-highlight-control/validation.zip)保存片元程序、源纹理摘要及双设备采集。
