@@ -1,0 +1,1608 @@
+{
+  "capacity": {
+    "sourceArchiveSha256": "c8d69b1574ae9c676f318735618ac7c0c196a1f5ac853d9376bea5e49c9400b5",
+    "scope": "historical-capture-single-layer-mipmapped-RGBA8-sRGB-RGBA8-UNORM-RG8-UNORM-R8-UNORM",
+    "eligibleInventoryImages": 364,
+    "topMipTexelBytes": 1381296260,
+    "topMipTexelBytesByMaximumDimension": {
+      "2": 116,
+      "4": 16,
+      "32": 8192,
+      "64": 114688,
+      "128": 65536,
+      "256": 3080192,
+      "512": 2621440,
+      "640": 460800,
+      "1024": 1031012352,
+      "2048": 343932928
+    },
+    "fractionOfTopMipBytesNeededIfAlone": 0.8499755381948257,
+    "sRgbExactDuplicateMipPayloadBytes": 5592636,
+    "sRgbImagesScannedForDuplicates": 180,
+    "duplicateScope": "Same width, height and complete captured RGBA sRGB bytes; ignores memory granularity, layout and ownership.",
+    "demonstratesUnusedMips": false,
+    "testedProductionChanges": false
+  },
+  "samplerMipExtent": {
+    "sourceArchiveSha256": "63493838f624ddb06637b39da1a7e3bee8e98deb56d6ff408470535c24341210",
+    "scope": "frozen historical sampler declarations before linear-channel packing",
+    "rows": 385,
+    "imageIdentityGroups": 381,
+    "levelsBeyondCeilingOfMaximumLod": {
+      "0": 385
+    },
+    "potentialCoarsestMipPayloadBytes": 0,
+    "requiresLiveSamplerFootprintVerification": true
+  },
+  "registeredInventory": {
+    "Debug": {
+      "currentCount": 605,
+      "previousCount": 605,
+      "added": [],
+      "missing": [],
+      "changedCommands": [
+        "AzureRender.VisualRegression",
+        "AzureRender.VisualRegressionLegacyDescriptors",
+        "AzureRender.VisualRegressionLegacySkinning"
+      ]
+    },
+    "Release": {
+      "currentCount": 607,
+      "previousCount": 607,
+      "added": [],
+      "missing": [],
+      "changedCommands": [
+        "AzureRender.VisualRegression",
+        "AzureRender.VisualRegressionLegacyDescriptors",
+        "AzureRender.VisualRegressionLegacySkinning"
+      ]
+    }
+  },
+  "visualProductReceipt": {
+    "release": {
+      "registeredVisualBuildRecorded": true,
+      "playerMatchesVisualReceipt": true,
+      "rendererMatchesVisualReceipt": true,
+      "staleGenericBuildReceiptCommit": "ccc3da22fc72af7c0acc7bec21c55e1bfc64de3a"
+    },
+    "debug": {
+      "registeredVisualBuildRecorded": true,
+      "playerMatchesVisualReceipt": true,
+      "rendererMatchesVisualReceipt": true,
+      "staleGenericBuildReceiptCommit": "ccc3da22fc72af7c0acc7bec21c55e1bfc64de3a"
+    }
+  },
+  "capture": {
+    "driver": "595.79",
+    "source": "01cc6b26e52d8d602aae1b75d7259a5da4f10dbd",
+    "scope": "pixel-diagnostic",
+    "allocatorZero": true,
+    "computedMaterialView": true,
+    "pipelineCacheBytes": 20662456,
+    "pipelineCacheState": "loaded",
+    "recordedRunSeconds": null,
+    "backgroundUtilizationAtStart": 60.0,
+    "watts": [
+      80.0
+    ],
+    "periodicTelemetryArchived": false,
+    "computeSelections": 2816,
+    "frames": [
+      {
+        "name": "frame_000000.png",
+        "sha256": "b57a67f263f0bc0d9cc53a279f74e90696b47c5802e60cd5b54196cc647fbdc3",
+        "expected": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "exact": false,
+        "changedPixels": 228,
+        "maximumByteError": 1
+      },
+      {
+        "name": "frame_000001.png",
+        "sha256": "dcf466cd4ea345671eaad5efd4128584e02de9a05e6f218acf2ebf5409abe90f",
+        "expected": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "exact": false,
+        "changedPixels": 330,
+        "maximumByteError": 7
+      },
+      {
+        "name": "frame_000002.png",
+        "sha256": "974756b6d8dba263a333c613eaf24a33d53be96b24e6c000b78646341f492050",
+        "expected": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "exact": false,
+        "changedPixels": 397,
+        "maximumByteError": 37
+      },
+      {
+        "name": "frame_000003.png",
+        "sha256": "e27b4d25426d5d36725ccb159d7fe2324f4eb60b0993d369e91e45260bc6fbeb",
+        "expected": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "exact": false,
+        "changedPixels": 421,
+        "maximumByteError": 23
+      }
+    ]
+  },
+  "originalReferenceDriver": "592.82",
+  "pixelPairDispatcher": {
+    "id": 338,
+    "state": "budget-stopped",
+    "reason": "diagnostic-output-limit",
+    "run_seconds": 527.6409999999996,
+    "wait_seconds": 475.59399999999914,
+    "exit_code": 1
+  },
+  "pixelLocalization": {
+    "referenceMaterialToFrozen": [
+      {
+        "frame": "frame_000000.png",
+        "count": 228,
+        "box": [
+          3,
+          62,
+          2283,
+          1385
+        ],
+        "absoluteDifferenceHistogram": {
+          "1": 228
+        },
+        "strongestDifference": [
+          [
+            494,
+            62,
+            [
+              0,
+              0,
+              1
+            ]
+          ],
+          [
+            2250,
+            205,
+            [
+              1,
+              0,
+              0
+            ]
+          ],
+          [
+            2250,
+            206,
+            [
+              0,
+              0,
+              1
+            ]
+          ],
+          [
+            2248,
+            207,
+            [
+              0,
+              1,
+              0
+            ]
+          ],
+          [
+            2249,
+            208,
+            [
+              0,
+              0,
+              1
+            ]
+          ],
+          [
+            2283,
+            208,
+            [
+              0,
+              1,
+              0
+            ]
+          ],
+          [
+            2245,
+            209,
+            [
+              1,
+              0,
+              0
+            ]
+          ],
+          [
+            2260,
+            209,
+            [
+              1,
+              0,
+              0
+            ]
+          ],
+          [
+            2236,
+            210,
+            [
+              1,
+              0,
+              0
+            ]
+          ],
+          [
+            2243,
+            210,
+            [
+              1,
+              0,
+              0
+            ]
+          ],
+          [
+            2246,
+            211,
+            [
+              1,
+              0,
+              0
+            ]
+          ],
+          [
+            2249,
+            211,
+            [
+              0,
+              0,
+              1
+            ]
+          ]
+        ]
+      },
+      {
+        "frame": "frame_000001.png",
+        "count": 330,
+        "box": [
+          3,
+          5,
+          2386,
+          1393
+        ],
+        "absoluteDifferenceHistogram": {
+          "1": 327,
+          "2": 1,
+          "3": 1,
+          "7": 1
+        },
+        "strongestDifference": [
+          [
+            1426,
+            396,
+            [
+              7,
+              6,
+              7
+            ]
+          ],
+          [
+            149,
+            869,
+            [
+              2,
+              3,
+              2
+            ]
+          ],
+          [
+            1147,
+            1080,
+            [
+              0,
+              1,
+              2
+            ]
+          ],
+          [
+            1092,
+            5,
+            [
+              0,
+              1,
+              0
+            ]
+          ],
+          [
+            2210,
+            15,
+            [
+              1,
+              0,
+              0
+            ]
+          ],
+          [
+            2216,
+            18,
+            [
+              0,
+              1,
+              0
+            ]
+          ],
+          [
+            2211,
+            22,
+            [
+              1,
+              0,
+              0
+            ]
+          ],
+          [
+            2206,
+            24,
+            [
+              1,
+              0,
+              0
+            ]
+          ],
+          [
+            2067,
+            79,
+            [
+              0,
+              0,
+              1
+            ]
+          ],
+          [
+            2067,
+            82,
+            [
+              1,
+              0,
+              0
+            ]
+          ],
+          [
+            2067,
+            86,
+            [
+              0,
+              1,
+              0
+            ]
+          ],
+          [
+            2065,
+            87,
+            [
+              0,
+              1,
+              0
+            ]
+          ]
+        ]
+      },
+      {
+        "frame": "frame_000002.png",
+        "count": 397,
+        "box": [
+          3,
+          15,
+          2268,
+          1355
+        ],
+        "absoluteDifferenceHistogram": {
+          "1": 393,
+          "2": 3,
+          "37": 1
+        },
+        "strongestDifference": [
+          [
+            941,
+            295,
+            [
+              37,
+              34,
+              35
+            ]
+          ],
+          [
+            941,
+            294,
+            [
+              1,
+              2,
+              1
+            ]
+          ],
+          [
+            944,
+            298,
+            [
+              2,
+              2,
+              1
+            ]
+          ],
+          [
+            1147,
+            1080,
+            [
+              0,
+              1,
+              2
+            ]
+          ],
+          [
+            2210,
+            15,
+            [
+              1,
+              0,
+              0
+            ]
+          ],
+          [
+            2216,
+            18,
+            [
+              0,
+              1,
+              0
+            ]
+          ],
+          [
+            2211,
+            22,
+            [
+              1,
+              0,
+              0
+            ]
+          ],
+          [
+            2197,
+            24,
+            [
+              0,
+              0,
+              1
+            ]
+          ],
+          [
+            2206,
+            24,
+            [
+              1,
+              0,
+              0
+            ]
+          ],
+          [
+            2067,
+            79,
+            [
+              0,
+              0,
+              1
+            ]
+          ],
+          [
+            2067,
+            82,
+            [
+              1,
+              0,
+              0
+            ]
+          ],
+          [
+            2067,
+            86,
+            [
+              0,
+              1,
+              0
+            ]
+          ]
+        ]
+      },
+      {
+        "frame": "frame_000003.png",
+        "count": 421,
+        "box": [
+          3,
+          15,
+          2274,
+          1355
+        ],
+        "absoluteDifferenceHistogram": {
+          "1": 417,
+          "2": 1,
+          "10": 1,
+          "21": 1,
+          "23": 1
+        },
+        "strongestDifference": [
+          [
+            1424,
+            387,
+            [
+              16,
+              17,
+              23
+            ]
+          ],
+          [
+            939,
+            274,
+            [
+              21,
+              21,
+              21
+            ]
+          ],
+          [
+            1425,
+            387,
+            [
+              8,
+              9,
+              10
+            ]
+          ],
+          [
+            1147,
+            1080,
+            [
+              0,
+              1,
+              2
+            ]
+          ],
+          [
+            2210,
+            15,
+            [
+              1,
+              0,
+              0
+            ]
+          ],
+          [
+            2216,
+            18,
+            [
+              0,
+              1,
+              0
+            ]
+          ],
+          [
+            2211,
+            22,
+            [
+              1,
+              0,
+              0
+            ]
+          ],
+          [
+            2197,
+            24,
+            [
+              0,
+              0,
+              1
+            ]
+          ],
+          [
+            2206,
+            24,
+            [
+              1,
+              0,
+              0
+            ]
+          ],
+          [
+            2067,
+            79,
+            [
+              0,
+              0,
+              1
+            ]
+          ],
+          [
+            2067,
+            82,
+            [
+              1,
+              0,
+              0
+            ]
+          ],
+          [
+            2067,
+            86,
+            [
+              0,
+              1,
+              0
+            ]
+          ]
+        ]
+      }
+    ],
+    "computedMaterialToFrozen": [
+      {
+        "frame": "frame_000000.png",
+        "count": 228,
+        "box": [
+          3,
+          62,
+          2283,
+          1385
+        ],
+        "absoluteDifferenceHistogram": {
+          "1": 228
+        },
+        "strongestDifference": [
+          [
+            494,
+            62,
+            [
+              0,
+              0,
+              1
+            ]
+          ],
+          [
+            2250,
+            205,
+            [
+              1,
+              0,
+              0
+            ]
+          ],
+          [
+            2250,
+            206,
+            [
+              0,
+              0,
+              1
+            ]
+          ],
+          [
+            2248,
+            207,
+            [
+              0,
+              1,
+              0
+            ]
+          ],
+          [
+            2249,
+            208,
+            [
+              0,
+              0,
+              1
+            ]
+          ],
+          [
+            2283,
+            208,
+            [
+              0,
+              1,
+              0
+            ]
+          ],
+          [
+            2245,
+            209,
+            [
+              1,
+              0,
+              0
+            ]
+          ],
+          [
+            2260,
+            209,
+            [
+              1,
+              0,
+              0
+            ]
+          ],
+          [
+            2236,
+            210,
+            [
+              1,
+              0,
+              0
+            ]
+          ],
+          [
+            2243,
+            210,
+            [
+              1,
+              0,
+              0
+            ]
+          ],
+          [
+            2246,
+            211,
+            [
+              1,
+              0,
+              0
+            ]
+          ],
+          [
+            2249,
+            211,
+            [
+              0,
+              0,
+              1
+            ]
+          ]
+        ]
+      },
+      {
+        "frame": "frame_000001.png",
+        "count": 330,
+        "box": [
+          3,
+          5,
+          2386,
+          1393
+        ],
+        "absoluteDifferenceHistogram": {
+          "1": 327,
+          "2": 1,
+          "3": 1,
+          "7": 1
+        },
+        "strongestDifference": [
+          [
+            1426,
+            396,
+            [
+              7,
+              6,
+              7
+            ]
+          ],
+          [
+            149,
+            869,
+            [
+              2,
+              3,
+              2
+            ]
+          ],
+          [
+            1147,
+            1080,
+            [
+              0,
+              1,
+              2
+            ]
+          ],
+          [
+            1092,
+            5,
+            [
+              0,
+              1,
+              0
+            ]
+          ],
+          [
+            2210,
+            15,
+            [
+              1,
+              0,
+              0
+            ]
+          ],
+          [
+            2216,
+            18,
+            [
+              0,
+              1,
+              0
+            ]
+          ],
+          [
+            2211,
+            22,
+            [
+              1,
+              0,
+              0
+            ]
+          ],
+          [
+            2206,
+            24,
+            [
+              1,
+              0,
+              0
+            ]
+          ],
+          [
+            2067,
+            79,
+            [
+              0,
+              0,
+              1
+            ]
+          ],
+          [
+            2067,
+            82,
+            [
+              1,
+              0,
+              0
+            ]
+          ],
+          [
+            2067,
+            86,
+            [
+              0,
+              1,
+              0
+            ]
+          ],
+          [
+            2065,
+            87,
+            [
+              0,
+              1,
+              0
+            ]
+          ]
+        ]
+      },
+      {
+        "frame": "frame_000002.png",
+        "count": 397,
+        "box": [
+          3,
+          15,
+          2268,
+          1355
+        ],
+        "absoluteDifferenceHistogram": {
+          "1": 393,
+          "2": 3,
+          "37": 1
+        },
+        "strongestDifference": [
+          [
+            941,
+            295,
+            [
+              37,
+              34,
+              35
+            ]
+          ],
+          [
+            941,
+            294,
+            [
+              1,
+              2,
+              1
+            ]
+          ],
+          [
+            944,
+            298,
+            [
+              2,
+              2,
+              1
+            ]
+          ],
+          [
+            1147,
+            1080,
+            [
+              0,
+              1,
+              2
+            ]
+          ],
+          [
+            2210,
+            15,
+            [
+              1,
+              0,
+              0
+            ]
+          ],
+          [
+            2216,
+            18,
+            [
+              0,
+              1,
+              0
+            ]
+          ],
+          [
+            2211,
+            22,
+            [
+              1,
+              0,
+              0
+            ]
+          ],
+          [
+            2197,
+            24,
+            [
+              0,
+              0,
+              1
+            ]
+          ],
+          [
+            2206,
+            24,
+            [
+              1,
+              0,
+              0
+            ]
+          ],
+          [
+            2067,
+            79,
+            [
+              0,
+              0,
+              1
+            ]
+          ],
+          [
+            2067,
+            82,
+            [
+              1,
+              0,
+              0
+            ]
+          ],
+          [
+            2067,
+            86,
+            [
+              0,
+              1,
+              0
+            ]
+          ]
+        ]
+      },
+      {
+        "frame": "frame_000003.png",
+        "count": 421,
+        "box": [
+          3,
+          15,
+          2274,
+          1355
+        ],
+        "absoluteDifferenceHistogram": {
+          "1": 417,
+          "2": 1,
+          "10": 1,
+          "21": 1,
+          "23": 1
+        },
+        "strongestDifference": [
+          [
+            1424,
+            387,
+            [
+              16,
+              17,
+              23
+            ]
+          ],
+          [
+            939,
+            274,
+            [
+              21,
+              21,
+              21
+            ]
+          ],
+          [
+            1425,
+            387,
+            [
+              8,
+              9,
+              10
+            ]
+          ],
+          [
+            1147,
+            1080,
+            [
+              0,
+              1,
+              2
+            ]
+          ],
+          [
+            2210,
+            15,
+            [
+              1,
+              0,
+              0
+            ]
+          ],
+          [
+            2216,
+            18,
+            [
+              0,
+              1,
+              0
+            ]
+          ],
+          [
+            2211,
+            22,
+            [
+              1,
+              0,
+              0
+            ]
+          ],
+          [
+            2197,
+            24,
+            [
+              0,
+              0,
+              1
+            ]
+          ],
+          [
+            2206,
+            24,
+            [
+              1,
+              0,
+              0
+            ]
+          ],
+          [
+            2067,
+            79,
+            [
+              0,
+              0,
+              1
+            ]
+          ],
+          [
+            2067,
+            82,
+            [
+              1,
+              0,
+              0
+            ]
+          ],
+          [
+            2067,
+            86,
+            [
+              0,
+              1,
+              0
+            ]
+          ]
+        ]
+      }
+    ],
+    "computedToReferenceMaterial": [
+      {
+        "frame": "frame_000000.png",
+        "count": 0,
+        "box": null,
+        "absoluteDifferenceHistogram": {},
+        "strongestDifference": []
+      },
+      {
+        "frame": "frame_000001.png",
+        "count": 0,
+        "box": null,
+        "absoluteDifferenceHistogram": {},
+        "strongestDifference": []
+      },
+      {
+        "frame": "frame_000002.png",
+        "count": 0,
+        "box": null,
+        "absoluteDifferenceHistogram": {},
+        "strongestDifference": []
+      },
+      {
+        "frame": "frame_000003.png",
+        "count": 0,
+        "box": null,
+        "absoluteDifferenceHistogram": {},
+        "strongestDifference": []
+      }
+    ]
+  },
+  "fanReady": {
+    "powerMode": "balanced",
+    "mode": "automatic",
+    "reason": "candidate capture during interactive desktop use",
+    "recorded": "2026-11-14T01:37:01.0343296+08:00",
+    "confirmedAtEndOfPriorRun": true
+  },
+  "baselineQualificationSha256": "ebe0b7217b3b5dd99c4e9d105399ba93e5d81d9db9dce51e2b64468a7d8b240f",
+  "firstStartupRejection": {
+    "error": "GPU environment not ready: background GPU load exceeds the declared idle limit; background GPU load exceeds the declared idle limit; background GPU load exceeds the declared idle limit",
+    "observations": 25,
+    "lastThree": [
+      17.0,
+      19.0,
+      18.0
+    ],
+    "limit": 10
+  },
+  "firstPixelTimeoutSeconds": 360,
+  "longWindow": {
+    "scope": "isolated-computed-material-view-1080p60",
+    "source": "01cc6b26e52d8d602aae1b75d7259a5da4f10dbd",
+    "driver": "595.79",
+    "warmup": 300,
+    "frames": 1800,
+    "gpuPowerLimitWatts": [
+      80.0
+    ],
+    "environmentFailures": [
+      "run observation 53: software thermal slowdown is active",
+      "run observation 54: software thermal slowdown is active",
+      "run observation 55: software thermal slowdown is active",
+      "run observation 56: software thermal slowdown is active",
+      "run observation 57: driver relative thermal headroom is insufficient",
+      "run observation 57: software thermal slowdown is active",
+      "run observation 58: driver relative thermal headroom is insufficient",
+      "run observation 58: software thermal slowdown is active",
+      "run observation 59: software thermal slowdown is active",
+      "run observation 60: driver relative thermal headroom is insufficient",
+      "run observation 60: software thermal slowdown is active",
+      "run observation 61: driver relative thermal headroom is insufficient",
+      "run observation 61: software thermal slowdown is active",
+      "run observation 62: driver relative thermal headroom is insufficient",
+      "run observation 62: software thermal slowdown is active",
+      "run observation 63: driver relative thermal headroom is insufficient",
+      "run observation 63: software thermal slowdown is active",
+      "run observation 64: software thermal slowdown is active",
+      "run observation 65: software thermal slowdown is active",
+      "run observation 66: software thermal slowdown is active",
+      "run observation 67: driver relative thermal headroom is insufficient",
+      "run observation 67: software thermal slowdown is active",
+      "run observation 68: software thermal slowdown is active",
+      "run observation 69: driver relative thermal headroom is insufficient",
+      "run observation 69: software thermal slowdown is active"
+    ],
+    "peakTemperatureC": 87.0,
+    "observationCount": 75,
+    "softwareThermalSlowdownObservations": 17,
+    "timings": {
+      "frameMs": {
+        "mean": 18.303759608888893,
+        "p95": 19.2864384,
+        "peak": 20.138656
+      },
+      "sceneMs": {
+        "mean": 15.820855182222221,
+        "p95": 16.7189504,
+        "peak": 17.519616
+      },
+      "shadowMs": {
+        "mean": 2.1708068622222223,
+        "p95": 2.243264,
+        "peak": 2.291712
+      },
+      "postProcessMs": {
+        "mean": 0.31209756444444453,
+        "p95": 0.331776,
+        "peak": 0.34816
+      },
+      "cpuWorkMs": {
+        "mean": 6.415308555555558,
+        "p95": 7.495914999999933,
+        "peak": 18.888399999998924
+      }
+    },
+    "deviceLocalPeakBytes": 2784680768,
+    "workingSetPeakBytes": 2037727232,
+    "allocatorZero": true,
+    "gates": {
+      "fixed80W": true,
+      "thermalAndAC": false,
+      "gpuP95": false,
+      "cpuP95": true,
+      "deviceLocal": false,
+      "workingSet": true
+    },
+    "windows": [
+      {
+        "frameMs": {
+          "mean": 17.504073066666667,
+          "p95": 18.0689712,
+          "peak": 18.379008
+        },
+        "sceneMs": {
+          "mean": 15.169378986666665,
+          "p95": 15.5923456,
+          "peak": 15.87712
+        },
+        "shadowMs": {
+          "mean": 2.0362561066666665,
+          "p95": 2.1859295999999997,
+          "peak": 2.207648
+        },
+        "postProcessMs": {
+          "mean": 0.2984379733333334,
+          "p95": 0.308224,
+          "peak": 0.314368
+        },
+        "cpuWorkMs": {
+          "mean": 6.1448323333333335,
+          "p95": 7.077654999999976,
+          "peak": 10.90329999999998
+        }
+      },
+      {
+        "frameMs": {
+          "mean": 17.951062613333335,
+          "p95": 18.3383408,
+          "peak": 18.69024
+        },
+        "sceneMs": {
+          "mean": 15.475923626666669,
+          "p95": 15.8311936,
+          "peak": 16.165888
+        },
+        "shadowMs": {
+          "mean": 2.17028736,
+          "p95": 2.1968432,
+          "peak": 2.228288
+        },
+        "postProcessMs": {
+          "mean": 0.30485162666666665,
+          "p95": 0.311296,
+          "peak": 0.319488
+        },
+        "cpuWorkMs": {
+          "mean": 6.588806333333328,
+          "p95": 7.603754999999962,
+          "peak": 12.262300000000062
+        }
+      },
+      {
+        "frameMs": {
+          "mean": 18.219230613333334,
+          "p95": 18.764873599999998,
+          "peak": 19.108512
+        },
+        "sceneMs": {
+          "mean": 15.721004373333331,
+          "p95": 16.2217984,
+          "peak": 16.538624
+        },
+        "shadowMs": {
+          "mean": 2.1880566399999997,
+          "p95": 2.2303151999999997,
+          "peak": 2.248096
+        },
+        "postProcessMs": {
+          "mean": 0.31016960000000005,
+          "p95": 0.320512,
+          "peak": 0.326656
+        },
+        "cpuWorkMs": {
+          "mean": 6.402864333333332,
+          "p95": 7.4119500000004335,
+          "peak": 11.20610000000033
+        }
+      },
+      {
+        "frameMs": {
+          "mean": 18.535396693333333,
+          "p95": 19.499452800000004,
+          "peak": 20.138656
+        },
+        "sceneMs": {
+          "mean": 16.018090666666666,
+          "p95": 16.909875200000002,
+          "peak": 17.519616
+        },
+        "shadowMs": {
+          "mean": 2.20118016,
+          "p95": 2.2604624,
+          "peak": 2.291712
+        },
+        "postProcessMs": {
+          "mean": 0.3161258666666667,
+          "p95": 0.3348992,
+          "peak": 0.34816
+        },
+        "cpuWorkMs": {
+          "mean": 6.530297000000004,
+          "p95": 8.106045000002146,
+          "peak": 13.801800000000057
+        }
+      },
+      {
+        "frameMs": {
+          "mean": 18.683911466666668,
+          "p95": 18.8811872,
+          "peak": 19.318848
+        },
+        "sceneMs": {
+          "mean": 16.156767573333333,
+          "p95": 16.366643200000002,
+          "peak": 16.744448
+        },
+        "shadowMs": {
+          "mean": 2.2079869866666666,
+          "p95": 2.2328864000000004,
+          "peak": 2.253632
+        },
+        "postProcessMs": {
+          "mean": 0.31915690666666663,
+          "p95": 0.32256,
+          "peak": 0.330752
+        },
+        "cpuWorkMs": {
+          "mean": 6.493573666666688,
+          "p95": 7.461129999998479,
+          "peak": 18.888399999998924
+        }
+      },
+      {
+        "frameMs": {
+          "mean": 18.9288832,
+          "p95": 19.7397728,
+          "peak": 19.899968
+        },
+        "sceneMs": {
+          "mean": 16.383965866666667,
+          "p95": 17.137664,
+          "peak": 17.3056
+        },
+        "shadowMs": {
+          "mean": 2.2210739200000003,
+          "p95": 2.2658688,
+          "peak": 2.28736
+        },
+        "postProcessMs": {
+          "mean": 0.32384341333333333,
+          "p95": 0.339968,
+          "peak": 0.344064
+        },
+        "cpuWorkMs": {
+          "mean": 6.3314776666666575,
+          "p95": 7.333785000000114,
+          "peak": 13.859899999996763
+        }
+      }
+    ],
+    "analysis": {
+      "firstSoftwareThermalSlowdownSecondsFromPlayerStart": 120.91138479999972,
+      "startGpuTemperatureC": 57.0,
+      "startupGpuUtilization": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "materialResidentTexelBytes": 1852081920,
+      "liveImageBytes": 2500562944,
+      "liveBufferBytes": 219448128,
+      "gpuFrameP95MsByWindow": [
+        18.0689712,
+        18.3383408,
+        18.764873599999998,
+        19.499452800000004,
+        18.8811872,
+        19.7397728
+      ],
+      "cpuWorkP95MsByWindow": [
+        7.077654999999976,
+        7.603754999999962,
+        7.4119500000004335,
+        8.106045000002146,
+        7.461129999998479,
+        7.333785000000114
+      ],
+      "gpuP95GapMs": 2.6864384,
+      "activePipelines": 108,
+      "computedSelections": 1471372,
+      "renderedFrames": 2100
+    }
+  },
+  "baselineCapture": {
+    "driver": "595.79",
+    "source": "01cc6b26e52d8d602aae1b75d7259a5da4f10dbd",
+    "scope": "pixel-diagnostic",
+    "allocatorZero": true,
+    "computedMaterialView": false,
+    "pipelineCacheBytes": 0,
+    "pipelineCacheState": "empty",
+    "recordedRunSeconds": 272.5472454999999,
+    "backgroundUtilizationAtStart": 33.0,
+    "watts": [
+      80.0
+    ],
+    "periodicTelemetryArchived": true,
+    "computeSelections": 0,
+    "frames": [
+      {
+        "name": "frame_000000.png",
+        "sha256": "b57a67f263f0bc0d9cc53a279f74e90696b47c5802e60cd5b54196cc647fbdc3",
+        "expected": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "exact": false,
+        "changedPixels": 228,
+        "maximumByteError": 1
+      },
+      {
+        "name": "frame_000001.png",
+        "sha256": "dcf466cd4ea345671eaad5efd4128584e02de9a05e6f218acf2ebf5409abe90f",
+        "expected": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "exact": false,
+        "changedPixels": 330,
+        "maximumByteError": 7
+      },
+      {
+        "name": "frame_000002.png",
+        "sha256": "974756b6d8dba263a333c613eaf24a33d53be96b24e6c000b78646341f492050",
+        "expected": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "exact": false,
+        "changedPixels": 397,
+        "maximumByteError": 37
+      },
+      {
+        "name": "frame_000003.png",
+        "sha256": "e27b4d25426d5d36725ccb159d7fe2324f4eb60b0993d369e91e45260bc6fbeb",
+        "expected": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "exact": false,
+        "changedPixels": 421,
+        "maximumByteError": 23
+      }
+    ],
+    "sameDriverCandidateComparison": [
+      {
+        "name": "frame_000000.png",
+        "changedPixels": 0,
+        "maximumByteError": 0
+      },
+      {
+        "name": "frame_000001.png",
+        "changedPixels": 0,
+        "maximumByteError": 0
+      },
+      {
+        "name": "frame_000002.png",
+        "changedPixels": 0,
+        "maximumByteError": 0
+      },
+      {
+        "name": "frame_000003.png",
+        "changedPixels": 0,
+        "maximumByteError": 0
+      }
+    ]
+  },
+  "mainCapture": {
+    "driver": "595.79",
+    "source": "01418ed",
+    "frames": [
+      {
+        "name": "frame_000000.png",
+        "sha256": "b57a67f263f0bc0d9cc53a279f74e90696b47c5802e60cd5b54196cc647fbdc3",
+        "expected": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "exact": false,
+        "changedPixels": 228,
+        "maximumByteError": 1
+      },
+      {
+        "name": "frame_000001.png",
+        "sha256": "dcf466cd4ea345671eaad5efd4128584e02de9a05e6f218acf2ebf5409abe90f",
+        "expected": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "exact": false,
+        "changedPixels": 330,
+        "maximumByteError": 7
+      },
+      {
+        "name": "frame_000002.png",
+        "sha256": "974756b6d8dba263a333c613eaf24a33d53be96b24e6c000b78646341f492050",
+        "expected": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "exact": false,
+        "changedPixels": 397,
+        "maximumByteError": 37
+      },
+      {
+        "name": "frame_000003.png",
+        "sha256": "e27b4d25426d5d36725ccb159d7fe2324f4eb60b0993d369e91e45260bc6fbeb",
+        "expected": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "exact": false,
+        "changedPixels": 421,
+        "maximumByteError": 23
+      }
+    ],
+    "scope": "pixel-diagnostic",
+    "backgroundUtilizationAtStart": 0.0,
+    "watts": [
+      80.0
+    ],
+    "allocatorZero": true,
+    "sameDriverReferenceMaterialComparison": [
+      {
+        "name": "frame_000000.png",
+        "changedPixels": 0,
+        "maximumByteError": 0,
+        "pngExact": true
+      },
+      {
+        "name": "frame_000001.png",
+        "changedPixels": 0,
+        "maximumByteError": 0,
+        "pngExact": true
+      },
+      {
+        "name": "frame_000002.png",
+        "changedPixels": 0,
+        "maximumByteError": 0,
+        "pngExact": true
+      },
+      {
+        "name": "frame_000003.png",
+        "changedPixels": 0,
+        "maximumByteError": 0,
+        "pngExact": true
+      }
+    ]
+  },
+  "archiveSha256": "410a949df8a0c838faaff2b9ce84d5dece83ea637d970649263ce3bf581bded9"
+}

@@ -56,6 +56,10 @@ CPU 工作 P95 为 5.90 毫秒，GPU 帧 P95 为 20.33 毫秒。
 [主线材质候选采样](../acceptance/nr/material-viewquad-integration.md)完成 1080p60 连续 1800 帧诊断。
 CPU 工作 P95 为 5.62 毫秒，GPU P95 为 18.56 毫秒，设备本地内存峰值为 2.593 GiB。
 标准构建采用参考族。
+[595.79 对照](../acceptance/nr/material-viewquad-integration.md#59579-像素对照)验证主线与两条材质路径逐像素一致。
+联合场景四帧冻结图来自 592.82，原图差异仍待核验。
+计算材质在固定 80 W 下的 GPU P95 为 19.29 毫秒。
+后段出现软件热降频，设备本地峰值为 2.593 GiB。
 
 [材质视图回归矩阵](../acceptance/nr/material-view-regression-matrix.md)通过双配置三十六项检查。
 [捕获布局回归](../acceptance/nr/capture-layout-regression.md)通过双配置八项多采样轮廓光检查。
