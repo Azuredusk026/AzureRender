@@ -1,0 +1,53 @@
+{
+  "sourceCaptureSha256": "35077c571bcb70bc99688bfb97eec1b291bd6567df7482746fd3f5db49f339b3",
+  "sourceBase": "73300ab",
+  "captureFrame": 320,
+  "captureResolution": [
+    1280,
+    720
+  ],
+  "renderDocVersion": "1.46",
+  "scope": "single captured frame, eligible 2D mipmapped sampled image inventory",
+  "inventory": {
+    "resources": 364,
+    "kinds": {
+      "PS_Resource": 1208,
+      "Barrier": 8,
+      "Discard": 1,
+      "CS_RWResource": 13,
+      "CS_Resource": 2
+    },
+    "noRecordedEvents": 271,
+    "noRecordedEventsTextureBytes": 1252758528
+  },
+  "descriptorFeedbackEventCount": 8,
+  "missingStaticUsageWitnesses": [
+    "ResourceId::1378",
+    "ResourceId::1391",
+    "ResourceId::2220",
+    "ResourceId::2233",
+    "ResourceId::355",
+    "ResourceId::368",
+    "ResourceId::394",
+    "ResourceId::433",
+    "ResourceId::648",
+    "ResourceId::661",
+    "ResourceId::674",
+    "ResourceId::687",
+    "ResourceId::8483",
+    "ResourceId::8606",
+    "ResourceId::8619",
+    "ResourceId::8632",
+    "ResourceId::8697",
+    "ResourceId::8710",
+    "ResourceId::8723"
+  ],
+  "missingStaticUsageWitnessBytes": 158018560,
+  "remainingStaticNoEventTextureBytesAfterWitnesses": 1094739968,
+  "observedJointDeviceLocalAllocationGapBytes": 1174068032,
+  "comparisonShortfallBytes": 79328064,
+  "comparisonScope": "Logical capture image bytes. Counterexample to selecting whole images by missing static usage, independently of allocation page granularity.",
+  "quantifiesUnusedMipOrPages": false,
+  "productionCandidate": false,
+  "archiveSha256": "d07e1026579bf11562799c14e24410becd8454d73138c61a410f4c8ac7841bf4"
+}

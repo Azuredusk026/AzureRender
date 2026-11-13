@@ -71,4 +71,21 @@ CPU 降幅属于复测观察，尚需同等起始条件确认归因。
 候选资格仍需证实实际采样范围、帧间更新和双设备输出。
 [层级核查数据](evidence/2026-11-14/material-viewquad-59579/results.json)保存图像范围及原始摘要。
 
+## 纹理访问记录
+
+RenderDoc 1.46 重放 720p 联合场景第 320 帧。
+364 张候选图像中，271 张在常规资源表中无事件。
+这 271 张图像在捕获中的逻辑容量为 1,252,758,528 字节。
+Vulkan 的常规统计跳过超过 1000 项的描述符数组。
+[RenderDoc 1.46 源码](https://github.com/baldurk/renderdoc/blob/v1.46/renderdoc/driver/vulkan/vk_core.cpp#L6235-L6244)给出这个边界。
+
+八次绘制的逐事件描述符反馈识别出其中 19 张图像。
+这 19 张图像共占 158,018,560 字节。
+剔除已观察到访问的图像后，剩余逻辑容量为 1,094,739,968 字节。
+该值比联合场景实际分配缺口少 79,328,064 字节。
+比较使用捕获逻辑容量，实际节省以分配器高水位验收。
+进一步评估需使用逐页或逐层的动态采样证据。
+
+[访问结果](evidence/2026-11-14/joint-texture-usage/results.json)与[回放归档](evidence/2026-11-14/joint-texture-usage/validation.zip)保存描述符反馈、图像身份和失败复测记录。
+
 [结果清单](evidence/2026-11-14/joint-59579-qualification/results.json)及[验证归档](evidence/2026-11-14/joint-59579-qualification/validation.zip)保存采样命令、逐帧计时、设备和内存记录。
