@@ -502,5 +502,42 @@
   "archive": {
     "members": 59,
     "sha256": "b050b4760afe3f898671a59b413457d1b3b770edca728870383555c88cf49a56"
+  },
+  "frozenRegression": {
+    "frames": [
+      {
+        "name": "frame_000000.png",
+        "activeDriverBaseline": "b57a67f263f0bc0d9cc53a279f74e90696b47c5802e60cd5b54196cc647fbdc3",
+        "candidate": "b57a67f263f0bc0d9cc53a279f74e90696b47c5802e60cd5b54196cc647fbdc3",
+        "originalDriverBaseline": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "activeDriverExact": true,
+        "originalDriverExact": false
+      },
+      {
+        "name": "frame_000001.png",
+        "activeDriverBaseline": "dcf466cd4ea345671eaad5efd4128584e02de9a05e6f218acf2ebf5409abe90f",
+        "candidate": "dcf466cd4ea345671eaad5efd4128584e02de9a05e6f218acf2ebf5409abe90f",
+        "originalDriverBaseline": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "activeDriverExact": true,
+        "originalDriverExact": false
+      },
+      {
+        "name": "frame_000002.png",
+        "activeDriverBaseline": "974756b6d8dba263a333c613eaf24a33d53be96b24e6c000b78646341f492050",
+        "candidate": "974756b6d8dba263a333c613eaf24a33d53be96b24e6c000b78646341f492050",
+        "originalDriverBaseline": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "activeDriverExact": true,
+        "originalDriverExact": false
+      },
+      {
+        "name": "frame_000003.png",
+        "activeDriverBaseline": "e27b4d25426d5d36725ccb159d7fe2324f4eb60b0993d369e91e45260bc6fbeb",
+        "candidate": "e27b4d25426d5d36725ccb159d7fe2324f4eb60b0993d369e91e45260bc6fbeb",
+        "originalDriverBaseline": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "activeDriverExact": true,
+        "originalDriverExact": false
+      }
+    ],
+    "sha256": "5ccc350676bc89a2bf4eb72572e57f637e60aefca91914943d8cd78f66ea34b0"
   }
 }
