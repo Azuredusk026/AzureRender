@@ -57,6 +57,13 @@
   },
   "milestones": [
     {
+      "path": "runs/20261115-013428-nr-joint-80w-idle-retest-89f552",
+      "name": "联合场景独显空闲复验",
+      "sourceBase": "01cc6b2",
+      "evidence": "docs/acceptance/nr/joint-nonlocal-texture-placement.md",
+      "results": "docs/acceptance/nr/evidence/2026-11-15/joint-80w-idle-retest/results.json"
+    },
+    {
       "path": "runs/20261114-173220-nr-shader-host-compiler-concurrency-d140b8",
       "name": "编辑器加载与目录规模诊断",
       "evidence": "docs/acceptance/nr/registered-gpu-infrastructure.md",

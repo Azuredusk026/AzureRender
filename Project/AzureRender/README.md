@@ -7,6 +7,7 @@
 [着色器注册回归](docs/acceptance/nr/frozen-public-visual.md#着色器注册回归)记录双配置的编译结果和历史诊断产物的恢复信息。
 
 [联合场景热点纹理分配](docs/acceptance/nr/joint-texture-hot-placement.md)记录 1440p 同驱动逐字节比较及固定 80 W 配对计时。
+[联合场景 80 W 复验](docs/acceptance/nr/joint-nonlocal-texture-placement.md#独显空闲复验)记录独显空闲启动后的帧耗时、容量和热状态。
 
 [三纹理采样与视口选择集成](docs/acceptance/nr/projected-hair-viewport-integration.md)通过两种配置及双显卡参考附件核对。
 主线投影头发和表面响应的注册用例通过 Debug 与 Release 复测。
