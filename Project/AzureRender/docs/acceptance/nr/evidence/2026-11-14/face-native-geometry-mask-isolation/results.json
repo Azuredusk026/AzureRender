@@ -2349,13 +2349,1189 @@
           "wait_seconds": 2186.2810000000027,
           "run_seconds": 88.70299999999406
         }
+      },
+      "diffuse": {
+        "device": "nvidia",
+        "input": {
+          "player": "a81b21b464231741b3331ae4839fb3f716e0f0b69137c33490e6dd7c129851be",
+          "programs": {
+            "mesh_object_lighting.frag.spv": "5ae08c228be947417f15b94a324b2b2ca7351a38dba9a50fee8a863430198b1e",
+            "mesh_object_early_lighting.frag.spv": "a304bdcd648f5bc24818d23517d180fc7608ec8626b9bb3cd11a526f28c430f3"
+          },
+          "sampler": {
+            "schemaVersion": 1,
+            "usage": "linear",
+            "colorSpace": "linear",
+            "filter": "linear",
+            "wrapU": "clamp",
+            "wrapV": "clamp",
+            "mipPolicy": "generate",
+            "anisotropy": 1,
+            "mipBias": -1,
+            "mipFilter": "nearest"
+          },
+          "texture": "e4d7865a20fad774cc896c4b821442bf1649d91207ca2715b1b01255f8ed55ab",
+          "experimentalBinding": 2,
+          "fixedMaskBinding": 4,
+          "mode": "diffuse",
+          "overlayPair": false
+        },
+        "frameSha256": "b2848d59cc968603e818d76813df7d9748224bc0222c10600b22212ed6c9ec35",
+        "baselineSha256": "b2848d59cc968603e818d76813df7d9748224bc0222c10600b22212ed6c9ec35",
+        "regions": {
+          "face": {
+            "count": 3663,
+            "overOne": [
+              573,
+              573
+            ],
+            "overEight": [
+              356,
+              356
+            ],
+            "peak": [
+              54,
+              54
+            ],
+            "newOverOne": 0,
+            "changed": 0,
+            "baseline": {
+              "pixels": 3663,
+              "ssim": 0.9606830433909681,
+              "medianLuminanceRelativeError": 0.01676899275334613,
+              "passed": true
+            },
+            "candidate": {
+              "pixels": 3663,
+              "ssim": 0.9606830433909681,
+              "medianLuminanceRelativeError": 0.01676899275334613,
+              "passed": true
+            }
+          },
+          "faceCore": {
+            "count": 1176,
+            "overOne": [
+              17,
+              17
+            ],
+            "overEight": [
+              0,
+              0
+            ],
+            "peak": [
+              3,
+              3
+            ],
+            "newOverOne": 0,
+            "changed": 0,
+            "baseline": {
+              "pixels": 1176,
+              "ssim": 0.9980932538177006,
+              "medianLuminanceRelativeError": 0.00599252679563281,
+              "passed": true
+            },
+            "candidate": {
+              "pixels": 1176,
+              "ssim": 0.9980932538177006,
+              "medianLuminanceRelativeError": 0.00599252679563281,
+              "passed": true
+            }
+          },
+          "iris": {
+            "count": 255,
+            "overOne": [
+              52,
+              52
+            ],
+            "overEight": [
+              10,
+              10
+            ],
+            "peak": [
+              20,
+              20
+            ],
+            "newOverOne": 0,
+            "changed": 0,
+            "baseline": {
+              "pixels": 255,
+              "ssim": 0.9811525059347715,
+              "medianLuminanceRelativeError": 0.011089778228747777,
+              "passed": true
+            },
+            "candidate": {
+              "pixels": 255,
+              "ssim": 0.9811525059347715,
+              "medianLuminanceRelativeError": 0.011089778228747777,
+              "passed": true
+            }
+          },
+          "outsideFace": {
+            "count": 3682737,
+            "overOne": [
+              179142,
+              179142
+            ],
+            "overEight": [
+              29946,
+              29946
+            ],
+            "peak": [
+              228,
+              228
+            ],
+            "newOverOne": 0,
+            "changed": 0
+          },
+          "frame": {
+            "count": 3686400,
+            "overOne": [
+              179715,
+              179715
+            ],
+            "overEight": [
+              30302,
+              30302
+            ],
+            "peak": [
+              228,
+              228
+            ],
+            "newOverOne": 0,
+            "changed": 0
+          }
+        },
+        "samples": {
+          "traced": {
+            "points": [
+              [
+                1280,
+                318
+              ],
+              [
+                1279,
+                318
+              ],
+              [
+                1306,
+                304
+              ],
+              [
+                1313,
+                297
+              ],
+              [
+                1312,
+                298
+              ],
+              [
+                1318,
+                289
+              ],
+              [
+                1316,
+                292
+              ],
+              [
+                1247,
+                293
+              ],
+              [
+                1314,
+                295
+              ],
+              [
+                1310,
+                300
+              ],
+              [
+                1307,
+                303
+              ],
+              [
+                1318,
+                288
+              ]
+            ],
+            "improved": 0,
+            "worsened": 0,
+            "overOne": [
+              12,
+              12
+            ],
+            "overEight": [
+              12,
+              12
+            ],
+            "peak": [
+              41,
+              41
+            ],
+            "errors": [
+              [
+                41,
+                35,
+                25,
+                21,
+                21,
+                17,
+                17,
+                16,
+                16,
+                16,
+                16,
+                15
+              ],
+              [
+                41,
+                35,
+                25,
+                21,
+                21,
+                17,
+                17,
+                16,
+                16,
+                16,
+                16,
+                15
+              ]
+            ]
+          },
+          "outsideOverEight": {
+            "points": [
+              [
+                1280,
+                318
+              ],
+              [
+                1279,
+                318
+              ],
+              [
+                1306,
+                304
+              ],
+              [
+                1313,
+                297
+              ],
+              [
+                1312,
+                298
+              ],
+              [
+                1318,
+                289
+              ],
+              [
+                1316,
+                292
+              ],
+              [
+                1247,
+                293
+              ],
+              [
+                1314,
+                295
+              ],
+              [
+                1310,
+                300
+              ],
+              [
+                1307,
+                303
+              ],
+              [
+                1318,
+                288
+              ],
+              [
+                1317,
+                290
+              ],
+              [
+                1317,
+                291
+              ],
+              [
+                1316,
+                293
+              ],
+              [
+                1315,
+                294
+              ],
+              [
+                1311,
+                299
+              ],
+              [
+                1253,
+                301
+              ],
+              [
+                1309,
+                301
+              ],
+              [
+                1302,
+                307
+              ],
+              [
+                1245,
+                289
+              ],
+              [
+                1246,
+                291
+              ],
+              [
+                1249,
+                296
+              ],
+              [
+                1313,
+                296
+              ],
+              [
+                1312,
+                297
+              ],
+              [
+                1308,
+                302
+              ],
+              [
+                1315,
+                293
+              ],
+              [
+                1314,
+                294
+              ],
+              [
+                1313,
+                295
+              ],
+              [
+                1311,
+                298
+              ],
+              [
+                1308,
+                301
+              ],
+              [
+                1307,
+                302
+              ],
+              [
+                1316,
+                291
+              ],
+              [
+                1310,
+                299
+              ],
+              [
+                1305,
+                304
+              ],
+              [
+                1261,
+                308
+              ],
+              [
+                1283,
+                317
+              ],
+              [
+                1317,
+                289
+              ],
+              [
+                1248,
+                294
+              ],
+              [
+                1252,
+                299
+              ],
+              [
+                1309,
+                300
+              ],
+              [
+                1306,
+                303
+              ],
+              [
+                1304,
+                305
+              ],
+              [
+                1300,
+                308
+              ],
+              [
+                1299,
+                309
+              ],
+              [
+                1316,
+                290
+              ],
+              [
+                1315,
+                292
+              ],
+              [
+                1312,
+                296
+              ],
+              [
+                1250,
+                297
+              ],
+              [
+                1251,
+                298
+              ],
+              [
+                1297,
+                310
+              ]
+            ],
+            "improved": 0,
+            "worsened": 0,
+            "overOne": [
+              51,
+              51
+            ],
+            "overEight": [
+              51,
+              51
+            ],
+            "peak": [
+              41,
+              41
+            ],
+            "errors": [
+              [
+                41,
+                35,
+                25,
+                21,
+                21,
+                17,
+                17,
+                16,
+                16,
+                16,
+                16,
+                15,
+                15,
+                15,
+                15,
+                15,
+                15,
+                15,
+                15,
+                15,
+                14,
+                14,
+                14,
+                14,
+                14,
+                14,
+                12,
+                12,
+                12,
+                12,
+                12,
+                12,
+                11,
+                11,
+                11,
+                11,
+                11,
+                10,
+                10,
+                10,
+                10,
+                10,
+                10,
+                10,
+                10,
+                9,
+                9,
+                9,
+                9,
+                9,
+                9
+              ],
+              [
+                41,
+                35,
+                25,
+                21,
+                21,
+                17,
+                17,
+                16,
+                16,
+                16,
+                16,
+                15,
+                15,
+                15,
+                15,
+                15,
+                15,
+                15,
+                15,
+                15,
+                14,
+                14,
+                14,
+                14,
+                14,
+                14,
+                12,
+                12,
+                12,
+                12,
+                12,
+                12,
+                11,
+                11,
+                11,
+                11,
+                11,
+                10,
+                10,
+                10,
+                10,
+                10,
+                10,
+                10,
+                10,
+                9,
+                9,
+                9,
+                9,
+                9,
+                9
+              ]
+            ]
+          }
+        },
+        "queue": {
+          "id": 833,
+          "task": "nr-face-authored-mip-diffuse-database-lock-retry-queue-repeat-3",
+          "state": "succeeded",
+          "wait_seconds": 8445.407000000007,
+          "run_seconds": 86.29699999999139
+        }
+      }
+    },
+    "intel": {
+      "sdf": {
+        "device": "intel",
+        "input": {
+          "player": "a81b21b464231741b3331ae4839fb3f716e0f0b69137c33490e6dd7c129851be",
+          "programs": {
+            "mesh_object_lighting.frag.spv": "8575b735c49fb8d2d01b5a18ec473ff9852fe625c9dfeb16bcceb42116ff4545",
+            "mesh_object_early_lighting.frag.spv": "36205c9a1a384bc93cb30ea11f0b136477fb1ef4c0684799516a0cd6cf24f932"
+          },
+          "sampler": {
+            "schemaVersion": 1,
+            "usage": "linear",
+            "colorSpace": "linear",
+            "filter": "linear",
+            "wrapU": "clamp",
+            "wrapV": "clamp",
+            "mipPolicy": "generate",
+            "anisotropy": 1,
+            "mipBias": -1,
+            "mipFilter": "nearest"
+          },
+          "texture": "e4d7865a20fad774cc896c4b821442bf1649d91207ca2715b1b01255f8ed55ab",
+          "experimentalBinding": 2,
+          "fixedMaskBinding": 4,
+          "mode": "sdf",
+          "overlayPair": false
+        },
+        "frameSha256": "b4e30900b0f0ff8ad5b7f6e2d095565a8cd502e2fac1c2c0365dbf189d01a38e",
+        "baselineSha256": "47ea26e0a35eb08338f4fa17f451b98b8ea4bd22635232de9e5d0778f5fdc132",
+        "regions": {
+          "face": {
+            "count": 3663,
+            "overOne": [
+              592,
+              591
+            ],
+            "overEight": [
+              356,
+              354
+            ],
+            "peak": [
+              54,
+              54
+            ],
+            "newOverOne": 0,
+            "changed": 23,
+            "baseline": {
+              "pixels": 3663,
+              "ssim": 0.9618673164599938,
+              "medianLuminanceRelativeError": 0.01580705595530241,
+              "passed": true
+            },
+            "candidate": {
+              "pixels": 3663,
+              "ssim": 0.9620934697425174,
+              "medianLuminanceRelativeError": 0.01580705595530241,
+              "passed": true
+            }
+          },
+          "faceCore": {
+            "count": 1176,
+            "overOne": [
+              23,
+              23
+            ],
+            "overEight": [
+              0,
+              0
+            ],
+            "peak": [
+              3,
+              3
+            ],
+            "newOverOne": 0,
+            "changed": 0,
+            "baseline": {
+              "pixels": 1176,
+              "ssim": 0.9981404027843793,
+              "medianLuminanceRelativeError": 0.005877674827978387,
+              "passed": true
+            },
+            "candidate": {
+              "pixels": 1176,
+              "ssim": 0.9981404027843793,
+              "medianLuminanceRelativeError": 0.005877674827978387,
+              "passed": true
+            }
+          },
+          "iris": {
+            "count": 255,
+            "overOne": [
+              56,
+              56
+            ],
+            "overEight": [
+              13,
+              13
+            ],
+            "peak": [
+              27,
+              27
+            ],
+            "newOverOne": 0,
+            "changed": 0,
+            "baseline": {
+              "pixels": 255,
+              "ssim": 0.9841700525097131,
+              "medianLuminanceRelativeError": 0.009946273866373248,
+              "passed": true
+            },
+            "candidate": {
+              "pixels": 255,
+              "ssim": 0.9841700525097131,
+              "medianLuminanceRelativeError": 0.009946273866373248,
+              "passed": true
+            }
+          },
+          "outsideFace": {
+            "count": 3682737,
+            "overOne": [
+              182685,
+              182685
+            ],
+            "overEight": [
+              30700,
+              30700
+            ],
+            "peak": [
+              228,
+              228
+            ],
+            "newOverOne": 0,
+            "changed": 0
+          },
+          "frame": {
+            "count": 3686400,
+            "overOne": [
+              183277,
+              183276
+            ],
+            "overEight": [
+              31056,
+              31054
+            ],
+            "peak": [
+              228,
+              228
+            ],
+            "newOverOne": 0,
+            "changed": 23
+          }
+        },
+        "samples": {
+          "traced": {
+            "points": [
+              [
+                1280,
+                318
+              ],
+              [
+                1279,
+                318
+              ],
+              [
+                1306,
+                304
+              ],
+              [
+                1313,
+                297
+              ],
+              [
+                1312,
+                298
+              ],
+              [
+                1318,
+                289
+              ],
+              [
+                1316,
+                292
+              ],
+              [
+                1247,
+                293
+              ],
+              [
+                1314,
+                295
+              ],
+              [
+                1310,
+                300
+              ],
+              [
+                1307,
+                303
+              ],
+              [
+                1318,
+                288
+              ]
+            ],
+            "improved": 2,
+            "worsened": 0,
+            "overOne": [
+              12,
+              12
+            ],
+            "overEight": [
+              12,
+              10
+            ],
+            "peak": [
+              41,
+              25
+            ],
+            "errors": [
+              [
+                41,
+                35,
+                25,
+                21,
+                21,
+                17,
+                17,
+                15,
+                15,
+                16,
+                16,
+                15
+              ],
+              [
+                4,
+                2,
+                25,
+                21,
+                21,
+                17,
+                17,
+                15,
+                15,
+                16,
+                16,
+                15
+              ]
+            ]
+          },
+          "outsideOverEight": {
+            "points": [
+              [
+                1280,
+                318
+              ],
+              [
+                1279,
+                318
+              ],
+              [
+                1306,
+                304
+              ],
+              [
+                1313,
+                297
+              ],
+              [
+                1312,
+                298
+              ],
+              [
+                1318,
+                289
+              ],
+              [
+                1316,
+                292
+              ],
+              [
+                1317,
+                291
+              ],
+              [
+                1311,
+                299
+              ],
+              [
+                1310,
+                300
+              ],
+              [
+                1253,
+                301
+              ],
+              [
+                1307,
+                303
+              ],
+              [
+                1318,
+                288
+              ],
+              [
+                1317,
+                290
+              ],
+              [
+                1247,
+                293
+              ],
+              [
+                1316,
+                293
+              ],
+              [
+                1315,
+                294
+              ],
+              [
+                1314,
+                295
+              ],
+              [
+                1309,
+                301
+              ],
+              [
+                1302,
+                307
+              ],
+              [
+                1245,
+                289
+              ],
+              [
+                1246,
+                291
+              ],
+              [
+                1313,
+                296
+              ],
+              [
+                1312,
+                297
+              ],
+              [
+                1308,
+                302
+              ],
+              [
+                1315,
+                293
+              ],
+              [
+                1249,
+                296
+              ],
+              [
+                1316,
+                291
+              ],
+              [
+                1314,
+                294
+              ],
+              [
+                1313,
+                295
+              ],
+              [
+                1311,
+                298
+              ],
+              [
+                1308,
+                301
+              ],
+              [
+                1307,
+                302
+              ],
+              [
+                1310,
+                299
+              ],
+              [
+                1305,
+                304
+              ],
+              [
+                1261,
+                308
+              ],
+              [
+                1283,
+                317
+              ],
+              [
+                1317,
+                289
+              ],
+              [
+                1248,
+                294
+              ],
+              [
+                1312,
+                296
+              ],
+              [
+                1252,
+                299
+              ],
+              [
+                1309,
+                300
+              ],
+              [
+                1306,
+                303
+              ],
+              [
+                1304,
+                305
+              ],
+              [
+                1300,
+                308
+              ],
+              [
+                1299,
+                309
+              ],
+              [
+                1316,
+                290
+              ],
+              [
+                1315,
+                292
+              ],
+              [
+                1250,
+                297
+              ],
+              [
+                1251,
+                298
+              ],
+              [
+                1297,
+                310
+              ]
+            ],
+            "improved": 3,
+            "worsened": 3,
+            "overOne": [
+              51,
+              51
+            ],
+            "overEight": [
+              51,
+              48
+            ],
+            "peak": [
+              41,
+              25
+            ],
+            "errors": [
+              [
+                41,
+                35,
+                25,
+                21,
+                21,
+                17,
+                17,
+                16,
+                16,
+                16,
+                16,
+                16,
+                15,
+                15,
+                15,
+                15,
+                15,
+                15,
+                15,
+                15,
+                14,
+                14,
+                14,
+                14,
+                14,
+                13,
+                13,
+                12,
+                12,
+                12,
+                12,
+                12,
+                12,
+                11,
+                11,
+                11,
+                11,
+                10,
+                10,
+                10,
+                10,
+                10,
+                10,
+                10,
+                10,
+                10,
+                9,
+                9,
+                9,
+                9,
+                9
+              ],
+              [
+                4,
+                2,
+                25,
+                21,
+                21,
+                17,
+                17,
+                16,
+                16,
+                16,
+                16,
+                16,
+                15,
+                15,
+                15,
+                15,
+                15,
+                15,
+                15,
+                16,
+                14,
+                14,
+                14,
+                14,
+                15,
+                13,
+                13,
+                12,
+                12,
+                12,
+                12,
+                12,
+                12,
+                11,
+                11,
+                11,
+                3,
+                10,
+                10,
+                10,
+                10,
+                11,
+                10,
+                10,
+                10,
+                10,
+                9,
+                9,
+                9,
+                9,
+                9
+              ]
+            ]
+          }
+        },
+        "queue": {
+          "id": 836,
+          "task": "nr-face-authored-sdf-mip-intel-isolated-queue-repeat-2",
+          "state": "succeeded",
+          "wait_seconds": 11397.875,
+          "run_seconds": 90.71899999999732
+        }
       }
     }
   },
   "archive": {
-    "sha256": "1486864eef0051a138754ba5c61c900324f309867d5eefaf7f1579b38b5346e4",
+    "sha256": "057606d36a11ccbf3f6a9a6747c0954b6743402488f5a003079c5bbad2c6f6c0",
     "members": {
-      "archive-face-geometry-mask-isolation.py": "dd96970362514c960aa62d11535b1c7eaf314a243bc30156db09a5c2f4d2fe9d",
+      "archive-face-geometry-mask-isolation.py": "1e456844e9ea7f592c20a3382aafdc2b34cda63abc2a74aa3bb545df6b384851",
       "face-geometry-mask-actual.py": "69e9a8d45dbf19370c96c7ef0fc7dbb7ff35b5a67fe75f1a08ec3f38d49a320e",
       "capture-nvidia-sdf/command.json": "0543204fc716445caf60174d1a05f9787050c2f3e9d2fee7ae23ca907bb381ff",
       "capture-nvidia-sdf/player.log": "20f39b2d388094216c9e359364199aab829b1bc7bacadf741ab653d7f36ea100",
@@ -2380,7 +3556,18 @@
       "capture-nvidia-rim/results.json": "b83644a59da106d628fedef10e89a6d87145ce53e74e925dc0df39b835a42e94",
       "capture-nvidia-rim/runtime.json": "fd2c9542b76bf80901952afda0ba6bd0dac184828575b75c695e7c7c1c16b4ec",
       "capture-nvidia-rim/frames/gpu_capabilities.json": "93c9fb29461fae11a7e57d4e49112071a71940dee571f1f6696ffbf03c392879",
-      "assets-rim/mesh-face-geometry-mask.frag": "46f679081cb2571f08f2fec417c5dc56e0468aee7b2f2bf99f653d1bb3c48469"
+      "assets-rim/mesh-face-geometry-mask.frag": "46f679081cb2571f08f2fec417c5dc56e0468aee7b2f2bf99f653d1bb3c48469",
+      "capture-nvidia-diffuse/command.json": "d6d044f3527d5fd2a124a84c2d929d3a5b37000dc2e03cc06f6c5050b2f2720c",
+      "capture-nvidia-diffuse/player.log": "4fe9d1a9bbb1347864ef821cd8e268924d4b2e704f616662278ea9e5719792c4",
+      "capture-nvidia-diffuse/results.json": "788c026fccb5b948c609726ab5130b8f57f431803cdb73a6004fd9afb31eb8e2",
+      "capture-nvidia-diffuse/runtime.json": "fd2c9542b76bf80901952afda0ba6bd0dac184828575b75c695e7c7c1c16b4ec",
+      "capture-nvidia-diffuse/frames/gpu_capabilities.json": "93c9fb29461fae11a7e57d4e49112071a71940dee571f1f6696ffbf03c392879",
+      "assets-diffuse/mesh-face-geometry-mask.frag": "eb79e4354d6f1e70ccf7333e96bf8c64c03cd0f481e9435d96620bebbdbd355b",
+      "capture-intel-sdf/command.json": "fe67543d29b26b63243107bae0861ccba50f7f0c45845104da66fb8296def1b3",
+      "capture-intel-sdf/player.log": "4a93e6a3f09ee8e73ca9e638569184d83e265aaa1c942974ddaa17b65e6d0cf5",
+      "capture-intel-sdf/results.json": "ab8db73af19fb1dc0d329a52b1cf1291b7ac1e8e477a3313ece079f660e42268",
+      "capture-intel-sdf/runtime.json": "fd2c9542b76bf80901952afda0ba6bd0dac184828575b75c695e7c7c1c16b4ec",
+      "capture-intel-sdf/frames/gpu_capabilities.json": "a38eaca3509b417cfe23614fe415bd9ccc5622fc682d8623142cdeb7dc3d85cc"
     }
   }
 }
