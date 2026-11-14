@@ -75,6 +75,10 @@
 
 [595.79 结果清单](evidence/2026-11-13/frozen-public-visual/driver-59579-results.json)与[验证归档](evidence/2026-11-13/frozen-public-visual/driver-59579-validation.zip)保存逐图摘要、设备报告、捕获清单和注册结果。
 
+2026-11-15 的主线构建复验覆盖同一设备、驱动和三条注册路径。Release 与 Debug 各通过 21 张截图。全部 42 张截图的 RGB 差异为零，PNG 摘要均与冻结文件一致。
+
+[主线复验清单](evidence/2026-11-15/integrated-frozen-public/results.json)和[验证归档](evidence/2026-11-15/integrated-frozen-public/verification.zip)保存两个构建的产物摘要、CTest 结果及逐图检查。
+
 [重放归档](evidence/2026-11-13/frozen-public-visual/replay.zip)保存构建来源、显示设备、严格比对和逐像素证据。
 [复验计划](../../plans/2026-11-13-frozen-public-visual-regression.md)记录后续验证条件。
 

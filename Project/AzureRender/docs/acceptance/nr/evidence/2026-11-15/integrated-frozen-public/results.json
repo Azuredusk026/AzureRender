@@ -1,0 +1,21 @@
+{
+  "driver": "595.79",
+  "rgbDifferencePixels": 0,
+  "pngDigestMismatchCount": 0,
+  "configurations": {
+    "release": {
+      "cases": 3,
+      "frames": 21,
+      "testsSeconds": 55.5,
+      "samePngSha256": true
+    },
+    "debug": {
+      "cases": 3,
+      "frames": 21,
+      "testsSeconds": 160.82800000000861,
+      "samePngSha256": true
+    }
+  },
+  "archiveMembers": 10,
+  "archiveSha256": "be664aa144593ab782e5ddbfb3d583d52e79610b19027b14ca06ff6cf21b1330"
+}
