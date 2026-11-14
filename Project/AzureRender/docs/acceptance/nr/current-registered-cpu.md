@@ -2,6 +2,8 @@
 
 2026-11-14，Release 与 Debug 各通过 333 项 CPU 注册用例。两种配置均无失败或跳过。完整 GPU 回归使用同批构建产物继续执行。
 
+[主线 GPU 定向复验](current-registered-gpu-recoveries.md)记录同批产物上三项已通过的复验。
+
 | 配置 | CPU 通过 | GPU 注册 | 注册总数 |
 | --- | ---: | ---: | ---: |
 | Release | 333 | 274 | 607 |

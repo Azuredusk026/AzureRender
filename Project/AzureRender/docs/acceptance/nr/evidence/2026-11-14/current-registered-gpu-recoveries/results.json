@@ -1,0 +1,41 @@
+{
+  "date": "2026-11-14",
+  "scope": "Three recovered Release registered cases",
+  "configuration": "Release",
+  "cases": {
+    "AzureEditor.DevtoolsHost": {
+      "originalResult": "failed",
+      "originalSeconds": 96.166,
+      "retestResult": "passed",
+      "retestSeconds": 161.395,
+      "originalShard": "release-gpu-14",
+      "retestShard": "release-gpu-14-focused-retry-01"
+    },
+    "AzureRender.SamplingHostGpu": {
+      "originalResult": "failed",
+      "originalSeconds": 39.44,
+      "retestResult": "passed",
+      "retestSeconds": 26.2341,
+      "originalShard": "release-gpu-14",
+      "retestShard": "release-gpu-14-focused-retry-01"
+    },
+    "AzureEngine.ManagedWorkflows.coreclr": {
+      "originalResult": "failed",
+      "originalSeconds": 198.785,
+      "retestResult": "passed",
+      "retestSeconds": 152.867,
+      "originalShard": "release-gpu-16",
+      "retestShard": "release-gpu-16-focused-retry-01"
+    }
+  },
+  "provenanceFiles": {
+    "release-products": "46fe6efcbcebc95f36e5559f9373262a99a4bc5213bdb53052edf4c62ff88cf4",
+    "release-inventory": "30ab23833879c745cc1d1d32f948b78d6c2f0c15fac0da629bd7bb50041ad3c7",
+    "release-tests-source": "039a2553073c803f8e836853491b3f39b9b53520729345875198792a61b9610a"
+  },
+  "archive": {
+    "members": 33,
+    "bytes": 34802,
+    "sha256": "cab218a85215c46685c94336db9a0b35fc352e4ee195c78b75bd9b628364107e"
+  }
+}

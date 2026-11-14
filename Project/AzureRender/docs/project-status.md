@@ -1,6 +1,7 @@
 # 项目现状
 
 [主线 CPU 注册回归](acceptance/nr/current-registered-cpu.md)通过双配置各 333 项检查。GPU 用例按当前受检产物逐组执行。
+[主线 GPU 定向复验](acceptance/nr/current-registered-gpu-recoveries.md)记录已通过的采样切换、开发工具和 CoreCLR 用例。
 
 [着色器注册回归](acceptance/nr/frozen-public-visual.md#着色器注册回归)通过 Release 与 Debug 的编译契约和完整目录编译。全量注册用例按当前受检产物逐组执行。
 
