@@ -45,7 +45,7 @@ CPU 工作 P95 为 5.90 毫秒，GPU 帧 P95 为 20.33 毫秒。
 
 [可玩包关卡提交](../acceptance/p1/2026-11-13-level-commit.md)通过提交耗时和资源驻留门槛。
 [可玩包三十分钟长跑](../acceptance/p1/2026-11-13-playable-30min.md)完成 33 次切关和 34 次重启，全部分钟窗口满足 GPU 预算。
-完整注册回归使用当前受检产物。
+[主线 CPU 注册回归](../acceptance/nr/current-registered-cpu.md)通过双配置各 333 项检查。GPU 用例使用同批受检产物。
 [着色器注册回归](../acceptance/nr/frozen-public-visual.md#着色器注册回归)通过两种配置的编译契约和完整目录编译。
 
 [空白视口选择](../acceptance/nr/editor-empty-viewport-selection.md)通过探索项目和场景检视项目的所属回归。

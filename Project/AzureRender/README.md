@@ -1,5 +1,7 @@
 # AzureRender 工程
 
+[主线 CPU 注册回归](docs/acceptance/nr/current-registered-cpu.md)记录两种配置各 333 项检查的结果。
+
 [着色器注册回归](docs/acceptance/nr/frozen-public-visual.md#着色器注册回归)记录双配置的编译结果和历史诊断产物的恢复信息。
 
 [联合场景热点纹理分配](docs/acceptance/nr/joint-texture-hot-placement.md)记录 1440p 同驱动逐字节比较及固定 80 W 配对计时。

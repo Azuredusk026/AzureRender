@@ -1,5 +1,7 @@
 # 项目现状
 
+[主线 CPU 注册回归](acceptance/nr/current-registered-cpu.md)通过双配置各 333 项检查。GPU 用例按当前受检产物逐组执行。
+
 [着色器注册回归](acceptance/nr/frozen-public-visual.md#着色器注册回归)通过 Release 与 Debug 的编译契约和完整目录编译。全量注册用例按当前受检产物逐组执行。
 
 [联合场景热点纹理分配](acceptance/nr/joint-texture-hot-placement.md)通过同驱动画面对照，固定 80 W 短时计时未达到 GPU 净收益条件。

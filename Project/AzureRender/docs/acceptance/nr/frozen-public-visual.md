@@ -78,7 +78,7 @@
 [重放归档](evidence/2026-11-13/frozen-public-visual/replay.zip)保存构建来源、显示设备、严格比对和逐像素证据。
 [复验计划](../../plans/2026-11-13-frozen-public-visual-regression.md)记录后续验证条件。
 
-## 着色器注册回归
+## 着色器注册回归 {#着色器注册回归}
 
 Release 与 Debug 均通过 `AzureRender.ShaderCompilerContract` 和 `AzureRender.ShaderCatalogCompilation`。目录编译逐份核对生成程序摘要，并按注册时限执行。
 

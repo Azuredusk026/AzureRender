@@ -57,6 +57,12 @@
   },
   "milestones": [
     {
+      "path": "runs/20261114-132114-nr-current-registered-regression-16567f",
+      "name": "主线 CPU 注册回归",
+      "evidence": "docs/acceptance/nr/current-registered-cpu.md",
+      "results": "docs/acceptance/nr/evidence/2026-11-14/current-registered-cpu/results.json"
+    },
+    {
       "path": "runs/20261114-125834-nr-joint-texture-hot-placement-4e085e",
       "name": "联合场景热点纹理分配",
       "sourceBase": "01cc6b2",

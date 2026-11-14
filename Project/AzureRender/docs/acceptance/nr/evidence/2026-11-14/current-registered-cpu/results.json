@@ -1,0 +1,247 @@
+{
+  "date": "2026-11-14",
+  "scope": "CPU registered subset; full GPU regression remains separate",
+  "configurations": {
+    "release": {
+      "registrationCount": 607,
+      "passedCpu": 333,
+      "failedCpu": 0,
+      "skippedCpu": 0,
+      "registeredGpu": 274,
+      "productCount": 1295,
+      "hostSha256": "8ba1645ea990be7cece11bee467da188010c236abaa16fa1e21968e50cdb19c4",
+      "sourceCommit": "2f9a433a5a76e9531ef12f1afcbc64b9556b1425",
+      "sources": 1744,
+      "registrySha256": "30ab23833879c745cc1d1d32f948b78d6c2f0c15fac0da629bd7bb50041ad3c7",
+      "receiptSha256": "46fe6efcbcebc95f36e5559f9373262a99a4bc5213bdb53052edf4c62ff88cf4",
+      "shards": [
+        {
+          "shard": "release-cpu-01",
+          "job": 443,
+          "count": 25,
+          "junitSha256": "f655d69f9244ad86dedbd65d1421519057ddfdd304c41497c25a0fe63e5bb74e",
+          "runSeconds": 147.68800000000192,
+          "perShardFingerprints": false
+        },
+        {
+          "shard": "release-cpu-02",
+          "job": 454,
+          "count": 28,
+          "junitSha256": "8a3c77d407b513d967a1772626e027f4f72a754b7ad72a7232bb7b1e09aaad4d",
+          "runSeconds": 64.09300000000076,
+          "perShardFingerprints": true
+        },
+        {
+          "shard": "release-cpu-03",
+          "job": 456,
+          "count": 30,
+          "junitSha256": "02359eb1e75f54b6f4b57b0862794138ebf5014594f0ae974d0b46a02add3d66",
+          "runSeconds": 62.73399999999674,
+          "perShardFingerprints": true
+        },
+        {
+          "shard": "release-cpu-04",
+          "job": 495,
+          "count": 28,
+          "junitSha256": "ed8dc834df016d253bbdccba36c76e5c8f49356e05476941252ba97a46ba6d1a",
+          "runSeconds": 95.11000000000058,
+          "perShardFingerprints": true
+        },
+        {
+          "shard": "release-cpu-05",
+          "job": 458,
+          "count": 30,
+          "junitSha256": "9b9a67ce81014a8f6390c6d24e7f840bec47793593b5024eea5a25f21582db1e",
+          "runSeconds": 67.89100000000326,
+          "perShardFingerprints": true
+        },
+        {
+          "shard": "release-cpu-06",
+          "job": 460,
+          "count": 31,
+          "junitSha256": "1fb613704d814438953f5de1b40e78aba1b466b483c73f4e648291cac9c143bb",
+          "runSeconds": 68.82800000000134,
+          "perShardFingerprints": true
+        },
+        {
+          "shard": "release-cpu-07",
+          "job": 463,
+          "count": 30,
+          "junitSha256": "d386484495a9f8a2fe59696cc270f57aa843fd96e170bcf7c769c6640a507367",
+          "runSeconds": 28.68800000000192,
+          "perShardFingerprints": true
+        },
+        {
+          "shard": "release-cpu-08",
+          "job": 464,
+          "count": 30,
+          "junitSha256": "58a707139afa53617e6ddd858c03a8e1d8ce200e28546fbe546f9f82b87812ec",
+          "runSeconds": 33.38999999999942,
+          "perShardFingerprints": true
+        },
+        {
+          "shard": "release-cpu-09",
+          "job": 466,
+          "count": 30,
+          "junitSha256": "7c1597794ab1879a20fcee5ebb8d2bf6f741b3741392e520a2646532114338db",
+          "runSeconds": 41.21899999999732,
+          "perShardFingerprints": true
+        },
+        {
+          "shard": "release-cpu-10",
+          "job": 467,
+          "count": 28,
+          "junitSha256": "5fba5b20557000745726d62cb1d00830b759fc7f854e5658321be56c779a5cbc",
+          "runSeconds": 120.23500000000058,
+          "perShardFingerprints": true
+        },
+        {
+          "shard": "release-cpu-11",
+          "job": 469,
+          "count": 30,
+          "junitSha256": "edde3cd97d618d6a2f4faafbc5d76f905d64161424f128749dd72214e566a77a",
+          "runSeconds": 96.1559999999954,
+          "perShardFingerprints": true
+        },
+        {
+          "shard": "release-cpu-12",
+          "job": 473,
+          "count": 13,
+          "junitSha256": "fef60f7d98a948ceac1956974fd6a1a3b85a70f4c8293bb24b1dd85869355a15",
+          "runSeconds": 17.01600000000326,
+          "perShardFingerprints": true
+        }
+      ]
+    },
+    "debug": {
+      "registrationCount": 605,
+      "passedCpu": 333,
+      "failedCpu": 0,
+      "skippedCpu": 0,
+      "registeredGpu": 272,
+      "productCount": 1288,
+      "hostSha256": "a8e0ce254171a1248571cb07f4fb5fc6f9909e8327a192587d3c28b0cf05d9f2",
+      "sourceCommit": "08fca69c321038ba0c88a381fd4ea33a97344501",
+      "sources": 1744,
+      "registrySha256": "226098ba1d9799b19eb3c180f6e561df9a861361117115b39a1901932c097fa1",
+      "receiptSha256": "02905556208f7898495a3038f2811f94bef0fb50abceb95f6f3ac52c4e83c156",
+      "shards": [
+        {
+          "shard": "debug-cpu-01",
+          "job": 474,
+          "count": 25,
+          "junitSha256": "e98a35f7346d0a78c5bb98451c6d8b29710853e34ceedf61b3792b8f463eba70",
+          "runSeconds": 83.56300000000192,
+          "perShardFingerprints": true
+        },
+        {
+          "shard": "debug-cpu-02",
+          "job": 478,
+          "count": 28,
+          "junitSha256": "0c6517e8d85decebe17711ba63ec73a6d0564125d72bd4b98e64f45fa03bf50a",
+          "runSeconds": 74.45300000000134,
+          "perShardFingerprints": true
+        },
+        {
+          "shard": "debug-cpu-03",
+          "job": 480,
+          "count": 30,
+          "junitSha256": "587eda16276c84e27af1a4548684ca3fd110719ac2a96e00b283069fe9f0f161",
+          "runSeconds": 75.5,
+          "perShardFingerprints": true
+        },
+        {
+          "shard": "debug-cpu-04",
+          "job": 481,
+          "count": 28,
+          "junitSha256": "97829943b38a8be24b39f1dde104a8a7d5aabfee554a5f27c4d90575f033e794",
+          "runSeconds": 146.57800000000134,
+          "perShardFingerprints": true
+        },
+        {
+          "shard": "debug-cpu-05",
+          "job": 482,
+          "count": 30,
+          "junitSha256": "a63bc1479ec829f1641c7293664c35fa30ebee6e39230080b550dc45dd73b2c1",
+          "runSeconds": 87.82800000000134,
+          "perShardFingerprints": true
+        },
+        {
+          "shard": "debug-cpu-06",
+          "job": 483,
+          "count": 31,
+          "junitSha256": "51d0d8a911f163bf18ad84c21999f05f4714975e66f329a4886052f32432f7d1",
+          "runSeconds": 86.93799999999464,
+          "perShardFingerprints": true
+        },
+        {
+          "shard": "debug-cpu-07",
+          "job": 484,
+          "count": 30,
+          "junitSha256": "3947a38c8a4fb9f35ae284a6653f08d3a92b50e3f932b415629a75f95f499474",
+          "runSeconds": 26.781000000002678,
+          "perShardFingerprints": true
+        },
+        {
+          "shard": "debug-cpu-08",
+          "job": 486,
+          "count": 30,
+          "junitSha256": "b1059b3ef43328d14b93bb8eadedb5a182f1c0254fa62f90c0876f461f03babb",
+          "runSeconds": 59.42199999999866,
+          "perShardFingerprints": true
+        },
+        {
+          "shard": "debug-cpu-09",
+          "job": 487,
+          "count": 30,
+          "junitSha256": "ff7c6152b646788544ee04cc6a2b02eaa786ba6335931eceb61ce947fc8b0b15",
+          "runSeconds": 44.140999999995984,
+          "perShardFingerprints": true
+        },
+        {
+          "shard": "debug-cpu-10",
+          "job": 488,
+          "count": 28,
+          "junitSha256": "cabb995c0dc121374c27ad46d2059cec766822febdcd29e843d90c94bfac8025",
+          "runSeconds": 189.09399999999732,
+          "perShardFingerprints": true
+        },
+        {
+          "shard": "debug-cpu-11",
+          "job": 491,
+          "count": 30,
+          "junitSha256": "a787376b73efa41d6f5a093e659ae4de1917791a54dfbb462a610af8b4c34666",
+          "runSeconds": 144.17199999999866,
+          "perShardFingerprints": true
+        },
+        {
+          "shard": "debug-cpu-12",
+          "job": 507,
+          "count": 13,
+          "junitSha256": "b74fb77cdf54967723f012763077932a333d0c2fd847da06647e04962089623f",
+          "runSeconds": 17.187999999994645,
+          "perShardFingerprints": true
+        }
+      ]
+    }
+  },
+  "exitCodeControls": {
+    "passing": {
+      "ctest": 0,
+      "dispatch": 0
+    },
+    "failing": {
+      "ctest": 8,
+      "dispatch": 8
+    },
+    "skipped": {
+      "ctest": 0,
+      "dispatch": 8
+    }
+  },
+  "archive": {
+    "members": 113,
+    "bytes": 484789,
+    "sha256": "7e034bc0322a8dfb426e803a7aeedff19e3021e04d726f3d339f9460f113cbee"
+  }
+}
