@@ -1,0 +1,132 @@
+{
+  "status": "passed",
+  "tests": {
+    "release": {
+      "AzureRender.MaterialViewDeterminismGpu": {
+        "seconds": 84.1454,
+        "computedCapable": false,
+        "computedViewMode": false,
+        "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+        "eligibleChecks": 0,
+        "fallbackChecks": 0,
+        "matrixCase": {
+          "lighting": 0,
+          "setting": 0
+        },
+        "pixelsCompared": 33280,
+        "status": "passed",
+        "validationErrors": 0,
+        "zeroAllocator": true
+      },
+      "AzureRender.MaterialViewDeterminismGpu.environment.default": {
+        "seconds": 96.6979,
+        "computedCapable": false,
+        "computedViewMode": false,
+        "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+        "eligibleChecks": 0,
+        "fallbackChecks": 0,
+        "matrixCase": {
+          "lighting": 1,
+          "setting": 0
+        },
+        "pixelsCompared": 33280,
+        "status": "passed",
+        "validationErrors": 0,
+        "zeroAllocator": true
+      },
+      "AzureRender.MaterialViewDeterminismGpu.environment.unlit": {
+        "seconds": 79.9505,
+        "computedCapable": false,
+        "computedViewMode": false,
+        "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+        "eligibleChecks": 0,
+        "fallbackChecks": 0,
+        "matrixCase": {
+          "lighting": 1,
+          "setting": 1
+        },
+        "pixelsCompared": 33280,
+        "status": "passed",
+        "validationErrors": 0,
+        "zeroAllocator": true
+      }
+    },
+    "debug": {
+      "AzureRender.MaterialViewDeterminismGpu": {
+        "seconds": 48.1012,
+        "computedCapable": false,
+        "computedViewMode": false,
+        "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+        "eligibleChecks": 0,
+        "fallbackChecks": 0,
+        "matrixCase": {
+          "lighting": 0,
+          "setting": 0
+        },
+        "pixelsCompared": 33280,
+        "status": "passed",
+        "validationErrors": 0,
+        "zeroAllocator": true
+      },
+      "AzureRender.MaterialViewDeterminismGpu.environment.default": {
+        "seconds": 82.4233,
+        "computedCapable": false,
+        "computedViewMode": false,
+        "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+        "eligibleChecks": 0,
+        "fallbackChecks": 0,
+        "matrixCase": {
+          "lighting": 1,
+          "setting": 0
+        },
+        "pixelsCompared": 33280,
+        "status": "passed",
+        "validationErrors": 0,
+        "zeroAllocator": true
+      },
+      "AzureRender.MaterialViewDeterminismGpu.environment.unlit": {
+        "seconds": 79.313,
+        "computedCapable": false,
+        "computedViewMode": false,
+        "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+        "eligibleChecks": 0,
+        "fallbackChecks": 0,
+        "matrixCase": {
+          "lighting": 1,
+          "setting": 1
+        },
+        "pixelsCompared": 33280,
+        "status": "passed",
+        "validationErrors": 0,
+        "zeroAllocator": true
+      }
+    }
+  },
+  "archive": {
+    "sha256": "11836293203e71098c966f669c42f081c1a43926f7ef02da196aac3b6f69f0a2",
+    "files": {
+      "isolated/candidate-results.json": "da6108014c1dcc4d2ac3609cac1d73d9b4ae5a66a0edf46835db9b7a928e2ce4",
+      "isolated/environment-default.log": "7195809c6110e2ad182ceb8fa25ce1279e593271e436a6e339f1b10ec1e1d0fd",
+      "isolated/environment-unlit.log": "def6faba1970e615417f2ac5a9ce548415d28fb1be37535ddc6b1799effcc1e4",
+      "original/retest.json": "56a5d31d5f3f3fb2bc4ba5187670ce63f350c46000f8c5cc022a3c6e20f7be1b",
+      "original/retest.xml": "cc13db4600d441e70325eb929f3dc22cad6b193990f018949ea29aaf889a4492",
+      "change/fixture.patch": "db1b346b926d5a3826937510347409dce65759618a6138f0a9243c8fb279c9f0",
+      "change/source-activation.json": "ae5ccd3576f7d9fb6d0e5dc1146237e14411d6738644980444d2a5f68147af66",
+      "change/registered-evidence-transfer.json": "f8a090b0450ae7a87a3ff9b1403421bbc6528042436c8642f0ca8ab848469d68",
+      "release/release-material-cache-recovery.txt": "5f88f45b5edc52d4a29dea8c1b9bcbdcc20cb746f50c79405ea14433b506d313",
+      "release/release-material-cache-recovery.json": "794651ff8a070e4be24a734560ab8d9bbb1367e25788f58ad07a2defa73c1234",
+      "release/release-material-cache-recovery.xml": "20e660b8a95b19123e5e89d284f8d3231ab0c923c18df3275f0915b5fa83bda8",
+      "release/release-material-cache-recovery.log": "d7ce772ca42796c3e5beb3686bbf8484ffc5e87edb40845de16875214b744eae",
+      "release/scene-default-capture.json": "d11b73422cce63fab7e3fce335822f3527fa6982752f172e17a882d3241b7ccf",
+      "release/environment-default-capture.json": "68716e4d9012afa2a3d51039d810be91670f26c59c9814595f6785ee63bef039",
+      "release/environment-unlit-capture.json": "b560a942bcb780da3efe210659829f8b9f72ce832aec1ce339910d430c37e4be",
+      "debug/debug-material-cache-recovery.txt": "5f88f45b5edc52d4a29dea8c1b9bcbdcc20cb746f50c79405ea14433b506d313",
+      "debug/debug-material-cache-recovery.json": "c697dcc74f168f8c8488b037eef965cd66ad7ac7e3e106364fc420000e46b7dd",
+      "debug/debug-material-cache-recovery.xml": "7b0dd5c26d5bbd3d2f6cdec98683ab8d0e42ae1485ea53853db7cd0e6249bf6c",
+      "debug/debug-material-cache-recovery.log": "54b6fea2a2d9cb15f6e6485e84cd641e07947e1bd9b51f9f23a87ba37deb7557",
+      "debug/scene-default-capture.json": "d11b73422cce63fab7e3fce335822f3527fa6982752f172e17a882d3241b7ccf",
+      "debug/environment-default-capture.json": "68716e4d9012afa2a3d51039d810be91670f26c59c9814595f6785ee63bef039",
+      "debug/environment-unlit-capture.json": "b560a942bcb780da3efe210659829f8b9f72ce832aec1ce339910d430c37e4be"
+    }
+  }
+}

@@ -1,4 +1,5 @@
 #include "render/RenderViewService.hpp"
+#include "rhi/VulkanPipelineCache.hpp"
 #include "scenes/CharacterSceneRenderer.hpp"
 #include "support/VulkanComputeFixture.hpp"
 #include <filesystem>
@@ -56,8 +57,14 @@ int main(int argc,char** argv)try{
         catch(const test::VulkanFeatureUnavailable&){owner=std::make_unique<test::VulkanComputeFixture>(true);}
     }else owner=std::make_unique<test::VulkanComputeFixture>(true);
     auto& host=*owner;
+    // Rebuild each renderer while reusing this device's compiled pipeline data.
+    VkPhysicalDeviceFeatures features{};
+    vkGetPhysicalDeviceFeatures(host.physical,&features);
+    rhi::VulkanPipelineCache cache(host.device,host.physical,{});
+    rhi::VulkanRhi viewBackend(host.device,host.physical,host.queue,host.pool,host.allocator,
+        features.samplerAnisotropy==VK_TRUE,nullptr,false,false,cache.handle());
     if(computedView&&host.properties.vendorID==0x10deU)check(computedCapable,"Qualified NVIDIA fixture must enable real quad and indexing features");
-    RenderContext base;base.rhi=host.backend.get();base.allocator=&host.allocator;
+    RenderContext base;base.rhi=&viewBackend;base.allocator=&host.allocator;
     base.device=host.device;base.physicalDevice=host.physical;base.graphicsQueue=host.queue;
     base.commandPool=host.pool;base.graphicsQueueFamily=host.family;base.descriptorLimits=host.properties.limits;
     base.shadowMapSize=32;base.cullingEnabled=false;base.computeShaders=true;base.rgba16fStorageImage=true;

@@ -5,6 +5,7 @@
 [GPU 注册回归的产物预约与管线缓存](docs/acceptance/nr/registered-gpu-infrastructure.md)记录双配置雾效结果、编辑器重建计时和目录规模复验。
 [编辑器与资产主线复验](docs/acceptance/nr/registered-gpu-infrastructure.md#编辑器与资产主线复验)记录标准构建的目录规模、热重载和两条编辑器工作流。
 [Windows 发布安装](docs/acceptance/nr/registered-gpu-infrastructure.md#windows-发布安装)记录安装文档核对和两种发布包的注册验收。
+[材质视图管线缓存](docs/acceptance/nr/registered-gpu-infrastructure.md#材质视图管线缓存)记录双配置材质视图的读回与验证结果。
 
 [着色器注册回归](docs/acceptance/nr/frozen-public-visual.md#着色器注册回归)记录双配置的编译结果和历史诊断产物的恢复信息。
 

@@ -69,6 +69,12 @@
       "results": "docs/acceptance/nr/evidence/2026-11-15/windows-package-install/results.json"
     },
     {
+      "path": "runs/20261115-064800-nr-material-cache-regression-4d7a62",
+      "name": "材质视图管线缓存",
+      "evidence": "docs/acceptance/nr/registered-gpu-infrastructure.md#材质视图管线缓存",
+      "results": "docs/acceptance/nr/evidence/2026-11-15/material-view-pipeline-cache/results.json"
+    },
+    {
       "path": "runs/20261115-013428-nr-joint-80w-idle-retest-89f552",
       "name": "联合场景独显空闲复验",
       "sourceBase": "01cc6b2",

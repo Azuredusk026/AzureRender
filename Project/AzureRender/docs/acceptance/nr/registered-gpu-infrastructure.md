@@ -95,3 +95,17 @@ Windows 安装按扩展名选择 Markdown 和 JSON 文档，并按相对路径�
 Release 游戏包和可玩包分别在 237.04 和 396.34 秒通过原注册用例。验证覆盖目录移动、隔离启动、任务路线、6,600 帧关卡循环、依赖回滚和文件篡改检测。打包规则、安装清单往返和缺失构建的发布门禁也通过。
 
 [结果清单](evidence/2026-11-15/windows-package-install/results.json)和[验证归档](evidence/2026-11-15/windows-package-install/verification.zip)保存安装对照、CTest 原始结果和可玩包运行记录。
+
+## 材质视图管线缓存
+
+材质视图夹具在同一 Vulkan 设备上保留内存管线缓存。每轮构造独立的视图和渲染器，核对完整的 RGBA 读回序列。
+
+| 原注册用例 | Release | Debug |
+| --- | ---: | ---: |
+| 场景默认材质 | 84.15 秒 | 48.10 秒 |
+| 环境光默认材质 | 96.70 秒 | 82.42 秒 |
+| 环境光无光照材质 | 79.95 秒 | 79.31 秒 |
+
+六项检查各核对 33,280 个像素。Vulkan 验证错误均为零，资源释放检查通过。
+
+[结果清单](evidence/2026-11-15/material-view-pipeline-cache/results.json)和[验证归档](evidence/2026-11-15/material-view-pipeline-cache/verification.zip)保存初始时限记录、隔离对照和标准构建的 CTest 收据。
