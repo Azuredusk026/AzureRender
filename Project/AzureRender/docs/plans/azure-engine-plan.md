@@ -43,6 +43,7 @@ CPU 工作 P95 为 5.90 毫秒，GPU 帧 P95 为 20.33 毫秒。
 最高风扇档 CPU 工作 P95 为 6.98 毫秒，GPU 帧 P95 为 19.99 毫秒。
 正式 GPU 帧耗时、热状态和设备本地容量仍待验收。
 [独显空闲复验](../acceptance/nr/joint-nonlocal-texture-placement.md#独显空闲复验)的非本地纹理候选通过 CPU、设备本地内存和工作集门槛。GPU P95 为 19.02 毫秒，软件热降频观测为 15 次。
+[聚光灯范围与辐照度系数](../acceptance/nr/joint-gpu-pass-budget.md#聚光灯范围与辐照度系数)登记光源访问估算及双设备精确对照。
 
 [可玩包关卡提交](../acceptance/p1/2026-11-13-level-commit.md)通过提交耗时和资源驻留门槛。
 [可玩包三十分钟长跑](../acceptance/p1/2026-11-13-playable-30min.md)完成 33 次切关和 34 次重启，全部分钟窗口满足 GPU 预算。

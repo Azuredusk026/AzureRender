@@ -75,6 +75,18 @@
       "results": "docs/acceptance/nr/evidence/2026-11-15/material-view-pipeline-cache/results.json"
     },
     {
+      "path": "runs/20261114-141056-nr-ordinary-light-range-work-e70ebf",
+      "name": "联合场景聚光灯范围",
+      "evidence": "docs/acceptance/nr/joint-gpu-pass-budget.md#聚光灯范围与辐照度系数",
+      "results": "docs/acceptance/nr/evidence/2026-11-15/joint-light-and-irradiance/results.json"
+    },
+    {
+      "path": "runs/20261114-141946-nr-irradiance-ordered-layers-5887fd",
+      "name": "联合场景辐照度系数",
+      "evidence": "docs/acceptance/nr/joint-gpu-pass-budget.md#聚光灯范围与辐照度系数",
+      "results": "docs/acceptance/nr/evidence/2026-11-15/joint-light-and-irradiance/results.json"
+    },
+    {
       "path": "runs/20261115-013428-nr-joint-80w-idle-retest-89f552",
       "name": "联合场景独显空闲复验",
       "sourceBase": "01cc6b2",

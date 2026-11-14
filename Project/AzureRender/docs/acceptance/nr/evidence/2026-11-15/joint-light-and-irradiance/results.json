@@ -1,0 +1,249 @@
+{
+  "captureSha256": "35077c571bcb70bc99688bfb97eec1b291bd6567df7482746fd3f5db49f339b3",
+  "dispatch": [
+    [
+      860,
+      "nr-ordinary-light-readback-volume-retry",
+      "failed",
+      1
+    ],
+    [
+      861,
+      "nr-irradiance-ordered-query-volume-retry-2",
+      "failed",
+      1
+    ],
+    [
+      921,
+      "irradiance-ordered-fixture-and-replay",
+      "failed",
+      8
+    ],
+    [
+      922,
+      "ordinary-light-descriptor-class-retry",
+      "succeeded",
+      0
+    ]
+  ],
+  "clusteredLight": {
+    "status": "measured",
+    "passes": {
+      "main": {
+        "0": {
+          "membership": 7032,
+          "omittedMembership": 6,
+          "visits": 2404257,
+          "omittedVisits": 13342,
+          "percent": 0.5549323554012736
+        },
+        "2": {
+          "membership": 10488,
+          "omittedMembership": 6,
+          "visits": 3325857,
+          "omittedVisits": 13342,
+          "percent": 0.4011597612284593
+        }
+      },
+      "snapshot": {
+        "0": {
+          "membership": 7032,
+          "omittedMembership": 6,
+          "visits": 2404170,
+          "omittedVisits": 13342,
+          "percent": 0.5549524368077132
+        },
+        "2": {
+          "membership": 10488,
+          "omittedMembership": 6,
+          "visits": 3325770,
+          "omittedVisits": 13342,
+          "percent": 0.4011702553092968
+        }
+      }
+    }
+  },
+  "irradiance": {
+    "status": "exact-fixture-failed",
+    "adapters": {
+      "nvidia": {
+        "positions": 918,
+        "changed": 4,
+        "maxUlp": 4,
+        "differences": [
+          {
+            "index": 326,
+            "position": "-26.75 -11.5 -33.75",
+            "differences": [
+              {
+                "component": 0,
+                "base": 0.0415628664,
+                "candidate": 0.0415628627,
+                "ulp": 1
+              },
+              {
+                "component": 4,
+                "base": 0.0491559394,
+                "candidate": 0.0491559356,
+                "ulp": 1
+              }
+            ]
+          },
+          {
+            "index": 380,
+            "position": "-13.5 -11.5 -33.75",
+            "differences": [
+              {
+                "component": 5,
+                "base": -0.0453128479,
+                "candidate": -0.0453128442,
+                "ulp": 1
+              }
+            ]
+          },
+          {
+            "index": 434,
+            "position": "-0.25 -11.5 -33.75",
+            "differences": [
+              {
+                "component": 0,
+                "base": 0.00862296112,
+                "candidate": 0.00862296205,
+                "ulp": 1
+              }
+            ]
+          },
+          {
+            "index": 488,
+            "position": "13.0 -11.5 -33.75",
+            "differences": [
+              {
+                "component": 6,
+                "base": -0.0389586426,
+                "candidate": -0.0389586464,
+                "ulp": 1
+              },
+              {
+                "component": 9,
+                "base": -0.00713378796,
+                "candidate": -0.0071337861,
+                "ulp": 4
+              },
+              {
+                "component": 10,
+                "base": -0.0484650247,
+                "candidate": -0.0484650284,
+                "ulp": 1
+              }
+            ]
+          }
+        ]
+      },
+      "intel": {
+        "positions": 918,
+        "changed": 3,
+        "maxUlp": 4,
+        "differences": [
+          {
+            "index": 326,
+            "position": "-26.75 -11.5 -33.75",
+            "differences": [
+              {
+                "component": 1,
+                "base": -0.0233918801,
+                "candidate": -0.0233918764,
+                "ulp": 2
+              },
+              {
+                "component": 4,
+                "base": 0.0491577685,
+                "candidate": 0.0491577722,
+                "ulp": 1
+              },
+              {
+                "component": 10,
+                "base": -0.0811313316,
+                "candidate": -0.0811313391,
+                "ulp": 1
+              },
+              {
+                "component": 11,
+                "base": 0.086663343,
+                "candidate": 0.0866633505,
+                "ulp": 1
+              }
+            ]
+          },
+          {
+            "index": 380,
+            "position": "-13.5 -11.5 -33.75",
+            "differences": [
+              {
+                "component": 3,
+                "base": 0.0681807846,
+                "candidate": 0.0681807771,
+                "ulp": 1
+              }
+            ]
+          },
+          {
+            "index": 488,
+            "position": "13.0 -11.5 -33.75",
+            "differences": [
+              {
+                "component": 1,
+                "base": -0.00645313924,
+                "candidate": -0.00645313738,
+                "ulp": 4
+              },
+              {
+                "component": 5,
+                "base": -0.0112822754,
+                "candidate": -0.0112822773,
+                "ulp": 2
+              },
+              {
+                "component": 11,
+                "base": 0.0616373345,
+                "candidate": 0.0616373383,
+                "ulp": 1
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "archive": {
+    "sha256": "8f7973a3b30dfc9889c19b25d94a6fce85967103e3bd40ecb71e6499ce392dfe",
+    "files": {
+      "cluster/main-headers.bin": "8c0be9b684a7d759362049935949627494bbab029d308412673caf306652665e",
+      "cluster/main-indices.bin": "25e9162a84d46f3a983fe2c86a1d0337819a7fc40dfdf82eca1dfee237b946a3",
+      "cluster/main-lights.bin": "c57070449b462753fbe0a0411eafeec470b552e14281e24a5495d9df69d4a759",
+      "cluster/main-depth.bin": "7f64edd5efd10bf482aaebfdd04f4282c3256203960671f7a8fd1ce50ce3cf52",
+      "cluster/snapshot-headers.bin": "8c0be9b684a7d759362049935949627494bbab029d308412673caf306652665e",
+      "cluster/snapshot-indices.bin": "25e9162a84d46f3a983fe2c86a1d0337819a7fc40dfdf82eca1dfee237b946a3",
+      "cluster/snapshot-lights.bin": "c57070449b462753fbe0a0411eafeec470b552e14281e24a5495d9df69d4a759",
+      "cluster/snapshot-depth.bin": "8f19d87ee2c440d31babcf785b94cdf83e99910517dea7eef12efade163e3019",
+      "irradiance/nvidia-native-base.stdout": "4c1f8f79da44caf633306244cd772e6687beecb4bf07ba8a3f98750dbdad61b1",
+      "irradiance/nvidia-native-candidate.stdout": "7f5ac0bf4c5630d42217ff21c92d026b816f9220de36be08a86045e24d61d13a",
+      "irradiance/intel-native-base.stdout": "a4c122e247769ebb9d6413a7f4f8a961541b73961d0aeef8a60048c5e5c32145",
+      "irradiance/intel-native-candidate.stdout": "339a0a2e080ae8c6f1cde52b67c052a2df101d2524f414e61e685330f3874792",
+      "cluster/attempt-860-actual-clusters.json": "75c852d631e1ed94b0c5f30d70cd0821527b91c569e4988fe07d5bbc3e99e211",
+      "cluster/actual-clusters.json": "e4a81fb00b02785ead732108832422600dfa502d36dd1a36135d41873d29e0ee",
+      "cluster/cone-scope.json": "561faae7e332cbc8da24182fac056269e20294c9f7d6fa724155f16902fa5344",
+      "cluster/replay.py": "42f0024acd401ab2da0fe8fd7f99aa1879c1705b78321b3e3b908716fac55097",
+      "cluster/run_scan_then_scope.py": "33b866731fad77c5b4ea87a5f8780f5fd38750f921843244dafb8c59ef560231",
+      "cluster/cone_scope.py": "9428010ea3e390830e657704efd86a8af51d59df3df3e9bf52b9e1f0152937a6",
+      "irradiance/attempt-861-replay-status.txt": "2de8c2c65281ec5d0314b7d46b2c0969e30ef5db725c166fc88f2fd52d3a421b",
+      "irradiance/fixture-results.json": "4e721ba99edce381c1c08f7ec3f43179c716fc5874929f457dcef3876ed31b6c",
+      "irradiance/prepare-results.json": "11a5c5925633feaae0ad67d3ee3c0538fc12fe0abf3d10d97a5f02336a5d2baf",
+      "irradiance/test_fixture.py": "1977b136ef7ea29f9601866771de7d02f9351bd00ecb54b1bb0d1a95ef729b7b",
+      "irradiance/test_fixture-verified.log": "5f5ca20dea6ca5e1e7360798ad29f4bcb198fcff92f5e2b167e50a9d85a8d407",
+      "irradiance/run_fixture_then_replay.py": "46700802c6c0a1c96bee4fb3c963174419568c9841cf5ecc482aca311400bffd",
+      "irradiance/compute-base.spv": "18327769bd6bfc0fc9ce5274060e267fab85edea147a7d7076642b910bc926d5",
+      "irradiance/compute-candidate.spv": "6ec5501ddc899e32e7890a686a4fcc5d41c46a70a83eee5bd4439682c6b0b866",
+      "irradiance/positions.txt": "d862fa644169d62647fb7041ff22397e2ea3651cd3ba4d6c5f9b66f87b1f88d9"
+    }
+  }
+}
