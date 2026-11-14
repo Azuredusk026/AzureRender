@@ -16,6 +16,10 @@
 
 [主线结果清单](evidence/2026-11-14/registered-gpu-infrastructure/registered-main-capture-completed.json)和[主线复验归档](evidence/2026-11-14/registered-gpu-infrastructure/registered-main-capture-completed.zip)保存两种配置的 CTest 结果、材质显示逐帧核对及缓存对照。
 
+Debug 两项材质用例以同一主线产物和原 CTest 命令复验。材质辐射耗时 382.50 秒，完成 36 个场景和 10 组比较。材质显示耗时 564.94 秒，完成 53 个场景和 16 组比较。两项均低于 600 秒门槛，验证层通过，182 帧 PNG 与对应通过轮逐字节一致。通过轮和超时轮均纳入回归记录。
+
+[材质复验清单](evidence/2026-11-15/registered-gpu-infrastructure/registered-material-focused-retests.json)和[材质复验归档](evidence/2026-11-15/registered-gpu-infrastructure/registered-material-focused-retests.zip)保存原注册收据、整个帧集的摘要及两项复验的 CTest 结果。
+
 [材质辐射对照清单](evidence/2026-11-14/registered-gpu-infrastructure/material-radiance-same-input-timeout.json)和[采集归档](evidence/2026-11-14/registered-gpu-infrastructure/material-radiance-same-input-timeout.zip)保存命令、帧摘要与管线日志。
 
 ## 雾效管线缓存
