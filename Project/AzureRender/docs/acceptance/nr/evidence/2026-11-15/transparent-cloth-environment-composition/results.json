@@ -1,6 +1,17 @@
 {
   "status": "measured-player-environment-lanes",
   "sourceShader": "f8f6330ff880404dafdc2f6c5c7db0cc13fc36c2433267b9894f80b1f2c53c36",
+  "nativeCube": {
+    "resource": "ResourceId::11467",
+    "width": 128,
+    "height": 128,
+    "mips": 8,
+    "slices": 6,
+    "firstMip": 0,
+    "numMips": 8,
+    "format": "BC6_UFLOAT"
+  },
+  "nativeTraceSha256": "3e32786ab1c98bff3acfdf6827204441d0d9ee9edbfac71a3de77ad81fa2b69f",
   "originalRestored": "34736b7f04f9ed28ce51a22309803a6f0e605bd506297e7a8b59a014682830a8",
   "materialRadianceScale": 0.25,
   "witnesses": [
@@ -45,6 +56,27 @@
         0.00972747802734375,
         0.0142364501953125,
         0.017913818359375
+      ],
+      "nativeCubeLod": 4.322752475738525,
+      "nativeCubeSample": [
+        0.474853515625,
+        0.45068359375,
+        0.387939453125
+      ],
+      "nativeCubeDirection": [
+        -0.03920459747314453,
+        -0.11199813336133957,
+        -0.9929347634315491
+      ],
+      "nativeTint": [
+        0.8783068656921387,
+        0.9302293062210083,
+        1.1216931343078613
+      ],
+      "nativeResponseAndSample": [
+        0.01072186604142189,
+        0.010176125913858414,
+        0.00875940639525652
       ],
       "shaderProductError": 9.268522262573242e-06,
       "nativeIndirectError": 0.015457476855832097,
@@ -96,6 +128,27 @@
         0.0148468017578125,
         0.0186767578125
       ],
+      "nativeCubeLod": 4.315157413482666,
+      "nativeCubeSample": [
+        0.45166015625,
+        0.4267578125,
+        0.367431640625
+      ],
+      "nativeCubeDirection": [
+        -0.08126667141914368,
+        -0.11116088181734085,
+        -0.9904741048812866
+      ],
+      "nativeTint": [
+        0.8783068656921387,
+        0.9302293062210083,
+        1.1216931343078613
+      ],
+      "nativeResponseAndSample": [
+        0.010309380479156971,
+        0.009740971028804779,
+        0.008386820554733276
+      ],
       "shaderProductError": 1.2159347534179688e-05,
       "nativeIndirectError": 0.01632489805377091,
       "calculatedProduct": [
@@ -146,6 +199,27 @@
         0.0020961761474609375,
         0.0026760101318359375
       ],
+      "nativeCubeLod": 4.481039047241211,
+      "nativeCubeSample": [
+        0.67431640625,
+        0.6220703125,
+        0.5205078125
+      ],
+      "nativeCubeDirection": [
+        0.755523681640625,
+        0.09463921189308167,
+        -0.6482495069503784
+      ],
+      "nativeTint": [
+        0.8783068656921387,
+        0.9302293062210083,
+        1.1216931343078613
+      ],
+      "nativeResponseAndSample": [
+        0.008252276107668877,
+        0.007612889166921377,
+        0.00636996841058135
+      ],
       "shaderProductError": 2.4024397134780884e-05,
       "nativeIndirectError": 0.0008897226738591724,
       "calculatedProduct": [
@@ -157,12 +231,14 @@
   ],
   "overallVisualAcceptance": "failed-user-review",
   "archive": {
-    "sha256": "cb3a5452edaa7d794f5edad628cd44f3b5976d96133ed483d323150e65ac5190",
+    "sha256": "e6c39ccbc5c449e72163b9cc72e5c138c8e294532be996e42f8af96c5a2f5efc",
     "members": {
-      "analyze-cloth-environment.py": "cc3a22e937fa39af67bf256e77b32c47a3206c920634c7ccd72eb108a98a7b15",
-      "archive-cloth-environment-composition.py": "5fa9a36f244b77099d14ffa354e2232a85ee344fe8f1277ef4dc2509b9d95146",
+      "analyze-cloth-environment.py": "0c95bed53923a6dce30f2754418bc29c543646bada97c7c62e5862de8a42540b",
+      "archive-cloth-environment-composition.py": "4eab05bb1da51a04067f5b9ecad2f16176797893396977fa86b7d1ac1e35354f",
       "cloth-native-light-lanes.json": "df7e45d7cebbeddcae2592f75d008237ac0169644f0a1cd21f503008cf021229",
-      "cloth-environment-composition.json": "d7bc9a688cdebeb9c272ecf158229d7e4ba90e395a2c947c0195c20a9f6f80f2",
+      "cloth-environment-composition.json": "e42aa2c604dcc18796ec6097161178c14e860a67b7c3d2934c5f30cfb97aa035",
+      "cloth-environment-source.py": "fbc5289c8d04c92be13f8a888d71a493a1351ddbf5c6f31ca71cef0de9e9a795",
+      "cloth-environment-source.json": "3e32786ab1c98bff3acfdf6827204441d0d9ee9edbfac71a3de77ad81fa2b69f",
       "cloth-directional-rim-worker.py": "4989b894afead3afd821ff61424f9caabaa5cf90cd8083caa586bde73452d40f",
       "cloth-environment-replay/request.json": "86912309f2026acf5fcaa398794566fe4777b3186fc18f9c051d910ed9ffd133",
       "cloth-environment-replay/results.json": "51d876027a3ceed6c88378fca65badf4888121ebe98618a26d5d06ad9a5afa80",
