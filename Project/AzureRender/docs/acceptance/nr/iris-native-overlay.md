@@ -103,3 +103,13 @@ NVIDIA 的独立回放按原生眼影倍率处理 Player 底层辐亮度，得�
 整帧验收仍使用已冻结的画面和原定门槛。
 
 逐点颜色、纹理层级及输入指纹见[虹膜剩余颜色对照](evidence/2026-11-14/iris-residual-sources/results.json)和[验证归档](evidence/2026-11-14/iris-residual-sources/validation.zip)。
+
+## Vulkan 虹膜采样
+
+原生底色纹理的第 4、5 层与 Player 资源逐字节一致。NVIDIA 的 Vulkan 回放中，255 处虹膜样本使用显式硬件查询层级时，底色与隐式采样逐位一致。完整粗梯度、粗梯度轴对角模型及粗梯度椭圆模型在这 255 处得到相同样本。
+
+三个追踪点的 Player 底色 RGB 与原生读回一致，透明度最大差为 0.000524。坐标 `[1262,257]` 的反射贴图 RGB 最大差为 0.01794，透明度差为 0.06287。该位置继续核对反射贴图坐标与层级。
+
+Intel 驱动缺少该 NVIDIA 捕获使用的 `VK_EXT_depth_bias_control`。Intel 的本机采样依据为独立执行的 Player 路径。
+
+[Vulkan 虹膜采样结果](evidence/2026-11-15/iris-vulkan-footprint/results.json)和[验证归档](evidence/2026-11-15/iris-vulkan-footprint/validation.zip)保存硬件读回、原生纹理块及计算程序。

@@ -1,0 +1,237 @@
+{
+  "status": "measured-vulkan-footprint",
+  "witnesses": [
+    {
+      "point": [
+        1262,
+        257
+      ],
+      "mip": 4,
+      "playerIntoNativeBaseRgb": 0.0,
+      "playerIntoNativeBaseAlpha": 0.0,
+      "playerIntoNativeMatcapRgb": 0.017940521240234375,
+      "playerIntoNativeMatcapAlpha": 0.062867172062397,
+      "nativeRamp": 0.9576085805892944,
+      "playerRamp": 0.95751953125,
+      "lod": [
+        4.0,
+        4.07421875,
+        0.057861328125,
+        0.62841796875
+      ],
+      "candidates": {
+        "fineHardwareFull": 0.0,
+        "fineAxis": 0.0,
+        "fineComponent": 0.0,
+        "fineTextureAxis": 0.0,
+        "fineAxisDiagonal": 0.0,
+        "fineEllipse": 0.0,
+        "coarseHardwareFull": 0.0,
+        "coarseAxis": 0.0,
+        "coarseComponent": 0.0,
+        "coarseTextureAxis": 0.0,
+        "coarseAxisDiagonal": 0.0,
+        "coarseEllipse": 0.0,
+        "fineHardwareHalf": 0.05450439453125,
+        "coarseHardwareHalf": 0.05450439453125
+      },
+      "uvPlayer": [
+        0.057861328125,
+        0.6287384033203125
+      ],
+      "uvNative": [
+        0.05786222591996193,
+        0.6287403106689453
+      ],
+      "uvMaximumDifference": 1.9073486328125e-06
+    },
+    {
+      "point": [
+        1260,
+        262
+      ],
+      "mip": 5,
+      "playerIntoNativeBaseRgb": 0.0,
+      "playerIntoNativeBaseAlpha": 0.0005233883857727051,
+      "playerIntoNativeMatcapRgb": 2.288818359375e-05,
+      "playerIntoNativeMatcapAlpha": 0.0,
+      "nativeRamp": 0.9777368307113647,
+      "playerRamp": 0.9775390625,
+      "lod": [
+        5.0,
+        4.5078125,
+        0.2186279296875,
+        0.2978515625
+      ],
+      "candidates": {
+        "fineHardwareFull": 0.0,
+        "fineAxisDiagonal": 0.0,
+        "fineEllipse": 0.0,
+        "coarseHardwareFull": 0.0,
+        "coarseAxisDiagonal": 0.0,
+        "coarseEllipse": 0.0,
+        "fineHardwareHalf": 0.056396484375,
+        "fineAxis": 0.056396484375,
+        "fineComponent": 0.056396484375,
+        "fineTextureAxis": 0.056396484375,
+        "coarseHardwareHalf": 0.056396484375,
+        "coarseAxis": 0.056396484375,
+        "coarseComponent": 0.056396484375,
+        "coarseTextureAxis": 0.056396484375
+      },
+      "uvPlayer": [
+        0.218658447265625,
+        0.297943115234375
+      ],
+      "uvNative": [
+        0.2187003344297409,
+        0.29820752143859863
+      ],
+      "uvMaximumDifference": 0.0002644062042236328
+    },
+    {
+      "point": [
+        1302,
+        265
+      ],
+      "mip": 5,
+      "playerIntoNativeBaseRgb": 0.0,
+      "playerIntoNativeBaseAlpha": 1.6920268535614014e-05,
+      "playerIntoNativeMatcapRgb": 0.0,
+      "playerIntoNativeMatcapAlpha": 0.0,
+      "nativeRamp": 0.9860804677009583,
+      "playerRamp": 0.98583984375,
+      "lod": [
+        5.0,
+        4.53515625,
+        0.259765625,
+        0.1693115234375
+      ],
+      "candidates": {
+        "fineHardwareFull": 0.0,
+        "fineAxisDiagonal": 0.0,
+        "fineEllipse": 0.0,
+        "coarseHardwareFull": 0.0,
+        "coarseAxisDiagonal": 0.0,
+        "coarseEllipse": 0.0,
+        "fineHardwareHalf": 0.03619384765625,
+        "fineAxis": 0.03619384765625,
+        "fineComponent": 0.03619384765625,
+        "fineTextureAxis": 0.03619384765625,
+        "coarseHardwareHalf": 0.03619384765625,
+        "coarseAxis": 0.03619384765625,
+        "coarseComponent": 0.03619384765625,
+        "coarseTextureAxis": 0.03619384765625
+      },
+      "uvPlayer": [
+        0.25994110107421875,
+        0.1693115234375
+      ],
+      "uvNative": [
+        0.259944885969162,
+        0.16932319104671478
+      ],
+      "uvMaximumDifference": 1.1667609214782715e-05
+    }
+  ],
+  "device": "nvidia",
+  "nativePlayerBaseMip4And5Exact": true,
+  "explicitQueryBase": {
+    "exact": 255,
+    "maximum": 0.0
+  },
+  "fullIris": {
+    "fineHardwareFull": {
+      "equalToPlayerBase": 254,
+      "maximumRgbDifference": 0.0498046875,
+      "maximumAlphaDifference": 0.02532958984375
+    },
+    "fineHardwareHalf": {
+      "equalToPlayerBase": 2,
+      "maximumRgbDifference": 0.2724609375,
+      "maximumAlphaDifference": 0.201416015625
+    },
+    "fineAxis": {
+      "equalToPlayerBase": 251,
+      "maximumRgbDifference": 0.056396484375,
+      "maximumAlphaDifference": 0.064788818359375
+    },
+    "fineComponent": {
+      "equalToPlayerBase": 250,
+      "maximumRgbDifference": 0.056396484375,
+      "maximumAlphaDifference": 0.064788818359375
+    },
+    "fineTextureAxis": {
+      "equalToPlayerBase": 251,
+      "maximumRgbDifference": 0.056396484375,
+      "maximumAlphaDifference": 0.064788818359375
+    },
+    "fineAxisDiagonal": {
+      "equalToPlayerBase": 254,
+      "maximumRgbDifference": 0.0498046875,
+      "maximumAlphaDifference": 0.02532958984375
+    },
+    "fineEllipse": {
+      "equalToPlayerBase": 254,
+      "maximumRgbDifference": 0.028076171875,
+      "maximumAlphaDifference": 0.0
+    },
+    "coarseHardwareFull": {
+      "equalToPlayerBase": 255,
+      "maximumRgbDifference": 0.0,
+      "maximumAlphaDifference": 0.0
+    },
+    "coarseHardwareHalf": {
+      "equalToPlayerBase": 1,
+      "maximumRgbDifference": 0.2724609375,
+      "maximumAlphaDifference": 0.201416015625
+    },
+    "coarseAxis": {
+      "equalToPlayerBase": 251,
+      "maximumRgbDifference": 0.056396484375,
+      "maximumAlphaDifference": 0.064788818359375
+    },
+    "coarseComponent": {
+      "equalToPlayerBase": 250,
+      "maximumRgbDifference": 0.056396484375,
+      "maximumAlphaDifference": 0.064788818359375
+    },
+    "coarseTextureAxis": {
+      "equalToPlayerBase": 251,
+      "maximumRgbDifference": 0.056396484375,
+      "maximumAlphaDifference": 0.064788818359375
+    },
+    "coarseAxisDiagonal": {
+      "equalToPlayerBase": 255,
+      "maximumRgbDifference": 0.0,
+      "maximumAlphaDifference": 0.0
+    },
+    "coarseEllipse": {
+      "equalToPlayerBase": 255,
+      "maximumRgbDifference": 0.0,
+      "maximumAlphaDifference": 0.0
+    }
+  },
+  "hardwareReplaySha256": "6bf1e332d07ccac69f71dc4a0a3377b76065045529fa3ea72f96a7e8ae0af713",
+  "intelReplay": {
+    "status": "unsupported-capture-extension",
+    "requiredExtension": "VK_EXT_depth_bias_control"
+  },
+  "overallVisualAcceptance": "failed-user-review",
+  "archive": {
+    "sha256": "5406ccd22e300d3d8c0eff760c4e1710dcf9052ffb39dbd4e60bb106b02dddad",
+    "members": {
+      "iris-vulkan-footprint.py": "20bc995f609a66f5b88a84cc411d41033eca5ced6566d57a1a4bae2710e9566c",
+      "score-iris-vulkan-footprint.py": "8594ab17a65a38b1480eca18d4c6c6041b9b4ea00039747f35d6e6f26264f8cb",
+      "archive-iris-vulkan-footprint.py": "66b186ee81220cdca2ff3151ea9feb1062e02756dc24d20918c72f96c7853f25",
+      "trace-iris-projected-residual-inputs.json": "ee84321567c56b5d615d8716be79cbb344143b538c5307594d21df9a32427358",
+      "iris-projected-source-inputs.py": "4c60a84943ab540b0450f0b13e95185a29bf6690781f89f00512f5f18461b9ab",
+      "iris-projected-source-inputs.json": "5df1556d44c21720d53f825438eba923fc9bf471ae251014c1f806f26fbbb399",
+      "iris-projected-native-t13-mip4.bin": "2f2e954d34f40770e9d18ce21cd57668afe41225222a6e83f3b0393b8ff5607f",
+      "iris-projected-native-t13-mip5.bin": "e96865b60d843d7f06b661887c55caccc34ddfa78426a7f217793b41b80a4370",
+      "iris-vulkan-footprint-nvidia/request.json": "0b58923314d07870064b1d5164c0ff368d5e07ce57689c273c11cec029155aa8",
+      "iris-vulkan-footprint-nvidia/results.json": "6bf1e332d07ccac69f71dc4a0a3377b76065045529fa3ea72f96a7e8ae0af713",
+      "iris-vulkan-footprint-intel/results.json": "08f8d4940e8a3eb3e993b7d9abad8618f372b7ca299299690649ab4de46ce140"
+    }
+  }
+}
