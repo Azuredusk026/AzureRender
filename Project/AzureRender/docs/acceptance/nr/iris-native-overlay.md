@@ -59,5 +59,12 @@ NVIDIA 的虹膜超差为 52 处，Intel 为 57 处，两设备各出现一处�
 
 [采样结果](evidence/2026-11-14/iris-sampler-boundary/results.json)和[采样归档](evidence/2026-11-14/iris-sampler-boundary/validation.zip)保存固定层级、偏移对照和实际 Player 收据。
 
+## 虹膜辐亮度与附件精度
+
+NVIDIA 的 37 个未覆盖超差位置均通过原生深度及模板测试。原生片元输出至颜色附件的量化在这些位置最多造成 2 字节差异，Player 与原生附件在最差位置相差 20 字节。
+在末次片元通过测试的 159 个未覆盖位置中，以未打包的原生片元输出作对照，仍有 38 处超过一字节。误差最大的三个位置均匹配原生第 4 层，下一步分别核对纹理实际采样值和照明。
+
+[虹膜辐亮度结果](evidence/2026-11-14/iris-uncovered-radiance-source/results.json)和[验证归档](evidence/2026-11-14/iris-uncovered-radiance-source/validation.zip)保存颜色附件、原生片元和逐级对照。
+
 [结果清单](evidence/2026-11-13/iris-native-overlay/results.json)记录各阶段读回。
 [验证归档](evidence/2026-11-13/iris-native-overlay/validation.zip)保存遮罩及逐点计算程序。
