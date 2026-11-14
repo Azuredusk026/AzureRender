@@ -10,7 +10,11 @@
 
 [双配置清单](evidence/2026-11-14/registered-gpu-infrastructure/capture-reservations-release-debug.json)与[采集归档](evidence/2026-11-14/registered-gpu-infrastructure/capture-reservations-release-debug.zip)保存注册命令、摘要、时限和实测写入。主线采集脚本使用上述预约。正式回归使用原注册命令、主线构建产物和独立收据。
 
-主线以原 CTest 命令运行九项采集，Release 全部通过。Debug 材质辐射到达 600 秒进程时限。两轮使用同一 Debug Player 和同一验证层，34 个共同完成的子场景命令与帧摘要一致。隔离轮通过全部子场景，耗时 264.08 秒；两轮完成子场景的管线准备中位数分别为 3.42 秒和 13.75 秒。NPR 对照场景的 75 次管线请求在两轮均命中驱动缓存。
+主线以原 CTest 命令运行九项采集，Release 通过九项，Debug 通过七项。Debug 材质辐射和材质显示到达 600 秒进程时限。两组对照均使用同一 Debug Player 和同一验证层。材质辐射的 34 个共同完成子场景命令与帧摘要一致，管线准备中位数分别为 3.42 秒和 13.75 秒。NPR 对照场景的 75 次管线请求在两轮均命中驱动缓存。材质显示完成的 36 帧与通过轮逐像素一致。
+
+固定驱动缓存及场景输入后，交替使用预热和空的验证缓存各重放两次。预热组的管线准备为 12.19 和 12.77 秒，空缓存组为 11.95 和 12.38 秒。四次驱动缓存摘要及输出帧摘要一致。该对照未复现材质辐射两轮间的管线耗时差。
+
+[主线结果清单](evidence/2026-11-14/registered-gpu-infrastructure/registered-main-capture-completed.json)和[主线复验归档](evidence/2026-11-14/registered-gpu-infrastructure/registered-main-capture-completed.zip)保存两种配置的 CTest 结果、材质显示逐帧核对及缓存对照。
 
 [材质辐射对照清单](evidence/2026-11-14/registered-gpu-infrastructure/material-radiance-same-input-timeout.json)和[采集归档](evidence/2026-11-14/registered-gpu-infrastructure/material-radiance-same-input-timeout.zip)保存命令、帧摘要与管线日志。
 
