@@ -2585,6 +2585,14 @@
   ],
   "recoveryArchives": [
     {
+      "path": "archives/frozen-public-visual-shader-controls-20261114.zip",
+      "sha256": "7697a93c182185b9c0d38bd3ae54972bbddde785ebed0f87610da431b03d77af",
+      "journal": "archives/frozen-public-visual-shader-controls-20261114.zip.manifest.json",
+      "journalSha256": "06f37e39a05d6d803292ad33632cb67cbccd3f8320dcbeb7642935d709845b24",
+      "scope": "公开角色背景和显示诊断的五组生成着色器，涵盖 4,483 条原路径和 897 份独立内容。",
+      "retention": "历史诊断复现；冻结参考图、正式验收资料和重放程序保留原地址。"
+    },
+    {
       "path": "archives/generated-cache-recovery-20261106.zip",
       "sha256": "4d7b22cf9a104a25d23b86c216788a9ee9cb164e02bdc96e9cc17a5a0951eb3d",
       "journal": "archives/generated-cache-recovery-20261106.zip.manifest.json",

@@ -1,0 +1,77 @@
+{
+  "date": "2026-11-14",
+  "reason": "managed-pool-limit before shader compilation",
+  "successfulReservationsReturnedBeforeRetry": 848246314,
+  "registered": {
+    "release-cpu-04": {
+      "runtimeSha256": "8ba1645ea990be7cece11bee467da188010c236abaa16fa1e21968e50cdb19c4",
+      "cases": {
+        "AzureRender.ShaderCatalogCompilation": {
+          "status": "failed",
+          "seconds": 0.380201
+        },
+        "AzureRender.ShaderCompilerContract": {
+          "status": "failed",
+          "seconds": 0.278846
+        }
+      },
+      "receiptSha256": "6dcda88dc3599896bafac5ce4a98a4864880253146a41f2de5d4752f8a9a1b45",
+      "junitSha256": "47da2648932b0e5161fb0640ebd36bcde4bd930b7dc7f2ff018b5a6834ef68bf"
+    },
+    "release-cpu-04-focused-retry-01": {
+      "runtimeSha256": "8ba1645ea990be7cece11bee467da188010c236abaa16fa1e21968e50cdb19c4",
+      "cases": {
+        "AzureRender.ShaderCatalogCompilation": {
+          "status": "passed",
+          "seconds": 67.8302
+        },
+        "AzureRender.ShaderCompilerContract": {
+          "status": "passed",
+          "seconds": 7.5298
+        }
+      },
+      "receiptSha256": "aef896f638c08055a25d9f016e82b7f2f75e1ac857442a17baf20c3cb057a0f5",
+      "junitSha256": "f7fe3b70b2494c936073f07911aca8294adff482c581f0f49af2e9fb5a170dc7"
+    },
+    "debug-cpu-04": {
+      "runtimeSha256": "a8e0ce254171a1248571cb07f4fb5fc6f9909e8327a192587d3c28b0cf05d9f2",
+      "cases": {
+        "AzureRender.ShaderCatalogCompilation": {
+          "status": "passed",
+          "seconds": 85.6246
+        },
+        "AzureRender.ShaderCompilerContract": {
+          "status": "passed",
+          "seconds": 8.77421
+        }
+      },
+      "receiptSha256": "d9076232850153a0b6d694429bd9fb006d50afb8992988914dd580608a9327ab",
+      "junitSha256": "97829943b38a8be24b39f1dde104a8a7d5aabfee554a5f27c4d90575f033e794"
+    }
+  },
+  "archive": {
+    "archiveSha256": "7697a93c182185b9c0d38bd3ae54972bbddde785ebed0f87610da431b03d77af",
+    "bytes": 89599641,
+    "fileManifestSha256": "06f37e39a05d6d803292ad33632cb67cbccd3f8320dcbeb7642935d709845b24",
+    "files": 4483,
+    "uniqueBlobs": 897,
+    "originalBytes": 1369923088,
+    "reservationReturned": 1372241420,
+    "volumeFreedBytes": -1437696,
+    "pool": {
+      "allowed": true,
+      "reasons": [],
+      "reservedBytes": 14322797116,
+      "projectedBytes": 16470280764,
+      "limitBytes": 17179869184
+    }
+  },
+  "restore": {
+    "filesVerified": 4483,
+    "status": "passed"
+  },
+  "verificationArchive": {
+    "bytes": 15683,
+    "sha256": "adb22633b5f30ffe84d085ef1b92773a901b17ab1b5f99243047b81f138fccbf"
+  }
+}

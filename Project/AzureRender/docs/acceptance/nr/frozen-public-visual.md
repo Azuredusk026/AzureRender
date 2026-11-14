@@ -77,3 +77,17 @@
 
 [重放归档](evidence/2026-11-13/frozen-public-visual/replay.zip)保存构建来源、显示设备、严格比对和逐像素证据。
 [复验计划](../../plans/2026-11-13-frozen-public-visual-regression.md)记录后续验证条件。
+
+## 着色器注册回归
+
+Release 与 Debug 均通过 `AzureRender.ShaderCompilerContract` 和 `AzureRender.ShaderCatalogCompilation`。目录编译逐份核对生成程序摘要，并按注册时限执行。
+
+Release 的首次执行因受管池预留空间不足在编译前退出。任务封存归还未使用配额后，使用同批构建产物及原注册命令复测。[检查收据](evidence/2026-11-14/frozen-public-shader-controls/results.json)与[验证归档](evidence/2026-11-14/frozen-public-shader-controls/verification.zip)保存首次结果、复测和 Debug 对应分组的报告。
+
+历史背景与显示诊断的五组着色器通过内容摘要归档。归档包含 897 份独立内容、4,483 条原路径和逐文件摘要，大小为 89,599,641 字节。冻结图片、正式验收资料与重放程序保留在各自的原地址。
+
+归档与摘要清单登记于[产物清单](../../development/artifact-manifest.json)。在引擎根目录运行下列命令，将文件恢复到新的临时目录，并逐份核对还原摘要：
+
+```powershell
+python build/archives/frozen-public-visual-shader-controls-20261114-restore.py --staging build/maintenance/public-shader-recovery/shader-controls
+```
