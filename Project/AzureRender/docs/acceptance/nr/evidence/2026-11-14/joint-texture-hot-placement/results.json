@@ -69,7 +69,120 @@
     "allocatorZero": true
   },
   "visualDeviceLocalPeakBytes": 1705712448,
-  "archiveSha256": "1f3f28ff0f9843586c63238fbd4ac67db803927e52b3bcff413a30b4d136f296",
-  "archiveMembers": 27,
+  "comparison": [
+    {
+      "role": "nonlocal-before",
+      "sampled": 450,
+      "gpuFrameMs": {
+        "mean": 18.943473564444446,
+        "p95": 19.711723199999998
+      },
+      "gpuSceneMs": {
+        "mean": 16.40221582222222,
+        "p95": 17.1295232
+      },
+      "cpuMs": {
+        "mean": 6.872607777777773,
+        "p95": 9.009680000000017
+      },
+      "deviceLocalPeakBytes": 1442503488,
+      "workingSetPeakBytes": 2043609088,
+      "residentCount": 0,
+      "residentBytes": 0,
+      "allocationCount": 224,
+      "allocationBytes": 1588625408,
+      "allocatorZero": true,
+      "temperatureRange": [
+        59.0,
+        87.0
+      ],
+      "powerLimits": [
+        80.0
+      ],
+      "drivers": [
+        "595.79"
+      ],
+      "softwareThermalObservations": 6
+    },
+    {
+      "role": "resident-hotset",
+      "sampled": 450,
+      "gpuFrameMs": {
+        "mean": 18.994980053333332,
+        "p95": 19.9864896
+      },
+      "gpuSceneMs": {
+        "mean": 16.441557902222222,
+        "p95": 17.3706752
+      },
+      "cpuMs": {
+        "mean": 5.96517888888888,
+        "p95": 6.866650000000038
+      },
+      "deviceLocalPeakBytes": 1442503488,
+      "workingSetPeakBytes": 2043940864,
+      "residentCount": 18,
+      "residentBytes": 100694016,
+      "allocationCount": 206,
+      "allocationBytes": 1487931392,
+      "allocatorZero": true,
+      "temperatureRange": [
+        59.0,
+        87.0
+      ],
+      "powerLimits": [
+        80.0
+      ],
+      "drivers": [
+        "595.79"
+      ],
+      "softwareThermalObservations": 6
+    },
+    {
+      "role": "nonlocal-after",
+      "sampled": 450,
+      "gpuFrameMs": {
+        "mean": 18.642077155555555,
+        "p95": 19.2990832
+      },
+      "gpuSceneMs": {
+        "mean": 16.114333013333333,
+        "p95": 16.7276032
+      },
+      "cpuMs": {
+        "mean": 5.5494815555555475,
+        "p95": 6.424139999999923
+      },
+      "deviceLocalPeakBytes": 1442503488,
+      "workingSetPeakBytes": 2043260928,
+      "residentCount": 0,
+      "residentBytes": 0,
+      "allocationCount": 224,
+      "allocationBytes": 1588625408,
+      "allocatorZero": true,
+      "temperatureRange": [
+        59.0,
+        88.0
+      ],
+      "powerLimits": [
+        80.0
+      ],
+      "drivers": [
+        "595.79"
+      ],
+      "softwareThermalObservations": 6
+    }
+  ],
+  "decision": {
+    "textureCount": 18,
+    "localAllocationBytes": 100694016,
+    "frameMeanReductionMs": -0.20220469333333213,
+    "referenceFrameMeanDriftMs": 0.3013964088888912,
+    "memoryHeadroomBytes": 168109248,
+    "sameDriverPixelExact": true,
+    "qualifiesForFormalRerun": false
+  },
+  "archiveSha256": "dc1c988a13352ad02482545d9c92c1cfb64325ba490b5df90853a654e88f14b4",
+  "archiveMembers": 47,
   "candidateExecutableSha256": "d2098833aabc6f716758dd4a04c5c9435c0ec6b6055435f0412d7332f098052b"
 }

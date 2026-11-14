@@ -1,6 +1,6 @@
 # AzureRender 工程
 
-[联合场景热点纹理分配](docs/acceptance/nr/joint-texture-hot-placement.md)记录材质纹理分配及同驱动画面验证。
+[联合场景热点纹理分配](docs/acceptance/nr/joint-texture-hot-placement.md)记录 1440p 同驱动逐字节比较及固定 80 W 配对计时。
 
 [三纹理采样与视口选择集成](docs/acceptance/nr/projected-hair-viewport-integration.md)通过两种配置及双显卡参考附件核对。
 主线投影头发和表面响应的注册用例通过 Debug 与 Release 复测。

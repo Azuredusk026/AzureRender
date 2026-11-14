@@ -1,6 +1,6 @@
 # 项目现状
 
-[联合场景热点纹理分配](acceptance/nr/joint-texture-hot-placement.md)已核对 18 张实际本地纹理与同驱动的四帧输出。
+[联合场景热点纹理分配](acceptance/nr/joint-texture-hot-placement.md)通过同驱动画面对照，固定 80 W 短时计时未达到 GPU 净收益条件。
 
 [三纹理采样与视口选择集成](acceptance/nr/projected-hair-viewport-integration.md)通过两种配置的视口选择、可玩编辑、双显卡和原始四帧回归。
 完整参考接收超差为 NVIDIA 237 处和 Intel 494 处。
