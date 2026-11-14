@@ -353,6 +353,10 @@ NVIDIA 不透明末尾提交对照覆盖 571 处。61 处重点像素均缩小�
 
 [取样对照](evidence/2026-11-14/body-outline-source-controls/results.json)和[验证归档](evidence/2026-11-14/body-outline-source-controls/validation.zip)保存控制点、常量和复原记录。
 
+66 处待核对位置已抽查三处，原生硬件三角形编号与覆盖模型全部一致。按原生裁剪寄存器与指令顺序复算，三处屏幕取样坐标逐位一致。独立插值在 `[1350,348]` 将采样横坐标算为 1349.999998，原生值为 1350.001343，整数取样地址相差一像素。八位子像素顶点对齐可重建该处横坐标，三处中仍有一处纵坐标跨越整数边界。
+
+[描边子像素取样结果](evidence/2026-11-15/body-outline-subpixel-address/results.json)和[验证归档](evidence/2026-11-15/body-outline-subpixel-address/validation.zip)保存片元历史、寄存器和复算步骤。
+
 ### 描边光照来源
 
 四处原生片元按主光、全局轮廓光和局部灯复算。
