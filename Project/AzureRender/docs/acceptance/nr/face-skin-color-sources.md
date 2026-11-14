@@ -181,6 +181,10 @@ NVIDIA 与 Intel 全图分别新增 404 和 444 个超出一字节的像素。
 
 [透明衣料法线来源](evidence/2026-11-14/transparent-cloth-normal-source/results.json)和[验证归档](evidence/2026-11-14/transparent-cloth-normal-source/validation.zip)保存原生寄存器、纹理层级和法线复算脚本。
 
+事件 1383 的三处片元分别记录主光漫反射、直接高光、环境高光、局部灯和材质染色。原生场景边缘光在三处均为零；材质染色的红通道线性贡献分别为 0.12159、0.12159 与 0.05715。原生追踪与硬件颜色的最大线性差为 0.00195。Player 对照保留独立的漫反射、环境高光与边缘光附件，后续核对环境输入及漫反射。
+
+[透明衣料照明分项](evidence/2026-11-14/transparent-cloth-light-lanes/results.json)和[验证归档](evidence/2026-11-14/transparent-cloth-light-lanes/validation.zip)保存原生复算与 Player 读回。
+
 ## Player 体表描边提交
 
 Player 绘制 940 在体表主体和场景深度之后提交。
