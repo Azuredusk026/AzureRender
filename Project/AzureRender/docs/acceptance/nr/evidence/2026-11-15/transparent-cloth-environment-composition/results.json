@@ -1,0 +1,176 @@
+{
+  "status": "measured-player-environment-lanes",
+  "sourceShader": "f8f6330ff880404dafdc2f6c5c7db0cc13fc36c2433267b9894f80b1f2c53c36",
+  "originalRestored": "34736b7f04f9ed28ce51a22309803a6f0e605bd506297e7a8b59a014682830a8",
+  "materialRadianceScale": 0.25,
+  "witnesses": [
+    {
+      "point": [
+        1234,
+        789
+      ],
+      "player": {
+        "indirect-radiance": [
+          0.06488037109375,
+          0.09490966796875,
+          0.1195068359375
+        ],
+        "indirect-response": [
+          0.599609375,
+          0.599609375,
+          0.599609375
+        ],
+        "indirect-product": [
+          0.00972747802734375,
+          0.0142364501953125,
+          0.017913818359375
+        ],
+        "reflect-vector": [
+          0.6376953125,
+          0.33251953125,
+          0.049407958984375
+        ],
+        "roughness": [
+          0.720703125,
+          0.599609375,
+          1.0
+        ]
+      },
+      "nativeExposedIndirect": [
+        0.0023542721393030597,
+        0.002366532637216534,
+        0.0024563415035429026
+      ],
+      "playerExposedIndirect": [
+        0.00972747802734375,
+        0.0142364501953125,
+        0.017913818359375
+      ],
+      "shaderProductError": 9.268522262573242e-06,
+      "nativeIndirectError": 0.015457476855832097,
+      "calculatedProduct": [
+        0.009725719690322876,
+        0.014227181673049927,
+        0.01791435480117798
+      ]
+    },
+    {
+      "point": [
+        1231,
+        792
+      ],
+      "player": {
+        "indirect-radiance": [
+          0.06781005859375,
+          0.0989990234375,
+          0.12451171875
+        ],
+        "indirect-response": [
+          0.599609375,
+          0.599609375,
+          0.599609375
+        ],
+        "indirect-product": [
+          0.01016998291015625,
+          0.0148468017578125,
+          0.0186767578125
+        ],
+        "reflect-vector": [
+          0.70458984375,
+          0.35791015625,
+          0.0665283203125
+        ],
+        "roughness": [
+          0.71826171875,
+          0.599609375,
+          1.0
+        ]
+      },
+      "nativeExposedIndirect": [
+        0.0022636999139690195,
+        0.0022653341805110028,
+        0.0023518597587290913
+      ],
+      "playerExposedIndirect": [
+        0.01016998291015625,
+        0.0148468017578125,
+        0.0186767578125
+      ],
+      "shaderProductError": 1.2159347534179688e-05,
+      "nativeIndirectError": 0.01632489805377091,
+      "calculatedProduct": [
+        0.010164886713027954,
+        0.014840185642242432,
+        0.01866459846496582
+      ]
+    },
+    {
+      "point": [
+        1166,
+        784
+      ],
+      "player": {
+        "indirect-radiance": [
+          0.0806884765625,
+          0.12103271484375,
+          0.154541015625
+        ],
+        "indirect-response": [
+          0.06988525390625,
+          0.06988525390625,
+          0.06988525390625
+        ],
+        "indirect-product": [
+          0.0013971328735351562,
+          0.0020961761474609375,
+          0.0026760101318359375
+        ],
+        "reflect-vector": [
+          0.122314453125,
+          0.5439453125,
+          0.1751708984375
+        ],
+        "roughness": [
+          0.76416015625,
+          0.599609375,
+          1.0
+        ]
+      },
+      "nativeExposedIndirect": [
+        0.0018120076907381932,
+        0.0017704331520206756,
+        0.0017862874579767651
+      ],
+      "playerExposedIndirect": [
+        0.0013971328735351562,
+        0.0020961761474609375,
+        0.0026760101318359375
+      ],
+      "shaderProductError": 2.4024397134780884e-05,
+      "nativeIndirectError": 0.0008897226738591724,
+      "calculatedProduct": [
+        0.0014097336679697037,
+        0.0021146005019545555,
+        0.0027000345289707184
+      ]
+    }
+  ],
+  "overallVisualAcceptance": "failed-user-review",
+  "archive": {
+    "sha256": "cb3a5452edaa7d794f5edad628cd44f3b5976d96133ed483d323150e65ac5190",
+    "members": {
+      "analyze-cloth-environment.py": "cc3a22e937fa39af67bf256e77b32c47a3206c920634c7ccd72eb108a98a7b15",
+      "archive-cloth-environment-composition.py": "5fa9a36f244b77099d14ffa354e2232a85ee344fe8f1277ef4dc2509b9d95146",
+      "cloth-native-light-lanes.json": "df7e45d7cebbeddcae2592f75d008237ac0169644f0a1cd21f503008cf021229",
+      "cloth-environment-composition.json": "d7bc9a688cdebeb9c272ecf158229d7e4ba90e395a2c947c0195c20a9f6f80f2",
+      "cloth-directional-rim-worker.py": "4989b894afead3afd821ff61424f9caabaa5cf90cd8083caa586bde73452d40f",
+      "cloth-environment-replay/request.json": "86912309f2026acf5fcaa398794566fe4777b3186fc18f9c051d910ed9ffd133",
+      "cloth-environment-replay/results.json": "51d876027a3ceed6c88378fca65badf4888121ebe98618a26d5d06ad9a5afa80",
+      "cloth-environment-replay/967-mipindirect-radiance-direct.bin": "29e4572d343d28bf0dfbdcf47b2dbbd77e97327aee4580f5ce5dffa21e4ebf30",
+      "cloth-environment-replay/967-mipindirect-response-direct.bin": "21d3339321ab8cfe629ad7d6d028d8e07068d408ee9a6e1df6463a4f44b484b7",
+      "cloth-environment-replay/967-mipindirect-product-direct.bin": "ee273f401d25028259405f000762097ca039dc7c9e813793f31347d95b35ba4c",
+      "cloth-environment-replay/967-mipreflect-vector-direct.bin": "e681df66c839c1b588a68c9cd000bfb267e0701f9a2fbf24a41aa3cdffa217da",
+      "cloth-environment-replay/967-miproughness-direct.bin": "9bc4065a4e2d0d77e573b5d3335125056f969dda27246f2453c2c2ef078e1922"
+    }
+  }
+}

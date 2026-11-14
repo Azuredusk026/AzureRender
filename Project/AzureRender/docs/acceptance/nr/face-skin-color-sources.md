@@ -185,6 +185,15 @@ NVIDIA 与 Intel 全图分别新增 404 和 444 个超出一字节的像素。
 
 [透明衣料照明分项](evidence/2026-11-14/transparent-cloth-light-lanes/results.json)和[验证归档](evidence/2026-11-14/transparent-cloth-light-lanes/validation.zip)保存原生复算与 Player 读回。
 
+### 透明衣料环境反射
+
+Vulkan 事件 967 在三个位置分别读回环境辐亮度、材质响应、反射方向和粗糙度。
+环境辐亮度与材质响应相乘，再应用 0.25 的材质辐亮度倍率，重建反射输出的最大线性误差为 0.000025。
+原生事件 1383 使用相同显示坐标，三处间接高光的最大通道差分别为 0.01546、0.01632 和 0.00089。
+原生环境贴图与材质响应继续按片元来源核对。
+
+[环境反射对照](evidence/2026-11-15/transparent-cloth-environment-composition/results.json)和[验证归档](evidence/2026-11-15/transparent-cloth-environment-composition/validation.zip)保存着色器指纹、逐项读回与复算程序。
+
 ## Player 体表描边提交
 
 Player 绘制 940 在体表主体和场景深度之后提交。
