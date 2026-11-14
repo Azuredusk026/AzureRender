@@ -1,0 +1,358 @@
+{
+  "status": "measured-native-shell-local-light",
+  "overallVisualAcceptance": "failed-user-review",
+  "devices": {
+    "nvidia": {
+      "status": "measured",
+      "referencePixels": 1184,
+      "changedInside": 540,
+      "changedOutside": 0,
+      "changedOutsideOverOne": 0,
+      "nativeCoverageOverEight": [
+        626,
+        242
+      ],
+      "nativeCoverageOverOne": [
+        1182,
+        1125
+      ],
+      "nativeCoveragePeak": [
+        88,
+        77
+      ],
+      "focusOverEight": [
+        0,
+        0
+      ],
+      "focusPeak": [
+        5,
+        5
+      ],
+      "newGlobalOverOne": 0,
+      "currentDifferentFromHistoricalPixels": 0,
+      "currentHistoricalPeak": 0,
+      "points": [
+        {
+          "point": [
+            1270,
+            1037
+          ],
+          "before": [
+            89,
+            55,
+            45
+          ],
+          "after": [
+            89,
+            55,
+            45
+          ],
+          "reference": [
+            85,
+            51,
+            41
+          ],
+          "rimView": [
+            29,
+            29,
+            29
+          ]
+        },
+        {
+          "point": [
+            1325,
+            1120
+          ],
+          "before": [
+            77,
+            45,
+            38
+          ],
+          "after": [
+            128,
+            121,
+            126
+          ],
+          "reference": [
+            125,
+            121,
+            126
+          ],
+          "rimView": [
+            174,
+            187,
+            198
+          ]
+        },
+        {
+          "point": [
+            1325,
+            1118
+          ],
+          "before": [
+            78,
+            47,
+            41
+          ],
+          "after": [
+            128,
+            122,
+            126
+          ],
+          "reference": [
+            126,
+            121,
+            126
+          ],
+          "rimView": [
+            174,
+            187,
+            198
+          ]
+        },
+        {
+          "point": [
+            1319,
+            938
+          ],
+          "before": [
+            66,
+            40,
+            30
+          ],
+          "after": [
+            115,
+            112,
+            115
+          ],
+          "reference": [
+            111,
+            111,
+            115
+          ],
+          "rimView": [
+            161,
+            173,
+            183
+          ]
+        }
+      ],
+      "primaryRimModelControl": {
+        "point": [
+          1325,
+          1120
+        ],
+        "predicted": [
+          128,
+          121,
+          126
+        ],
+        "actual": [
+          128,
+          121,
+          126
+        ],
+        "absoluteError": 0
+      },
+      "captures": {
+        "beauty": {
+          "frameSha256": "f1ad627cc5b029c354ed73c8f0b63c2d5768f76c4a84192271182f82daa14417",
+          "materialSha256": "b945f790b9a5d34c3cf72f1061675bd5873ab13ed4681529dac191f93c9d3608",
+          "playerSha256": "1a30d925a674ddb1d95876cb80181106a0217e12a7228a35b5980b134954cb69"
+        },
+        "beauty-transparent-highlights": {
+          "frameSha256": "6828300ca3eccd73a4cc77b6fe8aabdb621cda2a42bd8b52790732f9451f8b9c",
+          "materialSha256": "f8c9aa32e66d3be1ed786ba737ba306ab48746f4403ac02cfdf5c722830ab95c",
+          "playerSha256": "1a30d925a674ddb1d95876cb80181106a0217e12a7228a35b5980b134954cb69"
+        },
+        "rim-transparent-highlights": {
+          "frameSha256": "b6b113787da946c45c8d8489dc9028b86a704e0467533ed32f013d5ae759b5e2",
+          "materialSha256": "f8c9aa32e66d3be1ed786ba737ba306ab48746f4403ac02cfdf5c722830ab95c",
+          "playerSha256": "1a30d925a674ddb1d95876cb80181106a0217e12a7228a35b5980b134954cb69"
+        }
+      }
+    },
+    "intel": {
+      "status": "measured",
+      "referencePixels": 1184,
+      "changedInside": 540,
+      "changedOutside": 0,
+      "changedOutsideOverOne": 0,
+      "nativeCoverageOverEight": [
+        627,
+        243
+      ],
+      "nativeCoverageOverOne": [
+        1179,
+        1125
+      ],
+      "nativeCoveragePeak": [
+        88,
+        77
+      ],
+      "focusOverEight": [
+        0,
+        0
+      ],
+      "focusPeak": [
+        5,
+        5
+      ],
+      "newGlobalOverOne": 0,
+      "currentDifferentFromHistoricalPixels": 0,
+      "currentHistoricalPeak": 0,
+      "points": [
+        {
+          "point": [
+            1270,
+            1037
+          ],
+          "before": [
+            88,
+            55,
+            45
+          ],
+          "after": [
+            88,
+            55,
+            45
+          ],
+          "reference": [
+            85,
+            51,
+            41
+          ],
+          "rimView": [
+            29,
+            29,
+            29
+          ]
+        },
+        {
+          "point": [
+            1325,
+            1120
+          ],
+          "before": [
+            78,
+            45,
+            38
+          ],
+          "after": [
+            128,
+            121,
+            126
+          ],
+          "reference": [
+            125,
+            121,
+            126
+          ],
+          "rimView": [
+            174,
+            187,
+            198
+          ]
+        },
+        {
+          "point": [
+            1325,
+            1118
+          ],
+          "before": [
+            78,
+            47,
+            41
+          ],
+          "after": [
+            129,
+            122,
+            126
+          ],
+          "reference": [
+            126,
+            121,
+            126
+          ],
+          "rimView": [
+            174,
+            187,
+            198
+          ]
+        },
+        {
+          "point": [
+            1319,
+            938
+          ],
+          "before": [
+            66,
+            41,
+            30
+          ],
+          "after": [
+            115,
+            112,
+            115
+          ],
+          "reference": [
+            111,
+            111,
+            115
+          ],
+          "rimView": [
+            161,
+            173,
+            183
+          ]
+        }
+      ],
+      "captures": {
+        "beauty": {
+          "frameSha256": "3d0f4628f202e0bbcae0f89814fce5fb844c574ead6d3a809275a6a788a92230",
+          "materialSha256": "b945f790b9a5d34c3cf72f1061675bd5873ab13ed4681529dac191f93c9d3608",
+          "playerSha256": "1a30d925a674ddb1d95876cb80181106a0217e12a7228a35b5980b134954cb69"
+        },
+        "beauty-transparent-highlights": {
+          "frameSha256": "3108484ccf766937115935762f10207c46f0dbe608ece93a31304630ed2fea53",
+          "materialSha256": "f8c9aa32e66d3be1ed786ba737ba306ab48746f4403ac02cfdf5c722830ab95c",
+          "playerSha256": "1a30d925a674ddb1d95876cb80181106a0217e12a7228a35b5980b134954cb69"
+        },
+        "rim-transparent-highlights": {
+          "frameSha256": "cb2ede241d5cba79cf7f6e4c404fc6a4975ebdbf8915e2e07d0ac648f65d015f",
+          "materialSha256": "f8c9aa32e66d3be1ed786ba737ba306ab48746f4403ac02cfdf5c722830ab95c",
+          "playerSha256": "1a30d925a674ddb1d95876cb80181106a0217e12a7228a35b5980b134954cb69"
+        }
+      }
+    }
+  },
+  "archive": {
+    "sha256": "dfb4c23bf7cd9b3f102d159afebc0c49e13f57f0db45f8ffa3a3f8ebafe60a60",
+    "members": {
+      "archive-body-outline-transparent-highlights.py": "186ceaa69ae154bd0b93a7cc3606ab48bcee71f1ba7da404cd67dcb09dbbbaff",
+      "body-outline-light-comparison.py": "ab55313c1946da1c5101951fa6f519e41c64762fc370d308347b14ede67c957f",
+      "body-outline-player-isolation.py": "759dc44fe1410939f324d323dcc87348e54dcad2707a5562907924de8046888e",
+      "body-outline-local-rim-radial-model.json": "0bca587ea63a995d0e46ce6abc32016a24fd381b018600991aac3c5ea4d3074f",
+      "body-outline-highlight-result-nvidia.json": "5abd740fa2c3d87c6f4a9d593b10eeaed8083bd5effa7a04d0a02fdca00495b8",
+      "body-outline-beauty-nvidia/command.json": "0511662967a98ee977169eadbc6ced0a01c8fa94274178ad5176d1812758cfc8",
+      "body-outline-beauty-nvidia/results.json": "1d729f316b219c178ea22fe14d321bab7e4785a2cc20ae86afbc6620102613c9",
+      "body-outline-beauty-nvidia/frames/gpu_capabilities.json": "93c9fb29461fae11a7e57d4e49112071a71940dee571f1f6696ffbf03c392879",
+      "body-outline-beauty-transparent-highlights-nvidia/command.json": "1a72760fb5a87ff46eb26a9e04309b596ce479261f296f3f073e390895b841d0",
+      "body-outline-beauty-transparent-highlights-nvidia/results.json": "186696bed04186a6c7cbba3d8859ee9d7f927980a6b389f9817f7300e1ac4d20",
+      "body-outline-beauty-transparent-highlights-nvidia/frames/gpu_capabilities.json": "93c9fb29461fae11a7e57d4e49112071a71940dee571f1f6696ffbf03c392879",
+      "body-outline-rim-transparent-highlights-nvidia/command.json": "98fb011a7d82fceafd780fb7a8d1f12a645a5c917d8118bec7e46f24f68e2f1e",
+      "body-outline-rim-transparent-highlights-nvidia/results.json": "5f6ea2560ea708dca55a55789b74d8ccde98a38eb153633530f97ef0109d6f2c",
+      "body-outline-rim-transparent-highlights-nvidia/frames/gpu_capabilities.json": "93c9fb29461fae11a7e57d4e49112071a71940dee571f1f6696ffbf03c392879",
+      "body-outline-highlight-result-intel.json": "87130a21af5c91fbd5cf27cba199e23a87f73357db8924288ca30b8940511057",
+      "body-outline-beauty-intel/command.json": "2e4a0ac5a42c4a0ba85ebefd40c8b30a898224c370264305f780b938a298b7ad",
+      "body-outline-beauty-intel/results.json": "327420f65e1111e1d72d86298fea8ee97e25ab1d8574348e4ad3bdf9ca2e3590",
+      "body-outline-beauty-intel/frames/gpu_capabilities.json": "a38eaca3509b417cfe23614fe415bd9ccc5622fc682d8623142cdeb7dc3d85cc",
+      "body-outline-beauty-transparent-highlights-intel/command.json": "35a5ed18ecaaa0585ba02dd683591cdf4378023703463fc0f6f26a56febc5b35",
+      "body-outline-beauty-transparent-highlights-intel/results.json": "48add83654021e0894ccedc8db63c50baf098d6b7b5e327116bb75110d8e53b4",
+      "body-outline-beauty-transparent-highlights-intel/frames/gpu_capabilities.json": "a38eaca3509b417cfe23614fe415bd9ccc5622fc682d8623142cdeb7dc3d85cc",
+      "body-outline-rim-transparent-highlights-intel/command.json": "3f5794c5bad24b5d3bf41070621578fabd6b6dabb03f0ab4f18482513999b666",
+      "body-outline-rim-transparent-highlights-intel/results.json": "d14955e2142ea462ce0ca7f0e1de17b7e66b390b2cc95366793750836080ff82",
+      "body-outline-rim-transparent-highlights-intel/frames/gpu_capabilities.json": "a38eaca3509b417cfe23614fe415bd9ccc5622fc682d8623142cdeb7dc3d85cc"
+    }
+  }
+}
