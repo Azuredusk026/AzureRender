@@ -23,4 +23,14 @@
 隔离目录验证通过 897 项字节检查，总耗时为 90.18 秒。该轮采用隔离运行器，正式目录包装的 90 秒进程限制及两个编辑器工作流继续核验。
 [超时归档](evidence/2026-11-14/registered-gpu-infrastructure/debug-host-timeout-diagnostics.zip)记录主机观测、原始日志和独立对照。
 
+## 管线调用与着色器读取
+
+雾效缓存分流候选在 Release 耗时 276.28 秒，通过 50 项检查，并与 43 张可对照图像的摘要一致。Debug 在 600 秒内完成 38 项；固定描述符已完成的 13 次缓存保存全部成功，1,012 次请求命中 1,010 次。
+
+Debug 编辑器采得 97 次完整图形管线调用，全部命中驱动缓存。调用累计耗时 23.37 秒，驱动反馈累计 1.24 秒；编辑器仍触发操作时限。Vulkan 验证层在管线创建时按特化值处理并验证 SPIR-V，相关实现见 [Khronos 1.4.350 源码](https://github.com/KhronosGroup/Vulkan-ValidationLayers/blob/v1.4.350/layers/core_checks/cc_spirv.cpp#L1803)。
+
+Debug 着色器读取对照覆盖 897 个文件，共 274,002,740 字节。迭代器读取耗时 32.00 秒，分块读取耗时 1.12 秒，逐文件内容一致。目录编译按 90 秒进程限制及原有字节断言核验。
+
+[计时清单](evidence/2026-11-14/registered-gpu-infrastructure/debug-pipeline-wall-time.json)和[诊断归档](evidence/2026-11-14/registered-gpu-infrastructure/debug-pipeline-wall-time.zip)保存两种配置的雾效结果、调用跟踪及读取对照。
+
 [结果清单](evidence/2026-11-14/registered-gpu-infrastructure/results.json)及[验证归档](evidence/2026-11-14/registered-gpu-infrastructure/release-baseline-recovery.zip)保存启动预算、实际采集、缓存日志和原始复验收据。
