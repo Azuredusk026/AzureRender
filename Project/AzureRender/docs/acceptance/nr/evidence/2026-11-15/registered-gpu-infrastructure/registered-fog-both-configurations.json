@@ -1,0 +1,88 @@
+{
+  "registrations": {
+    "debug": {
+      "job": 694,
+      "seconds": 512.477,
+      "scenes": 50,
+      "descriptorPairs": 25,
+      "medianPipelineMs": {
+        "indexed": 4851.3618,
+        "fixed": 4901.9709
+      }
+    },
+    "release": {
+      "job": 712,
+      "seconds": 232.466,
+      "scenes": 50,
+      "descriptorPairs": 25,
+      "medianPipelineMs": {
+        "indexed": 33.5598,
+        "fixed": 279.9695
+      }
+    }
+  },
+  "sameConfigurationPairs": 50,
+  "sameImageAcrossBuildConfigurations": 50,
+  "frameSha256": {
+    "fixed-absent": "57eb579853d62ae3b4f628e41f19be8c74808115380166b9ad8516710e1b6812",
+    "fixed-additive": "80b37e28072eff7d011d233a29824d885e7791e6f1d35b00e0dad9a083578ae6",
+    "fixed-alpha": "d36eb53b8702a39e70875d51fe9f75beee712842562c7ef734c6567e1c745a23",
+    "fixed-disabled": "57eb579853d62ae3b4f628e41f19be8c74808115380166b9ad8516710e1b6812",
+    "fixed-none": "49b61c35a9bdc13ca8bf70126683c481ec062b4381241425fc0ccb3cfe7523e4",
+    "indexed-absent": "57eb579853d62ae3b4f628e41f19be8c74808115380166b9ad8516710e1b6812",
+    "indexed-additive": "80b37e28072eff7d011d233a29824d885e7791e6f1d35b00e0dad9a083578ae6",
+    "indexed-alpha": "d36eb53b8702a39e70875d51fe9f75beee712842562c7ef734c6567e1c745a23",
+    "indexed-aspect-mismatch": "57eb579853d62ae3b4f628e41f19be8c74808115380166b9ad8516710e1b6812",
+    "indexed-camera-mismatch": "57eb579853d62ae3b4f628e41f19be8c74808115380166b9ad8516710e1b6812",
+    "indexed-coplanar-additive": "80b37e28072eff7d011d233a29824d885e7791e6f1d35b00e0dad9a083578ae6",
+    "indexed-coplanar-alpha": "d36eb53b8702a39e70875d51fe9f75beee712842562c7ef734c6567e1c745a23",
+    "indexed-coplanar-document": "d36eb53b8702a39e70875d51fe9f75beee712842562c7ef734c6567e1c745a23",
+    "indexed-coplanar-less": "3d2267adcf6a0d16b8171a91c090fe7211cea7472b69d5e15007157a2b01f2b8",
+    "indexed-coplanar-msaa": "5ebcc31b2f0ec0f326cf536cef6c4ea8e4928c3c72ca648d8eef397ff59d13f8",
+    "indexed-disabled": "57eb579853d62ae3b4f628e41f19be8c74808115380166b9ad8516710e1b6812",
+    "indexed-document": "d36eb53b8702a39e70875d51fe9f75beee712842562c7ef734c6567e1c745a23",
+    "indexed-gradient": "3fd9e65d03bea1f0fe1f12467973d3be89ac69ca5a92f0f31a34aecfa15e7c95",
+    "indexed-linear-additive": "c45862d4eb2b94939d18f2626da9010a548cdc276a8de382f5f59004274d55f1",
+    "indexed-linear-display": "653d83b2c25c389fa571849144030289e05e6e236da86bab7faaba3832fdf28b",
+    "indexed-msaa": "5ebcc31b2f0ec0f326cf536cef6c4ea8e4928c3c72ca648d8eef397ff59d13f8",
+    "indexed-near": "ed745c9845cda62fa9f754c9ad58ee60859964b95176e270230196afbc7a6546",
+    "indexed-none": "49b61c35a9bdc13ca8bf70126683c481ec062b4381241425fc0ccb3cfe7523e4",
+    "indexed-object-shadow": "d36eb53b8702a39e70875d51fe9f75beee712842562c7ef734c6567e1c745a23",
+    "indexed-object-shadow-additive": "80b37e28072eff7d011d233a29824d885e7791e6f1d35b00e0dad9a083578ae6",
+    "indexed-object-shadow-additive-msaa": "ae57f229910f1eb45c9a9d5bcee0b65d4bbfa5c420a1dd92ba3ba80db358cff5",
+    "indexed-object-shadow-msaa": "5ebcc31b2f0ec0f326cf536cef6c4ea8e4928c3c72ca648d8eef397ff59d13f8",
+    "indexed-orthographic": "7507993bac6bd94f1cad5fdf7c6bebde81818402e8e9280cbfadceebcb4e3f76",
+    "indexed-radiance-quarter": "6b702254965cfd5f44bab1bcbc0cfe76ca26d18b32cd3efe932cec5debba839a",
+    "indexed-resize": "fbeb7153e1f243cc154bcc73cef25c5947832b4e0102968c8f768a0f2e1be48f",
+    "fixed-camera-mismatch": "57eb579853d62ae3b4f628e41f19be8c74808115380166b9ad8516710e1b6812",
+    "fixed-aspect-mismatch": "57eb579853d62ae3b4f628e41f19be8c74808115380166b9ad8516710e1b6812",
+    "fixed-near": "ed745c9845cda62fa9f754c9ad58ee60859964b95176e270230196afbc7a6546",
+    "fixed-orthographic": "7507993bac6bd94f1cad5fdf7c6bebde81818402e8e9280cbfadceebcb4e3f76",
+    "fixed-gradient": "3fd9e65d03bea1f0fe1f12467973d3be89ac69ca5a92f0f31a34aecfa15e7c95",
+    "fixed-resize": "fbeb7153e1f243cc154bcc73cef25c5947832b4e0102968c8f768a0f2e1be48f",
+    "fixed-document": "d36eb53b8702a39e70875d51fe9f75beee712842562c7ef734c6567e1c745a23",
+    "fixed-msaa": "5ebcc31b2f0ec0f326cf536cef6c4ea8e4928c3c72ca648d8eef397ff59d13f8",
+    "fixed-object-shadow": "d36eb53b8702a39e70875d51fe9f75beee712842562c7ef734c6567e1c745a23",
+    "fixed-object-shadow-additive": "80b37e28072eff7d011d233a29824d885e7791e6f1d35b00e0dad9a083578ae6",
+    "fixed-object-shadow-msaa": "5ebcc31b2f0ec0f326cf536cef6c4ea8e4928c3c72ca648d8eef397ff59d13f8",
+    "fixed-object-shadow-additive-msaa": "ae57f229910f1eb45c9a9d5bcee0b65d4bbfa5c420a1dd92ba3ba80db358cff5",
+    "fixed-radiance-quarter": "6b702254965cfd5f44bab1bcbc0cfe76ca26d18b32cd3efe932cec5debba839a",
+    "fixed-linear-display": "653d83b2c25c389fa571849144030289e05e6e236da86bab7faaba3832fdf28b",
+    "fixed-linear-additive": "c45862d4eb2b94939d18f2626da9010a548cdc276a8de382f5f59004274d55f1",
+    "fixed-coplanar-alpha": "d36eb53b8702a39e70875d51fe9f75beee712842562c7ef734c6567e1c745a23",
+    "fixed-coplanar-additive": "80b37e28072eff7d011d233a29824d885e7791e6f1d35b00e0dad9a083578ae6",
+    "fixed-coplanar-document": "d36eb53b8702a39e70875d51fe9f75beee712842562c7ef734c6567e1c745a23",
+    "fixed-coplanar-msaa": "5ebcc31b2f0ec0f326cf536cef6c4ea8e4928c3c72ca648d8eef397ff59d13f8",
+    "fixed-coplanar-less": "3d2267adcf6a0d16b8171a91c090fe7211cea7472b69d5e15007157a2b01f2b8"
+  },
+  "evidence": {
+    "debug-gpu-95.json": "d67930921b0eb13e6c389bc609c5c28ae841c388e75622a2828dea7c7b92307f",
+    "debug-gpu-95.xml": "f7d0326675439f7cd51e720f66cc6b3904dcee7f649abe83f37d1fbf1a8e9c80",
+    "full-fog-observation-694.json": "d3f1fb227a111a3359f2417ac92b74cea6251efba96042edba499b162dfea119",
+    "debug-gpu-95-queue.log": "ec9dde5671b25a66544011a55585f5523ec840d21f77fa75e50dedfe35c9cd5c",
+    "release-gpu-95.json": "7496091ed98d1518afcf6d7f1896defc1c378a4bb766beee205f6448c868d00c",
+    "release-gpu-95.xml": "c5ff2b6a8e902fad010a6c2c36196cb3f61fb3550813806f6e5e3e52507a2dfe",
+    "full-fog-observation-712.json": "932b7a5bd47133dc74727741f809d2b18b8afb6edb43875117d4783792d520f5",
+    "release-gpu-95-queue.log": "464777e76cd639f9457ed73a4dfe1b39e4d6415f1d644b6c3295e94223f9c499"
+  }
+}

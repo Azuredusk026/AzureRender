@@ -49,6 +49,10 @@ Debug 着色器读取对照覆盖 897 个文件，共 274,002,740 字节。迭�
 
 [着色器与雾效结果清单](evidence/2026-11-15/registered-gpu-infrastructure/registered-shader-and-debug-fog.json)和[验证归档](evidence/2026-11-15/registered-gpu-infrastructure/registered-shader-and-debug-fog.zip)保存两种配置的编译收据、Debug 雾效帧摘要及特化计时。
 
+原注册 Release 雾效在 232.47 秒内通过。两种配置分别完成 50 个组合，配置内各有 25 对描述符路径的帧摘要一致。两种配置间对应的 50 张 PNG 摘要一致。
+
+[双配置雾效清单](evidence/2026-11-15/registered-gpu-infrastructure/registered-fog-both-configurations.json)及[雾效复验归档](evidence/2026-11-15/registered-gpu-infrastructure/registered-fog-both-configurations.zip)保存原 CTest 结果、缓存观察与帧摘要。
+
 [计时清单](evidence/2026-11-14/registered-gpu-infrastructure/debug-pipeline-wall-time.json)和[诊断归档](evidence/2026-11-14/registered-gpu-infrastructure/debug-pipeline-wall-time.zip)保存两种配置的雾效结果、调用跟踪及读取对照。
 
 [结果清单](evidence/2026-11-14/registered-gpu-infrastructure/results.json)及[验证归档](evidence/2026-11-14/registered-gpu-infrastructure/release-baseline-recovery.zip)保存启动预算、实际采集、缓存日志和原始复验收据。
