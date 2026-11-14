@@ -57,6 +57,12 @@
   },
   "milestones": [
     {
+      "path": "runs/20261114-173220-nr-shader-host-compiler-concurrency-d140b8",
+      "name": "编辑器加载与目录规模诊断",
+      "evidence": "docs/acceptance/nr/registered-gpu-infrastructure.md",
+      "results": "docs/acceptance/nr/evidence/2026-11-15/registered-editor-diagnostics/results.json"
+    },
+    {
       "path": "runs/20261114-132114-nr-current-registered-regression-16567f",
       "name": "主线 GPU 定向复验",
       "evidence": "docs/acceptance/nr/current-registered-gpu-recoveries.md",

@@ -56,3 +56,13 @@ Debug 着色器读取对照覆盖 897 个文件，共 274,002,740 字节。迭�
 [计时清单](evidence/2026-11-14/registered-gpu-infrastructure/debug-pipeline-wall-time.json)和[诊断归档](evidence/2026-11-14/registered-gpu-infrastructure/debug-pipeline-wall-time.zip)保存两种配置的雾效结果、调用跟踪及读取对照。
 
 [结果清单](evidence/2026-11-14/registered-gpu-infrastructure/results.json)及[验证归档](evidence/2026-11-14/registered-gpu-infrastructure/release-baseline-recovery.zip)保存启动预算、实际采集、缓存日志和原始复验收据。
+
+## 编辑器加载与目录规模
+
+隔离 Debug 使用当前着色器和验证层运行按材质特性创建混合管线的候选。材质覆盖用例通过六个场景，无光照纹理用例在 571.78 秒内通过 76 个场景和 88 帧。轮廓覆盖录制及空 RHI 通道测试分别在 62.29 秒与 31.88 秒内通过。
+
+编辑器复验分别记录启动和资产刷新时限。一次启动在设备初始化阶段消耗约 28 秒，独立读取同一份 128 MiB 缓存的 Debug 两轮合计耗时为 1.59 秒和 1.43 秒，涵盖程序目录摘要和缓存载荷读取。使用同一候选复验时，编辑器启动并执行到资产刷新。启用按需透明管线的后续复验在同一操作超时。相邻日志分别记录场景资源重建和缩略图重建。
+
+Release 目录规模原用例两次到达 180 秒时限。首次生成全部 10,000 份旁置文件并发布 8,217 份缓存。旁置文件原子发布候选完成全部初始缓存，原用例仍到达时限。资产与关卡契约以及源文件快照契约均通过。
+
+[诊断清单](evidence/2026-11-15/registered-editor-diagnostics/results.json)和[验证归档](evidence/2026-11-15/registered-editor-diagnostics/validation.zip)保存 26 项相关收据、日志与隔离源码。
