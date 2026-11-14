@@ -1,0 +1,15 @@
+{
+  "measuredFrames": 1800,
+  "sourceDriver": "595.79",
+  "sourcePowerWatts": 80.0,
+  "frozenDriver": "592.82",
+  "pipelineGateMs": 16.6,
+  "sourceGpuP95Ms": 18.609472,
+  "nativeFrozenPass": false,
+  "formalPerformancePass": false,
+  "archive": {
+    "sha256": "a07842d23090e180838835666b680367d78e3ed92413f2e412c71f8c5dc2576b",
+    "bytes": 354593,
+    "members": 10
+  }
+}
