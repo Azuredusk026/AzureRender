@@ -394,6 +394,14 @@ NVIDIA 画面颜色误差最大的十二处，在 Intel 法线视图中的角差
 
 [局部光实机结果](evidence/2026-11-15/body-outline-transparent-highlights/results.json)和[验证归档](evidence/2026-11-15/body-outline-transparent-highlights/validation.zip)保存两块显卡的逐点颜色、法线模型及捕获指纹。
 
+### 描边与透明衣料的最终覆盖
+
+在描边深度覆盖的 1,184 处，按原生最后一次改写颜色的绘制统计。描边事件 1018 保留 1,112 处，NVIDIA 和 Intel 分别有 177 处和 178 处超过八个色阶。透明衣料事件 1383 接管 57 处，其中两块显卡均有 56 处超过八个色阶，包含全区峰差最大的七处。
+
+坐标 `[1255,837]` 的描边事件结束时，NVIDIA 与原生相差六个色阶，透明衣料绘制后与最终参考相差 75 个色阶。坐标 `[1258,971]` 由描边保留到最终画面，NVIDIA 与原生相差 59 个色阶。两个位置分别用于定位透明衣料的覆盖与描边照明。
+
+[最终覆盖结果](evidence/2026-11-15/body-outline-remaining-draw-ownership/results.json)和[验证归档](evidence/2026-11-15/body-outline-remaining-draw-ownership/validation.zip)记录原生颜色附件、双设备逐点颜色及捕获指纹。
+
 ## 脸部局部灯
 
 原生事件 804 的七处片元中，局部灯的逐灯贡献可按加法照明和颜色混合重建。
