@@ -66,5 +66,13 @@ NVIDIA 的 37 个未覆盖超差位置均通过原生深度及模板测试。原
 
 [虹膜辐亮度结果](evidence/2026-11-14/iris-uncovered-radiance-source/results.json)和[验证归档](evidence/2026-11-14/iris-uncovered-radiance-source/validation.zip)保存颜色附件、原生片元和逐级对照。
 
+## 虹膜主光色带
+
+原生绘制 846 与 Player 绘制 897 分别读回五处虹膜的底色、反射贴图、光带和漫反射。四处最高差位置的底色最大线性差小于 0.00000003，反射贴图采样逐位一致。Player 的主光色带横坐标在这四处偏低 0.214 至 0.274，漫反射各通道最大线性差为 0.0546。原生边缘光在五处的线性贡献均小于 0.00000002。
+
+原生将选定的主光投影到头部左右轴和前向轴组成的平面，归一化后与径向眼部法线取点积。用原生缓冲复算方向和色带坐标，五处最大绝对差均小于 0.0000003。采样层级边界位置仍用独立对照，完整区域保留一字节门槛。
+
+[主光色带结果](evidence/2026-11-14/iris-main-ramp-source/results.json)和[验证归档](evidence/2026-11-14/iris-main-ramp-source/validation.zip)保存原生寄存器、片元采样和当前着色分项。
+
 [结果清单](evidence/2026-11-13/iris-native-overlay/results.json)记录各阶段读回。
 [验证归档](evidence/2026-11-13/iris-native-overlay/validation.zip)保存遮罩及逐点计算程序。
