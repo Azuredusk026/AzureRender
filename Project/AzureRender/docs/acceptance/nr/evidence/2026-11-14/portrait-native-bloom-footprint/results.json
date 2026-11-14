@@ -1,0 +1,424 @@
+{
+  "status": "analytical same-input footprint",
+  "differentNativeCamera": true,
+  "devices": {
+    "nvidia": {
+      "peakPoint": [
+        667,
+        808
+      ],
+      "currentLinear": [
+        0.0,
+        0.0,
+        0.14601962268352509
+      ],
+      "nativeHalfLinear": [
+        0.00965118408203125,
+        0.01338958740234375,
+        0.143310546875
+      ],
+      "nativeCompositeLinear": [
+        0.003532721661031246,
+        0.004901127424091101,
+        0.052457425743341446
+      ],
+      "probeRGB": [
+        12,
+        1,
+        1
+      ],
+      "currentRGB": [
+        68,
+        19,
+        109
+      ],
+      "referenceRGB": [
+        68,
+        19,
+        19
+      ],
+      "estimatedLinearOutput": [
+        71,
+        25,
+        68
+      ],
+      "currentRegions": {
+        "hair-crown": {
+          "overOne": 0,
+          "peak": 1,
+          "worstPoint": [
+            711,
+            400
+          ]
+        },
+        "hair-fringe": {
+          "overOne": 0,
+          "peak": 1,
+          "worstPoint": [
+            705,
+            570
+          ]
+        },
+        "face-cheek": {
+          "overOne": 0,
+          "peak": 1,
+          "worstPoint": [
+            715,
+            852
+          ]
+        },
+        "face-chin": {
+          "overOne": 0,
+          "peak": 1,
+          "worstPoint": [
+            773,
+            960
+          ]
+        },
+        "eye-left": {
+          "overOne": 418,
+          "peak": 90,
+          "worstPoint": [
+            667,
+            808
+          ]
+        }
+      },
+      "estimatedNativeBloomRegions": {
+        "hair-crown": {
+          "overOne": 10460,
+          "peak": 11,
+          "worstPoint": [
+            809,
+            404
+          ]
+        },
+        "hair-fringe": {
+          "overOne": 5206,
+          "peak": 5,
+          "worstPoint": [
+            707,
+            606
+          ]
+        },
+        "face-cheek": {
+          "overOne": 1205,
+          "peak": 2,
+          "worstPoint": [
+            712,
+            852
+          ]
+        },
+        "face-chin": {
+          "overOne": 344,
+          "peak": 2,
+          "worstPoint": [
+            773,
+            960
+          ]
+        },
+        "eye-left": {
+          "overOne": 1716,
+          "peak": 52,
+          "worstPoint": [
+            667,
+            809
+          ]
+        }
+      },
+      "estimatedLocalBloomRegions": {
+        "hair-crown": {
+          "overOne": 7395,
+          "peak": 5,
+          "worstPoint": [
+            721,
+            400
+          ]
+        },
+        "hair-fringe": {
+          "overOne": 2499,
+          "peak": 3,
+          "worstPoint": [
+            798,
+            589
+          ]
+        },
+        "face-cheek": {
+          "overOne": 443,
+          "peak": 2,
+          "worstPoint": [
+            715,
+            852
+          ]
+        },
+        "face-chin": {
+          "overOne": 85,
+          "peak": 2,
+          "worstPoint": [
+            773,
+            960
+          ]
+        },
+        "eye-left": {
+          "overOne": 1105,
+          "peak": 89,
+          "worstPoint": [
+            667,
+            808
+          ]
+        }
+      },
+      "probeOnlyRegions": {
+        "hair-crown": {
+          "overOne": 7395,
+          "peak": 5,
+          "worstPoint": [
+            721,
+            400
+          ]
+        },
+        "hair-fringe": {
+          "overOne": 2499,
+          "peak": 3,
+          "worstPoint": [
+            798,
+            589
+          ]
+        },
+        "face-cheek": {
+          "overOne": 443,
+          "peak": 2,
+          "worstPoint": [
+            715,
+            852
+          ]
+        },
+        "face-chin": {
+          "overOne": 85,
+          "peak": 2,
+          "worstPoint": [
+            773,
+            960
+          ]
+        },
+        "eye-left": {
+          "overOne": 828,
+          "peak": 8,
+          "worstPoint": [
+            664,
+            784
+          ]
+        }
+      }
+    },
+    "intel": {
+      "peakPoint": [
+        667,
+        808
+      ],
+      "currentLinear": [
+        0.0,
+        0.0,
+        0.14601962268352509
+      ],
+      "nativeHalfLinear": [
+        0.009552001953125,
+        0.01324462890625,
+        0.1429443359375
+      ],
+      "nativeCompositeLinear": [
+        0.0034964170772582293,
+        0.004848067183047533,
+        0.05232337862253189
+      ],
+      "probeRGB": [
+        12,
+        1,
+        1
+      ],
+      "currentRGB": [
+        68,
+        18,
+        109
+      ],
+      "referenceRGB": [
+        68,
+        19,
+        19
+      ],
+      "estimatedLinearOutput": [
+        71,
+        25,
+        68
+      ],
+      "currentRegions": {
+        "hair-crown": {
+          "overOne": 22,
+          "peak": 5,
+          "worstPoint": [
+            780,
+            549
+          ]
+        },
+        "hair-fringe": {
+          "overOne": 17,
+          "peak": 4,
+          "worstPoint": [
+            784,
+            598
+          ]
+        },
+        "face-cheek": {
+          "overOne": 0,
+          "peak": 1,
+          "worstPoint": [
+            705,
+            852
+          ]
+        },
+        "face-chin": {
+          "overOne": 0,
+          "peak": 1,
+          "worstPoint": [
+            777,
+            960
+          ]
+        },
+        "eye-left": {
+          "overOne": 415,
+          "peak": 90,
+          "worstPoint": [
+            667,
+            808
+          ]
+        }
+      },
+      "estimatedNativeBloomRegions": {
+        "hair-crown": {
+          "overOne": 7759,
+          "peak": 9,
+          "worstPoint": [
+            806,
+            401
+          ]
+        },
+        "hair-fringe": {
+          "overOne": 4084,
+          "peak": 4,
+          "worstPoint": [
+            708,
+            608
+          ]
+        },
+        "face-cheek": {
+          "overOne": 915,
+          "peak": 2,
+          "worstPoint": [
+            717,
+            852
+          ]
+        },
+        "face-chin": {
+          "overOne": 474,
+          "peak": 2,
+          "worstPoint": [
+            773,
+            960
+          ]
+        },
+        "eye-left": {
+          "overOne": 1686,
+          "peak": 52,
+          "worstPoint": [
+            666,
+            810
+          ]
+        }
+      },
+      "estimatedLocalBloomRegions": {
+        "hair-crown": {
+          "overOne": 9842,
+          "peak": 7,
+          "worstPoint": [
+            770,
+            400
+          ]
+        },
+        "hair-fringe": {
+          "overOne": 4081,
+          "peak": 5,
+          "worstPoint": [
+            700,
+            637
+          ]
+        },
+        "face-cheek": {
+          "overOne": 1014,
+          "peak": 2,
+          "worstPoint": [
+            712,
+            852
+          ]
+        },
+        "face-chin": {
+          "overOne": 401,
+          "peak": 2,
+          "worstPoint": [
+            773,
+            960
+          ]
+        },
+        "eye-left": {
+          "overOne": 1240,
+          "peak": 89,
+          "worstPoint": [
+            667,
+            808
+          ]
+        }
+      },
+      "probeOnlyRegions": {
+        "hair-crown": {
+          "overOne": 9842,
+          "peak": 7,
+          "worstPoint": [
+            770,
+            400
+          ]
+        },
+        "hair-fringe": {
+          "overOne": 4081,
+          "peak": 5,
+          "worstPoint": [
+            700,
+            637
+          ]
+        },
+        "face-cheek": {
+          "overOne": 1014,
+          "peak": 2,
+          "worstPoint": [
+            712,
+            852
+          ]
+        },
+        "face-chin": {
+          "overOne": 401,
+          "peak": 2,
+          "worstPoint": [
+            773,
+            960
+          ]
+        },
+        "eye-left": {
+          "overOne": 1019,
+          "peak": 14,
+          "worstPoint": [
+            677,
+            813
+          ]
+        }
+      }
+    }
+  }
+}

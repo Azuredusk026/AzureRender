@@ -1,0 +1,107 @@
+{
+  "overallStatus": "failed-user-review",
+  "faceMask": "cb7ed7030771a6f5d5ff1ed49ce22d668d09de342497e97e9141ed25ea4b2bbb",
+  "facePixels": 3663,
+  "reference": "48afd6546c23cfa85099a765cc94ada4813a684538c695faf6d70d6daf2261b5",
+  "nativeWrites": {
+    "1230": {
+      "indices": 96,
+      "pixels": 41,
+      "attachment": "ResourceId::141925",
+      "sha256": [
+        "8f17116efdee02863210165a03a9333c6be84bd561d3e4a7b60523a091f90cd0",
+        "a284c5929d3f0f4e241238ada543513e28a1856a4316bbe537eecd54557c945d"
+      ]
+    },
+    "1291": {
+      "indices": 43044,
+      "pixels": 7,
+      "attachment": "ResourceId::141925",
+      "sha256": [
+        "9332fcd6fe10841dd014c3fff7d3f0f61474577fc8ce6bbe0cfdb7759f4177de",
+        "3b2ed7e823eee25c7d15633e2145c7c561b968cf2d96cd901e4a5f5b7c0e63b1"
+      ]
+    },
+    "1358": {
+      "indices": 444,
+      "pixels": 264,
+      "attachment": "ResourceId::141925",
+      "sha256": [
+        "b66d8847ef4dda69e30c5d0a416f445fa7baf0eaed75ea146d87b61e4cae1a43",
+        "0998a3cfc6829870267edd086943870c6cb1f2536f85f4f047196854570533e4"
+      ]
+    }
+  },
+  "devices": {
+    "nvidia": {
+      "frame": "b2848d59cc968603e818d76813df7d9748224bc0222c10600b22212ed6c9ec35",
+      "byLatestEvent": {
+        "0": {
+          "pixels": 3351,
+          "overOne": 268,
+          "overEight": 51,
+          "peak": 41
+        },
+        "1230": {
+          "pixels": 41,
+          "overOne": 41,
+          "overEight": 41,
+          "peak": 54
+        },
+        "1291": {
+          "pixels": 7,
+          "overOne": 0,
+          "overEight": 0,
+          "peak": 1
+        },
+        "1358": {
+          "pixels": 264,
+          "overOne": 264,
+          "overEight": 264,
+          "peak": 38
+        }
+      },
+      "peak": 54,
+      "peakEvent": 1230,
+      "peakPosition": [
+        1315,
+        258
+      ]
+    },
+    "intel": {
+      "frame": "47ea26e0a35eb08338f4fa17f451b98b8ea4bd22635232de9e5d0778f5fdc132",
+      "byLatestEvent": {
+        "0": {
+          "pixels": 3351,
+          "overOne": 286,
+          "overEight": 51,
+          "peak": 41
+        },
+        "1230": {
+          "pixels": 41,
+          "overOne": 41,
+          "overEight": 41,
+          "peak": 54
+        },
+        "1291": {
+          "pixels": 7,
+          "overOne": 1,
+          "overEight": 0,
+          "peak": 2
+        },
+        "1358": {
+          "pixels": 264,
+          "overOne": 264,
+          "overEight": 264,
+          "peak": 38
+        }
+      },
+      "peak": 54,
+      "peakEvent": 1230,
+      "peakPosition": [
+        1315,
+        258
+      ]
+    }
+  }
+}

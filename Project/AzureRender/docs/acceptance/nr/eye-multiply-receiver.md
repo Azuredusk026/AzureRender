@@ -84,3 +84,15 @@ CPU 从原生线性场景重建最终 921,600 个泛光图素，其中 826,024 �
 该核验覆盖原生泛光纹理，近景 Player 的完整后处理对照保持开放。
 
 [逐级重建结果](evidence/2026-11-14/native-bloom-pixel-reconstruction/results.json)和[验证归档](evidence/2026-11-14/native-bloom-pixel-reconstruction/validation.zip)保存原生绑定、常量与误差统计。
+
+## 同机位泛光范围
+
+同机位 Player 的线性场景探针按原生第 6834 帧的十三点提取、八级降采样和八级回升计算泛光。
+显示坐标 `[667,808]` 的蓝通道线性增量约为 0.0524，Player 八近邻探针的增量约为 0.1460。
+采用原生近景的泛光合成强度时，左眼矩形的估算峰差为 52 字节。
+与关闭泛光的同机位参考相比，NVIDIA 和 Intel 分别有 1,716 和 1,686 处超过一字节。
+
+对照输入来自经过量化的线性场景探针，原生第 6834 帧采用独立相机与姿态。
+该对照用于核定采样范围，近景完整后处理仍按实际画面验收。
+
+[同机位泛光结果](evidence/2026-11-14/portrait-native-bloom-footprint/results.json)和[验证归档](evidence/2026-11-14/portrait-native-bloom-footprint/validation.zip)保存双设备探针与重建程序。

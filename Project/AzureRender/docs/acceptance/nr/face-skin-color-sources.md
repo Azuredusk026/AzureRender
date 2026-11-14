@@ -299,3 +299,12 @@ Release 与 Debug 各通过四项材质检查，895 份着色程序逐字节一�
 完整脸部的峰差位置为 `[1315,258]`，脸部验收保持开放。
 
 [局部灯结果](evidence/2026-11-14/face-local-radial-normal/results.json)和[验证归档](evidence/2026-11-14/face-local-radial-normal/validation.zip)保存双设备采集与逐灯输入。
+
+## 脸部后续覆盖
+
+完整脸部遮罩包含 3,663 个原生不透明绘制位置。
+按最后一次产生颜色变化的原生绘制统计，事件 1230 影响 41 处，事件 1358 影响 264 处。
+两组位置在双显卡对照中均超过八字节。事件 1230 覆盖区的峰差为 54 字节，事件 1358 覆盖区的峰差为 38 字节。
+其余 51 处超过八字节的位置由独立片元和遮挡检查继续定位。
+
+[覆盖归属结果](evidence/2026-11-14/face-late-overlay-ownership/results.json)和[验证归档](evidence/2026-11-14/face-late-overlay-ownership/validation.zip)保存原生附件指纹和双设备统计。
