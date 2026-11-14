@@ -159,6 +159,11 @@ NVIDIA 与 Intel 全图分别新增 404 和 444 个超出一字节的像素。
 完整十二级参数纹理使 NVIDIA 和 Intel 的最终画面分别变化 27 和 18 个像素。
 两块显卡的重点位置均有 28 处超出八字节，峰差为 39 字节。
 
+按实际混合方程分解全部 30 处重点像素，片元颜色造成的红通道平均绝对偏差为 0.05046，背景为 0.00067；透明度造成的最大绝对偏差为 0.00017。
+三处原生跟踪中，材质轮廓解释了红通道的主要偏差。扣除该项后，三处红通道的剩余绝对偏差均低于 0.0041。
+
+[混合来源结果](evidence/2026-11-14/transparent-cloth-blend-attribution/results.json)和[验证归档](evidence/2026-11-14/transparent-cloth-blend-attribution/validation.zip)保存逐点颜色、混合分项和原生轨迹摘要。
+
 [打包参数结果](evidence/2026-11-14/cloth-packed-parameters/results.json)和[验证归档](evidence/2026-11-14/cloth-packed-parameters/validation.zip)保存逐级摘要和双设备采集。
 
 ## Player 体表描边提交
