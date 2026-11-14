@@ -1,0 +1,346 @@
+{
+  "status": "qualified",
+  "replayStarted": false,
+  "captureSha256": "fa2ca267f7168f5603e83ad5f817a3074d8dbee23a216e6ab8ef2c340ec06a90",
+  "events": {
+    "846": {
+      "shaderSha256": "2fed357c703e0c981455a06d6e4e809cdb519aebca2838365137fdd5c8944b1e",
+      "samples": {
+        "13": {
+          "instruction": 62,
+          "shaderBias": "cb1[26].x",
+          "sampler": {
+            "id": "ResourceId::338",
+            "bindingChunk": 1675,
+            "definitionChunk": 9,
+            "slot": 1,
+            "descriptor": {
+              "Filter": "D3D11_FILTER_MIN_MAG_LINEAR_MIP_POINT",
+              "AddressU": "D3D11_TEXTURE_ADDRESS_WRAP",
+              "AddressV": "D3D11_TEXTURE_ADDRESS_WRAP",
+              "AddressW": "D3D11_TEXTURE_ADDRESS_WRAP",
+              "MipLODBias": 0.0,
+              "MaxAnisotropy": 1,
+              "MinLOD": 0.0,
+              "MaxLOD": 1000.0
+            }
+          },
+          "view": {
+            "id": "ResourceId::139682",
+            "bindingChunk": 1676,
+            "definitionChunk": 589,
+            "texture": "ResourceId::139680",
+            "format": "DXGI_FORMAT_BC7_UNORM_SRGB",
+            "firstMip": 0,
+            "mipCount": 10
+          }
+        },
+        "14": {
+          "instruction": 462,
+          "shaderBias": "cb1[26].x",
+          "sampler": {
+            "id": "ResourceId::365",
+            "bindingChunk": 1675,
+            "definitionChunk": 20,
+            "slot": 0,
+            "descriptor": {
+              "Filter": "D3D11_FILTER_MIN_MAG_LINEAR_MIP_POINT",
+              "AddressU": "D3D11_TEXTURE_ADDRESS_CLAMP",
+              "AddressV": "D3D11_TEXTURE_ADDRESS_CLAMP",
+              "AddressW": "D3D11_TEXTURE_ADDRESS_CLAMP",
+              "MipLODBias": 0.0,
+              "MaxAnisotropy": 1,
+              "MinLOD": 0.0,
+              "MaxLOD": 1000.0
+            }
+          },
+          "view": {
+            "id": "ResourceId::20976",
+            "bindingChunk": 1676,
+            "definitionChunk": 495,
+            "texture": "ResourceId::20975",
+            "format": "DXGI_FORMAT_BC7_UNORM_SRGB",
+            "firstMip": 0,
+            "mipCount": 9
+          }
+        }
+      }
+    },
+    "950": {
+      "shaderSha256": "b84f4d70ba795ada599a0f78ca4f60c6d1efa39f2974e293d2d694e7222e5cee",
+      "samples": {
+        "16": {
+          "instruction": 32,
+          "shaderBias": "cb1[26].x",
+          "sampler": {
+            "id": "ResourceId::338",
+            "bindingChunk": 1779,
+            "definitionChunk": 9,
+            "slot": 2,
+            "descriptor": {
+              "Filter": "D3D11_FILTER_MIN_MAG_LINEAR_MIP_POINT",
+              "AddressU": "D3D11_TEXTURE_ADDRESS_WRAP",
+              "AddressV": "D3D11_TEXTURE_ADDRESS_WRAP",
+              "AddressW": "D3D11_TEXTURE_ADDRESS_WRAP",
+              "MipLODBias": 0.0,
+              "MaxAnisotropy": 1,
+              "MinLOD": 0.0,
+              "MaxLOD": 1000.0
+            }
+          },
+          "view": {
+            "id": "ResourceId::139678",
+            "bindingChunk": 1780,
+            "definitionChunk": 585,
+            "texture": "ResourceId::139677",
+            "format": "DXGI_FORMAT_BC7_UNORM_SRGB",
+            "firstMip": 0,
+            "mipCount": 12
+          }
+        },
+        "17": {
+          "instruction": 33,
+          "shaderBias": "cb1[26].x",
+          "sampler": {
+            "id": "ResourceId::338",
+            "bindingChunk": 1779,
+            "definitionChunk": 9,
+            "slot": 2,
+            "descriptor": {
+              "Filter": "D3D11_FILTER_MIN_MAG_LINEAR_MIP_POINT",
+              "AddressU": "D3D11_TEXTURE_ADDRESS_WRAP",
+              "AddressV": "D3D11_TEXTURE_ADDRESS_WRAP",
+              "AddressW": "D3D11_TEXTURE_ADDRESS_WRAP",
+              "MipLODBias": 0.0,
+              "MaxAnisotropy": 1,
+              "MinLOD": 0.0,
+              "MaxLOD": 1000.0
+            }
+          },
+          "view": {
+            "id": "ResourceId::139673",
+            "bindingChunk": 1780,
+            "definitionChunk": 583,
+            "texture": "ResourceId::139671",
+            "format": "DXGI_FORMAT_BC7_UNORM",
+            "firstMip": 0,
+            "mipCount": 12
+          }
+        },
+        "18": {
+          "instruction": 44,
+          "shaderBias": "cb1[26].x",
+          "sampler": {
+            "id": "ResourceId::338",
+            "bindingChunk": 1779,
+            "definitionChunk": 9,
+            "slot": 2,
+            "descriptor": {
+              "Filter": "D3D11_FILTER_MIN_MAG_LINEAR_MIP_POINT",
+              "AddressU": "D3D11_TEXTURE_ADDRESS_WRAP",
+              "AddressV": "D3D11_TEXTURE_ADDRESS_WRAP",
+              "AddressW": "D3D11_TEXTURE_ADDRESS_WRAP",
+              "MipLODBias": 0.0,
+              "MaxAnisotropy": 1,
+              "MinLOD": 0.0,
+              "MaxLOD": 1000.0
+            }
+          },
+          "view": {
+            "id": "ResourceId::139864",
+            "bindingChunk": 1780,
+            "definitionChunk": 593,
+            "texture": "ResourceId::139862",
+            "format": "DXGI_FORMAT_BC7_UNORM",
+            "firstMip": 0,
+            "mipCount": 12
+          }
+        }
+      }
+    },
+    "1018": {
+      "shaderSha256": "a04e640e475f1e82fc57ca1f67628610059d51561dcabf4d6ce5b927fa683feb",
+      "samples": {
+        "14": {
+          "instruction": 18,
+          "shaderBias": "cb1[26].x",
+          "sampler": {
+            "id": "ResourceId::338",
+            "bindingChunk": 1847,
+            "definitionChunk": 9,
+            "slot": 1,
+            "descriptor": {
+              "Filter": "D3D11_FILTER_MIN_MAG_LINEAR_MIP_POINT",
+              "AddressU": "D3D11_TEXTURE_ADDRESS_WRAP",
+              "AddressV": "D3D11_TEXTURE_ADDRESS_WRAP",
+              "AddressW": "D3D11_TEXTURE_ADDRESS_WRAP",
+              "MipLODBias": 0.0,
+              "MaxAnisotropy": 1,
+              "MinLOD": 0.0,
+              "MaxLOD": 1000.0
+            }
+          },
+          "view": {
+            "id": "ResourceId::85443",
+            "bindingChunk": 1848,
+            "definitionChunk": 525,
+            "texture": "ResourceId::85442",
+            "format": "DXGI_FORMAT_BC7_UNORM_SRGB",
+            "firstMip": 0,
+            "mipCount": 11
+          }
+        }
+      }
+    },
+    "1383": {
+      "shaderSha256": "135b25965ed786752775596a86f4069f58942eae340be4d143d291eea9429680",
+      "samples": {
+        "19": {
+          "instruction": 18,
+          "shaderBias": "cb1[26].x",
+          "sampler": {
+            "id": "ResourceId::338",
+            "bindingChunk": 2212,
+            "definitionChunk": 9,
+            "slot": 1,
+            "descriptor": {
+              "Filter": "D3D11_FILTER_MIN_MAG_LINEAR_MIP_POINT",
+              "AddressU": "D3D11_TEXTURE_ADDRESS_WRAP",
+              "AddressV": "D3D11_TEXTURE_ADDRESS_WRAP",
+              "AddressW": "D3D11_TEXTURE_ADDRESS_WRAP",
+              "MipLODBias": 0.0,
+              "MaxAnisotropy": 1,
+              "MinLOD": 0.0,
+              "MaxLOD": 1000.0
+            }
+          },
+          "view": {
+            "id": "ResourceId::85389",
+            "bindingChunk": 2213,
+            "definitionChunk": 519,
+            "texture": "ResourceId::85388",
+            "format": "DXGI_FORMAT_BC7_UNORM_SRGB",
+            "firstMip": 0,
+            "mipCount": 12
+          }
+        },
+        "20": {
+          "instruction": 19,
+          "shaderBias": "cb1[26].x",
+          "sampler": {
+            "id": "ResourceId::338",
+            "bindingChunk": 2212,
+            "definitionChunk": 9,
+            "slot": 1,
+            "descriptor": {
+              "Filter": "D3D11_FILTER_MIN_MAG_LINEAR_MIP_POINT",
+              "AddressU": "D3D11_TEXTURE_ADDRESS_WRAP",
+              "AddressV": "D3D11_TEXTURE_ADDRESS_WRAP",
+              "AddressW": "D3D11_TEXTURE_ADDRESS_WRAP",
+              "MipLODBias": 0.0,
+              "MaxAnisotropy": 1,
+              "MinLOD": 0.0,
+              "MaxLOD": 1000.0
+            }
+          },
+          "view": {
+            "id": "ResourceId::85395",
+            "bindingChunk": 2213,
+            "definitionChunk": 522,
+            "texture": "ResourceId::85393",
+            "format": "DXGI_FORMAT_BC7_UNORM",
+            "firstMip": 0,
+            "mipCount": 12
+          }
+        },
+        "21": {
+          "instruction": 28,
+          "shaderBias": "cb1[26].x",
+          "sampler": {
+            "id": "ResourceId::338",
+            "bindingChunk": 2212,
+            "definitionChunk": 9,
+            "slot": 1,
+            "descriptor": {
+              "Filter": "D3D11_FILTER_MIN_MAG_LINEAR_MIP_POINT",
+              "AddressU": "D3D11_TEXTURE_ADDRESS_WRAP",
+              "AddressV": "D3D11_TEXTURE_ADDRESS_WRAP",
+              "AddressW": "D3D11_TEXTURE_ADDRESS_WRAP",
+              "MipLODBias": 0.0,
+              "MaxAnisotropy": 1,
+              "MinLOD": 0.0,
+              "MaxLOD": 1000.0
+            }
+          },
+          "view": {
+            "id": "ResourceId::85363",
+            "bindingChunk": 2213,
+            "definitionChunk": 517,
+            "texture": "ResourceId::85362",
+            "format": "DXGI_FORMAT_BC5_UNORM",
+            "firstMip": 0,
+            "mipCount": 12
+          }
+        }
+      }
+    }
+  },
+  "definitionCount": 149,
+  "bindingCount": 412,
+  "playerIris": {
+    "materialSha256": "a39fc9282406d9c1ff7167098e0bc29c702a353855e272e2213d9e7f85dc139f",
+    "samplers": {
+      "13": {
+        "ddsSha256": "1b4f9b86067924b0a915e99395962aeb7fa865bdad1fb3d16987c4c0ca9e66a5",
+        "metadataSha256": "ebbf34734f0b4605764cebe68bc831493bf2858ae1a4b435e07533f76871984c",
+        "asset": "78aceced-9df2-5a59-a58b-f288adb30cb4",
+        "mipCount": 10,
+        "settings": {
+          "schemaVersion": 1,
+          "usage": "albedo",
+          "colorSpace": "srgb",
+          "filter": "linear",
+          "wrapU": "repeat",
+          "wrapV": "repeat",
+          "mipPolicy": "generate",
+          "anisotropy": 1,
+          "mipBias": -1.0,
+          "mipFilter": "nearest"
+        }
+      },
+      "14": {
+        "ddsSha256": "e66580ef2b098421bd47f9ec127500b12f7a288d4c624f257a36afd513e0769d",
+        "metadataSha256": "60bca95b9b14bf2111ba19d6a60352a87ba81323b746b32655869370200c735d",
+        "asset": "3ba349b4-c65d-5c41-a71c-dbf8a4cd63ee",
+        "mipCount": 9,
+        "settings": {
+          "schemaVersion": 1,
+          "usage": "albedo",
+          "colorSpace": "srgb",
+          "filter": "linear",
+          "wrapU": "clamp",
+          "wrapV": "clamp",
+          "mipPolicy": "generate",
+          "anisotropy": 1,
+          "mipBias": -1.0,
+          "mipFilter": "nearest"
+        }
+      }
+    }
+  },
+  "retainedNativeHairReplay": {
+    "sha256": "b370102db896b179cea5fd893aa5b62bdc114c01026d7f8b6ee95108d85f73bd",
+    "event": 950,
+    "shaderBias": -1.0
+  },
+  "overallVisualAcceptance": "failed-user-review",
+  "archive": {
+    "sha256": "aa6edf914a189bef03da533b0d709c53f960f43877cbed4adb6f80c393d689f9",
+    "members": {
+      "native-surface-sampler-commands.py": "159b927f000ba70e5da5b4e147305b89a734a6c2eb358251a105936f5add30d5",
+      "capture-request.json": "47d46d3fa5d39fda2c7f3affcfce7c8394bbfb76f1fadd5eddade79f99c5fa12",
+      "sampler-results.json": "a24d0a46e33d535966f73a1d85d735140543d84353013a83d7ef5be07640403a",
+      "quality-legacy-material-debug-cpu-retest.xml": "f7ab4c5e0b460475c47afdbc802fd51e77e4c96f9a512cbc628c530a1253cc5b"
+    }
+  }
+}

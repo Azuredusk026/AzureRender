@@ -95,6 +95,21 @@ Player 隐式选择第 4 层，峰差 12 字节；附加 `0.01` 采样偏移使�
 [选层验证结果](evidence/2026-11-14/iris-mipmap-attribution/results.json)保存逐点颜色、层级及输入指纹。
 [验证归档](evidence/2026-11-14/iris-mipmap-attribution/validation.zip)保存采样和复算程序所用的附件数据。
 
+## 原生采样绑定
+
+捕获命令确认原生事件 846 的虹膜底色和 Matcap 分别读取纹理槽 13 和 14。
+两者均使用 BC7 sRGB、双线性缩放和最近层级过滤。
+底色为十级纹理，使用重复寻址。Matcap 为九级纹理，使用边缘钳制。
+原生采样器偏移为零，着色指令从 `cb1[26].x` 读取偏移量。
+Player 材质引用的 DDS 级数、寻址和过滤与相应绑定一致，采样器记录负一层级偏移。
+
+同一捕获还核对了发丝、体表描边及透明服饰的七处材质纹理读取。
+这七处使用重复寻址、双线性缩放和最近层级过滤，采样指令均读取同一常量槽。
+保留的发丝回放确认该槽分量为负一。
+实际层级选择继续按双设备的片元读回验收。
+
+[采样绑定记录](evidence/2026-11-14/native-surface-sampler-commands/results.json)及[验证归档](evidence/2026-11-14/native-surface-sampler-commands/validation.zip)保存命令位置、纹理视图、材质指纹及验证程序。
+
 ## 剩余门禁
 
 继续核对隐式采样梯度、层级边界和几何覆盖。
