@@ -134,7 +134,7 @@ if __name__=='__main__':
     p.add_argument('--material-class',choices=['generic','fabric'])
     p.add_argument('--case',action='append');p.add_argument('--backend',action='append',choices=['indexed','fixed']);p.add_argument('--expected-validation',choices=['any','enabled','disabled'],default='any');args=p.parse_args()
     engine=Path(__file__).resolve().parents[1];task=None
-    if args.output is None:task=Path(subprocess.check_output([sys.executable,str(engine/'tools/artifact_cleanup.py'),'--new-run','npr-ramp-composition'],text=True,cwd=engine).strip());args.output=task/'captures'
+    if args.output is None:task=Path(subprocess.check_output([sys.executable,str(engine/'tools/artifact_cleanup.py'),'--new-run','npr-ramp-composition', '--planned-bytes', '67108864'],text=True,cwd=engine).strip());args.output=task/'captures'
     try:run(args.executable.resolve(),args.output.resolve(),args.case,args.backend or ('indexed','fixed'),args.expected_validation,args.material_class)
     finally:
         if task:subprocess.run([sys.executable,str(engine/'tools/artifact_cleanup.py'),'--finish',str(task)],cwd=engine,check=True)

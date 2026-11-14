@@ -8,7 +8,7 @@
 
 隔离候选沿用 Release 和 Debug 的注册参数、构建产物、时限和图像断言。每种配置均通过八项原受阻用例及九项相邻用例。材质显示每种配置完成 53 次采集及 16 组比较。34 项结果均有独立受管任务及封存收据，写入量低于各自预约。
 
-[双配置清单](evidence/2026-11-14/registered-gpu-infrastructure/capture-reservations-release-debug.json)与[采集归档](evidence/2026-11-14/registered-gpu-infrastructure/capture-reservations-release-debug.zip)保存注册命令、摘要、时限和实测写入。正式回归使用主线构建和独立收据。
+[双配置清单](evidence/2026-11-14/registered-gpu-infrastructure/capture-reservations-release-debug.json)与[采集归档](evidence/2026-11-14/registered-gpu-infrastructure/capture-reservations-release-debug.zip)保存注册命令、摘要、时限和实测写入。主线采集脚本使用上述预约。正式回归使用原注册命令、主线构建产物和独立收据。
 
 ## 雾效管线缓存
 

@@ -200,7 +200,7 @@ if __name__=='__main__':
     parser.add_argument('--case',action='append',default=[]);parser.add_argument('--expected-validation',choices=('any','enabled','disabled'),default='any');args=parser.parse_args()
     owned=None
     if args.output is None:
-        owned=Path(subprocess.check_output([sys.executable,str(ROOT/'tools/artifact_cleanup.py'),'--new-run','material-display-gpu'],text=True,cwd=ROOT).strip());args.output=owned/'captures'
+        owned=Path(subprocess.check_output([sys.executable,str(ROOT/'tools/artifact_cleanup.py'),'--new-run','material-display-gpu', '--planned-bytes', '67108864'],text=True,cwd=ROOT).strip());args.output=owned/'captures'
     try:run(args.executable.resolve(),args.output.resolve(),args.case,args.expected_validation)
     finally:
         if owned is not None:subprocess.run([sys.executable,str(ROOT/'tools/artifact_cleanup.py'),'--finish',str(owned)],check=True,cwd=ROOT)

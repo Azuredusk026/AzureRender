@@ -80,7 +80,7 @@ def main():
     parser.add_argument('--fixture',type=Path)
     parser.add_argument('--projected',action='store_true')
     args=parser.parse_args()
-    run=Path(subprocess.check_output([sys.executable,str(ENGINE/'tools/artifact_cleanup.py'),'--new-run','native-ray-reference'],cwd=ENGINE,text=True).strip())
+    run=Path(subprocess.check_output([sys.executable,str(ENGINE/'tools/artifact_cleanup.py'),'--new-run','native-ray-reference', '--planned-bytes', '67108864'],cwd=ENGINE,text=True).strip())
     rows=[]
     if args.fixture:
         cases=[('native',args.fixture.resolve(),False,True),('native-reversed',args.fixture.resolve(),True,True)]

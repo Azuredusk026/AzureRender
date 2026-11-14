@@ -17,7 +17,7 @@ def main():
     args=parser.parse_args();engine=Path(__file__).resolve().parents[1]
     if args.preparation and args.composition:parser.error('Choose preparation or composition')
     if args.motion_contract and not args.composition:parser.error('Motion contract requires composition controls')
-    run=Path(subprocess.check_output([sys.executable,str(engine/'tools/artifact_cleanup.py'),'--new-run','projected-camera-gpu'],cwd=engine,text=True).strip())
+    run=Path(subprocess.check_output([sys.executable,str(engine/'tools/artifact_cleanup.py'),'--new-run','projected-camera-gpu', '--planned-bytes', '134217728'],cwd=engine,text=True).strip())
     report=dict(status='running',cases=[],shaderSha256=hashlib.sha256(args.shader.read_bytes()).hexdigest(),executableSha256=hashlib.sha256(args.executable.read_bytes()).hexdigest())
     if args.preparation:report['preparationSha256']=hashlib.sha256(args.preparation.read_bytes()).hexdigest()
     if args.composition:report['compositionDirectory']=str(args.composition.resolve())

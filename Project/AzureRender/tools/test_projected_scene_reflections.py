@@ -15,7 +15,7 @@ def main():
     parser.add_argument('--smoke',action='store_true')
     parser.add_argument('--expected-validation',choices=('any','enabled','disabled'),default='any')
     args=parser.parse_args();engine=Path(__file__).resolve().parents[1]
-    run=args.output.resolve() if args.output else Path(subprocess.check_output([sys.executable,str(engine/'tools/artifact_cleanup.py'),'--new-run','projected-scene-gpu'],cwd=engine,text=True).strip())
+    run=args.output.resolve() if args.output else Path(subprocess.check_output([sys.executable,str(engine/'tools/artifact_cleanup.py'),'--new-run','projected-scene-gpu', '--planned-bytes', '67108864'],cwd=engine,text=True).strip())
     run.mkdir(parents=True,exist_ok=True);report=dict(status='running',captures=[],metrics=[],executableSha256=lab.sha(args.executable),budgets=lab.BUDGETS)
     try:
         cases=[dict(name='off',enabled=False),dict(name='on',algorithm='projected')]

@@ -117,7 +117,7 @@ if __name__=='__main__':
     parser=argparse.ArgumentParser();parser.add_argument('--player','--executable',dest='player',type=Path,required=True);parser.add_argument('--output',type=Path);parser.add_argument('--case',action='append');parser.add_argument('--backend',action='append',choices=['indexed','fixed']);parser.add_argument('--expected-validation',choices=['any','enabled','disabled'],default='any')
     parser.add_argument('--group',choices=('generic-environment','fabric-environment','object-shadow'))
     args=parser.parse_args();engine=Path(__file__).resolve().parents[1];task=None
-    if args.output is None:task=Path(subprocess.check_output([sys.executable,str(engine/'tools/artifact_cleanup.py'),'--new-run','material-lighting-gpu'],cwd=engine,text=True).strip());args.output=task/'validation'
+    if args.output is None:task=Path(subprocess.check_output([sys.executable,str(engine/'tools/artifact_cleanup.py'),'--new-run','material-lighting-gpu', '--planned-bytes', '67108864'],cwd=engine,text=True).strip());args.output=task/'validation'
     try:run(args.player.resolve(),args.output.resolve(),args.case,args.backend or ('indexed','fixed'),args.expected_validation,args.group)
     finally:
         if task is not None:subprocess.run([sys.executable,str(engine/'tools/artifact_cleanup.py'),'--finish',str(task)],cwd=engine,check=True)

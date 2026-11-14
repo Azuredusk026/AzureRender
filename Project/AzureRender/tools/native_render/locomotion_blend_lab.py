@@ -131,7 +131,7 @@ if __name__ == '__main__':
     cleanup = Path(__file__).resolve().parents[1]/'artifact_cleanup.py'
     if args.output is None:
         managed = Path(subprocess.check_output([sys.executable, str(cleanup), '--new-run',
-            'locomotion-blend-lab'], text=True).strip())
+            'locomotion-blend-lab', '--planned-bytes', '67108864'], text=True).strip())
     run(args.player.resolve(), args.output.resolve() if args.output else managed/'lab')
     if managed:
         subprocess.run([sys.executable, str(cleanup), '--finish', str(managed)], check=True)
