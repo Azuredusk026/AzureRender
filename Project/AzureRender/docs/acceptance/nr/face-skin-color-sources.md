@@ -367,6 +367,19 @@ Release 与 Debug 各通过四项材质检查，895 份着色程序逐字节一�
 
 [脸部遮罩整帧结果](evidence/2026-11-14/face-native-geometry-mask-frame/results.json)和[验证归档](evidence/2026-11-14/face-native-geometry-mask-frame/validation.zip)保存双设备统计、着色器和加载器的采样约束回执。
 
+原生脸部视角色调由头部前向、几何法线、遮罩红绿通道和蓝通道共同决定。蓝通道在 1.0 与 0.7 之间插值，参与染色权重。十二处片元的染色系数复算最大绝对差为 0.00000011。
+
+| NVIDIA 整帧对照 | 脸部超过一字节 | 脸部超过八字节 | 两处嘴角误差 |
+| --- | ---: | ---: | ---: |
+| 控制组 | 573 | 356 | 41、35 |
+| 原生权重，基准遮罩采样 | 422 | 308 | 41、34 |
+| 原生权重，染色项使用原生遮罩层级 | 578 | 357 | 41、36 |
+| 原生权重，全部几何遮罩项使用原生层级 | 582 | 356 | 9、5 |
+
+三个对照的虹膜及脸外像素与控制组逐字节一致。基准遮罩采样与原生权重的组合在十二处追踪点中缩小十一处误差，完整脸部有二十二处新增超过一字节。嘴角继续按各项几何采样验收。
+
+[视角色调结果](evidence/2026-11-14/face-view-mask-blue-source/results.json)和[验证归档](evidence/2026-11-14/face-view-mask-blue-source/validation.zip)保存寄存器、整帧统计及着色器对照。
+
 [乘色照明来源](evidence/2026-11-14/face-overlay-lighting-sources/results.json)和[验证归档](evidence/2026-11-14/face-overlay-lighting-sources/validation.zip)保存原生寄存器、覆盖裁片和十二处绘制记录。
 
 [覆盖来源结果](evidence/2026-11-14/face-overlay-source/results.json)和[验证归档](evidence/2026-11-14/face-overlay-source/validation.zip)保存接收分类、几何覆盖、乘色状态和体表顺序对照。
