@@ -113,3 +113,16 @@ NVIDIA 的独立回放按原生眼影倍率处理 Player 底层辐亮度，得�
 Intel 驱动缺少该 NVIDIA 捕获使用的 `VK_EXT_depth_bias_control`。Intel 的本机采样依据为独立执行的 Player 路径。
 
 [Vulkan 虹膜采样结果](evidence/2026-11-15/iris-vulkan-footprint/results.json)和[验证归档](evidence/2026-11-15/iris-vulkan-footprint/validation.zip)保存硬件读回、原生纹理块及计算程序。
+
+## 眼影配对采集
+
+保持原始姿态、头部平面主光和材质输入，分别采集启用与关闭眼影节点的画面。两块显卡均准确匹配原生眼影覆盖的 94 个虹膜像素，虹膜外像素逐字节一致。
+
+| 设备 | 覆盖区眼影前超差 | 覆盖区眼影后超差 | 未覆盖区超差 |
+| --- | ---: | ---: | ---: |
+| NVIDIA | 3 | 15 | 7 |
+| Intel | 6 | 17 | 13 |
+
+坐标 `[1262,257]` 的眼影后峰差为 15 个色阶。按两块显卡各自的眼影系数估计值，替换原生底层颜色后与参考的差分别为一个和零个色阶。其余位置继续使用原生线性附件核对底层颜色与乘色系数。
+
+[双设备配对结果](evidence/2026-11-15/iris-overlay-paired-controls/results.json)和[验证归档](evidence/2026-11-15/iris-overlay-paired-controls/validation.zip)保存覆盖、逐点颜色及运行参数。

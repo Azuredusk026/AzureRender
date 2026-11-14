@@ -1,0 +1,1571 @@
+{
+  "status": "qualified-coverage",
+  "overallVisualAcceptance": "failed-user-review",
+  "devices": {
+    "nvidia": {
+      "device": "nvidia",
+      "status": "source-isolation",
+      "nativeReferenceSha256": "48afd6546c23cfa85099a765cc94ada4813a684538c695faf6d70d6daf2261b5",
+      "runPlayerSha256": "1a30d925a674ddb1d95876cb80181106a0217e12a7228a35b5980b134954cb69",
+      "enabledFrameSha256": "8f732d547598e91901563aff64ab6b9d88a87a5280518973fe050e020c9f74c1",
+      "disabledFrameSha256": "823a89734b7e77759825475f64a6031046b72635c24736b59497dd19c57a9519",
+      "coveredCount": 94,
+      "exactCoverage": true,
+      "nativePostToReference": {
+        "pixels": 255,
+        "overOne": 0,
+        "overEight": 0,
+        "peak": 0
+      },
+      "coverageMissing": [],
+      "coverageAdded": [],
+      "outsideIrisChanged": 0,
+      "underlyingOnCovered": {
+        "pixels": 94,
+        "overOne": 3,
+        "overEight": 1,
+        "peak": 19
+      },
+      "currentCovered": {
+        "pixels": 94,
+        "overOne": 15,
+        "overEight": 1,
+        "peak": 15
+      },
+      "currentBare": {
+        "pixels": 161,
+        "overOne": 7,
+        "overEight": 1,
+        "peak": 12
+      },
+      "estimatedNativeFactorOnPlayerBase": {
+        "pixels": 94,
+        "overOne": 8,
+        "overEight": 5,
+        "peak": 39
+      },
+      "estimatedPlayerFactorOnNativeBase": {
+        "pixels": 94,
+        "overOne": 7,
+        "overEight": 4,
+        "peak": 19
+      },
+      "nativeFactorCaveat": "The source linear target is packed R11G11B10 and Player factors have an interval inferred from eight-bit output.",
+      "witnesses": [
+        {
+          "point": [
+            1262,
+            257
+          ],
+          "currentError": 15,
+          "preError": 19,
+          "preNative": [
+            101,
+            57,
+            85
+          ],
+          "prePlayer": [
+            82,
+            46,
+            74
+          ],
+          "postNative": [
+            82,
+            26,
+            56
+          ],
+          "postPlayer": [
+            67,
+            20,
+            48
+          ],
+          "factorNative": [
+            0.6515151515151515,
+            0.25595238095238093,
+            0.425531914893617
+          ],
+          "factorPlayer": [
+            0.6652169968573612,
+            0.25604618910974375,
+            0.4316241877516507
+          ],
+          "factorMinDrift": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "sourceBaseReplacementError": 1,
+          "sourceFactorReplacementError": 16
+        },
+        {
+          "point": [
+            1260,
+            259
+          ],
+          "currentError": 3,
+          "preError": 1,
+          "preNative": [
+            90,
+            81,
+            205
+          ],
+          "prePlayer": [
+            90,
+            81,
+            206
+          ],
+          "postNative": [
+            88,
+            78,
+            198
+          ],
+          "postPlayer": [
+            89,
+            79,
+            201
+          ],
+          "factorNative": [
+            0.9615384615384616,
+            0.9285714285714286,
+            0.9230769230769231
+          ],
+          "factorPlayer": [
+            0.9770836744427203,
+            0.950229088620438,
+            0.9463256767740545
+          ],
+          "factorMinDrift": [
+            0.0,
+            0.0,
+            0.012863471926673586
+          ],
+          "sourceBaseReplacementError": 2,
+          "sourceFactorReplacementError": 1
+        },
+        {
+          "point": [
+            1303,
+            259
+          ],
+          "currentError": 3,
+          "preError": 1,
+          "preNative": [
+            255,
+            166,
+            163
+          ],
+          "prePlayer": [
+            255,
+            166,
+            164
+          ],
+          "postNative": [
+            234,
+            132,
+            137
+          ],
+          "postPlayer": [
+            234,
+            133,
+            140
+          ],
+          "factorNative": [
+            0.8203125,
+            0.6071428571428571,
+            0.6808510638297872
+          ],
+          "factorPlayer": [
+            0.8227857543962835,
+            0.6150920082264186,
+            0.7064225193809708
+          ],
+          "factorMinDrift": [
+            0.0,
+            0.0,
+            0.015378008890012396
+          ],
+          "sourceBaseReplacementError": 2,
+          "sourceFactorReplacementError": 1
+        },
+        {
+          "point": [
+            1255,
+            257
+          ],
+          "currentError": 2,
+          "preError": 0,
+          "preNative": [
+            255,
+            255,
+            255
+          ],
+          "prePlayer": [
+            255,
+            255,
+            255
+          ],
+          "postNative": [
+            255,
+            188,
+            202
+          ],
+          "postPlayer": [
+            255,
+            188,
+            204
+          ],
+          "factorNative": [
+            0.7415730337078652,
+            0.4383561643835616,
+            0.5588235294117647
+          ],
+          "factorPlayer": [
+            1.0,
+            0.5028864580325687,
+            0.6038273388553378
+          ],
+          "factorMinDrift": [
+            0.2539722160132124,
+            0.06154839230684633,
+            0.04168570391096038
+          ],
+          "sourceBaseReplacementError": 11,
+          "sourceFactorReplacementError": 32
+        },
+        {
+          "point": [
+            1303,
+            257
+          ],
+          "currentError": 2,
+          "preError": 1,
+          "preNative": [
+            255,
+            138,
+            128
+          ],
+          "prePlayer": [
+            255,
+            139,
+            129
+          ],
+          "postNative": [
+            218,
+            70,
+            84
+          ],
+          "postPlayer": [
+            220,
+            70,
+            85
+          ],
+          "factorNative": [
+            0.6428571428571429,
+            0.23846153846153847,
+            0.4090909090909091
+          ],
+          "factorPlayer": [
+            0.7156935005064807,
+            0.237219681859417,
+            0.4138080616137767
+          ],
+          "factorMinDrift": [
+            0.06917201355886748,
+            0.0,
+            0.0
+          ],
+          "sourceBaseReplacementError": 11,
+          "sourceFactorReplacementError": 8
+        },
+        {
+          "point": [
+            1253,
+            258
+          ],
+          "currentError": 2,
+          "preError": 1,
+          "preNative": [
+            90,
+            80,
+            152
+          ],
+          "prePlayer": [
+            90,
+            81,
+            153
+          ],
+          "postNative": [
+            88,
+            76,
+            145
+          ],
+          "postPlayer": [
+            88,
+            76,
+            147
+          ],
+          "factorNative": [
+            0.9519230769230769,
+            0.891566265060241,
+            0.9
+          ],
+          "factorPlayer": [
+            0.9544766524817396,
+            0.8783358399754215,
+            0.9159428688459654
+          ],
+          "factorMinDrift": [
+            0.0,
+            0.0,
+            0.0026332444166338176
+          ],
+          "sourceBaseReplacementError": 1,
+          "sourceFactorReplacementError": 1
+        },
+        {
+          "point": [
+            1255,
+            258
+          ],
+          "currentError": 2,
+          "preError": 1,
+          "preNative": [
+            209,
+            58,
+            57
+          ],
+          "prePlayer": [
+            210,
+            58,
+            58
+          ],
+          "postNative": [
+            202,
+            53,
+            53
+          ],
+          "postPlayer": [
+            204,
+            54,
+            54
+          ],
+          "factorNative": [
+            0.926829268292683,
+            0.8488372093023255,
+            0.8809523809523809
+          ],
+          "factorPlayer": [
+            0.936922226949119,
+            0.8718558388823133,
+            0.8718558388823133
+          ],
+          "factorMinDrift": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "sourceBaseReplacementError": 1,
+          "sourceFactorReplacementError": 1
+        },
+        {
+          "point": [
+            1302,
+            258
+          ],
+          "currentError": 2,
+          "preError": 2,
+          "preNative": [
+            255,
+            220,
+            205
+          ],
+          "prePlayer": [
+            255,
+            221,
+            207
+          ],
+          "postNative": [
+            254,
+            131,
+            146
+          ],
+          "postPlayer": [
+            255,
+            132,
+            148
+          ],
+          "factorNative": [
+            0.6827956989247311,
+            0.3179347826086957,
+            0.47435897435897434
+          ],
+          "factorPlayer": [
+            1.0,
+            0.3191181962409538,
+            0.4746106880331171
+          ],
+          "factorMinDrift": [
+            0.3127495507963465,
+            0.0,
+            0.0
+          ],
+          "sourceBaseReplacementError": 1,
+          "sourceFactorReplacementError": 39
+        },
+        {
+          "point": [
+            1303,
+            258
+          ],
+          "currentError": 2,
+          "preError": 0,
+          "preNative": [
+            255,
+            255,
+            255
+          ],
+          "prePlayer": [
+            255,
+            255,
+            255
+          ],
+          "postNative": [
+            253,
+            166,
+            190
+          ],
+          "postPlayer": [
+            255,
+            166,
+            192
+          ],
+          "factorNative": [
+            0.6847826086956522,
+            0.3233333333333333,
+            0.4714285714285714
+          ],
+          "factorPlayer": [
+            1.0,
+            0.38132601143253014,
+            0.5271151257058131
+          ],
+          "factorMinDrift": [
+            0.3107626410254254,
+            0.05545579763163261,
+            0.05262156736615742
+          ],
+          "sourceBaseReplacementError": 12,
+          "sourceFactorReplacementError": 37
+        },
+        {
+          "point": [
+            1301,
+            259
+          ],
+          "currentError": 2,
+          "preError": 1,
+          "preNative": [
+            129,
+            60,
+            114
+          ],
+          "prePlayer": [
+            129,
+            60,
+            115
+          ],
+          "postNative": [
+            115,
+            43,
+            91
+          ],
+          "postPlayer": [
+            115,
+            43,
+            93
+          ],
+          "factorNative": [
+            0.7767857142857143,
+            0.5271739130434783,
+            0.627906976744186
+          ],
+          "factorPlayer": [
+            0.7809596346324603,
+            0.5346240689373537,
+            0.6384799812320778
+          ],
+          "factorMinDrift": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "sourceBaseReplacementError": 1,
+          "sourceFactorReplacementError": 1
+        },
+        {
+          "point": [
+            1309,
+            259
+          ],
+          "currentError": 2,
+          "preError": 1,
+          "preNative": [
+            106,
+            73,
+            114
+          ],
+          "prePlayer": [
+            107,
+            73,
+            115
+          ],
+          "postNative": [
+            99,
+            60,
+            99
+          ],
+          "postPlayer": [
+            99,
+            61,
+            101
+          ],
+          "factorNative": [
+            0.8581081081081081,
+            0.6911764705882353,
+            0.7441860465116279
+          ],
+          "factorPlayer": [
+            0.8486304651728763,
+            0.7004041862191699,
+            0.7590739684597085
+          ],
+          "factorMinDrift": [
+            0.0,
+            0.0,
+            5.2361184519233994e-05
+          ],
+          "sourceBaseReplacementError": 1,
+          "sourceFactorReplacementError": 1
+        },
+        {
+          "point": [
+            1300,
+            260
+          ],
+          "currentError": 2,
+          "preError": 1,
+          "preNative": [
+            95,
+            47,
+            99
+          ],
+          "prePlayer": [
+            95,
+            47,
+            100
+          ],
+          "postNative": [
+            91,
+            42,
+            92
+          ],
+          "postPlayer": [
+            91,
+            42,
+            94
+          ],
+          "factorNative": [
+            0.9137931034482759,
+            0.8260869565217391,
+            0.859375
+          ],
+          "factorPlayer": [
+            0.914197075541382,
+            0.814512558969378,
+            0.878330706069532
+          ],
+          "factorMinDrift": [
+            0.0,
+            0.0,
+            0.0001568257357906777
+          ],
+          "sourceBaseReplacementError": 1,
+          "sourceFactorReplacementError": 1
+        },
+        {
+          "point": [
+            1301,
+            260
+          ],
+          "currentError": 2,
+          "preError": 1,
+          "preNative": [
+            85,
+            66,
+            163
+          ],
+          "prePlayer": [
+            86,
+            66,
+            164
+          ],
+          "postNative": [
+            84,
+            63,
+            158
+          ],
+          "postPlayer": [
+            84,
+            63,
+            160
+          ],
+          "factorNative": [
+            0.9574468085106383,
+            0.9181818181818182,
+            0.9361702127659575
+          ],
+          "factorPlayer": [
+            0.9526818650647443,
+            0.9123772717387274,
+            0.9469205794289465
+          ],
+          "factorMinDrift": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "sourceBaseReplacementError": 1,
+          "sourceFactorReplacementError": 1
+        },
+        {
+          "point": [
+            1310,
+            260
+          ],
+          "currentError": 2,
+          "preError": 2,
+          "preNative": [
+            109,
+            75,
+            103
+          ],
+          "prePlayer": [
+            109,
+            75,
+            105
+          ],
+          "postNative": [
+            103,
+            67,
+            95
+          ],
+          "postPlayer": [
+            104,
+            67,
+            97
+          ],
+          "factorNative": [
+            0.8974358974358975,
+            0.7916666666666666,
+            0.8428571428571429
+          ],
+          "factorPlayer": [
+            0.9052187165210092,
+            0.79773186056533,
+            0.8462101302003954
+          ],
+          "factorMinDrift": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "sourceBaseReplacementError": 1,
+          "sourceFactorReplacementError": 2
+        },
+        {
+          "point": [
+            1312,
+            260
+          ],
+          "currentError": 2,
+          "preError": 1,
+          "preNative": [
+            98,
+            47,
+            75
+          ],
+          "prePlayer": [
+            98,
+            47,
+            76
+          ],
+          "postNative": [
+            96,
+            46,
+            73
+          ],
+          "postPlayer": [
+            97,
+            46,
+            75
+          ],
+          "factorNative": [
+            0.9758064516129032,
+            0.9568965517241379,
+            0.9444444444444444
+          ],
+          "factorPlayer": [
+            0.9787099199231509,
+            0.961121989393773,
+            0.9735477233850697
+          ],
+          "factorMinDrift": [
+            0.0,
+            0.0,
+            0.0033491399945891898
+          ],
+          "sourceBaseReplacementError": 1,
+          "sourceFactorReplacementError": 1
+        }
+      ]
+    },
+    "intel": {
+      "device": "intel",
+      "status": "source-isolation",
+      "nativeReferenceSha256": "48afd6546c23cfa85099a765cc94ada4813a684538c695faf6d70d6daf2261b5",
+      "runPlayerSha256": "1a30d925a674ddb1d95876cb80181106a0217e12a7228a35b5980b134954cb69",
+      "enabledFrameSha256": "6afeae40383c5dd2ba1d410ef9ee201aead8d101dd231463348b5235bbd17af7",
+      "disabledFrameSha256": "c8c529783d0ee888fc49d45de3be324e48605218664284517e335abf3dd38da8",
+      "coveredCount": 94,
+      "exactCoverage": true,
+      "nativePostToReference": {
+        "pixels": 255,
+        "overOne": 0,
+        "overEight": 0,
+        "peak": 0
+      },
+      "coverageMissing": [],
+      "coverageAdded": [],
+      "outsideIrisChanged": 0,
+      "underlyingOnCovered": {
+        "pixels": 94,
+        "overOne": 6,
+        "overEight": 1,
+        "peak": 18
+      },
+      "currentCovered": {
+        "pixels": 94,
+        "overOne": 17,
+        "overEight": 1,
+        "peak": 15
+      },
+      "currentBare": {
+        "pixels": 161,
+        "overOne": 13,
+        "overEight": 4,
+        "peak": 27
+      },
+      "estimatedNativeFactorOnPlayerBase": {
+        "pixels": 94,
+        "overOne": 11,
+        "overEight": 5,
+        "peak": 39
+      },
+      "estimatedPlayerFactorOnNativeBase": {
+        "pixels": 94,
+        "overOne": 7,
+        "overEight": 4,
+        "peak": 19
+      },
+      "nativeFactorCaveat": "The source linear target is packed R11G11B10 and Player factors have an interval inferred from eight-bit output.",
+      "witnesses": [
+        {
+          "point": [
+            1262,
+            257
+          ],
+          "currentError": 15,
+          "preError": 18,
+          "preNative": [
+            101,
+            57,
+            85
+          ],
+          "prePlayer": [
+            83,
+            47,
+            74
+          ],
+          "postNative": [
+            82,
+            26,
+            56
+          ],
+          "postPlayer": [
+            67,
+            20,
+            48
+          ],
+          "factorNative": [
+            0.6515151515151515,
+            0.25595238095238093,
+            0.425531914893617
+          ],
+          "factorPlayer": [
+            0.6488808120572078,
+            0.24609162265385112,
+            0.4316241877516507
+          ],
+          "factorMinDrift": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "sourceBaseReplacementError": 0,
+          "sourceFactorReplacementError": 15
+        },
+        {
+          "point": [
+            1255,
+            258
+          ],
+          "currentError": 4,
+          "preError": 3,
+          "preNative": [
+            209,
+            58,
+            57
+          ],
+          "prePlayer": [
+            211,
+            61,
+            60
+          ],
+          "postNative": [
+            202,
+            53,
+            53
+          ],
+          "postPlayer": [
+            205,
+            57,
+            57
+          ],
+          "factorNative": [
+            0.926829268292683,
+            0.8488372093023255,
+            0.8809523809523809
+          ],
+          "factorPlayer": [
+            0.937197248132513,
+            0.8767839110268038,
+            0.9054798353415959
+          ],
+          "factorMinDrift": [
+            0.000289664197153372,
+            0.0,
+            0.0
+          ],
+          "sourceBaseReplacementError": 1,
+          "sourceFactorReplacementError": 3
+        },
+        {
+          "point": [
+            1303,
+            257
+          ],
+          "currentError": 3,
+          "preError": 1,
+          "preNative": [
+            255,
+            138,
+            128
+          ],
+          "prePlayer": [
+            255,
+            139,
+            129
+          ],
+          "postNative": [
+            218,
+            70,
+            84
+          ],
+          "postPlayer": [
+            221,
+            70,
+            85
+          ],
+          "factorNative": [
+            0.6428571428571429,
+            0.23846153846153847,
+            0.4090909090909091
+          ],
+          "factorPlayer": [
+            0.7230551289219693,
+            0.237219681859417,
+            0.4138080616137767
+          ],
+          "factorMinDrift": [
+            0.07651167869298836,
+            0.0,
+            0.0
+          ],
+          "sourceBaseReplacementError": 12,
+          "sourceFactorReplacementError": 8
+        },
+        {
+          "point": [
+            1260,
+            259
+          ],
+          "currentError": 3,
+          "preError": 1,
+          "preNative": [
+            90,
+            81,
+            205
+          ],
+          "prePlayer": [
+            90,
+            81,
+            206
+          ],
+          "postNative": [
+            88,
+            78,
+            198
+          ],
+          "postPlayer": [
+            88,
+            79,
+            201
+          ],
+          "factorNative": [
+            0.9615384615384616,
+            0.9285714285714286,
+            0.9230769230769231
+          ],
+          "factorPlayer": [
+            0.9544766524817396,
+            0.950229088620438,
+            0.9463256767740545
+          ],
+          "factorMinDrift": [
+            0.0,
+            0.0,
+            0.012863471926673586
+          ],
+          "sourceBaseReplacementError": 2,
+          "sourceFactorReplacementError": 1
+        },
+        {
+          "point": [
+            1303,
+            259
+          ],
+          "currentError": 3,
+          "preError": 2,
+          "preNative": [
+            255,
+            166,
+            163
+          ],
+          "prePlayer": [
+            255,
+            167,
+            165
+          ],
+          "postNative": [
+            234,
+            132,
+            137
+          ],
+          "postPlayer": [
+            235,
+            133,
+            140
+          ],
+          "factorNative": [
+            0.8203125,
+            0.6071428571428571,
+            0.6808510638297872
+          ],
+          "factorPlayer": [
+            0.8307698767746546,
+            0.6069687287078132,
+            0.6969892569708227
+          ],
+          "factorMinDrift": [
+            0.006459693532254063,
+            0.0,
+            0.0061066579011733735
+          ],
+          "sourceBaseReplacementError": 1,
+          "sourceFactorReplacementError": 2
+        },
+        {
+          "point": [
+            1254,
+            257
+          ],
+          "currentError": 2,
+          "preError": 1,
+          "preNative": [
+            255,
+            123,
+            113
+          ],
+          "prePlayer": [
+            255,
+            124,
+            114
+          ],
+          "postNative": [
+            227,
+            84,
+            86
+          ],
+          "postPlayer": [
+            228,
+            85,
+            88
+          ],
+          "factorNative": [
+            0.7424242424242424,
+            0.4504950495049505,
+            0.5714285714285714
+          ],
+          "factorPlayer": [
+            0.7758222183174236,
+            0.45070152611624364,
+            0.5799470790996573
+          ],
+          "factorMinDrift": [
+            0.029556882189150646,
+            0.0,
+            0.0
+          ],
+          "sourceBaseReplacementError": 4,
+          "sourceFactorReplacementError": 3
+        },
+        {
+          "point": [
+            1255,
+            257
+          ],
+          "currentError": 2,
+          "preError": 0,
+          "preNative": [
+            255,
+            255,
+            255
+          ],
+          "prePlayer": [
+            255,
+            255,
+            255
+          ],
+          "postNative": [
+            255,
+            188,
+            202
+          ],
+          "postPlayer": [
+            255,
+            187,
+            204
+          ],
+          "factorNative": [
+            0.7415730337078652,
+            0.4383561643835616,
+            0.5588235294117647
+          ],
+          "factorPlayer": [
+            1.0,
+            0.4969329950608704,
+            0.6038273388553378
+          ],
+          "factorMinDrift": [
+            0.2539722160132124,
+            0.055615598491271345,
+            0.04168570391096038
+          ],
+          "sourceBaseReplacementError": 10,
+          "sourceFactorReplacementError": 32
+        },
+        {
+          "point": [
+            1307,
+            257
+          ],
+          "currentError": 2,
+          "preError": 1,
+          "preNative": [
+            165,
+            79,
+            115
+          ],
+          "prePlayer": [
+            165,
+            80,
+            116
+          ],
+          "postNative": [
+            135,
+            37,
+            75
+          ],
+          "postPlayer": [
+            136,
+            38,
+            77
+          ],
+          "factorNative": [
+            0.6510416666666666,
+            0.240625,
+            0.4090909090909091
+          ],
+          "factorPlayer": [
+            0.6543346025658439,
+            0.24161561171485135,
+            0.424933705436029
+          ],
+          "factorMinDrift": [
+            0.0,
+            0.0,
+            0.0064172879485370204
+          ],
+          "sourceBaseReplacementError": 1,
+          "sourceFactorReplacementError": 1
+        },
+        {
+          "point": [
+            1253,
+            258
+          ],
+          "currentError": 2,
+          "preError": 1,
+          "preNative": [
+            90,
+            80,
+            152
+          ],
+          "prePlayer": [
+            90,
+            81,
+            153
+          ],
+          "postNative": [
+            88,
+            76,
+            145
+          ],
+          "postPlayer": [
+            88,
+            77,
+            147
+          ],
+          "factorNative": [
+            0.9519230769230769,
+            0.891566265060241,
+            0.9
+          ],
+          "factorPlayer": [
+            0.9544766524817396,
+            0.9019339660648896,
+            0.9159428688459654
+          ],
+          "factorMinDrift": [
+            0.0,
+            0.0,
+            0.0026332444166338176
+          ],
+          "sourceBaseReplacementError": 1,
+          "sourceFactorReplacementError": 1
+        },
+        {
+          "point": [
+            1302,
+            258
+          ],
+          "currentError": 2,
+          "preError": 2,
+          "preNative": [
+            255,
+            220,
+            205
+          ],
+          "prePlayer": [
+            255,
+            221,
+            207
+          ],
+          "postNative": [
+            254,
+            131,
+            146
+          ],
+          "postPlayer": [
+            255,
+            132,
+            148
+          ],
+          "factorNative": [
+            0.6827956989247311,
+            0.3179347826086957,
+            0.47435897435897434
+          ],
+          "factorPlayer": [
+            1.0,
+            0.3191181962409538,
+            0.4746106880331171
+          ],
+          "factorMinDrift": [
+            0.3127495507963465,
+            0.0,
+            0.0
+          ],
+          "sourceBaseReplacementError": 1,
+          "sourceFactorReplacementError": 39
+        },
+        {
+          "point": [
+            1303,
+            258
+          ],
+          "currentError": 2,
+          "preError": 0,
+          "preNative": [
+            255,
+            255,
+            255
+          ],
+          "prePlayer": [
+            255,
+            255,
+            255
+          ],
+          "postNative": [
+            253,
+            166,
+            190
+          ],
+          "postPlayer": [
+            255,
+            166,
+            192
+          ],
+          "factorNative": [
+            0.6847826086956522,
+            0.3233333333333333,
+            0.4714285714285714
+          ],
+          "factorPlayer": [
+            1.0,
+            0.38132601143253014,
+            0.5271151257058131
+          ],
+          "factorMinDrift": [
+            0.3107626410254254,
+            0.05545579763163261,
+            0.05262156736615742
+          ],
+          "sourceBaseReplacementError": 12,
+          "sourceFactorReplacementError": 37
+        },
+        {
+          "point": [
+            1301,
+            259
+          ],
+          "currentError": 2,
+          "preError": 1,
+          "preNative": [
+            129,
+            60,
+            114
+          ],
+          "prePlayer": [
+            129,
+            60,
+            115
+          ],
+          "postNative": [
+            115,
+            43,
+            91
+          ],
+          "postPlayer": [
+            115,
+            43,
+            93
+          ],
+          "factorNative": [
+            0.7767857142857143,
+            0.5271739130434783,
+            0.627906976744186
+          ],
+          "factorPlayer": [
+            0.7809596346324603,
+            0.5346240689373537,
+            0.6384799812320778
+          ],
+          "factorMinDrift": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "sourceBaseReplacementError": 1,
+          "sourceFactorReplacementError": 1
+        },
+        {
+          "point": [
+            1309,
+            259
+          ],
+          "currentError": 2,
+          "preError": 1,
+          "preNative": [
+            106,
+            73,
+            114
+          ],
+          "prePlayer": [
+            106,
+            73,
+            115
+          ],
+          "postNative": [
+            99,
+            60,
+            99
+          ],
+          "postPlayer": [
+            99,
+            61,
+            101
+          ],
+          "factorNative": [
+            0.8581081081081081,
+            0.6911764705882353,
+            0.7441860465116279
+          ],
+          "factorPlayer": [
+            0.8656986147020853,
+            0.7004041862191699,
+            0.7590739684597085
+          ],
+          "factorMinDrift": [
+            0.0,
+            0.0,
+            5.2361184519233994e-05
+          ],
+          "sourceBaseReplacementError": 1,
+          "sourceFactorReplacementError": 1
+        },
+        {
+          "point": [
+            1300,
+            260
+          ],
+          "currentError": 2,
+          "preError": 2,
+          "preNative": [
+            95,
+            47,
+            99
+          ],
+          "prePlayer": [
+            95,
+            47,
+            101
+          ],
+          "postNative": [
+            91,
+            42,
+            92
+          ],
+          "postPlayer": [
+            91,
+            42,
+            94
+          ],
+          "factorNative": [
+            0.9137931034482759,
+            0.8260869565217391,
+            0.859375
+          ],
+          "factorPlayer": [
+            0.914197075541382,
+            0.814512558969378,
+            0.8601157083976396
+          ],
+          "factorMinDrift": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "sourceBaseReplacementError": 0,
+          "sourceFactorReplacementError": 2
+        },
+        {
+          "point": [
+            1301,
+            260
+          ],
+          "currentError": 2,
+          "preError": 1,
+          "preNative": [
+            85,
+            66,
+            163
+          ],
+          "prePlayer": [
+            85,
+            66,
+            164
+          ],
+          "postNative": [
+            84,
+            63,
+            158
+          ],
+          "postPlayer": [
+            84,
+            63,
+            160
+          ],
+          "factorNative": [
+            0.9574468085106383,
+            0.9181818181818182,
+            0.9361702127659575
+          ],
+          "factorPlayer": [
+            0.9759347895459499,
+            0.9123772717387274,
+            0.9469205794289465
+          ],
+          "factorMinDrift": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "sourceBaseReplacementError": 1,
+          "sourceFactorReplacementError": 1
+        },
+        {
+          "point": [
+            1310,
+            260
+          ],
+          "currentError": 2,
+          "preError": 2,
+          "preNative": [
+            109,
+            75,
+            103
+          ],
+          "prePlayer": [
+            109,
+            75,
+            105
+          ],
+          "postNative": [
+            103,
+            67,
+            95
+          ],
+          "postPlayer": [
+            104,
+            67,
+            97
+          ],
+          "factorNative": [
+            0.8974358974358975,
+            0.7916666666666666,
+            0.8428571428571429
+          ],
+          "factorPlayer": [
+            0.9052187165210092,
+            0.79773186056533,
+            0.8462101302003954
+          ],
+          "factorMinDrift": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "sourceBaseReplacementError": 1,
+          "sourceFactorReplacementError": 2
+        },
+        {
+          "point": [
+            1312,
+            260
+          ],
+          "currentError": 2,
+          "preError": 1,
+          "preNative": [
+            98,
+            47,
+            75
+          ],
+          "prePlayer": [
+            98,
+            47,
+            76
+          ],
+          "postNative": [
+            96,
+            46,
+            73
+          ],
+          "postPlayer": [
+            97,
+            46,
+            75
+          ],
+          "factorNative": [
+            0.9758064516129032,
+            0.9568965517241379,
+            0.9444444444444444
+          ],
+          "factorPlayer": [
+            0.9787099199231509,
+            0.961121989393773,
+            0.9735477233850697
+          ],
+          "factorMinDrift": [
+            0.0,
+            0.0,
+            0.0033491399945891898
+          ],
+          "sourceBaseReplacementError": 1,
+          "sourceFactorReplacementError": 1
+        }
+      ]
+    }
+  },
+  "archiveSha256": "25ecb148020043efcaaeebae0c3e4635e70a5eceafa08e25f06fa4a7e93c39ff",
+  "members": {
+    "archive-iris-paired-controls.py": "265971f38a3d089325b95bd432b26fd937c409ec3cf172c8e027993d1a62e674",
+    "iris-overlay-main-frame-isolation.py": "ddcab255d794dc0674be0097bd767917d071661af48c7d61d29c3bdf19451a17",
+    "nvidia/shadow-on/results.json": "19f568486bda188cdea39a2cd7aa35b27dfd79544c2b5a811b320f0be6487c57",
+    "nvidia/shadow-on/command.json": "6872bb14145d830177fe1e932fa9a4fa40a25ba697edb59d1b354cb1115334b4",
+    "nvidia/shadow-on/frames/capture_manifest.json": "1f6591868785e2d4cc439c3e83e0eb4fc263acdca7ce32bb3a12550c3a202198",
+    "nvidia/shadow-on/frames/gpu_capabilities.json": "93c9fb29461fae11a7e57d4e49112071a71940dee571f1f6696ffbf03c392879",
+    "nvidia/shadow-off/results.json": "7c15eeb30593ac4538707c317455c8c44986e8c316b349390428efe287a58c36",
+    "nvidia/shadow-off/command.json": "9cfee2301ba555520e8718f643030a0350b81951d29d2b731cd66a3a30492829",
+    "nvidia/shadow-off/frames/capture_manifest.json": "0c8995b3cd85c0d53f3d1f3ea2805f96cf365d4bf8feb96ea7fd263872476362",
+    "nvidia/shadow-off/frames/gpu_capabilities.json": "93c9fb29461fae11a7e57d4e49112071a71940dee571f1f6696ffbf03c392879",
+    "intel/shadow-on/results.json": "d16b9e74853d2671a0b52bd017430606dd155e40f1845d5a1f7175fe9be54245",
+    "intel/shadow-on/command.json": "12e3c08ace0a32a4e6590e3fe9e774652c5ae84d19e5b2762161001b58141bbd",
+    "intel/shadow-on/frames/capture_manifest.json": "9810dd6d36aeb5c6055f726056c789cab11afc34838d69a359fe296efe5cc11e",
+    "intel/shadow-on/frames/gpu_capabilities.json": "a38eaca3509b417cfe23614fe415bd9ccc5622fc682d8623142cdeb7dc3d85cc",
+    "intel/shadow-off/results.json": "e91ea88321794e7cdeac305ed17e2fc94988992db98ce71ef2fcd3b3c13ee3b5",
+    "intel/shadow-off/command.json": "797c4fef0be344836b13eee428b9b2d6e793de93f6cc94625a3517359d2d06fc",
+    "intel/shadow-off/frames/capture_manifest.json": "24aa2248b7403c9d04a109472153ba7584adfddbc51f2b59ea1ec97fb2d858c2",
+    "intel/shadow-off/frames/gpu_capabilities.json": "a38eaca3509b417cfe23614fe415bd9ccc5622fc682d8623142cdeb7dc3d85cc"
+  }
+}
