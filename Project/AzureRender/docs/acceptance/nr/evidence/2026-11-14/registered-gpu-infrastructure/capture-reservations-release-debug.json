@@ -1,0 +1,20 @@
+{
+  "archive": {
+    "sizeBytes": 39276,
+    "members": 48,
+    "sha256": "fc6e851bb338d225df9e6fcfadfc94ba5d2426fa9aaecd142d1429276c060c2a"
+  },
+  "passed": {
+    "Release": 17,
+    "Debug": 17
+  },
+  "registrationUnchanged": true,
+  "candidateOnly": true,
+  "driver": "NVIDIA 595.79",
+  "jobs": {
+    "release-failed": 622,
+    "release-adjacent": 632,
+    "debug-failed": 643,
+    "debug-adjacent": 655
+  }
+}

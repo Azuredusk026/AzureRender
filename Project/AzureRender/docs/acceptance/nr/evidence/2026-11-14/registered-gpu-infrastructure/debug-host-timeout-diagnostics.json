@@ -1,0 +1,13 @@
+{
+  "open": true,
+  "archive": {
+    "sha256": "84be67d22155eca6a5e682829d520c10731c54c761b7019b28308e56b2917624",
+    "members": 19,
+    "bytes": 16757
+  },
+  "stageByCase": {
+    "original-bootstrap": "wait-idle",
+    "candidate-host": "first-developer-query",
+    "candidate-previews": "preview-create"
+  }
+}
