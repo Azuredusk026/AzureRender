@@ -6,10 +6,12 @@
 #include <fstream>
 #include <future>
 #include <iomanip>
+#include <limits>
 #include <mutex>
 #include <set>
 #include <sstream>
 #include <stdexcept>
+#include <thread>
 namespace azurerender {
 namespace {
 bool validRelativeShaderPath(const std::filesystem::path& path){
@@ -17,10 +19,17 @@ bool validRelativeShaderPath(const std::filesystem::path& path){
     for(const auto& part:path)if(part=="..")return false;
     return true;
 }
-std::string read(const std::filesystem::path& path){
-    std::ifstream input(path,std::ios::binary);
-    if(!input)throw std::runtime_error("Shader input unavailable: "+path.u8string());
-    return {std::istreambuf_iterator<char>(input),std::istreambuf_iterator<char>()};
+std::string read(const std::filesystem::path& path,std::uint64_t limit){
+    std::ifstream input(path,std::ios::binary|std::ios::ate);
+    const auto length=input.tellg();
+    if(length<0)throw std::runtime_error("Shader input unavailable: "+path.u8string());
+    if(static_cast<std::uint64_t>(length)>limit)throw std::runtime_error("Shader input exceeds its byte budget");
+    std::string value(static_cast<std::size_t>(length),'\0');
+    input.seekg(0);
+    if(!input.read(value.data(),static_cast<std::streamsize>(length))
+        ||input.peek()!=std::char_traits<char>::eof()||input.bad())
+        throw std::runtime_error("Shader input changed during read: "+path.u8string());
+    return value;
 }
 std::string compilerOutputPath(const std::filesystem::path& path){
 #ifdef _WIN32
@@ -54,9 +63,11 @@ ShaderSourceSnapshot snapshotShaders(const ShaderReloadOptions& options){
     for(const auto& entry:std::filesystem::recursive_directory_iterator(options.sourceRoot)){
         if(entry.is_symlink())throw std::invalid_argument("Shader snapshots require regular owned files");
         if(!entry.is_regular_file())continue;
-        bytes+=static_cast<std::size_t>(entry.file_size());
-        if(bytes>options.sourceBytes || result.files.size()>=4096)throw std::invalid_argument("Shader source exceeds budget");
-        result.files.emplace(entry.path().lexically_relative(options.sourceRoot),read(entry.path()));
+        if(result.files.size()>=4096)throw std::invalid_argument("Shader source exceeds budget");
+        if(entry.file_size()>options.sourceBytes-bytes)throw std::invalid_argument("Shader source exceeds budget");
+        auto source=read(entry.path(),options.sourceBytes-bytes);
+        bytes+=source.size();
+        result.files.emplace(entry.path().lexically_relative(options.sourceRoot),std::move(source));
     }
     std::uint64_t hash=14695981039346656037ULL;
     auto append=[&](const std::string& text){for(const unsigned char c:text){hash^=c;hash*=1099511628211ULL;}hash^=0;hash*=1099511628211ULL;};
@@ -122,14 +133,16 @@ ShaderCompileResult compileShaderCandidate(const ShaderReloadOptions& options,co
             request.arguments.insert(request.arguments.end(),{"-I",sources.u8string(),(sources/program.source).u8string(),program.outputOption,compilerOutputPath(target)});
             const auto process=runProcess(request,cancelled);
             if(!process.passed)throw std::runtime_error(process.diagnostic+"\n"+process.output);
-            const auto code=read(target);std::uint32_t magic=0;
+            const auto code=read(target,std::numeric_limits<std::streamsize>::max());std::uint32_t magic=0;
             if(code.size()>=4)std::memcpy(&magic,code.data(),4);
             if(code.size()<20 || code.size()%4 || magic!=0x07230203)throw std::runtime_error("Compiler candidate is not SPIR-V");
         }}catch(const std::exception& error){
             std::lock_guard<std::mutex> lock(diagnosticMutex);
             if(diagnostic.empty())diagnostic=error.what();failed=true;
         }};
-        const auto workers=independent?std::min<std::size_t>(8,options.programs.size()):1;
+        const auto available=std::thread::hardware_concurrency();
+        const auto limit=std::clamp<std::size_t>(available/2U,8,16);
+        const auto workers=independent?std::min(limit,options.programs.size()):1;
         std::vector<std::future<void>> jobs;jobs.reserve(workers);
         for(std::size_t i=0;i<workers;++i)jobs.push_back(std::async(std::launch::async,compile));
         for(auto& job:jobs)job.get();

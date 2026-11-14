@@ -57,6 +57,12 @@
   },
   "milestones": [
     {
+      "path": "runs/20261115-025120-nr-main-acceptance-fixes-83c2b8",
+      "name": "编辑器与资产主线复验",
+      "evidence": "docs/acceptance/nr/registered-gpu-infrastructure.md",
+      "results": "docs/acceptance/nr/evidence/2026-11-15/registered-editor-asset-integration/results.json"
+    },
+    {
       "path": "runs/20261115-013428-nr-joint-80w-idle-retest-89f552",
       "name": "联合场景独显空闲复验",
       "sourceBase": "01cc6b2",

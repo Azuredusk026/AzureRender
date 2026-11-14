@@ -7,6 +7,8 @@
 #include "runtime/AnimationStateMachine.hpp"
 #include <algorithm>
 #include <fstream>
+#include <atomic>
+#include <future>
 #include <iomanip>
 #include <random>
 #include <regex>
@@ -103,6 +105,34 @@ std::string uuid() {
     }
     return out.str();
 }
+Json createAssetMetadata(const std::filesystem::path& sidecar) {
+    namespace fs = std::filesystem;
+    Json created = {{"schemaVersion", 1}, {"id", uuid()}, {"settings", Json::object()}, {"dependencies", Json::array()}};
+    const auto id = created.at("id").get<std::string>();
+    auto staging = sidecar;
+    staging += "." + id + ".tmp";
+    const auto cleanup = [&] { std::error_code ignored; fs::remove(staging, ignored); };
+    try {
+        std::ofstream output(staging, std::ios::binary | std::ios::trunc);
+        output << created.dump(2);
+        output.close();
+        if (!output) throw std::runtime_error("Cannot write asset metadata: " + sidecar.u8string());
+        std::error_code error;
+#ifdef _WIN32
+        if (!MoveFileExW(nativeFilePath(staging).c_str(), nativeFilePath(sidecar).c_str(), 0))
+            error = {static_cast<int>(GetLastError()), std::system_category()};
+#else
+        fs::create_hard_link(staging, sidecar, error);
+        if (!error) cleanup();
+#endif
+        if (!error) return created;
+        if (fs::is_regular_file(sidecar)) {
+            cleanup();
+            return Json::parse(bytes(sidecar));
+        }
+        throw fs::filesystem_error("Cannot publish asset metadata", staging, sidecar, error);
+    } catch (...) { cleanup(); throw; }
+}
 void writeCache(const std::filesystem::path& path, const std::string& data) {
     namespace fs=std::filesystem;
     // Validate the complete immutable payload before reserving staging space.
@@ -123,7 +153,7 @@ void writeCache(const std::filesystem::path& path, const std::string& data) {
          if(!output)throw std::runtime_error("Cannot write asset cache: "+path.u8string());}
         std::error_code error;
 #ifdef _WIN32
-        if(!MoveFileExW(nativeFilePath(payload).c_str(),nativeFilePath(path).c_str(),MOVEFILE_WRITE_THROUGH))
+        if(!MoveFileExW(nativeFilePath(payload).c_str(),nativeFilePath(path).c_str(),0))
             error={static_cast<int>(GetLastError()),std::system_category()};
 #else
         fs::rename(payload,path,error);
@@ -133,7 +163,7 @@ void writeCache(const std::filesystem::path& path, const std::string& data) {
         if(error && fs::is_regular_file(path)){
             if(cacheBytes(path)==data)error.clear();
 #ifdef _WIN32
-            else if(MoveFileExW(nativeFilePath(payload).c_str(),nativeFilePath(path).c_str(),MOVEFILE_REPLACE_EXISTING|MOVEFILE_WRITE_THROUGH))
+            else if(MoveFileExW(nativeFilePath(payload).c_str(),nativeFilePath(path).c_str(),MOVEFILE_REPLACE_EXISTING))
                 error.clear();
             else error={static_cast<int>(GetLastError()),std::system_category()};
 #endif
@@ -207,59 +237,110 @@ std::vector<std::string> AssetDatabase::refresh(bool verifyAll,std::function<voi
     std::map<std::string, AssetRecord> candidate;
     std::map<std::string, std::string> paths;
     std::map<std::filesystem::path,SourceState> sources;
+    struct Entry {
+        std::string virtualPath;
+        std::filesystem::path path, sidecar;
+        std::optional<Json> metadata;
+    };
+    const auto process = [&](Entry& entry) {
+        const auto& virtualPath = entry.virtualPath;
+        const auto& path = entry.path;
+        const auto& sidecar = entry.sidecar;
+        const auto previous=sources_->find(path);
+        const auto time=std::filesystem::last_write_time(path);
+        const auto size=std::filesystem::file_size(path);
+        if(!verifyAll && previous!=sources_->end() && std::filesystem::exists(sidecar)
+            && previous->second.sourceTime==time && previous->second.size==size
+            && previous->second.metadataTime==std::filesystem::last_write_time(sidecar)){
+            const auto& state=previous->second;
+            if(!candidate.emplace(state.id,AssetRecord{state.id,virtualPath,path,state.baseFingerprint,state.contentHash,{}}).second)
+                throw std::runtime_error("Duplicate asset UUID: "+state.id);
+            paths[virtualPath]=state.id;
+            sources[path]=state;++statistics_.filesReused;return;
+        }
+        Json meta;
+        if (entry.metadata) meta = std::move(*entry.metadata);
+        else if (std::filesystem::exists(sidecar)) meta = Json::parse(bytes(sidecar));
+        else meta = createAssetMetadata(sidecar);
+        if (!meta.at("schemaVersion").is_number_integer() || meta.at("schemaVersion") != 1) throw std::runtime_error("Unsupported asset metadata version");
+        const auto id = meta.at("id").get<std::string>();
+        if (!std::regex_match(id, uuidPattern))
+            throw std::runtime_error("Invalid asset UUID: " + sidecar.u8string());
+        if(meta.value("settings",Json::object()).contains("texture")) {
+            const auto settings=TextureImportSettings::parse(meta.at("settings").at("texture"));
+            meta["settings"]["texture"]=settings.describe();
+        }
+        const auto source = bytes(path,check);
+        statistics_.sourceBytesRead+=source.size();++statistics_.filesRead;
+        if (!candidate.emplace(id, AssetRecord{id, virtualPath, path, hash(source + meta.value("settings", Json::object()).dump() + "importer-v1"), hash(source), {}}).second)
+            throw std::runtime_error("Duplicate asset UUID: " + id);
+        const auto extension=assetExtension(path);Json document;
+        if(extension==".gltf" || extension==".azurelevel" || extension==".azureprefab" || extension==".azscript" || extension==".azurematerial" || extension==".azure2d")document=Json::parse(source);
+        if(extension==".azure2d")document=Scene2D::parse(document).encode();
+        if(extension==".azscene") {
+            document={{"resources",Json::array()}};
+            const auto scene=SceneDocument::load(path);
+            if(!scene.reflectionProbe.texture.empty())document["reflectionProbe"]=scene.reflectionProbe;
+            if(!scene.irradianceVolume.asset.empty())document["irradianceVolume"]=scene.irradianceVolume;
+            if(!scene.viewFog.asset.empty())document["viewFog"]=scene.viewFog;
+            if(!scene.renderSettings.grade.lut.asset.empty())document["gradeLut"]={{"asset",scene.renderSettings.grade.lut.asset}};
+            for(const auto& resource:scene.resources)document["resources"].push_back({{"asset",resource.path.generic_u8string()}});
+            document["nodes"]=Json::array();for(const auto& node:scene.nodes)if(!node.materialSlots.empty())document["nodes"].push_back({{"materialSlots",node.materialSlots}});
+        }
+        const auto& record=candidate.at(id);
+        auto references=discoverAssetReferences(document,extension,virtualPath,project_);
+        sources[path]={time,std::filesystem::last_write_time(sidecar),size,id,std::move(meta),std::move(references),record.contentHash,record.fingerprint};
+        paths[virtualPath] = id;
+    };
+    // A cold synchronous scan can publish independent sidecars together.
+    // Cancellable and warm scans continue to process entries as they are read.
+    const bool collect = !check && sources_->empty();
+    std::vector<Entry> entries;
     for (const auto& mount : project_.mounts) {
+        const auto root = std::filesystem::weakly_canonical(mount.second);
+        const auto prefix = mount.first + ":/";
         for (const auto& entry : std::filesystem::recursive_directory_iterator(mount.second)) {
             if(check)check();
             if (!entry.is_regular_file() || entry.path().extension() == ".azmeta" || entry.path().extension() == ".tmp") continue;
-            const auto virtualPath = mount.first + ":/" + entry.path().lexically_relative(mount.second).generic_u8string();
-            const auto path = project_.resolve(virtualPath);
+            const auto relative = entry.path().lexically_relative(mount.second).generic_u8string();
+            const auto virtualPath = prefix + relative;
+            if (relative.empty() || relative.find(':') != std::string::npos)
+                throw std::runtime_error("Invalid virtual path: " + virtualPath);
+            // The mount root is shared by the scan. Resolve each entry, including
+            // links, before checking containment against that root.
+            const auto path = std::filesystem::weakly_canonical(root / std::filesystem::u8path(relative));
+            const auto inside = path.lexically_relative(root);
+            if (inside.empty() || *inside.begin() == "..")
+                throw std::runtime_error("Project path escapes mount: " + virtualPath);
             auto sidecar = path;sidecar += ".azmeta";
-            const auto previous=sources_->find(path);
-            const auto time=std::filesystem::last_write_time(path);
-            const auto size=std::filesystem::file_size(path);
-            if(!verifyAll && previous!=sources_->end() && std::filesystem::exists(sidecar)
-                && previous->second.sourceTime==time && previous->second.size==size
-                && previous->second.metadataTime==std::filesystem::last_write_time(sidecar)){
-                const auto& state=previous->second;
-                if(!candidate.emplace(state.id,AssetRecord{state.id,virtualPath,path,state.baseFingerprint,state.contentHash,{}}).second)
-                    throw std::runtime_error("Duplicate asset UUID: "+state.id);
-                paths[virtualPath]=state.id;
-                sources[path]=state;++statistics_.filesReused;continue;
-            }
-            Json meta;
-            if (std::filesystem::exists(sidecar)) meta = Json::parse(bytes(sidecar));
-            else { meta = {{"schemaVersion", 1}, {"id", uuid()}, {"settings", Json::object()}, {"dependencies", Json::array()}}; write(sidecar, meta.dump(2)); }
-            if (!meta.at("schemaVersion").is_number_integer() || meta.at("schemaVersion") != 1) throw std::runtime_error("Unsupported asset metadata version");
-            const auto id = meta.at("id").get<std::string>();
-            if (!std::regex_match(id, uuidPattern))
-                throw std::runtime_error("Invalid asset UUID: " + sidecar.u8string());
-            if(meta.value("settings",Json::object()).contains("texture")) {
-                const auto settings=TextureImportSettings::parse(meta.at("settings").at("texture"));
-                meta["settings"]["texture"]=settings.describe();
-            }
-            const auto source = bytes(path,check);
-            statistics_.sourceBytesRead+=source.size();++statistics_.filesRead;
-            if (!candidate.emplace(id, AssetRecord{id, virtualPath, path, hash(source + meta.value("settings", Json::object()).dump() + "importer-v1"), hash(source), {}}).second)
-                throw std::runtime_error("Duplicate asset UUID: " + id);
-            const auto extension=assetExtension(path);Json document;
-            if(extension==".gltf" || extension==".azurelevel" || extension==".azureprefab" || extension==".azscript" || extension==".azurematerial" || extension==".azure2d")document=Json::parse(source);
-            if(extension==".azure2d")document=Scene2D::parse(document).encode();
-            if(extension==".azscene") {
-                document={{"resources",Json::array()}};
-                const auto scene=SceneDocument::load(path);
-                if(!scene.reflectionProbe.texture.empty())document["reflectionProbe"]=scene.reflectionProbe;
-                if(!scene.irradianceVolume.asset.empty())document["irradianceVolume"]=scene.irradianceVolume;
-                if(!scene.viewFog.asset.empty())document["viewFog"]=scene.viewFog;
-                if(!scene.renderSettings.grade.lut.asset.empty())document["gradeLut"]={{"asset",scene.renderSettings.grade.lut.asset}};
-                for(const auto& resource:scene.resources)document["resources"].push_back({{"asset",resource.path.generic_u8string()}});
-                document["nodes"]=Json::array();for(const auto& node:scene.nodes)if(!node.materialSlots.empty())document["nodes"].push_back({{"materialSlots",node.materialSlots}});
-            }
-            const auto& record=candidate.at(id);
-            auto references=discoverAssetReferences(document,extension,virtualPath,project_);
-            sources[path]={time,std::filesystem::last_write_time(sidecar),size,id,std::move(meta),std::move(references),record.contentHash,record.fingerprint};
-            paths[virtualPath] = id;
+            Entry pending{virtualPath, path, std::move(sidecar), std::nullopt};
+            if (collect) entries.push_back(std::move(pending));
+            else process(pending);
         }
     }
+    if (entries.size() >= 64) {
+        std::atomic<std::size_t> next{0};
+        std::atomic<bool> failed{false};
+        const auto publish = [&] {
+            try {
+                while (!failed.load(std::memory_order_relaxed)) {
+                    const auto index = next.fetch_add(1, std::memory_order_relaxed);
+                    if (index >= entries.size()) return;
+                    auto& entry = entries[index];
+                    if (!std::filesystem::exists(entry.sidecar))
+                        entry.metadata = createAssetMetadata(entry.sidecar);
+                }
+            } catch (...) {
+                failed.store(true, std::memory_order_relaxed);
+                throw;
+            }
+        };
+        std::vector<std::future<void>> publishers;
+        for (unsigned worker = 0; worker < 4; ++worker)
+            publishers.push_back(std::async(std::launch::async, publish));
+        for (auto& publisher : publishers) publisher.get();
+    }
+    for (auto& entry : entries) process(entry);
     for (auto& entry : candidate) {
         if(check)check();
         auto& record = entry.second;
@@ -334,12 +415,42 @@ std::vector<std::string> AssetDatabase::refresh(bool verifyAll,std::function<voi
         record.fingerprint = hash(key); state[id] = 2; return record.fingerprint;
     };
     std::vector<std::string> changed;
+    std::vector<std::pair<std::filesystem::path, const AssetRecord*>> snapshots;
+    const auto cacheDirectory = project_.file.parent_path() / ".azure/cache";
     for (auto& entry : candidate) {
         fingerprint(entry.first, fingerprint);
         const auto old = records_.find(entry.first);
-        if (old == records_.end() || old->second.fingerprint != entry.second.fingerprint || old->second.path != entry.second.path) {
-            changed.push_back(entry.first); cache(project_.file.parent_path() / ".azure/cache" / entry.first / (std::to_string(entry.second.fingerprint) + ".azcache"), entry.second);
+        if (old != records_.end() && old->second.fingerprint == entry.second.fingerprint && old->second.path == entry.second.path) continue;
+        changed.push_back(entry.first);
+        snapshots.emplace_back(cacheDirectory / entry.first / (std::to_string(entry.second.fingerprint) + ".azcache"), &entry.second);
+    }
+    // Cancellation belongs to the caller. Small and cancellable publications
+    // retain the same owner-thread order and checks.
+    if (check || snapshots.size() < 64) {
+        for (const auto& [path, record] : snapshots) {
+            if (check) check();
+            cache(path, *record);
         }
+    } else {
+        std::atomic<std::size_t> next{0};
+        std::atomic<bool> failed{false};
+        const auto publish = [&] {
+            try {
+                while (!failed.load(std::memory_order_relaxed)) {
+                    const auto index = next.fetch_add(1, std::memory_order_relaxed);
+                    if (index >= snapshots.size()) return;
+                    const auto& [path, record] = snapshots[index];
+                    cache(path, *record);
+                }
+            } catch (...) {
+                failed.store(true, std::memory_order_relaxed);
+                throw;
+            }
+        };
+        std::vector<std::future<void>> publishers;
+        for (unsigned worker = 0; worker < 4; ++worker)
+            publishers.push_back(std::async(std::launch::async, publish));
+        for (auto& publisher : publishers) publisher.get();
     }
     for (const auto& old : records_) if (!candidate.count(old.first)) changed.push_back(old.first);
     if(check)check();

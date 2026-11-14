@@ -1,0 +1,617 @@
+{
+  "builds": {
+    "release": {
+      "status": "built",
+      "seconds": 163.92200000000594,
+      "tests": 607,
+      "missingCommands": [],
+      "hostSha256": "f15ca390735be9978a86eddf827e471c5f788ae29a09d458c6a0f39b25ae7af2"
+    },
+    "debug": {
+      "status": "built",
+      "seconds": 59.812000000005355,
+      "tests": 605,
+      "missingCommands": [],
+      "hostSha256": "e9ec02f1c89eaedf9c21166899431ce807f999199600a7b3f84e487fc1ad0bfa"
+    }
+  },
+  "originalCases": {
+    "release": {
+      "AzureEditor.Thumbnail": {
+        "seconds": 1.02201,
+        "report": "release-integrated-cpu-assets.json",
+        "junit": "release-integrated-cpu-assets.xml"
+      },
+      "AzureEngine.AssetSourceCache": {
+        "seconds": 1.97637,
+        "report": "release-integrated-cpu-assets.json",
+        "junit": "release-integrated-cpu-assets.xml"
+      },
+      "AzureEngine.AssetLevel": {
+        "seconds": 3.9206,
+        "report": "release-integrated-cpu-assets.json",
+        "junit": "release-integrated-cpu-assets.xml"
+      },
+      "AzureEditor.ProjectFlow": {
+        "seconds": 7.58714,
+        "report": "release-integrated-cpu-assets.json",
+        "junit": "release-integrated-cpu-assets.xml"
+      },
+      "AzureEditor.ContentDirectoryScale": {
+        "seconds": 130.058,
+        "report": "release-integrated-cpu-assets.json",
+        "junit": "release-integrated-cpu-assets.xml",
+        "assets": 10000,
+        "cachedP95Ms": 0.0088,
+        "directoryResetMs": 12.0449,
+        "repeatedResetsMs": [
+          0.0602,
+          0.0615,
+          0.0596
+        ]
+      },
+      "AzureRender.ShaderCompilerContract": {
+        "seconds": 5.47306,
+        "report": "release-integrated-cpu-compiler.json",
+        "junit": "release-integrated-cpu-compiler.xml"
+      },
+      "AzureRender.ShaderCatalogCompilation": {
+        "seconds": 56.2055,
+        "report": "release-integrated-cpu-compiler.json",
+        "junit": "release-integrated-cpu-compiler.xml",
+        "byteExactPrograms": 897
+      },
+      "AzureRender.PipelineInspection": {
+        "seconds": 0.91491,
+        "report": "release-integrated-cpu-recording.json",
+        "junit": "release-integrated-cpu-recording.xml"
+      },
+      "AzureRender.OutlineCoverageRecording": {
+        "seconds": 6.74132,
+        "report": "release-integrated-cpu-recording.json",
+        "junit": "release-integrated-cpu-recording.xml"
+      },
+      "AzureRender.NullRhiPass": {
+        "seconds": 2.16911,
+        "report": "release-integrated-cpu-recording.json",
+        "junit": "release-integrated-cpu-recording.xml"
+      },
+      "AzureRender.VisualRegression": {
+        "seconds": 19.926,
+        "report": "release-integrated-gpu-frozen.json",
+        "junit": "release-integrated-gpu-frozen.xml"
+      },
+      "AzureRender.VisualRegressionLegacyDescriptors": {
+        "seconds": 17.7776,
+        "report": "release-integrated-gpu-frozen.json",
+        "junit": "release-integrated-gpu-frozen.xml"
+      },
+      "AzureRender.VisualRegressionLegacySkinning": {
+        "seconds": 17.6762,
+        "report": "release-integrated-gpu-frozen.json",
+        "junit": "release-integrated-gpu-frozen.xml"
+      },
+      "AzureEditor.DevtoolsHost": {
+        "seconds": 116.858,
+        "report": "release-integrated-gpu-editor.json",
+        "junit": "release-integrated-gpu-editor.xml",
+        "workflows": [
+          {
+            "workflow": "exploration",
+            "status": "passed",
+            "operations": 145,
+            "shaderGeneration": 2,
+            "physicalKeyboardMouse": "not performed",
+            "synchronizationValidation": true
+          },
+          {
+            "workflow": "inspector",
+            "status": "passed",
+            "operations": 145,
+            "shaderGeneration": 2,
+            "physicalKeyboardMouse": "not performed",
+            "synchronizationValidation": true
+          }
+        ]
+      },
+      "AzureEditor.ShaderReloadHost": {
+        "seconds": 93.3224,
+        "report": "release-integrated-gpu-editor.json",
+        "junit": "release-integrated-gpu-editor.xml"
+      },
+      "AzureEngine.UnlitTextureLayersGpu": {
+        "seconds": 266.394,
+        "report": "release-integrated-gpu-materials.json",
+        "junit": "release-integrated-gpu-materials.xml"
+      },
+      "AzureEngine.MaterialOverlaysGpu": {
+        "seconds": 35.828,
+        "report": "release-integrated-gpu-materials.json",
+        "junit": "release-integrated-gpu-materials.xml"
+      }
+    },
+    "debug": {
+      "AzureEditor.Thumbnail": {
+        "seconds": 2.33362,
+        "report": "debug-integrated-cpu-assets.json",
+        "junit": "debug-integrated-cpu-assets.xml"
+      },
+      "AzureEngine.AssetSourceCache": {
+        "seconds": 2.92459,
+        "report": "debug-integrated-cpu-assets.json",
+        "junit": "debug-integrated-cpu-assets.xml"
+      },
+      "AzureEngine.AssetLevel": {
+        "seconds": 3.65925,
+        "report": "debug-integrated-cpu-assets.json",
+        "junit": "debug-integrated-cpu-assets.xml"
+      },
+      "AzureEditor.ProjectFlow": {
+        "seconds": 5.45685,
+        "report": "debug-integrated-cpu-assets.json",
+        "junit": "debug-integrated-cpu-assets.xml"
+      },
+      "AzureEditor.ContentDirectoryScale": {
+        "seconds": 170.635,
+        "report": "debug-integrated-cpu-assets.json",
+        "junit": "debug-integrated-cpu-assets.xml",
+        "assets": 10000,
+        "cachedP95Ms": 0.1787,
+        "directoryResetMs": 63.0958,
+        "repeatedResetsMs": [
+          0.322,
+          0.7329,
+          0.3771
+        ]
+      },
+      "AzureRender.ShaderCompilerContract": {
+        "seconds": 5.16417,
+        "report": "debug-integrated-cpu-compiler.json",
+        "junit": "debug-integrated-cpu-compiler.xml"
+      },
+      "AzureRender.ShaderCatalogCompilation": {
+        "seconds": 70.9316,
+        "report": "debug-integrated-cpu-compiler.json",
+        "junit": "debug-integrated-cpu-compiler.xml",
+        "byteExactPrograms": 897
+      },
+      "AzureRender.PipelineInspection": {
+        "seconds": 0.79665,
+        "report": "debug-integrated-cpu-recording.json",
+        "junit": "debug-integrated-cpu-recording.xml"
+      },
+      "AzureRender.OutlineCoverageRecording": {
+        "seconds": 60.7421,
+        "report": "debug-integrated-cpu-recording.json",
+        "junit": "debug-integrated-cpu-recording.xml"
+      },
+      "AzureRender.NullRhiPass": {
+        "seconds": 37.7308,
+        "report": "debug-integrated-cpu-recording.json",
+        "junit": "debug-integrated-cpu-recording.xml"
+      },
+      "AzureRender.VisualRegression": {
+        "seconds": 61.7743,
+        "report": "debug-integrated-gpu-frozen.json",
+        "junit": "debug-integrated-gpu-frozen.xml"
+      },
+      "AzureRender.VisualRegressionLegacyDescriptors": {
+        "seconds": 50.4653,
+        "report": "debug-integrated-gpu-frozen.json",
+        "junit": "debug-integrated-gpu-frozen.xml"
+      },
+      "AzureRender.VisualRegressionLegacySkinning": {
+        "seconds": 48.449,
+        "report": "debug-integrated-gpu-frozen.json",
+        "junit": "debug-integrated-gpu-frozen.xml"
+      },
+      "AzureEditor.DevtoolsHost": {
+        "seconds": 229.216,
+        "report": "debug-integrated-gpu-editor.json",
+        "junit": "debug-integrated-gpu-editor.xml",
+        "workflows": [
+          {
+            "workflow": "exploration",
+            "status": "passed",
+            "operations": 145,
+            "shaderGeneration": 2,
+            "physicalKeyboardMouse": "not performed",
+            "synchronizationValidation": true
+          },
+          {
+            "workflow": "inspector",
+            "status": "passed",
+            "operations": 145,
+            "shaderGeneration": 2,
+            "physicalKeyboardMouse": "not performed",
+            "synchronizationValidation": true
+          }
+        ]
+      },
+      "AzureEditor.ShaderReloadHost": {
+        "seconds": 108.539,
+        "report": "debug-integrated-gpu-editor.json",
+        "junit": "debug-integrated-gpu-editor.xml"
+      },
+      "AzureEngine.UnlitTextureLayersGpu": {
+        "seconds": 489.321,
+        "report": "debug-integrated-gpu-materials.json",
+        "junit": "debug-integrated-gpu-materials.xml"
+      },
+      "AzureEngine.MaterialOverlaysGpu": {
+        "seconds": 52.1707,
+        "report": "debug-integrated-gpu-materials.json",
+        "junit": "debug-integrated-gpu-materials.xml"
+      }
+    }
+  },
+  "inputFiles": {
+    "src/devtools/ShaderCompileJob.cpp": {
+      "beforeSha256": "14c178a716f7c1005c9e647fd439b4b9c827d6d3af9044cab139b7416f983864",
+      "afterSha256": "622e36a5f65948b63b181e8c6fb3b328c13ebe6ceb53001f16ca7fde62205768"
+    },
+    "tests/ShaderCompilerContractTests.cpp": {
+      "beforeSha256": "8e8ba821f82a611897c69d3a3ad2e58e9c5bbf2182ee360eb3139c83e03127bb",
+      "afterSha256": "5699bf661008e9c1f991449c9a1255561893866536e506eacd9ba7c6dc74ef3b"
+    },
+    "tools/test_devtools_host.py": {
+      "beforeSha256": "1231f024987637e6449c42fa8c668136706ddeb3841e3e4b882e9d32c99a7c44",
+      "afterSha256": "6b65484138ccacdba499846e83627f975874f3481c26fc9f44cd29f0301a811b"
+    },
+    "src/scenes/CharacterSceneRenderer.cpp": {
+      "beforeSha256": "fcbd80abc0afc272d3d875f213136dcc637ffe7a32f9db122a7ccd2af5d7b78e",
+      "afterSha256": "291460c5d0e866413e9fc96920e0bcb681045aeebeeaee6ecb66652d3dd5938e"
+    },
+    "src/rhi/VulkanRhi.cpp": {
+      "beforeSha256": "dfe5550ee44dd4fd3cf6f3ec5c235beea2959eb3b210e352bc0b345df55e940f",
+      "afterSha256": "668242b48c19be3398fa96bdbe660eccf8caf620c9327af40b70d56c24eda5e2"
+    },
+    "src/runtime/AssetDatabase.cpp": {
+      "beforeSha256": "746ce43fe3c7efdc9d307cfca6ac7090bfb6fd20e853843c658ff94cdd5e1557",
+      "afterSha256": "6bd39556eaa1d519e6437b922e1c8be221dc0f50dbd193bdb5a27ac7098ede49"
+    },
+    "src/editor/content/AssetCatalog.cpp": {
+      "beforeSha256": "a029dba4e50f0666892dfca17d02449ac7438e94b5b01b6eb4a7049a414e4249",
+      "afterSha256": "049edcd0b26583c7c0fa0133403e8648c101c2513949198295a19b9850c1173d"
+    }
+  },
+  "frozenFrames": {
+    "release": {
+      "indexed": {
+        "summarySha256": "23959ae31537dcd58b669eaea848b7c15656f4f2525f47f32e8efabce7664f52",
+        "frames": {
+          "character_beauty_fullbody": {
+            "pixelDifferences": 0,
+            "captureSha256": "c23d4620ed136cc8367fe21e97d800bb6aeccac80c5bc06ee3851d7be824631e",
+            "referenceSha256": "c23d4620ed136cc8367fe21e97d800bb6aeccac80c5bc06ee3851d7be824631e",
+            "manifestSha256": "b1609e59dd4a26991f460f4f121d053b638343a3c3b23cd146261ce2b379bed8",
+            "deviceSha256": "fcc84c76d84bace150db35ec07631ab83809bdd1c365b6d96cb8afe8e354190a"
+          },
+          "character_albedo_fullbody": {
+            "pixelDifferences": 0,
+            "captureSha256": "93756f932fbf0f8750095172c8e1c1aaf6a41952cd59db73c856d1e97bc82373",
+            "referenceSha256": "93756f932fbf0f8750095172c8e1c1aaf6a41952cd59db73c856d1e97bc82373",
+            "manifestSha256": "3e69de12af483144c4b4047d57fd9be59217dda648950e9c799099a230ec09f7",
+            "deviceSha256": "fcc84c76d84bace150db35ec07631ab83809bdd1c365b6d96cb8afe8e354190a"
+          },
+          "character_world_normal_fullbody": {
+            "pixelDifferences": 0,
+            "captureSha256": "156bc7ebcf292ef690e5dcb7dcd00d9d846898c0de22c0220f6fd8b3b98554eb",
+            "referenceSha256": "156bc7ebcf292ef690e5dcb7dcd00d9d846898c0de22c0220f6fd8b3b98554eb",
+            "manifestSha256": "373fc441e91623030a360f4825b8c4622cbf4620e2cb4843599d0b04365999bf",
+            "deviceSha256": "fcc84c76d84bace150db35ec07631ab83809bdd1c365b6d96cb8afe8e354190a"
+          },
+          "character_material_id_fullbody": {
+            "pixelDifferences": 0,
+            "captureSha256": "4d4e341319d327eacfcd7077931db12666fd2c67ee517e13d9b5cf1dacd99d95",
+            "referenceSha256": "4d4e341319d327eacfcd7077931db12666fd2c67ee517e13d9b5cf1dacd99d95",
+            "manifestSha256": "d888da2bf51ebdfed550c367f33dc55726c985ac86ffc2b32e2ac2d22434c320",
+            "deviceSha256": "fcc84c76d84bace150db35ec07631ab83809bdd1c365b6d96cb8afe8e354190a"
+          },
+          "character_outline_fullbody": {
+            "pixelDifferences": 0,
+            "captureSha256": "20b20897c33ac8f0b24178ca34239b15a48035a277c73a0920bc3bbf4dc5af56",
+            "referenceSha256": "20b20897c33ac8f0b24178ca34239b15a48035a277c73a0920bc3bbf4dc5af56",
+            "manifestSha256": "53c9e2bf754ebfce0e57a26bcbc2ce36578c1975e29708323fa01573f7f4c945",
+            "deviceSha256": "fcc84c76d84bace150db35ec07631ab83809bdd1c365b6d96cb8afe8e354190a"
+          },
+          "character_direct_diffuse_fullbody": {
+            "pixelDifferences": 0,
+            "captureSha256": "310f136e2b62a9606a067719e29aa48ee4224edf863d9cfa206c9af29bb714f4",
+            "referenceSha256": "310f136e2b62a9606a067719e29aa48ee4224edf863d9cfa206c9af29bb714f4",
+            "manifestSha256": "54cb5bf9a3114597116303f78331455e2dfd7f423d5def520bb1d9c243ff3acc",
+            "deviceSha256": "fcc84c76d84bace150db35ec07631ab83809bdd1c365b6d96cb8afe8e354190a"
+          },
+          "character_face_sdf_closeup": {
+            "pixelDifferences": 0,
+            "captureSha256": "2b482d6c4bb8c2250ddc98b1a74621350a643b50e4b20f76fc02602b36df4f6c",
+            "referenceSha256": "2b482d6c4bb8c2250ddc98b1a74621350a643b50e4b20f76fc02602b36df4f6c",
+            "manifestSha256": "5aafcc101f27077f0cad5b2f72b5ea698540e95760b64a01c0551fd5b4c57cf6",
+            "deviceSha256": "fcc84c76d84bace150db35ec07631ab83809bdd1c365b6d96cb8afe8e354190a"
+          }
+        }
+      },
+      "fixed": {
+        "summarySha256": "23959ae31537dcd58b669eaea848b7c15656f4f2525f47f32e8efabce7664f52",
+        "frames": {
+          "character_beauty_fullbody": {
+            "pixelDifferences": 0,
+            "captureSha256": "c23d4620ed136cc8367fe21e97d800bb6aeccac80c5bc06ee3851d7be824631e",
+            "referenceSha256": "c23d4620ed136cc8367fe21e97d800bb6aeccac80c5bc06ee3851d7be824631e",
+            "manifestSha256": "e77824e5ea6d569ffd7e65b6cb5122351cd33f32add91137055e9bca308709da",
+            "deviceSha256": "93c9fb29461fae11a7e57d4e49112071a71940dee571f1f6696ffbf03c392879"
+          },
+          "character_albedo_fullbody": {
+            "pixelDifferences": 0,
+            "captureSha256": "93756f932fbf0f8750095172c8e1c1aaf6a41952cd59db73c856d1e97bc82373",
+            "referenceSha256": "93756f932fbf0f8750095172c8e1c1aaf6a41952cd59db73c856d1e97bc82373",
+            "manifestSha256": "4bbcc29135a7cc97fcdc4f4ab2fe2100d1662fadf709856b1fb0cefc16628d75",
+            "deviceSha256": "93c9fb29461fae11a7e57d4e49112071a71940dee571f1f6696ffbf03c392879"
+          },
+          "character_world_normal_fullbody": {
+            "pixelDifferences": 0,
+            "captureSha256": "156bc7ebcf292ef690e5dcb7dcd00d9d846898c0de22c0220f6fd8b3b98554eb",
+            "referenceSha256": "156bc7ebcf292ef690e5dcb7dcd00d9d846898c0de22c0220f6fd8b3b98554eb",
+            "manifestSha256": "d41debab872d643ad7c87665b6deb179599d8c5fc02d69ea4d6fd7c4a6206fd7",
+            "deviceSha256": "93c9fb29461fae11a7e57d4e49112071a71940dee571f1f6696ffbf03c392879"
+          },
+          "character_material_id_fullbody": {
+            "pixelDifferences": 0,
+            "captureSha256": "4d4e341319d327eacfcd7077931db12666fd2c67ee517e13d9b5cf1dacd99d95",
+            "referenceSha256": "4d4e341319d327eacfcd7077931db12666fd2c67ee517e13d9b5cf1dacd99d95",
+            "manifestSha256": "3efbcb11c6731336a28e07297e5f076754988befd8caef3e2ca18211bfda8bcf",
+            "deviceSha256": "93c9fb29461fae11a7e57d4e49112071a71940dee571f1f6696ffbf03c392879"
+          },
+          "character_outline_fullbody": {
+            "pixelDifferences": 0,
+            "captureSha256": "20b20897c33ac8f0b24178ca34239b15a48035a277c73a0920bc3bbf4dc5af56",
+            "referenceSha256": "20b20897c33ac8f0b24178ca34239b15a48035a277c73a0920bc3bbf4dc5af56",
+            "manifestSha256": "3a0b2906d0ccc64b35af41f78c39203c0f5d512f8018e43dd93bf5d1b1ca5fab",
+            "deviceSha256": "93c9fb29461fae11a7e57d4e49112071a71940dee571f1f6696ffbf03c392879"
+          },
+          "character_direct_diffuse_fullbody": {
+            "pixelDifferences": 0,
+            "captureSha256": "310f136e2b62a9606a067719e29aa48ee4224edf863d9cfa206c9af29bb714f4",
+            "referenceSha256": "310f136e2b62a9606a067719e29aa48ee4224edf863d9cfa206c9af29bb714f4",
+            "manifestSha256": "7e52026a9aa5ada612a0e64729e930515991a1c385484dc72cc4266735ec28c5",
+            "deviceSha256": "93c9fb29461fae11a7e57d4e49112071a71940dee571f1f6696ffbf03c392879"
+          },
+          "character_face_sdf_closeup": {
+            "pixelDifferences": 0,
+            "captureSha256": "2b482d6c4bb8c2250ddc98b1a74621350a643b50e4b20f76fc02602b36df4f6c",
+            "referenceSha256": "2b482d6c4bb8c2250ddc98b1a74621350a643b50e4b20f76fc02602b36df4f6c",
+            "manifestSha256": "8c72d11d9dec780ea6f178b3a5906d742031f9908f411955e55fcaf9b939a32d",
+            "deviceSha256": "93c9fb29461fae11a7e57d4e49112071a71940dee571f1f6696ffbf03c392879"
+          }
+        }
+      },
+      "vertex": {
+        "summarySha256": "23959ae31537dcd58b669eaea848b7c15656f4f2525f47f32e8efabce7664f52",
+        "frames": {
+          "character_beauty_fullbody": {
+            "pixelDifferences": 0,
+            "captureSha256": "c23d4620ed136cc8367fe21e97d800bb6aeccac80c5bc06ee3851d7be824631e",
+            "referenceSha256": "c23d4620ed136cc8367fe21e97d800bb6aeccac80c5bc06ee3851d7be824631e",
+            "manifestSha256": "1e3c4574d95541bacc7601dab92fb9cfb4b34274ddb8520d897e176e6d2b9230",
+            "deviceSha256": "fcc84c76d84bace150db35ec07631ab83809bdd1c365b6d96cb8afe8e354190a"
+          },
+          "character_albedo_fullbody": {
+            "pixelDifferences": 0,
+            "captureSha256": "93756f932fbf0f8750095172c8e1c1aaf6a41952cd59db73c856d1e97bc82373",
+            "referenceSha256": "93756f932fbf0f8750095172c8e1c1aaf6a41952cd59db73c856d1e97bc82373",
+            "manifestSha256": "bb8849fc5a122c6df270459707d606d5ecfe6194f2c1c90741c487d59dcdce8f",
+            "deviceSha256": "fcc84c76d84bace150db35ec07631ab83809bdd1c365b6d96cb8afe8e354190a"
+          },
+          "character_world_normal_fullbody": {
+            "pixelDifferences": 0,
+            "captureSha256": "156bc7ebcf292ef690e5dcb7dcd00d9d846898c0de22c0220f6fd8b3b98554eb",
+            "referenceSha256": "156bc7ebcf292ef690e5dcb7dcd00d9d846898c0de22c0220f6fd8b3b98554eb",
+            "manifestSha256": "ee42af390d54b2393968606a22ea3931636e9ca0d4e44607a3d8ceb35bd4cb7f",
+            "deviceSha256": "fcc84c76d84bace150db35ec07631ab83809bdd1c365b6d96cb8afe8e354190a"
+          },
+          "character_material_id_fullbody": {
+            "pixelDifferences": 0,
+            "captureSha256": "4d4e341319d327eacfcd7077931db12666fd2c67ee517e13d9b5cf1dacd99d95",
+            "referenceSha256": "4d4e341319d327eacfcd7077931db12666fd2c67ee517e13d9b5cf1dacd99d95",
+            "manifestSha256": "8fda9e2a99a798132787a0e49886c19da93278f1ce5a63779182804762795aa3",
+            "deviceSha256": "fcc84c76d84bace150db35ec07631ab83809bdd1c365b6d96cb8afe8e354190a"
+          },
+          "character_outline_fullbody": {
+            "pixelDifferences": 0,
+            "captureSha256": "20b20897c33ac8f0b24178ca34239b15a48035a277c73a0920bc3bbf4dc5af56",
+            "referenceSha256": "20b20897c33ac8f0b24178ca34239b15a48035a277c73a0920bc3bbf4dc5af56",
+            "manifestSha256": "38243588745ad58476c3f9d5ea2ba9c8db5502dc5bb45b2b1d72dbdb6853e39d",
+            "deviceSha256": "fcc84c76d84bace150db35ec07631ab83809bdd1c365b6d96cb8afe8e354190a"
+          },
+          "character_direct_diffuse_fullbody": {
+            "pixelDifferences": 0,
+            "captureSha256": "310f136e2b62a9606a067719e29aa48ee4224edf863d9cfa206c9af29bb714f4",
+            "referenceSha256": "310f136e2b62a9606a067719e29aa48ee4224edf863d9cfa206c9af29bb714f4",
+            "manifestSha256": "91e94c7d831311265a81f6df3a378e68eab0a44ecf11ad33a4d2576254e920f5",
+            "deviceSha256": "fcc84c76d84bace150db35ec07631ab83809bdd1c365b6d96cb8afe8e354190a"
+          },
+          "character_face_sdf_closeup": {
+            "pixelDifferences": 0,
+            "captureSha256": "2b482d6c4bb8c2250ddc98b1a74621350a643b50e4b20f76fc02602b36df4f6c",
+            "referenceSha256": "2b482d6c4bb8c2250ddc98b1a74621350a643b50e4b20f76fc02602b36df4f6c",
+            "manifestSha256": "d3f76305cd460c407fa67bbff46b3ee53dcfaced7e5d04fa6578dccc9eedeaf7",
+            "deviceSha256": "fcc84c76d84bace150db35ec07631ab83809bdd1c365b6d96cb8afe8e354190a"
+          }
+        }
+      }
+    },
+    "debug": {
+      "indexed": {
+        "summarySha256": "23959ae31537dcd58b669eaea848b7c15656f4f2525f47f32e8efabce7664f52",
+        "frames": {
+          "character_beauty_fullbody": {
+            "pixelDifferences": 0,
+            "captureSha256": "c23d4620ed136cc8367fe21e97d800bb6aeccac80c5bc06ee3851d7be824631e",
+            "referenceSha256": "c23d4620ed136cc8367fe21e97d800bb6aeccac80c5bc06ee3851d7be824631e",
+            "manifestSha256": "08441d4291e3becf73b73e6a179ee5d15bf2d67ffe5a514ab1d8392a9be42336",
+            "deviceSha256": "fcc84c76d84bace150db35ec07631ab83809bdd1c365b6d96cb8afe8e354190a"
+          },
+          "character_albedo_fullbody": {
+            "pixelDifferences": 0,
+            "captureSha256": "93756f932fbf0f8750095172c8e1c1aaf6a41952cd59db73c856d1e97bc82373",
+            "referenceSha256": "93756f932fbf0f8750095172c8e1c1aaf6a41952cd59db73c856d1e97bc82373",
+            "manifestSha256": "134beb391dd7a06dbe196ad535c52c98347743c6e56acf70e627625a02d708f4",
+            "deviceSha256": "fcc84c76d84bace150db35ec07631ab83809bdd1c365b6d96cb8afe8e354190a"
+          },
+          "character_world_normal_fullbody": {
+            "pixelDifferences": 0,
+            "captureSha256": "156bc7ebcf292ef690e5dcb7dcd00d9d846898c0de22c0220f6fd8b3b98554eb",
+            "referenceSha256": "156bc7ebcf292ef690e5dcb7dcd00d9d846898c0de22c0220f6fd8b3b98554eb",
+            "manifestSha256": "c542b0ffb93dcc74cd013e5beba891c1c5b9e83f907e787bc526c6dd76a2d6c9",
+            "deviceSha256": "fcc84c76d84bace150db35ec07631ab83809bdd1c365b6d96cb8afe8e354190a"
+          },
+          "character_material_id_fullbody": {
+            "pixelDifferences": 0,
+            "captureSha256": "4d4e341319d327eacfcd7077931db12666fd2c67ee517e13d9b5cf1dacd99d95",
+            "referenceSha256": "4d4e341319d327eacfcd7077931db12666fd2c67ee517e13d9b5cf1dacd99d95",
+            "manifestSha256": "877b581a10f7c61dc739481fe6d4dea83cfcb6545368dbcb07ec7e37c3c4840e",
+            "deviceSha256": "fcc84c76d84bace150db35ec07631ab83809bdd1c365b6d96cb8afe8e354190a"
+          },
+          "character_outline_fullbody": {
+            "pixelDifferences": 0,
+            "captureSha256": "20b20897c33ac8f0b24178ca34239b15a48035a277c73a0920bc3bbf4dc5af56",
+            "referenceSha256": "20b20897c33ac8f0b24178ca34239b15a48035a277c73a0920bc3bbf4dc5af56",
+            "manifestSha256": "5833c4134236bba5029ed868e6ed5f9cb0489db9513ed3d189ed737208e6d75b",
+            "deviceSha256": "fcc84c76d84bace150db35ec07631ab83809bdd1c365b6d96cb8afe8e354190a"
+          },
+          "character_direct_diffuse_fullbody": {
+            "pixelDifferences": 0,
+            "captureSha256": "310f136e2b62a9606a067719e29aa48ee4224edf863d9cfa206c9af29bb714f4",
+            "referenceSha256": "310f136e2b62a9606a067719e29aa48ee4224edf863d9cfa206c9af29bb714f4",
+            "manifestSha256": "98f8af573617f1e31656183e51af3b519ce447538196333e45735f8a041ab56e",
+            "deviceSha256": "fcc84c76d84bace150db35ec07631ab83809bdd1c365b6d96cb8afe8e354190a"
+          },
+          "character_face_sdf_closeup": {
+            "pixelDifferences": 0,
+            "captureSha256": "2b482d6c4bb8c2250ddc98b1a74621350a643b50e4b20f76fc02602b36df4f6c",
+            "referenceSha256": "2b482d6c4bb8c2250ddc98b1a74621350a643b50e4b20f76fc02602b36df4f6c",
+            "manifestSha256": "1f249b4efca825873febb724f31727d1773af9a732f0383a0166f300ecda0fb1",
+            "deviceSha256": "fcc84c76d84bace150db35ec07631ab83809bdd1c365b6d96cb8afe8e354190a"
+          }
+        }
+      },
+      "fixed": {
+        "summarySha256": "23959ae31537dcd58b669eaea848b7c15656f4f2525f47f32e8efabce7664f52",
+        "frames": {
+          "character_beauty_fullbody": {
+            "pixelDifferences": 0,
+            "captureSha256": "c23d4620ed136cc8367fe21e97d800bb6aeccac80c5bc06ee3851d7be824631e",
+            "referenceSha256": "c23d4620ed136cc8367fe21e97d800bb6aeccac80c5bc06ee3851d7be824631e",
+            "manifestSha256": "249cf3b1f2aa6c4bf83cfa231c8a50a4242b6ae7d52293ac6e9358ba686af7f9",
+            "deviceSha256": "93c9fb29461fae11a7e57d4e49112071a71940dee571f1f6696ffbf03c392879"
+          },
+          "character_albedo_fullbody": {
+            "pixelDifferences": 0,
+            "captureSha256": "93756f932fbf0f8750095172c8e1c1aaf6a41952cd59db73c856d1e97bc82373",
+            "referenceSha256": "93756f932fbf0f8750095172c8e1c1aaf6a41952cd59db73c856d1e97bc82373",
+            "manifestSha256": "b6941c3ec87786075a203c0a5abfcba4985133a42ff7c117a010e06c19b1fb9f",
+            "deviceSha256": "93c9fb29461fae11a7e57d4e49112071a71940dee571f1f6696ffbf03c392879"
+          },
+          "character_world_normal_fullbody": {
+            "pixelDifferences": 0,
+            "captureSha256": "156bc7ebcf292ef690e5dcb7dcd00d9d846898c0de22c0220f6fd8b3b98554eb",
+            "referenceSha256": "156bc7ebcf292ef690e5dcb7dcd00d9d846898c0de22c0220f6fd8b3b98554eb",
+            "manifestSha256": "985103b4a4bfbb62ed5c0db6c883deae5d8b9b901b9f28a0598b17475bcdcba5",
+            "deviceSha256": "93c9fb29461fae11a7e57d4e49112071a71940dee571f1f6696ffbf03c392879"
+          },
+          "character_material_id_fullbody": {
+            "pixelDifferences": 0,
+            "captureSha256": "4d4e341319d327eacfcd7077931db12666fd2c67ee517e13d9b5cf1dacd99d95",
+            "referenceSha256": "4d4e341319d327eacfcd7077931db12666fd2c67ee517e13d9b5cf1dacd99d95",
+            "manifestSha256": "b92d73e5ff4fcefa11ab9778c05853f2400e5114d76093584354cb112a8ac6f8",
+            "deviceSha256": "93c9fb29461fae11a7e57d4e49112071a71940dee571f1f6696ffbf03c392879"
+          },
+          "character_outline_fullbody": {
+            "pixelDifferences": 0,
+            "captureSha256": "20b20897c33ac8f0b24178ca34239b15a48035a277c73a0920bc3bbf4dc5af56",
+            "referenceSha256": "20b20897c33ac8f0b24178ca34239b15a48035a277c73a0920bc3bbf4dc5af56",
+            "manifestSha256": "91638e8326754ec1c8247673b2aaa461d15cdaaed871693d49912394748e3470",
+            "deviceSha256": "93c9fb29461fae11a7e57d4e49112071a71940dee571f1f6696ffbf03c392879"
+          },
+          "character_direct_diffuse_fullbody": {
+            "pixelDifferences": 0,
+            "captureSha256": "310f136e2b62a9606a067719e29aa48ee4224edf863d9cfa206c9af29bb714f4",
+            "referenceSha256": "310f136e2b62a9606a067719e29aa48ee4224edf863d9cfa206c9af29bb714f4",
+            "manifestSha256": "4800b1b89d31061931bf87f8962c59e67ecc080f90fa8073aa523ecf1ed20520",
+            "deviceSha256": "93c9fb29461fae11a7e57d4e49112071a71940dee571f1f6696ffbf03c392879"
+          },
+          "character_face_sdf_closeup": {
+            "pixelDifferences": 0,
+            "captureSha256": "2b482d6c4bb8c2250ddc98b1a74621350a643b50e4b20f76fc02602b36df4f6c",
+            "referenceSha256": "2b482d6c4bb8c2250ddc98b1a74621350a643b50e4b20f76fc02602b36df4f6c",
+            "manifestSha256": "3b6f1c0ea1559554150530e61106b11854cbcf1c7eb5f173d85fc8aa12cffa88",
+            "deviceSha256": "93c9fb29461fae11a7e57d4e49112071a71940dee571f1f6696ffbf03c392879"
+          }
+        }
+      },
+      "vertex": {
+        "summarySha256": "23959ae31537dcd58b669eaea848b7c15656f4f2525f47f32e8efabce7664f52",
+        "frames": {
+          "character_beauty_fullbody": {
+            "pixelDifferences": 0,
+            "captureSha256": "c23d4620ed136cc8367fe21e97d800bb6aeccac80c5bc06ee3851d7be824631e",
+            "referenceSha256": "c23d4620ed136cc8367fe21e97d800bb6aeccac80c5bc06ee3851d7be824631e",
+            "manifestSha256": "d070f894c076146555d51365c03773d9b25969d41b0be2c68dfcae17b6abb9ca",
+            "deviceSha256": "fcc84c76d84bace150db35ec07631ab83809bdd1c365b6d96cb8afe8e354190a"
+          },
+          "character_albedo_fullbody": {
+            "pixelDifferences": 0,
+            "captureSha256": "93756f932fbf0f8750095172c8e1c1aaf6a41952cd59db73c856d1e97bc82373",
+            "referenceSha256": "93756f932fbf0f8750095172c8e1c1aaf6a41952cd59db73c856d1e97bc82373",
+            "manifestSha256": "1077e81bf26f8fce47dd40bdc1c4de1e246e099627d7334cb01eb02b6de0dba2",
+            "deviceSha256": "fcc84c76d84bace150db35ec07631ab83809bdd1c365b6d96cb8afe8e354190a"
+          },
+          "character_world_normal_fullbody": {
+            "pixelDifferences": 0,
+            "captureSha256": "156bc7ebcf292ef690e5dcb7dcd00d9d846898c0de22c0220f6fd8b3b98554eb",
+            "referenceSha256": "156bc7ebcf292ef690e5dcb7dcd00d9d846898c0de22c0220f6fd8b3b98554eb",
+            "manifestSha256": "9c3dc68107470f7fc0812a68b6ffaee3b9f7efc32edd209053ab42c112cfcd84",
+            "deviceSha256": "fcc84c76d84bace150db35ec07631ab83809bdd1c365b6d96cb8afe8e354190a"
+          },
+          "character_material_id_fullbody": {
+            "pixelDifferences": 0,
+            "captureSha256": "4d4e341319d327eacfcd7077931db12666fd2c67ee517e13d9b5cf1dacd99d95",
+            "referenceSha256": "4d4e341319d327eacfcd7077931db12666fd2c67ee517e13d9b5cf1dacd99d95",
+            "manifestSha256": "96364542a2fd4afece73c6cf44d711367dfeac9819f2328ce4aae93dced24f8c",
+            "deviceSha256": "fcc84c76d84bace150db35ec07631ab83809bdd1c365b6d96cb8afe8e354190a"
+          },
+          "character_outline_fullbody": {
+            "pixelDifferences": 0,
+            "captureSha256": "20b20897c33ac8f0b24178ca34239b15a48035a277c73a0920bc3bbf4dc5af56",
+            "referenceSha256": "20b20897c33ac8f0b24178ca34239b15a48035a277c73a0920bc3bbf4dc5af56",
+            "manifestSha256": "204413742291fddf5fe9eabef4c65c87e05346ac042b39a21d3b09a144f8e07a",
+            "deviceSha256": "fcc84c76d84bace150db35ec07631ab83809bdd1c365b6d96cb8afe8e354190a"
+          },
+          "character_direct_diffuse_fullbody": {
+            "pixelDifferences": 0,
+            "captureSha256": "310f136e2b62a9606a067719e29aa48ee4224edf863d9cfa206c9af29bb714f4",
+            "referenceSha256": "310f136e2b62a9606a067719e29aa48ee4224edf863d9cfa206c9af29bb714f4",
+            "manifestSha256": "e2ee50c249859d36f3462df8ad5a6cca6e7cd7d27d2f0b0432c75551a612d6e4",
+            "deviceSha256": "fcc84c76d84bace150db35ec07631ab83809bdd1c365b6d96cb8afe8e354190a"
+          },
+          "character_face_sdf_closeup": {
+            "pixelDifferences": 0,
+            "captureSha256": "2b482d6c4bb8c2250ddc98b1a74621350a643b50e4b20f76fc02602b36df4f6c",
+            "referenceSha256": "2b482d6c4bb8c2250ddc98b1a74621350a643b50e4b20f76fc02602b36df4f6c",
+            "manifestSha256": "b557159d8b6b0056c16c7c4c355c901e534c5546e8a3315bc62375bb7f592ea1",
+            "deviceSha256": "fcc84c76d84bace150db35ec07631ab83809bdd1c365b6d96cb8afe8e354190a"
+          }
+        }
+      }
+    }
+  },
+  "retests": {
+    "debug-integrated-cpu-assets-focused-retry-01-receipt.json": [
+      "AzureEditor.ContentDirectoryScale"
+    ]
+  },
+  "archiveSha256": "8d6a56c11387e77a7ad0dd42de9265bb674d95aa3449ef25d6db190874d16b5b",
+  "archiveMembers": 57,
+  "protectedFiles": 16,
+  "fullRegression": "pending"
+}

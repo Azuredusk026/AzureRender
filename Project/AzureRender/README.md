@@ -3,6 +3,7 @@
 [主线 CPU 注册回归](docs/acceptance/nr/current-registered-cpu.md)记录两种配置各 333 项检查的结果。
 [主线 GPU 定向复验](docs/acceptance/nr/current-registered-gpu-recoveries.md)记录三项 Release 用例的复验结果。
 [GPU 注册回归的产物预约与管线缓存](docs/acceptance/nr/registered-gpu-infrastructure.md)记录双配置雾效结果、编辑器重建计时和目录规模复验。
+[编辑器与资产主线复验](docs/acceptance/nr/registered-gpu-infrastructure.md#编辑器与资产主线复验)记录标准构建的目录规模、热重载和两条编辑器工作流。
 
 [着色器注册回归](docs/acceptance/nr/frozen-public-visual.md#着色器注册回归)记录双配置的编译结果和历史诊断产物的恢复信息。
 

@@ -4,6 +4,7 @@
 #include <chrono>
 #include <fstream>
 #include <iostream>
+#include <limits>
 #include <stdexcept>
 #include <thread>
 using namespace azurerender;
@@ -11,7 +12,15 @@ namespace {
 void require(bool value,const char* message){if(!value)throw std::runtime_error(message);}
 template<class F>void rejects(F op){bool failed=false;try{op();}catch(const std::exception&){failed=true;}require(failed,"Invalid compiler configuration accepted");}
 void write(const std::filesystem::path& path,const std::string& text){std::ofstream f(path,std::ios::binary);f<<text;if(!f)throw std::runtime_error("Cannot save compiler fixture");}
-std::string read(const std::filesystem::path& path){std::ifstream f(path,std::ios::binary);if(!f)throw std::runtime_error("Compiler output unavailable");return {std::istreambuf_iterator<char>(f),std::istreambuf_iterator<char>()};}
+std::string read(const std::filesystem::path& path){
+    std::ifstream f(path,std::ios::binary|std::ios::ate);const auto length=f.tellg();
+    require(length>=0&&static_cast<std::uint64_t>(length)<=static_cast<std::uint64_t>(std::numeric_limits<std::streamsize>::max()),
+        "Compiler output unavailable or cannot be represented by the stream");
+    std::string value(static_cast<std::size_t>(length),'\0');f.seekg(0);
+    require(bool(f.read(value.data(),static_cast<std::streamsize>(length)))&&f.peek()==std::char_traits<char>::eof()&&!f.bad(),
+        "Compiler output changed during comparison");
+    return value;
+}
 int snapshotTiming(const char* config){
     const auto options=loadShaderReloadOptions(config);ShaderSourceSnapshot snapshot;nlohmann::json times=nlohmann::json::array();
     const auto elapsed=[](auto start){return std::chrono::duration<double,std::milli>(std::chrono::steady_clock::now()-start).count();};
@@ -20,7 +29,8 @@ int snapshotTiming(const char* config){
     std::uint64_t ranged=14695981039346656037ULL,pointer=ranged;
     auto start=std::chrono::steady_clock::now();for(const auto& entry:snapshot.files)for(const unsigned char c:entry.second){ranged^=c;ranged*=1099511628211ULL;}const auto rangedMs=elapsed(start);
     start=std::chrono::steady_clock::now();for(const auto& entry:snapshot.files){auto p=reinterpret_cast<const unsigned char*>(entry.second.data());const auto end=p+entry.second.size();for(;p!=end;++p){pointer^=*p;pointer*=1099511628211ULL;}}const auto pointerMs=elapsed(start);require(ranged==pointer,"Byte pointer hash differs from ranged hash");
-    start=std::chrono::steady_clock::now();for(const auto& entry:snapshot.files)require(read(options.sourceRoot/entry.first)==entry.second,"Stream source read differs");const auto streamMs=elapsed(start);
+    start=std::chrono::steady_clock::now();for(const auto& entry:snapshot.files){std::ifstream stream(options.sourceRoot/entry.first,std::ios::binary);
+        require(std::string(std::istreambuf_iterator<char>(stream),std::istreambuf_iterator<char>())==entry.second,"Stream source read differs");};const auto streamMs=elapsed(start);
     start=std::chrono::steady_clock::now();for(const auto& entry:snapshot.files){std::ifstream f(options.sourceRoot/entry.first,std::ios::binary|std::ios::ate);const auto size=f.tellg();require(size>=0,"Cannot size source read");std::string value(static_cast<std::size_t>(size),'\0');f.seekg(0);f.read(value.data(),static_cast<std::streamsize>(value.size()));require(bool(f)&&value==entry.second,"Block source read differs");}const auto blockMs=elapsed(start);
     std::cout<<nlohmann::json{{"programs",options.programs.size()},{"files",snapshot.files.size()},{"bytes",bytes},{"fingerprint",snapshot.fingerprint},{"snapshotMilliseconds",times},
         {"rangeHashMilliseconds",rangedMs},{"pointerHashMilliseconds",pointerMs},{"streamReadMilliseconds",streamMs},{"blockReadMilliseconds",blockMs},{"hashesExact",true},{"sourceBytesExact",true}}.dump(2)<<'\n';return 0;

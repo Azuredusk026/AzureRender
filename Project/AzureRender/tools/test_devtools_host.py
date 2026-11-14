@@ -82,6 +82,17 @@ def run(executable, output, workflow, config):
             call('input', event=dict(action='click', target=target)); frames()
         def status():
             return json.loads(call('query', name='developer.status'))
+        def set_asset_grid(enabled):
+            workspace = json.loads(call('query', name='editor.workspace'))
+            if 'assets.grid' not in workspace['widgets']:
+                assert workspace['panels']['assets']['open'], workspace['panels']['assets']
+                click('tab.assets')
+                workspace = json.loads(call('query', name='editor.workspace'))
+            assert 'assets.grid' in workspace['widgets'], workspace['panels']['assets']
+            if workspace['contentView']['grid'] != enabled:
+                click('assets.grid')
+            updated = json.loads(call('query', name='editor.workspace'))
+            assert 'assets.grid' in updated['widgets'] and updated['contentView']['grid'] == enabled
         frames(15)
         original = call('query', name='document.version')
         handles = [edit('preview.create', renderer=name, extent=[192,128])['handle']
@@ -102,7 +113,7 @@ def run(executable, output, workflow, config):
             edit('preview.request', passed=False, handle=handle)
         frames()
         # Content Browser grid uses the same thumbnail operation as tools.
-        click('assets.grid');frames(20)
+        set_asset_grid(True);frames(20)
         current = status()
         thumbnails = current['thumbnails']
         assert thumbnails and len(thumbnails) <= 2, current
@@ -137,7 +148,7 @@ def run(executable, output, workflow, config):
             assert (retained['fingerprint'],retained['handle'])==(unaffected['fingerprint'],unaffected['handle']), \
                 'An unrelated thumbnail must retain its cached view after asset refresh'
         edit('preview.inspect',passed=False,handle=thumb['handle'])
-        click('assets.grid')
+        set_asset_grid(False)
         edit('preview.clear');frames()
         # Camera preview is rendered through a real panel and stops when hidden.
         click('menu.View');frames()

@@ -5,6 +5,8 @@ static constexpr unsigned kShadowBoundsTilesPerGroup=8;
 static constexpr unsigned kShadowBoundsTilesPerGroup=1;
 #endif
 #include "render/SkinnedVertex.hpp"
+#include "render/RecordingWorkerPool.hpp"
+#include "rhi/VulkanRhi.hpp"
 #if defined(AZURE_SURFACE_RADIANCE_DIAGNOSTICS)
 static constexpr bool kSurfaceRadianceDiagnostics=true;
 #else
@@ -4136,11 +4138,31 @@ void CharacterSceneRenderer::createGraphicsPipeline(
         materialDesc.cullMode = context.faceCullingEnabled ? VK_CULL_MODE_BACK_BIT : VK_CULL_MODE_NONE;
         materialDesc.alphaBlend = false;
         materialDesc.depthWrite = true;
-        const auto createFacingPipelines=[&](std::array<VkPipeline,4>& pipelines,const rhi::GraphicsPipelineDesc& base){
-            for(unsigned facing=0;facing<4;++facing){auto desc=base;
-                desc.frontFace=(facing&1U)?VK_FRONT_FACE_CLOCKWISE:VK_FRONT_FACE_COUNTER_CLOCKWISE;
-                desc.cullMode=facing>=2||!context.faceCullingEnabled?VK_CULL_MODE_NONE:VK_CULL_MODE_BACK_BIT;
-                pipelines[facing]=createMaterialGraphicsPipeline(desc);}
+        const auto createFacingPipelines = [&](std::array<VkPipeline,4>& pipelines, const rhi::GraphicsPipelineDesc& base) {
+            const auto facingDescription = [&](unsigned facing) {
+                auto desc = base;
+                desc.frontFace = (facing & 1U) ? VK_FRONT_FACE_CLOCKWISE : VK_FRONT_FACE_COUNTER_CLOCKWISE;
+                desc.cullMode = facing >= 2 || !context.faceCullingEnabled ? VK_CULL_MODE_NONE : VK_CULL_MODE_BACK_BIT;
+                return desc;
+            };
+#if !defined(AZURE_COMPUTED_MATERIAL_VIEW_PROGRAMS) && !defined(AZURE_DEFAULT_ISOLATION_VARIANTS)
+            // With no additional variants, each creation only consumes this immutable descriptor.
+            if (preparationWorkers_ && dynamic_cast<rhi::VulkanRhi*>(rhi_) && !materialUvNeeded_
+                && !independentCoverageNeeded_ && !lightingBlendNeeded_ && !lightingFallbackNeeded_
+                && !materialDepthPoliciesNeeded_[1] && !materialDepthPoliciesNeeded_[2] && !materialDepthPoliciesNeeded_[3]) {
+                std::vector<RecordingWorkerPool::Task> tasks;
+                tasks.reserve(pipelines.size());
+                for (unsigned facing = 0; facing < pipelines.size(); ++facing) {
+                    tasks.emplace_back([&, facing](std::size_t) {
+                        pipelines[facing] = rhi_->createGraphicsPipeline(facingDescription(facing));
+                    });
+                }
+                preparationWorkers_->runWithCaller(std::move(tasks));
+                return;
+            }
+#endif
+            for (unsigned facing = 0; facing < pipelines.size(); ++facing)
+                pipelines[facing] = createMaterialGraphicsPipeline(facingDescription(facing));
         };
         const auto integralBase=materialDesc;
         createFacingPipelines(opaquePipelines_,materialDesc);
@@ -4190,17 +4212,31 @@ void CharacterSceneRenderer::createGraphicsPipeline(
         materialDesc.cullMode = context.faceCullingEnabled ? VK_CULL_MODE_BACK_BIT : VK_CULL_MODE_NONE;
         materialDesc.alphaBlend = true;
         materialDesc.depthWrite = false;
-        createFacingPipelines(blendPipelines_,materialDesc);
-        bool vertexColors=!asset_.vertexColors.empty();
-        for(const auto& resource:additionalResources_)vertexColors|=!resource->asset.vertexColors.empty();
-        if(vertexColors){auto colored=materialDesc;colored.vertexBindings[1].stride=sizeof(std::array<float,4>);
-            createFacingPipelines(vertexColorBlendPipelines_,colored);}
-        bool additive=false,coloredAdditive=false;
-        const auto inspectAdditive=[&](const LoadedAsset& asset){for(const auto& m:asset.materials)
-            if(m.unlitTextureLayers.present&&m.unlitTextureLayers.composite==UnlitTextureLayers::Composite::Additive) {
-                additive=true;coloredAdditive|=m.unlitTextureLayers.useVertexColor&&!asset.vertexColors.empty();
-            }};
-        inspectAdditive(asset_);for(const auto& resource:additionalResources_)inspectAdditive(resource->asset);
+        bool needsBlend = false;
+        bool needsVertexColorBlend = false;
+        bool additive = false;
+        bool coloredAdditive = false;
+        const auto inspectTransparency = [&](const LoadedAsset& mesh) {
+            for (const auto& material : mesh.materials) {
+                const auto& layers = material.unlitTextureLayers;
+                const bool vertexColor = layers.useVertexColor && !mesh.vertexColors.empty();
+                const bool materialAdditive = layers.present && layers.composite == UnlitTextureLayers::Composite::Additive;
+                additive |= materialAdditive;
+                coloredAdditive |= materialAdditive && vertexColor;
+                if (material.alphaMode != AssetAlphaMode::Blend) continue;
+                // Hair integral uses the plain blend family as its multisample fallback.
+                needsBlend |= !vertexColor || (material.materialFeatures & MaterialFeatureHairPixelIntegral) != 0;
+                needsVertexColorBlend |= vertexColor;
+            }
+        };
+        inspectTransparency(asset_);
+        for (const auto& resource : additionalResources_) inspectTransparency(resource->asset);
+        if (needsBlend) createFacingPipelines(blendPipelines_, materialDesc);
+        if (needsVertexColorBlend) {
+            auto colored = materialDesc;
+            colored.vertexBindings[1].stride = sizeof(std::array<float,4>);
+            createFacingPipelines(vertexColorBlendPipelines_, colored);
+        }
         if(additive){auto composed=materialDesc;composed.primaryColorBlend=rhi::PrimaryColorBlend::Additive;
             if(context.displayMaskEnabled){composed.colorWriteMasks.assign(composed.colorAttachmentCount,0xf);composed.colorWriteMasks[2]=0;}
             createFacingPipelines(additiveBlendPipelines_,composed);
@@ -4209,16 +4245,30 @@ void CharacterSceneRenderer::createGraphicsPipeline(
         if(viewFog_)viewFog_->initializePipelines(*this,context,materialDesc,bindlessTextures_,computeSkinningEnabled_,asset_,additionalResources_);
         materialDesc.cullMode=VK_CULL_MODE_NONE;
         initializeHairIntegralPipelines(context,integralBase);
-        auto multiplyDesc=materialDesc;
-        multiplyDesc.primaryColorBlend=rhi::PrimaryColorBlend::Multiply;
-        multiplyDesc.depthCompare=VK_COMPARE_OP_LESS_OR_EQUAL;
-        multiplyDesc.cullMode=context.faceCullingEnabled?VK_CULL_MODE_BACK_BIT:VK_CULL_MODE_NONE;
-        createFacingPipelines(multiplyPipelines_,multiplyDesc);
-        auto tintDesc=materialDesc;
-        for(unsigned mirrored=0;mirrored<2;++mirrored){
-            tintDesc.frontFace=mirrored?VK_FRONT_FACE_CLOCKWISE:VK_FRONT_FACE_COUNTER_CLOCKWISE;
-            sceneTintPipelines_[mirrored]=createMaterialGraphicsPipeline(tintDesc);}
-
+        bool needsMultiply = false;
+        bool needsSceneTint = false;
+        const auto inspectComposites = [&](const LoadedAsset& asset) {
+            for (const auto& material : asset.materials) {
+                needsMultiply |= (material.materialFeatures & MaterialFeatureMultiplyComposite) != 0;
+                needsSceneTint |= (material.materialFeatures & MaterialFeatureSceneTint) != 0;
+            }
+        };
+        inspectComposites(asset_);
+        for (const auto& resource : additionalResources_) inspectComposites(resource->asset);
+        if (needsMultiply) {
+            auto multiplyDesc = materialDesc;
+            multiplyDesc.primaryColorBlend = rhi::PrimaryColorBlend::Multiply;
+            multiplyDesc.depthCompare = VK_COMPARE_OP_LESS_OR_EQUAL;
+            multiplyDesc.cullMode = context.faceCullingEnabled ? VK_CULL_MODE_BACK_BIT : VK_CULL_MODE_NONE;
+            createFacingPipelines(multiplyPipelines_, multiplyDesc);
+        }
+        if (needsSceneTint) {
+            auto tintDesc = materialDesc;
+            for (unsigned mirrored = 0; mirrored < 2; ++mirrored) {
+                tintDesc.frontFace = mirrored ? VK_FRONT_FACE_CLOCKWISE : VK_FRONT_FACE_COUNTER_CLOCKWISE;
+                sceneTintPipelines_[mirrored] = createMaterialGraphicsPipeline(tintDesc);
+            }
+        }
 
         const auto maskModule=createUvShaderModule(mainFragmentPath((bindlessTextures_?"/outline_mask_bindless.frag.spv":"/outline_mask.frag.spv")));
         VkShaderModule maskVertex=VK_NULL_HANDLE;

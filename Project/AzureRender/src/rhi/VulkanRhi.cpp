@@ -603,7 +603,11 @@ VkPipeline VulkanRhi::createGraphicsPipeline(
             device_, pipelineCache_, 1, &pipelineInfo, nullptr, &pipeline),
         "vkCreateGraphicsPipelines");
     notePipelineCache(feedback);
-    if (pipelineInspection_) pipelineInspection_->inspect(pipeline,pipelineInfo.flags);
+    if (pipelineInspection_) {
+        static std::mutex inspectionMutex;
+        const std::lock_guard<std::mutex> lock(inspectionMutex);
+        pipelineInspection_->inspect(pipeline,pipelineInfo.flags);
+    }
     return pipeline;
 }
 
