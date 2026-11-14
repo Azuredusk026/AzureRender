@@ -43,3 +43,11 @@ Intel 的参考取前后两轮中位数的平均值。候选为每个 512² 基�
 [结果清单](evidence/2026-11-14/joint-gpu-pass-budget/results.json)和[验证归档](evidence/2026-11-14/joint-gpu-pass-budget/validation.zip)保存通道计时、环境观测、探针源码和两设备逐项结果。
 
 [单表范围查询](joint-shadow-single-range-table.md)记录两设备的精确查询和联合场景的隔离复测。
+
+## 探针漫反射按需采样
+
+在联合场景 720p 捕获上分别替换主颜色、快照颜色和两者组合的探针漫反射程序。三组各核对八份颜色、材质、法线和显示附件，全部逐字节一致。
+
+两轮参考的主颜色与快照事件中位数之和分别为 6.200 和 8.396 毫秒，两轮候选分别为 8.671 和 8.952 毫秒。参考漂移为 30.08%，候选两轮均高于两轮参考。此次重放保留隔离结果，联合场景的帧耗时和热状态继续按正式条件核验。
+
+[结果清单](evidence/2026-11-15/probe-field-diffuse-replay/results.json)与[重放归档](evidence/2026-11-15/probe-field-diffuse-replay/verification.zip)保存附件摘要、逐轮计时、程序及重放命令。

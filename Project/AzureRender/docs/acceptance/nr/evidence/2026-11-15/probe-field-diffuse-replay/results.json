@@ -1,0 +1,18 @@
+{
+  "job": 695,
+  "captureSha256": "35077c571bcb70bc99688bfb97eec1b291bd6567df7482746fd3f5db49f339b3",
+  "referenceDriftFraction": 0.30084603630129353,
+  "measuredEventSumsMs": [
+    6.200239999999999,
+    8.670912,
+    8.952336,
+    8.395824000000001
+  ],
+  "referenceMeanMs": 7.298032,
+  "candidateMeanMs": 8.811624,
+  "candidateDeltaMs": 1.513592,
+  "byteExactAttachmentsPerRole": 8,
+  "archiveMembers": 12,
+  "archiveSha256": "4b73cb74e3e0c40e6d1a448f99823ce638e648f4708975c09055c39b056427bb",
+  "status": "no-acceptance-gain"
+}
