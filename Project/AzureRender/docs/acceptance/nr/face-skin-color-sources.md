@@ -176,6 +176,11 @@ NVIDIA 与 Intel 全图分别新增 404 和 444 个超出一字节的像素。
 
 [轮廓方向结果](evidence/2026-11-14/transparent-cloth-directional-rim/results.json)和[验证归档](evidence/2026-11-14/transparent-cloth-directional-rim/validation.zip)保存数值重建、回放及双设备画面核对。
 
+原生透明衣料的三个追踪片元从槽位 21 的 BC5 法线选取第 0、1、0 层。前两处为背面，第三处为正面，原生按绕序调整法线方向。
+由纹理采样、插值切线和绕序重建的基础法线与原生寄存器相差至多 0.46 度。三个片元均未进入细节法线分支，基础法线与轮廓法线夹角均低于 0.032 度。
+
+[透明衣料法线来源](evidence/2026-11-14/transparent-cloth-normal-source/results.json)和[验证归档](evidence/2026-11-14/transparent-cloth-normal-source/validation.zip)保存原生寄存器、纹理层级和法线复算脚本。
+
 ## Player 体表描边提交
 
 Player 绘制 940 在体表主体和场景深度之后提交。
