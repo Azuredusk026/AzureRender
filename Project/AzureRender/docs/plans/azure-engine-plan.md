@@ -30,6 +30,8 @@ Player 的 CPU 工作 P95 至多为八毫秒。
 
 ## 当前执行顺序
 
+[联合场景热点纹理分配](../acceptance/nr/joint-texture-hot-placement.md)完成 1440p 同驱动逐像素比较。
+
 [三纹理采样与视口选择集成](../acceptance/nr/projected-hair-viewport-integration.md)通过所属构建和双显卡复验。
 [投影头发主线注册用例](../acceptance/nr/projected-hair-viewport-integration.md#主线注册用例)通过双配置 GPU 复测和构建契约核对。
 [相机捕获清单](../acceptance/nr/capture-camera.md#主线清单版本)通过投影布局三、镜头输入及画面偏移检查。

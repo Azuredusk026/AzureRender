@@ -1,0 +1,75 @@
+{
+  "source": "01cc6b26e52d8d602aae1b75d7259a5da4f10dbd",
+  "driver": "595.79",
+  "captureSha256": "35077c571bcb70bc99688bfb97eec1b291bd6567df7482746fd3f5db49f339b3",
+  "attribution": {
+    "textureCount": 224,
+    "selectedCount": 18,
+    "selectedLogicalBytes": 100663272,
+    "weightedDescriptorShare": 0.7941947592027312
+  },
+  "visual": {
+    "driver": "595.79",
+    "source": "01cc6b26e52d8d602aae1b75d7259a5da4f10dbd",
+    "frames": [
+      {
+        "name": "frame_000000.png",
+        "sameDriverExact": true,
+        "sameDriverChangedPixels": 0,
+        "sameDriverMaximumByteError": 0,
+        "sha256": "b57a67f263f0bc0d9cc53a279f74e90696b47c5802e60cd5b54196cc647fbdc3",
+        "expected": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "exact": false,
+        "changedPixels": 228,
+        "maximumByteError": 1
+      },
+      {
+        "name": "frame_000001.png",
+        "sameDriverExact": true,
+        "sameDriverChangedPixels": 0,
+        "sameDriverMaximumByteError": 0,
+        "sha256": "dcf466cd4ea345671eaad5efd4128584e02de9a05e6f218acf2ebf5409abe90f",
+        "expected": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "exact": false,
+        "changedPixels": 330,
+        "maximumByteError": 7
+      },
+      {
+        "name": "frame_000002.png",
+        "sameDriverExact": true,
+        "sameDriverChangedPixels": 0,
+        "sameDriverMaximumByteError": 0,
+        "sha256": "974756b6d8dba263a333c613eaf24a33d53be96b24e6c000b78646341f492050",
+        "expected": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "exact": false,
+        "changedPixels": 397,
+        "maximumByteError": 37
+      },
+      {
+        "name": "frame_000003.png",
+        "sameDriverExact": true,
+        "sameDriverChangedPixels": 0,
+        "sameDriverMaximumByteError": 0,
+        "sha256": "e27b4d25426d5d36725ccb159d7fe2324f4eb60b0993d369e91e45260bc6fbeb",
+        "expected": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "exact": false,
+        "changedPixels": 421,
+        "maximumByteError": 23
+      }
+    ],
+    "scope": "material-image-hotset-pixel-diagnostic",
+    "retainedAllocations": 18,
+    "retainedBytes": 100694016,
+    "nonlocalAllocations": 206,
+    "nonlocalBytes": 1487931392,
+    "backgroundUtilizationAtStart": 0.0,
+    "watts": [
+      80.0
+    ],
+    "allocatorZero": true
+  },
+  "visualDeviceLocalPeakBytes": 1705712448,
+  "archiveSha256": "1f3f28ff0f9843586c63238fbd4ac67db803927e52b3bcff413a30b4d136f296",
+  "archiveMembers": 27,
+  "candidateExecutableSha256": "d2098833aabc6f716758dd4a04c5c9435c0ec6b6055435f0412d7332f098052b"
+}

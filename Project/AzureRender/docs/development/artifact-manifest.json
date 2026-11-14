@@ -57,6 +57,13 @@
   },
   "milestones": [
     {
+      "path": "runs/20261114-125834-nr-joint-texture-hot-placement-4e085e",
+      "name": "联合场景热点纹理分配",
+      "sourceBase": "01cc6b2",
+      "evidence": "docs/acceptance/nr/joint-texture-hot-placement.md",
+      "results": "docs/acceptance/nr/evidence/2026-11-14/joint-texture-hot-placement/results.json"
+    },
+    {
       "path": "runs/20261113-005205-nr-main-registered-regression-c82feb",
       "name": "相机投影清单回归",
       "sourceBase": "1b71afd",
