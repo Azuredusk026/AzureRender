@@ -51,6 +51,7 @@ CPU 工作 P95 为 5.90 毫秒，GPU 帧 P95 为 20.33 毫秒。
 [GPU 注册回归的产物预约与管线缓存](../acceptance/nr/registered-gpu-infrastructure.md)记录双配置 34 项采集验证、缓存分流、管线计时及着色器读取对照。
 [编辑器与目录规模复验](../acceptance/nr/registered-gpu-infrastructure.md#编辑器加载与目录规模)核对资产刷新阶段、混合材质路径和一万资产的缓存发布。
 [编辑器与资产主线复验](../acceptance/nr/registered-gpu-infrastructure.md#编辑器与资产主线复验)记录标准构建的目录、着色器和材质检查。完整注册回归按两种配置执行。
+[Windows 发布安装](../acceptance/nr/registered-gpu-infrastructure.md#windows-发布安装)记录游戏包、可玩包和安装清单的正式复验。
 [着色器注册回归](../acceptance/nr/frozen-public-visual.md#着色器注册回归)通过两种配置的编译契约和完整目录编译。
 
 [空白视口选择](../acceptance/nr/editor-empty-viewport-selection.md)通过探索项目和场景检视项目的所属回归。

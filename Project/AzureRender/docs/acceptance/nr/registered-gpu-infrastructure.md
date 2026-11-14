@@ -85,3 +85,13 @@ Debug 目录首轮在清理测试目录时达到 180 秒上限，同一标准产
 两种配置各通过 17 项定向检查。无光照纹理分别耗时 266.39 和 489.32 秒，材质覆盖分别耗时 35.83 和 52.17 秒。定向结果进入同一构建的完整注册回归。
 
 [主线复验清单](evidence/2026-11-15/registered-editor-asset-integration/results.json)和[验证归档](evidence/2026-11-15/registered-editor-asset-integration/verification.zip)保存构建摘要、首轮及定向复测结果。公开角色三条路径的逐图记录见[冻结画面复验](frozen-public-visual.md#冻结驱动复测)。
+
+## Windows 发布安装
+
+Windows 安装按扩展名选择 Markdown 和 JSON 文档，并按相对路径复制文件。专项交付资料由对应安装规则发布。
+
+独立安装完成于 166.06 秒。安装清单包含 16,156 个不同文件，选取的 7,562 份文档与源码逐份比对一致。Release 与 Debug 的运行和测试产物通过摘要核对。
+
+Release 游戏包和可玩包分别在 237.04 和 396.34 秒通过原注册用例。验证覆盖目录移动、隔离启动、任务路线、6,600 帧关卡循环、依赖回滚和文件篡改检测。打包规则、安装清单往返和缺失构建的发布门禁也通过。
+
+[结果清单](evidence/2026-11-15/windows-package-install/results.json)和[验证归档](evidence/2026-11-15/windows-package-install/verification.zip)保存安装对照、CTest 原始结果和可玩包运行记录。

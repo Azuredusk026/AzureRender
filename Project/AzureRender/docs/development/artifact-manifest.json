@@ -63,6 +63,12 @@
       "results": "docs/acceptance/nr/evidence/2026-11-15/registered-editor-asset-integration/results.json"
     },
     {
+      "path": "runs/20261115-061830-nr-packaging-docs-regression-c61f43",
+      "name": "Windows 发布安装",
+      "evidence": "docs/acceptance/nr/registered-gpu-infrastructure.md#windows-发布安装",
+      "results": "docs/acceptance/nr/evidence/2026-11-15/windows-package-install/results.json"
+    },
+    {
       "path": "runs/20261115-013428-nr-joint-80w-idle-retest-89f552",
       "name": "联合场景独显空闲复验",
       "sourceBase": "01cc6b2",

@@ -3238,9 +3238,26 @@ set(AZURE_DOCUMENTATION_FILES
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/runtime/scripts-gameplay.md")
 install(FILES ${AZURE_DOCUMENTATION_FILES}
     DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender")
-install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/docs/"
-    DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs"
-    FILES_MATCHING PATTERN "*.md" PATTERN "*.json")
+# Select the installed files before copying so captured evidence does not create
+# thousands of empty directories in a Windows installation.
+if(CMAKE_HOST_WIN32 AND NOT IS_ABSOLUTE "${CMAKE_INSTALL_DATADIR}")
+    set(AZURE_INSTALL_DOCUMENTATION_CODE [=[
+        set(azure_docs_source "@CMAKE_CURRENT_SOURCE_DIR@/docs")
+        set(azure_docs_destination "${CMAKE_INSTALL_PREFIX}/@CMAKE_INSTALL_DATADIR@/AzureRender/docs")
+        file(GLOB_RECURSE azure_docs LIST_DIRECTORIES false RELATIVE "${azure_docs_source}"
+            "${azure_docs_source}/*.md" "${azure_docs_source}/*.json")
+        if(azure_docs)
+            file(INSTALL DESTINATION "${azure_docs_destination}" TYPE FILE
+                FILES_FROM_DIR "${azure_docs_source}" FILES ${azure_docs})
+        endif()
+    ]=])
+    string(CONFIGURE "${AZURE_INSTALL_DOCUMENTATION_CODE}" AZURE_INSTALL_DOCUMENTATION_CODE @ONLY)
+    install(CODE "${AZURE_INSTALL_DOCUMENTATION_CODE}")
+else()
+    install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/docs/"
+        DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs"
+        FILES_MATCHING PATTERN "*.md" PATTERN "*.json")
+endif()
 install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/docs/acceptance/p8/evidence/"
     DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/acceptance/p8/evidence")
 foreach(AZURE_DOCUMENTATION_FILE IN LISTS AZURE_DOCUMENTATION_FILES)

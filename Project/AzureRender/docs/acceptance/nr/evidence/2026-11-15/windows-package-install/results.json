@@ -1,0 +1,152 @@
+{
+  "status": "passed",
+  "documentation": {
+    "matchedFiles": 7562,
+    "installSeconds": 166.06299999999464,
+    "distinctInstalledFiles": 16156
+  },
+  "ctest": {
+    "AzureEngine.GamePackageRules": 3.2524,
+    "AzureEngine.PlayablePackage": 396.343,
+    "AzureRender.ReleaseGateMissingBuild": 0.0558884,
+    "AzureRender.InstallManifestRoundTrip": 0.523413,
+    "AzureEngine.GamePackage": 237.039
+  },
+  "gamePackage": {
+    "status": "passed",
+    "package": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\game-package\\Windows Game",
+    "files": 1370,
+    "isolatedPath": "C:\\WINDOWS\\System32",
+    "movedDirectory": true,
+    "sourceUnavailable": true,
+    "engineUnavailable": true,
+    "dependencyFailureRollback": true,
+    "tamperRejected": true,
+    "scene": "destination",
+    "fixedSteps": 179,
+    "hero": [
+      7.1500091552734375,
+      0.8999999761581421,
+      0.0
+    ],
+    "audioStarts": 2,
+    "uiDrawCalls": 900,
+    "animationFrames": 180
+  },
+  "playablePackage": {
+    "status": "passed",
+    "package": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\playable-package\\Azure Exploration",
+    "files": 1396,
+    "licenses": 54,
+    "movedDirectory": true,
+    "sourceUnavailable": true,
+    "engineUnavailable": true,
+    "isolatedPath": "C:\\WINDOWS\\System32",
+    "tamperRejected": true,
+    "completeQuest": true,
+    "quest": {
+      "frames": 940,
+      "actions": 38,
+      "completionSeconds": 221.0,
+      "fixedSteps": 14085,
+      "restarts": 2,
+      "validationErrors": 0,
+      "released": true
+    },
+    "cycles": {
+      "commits": 40,
+      "switches": 20,
+      "restarts": 20,
+      "commitMilliseconds": {
+        "mean": 1.22964,
+        "p95": 1.562525,
+        "p99": 1.5899729999999999
+      },
+      "commitFrameMilliseconds": {
+        "mean": 8.1445225,
+        "p95": 10.312185,
+        "p99": 10.651284
+      },
+      "first": {
+        "bufferBytes": 41119456,
+        "buffers": 69,
+        "cachedCandidates": 2,
+        "commitMs": 1.0921,
+        "committed": false,
+        "frame": 1200,
+        "imageBytes": 377597952,
+        "images": 72,
+        "loadError": "",
+        "loading": false,
+        "physicsMaxMs": 0.2049,
+        "requestGeneration": 12,
+        "revision": 8,
+        "uiActiveGeometry": 12,
+        "uiBuffers": 1,
+        "uiRetiredGeometry": 0,
+        "waitMs": 0.102800000000002,
+        "workMs": 1.533299999999998
+      },
+      "last": {
+        "bufferBytes": 41119456,
+        "buffers": 69,
+        "cachedCandidates": 2,
+        "commitMs": 1.1735,
+        "committed": false,
+        "frame": 6480,
+        "imageBytes": 377597952,
+        "images": 72,
+        "loadError": "",
+        "loading": false,
+        "physicsMaxMs": 0.1639,
+        "requestGeneration": 46,
+        "revision": 42,
+        "uiActiveGeometry": 12,
+        "uiBuffers": 1,
+        "uiRetiredGeometry": 0,
+        "waitMs": 0.08799999999996544,
+        "workMs": 1.1709000000000345
+      },
+      "passed": true
+    },
+    "quality": {
+      "schemaVersion": 1,
+      "platform": "Windows x64",
+      "vulkanApi": "1.3",
+      "width": 1920,
+      "height": 1080,
+      "targetHz": 60,
+      "shadowMapSize": 2048,
+      "shadowCascades": 4,
+      "entities": 100,
+      "animatedCharacters": 4,
+      "fullGameUi": true,
+      "materialQuality": "full",
+      "privateCharacter": false,
+      "pointLights": 8
+    },
+    "packageManifestHash": "9d6f0ee9c5d583a5a64cb0165681ab0f6bb0b458b9010bc48b90f7431a662780"
+  },
+  "buildReceipts": {
+    "release": "87bf93c5e07bc55955e69d3ec71706a4cacda3727e3fa2b604f3031f6e597487",
+    "debug": "995c6c4c30e9b31235cf419eab870850452746c33cd8d47b8dda243ec8becc50"
+  },
+  "archive": {
+    "sha256": "5f07f784adedfa3a406ef65bc11ee8200c9485d762efaa240a4e6dfc44f48434",
+    "files": {
+      "install-probe.json": "7013ae6d22059908631741d5328157bebc96924ec63d5ca7cf2b5099e53f9fab",
+      "install-probe.log": "47bed2df80def57af5f5c916be997bae1ea93f9b8fb375140b7d98310a8e1dc7",
+      "package-source.patch": "d0bf42738221db5d7b511b72ae4c15495110a9ff8e2ac4252826a8906da9f057",
+      "original-registered.json": "d963483002f2702bca202eeadcc052612287c7e438eac3507d40883b34c8728c",
+      "original-registered.xml": "437c094ea247ff1127ca30b919679757bab5deef320b2455f822a9e88703371c",
+      "original-retry.json": "aa19f4b71e36e9b64a19813a15d30e66a7f6f011455a7adcf0586630ddf32aa6",
+      "registered.json": "d55d32f8d3a11b7fb911e1b5073bcfc51b890ba082c65f68dd10b11d047554e5",
+      "registered.xml": "8e4506ca9cb2dd6d99194b5515e26c9e5c8117ce42bfde4a1c9501b34b64f37f",
+      "registered-commands.txt": "ecc64bfe79ff22f40d68acb10f4d96962c7c4476e6512ac18e20a1e80fe03029",
+      "game-package.json": "f24c9d81e7154af911ee865242944790d87ee3ab188a986cc1969c61a4617321",
+      "playable-package.json": "4cee34c0d26adf70eb11e1254fd64f3cbdc6b18d9f1ccc6b5ea0aff7f0d853d0",
+      "playable-install.log": "067ee64e58977941c94cdf45eef993d810339e39dd627fa16c19d054dff7d03a",
+      "playable-cycles.json": "4c3a96414fbecaf1a56a05abe3ff323d35c39bae7e805b9ace0a9038e010ea2d"
+    }
+  }
+}
