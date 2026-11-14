@@ -166,6 +166,16 @@ NVIDIA 与 Intel 全图分别新增 404 和 444 个超出一字节的像素。
 
 [打包参数结果](evidence/2026-11-14/cloth-packed-parameters/results.json)和[验证归档](evidence/2026-11-14/cloth-packed-parameters/validation.zip)保存逐级摘要和双设备采集。
 
+原生轮廓权重采用 `1 − clamp(N·V, 0, 1)`，抽查材质的实际起始阈值为 0.235。
+以原生法线重建三处轮廓贡献，线性 RGB 最大绝对差低于 0.00000002。
+按该公式重放三十处重点像素，二十六处的混合颜色更接近参考。
+
+两块显卡的实际 Player 对照中，三十处重点位置各有十一处超过八字节，峰差均为十九字节。
+原生衣料改写范围包含 27,832 处。该范围内，NVIDIA 和 Intel 分别新增 1,010 和 1,027 处一字节超差，范围外新增为零。
+这组参数保留在独立对照夹具中，透明衣料严格验收保持开放。
+
+[轮廓方向结果](evidence/2026-11-14/transparent-cloth-directional-rim/results.json)和[验证归档](evidence/2026-11-14/transparent-cloth-directional-rim/validation.zip)保存数值重建、回放及双设备画面核对。
+
 ## Player 体表描边提交
 
 Player 绘制 940 在体表主体和场景深度之后提交。
