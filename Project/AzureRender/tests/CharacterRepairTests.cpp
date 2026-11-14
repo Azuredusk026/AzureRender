@@ -1249,6 +1249,25 @@ void testEyeRadialSurface(const nlohmann::json& fixture,const std::filesystem::p
     lighting(nprEye)["mainColor"]={1,.92,.86};
     lighting(nprEye)["shadowScale"]=.55;
     const auto nprMaterial=load(nprEye).materials.at(0);
+    auto framedEye=nprEye;
+    framedEye["nodes"].push_back({{"name","eye-light-frame"}});
+    framedEye["scenes"][0]["nodes"].push_back(1);
+    lighting(framedEye)["mainRampFrame"]={{"schemaVersion",1},{"node","eye-light-frame"},
+        {"basis",{1,0,0,0,1,0,0,0,1}}};
+    const auto projected=load(framedEye);
+    const auto packedProjected=azurerender::packMaterialSurfaceProfile(projected.materials.at(0));
+    require(packedProjected.rows[6][1]==1.F,"Eye head-plane main ramp must enable its packed shader option");
+    for(const auto* name:{"missing","duplicate","invalid-basis","host-lambert"}){
+        auto invalid=framedEye;
+        if(std::string_view(name)=="missing")invalid["nodes"][1]["name"]="other";
+        if(std::string_view(name)=="duplicate")invalid["nodes"].push_back(invalid["nodes"][1].get<Json>());
+        if(std::string_view(name)=="invalid-basis")lighting(invalid)["mainRampFrame"]["basis"][4]=0;
+        if(std::string_view(name)=="host-lambert"){
+            auto frame=lighting(invalid)["mainRampFrame"].get<Json>();
+            lighting(invalid)=authoredLighting;lighting(invalid)["mainRampFrame"]=std::move(frame);
+        }
+        reject(invalid,"mainRampFrame");
+    }
     require(nprMaterial.eyeSurface.nprLighting&&std::abs(nprMaterial.eyeSurface.shadowScale-.55F)<1e-6F,
         "Eye NPR lighting fields must reach the typed material");
     const auto nprPacked=packMaterialSurfaceProfile(nprMaterial);

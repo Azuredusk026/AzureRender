@@ -15,6 +15,7 @@ inline std::optional<AssetMaterialFrame> resolveMaterialFrame(const LoadedAsset&
         if(material.faceSdf.present&&material.faceSdf.schemaVersion==2)
             accept({true,material.faceSdf.headNode,material.faceSdf.headNodeName,material.faceSdf.headBasis});
         if(material.projectedHairRamp.present)accept(material.projectedHairRamp.frame);
+        if(material.eyeSurface.present)accept(material.eyeSurface.mainRampFrame);
     }
     return result;
 }

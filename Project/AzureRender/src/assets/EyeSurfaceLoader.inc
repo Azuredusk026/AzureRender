@@ -129,7 +129,7 @@ void loadEyeSurface(const tinygltf::Material& material,const tinygltf::Model& mo
     eye.nprLighting=lighting["illuminationModel"]=="npr-main-ambient";
     std::set<std::string> lightFields{"source","illuminationModel","matcapShadowFloor","directWeights"};
     if(eye.nprLighting)for(const char* field:{"ambientColor","mainColor","shadowScale"})lightFields.insert(field);
-    for(const auto& field:lighting.items())if(!lightFields.count(field.key()))fail("lightingInputs."+field.key(),"unknown field");
+    for(const auto& field:lighting.items())if(!lightFields.count(field.key())&&field.key()!="mainRampFrame")fail("lightingInputs."+field.key(),"unknown field");
     for(const auto& field:lightFields)if(!lighting.contains(field))fail("lightingInputs."+field,"required field missing");
     if(lighting["source"]!="host-authored")fail("lightingInputs","require explicit host-authored inputs");
     eye.matcapShadowFloor=number(lighting["matcapShadowFloor"],"lightingInputs.matcapShadowFloor",0,1);
@@ -138,6 +138,27 @@ void loadEyeSurface(const tinygltf::Material& material,const tinygltf::Model& mo
         eye.shadowScale=number(lighting["shadowScale"],"lightingInputs.shadowScale",0,1);
         vector(lighting,"ambientColor",eye.ambientColor,0,64,"lightingInputs.");
         vector(lighting,"mainColor",eye.mainColor,0,64,"lightingInputs.");
+    }
+    if(lighting.contains("mainRampFrame")){
+        constexpr auto field="lightingInputs.mainRampFrame";
+        const auto& value=lighting.at("mainRampFrame");
+        if(!eye.nprLighting||!value.is_object()||value.size()!=3||!value.contains("schemaVersion")
+            ||!value["schemaVersion"].is_number_integer()||value["schemaVersion"]!=1
+            ||!value.contains("node")||!value["node"].is_string()||value["node"].get_ref<const std::string&>().empty())
+            fail(field,"require NPR main and ambient lighting, version 1 and a named node");
+        auto& frame=eye.mainRampFrame;
+        frame.nodeName=value["node"].get<std::string>();
+        unsigned matches=0;
+        for(std::size_t i=0;i<model.nodes.size();++i)if(model.nodes[i].name==frame.nodeName){
+            frame.node=static_cast<std::uint32_t>(i);++matches;
+        }
+        if(matches!=1)fail(field,"require one unique named node");
+        vector(value,"basis",frame.basis,-1.0001,1.0001,"lightingInputs.mainRampFrame.");
+        for(unsigned a=0;a<3;++a)for(unsigned b=0;b<3;++b){
+            float dot=0;for(unsigned i=0;i<3;++i)dot+=frame.basis[a*3+i]*frame.basis[b*3+i];
+            if(std::abs(dot-(a==b?1.F:0.F))>1e-4F)fail(field,"basis must be orthonormal");
+        }
+        frame.present=true;
     }
     const auto sampler=[&](int index,const std::string& property,bool fixed) {
         azurerender::TextureImportSettings settings;

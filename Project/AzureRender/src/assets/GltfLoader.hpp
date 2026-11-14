@@ -245,6 +245,7 @@ struct AssetMaterial {
     struct EyeSurface {
         bool present=false;
         bool nprLighting=false;
+        AssetMaterialFrame mainRampFrame;
         float shadowScale=1;
         std::array<float,3> ambientColor{1,1,1},mainColor{1,1,1};
         float parallaxScale=0,matcapNormalScale=0,alphaPremultiply=0,matcapShadowFloor=0;

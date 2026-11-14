@@ -61,7 +61,7 @@ inline PackedMaterialSurfaceProfile packEyeSurfaceProfile(const AssetMaterial::E
         eye.matcapColor,{eye.directWeights[0],eye.directWeights[1],eye.directWeights[2],0},eye.uvScaleOffset}}};
     result.rows[19][3]=1;
     if(eye.nprLighting){
-        result.rows[6]={eye.shadowScale,0,0,1};
+        result.rows[6]={eye.shadowScale,eye.mainRampFrame.present?1.F:0.F,0,1};
         result.rows[7]={eye.ambientColor[0],eye.ambientColor[1],eye.ambientColor[2],0};
         result.rows[8]={eye.mainColor[0],eye.mainColor[1],eye.mainColor[2],0};
     }

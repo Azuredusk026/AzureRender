@@ -1202,7 +1202,16 @@ void main()
         faceSdfWeight);
     bool dualFaceSdf=faceSdfEnabled>0.0 && materialFeatureEnabled(2048U)>0.5;
     bool signedMainRamp=false;
-    if(eyeNpr){signedMainRamp=true;rampCoordinate=characterMainRampCoordinate(shadedNormal,lightDirection,0);}
+    if(eyeNpr){
+        vec3 eyeLight=lightDirection;
+        if(materialSurfaceProfiles.profiles[material.materialPadding>>1U].rows[6].y>.5){
+            vec3 side=instanceFaceFrame[0].xyz,front=instanceFaceFrame[2].xyz;
+            vec3 projected=side*dot(eyeLight,side)+front*dot(eyeLight,front);
+            if(dot(projected,projected)>1e-12)eyeLight=normalize(projected);
+        }
+        signedMainRamp=true;
+        rampCoordinate=characterMainRampCoordinate(shadedNormal,eyeLight,0);
+    }
     if(materialFeatureEnabled(524288U)>.5&&!dualFaceSdf) {
         vec4 rampInput=materialSurfaceProfiles.profiles[material.materialPadding>>1U].rows[1];
         signedMainRamp=rampInput.y>.5;

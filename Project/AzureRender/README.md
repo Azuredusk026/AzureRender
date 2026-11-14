@@ -466,6 +466,7 @@ CPU 与编辑回归范围见[解释验证](docs/acceptance/nr/material-document-
 公共机制及实景待项见[六面反射验收](docs/acceptance/nr/reflection-cube.md)。
 
 径向眼表面支持视差、Matcap 与显式宿主照明。
+主光色带可按模型的头部平面取光，并随角色姿态更新。
 公共验证及原生待项见[眼睛验收](docs/acceptance/nr/eye-radial-surface.md)。
 
 三个公开模型工程已交付，支持编辑、保存和独立发布。

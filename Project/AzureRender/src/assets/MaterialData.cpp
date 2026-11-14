@@ -246,6 +246,7 @@ void applyMaterialBindings(LoadedAsset& mesh,const std::map<std::string,Material
         lost((source.materialFeatures & MaterialFeatureHairReferenceRasterGrid)
             && !(replacement.materialFeatures & MaterialFeatureHairReferenceRasterGrid),"hair.projectedRamp.referenceRasterGrid");
         lost(source.eyeSurface.present&&!replacement.eyeSurface.present,"eyeSurface");
+        lost(source.eyeSurface.mainRampFrame.present&&!replacement.eyeSurface.mainRampFrame.present,"eyeSurface.lightingInputs.mainRampFrame");
         lost(source.unlitTextureLayers.present&&!replacement.unlitTextureLayers.present,"surface.layers");
         lost(source.unlitTextureLayers.submission==UnlitTextureLayers::Submission::OpaqueOverlay
             &&replacement.unlitTextureLayers.submission!=UnlitTextureLayers::Submission::OpaqueOverlay,"surface.submission");
