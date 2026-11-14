@@ -1,7 +1,14 @@
 {
   "status": "verified-pixel-comparison",
   "overallVisualAcceptance": "failed-user-review",
-  "nativeDepthReadback": "pending",
+  "nativeDepthReadback": {
+    "status": "qualified",
+    "positions": 14,
+    "overlaps": 12,
+    "nearestPassed": 12,
+    "screenDepthSuppressionEnabled": false,
+    "depthUnchangedInColorPass": 14
+  },
   "nativeDepthPipeline": {
     "1339": {
       "id": "ResourceId::19970",
@@ -95,6 +102,16 @@
     }
   },
   "nativeCaptureSha256": "fa2ca267f7168f5603e83ad5f817a3074d8dbee23a216e6ab8ef2c340ec06a90",
+  "nativeLaterDraw": {
+    "event": 1383,
+    "target": "ResourceId::141925",
+    "changedPixels": 27832,
+    "beforeSha256": "f296f8072c0a7b81f1527571e7a9ec8ca5f393f78d29b691af34541f6c602930",
+    "afterSha256": "b742829a6c1b20917dc88a25670090509ec89d7a5885add5931acd40d87ff484",
+    "sharedWithNativeHairShadow": 0,
+    "sharedWithFaceHairShadow": 0,
+    "sharedWithKnownOverlaps": []
+  },
   "referenceSha256": "48afd6546c23cfa85099a765cc94ada4813a684538c695faf6d70d6daf2261b5",
   "coveredFaceHairShadow": 264,
   "depthPrepassGeometryPrediction": [
@@ -224,9 +241,9 @@
     }
   },
   "archive": {
-    "sha256": "5df5ffa27d15ff02f94cd5c9e29a4f54810fd7e8b5067c67391ed3fbdf3e686a",
+    "sha256": "1c9f17b06dbee40b93a3f556b9d7bb37deb910bef5807601910641e316289ead",
     "members": {
-      "archive-face-multiply-overlap.py": "6da7f4d9e26f1e3b73535c931d77e9a59eace8b1d1fcd940702218f52a5239f3",
+      "archive-face-multiply-overlap.py": "d69610a7dcc9813abc6e024c0fa355fa3096e38cdc748aa64f6459ce531d4ba7",
       "face-multiply-overlap-audit.py": "2ba4c88a20c70d46323fb2e32314b779b673de8c1d626549de3403e87f036ca9",
       "face-multiply-overlap-audit.json": "869dab169cf0169314d81feb69e94685b0d99fe847d3324c8c974fb89bff0cd9",
       "score-final-face-ownership.py": "f76a36eb1603794dbe34749825c336ced9958cbdab8dfea1420fff95af297feb",
@@ -236,7 +253,13 @@
       "face-shadow-structured-capture.py": "f854ec690fecf6e40122f44b31c3b403d9c0a2cbaad25ebf4e12334358c33cc9",
       "face-shadow-structured-capture/results.json": "663083b5a73f68c696436c5abc5555febb3e17edd2db35238630c1eef3e9e82a",
       "face-shadow-structured-capture/request.json": "47d46d3fa5d39fda2c7f3affcfce7c8394bbfb76f1fadd5eddade79f99c5fa12",
-      "quality-legacy-material-cpu-retest.xml": "bdfa9f87928eee834eff68c9a61119c01a2433dde62c9d53bfe4aa9433abfa66"
+      "quality-legacy-material-cpu-retest.xml": "bdfa9f87928eee834eff68c9a61119c01a2433dde62c9d53bfe4aa9433abfa66",
+      "face-shadow-native-depth-control.py": "8b09d250a25fb61c5861c737712f2b149ca0fab5e97b070af8c939fee3c171e6",
+      "face-shadow-native-depth/request.json": "a6026dc8d05f0d810585a722e14b55ca21ff3c84c92b2ec28387a04370b5e6ab",
+      "face-shadow-native-depth/results.json": "8a6dd16c3e4b008065114eec8189592290e74d62fad4d6bd4a56d495c10247cb",
+      "face-shadow-native-depth/comparison.json": "1c16d05e9790cf9f44bf380c2532e721b9cd11994a80a6f6fde0a9a8f86e8647",
+      "face-shadow-later-draws.py": "3f27b8022f0484e268f8753ded8bddd7374256166d62c69de97a13640f145e7b",
+      "face-shadow-later-draws.json": "1897ece4e1143c1df52e813b6f998ffd93104c7b5cace52d6e8d31bfa0dd7478"
     }
   }
 }
