@@ -296,9 +296,11 @@ Release 和 Debug 各通过四项材质检查，895 份着色程序逐字节一�
 正式 Player 在两块显卡上分别重现关闭字段的基准和开启字段的独立对照，四帧均逐字节一致。
 完整脸部遮罩之外新增超差为零。内缩区域之外新增超差分别为 8 和 6 处，均位于完整脸部遮罩内。
 Release 与 Debug 各通过四项材质检查，895 份着色程序逐字节一致，384 份扩展照明程序通过 SPIR-V 验证。
+遮罩边缘光与双距离场的两项图像回归在 NVIDIA 和 Intel 上分别通过。
 完整脸部的峰差位置为 `[1315,258]`，脸部验收保持开放。
 
 [局部灯结果](evidence/2026-11-14/face-local-radial-normal/results.json)和[验证归档](evidence/2026-11-14/face-local-radial-normal/validation.zip)保存双设备采集与逐灯输入。
+[兼容回归归档](evidence/2026-11-14/face-local-radial-normal/legacy-gpu-regression.zip)保存四项设备测试的执行结果。
 
 ## 脸部后续覆盖
 
