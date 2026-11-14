@@ -74,5 +74,18 @@ NVIDIA 的 37 个未覆盖超差位置均通过原生深度及模板测试。原
 
 [主光色带结果](evidence/2026-11-14/iris-main-ramp-source/results.json)和[验证归档](evidence/2026-11-14/iris-main-ramp-source/validation.zip)保存原生寄存器、片元采样和当前着色分项。
 
+## 头部平面光照对照
+
+Player 候选从场景读取主光，按实例头部的左右轴和前向轴投影。NVIDIA 与 Intel 的整帧对照使用同一原生参考、相机和材质输入。表内只统计最大颜色通道误差超过 1 个色阶的虹膜像素。
+
+| 设备 | 当前虹膜 | 候选虹膜 | 当前未覆盖区 | 候选未覆盖区 | 候选最大误差 |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| NVIDIA | 52 | 22 | 37 | 7 | 15 |
+| Intel | 56 | 30 | 39 | 13 | 27 |
+
+两块显卡的眼影覆盖区及虹膜外均与当前输出逐像素一致。候选仍有 2 处及 4 处新增超差，虹膜一字节验收待通过。该对照使用隔离编译的着色器，正式材质接口还需验证头部绑定和姿态更新。
+
+[头部平面光照结果](evidence/2026-11-14/iris-main-ramp-head-plane/results.json)和[验证归档](evidence/2026-11-14/iris-main-ramp-head-plane/validation.zip)保存源绘制对照与双设备收据。
+
 [结果清单](evidence/2026-11-13/iris-native-overlay/results.json)记录各阶段读回。
 [验证归档](evidence/2026-11-13/iris-native-overlay/validation.zip)保存遮罩及逐点计算程序。
