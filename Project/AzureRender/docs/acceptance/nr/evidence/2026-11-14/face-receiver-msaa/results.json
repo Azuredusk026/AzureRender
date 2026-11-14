@@ -1,0 +1,152 @@
+{
+  "overallStatus": "failed-user-review",
+  "fixtures": {
+    "nvidia-release-red-v2": {
+      "metrics": {
+        "face": {
+          "edgeError": 0.23931801946657616,
+          "wrongClassError": 0.0,
+          "comparisonColumns": [
+            8,
+            10,
+            12
+          ],
+          "edgeRGB": [
+            209,
+            162,
+            111
+          ],
+          "edgeExpectedLinear": [
+            0.3982788545274565,
+            0.27123551201668483,
+            0.139249631524613
+          ]
+        },
+        "eye": {
+          "edgeError": 0.23931801946657608,
+          "wrongClassError": 0.0,
+          "comparisonColumns": [
+            8,
+            10,
+            12
+          ],
+          "edgeRGB": [
+            111,
+            118,
+            97
+          ],
+          "edgeExpectedLinear": [
+            0.3982788545274565,
+            0.27123551201668483,
+            0.139249631524613
+          ]
+        }
+      },
+      "failures": [
+        "face filter must affect exactly the covered samples of its class",
+        "eye filter must affect exactly the covered samples of its class"
+      ],
+      "playerSha256": "a81b21b464231741b3331ae4839fb3f716e0f0b69137c33490e6dd7c129851be"
+    },
+    "nvidia-release-fixed": {
+      "metrics": {
+        "face": {
+          "edgeError": 0.0015236238018296322,
+          "wrongClassError": 0.0,
+          "disjointError": 0.0,
+          "comparisonColumns": [
+            8,
+            10,
+            12
+          ],
+          "edgeRGB": [
+            169,
+            142,
+            104
+          ],
+          "edgeExpectedLinear": [
+            0.3982788545274565,
+            0.27123551201668483,
+            0.139249631524613
+          ]
+        },
+        "eye": {
+          "edgeError": 0.0015236238018296322,
+          "wrongClassError": 0.0,
+          "disjointError": 0.0,
+          "comparisonColumns": [
+            8,
+            10,
+            12
+          ],
+          "edgeRGB": [
+            169,
+            142,
+            104
+          ],
+          "edgeExpectedLinear": [
+            0.3982788545274565,
+            0.27123551201668483,
+            0.139249631524613
+          ]
+        }
+      },
+      "failures": [],
+      "playerSha256": "1885b341231981d0ad85a2aa29aa20a2807e052a0ef6f927711fe614837e3f74"
+    },
+    "intel-release-fixed": {
+      "metrics": {
+        "face": {
+          "edgeError": 0.0015236238018296322,
+          "wrongClassError": 0.0,
+          "disjointError": 0.0,
+          "comparisonColumns": [
+            8,
+            10,
+            12
+          ],
+          "edgeRGB": [
+            169,
+            142,
+            104
+          ],
+          "edgeExpectedLinear": [
+            0.3982788545274565,
+            0.27123551201668483,
+            0.139249631524613
+          ]
+        },
+        "eye": {
+          "edgeError": 0.0015236238018296322,
+          "wrongClassError": 0.0,
+          "disjointError": 0.0,
+          "comparisonColumns": [
+            8,
+            10,
+            12
+          ],
+          "edgeRGB": [
+            169,
+            142,
+            104
+          ],
+          "edgeExpectedLinear": [
+            0.3982788545274565,
+            0.27123551201668483,
+            0.139249631524613
+          ]
+        }
+      },
+      "failures": [],
+      "playerSha256": "1885b341231981d0ad85a2aa29aa20a2807e052a0ef6f927711fe614837e3f74"
+    }
+  },
+  "cpu": [
+    "AzureRender.SceneMultisampling",
+    "AzureRender.CharacterRepair"
+  ],
+  "archive": {
+    "members": 41,
+    "sha256": "073a3fac714d40c7b31040e8e46fc8f83a4239ee08158c73f0e928a41ff92c3e"
+  }
+}

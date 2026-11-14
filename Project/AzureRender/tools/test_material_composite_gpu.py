@@ -20,13 +20,15 @@ def linear(image):
     return np.where(value <= .04045, value / 12.92, ((value + .055) / 1.055) ** 2.4)
 
 
-def run(player, root, *, legacy_alpha_red=False, expected_validation='any'):
+def run(player, root, *, legacy_alpha_red=False, expected_validation='any', receiver_msaa_only=False):
     root.mkdir(parents=True, exist_ok=False)
     assets = root / 'assets'
     assets.mkdir()
     surface(assets / 'rear.gltf', double_sided=True)
     rear = json.loads((assets / 'rear.gltf').read_text())
     rear['materials'][0]['pbrMetallicRoughness']['baseColorFactor'] = [.64, .36, .16, 1]
+    if receiver_msaa_only:
+        (assets / 'background.gltf').write_text(json.dumps(rear))
     surface(assets / 'overlay.gltf', sloped=True)
     template = json.loads((assets / 'overlay.gltf').read_text())
     Image.new('RGBA', (1, 1), (255, 255, 255, 128)).save(assets / 'alpha.png')
@@ -69,7 +71,7 @@ def run(player, root, *, legacy_alpha_red=False, expected_validation='any'):
                 fixed=False, isolation='albedo', material_class='overlay',
                 scene_lighting=True, texture_alpha=False, opaque=False,
                 lighting=False, light_enabled=True, coplanar=False,
-                rear_class='generic', eye_receiver=False, coverage_scale=1):
+                rear_class='generic', receiver_filter=None, coverage_scale=1, split_overlay=False):
         assert not (opaque and multiply), 'opaque control must use the ordinary material path'
         assert not (coplanar and behind), 'a card cannot be both coplanar and behind'
         model = copy.deepcopy(rear if coplanar else template)
@@ -81,8 +83,8 @@ def run(player, root, *, legacy_alpha_red=False, expected_validation='any'):
         if multiply:
             profile['features'].append('multiply-composite')
             profile['composite'] = {'schemaVersion': 1, 'mode': 'multiply'}
-            if eye_receiver:
-                profile['composite'].update(receiver='eye', coverageScale=coverage_scale)
+            if receiver_filter:
+                profile['composite'].update(receiver=receiver_filter, coverageScale=coverage_scale)
         material['extras'] = {'azureRenderMaterial': profile}
         receiver = copy.deepcopy(rear)
         if rear_class != 'generic':
@@ -128,6 +130,18 @@ def run(player, root, *, legacy_alpha_red=False, expected_validation='any'):
                 'stylized': False, 'bloomEnabled': False, 'antiAliasing': 0,
                 'exposure': 0, 'toneMapping': False, 'contrast': 1, 'saturation': 1,
                 'diagnosticView': {'world-normal': 1, 'depth': 4}.get(isolation, 0)}}
+        if receiver_msaa_only:
+            nodes[0]['components']['azure.transform']['data'].update(
+                translation=[-1 + .5/64, 0, -1], scale=[2, 2, 2])
+            if split_overlay:
+                nodes[1]['components']['azure.transform']['data']['translation'][0] = .5 + .5/64
+            camera = nodes[2]['components']['azure.camera']
+            camera['version'] = 2
+            camera['data'].update(orthographic=True, orthographicHeight=2)
+            level['renderSettings'].update(schemaVersion=19, antiAliasing=4)
+            level['resources'].append({'id': 'background', 'asset': 'assets:/background.gltf'})
+            nodes.append({'id': 'background', 'resourceId': 'background', 'components': {
+                'azure.transform': component('azure.transform', {'translation': [0, 0, -2], 'scale': [4, 4, 4]})}})
         if lighting:
             nodes.append({'id': 'light', 'components': {
                 'azure.transform': component('azure.transform', {'translation': [0, 0, 2]})}})
@@ -161,6 +175,8 @@ def run(player, root, *, legacy_alpha_red=False, expected_validation='any'):
         assert not report['scriptErrors'] and not report['presentationErrors'], name
         manifest_path = output / 'frames/capture_manifest.json'
         manifest = json.loads(manifest_path.read_text())
+        if receiver_msaa_only:
+            assert manifest['rasterizationSamples'] == manifest['snapshotRasterizationSamples'] == 4, name
         expected_view = {'world-normal': 'world-normal', 'depth': 'depth'}.get(isolation, 'beauty')
         assert manifest['qaIsolation'] == isolation, (name, 'isolation overridden', manifest['qaIsolation'])
         assert manifest['diagnosticView'] == expected_view, (name, 'diagnostic view overridden', manifest['diagnosticView'])
@@ -182,6 +198,37 @@ def run(player, root, *, legacy_alpha_red=False, expected_validation='any'):
             'effectiveAlpha': alpha * opacity * (128 / 255 if texture_alpha else 1),
             'validationEnabled': validation_enabled})
         return frames[name][54:74, 54:74]
+
+    if receiver_msaa_only:
+        # A straight edge at x=64.5 covers exactly two of the standard four
+        # sample positions. Its opaque backing has the same colour but a
+        # different material class, so class selection alone sets the result.
+        for receiver in ('face', 'eye'):
+            hidden = capture(receiver+'-unfiltered-hidden', visible=False, multiply=False, rear_class=receiver)
+            full = capture(receiver+'-unfiltered', rear_class=receiver)
+            actual = capture(receiver+'-filtered', rear_class=receiver, receiver_filter=receiver)
+            wrong = capture(receiver+'-wrong-filter', rear_class=receiver, receiver_filter='eye' if receiver=='face' else 'face')
+            disjoint = capture(receiver+'-disjoint', rear_class=receiver, receiver_filter=receiver, split_overlay=True)
+            disjoint_control = capture(receiver+'-disjoint-unfiltered', rear_class=receiver, split_overlay=True)
+            columns = [8, 10, 12]
+            source = linear(hidden[:, columns])
+            dark = linear(full[:, columns])
+            assert np.abs(dark - source*tint).max() < .008, receiver
+            expected = dark + (source-dark)*np.array([0, .5, 1])[None, :, None]
+            error = float(np.abs(linear(actual[:, columns])-expected).max())
+            wrong_error = float(np.abs(linear(wrong[:, columns])-source).max())
+            disjoint_error = float(np.abs(linear(disjoint)-linear(hidden)).max())
+            split_expected = (dark[:, 1]+source[:, 1])*.5
+            assert np.abs(linear(disjoint_control[:, 10])-split_expected).max() < .008, receiver
+            metrics[receiver] = {'edgeError': error, 'wrongClassError': wrong_error,
+                'disjointError': disjoint_error,
+                'comparisonColumns': columns, 'edgeRGB': actual[10, 10].tolist(),
+                'edgeExpectedLinear': expected[10, 1].tolist()}
+            if max(error, wrong_error, disjoint_error) >= .008:
+                failures.append(receiver+' filter must affect exactly the covered samples of its class')
+        finish()
+        assert not failures, failures
+        return
 
     # The receiver captures the real transfer function and its quantization.
     baseline = capture('hidden', visible=False, multiply=False)
@@ -232,14 +279,29 @@ def run(player, root, *, legacy_alpha_red=False, expected_validation='any'):
     metrics['fallbackMaximumDifference'] = error
     if error > 1:
         failures.append('fixed descriptors and CPU skinning must match')
-    eye = capture('eye-receiver', rear_class='eye', eye_receiver=True, coverage_scale=.5)
+    eye = capture('eye-receiver', rear_class='eye', receiver_filter='eye', coverage_scale=.5)
     error = float(np.abs(linear(eye) - destination * (.5 + tint * .5)).max())
     metrics['eyeReceiverLinearMaximumError'] = error
     if error > .008:
         failures.append('eye receiver must apply the authored coverage scale')
     for name, options in [('non-eye-receiver', {}),
                           ('eye-receiver-occluded', {'rear_class': 'eye', 'behind': True})]:
-        pixels = capture(name, eye_receiver=True, **options)
+        pixels = capture(name, receiver_filter='eye', **options)
+        error = int(np.abs(pixels - baseline).max())
+        metrics[name + 'MaximumDifference'] = error
+        if error > 1:
+            failures.append(name + ' must preserve the receiver')
+    face = capture('face-receiver', rear_class='face', receiver_filter='face', coverage_scale=.5)
+    face_fixed = capture('face-receiver-fixed', rear_class='face', receiver_filter='face', coverage_scale=.5, fixed=True)
+    for name, pixels in [('faceReceiver', face), ('faceReceiverFixed', face_fixed)]:
+        error = float(np.abs(linear(pixels) - destination * (.5 + tint * .5)).max())
+        metrics[name + 'LinearMaximumError'] = error
+        if error > .008:
+            failures.append(name + ' must apply the authored coverage scale')
+    for rear_class, receiver_filter, behind in [('eye','face',False), ('generic','face',False),
+                                                  ('face','eye',False), ('face','face',True)]:
+        name = f'{rear_class}-under-{receiver_filter}-' + ('occluded' if behind else 'control')
+        pixels = capture(name, rear_class=rear_class, receiver_filter=receiver_filter, behind=behind)
         error = int(np.abs(pixels - baseline).max())
         metrics[name + 'MaximumDifference'] = error
         if error > 1:
@@ -295,13 +357,14 @@ if __name__ == '__main__':
     parser.add_argument('--legacy-alpha-red', action='store_true',
         help='Save an expected formula failure using only ordinary alpha blending; exits nonzero.')
     parser.add_argument('--expected-validation', choices=('any','enabled','disabled'), default='any')
+    parser.add_argument('--receiver-msaa-only', action='store_true')
     args = parser.parse_args()
     if args.output:
         run(args.executable, args.output.resolve(), legacy_alpha_red=args.legacy_alpha_red,
-            expected_validation=args.expected_validation)
+            expected_validation=args.expected_validation, receiver_msaa_only=args.receiver_msaa_only)
     else:
         runs = Path(__file__).resolve().parents[1] / 'build/runs'
         runs.mkdir(parents=True, exist_ok=True)
         with tempfile.TemporaryDirectory(prefix='material-composite-', dir=runs) as temporary:
             run(args.executable, Path(temporary) / 'capture', legacy_alpha_red=args.legacy_alpha_red,
-                expected_validation=args.expected_validation)
+                expected_validation=args.expected_validation, receiver_msaa_only=args.receiver_msaa_only)

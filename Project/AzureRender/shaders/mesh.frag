@@ -2293,8 +2293,15 @@ void main()
 #if !defined(AZURE_OPAQUE_SNAPSHOT)
         if (compositeProfile.x>.5) {
             ivec2 pixel=ivec2(AZURE_FRAGMENT_COORD.xy);
-            if(texelFetch(opaqueSceneColor,pixel,0).a>.5 || texelFetch(overlaySceneDepth,pixel,0).r>=100000.0)
-                discard;
+            float receiverCode=texelFetch(opaqueSceneColor,pixel,0).a;
+#if defined(AZURE_GEOMETRY_SAMPLES)
+            uint requiredReceiver=compositeProfile.x<1.5?0u:2u;
+            uint sampleReceiver=(uint(receiverCode)>>(2*gl_SampleID))&3u;
+            if(sampleReceiver!=requiredReceiver)discard;
+#else
+            bool receiverMatches=compositeProfile.x<1.5?receiverCode<=.5:receiverCode>1.5;
+            if(!receiverMatches || texelFetch(overlaySceneDepth,pixel,0).r>=100000.0)discard;
+#endif
         }
 #endif
         compositeCoverage*=compositeProfile.y;
@@ -2316,7 +2323,9 @@ void main()
     if(camera.clusterLighting.x>.5 && !sceneCharacter)innerOutlineParticipation=0.0;
     vec3 innerOutlineNormal = geometricNormal;
 #if defined(AZURE_OPAQUE_SNAPSHOT)
+    // Snapshot alpha identifies the opaque receiver, independently of scene colour.
     if(AZURE_MATERIAL_CLASS==6U)outputColor.a=0.0;
+    if(AZURE_MATERIAL_CLASS==2U)outputColor.a=2.0;
     vec3 snapshotNormal=shadedNormal;
     if(projectedHair&&(projectedHairFlags&4U)!=0U) {
         ProjectedHairProfile p=loadProjectedHairSurfaceProfile(material.materialPadding>>1U);

@@ -4,8 +4,9 @@
 #include <stdexcept>
 namespace azurerender {
 SceneMultisampling::SceneMultisampling(rhi::IRhi& rhi,rhi::IGpuAllocator& allocator,VkExtent2D extent,VkFormat depth,VkFormat secondary,
-    SceneSecondaryResolve policy,std::uint32_t slots,std::vector<SceneMultisampleDestination> destinations,const std::string& shaders)
-    :rhi_(rhi),allocator_(allocator),extent_(extent),secondaryResolve_(policy),destinations_(std::move(destinations)){
+    SceneSecondaryResolve policy,std::uint32_t slots,std::vector<SceneMultisampleDestination> destinations,const std::string& shaders,
+    bool packSnapshotReceivers)
+    :rhi_(rhi),allocator_(allocator),extent_(extent),secondaryResolve_(policy),packSnapshotReceivers_(packSnapshotReceivers),destinations_(std::move(destinations)){
     const std::array<VkFormat,4> formats{VK_FORMAT_R16G16B16A16_SFLOAT,depth,secondary,VK_FORMAT_R8_UNORM};
     if(!destinations_.empty()&&(destinations_[0].images[3]||destinations_[0].views[3]))attachmentCount_=4;
     const auto pixels=std::uint64_t(extent.width)*extent.height;
@@ -15,6 +16,7 @@ SceneMultisampling::SceneMultisampling(rhi::IRhi& rhi,rhi::IGpuAllocator& alloca
         ||destinations_.empty()||destinations_.size()>UINT32_MAX
         ||depth!=VK_FORMAT_D32_SFLOAT||(secondary!=VK_FORMAT_R8G8B8A8_UNORM&&secondary!=VK_FORMAT_R32_SFLOAT&&secondary!=VK_FORMAT_R32G32B32A32_SFLOAT)
         ||(policy!=SceneSecondaryResolve::Average&&policy!=SceneSecondaryResolve::Minimum&&policy!=SceneSecondaryResolve::MinimumDepthSample)
+        ||(packSnapshotReceivers_&&(policy==SceneSecondaryResolve::Average||hasDisplayMask()))
         ||(policy==SceneSecondaryResolve::Minimum&&secondary!=VK_FORMAT_R32_SFLOAT)
         ||(policy==SceneSecondaryResolve::MinimumDepthSample&&secondary!=VK_FORMAT_R32G32B32A32_SFLOAT))
         throw std::invalid_argument("Scene multisampling requires bounded four-sample targets and supported resolve formats");
@@ -89,7 +91,8 @@ std::array<RenderGraph::ResourceId,3> SceneMultisampling::importSources(RenderGr
 }
 void SceneMultisampling::recordResolveDraw(rhi::ICommandRecorder& commands,std::uint32_t slot) const{
     commands.setViewport(float(extent_.width),float(extent_.height));commands.setScissor(extent_);commands.bindPipeline(pipeline_);
-    commands.bindDescriptorSet(layout_,sets_.at(slot));const auto policy=static_cast<std::uint32_t>(secondaryResolve_)|(hasDisplayMask()?256U:0U);
+    commands.bindDescriptorSet(layout_,sets_.at(slot));const auto policy=static_cast<std::uint32_t>(secondaryResolve_)
+        |(hasDisplayMask()?256U:0U)|(packSnapshotReceivers_?512U:0U);
     commands.pushConstants(layout_,VK_SHADER_STAGE_FRAGMENT_BIT,0,&policy,sizeof(policy));commands.draw(3);
 }
 void SceneMultisampling::recordResolve(rhi::ICommandRecorder& commands,std::uint32_t slot,std::uint32_t destination) const{

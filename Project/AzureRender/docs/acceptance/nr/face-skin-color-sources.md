@@ -384,6 +384,12 @@ Release 与 Debug 各通过四项材质检查，895 份着色程序逐字节一�
 
 [视角色调结果](evidence/2026-11-14/face-view-mask-blue-source/results.json)和[验证归档](evidence/2026-11-14/face-view-mask-blue-source/validation.zip)保存寄存器、整帧统计及着色器对照。
 
+## 多重采样接收边缘
+
+四倍多重采样夹具使用等色、不同类别的前后表面，分别核对眼部和脸部在混合像素中的接收范围。NVIDIA 与 Intel 各通过十二次实际绘制；半覆盖线性颜色最大绝对误差为 0.001524。目标类别和覆盖片在样本上互不相交时，输出与未染色画面逐字节一致。
+
+[逐样本结果](evidence/2026-11-14/face-receiver-msaa/results.json)和[验证归档](evidence/2026-11-14/face-receiver-msaa/validation.zip)保存失败复现及双设备复测。
+
 [乘色照明来源](evidence/2026-11-14/face-overlay-lighting-sources/results.json)和[验证归档](evidence/2026-11-14/face-overlay-lighting-sources/validation.zip)保存原生寄存器、覆盖裁片和十二处绘制记录。
 
 [覆盖来源结果](evidence/2026-11-14/face-overlay-source/results.json)和[验证归档](evidence/2026-11-14/face-overlay-source/validation.zip)保存接收分类、几何覆盖、乘色状态和体表顺序对照。

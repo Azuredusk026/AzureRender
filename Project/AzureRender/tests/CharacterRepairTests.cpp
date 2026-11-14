@@ -674,10 +674,15 @@ void testMultiplyComposite(const nlohmann::json& fixture, const std::filesystem:
     const auto eyeProfile=azurerender::packMaterialSurfaceProfile(load(eyeOverlay).materials.at(0));
     require(eyeProfile.rows[20][0]==1.F&&eyeProfile.rows[20][1]==.95F,
         "Eye multiply composite must carry its receiver filter and coverage scale");
+    auto faceOverlay=eyeOverlay;
+    faceOverlay["materials"][0]["extras"]["azureRenderMaterial"]["composite"]["receiver"]="face";
+    const auto faceProfile=azurerender::packMaterialSurfaceProfile(load(faceOverlay).materials.at(0));
+    require(faceProfile.rows[20][0]==2.F&&faceProfile.rows[20][1]==.95F,
+        "Face multiply composite must carry a distinct receiver filter and the coverage scale");
     const auto defaultProfile=azurerender::packMaterialSurfaceProfile(overlay);
     require(defaultProfile.rows[20][0]==0.F&&defaultProfile.rows[20][1]==1.F,
         "Multiply composite defaults must preserve unrestricted coverage");
-    for(const auto& value:Json::array({"face",1,false,nullptr})) {
+    for(const auto& value:Json::array({"skin","other",1,false,nullptr})) {
         auto invalid=eyeOverlay;
         invalid["materials"][0]["extras"]["azureRenderMaterial"]["composite"]["receiver"]=value;
         reject(invalid);

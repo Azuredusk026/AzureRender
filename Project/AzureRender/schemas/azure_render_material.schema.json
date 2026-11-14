@@ -443,7 +443,7 @@
       "properties": {
         "schemaVersion": {"const": 1},
         "mode": {"const": "multiply"},
-        "receiver": {"const": "eye"},
+        "receiver": {"enum": ["eye", "face"]},
         "coverageScale": {"type": "number", "minimum": 0, "maximum": 1}
       }
     },

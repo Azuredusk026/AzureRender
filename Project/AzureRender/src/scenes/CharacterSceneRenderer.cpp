@@ -3086,7 +3086,7 @@ void CharacterSceneRenderer::createOverlayDepth(const RenderContext& context) {
             destinations.push_back({{opaqueSceneColor_[frame].image.image,overlayDepthAttachments_[frame].image,overlaySceneDepth_[frame].image.image},
                 {opaqueSceneColor_[frame].view,overlayDepthViews_[frame],overlaySceneDepth_[frame].view}});
         snapshotMultisampling_=std::make_unique<SceneMultisampling>(*rhi_,*allocator_,context.renderExtent,context.depthFormat,reflectionSurfaceFormat_,
-            reflectionSurfaceFormat_==VK_FORMAT_R32G32B32A32_SFLOAT?SceneSecondaryResolve::MinimumDepthSample:SceneSecondaryResolve::Minimum,static_cast<std::uint32_t>(kMaxFramesInFlight),std::move(destinations),shaderDirectory_);
+            reflectionSurfaceFormat_==VK_FORMAT_R32G32B32A32_SFLOAT?SceneSecondaryResolve::MinimumDepthSample:SceneSecondaryResolve::Minimum,static_cast<std::uint32_t>(kMaxFramesInFlight),std::move(destinations),shaderDirectory_,true);
     }
     if(surfaceRadiance_&&kSurfaceRadianceFrameSelection&&context.depthFormat==VK_FORMAT_D32_SFLOAT
         &&std::uint64_t(context.renderExtent.width)*context.renderExtent.height*4*kMaxFramesInFlight<=64ULL*1024*1024
@@ -3278,7 +3278,7 @@ void CharacterSceneRenderer::recordOutlineMask(const RenderContext& context,cons
 
 void CharacterSceneRenderer::recordOverlayDepth(const RenderContext& context,const SceneInstanceSnapshot& snapshot,rhi::ICommandRecorder& commands){
     bool depthShell=false;
-    bool eyeReceiver=false;
+    bool compositeReceiver=false;
     bool colorRequired=screenSpaceReflectionActive(snapshot.settings.screenSpaceReflection,
         snapshot.settings.sceneLightingEnabled,qaIsolationMode_,!(qaEffectMode_==5&&!qaEffectEnabled_));
     bool sampled=colorRequired||viewFog_!=nullptr;
@@ -3298,12 +3298,12 @@ void CharacterSceneRenderer::recordOverlayDepth(const RenderContext& context,con
             colorRequired|=material.nprDiffuse.screenLightingNormal;
             sampled|=(material.materialFeatures&(MaterialFeatureBrowOverlay|MaterialFeatureSceneTint|MaterialFeatureSceneRefraction|MaterialFeatureUnlitTextureLayers))!=0;
             colorRequired|=(material.materialFeatures&(MaterialFeatureSceneRefraction|MaterialFeatureSceneTint))!=0||opaqueSurfaceOverlay(material);
-            eyeReceiver|=material.multiplyEyeReceiver;
+            compositeReceiver|=material.multiplyReceiver!=AssetMaterial::MultiplyReceiver::Unrestricted;
             depthShell|=material.outlineSurface.present&&material.outlineSurface.depthPrepass;
         }
     }
-    if(!sampled&&!eyeReceiver&&!depthShell)return;
-    colorRequired|=eyeReceiver;
+    if(!sampled&&!compositeReceiver&&!depthShell)return;
+    colorRequired|=compositeReceiver;
     if(colorRequired&&context.depthTestEnabled)
         recordDepthCoverage(context,snapshot,commands,DepthCoverageMode::SnapshotPrefill);
     recordDepthCoverage(context,snapshot,commands,colorRequired?DepthCoverageMode::SnapshotColor:DepthCoverageMode::SnapshotDepth);

@@ -124,7 +124,8 @@ struct AssetMaterial {
         bool present=false,write=false;
         Compare compare=Compare::Less;
     } blendDepth;
-    bool multiplyEyeReceiver = false;
+    enum class MultiplyReceiver : std::uint8_t { Unrestricted, Eye, Face };
+    MultiplyReceiver multiplyReceiver = MultiplyReceiver::Unrestricted;
     float multiplyCoverageScale = 1.F;
     azurerender::UnlitTextureLayers unlitTextureLayers;
     enum class CharacterVisibility : std::uint8_t { SceneVisibility,MainLightShadow,ObjectShadow,One };

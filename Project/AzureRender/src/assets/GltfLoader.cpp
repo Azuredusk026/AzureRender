@@ -1112,9 +1112,9 @@ void loadMaterialComposite(const tinygltf::Material& material, AssetMaterial& re
     const auto& raw=authored.at("azureRenderMaterial").at("composite");
     if(raw.contains("receiver")) {
         const auto& receiver=raw.at("receiver");
-        if(!receiver.is_string()||receiver!="eye")
+        if(!receiver.is_string()||(receiver!="eye"&&receiver!="face"))
             throw std::invalid_argument("Invalid multiply composite receiver");
-        result.multiplyEyeReceiver=true;
+        result.multiplyReceiver=receiver=="eye"?AssetMaterial::MultiplyReceiver::Eye:AssetMaterial::MultiplyReceiver::Face;
     }
     if(raw.contains("coverageScale")) {
         const auto& scale=raw.at("coverageScale");

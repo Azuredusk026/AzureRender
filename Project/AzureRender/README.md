@@ -165,7 +165,8 @@ GPU 可映射缓冲的用途选择及双设备检查见[内存分配](docs/accep
 含雾关卡的资源身份、重开复用及画面兼容见[复用验证](docs/acceptance/recovery/view-fog-resource-reuse.md)。
 
 全身衣料的实际差异、材质区域及辐照响应见[全身对照](docs/acceptance/nr/full-body-native-comparison.md)。
-眼部阴影的实际采集、回归及接收规则见[眼部乘色接收表面](docs/acceptance/nr/eye-multiply-receiver.md)。
+眼周与脸部阴影可按眼部或脸部类别限制乘色接收。
+验收记录见[眼部乘色接收表面](docs/acceptance/nr/eye-multiply-receiver.md)及[脸部覆盖](docs/acceptance/nr/face-skin-color-sources.md)。
 
 材质环境来源、主光对象阴影及原生对照见[接收验证](docs/acceptance/nr/material-lighting-reception.md)。
 五份衣料的实际高光资源及参数差异见[原生输入核验](docs/acceptance/nr/native-cloth-inputs.md)。
