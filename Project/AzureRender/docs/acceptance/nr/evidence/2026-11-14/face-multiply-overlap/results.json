@@ -27,7 +27,26 @@
         }
       },
       "definitionChunk": 471,
-      "bindingChunk": 2152
+      "bindingChunk": 2152,
+      "rasterizer": {
+        "id": "ResourceId::2270",
+        "bindingChunk": 2151,
+        "definition": {
+          "Descriptor": {
+            "FillMode": "D3D11_FILL_SOLID",
+            "CullMode": "D3D11_CULL_BACK",
+            "FrontCounterClockwise": true,
+            "DepthBias": 0,
+            "DepthBiasClamp": 0.0,
+            "SlopeScaledDepthBias": 0.0,
+            "DepthClipEnable": true,
+            "ScissorEnable": true,
+            "MultisampleEnable": false,
+            "AntialiasedLineEnable": false
+          },
+          "pState": "ResourceId::2270"
+        }
+      }
     },
     "1358": {
       "id": "ResourceId::16260",
@@ -53,12 +72,129 @@
         }
       },
       "definitionChunk": 358,
-      "bindingChunk": 2174
+      "bindingChunk": 2174,
+      "rasterizer": {
+        "id": "ResourceId::2270",
+        "bindingChunk": 2151,
+        "definition": {
+          "Descriptor": {
+            "FillMode": "D3D11_FILL_SOLID",
+            "CullMode": "D3D11_CULL_BACK",
+            "FrontCounterClockwise": true,
+            "DepthBias": 0,
+            "DepthBiasClamp": 0.0,
+            "SlopeScaledDepthBias": 0.0,
+            "DepthClipEnable": true,
+            "ScissorEnable": true,
+            "MultisampleEnable": false,
+            "AntialiasedLineEnable": false
+          },
+          "pState": "ResourceId::2270"
+        }
+      }
     }
   },
   "nativeCaptureSha256": "fa2ca267f7168f5603e83ad5f817a3074d8dbee23a216e6ab8ef2c340ec06a90",
   "referenceSha256": "48afd6546c23cfa85099a765cc94ada4813a684538c695faf6d70d6daf2261b5",
   "coveredFaceHairShadow": 264,
+  "depthPrepassGeometryPrediction": [
+    {
+      "point": [
+        1256,
+        224
+      ],
+      "winner": 27,
+      "depthGap": 2.865653925002154e-05
+    },
+    {
+      "point": [
+        1256,
+        225
+      ],
+      "winner": 27,
+      "depthGap": 2.93936243713315e-05
+    },
+    {
+      "point": [
+        1256,
+        226
+      ],
+      "winner": 27,
+      "depthGap": 3.0133922459152362e-05
+    },
+    {
+      "point": [
+        1256,
+        227
+      ],
+      "winner": 27,
+      "depthGap": 3.1204062056228166e-05
+    },
+    {
+      "point": [
+        1256,
+        228
+      ],
+      "winner": 27,
+      "depthGap": 3.227420165330397e-05
+    },
+    {
+      "point": [
+        1302,
+        229
+      ],
+      "winner": 62,
+      "depthGap": 7.876872171595772e-06
+    },
+    {
+      "point": [
+        1302,
+        230
+      ],
+      "winner": 62,
+      "depthGap": 7.008216028218939e-06
+    },
+    {
+      "point": [
+        1302,
+        231
+      ],
+      "winner": 62,
+      "depthGap": 6.139559884855983e-06
+    },
+    {
+      "point": [
+        1302,
+        232
+      ],
+      "winner": 62,
+      "depthGap": 5.270903741493027e-06
+    },
+    {
+      "point": [
+        1302,
+        233
+      ],
+      "winner": 62,
+      "depthGap": 4.402247598130071e-06
+    },
+    {
+      "point": [
+        1320,
+        264
+      ],
+      "winner": 83,
+      "depthGap": 0.00012154799454035942
+    },
+    {
+      "point": [
+        1320,
+        265
+      ],
+      "winner": 83,
+      "depthGap": 0.0001225054505332203
+    }
+  ],
   "devices": {
     "nvidia": {
       "residuals": 20,
@@ -88,17 +224,17 @@
     }
   },
   "archive": {
-    "sha256": "315a9968e36f5bd51aeec102953089d73cf4dcd244f5b51f9227a66c924543d0",
+    "sha256": "5df5ffa27d15ff02f94cd5c9e29a4f54810fd7e8b5067c67391ed3fbdf3e686a",
     "members": {
-      "archive-face-multiply-overlap.py": "8ef107db6a7a081daa81761851ef8075eb5f3ad77815cb3c492cddb68976c8c1",
-      "face-multiply-overlap-audit.py": "4fc246345ce24d478a8927e8995580e40b0b52dae0d9c07699f273a97ab164d7",
-      "face-multiply-overlap-audit.json": "a09b211cacc4c5a51e8c5e6192c5818b9460457d68ef0b39bdb889dbaa9e1996",
+      "archive-face-multiply-overlap.py": "6da7f4d9e26f1e3b73535c931d77e9a59eace8b1d1fcd940702218f52a5239f3",
+      "face-multiply-overlap-audit.py": "2ba4c88a20c70d46323fb2e32314b779b673de8c1d626549de3403e87f036ca9",
+      "face-multiply-overlap-audit.json": "869dab169cf0169314d81feb69e94685b0d99fe847d3324c8c974fb89bff0cd9",
       "score-final-face-ownership.py": "f76a36eb1603794dbe34749825c336ced9958cbdab8dfea1420fff95af297feb",
       "face-pair-native-ownership.json": "b42a47c6c208ff5ab4cc867c16790c1559dff5016e963be8e7ae118f1cf333e0",
       "native-1339.asm": "ba3c26e42b9b22fcf090ff4cd3f0adfe9dfd86268060580cfed9399e620068d4",
       "native-1358.asm": "565667a84671cc9469b526cd35d6e5fd7c4244dfac4fff49f30b2d59bd54c661",
-      "face-shadow-structured-capture.py": "aaea8d47cb17efffd9fae89eb95e417ad5223189b9b141b8f3fcf0149626e946",
-      "face-shadow-structured-capture/results.json": "445894c8a12de35d850a1e56bfc05b7ae1d8820c4fca02203451da8f8875534d",
+      "face-shadow-structured-capture.py": "f854ec690fecf6e40122f44b31c3b403d9c0a2cbaad25ebf4e12334358c33cc9",
+      "face-shadow-structured-capture/results.json": "663083b5a73f68c696436c5abc5555febb3e17edd2db35238630c1eef3e9e82a",
       "face-shadow-structured-capture/request.json": "47d46d3fa5d39fda2c7f3affcfce7c8394bbfb76f1fadd5eddade79f99c5fa12",
       "quality-legacy-material-cpu-retest.xml": "bdfa9f87928eee834eff68c9a61119c01a2433dde62c9d53bfe4aa9433abfa66"
     }
