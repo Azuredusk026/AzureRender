@@ -10,6 +10,10 @@
 
 [双配置清单](evidence/2026-11-14/registered-gpu-infrastructure/capture-reservations-release-debug.json)与[采集归档](evidence/2026-11-14/registered-gpu-infrastructure/capture-reservations-release-debug.zip)保存注册命令、摘要、时限和实测写入。主线采集脚本使用上述预约。正式回归使用原注册命令、主线构建产物和独立收据。
 
+主线以原 CTest 命令运行九项采集，Release 全部通过。Debug 材质辐射到达 600 秒进程时限。两轮使用同一 Debug Player 和同一验证层，34 个共同完成的子场景命令与帧摘要一致。隔离轮通过全部子场景，耗时 264.08 秒；两轮完成子场景的管线准备中位数分别为 3.42 秒和 13.75 秒。NPR 对照场景的 75 次管线请求在两轮均命中驱动缓存。
+
+[材质辐射对照清单](evidence/2026-11-14/registered-gpu-infrastructure/material-radiance-same-input-timeout.json)和[采集归档](evidence/2026-11-14/registered-gpu-infrastructure/material-radiance-same-input-timeout.zip)保存命令、帧摘要与管线日志。
+
 ## 雾效管线缓存
 
 `AzureEngine.ViewFogGpu` 在同一 Release 产物上两次达到 600 秒时限。第二次完成全部 25 个索引描述符组合及 20 个固定描述符组合。两次采集中可对照的 43 张图像摘要一致。
