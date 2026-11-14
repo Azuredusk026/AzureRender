@@ -1,0 +1,692 @@
+{
+  "status": "source-attribution",
+  "overallStatus": "failed-user-review",
+  "overlay": {
+    "1230": {
+      "tint": [
+        0.10048151761293411,
+        0.08907400816679001,
+        0.08366885036230087
+      ],
+      "samplingBias": -1.0,
+      "fogBranchEnabled": true,
+      "maxFogAbsoluteChange": 0.0,
+      "localFactorRange": [
+        0.9462809872812334,
+        0.9515385381607545
+      ],
+      "maxBlendError": 2.7098315591445044e-08,
+      "samples": [
+        {
+          "point": [
+            1247,
+            256
+          ],
+          "primitive": 20,
+          "textureCoverage": 0.65316241979599,
+          "localFactor": 0.9473100943973977,
+          "fogAbsoluteChange": 0.0,
+          "blendReconstructionError": 2.7098315591445044e-08,
+          "hardwareAgreement": 2.9802322387695312e-08
+        },
+        {
+          "point": [
+            1246,
+            257
+          ],
+          "primitive": 19,
+          "textureCoverage": 0.5918364524841309,
+          "localFactor": 0.9468032607916234,
+          "fogAbsoluteChange": 0.0,
+          "blendReconstructionError": 1.0462446020653715e-08,
+          "hardwareAgreement": 2.9802322387695312e-08
+        },
+        {
+          "point": [
+            1245,
+            258
+          ],
+          "primitive": 18,
+          "textureCoverage": 0.4423590302467346,
+          "localFactor": 0.9462809872812334,
+          "fogAbsoluteChange": 0.0,
+          "blendReconstructionError": 2.4571110257554096e-08,
+          "hardwareAgreement": 5.960464477539063e-08
+        },
+        {
+          "point": [
+            1263,
+            258
+          ],
+          "primitive": 29,
+          "textureCoverage": 0.6026092767715454,
+          "localFactor": 0.9503618458599742,
+          "fogAbsoluteChange": 0.0,
+          "blendReconstructionError": 8.382477378887643e-09,
+          "hardwareAgreement": 2.9802322387695312e-08
+        },
+        {
+          "point": [
+            1263,
+            259
+          ],
+          "primitive": 29,
+          "textureCoverage": 0.4722362160682678,
+          "localFactor": 0.950192854579733,
+          "fogAbsoluteChange": 0.0,
+          "blendReconstructionError": 8.137357232484987e-09,
+          "hardwareAgreement": 0.0
+        },
+        {
+          "point": [
+            1314,
+            259
+          ],
+          "primitive": 3,
+          "textureCoverage": 0.537788987159729,
+          "localFactor": 0.9497757963833493,
+          "fogAbsoluteChange": 0.0,
+          "blendReconstructionError": 1.4342465437522378e-08,
+          "hardwareAgreement": 0.0
+        },
+        {
+          "point": [
+            1296,
+            260
+          ],
+          "primitive": 15,
+          "textureCoverage": 0.5810330510139465,
+          "localFactor": 0.9515385381607545,
+          "fogAbsoluteChange": 0.0,
+          "blendReconstructionError": 2.433808132806803e-08,
+          "hardwareAgreement": 2.9802322387695312e-08
+        },
+        {
+          "point": [
+            1264,
+            261
+          ],
+          "primitive": 30,
+          "textureCoverage": 0.21510642766952515,
+          "localFactor": 0.949932347563113,
+          "fogAbsoluteChange": 0.0,
+          "blendReconstructionError": 7.081843778067309e-09,
+          "hardwareAgreement": 0.0
+        },
+        {
+          "point": [
+            1296,
+            262
+          ],
+          "primitive": 14,
+          "textureCoverage": 0.1443656086921692,
+          "localFactor": 0.9511648795464014,
+          "fogAbsoluteChange": 0.0,
+          "blendReconstructionError": 2.5848979956499818e-08,
+          "hardwareAgreement": 0.0
+        }
+      ],
+      "sourcePrograms": "2182bb4217a61e6e58538ed455431741678832900406bb4a826fe03e3348d538"
+    },
+    "1245": {
+      "tint": [
+        0.6231937408447266,
+        0.18207712471485138,
+        0.36842724680900574
+      ],
+      "samplingBias": -1.0,
+      "fogBranchEnabled": true,
+      "maxFogAbsoluteChange": 0.0,
+      "localFactorRange": [
+        0.9488058358788283,
+        0.9514484820448151
+      ],
+      "maxBlendError": 4.3115059966680747e-08,
+      "samples": [
+        {
+          "point": [
+            1252,
+            255
+          ],
+          "primitive": 22,
+          "textureCoverage": 0.9918516874313354,
+          "localFactor": 0.9488058358788283,
+          "fogAbsoluteChange": 0.0,
+          "blendReconstructionError": 1.6777343958551683e-08,
+          "hardwareAgreement": 2.9802322387695312e-08
+        },
+        {
+          "point": [
+            1258,
+            256
+          ],
+          "primitive": 26,
+          "textureCoverage": 0.9636377692222595,
+          "localFactor": 0.9498410326761801,
+          "fogAbsoluteChange": 0.0,
+          "blendReconstructionError": 3.524463743076467e-08,
+          "hardwareAgreement": 2.9802322387695312e-08
+        },
+        {
+          "point": [
+            1259,
+            257
+          ],
+          "primitive": 26,
+          "textureCoverage": 0.844327449798584,
+          "localFactor": 0.949906264983625,
+          "fogAbsoluteChange": 0.0,
+          "blendReconstructionError": 2.631371209815825e-08,
+          "hardwareAgreement": 5.960464477539063e-08
+        },
+        {
+          "point": [
+            1311,
+            257
+          ],
+          "primitive": 6,
+          "textureCoverage": 0.9880521893501282,
+          "localFactor": 0.9506733672100678,
+          "fogAbsoluteChange": 0.0,
+          "blendReconstructionError": 2.2279323275142815e-08,
+          "hardwareAgreement": 5.960464477539063e-08
+        },
+        {
+          "point": [
+            1260,
+            258
+          ],
+          "primitive": 27,
+          "textureCoverage": 0.5606927871704102,
+          "localFactor": 0.9499714251210606,
+          "fogAbsoluteChange": 0.0,
+          "blendReconstructionError": 1.8656919564818963e-08,
+          "hardwareAgreement": 0.0
+        },
+        {
+          "point": [
+            1308,
+            258
+          ],
+          "primitive": 7,
+          "textureCoverage": 0.8418097496032715,
+          "localFactor": 0.9509322375684193,
+          "fogAbsoluteChange": 0.0,
+          "blendReconstructionError": 2.080730610032333e-08,
+          "hardwareAgreement": 2.9802322387695312e-08
+        },
+        {
+          "point": [
+            1302,
+            259
+          ],
+          "primitive": 10,
+          "textureCoverage": 0.5430838465690613,
+          "localFactor": 0.9514484820448151,
+          "fogAbsoluteChange": 0.0,
+          "blendReconstructionError": 4.3115059966680747e-08,
+          "hardwareAgreement": 5.960464477539063e-08
+        },
+        {
+          "point": [
+            1299,
+            260
+          ],
+          "primitive": 12,
+          "textureCoverage": 0.3642786741256714,
+          "localFactor": 0.9514484138476748,
+          "fogAbsoluteChange": 0.0,
+          "blendReconstructionError": 1.4300326256488916e-08,
+          "hardwareAgreement": 0.0
+        },
+        {
+          "point": [
+            1299,
+            261
+          ],
+          "primitive": 12,
+          "textureCoverage": 0.3053940534591675,
+          "localFactor": 0.9513067021204755,
+          "fogAbsoluteChange": 0.0,
+          "blendReconstructionError": 2.936792142804734e-08,
+          "hardwareAgreement": 0.0
+        }
+      ],
+      "sourcePrograms": "2182bb4217a61e6e58538ed455431741678832900406bb4a826fe03e3348d538"
+    },
+    "1358": {
+      "tint": [
+        0.6444797515869141,
+        0.5120452642440796,
+        0.4718029201030731
+      ],
+      "samplingBias": -1.0,
+      "fogBranchEnabled": true,
+      "maxFogAbsoluteChange": 0.0,
+      "localFactorRange": [
+        0.9517570673627147,
+        0.9599808442291836
+      ],
+      "maxBlendError": 5.3070820626999193e-08,
+      "samples": [
+        {
+          "point": [
+            1256,
+            224
+          ],
+          "primitive": 27,
+          "textureCoverage": 0.999786376953125,
+          "localFactor": 0.9578303613671744,
+          "fogAbsoluteChange": 0.0,
+          "blendReconstructionError": 3.430637818269133e-08,
+          "hardwareAgreement": 0.0
+        },
+        {
+          "point": [
+            1304,
+            232
+          ],
+          "primitive": 63,
+          "textureCoverage": 0.9977111220359802,
+          "localFactor": 0.9594088350937626,
+          "fogAbsoluteChange": 0.0,
+          "blendReconstructionError": 1.516300862647313e-08,
+          "hardwareAgreement": 2.9802322387695312e-08
+        },
+        {
+          "point": [
+            1301,
+            238
+          ],
+          "primitive": 11,
+          "textureCoverage": 0.9976958632469177,
+          "localFactor": 0.9599808442291836,
+          "fogAbsoluteChange": 0.0,
+          "blendReconstructionError": 1.851452680057264e-08,
+          "hardwareAgreement": 0.0
+        },
+        {
+          "point": [
+            1262,
+            249
+          ],
+          "primitive": 33,
+          "textureCoverage": 0.993972659111023,
+          "localFactor": 0.9587251666967097,
+          "fogAbsoluteChange": 0.0,
+          "blendReconstructionError": 3.1006477385631115e-08,
+          "hardwareAgreement": 5.960464477539063e-08
+        },
+        {
+          "point": [
+            1269,
+            260
+          ],
+          "primitive": 42,
+          "textureCoverage": 0.9891660809516907,
+          "localFactor": 0.9589054905581668,
+          "fogAbsoluteChange": 0.0,
+          "blendReconstructionError": 2.761098727432909e-08,
+          "hardwareAgreement": 2.9802322387695312e-08
+        },
+        {
+          "point": [
+            1271,
+            265
+          ],
+          "primitive": 43,
+          "textureCoverage": 0.9858701229095459,
+          "localFactor": 0.9583150243564813,
+          "fogAbsoluteChange": 0.0,
+          "blendReconstructionError": 5.3070820626999193e-08,
+          "hardwareAgreement": 0.0
+        },
+        {
+          "point": [
+            1318,
+            269
+          ],
+          "primitive": 81,
+          "textureCoverage": 0.9040207266807556,
+          "localFactor": 0.9538317226712212,
+          "fogAbsoluteChange": 0.0,
+          "blendReconstructionError": 4.360016525595256e-08,
+          "hardwareAgreement": 0.0
+        },
+        {
+          "point": [
+            1251,
+            282
+          ],
+          "primitive": 105,
+          "textureCoverage": 0.8173037171363831,
+          "localFactor": 0.9517570673627147,
+          "fogAbsoluteChange": 0.0,
+          "blendReconstructionError": 2.5976547135542205e-08,
+          "hardwareAgreement": 5.960464477539063e-08
+        },
+        {
+          "point": [
+            1304,
+            292
+          ],
+          "primitive": 87,
+          "textureCoverage": 0.7702296376228333,
+          "localFactor": 0.9531612345750283,
+          "fogAbsoluteChange": 0.0,
+          "blendReconstructionError": 4.015934251810904e-08,
+          "hardwareAgreement": 5.960464477539063e-08
+        }
+      ],
+      "sourcePrograms": "9e1bd3475192742442220517d800817623be3280da01ddc38facc1d52c5ab626"
+    }
+  },
+  "faceBaseOwners": {
+    "native": {
+      "event": 804,
+      "count": 12,
+      "format": "R11G11B10_FLOAT",
+      "points": [
+        {
+          "point": [
+            1280,
+            318
+          ],
+          "primitive": 1297,
+          "rgb": [
+            0.9216915965080261,
+            0.5099501013755798,
+            0.3799605667591095
+          ]
+        },
+        {
+          "point": [
+            1279,
+            318
+          ],
+          "primitive": 1297,
+          "rgb": [
+            1.030089020729065,
+            0.6364025473594666,
+            0.4936739504337311
+          ]
+        },
+        {
+          "point": [
+            1306,
+            304
+          ],
+          "primitive": 736,
+          "rgb": [
+            1.6892564296722412,
+            0.860100507736206,
+            0.6455010175704956
+          ]
+        },
+        {
+          "point": [
+            1313,
+            297
+          ],
+          "primitive": 717,
+          "rgb": [
+            1.8294492959976196,
+            0.8907090425491333,
+            0.6699850559234619
+          ]
+        },
+        {
+          "point": [
+            1312,
+            298
+          ],
+          "primitive": 717,
+          "rgb": [
+            2.0559957027435303,
+            1.0194225311279297,
+            0.7593773007392883
+          ]
+        },
+        {
+          "point": [
+            1318,
+            289
+          ],
+          "primitive": 699,
+          "rgb": [
+            2.2505881786346436,
+            1.0334773063659668,
+            0.7665697932243347
+          ]
+        },
+        {
+          "point": [
+            1316,
+            292
+          ],
+          "primitive": 708,
+          "rgb": [
+            2.3345842361450195,
+            1.1407291889190674,
+            0.8424420952796936
+          ]
+        },
+        {
+          "point": [
+            1247,
+            293
+          ],
+          "primitive": 1108,
+          "rgb": [
+            0.7357412576675415,
+            0.36132532358169556,
+            0.28888803720474243
+          ]
+        },
+        {
+          "point": [
+            1314,
+            295
+          ],
+          "primitive": 729,
+          "rgb": [
+            2.279740333557129,
+            1.1137639284133911,
+            0.8267929553985596
+          ]
+        },
+        {
+          "point": [
+            1310,
+            300
+          ],
+          "primitive": 728,
+          "rgb": [
+            2.0458476543426514,
+            1.034173607826233,
+            0.7714440822601318
+          ]
+        },
+        {
+          "point": [
+            1307,
+            303
+          ],
+          "primitive": 735,
+          "rgb": [
+            1.8418794870376587,
+            0.9433972239494324,
+            0.707345187664032
+          ]
+        },
+        {
+          "point": [
+            1318,
+            288
+          ],
+          "primitive": 700,
+          "rgb": [
+            2.382009983062744,
+            1.134595274925232,
+            0.8377366065979004
+          ]
+        }
+      ]
+    },
+    "vulkan": {
+      "event": 876,
+      "count": 12,
+      "format": "R16G16B16A16_FLOAT",
+      "points": [
+        {
+          "point": [
+            1280,
+            318
+          ],
+          "primitive": 1297,
+          "rgb": [
+            0.10277988016605377,
+            0.06285696476697922,
+            0.04993848502635956
+          ]
+        },
+        {
+          "point": [
+            1279,
+            318
+          ],
+          "primitive": 1297,
+          "rgb": [
+            0.1318775862455368,
+            0.0847715511918068,
+            0.06765758246183395
+          ]
+        },
+        {
+          "point": [
+            1306,
+            304
+          ],
+          "primitive": 736,
+          "rgb": [
+            0.5796964168548584,
+            0.3465762436389923,
+            0.25913193821907043
+          ]
+        },
+        {
+          "point": [
+            1313,
+            297
+          ],
+          "primitive": 717,
+          "rgb": [
+            0.6928237080574036,
+            0.4041871726512909,
+            0.29846563935279846
+          ]
+        },
+        {
+          "point": [
+            1312,
+            298
+          ],
+          "primitive": 717,
+          "rgb": [
+            0.7400829195976257,
+            0.4365922510623932,
+            0.3204238712787628
+          ]
+        },
+        {
+          "point": [
+            1318,
+            289
+          ],
+          "primitive": 699,
+          "rgb": [
+            0.8046037554740906,
+            0.4480936527252197,
+            0.32759836316108704
+          ]
+        },
+        {
+          "point": [
+            1316,
+            292
+          ],
+          "primitive": 708,
+          "rgb": [
+            0.8172740340232849,
+            0.4666726291179657,
+            0.3406873345375061
+          ]
+        },
+        {
+          "point": [
+            1247,
+            293
+          ],
+          "primitive": 1108,
+          "rgb": [
+            0.2903096675872803,
+            0.1855078488588333,
+            0.1472843587398529
+          ]
+        },
+        {
+          "point": [
+            1314,
+            295
+          ],
+          "primitive": 729,
+          "rgb": [
+            0.7956546545028687,
+            0.4639946520328522,
+            0.33942317962646484
+          ]
+        },
+        {
+          "point": [
+            1310,
+            300
+          ],
+          "primitive": 728,
+          "rgb": [
+            0.7428476810455322,
+            0.4446276128292084,
+            0.3256354033946991
+          ]
+        },
+        {
+          "point": [
+            1307,
+            303
+          ],
+          "primitive": 735,
+          "rgb": [
+            0.6710153222084045,
+            0.40523478388786316,
+            0.29939958453178406
+          ]
+        },
+        {
+          "point": [
+            1318,
+            288
+          ],
+          "primitive": 700,
+          "rgb": [
+            0.8395965695381165,
+            0.4737960696220398,
+            0.3445928394794464
+          ]
+        }
+      ]
+    }
+  },
+  "archive": {
+    "sha256": "3bd898e6d9d20f12f0545cdcbbdfb6585c85a3305c2fbb2642efd1f6b40bd871",
+    "members": 22
+  }
+}
