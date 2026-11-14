@@ -151,6 +151,7 @@ inline PackedMaterialSurfaceProfile packMaterialSurfaceProfile(const AssetMateri
         result.rows[1][0]=static_cast<float>(material.nprDiffuse.rimResponse);
         result.rows[1][3]=static_cast<float>(material.nprDiffuse.rampComposition);
         result.rows[6][0]=material.nprDiffuse.shadowSaturation-1;
+        if(material.nprDiffuse.localDiffuseIndirectNormal)result.rows[6][3]=1.F;
         result.rows[3][0]=static_cast<float>(material.nprDiffuse.characterVisibility);
         result.rows[3][1]=material.nprDiffuse.localDiffuseFloorScale;
         result.rows[3][2]=material.nprDiffuse.screenLightingNormal?2.F:material.nprDiffuse.radialLightingNormal?1.F:0.F;

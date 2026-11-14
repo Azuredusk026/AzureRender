@@ -340,6 +340,10 @@
           "type": "boolean",
           "default": false
         },
+        "localDiffuseNormal": {
+          "enum": ["surface", "indirect"],
+          "default": "surface"
+        },
         "viewTint": {
           "type": "object",
           "additionalProperties": false,

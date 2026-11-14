@@ -1,0 +1,216 @@
+{
+  "overallStatus": "failed-user-review",
+  "production": {
+    "player": "49142120094b2f129040e06ccf874519ef404cb0f5522ff258bda011d24ce5a8",
+    "corePixels": 1176,
+    "fullFacePixels": 3663,
+    "devices": {
+      "nvidia": {
+        "disabled": {
+          "frame": "895cef54c5cb48da6b6748f112ad667b7541981bc10c5d117a4b19acd8d64e4b",
+          "expected": "895cef54c5cb48da6b6748f112ad667b7541981bc10c5d117a4b19acd8d64e4b",
+          "exact": true,
+          "pixelsDifferent": 0,
+          "maximumDifference": 0,
+          "coreOverOne": 510,
+          "fullOverOne": 1895,
+          "corePeak": 4,
+          "fullPeak": 56,
+          "coreMedian": [
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "enabled": {
+          "frame": "b2848d59cc968603e818d76813df7d9748224bc0222c10600b22212ed6c9ec35",
+          "expected": "b2848d59cc968603e818d76813df7d9748224bc0222c10600b22212ed6c9ec35",
+          "exact": true,
+          "pixelsDifferent": 0,
+          "maximumDifference": 0,
+          "coreOverOne": 17,
+          "fullOverOne": 573,
+          "corePeak": 3,
+          "fullPeak": 54,
+          "coreMedian": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "newFaceEdgeOverOne": 8,
+          "newOutsideFaceOverOne": 0
+        }
+      },
+      "intel": {
+        "disabled": {
+          "frame": "4b825f1becbc5b398d14e3f2443bfe51fccca87f9ece67d8b9a17e58ec40a5c6",
+          "expected": "4b825f1becbc5b398d14e3f2443bfe51fccca87f9ece67d8b9a17e58ec40a5c6",
+          "exact": true,
+          "pixelsDifferent": 0,
+          "maximumDifference": 0,
+          "coreOverOne": 513,
+          "fullOverOne": 1915,
+          "corePeak": 4,
+          "fullPeak": 56,
+          "coreMedian": [
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "enabled": {
+          "frame": "47ea26e0a35eb08338f4fa17f451b98b8ea4bd22635232de9e5d0778f5fdc132",
+          "expected": "47ea26e0a35eb08338f4fa17f451b98b8ea4bd22635232de9e5d0778f5fdc132",
+          "exact": true,
+          "pixelsDifferent": 0,
+          "maximumDifference": 0,
+          "coreOverOne": 23,
+          "fullOverOne": 592,
+          "corePeak": 3,
+          "fullPeak": 54,
+          "coreMedian": [
+            1.0,
+            0.0,
+            1.0
+          ],
+          "newFaceEdgeOverOne": 6,
+          "newOutsideFaceOverOne": 0
+        }
+      }
+    }
+  },
+  "isolated": {
+    "overallStatus": "failed-user-review",
+    "shaders": {
+      "mesh_object_lighting.frag.spv": "d5ac12b6548f165d502ef8fcb8cf928f435faa5b1ed7f6a24e134dd8a0d6657a",
+      "mesh_object_early_lighting.frag.spv": "a20d1a703585d4415c8af02955be8bd3abaa0f12b1dcce9b22b864de015ffe29"
+    },
+    "devices": {
+      "nvidia": {
+        "frame": "b2848d59cc968603e818d76813df7d9748224bc0222c10600b22212ed6c9ec35",
+        "faceOverOne": [
+          510,
+          17
+        ],
+        "facePeak": [
+          4,
+          3
+        ],
+        "faceMedian": [
+          [
+            1.0,
+            1.0,
+            1.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "strongPoints": [
+          {
+            "x": 1295,
+            "y": 283,
+            "before": [
+              3,
+              3,
+              3
+            ],
+            "after": [
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "x": 1296,
+            "y": 301,
+            "before": [
+              3,
+              2,
+              1
+            ],
+            "after": [
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "newOutsideFaceOverOne": 8
+      },
+      "intel": {
+        "frame": "47ea26e0a35eb08338f4fa17f451b98b8ea4bd22635232de9e5d0778f5fdc132",
+        "faceOverOne": [
+          513,
+          23
+        ],
+        "facePeak": [
+          4,
+          3
+        ],
+        "faceMedian": [
+          [
+            1.0,
+            1.0,
+            1.0
+          ],
+          [
+            1.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "strongPoints": [
+          {
+            "x": 1295,
+            "y": 283,
+            "before": [
+              3,
+              2,
+              3
+            ],
+            "after": [
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "x": 1296,
+            "y": 301,
+            "before": [
+              2,
+              1,
+              1
+            ],
+            "after": [
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "newOutsideFaceOverOne": 6
+      }
+    }
+  },
+  "nativeLightMaximumSumError": 1.2386590242385864e-07,
+  "nativeDirectionalMaximumError": 1.548251593597172e-08,
+  "build": {
+    "programs": 895,
+    "validated": 384,
+    "cpuPerConfiguration": 4,
+    "player": {
+      "Release": "49142120094b2f129040e06ccf874519ef404cb0f5522ff258bda011d24ce5a8",
+      "Debug": "ec535c63c4a5ba2410fbdf47e27ba90dfe180141d637a2d983ea47009b48520d"
+    }
+  },
+  "vulkanVendors": {
+    "production-nvidia-disabled": 4318,
+    "production-nvidia-enabled": 4318,
+    "production-intel-disabled": 32902,
+    "production-intel-enabled": 32902
+  }
+}

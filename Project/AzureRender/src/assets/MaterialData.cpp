@@ -230,6 +230,8 @@ void applyMaterialBindings(LoadedAsset& mesh,const std::map<std::string,Material
         lost(source.nprDiffuse.present&&!replacement.nprDiffuse.present,"nprDiffuse");
         lost(source.nprDiffuse.mainBrightnessSaturation&&!replacement.nprDiffuse.mainBrightnessSaturation,
             "nprDiffuse.mainBrightnessSaturation");
+        lost(source.nprDiffuse.localDiffuseIndirectNormal&&!replacement.nprDiffuse.localDiffuseIndirectNormal,
+            "nprDiffuse.localDiffuseNormal");
         lost(source.nprDiffuse.viewTint.faceMask&&!replacement.nprDiffuse.viewTint.faceMask,"nprDiffuse.viewTint.mode");
         lost(source.colorAdjustment.present&&!replacement.colorAdjustment.present,"colorAdjustment");
         lost(source.coverageTexture.present&&!replacement.coverageTexture.present,"coverageTexture");

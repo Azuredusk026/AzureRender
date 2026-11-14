@@ -2179,7 +2179,7 @@ AssetMaterial loadMaterial(
             for(const auto& field:fields)if(!npr.contains(field))throw std::invalid_argument("nprDiffuse requires all versioned fields");
             for(const auto& field:npr.items())if(!fields.count(field.key())&&field.key()!="indirectNormal"&&field.key()!="lighting"
                 &&field.key()!="rimResponse"&&field.key()!="viewTint"&&field.key()!="mainRamp"
-                &&field.key()!="characterVisibility"&&field.key()!="localDiffuseFloorScale"
+                &&field.key()!="characterVisibility"&&field.key()!="localDiffuseFloorScale"&&field.key()!="localDiffuseNormal"
                 &&field.key()!="lightingNormal"&&field.key()!="transparentHighlights"
                 &&field.key()!="rimOrigin"&&field.key()!="shadowAlbedo"&&field.key()!="rampComposition"
                 &&field.key()!="shadowSaturation"&&field.key()!="mainBrightnessSaturation")
@@ -2253,6 +2253,12 @@ AssetMaterial loadMaterial(
                 if(!value.is_number()||!std::isfinite(value.get<double>())||value.get<double>()<0||value.get<double>()>4)
                     throw std::invalid_argument("Invalid nprDiffuse.localDiffuseFloorScale");
                 result.nprDiffuse.localDiffuseFloorScale=value.get<float>();
+            }
+            if(npr.contains("localDiffuseNormal")) {
+                const auto& value=npr.at("localDiffuseNormal");
+                if(value!="surface"&&value!="indirect")
+                    throw std::invalid_argument("Invalid nprDiffuse.localDiffuseNormal");
+                result.nprDiffuse.localDiffuseIndirectNormal=value=="indirect";
             }
             if(npr.contains("lightingNormal")) {
                 const auto& mode=npr.at("lightingNormal");

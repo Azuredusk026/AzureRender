@@ -1419,8 +1419,13 @@ void main()
         }
         vec2 localResponse=light.characterResponse.yz;
         if(nprDiffuse)localResponse.x*=materialSurfaceProfiles.profiles[material.materialPadding>>1U].rows[3].y;
+        vec3 wrapNormal=localLightingNormal;
+#if defined(AZURE_EXTENDED_MATERIAL_LIGHTING)
+        if(dualFaceSdf&&materialSurfaceProfiles.profiles[material.materialPadding>>1U].rows[6].w>.5)
+            wrapNormal=indirectDiffuseNormal;
+#endif
         vec3 characterRadiance=characterLight?characterLocalLightRadiance(radiance,
-            dot(localLightingNormal,pointDirection),localResponse,characterSceneVisibility):radiance;
+            dot(wrapNormal,pointDirection),localResponse,characterSceneVisibility):radiance;
         if(!specularOnly) {
         if(eyeRadial&&!eyeNpr&&camera.clusterLighting.x>.5) {
             // This host adapter is independent from the unbound native NPR globals.

@@ -935,6 +935,18 @@ void testFaceHighlightProfile(const nlohmann::json& fixture,const std::filesyste
     require(tintRows[2]==PackedMaterialSurfaceProfile::Row{.38F,.12F,.14F,.85F}
         &&tintRows[6][1]==1.F&&tintRows[6][2]==.595F,
         "Face view tint must carry its mask policy and geometry scale");
+    auto localRadial=source;
+    profile(localRadial)["nprDiffuse"]["indirectNormal"]="face-frame-radial-horizontal";
+    profile(localRadial)["nprDiffuse"]["localDiffuseNormal"]="indirect";
+    require(packMaterialSurfaceProfile(load(localRadial)).rows[6][3]==1.F,
+        "Face local diffuse must be able to consume its authored indirect normal");
+    require(packMaterialSurfaceProfile(loaded).rows[6][3]==0.F,
+        "Omitted local diffuse normal must retain surface lighting");
+    profile(localRadial)["nprDiffuse"]["indirectNormal"]="surface";
+    std::string localError;
+    try{(void)load(localRadial);}catch(const std::exception& error){localError=error.what();}
+    require(localError.find("nprDiffuse.localDiffuseNormal")!=std::string::npos,
+        "A local indirect normal must have an authored radial source");
     auto geometryTint=maskedTint;
     auto& geometryViewTint=profile(geometryTint)["nprDiffuse"]["viewTint"];
     geometryViewTint.erase("mode");

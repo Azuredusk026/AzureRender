@@ -288,6 +288,7 @@ struct AssetMaterial {
         using CharacterVisibility=AssetMaterial::CharacterVisibility;
         CharacterVisibility characterVisibility=CharacterVisibility::SceneVisibility;
         float localDiffuseFloorScale=1;
+        bool localDiffuseIndirectNormal=false;
         using RampComposition=azurerender::NprRampComposition;
         RampComposition rampComposition=RampComposition::MaskVisibility;
         float shadowSaturation=1;

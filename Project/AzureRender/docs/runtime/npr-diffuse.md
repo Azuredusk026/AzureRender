@@ -230,6 +230,10 @@ RGB 与 Alpha 共同参与颜色及照明选择。
 材质倍率仅乘下限，压缩、距离及发射形状仍归属灯。
 实际下限为 `floor = lightFloor * localDiffuseFloorScale`。
 包裹权重为 `floor + clamp(NdotL + 0.5, 0, 1) * (1 - floor)`。
+`localDiffuseNormal` 默认为 `surface`。
+不透明的版本二双距离场脸部可指定 `indirect`，并声明 `face-frame-radial-horizontal` 间接法线。
+该模式将头部径向法线用于带角色响应的局部灯包裹计算。
+距离场色带与局部镜面各自使用所属法线。
 
 普通局部灯消费宿主余弦响应。
 头发的独立表面画像消费灯自身的角色响应。

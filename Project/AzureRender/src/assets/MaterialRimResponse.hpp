@@ -23,6 +23,13 @@ inline void validateMaterialRimResponse(const AssetMaterial& material) {
             ||!(material.materialFeatures&MaterialFeatureFaceSdfEligible)
             ||(material.materialFeatures&(MaterialFeatureUnlitSurface|MaterialFeatureMultiplyComposite))))
         throw std::invalid_argument("nprDiffuse.viewTint face-mask requires an opaque lit version-two dual face");
+    if(npr.localDiffuseIndirectNormal
+        &&(!npr.present||material.materialProfileVersion!=2||material.materialClass!=AssetMaterialClass::Face
+            ||material.alphaMode!=AssetAlphaMode::Opaque||!material.faceSdf.present||material.faceSdf.schemaVersion!=2
+            ||!(material.materialFeatures&MaterialFeatureDualFaceSdf)
+            ||!(material.materialFeatures&MaterialFeatureFaceSdfEligible)
+            ||npr.indirectNormal!=AssetMaterial::NprDiffuse::IndirectNormal::FaceFrameRadialHorizontal))
+        throw std::invalid_argument("nprDiffuse.localDiffuseNormal indirect requires an opaque dual face with a radial indirect normal");
     const bool screenClass=material.materialClass==AssetMaterialClass::Generic||material.materialClass==AssetMaterialClass::Skin
         ||material.materialClass==AssetMaterialClass::Fabric||material.materialClass==AssetMaterialClass::Metal;
     if(npr.screenLightingNormal&&(!npr.present||material.materialProfileVersion!=2||npr.radialLightingNormal||!screenClass))
