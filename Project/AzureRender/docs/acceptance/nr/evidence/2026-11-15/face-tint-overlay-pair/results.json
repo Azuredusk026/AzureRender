@@ -1,0 +1,422 @@
+{
+  "status": "measured-actual-face-tint-and-overlays",
+  "overallVisualAcceptance": "failed-user-review",
+  "devices": {
+    "nvidia": {
+      "frame": "c5cba064c98284c08f9a9ea19284df208a2102af96a708c9f6e16a420ea20c8d",
+      "control": "42f35ac0299c854bdc2ab72359e67cef1ab257aaa20bb0a3c5b2037b9b2b213b",
+      "shaderInput": {
+        "player": "a81b21b464231741b3331ae4839fb3f716e0f0b69137c33490e6dd7c129851be",
+        "programs": {
+          "mesh_object_lighting.frag.spv": "3635b2c823adc36148c508d6bcd2691a479dd9906b00d268652dc32e33f76353",
+          "mesh_object_early_lighting.frag.spv": "276dabad1cd61caa9e3748bc257765b18ad6ddc87a311b24ba42350867e12aa4"
+        },
+        "sampler": {
+          "schemaVersion": 1,
+          "usage": "linear",
+          "colorSpace": "linear",
+          "filter": "linear",
+          "wrapU": "clamp",
+          "wrapV": "clamp",
+          "mipPolicy": "generate",
+          "anisotropy": 1,
+          "mipBias": -1,
+          "mipFilter": "nearest"
+        },
+        "texture": "e4d7865a20fad774cc896c4b821442bf1649d91207ca2715b1b01255f8ed55ab",
+        "experimentalBinding": 2,
+        "fixedMaskBinding": 4,
+        "mode": "tint-base",
+        "overlayPair": true
+      },
+      "face": {
+        "count": 3663,
+        "overOne": [
+          366,
+          215
+        ],
+        "overEight": [
+          64,
+          15
+        ],
+        "peak": [
+          41,
+          41
+        ],
+        "newOverOne": 30,
+        "changed": 817,
+        "baseline": {
+          "pixels": 3663,
+          "ssim": 0.991408645692437,
+          "medianLuminanceRelativeError": 0.006862159529449356,
+          "passed": true
+        },
+        "candidate": {
+          "pixels": 3663,
+          "ssim": 0.9920353676398362,
+          "medianLuminanceRelativeError": 0.010842375004362739,
+          "passed": true
+        }
+      },
+      "iris": {
+        "count": 255,
+        "overOne": [
+          52,
+          52
+        ],
+        "overEight": [
+          10,
+          10
+        ],
+        "peak": [
+          20,
+          20
+        ],
+        "newOverOne": 0,
+        "changed": 0,
+        "baseline": {
+          "pixels": 255,
+          "ssim": 0.9899875328324826,
+          "medianLuminanceRelativeError": 0.011089778228747777,
+          "passed": true
+        },
+        "candidate": {
+          "pixels": 255,
+          "ssim": 0.9899862339089821,
+          "medianLuminanceRelativeError": 0.011089778228747777,
+          "passed": true
+        }
+      },
+      "outsideFace": {
+        "count": 3682737,
+        "overOne": [
+          179141,
+          179141
+        ],
+        "overEight": [
+          29945,
+          29945
+        ],
+        "peak": [
+          228,
+          228
+        ],
+        "newOverOne": 0,
+        "changed": 0
+      },
+      "trackedFaceLocations": {
+        "points": [
+          [
+            1280,
+            318
+          ],
+          [
+            1279,
+            318
+          ],
+          [
+            1306,
+            304
+          ],
+          [
+            1313,
+            297
+          ],
+          [
+            1312,
+            298
+          ],
+          [
+            1318,
+            289
+          ],
+          [
+            1316,
+            292
+          ],
+          [
+            1247,
+            293
+          ],
+          [
+            1314,
+            295
+          ],
+          [
+            1310,
+            300
+          ],
+          [
+            1307,
+            303
+          ],
+          [
+            1318,
+            288
+          ]
+        ],
+        "improved": 11,
+        "worsened": 0,
+        "overOne": [
+          12,
+          7
+        ],
+        "overEight": [
+          12,
+          2
+        ],
+        "peak": [
+          41,
+          41
+        ],
+        "errors": [
+          [
+            41,
+            35,
+            25,
+            21,
+            21,
+            17,
+            17,
+            16,
+            16,
+            16,
+            16,
+            15
+          ],
+          [
+            41,
+            34,
+            4,
+            3,
+            1,
+            1,
+            1,
+            1,
+            2,
+            4,
+            5,
+            1
+          ]
+        ]
+      }
+    },
+    "intel": {
+      "frame": "25d57c3e3cd3dd7fc8b334ae1c89d8d5a14c8bc828cced7dece60f2d44f51e7c",
+      "control": "5f10a90f9ad4b5ba510202bdd54be2ac5e317659aa2affd25999a103e181bba9",
+      "shaderInput": {
+        "player": "a81b21b464231741b3331ae4839fb3f716e0f0b69137c33490e6dd7c129851be",
+        "programs": {
+          "mesh_object_lighting.frag.spv": "3635b2c823adc36148c508d6bcd2691a479dd9906b00d268652dc32e33f76353",
+          "mesh_object_early_lighting.frag.spv": "276dabad1cd61caa9e3748bc257765b18ad6ddc87a311b24ba42350867e12aa4"
+        },
+        "sampler": {
+          "schemaVersion": 1,
+          "usage": "linear",
+          "colorSpace": "linear",
+          "filter": "linear",
+          "wrapU": "clamp",
+          "wrapV": "clamp",
+          "mipPolicy": "generate",
+          "anisotropy": 1,
+          "mipBias": -1,
+          "mipFilter": "nearest"
+        },
+        "texture": "e4d7865a20fad774cc896c4b821442bf1649d91207ca2715b1b01255f8ed55ab",
+        "experimentalBinding": 2,
+        "fixedMaskBinding": 4,
+        "mode": "tint-base",
+        "overlayPair": true
+      },
+      "face": {
+        "count": 3663,
+        "overOne": [
+          376,
+          219
+        ],
+        "overEight": [
+          66,
+          17
+        ],
+        "peak": [
+          41,
+          41
+        ],
+        "newOverOne": 28,
+        "changed": 802,
+        "baseline": {
+          "pixels": 3663,
+          "ssim": 0.9925143865147846,
+          "medianLuminanceRelativeError": 0.005525623705578087,
+          "passed": true
+        },
+        "candidate": {
+          "pixels": 3663,
+          "ssim": 0.9931218333306415,
+          "medianLuminanceRelativeError": 0.010262082228557325,
+          "passed": true
+        }
+      },
+      "iris": {
+        "count": 255,
+        "overOne": [
+          56,
+          56
+        ],
+        "overEight": [
+          13,
+          13
+        ],
+        "peak": [
+          27,
+          27
+        ],
+        "newOverOne": 0,
+        "changed": 0,
+        "baseline": {
+          "pixels": 255,
+          "ssim": 0.9931101621348171,
+          "medianLuminanceRelativeError": 0.009946273866373248,
+          "passed": true
+        },
+        "candidate": {
+          "pixels": 255,
+          "ssim": 0.9931076507723701,
+          "medianLuminanceRelativeError": 0.009946273866373248,
+          "passed": true
+        }
+      },
+      "outsideFace": {
+        "count": 3682737,
+        "overOne": [
+          182685,
+          182685
+        ],
+        "overEight": [
+          30700,
+          30700
+        ],
+        "peak": [
+          228,
+          228
+        ],
+        "newOverOne": 0,
+        "changed": 0
+      },
+      "trackedFaceLocations": {
+        "points": [
+          [
+            1280,
+            318
+          ],
+          [
+            1279,
+            318
+          ],
+          [
+            1306,
+            304
+          ],
+          [
+            1313,
+            297
+          ],
+          [
+            1312,
+            298
+          ],
+          [
+            1318,
+            289
+          ],
+          [
+            1316,
+            292
+          ],
+          [
+            1247,
+            293
+          ],
+          [
+            1314,
+            295
+          ],
+          [
+            1310,
+            300
+          ],
+          [
+            1307,
+            303
+          ],
+          [
+            1318,
+            288
+          ]
+        ],
+        "improved": 11,
+        "worsened": 0,
+        "overOne": [
+          12,
+          8
+        ],
+        "overEight": [
+          12,
+          2
+        ],
+        "peak": [
+          41,
+          41
+        ],
+        "errors": [
+          [
+            41,
+            35,
+            25,
+            21,
+            21,
+            17,
+            17,
+            15,
+            15,
+            16,
+            16,
+            15
+          ],
+          [
+            41,
+            34,
+            4,
+            3,
+            1,
+            1,
+            1,
+            2,
+            2,
+            4,
+            5,
+            1
+          ]
+        ]
+      }
+    }
+  },
+  "archive": {
+    "sha256": "96527e5eeae1d532fb11f7308ca0a2d66cbab7cf4ee254a8b3720bbb1cfcea37",
+    "members": {
+      "archive-face-tint-pair.py": "46400fb5fff73893bd9dd501c531d78bea1e6cc5381e7e47ac752f9a4a2f46d8",
+      "face-geometry-mask-actual.py": "69e9a8d45dbf19370c96c7ef0fc7dbb7ff35b5a67fe75f1a08ec3f38d49a320e",
+      "face-view-mask-math.json": "1bbedf1d70fff84fc64bc8fe1a12ee7b081183dcd916876ea34371cdb7e8c96d",
+      "assets-tint-base-pair/mesh-face-geometry-mask.frag": "6bdb8b35bce3f5c6655b15ef16485bb4c10d3f29321a8d81f304749d6c386c0f",
+      "assets-tint-base-pair/prepared.json": "eeaec25c6ff9a421d6eef61c6ddd9a9a2722480a74495151bb4a12961b333698",
+      "capture-nvidia-tint-base-pair/command.json": "16a03218a3b93f933db15f54400e2a569c24958aec93e0a8e6fe804d3be8c344",
+      "capture-nvidia-tint-base-pair/results.json": "96204ff5b317f41887829633d10c5297fbe7db92aa2b59df976ceb9eb20417d8",
+      "capture-nvidia-tint-base-pair/frames/capture_manifest.json": "948c94cd86cd652afc8f392cbaa52231aa966a0677791d37c92a6076c3f34802",
+      "capture-nvidia-tint-base-pair/frames/gpu_capabilities.json": "93c9fb29461fae11a7e57d4e49112071a71940dee571f1f6696ffbf03c392879",
+      "capture-intel-tint-base-pair/command.json": "139eb2be1212fbe2ebc7fb746727782e2a4ada4c2ff4ff4e2b8f82de31a3a061",
+      "capture-intel-tint-base-pair/results.json": "bbdcda28701fba1046c70b79b2239d581d5fb9f21c6b1ccfdfbc76d26268f850",
+      "capture-intel-tint-base-pair/frames/capture_manifest.json": "2866681c0b0e89205992b9a58026abd33bb6e04a4c862d1ede218096ee7f8b17",
+      "capture-intel-tint-base-pair/frames/gpu_capabilities.json": "a38eaca3509b417cfe23614fe415bd9ccc5622fc682d8623142cdeb7dc3d85cc"
+    }
+  }
+}
