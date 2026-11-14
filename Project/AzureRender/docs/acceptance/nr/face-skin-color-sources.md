@@ -356,6 +356,12 @@ Release 与 Debug 各通过四项材质检查，895 份着色程序逐字节一�
 
 [脸部遮罩采样来源](evidence/2026-11-14/face-native-geometry-mask-sources/results.json)和[验证归档](evidence/2026-11-14/face-native-geometry-mask-sources/validation.zip)保存两份回放的采样结果、原生各级纹理和透视插值复算脚本。
 
+整帧对照将九层原生遮罩置于独立绑定，采样采用线性过滤、最近层级及 −1 层偏移。曲线及距离场查找表采用固定层级。
+两块显卡在嘴角两处的误差分别为 9 和 5 字节。覆盖区外的 51 个重点位置中，有 47 处超过八字节。脸部内区、虹膜和脸外像素与各自控制组逐字节一致。
+完整脸部新增超过一字节的位置分别为 NVIDIA 11 处和 Intel 8 处。该对照用于核验采样来源，正式脸部材质按逐像素门槛继续验收。
+
+[脸部遮罩整帧结果](evidence/2026-11-14/face-native-geometry-mask-frame/results.json)和[验证归档](evidence/2026-11-14/face-native-geometry-mask-frame/validation.zip)保存双设备统计、着色器和加载器的采样约束回执。
+
 [乘色照明来源](evidence/2026-11-14/face-overlay-lighting-sources/results.json)和[验证归档](evidence/2026-11-14/face-overlay-lighting-sources/validation.zip)保存原生寄存器、覆盖裁片和十二处绘制记录。
 
 [覆盖来源结果](evidence/2026-11-14/face-overlay-source/results.json)和[验证归档](evidence/2026-11-14/face-overlay-source/validation.zip)保存接收分类、几何覆盖、乘色状态和体表顺序对照。
