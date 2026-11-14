@@ -229,16 +229,197 @@
       ]
     }
   ],
+  "operandControls": [
+    {
+      "point": [
+        1234,
+        789
+      ],
+      "NdotV": 0.80990070104599,
+      "faceReflectance": [
+        0.039912715554237366,
+        0.039912715554237366,
+        0.039912715554237366
+      ],
+      "baseLobe": [
+        0.10168066620826721,
+        0.10168066620826721,
+        0.10168066620826721
+      ],
+      "nativeResponse": [
+        0.019831566593961878,
+        0.021003939687342925,
+        0.02532706159991854
+      ],
+      "nativeRadiance": [
+        0.474853515625,
+        0.45068359375,
+        0.387939453125
+      ],
+      "nativeReflection": [
+        -0.03920459747314453,
+        -0.11199813336133957,
+        -0.9929347634315491
+      ],
+      "playerResponse": [
+        0.599609375,
+        0.599609375,
+        0.599609375
+      ],
+      "playerRadiance": [
+        0.06488037109375,
+        0.09490966796875,
+        0.1195068359375
+      ],
+      "fixedEnvironmentWithPlayerResponse": [
+        0.07118165493011475,
+        0.06755852699279785,
+        0.05815303325653076
+      ],
+      "fixedResponseWithPlayerEnvironment": [
+        0.00032166984999666557,
+        0.0004983692354403419,
+        0.0007566892488501053
+      ],
+      "nativeExposedIndirect": [
+        0.002354272279373526,
+        0.0023665327552999903,
+        0.0024563416065838963
+      ],
+      "updateEnvironmentError": 0.06882738265074122,
+      "updateResponseError": 0.0020326024293768606
+    },
+    {
+      "point": [
+        1231,
+        792
+      ],
+      "NdotV": 0.8110605478286743,
+      "faceReflectance": [
+        0.03999999910593033,
+        0.03999999910593033,
+        0.03999999910593033
+      ],
+      "baseLobe": [
+        0.10279452800750732,
+        0.10279452800750732,
+        0.10279452800750732
+      ],
+      "nativeResponse": [
+        0.020047815743541347,
+        0.021232972732901177,
+        0.025603235219706946
+      ],
+      "nativeRadiance": [
+        0.45166015625,
+        0.4267578125,
+        0.367431640625
+      ],
+      "nativeReflection": [
+        -0.08126667141914368,
+        -0.11116088181734085,
+        -0.9904741048812866
+      ],
+      "playerResponse": [
+        0.599609375,
+        0.599609375,
+        0.599609375
+      ],
+      "playerRadiance": [
+        0.06781005859375,
+        0.0989990234375,
+        0.12451171875
+      ],
+      "fixedEnvironmentWithPlayerResponse": [
+        0.06770491600036621,
+        0.06397199630737305,
+        0.055078864097595215
+      ],
+      "fixedResponseWithPlayerEnvironment": [
+        0.00033986089006156063,
+        0.0005255108913080705,
+        0.0007969757056915614
+      ],
+      "nativeExposedIndirect": [
+        0.0022636998977997734,
+        0.002265334249091263,
+        0.0023518596805211763
+      ],
+      "updateEnvironmentError": 0.06544121610256644,
+      "updateResponseError": 0.0019238390077382127
+    },
+    {
+      "point": [
+        1166,
+        784
+      ],
+      "NdotV": 0.6750134825706482,
+      "faceReflectance": [
+        0.03999999910593033,
+        0.03999999910593033,
+        0.03999999910593033
+      ],
+      "baseLobe": [
+        0.038796279579401016,
+        0.038796279579401016,
+        0.038796279579401016
+      ],
+      "nativeResponse": [
+        0.010748708905782736,
+        0.011384135111272809,
+        0.013727267146874784
+      ],
+      "nativeRadiance": [
+        0.67431640625,
+        0.6220703125,
+        0.5205078125
+      ],
+      "nativeReflection": [
+        0.755523681640625,
+        0.09463921189308167,
+        -0.6482495069503784
+      ],
+      "playerResponse": [
+        0.06988525390625,
+        0.06988525390625,
+        0.06988525390625
+      ],
+      "playerRadiance": [
+        0.0806884765625,
+        0.12103271484375,
+        0.154541015625
+      ],
+      "fixedEnvironmentWithPlayerResponse": [
+        0.011781193315982819,
+        0.010868385434150696,
+        0.009093955159187317
+      ],
+      "fixedResponseWithPlayerEnvironment": [
+        0.00021682423665534634,
+        0.000344463194666351,
+        0.0005303564516584313
+      ],
+      "nativeExposedIndirect": [
+        0.0018120076902936961,
+        0.0017704331215529247,
+        0.0017862874485557276
+      ],
+      "updateEnvironmentError": 0.009969185625689122,
+      "updateResponseError": 0.0015951834536383498
+    }
+  ],
   "overallVisualAcceptance": "failed-user-review",
   "archive": {
-    "sha256": "e6c39ccbc5c449e72163b9cc72e5c138c8e294532be996e42f8af96c5a2f5efc",
+    "sha256": "874a045104ae9788d5d66beb4ad4a5537ba07dd8dd7d88bcb30f245afffcb9b5",
     "members": {
       "analyze-cloth-environment.py": "0c95bed53923a6dce30f2754418bc29c543646bada97c7c62e5862de8a42540b",
-      "archive-cloth-environment-composition.py": "4eab05bb1da51a04067f5b9ecad2f16176797893396977fa86b7d1ac1e35354f",
+      "archive-cloth-environment-composition.py": "4dfe250b737b548b995fdecab1d9058bd0bf742cd772da3d11c5b9d1f720542a",
       "cloth-native-light-lanes.json": "df7e45d7cebbeddcae2592f75d008237ac0169644f0a1cd21f503008cf021229",
       "cloth-environment-composition.json": "e42aa2c604dcc18796ec6097161178c14e860a67b7c3d2934c5f30cfb97aa035",
       "cloth-environment-source.py": "fbc5289c8d04c92be13f8a888d71a493a1351ddbf5c6f31ca71cef0de9e9a795",
       "cloth-environment-source.json": "3e32786ab1c98bff3acfdf6827204441d0d9ee9edbfac71a3de77ad81fa2b69f",
+      "cloth-environment-native-response.py": "2f2f1b9de454a61034bef361c0bc91693fc471befdc75d7201186fad327cc854",
+      "cloth-environment-native-response.json": "9078203cb8546974592bf2c02b496256841410ac1a4ac9beaef13d88527c6cc7",
       "cloth-directional-rim-worker.py": "4989b894afead3afd821ff61424f9caabaa5cf90cd8083caa586bde73452d40f",
       "cloth-environment-replay/request.json": "86912309f2026acf5fcaa398794566fe4777b3186fc18f9c051d910ed9ffd133",
       "cloth-environment-replay/results.json": "51d876027a3ceed6c88378fca65badf4888121ebe98618a26d5d06ad9a5afa80",
