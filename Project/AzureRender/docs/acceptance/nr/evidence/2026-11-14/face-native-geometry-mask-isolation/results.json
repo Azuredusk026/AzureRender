@@ -1,0 +1,1200 @@
+{
+  "overallStatus": "failed-user-review",
+  "devices": {
+    "nvidia": {
+      "sdf": {
+        "device": "nvidia",
+        "input": {
+          "player": "a81b21b464231741b3331ae4839fb3f716e0f0b69137c33490e6dd7c129851be",
+          "programs": {
+            "mesh_object_lighting.frag.spv": "8575b735c49fb8d2d01b5a18ec473ff9852fe625c9dfeb16bcceb42116ff4545",
+            "mesh_object_early_lighting.frag.spv": "36205c9a1a384bc93cb30ea11f0b136477fb1ef4c0684799516a0cd6cf24f932"
+          },
+          "sampler": {
+            "schemaVersion": 1,
+            "usage": "linear",
+            "colorSpace": "linear",
+            "filter": "linear",
+            "wrapU": "clamp",
+            "wrapV": "clamp",
+            "mipPolicy": "generate",
+            "anisotropy": 1,
+            "mipBias": -1,
+            "mipFilter": "nearest"
+          },
+          "texture": "e4d7865a20fad774cc896c4b821442bf1649d91207ca2715b1b01255f8ed55ab",
+          "experimentalBinding": 2,
+          "fixedMaskBinding": 4,
+          "mode": "sdf",
+          "overlayPair": false
+        },
+        "frameSha256": "1e9ee15d88e6563d35df86042f659e37b601a7e99574d615d03bce0e79f7785e",
+        "baselineSha256": "b2848d59cc968603e818d76813df7d9748224bc0222c10600b22212ed6c9ec35",
+        "regions": {
+          "face": {
+            "count": 3663,
+            "overOne": [
+              573,
+              572
+            ],
+            "overEight": [
+              356,
+              354
+            ],
+            "peak": [
+              54,
+              54
+            ],
+            "newOverOne": 0,
+            "changed": 23,
+            "baseline": {
+              "pixels": 3663,
+              "ssim": 0.9606830433909681,
+              "medianLuminanceRelativeError": 0.01676899275334613,
+              "passed": true
+            },
+            "candidate": {
+              "pixels": 3663,
+              "ssim": 0.960908322563495,
+              "medianLuminanceRelativeError": 0.01676899275334613,
+              "passed": true
+            }
+          },
+          "faceCore": {
+            "count": 1176,
+            "overOne": [
+              17,
+              17
+            ],
+            "overEight": [
+              0,
+              0
+            ],
+            "peak": [
+              3,
+              3
+            ],
+            "newOverOne": 0,
+            "changed": 0,
+            "baseline": {
+              "pixels": 1176,
+              "ssim": 0.9980932538177006,
+              "medianLuminanceRelativeError": 0.00599252679563281,
+              "passed": true
+            },
+            "candidate": {
+              "pixels": 1176,
+              "ssim": 0.9980932538177006,
+              "medianLuminanceRelativeError": 0.00599252679563281,
+              "passed": true
+            }
+          },
+          "iris": {
+            "count": 255,
+            "overOne": [
+              52,
+              52
+            ],
+            "overEight": [
+              10,
+              10
+            ],
+            "peak": [
+              20,
+              20
+            ],
+            "newOverOne": 0,
+            "changed": 0,
+            "baseline": {
+              "pixels": 255,
+              "ssim": 0.9811525059347715,
+              "medianLuminanceRelativeError": 0.011089778228747777,
+              "passed": true
+            },
+            "candidate": {
+              "pixels": 255,
+              "ssim": 0.9811525059347715,
+              "medianLuminanceRelativeError": 0.011089778228747777,
+              "passed": true
+            }
+          },
+          "outsideFace": {
+            "count": 3682737,
+            "overOne": [
+              179142,
+              179142
+            ],
+            "overEight": [
+              29946,
+              29946
+            ],
+            "peak": [
+              228,
+              228
+            ],
+            "newOverOne": 0,
+            "changed": 0
+          },
+          "frame": {
+            "count": 3686400,
+            "overOne": [
+              179715,
+              179714
+            ],
+            "overEight": [
+              30302,
+              30300
+            ],
+            "peak": [
+              228,
+              228
+            ],
+            "newOverOne": 0,
+            "changed": 23
+          }
+        },
+        "samples": {
+          "traced": {
+            "points": [
+              [
+                1280,
+                318
+              ],
+              [
+                1279,
+                318
+              ],
+              [
+                1306,
+                304
+              ],
+              [
+                1313,
+                297
+              ],
+              [
+                1312,
+                298
+              ],
+              [
+                1318,
+                289
+              ],
+              [
+                1316,
+                292
+              ],
+              [
+                1247,
+                293
+              ],
+              [
+                1314,
+                295
+              ],
+              [
+                1310,
+                300
+              ],
+              [
+                1307,
+                303
+              ],
+              [
+                1318,
+                288
+              ]
+            ],
+            "improved": 2,
+            "worsened": 0,
+            "overOne": [
+              12,
+              12
+            ],
+            "overEight": [
+              12,
+              10
+            ],
+            "peak": [
+              41,
+              25
+            ],
+            "errors": [
+              [
+                41,
+                35,
+                25,
+                21,
+                21,
+                17,
+                17,
+                16,
+                16,
+                16,
+                16,
+                15
+              ],
+              [
+                4,
+                2,
+                25,
+                21,
+                21,
+                17,
+                17,
+                16,
+                16,
+                16,
+                16,
+                15
+              ]
+            ]
+          },
+          "outsideOverEight": {
+            "points": [
+              [
+                1280,
+                318
+              ],
+              [
+                1279,
+                318
+              ],
+              [
+                1306,
+                304
+              ],
+              [
+                1313,
+                297
+              ],
+              [
+                1312,
+                298
+              ],
+              [
+                1318,
+                289
+              ],
+              [
+                1316,
+                292
+              ],
+              [
+                1247,
+                293
+              ],
+              [
+                1314,
+                295
+              ],
+              [
+                1310,
+                300
+              ],
+              [
+                1307,
+                303
+              ],
+              [
+                1318,
+                288
+              ],
+              [
+                1317,
+                290
+              ],
+              [
+                1317,
+                291
+              ],
+              [
+                1316,
+                293
+              ],
+              [
+                1315,
+                294
+              ],
+              [
+                1311,
+                299
+              ],
+              [
+                1253,
+                301
+              ],
+              [
+                1309,
+                301
+              ],
+              [
+                1302,
+                307
+              ],
+              [
+                1245,
+                289
+              ],
+              [
+                1246,
+                291
+              ],
+              [
+                1249,
+                296
+              ],
+              [
+                1313,
+                296
+              ],
+              [
+                1312,
+                297
+              ],
+              [
+                1308,
+                302
+              ],
+              [
+                1315,
+                293
+              ],
+              [
+                1314,
+                294
+              ],
+              [
+                1313,
+                295
+              ],
+              [
+                1311,
+                298
+              ],
+              [
+                1308,
+                301
+              ],
+              [
+                1307,
+                302
+              ],
+              [
+                1316,
+                291
+              ],
+              [
+                1310,
+                299
+              ],
+              [
+                1305,
+                304
+              ],
+              [
+                1261,
+                308
+              ],
+              [
+                1283,
+                317
+              ],
+              [
+                1317,
+                289
+              ],
+              [
+                1248,
+                294
+              ],
+              [
+                1252,
+                299
+              ],
+              [
+                1309,
+                300
+              ],
+              [
+                1306,
+                303
+              ],
+              [
+                1304,
+                305
+              ],
+              [
+                1300,
+                308
+              ],
+              [
+                1299,
+                309
+              ],
+              [
+                1316,
+                290
+              ],
+              [
+                1315,
+                292
+              ],
+              [
+                1312,
+                296
+              ],
+              [
+                1250,
+                297
+              ],
+              [
+                1251,
+                298
+              ],
+              [
+                1297,
+                310
+              ]
+            ],
+            "improved": 3,
+            "worsened": 4,
+            "overOne": [
+              51,
+              51
+            ],
+            "overEight": [
+              51,
+              48
+            ],
+            "peak": [
+              41,
+              25
+            ],
+            "errors": [
+              [
+                41,
+                35,
+                25,
+                21,
+                21,
+                17,
+                17,
+                16,
+                16,
+                16,
+                16,
+                15,
+                15,
+                15,
+                15,
+                15,
+                15,
+                15,
+                15,
+                15,
+                14,
+                14,
+                14,
+                14,
+                14,
+                14,
+                12,
+                12,
+                12,
+                12,
+                12,
+                12,
+                11,
+                11,
+                11,
+                11,
+                11,
+                10,
+                10,
+                10,
+                10,
+                10,
+                10,
+                10,
+                10,
+                9,
+                9,
+                9,
+                9,
+                9,
+                9
+              ],
+              [
+                4,
+                2,
+                25,
+                21,
+                21,
+                17,
+                17,
+                16,
+                16,
+                16,
+                16,
+                15,
+                15,
+                15,
+                15,
+                15,
+                16,
+                15,
+                15,
+                16,
+                14,
+                14,
+                14,
+                14,
+                14,
+                15,
+                12,
+                12,
+                12,
+                12,
+                12,
+                12,
+                11,
+                11,
+                11,
+                11,
+                3,
+                10,
+                10,
+                10,
+                10,
+                10,
+                10,
+                10,
+                10,
+                9,
+                9,
+                10,
+                9,
+                9,
+                9
+              ]
+            ]
+          }
+        },
+        "queue": {
+          "id": 608,
+          "task": "nr-face-authored-mip-sdf-nvidia-retest",
+          "state": "succeeded",
+          "wait_seconds": 16079.358999999997,
+          "run_seconds": 316.45299999999406
+        }
+      },
+      "view": {
+        "device": "nvidia",
+        "input": {
+          "player": "a81b21b464231741b3331ae4839fb3f716e0f0b69137c33490e6dd7c129851be",
+          "programs": {
+            "mesh_object_lighting.frag.spv": "6646d71632b1729fb5f557cac796463d8c51de43f0d63da1a2fba998fb3af6c3",
+            "mesh_object_early_lighting.frag.spv": "b65fc72006e83099954a0e30ab920d1acf93a1a5e357df80561190bf6b3c5607"
+          },
+          "sampler": {
+            "schemaVersion": 1,
+            "usage": "linear",
+            "colorSpace": "linear",
+            "filter": "linear",
+            "wrapU": "clamp",
+            "wrapV": "clamp",
+            "mipPolicy": "generate",
+            "anisotropy": 1,
+            "mipBias": -1,
+            "mipFilter": "nearest"
+          },
+          "texture": "e4d7865a20fad774cc896c4b821442bf1649d91207ca2715b1b01255f8ed55ab",
+          "experimentalBinding": 2,
+          "fixedMaskBinding": 4,
+          "mode": "view",
+          "overlayPair": false
+        },
+        "frameSha256": "3266024944b1ede48d00c0ccd85f87bf608938b2b5498dc244e55787247677d6",
+        "baselineSha256": "b2848d59cc968603e818d76813df7d9748224bc0222c10600b22212ed6c9ec35",
+        "regions": {
+          "face": {
+            "count": 3663,
+            "overOne": [
+              573,
+              577
+            ],
+            "overEight": [
+              356,
+              357
+            ],
+            "peak": [
+              54,
+              54
+            ],
+            "newOverOne": 6,
+            "changed": 125,
+            "baseline": {
+              "pixels": 3663,
+              "ssim": 0.9606830433909681,
+              "medianLuminanceRelativeError": 0.01676899275334613,
+              "passed": true
+            },
+            "candidate": {
+              "pixels": 3663,
+              "ssim": 0.960699970435984,
+              "medianLuminanceRelativeError": 0.01676899275334613,
+              "passed": true
+            }
+          },
+          "faceCore": {
+            "count": 1176,
+            "overOne": [
+              17,
+              17
+            ],
+            "overEight": [
+              0,
+              0
+            ],
+            "peak": [
+              3,
+              3
+            ],
+            "newOverOne": 0,
+            "changed": 0,
+            "baseline": {
+              "pixels": 1176,
+              "ssim": 0.9980932538177006,
+              "medianLuminanceRelativeError": 0.00599252679563281,
+              "passed": true
+            },
+            "candidate": {
+              "pixels": 1176,
+              "ssim": 0.9980935947802417,
+              "medianLuminanceRelativeError": 0.00599252679563281,
+              "passed": true
+            }
+          },
+          "iris": {
+            "count": 255,
+            "overOne": [
+              52,
+              52
+            ],
+            "overEight": [
+              10,
+              10
+            ],
+            "peak": [
+              20,
+              20
+            ],
+            "newOverOne": 0,
+            "changed": 0,
+            "baseline": {
+              "pixels": 255,
+              "ssim": 0.9811525059347715,
+              "medianLuminanceRelativeError": 0.011089778228747777,
+              "passed": true
+            },
+            "candidate": {
+              "pixels": 255,
+              "ssim": 0.9811525207277153,
+              "medianLuminanceRelativeError": 0.011089778228747777,
+              "passed": true
+            }
+          },
+          "outsideFace": {
+            "count": 3682737,
+            "overOne": [
+              179142,
+              179142
+            ],
+            "overEight": [
+              29946,
+              29946
+            ],
+            "peak": [
+              228,
+              228
+            ],
+            "newOverOne": 0,
+            "changed": 0
+          },
+          "frame": {
+            "count": 3686400,
+            "overOne": [
+              179715,
+              179719
+            ],
+            "overEight": [
+              30302,
+              30303
+            ],
+            "peak": [
+              228,
+              228
+            ],
+            "newOverOne": 6,
+            "changed": 125
+          }
+        },
+        "samples": {
+          "traced": {
+            "points": [
+              [
+                1280,
+                318
+              ],
+              [
+                1279,
+                318
+              ],
+              [
+                1306,
+                304
+              ],
+              [
+                1313,
+                297
+              ],
+              [
+                1312,
+                298
+              ],
+              [
+                1318,
+                289
+              ],
+              [
+                1316,
+                292
+              ],
+              [
+                1247,
+                293
+              ],
+              [
+                1314,
+                295
+              ],
+              [
+                1310,
+                300
+              ],
+              [
+                1307,
+                303
+              ],
+              [
+                1318,
+                288
+              ]
+            ],
+            "improved": 9,
+            "worsened": 1,
+            "overOne": [
+              12,
+              12
+            ],
+            "overEight": [
+              12,
+              12
+            ],
+            "peak": [
+              41,
+              41
+            ],
+            "errors": [
+              [
+                41,
+                35,
+                25,
+                21,
+                21,
+                17,
+                17,
+                16,
+                16,
+                16,
+                16,
+                15
+              ],
+              [
+                41,
+                36,
+                14,
+                17,
+                17,
+                17,
+                14,
+                15,
+                15,
+                14,
+                11,
+                12
+              ]
+            ]
+          },
+          "outsideOverEight": {
+            "points": [
+              [
+                1280,
+                318
+              ],
+              [
+                1279,
+                318
+              ],
+              [
+                1306,
+                304
+              ],
+              [
+                1313,
+                297
+              ],
+              [
+                1312,
+                298
+              ],
+              [
+                1318,
+                289
+              ],
+              [
+                1316,
+                292
+              ],
+              [
+                1247,
+                293
+              ],
+              [
+                1314,
+                295
+              ],
+              [
+                1310,
+                300
+              ],
+              [
+                1307,
+                303
+              ],
+              [
+                1318,
+                288
+              ],
+              [
+                1317,
+                290
+              ],
+              [
+                1317,
+                291
+              ],
+              [
+                1316,
+                293
+              ],
+              [
+                1315,
+                294
+              ],
+              [
+                1311,
+                299
+              ],
+              [
+                1253,
+                301
+              ],
+              [
+                1309,
+                301
+              ],
+              [
+                1302,
+                307
+              ],
+              [
+                1245,
+                289
+              ],
+              [
+                1246,
+                291
+              ],
+              [
+                1249,
+                296
+              ],
+              [
+                1313,
+                296
+              ],
+              [
+                1312,
+                297
+              ],
+              [
+                1308,
+                302
+              ],
+              [
+                1315,
+                293
+              ],
+              [
+                1314,
+                294
+              ],
+              [
+                1313,
+                295
+              ],
+              [
+                1311,
+                298
+              ],
+              [
+                1308,
+                301
+              ],
+              [
+                1307,
+                302
+              ],
+              [
+                1316,
+                291
+              ],
+              [
+                1310,
+                299
+              ],
+              [
+                1305,
+                304
+              ],
+              [
+                1261,
+                308
+              ],
+              [
+                1283,
+                317
+              ],
+              [
+                1317,
+                289
+              ],
+              [
+                1248,
+                294
+              ],
+              [
+                1252,
+                299
+              ],
+              [
+                1309,
+                300
+              ],
+              [
+                1306,
+                303
+              ],
+              [
+                1304,
+                305
+              ],
+              [
+                1300,
+                308
+              ],
+              [
+                1299,
+                309
+              ],
+              [
+                1316,
+                290
+              ],
+              [
+                1315,
+                292
+              ],
+              [
+                1312,
+                296
+              ],
+              [
+                1250,
+                297
+              ],
+              [
+                1251,
+                298
+              ],
+              [
+                1297,
+                310
+              ]
+            ],
+            "improved": 27,
+            "worsened": 13,
+            "overOne": [
+              51,
+              51
+            ],
+            "overEight": [
+              51,
+              49
+            ],
+            "peak": [
+              41,
+              41
+            ],
+            "errors": [
+              [
+                41,
+                35,
+                25,
+                21,
+                21,
+                17,
+                17,
+                16,
+                16,
+                16,
+                16,
+                15,
+                15,
+                15,
+                15,
+                15,
+                15,
+                15,
+                15,
+                15,
+                14,
+                14,
+                14,
+                14,
+                14,
+                14,
+                12,
+                12,
+                12,
+                12,
+                12,
+                12,
+                11,
+                11,
+                11,
+                11,
+                11,
+                10,
+                10,
+                10,
+                10,
+                10,
+                10,
+                10,
+                10,
+                9,
+                9,
+                9,
+                9,
+                9,
+                9
+              ],
+              [
+                41,
+                36,
+                14,
+                17,
+                17,
+                17,
+                14,
+                15,
+                15,
+                14,
+                11,
+                12,
+                12,
+                14,
+                14,
+                12,
+                14,
+                13,
+                15,
+                16,
+                12,
+                13,
+                14,
+                13,
+                13,
+                12,
+                13,
+                11,
+                11,
+                12,
+                11,
+                11,
+                11,
+                12,
+                12,
+                7,
+                11,
+                10,
+                11,
+                9,
+                11,
+                10,
+                12,
+                12,
+                12,
+                9,
+                10,
+                9,
+                12,
+                10,
+                8
+              ]
+            ]
+          }
+        },
+        "queue": {
+          "id": 611,
+          "task": "nr-face-authored-mip-view-nvidia-retest",
+          "state": "succeeded",
+          "wait_seconds": 16395.86,
+          "run_seconds": 121.26600000000326
+        }
+      }
+    }
+  },
+  "archive": {
+    "sha256": "b61068a79512ff56810d9b038e729ff31be8e66074908010039251b357d3d4dd",
+    "members": {
+      "archive-face-geometry-mask-isolation.py": "a54c574819f72f94b9555bad8d995e0613d9d339a366364f41f4acba9355c1a3",
+      "face-geometry-mask-actual.py": "795f428d252a0ac88adf43aae94a1ef0d1c4c1bf5b8260cef00f02d57a19546c",
+      "capture-nvidia-sdf/command.json": "0543204fc716445caf60174d1a05f9787050c2f3e9d2fee7ae23ca907bb381ff",
+      "capture-nvidia-sdf/player.log": "20f39b2d388094216c9e359364199aab829b1bc7bacadf741ab653d7f36ea100",
+      "capture-nvidia-sdf/results.json": "c21bfccee5cb7a3d82971695bc314ada93bcf60abc2fbee8b5256be26812e533",
+      "capture-nvidia-sdf/runtime.json": "fd2c9542b76bf80901952afda0ba6bd0dac184828575b75c695e7c7c1c16b4ec",
+      "capture-nvidia-sdf/frames/gpu_capabilities.json": "93c9fb29461fae11a7e57d4e49112071a71940dee571f1f6696ffbf03c392879",
+      "assets-sdf/mesh-face-geometry-mask.frag": "0622128156fbfa531e1c280ccd5b9f2fabcea95ad0c24a0301a4d55e8b4e4720",
+      "capture-nvidia-view/command.json": "e1e21a2251857ecc4b52a9febba6e141265428e59ead5f6e08df2c8f50d7aafe",
+      "capture-nvidia-view/player.log": "8ca8f3f23978bf3ecef86358b9a673293809aceb659ad9f25e89dc19a6d73683",
+      "capture-nvidia-view/results.json": "fc832a2d6c16304d4700fe5680e1131139a454d0a73c74321cf5e6e1b169ae3f",
+      "capture-nvidia-view/runtime.json": "fd2c9542b76bf80901952afda0ba6bd0dac184828575b75c695e7c7c1c16b4ec",
+      "capture-nvidia-view/frames/gpu_capabilities.json": "93c9fb29461fae11a7e57d4e49112071a71940dee571f1f6696ffbf03c392879",
+      "assets-view/mesh-face-geometry-mask.frag": "f7353551032fa6a38271d3084a1329355e233c8927b1198256c2e4f6cc69c2c3"
+    }
+  }
+}
