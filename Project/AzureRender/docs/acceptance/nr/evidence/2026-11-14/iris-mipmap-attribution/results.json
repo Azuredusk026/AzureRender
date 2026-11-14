@@ -1,0 +1,290 @@
+{
+  "status": "diagnostic",
+  "baseline": {
+    "pixels": 161,
+    "overOne": 37,
+    "overEight": 9,
+    "maximum": 20,
+    "mean": 1.9627329192546583
+  },
+  "offsets": {
+    "-1": {
+      "result": {
+        "pixels": 161,
+        "overOne": 45,
+        "overEight": 15,
+        "maximum": 28,
+        "mean": 2.6770186335403725
+      },
+      "aligned": {
+        "pixels": 10,
+        "overOne": 10,
+        "overEight": 7,
+        "maximum": 28,
+        "mean": 13.7
+      },
+      "sameBaselineScope": {
+        "pixels": 10,
+        "overOne": 2,
+        "overEight": 1,
+        "maximum": 12,
+        "mean": 2.2
+      }
+    },
+    "0": {
+      "result": {
+        "pixels": 161,
+        "overOne": 155,
+        "overEight": 86,
+        "maximum": 103,
+        "mean": 12.826086956521738
+      },
+      "aligned": {
+        "pixels": 160,
+        "overOne": 155,
+        "overEight": 86,
+        "maximum": 103,
+        "mean": 12.9
+      },
+      "sameBaselineScope": {
+        "pixels": 160,
+        "overOne": 37,
+        "overEight": 9,
+        "maximum": 20,
+        "mean": 1.96875
+      }
+    },
+    "1": {
+      "result": {
+        "pixels": 161,
+        "overOne": 36,
+        "overEight": 8,
+        "maximum": 20,
+        "mean": 1.8944099378881987
+      },
+      "aligned": {
+        "pixels": 160,
+        "overOne": 36,
+        "overEight": 8,
+        "maximum": 20,
+        "mean": 1.9
+      },
+      "sameBaselineScope": {
+        "pixels": 160,
+        "overOne": 37,
+        "overEight": 9,
+        "maximum": 20,
+        "mean": 1.96875
+      }
+    },
+    "2": {
+      "result": {
+        "pixels": 161,
+        "overOne": 150,
+        "overEight": 116,
+        "maximum": 106,
+        "mean": 21.987577639751553
+      },
+      "aligned": {
+        "pixels": 150,
+        "overOne": 148,
+        "overEight": 115,
+        "maximum": 106,
+        "mean": 23.446666666666665
+      },
+      "sameBaselineScope": {
+        "pixels": 150,
+        "overOne": 35,
+        "overEight": 8,
+        "maximum": 20,
+        "mean": 1.9533333333333334
+      }
+    }
+  },
+  "nearLevelBoundary": [
+    {
+      "bias": -0.01,
+      "point": [
+        1261,
+        257
+      ],
+      "coveredByOverlay": true,
+      "reportedLod": [
+        5.0,
+        4.50390625
+      ],
+      "nativeLevels": [
+        5
+      ],
+      "baseline": [
+        96,
+        51,
+        85
+      ],
+      "candidate": [
+        101,
+        51,
+        87
+      ],
+      "reference": [
+        95,
+        50,
+        85
+      ],
+      "maxByteError": [
+        1,
+        6
+      ]
+    },
+    {
+      "bias": 0.01,
+      "point": [
+        1261,
+        261
+      ],
+      "coveredByOverlay": false,
+      "reportedLod": [
+        4.0,
+        4.4921875
+      ],
+      "nativeLevels": [
+        5
+      ],
+      "baseline": [
+        101,
+        59,
+        123
+      ],
+      "candidate": [
+        89,
+        58,
+        136
+      ],
+      "reference": [
+        89,
+        58,
+        135
+      ],
+      "maxByteError": [
+        12,
+        1
+      ]
+    },
+    {
+      "bias": 0.02,
+      "point": [
+        1261,
+        259
+      ],
+      "coveredByOverlay": true,
+      "reportedLod": [
+        4.0,
+        4.48046875
+      ],
+      "nativeLevels": [
+        4
+      ],
+      "baseline": [
+        103,
+        69,
+        112
+      ],
+      "candidate": [
+        100,
+        68,
+        127
+      ],
+      "reference": [
+        103,
+        69,
+        111
+      ],
+      "maxByteError": [
+        1,
+        16
+      ]
+    },
+    {
+      "bias": 0.02,
+      "point": [
+        1261,
+        260
+      ],
+      "coveredByOverlay": false,
+      "reportedLod": [
+        4.0,
+        4.48828125
+      ],
+      "nativeLevels": [
+        4
+      ],
+      "baseline": [
+        98,
+        63,
+        117
+      ],
+      "candidate": [
+        92,
+        61,
+        128
+      ],
+      "reference": [
+        98,
+        63,
+        116
+      ],
+      "maxByteError": [
+        1,
+        12
+      ]
+    },
+    {
+      "bias": 0.02,
+      "point": [
+        1261,
+        261
+      ],
+      "coveredByOverlay": false,
+      "reportedLod": [
+        4.0,
+        4.4921875
+      ],
+      "nativeLevels": [
+        5
+      ],
+      "baseline": [
+        101,
+        59,
+        123
+      ],
+      "candidate": [
+        89,
+        58,
+        136
+      ],
+      "reference": [
+        89,
+        58,
+        135
+      ],
+      "maxByteError": [
+        12,
+        1
+      ]
+    }
+  ],
+  "inputs": {
+    "native-iris-stages/points.bin": "9bfcbfb5194b733a9a4c78015121126465d7143aee28f31bf821c8b6c51c31c9",
+    "native-iris-stages/event-846.bin": "b5f76e2bfe5979ebc9e43994e7d284e1080f32c0488344569956c78d3dc8760d",
+    "native-iris-stages/event-1230.bin": "b5f76e2bfe5979ebc9e43994e7d284e1080f32c0488344569956c78d3dc8760d",
+    "native-iris-stages/event-1245.bin": "71e1606bae7be46b7ac5b27cbc9c6ff65b7b78571082a1c19ddd855ea0ddbfc0",
+    "iris-explicit-mips/iris-explicit-mips.json": "8381f7ab3b6f1c1bd60ca56acdeadc08a9504a1c717d1ced3999a6d2de784b1f",
+    "engine-iris-lod-bias/results.json": "9bed944d9e7f801e70306b89dee20f2c437fef9dd352d40c7e4a81a7f71f67e0",
+    "engine-iris-lod-boundary/results.json": "b025ec2f2b185f1bc3f16c560619de1dba0f2f0f5a94cb9887f8d92e2d4364f4",
+    "engine-iris-explicit-mips/results.json": "b457d8d258b972a8d33a8ab1bc86ac4164d64637ad76e9ce7424789f3474621c"
+  },
+  "archive": {
+    "sha256": "0a620dfb286ace2ee65e0f9afe4d2661e5f3c3848bdc2e7f78dfd9096e4fb3e7",
+    "members": 31
+  }
+}
