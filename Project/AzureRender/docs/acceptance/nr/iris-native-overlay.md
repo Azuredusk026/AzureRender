@@ -91,3 +91,15 @@ Player 从场景读取主光，按实例头部的左右轴和前向轴投影。�
 
 [结果清单](evidence/2026-11-13/iris-native-overlay/results.json)记录各阶段读回。
 [验证归档](evidence/2026-11-13/iris-native-overlay/validation.zip)保存遮罩及逐点计算程序。
+
+## 虹膜剩余颜色来源
+
+在虹膜坐标 `[1262,257]`，两块显卡的显示值均为 `[67,20,48]`，原生值为 `[82,26,56]`。
+NVIDIA 的独立回放按原生眼影倍率处理 Player 底层辐亮度，得到同一显示值。
+两块显卡的原生回放均在此处选用第 4 级纹理。
+
+另有三处未覆盖像素在 NVIDIA 原生回放中匹配第 5 级，在 Intel 中匹配第 4 级。
+这些位置的 Intel Player 与同设备原生回放最多相差一字节。
+整帧验收仍使用已冻结的画面和原定门槛。
+
+逐点颜色、纹理层级及输入指纹见[虹膜剩余颜色对照](evidence/2026-11-14/iris-residual-sources/results.json)和[验证归档](evidence/2026-11-14/iris-residual-sources/validation.zip)。
