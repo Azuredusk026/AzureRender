@@ -43,6 +43,12 @@ Debug 编辑器采得 97 次完整图形管线调用，全部命中驱动缓存�
 
 Debug 着色器读取对照覆盖 897 个文件，共 274,002,740 字节。迭代器读取耗时 32.00 秒，分块读取耗时 1.12 秒，逐文件内容一致。目录编译按 90 秒进程限制及原有字节断言核验。
 
+分块读取候选的 Debug 和 Release 分别在 61.70 秒和 62.86 秒内通过目录包装，897 份输出均与构建产物逐字节一致。两种配置的编译契约也通过，编辑器工作流按所属断言复验。
+
+原注册 Debug 雾效在 512.48 秒内通过。50 个组合均启用 Vulkan 验证层，索引与固定描述符路径的 25 对帧摘要一致。独立特化对照的六组画面一致，管线准备耗时为原路径的 4.39 至 9.36 倍。该候选保留于诊断归档。
+
+[着色器与雾效结果清单](evidence/2026-11-15/registered-gpu-infrastructure/registered-shader-and-debug-fog.json)和[验证归档](evidence/2026-11-15/registered-gpu-infrastructure/registered-shader-and-debug-fog.zip)保存两种配置的编译收据、Debug 雾效帧摘要及特化计时。
+
 [计时清单](evidence/2026-11-14/registered-gpu-infrastructure/debug-pipeline-wall-time.json)和[诊断归档](evidence/2026-11-14/registered-gpu-infrastructure/debug-pipeline-wall-time.zip)保存两种配置的雾效结果、调用跟踪及读取对照。
 
 [结果清单](evidence/2026-11-14/registered-gpu-infrastructure/results.json)及[验证归档](evidence/2026-11-14/registered-gpu-infrastructure/release-baseline-recovery.zip)保存启动预算、实际采集、缓存日志和原始复验收据。
