@@ -1,0 +1,651 @@
+{
+  "status": "measured native and Player at corresponding stage boundaries",
+  "originalTintMatched": true,
+  "nativeSceneShadowMultiplier": 0.550000011920929,
+  "nativePaletteMultiplier": 0.96,
+  "effectiveShadowPaletteMultiplier": 0.5280000114440918,
+  "devices": {
+    "nvidia": [
+      {
+        "point": [
+          1260,
+          320
+        ],
+        "player": [
+          [
+            158,
+            126,
+            110
+          ],
+          [
+            133,
+            92,
+            82
+          ],
+          [
+            131,
+            87,
+            76
+          ]
+        ],
+        "native": {
+          "tint": [
+            158,
+            126,
+            110
+          ],
+          "palette": [
+            133,
+            92,
+            83
+          ],
+          "weighted": [
+            99,
+            67,
+            60
+          ],
+          "mainPreSaturation": [
+            176,
+            124,
+            106
+          ]
+        },
+        "modeledScaledPalette": [
+          99,
+          67,
+          60
+        ],
+        "difference": {
+          "tint": [
+            0,
+            0,
+            0
+          ],
+          "unscaledPalette": [
+            0,
+            0,
+            -1
+          ],
+          "sceneWeightedPalette": [
+            0,
+            0,
+            0
+          ],
+          "currentUnmatchedScale": [
+            34,
+            25,
+            22
+          ],
+          "mainPreSaturation": [
+            -45,
+            -37,
+            -30
+          ]
+        }
+      },
+      {
+        "point": [
+          1334,
+          417
+        ],
+        "player": [
+          [
+            158,
+            120,
+            100
+          ],
+          [
+            134,
+            88,
+            76
+          ],
+          [
+            135,
+            80,
+            65
+          ]
+        ],
+        "native": {
+          "tint": [
+            158,
+            120,
+            99
+          ],
+          "palette": [
+            134,
+            88,
+            75
+          ],
+          "weighted": [
+            99,
+            64,
+            54
+          ],
+          "mainPreSaturation": [
+            171,
+            109,
+            86
+          ]
+        },
+        "modeledScaledPalette": [
+          99,
+          64,
+          55
+        ],
+        "difference": {
+          "tint": [
+            0,
+            0,
+            1
+          ],
+          "unscaledPalette": [
+            0,
+            0,
+            1
+          ],
+          "sceneWeightedPalette": [
+            0,
+            0,
+            1
+          ],
+          "currentUnmatchedScale": [
+            35,
+            24,
+            22
+          ],
+          "mainPreSaturation": [
+            -36,
+            -29,
+            -21
+          ]
+        }
+      },
+      {
+        "point": [
+          1171,
+          867
+        ],
+        "player": [
+          [
+            157,
+            138,
+            124
+          ],
+          [
+            133,
+            100,
+            92
+          ],
+          [
+            136,
+            96,
+            85
+          ]
+        ],
+        "native": {
+          "tint": [
+            157,
+            138,
+            124
+          ],
+          "palette": [
+            133,
+            100,
+            92
+          ],
+          "weighted": [
+            99,
+            73,
+            67
+          ],
+          "mainPreSaturation": [
+            171,
+            128,
+            111
+          ]
+        },
+        "modeledScaledPalette": [
+          99,
+          73,
+          67
+        ],
+        "difference": {
+          "tint": [
+            0,
+            0,
+            0
+          ],
+          "unscaledPalette": [
+            0,
+            0,
+            0
+          ],
+          "sceneWeightedPalette": [
+            0,
+            0,
+            0
+          ],
+          "currentUnmatchedScale": [
+            34,
+            27,
+            25
+          ],
+          "mainPreSaturation": [
+            -35,
+            -32,
+            -26
+          ]
+        }
+      },
+      {
+        "point": [
+          1257,
+          927
+        ],
+        "player": [
+          [
+            153,
+            118,
+            98
+          ],
+          [
+            129,
+            86,
+            74
+          ],
+          [
+            136,
+            84,
+            68
+          ]
+        ],
+        "native": {
+          "tint": [
+            153,
+            118,
+            98
+          ],
+          "palette": [
+            128,
+            86,
+            74
+          ],
+          "weighted": [
+            95,
+            63,
+            54
+          ],
+          "mainPreSaturation": [
+            128,
+            78,
+            63
+          ]
+        },
+        "modeledScaledPalette": [
+          96,
+          63,
+          53
+        ],
+        "difference": {
+          "tint": [
+            0,
+            0,
+            0
+          ],
+          "unscaledPalette": [
+            1,
+            0,
+            0
+          ],
+          "sceneWeightedPalette": [
+            1,
+            0,
+            -1
+          ],
+          "currentUnmatchedScale": [
+            34,
+            23,
+            20
+          ],
+          "mainPreSaturation": [
+            8,
+            6,
+            5
+          ]
+        }
+      }
+    ],
+    "intel": [
+      {
+        "point": [
+          1260,
+          320
+        ],
+        "player": [
+          [
+            158,
+            126,
+            110
+          ],
+          [
+            133,
+            92,
+            83
+          ],
+          [
+            131,
+            87,
+            77
+          ]
+        ],
+        "native": {
+          "tint": [
+            158,
+            126,
+            110
+          ],
+          "palette": [
+            133,
+            92,
+            83
+          ],
+          "weighted": [
+            99,
+            67,
+            60
+          ],
+          "mainPreSaturation": [
+            176,
+            124,
+            106
+          ]
+        },
+        "modeledScaledPalette": [
+          99,
+          67,
+          60
+        ],
+        "difference": {
+          "tint": [
+            0,
+            0,
+            0
+          ],
+          "unscaledPalette": [
+            0,
+            0,
+            0
+          ],
+          "sceneWeightedPalette": [
+            0,
+            0,
+            0
+          ],
+          "currentUnmatchedScale": [
+            34,
+            25,
+            23
+          ],
+          "mainPreSaturation": [
+            -45,
+            -37,
+            -29
+          ]
+        }
+      },
+      {
+        "point": [
+          1334,
+          417
+        ],
+        "player": [
+          [
+            158,
+            120,
+            100
+          ],
+          [
+            134,
+            87,
+            76
+          ],
+          [
+            135,
+            80,
+            65
+          ]
+        ],
+        "native": {
+          "tint": [
+            158,
+            120,
+            99
+          ],
+          "palette": [
+            134,
+            88,
+            75
+          ],
+          "weighted": [
+            99,
+            64,
+            54
+          ],
+          "mainPreSaturation": [
+            171,
+            109,
+            86
+          ]
+        },
+        "modeledScaledPalette": [
+          99,
+          63,
+          55
+        ],
+        "difference": {
+          "tint": [
+            0,
+            0,
+            1
+          ],
+          "unscaledPalette": [
+            0,
+            -1,
+            1
+          ],
+          "sceneWeightedPalette": [
+            0,
+            -1,
+            1
+          ],
+          "currentUnmatchedScale": [
+            35,
+            23,
+            22
+          ],
+          "mainPreSaturation": [
+            -36,
+            -29,
+            -21
+          ]
+        }
+      },
+      {
+        "point": [
+          1171,
+          867
+        ],
+        "player": [
+          [
+            157,
+            138,
+            124
+          ],
+          [
+            133,
+            100,
+            92
+          ],
+          [
+            136,
+            96,
+            85
+          ]
+        ],
+        "native": {
+          "tint": [
+            157,
+            138,
+            124
+          ],
+          "palette": [
+            133,
+            100,
+            92
+          ],
+          "weighted": [
+            99,
+            73,
+            67
+          ],
+          "mainPreSaturation": [
+            171,
+            128,
+            111
+          ]
+        },
+        "modeledScaledPalette": [
+          99,
+          73,
+          67
+        ],
+        "difference": {
+          "tint": [
+            0,
+            0,
+            0
+          ],
+          "unscaledPalette": [
+            0,
+            0,
+            0
+          ],
+          "sceneWeightedPalette": [
+            0,
+            0,
+            0
+          ],
+          "currentUnmatchedScale": [
+            34,
+            27,
+            25
+          ],
+          "mainPreSaturation": [
+            -35,
+            -32,
+            -26
+          ]
+        }
+      },
+      {
+        "point": [
+          1257,
+          927
+        ],
+        "player": [
+          [
+            153,
+            118,
+            98
+          ],
+          [
+            129,
+            86,
+            74
+          ],
+          [
+            136,
+            84,
+            68
+          ]
+        ],
+        "native": {
+          "tint": [
+            153,
+            118,
+            98
+          ],
+          "palette": [
+            128,
+            86,
+            74
+          ],
+          "weighted": [
+            95,
+            63,
+            54
+          ],
+          "mainPreSaturation": [
+            128,
+            78,
+            63
+          ]
+        },
+        "modeledScaledPalette": [
+          96,
+          63,
+          53
+        ],
+        "difference": {
+          "tint": [
+            0,
+            0,
+            0
+          ],
+          "unscaledPalette": [
+            1,
+            0,
+            0
+          ],
+          "sceneWeightedPalette": [
+            1,
+            0,
+            -1
+          ],
+          "currentUnmatchedScale": [
+            34,
+            23,
+            20
+          ],
+          "mainPreSaturation": [
+            8,
+            6,
+            5
+          ]
+        }
+      }
+    ]
+  },
+  "bodyReadback": "a64e4e7dd3388bd859d23a01b11f7aa634b926df49c806827fc12c8b225afdab",
+  "shaderConstants": "30ed44bbe849bdb3a1cff0c94840eef52c79a6e412a126a3c7ee71d5546f8f55",
+  "nativeReference": "6f5e0169d74f3747ffae8f21d71458bed34ea57b7dd42f29478494ec4e5d669b",
+  "archive": {
+    "sha256": "23e9de9c0b60cb080c107f045abdb535886210f96bd22d47e294f42317b78e74",
+    "members": {
+      "outline-native-energy-qualification.json": "9d200624e50cff925fc8b4238aca420666c5241e89b0d7b26bc9a10629bcb989",
+      "outline-shadow-stage-readback.py": "9b820126f0817f2ea7cac76eae4ebdc7f642a05b376f79444a4f32b49978e490",
+      "score-outline-native-energy.py": "d3ba780e1b5447947c52b7ef09824220617523869fccc160fef1854dda21fdd9",
+      "archive-body-outline-energy-stage.py": "0aa4b430d5ce2f370e423bf2bebf9754bcb98163f3f4c591061ab26ccdc952b2",
+      "hardware/stages.json": "a64e4e7dd3388bd859d23a01b11f7aa634b926df49c806827fc12c8b225afdab",
+      "hardware/mesh.frag": "727e579d6d3adda21f7cff96debeb809a8080475ef2eb839fa3ffa8f175a1ead",
+      "original/trace-receipt.json": "6f5e0169d74f3747ffae8f21d71458bed34ea57b7dd42f29478494ec4e5d669b",
+      "original/outline-constants.bin": "30ed44bbe849bdb3a1cff0c94840eef52c79a6e412a126a3c7ee71d5546f8f55",
+      "original/outline-disassembly.asm": "859ab38d6ca1e16996f7ee48f6a7d1d0ec5228609dbff2c695f7774215b195de",
+      "original/body-outline-trace-1260-320.json": "415c13fffeccf9c0a82cf910bb0cbb30d8fc1be00243a11fcbc8e5c1a3bf8c79",
+      "original/body-outline-trace-1334-417.json": "a553eee4cdef38e98a7ff7c59b4ebe766f512cb9bd4bb762139405cc8d5fdbd1",
+      "original/body-outline-trace-1171-867.json": "904a786872b6e7940f3f7a04c6afa48e8b2b251b772c6e8419ec6e3499a2a864",
+      "original/body-outline-trace-1257-927.json": "d714021804d64f23bd132cd4f18bd524ae923166fda12a2ce65c8c88ee34d7b8"
+    }
+  },
+  "productionCandidateAccepted": false
+}
