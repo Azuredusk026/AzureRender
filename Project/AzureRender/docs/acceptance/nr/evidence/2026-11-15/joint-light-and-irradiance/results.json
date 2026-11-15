@@ -245,5 +245,9 @@
       "irradiance/compute-candidate.spv": "6ec5501ddc899e32e7890a686a4fcc5d41c46a70a83eee5bd4439682c6b0b866",
       "irradiance/positions.txt": "d862fa644169d62647fb7041ff22397e2ea3651cd3ba4d6c5f9b66f87b1f88d9"
     }
+  },
+  "snapshotDrawUpperBound": {
+    "file": "snapshot-draw-upper-bound.json",
+    "sha256": "bd0cb71f740ad748179180c71535adbbb79ce80287106b7d91fad8e3171d6e4f"
   }
 }
