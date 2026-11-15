@@ -682,6 +682,9 @@ UX-A 至 UX-D 完成，UX-E 为 Ready。
 
 ED0 至 ED7 开发交付完成，P8 状态为 Ready。
 开发任务见[编辑器实施计划](docs/plans/2026-10-14-editor-generalization.md)。
+层级提供顶层创建和子级创建入口。
+文档保护对话框提供保存、放弃和取消。
+对应回放见[编辑器交互专项](docs/plans/2026-10-14-editor-generalization.md#编辑器交互专项)。
 本轮机器批次已收尾，实体与历史条件待满足。
 
 阶段状态见[当前状态](docs/plans/current-stage-status.md)。

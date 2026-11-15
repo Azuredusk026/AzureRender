@@ -194,7 +194,7 @@ private:
     nlohmann::json consoleView_=nlohmann::json::object();
     std::string consoleLastLine_;
     std::string consoleLastFeedback_;
-    bool navigationMoved_=false;
+    bool navigationUsed_=false;
     std::string prefabInstance_,installPath_,outputPath_,projectPath_;
 };
 

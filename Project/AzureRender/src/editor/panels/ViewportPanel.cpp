@@ -39,10 +39,22 @@ void ImGuiEditorLayer::drawViewportPanel(PanelContext&) {
         ImGuiFocusedFlags_RootAndChildWindows);
     if (!viewportTextures_.empty()) {
         ImGui::BeginDisabled(session_->playing()||session_->building());
-        for(const auto& entry:std::vector<std::pair<const char*,unsigned>>{{"Hand",3},{"Move",0},{"Rotate",1},{"Scale",2}}) {
-            const char* shortcut=entry.second==0?"W":entry.second==1?"E":entry.second==2?"R":"Q";
-            if(ui::button(compact?shortcut:entry.second==0?ui::tr("移动"):entry.second==1?ui::tr("旋转"):entry.second==2?ui::tr("缩放"):ui::tr("平移"),{ui::ButtonVariant::Toolbar,static_cast<unsigned>(context_->gizmoMode())==entry.second}))session_->edit("viewport.gizmo-mode",{{"value",entry.second}});
-            observeWidget(std::string("mode.")+entry.first);ImGui::SameLine();
+        struct ToolButton {const char* id;const char* label;const char* binding;EditorContext::GizmoMode mode;};
+        const ToolButton tools[]={
+            {"Hand","选择","editor.shortcuts.select",EditorContext::GizmoMode::Select},
+            {"Move","移动","editor.shortcuts.move",EditorContext::GizmoMode::Translate},
+            {"Rotate","旋转","editor.shortcuts.rotate",EditorContext::GizmoMode::Rotate},
+            {"Scale","缩放","editor.shortcuts.scale",EditorContext::GizmoMode::Scale},
+        };
+        for(const auto& tool:tools) {
+            const auto shortcut=session_->settings().get(tool.binding).get<std::string>();
+            const auto* label=ui::tr(tool.label);
+            const auto tooltip=std::string(label)+" ("+shortcut+")";
+            const auto buttonLabel=(compact?shortcut:std::string(label))+"###viewport-tool-"+tool.id;
+            if(ui::button(buttonLabel.c_str(),{ui::ButtonVariant::Toolbar,context_->gizmoMode()==tool.mode,false,tooltip})){
+                session_->edit("viewport.gizmo-mode",{{"value",static_cast<unsigned>(tool.mode)}});
+            }
+            observeWidget(std::string("mode.")+tool.id);ImGui::SameLine();
         }
         ImGui::EndDisabled();ui::nextToolbarItem(ui::buttonWidth(ui::tr("聚焦选择")));
         if(ui::button(ui::tr("聚焦选择"),{ui::ButtonVariant::Toolbar,false,context_->selectedNodes().empty()})) {
@@ -182,11 +194,11 @@ void ImGuiEditorLayer::drawViewportPanel(PanelContext&) {
             if(ImGui::IsMouseClicked(ImGuiMouseButton_Right))navigationButton_=ImGuiMouseButton_Right;
             else if(ImGui::IsMouseClicked(ImGuiMouseButton_Middle))navigationButton_=ImGuiMouseButton_Middle;
             else if(navIo.KeyAlt && ImGui::IsMouseClicked(ImGuiMouseButton_Left))navigationButton_=ImGuiMouseButton_Left;
-            if(navigationButton_>=0){navigationMoved_=false;ImGui::SetWindowFocus();viewportFocused_=true;}
+            if(navigationButton_>=0){navigationUsed_=false;ImGui::SetWindowFocus();viewportFocused_=true;}
         }
-        if(navigationButton_>=0&&ImGui::IsMouseDragging(navigationButton_,3*dpi_))navigationMoved_=true;
+        if(navigationButton_>=0&&ImGui::IsMouseDragging(navigationButton_,3*dpi_))navigationUsed_=true;
         if(navigationButton_>=0 && (!ImGui::IsMouseDown(navigationButton_) || ImGui::IsKeyPressed(ImGuiKey_Escape,false))){
-            const bool contextClick=navigationButton_==ImGuiMouseButton_Right&&!navigationMoved_&&ImGui::IsMouseReleased(ImGuiMouseButton_Right);
+            const bool contextClick=navigationButton_==ImGuiMouseButton_Right&&!navigationUsed_&&ImGui::IsMouseReleased(ImGuiMouseButton_Right);
             navigationButton_=-1;if(contextClick)ImGui::OpenPopup(ui::tr("Viewport context"));
         }
         setNavigationCapture(navigationButton_==ImGuiMouseButton_Right);
@@ -202,7 +214,13 @@ void ImGuiEditorLayer::drawViewportPanel(PanelContext&) {
         }
         if (hovered || navigationButton_>=0 || viewportGizmoDragActive_) {
             const ImGuiIO& io = ImGui::GetIO();
-            if(navigationAllowed && navigationButton_==ImGuiMouseButton_Right){if(io.MouseWheel!=0){const auto changed=session_->edit("viewport.fly-speed",{{"steps",io.MouseWheel}});if(changed)settingsSaveRequested_=true;}}
+            if(navigationAllowed && navigationButton_==ImGuiMouseButton_Right){
+                if(io.MouseWheel!=0){
+                    navigationUsed_=true;
+                    const auto changed=session_->edit("viewport.fly-speed",{{"steps",io.MouseWheel}});
+                    if(changed)settingsSaveRequested_=true;
+                }
+            }
             else if(navigationAllowed && hovered && !orientationOver)viewportInput_.zoomSteps += io.MouseWheel;
             const float sx=session_->settings().get("editor.camera.invertX").get<bool>()?-1.F:1.F;
             const float sy=session_->settings().get("editor.camera.invertY").get<bool>()?-1.F:1.F;
@@ -214,6 +232,7 @@ void ImGuiEditorLayer::drawViewportPanel(PanelContext&) {
                 viewportInput_.flyForward=static_cast<float>(ImGui::IsKeyDown(ImGuiKey_W))-static_cast<float>(ImGui::IsKeyDown(ImGuiKey_S));
                 viewportInput_.flyRight=static_cast<float>(ImGui::IsKeyDown(ImGuiKey_D))-static_cast<float>(ImGui::IsKeyDown(ImGuiKey_A));
                 viewportInput_.flyUp=static_cast<float>(ImGui::IsKeyDown(ImGuiKey_E))-static_cast<float>(ImGui::IsKeyDown(ImGuiKey_Q));
+                navigationUsed_ |= viewportInput_.flyForward!=0 || viewportInput_.flyRight!=0 || viewportInput_.flyUp!=0;
                 viewportInput_.flySpeed=session_->settings().get("editor.camera.flySpeed").get<float>()*(io.KeyShift?session_->settings().get("editor.camera.boost").get<float>():1.F);
                 viewportInput_.deltaSeconds=io.DeltaTime;
             }else if(navigationButton_==ImGuiMouseButton_Left) {

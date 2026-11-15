@@ -356,10 +356,23 @@ void ImGuiEditorLayer::drawPanels() {
         if(routed.consumed)session_->edit(routed.operation,routed.mode>=0?nlohmann::json{{"value",routed.mode}}:nlohmann::json::object());
     }
     auto& guard=session_->documentGuard();
-    if(guard.state()==DocumentActionState::AwaitingDecision || guard.state()==DocumentActionState::Failed)ImGui::OpenPopup("Unsaved changes");
+    if(guard.state()==DocumentActionState::AwaitingDecision || guard.state()==DocumentActionState::Failed){
+        ImGui::OpenPopup("Unsaved changes");
+        const auto* viewport=ImGui::GetMainViewport();
+        const auto width=std::min(520.F*dpi_,viewport->WorkSize.x*.9F);
+        ImGui::SetNextWindowPos(viewport->GetWorkCenter(),ImGuiCond_Always,{.5F,.5F});
+        ImGui::SetNextWindowSize({width,0},ImGuiCond_Always);
+    }
     if(ImGui::BeginPopupModal("Unsaved changes",nullptr,ImGuiWindowFlags_AlwaysAutoResize)) {
-        ImGui::TextUnformatted(guard.action()==DocumentAction::Close?"Save changes before closing?":guard.action()==DocumentAction::Open?"Save changes before switching project?":"Save changes before reloading?");
-        if(!guard.diagnostic().empty())ImGui::TextWrapped("%s",guard.diagnostic().c_str());
+        ImGui::TextWrapped("%s",guard.action()==DocumentAction::Close?"Save changes before closing?":guard.action()==DocumentAction::Open?"Save changes before switching project?":"Save changes before reloading?");
+        if(!guard.diagnostic().empty()){
+            const auto size=ImGui::GetMainViewport()->WorkSize;
+            const auto height=std::min(130.F*dpi_,size.y*.25F);
+            if(ImGui::BeginChild("document-diagnostic",{0,height},ImGuiChildFlags_Borders)){
+                ImGui::TextWrapped("%s",guard.diagnostic().c_str());
+            }
+            ImGui::EndChild();
+        }
         for(const auto* decision:{"save","discard","cancel"}) {
             if(ImGui::Button(decision)) {session_->edit("document.decision",{{"value",decision}});if(guard.state()!=DocumentActionState::Failed)ImGui::CloseCurrentPopup();}
             observeWidget(std::string("document.")+decision);ImGui::SameLine();

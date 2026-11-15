@@ -36,14 +36,25 @@ void OutlinerPanel::draw(PanelContext& panelContext) {
     const auto& nodes = view.scene().nodes;
     std::function<void()> pending;
     const bool writable=!services_.session.playing()&&!services_.session.building();
-    ImGui::BeginDisabled(!writable);
-    if(ui::button(ui::tr("创建")))ImGui::OpenPopup(ui::tr("Create root"));
-    services_.observe("outliner.create");
-    if(ImGui::BeginPopup(ui::tr("Create root"))){
-        const auto parent=view.selectedNode()?view.selectedNode()->id:std::string();
+    const auto createMenu=[&](const char* popup,const std::string& parent,const char* destination){
+        if(!ImGui::BeginPopup(popup))return;
+        if(destination)ImGui::TextDisabled("%s",destination);
         ui::objectCreationMenu(services_.session.nodePresets().describe(),[&](const auto& preset){pending=[this,preset,parent]{services_.session.edit("node.create-preset",{{"preset",preset},{"parent",parent}});};},[&](const auto& id){services_.observe(id);});
         ImGui::EndPopup();
-    }
+    };
+    const auto* parent=view.selectedNode();
+    const auto* childLabel=ui::tr("创建子对象");
+    ImGui::BeginDisabled(!writable);
+    if(ui::button(ui::tr("创建顶层对象")))ImGui::OpenPopup("outliner-create-root");
+    services_.observe("outliner.create");
+    ui::nextToolbarItem(ui::buttonWidth(childLabel));
+    ui::ButtonOptions childOptions;
+    childOptions.disabled=parent==nullptr;
+    childOptions.tooltip=parent?parent->name:ui::tr("先选择父对象");
+    if(ui::button(childLabel,childOptions))ImGui::OpenPopup("outliner-create-child");
+    services_.observe("outliner.create-child");
+    createMenu("outliner-create-root",{},nullptr);
+    if(parent)createMenu("outliner-create-child",parent->id,parent->name.c_str());
     ImGui::EndDisabled();
     std::string reveal;
     if(panelContext.selection().consumeReveal()) {

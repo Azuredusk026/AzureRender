@@ -1,0 +1,34 @@
+{
+  "date": "2026-11-15",
+  "baseCommit": "a2b6e110f8853cb66259123e60f2ef7c481efa61",
+  "configuration": "Release",
+  "baselineExecutableSha256": "f163492efeec4f8c3d0ad812feb1d02be8d591f09ea9a79811d6fa7dacbfb9c3",
+  "candidateExecutableSha256": "735dfd65f0ac106777f41ffa289fc4df1770680e290cb170ea43d02081c4678e",
+  "run": "D:/Projects/FYP/Project/AzureRender/build/runs/20261115-133208-editor-interaction-baseline-dd4266",
+  "input": "production ImGui replay",
+  "physicalInput": false,
+  "dispatch": {
+    "build": 1069,
+    "candidateReplays": 1070,
+    "nodeAdditionRetest": 1072
+  },
+  "checks": {
+    "nodeAddition": {
+      "baseline": "outliner-baseline-red.log",
+      "candidate": "outliner-green/run-cbf39bf4/summary.json",
+      "casesPassed": 4
+    },
+    "documentGuard": {
+      "baseline": "document-guard-retest.log",
+      "candidate": "workflow-candidate/document_guard.log",
+      "casesPassed": 6,
+      "viewportHeight": 720,
+      "baselineCancelTop": 715,
+      "candidateCancelTop": 466
+    },
+    "sceneContainer": "workflow-candidate/scene_container.log",
+    "selection": "workflow-candidate/selection.log",
+    "properties": "workflow-candidate/properties.log",
+    "viewportNavigation": "workflow-candidate/viewport_navigation.log"
+  }
+}
