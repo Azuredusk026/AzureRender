@@ -665,3 +665,13 @@ Intel 的距离场对照同样改变 23 个脸部像素。两处嘴角的误差�
 [乘色照明来源](evidence/2026-11-14/face-overlay-lighting-sources/results.json)和[验证归档](evidence/2026-11-14/face-overlay-lighting-sources/validation.zip)保存原生寄存器、覆盖裁片和十二处绘制记录。
 
 [覆盖来源结果](evidence/2026-11-14/face-overlay-source/results.json)和[验证归档](evidence/2026-11-14/face-overlay-source/validation.zip)保存接收分类、几何覆盖、乘色状态和体表顺序对照。
+
+## 固定姿态材质门槛
+
+原生脸部绘制 804 的明暗参照点在两块显卡上各有六处。漫反射从底色、受光遮罩与材料系数复算，线性分量最大误差为 0.000000054。皮肤图集的五处深度经过绘制顺序核对，原生与 Player 的最终深度码均相差一个十六位编码单位。
+
+身体候选采用原生主光亮度饱和度。30,561 个无透明衣料覆盖的皮肤内部位置中，超过一个色阶的数量在 NVIDIA 上为 627，在 Intel 上为 581；配对对照分别为 11,018 和 10,522。皮肤区域之外逐像素一致。全皮肤新增超差分别为 6 和 17 处，均为两个色阶，候选未通过新增误差门槛。
+
+第一层衣料候选直接使用原生绘制 1079 的网格输出。两设备各新增 19 处超差，取样点 [1274,523] 均保留 41 个色阶的误差。该候选未通过整帧和衣料邻区门槛。
+
+[材质对照结果](evidence/2026-11-16/fixed-pose-material-controls/results.json)和[验证归档](evidence/2026-11-16/fixed-pose-material-controls/validation.zip)保存采集指纹、图集写入顺序、配对图像指标与各设备收据。
