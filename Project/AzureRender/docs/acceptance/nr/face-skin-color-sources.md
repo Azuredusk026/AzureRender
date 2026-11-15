@@ -402,6 +402,14 @@ NVIDIA 画面颜色误差最大的十二处，在 Intel 法线视图中的角差
 
 [最终覆盖结果](evidence/2026-11-15/body-outline-remaining-draw-ownership/results.json)和[验证归档](evidence/2026-11-15/body-outline-remaining-draw-ownership/validation.zip)记录原生颜色附件、双设备逐点颜色及捕获指纹。
 
+### 描边取样的子像素地址
+
+原生硬件记录了深度重建边界上的 66 个位置。全部图元编号与独立几何投影吻合，输入原生裁剪坐标复算的浮点坐标和整数取样地址也全部一致。
+
+从顶点独立重建时，连续坐标方案有 39 个取样地址一致，八位子像素方案有 40 个地址一致。两种方案的剩余差异落在不同边界位置，描边法线继续按整数地址验收。
+
+[原生地址结果](evidence/2026-11-15/body-outline-66-native-addresses/results.json)和[验证归档](evidence/2026-11-15/body-outline-66-native-addresses/validation.zip)保存 66 组裁剪坐标、取样地址与复算脚本。
+
 ## 脸部局部灯
 
 原生事件 804 的七处片元中，局部灯的逐灯贡献可按加法照明和颜色混合重建。
