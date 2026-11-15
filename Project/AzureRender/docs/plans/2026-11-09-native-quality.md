@@ -164,6 +164,7 @@ Intel 的冻结可见量和颜色分别核对设备输入。
 [项目参考可见量算术](../acceptance/nr/project-reference-visibility-profile.md)核对编辑器、Player 和发布配置。
 完整接收分别核对事件 377 的法线与事件 422 的深度。
 Intel 头发颜色继续核对纹理梯度与层级选择。
+[原生头发显式层级](../acceptance/nr/evidence/2026-11-15/native-hair-hardware-explicit-levels/results.json)在两块显卡上核对五个相同图元位置。两处基色及法线层级不同，另外两处层级一致并保留颜色差异。
 
 [原生接收输入来源](../acceptance/nr/native-receiver-producer-replay.md)记录服饰双通道法线和头发外扩写入。
 参考场景外扩深度与服饰法线分别进入生产验证。
