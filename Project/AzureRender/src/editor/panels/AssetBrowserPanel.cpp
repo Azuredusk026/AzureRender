@@ -11,6 +11,7 @@
 #ifdef AZURERENDER_HAS_IMGUI
 #include <imgui.h>
 #include <algorithm>
+#include <cstdio>
 #include <cstring>
 #include <fstream>
 #include <map>
@@ -33,8 +34,37 @@ void AssetBrowserPanel::draw(PanelContext& panelContext) {
     if(!ImGui::Begin(ui::tr("资源###assets"),services_.workspace.open("assets"))){ImGui::End();return;}
     {const auto p=ImGui::GetWindowPos(),s=ImGui::GetWindowSize();services_.widgets["assets.drop-region"]={p.x,p.y,s.x,s.y};}
     const auto metrics=ui::UiMetrics::fromScale(services_.dpi);
+    const auto project=view.isProject()?services_.session.context().project().file.u8string():std::string();
+    if(project!=presentation.browseProject_){
+        presentation.browseProject_=project;
+        presentation.beforeReveal_.reset();
+        presentation.restoreScroll_.reset();
+        presentation.pendingReveal_.clear();
+    }
     const auto reveal=services_.session.consumeAssetReveal();
-    if(!reveal.empty()) {presentation.assetFilter_.Clear();presentation.assetTypeId_.clear();presentation.assetDirectory_.clear();presentation.assetMount_.clear();presentation.selectedAssets_={reveal};}
+    if(!reveal.empty() && view.isProject()){
+        const auto& records=view.assets().records();
+        auto record=records.find(reveal);
+        if(record==records.end()){
+            record=std::find_if(records.begin(),records.end(),[&](const auto& entry){return entry.second.virtualPath==reveal;});
+        }
+        if(record!=records.end()){
+            if(!presentation.beforeReveal_){
+                presentation.beforeReveal_=AssetPanelState::BrowseLocation{
+                    presentation.assetMount_,presentation.assetDirectory_,presentation.assetTypeId_,
+                    presentation.assetFilter_.InputBuf,presentation.selectedAssets_,presentation.assetScroll_};
+            }
+            const auto& path=record->second.virtualPath;
+            const auto separator=path.find(":/");
+            const auto slash=path.rfind('/');
+            presentation.assetMount_=path.substr(0,separator);
+            presentation.assetDirectory_=slash>separator+1?path.substr(separator+2,slash-separator-2):std::string();
+            presentation.assetFilter_.Clear();
+            presentation.assetTypeId_.clear();
+            presentation.selectedAssets_={record->first};
+            presentation.pendingReveal_=record->first;
+        }
+    }
     const bool compact=ImGui::GetContentRegionAvail().y<metrics.compactPanelHeight;
     const bool renderGrid=presentation.assetGrid_&&!compact;
     const bool wide=compact||ImGui::GetContentRegionAvail().x>metrics.widePanelWidth;
@@ -56,6 +86,58 @@ void AssetBrowserPanel::draw(PanelContext& panelContext) {
         if(ui::button(ui::tr("清除"))){presentation.assetFilter_.Clear();presentation.assetTypeId_.clear();}
         services_.observe("assets.clear-filters");ImGui::EndDisabled();
         if(ImGui::IsItemHovered())ImGui::SetTooltip(ui::tr("清除搜索和类型筛选"));
+    }
+    if(presentation.beforeReveal_){
+        ui::nextToolbarItem(ui::buttonWidth(ui::tr("返回浏览位置")));
+        if(ui::button(ui::tr("返回浏览位置"))){
+            const auto& state=*presentation.beforeReveal_;
+            presentation.assetMount_=state.mount;
+            presentation.assetDirectory_=state.directory;
+            presentation.assetTypeId_=state.type;
+            std::snprintf(presentation.assetFilter_.InputBuf,sizeof(presentation.assetFilter_.InputBuf),"%s",state.search.c_str());
+            presentation.assetFilter_.Build();
+            presentation.selectedAssets_=state.selection;
+            presentation.restoreScroll_=state.scroll;
+            presentation.pendingReveal_.clear();
+            presentation.beforeReveal_.reset();
+        }
+        services_.observe("assets.return-to-browse");
+    }
+    if(view.isProject()){
+        const auto tasks=services_.session.tasks().report();
+        const auto task=std::find_if(tasks.rbegin(),tasks.rend(),[&](const auto& item){
+            return item.at("target")==project && item.at("source").template get<std::string>().rfind("asset.import: ",0)==0;
+        });
+        if(task!=tasks.rend()){
+            const auto id=task->at("id").get<std::string>();
+            const auto state=task->at("state").get<std::string>();
+            if(state=="completed" && task->at("result").is_string()){
+                const auto asset=task->at("result").get<std::string>();
+                const auto record=view.assets().records().find(asset);
+                if(record!=view.assets().records().end()){
+                    ui::ButtonOptions options;
+                    options.tooltip=record->second.virtualPath;
+                    if(ui::button(ui::tr("定位导入结果"),options))services_.session.edit("reference.reveal",{{"kind","asset"},{"id",asset}});
+                    services_.observe("task.asset-reveal."+id);
+                }
+            }else if(state=="running"){
+                const bool cancelling=task->at("cancelling").get<bool>();
+                ui::statusText(ui::tr(cancelling?"正在取消导入":"正在导入资源"),ui::StatusKind::Info);
+                if(!cancelling){
+                    ui::nextToolbarItem(ui::buttonWidth(ui::tr("取消导入")));
+                    if(ui::button(ui::tr("取消导入")))services_.session.edit("tasks.cancel",{{"id",id}});
+                    services_.observe("task.import-cancel."+id);
+                }
+            }else if(state=="failed"){
+                if(ui::button(ui::tr("查看导入错误"))){
+                    services_.workspace.setVisible("console",true);
+                    ImGui::SetWindowFocus(ui::tr("日志###console"));
+                }
+                services_.observe("task.import-error."+id);
+            }else if(state=="cancelled"){
+                ui::statusText(ui::tr("导入已取消"),ui::StatusKind::Neutral);
+            }
+        }
     }
     auto& directories=services_.session.contentDirectories();
     const auto navigate=[&](const std::string& mount,const std::string& path){
@@ -183,7 +265,16 @@ void AssetBrowserPanel::draw(PanelContext& panelContext) {
         if(!renderGrid){for(const auto* title:{ui::tr("资源"),ui::tr("类型"),ui::tr("状态"),ui::tr("引用")})ImGui::TableSetupColumn(title);if(!compact)ImGui::TableHeadersRow();}
         ImGuiListClipper clipper;const int perRow=renderGrid?columns:1;
         const float rowHeight=renderGrid?thumbnailSize+52*services_.dpi:ImGui::GetTextLineHeightWithSpacing()+ImGui::GetStyle().CellPadding.y*2;
+        if(presentation.restoreScroll_){
+            ImGui::SetScrollY(*presentation.restoreScroll_);
+            presentation.restoreScroll_.reset();
+        }
+        presentation.assetScroll_=ImGui::GetScrollY();
         clipper.Begin(static_cast<int>((resources.size()+perRow-1)/perRow),rowHeight);
+        if(!presentation.pendingReveal_.empty()){
+            const auto target=std::find_if(resources.begin(),resources.end(),[&](const auto& row){return row.at("id")==presentation.pendingReveal_;});
+            if(target!=resources.end())clipper.IncludeItemByIndex(static_cast<int>(std::distance(resources.begin(),target))/perRow);
+        }
         while(clipper.Step())for(int clippedRow=clipper.DisplayStart;clippedRow<clipper.DisplayEnd;++clippedRow){
         for(int column=0;column<perRow;++column){const auto assetIndex=static_cast<std::size_t>(clippedRow*perRow+column);if(assetIndex>=resources.size())break;
             const auto& row=resources[assetIndex];
@@ -212,7 +303,10 @@ void AssetBrowserPanel::draw(PanelContext& panelContext) {
                     }
                 }
             }
-            if(id==reveal)ImGui::SetScrollHereY(.5F);
+            if(id==presentation.pendingReveal_){
+                ImGui::SetScrollHereY(.5F);
+                presentation.pendingReveal_.clear();
+            }
             services_.observe("asset."+id);
             if(ImGui::BeginPopupContextItem(ui::tr("Asset actions"))) {
                 if(!presentation.selectedAssets_.count(id))presentation.selectedAssets_={id};

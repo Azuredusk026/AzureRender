@@ -30,5 +30,17 @@
     "selection": "workflow-candidate/selection.log",
     "properties": "workflow-candidate/properties.log",
     "viewportNavigation": "workflow-candidate/viewport_navigation.log"
+  },
+  "importResult": {
+    "configuration": "Release",
+    "candidateExecutableSha256": "e2a081eee76bebfd406acdbe31c9daa8a06f625129a254dc348609463360b485",
+    "buildDispatch": 1075,
+    "coldRunDispatch": 1076,
+    "warmRunDispatch": 1079,
+    "baseline": "import-red-direct.log",
+    "coldFailure": "import-green-cold-timeout.log",
+    "warmResult": "import-green/run-2ecbfdf1/summary.json",
+    "contentNavigation": "import-content-regression.log",
+    "projectsPassed": 2
   }
 }
