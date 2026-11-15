@@ -34,3 +34,11 @@ CoreCLR 首轮的安装子进程达到 180 秒时限。复验完成安装、移�
 Release 第十三组执行九项 GPU 检查。首次运行的执行结果全部通过，构建来源复核检出共享工作区缺失第三方文件，该次分组等待复测。恢复 34 份已跟踪文件后，按摘要核对 .NET 来源清单的字节，重新核对 Release 的 1,295 个产物和 Debug 的 1,288 个产物。Release 第十三组按原命令复测，九项全部通过。
 
 [复测结果](evidence/2026-11-15/registered-vendor-source-recovery/results.json)和[验证归档](evidence/2026-11-15/registered-vendor-source-recovery/verification.zip)保存两次注册输出、缺失来源记录和产物摘要。
+
+## 生成物池容量与宿主复测
+
+Release 第十四组首次运行记录开发工具宿主通信超时及临时日志句柄占用。生成物池达到上限后，调度器结束该分组。三份到期着色器目录完成逐文件归档，释放 705,311,360 字节配额。中止的着色器热重载夹具逐文件核对并保留。
+
+同一 Release 产物执行原注册命令，五项全部通过。开发工具宿主用时 134.86 秒，着色器热重载宿主用时 60.67 秒，程序化资产宿主用时 86.77 秒。
+
+[复测结果](evidence/2026-11-15/registered-cache-retention-pool-recovery/results.json)和[验证归档](evidence/2026-11-15/registered-cache-retention-pool-recovery/verification.zip)保存首次超时、调度收据、归档摘要及注册复测。
