@@ -42,3 +42,9 @@ Release 第十四组首次运行记录开发工具宿主通信超时及临时日
 同一 Release 产物执行原注册命令，五项全部通过。开发工具宿主用时 134.86 秒，着色器热重载宿主用时 60.67 秒，程序化资产宿主用时 86.77 秒。
 
 [复测结果](evidence/2026-11-15/registered-cache-retention-pool-recovery/results.json)和[验证归档](evidence/2026-11-15/registered-cache-retention-pool-recovery/verification.zip)保存首次超时、调度收据、归档摘要及注册复测。
+
+## 生成物池容量与反射运动复测
+
+Release 第三十四组完成十一项注册检查。反射运动用例首次申请 134,217,728 字节时达到生成物池上限，执行在启动渲染前结束。三份到期着色器目录完成逐文件归档，释放 632,109,919 字节配额。同一 Release 产物使用原注册命令复测反射运动，用时 11.98 秒，通过后该组十一项均已通过。
+
+[复测结果](evidence/2026-11-15/registered-reflection-motion-storage-recovery/results.json)和[验证归档](evidence/2026-11-15/registered-reflection-motion-storage-recovery/verification.zip)保存两次注册收据、构建校验、归档摘要及调度结果。

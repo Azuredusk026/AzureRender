@@ -1,0 +1,77 @@
+{
+  "status": "passed",
+  "configuration": "Release",
+  "test": "AzureRender.ProjectedReflectionMotionGpu",
+  "durationSeconds": 11.98,
+  "jobs": [
+    {
+      "id": 1126,
+      "task": "release-gpu-34",
+      "state": "failed",
+      "exitCode": 8,
+      "reason": null
+    },
+    {
+      "id": 1131,
+      "task": "archive-expired-catalogs-for-remaining-matrix",
+      "state": "succeeded",
+      "exitCode": 0,
+      "reason": null
+    },
+    {
+      "id": 1133,
+      "task": "release-gpu-34-focused-retry-01",
+      "state": "succeeded",
+      "exitCode": 0,
+      "reason": null
+    }
+  ],
+  "initialReservationBytes": 134217728,
+  "capacity": {
+    "archived": [
+      {
+        "name": "20261110-224505-shader-catalog-b23715",
+        "bytes": 212930572,
+        "archive": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\archives\\managed\\20261110-224505-shader-catalog-b23715-12a5690c8eb4.zip",
+        "archiveSha256": "8814c594d766810958159063171cb335e98c82ad12e4dedc8167f250fee0dda0",
+        "files": 855
+      },
+      {
+        "name": "20261110-171927-shader-catalog-acef63",
+        "bytes": 210664541,
+        "archive": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\archives\\managed\\20261110-171927-shader-catalog-acef63-cb6a1cc3ef9c.zip",
+        "archiveSha256": "5fe932832534c43cd72b8d9bdb5abd21a49182d41c3f1ced3997829282d283ce",
+        "files": 847
+      },
+      {
+        "name": "20261110-181220-shader-catalog-dbf230",
+        "bytes": 208514806,
+        "archive": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\archives\\managed\\20261110-181220-shader-catalog-dbf230-8c5081275dce.zip",
+        "archiveSha256": "65d3846e19b80623a1f49a2194c05beb1ff3cba15bb3e0a7ed9a42543351b978",
+        "files": 679
+      }
+    ],
+    "recoveredBytes": 632109919,
+    "reservedAfter": 16443662243
+  },
+  "verificationSha256": "49f15b39c6077b12ee142350f52f33a91113070df122e2575050eaf404b43fb2",
+  "files": {
+    "archive_more_expired_shader_runs.py": "e05fd04d95ee925efb3d29e90b641b2ae1e58e28c14924b6d08e7ca60e2ccd03",
+    "registered-pool-next-capacity-recovery.json": "d0fabc3242b35b8b3b99c36e458133c98a91855e858d8a83f969a67a17ae873f",
+    "release-gpu-34-focused-retry-01-queue.log": "1d07cee0aa7d3970f1c58cbf7f742f1b6a51ab19292a3cceef6107e7d58102fa",
+    "release-gpu-34-focused-retry-01-receipt.json": "b021c02a3b8fbab9ec32d58aba5d93f0fa0f4a9f3fd9591ac90b39650e5991d8",
+    "release-gpu-34-focused-retry-01.json": "974e67c81dd58e70332f2235b57228db03ac76e755ffcdd305e619e8cc34b9b5",
+    "release-gpu-34-focused-retry-01.log": "46ea65b539b72ea9ae7286a77db95bb7b682dfb8b203a56c90cb0402f6ed8b43",
+    "release-gpu-34-focused-retry-01.txt": "1d044ec71380425a6e48194e179b7bfa66f2a68272c8b8c94bf575af473523af",
+    "release-gpu-34-focused-retry-01.xml": "22102442848c99514e5a5706a033764cdc189e008f35a8746fc26c208d1af6d5",
+    "release-gpu-34-queue.log": "6f33b3d6ec06015d16a152658ca6a7928a836bbb25ddb45da564ae59566d8c6c",
+    "release-gpu-34.json": "beed3d58acd6fd19c5b4f7b04bafbca0c654474621dd2f7dffd1e04f44614f82",
+    "release-gpu-34.log": "cb0dfbfd8ac2a61b6e47e218a7b6b788707c94948fa59008b81a1f7492a3a603",
+    "release-gpu-34.txt": "6e3ea4785a04c08d676e257ad364b738b2ed91dee233aa660a92b2ea816bd1e9",
+    "release-gpu-34.xml": "1aad86856f598f46f2658a40a17d013db5244819079a741cd1919f83a1333ec4",
+    "release-inventory.json": "0eb387722d30059d105ef9b22f8eb59124af491f28ed0c2603be3071283b7aa2",
+    "release-products.json": "b1283ecdd5079fc8205032e76774fd5c8ee60f18fea9c55f5c3c4448a014f422",
+    "release-tests-source.json": "1f9b71616f53b77e13f8bd2c8649caa22659e0f60d85f0142519a5a34542dc6e",
+    "dispatch-jobs.json": "8ae0c29653408facb6421ec78f8714dbadffd9ab470d6a119462ed43954c3c42"
+  }
+}
