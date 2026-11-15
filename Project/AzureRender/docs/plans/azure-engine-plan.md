@@ -52,6 +52,7 @@ CPU 工作 P95 为 5.90 毫秒，GPU 帧 P95 为 20.33 毫秒。
 [可玩包三十分钟长跑](../acceptance/p1/2026-11-13-playable-30min.md)完成 33 次切关和 34 次重启，全部分钟窗口满足 GPU 预算。
 [主线 CPU 注册回归](../acceptance/nr/current-registered-cpu.md)通过双配置各 333 项检查。GPU 用例使用同批受检产物。
 [主线 GPU 定向复验](../acceptance/nr/current-registered-gpu-recoveries.md)通过三项 Release 检查。完整 GPU 回归持续登记。
+[标准构建定向复验](../acceptance/nr/current-registered-gpu-recoveries.md#标准构建定向复验)通过采样宿主、流程宿主、CoreCLR 发布和动作混合检查。
 [GPU 注册回归的产物预约与管线缓存](../acceptance/nr/registered-gpu-infrastructure.md)记录双配置 34 项采集验证、缓存分流、管线计时及着色器读取对照。
 [编辑器与目录规模复验](../acceptance/nr/registered-gpu-infrastructure.md#编辑器加载与目录规模)核对资产刷新阶段、混合材质路径和一万资产的缓存发布。
 [编辑器与资产主线复验](../acceptance/nr/registered-gpu-infrastructure.md#编辑器与资产主线复验)记录标准构建的目录、着色器和材质检查。完整注册回归按两种配置执行。

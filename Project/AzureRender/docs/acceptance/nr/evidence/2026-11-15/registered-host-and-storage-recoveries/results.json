@@ -1,0 +1,136 @@
+{
+  "recovered": {
+    "AzureRender.SamplingHostGpu": {
+      "originalJob": 971,
+      "retestJob": 972,
+      "seconds": 11.7089
+    },
+    "AzureAssets.ProceduralHost": {
+      "originalJob": 973,
+      "retestJob": 976,
+      "seconds": 119.308
+    },
+    "AzureEngine.ManagedWorkflows.coreclr": {
+      "originalJob": 973,
+      "retestJob": 976,
+      "seconds": 240.65
+    },
+    "AzureEngine.LocomotionBlendGpu": {
+      "originalJob": 975,
+      "retestJob": 983,
+      "seconds": 12.8298
+    }
+  },
+  "dispatch": {
+    "971": [
+      "release-gpu-12",
+      "failed",
+      8
+    ],
+    "972": [
+      "release-gpu-12-focused-retry-01",
+      "succeeded",
+      0
+    ],
+    "973": [
+      "release-gpu-13",
+      "failed",
+      8
+    ],
+    "975": [
+      "release-gpu-14",
+      "failed",
+      8
+    ],
+    "976": [
+      "release-gpu-13-focused-retry-01",
+      "succeeded",
+      0
+    ],
+    "977": [
+      "registered-editor-cold-pipeline-controls",
+      "failed",
+      8
+    ],
+    "982": [
+      "reclaim-exact-duplicate-editor-programs",
+      "succeeded",
+      0
+    ],
+    "983": [
+      "release-gpu-14-focused-retry-01",
+      "succeeded",
+      0
+    ],
+    "984": [
+      "registered-procedural-host-cold-cache-retest",
+      "succeeded",
+      0
+    ]
+  },
+  "isolatedColdChecks": {
+    "AzureRender.SamplingHostGpu": 13.187,
+    "AzureAssets.ProceduralHost": 100.093
+  },
+  "cleanup": {
+    "files": 4708,
+    "bytes": 555649037
+  },
+  "coreclrPackage": {
+    "files": 1366,
+    "moved": true,
+    "isolatedPath": "C:\\WINDOWS\\System32",
+    "sourceUnavailable": true,
+    "engineUnavailable": true,
+    "dotnetRuntimeExternal": true,
+    "tamperRejected": true,
+    "directoryRestoreAttempts": 1
+  },
+  "archive": {
+    "sha256": "4acc1516078116ff2d79fbeb80ef929dd57d46624b1b12bc896752700011ea2b",
+    "files": {
+      "archive_host_and_storage_recoveries.py": "309c448e2688b633d69fc2c785e63a9081e2cdd15433cc5983d1229ef63a2da1",
+      "release-products.json": "877b5aab321f86cacd86d692b29aae3c3179d4152015108c266de67aefee5464",
+      "release-inventory.json": "0eb387722d30059d105ef9b22f8eb59124af491f28ed0c2603be3071283b7aa2",
+      "release-tests-source.json": "31d06bfa697977f3e921000a66668b182dd66ec17cd82d3b413f8dd21a63ff24",
+      "release-gpu-12.json": "3824403ae01395fcac8d9cefe41b14a390a748b35e73ced99588b9dba5bd465c",
+      "release-gpu-12.xml": "e184f448409eb339c73f49f34a67dc0dd916dfeff04d26eb8c702dbd38d0b297",
+      "release-gpu-12.txt": "d331fc685cee6c832710a8fe5d3a4f2443e92fa4bd8545f750b32f4508d972e7",
+      "release-gpu-12.log": "0d9167c0f477af43f2d58dca9f84788053fb5a600f4e818cbacf73150ad7949f",
+      "release-gpu-12-focused-retry-01.json": "b8b2c747bc3bd71639192b10d66af79115317c2a8f9e7010b1f126124edf7875",
+      "release-gpu-12-focused-retry-01.xml": "a6a344e65728cfbc6b9afa416adadb00e4ebfb460c536d107c24f6626b5a8e61",
+      "release-gpu-12-focused-retry-01.txt": "c415e5bc241d8fa9c58443949ad77644e882ad9978ab88ce380e88a76da037bd",
+      "release-gpu-12-focused-retry-01.log": "86ff8ac2374d91099f4b63133fc4712b9fff5ed73568f2e097746cb5a645b106",
+      "release-gpu-12-focused-retry-01-receipt.json": "9d7291026bdc268b889bfe4766df0ed6b06955d34a115281f9ca50ddcfafc3c1",
+      "release-gpu-13.json": "2822ffb97c2b309895cb762b32c7e88afd66dedba824bc3d75d0b4a288e2cf49",
+      "release-gpu-13.xml": "6076004660d036d5ac6edeb39d1628ef2803001fc9b55493fb6c012bb768c524",
+      "release-gpu-13.txt": "4cf53232b3c6a90fc7caacddf7ba61ccbc3afed9e4f8f30d3d08381b3af75125",
+      "release-gpu-13.log": "cae1f702d12efe099167a133671ac3b5495255610d8010b830b03efda329c301",
+      "release-gpu-13-focused-retry-01.json": "a19191bd4581b5ef74694964048b967ea35bf78ebab03122a490f4b69091985f",
+      "release-gpu-13-focused-retry-01.xml": "f20919f87016bd52445f1e8044692198adf315ff2cbe74e4615192f8268f01ac",
+      "release-gpu-13-focused-retry-01.txt": "aca91c375f2442ea6e2b04bbaa91b02426cdae685e392766854e80c5ff08ad8a",
+      "release-gpu-13-focused-retry-01.log": "8987609eecb96b82e713ae50951b386d0be1f7d53e0807ccb80d6f8af910a7a2",
+      "release-gpu-13-focused-retry-01-receipt.json": "02a4d0a0a83d0cb7f7872933665561cafd4df9e45440b6ee3a46ae2f4ace4880",
+      "release-gpu-14.json": "555656dcd89e5012aba912f7153fa80ff3508bee368b48831042101e9ce42adb",
+      "release-gpu-14.xml": "38e2fad5597e994f8b754fcc3a6618db60d3fcb3fe0a961a774d65f2d73a3691",
+      "release-gpu-14.txt": "9ca6f45a1ca5b783e53b07f7e1503e703a910b0fc6508b057ec76e527108bdc9",
+      "release-gpu-14.log": "b8bc189153d994e33b295695323298d88d466da036be56913597af0e523d6ec8",
+      "release-gpu-14-focused-retry-01.json": "fb79db36c2ff53466d992d6bee36208740f21c1b5f614e07da5eb20c609cc37c",
+      "release-gpu-14-focused-retry-01.xml": "9466ae188f7337a3e959c6805eb04f8e02971f1ee4b80a7ce8129b898987f7ac",
+      "release-gpu-14-focused-retry-01.txt": "6bbd00285d59a10bba0bd921cdf784a4856780f5921b7ad188ce8aea08576157",
+      "release-gpu-14-focused-retry-01.log": "38fed87c2960fad8e5491faf9b9713f462a6f69eb9b7d31f7075d638e1feddf5",
+      "release-gpu-14-focused-retry-01-receipt.json": "82a0de70d7605b4484fe885e0841f34631e421fbec9a193c1902889fc567e301",
+      "coreclr-package-summary.json": "74353913551511c450e5616da94b16b1ff4915d587d0a2dc12c63a25292cfb12",
+      "cold/staging.json": "9da2f7af8536644569e8336a13ac00caa4d3eb1907feb1c2a3020fc703bf4bc4",
+      "cold/procedural-tool-products.json": "363d0ce718beabc71096b1dc5a86cac1ea9e531046ef6533e2055540ddedb16a",
+      "cold/control-results.json": "1d477e073a60f914d9fd974f3d47c10201f2c621841bd57c024862193726e329",
+      "cold/control-retest-results.json": "4da50a0a25569e0021aaa2d8f4fdb58faf0d3e098ba661a9b424fb3bf3ccf347",
+      "cold/control/SamplingHostGpu/summary.json": "4ddd75a5d69ea993e990b57efe57fbdc0a68caec3b86350f52873a91018019e4",
+      "cold/control/ProceduralHost/registered-command.log": "367c761661d1fe96251e22e7981b1603e29fcf5e6450748d4811ceba1314123e",
+      "cold/control-retest/ProceduralHost/summary.json": "8ee264de45ab08cc94a511484e884159da46272ad543d95e97374d255897e1a0",
+      "cold/control-retest/ProceduralHost/registered-command.log": "f19ac3fbbc0a35fee22821aae2dc49bc6c8f91306d7720a805c424b85080aeff",
+      "cold/cold_editor_probe.py": "80c9c249114e8bd6a07ff24e5ddc32d09f97e3620206f84d71dcf816f4c84504",
+      "reclaimed-staging-copies.json": "2864613eb435e25f79976d216b4e913a6435d25d2443e565ed0fde90ff4c52fc"
+    }
+  }
+}
