@@ -34,6 +34,7 @@ public:
     std::filesystem::path file() const;
     PipelineCacheBytes load() const noexcept;
     bool save(const PipelineCacheBytes&) const noexcept;
+    bool retain(std::uint64_t payloadBytes) const noexcept;
 private:
     std::filesystem::path directory_;
     PipelineCacheIdentity identity_;

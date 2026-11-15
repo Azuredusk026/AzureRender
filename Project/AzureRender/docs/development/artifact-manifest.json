@@ -87,6 +87,24 @@
       "results": "docs/acceptance/nr/evidence/2026-11-15/registered-formal-working-set-control/results.json"
     },
     {
+      "path": "runs/20261115-110843-nr-cache-retention-working-set-352eb9",
+      "name": "缓存保留配对验证",
+      "evidence": "docs/acceptance/nr/registered-working-set-cache.md#缓存保留验证",
+      "results": "docs/acceptance/nr/evidence/2026-11-15/registered-cache-retention-paired/results.json"
+    },
+    {
+      "path": "runs/20261115-113412-nr-standard-cache-retention-qualification-d65701",
+      "name": "缓存保留的标准构建复测",
+      "evidence": "docs/acceptance/nr/registered-working-set-cache.md#标准构建复测",
+      "results": "docs/acceptance/nr/evidence/2026-11-15/registered-cache-retention-formal-first/results.json"
+    },
+    {
+      "path": "runs/20261115-115238-nr-standard-formal-cache-retention-repeat-bba226",
+      "name": "缓存保留的十五轮正式验收",
+      "evidence": "docs/acceptance/nr/registered-working-set-cache.md#十五轮正式验收",
+      "results": "docs/acceptance/nr/evidence/2026-11-15/registered-cache-retention-formal-settled/results.json"
+    },
+    {
       "path": "runs/20261114-141056-nr-ordinary-light-range-work-e70ebf",
       "name": "联合场景聚光灯范围",
       "evidence": "docs/acceptance/nr/joint-gpu-pass-budget.md#聚光灯范围与辐照度系数",

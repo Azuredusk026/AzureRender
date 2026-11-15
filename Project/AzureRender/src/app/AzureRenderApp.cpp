@@ -1274,7 +1274,10 @@ void AzureRenderApp::cleanup() {
         const auto cacheUsage=rhi_?rhi_->pipelineCacheUsage():azurerender::rhi::VulkanRhi::CacheUsage{};
         rhi_.reset();
         if(pipelineCache_){
-            pipelineCache_->flush();
+            const bool allCacheHits = cacheUsage.requests != 0 && cacheUsage.feedback == cacheUsage.requests
+                && cacheUsage.hits == cacheUsage.requests;
+            if (!allCacheHits || !pipelineCache_->retainLoadedCache())
+                pipelineCache_->flush();
             const auto& cache=pipelineCache_->statistics();
             azurerender::RuntimeDiagnostics::instance().info("startup","Pipeline cache saved: bytes="+std::to_string(cache.writtenBytes)+", state="+cache.writeState+", requests="+std::to_string(cacheUsage.requests)+", hits="+std::to_string(cacheUsage.hits)+", feedback="+std::to_string(cacheUsage.feedback));
             pipelineCache_.reset();

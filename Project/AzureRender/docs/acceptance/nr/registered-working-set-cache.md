@@ -19,3 +19,23 @@
 `VulkanPipelineCache::flush` 读取驱动缓存到连续缓冲，`PipelineCacheStore::save` 生成带校验头的完整副本。工作集峰值的时点与缓存退出阶段吻合，修复候选继续使用原始工作集门槛复测。
 
 [正式失败清单](evidence/2026-11-15/registered-formal-working-set-control/results.json)和[验证归档](evidence/2026-11-15/registered-formal-working-set-control/verification.zip)保存十五轮的逐帧计时、内存时间序列、管线计数和设备状态。
+
+## 缓存保留验证
+
+全部管线请求均具备有效反馈且命中应用缓存时，退出流程核对驱动报告的缓存长度及磁盘校验头。匹配的缓存保留载荷并刷新使用时间。首次运行、未命中和缓存长度变化时，退出流程执行完整保存。
+
+隔离的 Release 播放器和编辑器各运行一次原负载。标准负载增长为 0.282%，编辑器负载为 0.446%，均通过 5% 门槛及本轮其他预算。管线请求分别为 67 次及 188 次，均命中磁盘缓存。对应的基线重放分别增长 57.950% 和 40.801%，退出阶段各写入 134,081,871 字节。
+
+[配对结果](evidence/2026-11-15/registered-cache-retention-paired/results.json)和[验证归档](evidence/2026-11-15/registered-cache-retention-paired/verification.zip)保存隔离编译、逐帧计时、内存时间序列及设备复原记录。
+
+## 标准构建复测
+
+五类负载各执行三轮。十五轮的工作集增长均符合门槛，最大值为 0.422%。十三轮通过全部预算。编辑器第一、第二轮 CPU P95 分别为 11.53 和 10.33 毫秒，超过 10 毫秒门槛。第三轮 CPU P95 为 5.23 毫秒。
+
+[标准构建结果](evidence/2026-11-15/registered-cache-retention-formal-first/results.json)和[验证归档](evidence/2026-11-15/registered-cache-retention-formal-first/verification.zip)保存所有轮次及两次 CPU 超限。
+
+## 十五轮正式验收
+
+正式复测在启动前连续观察系统 CPU 六十秒，其间的采样忙碌率为 2.26% 至 3.78%。五种负载各通过三轮，十五轮均预热 300 帧并统计 1,800 帧。工作集最大增长为 0.448%，GPU 帧 P95 最大为 7.07 毫秒，播放器 CPU P95 最大为 4.84 毫秒，编辑器 CPU P95 最大为 6.59 毫秒。全部轮次保留已验证的应用管线缓存，退出时核验系统平衡电源计划及自动风扇档位。
+
+[正式结果](evidence/2026-11-15/registered-cache-retention-formal-settled/results.json)和[验证归档](evidence/2026-11-15/registered-cache-retention-formal-settled/verification.zip)保存十五轮的来源摘要、逐帧计时、工作集序列和设备状态。

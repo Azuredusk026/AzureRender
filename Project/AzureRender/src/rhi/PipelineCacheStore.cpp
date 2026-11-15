@@ -127,6 +127,36 @@ PipelineCacheBytes PipelineCacheStore::load()const noexcept{try{
     PipelineCacheBytes bytes(static_cast<std::size_t>(size));std::ifstream input(path,std::ios::binary);if(!input.read(reinterpret_cast<char*>(bytes.data()),static_cast<std::streamsize>(size)))return {};
     auto result=decodePipelineCache(identity_,bytes,limits_.maximumFileBytes);return result?std::move(*result):PipelineCacheBytes{};
 }catch(...){return {};}}
+bool PipelineCacheStore::retain(std::uint64_t payloadBytes) const noexcept {
+    try {
+        namespace fs = std::filesystem;
+        if (directory_.empty() || payloadBytes < 32 || limits_.maximumFileBytes < headerBytes
+            || payloadBytes > limits_.maximumFileBytes - headerBytes)
+            return false;
+        const auto target = file();
+        const auto lockPath = directory_ / ".pool.lock";
+        if (!safePath(target) || !safePath(lockPath))
+            return false;
+        PoolLock lock(lockPath);
+        if (!lock || !fs::is_regular_file(target) || fs::file_size(target) != headerBytes + payloadBytes)
+            return false;
+        PipelineCacheBytes header(headerBytes);
+        {
+            std::ifstream input(target, std::ios::binary);
+            if (!input.read(reinterpret_cast<char*>(header.data()), static_cast<std::streamsize>(header.size())))
+                return false;
+        }
+        if (!std::equal(magic.begin(), magic.end(), header.begin()) || get(header, 8, 4) != identity_.vendor
+            || get(header, 12, 4) != identity_.device || get(header, 16, 4) != identity_.driver
+            || !std::equal(identity_.uuid.begin(), identity_.uuid.end(), header.begin() + 20)
+            || get(header, 36, 8) != payloadBytes)
+            return false;
+        fs::last_write_time(target, fs::file_time_type::clock::now());
+        return true;
+    } catch (...) {
+        return false;
+    }
+}
 bool PipelineCacheStore::save(const PipelineCacheBytes& payload)const noexcept{try{
     namespace fs=std::filesystem;
     if(directory_.empty()||!limits_.maximumEntries||!safePath(directory_))return false;

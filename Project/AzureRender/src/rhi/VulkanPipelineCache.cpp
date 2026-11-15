@@ -26,6 +26,16 @@ VulkanPipelineCache::VulkanPipelineCache(VkDevice device,VkPhysicalDevice physic
     if(!cache_)statistics_.readState="unavailable";
 }
 VulkanPipelineCache::~VulkanPipelineCache(){if(cache_)vkDestroyPipelineCache(device_,cache_,nullptr);}
+bool VulkanPipelineCache::retainLoadedCache() noexcept {
+    if (!cache_ || statistics_.loadedBytes == 0)
+        return false;
+    std::size_t currentSize = 0;
+    if (vkGetPipelineCacheData(device_, cache_, &currentSize, nullptr) != VK_SUCCESS
+        || currentSize != statistics_.loadedBytes || !store_.retain(currentSize))
+        return false;
+    statistics_.writeState = "retained";
+    return true;
+}
 bool VulkanPipelineCache::flush()noexcept{try{
     if(!cache_){statistics_.writeState="unavailable";return false;}
     if(store_.file().empty()){statistics_.writeState="memory-only";return false;}

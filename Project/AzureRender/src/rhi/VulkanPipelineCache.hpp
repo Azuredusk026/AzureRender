@@ -19,6 +19,7 @@ public:
     VkPipelineCache handle() const noexcept{return cache_;}
     std::filesystem::path file()const{return store_.file();}
     const VulkanPipelineCacheStatistics& statistics()const noexcept{return statistics_;}
+    bool retainLoadedCache() noexcept;
     bool flush() noexcept;
 private:
     VkDevice device_=VK_NULL_HANDLE;

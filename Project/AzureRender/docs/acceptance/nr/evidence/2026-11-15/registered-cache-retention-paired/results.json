@@ -1,0 +1,234 @@
+{
+  "passed": true,
+  "driver": "595.79",
+  "loads": {
+    "standard": {
+      "reference": {
+        "warmup": 300,
+        "samples": 1800,
+        "gpu": {
+          "mean": 5.83860704,
+          "p95": 5.9837776,
+          "p99": 6.03372992
+        },
+        "cpu": {
+          "mean": 1.8887930000000002,
+          "p95": 2.657324999999998,
+          "p99": 3.880015999999986
+        },
+        "physics": {
+          "mean": 0.26788633333333334,
+          "p95": 0.3747199999999999,
+          "p99": 1.9064489999999994
+        },
+        "stableWorkingSetGrowth": 0.5795024769615937,
+        "peakWorkingSetBytes": 607272960,
+        "budgetFailures": [
+          "stableWorkingSetGrowth: 0.5795024769615937 exceeds 0.05"
+        ],
+        "passed": false,
+        "playerSha256": "f15ca390735be9978a86eddf827e471c5f788ae29a09d458c6a0f39b25ae7af2",
+        "cache": {
+          "state": "stored",
+          "writtenBytes": 134081871,
+          "requests": 67,
+          "hits": 67,
+          "validFeedback": 67
+        }
+      },
+      "candidate": {
+        "warmup": 300,
+        "samples": 1800,
+        "gpu": {
+          "mean": 5.890404071111111,
+          "p95": 6.0503376,
+          "p99": 6.08543328
+        },
+        "cpu": {
+          "mean": 2.240379166666667,
+          "p95": 3.3505749999999974,
+          "p99": 4.8753020000000395
+        },
+        "physics": {
+          "mean": 0.30927472222222224,
+          "p95": 0.43904999999999994,
+          "p99": 2.35306
+        },
+        "stableWorkingSetGrowth": 0.0028165708250205146,
+        "peakWorkingSetBytes": 389001216,
+        "budgetFailures": [],
+        "passed": true,
+        "playerSha256": "eba1d8889b769ef4e91424cbc6290d60c84803760e8829585f82e369c062a307",
+        "cache": {
+          "state": "retained",
+          "writtenBytes": 0,
+          "requests": 67,
+          "hits": 67,
+          "validFeedback": 67
+        }
+      }
+    },
+    "editor": {
+      "reference": {
+        "warmup": 300,
+        "samples": 1800,
+        "gpu": {
+          "mean": 3.9790644088888887,
+          "p95": 5.205857599999999,
+          "p99": 5.3544515200000005
+        },
+        "cpu": {
+          "mean": 4.132664833333333,
+          "p95": 5.134084999999992,
+          "p99": 6.4657000000000036
+        },
+        "physics": {
+          "mean": 0.24651466666666666,
+          "p95": 0.33812,
+          "p99": 1.8308959999999999
+        },
+        "stableWorkingSetGrowth": 0.4080073935864126,
+        "peakWorkingSetBytes": 661463040,
+        "budgetFailures": [
+          "stableWorkingSetGrowth: 0.4080073935864126 exceeds 0.05"
+        ],
+        "passed": false,
+        "playerSha256": "5842acc005aedeec9ac662d0459145ebed67edfd58c68189fc03a1b4ab45e04b",
+        "cache": {
+          "state": "stored",
+          "writtenBytes": 134081871,
+          "requests": 188,
+          "hits": 188,
+          "validFeedback": 188
+        }
+      },
+      "candidate": {
+        "warmup": 300,
+        "samples": 1800,
+        "gpu": {
+          "mean": 4.019012586666666,
+          "p95": 5.2344672,
+          "p99": 5.39828416
+        },
+        "cpu": {
+          "mean": 4.754658888888889,
+          "p95": 6.665435000000004,
+          "p99": 7.60666999999998
+        },
+        "physics": {
+          "mean": 0.27901194444444444,
+          "p95": 0.4172199999999997,
+          "p99": 2.0772999999999997
+        },
+        "stableWorkingSetGrowth": 0.0044604742738660885,
+        "peakWorkingSetBytes": 492363776,
+        "budgetFailures": [],
+        "passed": true,
+        "playerSha256": "70c3079538e76d744002efd0a6748f10d2aecb4359018be9a65764ea95462d76",
+        "cache": {
+          "state": "retained",
+          "writtenBytes": 0,
+          "requests": 188,
+          "hits": 188,
+          "validFeedback": 188
+        }
+      }
+    }
+  },
+  "dispatch": [
+    [
+      990,
+      "cache-retention-working-set-isolated-release",
+      "succeeded",
+      0
+    ],
+    [
+      993,
+      "cache-retention-original-workload-ab",
+      "succeeded",
+      0
+    ]
+  ],
+  "powerRestored": {
+    "active": "381b4222-f694-41f0-9685-ff5bb260df2e",
+    "values": {
+      "PERFEPP": {
+        "ac": 25,
+        "dc": 50
+      },
+      "PERFEPP1": {
+        "ac": 25,
+        "dc": 50
+      }
+    },
+    "time": "2026-11-15T11:36:20.3090887+08:00"
+  },
+  "fanRestored": {
+    "time": "2026-11-15T11:36:19.5769709+08:00",
+    "rpm": 6000,
+    "balanced": true,
+    "automatic": true,
+    "maximum": false
+  },
+  "archive": {
+    "members": {
+      "cache-retention.patch": "bb0cc4bd4267eca44b4ed6a612c213366b7f6c523edb80f700b39961e3cf603c",
+      "build_cache_retention_candidate.py": "ff6423baf88a32b7100c091c189dc592c93101e78a10e205c7f6bbd9e117981d",
+      "verify_retention_ab.py": "77763f6e85592ac760b9078268948c220aef0060e8eaea3fa1045d0b6214f5ce",
+      "prepare_max_fan_replay.py": "d21f7ba7d57e8cda42b60720198b9f48ed0182852acbc2a47a35063b970e2f31",
+      "release/build-receipt.json": "054d5145b6078ea5ebcc07fb46921ddab6876689b09084ce05a400af3ad71bde",
+      "measurement.log": "5c0e2366cee9a5e14e7e56b59a2bea0b05754f92fdaf86f232cd73a81f44eb8d",
+      "measurement.stderr.log": "7eb70257593da06f682a3ddda54a9d260d4fc514f645237f5ca74b08f8da61a6",
+      "power-policy-before.json": "d71cd34d315a25e60fa35c11126f709d6e9507726141fdc9e3e412d6d3251cb6",
+      "power-policy-observations.json": "6524b91a885b6dbd4fe119bfd40d0ba49de99919d39fc97ce84102b478224f1a",
+      "power-policy-ready.json": "c11ec3d32607ca2c1e9c5d282a3f75dd440ee36e94215b82f12ef7f81addd3ec",
+      "power-policy-restored.json": "f7a63acaf067e6907d80f090d510f608ae2c23917a77bbe2ca44b32c99560d2b",
+      "fan-before.json": "d13bb3cb8530df24299851f057bd5cbd2929d038b05ede0240d7193a0ac5c643",
+      "fan-observations.json": "c129063e87a2f6dfbefd47659ef5cfe74997de22bcf952157c0acb4b2d8bf145",
+      "fan-ready.json": "a7604868fc64024df30c805a4eafdfafd67c772a91b31d830c7d076a480e079a",
+      "fan-restored.json": "009cd3ff66383a3e686d94bdf5f518a555a29518d810e43ef9a89d979c87ca92",
+      "release/app-AzurePlayer.log": "732af8701f0f8f8fb4d13034da527ea14123de9e501472095a00c24428c477fc",
+      "release/app-AzureRender.log": "ddd5fac04e351710356a6e1203d31f135edbaaa68a2cc8245bfc894501ef3d76",
+      "release/cache.log": "e16a550ae462bb449862fbdcb70ea95a7423589469eaed72740490f6835c8882",
+      "release/link-AzurePipelineCacheStoreTests.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "release/link-AzurePlayer.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "release/link-AzureRender.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "release/run-store-tests.log": "ce26332a250f70d61cebedaf6d9e1704303c9691e0d816b533450d77e03ef518",
+      "release/store.log": "af415b4923d003d4617729bfaeedf276911c1795b31bb1cfdde2dd3d873fcac1",
+      "release/test-store-green.log": "fd374886eb7cdaf4235da47d3635569e1955566968a53cd928384667ab773f02",
+      "release/test-store-red.log": "6d9f4551f7b235f04cf71ed021ea5d9018de86a735b936fe5f47d7727a6bc493",
+      "working-set/candidate-editor.csv": "a5be3e835a1252891a1620525b3a66fab6421a211d3d90064e2fa1f59712f5ab",
+      "working-set/candidate-editor.editor.json": "0ce29cf5eee0f4abcc0a0c71d0518ce2f56d3eb5e61f941e4b68e5f3ab3e7b1d",
+      "working-set/candidate-editor.environment.json": "4227db5050a63b7097ca2913ba2a568e40b494b7cbe6332ef674bec0f78c946d",
+      "working-set/candidate-editor.input.json": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "working-set/candidate-editor.json": "d1c3f22c6d2fb641b3858aab60cd639d6eb09eabc3f42fac9ed5d289f337e225",
+      "working-set/candidate-editor.memory.json": "2d686fb45c8a7ed0f32e248be9f08fcfb8051959ccd754b4d966c323122a0b6c",
+      "working-set/candidate-editor.stderr.log": "f1268a946eec0cf0d24cb68a12cd969d2e37225afe469447025bbd8efc1693d5",
+      "working-set/candidate-editor.stdout.log": "2266c1005e86b0a992b8c586227b5977354b1ad9b657036ab13b80b1f78d9b8c",
+      "working-set/candidate-standard.csv": "272bc0ec17880c882f8fdb693f50e8842a363904dc72dac9976a24f4b294732f",
+      "working-set/candidate-standard.environment.json": "bd0448fca9e7057fa16caba642171d202b066036f8c571cca687600936e776ca",
+      "working-set/candidate-standard.input.json": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "working-set/candidate-standard.json": "f49d37fb8937b97034e25161d817f4e9e8afaf666df557f080e7cea67cfb25a4",
+      "working-set/candidate-standard.memory.json": "d64b4921b155852767c2a5f201521d29208431c00953d8e3fd99a703ca67463b",
+      "working-set/candidate-standard.stderr.log": "898d943503babd52d19e760cf4492db682a95235b9c5e97ee22c891e25635c76",
+      "working-set/candidate-standard.stdout.log": "014195a31efa45b5efabd8ca0bbbf879532564c286dd2c8d47989efdcbe01556",
+      "working-set/reference-editor.csv": "ff8eb7cb345c044b86a3173f5614a210286eb8a17c3d70094d19581432b92229",
+      "working-set/reference-editor.editor.json": "0ce29cf5eee0f4abcc0a0c71d0518ce2f56d3eb5e61f941e4b68e5f3ab3e7b1d",
+      "working-set/reference-editor.environment.json": "6dc01dcade5691cd434c5b65719903f0e68dac532107c3d8e6ab8b0b091b5c8c",
+      "working-set/reference-editor.input.json": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "working-set/reference-editor.json": "d058de265a9c8dfefd4ac92e21fa1c62722ab17eb3ac0eaae38a62366f1a7e99",
+      "working-set/reference-editor.memory.json": "1300814868182838a68916900fa67ea00c18cd4540351f8275d4309a693b00b8",
+      "working-set/reference-editor.stderr.log": "3935d9873fdbbd46a544fe0dbc5b636535a60f240f55c14618277598c3dc7a24",
+      "working-set/reference-editor.stdout.log": "1718093122b49a76ea82fc17390e0d156e0f45ccd697ac24587c2df71174be95",
+      "working-set/reference-standard.csv": "3198e3b1e3df1aec128adbbd6db091d4ab712e50170bbab26fdb0c5aa23ed6e6",
+      "working-set/reference-standard.environment.json": "2f037ed71dd1359260f8890ff3b8196d8d3cbff6f42bd382a131e97d8b9e2312",
+      "working-set/reference-standard.input.json": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "working-set/reference-standard.json": "f8a4f7b5bc17311f8d1a9a062f644ac588ff430a449427376a4e17a8bff9b19d",
+      "working-set/reference-standard.memory.json": "48be1236c8cca96746d5f9fa2ac14a90610671ae3e35c4ca42acc49349e889c3",
+      "working-set/reference-standard.stderr.log": "6776b40e5ca8f81b070703aaae93cbe1e3c3ff91db799ca43f71dccd4b6c8889",
+      "working-set/reference-standard.stdout.log": "11d62b047f98bf9ad3b9e227e749180665a7b958bbbd8f67192c7e4c734516d8",
+      "working-set/results.json": "67ef9d42120ec531f42c62120fd066fe1d0a130f3a5dd607c0551d6a6cba5b78"
+    },
+    "sha256": "869efdfa3ce0818e2275a67fa22055bd8556ec7d4cf64deb7d40ac3d79926502"
+  }
+}
