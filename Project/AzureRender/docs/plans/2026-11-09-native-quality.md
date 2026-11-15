@@ -194,6 +194,7 @@ Intel 头发颜色继续核对纹理梯度与层级选择。
 生产可见量及共同图元按原门槛继续验收。
 
 [体表接收法线小数精度](../acceptance/nr/body-fractional-normal.md)核对生产 Player 及新增可见量超差。
+[体表接收分项](../acceptance/nr/evidence/2026-11-15/body-receiver-operands/results.json)复算 9,116 处深度、法线和图集的作用。原生三项输入在两设备上均进入一字节门槛，生产接收保持待通过。
 
 ## 后续外观
 
