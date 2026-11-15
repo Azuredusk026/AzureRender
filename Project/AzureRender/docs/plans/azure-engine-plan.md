@@ -1421,6 +1421,7 @@ Intel 头发颜色继续按冻结区域核对纹理选级。
 
 [投影反射射线步数](../acceptance/nr/scene-material-quality-diagnosis.md#联合场景步数对照)记录联合场景的双设备配对画面。32 步候选未通过中央亮度及邻区门槛，后续按实际历史取样坐标、深度和颜色核对。
 [原始反射颜色](../acceptance/nr/evidence/2026-11-16/projected-reflection-shared-hits/results.json)核对中央地面与青色环带的共同命中误差，完整画面按结构相似度和亮度门槛验收。
+[原生取样坐标](../acceptance/nr/evidence/2026-11-16/projected-history-native-endpoints/results.json)已核对两区的原生颜色来源。两端取样贡献继续用 Player 的实际坐标和颜色比较。
 
 [角色硬件分项](../acceptance/nr/evidence/2026-11-16/native-hair-lighting-lanes/results.json)、[体表法线](../acceptance/nr/evidence/2026-11-16/native-body-normal-raw-samples/results.json)和[虹膜眼影覆盖](../acceptance/nr/evidence/2026-11-16/iris-projective-covered/results.json)保存原生和 Player 双设备回读。角色严格颜色门槛继续验收。
 

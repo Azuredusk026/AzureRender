@@ -209,4 +209,12 @@ Player 使用 `cd8d95d` 对应的受检构建。
 
 颜色相同的候选纹素可以出现在多个位置，颜色匹配用于核对数据来源。两端的实际取样坐标及 Player 历史亮度按独立读回核对。见[原生历史输入记录](evidence/2026-11-16/projected-history-original-input/results.json)和[验证归档](evidence/2026-11-16/projected-history-original-input/validation.zip)。
 
+## 原生反射取样坐标
+
+原生 8702 号调度将上一帧取样坐标写到诊断附件。常量标记覆盖裁切区内 55,658 个置信度大于零的位置。插桩前后，反射颜色和置信度附件逐字节一致；还原后的足迹附件也逐字节一致。
+
+中央地面、青色环带各有 20,003 和 6,258 个坐标可确定唯一的颜色纹素。取出上一帧原始颜色并编码后，两区全部复现了原生反射附件中的颜色。按这些坐标比较两端的上一帧深度，两区分别有 8,028 和 3,364 个世界位置相距不超过两厘米。
+
+[原生取样记录](evidence/2026-11-16/projected-history-native-endpoints/results.json)及[读回归档](evidence/2026-11-16/projected-history-native-endpoints/validation.zip)保存实际坐标和指纹。两端实际取样的分解还需 Player 的坐标和颜色附件。
+
 当前运行入口统一见[完整场景显示](../../tutorials/restored-native-scene.md)。

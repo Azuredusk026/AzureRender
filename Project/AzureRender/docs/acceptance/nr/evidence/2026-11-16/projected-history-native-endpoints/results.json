@@ -1,0 +1,171 @@
+{
+  "status": "qualified-native-history-endpoint-observations",
+  "scope": "Native actual point coordinates and exact color from the native capture. Player prior depth at these native addresses is separately compared. Actual Player coordinates and radiance are separate evidence.",
+  "executedJob": 1349,
+  "originalBinding": "9874977ebc47e87ed0a006b7bebd51f525126c4f584bc4a6abc95282ba291faa",
+  "originalCoordinateControls": {
+    "status": "qualified",
+    "control": [
+      "593fbb22eedb5dfe6897b0edff7e913015e341d2551a26909f4e0cda2c87a8ee",
+      "97cc733bca47fc8543421271a699516f0adafe11b7e2ab5b2a8395732f77c308",
+      "a1230c9801b2c12015a781fe07e39fd3e14150d6e9a3e6a9d472f0397a1466a9"
+    ],
+    "hits": 55658,
+    "outputs": {
+      "marker": [
+        "593fbb22eedb5dfe6897b0edff7e913015e341d2551a26909f4e0cda2c87a8ee",
+        "7adfa6ad3e446b363fa16011363affc229df39f52272698c1c410b8fabf7f4e4",
+        "a1230c9801b2c12015a781fe07e39fd3e14150d6e9a3e6a9d472f0397a1466a9"
+      ],
+      "coordinates": [
+        "593fbb22eedb5dfe6897b0edff7e913015e341d2551a26909f4e0cda2c87a8ee",
+        "06b62ec48bd53ccf1a29bc73202bbafcb55ddc78bff2db3cf485bebc699396d6",
+        "a1230c9801b2c12015a781fe07e39fd3e14150d6e9a3e6a9d472f0397a1466a9"
+      ]
+    },
+    "baselineRestored": true
+  },
+  "priorDepthSources": {
+    "native": "5e9bc968dffc4968aa9042b4fdcd5f0a25837e286a0af6f185a678fcb87879f9",
+    "player": "b6c9b61c16c5f22020951ff80dafda2018aaab1710408da33346e93a1a2d119a"
+  },
+  "calibratedRegions": {
+    "centerFloor": {
+      "hits": 21340,
+      "stableTextureAddresses": 20003,
+      "exactNativeOutputWords": 20003,
+      "sourceLinearLuma": [
+        0.04505915893554688,
+        0.216584130859375,
+        0.7647926757812499
+      ],
+      "selectedScreenU": [
+        0.4185580224307622,
+        0.49872587167162585,
+        0.5728084229800869
+      ],
+      "selectedScreenV": [
+        0.37299458304722666,
+        0.4549324788281071,
+        0.5038223849851224
+      ],
+      "distinctSelection": 19986,
+      "sameDisplayHistoryDepthChecked": 20003,
+      "depthWithinTwoCm": 8028,
+      "depthWithinTenCm": 17920,
+      "worldDifferenceAtNativeAddress": [
+        0.008371207131271433,
+        0.022662040617800246,
+        0.12408802047557596
+      ]
+    },
+    "cyanRing": {
+      "hits": 6657,
+      "stableTextureAddresses": 6258,
+      "exactNativeOutputWords": 6258,
+      "sourceLinearLuma": [
+        0.05636913330078125,
+        0.23708470764160156,
+        0.9454020996093756
+      ],
+      "selectedScreenU": [
+        0.41658197909514,
+        0.4504997329671168,
+        0.48795300221255816
+      ],
+      "selectedScreenV": [
+        0.35833371480888077,
+        0.45919737544823375,
+        0.48643167772945756
+      ],
+      "distinctSelection": 6251,
+      "sameDisplayHistoryDepthChecked": 6258,
+      "depthWithinTwoCm": 3364,
+      "depthWithinTenCm": 5600,
+      "worldDifferenceAtNativeAddress": [
+        0.008370872304507324,
+        0.019557700502690584,
+        0.12401462617073528
+      ]
+    }
+  },
+  "pendingPlayerReplay": {
+    "job": 1365,
+    "reason": "The Vulkan replay exposes the tile list separately as a storage buffer; the full captured descriptor contract is now checked."
+  },
+  "files": {
+    "native-endpoints-score.json": {
+      "bytes": 2876,
+      "sha256": "a330f4e63c95abc5d64007a6ce6f07a2c16a35bfb8b662f281feef4a10be8c45"
+    },
+    "request.json": {
+      "bytes": 1044,
+      "sha256": "ac7d3d8f56c2ab832d59ffbc11b79ed7eb8cd2d5f9e4f34c97804ac10e29f5e7"
+    },
+    "receipt.json": {
+      "bytes": 842,
+      "sha256": "e5b9a651952e49774867365d1ebf6d51a5f1f61faa77da03b1d5630367c4afbe"
+    },
+    "checkpoint.json": {
+      "bytes": 667,
+      "sha256": "242ebd984018e67e67ab5277543ed644494fb1995b9b05e62c67348d40547f81"
+    },
+    "history-uv.bin": {
+      "bytes": 255200,
+      "sha256": "06b62ec48bd53ccf1a29bc73202bbafcb55ddc78bff2db3cf485bebc699396d6"
+    },
+    "trace-color.bin": {
+      "bytes": 255200,
+      "sha256": "593fbb22eedb5dfe6897b0edff7e913015e341d2551a26909f4e0cda2c87a8ee"
+    },
+    "trace-confidence.bin": {
+      "bytes": 63800,
+      "sha256": "a1230c9801b2c12015a781fe07e39fd3e14150d6e9a3e6a9d472f0397a1466a9"
+    },
+    "source-provenance.json": {
+      "bytes": 353,
+      "sha256": "525431e1f9f9493a05c34bc878ce2b7e1241e75ab1f5bc47b6653ad3806aeca1"
+    },
+    "failure-1349.log": {
+      "bytes": 546,
+      "sha256": "986485d7a9bb2bd2190b314839047cdc2b73e2b4675794371eec63d23fd11215"
+    },
+    "player-failure-1349.json": {
+      "bytes": 364,
+      "sha256": "9af13cf7666f5744a5f06d175880b2cf11b10da9f0167f300da1c3e9d579f2a8"
+    },
+    "score-projected-native-history-endpoints.py": {
+      "bytes": 4851,
+      "sha256": "8278368f45001bc304c33daa2cf1fddf8420bb9a998ee2c2c19435b2910cbbf8"
+    },
+    "projected-history-coordinates.py": {
+      "bytes": 15322,
+      "sha256": "ade7569a5c66b01f480f82517632ae8d7aa8cd0906c24a53bbe0f633be4e5f6e"
+    },
+    "projected-history-source-replay.py": {
+      "bytes": 13756,
+      "sha256": "9b2e9f94240c3f9aa3b0c676e03e7015274848d9817197b4883cf917195cf051"
+    },
+    "score-projected-history-coordinates.py": {
+      "bytes": 8994,
+      "sha256": "21c95dd59e771bfee52b26c4781e8bd760a1ded2f9633db5be56bce7feec44c9"
+    },
+    "score-projected-history-source.py": {
+      "bytes": 4783,
+      "sha256": "b584c0ac6623cb28b6d5173e5828af9cba838844e09bcdad45aec94ad6b87212"
+    },
+    "score-native-floor-reflection-inputs.py": {
+      "bytes": 13893,
+      "sha256": "80ea2f2026ddec0f4473bbf1b887436b08e8c2e4fd681f892389a10f7578180e"
+    },
+    "preview-native-history-color-support.py": {
+      "bytes": 4697,
+      "sha256": "13636aed24035c46bacb89e3f93c10ebca8b9f03c92c900a63fc5747587230ff"
+    }
+  },
+  "archive": {
+    "sha256": "b264f6af3eddadfcffe30979d5eced291dca67a4ed572c2d955655a336d2dc8c",
+    "bytes": 397650,
+    "file": "validation.zip"
+  }
+}
