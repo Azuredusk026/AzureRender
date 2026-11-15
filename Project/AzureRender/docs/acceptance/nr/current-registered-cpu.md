@@ -20,3 +20,9 @@
 编辑器与资产修复提交为 `addae69`。Release 与 Debug 各通过 333 项 CPU 注册用例。合并收据核对每项用例在当前构建清单中的名称和归属。Debug 目录规模用例按同一构建和原时限定向复验，首轮及复验均有记录。
 
 [本轮清单](evidence/2026-11-15/integrated-registered-cpu/results.json)和[验证归档](evidence/2026-11-15/integrated-registered-cpu/verification.zip)保存 666 项用例、注册清单和构建摘要。
+
+## 管线缓存保留构建
+
+标准 Release 和 Debug 各通过 333 项 CPU 注册检查。目录规模用例的注册时限为 180 秒，两种配置分别用时 45.65 秒与 35.89 秒。Release 项目流程的目录重命名初次收到系统拒绝，按相同构建和注册命令复测通过。
+
+[本轮结果](evidence/2026-11-15/registered-cache-retention-cpu/results.json)和[验证归档](evidence/2026-11-15/registered-cache-retention-cpu/verification.zip)保存 666 项结果、当前与沿用用例的来源核对，以及原失败和复测收据。

@@ -94,7 +94,7 @@
     },
     {
       "path": "runs/20261115-113412-nr-standard-cache-retention-qualification-d65701",
-      "name": "缓存保留的标准构建、画面与发布包复验",
+      "name": "缓存保留的标准构建注册验收",
       "evidence": "docs/acceptance/nr/registered-working-set-cache.md#标准构建复测",
       "results": "docs/acceptance/nr/evidence/2026-11-15/registered-cache-retention-formal-first/results.json"
     },
