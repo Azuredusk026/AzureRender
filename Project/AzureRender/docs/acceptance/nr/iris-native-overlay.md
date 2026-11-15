@@ -150,3 +150,11 @@ NVIDIA 的 Vulkan 硬件回放逐点核对完整虹膜。隐式采样与显式�
 使用原生顶点复算片元四元组时，横向取底行，纵向取左列，复现粗粒度层级的匹配数。坐标 [1262,257] 跨越纹理接缝，原生横向导数的首分量绝对值为 0.94373。该处两设备均选择第 7 级。
 
 [原生梯度结果](evidence/2026-11-15/iris-native-derivative-lanes/results.json)和[验证归档](evidence/2026-11-15/iris-native-derivative-lanes/validation.zip)保存两设备读回、顶点附件及原生层级计算。
+
+### 层级选择复算
+
+原生 NVIDIA 回放的 255 处采样可由横向、纵向和对角纹理足迹复算，Intel 回放的 255 处采样可由横向和纵向中较长的欧氏梯度复算。两设备各有 112 处留出位置，计算层级均落在硬件显式取样的匹配范围内。其中 NVIDIA 与 Intel 分别有 172 和 168 处可以唯一定位层级。
+
+从任一片元的透视插值结果和一阶导数重建邻接像素时，两块显卡的四元组复算均保持全部 255 处计算层级，归一化纹理坐标的峰差低于 0.00000024。实际 Player 继续按独立的显示误差门槛验收。
+
+[层级足迹结果](evidence/2026-11-15/iris-native-mip-footprints/results.json)和[验证归档](evidence/2026-11-15/iris-native-mip-footprints/validation.zip)保存逐设备对照、留出控制和投影复算。

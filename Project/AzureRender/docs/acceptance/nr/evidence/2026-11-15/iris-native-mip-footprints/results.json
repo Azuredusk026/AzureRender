@@ -1,0 +1,43 @@
+{
+  "status": "measured-native-iris-mip-footprint-equivalence",
+  "overall": "failed-user-review",
+  "sourcePrograms": {
+    "gradient": "4d73a6e3223e1abb3a19ac3ab332bfe882734ae4e975ac83952a7505a9617f8e",
+    "quad": "2ec129bcc1106c3b1347cf33f319781018e8228f0ad5ef078bbae3b55e644fbb"
+  },
+  "scope": 255,
+  "devices": {
+    "nvidia": {
+      "rule": "coarse-diagonal-footprint",
+      "matchingSamples": {
+        "calibration": 143,
+        "holdout": 112,
+        "total": 255,
+        "matchesSeam": 20
+      },
+      "uniqueLevels": 172,
+      "projectiveCoordinateError": 2.384185791015625e-07
+    },
+    "intel": {
+      "rule": "coarse-axis-length",
+      "matchingSamples": {
+        "calibration": 143,
+        "holdout": 112,
+        "total": 255,
+        "matchesSeam": 20
+      },
+      "uniqueLevels": 168,
+      "projectiveCoordinateError": 1.7881393432617188e-07
+    }
+  },
+  "archive": {
+    "sha256": "62af9c81400522432681bd0e9a72f862b36ddbb0944af1ae1694b3d28dfd1f81",
+    "members": {
+      "archive-iris-native-mip-footprints.py": "e64977b2965ff41c8593173c5033f91a5763b3dc152630b2f644c156fabfa745",
+      "iris-native-coarse-threshold-alternatives.py": "a7b2fc46a067ac547be95a7258da7f1165f4413e5d7455b408640e57e9c9f039",
+      "iris-native-coarse-threshold-alternatives.json": "d7d863a887f5db6bbfef05a550644b79de44fad79ea339f02925cdffa07ea1b2",
+      "iris-matcap-projective-footprint.py": "1bf9bc880e7b3b9be085d6a434e67f89c1456d24e1807a030296ac12c99a8c7a",
+      "iris-matcap-projective-footprint.json": "a45333252b2999c7a9ac6be432c93d401e5b9b3aa4e570c3b0432a9fe68a2247"
+    }
+  }
+}
