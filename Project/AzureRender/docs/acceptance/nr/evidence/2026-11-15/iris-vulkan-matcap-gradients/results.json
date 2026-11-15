@@ -1,0 +1,443 @@
+{
+  "status": "measured-player-iris-gradients",
+  "referenceComparison": "native D3D texture level",
+  "sourceCaptureSha256": {
+    "iris-native-matcap-d3d-vulkan-owned-levels.json": "b1c285dfd50f882cb43424ff32fc4b19cf27bd905e6ddf87cedc1e161d4dcd2c",
+    "results.json": "c8fddc4fb30b1fcb36f9dfa523227399846c44689e970f50ca34d9592e4b236e",
+    "iris-matcap-score.json": "746c982ff687fe6c8bd3f835f3415745e85b05d5019d5bd04ae43fcd9dfaed63"
+  },
+  "summary": {
+    "nvidia": {
+      "matcap": {
+        "allMatches": 252,
+        "commonSeamMatches": 19,
+        "missing": [
+          [
+            1262,
+            257
+          ],
+          [
+            1304,
+            257
+          ],
+          [
+            1258,
+            264
+          ]
+        ]
+      },
+      "matcapGradCoarse": {
+        "allMatches": 252,
+        "commonSeamMatches": 19,
+        "missing": [
+          [
+            1262,
+            257
+          ],
+          [
+            1304,
+            257
+          ],
+          [
+            1258,
+            264
+          ]
+        ]
+      },
+      "matcapGradFine": {
+        "allMatches": 250,
+        "commonSeamMatches": 19,
+        "missing": [
+          [
+            1251,
+            260
+          ],
+          [
+            1261,
+            263
+          ],
+          [
+            1258,
+            264
+          ],
+          [
+            1309,
+            265
+          ],
+          [
+            1303,
+            266
+          ]
+        ]
+      }
+    },
+    "intel": {
+      "matcap": {
+        "allMatches": 245,
+        "commonSeamMatches": 19,
+        "missing": [
+          [
+            1262,
+            257
+          ],
+          [
+            1304,
+            257
+          ],
+          [
+            1250,
+            260
+          ],
+          [
+            1251,
+            260
+          ],
+          [
+            1260,
+            262
+          ],
+          [
+            1261,
+            262
+          ],
+          [
+            1262,
+            262
+          ],
+          [
+            1300,
+            263
+          ],
+          [
+            1301,
+            263
+          ],
+          [
+            1304,
+            267
+          ]
+        ]
+      },
+      "matcapGradCoarse": {
+        "allMatches": 245,
+        "commonSeamMatches": 19,
+        "missing": [
+          [
+            1262,
+            257
+          ],
+          [
+            1304,
+            257
+          ],
+          [
+            1250,
+            260
+          ],
+          [
+            1251,
+            260
+          ],
+          [
+            1260,
+            262
+          ],
+          [
+            1261,
+            262
+          ],
+          [
+            1262,
+            262
+          ],
+          [
+            1300,
+            263
+          ],
+          [
+            1301,
+            263
+          ],
+          [
+            1304,
+            267
+          ]
+        ]
+      },
+      "matcapGradFine": {
+        "allMatches": 245,
+        "commonSeamMatches": 19,
+        "missing": [
+          [
+            1250,
+            260
+          ],
+          [
+            1260,
+            262
+          ],
+          [
+            1261,
+            262
+          ],
+          [
+            1262,
+            262
+          ],
+          [
+            1261,
+            263
+          ],
+          [
+            1300,
+            263
+          ],
+          [
+            1301,
+            263
+          ],
+          [
+            1309,
+            265
+          ],
+          [
+            1303,
+            266
+          ],
+          [
+            1304,
+            267
+          ]
+        ]
+      }
+    }
+  },
+  "nonEquivalentFootprints": [
+    {
+      "point": [
+        1262,
+        257
+      ],
+      "queryLod": 3,
+      "original": [
+        3
+      ],
+      "fine": [
+        7
+      ],
+      "native": {
+        "nvidia": [
+          7
+        ],
+        "intel": [
+          7
+        ]
+      }
+    },
+    {
+      "point": [
+        1304,
+        257
+      ],
+      "queryLod": 4,
+      "original": [
+        4
+      ],
+      "fine": [
+        3
+      ],
+      "native": {
+        "nvidia": [
+          3
+        ],
+        "intel": [
+          3
+        ]
+      }
+    },
+    {
+      "point": [
+        1251,
+        260
+      ],
+      "queryLod": 4,
+      "original": [
+        4
+      ],
+      "fine": [
+        3
+      ],
+      "native": {
+        "nvidia": [
+          4
+        ],
+        "intel": [
+          3
+        ]
+      }
+    },
+    {
+      "point": [
+        1256,
+        263
+      ],
+      "queryLod": 3,
+      "original": [
+        3
+      ],
+      "fine": [
+        4
+      ],
+      "native": {
+        "nvidia": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "intel": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ]
+      }
+    },
+    {
+      "point": [
+        1261,
+        263
+      ],
+      "queryLod": 3,
+      "original": [
+        3
+      ],
+      "fine": [
+        4
+      ],
+      "native": {
+        "nvidia": [
+          3
+        ],
+        "intel": [
+          3
+        ]
+      }
+    },
+    {
+      "point": [
+        1303,
+        265
+      ],
+      "queryLod": 3,
+      "original": [
+        3
+      ],
+      "fine": [
+        4
+      ],
+      "native": {
+        "nvidia": [
+          3,
+          4
+        ],
+        "intel": [
+          3,
+          4
+        ]
+      }
+    },
+    {
+      "point": [
+        1309,
+        265
+      ],
+      "queryLod": 3,
+      "original": [
+        3
+      ],
+      "fine": [
+        4
+      ],
+      "native": {
+        "nvidia": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "intel": [
+          0,
+          1,
+          2,
+          3
+        ]
+      }
+    },
+    {
+      "point": [
+        1303,
+        266
+      ],
+      "queryLod": 7,
+      "original": [
+        7
+      ],
+      "fine": [
+        4
+      ],
+      "native": {
+        "nvidia": [
+          7
+        ],
+        "intel": [
+          7
+        ]
+      }
+    }
+  ],
+  "primaryPoint": {
+    "point": [
+      1262,
+      257
+    ],
+    "implicit": [
+      0.005939483642578125,
+      0.0038051605224609375,
+      0.001209259033203125,
+      0.0
+    ],
+    "fine": [
+      0.0238800048828125,
+      0.0187225341796875,
+      0.006320953369140625,
+      0.0628662109375
+    ],
+    "native": [
+      0.0238800048828125,
+      0.0187225341796875,
+      0.006320953369140625,
+      0.062867172062397
+    ],
+    "uvDifference": 1.3053417205810547e-05,
+    "nativeSourceSubstitutionPeak": 0.04486083984375
+  },
+  "archive": {
+    "sha256": "b1ac9b4969ef140a6f2b422fee082fad27f61cba47fbf7771b63fb067e3a3ba1",
+    "members": {
+      "readback/results.json": "c8fddc4fb30b1fcb36f9dfa523227399846c44689e970f50ca34d9592e4b236e",
+      "readback/request.json": "e353295bf6a86a8793e94cbd362ac63eda4e7d9e67bf130196ddeea7fba132af",
+      "readback/progress.json": "f5594ae0e5aa1c0cd54c51242dd1f49980c6cf40b5c4a822399bd322581ff3a0",
+      "readback/iris-vulkan-footprint.py": "983b1579ce0b41b6ea59e375b320d0aca5679d15c18cfb2de5e42713a3fbd978",
+      "fit/score.py": "b01b35b0a6a0e17059d87c4543cb668680688d58fa478394822ae944df8ed9fb",
+      "fit/score.json": "746c982ff687fe6c8bd3f835f3415745e85b05d5019d5bd04ae43fcd9dfaed63",
+      "fit/agreement.py": "7f4510e84de2e6c7ddf713690e4b4098892df79b2b0bc8401fc2c1cc0025a7fb",
+      "fit/agreement.json": "2945738bd721a7f15b029cd7ce74bd711f28fec092e2307b8cfc6209309f735b",
+      "fit/native-levels.json": "b1c285dfd50f882cb43424ff32fc4b19cf27bd905e6ddf87cedc1e161d4dcd2c",
+      "archive.py": "303b024bcfa999f56e5a17e9cc330b63d842102ffab3a6fee362a2e755b921b8"
+    }
+  },
+  "acceptance": "open-original-rgb"
+}

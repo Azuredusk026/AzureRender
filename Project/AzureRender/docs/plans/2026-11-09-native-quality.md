@@ -186,6 +186,7 @@ Intel 头发颜色继续核对纹理梯度与层级选择。
 [角色动态重开](../acceptance/nr/evidence/2026-11-15/current-joint-character-reopen/results.json)在 NVIDIA 595.79 下验证已保存场景、11 个动画实例及四个连续采集时点。四帧对旧驱动保留画面分别有 28、48、56、62 处超过一字节，原生连续画面验收保持开放。
 
 [固定姿态眼部阴影几何](../acceptance/nr/iris-overlay-geometry.md)通过双设备虹膜区域门槛，逐像素遮挡与乘色继续验收。
+[虹膜反射贴图梯度](../acceptance/nr/evidence/2026-11-15/iris-vulkan-matcap-gradients/results.json)核对 255 个 Vulkan 样本及原生层级。两种梯度分别在不同位置匹配原生第 7 级，眼部完整颜色继续验收。
 
 [眼部阴影纹理与遮挡](../acceptance/nr/iris-overlay-source.md)核对原生纹理、乘色及完整几何覆盖。
 
