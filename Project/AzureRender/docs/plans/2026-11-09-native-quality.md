@@ -203,6 +203,8 @@ Intel 头发颜色继续核对纹理梯度与层级选择。
 
 [正式遮罩与最近深度发影](../acceptance/nr/evidence/2026-11-15/face-public-mask-and-nearest-shade/results.json)的双设备联合复测各有 34 处脸部像素变化，完整脸部新增超差及脸部范围外变化均为零。
 
+[冻结四帧差异位置](../acceptance/nr/evidence/2026-11-15/frozen-cross-driver-spatial/results.json)记录天花板区域及高差位置。原始四帧仍按 RGB 零差验收。
+
 ## 后续外观
 
 - [ ] 按原计划核对皮肤、眼睛、GI 与反射。

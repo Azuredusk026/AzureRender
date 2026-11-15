@@ -1,0 +1,42 @@
+{
+  "status": "measured-original-cross-driver-frozen-difference",
+  "testStatus": "failed",
+  "drivers": [
+    "592.82",
+    "595.79"
+  ],
+  "differing": [
+    228,
+    330,
+    397,
+    421
+  ],
+  "overOne": [
+    0,
+    3,
+    4,
+    4
+  ],
+  "primarySceneCeilingTile": {
+    "pixelBounds": [
+      2176,
+      128,
+      2304,
+      256
+    ],
+    "differing": [
+      203,
+      200,
+      203,
+      204
+    ]
+  },
+  "archive": {
+    "sha256": "b8deeead8fe9b6838778e67c3d5f24ce5a1dcec4350127c78f746e482cbdc153",
+    "members": {
+      "frozen-cross-driver-pixel-locations.json": "8699cb5a7290fde334b24d101b1895a23c149768e312b369a32da8dcb55279a8",
+      "frozen-cross-driver-pixel-locations.py": "c7f013820dcf962842354218ebd060ae5777bf7bdfa97fadeedef8f560e67fb6",
+      "package-frozen-cross-driver-spatial.py": "80ad9d28a825f0e7001138c20df2d697bb6e41ae4552cd91f754fefa7580a388"
+    }
+  }
+}

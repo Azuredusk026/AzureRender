@@ -585,6 +585,10 @@ Intel 的距离场对照同样改变 23 个脸部像素。两处嘴角的误差�
 
 发布版 Player 的四张默认姿态画面与 NVIDIA 595.79 同驱动基准逐字节一致。592.82 保留参考的四张图仍分别有 228、330、397 和 421 处像素差异。
 
+原四帧的差异集中于场景右上方的天花板。边界为 [2176,128] 至 [2304,256] 的 128×128 区域，四帧分别有 203、200、203 和 204 处一色阶差异。全图超过一色阶的位置分别为 0、3、4 和 4 处。逐像素零差继续按两驱动的冻结帧核对。
+
+[冻结差异位置](evidence/2026-11-15/frozen-cross-driver-spatial/results.json)和[验证归档](evidence/2026-11-15/frozen-cross-driver-spatial/validation.zip)保存四帧的坐标及通道差异。
+
 [材质对照结果](evidence/2026-11-15/public-face-receiver-depth-and-mask/results.json)和[验证归档](evidence/2026-11-15/public-face-receiver-depth-and-mask/validation.zip)保存实际绘制、固定姿态及默认回归指纹。
 
 ### 距离场遮罩与发影联合复测
