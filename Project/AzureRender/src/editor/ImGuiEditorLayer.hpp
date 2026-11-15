@@ -195,7 +195,7 @@ private:
     std::string consoleLastLine_;
     std::string consoleLastFeedback_;
     bool navigationUsed_=false;
-    std::string prefabInstance_,installPath_,outputPath_,projectPath_;
+    std::string prefabInstance_,installPath_,outputPath_;
 };
 
 }  // namespace azurerender

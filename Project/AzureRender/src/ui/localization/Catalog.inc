@@ -24,6 +24,7 @@
 {"发布失败","Publish failed"},
 {"发布完成","Publish complete"},
 {"发布输出目录","Publish output directory"},
+{"本次发布目标：%s","Publish destination for this run: %s"},
 {"发布项目","Publish project"},
 {"取消任务","Cancel task"},
 {"取消选取","Cancel picking"},

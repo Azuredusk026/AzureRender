@@ -26,20 +26,23 @@ std::wstring quote(const std::wstring& value) {
 GameBuildJob::GameBuildJob(const std::filesystem::path& project, const std::filesystem::path& install,
                           const std::filesystem::path& output, bool replace) {
     const auto engine=std::filesystem::absolute(install);
+    const auto destination=std::filesystem::absolute(output);
     const auto tool = engine / "share/AzureRender/tools/build_game.py";
     const auto python = tool.parent_path()/"python/python.exe";
-    const auto log = project.parent_path() / ".azure/game-build.log";
+    const auto log = std::filesystem::absolute(project).parent_path() / ".azure/game-build.log";
     log_=log;
     std::filesystem::create_directories(log.parent_path());
     work_ = std::async(std::launch::async, [=] {
         const auto start = std::chrono::steady_clock::now(); GameBuildResult result;
+        result.outputDirectory=destination;
+        result.logFile=log;
         try {
         if(!std::filesystem::is_regular_file(python))throw std::runtime_error("Installed Python builder runtime missing: "+python.u8string());
         if(!std::filesystem::is_regular_file(tool))throw std::runtime_error("Game build tool missing: "+tool.u8string());
 #ifdef _WIN32
         std::wstring command = quote(python.wstring())+L" " + quote(tool.wstring()) + L" --project " + quote(project.wstring())
-            + L" --install " + quote(std::filesystem::absolute(install).wstring())
-            + L" --output " + quote(std::filesystem::absolute(output).wstring()) + (replace ? L" --replace" : L"");
+            + L" --install " + quote(engine.wstring())
+            + L" --output " + quote(destination.wstring()) + (replace ? L" --replace" : L"");
         SECURITY_ATTRIBUTES attributes{sizeof(SECURITY_ATTRIBUTES), nullptr, TRUE};
         HANDLE file = CreateFileW(log.c_str(), GENERIC_WRITE, FILE_SHARE_READ, &attributes, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, nullptr);
         if (file == INVALID_HANDLE_VALUE) { result.message = "Cannot open game build log"; return result; }

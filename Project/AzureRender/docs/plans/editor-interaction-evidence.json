@@ -54,5 +54,16 @@
     "restoredPixels": 319188,
     "restoredDifferentPixels": 0,
     "auxiliaryUnchanged": true
+  },
+  "publishReceipt": {
+    "configuration": "Release",
+    "candidateExecutableSha256": "00d6f888e4844fa7b859cf926957c53e1c2c89bbbaa43c666670be64a7a8bc13",
+    "dispatch": 1093,
+    "clippedButtonFailure": "publish-footer-clipped.log",
+    "productionReplay": "publish-candidate/run-eaad487c/summary.json",
+    "failureReceiptCheck": "publish-receipt-green.log",
+    "windowHeight": 1080,
+    "oldButtonTop": 1112,
+    "candidateButtonTop": 1020
   }
 }
