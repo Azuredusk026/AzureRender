@@ -24,13 +24,14 @@ public:
         VkCommandPool commandPool,
         GpuAllocator& allocator, bool samplerAnisotropyEnabled=false,
         PipelineInspection* pipelineInspection=nullptr,bool sampleShadingEnabled=false,bool exactDepthBiasEnabled=false,
-        VkPipelineCache pipelineCache=VK_NULL_HANDLE)
+        VkPipelineCache pipelineCache=VK_NULL_HANDLE, bool shaderFloatControls2Enabled=false)
         : device_(device),
           physicalDevice_(physicalDevice),
           graphicsQueue_(graphicsQueue),
           commandPool_(commandPool),
           samplerAnisotropyEnabled_(samplerAnisotropyEnabled),allocator_(&allocator),
-          pipelineInspection_(pipelineInspection),sampleShadingEnabled_(sampleShadingEnabled),exactDepthBiasEnabled_(exactDepthBiasEnabled),pipelineCache_(pipelineCache) {
+          pipelineInspection_(pipelineInspection),sampleShadingEnabled_(sampleShadingEnabled),exactDepthBiasEnabled_(exactDepthBiasEnabled),pipelineCache_(pipelineCache),
+          shaderFloatControls2Enabled_(shaderFloatControls2Enabled) {
         if(pipelineCache_&&physicalDevice_){VkPhysicalDeviceProperties properties{};vkGetPhysicalDeviceProperties(physicalDevice_,&properties);cacheFeedbackEnabled_=properties.apiVersion>=VK_API_VERSION_1_3;}
     }
 
@@ -44,6 +45,7 @@ public:
             &&count<=properties.limits.maxDescriptorSetStorageBuffers;
     }
     VkSampleCountFlags imageSampleCounts(VkFormat,VkImageUsageFlags) const override;
+    bool supportsShaderFloatControls2() const noexcept { return shaderFloatControls2Enabled_; }
     bool supportsSampleShading() const noexcept override {return sampleShadingEnabled_;}
     bool supportsExactDepthBias() const noexcept override {return exactDepthBiasEnabled_;}
     bool supportsSampledImageViewMapping() const noexcept override {return true;}
@@ -137,6 +139,7 @@ private:
     std::mutex renderPassMutex_;
     VkPipelineCache pipelineCache_=VK_NULL_HANDLE;
     bool cacheFeedbackEnabled_=false;
+    bool shaderFloatControls2Enabled_ = false;
     std::atomic<std::uint64_t> cacheRequests_{0},cacheHits_{0},cacheFeedback_{0};
     void notePipelineCache(const VkPipelineCreationFeedback& feedback)noexcept{
         if(!pipelineCache_)return;

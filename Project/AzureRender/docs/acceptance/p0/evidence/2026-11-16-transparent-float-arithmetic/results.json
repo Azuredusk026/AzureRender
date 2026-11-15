@@ -1,0 +1,132 @@
+{
+  "driver": "595.79",
+  "source": {
+    "src/app/AzureRenderApp.cpp": "afb7e20de31ed15d16d6d38d70edb621f8e5a56d9506de86dd189ca10f6745eb",
+    "src/app/AzureRenderApp.hpp": "0a2c4c4f700e6f38f7f0a659d2ed766581ade42302e9bff816f53a30cbda1328",
+    "src/render/StrictFragmentShader.hpp": "011bdb9482c2a772e98c0c25c1249da9c93030124d4618a234ca1962f84b163d",
+    "src/rhi/VulkanRhi.hpp": "1e8d8008426b458cf3460eda49593b6c2f0a65f01eb081d0c98ab17e80df58de",
+    "src/scenes/CharacterSceneRenderer.cpp": "053c051049431806694acaa938ec0bed1232f7d6ae9b83de793a9a2ac1451a58",
+    "CMakeLists.txt": "c834ec808a728f47ba5a46df400688fab8b0bd022c68625b90e4b8dd9b169e1c",
+    "tools/run_r3_comparison.py": "ee8ac8c8c674f1c54aa670467e1a8e8f5a67e9c03426f8e5eb5f31b3cfce3860",
+    "tools/run_visual_regression.py": "a6304d2d207f72d6bb38a431336d1f3fb2191ed01efb0bf86b048e5008ee2344"
+  },
+  "frozen": {
+    "character_albedo_fullbody.png": "93756f932fbf0f8750095172c8e1c1aaf6a41952cd59db73c856d1e97bc82373",
+    "character_beauty_fullbody.png": "c23d4620ed136cc8367fe21e97d800bb6aeccac80c5bc06ee3851d7be824631e",
+    "character_direct_diffuse_fullbody.png": "310f136e2b62a9606a067719e29aa48ee4224edf863d9cfa206c9af29bb714f4",
+    "character_face_sdf_closeup.png": "2b482d6c4bb8c2250ddc98b1a74621350a643b50e4b20f76fc02602b36df4f6c",
+    "character_material_id_fullbody.png": "4d4e341319d327eacfcd7077931db12666fd2c67ee517e13d9b5cf1dacd99d95",
+    "character_outline_fullbody.png": "20b20897c33ac8f0b24178ca34239b15a48035a277c73a0920bc3bbf4dc5af56",
+    "character_world_normal_fullbody.png": "156bc7ebcf292ef690e5dcb7dcd00d9d846898c0de22c0220f6fd8b3b98554eb"
+  },
+  "configurations": {
+    "release": {
+      "job": 1351,
+      "binary": "d2be8b1dde9b67cefe5345a4d8d04851220113425dcf002392aff97e241c5ea5",
+      "checked": {
+        "AzureRender.VisualRegression": 39.2216,
+        "AzureRender.VisualRegressionLegacyDescriptors": 122.979,
+        "AzureRender.R3Comparison": 23.4795,
+        "AzureRender.R3TransparentComparison": 25.0263,
+        "AzureRender.VisualRegressionLegacySkinning": 42.4118
+      },
+      "registry": "7f0fe1fd1c6024eb0826cb41518eb2d0634e199a066e6d6cd3d2859aa85364dd",
+      "junit": "b9b6336edc43d9c76119bd09333f262d4cc35435207b1dbea8eab8d1c97f279a",
+      "buildSwitches": {
+        "AZURE_ENABLE_BATCHED_SHADOW_BOUNDS": "ON",
+        "AZURE_ENABLE_COMPUTED_MATERIAL_VIEW": "OFF",
+        "AZURE_ENABLE_DEFAULT_ISOLATION_SPECIALIZATION": "OFF",
+        "AZURE_ENABLE_MANAGED_SCRIPT_PROTOTYPE": "ON",
+        "AZURE_ENABLE_SHADER_MODULE_PROTOTYPE": "ON",
+        "AZURE_ENABLE_SHADOW_HISTORY": "OFF",
+        "AZURE_ENABLE_SURFACE_RADIANCE_DIAGNOSTICS": "OFF",
+        "AZURE_ENABLE_SURFACE_RADIANCE_FRAME_SELECTION": "OFF",
+        "AZURE_ENABLE_SURFACE_RADIANCE_REUSE": "OFF"
+      },
+      "evidence": {
+        "build/runs/20261116-034957-nr-r3-original-registered-ab0dde/release/managed-build-manifest.json": "ccc49e8838e118fd72900bcd294a36ea67b9c59a6f02068c9bc581bc03bf4bb8",
+        "build/runs/20261116-034957-nr-r3-original-registered-ab0dde/release/managed-coreclr-workflow-summary.json": "cda21ff3be4c7ad9c1d993c4deb706fda83a664aabececc652ac327ea55ee586",
+        "build/runs/20261116-034957-nr-r3-original-registered-ab0dde/release/managed-install-source-projection-complete-install-docs.json": "807e25890bf402a38eb67aa4e0a8408c3a0ab4854c6a1b039d8e91fa4994bee2",
+        "build/runs/20261116-034957-nr-r3-original-registered-ab0dde/release/managed-install-source-projection-retry.json": "1c42f8fcd7e9ed6120d7874ddd9350660aa82ce7dc032c82eed7c8720cc9849f",
+        "build/runs/20261116-034957-nr-r3-original-registered-ab0dde/release/managed-install-source-projection.json": "cf8ab5bdfcbe6eb2942d2ae070147c3071f12c6c115adb672d37daf6fcb0c681",
+        "build/runs/20261116-034957-nr-r3-original-registered-ab0dde/release/managed-nativeaot-workflow-summary.json": "a7e754dd20a4a5eaa5cf1fb3d0d71ea80bbb400a1abf238b84456d0cc8b2ca06",
+        "build/runs/20261116-034957-nr-r3-original-registered-ab0dde/release/managed-player-registry-complete-install.json": "e1bcc8e79480b4f2d26dd8b150c680ef7697204be782d8cb883b5448ce54c75b",
+        "build/runs/20261116-034957-nr-r3-original-registered-ab0dde/release/managed-player-registry.json": "e1bcc8e79480b4f2d26dd8b150c680ef7697204be782d8cb883b5448ce54c75b",
+        "build/runs/20261116-034957-nr-r3-original-registered-ab0dde/release/managed-player-repro.json": "24ca6228d3e869a28295c2ab8a6d3b4f2046ab78f608b6c484c25539858c4729",
+        "build/runs/20261116-034957-nr-r3-original-registered-ab0dde/release/managed-registered-player-complete-install.xml": "6aa37318c684b22bd200e8efd1abb5340c9dee7bd7238ca938ab1baf7e74d6e6",
+        "build/runs/20261116-034957-nr-r3-original-registered-ab0dde/release/managed-registered-player.xml": "6864118d497e471bfed30548a6e33d5e492a5b86aab0f3ff9de02a9afe5a715c",
+        "build/runs/20261116-034957-nr-r3-original-registered-ab0dde/release/managed-registered.xml": "9f982f7fd3c93f23610dafb9b3a381692d5eb1fd9f908eda70343754c831482e",
+        "build/runs/20261116-034957-nr-r3-original-registered-ab0dde/release/managed-workflow-output-preflight-complete-install.json": "8a0d06d09246e262fb24314c2ac677619faf295a3945a935979eadfa1ca685ac",
+        "build/runs/20261116-034957-nr-r3-original-registered-ab0dde/release/managed-workflow-output-preflight.json": "0461610a3ee79c363761e2fef64641a96bd7c1e0d03f4fadc62a996222a22e2e",
+        "build/runs/20261116-034957-nr-r3-original-registered-ab0dde/release/qualification.json": "a28ebbcdaa1b600f9926f34e3be2affd68f4cc32b04dcf32fccdb7b08e415810",
+        "build/runs/20261116-034957-nr-r3-original-registered-ab0dde/release/r3-comparison.json": "e9f310ae8b903d01965abf2aaf94fbb23219b573ff475a01fa85625acedf7a9a",
+        "build/runs/20261116-034957-nr-r3-original-registered-ab0dde/release/r3-transparent-comparison.json": "a84b3dcd5447f33eef57263fa2a85f225d5a35a2346d88fc3cdb993c9da36f04",
+        "build/runs/20261116-034957-nr-r3-original-registered-ab0dde/release/registered.xml": "b9b6336edc43d9c76119bd09333f262d4cc35435207b1dbea8eab8d1c97f279a",
+        "build/runs/20261116-034957-nr-r3-original-registered-ab0dde/release/registry.json": "7f0fe1fd1c6024eb0826cb41518eb2d0634e199a066e6d6cd3d2859aa85364dd",
+        "build/runs/20261116-034957-nr-r3-original-registered-ab0dde/release/visual-regression-legacy-skinning-summary.json": "23959ae31537dcd58b669eaea848b7c15656f4f2525f47f32e8efabce7664f52",
+        "build/runs/20261116-034957-nr-r3-original-registered-ab0dde/release/visual-regression-legacy-summary.json": "23959ae31537dcd58b669eaea848b7c15656f4f2525f47f32e8efabce7664f52",
+        "build/runs/20261116-034957-nr-r3-original-registered-ab0dde/release/visual-regression-summary.json": "23959ae31537dcd58b669eaea848b7c15656f4f2525f47f32e8efabce7664f52"
+      }
+    },
+    "debug": {
+      "job": 1346,
+      "binary": "b569b85203aa70ff9c20f02e6d9f46e10f112cf853eb9141914cdfba821f862d",
+      "checked": {
+        "AzureRender.VisualRegression": 69.4226,
+        "AzureRender.VisualRegressionLegacyDescriptors": 141.163,
+        "AzureRender.R3Comparison": 43.1081,
+        "AzureRender.R3TransparentComparison": 51.6872,
+        "AzureRender.VisualRegressionLegacySkinning": 66.0688
+      },
+      "registry": "2e8f0850efa5048ef0df051c8e39f1eff20b2925814fcc4f63764c84a354155c",
+      "junit": "9a59a2af5aee0b7edd2d74ed670ecb501766c26d39dc94056eaeec6aec610ae8",
+      "buildSwitches": {
+        "AZURE_ENABLE_BATCHED_SHADOW_BOUNDS": "ON",
+        "AZURE_ENABLE_COMPUTED_MATERIAL_VIEW": "OFF",
+        "AZURE_ENABLE_DEFAULT_ISOLATION_SPECIALIZATION": "OFF",
+        "AZURE_ENABLE_MANAGED_SCRIPT_PROTOTYPE": "ON",
+        "AZURE_ENABLE_SHADER_MODULE_PROTOTYPE": "ON",
+        "AZURE_ENABLE_SHADOW_HISTORY": "OFF",
+        "AZURE_ENABLE_SURFACE_RADIANCE_DIAGNOSTICS": "OFF",
+        "AZURE_ENABLE_SURFACE_RADIANCE_FRAME_SELECTION": "OFF",
+        "AZURE_ENABLE_SURFACE_RADIANCE_REUSE": "OFF"
+      },
+      "evidence": {
+        "build/runs/20261116-034957-nr-r3-original-registered-ab0dde/debug/managed-build-manifest.json": "3aa1f4f6e335b361daae5635536e9c8d0fd524bb0213e12048b065d03b3fe1a4",
+        "build/runs/20261116-034957-nr-r3-original-registered-ab0dde/debug/managed-coreclr-workflow-summary.json": "23db232b697f214770091c92f996dd5774bc5fc5fbdc2ceace7ea4d954b82e93",
+        "build/runs/20261116-034957-nr-r3-original-registered-ab0dde/debug/managed-nativeaot-workflow-summary.json": "b2d4abd421efbbcfac70278d3ac6a35a2ff586b1aff54a012f34f93a7bc83bdf",
+        "build/runs/20261116-034957-nr-r3-original-registered-ab0dde/debug/managed-player-registry.json": "205e23c37ab6f675d59da2dc426c755c465be487a70b0d480a2a0f41c96cac46",
+        "build/runs/20261116-034957-nr-r3-original-registered-ab0dde/debug/managed-player-repro.json": "3b53e2b2ba5619ed7604a77487340374e908c489b9fccb962127240e04d28655",
+        "build/runs/20261116-034957-nr-r3-original-registered-ab0dde/debug/managed-registered-player.xml": "31a04ed2618f663704337a3dabae082c3daf6d91cdab7e5925d41a1f1ed33ed1",
+        "build/runs/20261116-034957-nr-r3-original-registered-ab0dde/debug/managed-registered.xml": "0341e0a719ed4e6608b572925d9989444c7f614a3f76878d4d113f7ca3b37dcd",
+        "build/runs/20261116-034957-nr-r3-original-registered-ab0dde/debug/qualification.json": "fb570e90ed5ae959d1328f32a9dcc2c95666c70b0913687e956548be2d350621",
+        "build/runs/20261116-034957-nr-r3-original-registered-ab0dde/debug/r3-comparison.json": "b55a15e95ab513e73607dc79afae72f5a803cec34a625a6ac1686385063b3066",
+        "build/runs/20261116-034957-nr-r3-original-registered-ab0dde/debug/r3-transparent-comparison.json": "ea38ba43ba8eb5c2b7c2b4b1419d257f4ba30a0a22b229884b57afad2370551b",
+        "build/runs/20261116-034957-nr-r3-original-registered-ab0dde/debug/registered.xml": "9a59a2af5aee0b7edd2d74ed670ecb501766c26d39dc94056eaeec6aec610ae8",
+        "build/runs/20261116-034957-nr-r3-original-registered-ab0dde/debug/registry.json": "2e8f0850efa5048ef0df051c8e39f1eff20b2925814fcc4f63764c84a354155c",
+        "build/runs/20261116-034957-nr-r3-original-registered-ab0dde/debug/visual-regression-legacy-skinning-summary.json": "23959ae31537dcd58b669eaea848b7c15656f4f2525f47f32e8efabce7664f52",
+        "build/runs/20261116-034957-nr-r3-original-registered-ab0dde/debug/visual-regression-legacy-summary.json": "23959ae31537dcd58b669eaea848b7c15656f4f2525f47f32e8efabce7664f52",
+        "build/runs/20261116-034957-nr-r3-original-registered-ab0dde/debug/visual-regression-summary.json": "23959ae31537dcd58b669eaea848b7c15656f4f2525f47f32e8efabce7664f52"
+      }
+    }
+  },
+  "controlled": {
+    "release": 1304,
+    "debug": 1313,
+    "waves": 2,
+    "pathsPerWave": 5,
+    "framesPerPath": 10
+  },
+  "paired": {
+    "job": 1309,
+    "referenceP95Ms": [
+      9.94144,
+      9.947057599999999
+    ],
+    "candidateP95Ms": 10.225224,
+    "overheadMs": 0.2809752000000003,
+    "driftMs": 0.005617599999999001,
+    "evidence": "build/runs/20261115-113412-nr-standard-cache-retention-qualification-d65701/r3-build/paired-release-02/result.json",
+    "sha256": "88922e8c0a7b7992b0970c5fa466cba6b46911340450446d642882731a22c9e6"
+  }
+}

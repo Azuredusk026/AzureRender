@@ -51,6 +51,7 @@ static constexpr bool kSurfaceRadianceFrameSelection=false;
 #include "scene/TransformParity.hpp"
 #include "render/CameraProjection.hpp"
 #include "render/ReferenceFmaShader.hpp"
+#include "render/StrictFragmentShader.hpp"
 #include "render/SceneReferenceObjectVisibility.hpp"
 
 #include <GLFW/glfw3.h>
@@ -4231,12 +4232,30 @@ void CharacterSceneRenderer::createGraphicsPipeline(
         };
         inspectTransparency(asset_);
         for (const auto& resource : additionalResources_) inspectTransparency(resource->asset);
-        if (needsBlend) createFacingPipelines(blendPipelines_, materialDesc);
-        if (needsVertexColorBlend) {
-            auto colored = materialDesc;
-            colored.vertexBindings[1].stride = sizeof(std::array<float,4>);
-            createFacingPipelines(vertexColorBlendPipelines_, colored);
+        auto blendDesc = materialDesc;
+        const auto* vulkan = dynamic_cast<const rhi::VulkanRhi*>(rhi_);
+        VkShaderModule strictBlendModule = VK_NULL_HANDLE;
+        if ((needsBlend || needsVertexColorBlend) && vulkan && vulkan->supportsShaderFloatControls2()
+            && !lightingBlendNeeded_ && !independentCoverageNeeded_ && !materialUvNeeded_) {
+            // The ordinary alpha blend path must use the same 32-bit arithmetic
+            // across pipeline variants and independently warmed driver caches.
+            const auto code = prepareStrictFragmentShader(readBinaryFile(materialFragmentPath));
+            strictBlendModule = rhi_->createShaderModule(code);
+            blendDesc.fragmentShader = strictBlendModule;
+            RuntimeDiagnostics::instance().info("render", "Ordinary alpha blend: strict float32 arithmetic");
         }
+        try {
+            if (needsBlend) createFacingPipelines(blendPipelines_, blendDesc);
+            if (needsVertexColorBlend) {
+                auto colored = blendDesc;
+                colored.vertexBindings[1].stride = sizeof(std::array<float,4>);
+                createFacingPipelines(vertexColorBlendPipelines_, colored);
+            }
+        } catch (...) {
+            if (strictBlendModule) rhi_->destroyShaderModule(strictBlendModule);
+            throw;
+        }
+        if (strictBlendModule) rhi_->destroyShaderModule(strictBlendModule);
         if(additive){auto composed=materialDesc;composed.primaryColorBlend=rhi::PrimaryColorBlend::Additive;
             if(context.displayMaskEnabled){composed.colorWriteMasks.assign(composed.colorAttachmentCount,0xf);composed.colorWriteMasks[2]=0;}
             createFacingPipelines(additiveBlendPipelines_,composed);

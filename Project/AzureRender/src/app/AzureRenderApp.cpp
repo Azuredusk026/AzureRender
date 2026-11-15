@@ -328,7 +328,7 @@ void AzureRenderApp::initVulkan(const std::string& assetPath) {
     }catch(const std::exception&){pipelineCache_.reset();azurerender::RuntimeDiagnostics::instance().info("startup","Pipeline cache unavailable; using normal pipeline creation");}
     rhi_ = std::make_unique<azurerender::rhi::VulkanRhi>(
         device_, physicalDevice_, graphicsQueue_, commandPool_,
-        gpuAllocator_, [] (VkPhysicalDevice physical) {VkPhysicalDeviceFeatures f{};vkGetPhysicalDeviceFeatures(physical,&f);return f.samplerAnisotropy==VK_TRUE;}(physicalDevice_), pipelineInspection_.get(), [] (VkPhysicalDevice physical) {VkPhysicalDeviceFeatures f{};vkGetPhysicalDeviceFeatures(physical,&f);return f.sampleRateShading==VK_TRUE;}(physicalDevice_),exactDepthBiasEnabled_,pipelineCache_?pipelineCache_->handle():VK_NULL_HANDLE);
+        gpuAllocator_, [] (VkPhysicalDevice physical) {VkPhysicalDeviceFeatures f{};vkGetPhysicalDeviceFeatures(physical,&f);return f.samplerAnisotropy==VK_TRUE;}(physicalDevice_), pipelineInspection_.get(), [] (VkPhysicalDevice physical) {VkPhysicalDeviceFeatures f{};vkGetPhysicalDeviceFeatures(physical,&f);return f.sampleRateShading==VK_TRUE;}(physicalDevice_),exactDepthBiasEnabled_,pipelineCache_?pipelineCache_->handle():VK_NULL_HANDLE, shaderFloatControls2Enabled_);
     createPostProcessDescriptorSetLayout();
     resolvedAssetPath_ = resourceLocator_.resolveAsset(std::filesystem::u8path(assetPath)).u8string();
     phase("shadow resources", [this] { createShadowResources(); });
@@ -1558,6 +1558,23 @@ void AzureRenderApp::createLogicalDevice() {
     if(exactDepthBiasEnabled_){
         enabledExtensions.push_back(VK_EXT_DEPTH_BIAS_CONTROL_EXTENSION_NAME);
         exactDepthBias.pNext=vulkan12Features.pNext;vulkan12Features.pNext=&exactDepthBias;
+    }
+    VkPhysicalDeviceShaderFloatControls2FeaturesKHR floatControls{
+        VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_FLOAT_CONTROLS_2_FEATURES_KHR};
+    const bool floatControlsExtension = std::any_of(availableExtensions.begin(), availableExtensions.end(),
+        [](const auto& extension) {
+            return std::strcmp(extension.extensionName, VK_KHR_SHADER_FLOAT_CONTROLS_2_EXTENSION_NAME) == 0;
+        });
+    if (floatControlsExtension) {
+        VkPhysicalDeviceFeatures2 available{VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2};
+        available.pNext = &floatControls;
+        vkGetPhysicalDeviceFeatures2(physicalDevice_, &available);
+    }
+    shaderFloatControls2Enabled_ = floatControls.shaderFloatControls2 == VK_TRUE;
+    if (shaderFloatControls2Enabled_) {
+        enabledExtensions.push_back(VK_KHR_SHADER_FLOAT_CONTROLS_2_EXTENSION_NAME);
+        floatControls.pNext = vulkan12Features.pNext;
+        vulkan12Features.pNext = &floatControls;
     }
     createInfo.pNext = &vulkan12Features;
     createInfo.queueCreateInfoCount = static_cast<std::uint32_t>(queueCreateInfos.size());
