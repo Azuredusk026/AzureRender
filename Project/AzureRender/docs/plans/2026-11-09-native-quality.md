@@ -198,6 +198,9 @@ Intel 头发颜色继续核对纹理梯度与层级选择。
 
 [体表固定层级与图集纹素](../acceptance/nr/evidence/2026-11-15/body-receiver-normal-and-atlas/results.json)核对 11 层法线和 5 个图集纹素。原生头发写入其中 4 个，衣料写入 1 个。
 
+[虹膜原生硬件梯度](../acceptance/nr/evidence/2026-11-15/iris-native-derivative-lanes/results.json)读回 255 处采样导数。粗粒度计算分别匹配 NVIDIA 的 247 处和 Intel 的全部 255 处。
+[脸部染色与固定环境光](../acceptance/nr/evidence/2026-11-15/face-tint-and-fixed-ambient/results.json)核对六处原生脸部片元和对应照明输入。中庭体积辐照继续按独立场景门槛验收。
+
 ## 后续外观
 
 - [ ] 按原计划核对皮肤、眼睛、GI 与反射。
