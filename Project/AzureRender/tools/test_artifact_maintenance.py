@@ -178,6 +178,7 @@ class MaintenanceTests(unittest.TestCase):
 
     def test_daily_asset_copy_policy_removes_only_verified_model(self):
         from test_artifact_asset_cleanup import AssetCopiesTests
+        subprocess.run(['git', 'init', '--quiet', str(self.root)], check=True, capture_output=True)
         _,source,target,catalog,lock=AssetCopiesTests().fixture(self.root)
         maintenance.write_json(self.build/'maintenance/asset-copy-cleanup-policy.json',dict(catalog=str(catalog),lock=str(lock),maximumBytes=source.stat().st_size,maximumFiles=1))
         with patch.object(maintenance,'active_processes',return_value=[]),patch('artifact_asset_cleanup.active_processes',return_value=[]):
@@ -409,6 +410,42 @@ class MaintenanceTests(unittest.TestCase):
             result=maintenance.guarded_run(self.build,path.name,command,timeout=5)
         self.assertEqual(result['status'],'budget-stopped');self.assertLess(result['seconds'],8)
         self.assertTrue(path.exists())
+
+    @unittest.skipUnless(os.name == 'nt', 'Windows process tree ownership')
+    def test_guard_timeout_reaps_process_tree_when_taskkill_is_unavailable(self):
+        import _winapi
+        path = self.create()
+        child_pid = path / 'child.pid'
+        child_code = 'import time; time.sleep(6)'
+        root_code = (
+            'import subprocess,sys,time; from pathlib import Path; '
+            "child = subprocess.Popen([sys.executable, '-c', sys.argv[2]]); "
+            'Path(sys.argv[1]).write_text(str(child.pid)); time.sleep(6)'
+        )
+        command = [sys.executable, '-c', root_code, str(child_pid), child_code]
+        run = subprocess.run
+
+        def unavailable_taskkill(args, *positional, **keywords):
+            if isinstance(args, (list, tuple)) and Path(args[0]).name.lower() == 'taskkill.exe':
+                raise subprocess.TimeoutExpired(args, timeout=1)
+            return run(args, *positional, **keywords)
+
+        with patch.object(subprocess, 'run', side_effect=unavailable_taskkill):
+            report = maintenance.guarded_run(self.build, path.name, command, timeout=2)
+        self.assertEqual(report['status'], 'budget-stopped')
+        self.assertIn('time budget exceeded', report['reason'])
+        self.assertLess(report['seconds'], 5)
+        try:
+            handle = _winapi.OpenProcess(0x00100000, False, int(child_pid.read_text()))
+        except OSError as error:
+            self.assertEqual(error.winerror, 87)
+        else:
+            try:
+                self.assertEqual(_winapi.WaitForSingleObject(handle, 1000), _winapi.WAIT_OBJECT_0)
+            finally:
+                _winapi.CloseHandle(handle)
+        with maintenance.database(self.build) as db:
+            self.assertIsNone(maintenance.rows(db)[path.name]['processPid'])
 
     def test_guard_caps_log_without_stopping_successful_command(self):
         path=self.create()
