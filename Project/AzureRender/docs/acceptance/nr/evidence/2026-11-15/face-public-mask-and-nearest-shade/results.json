@@ -518,11 +518,91 @@
       }
     }
   },
+  "nativeOwnerResidual": {
+    "commonOpaqueEdgeOverEight": 49,
+    "allChannelsBelowReference": {
+      "nvidia": 49,
+      "intel": 49
+    },
+    "tracedOriginalOpaque804": [
+      {
+        "point": [
+          1247,
+          293
+        ],
+        "primitive": 1108
+      },
+      {
+        "point": [
+          1306,
+          304
+        ],
+        "primitive": 736
+      },
+      {
+        "point": [
+          1307,
+          303
+        ],
+        "primitive": 735
+      },
+      {
+        "point": [
+          1310,
+          300
+        ],
+        "primitive": 728
+      },
+      {
+        "point": [
+          1312,
+          298
+        ],
+        "primitive": 717
+      },
+      {
+        "point": [
+          1313,
+          297
+        ],
+        "primitive": 717
+      },
+      {
+        "point": [
+          1314,
+          295
+        ],
+        "primitive": 729
+      },
+      {
+        "point": [
+          1316,
+          292
+        ],
+        "primitive": 708
+      },
+      {
+        "point": [
+          1318,
+          288
+        ],
+        "primitive": 700
+      },
+      {
+        "point": [
+          1318,
+          289
+        ],
+        "primitive": 699
+      }
+    ],
+    "nativeTraceSha256": "35af4b2be412d20487c030abc8fca8006f5071270962f0a86106590658a78e9b"
+  },
   "archive": {
-    "sha256": "e98354007dc0b3cf14b026c3a191365ccfdca4b553d40ee81f78335f4790cb9e",
+    "sha256": "0d5a87c2954c042efcbd0d6c7e9a993ed01f2c5c757445f3b0d44e7e37275054",
     "members": {
       "face-quality-native-production-combined.py": "60b3aa310912146dec7a90d777172fdece0aae979e908d531c6e771aac3c23b6",
-      "archive-face-quality-native-combined.py": "c57550eb2224085304554971f83c0636c1422f2aed23c6962731b5209eb1af21",
+      "archive-face-quality-native-combined.py": "90dd6b4328d0ecb8218abbb81de2c41209f9f20a05d03831d20412401c65e8bf",
       "face-quality-release-isolated-mask/test-receipt.json": "f046c0c8926d9468e2953edc92d2b1f9736189109ff480cca129835a076796d7",
       "face-quality-release-isolated-mask/native-combined-summary.json": "8fda0cb3785cdfea721d40126aedc69605342cfe67d52b43aa9ddcf52a0d8509",
       "nr-face-combined-production-mask-and-nearest-shade-queue.log": "fefcb06635692763ac88c7196a366d7de46d7816650b3814fd44d2b7178de0c2",
@@ -537,7 +617,10 @@
       "face-quality-release-isolated-mask/public-combined-intel/runtime.json": "28c1d6e7a03adf19f044767e790469df6274b44e0ff7a460907d4ce4951cda9d",
       "face-quality-release-isolated-mask/public-combined-intel/player.log": "8b6f16377d78d0d6bc2a233dec1e2b05c49a2597f20c8adb92df0331149ea4ee",
       "face-quality-release-isolated-mask/public-combined-intel/frames/capture_manifest.json": "d5104048d6acf687c27c20e28b30a94bbf38e30628ede103178e762ecee5de08",
-      "face-quality-release-isolated-mask/public-combined-intel/frames/gpu_capabilities.json": "a38eaca3509b417cfe23614fe415bd9ccc5622fc682d8623142cdeb7dc3d85cc"
+      "face-quality-release-isolated-mask/public-combined-intel/frames/gpu_capabilities.json": "a38eaca3509b417cfe23614fe415bd9ccc5622fc682d8623142cdeb7dc3d85cc",
+      "score-public-face-remaining-owners.py": "137ce6e2d3ff2d8c0dfc20e2c8548aba56ed7675399d073282a5e2a51d2d9bd5",
+      "public-face-remaining-owner-residual.json": "33546b2c7eff297a3d8b15fa7e5d7827db4f8752b21ae26d4a69aaf8156ba225",
+      "trace-face-view-mask.json": "35af4b2be412d20487c030abc8fca8006f5071270962f0a86106590658a78e9b"
     }
   }
 }

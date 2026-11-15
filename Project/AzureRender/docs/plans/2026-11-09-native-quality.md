@@ -201,7 +201,7 @@ Intel 头发颜色继续核对纹理梯度与层级选择。
 [虹膜原生硬件梯度](../acceptance/nr/evidence/2026-11-15/iris-native-derivative-lanes/results.json)读回 255 处采样导数。粗粒度计算分别匹配 NVIDIA 的 247 处和 Intel 的全部 255 处。
 [脸部染色与固定环境光](../acceptance/nr/evidence/2026-11-15/face-tint-and-fixed-ambient/results.json)核对六处原生脸部片元和对应照明输入。中庭体积辐照继续按独立场景门槛验收。
 
-[正式遮罩与最近深度发影](../acceptance/nr/evidence/2026-11-15/face-public-mask-and-nearest-shade/results.json)的双设备联合复测各有 34 处脸部像素变化，完整脸部新增超差及脸部范围外变化均为零。
+[正式遮罩与最近深度发影](../acceptance/nr/evidence/2026-11-15/face-public-mask-and-nearest-shade/results.json)的双设备联合复测各有 34 处脸部像素变化，完整脸部新增超差及脸部范围外变化均为零。两块显卡共有 49 处超过八个色阶的不透明脸缘像素，后续按原生绘制 804 核对。
 
 [冻结四帧差异位置](../acceptance/nr/evidence/2026-11-15/frozen-cross-driver-spatial/results.json)记录天花板区域及高差位置。原始四帧仍按 RGB 零差验收。
 

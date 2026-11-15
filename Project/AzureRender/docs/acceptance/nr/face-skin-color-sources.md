@@ -619,7 +619,9 @@ Intel 的距离场对照同样改变 23 个脸部像素。两处嘴角的误差�
 
 两块显卡各有 34 处脸部像素变化，新增一色阶超差为零。两处嘴角的误差分别为 4 和 2 个色阶，12 处发影重叠像素的误差至多两个色阶。脸部范围外、脸部内区及虹膜逐像素一致。
 
-[联合复测结果](evidence/2026-11-15/face-public-mask-and-nearest-shade/results.json)和[验证归档](evidence/2026-11-15/face-public-mask-and-nearest-shade/validation.zip)保存双设备的程序、命令和图像指纹。
+原生附件按最后一次颜色写入划分脸部区域。发影覆盖区超过八个色阶的位置在 NVIDIA 上由 13 处降至 1 处，在 Intel 上由 14 处降至 2 处。两块显卡在相同的 49 处不透明脸缘位置超过八个色阶，三通道均偏暗。其中 10 处具有原生不透明绘制 804 的片元跟踪凭据。
+
+[联合复测结果](evidence/2026-11-15/face-public-mask-and-nearest-shade/results.json)和[验证归档](evidence/2026-11-15/face-public-mask-and-nearest-shade/validation.zip)保存双设备的程序、命令、图像指纹与绘制归属。
 
 ## 多重采样接收边缘
 
