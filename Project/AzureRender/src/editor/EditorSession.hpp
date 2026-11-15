@@ -34,7 +34,9 @@
 #include "editor/preview/DeveloperServices.hpp"
 
 #include <memory>
+#include <optional>
 #include <string>
+#include <vector>
 
 namespace azurerender {
 
@@ -67,6 +69,9 @@ public:
     std::map<std::string,std::string>& viewportOverlayPolicies(){return viewportOverlayPolicies_;}
     EditorViewDescriptor& viewportView(){return viewportView_;}
     const EditorViewDescriptor& viewportView() const{return viewportView_;}
+    const std::vector<std::string>& viewportDiagnosticModes() const noexcept{return viewportDiagnosticModes_;}
+    std::optional<unsigned> viewportDiagnosticMode() const noexcept{return viewportDiagnosticMode_;}
+    void setViewportDiagnosticModes(std::vector<std::string> modes);
     void synchronizeViewportCamera(std::array<float,3> position,std::array<float,3> target){if(!viewportViewChanged_){viewportView_.position=position;viewportView_.target=target;}}
     bool consumeViewportViewChange(){const bool changed=viewportViewChanged_;viewportViewChanged_=false;return changed;}
     GameRuntime* game() noexcept;
@@ -140,6 +145,7 @@ public:
     const std::filesystem::path& userSettingsPath() const {return userSettingsPath_;}
     SettingRegistry& settings() noexcept { return settings_; }
     EditorPanelRegistry& panelRegistry() noexcept { return panelRegistry_; }
+    bool assetRevealPending() const noexcept {return !assetReveal_.empty();}
     std::string consumeAssetReveal(){auto result=assetReveal_;assetReveal_.clear();return result;}
     ReferencePickerService& references() noexcept {return references_;}
     SelectionService& selection() noexcept { return *selection_; }
@@ -185,6 +191,8 @@ private:
     void retainDocument();
     EditorViewDescriptor viewportView_;
     bool viewportViewChanged_=false;
+    std::vector<std::string> viewportDiagnosticModes_={"Beauty"};
+    std::optional<unsigned> viewportDiagnosticMode_;
     ViewportOverlayRegistry viewportOverlays_=ViewportOverlayRegistry::builtins();
     std::map<std::string,std::string> viewportOverlayPolicies_{{"grid","all"},{"light","selected"},{"camera","selected"},{"collision","selected"},{"hinge","selected"}};
     MaterialEditingService materials_;

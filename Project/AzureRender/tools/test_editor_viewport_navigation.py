@@ -30,6 +30,7 @@ def run(executable,output):
         assert displacement*sign>0,(name,displacement)
         assert not result['navigation']['cursorCaptured']
         assert result['navigation']['nativeCursorMode']=='normal'
+        assert 'viewport.duplicate' not in result['widgets'], 'Releasing a flight gesture must not open the context menu'
         movements[name]=abs(displacement)
     boosted=launch(executable,output,'boost',(1280,720),1,held+[
         dict(frame=27,action='key',key='Shift',down=True,shift=True),dict(frame=28,action='key',key='W',down=True,shift=True),

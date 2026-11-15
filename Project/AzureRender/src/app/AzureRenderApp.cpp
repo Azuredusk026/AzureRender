@@ -556,13 +556,16 @@ void AzureRenderApp::createSceneRenderer() {
     azurerender::SceneRendererRegistry registry =
         azurerender::BuiltinRendererCatalog::createRegistry();
     sceneRenderer_ = registry.create(rendererId);
-    azurerender::validateSceneRendererCapabilities(
-        sceneRenderer_->capabilities());
+    const auto capabilities=sceneRenderer_->capabilities();
+    azurerender::validateSceneRendererCapabilities(capabilities);
     createMultisampleResources();context.rasterizationSamples=sceneMultisampling_?azurerender::SceneMultisampling::kSamples:VK_SAMPLE_COUNT_1_BIT;
     context.sceneRenderPass=sceneMultisampling_?sceneMultisampling_->renderPass():renderPass_;
     if(sceneMultisampling_)context.scenePassDescription.reset();
 #if AZURE_WITH_EDITOR
     if (runOptions_.editorSession) {
+        if(!runOptions_.editorSession->playing()){
+            runOptions_.editorSession->setViewportDiagnosticModes(capabilities.diagnosticViewNames);
+        }
         const auto loadedScene = runOptions_.editorSession->viewScene();
         editorRenderResources_.load(loadedScene, [&] { sceneRenderer_->onLoad(context); });
     } else
@@ -730,8 +733,13 @@ void AzureRenderApp::buildSceneFrameData(
 #endif
     if (game&&!gameInputReplay_&&runtimeOwnsInput) {
         bool focused = glfwGetWindowAttrib(frontend_->nativeHandle(), GLFW_FOCUSED) != 0;
+        bool captureRequested=glfwGetMouseButton(frontend_->nativeHandle(),GLFW_MOUSE_BUTTON_LEFT)==GLFW_PRESS;
 #if AZURE_WITH_EDITOR
-        if (editorLayer_) focused = focused && editorLayer_->acceptsViewportShortcuts();
+        if (editorLayer_) {
+            focused=focused&&editorLayer_->acceptsGameInput()&&activeRuntime()->state()==azurerender::RuntimeLifecycle::State::Running;
+            captureRequested=editorLayer_->requestsGameCapture();
+            if(!focused)gameViewportFocus_=false;
+        }
 #endif
         double x=0,y=0;glfwGetCursorPos(frontend_->nativeHandle(),&x,&y);
         bool uiPointer=false;
@@ -742,7 +750,7 @@ void AzureRenderApp::buildSceneFrameData(
             int width=1,height=1;glfwGetWindowSize(frontend_->nativeHandle(),&width,&height);
             uiPointer=gameUi_->wantsPointer(static_cast<int>(x*renderExtent_.width/std::max(width,1)),static_cast<int>(y*renderExtent_.height/std::max(height,1)));
         }
-        if(focused&&glfwGetMouseButton(frontend_->nativeHandle(),GLFW_MOUSE_BUTTON_LEFT)==GLFW_PRESS&&!uiPointer) gameViewportFocus_=true;
+        if(focused&&captureRequested&&!uiPointer) gameViewportFocus_=true;
         focused=focused&&gameViewportFocus_&&!(gameUi_&&gameUi_->wantsKeyboard())&&!uiPointer;
         game->input().setFocused(focused);
         if(focused&&game->hasCamera()&&activeRuntime()->state()==azurerender::RuntimeLifecycle::State::Running){
@@ -1731,7 +1739,7 @@ void AzureRenderApp::createTimestampQueryPools() {
 void AzureRenderApp::scrollCallback(GLFWwindow* window, double x, double y) {
     (void)x;auto* app=static_cast<AzureRenderApp*>(glfwGetWindowUserPointer(window));
 #if AZURE_WITH_EDITOR
-    if(app && app->editorLayer_ && (!app->editorLayer_->acceptsViewportShortcuts() || !app->gameViewportFocus_))return;
+    if(app && app->editorLayer_ && (!app->editorLayer_->acceptsGameInput() || !app->gameViewportFocus_))return;
 #endif
     if(app)if(auto* game=app->activeGame())game->cameraInput(0,0,static_cast<float>(y));
 }
@@ -1749,18 +1757,26 @@ void AzureRenderApp::keyCallback(
     if (application == nullptr) {
         return;
     }
+    auto* game=application->activeGame();auto* runtime=application->activeRuntime();
+    const bool escape=key==GLFW_KEY_ESCAPE&&action==GLFW_PRESS;
 #if AZURE_WITH_EDITOR
     if (application->editorLayer_ != nullptr) {
-        if (!application->editorLayer_->acceptsViewportShortcuts()) {
+        const bool gameOwnsInput=game&&application->gameViewportFocus_;
+        if (!application->editorLayer_->acceptsViewportShortcuts() &&
+            !(gameOwnsInput&&(escape||application->editorLayer_->acceptsGameInput()))) {
             return;
         }
     }
 #endif
 
     if(application->gameUi_){application->gameUi_->key(key,action!=GLFW_RELEASE);if(application->gameUi_->wantsKeyboard())return;}
-    auto* game=application->activeGame();auto* runtime=application->activeRuntime();
-    if(game&&key==GLFW_KEY_ESCAPE&&action==GLFW_PRESS){application->gameViewportFocus_=false;application->gameCursorPrimed_=false;game->input().setFocused(false);glfwSetInputMode(window,GLFW_CURSOR,GLFW_CURSOR_NORMAL);return;}
-    if(game && game->input().bound(key)){game->input().key(key,action!=GLFW_RELEASE);return;}
+    if(game&&escape){application->gameViewportFocus_=false;application->gameCursorPrimed_=false;game->input().setFocused(false);glfwSetInputMode(window,GLFW_CURSOR,GLFW_CURSOR_NORMAL);return;}
+    if(game && game->input().bound(key)){
+#if AZURE_WITH_EDITOR
+        if(application->editorLayer_&&!application->gameViewportFocus_)return;
+#endif
+        game->input().key(key,action!=GLFW_RELEASE);return;
+    }
     if(runtime && game){
 #if AZURE_WITH_EDITOR
         if(auto session=application->runOptions_.editorSession;session&&session->playing()) {
@@ -1795,7 +1811,6 @@ void AzureRenderApp::keyCallback(
         if(action==GLFW_PRESS) {
             if(key==GLFW_KEY_F9)values["stylized"]=!settings.stylizedLightingEnabled;
             if(key==GLFW_KEY_F10)values["innerOutline"]=!settings.innerOutlineEnabled;
-            if(key==GLFW_KEY_0)values["diagnosticView"]=(settings.diagnosticView+1)%5;
         }
         if(action==GLFW_PRESS||action==GLFW_REPEAT) {
             if(key==GLFW_KEY_F7)values["styleMaskStrength"]=std::max(settings.styleMaskStrength-.1F,0.F);
@@ -1811,7 +1826,7 @@ void AzureRenderApp::keyCallback(
     }
 #endif
 #if AZURE_WITH_EDITOR
-    if(application->editorLayer_ && (key==GLFW_KEY_W||key==GLFW_KEY_E||key==GLFW_KEY_R||key==GLFW_KEY_Q||key==GLFW_KEY_F))return;
+    if(application->editorLayer_ && (key==GLFW_KEY_W||key==GLFW_KEY_E||key==GLFW_KEY_R||key==GLFW_KEY_Q||key==GLFW_KEY_F||key==GLFW_KEY_0))return;
 #endif
     if (action == GLFW_PRESS) {
         if (key == GLFW_KEY_SPACE) {

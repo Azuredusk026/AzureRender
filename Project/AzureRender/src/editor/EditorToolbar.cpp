@@ -3,5 +3,5 @@
 namespace azurerender {
 bool EditorToolbar::enabled(EditorSession& s,EditorCommand c){return EditorChrome::enabled(s,c);}
 void EditorToolbar::draw(EditorSession& s,EditorWorkspace& w,float dpi,const Observer& o){EditorChrome::draw(s,w,dpi,o);}
-void EditorToolbar::status(EditorSession& s,float dpi){EditorChrome::status(s,dpi);}
+void EditorToolbar::status(EditorSession& s,float dpi,const Observer& observe,const Observer& openTask){EditorChrome::status(s,dpi,observe,openTask);}
 }

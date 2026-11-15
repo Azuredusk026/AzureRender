@@ -46,7 +46,7 @@ void ImGuiEditorLayer::queueInputEvent(nlohmann::json event) {
     }else if(action=="focus")event.at("focused").get<bool>();
     else if(action=="text")event.at("text").get<std::string>();
     else if(action=="key") {
-        const std::set<std::string> keys={"A","D","W","S","E","R","F","Q","P","Z","Y","Delete","Enter","Escape","Shift","Alt"};
+        const std::set<std::string> keys={"0","A","D","W","S","E","R","F","Q","P","Z","Y","Delete","Enter","Escape","Shift","Alt"};
         if(!keys.count(event.at("key").get<std::string>()))throw std::invalid_argument("Unsupported UI key");
         event.value("down",true);event.value("ctrl",false);
     }else if(action=="wheel") {
@@ -86,7 +86,7 @@ void ImGuiEditorLayer::injectUiEvents() {
             else if(kind=="text")io.AddInputCharactersUTF8(action.at("text").get<std::string>().c_str());
             else if(kind=="wheel")io.AddMouseWheelEvent(action.value("x",0.F),action.value("y",0.F));
             else if(kind=="key") {
-                static const std::map<std::string,ImGuiKey> keys={{"A",ImGuiKey_A},{"D",ImGuiKey_D},{"W",ImGuiKey_W},
+                static const std::map<std::string,ImGuiKey> keys={{"0",ImGuiKey_0},{"A",ImGuiKey_A},{"D",ImGuiKey_D},{"W",ImGuiKey_W},
                     {"S",ImGuiKey_S},{"E",ImGuiKey_E},{"R",ImGuiKey_R},{"F",ImGuiKey_F},{"Q",ImGuiKey_Q},{"P",ImGuiKey_P},{"Alt",ImGuiKey_LeftAlt},{"Z",ImGuiKey_Z},{"Y",ImGuiKey_Y},{"Delete",ImGuiKey_Delete},
                     {"Enter",ImGuiKey_Enter},{"Escape",ImGuiKey_Escape},{"Shift",ImGuiKey_LeftShift}};
                 io.AddKeyEvent(static_cast<ImGuiKey>(ImGuiMod_Ctrl),action.value("ctrl",false));
@@ -199,7 +199,10 @@ nlohmann::json ImGuiEditorLayer::workspaceSnapshot(bool includeHistory) const {
     data["dirty"]=context->dirty();data["undoCount"]=context->undoCount();data["selection"]=session_->selection().selected();
     data["settings"]=session_->settings().describe();
     data["project"]=context->isProject()?nlohmann::json{{"id",context->project().id},{"name",context->project().name},{"path",context->project().file.u8string()}}:nlohmann::json::object();
-    data["build"]={{"running",session_->building()},{"passed",session_->buildResult().passed},{"message",session_->buildResult().message},{"progress",session_->buildProgress()},{"install",installPath_},{"output",outputPath_}};
+    const auto& receipt=session_->buildResult();
+    data["build"]={{"running",session_->building()},{"passed",receipt.passed},{"message",receipt.message},
+        {"progress",session_->buildProgress()},{"install",installPath_},{"output",outputPath_},
+        {"resultOutput",receipt.outputDirectory.u8string()},{"resultLog",receipt.logFile.u8string()}};
     for(const auto& panel:workspace_.panels()) {
         const auto* window=ImGui::FindWindowByName(panel.title.c_str());
         data["panels"][panel.id]={{"open",panel.visible},{"docked",window&&window->DockId!=0},

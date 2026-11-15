@@ -1,6 +1,7 @@
 #include "editor/ImGuiEditorLayer.hpp"
 #include "render/CameraProjection.hpp"
 #ifdef AZURERENDER_HAS_IMGUI
+#include "editor/panels/CorePanels.hpp"
 #include <imgui.h>
 namespace azurerender {
 void ImGuiEditorLayer::processFileDrops(){
@@ -11,16 +12,22 @@ void ImGuiEditorLayer::processFileDrops(){
     }
     const auto main=ImGui::GetMainViewport();const float x=static_cast<float>(event.x)+main->Pos.x,y=static_cast<float>(event.y)+main->Pos.y;
     const auto contains=[&](const nlohmann::json& rect){return x>=rect[0].get<float>()&&y>=rect[1].get<float>()&&x<rect[0].get<float>()+rect[2].get<float>()&&y<rect[1].get<float>()+rect[3].get<float>();};
-    nlohmann::json request={{"path",event.paths.front().u8string()}};bool target=false;
-    if(workspace_.visible("viewport")&&widgets_.contains("viewport.image")&&contains(widgets_.at("viewport.image"))){
+    nlohmann::json request={{"path",event.paths.front().u8string()}};
+    const bool importPopup=widgets_.contains("assets.import-popup-region");
+    if(importPopup&&contains(widgets_.at("assets.import-popup-region")))captured.importOnly=true;
+    bool target=captured.importOnly;
+    if(!target&&workspace_.visible("viewport")&&widgets_.contains("viewport.image")&&contains(widgets_.at("viewport.image"))){
         const auto ray=cameraPickRay(session_->viewportView(),(x-imageRect_[0])/imageRect_[2],(y-imageRect_[1])/imageRect_[3],imageRect_[2]/imageRect_[3]);
         request["place"]=true;request["position"]=session_->placementPosition({{"origin",ray.origin},{"direction",ray.direction}});target=true;
-    }else{
+    }else if(!target){
         for(const auto& widget:widgets_.items())if(widget.key().rfind("node.",0)==0&&contains(widget.value())){request["place"]=true;request["parent"]=widget.key().substr(5);target=true;break;}
         if(!target&&widgets_.contains("outliner.drop-region")&&contains(widgets_.at("outliner.drop-region"))){request["place"]=true;target=true;}
         if(!target&&widgets_.contains("assets.drop-region")&&contains(widgets_.at("assets.drop-region")))target=true;
     }
-    if(target)session_->edit("asset.import-drop",request);else session_->log("请将文件拖入内容区、层级或场景视口。");
+    if(target){
+        const auto result=session_->edit("asset.import-drop",request);
+        if(result&&importPopup)assetPanel_->presentation.closeImportPopup_=true;
+    }else session_->log("请将文件拖入内容区、层级或场景视口。");
     captured.event.paths.erase(captured.event.paths.begin());if(captured.event.paths.empty())fileDrops_.pop_front();
 }
 }

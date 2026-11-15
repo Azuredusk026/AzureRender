@@ -13,8 +13,21 @@ void ImGuiEditorLayer::drawPrefabAuthoringPanel(PanelContext& panel){
     if(ui::button(ui::tr("Create from selection")))session_->edit("prefab.create",{{"nodes",session_->selection().selected()},{"path",prefabOutputPath_}});observeWidget("prefab.create");ImGui::EndDisabled();
     ImGui::Separator();
     const auto instances=panel.view().levelDocument().value("prefabs",nlohmann::json::array());
-    if(const auto* selected=panel.view().selectedNode();selected&&!selected->instanceOf.empty())prefabOverrideInstance_=selected->id.substr(0,selected->id.find(':'));
-    if(ImGui::BeginCombo(ui::tr("Instance"),prefabOverrideInstance_.c_str())){
+    const auto document=panel.view().documentId();
+    if(document!=prefabDocument_){
+        prefabDocument_=document;
+        prefabSelectionNode_.clear();
+        prefabOverrideInstance_.clear();
+    }
+    const auto* selected=panel.view().selectedNode();
+    const auto selection=selected?selected->id:std::string();
+    if(selection!=prefabSelectionNode_){
+        prefabSelectionNode_=selection;
+        if(selected&&!selected->instanceOf.empty()){
+            prefabOverrideInstance_=selection.substr(0,selection.find(':'));
+        }
+    }
+    if(ImGui::BeginCombo(ui::tr("Instance"),prefabOverrideInstance_.empty()?ui::tr("选择预制体实例"):prefabOverrideInstance_.c_str())){
         for(const auto& instance:instances){const auto id=instance.at("instance").get<std::string>();if(ImGui::Selectable(id.c_str(),id==prefabOverrideInstance_))prefabOverrideInstance_=id;observeWidget("prefab.instance."+id);}ImGui::EndCombo();
     }observeWidget("prefab.instance");
     bool present=false;for(const auto& instance:instances)if(instance.at("instance")==prefabOverrideInstance_)present=true;

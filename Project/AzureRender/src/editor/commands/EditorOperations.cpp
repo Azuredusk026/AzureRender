@@ -76,7 +76,11 @@ EditRegistry editorOperations(EditorSession& session) {
         c.createNode(std::string(),parent);
     });
     registry.add({"node.presets",1,schema(),false,false,false},[&session](EditorContext&,const Json&)->Json{return session.nodePresets().describe();});
-    document("node.create-preset",schema({{"preset",text},{"id",text},{"parent",text}},{"preset"}),[&session](auto& c,const auto& a){session.nodePresets().create(c,a.at("preset").template get<std::string>(),a.value("id",std::string()),a.value("parent",std::string()));session.assetReloadRequested_=true;});
+    document("node.create-preset",schema({{"preset",text},{"id",text},{"parent",text}},{"preset"}),
+        [&session](auto& context,const auto& args){
+            session.nodePresets().create(context,args.at("preset").template get<std::string>(),
+                args.value("id",std::string()),args.value("parent",std::string()));
+        });
     document("node.rename",schema({{"value",text}},{"value"}),[](auto& c,const auto& a) {
         if(!c.selectedNode())throw std::invalid_argument("Rename requires a selected node");
         c.setSelectedNodeName(a.at("value").template get<std::string>());
@@ -357,6 +361,22 @@ EditRegistry editorOperations(EditorSession& session) {
     });
     registry.add({"viewport.describe",1,schema(),false,false,false},[&session](EditorContext&,const Json&)->Json {
         const auto& view=session.viewportView_;return {{"projection",view.projection==CameraProjectionKind::Orthographic?"orthographic":"perspective"},{"position",view.position},{"target",view.target},{"up",view.up},{"fov",view.fov},{"orthoHeight",view.orthoHeight},{"near",view.nearPlane},{"far",view.farPlane},{"projectionOffsetX",view.projectionOffsetX},{"projectionOffsetY",view.projectionOffsetY}};
+    });
+    registry.add({"viewport.diagnostic-mode",1,schema({{"value",integer}},{"value"}),false,false,true},[&session](EditorContext&,const Json& a)->Json{
+        const auto mode=a.at("value").get<int>();
+        if(mode==-1)session.viewportDiagnosticMode_.reset();
+        else if(mode>=0 && static_cast<std::size_t>(mode)<session.viewportDiagnosticModes_.size()){
+            session.viewportDiagnosticMode_=static_cast<unsigned>(mode);
+        }else throw EditRejection("Diagnostic mode unavailable in the active renderer");
+        return nullptr;
+    });
+    registry.add({"viewport.diagnostic-cycle",1,schema(),false,false,true},[&session](EditorContext& c,const Json&)->Json{
+        const auto modes=session.viewportDiagnosticModes_.size();
+        if(modes>1){
+            const auto current=session.viewportDiagnosticMode_.value_or(c.renderSettings().diagnosticView);
+            session.viewportDiagnosticMode_=static_cast<unsigned>((current+1)%modes);
+        }
+        return nullptr;
     });
     registry.add({"viewport.overlays",1,schema(),false,false,false},[&session](EditorContext&,const Json&)->Json{return session.viewportOverlays().describe();});
     registry.add({"viewport.overlay-policy",1,schema({{"category",text},{"policy",text}},{"category","policy"}),false,false,true},[&session](EditorContext&,const Json& a)->Json{

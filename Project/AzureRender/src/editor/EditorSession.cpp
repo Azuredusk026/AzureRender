@@ -105,6 +105,7 @@ std::string EditorSession::startReimport(const nlohmann::json& request) {
 }
 
 void EditorSession::startImportTask(const std::filesystem::path& path) {
+    if(dropImporting()||creatingProject_||pendingProject_)throw EditRejection("Finish the active task before importing assets");
     contentDirectories_.cancelRefresh();
     context_->startImport(path);
     importTask_=tasks_->add("asset.import: "+path.u8string(),context_->project().file.u8string(),{
@@ -161,6 +162,11 @@ void EditorSession::pollBuild() {
 }
 bool EditorSession::playing() const noexcept{return play_!=nullptr;}
 bool EditorSession::simulating() const noexcept{return play_&&play_->simulation;}
+void EditorSession::setViewportDiagnosticModes(std::vector<std::string> modes){
+    if(modes==viewportDiagnosticModes_)return;
+    viewportDiagnosticModes_=std::move(modes);
+    viewportDiagnosticMode_.reset();
+}
 GameRuntime* EditorSession::game() noexcept{return play_?play_->game.get():nullptr;}
 RuntimeLifecycle* EditorSession::runtime() noexcept{return play_?&play_->runtime:nullptr;}
 LevelSession* EditorSession::levels() noexcept{return play_?play_->levels.get():nullptr;}
@@ -218,7 +224,7 @@ bool EditorSession::editEnabled(const EditDescriptor& descriptor) const {
     return !(descriptor.requiresIdle||descriptor.modifiesDocument)||(!playing()&&!building());
 }
 std::string EditorSession::startProjectCreation(const std::string& templateId,const std::filesystem::path& destination,const std::string& name) {
-    if(creatingProject_||playing()||building()||context_->importing()||reimporting_||gizmo_->active()||pendingProject_||
+    if(creatingProject_||playing()||building()||context_->importing()||dropImporting()||reimporting_||gizmo_->active()||pendingProject_||
         (proposals_&&proposals_->state()==ProposalState::Generating)||documentGuard_->state()!=DocumentActionState::Idle)
         throw EditRejection("Finish the active task before creating a project");
     auto job=std::make_shared<ProjectCreateJob>(templateId,destination,name);
@@ -234,7 +240,7 @@ std::string EditorSession::startProjectCreation(const std::string& templateId,co
 void EditorSession::requestProject(std::shared_ptr<EditorContext> candidate) {
     if(!candidate||!candidate->isProject())throw EditRejection("Prepared project is required");
     if(documents_.dirtyExcept(context_->documentId()))throw EditRejection("Save or close other modified documents before switching project");
-    if(creatingProject_||playing()||building()||context_->importing()||reimporting_||gizmo_->active()||pendingProject_||
+    if(creatingProject_||playing()||building()||context_->importing()||dropImporting()||reimporting_||gizmo_->active()||pendingProject_||
         (proposals_&&proposals_->state()==ProposalState::Generating)||
         documentGuard_->state()==DocumentActionState::AwaitingDecision||documentGuard_->state()==DocumentActionState::Failed)
         throw EditRejection("Finish the active task before switching project");
@@ -254,9 +260,10 @@ void EditorSession::activatePendingProject() {
         if(model_)proposals=std::make_unique<ProposalController>(*pendingProject_,*edits,generators_,*model_);
         projects_->remember(pendingProject_->project());
         const auto settingsResult=loadProjectSettings(settings_,pendingProject_->project());if(!settingsResult.passed)throw EditRejection(settingsResult.diagnostic);settings_.applyPending();
-        references_.cancel();content_.reset();contentDirectories_.reset();materials_.clear();prefabs_.clear();context_->detachRenderSettings();proposals_.reset();
+        references_.cancel();assetReveal_.clear();content_.reset();contentDirectories_.reset();materials_.clear();prefabs_.clear();context_->detachRenderSettings();proposals_.reset();
         selection_=std::move(selection);gizmo_=std::move(gizmo);edits_=std::move(edits);
         context_=std::move(pendingProject_);referenceViews_=std::move(referenceViews);
+        viewportDiagnosticMode_.reset();
         proposals_=std::move(proposals);documents_.clear();retainDocument();documentGuard_->reset();runtimeReset_=true;assetReloadRequested_=true;
     }catch(const std::exception& error){pendingProject_.reset();documentGuard_->reset();recordError("project.open",error.what());}
 }
@@ -383,7 +390,7 @@ bool EditorSession::pollWindowClose(){
     if(!windowClosePending_)return true;
     references_.cancel();
     if(gizmo_&&gizmo_->active())gizmo_->cancel();
-    if(context_->importing()||creatingProject_||pendingProject_||reimporting_||building()||
+    if(context_->importing()||dropImporting()||creatingProject_||pendingProject_||reimporting_||building()||
        !pendingDocument_.empty()||!closingDocument_.empty()||documentGuard_->state()!=DocumentActionState::Idle)return true;
     windowClosePending_=false;
     return requestDocumentAction(DocumentAction::Close);

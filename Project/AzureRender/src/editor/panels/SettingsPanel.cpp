@@ -32,7 +32,9 @@ void ImGuiEditorLayer::drawSettingsPanel(PanelContext&) {
     ui::searchField("##settings-search",ui::tr("搜索名称或说明"),settingsFilter_);observeWidget("settings.search");
     auto& registry=session_->settings();const auto descriptors=registry.describe();
     const auto source=workspace_.settingsCategory==1?SettingSource::Project:workspace_.settingsCategory==2?SettingSource::Console:SettingSource::UserFile;
-    if(workspace_.settingsCategory==2)ImGui::TextWrapped(ui::tr("诊断设置仅对当前会话生效。"));
+    const bool persistent=workspace_.settingsCategory!=2;
+    const auto footerHeight=persistent?ImGui::GetFrameHeightWithSpacing()*2:0.F;
+    ImGui::BeginChild("settings-fields",{0,-footerHeight},ImGuiChildFlags_None);
     for(const auto& field:descriptors.items()) {
         if(!field.value().value("editorVisible",true))continue;
         const bool editor=field.key().rfind("editor.",0)==0;
@@ -54,6 +56,19 @@ void ImGuiEditorLayer::drawSettingsPanel(PanelContext&) {
                 }
                 value=v;if(changed)settingsSaveRequested_=true;
             }
+            else if(field.key()=="render.diagnosticView"){
+                const auto& modes=session_->viewportDiagnosticModes();
+                const auto current=value.get<std::size_t>();
+                const auto count=std::min(modes.size(),d.at("maximum").get<std::size_t>()+1);
+                const auto* label=current<count?ui::tr(modes[current].c_str()):ui::tr("当前渲染器不支持此模式");
+                if(ImGui::BeginCombo("##value",label)){
+                    for(std::size_t option=0;option<count;++option){
+                        if(ImGui::Selectable(ui::tr(modes[option].c_str()),option==current)){value=option;changed=true;}
+                        observeWidget("setting.render.diagnosticView."+std::to_string(option));
+                    }
+                    ImGui::EndCombo();
+                }
+            }
             else if(value.is_boolean()){bool v=value.get<bool>();changed=ImGui::Checkbox("##value",&v);value=v;}
             else if(value.is_number_integer()){std::int64_t v=value.get<std::int64_t>();changed=ImGui::InputScalar("##value",ImGuiDataType_S64,&v);value=v;}
             else if(value.is_number()){float v=value.get<float>();changed=ImGui::InputFloat("##value",&v,0,0,"%.3f");value=v;}
@@ -61,16 +76,23 @@ void ImGuiEditorLayer::drawSettingsPanel(PanelContext&) {
             observeWidget("setting."+field.key());
         });
         if(changed){const auto result=session_->edit("settings.set",{{"name",field.key()},{"value",value},{"source",settingSourceName(source)}});settingDiagnostic_=result?std::string():session_->lastError();}
-        if(ui::button(ui::tr("恢复默认值"))){const auto result=session_->edit("settings.reset",{{"name",field.key()},{"source",settingSourceName(source)}});settingDiagnostic_=result?std::string():session_->lastError();}
+        if(ui::button(ui::tr("清除本层设置"))){const auto result=session_->edit("settings.reset",{{"name",field.key()},{"source",settingSourceName(source)}});settingDiagnostic_=result?std::string():session_->lastError();}
         observeWidget("setting.reset."+field.key());}
-        if(ImGui::IsItemHovered())ImGui::SetTooltip("%s",ui::tr(d.at("description").get<std::string>().c_str()));
+        const auto active=d.at("source").get<std::string>();
+        ImGui::TextDisabled(ui::tr("当前来源：%s"),ui::tr(active.c_str()));
+        observeWidget("setting.source."+field.key());
+        if(ImGui::IsItemHovered())ImGui::SetTooltip("%s",d.at("value").dump().c_str());
         ImGui::Separator();
     }
-    if(workspace_.settingsCategory!=2&&ui::button(workspace_.settingsCategory==1?ui::tr("保存项目设置"):ui::tr("保存个人偏好"))){
-        if(workspace_.settingsCategory==1){const auto result=session_->edit("settings.project-save");settingDiagnostic_=result?std::string():session_->lastError();}
-        else settingsSaveRequested_=true;
+    ImGui::EndChild();
+    if(persistent){
+        if(ui::button(workspace_.settingsCategory==1?ui::tr("保存项目设置"):ui::tr("保存个人偏好"))){
+            if(workspace_.settingsCategory==1){const auto result=session_->edit("settings.project-save");settingDiagnostic_=result?std::string():session_->lastError();}
+            else settingsSaveRequested_=true;
+        }
+        observeWidget("settings.save");
     }
-    observeWidget("settings.save");ui::resultMessage(settingDiagnostic_,true);ImGui::End();
+    ui::resultMessage(settingDiagnostic_,true);ImGui::End();
 }
 }
 #endif

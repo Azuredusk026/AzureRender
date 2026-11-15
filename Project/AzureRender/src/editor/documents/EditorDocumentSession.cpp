@@ -44,6 +44,7 @@ void EditorSession::activateDocument(const std::string& id){
     context_->closeEditMerge();context_->detachRenderSettings();proposals_.reset();
     context_=next.context;edits_=next.edits;selection_=next.selection;gizmo_=next.gizmo;proposals_=std::move(proposal);
     viewportView_=next.view;viewportViewChanged_=true;runtimeReset_=true;assetReloadRequested_=true;
+    viewportDiagnosticMode_.reset();
 }
 void EditorSession::pollDocuments(){
     if(!closingDocument_.empty()){

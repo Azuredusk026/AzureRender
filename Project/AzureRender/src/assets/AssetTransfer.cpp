@@ -30,8 +30,10 @@ std::string fingerprint(const std::filesystem::path& path,const AssetCancellatio
 void copyInput(const std::filesystem::path& source,const std::filesystem::path& target,
                const AssetTransferRequest& request,AssetTransferReport& report,const AssetCancellation& cancelled) {
     check(cancelled);
-    if(!std::filesystem::is_regular_file(source)||std::filesystem::file_size(source)>request.maxSourceBytes)
-        throw std::runtime_error("Asset input is missing or exceeds its size budget");
+    if(!std::filesystem::is_regular_file(source))
+        throw std::runtime_error("Asset input is missing: "+source.u8string());
+    if(std::filesystem::file_size(source)>request.maxSourceBytes)
+        throw std::runtime_error("Asset input exceeds its size budget: "+source.u8string());
     const auto before=fingerprint(source,cancelled);
     std::filesystem::create_directories(target.parent_path());
     std::ifstream input(source,std::ios::binary);std::ofstream output(target,std::ios::binary);

@@ -132,7 +132,7 @@ ImGuiEditorLayer::ImGuiEditorLayer(std::shared_ptr<EditorSession> session)
         [this]{inspectorPanel_->presentation.focusObjectName_=true;},
         [this](nlohmann::json request){assetPanel_->presentation.exportRequest_=std::move(request);assetPanel_->presentation.exportDialogRequested_=true;},
         [this](const auto& node){drawMaterialSlots(node);},[this](const auto& node){drawPhysicsAuthoring(node);},
-        [this]{drawTextureAssetPanel();},[this]{drawMaterialAssetPanel();},
+        [this]{drawTextureAssetPanel();},[this](const auto& asset){openMaterialAsset(asset);},
         [this](auto handle){return previewTexture(handle);},
         [this](const auto* label,auto& value,const auto& purpose,bool directory,const auto& extensions){drawPathInput(label,value,purpose,directory,extensions);}};
     registry.registerFactory({"panel.outliner",1,{"editor.panel"},{}},[this,services]{auto panel=std::make_unique<OutlinerPanel>(services);outlinerPanel_=panel.get();return panel;});
@@ -326,6 +326,7 @@ void ImGuiEditorLayer::drawPanels() {
     drawWorkspace();
     const ImGuiIO& io = ImGui::GetIO();
     viewportFocused_=false;viewportAcceptsShortcuts_=false;
+    gameCaptureRequested_=false;gameInputAllowed_=false;
     const bool nativeFocus=!io.AppFocusLost;
     if(session_->references().active()&&(!nativeFocus||ImGui::IsKeyPressed(ImGuiKey_Escape,false)))session_->edit("reference.cancel");
     if(!nativeFocus || !workspace_.visible("viewport")) {
@@ -338,7 +339,12 @@ void ImGuiEditorLayer::drawPanels() {
         ImGui::BeginDisabled((session_->playing() || session_->building()) && !editable && panel->id()!="build" && panel->id()!="settings");auto panelContext=session_->panelContext();panel->draw(panelContext);ImGui::EndDisabled();
     }
     drawAssetTransferPanel();
+    drawMaterialAssetPanel();
     processFileDrops();
+    if(session_->assetRevealPending()){
+        workspace_.setVisible("assets",true);
+        ImGui::SetWindowFocus(ui::tr("资源###assets"));
+    }
     const auto* nav=ImGui::GetCurrentContext()->NavWindow;
     const bool sceneFocus=viewportFocused_ || (nav && std::string(nav->Name).find("###outliner")!=std::string::npos);
     const bool modal=ImGui::IsPopupOpen(nullptr,ImGuiPopupFlags_AnyPopupId|ImGuiPopupFlags_AnyPopupLevel);
@@ -356,17 +362,34 @@ void ImGuiEditorLayer::drawPanels() {
         if(routed.consumed)session_->edit(routed.operation,routed.mode>=0?nlohmann::json{{"value",routed.mode}}:nlohmann::json::object());
     }
     auto& guard=session_->documentGuard();
-    if(guard.state()==DocumentActionState::AwaitingDecision || guard.state()==DocumentActionState::Failed)ImGui::OpenPopup("Unsaved changes");
+    if(guard.state()==DocumentActionState::AwaitingDecision || guard.state()==DocumentActionState::Failed){
+        ImGui::OpenPopup("Unsaved changes");
+        const auto* viewport=ImGui::GetMainViewport();
+        const auto width=std::min(520.F*dpi_,viewport->WorkSize.x*.9F);
+        ImGui::SetNextWindowPos(viewport->GetWorkCenter(),ImGuiCond_Always,{.5F,.5F});
+        ImGui::SetNextWindowSize({width,0},ImGuiCond_Always);
+    }
     if(ImGui::BeginPopupModal("Unsaved changes",nullptr,ImGuiWindowFlags_AlwaysAutoResize)) {
-        ImGui::TextUnformatted(guard.action()==DocumentAction::Close?"Save changes before closing?":guard.action()==DocumentAction::Open?"Save changes before switching project?":"Save changes before reloading?");
-        if(!guard.diagnostic().empty())ImGui::TextWrapped("%s",guard.diagnostic().c_str());
+        ImGui::TextWrapped("%s",guard.action()==DocumentAction::Close?"Save changes before closing?":guard.action()==DocumentAction::Open?"Save changes before switching project?":"Save changes before reloading?");
+        if(!guard.diagnostic().empty()){
+            const auto size=ImGui::GetMainViewport()->WorkSize;
+            const auto height=std::min(130.F*dpi_,size.y*.25F);
+            if(ImGui::BeginChild("document-diagnostic",{0,height},ImGuiChildFlags_Borders)){
+                ImGui::TextWrapped("%s",guard.diagnostic().c_str());
+            }
+            ImGui::EndChild();
+        }
         for(const auto* decision:{"save","discard","cancel"}) {
             if(ImGui::Button(decision)) {session_->edit("document.decision",{{"value",decision}});if(guard.state()!=DocumentActionState::Failed)ImGui::CloseCurrentPopup();}
             observeWidget(std::string("document.")+decision);ImGui::SameLine();
         }
         ImGui::NewLine();ImGui::EndPopup();
     }
-    EditorToolbar::status(*session_,dpi_);
+    EditorToolbar::status(*session_,dpi_,[this](const auto& id){observeWidget(id);},[this](const auto& id){
+        consoleTaskReveal_=id;
+        workspace_.setVisible("console",true);
+        ImGui::SetWindowFocus(ui::tr("日志###console"));
+    });
     if(!ImGui::IsAnyItemActive()&&!viewportGizmoDragActive_)context_->closeEditMerge();
 #ifdef IMGUI_HAS_DOCK
     for(const auto& panel:workspace_.panels())if(const auto* window=ImGui::FindWindowByName(panel.title.c_str())) {

@@ -37,12 +37,25 @@ void ImGuiEditorLayer::drawViewportPanel(PanelContext&) {
     if(!compact||session_->documents().describe(context_->documentId(),false).size()>1)drawDocumentTabs();
     viewportFocused_ = ImGui::IsWindowFocused(
         ImGuiFocusedFlags_RootAndChildWindows);
+    bool gameUiTyping=false;
     if (!viewportTextures_.empty()) {
         ImGui::BeginDisabled(session_->playing()||session_->building());
-        for(const auto& entry:std::vector<std::pair<const char*,unsigned>>{{"Hand",3},{"Move",0},{"Rotate",1},{"Scale",2}}) {
-            const char* shortcut=entry.second==0?"W":entry.second==1?"E":entry.second==2?"R":"Q";
-            if(ui::button(compact?shortcut:entry.second==0?ui::tr("移动"):entry.second==1?ui::tr("旋转"):entry.second==2?ui::tr("缩放"):ui::tr("平移"),{ui::ButtonVariant::Toolbar,static_cast<unsigned>(context_->gizmoMode())==entry.second}))session_->edit("viewport.gizmo-mode",{{"value",entry.second}});
-            observeWidget(std::string("mode.")+entry.first);ImGui::SameLine();
+        struct ToolButton {const char* id;const char* label;const char* binding;EditorContext::GizmoMode mode;};
+        const ToolButton tools[]={
+            {"Hand","选择","editor.shortcuts.select",EditorContext::GizmoMode::Select},
+            {"Move","移动","editor.shortcuts.move",EditorContext::GizmoMode::Translate},
+            {"Rotate","旋转","editor.shortcuts.rotate",EditorContext::GizmoMode::Rotate},
+            {"Scale","缩放","editor.shortcuts.scale",EditorContext::GizmoMode::Scale},
+        };
+        for(const auto& tool:tools) {
+            const auto shortcut=session_->settings().get(tool.binding).get<std::string>();
+            const auto* label=ui::tr(tool.label);
+            const auto tooltip=std::string(label)+" ("+shortcut+")";
+            const auto buttonLabel=(compact?shortcut:std::string(label))+"###viewport-tool-"+tool.id;
+            if(ui::button(buttonLabel.c_str(),{ui::ButtonVariant::Toolbar,context_->gizmoMode()==tool.mode,false,tooltip})){
+                session_->edit("viewport.gizmo-mode",{{"value",static_cast<unsigned>(tool.mode)}});
+            }
+            observeWidget(std::string("mode.")+tool.id);ImGui::SameLine();
         }
         ImGui::EndDisabled();ui::nextToolbarItem(ui::buttonWidth(ui::tr("聚焦选择")));
         if(ui::button(ui::tr("聚焦选择"),{ui::ButtonVariant::Toolbar,false,context_->selectedNodes().empty()})) {
@@ -82,6 +95,32 @@ void ImGuiEditorLayer::drawViewportPanel(PanelContext&) {
                 if(ImGui::InputFloat(entry.first,&step))session_->edit("settings.set",{{"name",entry.second},{"value",step}});
             }
             ImGui::EndDisabled();ImGui::EndPopup();
+        }
+        const auto& modes=session_->viewportDiagnosticModes();
+        if(modes.size()>1){
+            const auto mode=session_->viewportDiagnosticMode();
+            const auto* current=mode?ui::tr(modes.at(*mode).c_str()):ui::tr("场景显示");
+            const std::string label=std::string(current)+"###viewport-diagnostics";
+            ui::nextToolbarItem(ui::buttonWidth(label.c_str()));
+            const ui::ButtonOptions options{ui::ButtonVariant::Toolbar,mode.has_value(),
+                session_->playing()||session_->building(),ui::tr("视口观察模式 (0)")};
+            if(ui::button(label.c_str(),options))ImGui::OpenPopup("viewport-diagnostics");
+            observeWidget("viewport.diagnostics");
+            if(ImGui::BeginPopup("viewport-diagnostics")){
+                ImGui::BeginDisabled(session_->playing()||session_->building());
+                if(ImGui::MenuItem(ui::tr("使用场景显示"),nullptr,!mode)){
+                    session_->edit("viewport.diagnostic-mode",{{"value",-1}});
+                }
+                observeWidget("viewport.diagnostic.default");
+                for(std::size_t i=0;i<modes.size();++i){
+                    if(ImGui::MenuItem(ui::tr(modes[i].c_str()),nullptr,mode && *mode==i)){
+                        session_->edit("viewport.diagnostic-mode",{{"value",i}});
+                    }
+                    observeWidget("viewport.diagnostic."+std::to_string(i));
+                }
+                ImGui::EndDisabled();
+                ImGui::EndPopup();
+            }
         }
         const ImVec2 available = ImGui::GetContentRegionAvail();
         const ImVec2 framebufferScale = ImGui::GetIO().DisplayFramebufferScale;
@@ -157,10 +196,22 @@ void ImGuiEditorLayer::drawViewportPanel(PanelContext&) {
             if(auto* game=session_->game();game && game->hasCamera())line({game->camera().target(),game->camera().position()},IM_COL32(255,80,170,255));
             draw->PopClipRect();
         }
+        const bool hovered=ImGui::IsItemHovered();
+        const bool play=session_->playing()&&!session_->simulating();
+        bool gameUiPointer=false;
         if(session_->playing() && gameUi_ && imageSize.x>0 && imageSize.y>0){
-            const auto mouse=ImGui::GetMousePos();const bool consumed=gameUi_->pointer(static_cast<int>((mouse.x-itemMin.x)*viewportWidth_/imageSize.x),static_cast<int>((mouse.y-itemMin.y)*viewportHeight_/imageSize.y),ImGui::IsItemHovered() && ImGui::IsMouseDown(ImGuiMouseButton_Left));
-            if(consumed||gameUi_->wantsKeyboard())viewportAcceptsShortcuts_=false;
+            if(hovered&&glfwGetInputMode(window_,GLFW_CURSOR)!=GLFW_CURSOR_DISABLED){
+                const auto mouse=ImGui::GetMousePos();
+                gameUiPointer=gameUi_->pointer(static_cast<int>((mouse.x-itemMin.x)*viewportWidth_/imageSize.x),
+                    static_cast<int>((mouse.y-itemMin.y)*viewportHeight_/imageSize.y),ImGui::IsMouseDown(ImGuiMouseButton_Left));
+            }else gameUi_->pointer(-1,-1,false);
+            gameUiTyping=play&&gameUi_->wantsKeyboard();
             if(viewportFocused_){for(auto character:ImGui::GetIO().InputQueueCharacters)gameUi_->character(character);}
+        }
+        if(play && hovered && ImGui::IsMouseClicked(ImGuiMouseButton_Left) && !gameUiPointer && !gameUiTyping){
+            ImGui::SetWindowFocus();
+            viewportFocused_=true;
+            gameCaptureRequested_=true;
         }
         if(!session_->editCameraActive()&&session_->game()){
             const auto selected=session_->game()->renderCamera();
@@ -169,7 +220,6 @@ void ImGuiEditorLayer::drawViewportPanel(PanelContext&) {
                 draw->AddText({itemMin.x+12,itemMin.y+12},IM_COL32(255,205,105,255),ui::tr("未找到启用的游戏相机，正在使用默认视角"));
             }
         }
-        const bool hovered=ImGui::IsItemHovered();
         if(session_->editCameraActive())drawViewportOverlays(itemMin,imageSize);
         const bool orientationOver=session_->editCameraActive()&&drawViewportOrientation(itemMin,imageSize);
         const bool gizmoOver=orientationOver||(session_->editCameraActive()&&drawViewportGizmo(itemMin,imageSize));
@@ -182,11 +232,11 @@ void ImGuiEditorLayer::drawViewportPanel(PanelContext&) {
             if(ImGui::IsMouseClicked(ImGuiMouseButton_Right))navigationButton_=ImGuiMouseButton_Right;
             else if(ImGui::IsMouseClicked(ImGuiMouseButton_Middle))navigationButton_=ImGuiMouseButton_Middle;
             else if(navIo.KeyAlt && ImGui::IsMouseClicked(ImGuiMouseButton_Left))navigationButton_=ImGuiMouseButton_Left;
-            if(navigationButton_>=0){navigationMoved_=false;ImGui::SetWindowFocus();viewportFocused_=true;}
+            if(navigationButton_>=0){navigationUsed_=false;ImGui::SetWindowFocus();viewportFocused_=true;}
         }
-        if(navigationButton_>=0&&ImGui::IsMouseDragging(navigationButton_,3*dpi_))navigationMoved_=true;
+        if(navigationButton_>=0&&ImGui::IsMouseDragging(navigationButton_,3*dpi_))navigationUsed_=true;
         if(navigationButton_>=0 && (!ImGui::IsMouseDown(navigationButton_) || ImGui::IsKeyPressed(ImGuiKey_Escape,false))){
-            const bool contextClick=navigationButton_==ImGuiMouseButton_Right&&!navigationMoved_&&ImGui::IsMouseReleased(ImGuiMouseButton_Right);
+            const bool contextClick=navigationButton_==ImGuiMouseButton_Right&&!navigationUsed_&&ImGui::IsMouseReleased(ImGuiMouseButton_Right);
             navigationButton_=-1;if(contextClick)ImGui::OpenPopup(ui::tr("Viewport context"));
         }
         setNavigationCapture(navigationButton_==ImGuiMouseButton_Right);
@@ -202,7 +252,13 @@ void ImGuiEditorLayer::drawViewportPanel(PanelContext&) {
         }
         if (hovered || navigationButton_>=0 || viewportGizmoDragActive_) {
             const ImGuiIO& io = ImGui::GetIO();
-            if(navigationAllowed && navigationButton_==ImGuiMouseButton_Right){if(io.MouseWheel!=0){const auto changed=session_->edit("viewport.fly-speed",{{"steps",io.MouseWheel}});if(changed)settingsSaveRequested_=true;}}
+            if(navigationAllowed && navigationButton_==ImGuiMouseButton_Right){
+                if(io.MouseWheel!=0){
+                    navigationUsed_=true;
+                    const auto changed=session_->edit("viewport.fly-speed",{{"steps",io.MouseWheel}});
+                    if(changed)settingsSaveRequested_=true;
+                }
+            }
             else if(navigationAllowed && hovered && !orientationOver)viewportInput_.zoomSteps += io.MouseWheel;
             const float sx=session_->settings().get("editor.camera.invertX").get<bool>()?-1.F:1.F;
             const float sy=session_->settings().get("editor.camera.invertY").get<bool>()?-1.F:1.F;
@@ -214,6 +270,7 @@ void ImGuiEditorLayer::drawViewportPanel(PanelContext&) {
                 viewportInput_.flyForward=static_cast<float>(ImGui::IsKeyDown(ImGuiKey_W))-static_cast<float>(ImGui::IsKeyDown(ImGuiKey_S));
                 viewportInput_.flyRight=static_cast<float>(ImGui::IsKeyDown(ImGuiKey_D))-static_cast<float>(ImGui::IsKeyDown(ImGuiKey_A));
                 viewportInput_.flyUp=static_cast<float>(ImGui::IsKeyDown(ImGuiKey_E))-static_cast<float>(ImGui::IsKeyDown(ImGuiKey_Q));
+                navigationUsed_ |= viewportInput_.flyForward!=0 || viewportInput_.flyRight!=0 || viewportInput_.flyUp!=0;
                 viewportInput_.flySpeed=session_->settings().get("editor.camera.flySpeed").get<float>()*(io.KeyShift?session_->settings().get("editor.camera.boost").get<float>():1.F);
                 viewportInput_.deltaSeconds=io.DeltaTime;
             }else if(navigationButton_==ImGuiMouseButton_Left) {
@@ -242,7 +299,7 @@ void ImGuiEditorLayer::drawViewportPanel(PanelContext&) {
 
         }
     }
-    if(!viewportTextures_.empty()){
+    if(!viewportTextures_.empty() && session_->editCameraActive()){
         auto* draw=ImGui::GetWindowDrawList();const bool flying=navigationButton_==ImGuiMouseButton_Right;
         const float speed=session_->settings().get("editor.camera.flySpeed").get<float>()*(flying&&ImGui::GetIO().KeyShift?session_->settings().get("editor.camera.boost").get<float>():1.F);
         char status[160];if(flying)std::snprintf(status,sizeof(status),ui::tr("Fly | %.2f m/s\nWASD  E/Q  Shift  Wheel speed  Esc release"),static_cast<double>(speed));
@@ -251,8 +308,27 @@ void ImGuiEditorLayer::drawViewportPanel(PanelContext&) {
         const ImVec2 lower{imageRect_[0]+imageRect_[2],imageRect_[1]+imageRect_[3]},hud{imageRect_[0]+metrics.padding,lower.y-46*dpi_};
         draw->PushClipRect({imageRect_[0],imageRect_[1]},lower,true);draw->AddRectFilled({hud.x-4*dpi_,hud.y-2*dpi_},{std::min(lower.x,hud.x+330*dpi_),hud.y+42*dpi_},ImGui::ColorConvertFloat4ToU32(background),4*dpi_);draw->AddText(hud,ImGui::ColorConvertFloat4ToU32(theme.text),status);draw->PopClipRect();
     }
+    if(!viewportTextures_.empty() && session_->playing() && !session_->simulating()){
+        const bool captured=glfwGetInputMode(window_,GLFW_CURSOR)==GLFW_CURSOR_DISABLED;
+        auto* draw=ImGui::GetWindowDrawList();
+        const ImVec2 minimum{imageRect_[0],imageRect_[1]};
+        const ImVec2 maximum{minimum.x+imageRect_[2],minimum.y+imageRect_[3]};
+        const auto* game=session_->game();
+        const auto* hint=ui::tr(captured?"按 Esc 释放鼠标":game&&game->hasCamera()?"点击游戏画面捕获鼠标":"点击游戏画面聚焦输入");
+        const auto size=ImGui::CalcTextSize(hint);
+        const ImVec2 position{minimum.x+metrics.padding,maximum.y-size.y-metrics.padding};
+        draw->PushClipRect(minimum,maximum,true);
+        draw->AddRectFilled({position.x-4*dpi_,position.y-2*dpi_},
+            {position.x+size.x+4*dpi_,position.y+size.y+2*dpi_},IM_COL32(20,25,32,215),4*dpi_);
+        draw->AddText(position,IM_COL32_WHITE,hint);
+        draw->PopClipRect();
+        const auto& io=ImGui::GetIO();
+        gameInputAllowed_=viewportFocused_&&!gameUiTyping&&!io.WantTextInput&&!io.AppFocusLost
+            && !ImGui::IsPopupOpen(nullptr,ImGuiPopupFlags_AnyPopupId|ImGuiPopupFlags_AnyPopupLevel);
+    }
     viewportAcceptsShortcuts_ = (viewportFocused_ || navigationButton_>=0)
         && !ImGui::GetIO().WantTextInput
+        && !ImGui::GetIO().AppFocusLost
         && !ImGui::IsAnyItemActive();
     if(compact)ImGui::PopStyleVar();
     ImGui::End();
