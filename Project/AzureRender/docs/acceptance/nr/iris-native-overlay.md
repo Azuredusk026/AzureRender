@@ -157,4 +157,6 @@ NVIDIA 的 Vulkan 硬件回放逐点核对完整虹膜。隐式采样与显式�
 
 从任一片元的透视插值结果和一阶导数重建邻接像素时，两块显卡的四元组复算均保持全部 255 处计算层级，归一化纹理坐标的峰差低于 0.00000024。实际 Player 继续按独立的显示误差门槛验收。
 
-[层级足迹结果](evidence/2026-11-15/iris-native-mip-footprints/results.json)和[验证归档](evidence/2026-11-15/iris-native-mip-footprints/validation.zip)保存逐设备对照、留出控制和投影复算。
+NVIDIA 的 Player 捕获用同一规则复算 255 处 Vulkan 硬件查询。对角足迹的 255 处层级均与硬件一致，欧氏梯度的 242 处层级一致。该捕获的 Intel 回放结果见 Vulkan 采样小节。双设备实际输出继续以各自的独立渲染结果验收。
+
+[层级足迹结果](evidence/2026-11-15/iris-native-mip-footprints/results.json)和[验证归档](evidence/2026-11-15/iris-native-mip-footprints/validation.zip)保存逐设备对照、留出控制、投影复算及 Vulkan 查询。

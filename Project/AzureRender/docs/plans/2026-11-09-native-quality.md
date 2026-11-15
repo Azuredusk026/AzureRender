@@ -209,7 +209,7 @@ Intel 头发颜色继续核对纹理梯度与层级选择。
 
 [描边与透明衣料提交顺序](../acceptance/nr/evidence/2026-11-15/body-outline-before-transparent-cloth/results.json)完成双设备复测，衣料覆盖区超过八个色阶的像素均由 56 降至 5。覆盖区外逐像素一致。
 
-[原生虹膜层级足迹](../acceptance/nr/evidence/2026-11-15/iris-native-mip-footprints/results.json)按设备的硬件匹配范围复算双设备各 255 处，Player 严格眼部验收继续进行。
+[原生虹膜层级足迹](../acceptance/nr/evidence/2026-11-15/iris-native-mip-footprints/results.json)按设备的硬件匹配范围复算双设备各 255 处。对角足迹与 NVIDIA 的 255 处 Vulkan 层级查询一致，Player 严格眼部验收继续进行。
 
 ## 后续外观
 
