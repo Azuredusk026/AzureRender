@@ -4,6 +4,7 @@ from contextlib import contextmanager
 import json
 import os
 from pathlib import Path
+import sqlite3
 import time
 import uuid
 
@@ -53,8 +54,16 @@ def check_previous_owner(queue):
         raise ValueError('Previous resource owner is still running')
     output=maintenance.real_path(previous['output'])
     if output.parent.name=='runs':
-        with maintenance.database(output.parent.parent) as db:
-            record=maintenance.rows(db).get(output.name,{})
+        build=output.parent.parent
+        try:
+            with maintenance.database(build) as db:
+                record=maintenance.rows(db).get(output.name,{})
+        except sqlite3.OperationalError as error:
+            if error.sqlite_errorcode!=sqlite3.SQLITE_READONLY_ROLLBACK:
+                raise
+            # A terminated writer can leave a journal that requires a writable connection.
+            with maintenance.maintenance_lock(build), maintenance.database(build, True) as db:
+                record=maintenance.rows(db).get(output.name,{})
         child=record.get('processPid')
         if child and (child==-1 or process_alive(child)):
             raise ValueError('An orphaned managed command is running or requires inspection')

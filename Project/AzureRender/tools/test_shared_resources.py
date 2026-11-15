@@ -2,6 +2,7 @@
 import json
 import os
 from pathlib import Path
+import sqlite3
 import subprocess
 import sys
 import tempfile
@@ -95,6 +96,43 @@ with s.lease(queue,'worker','orphan-test',output):
         shared.release_inputs(self.build, token, 'quality')
         maintenance.maintain(self.build, **args)
         self.assertFalse(source.exists())
+
+    def test_stale_lease_recovers_interrupted_registry_transaction(self):
+        queue = self.root / 'queue'
+        output = self.build / 'runs' / 'interrupted-command'
+        maintenance.create_run(self.build, output, dict(plannedBytes=0))
+        with maintenance.database(self.build) as db:
+            original = maintenance.rows(db)
+        database = maintenance.metadata(self.build) / 'artifact-index.sqlite3'
+        worker = '''
+import os
+from pathlib import Path
+import sqlite3
+import sys
+import shared_resources as shared
+
+queue, output, database = map(Path, sys.argv[1:])
+with shared.lease(queue, 'previous', 'interrupted', output):
+    db = sqlite3.connect(database)
+    db.execute('PRAGMA journal_mode=DELETE')
+    db.execute('PRAGMA synchronous=FULL')
+    db.execute('PRAGMA cache_size=2')
+    db.execute('BEGIN IMMEDIATE')
+    db.execute('DELETE FROM runs')
+    db.executemany('INSERT INTO runs VALUES (?,?)',
+                   ((str(i), 'x' * 32768) for i in range(16)))
+    os._exit(0)
+'''
+        subprocess.run([sys.executable, '-B', '-c', worker, str(queue), str(output), str(database)],
+                       cwd=Path(__file__).parent, check=True, timeout=20)
+        with self.assertRaises(sqlite3.OperationalError) as failed:
+            with maintenance.database(self.build) as db:
+                maintenance.rows(db)
+        self.assertEqual(failed.exception.sqlite_errorcode, sqlite3.SQLITE_READONLY_ROLLBACK)
+
+        self.assertTrue(shared.try_once(queue, 'current', 'recovered', output))
+        with maintenance.database(self.build) as db:
+            self.assertEqual(maintenance.rows(db), original)
 
     def test_missing_input_never_creates_a_lease(self):
         with self.assertRaises(ValueError):
