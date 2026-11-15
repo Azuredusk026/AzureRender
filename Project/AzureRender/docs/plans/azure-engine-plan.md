@@ -45,6 +45,7 @@ CPU 工作 P95 为 5.90 毫秒，GPU 帧 P95 为 20.33 毫秒。
 [独显空闲复验](../acceptance/nr/joint-nonlocal-texture-placement.md#独显空闲复验)的非本地纹理候选通过 CPU、设备本地内存和工作集门槛。GPU P95 为 19.02 毫秒，软件热降频观测为 15 次。
 [最高风扇档复验](../acceptance/nr/joint-nonlocal-texture-placement.md#最高风扇档复验)的 GPU P95 为 16.95 毫秒，软件热降频观测为 3 次。用原门槛继续验收 GPU P95 和热状态。
 [进程级 CPU 节能对照](../acceptance/nr/joint-nonlocal-texture-placement.md#进程级-cpu-节能对照)测得 GPU P95 为 16.35 毫秒，软件热降频观测为零，CPU 工作 P95 为 20.11 毫秒。完整条件继续验收。
+[平衡电源计划复验](../acceptance/nr/joint-nonlocal-texture-placement.md#平衡电源计划的处理器节能首选项)的首轮 GPU P95 为 16.42 毫秒，CPU 工作 P95 为 7.18 毫秒，两个容量门槛通过，软件热降频观测为零。
 [聚光灯范围与辐照度系数](../acceptance/nr/joint-gpu-pass-budget.md#聚光灯范围与辐照度系数)登记光源访问估算及双设备精确对照。快照颜色绘制的零调用事件耗时上界为 0.121 毫秒。
 
 [可玩包关卡提交](../acceptance/p1/2026-11-13-level-commit.md)通过提交耗时和资源驻留门槛。

@@ -106,6 +106,12 @@
       "results": "docs/acceptance/nr/evidence/2026-11-15/joint-80w-player-cpu-efficiency/results.json"
     },
     {
+      "path": "runs/20261115-095355-nr-joint-balanced-cpu-energy-preference-ac9774",
+      "name": "联合场景平衡电源计划复验",
+      "evidence": "docs/acceptance/nr/joint-nonlocal-texture-placement.md#平衡电源计划的处理器节能首选项",
+      "results": "docs/acceptance/nr/evidence/2026-11-15/joint-80w-balanced-cpu-energy-preference/results.json"
+    },
+    {
       "path": "runs/20261114-173220-nr-shader-host-compiler-concurrency-d140b8",
       "name": "编辑器加载与目录规模诊断",
       "evidence": "docs/acceptance/nr/registered-gpu-infrastructure.md",

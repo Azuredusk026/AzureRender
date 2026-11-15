@@ -13,6 +13,7 @@
 [联合场景 80 W 复验](docs/acceptance/nr/joint-nonlocal-texture-placement.md#独显空闲复验)记录独显空闲启动后的帧耗时、容量和热状态。
 [最高风扇档复验](docs/acceptance/nr/joint-nonlocal-texture-placement.md#最高风扇档复验)记录同一冻结负载的持续帧时间和热状态。
 [进程级 CPU 节能对照](docs/acceptance/nr/joint-nonlocal-texture-placement.md#进程级-cpu-节能对照)记录固定 80 W 的 GPU 负载、帧时间和热状态。
+[平衡电源计划复验](docs/acceptance/nr/joint-nonlocal-texture-placement.md#平衡电源计划的处理器节能首选项)记录固定 80 W 联合场景首轮完整通过和原设备设置的恢复。
 [聚光灯范围与辐照度系数](docs/acceptance/nr/joint-gpu-pass-budget.md#聚光灯范围与辐照度系数)记录联合场景缓冲、辐照度系数和快照绘制成本。
 
 [三纹理采样与视口选择集成](docs/acceptance/nr/projected-hair-viewport-integration.md)通过两种配置及双显卡参考附件核对。
