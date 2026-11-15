@@ -1429,3 +1429,4 @@ Intel 头发颜色继续按冻结区域核对纹理选级。
 [双层衣料与覆盖](../acceptance/nr/evidence/2026-11-16/native-two-cloth-overlay-controls/results.json)核对两个原生绘制与定向衣料合成，覆盖及新增误差按原门槛验收。
 
 [动态角色网格](../acceptance/nr/full-body-native-comparison.md#动态角色网格)记录身体和脸部的原生索引对照及身体网格候选，动态画面继续按原门槛验收。
+原生身体权重和投影重建已确认固定捕获帧的几何覆盖，下一步核对实际播放器的动态轮廓和着色。
