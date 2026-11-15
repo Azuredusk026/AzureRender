@@ -28,6 +28,19 @@ def capture_auxiliary_view(host, label):
     return Path(output['path']).read_bytes()
 
 
+def project_diagnostic_setting(host):
+    host.click('menu.Edit')
+    host.click('menu.project-settings')
+    workspace = host.workspace()
+    _, y, _, h = workspace['widgets']['settings.save']
+    _, panel_y, _, panel_height = workspace['panels']['settings']['rect']
+    assert panel_y <= y and y + h <= panel_y + panel_height, 'Project settings must expose Save without scrolling'
+    host.click('settings.search')
+    host.call('input', event=dict(action='text', text='render.diagnosticView'))
+    host.frames()
+    assert 'setting.source.render.diagnosticView' in host.workspace()['widgets']
+
+
 def run(executable, root):
     assets = Path(__file__).resolve().parents[1] / 'assets_public'
     project = root / 'inspector'
@@ -75,6 +88,20 @@ def run(executable, root):
     with EditorHost(executable, project_file, root / 'reopen') as host:
         assert diagnostic_view(host) == 0
         assert not host.workspace()['dirty']
+        project_diagnostic_setting(host)
+        host.click('setting.render.diagnosticView')
+        host.click('setting.render.diagnosticView.3')
+        assert diagnostic_view(host) == 3 and not host.workspace()['dirty']
+        host.click('settings.save')
+        settings_file = project / 'config/engine-settings.json'
+        assert json.loads(settings_file.read_text(encoding='utf-8'))['values']['render.diagnosticView'] == 3
+    with EditorHost(executable, project_file, root / 'project-settings-reopen') as host:
+        assert diagnostic_view(host) == 3
+        project_diagnostic_setting(host)
+        host.click('setting.reset.render.diagnosticView')
+        assert diagnostic_view(host) == 0
+        host.click('settings.save')
+        assert 'render.diagnosticView' not in json.loads(settings_file.read_text(encoding='utf-8'))['values']
     # Empty exploration-derived scene uses a renderer with only a final display.
     second = root / 'exploration'
     create(second)
@@ -93,7 +120,7 @@ def run(executable, root):
         assert not host.workspace()['dirty']
     return {'modeSwitch': True, 'keyRoute': True, 'restored': True, 'savedSceneUnchanged': True,
             'playUsesSceneMode': True, 'stopRestoresSelectionAndCamera': True,
-            'auxiliaryPreservesSceneMode': True}
+            'auxiliaryPreservesSceneMode': True, 'namedProjectModeSaveAndReset': True}
 
 
 if __name__ == '__main__':

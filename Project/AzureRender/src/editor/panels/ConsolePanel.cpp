@@ -34,17 +34,23 @@ void ImGuiEditorLayer::drawConsolePanel(PanelContext&) {
         ||(session_->scripts()&&!session_->scripts()->errors().empty())||(session_->levels()&&!session_->levels()->lastError().empty())
         ||(session_->presentation()&&!session_->presentation()->errors().empty());
     const bool compact=ImGui::GetContentRegionAvail().y<metrics.compactPanelHeight;
+    const auto requestedTask=consoleTaskReveal_;
     const auto drawDetails=[&](float height){
     const auto latestFeedback=feedback.empty()?std::string():feedback.back().at("id").get<std::string>();
     ImGui::BeginChild("console-diagnostics",{0,height},ImGuiChildFlags_Borders);
     for(const auto& task:tasks) {
-        const auto state=task.at("state").get<std::string>();
+        const auto state=task.at("state").get<std::string>();const auto id=task.at("id").get<std::string>();
         ui::statusText((task.at("source").get<std::string>()+": "+state).c_str(),state=="failed"?ui::StatusKind::Error:state=="completed"?ui::StatusKind::Success:ui::StatusKind::Info);
+        observeWidget("console.task."+id);
+        if(id==requestedTask)ImGui::SetScrollHereY(0.2F);
         if(task.at("state")=="running") {
             ImGui::ProgressBar(task.at("progress").get<float>());
-            const auto id=task.at("id").get<std::string>();ImGui::PushID(id.c_str());
-            if(ui::button(ui::tr("取消任务")))session_->edit("tasks.cancel",{{"id",id}});
-            observeWidget("tasks.cancel."+id);ImGui::PopID();
+            if(task.at("cancelling")==true)ui::statusText(ui::tr("正在取消任务"),ui::StatusKind::Neutral);
+            else{
+                ImGui::PushID(id.c_str());
+                if(ui::button(ui::tr("取消任务")))session_->edit("tasks.cancel",{{"id",id}});
+                observeWidget("tasks.cancel."+id);ImGui::PopID();
+            }
         }
         const auto diagnostic=task.at("diagnostic").get<std::string>();
         if(!diagnostic.empty())ui::resultMessage(diagnostic,state=="failed");
@@ -54,7 +60,7 @@ void ImGuiEditorLayer::drawConsolePanel(PanelContext&) {
         ui::resultMessage(error.at("source").get<std::string>()+": "+error.at("message").get<std::string>(),true);
         if(ui::button(ui::tr("Dismiss")))session_->edit("feedback.dismiss",{{"id",id}});
         observeWidget("feedback.dismiss."+id);
-        if(id==latestFeedback&&id!=consoleLastFeedback_)ImGui::SetScrollHereY(1);
+        if(requestedTask.empty()&&id==latestFeedback&&id!=consoleLastFeedback_)ImGui::SetScrollHereY(1);
         ImGui::PopID();
     }
     if(!developer.empty()){
@@ -67,8 +73,9 @@ void ImGuiEditorLayer::drawConsolePanel(PanelContext&) {
     if(auto* scripts=session_->scripts())for(const auto& error:scripts->errors())ui::resultMessage("Script: "+error,true);
     if(auto* levels=session_->levels())if(!levels->lastError().empty())ui::resultMessage("Level: "+levels->lastError(),true);
     if(auto* presentation=session_->presentation())for(const auto& error:presentation->errors())ui::resultMessage("Presentation: "+error,true);
-    consoleLastFeedback_=latestFeedback;ImGui::EndChild();observeWidget("console.diagnostics-region");
+    consoleLastFeedback_=latestFeedback;consoleTaskReveal_.clear();ImGui::EndChild();observeWidget("console.diagnostics-region");
     };
+    if(!compact&&!requestedTask.empty())ImGui::SetNextItemOpen(true,ImGuiCond_Always);
     if(!compact&&hasDetails&&ImGui::CollapsingHeader(ui::tr("任务与诊断"),ImGuiTreeNodeFlags_DefaultOpen)){
         drawDetails(std::max(ImGui::GetFrameHeight(),std::min(metrics.controlHeight*4,ImGui::GetContentRegionAvail().y*.35F)));
     }
@@ -93,7 +100,8 @@ void ImGuiEditorLayer::drawConsolePanel(PanelContext&) {
     if(ui::button(ui::tr("复制可见日志"),{ui::ButtonVariant::Default,false,rows.empty()}))ImGui::SetClipboardText(consoleLogs_.copyVisible(rows).c_str());observeWidget("console.copy");
     if(compact&&hasDetails){
         ui::nextToolbarItem(ui::buttonWidth(ui::tr("任务与诊断")));
-        if(ui::button(ui::tr("任务与诊断")))ImGui::OpenPopup(ui::tr("Console diagnostics"));observeWidget("console.diagnostics");
+        const bool open=ui::button(ui::tr("任务与诊断"));observeWidget("console.diagnostics");
+        if(open||!requestedTask.empty())ImGui::OpenPopup(ui::tr("Console diagnostics"));
         const auto display=ImGui::GetIO().DisplaySize;
         ImGui::SetNextWindowSize({std::min(metrics.widePanelWidth*2,display.x-metrics.spacing*4),0},ImGuiCond_Appearing);
         if(ImGui::BeginPopup(ui::tr("Console diagnostics"))){

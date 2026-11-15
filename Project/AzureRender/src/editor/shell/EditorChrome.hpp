@@ -8,6 +8,6 @@ public:
     using Observer=std::function<void(const std::string&)>;
     static bool enabled(EditorSession&,EditorCommand);
     static void draw(EditorSession&,EditorWorkspace&,float,const Observer&);
-    static void status(EditorSession&,float);
+    static void status(EditorSession&,float,const Observer&,const Observer& openTask);
 };
 }

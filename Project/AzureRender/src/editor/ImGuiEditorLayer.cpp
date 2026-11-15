@@ -380,7 +380,11 @@ void ImGuiEditorLayer::drawPanels() {
         }
         ImGui::NewLine();ImGui::EndPopup();
     }
-    EditorToolbar::status(*session_,dpi_);
+    EditorToolbar::status(*session_,dpi_,[this](const auto& id){observeWidget(id);},[this](const auto& id){
+        consoleTaskReveal_=id;
+        workspace_.setVisible("console",true);
+        ImGui::SetWindowFocus(ui::tr("日志###console"));
+    });
     if(!ImGui::IsAnyItemActive()&&!viewportGizmoDragActive_)context_->closeEditMerge();
 #ifdef IMGUI_HAS_DOCK
     for(const auto& panel:workspace_.panels())if(const auto* window=ImGui::FindWindowByName(panel.title.c_str())) {

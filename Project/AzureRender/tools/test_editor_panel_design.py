@@ -70,11 +70,18 @@ def run(executable, output, cases=None):
             assert compact_error['feedback'], 'Failed import must publish an actionable error'
             assert compact_error['consoleView']['search'] == '导入错误', 'Active diagnostics must keep the compact log toolbar accessible'
             identity = compact_error['feedback'][-1]['id']
+            task = compact_error['tasks'][-1]['id']
+            linked = launch(executable, work, 'compact-task-link', (1120,720), 1, failure[:4] + [
+                dict(frame=53, action='click', target='status.task.' + task)], capture=False)
+            assert 'console.task.' + task in linked['widgets'], 'Status must open the exact task in compact diagnostics'
+            _, row_y, _, row_height = linked['widgets']['console.task.' + task]
+            _, detail_y, _, detail_height = linked['widgets']['console.diagnostics-region']
+            assert detail_y <= row_y and row_y + row_height <= detail_y + detail_height
             dismissed = launch(executable, work, 'compact-dismiss', (1120,720), 1, failure + [
                 dict(frame=63, action='click', target='console.diagnostics'),
                 dict(frame=69, action='click', target='feedback.dismiss.' + identity)], capture=True)
             assert not dismissed['feedback'], 'Compact diagnostic popup must dismiss the selected error'
-            results.append(dict(project=project, size=[1120,720], activeError=True, toolbarAccessible=True, errorDismiss=True))
+            results.append(dict(project=project, size=[1120,720], activeError=True, toolbarAccessible=True, errorDismiss=True, statusTaskLink=True))
         if cases == ['diagnostics']:
             return results
         level = launch(executable, work, 'console-level', (1920,1080), 1, [

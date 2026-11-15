@@ -5,6 +5,7 @@
   "baselineExecutableSha256": "f163492efeec4f8c3d0ad812feb1d02be8d591f09ea9a79811d6fa7dacbfb9c3",
   "candidateExecutableSha256": "735dfd65f0ac106777f41ffa289fc4df1770680e290cb170ea43d02081c4678e",
   "run": "D:/Projects/FYP/Project/AzureRender/build/runs/20261115-133208-editor-interaction-baseline-dd4266",
+  "regressionRun": "D:/Projects/FYP/Project/AzureRender/build/runs/20261115-162933-editor-interaction-regression-878b95",
   "input": "production ImGui replay",
   "physicalInput": false,
   "dispatch": {
@@ -95,5 +96,13 @@
     "explorationEvents": "native-capture-final/run-1794729947424086800/exploration/events.json",
     "input": "Windows SendInput, SetCursorPos and messages through GLFW",
     "physicalInput": false
+  },
+  "settingsAndTaskLink": {
+    "configuration": "Release",
+    "candidateExecutableSha256": "71286cf3117265a6c35ee95c02ae7cdc272091a7320d86fa67f2833c38102cb5",
+    "dispatch": 1125,
+    "projectModeSaveAndReset": "quadrant-runtime-165020/view_modes.log",
+    "panelReplay": "quadrant-runtime-165020/panel_design/run-ac4e9eca/summary.json",
+    "panelCasesPassed": 10
   }
 }
