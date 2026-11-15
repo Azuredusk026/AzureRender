@@ -1,0 +1,261 @@
+{
+  "status": "qualified-projective-iris-no-overlay",
+  "overall": "failed-user-review",
+  "scope": 255,
+  "reference": "48afd6546c23cfa85099a765cc94ada4813a684538c695faf6d70d6daf2261b5",
+  "native": {
+    "before": "258a8e0f35cb68568a21d1cd530558b173b458ca3958d45d5dfc11116f53d8ed",
+    "after": "164746638e9148bbd5016e8bc8d8b3c4f34db2d080bf7e70807f5a21be5ab3b3",
+    "overlayCount": 94
+  },
+  "devices": {
+    "nvidia": {
+      "frame": "3b1bb0373a25c17af303b19548ca2955664e4d093097ae92c496134b6736e00b",
+      "control": "823a89734b7e77759825475f64a6031046b72635c24736b59497dd19c57a9519",
+      "overOne": [
+        10,
+        9
+      ],
+      "peak": [
+        19,
+        12
+      ],
+      "outsideChanged": 0,
+      "newOverOne": 0,
+      "seam": [
+        19,
+        1
+      ],
+      "nativeOverlayRegions": {
+        "nativeOverlayCovered": [
+          3,
+          2
+        ],
+        "exposed": [
+          7,
+          7
+        ]
+      },
+      "unresolvedPeak": {
+        "point": [
+          1261,
+          261
+        ],
+        "rawNativeOverlayOwner": false,
+        "previousError": 12,
+        "currentError": 12,
+        "linearSamplerLevels": {
+          "nvidia": [
+            3
+          ],
+          "intel": [
+            3
+          ]
+        },
+        "signedDelta": [
+          11,
+          1,
+          -12
+        ],
+        "nativeDisplay": [
+          89,
+          58,
+          135
+        ]
+      }
+    },
+    "intel": {
+      "frame": "d563168cb817b6cd41fa1fdd42d659467b11b33f1343a5ec19f8887a17c1b9c0",
+      "control": "c8c529783d0ee888fc49d45de3be324e48605218664284517e335abf3dd38da8",
+      "overOne": [
+        19,
+        18
+      ],
+      "peak": [
+        27,
+        27
+      ],
+      "outsideChanged": 0,
+      "newOverOne": 0,
+      "seam": [
+        18,
+        1
+      ],
+      "nativeOverlayRegions": {
+        "nativeOverlayCovered": [
+          6,
+          5
+        ],
+        "exposed": [
+          13,
+          13
+        ]
+      },
+      "unresolvedPeak": {
+        "point": [
+          1302,
+          265
+        ],
+        "rawNativeOverlayOwner": false,
+        "previousError": 27,
+        "currentError": 27,
+        "linearSamplerLevels": {
+          "nvidia": [
+            4
+          ],
+          "intel": [
+            4
+          ]
+        },
+        "signedDelta": [
+          5,
+          -16,
+          -27
+        ],
+        "nativeDisplay": [
+          103,
+          82,
+          174
+        ],
+        "retainedIntelPlayerLevel": 4
+      }
+    }
+  },
+  "fullColor": "open",
+  "baseMipTargets": {
+    "hardwareQuery": {
+      "nvidia": 254,
+      "intel": 251
+    },
+    "Finediagonal": {
+      "nvidia": 255,
+      "intel": 250
+    },
+    "Fineaxis": {
+      "nvidia": 250,
+      "intel": 255
+    }
+  },
+  "highestIntelBaseControls": [
+    {
+      "point": [
+        1302,
+        265
+      ],
+      "nativeBase": [
+        0.271728515625,
+        0.12091064453125,
+        0.29443359375,
+        0.10896467417478561
+      ],
+      "playerBase": [
+        0.2851148241397726,
+        0.08476386663614863,
+        0.32442206454566264,
+        0.044174868390936144
+      ],
+      "nativeBaseLevels": {
+        "nvidia": [
+          5
+        ],
+        "intel": [
+          4
+        ]
+      },
+      "playerBaseLevel": 4,
+      "rgbBaseMaxDifference": 0.03614677789510137,
+      "nativeBaseRgbSrgb8": [
+        142,
+        98,
+        148
+      ],
+      "playerBaseRgbSrgb8": [
+        145,
+        82,
+        154
+      ],
+      "nativeMatcapLevels": {
+        "nvidia": [
+          4
+        ],
+        "intel": [
+          4
+        ]
+      },
+      "playerMatcapLevel": 4,
+      "allSourcesUnderOne": false,
+      "projectiveIntelError": 27
+    },
+    {
+      "point": [
+        1260,
+        262
+      ],
+      "nativeBase": [
+        0.2265625,
+        0.109375,
+        0.30859375,
+        0.3015487790107727
+      ],
+      "playerBase": [
+        0.23125047684443428,
+        0.075898374914168,
+        0.36507209887846187,
+        0.27266346227206834
+      ],
+      "nativeBaseLevels": {
+        "nvidia": [
+          5
+        ],
+        "intel": [
+          4
+        ]
+      },
+      "playerBaseLevel": 4,
+      "rgbBaseMaxDifference": 0.05647834887846187,
+      "nativeBaseRgbSrgb8": [
+        131,
+        93,
+        151
+      ],
+      "playerBaseRgbSrgb8": [
+        132,
+        78,
+        163
+      ],
+      "nativeMatcapLevels": {
+        "nvidia": [
+          4
+        ],
+        "intel": [
+          3
+        ]
+      },
+      "playerMatcapLevel": 3,
+      "allSourcesUnderOne": false,
+      "projectiveIntelError": 13
+    }
+  ],
+  "archive": {
+    "sha256": "5e1e30011209875e91647c8204060969b6eff54b0f24514d53a00e56d5ac5fc6",
+    "members": {
+      "archive-iris-projective-bare.py": "78e4dd1582d18899b679fedf9c892bedea8b7e8c6cb60eec3b942952898d83dd",
+      "score-iris-projective-residuals.py": "f967340a6aa892f80ce06656347f5c6f5577463b2db08dd1908788211cb90d7b",
+      "score-iris-projective-base-controls.py": "61eba07c1a518406722cfe584e8b5e4ba53d770ceb1545529b35eaa4c5221386",
+      "score-iris-base-footprint-native-match.py": "64a18f3b5621f45111712f2593f737e44f7f7c75f58c8970efa59988abfb4217",
+      "iris-projective-residuals.json": "865d3de6e3e51ee2abe89ebb9f0159e2551b4fe42c0334a94876c3d4825f3f73",
+      "iris-projective-base-controls.json": "7e1a8bdff6087c6938689d19c3863ea73199d780eca731b6831c36e70dc57e2f",
+      "iris-base-footprint-native-match.json": "dd0c875bff25098215bd8f596c6f1dc2bfabdfc99db41cf7a558680c38f63243",
+      "nr-iris-matcap-projective-coarse-two-adapters-queue.log": "6dc3c153804ad8c777f3d271796d0386ce26bc35183e0c255a1b165c0afbc0e0",
+      "bare-results.json": "5ecd795e89f6812ada484b591fcb1acb6abc0f8058ffea85cf9f31e1614b144e",
+      "preflight.json": "b737e82ba1717556805d6af5ab2c2dfa518967d4319d76dc6abb88594ecf5fe4",
+      "mesh.frag": "a0a0158f653e9c86a2dfb415a2479bff0404af173b79e6c777ed846e4633a875",
+      "nvidia/capture_manifest.json": "df10cad7ffac4e98150d68fc2d73a80e7965cb51ab3daeef7805579ba8045640",
+      "nvidia/gpu_capabilities.json": "93c9fb29461fae11a7e57d4e49112071a71940dee571f1f6696ffbf03c392879",
+      "nvidia/command.json": "f10620da1f3f4757d4d5b94b5ad52be70031102c30678506a71b478fcff6ac88",
+      "intel/capture_manifest.json": "124bd63e80e7a5e921a216a5d4510073c5b1bcf5517e0ca0c17e1062d47c7870",
+      "intel/gpu_capabilities.json": "a38eaca3509b417cfe23614fe415bd9ccc5622fc682d8623142cdeb7dc3d85cc",
+      "intel/command.json": "e4a747ff982c82130c72a5d7de406aa4dc874479b55ec07ebe05dea0ef717aff"
+    }
+  }
+}

@@ -160,3 +160,13 @@ NVIDIA 的 Vulkan 硬件回放逐点核对完整虹膜。隐式采样与显式�
 NVIDIA 的 Player 捕获用同一规则复算 255 处 Vulkan 硬件查询。对角足迹的 255 处层级均与硬件一致，欧氏梯度的 242 处层级一致。该捕获的 Intel 回放结果见 Vulkan 采样小节。双设备实际输出继续以各自的独立渲染结果验收。
 
 [层级足迹结果](evidence/2026-11-15/iris-native-mip-footprints/results.json)和[验证归档](evidence/2026-11-15/iris-native-mip-footprints/validation.zip)保存逐设备对照、留出控制、投影复算及 Vulkan 查询。
+
+### 透视梯度整帧对照
+
+关闭眼影节点，按原生眼影施加前的线性附件核对 255 个虹膜像素。以透视插值重建相邻像素并计算反射贴图梯度后，NVIDIA 超过一个色阶的位置由 10 处降至 9 处，Intel 由 19 处降至 18 处。两块显卡的虹膜外变化和新增超差均为零。接缝坐标 [1262,257] 分别由 19 和 18 个色阶降至 1 个色阶。
+
+Intel 的剩余峰差位于 [1302,265]，为 27 个色阶。两个原生回放和 Intel Player 的反射贴图均读取第 4 级。基色贴图在 NVIDIA 原生回放读取第 5 级，Intel 原生回放与 Player 读取第 4 级。另一处 13 色阶差异 [1260,262] 也有相同的基色贴图层级分布。
+
+在 255 处实测 Vulkan 基色坐标上，细粒度对角足迹匹配全部 NVIDIA 原生选层，细粒度欧氏足迹匹配全部 Intel 原生选层。完整虹膜按冻结图像、眼影覆盖及逐像素门槛验收。
+
+[透视梯度结果](evidence/2026-11-15/iris-projective-bare/results.json)和[验证归档](evidence/2026-11-15/iris-projective-bare/validation.zip)保存两块显卡的画面指纹、逐点层级及需继续核对的色差。

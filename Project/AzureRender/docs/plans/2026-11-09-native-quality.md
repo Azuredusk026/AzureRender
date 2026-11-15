@@ -211,6 +211,8 @@ Intel 头发颜色继续核对纹理梯度与层级选择。
 
 [原生虹膜层级足迹](../acceptance/nr/evidence/2026-11-15/iris-native-mip-footprints/results.json)按设备的硬件匹配范围复算双设备各 255 处。对角足迹与 NVIDIA 的 255 处 Vulkan 层级查询一致，Player 严格眼部验收继续进行。
 
+[虹膜透视梯度对照](../acceptance/nr/evidence/2026-11-15/iris-projective-bare/results.json)在关闭眼影的固定姿态确认双设备接缝误差降至一个色阶，虹膜外逐像素一致。眼影开启与基色贴图选层继续按同一冻结参考复测。
+
 ## 后续外观
 
 - [ ] 按原计划核对皮肤、眼睛、GI 与反射。
