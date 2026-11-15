@@ -85,12 +85,31 @@ def run(executable, output):
     data=launch(executable,root,'assistance',(1920,1080),1,actions,capture=True)
     assert data['panels']['assistance']['open']
     assert 'assistance.unavailable' in data['widgets'], 'Optional model service leaves an explicit manual authoring explanation'
-    actions=[dict(frame=20,action='click',target='tool.scripts'),dict(frame=24,action='click',target='script.create')]
-    scripts=launch(executable,root,'scripts',(1920,1080),1,actions,capture=True)
-    assert scripts['panels']['scripts']['open']
-    assert (root/'game/assets/NewBehaviour.lua').is_file()
-    assert not scripts['dirty'] and scripts['undoCount']==0
-    assert 'script.reload' in scripts['widgets']
+    with EditorHost(executable,root/'game/project.azureproject',root/'scripts') as host:
+        host.click('tool.scripts')
+        host.click('script.create')
+        scripts=host.workspace()
+        assert scripts['panels']['scripts']['open']
+        assert (root/'game/assets/NewBehaviour.lua').is_file()
+        assert not scripts['dirty'] and scripts['undoCount']==0
+        assert 'script.reload' in scripts['widgets'], 'Creating a script must retain the authoring panel'
+        assert 'script.locate-created' in scripts['widgets'], 'The creation receipt must provide a locator'
+        panel_x,panel_y,panel_width,panel_height=scripts['widgets']['panelrect.scripts']
+        for control in ('script.reload','script.locate-created','script.template-path-label','script.template-path'):
+            x,y,width,height=scripts['widgets'][control]
+            assert panel_x<=x and x+width<=panel_x+panel_width, (control,scripts['widgets'][control])
+            assert panel_y<=y and y+height<=panel_y+panel_height, (control,scripts['widgets'][control])
+        host.screenshot('u13-script-created')
+        host.click('script.reload')
+        assert 'script.locate-created' in host.workspace()['widgets']
+        asset=next(row['id'] for row in host.edit('assets.catalog',type='script')
+                   if row['path']=='assets:/NewBehaviour.lua')
+        host.click('script.locate-created')
+        located=host.workspace()
+        assert located['contentNavigation']['selected']==[asset]
+        assert 'asset.'+asset in located['widgets']
+        host.click('tab.scripts')
+        assert 'script.locate-created' in host.workspace()['widgets']
     actions=[dict(frame=20,action='click',target='tool.animation'),dict(frame=24,action='click',target='node.hero'),dict(frame=28,action='click',target='animation.play-pause'),dict(frame=33,action='click',target='node.guide'),dict(frame=38,action='click',target='animation.play-pause')]
     animation=launch(executable,root,'animation',(1920,1080),1,actions,capture=True)
     tracks=animation['animationTimelines']

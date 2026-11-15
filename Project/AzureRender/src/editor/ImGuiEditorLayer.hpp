@@ -17,6 +17,7 @@
 
 #include <array>
 #include <memory>
+#include <optional>
 #include <vector>
 #include <map>
 #include <set>
@@ -115,6 +116,12 @@ private:
     std::string prefabDocument_,prefabSelectionNode_;
     std::set<std::string> prefabSelectedFields_;
     std::string scriptTemplateBackend_="lua",scriptTemplatePath_="assets:/NewBehaviour.lua",problemSearch_;
+    struct ScriptCreationReceipt {
+        std::filesystem::path project;
+        std::string asset;
+        std::string path;
+    };
+    std::optional<ScriptCreationReceipt> scriptCreation_;
     std::string displayedDocument_,documentCloseTarget_;
     void drawCapturePanel(PanelContext& context);
     void drawConsolePanel(PanelContext& context);

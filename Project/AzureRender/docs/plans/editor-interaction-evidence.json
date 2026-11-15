@@ -159,5 +159,27 @@
     "applicationPipelineCacheBytesAtStartup": 0,
     "driverCache": "preserved",
     "physicalInput": false
+  },
+  "specializedToolsAndScriptCreation": {
+    "configuration": "Release",
+    "initialRun": "D:/Projects/FYP/Project/AzureRender/build/runs/20261115-193543-editor-final-specialized-be9042",
+    "initialDispatch": 1191,
+    "initialSummary": "quadrant-runtime-195927/summary.json",
+    "initialScriptFailure": "quadrant-runtime-195927/authoring.log",
+    "interruptedRun": "D:/Projects/FYP/Project/AzureRender/build/runs/20261115-200424-editor-script-creation-retest-8756ea",
+    "interruptedDispatch": 1196,
+    "interruptedRunRecovery": "recovery-after-reboot.json",
+    "queuedDispatchInterruptedByReboot": 1202,
+    "candidateRun": "D:/Projects/FYP/Project/AzureRender/build/runs/20261115-202003-editor-script-dock-label-623fde",
+    "candidateDispatch": 1203,
+    "candidateExecutableSha256": "18ed39f64553260132f7f81e445278010c507d5b40fe49ad683ada90ec6c8f06",
+    "candidateSummary": "quadrant-runtime-210709/summary.json",
+    "nativeForegroundFailure": "quadrant-runtime-210709/native_viewport.log",
+    "nativeDesktopStatus": "native-foreground-diagnostic.json",
+    "scriptInputReplay": "quadrant-runtime-210709/authoring/run-442d38fb/scripts/evidence.json",
+    "scriptPanelScreenshot": "quadrant-runtime-210709/authoring/run-442d38fb/scripts/u13-script-created.png",
+    "cpuLog": "editor-interaction-regression-source-ctest.log",
+    "cpuCasesPassed": 21,
+    "physicalInput": false
   }
 }
