@@ -1,0 +1,190 @@
+{
+  "status": "candidate-prepared-paired-player-pending",
+  "scope": "projected joint scene",
+  "playerPairedCaptureJob": 1274,
+  "nativeReadbackJob": 1271,
+  "source": {
+    "project": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-105539-full-scene-character-composition-b37668\\project\\history-actor.azureproject",
+    "projectSha256": "b5339a45d2f7ae9c4011af3463ab9e5996462a7825166d1034c96654630a88a8",
+    "level": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-105539-full-scene-character-composition-b37668\\project\\scene\\history-actor.azurelevel",
+    "levelSha256": "d99683193ef5aa3fd002bb4075b2a01639c1bd1a463df9fa484a4ea22944ce7e",
+    "nativeEvent": 8702,
+    "nativeEventConstants": "85f50cec46fa7bff88eb02f0ad63b8bbcefb3ececb09349a0f8ff70d36a79639",
+    "playerShaderConstants": "424f58910613b4d08905f3e8e26aa23a37a6e1af117d64ae28390ca65fa5c726",
+    "baselineSteps": 128,
+    "candidateMaximumSteps": 32,
+    "settings": {
+      "schemaVersion": 2,
+      "enabled": true,
+      "maxDistance": 32,
+      "thickness": 0.15,
+      "normalBias": 0.03,
+      "maxSteps": 128,
+      "maxRoughness": 0.7,
+      "edgeFade": 0.08,
+      "strength": 1,
+      "algorithm": "projected"
+    },
+    "player": "1a30d925a674ddb1d95876cb80181106a0217e12a7228a35b5980b134954cb69",
+    "baselineShader": "9b77643b12d533f69e7a159ba975dfaf75e56253429371d6f7470ea6a567e20a",
+    "source": "9a085e3575cc7481efe58f1866fc524242c86cd722bb543dd37c96f18b94585f"
+  },
+  "coordinateVerification": {
+    "raw": {
+      "centerFloor": 0,
+      "cyanRing": 0,
+      "archivedFloor": 0
+    },
+    "reverseRows": {
+      "centerFloor": 23832,
+      "cyanRing": 6873,
+      "archivedFloor": 25955
+    },
+    "reverseColumns": {
+      "centerFloor": 0,
+      "cyanRing": 0,
+      "archivedFloor": 0
+    },
+    "reverseBoth": {
+      "centerFloor": 23124,
+      "cyanRing": 6700,
+      "archivedFloor": 25230
+    }
+  },
+  "cpuRaySearch": {
+    "status": "cpu-geometric-search-only",
+    "scope": "Ignores history, motion acceptance and temporal resolve",
+    "referenceNativeFrame": 3534,
+    "referenceVulkanEvent": 21668,
+    "testedSteps": [
+      128,
+      32
+    ],
+    "dispatch": {
+      "event": 21668,
+      "dispatch": [
+        14400,
+        1,
+        1
+      ],
+      "shaderSha256": "f5ec047bbab474b8bc0ab75bee6ffb2a77c7ffb3f36737356c964019442f1aa8"
+    },
+    "playerInputs": {
+      "worklist": "01869e0438535301d3f75bd1bdf454f9b487e6cdec961565db787c43216dc414",
+      "currentDepth": "b6c9b61c16c5f22020951ff80dafda2018aaab1710408da33346e93a1a2d119a",
+      "surfaceMask": "cd1fb537c37464dc6bc2db970eb5416d81a8d9a72df3ecc98e44d3a083380fef",
+      "normalRoughness": "f03fec3f493693988fc25740deb2d4d8fb5dac7a64f2a35f872c99c370f2625b",
+      "outputConfidence": "a2c0f82a7ca1eb5a6bef9422e7e5ce99b44f7ce094897eb75f598bd52ce7d955"
+    },
+    "playerInitialConfidence": "ea83549f34d6eeee1a796b0dac7dbc45175324a9172b5ceadd0b35c89343efcc",
+    "nativeTraceConfidence": "2fea6f7dd90000166dd40134eb7b991ba590a4e5dc6ef8824f0998eb6caec609",
+    "regions": {
+      "centerFloor": {
+        "controlVsCapturedGpu": {
+          "common": 19856,
+          "onlyA": 220,
+          "onlyB": 0,
+          "agreement": 0.9909465020576131,
+          "iou": 0.989041641761307
+        },
+        "baselineToCandidate": {
+          "common": 19891,
+          "onlyA": 185,
+          "onlyB": 2697,
+          "agreement": 0.8813991769547325,
+          "iou": 0.8734466253897158
+        },
+        "baselineVsNativeOutput": {
+          "common": 19240,
+          "onlyA": 836,
+          "onlyB": 2100,
+          "agreement": 0.8791769547325103,
+          "iou": 0.8676046176046176
+        },
+        "candidateVsNativeOutput": {
+          "common": 20918,
+          "onlyA": 1670,
+          "onlyB": 422,
+          "agreement": 0.9139094650205761,
+          "iou": 0.9090830073880921
+        }
+      },
+      "cyanRing": {
+        "controlVsCapturedGpu": {
+          "common": 6691,
+          "onlyA": 81,
+          "onlyB": 0,
+          "agreement": 0.9882608695652174,
+          "iou": 0.9880389840519788
+        },
+        "baselineToCandidate": {
+          "common": 6763,
+          "onlyA": 9,
+          "onlyB": 122,
+          "agreement": 0.9810144927536232,
+          "iou": 0.980997969248622
+        },
+        "baselineVsNativeOutput": {
+          "common": 6556,
+          "onlyA": 216,
+          "onlyB": 101,
+          "agreement": 0.9540579710144927,
+          "iou": 0.9538774916339299
+        },
+        "candidateVsNativeOutput": {
+          "common": 6649,
+          "onlyA": 236,
+          "onlyB": 8,
+          "agreement": 0.9646376811594203,
+          "iou": 0.9646017699115044
+        }
+      },
+      "archivedFloor": {
+        "controlVsCapturedGpu": {
+          "common": 24590,
+          "onlyA": 294,
+          "onlyB": 0,
+          "agreement": 0.9886923076923076,
+          "iou": 0.9881851792316347
+        },
+        "baselineToCandidate": {
+          "common": 24609,
+          "onlyA": 275,
+          "onlyB": 966,
+          "agreement": 0.9522692307692308,
+          "iou": 0.9519922630560929
+        },
+        "baselineVsNativeOutput": {
+          "common": 23280,
+          "onlyA": 1604,
+          "onlyB": 658,
+          "agreement": 0.913,
+          "iou": 0.9114399812074231
+        },
+        "candidateVsNativeOutput": {
+          "common": 23717,
+          "onlyA": 1858,
+          "onlyB": 221,
+          "agreement": 0.9200384615384616,
+          "iou": 0.9194061094743371
+        }
+      }
+    }
+  },
+  "thresholds": {
+    "staticSsim": 0.95,
+    "medianRelativeLumaError": 0.1,
+    "frozenOriginalFourRgbMaximumByteDifference": 0
+  },
+  "archive": {
+    "sha256": "59b789514a3205bae3cd3b0f50872cd71689cede4bf613e59558c93f1739d73d",
+    "members": {
+      "projected-step-candidate.patch": "764133fc540d5751dcf542842cb394955a570c14f8c1b4dec18ee46ad05943cd",
+      "candidate-player.py": "d66577264fd51c3b6b1d49491d4ad0d1baca1d15025b4593374ebcdc39ad02b8",
+      "cpu-ray-search-preview.py": "f6138b0e5c2fd9b77e1254e213154cc1425cdf4485e6ae8ec4bf82b74e6596af",
+      "score-native-floor-reflection-inputs.py": "3c6a1b3e9545d2f4fdc758cd5e38b82ba0b77f006f9ad20ee2a197aeb2c54c53",
+      "aligned-depth-preview.json": "4835681fa4f9e5f6700ea02f9fc5a2291165af9c4cb0900ae9f1f58665a40d2c",
+      "archive.py": "01fe9afb2411f45e66ff9dd876100f0fa1afa4a5313e7175a02117ef2840f01e"
+    }
+  }
+}
