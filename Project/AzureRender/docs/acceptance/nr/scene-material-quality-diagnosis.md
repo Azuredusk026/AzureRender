@@ -171,4 +171,12 @@ Player 使用 `cd8d95d` 对应的受检构建。
 
 [候选记录](evidence/2026-11-16/projected-floor-ray-budget/results.json)和[验证归档](evidence/2026-11-16/projected-floor-ray-budget/validation.zip)保存冻结输入指纹、候选补丁和复算方法。
 
+## 原始反射颜色
+
+按显示坐标与两厘米前向深度误差配对，共有 24,073 个中央地面位置和 6,900 个青色环带位置。两端均有命中的分别为 19,043 和 6,477 个。中央地面共同命中的压缩颜色中位亮度为原生 0.178、Player 0.106，青色环带为原生 0.184、Player 0.135。
+
+以各自置信度加权后，共同命中处占中央地面原始反射亮度绝对误差的 78.15%，占青色环带的 87.64%。这些数字用于区分命中覆盖和命中处的颜色，范围止于过滤与合成前的半尺寸反射输出。原生深度使用 8811 号事件的同一资源；实际射线输入以及历史颜色取样位置分别核对。
+
+[原始反射颜色记录](evidence/2026-11-16/projected-reflection-shared-hits/results.json)和[验证归档](evidence/2026-11-16/projected-reflection-shared-hits/validation.zip)保存输入指纹和同位置复算。
+
 当前运行入口统一见[完整场景显示](../../tutorials/restored-native-scene.md)。
