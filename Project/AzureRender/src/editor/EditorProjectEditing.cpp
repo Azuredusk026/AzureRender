@@ -34,7 +34,13 @@ std::shared_ptr<EditorContext> EditorContext::openProject(const std::filesystem:
         for(const auto& resource:expanded.at("resources"))context->resourceReferences_[context->assets_->resolveReference(resource.at("asset").get<std::string>())]=resource.at("asset").get<std::string>();
     }else for(const auto& resource:context->scene_.resources){
         for(const auto& mount:context->project_->mounts){auto relative=resource.path.lexically_relative(mount.second);if(!relative.empty() && *relative.begin()!="..")context->resourceReferences_[resource.path]=mount.first+":/"+relative.generic_u8string();}
-        if(!context->resourceReferences_.count(resource.path)){const auto relative=resource.path.lexically_relative(ResourceLocator().publicAsset(""));if(relative.empty()||*relative.begin()=="..")throw std::runtime_error("Resource has no portable project identity");context->resourceReferences_[resource.path]="engine:/assets_public/"+relative.generic_u8string();}
+        if(!context->resourceReferences_.count(resource.path)){
+            const auto root=std::filesystem::weakly_canonical(ResourceLocator().publicAsset(""));
+            const auto resolved=std::filesystem::weakly_canonical(resource.path);
+            const auto relative=resolved.lexically_relative(root);
+            if(relative.empty()||*relative.begin()=="..")throw std::runtime_error("Resource has no portable project identity");
+            context->resourceReferences_[resource.path]="engine:/assets_public/"+relative.generic_u8string();
+        }
     }
     context->capturePrefabSources();context->syncComponents();context->checkpointSaved();return context;
 }

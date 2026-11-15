@@ -65,5 +65,13 @@
     "windowHeight": 1080,
     "oldButtonTop": 1112,
     "candidateButtonTop": 1020
+  },
+  "projectAssetJunction": {
+    "configuration": "Release",
+    "candidateExecutableSha256": "89f9ae44f1a34fc4c6acf44fd5d359afff7dfa0a2a20d1f62a0edd4a17baf31c",
+    "baseline": "material-workflow-junction-red.log",
+    "coldFailure": "material-workflow-pipeline-cold.log",
+    "warmResult": "material-workflow-warm/summary.json",
+    "coldPipelineMilliseconds": 35252.94
   }
 }
