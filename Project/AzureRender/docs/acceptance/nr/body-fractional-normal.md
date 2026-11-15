@@ -58,6 +58,14 @@
 
 [固定层级与图集结果](evidence/2026-11-15/body-receiver-normal-and-atlas/results.json)和[验证归档](evidence/2026-11-15/body-receiver-normal-and-atlas/validation.zip)保存逐层误差、采样地址及写入事件。
 
+## 原生法线取样
+
+原生事件 328 直接读回两块显卡的 UV、BC5 法线分量及打包输出。8,827 个位置的实际隐式取样值均可在一个编码单位内重建本设备法线码，其中 NVIDIA 有 8,281 处编码一致，Intel 有 8,571 处。
+
+在同一原生绘制和纹理上，两设备的 UV 有三处相差超过一个十六位归一化单位。隐式法线采样的差异有 7,526 处超过该单位，固定第 10 级的 8,827 处全部一致。法线采样和打包分别判定；生产可见量按完整附件和实际图集验收。
+
+[原生取样结果](evidence/2026-11-16/native-body-normal-raw-samples/results.json)和[验证归档](evidence/2026-11-16/native-body-normal-raw-samples/validation.zip)保存读回、证据指纹和逐级重建。
+
 ## 验收状态
 
 小数对照存在新增可见量超差。

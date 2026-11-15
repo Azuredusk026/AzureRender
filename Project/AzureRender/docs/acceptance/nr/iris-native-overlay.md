@@ -170,3 +170,14 @@ Intel 的剩余峰差位于 [1302,265]，为 27 个色阶。两个原生回放�
 在 255 处实测 Vulkan 基色坐标上，细粒度对角足迹匹配全部 NVIDIA 原生选层，细粒度欧氏足迹匹配全部 Intel 原生选层。完整虹膜按冻结图像、眼影覆盖及逐像素门槛验收。
 
 [透视梯度结果](evidence/2026-11-15/iris-projective-bare/results.json)和[验证归档](evidence/2026-11-15/iris-projective-bare/validation.zip)保存两块显卡的画面指纹、逐点层级及需继续核对的色差。
+
+### 眼影覆盖实机对照
+
+保留眼影节点和原生遮挡关系，按同机位核对 255 个虹膜像素。两块显卡的虹膜区域之外均逐像素一致，新增超出一个色阶的位置为零。
+
+| 设备 | 对照超差 | 透视梯度超差 | 对照峰差 | 透视梯度峰差 |
+| --- | ---: | ---: | ---: | ---: |
+| NVIDIA | 22 | 21 | 15 | 12 |
+| Intel | 30 | 29 | 27 | 27 |
+
+[覆盖结果](evidence/2026-11-16/iris-projective-covered/results.json)和[验证归档](evidence/2026-11-16/iris-projective-covered/validation.zip)保存画面指纹、逐点误差和验证层记录。完整虹膜继续按一个色阶的门槛验收。

@@ -1,0 +1,178 @@
+{
+  "validation": "qualified paired experiment",
+  "fullIrisAccepted": false,
+  "admissibleMaximumByteDifference": 1,
+  "status": "measured-projective-coarse-iris-player",
+  "devices": {
+    "nvidia": {
+      "false": {
+        "frame": "3b1bb0373a25c17af303b19548ca2955664e4d093097ae92c496134b6736e00b",
+        "control": "823a89734b7e77759825475f64a6031046b72635c24736b59497dd19c57a9519",
+        "overOne": [
+          10,
+          9
+        ],
+        "peak": [
+          19,
+          12
+        ],
+        "outsideIrisChanged": 0,
+        "newOverOne": 0,
+        "witnesses": [
+          {
+            "point": [
+              1262,
+              257
+            ],
+            "before": 19,
+            "after": 1
+          },
+          {
+            "point": [
+              1251,
+              261
+            ],
+            "before": 1,
+            "after": 0
+          }
+        ]
+      },
+      "true": {
+        "frame": "289e7411d8fe962d9c99b66f426821c0445416c61e056f69394ea8ab083b5c0a",
+        "control": "8f732d547598e91901563aff64ab6b9d88a87a5280518973fe050e020c9f74c1",
+        "overOne": [
+          22,
+          21
+        ],
+        "peak": [
+          15,
+          12
+        ],
+        "outsideIrisChanged": 0,
+        "newOverOne": 0,
+        "witnesses": [
+          {
+            "point": [
+              1262,
+              257
+            ],
+            "before": 15,
+            "after": 1
+          },
+          {
+            "point": [
+              1251,
+              261
+            ],
+            "before": 1,
+            "after": 0
+          }
+        ]
+      }
+    },
+    "intel": {
+      "false": {
+        "frame": "d563168cb817b6cd41fa1fdd42d659467b11b33f1343a5ec19f8887a17c1b9c0",
+        "control": "c8c529783d0ee888fc49d45de3be324e48605218664284517e335abf3dd38da8",
+        "overOne": [
+          19,
+          18
+        ],
+        "peak": [
+          27,
+          27
+        ],
+        "outsideIrisChanged": 0,
+        "newOverOne": 0,
+        "witnesses": [
+          {
+            "point": [
+              1262,
+              257
+            ],
+            "before": 18,
+            "after": 1
+          },
+          {
+            "point": [
+              1304,
+              257
+            ],
+            "before": 0,
+            "after": 1
+          },
+          {
+            "point": [
+              1305,
+              265
+            ],
+            "before": 0,
+            "after": 1
+          }
+        ]
+      },
+      "true": {
+        "frame": "6103c76f7ce2d19761fa47ae02e4f8b959d7589177d6df3280307ca3b4c3d201",
+        "control": "6afeae40383c5dd2ba1d410ef9ee201aead8d101dd231463348b5235bbd17af7",
+        "overOne": [
+          30,
+          29
+        ],
+        "peak": [
+          27,
+          27
+        ],
+        "outsideIrisChanged": 0,
+        "newOverOne": 0,
+        "witnesses": [
+          {
+            "point": [
+              1262,
+              257
+            ],
+            "before": 15,
+            "after": 1
+          },
+          {
+            "point": [
+              1304,
+              257
+            ],
+            "before": 0,
+            "after": 1
+          },
+          {
+            "point": [
+              1305,
+              265
+            ],
+            "before": 0,
+            "after": 1
+          }
+        ]
+      }
+    }
+  },
+  "scope": 255,
+  "stage": "covered",
+  "preflight": "b737e82ba1717556805d6af5ab2c2dfa518967d4319d76dc6abb88594ecf5fe4",
+  "reference": "48afd6546c23cfa85099a765cc94ada4813a684538c695faf6d70d6daf2261b5",
+  "archive": {
+    "sha256": "27a9ab08bc549c52a40b5b544a29b287cbec21261903589c1ab5ab874e1af944",
+    "bytes": 26495,
+    "members": {
+      "preflight.json": "b737e82ba1717556805d6af5ab2c2dfa518967d4319d76dc6abb88594ecf5fe4",
+      "results.json": "72253b848c5d94ca1313666d7d41265bbe48590e17cf433e7426df4d2198735b",
+      "bare-results.json": "5ecd795e89f6812ada484b591fcb1acb6abc0f8058ffea85cf9f31e1614b144e",
+      "nvidia/draw-receipt.json": "51c7a13fc4f72bd442f5552b92f7c2daefda4146b314ce5de5bb499139cb6e20",
+      "nvidia/frames/gpu_capabilities.json": "93c9fb29461fae11a7e57d4e49112071a71940dee571f1f6696ffbf03c392879",
+      "nvidia/frames/capture_manifest.json": "3515ca98e3b26da42b7cdfd244cfe3aaed20a80b213e71e22230d1ea704fd41b",
+      "nvidia/player.log": "b4de6167094fd8ddc689fbdd753b615967446c049a9f63466c3e2cff0e9c961c",
+      "intel/draw-receipt.json": "5a34e400e8f74369346d81bbd6fae6641d6a698c638163e3fbc4629c31076795",
+      "intel/frames/gpu_capabilities.json": "a38eaca3509b417cfe23614fe415bd9ccc5622fc682d8623142cdeb7dc3d85cc",
+      "intel/frames/capture_manifest.json": "ece5a7791799293e74de6ef1088d65b7427e715a28fe73c4f16f4577f91934a0",
+      "intel/player.log": "c99e1fc9528ca33e52f267a8ee8f47d7411ef47adb7cfeaedb5c472d00a91a1a",
+      "archive-native-character-hardware-lanes.py": "7519a78d3c4f5870927dcec16d443d518832dd1a9b11e0c6590809add2108809"
+    }
+  }
+}

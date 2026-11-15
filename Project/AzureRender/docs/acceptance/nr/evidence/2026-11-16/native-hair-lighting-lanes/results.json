@@ -1,0 +1,323 @@
+{
+  "frame": 10401,
+  "event": 950,
+  "firstMeasuredDifferences": {
+    "1243,342": "sample-inputs",
+    "1322,263": "sample-inputs",
+    "1327,287": "striped-diffuse",
+    "1333,312": "post-light-loop",
+    "1280,195": "exact-control"
+  },
+  "scope": "Native hardware attachment controls; complete hair color remains a separate gate",
+  "status": "qualified-native-ownership",
+  "points": [
+    {
+      "point": [
+        1243,
+        342
+      ],
+      "primitive": [
+        1518,
+        1518
+      ],
+      "nativeTargetAbsolute": 0.1484375,
+      "packedLanes": {
+        "copy": [
+          1515598718,
+          1410630488
+        ],
+        "base": [
+          1465205596,
+          1456808793
+        ],
+        "layer": [
+          1981500351,
+          1994132416
+        ],
+        "normal": [
+          1876683647,
+          1885076318
+        ],
+        "alpha": [
+          1872331712,
+          1876521920
+        ]
+      },
+      "lightingLanes": {
+        "pre-stripe-diffuse": [
+          2141185019,
+          2136982520
+        ],
+        "striped-diffuse": [
+          1494596464,
+          1377045327
+        ],
+        "main-specular": [
+          14,
+          13
+        ],
+        "continued-diffuse": [
+          1494596464,
+          1377045327
+        ],
+        "post-light-loop": [
+          1515598718,
+          1410630488
+        ],
+        "before-environment": [
+          1515598718,
+          1410630488
+        ]
+      }
+    },
+    {
+      "point": [
+        1322,
+        263
+      ],
+      "primitive": [
+        4087,
+        4087
+      ],
+      "nativeTargetAbsolute": 0.025390625,
+      "packedLanes": {
+        "copy": [
+          1553412999,
+          1607971721
+        ],
+        "base": [
+          1540805474,
+          1570175842
+        ],
+        "layer": [
+          1842931712,
+          1832910848
+        ],
+        "normal": [
+          1855720317,
+          1859914595
+        ],
+        "alpha": [
+          1901714305,
+          1897489282
+        ]
+      },
+      "lightingLanes": {
+        "pre-stripe-diffuse": [
+          2128589813,
+          2128589814
+        ],
+        "striped-diffuse": [
+          1494623067,
+          1540789089
+        ],
+        "main-specular": [
+          68,
+          36
+        ],
+        "continued-diffuse": [
+          1494623067,
+          1540789089
+        ],
+        "post-light-loop": [
+          1553412999,
+          1607971721
+        ],
+        "before-environment": [
+          1553412999,
+          1607971721
+        ]
+      }
+    },
+    {
+      "point": [
+        1327,
+        287
+      ],
+      "primitive": [
+        13024,
+        13024
+      ],
+      "nativeTargetAbsolute": 0.0703125,
+      "packedLanes": {
+        "copy": [
+          1628963737,
+          1645755298
+        ],
+        "base": [
+          1591161729,
+          1591161729
+        ],
+        "layer": [
+          1930857408,
+          1930857408
+        ],
+        "normal": [
+          1901837193,
+          1901837193
+        ],
+        "alpha": [
+          1843182528,
+          1843182528
+        ]
+      },
+      "lightingLanes": {
+        "pre-stripe-diffuse": [
+          2136986617,
+          2136986617
+        ],
+        "striped-diffuse": [
+          1607949192,
+          1624750991
+        ],
+        "main-specular": [
+          41943651,
+          46137967
+        ],
+        "continued-diffuse": [
+          1607949192,
+          1624750991
+        ],
+        "post-light-loop": [
+          1628963737,
+          1645755298
+        ],
+        "before-environment": [
+          1628963737,
+          1645755298
+        ]
+      }
+    },
+    {
+      "point": [
+        1333,
+        312
+      ],
+      "primitive": [
+        11767,
+        11767
+      ],
+      "nativeTargetAbsolute": 0.0390625,
+      "packedLanes": {
+        "copy": [
+          1633186718,
+          1675164577
+        ],
+        "base": [
+          1469412174,
+          1469412174
+        ],
+        "layer": [
+          1972709376,
+          1972709376
+        ],
+        "normal": [
+          1893464953,
+          1893464953
+        ],
+        "alpha": [
+          1876616128,
+          1876616128
+        ]
+      },
+      "lightingLanes": {
+        "pre-stripe-diffuse": [
+          2128589814,
+          2128589814
+        ],
+        "striped-diffuse": [
+          1482007383,
+          1482007383
+        ],
+        "main-specular": [
+          0,
+          0
+        ],
+        "continued-diffuse": [
+          1482007383,
+          1482007383
+        ],
+        "post-light-loop": [
+          1633186718,
+          1675164577
+        ],
+        "before-environment": [
+          1633186718,
+          1675164577
+        ]
+      }
+    },
+    {
+      "point": [
+        1280,
+        195
+      ],
+      "primitive": [
+        1017,
+        1017
+      ],
+      "nativeTargetAbsolute": 0.0,
+      "packedLanes": {
+        "copy": [
+          1708737483,
+          1708737483
+        ],
+        "base": [
+          1574386568,
+          1574386568
+        ],
+        "layer": [
+          1981565335,
+          1981565335
+        ],
+        "normal": [
+          1838936954,
+          1838936954
+        ],
+        "alpha": [
+          1864207296,
+          1864207296
+        ]
+      },
+      "lightingLanes": {
+        "pre-stripe-diffuse": [
+          2153780226,
+          2153780226
+        ],
+        "striped-diffuse": [
+          1691941827,
+          1691941827
+        ],
+        "main-specular": [
+          37749341,
+          37749341
+        ],
+        "continued-diffuse": [
+          1691941827,
+          1691941827
+        ],
+        "post-light-loop": [
+          1708737483,
+          1708737483
+        ],
+        "before-environment": [
+          1708737483,
+          1708737483
+        ]
+      }
+    }
+  ],
+  "archive": {
+    "sha256": "7ebaed4f8401c8b86c0bf956a1607a4615db984910621f9b37f07fa8557d42ea",
+    "bytes": 14310,
+    "members": {
+      "hair-native-owner-hardware-light-comparison.json": "8a28abb7843c8eb5f8fab8f5293cc97ab3a6414fc6a185454e592bc99a8b8247",
+      "hair-native-owner-control.py": "9f3ed664900d3a439d48ce53a8e041758b45b02c5c1de7606a3abb655d942276",
+      "nvidia/request.json": "9a37c650d2e450976ade995aca4f68022654b3c6643105e8a93805d6e423cce8",
+      "nvidia/results.json": "28a7324c9cca1c6f9ff02a6b330ae26a5a1842609fffeeb9ff97dd7ee2fb8f59",
+      "intel/request.json": "1d3f4881f9fd42e8bd65a17f28c9c9afd398a3c1aee4c937e1688612b557d079",
+      "intel/results.json": "30fed9aab2220b182520a76e217732bf56127895f902c5508eb24274959fded3",
+      "archive-native-character-hardware-lanes.py": "7519a78d3c4f5870927dcec16d443d518832dd1a9b11e0c6590809add2108809"
+    }
+  }
+}
