@@ -54,6 +54,8 @@
 
 采用原生深度和法线时，实际 Player 图集在 NVIDIA 上有 5 处可见量超差，在 Intel 上有 2 处。两设备合计涉及 5 个图集纹素，每个纹素在超差设备上比原生多一个 D16 单位。原生事件 237 的头发绘制写入其中 4 个，事件 191 的衣料绘制写入 1 个。坐标 [1236,1070] 两次读取同一图集纹素，比较命中由 28 增至 30，可见量相差 20 字节。
 
+[图集原生与 Vulkan 附件](evidence/2026-11-15/body-receiver-normal-and-atlas/results.json)的完整深度指纹核对通过。NVIDIA 的五处片元历史确认原生头发与衣料的图元编号。按读回的着色器深度扣除八个 D16 单位，五处均落在原生存储值的舍入范围内，距上方半单位边界约 0.029 至 0.079 个单位。Vulkan 的图集读回确认五处最终深度各高一个单位。Vulkan 记录保留到绘制级，逐图元深度及舍入继续核对。
+
 [固定层级与图集结果](evidence/2026-11-15/body-receiver-normal-and-atlas/results.json)和[验证归档](evidence/2026-11-15/body-receiver-normal-and-atlas/validation.zip)保存逐层误差、采样地址及写入事件。
 
 ## 验收状态

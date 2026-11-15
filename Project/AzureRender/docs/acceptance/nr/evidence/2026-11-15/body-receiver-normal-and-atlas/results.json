@@ -183,6 +183,107 @@
   },
   "distinctAtlasTexels": 10922,
   "residualAtlasTexels": 5,
+  "atlasDepthHistory": {
+    "status": "measured-native-and-player-d16-depth-history",
+    "source": "ad17064bfa37b79a04188e5e75ae4f162ebc52dc951ee4e09bb1b54a9077d328",
+    "atlasCapture": {
+      "native": "fa2ca267f7168f5603e83ad5f817a3074d8dbee23a216e6ab8ef2c340ec06a90",
+      "current": "fe3de15f134314eacb146e9cdf143bd6d98903d8250ddda8931faa1cc0e5f856"
+    },
+    "atlasAttachment": {
+      "native": "86daee0e01e9c33207679b094bdf5cf31a26d2f93754f11abf6c44df1faecf57",
+      "current": "df174554896d0969532f372427354f38efb7b6ce7e7e57d1902e674d0d3ab7da"
+    },
+    "samples": [
+      {
+        "point": [
+          2484,
+          1690
+        ],
+        "producer": 237,
+        "nativePrimitive": 1811,
+        "originalDepth": 44344,
+        "currentDepth": 44345,
+        "winningShaderDepthUnits": 44352.44041264057,
+        "nativeShaderDepthLessEight": 44344.44041264057,
+        "biasedDepthDistanceToUpperHalf": 0.05958735942840576,
+        "vulkanObservedEvent": 233,
+        "vulkanHistoryGranularity": "draw-level",
+        "vulkanHistoryDepthFailureFlag": false,
+        "historicalVulkanProducer": 272
+      },
+      {
+        "point": [
+          2552,
+          1681
+        ],
+        "producer": 191,
+        "nativePrimitive": 842,
+        "originalDepth": 44060,
+        "currentDepth": 44061,
+        "winningShaderDepthUnits": 44068.42130899429,
+        "nativeShaderDepthLessEight": 44060.42130899429,
+        "biasedDepthDistanceToUpperHalf": 0.07869100570678711,
+        "vulkanObservedEvent": 233,
+        "vulkanHistoryGranularity": "draw-level",
+        "vulkanHistoryDepthFailureFlag": true,
+        "historicalVulkanProducer": 242
+      },
+      {
+        "point": [
+          2565,
+          1691
+        ],
+        "producer": 237,
+        "nativePrimitive": 1355,
+        "originalDepth": 43954,
+        "currentDepth": 43955,
+        "winningShaderDepthUnits": 43962.46980071068,
+        "nativeShaderDepthLessEight": 43954.46980071068,
+        "biasedDepthDistanceToUpperHalf": 0.030199289321899414,
+        "vulkanObservedEvent": 233,
+        "vulkanHistoryGranularity": "draw-level",
+        "vulkanHistoryDepthFailureFlag": false,
+        "historicalVulkanProducer": 272
+      },
+      {
+        "point": [
+          2566,
+          1691
+        ],
+        "producer": 237,
+        "nativePrimitive": 1355,
+        "originalDepth": 43932,
+        "currentDepth": 43933,
+        "winningShaderDepthUnits": 43940.43498069048,
+        "nativeShaderDepthLessEight": 43932.43498069048,
+        "biasedDepthDistanceToUpperHalf": 0.06501930952072144,
+        "vulkanObservedEvent": 233,
+        "vulkanHistoryGranularity": "draw-level",
+        "vulkanHistoryDepthFailureFlag": false,
+        "historicalVulkanProducer": 272
+      },
+      {
+        "point": [
+          2566,
+          1694
+        ],
+        "producer": 237,
+        "nativePrimitive": 1352,
+        "originalDepth": 43903,
+        "currentDepth": 43904,
+        "winningShaderDepthUnits": 43911.47057890892,
+        "nativeShaderDepthLessEight": 43903.47057890892,
+        "biasedDepthDistanceToUpperHalf": 0.029421091079711914,
+        "vulkanObservedEvent": 233,
+        "vulkanHistoryGranularity": "draw-level",
+        "vulkanHistoryDepthFailureFlag": false,
+        "historicalVulkanProducer": 272
+      }
+    ],
+    "nativeThreshold": "unchanged",
+    "unresolved": "vulkan-subpixel-depth"
+  },
   "nativeAtlasProducerEvents": {
     "2484,1690": [
       [
@@ -243,15 +344,21 @@
     "visibilityModel": "71affe8d326bce3366cfdd76fe61b8966eff2765d3ca2030db20b3f0e456fea0"
   },
   "archive": {
-    "sha256": "ecb45dc5938a74cb0c97b7c997c8caa70ee20aeb9bd6744e0e454274b1977f1d",
+    "sha256": "c9ba048e5bda5fd463b871743b614515742a0fa626cbc931ed0f641e629a028f",
     "members": {
-      "package-body-receiver-normal-and-atlas.py": "f84a91312f45d4b3e32f35e489293b47b05dab030804cb9f07e15450d65b1e06",
+      "package-body-receiver-normal-and-atlas.py": "8a5b7c2d7fb5dab6fc7b6375efabd8e6484981b4615aa1a3cca2ca4712c7b236",
       "body-receiver-normal-explicit-reconstruction.py": "4d004a8e3e9bd7849effa503b8a84ac0d893756a67e8ae5af0be2b2c920fb58b",
       "body-receiver-normal-explicit-reconstruction.json": "88f160c9b6025c47842f230d83a5676392b1a3b5f1024eea17e0e87d65f442b5",
       "body-receiver-atlas-texels.py": "4f611e8b8097328cb39d673b60e548f4c446f50a2b06b0d7db83dc6d3d4a3e86",
       "body-receiver-atlas-texels.json": "01d993f9abe79598c14852432da0498172d99d139ab0e1b5e1fae8729142fef6",
       "body-receiver-atlas-texel-producers.py": "3218e515a8585cddbd9e6612b40eed6e6b9aa94ba09bfe6a7eb40298e8d2e5e5",
-      "body-receiver-atlas-texel-producers.json": "c198d30c3ac862e638dab6f2fcfcdc9b3336971ce7f6c304156c6b594f6778ef"
+      "body-receiver-atlas-texel-producers.json": "c198d30c3ac862e638dab6f2fcfcdc9b3336971ce7f6c304156c6b594f6778ef",
+      "body-atlas-depth-history.py": "864e20049c3a2e482a67e63a946f61b66e229ad00a3f8847e087c44eafdcf915",
+      "body-atlas-depth-history/request.json": "28d85aeb5fbb386ca5eebadca95701b7a730a1b2de369e2501268d40775df591",
+      "body-atlas-depth-history/results.json": "ad17064bfa37b79a04188e5e75ae4f162ebc52dc951ee4e09bb1b54a9077d328",
+      "score-body-atlas-hardware-depth-history.py": "17a4e39877d097f8bfab0430f4e854ec2e5423e4ce573706232fea86b88ef37c",
+      "body-atlas-hardware-depth-history-analysis.json": "eaa901b13d5dff1209441d4712d454809cda3be8d93df9654a519fdfe5b75b57",
+      "nr-body-atlas-depth-hardware-history-queue.log": "269f9d1d86f13c2fc7d75d30e82e239e0b28fdfc273e75afb4ec41df482182e7"
     }
   }
 }
