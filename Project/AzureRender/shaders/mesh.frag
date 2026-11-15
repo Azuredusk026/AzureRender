@@ -737,12 +737,29 @@ vec4 evaluateIrradianceVolume(vec3 position,vec3 normal,bool surfaceReceiver) {
 #endif
 }
 
-float dualFaceRampCoordinate(vec3 direction, vec3 normal, out vec4 distanceSample) {
+float authoredFaceGeometryMask(sampler2D mask, vec2 uv) {
+    vec2 baseExtent=vec2(textureSize(mask,0));
+    vec2 dx=azurePrimaryDx(uv)*baseExtent;
+    vec2 dy=azurePrimaryDy(uv)*baseExtent;
+    float footprintSquared=max(dot(dx,dx),dot(dy,dy));
+    float lod=0.5*log2(max(footprintSquared,1e-12))-1.0;
+    int level=int(clamp(floor(lod+0.5),0.0,float(textureQueryLevels(mask)-1)));
+    ivec2 extent=textureSize(mask,level);
+    vec2 texel=clamp(uv,vec2(0),vec2(1))*vec2(extent)-0.5;
+    ivec2 origin=ivec2(floor(texel));
+    ivec2 lo=clamp(origin,ivec2(0),extent-1);
+    ivec2 hi=clamp(origin+1,ivec2(0),extent-1);
+    vec2 weight=fract(texel);
+    float bottom=mix(texelFetch(mask,lo,level).g,texelFetch(mask,ivec2(hi.x,lo.y),level).g,weight.x);
+    float top=mix(texelFetch(mask,ivec2(lo.x,hi.y),level).g,texelFetch(mask,hi,level).g,weight.x);
+    return mix(bottom,top,weight.y);
+}
+
+float dualFaceRampCoordinate(vec3 direction, vec3 normal, out vec4 distanceSample, float geometryMask) {
     mat3 headFrame=mat3(instanceFaceFrame);
     vec3 localLight=transpose(headFrame)*direction;
     vec3 localCamera=transpose(headFrame)*(-camera.cameraForward.xyz);
     distanceSample=textureLod(AZ_TEX_FACE_SDF,faceSdfSampleUv(textureCoordinate,localLight.x),0.0);
-    float geometryMask=textureLod(AZ_TEX_STYLE_MASK,textureCoordinate,0.0).g;
     return faceSdfRampCoordinate(distanceSample,geometryMask,localLight,localCamera,
         dot(normal,direction),material.hairParameters.xyz);
 }
@@ -1218,14 +1235,17 @@ void main()
         if(signedMainRamp)rampCoordinate=characterMainRampCoordinate(shadedNormal,lightDirection,rampInput.z);
     }
     vec3 faceLightingNormal=shadedNormal;
+    float faceSdfGeometryMask=0.0;
     if(dualFaceSdf) {
         toonWeight=qaEffectMode==1 && qaEffectDisabled?0.0:1.0;
-        rampCoordinate=dualFaceRampCoordinate(lightDirection,shadedNormal,faceSdfSample);
+        bool authoredMaskMip=materialSurfaceProfiles.profiles[material.materialPadding>>1U].rows[20].z>.5;
+        faceSdfGeometryMask=authoredMaskMip?authoredFaceGeometryMask(AZ_TEX_STYLE_MASK,textureCoordinate)
+            :textureLod(AZ_TEX_STYLE_MASK,textureCoordinate,0.0).g;
+        rampCoordinate=dualFaceRampCoordinate(lightDirection,shadedNormal,faceSdfSample,faceSdfGeometryMask);
         mat3 headFrame=mat3(instanceFaceFrame);
         float localLightX=(transpose(headFrame)*lightDirection).x;
-        float geometryMix=textureLod(AZ_TEX_STYLE_MASK,textureCoordinate,0.0).g;
         faceLightingNormal=faceSdfWorldNormal(faceSdfSample,localLightX,
-            headFrame,shadedNormal,geometryMix);
+            headFrame,shadedNormal,faceSdfGeometryMask);
         faceIllumination=rampCoordinate;
         faceSdfWeight=0.0;
     }
@@ -1448,7 +1468,7 @@ void main()
         vec3 localDiffuseResponse=vec3(pointDiffuse);
         if(dualFaceSdf) {
             vec4 localDistanceSample;
-            float localCoordinate=dualFaceRampCoordinate(pointDirection,localLightingNormal,localDistanceSample);
+            float localCoordinate=dualFaceRampCoordinate(pointDirection,localLightingNormal,localDistanceSample,faceSdfGeometryMask);
             localDiffuseResponse=textureLod(AZ_TEX_MATCAP,vec2(localCoordinate,.5),0.0).rgb;
         } else if(sceneCharacter) {
             float coordinate=materialFeatureEnabled(8192U)>.5
@@ -1477,7 +1497,7 @@ void main()
             vec4 localRamp;
             if(dualFaceSdf) {
                 vec4 distanceValue;
-                localCoordinate=dualFaceRampCoordinate(pointDirection,localLightingNormal,distanceValue);
+                localCoordinate=dualFaceRampCoordinate(pointDirection,localLightingNormal,distanceValue,faceSdfGeometryMask);
                 localRamp=textureLod(AZ_TEX_MATCAP,vec2(localCoordinate,.5),0);
             } else localRamp=materialDiffuseRampRgba(localCoordinate);
             float visibility=light.coneType.y>1.5&&light.directionOuter.w>.5?shadowVisibility:1.0;
@@ -2298,7 +2318,7 @@ void main()
     }
     if (AZURE_ALPHA_MODE == 2) outputColor.a *= material.nodeOpacity;
     if(multiplyComposite) {
-        vec2 compositeProfile=materialSurfaceProfiles.profiles[material.materialPadding>>1U].rows[20].xy;
+        vec4 compositeProfile=materialSurfaceProfiles.profiles[material.materialPadding>>1U].rows[20];
 #if !defined(AZURE_OPAQUE_SNAPSHOT)
         if (compositeProfile.x>.5) {
             ivec2 pixel=ivec2(AZURE_FRAGMENT_COORD.xy);
@@ -2314,6 +2334,7 @@ void main()
         }
 #endif
         compositeCoverage*=compositeProfile.y;
+        if(compositeProfile.w>.5&&compositeCoverage<=0.0)discard;
         outputColor.rgb=mix(vec3(1.0),outputColor.rgb,compositeCoverage);
         outputColor.a=0.0;
     }

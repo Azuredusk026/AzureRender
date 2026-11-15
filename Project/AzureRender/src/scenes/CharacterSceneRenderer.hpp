@@ -613,6 +613,7 @@ private:
     std::array<VkPipeline,4> additiveBlendPipelines_{},vertexColorAdditiveBlendPipelines_{};
     std::array<std::array<VkPipeline,4>,2> surfaceOverlayPipelines_{},surfaceOverlaySnapshotPipelines_{};
     std::array<VkPipeline,4> multiplyPipelines_{};
+    std::array<VkPipeline,4> multiplyDepthPipelines_{};
     std::array<VkPipeline,2> sceneTintPipelines_{};
     VkPipeline outlinePipeline_ = VK_NULL_HANDLE;
     VkPipeline outlineDepthPipeline_=VK_NULL_HANDLE;

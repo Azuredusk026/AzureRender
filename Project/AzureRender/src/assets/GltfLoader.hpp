@@ -94,6 +94,7 @@ struct AssetFaceSdfProfile {
     static constexpr std::uint32_t kSchemaVersion = 1;
 
     bool present = false;
+    bool authoredMaskMip = false;
     std::uint32_t schemaVersion = kSchemaVersion;
     struct Highlight {
         bool present=false;
@@ -126,6 +127,7 @@ struct AssetMaterial {
     } blendDepth;
     enum class MultiplyReceiver : std::uint8_t { Unrestricted, Eye, Face };
     MultiplyReceiver multiplyReceiver = MultiplyReceiver::Unrestricted;
+    bool multiplyDepthPrepass = false;
     float multiplyCoverageScale = 1.F;
     azurerender::UnlitTextureLayers unlitTextureLayers;
     enum class CharacterVisibility : std::uint8_t { SceneVisibility,MainLightShadow,ObjectShadow,One };

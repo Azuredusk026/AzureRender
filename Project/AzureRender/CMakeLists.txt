@@ -2313,7 +2313,10 @@ if(BUILD_TESTING)
         --executable $<TARGET_FILE:AzurePlayer> --expected-validation "$<IF:$<CONFIG:Debug>,enabled,disabled>")
     add_test(NAME AzureEngine.MaterialCompositeMsaaGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_material_composite_gpu.py"
         --executable $<TARGET_FILE:AzurePlayer> --expected-validation "$<IF:$<CONFIG:Debug>,enabled,disabled>" --receiver-msaa-only)
-    set_tests_properties(AzureEngine.MaterialCompositeGpu AzureEngine.MaterialCompositeMsaaGpu PROPERTIES TIMEOUT 600 LABELS "gpu" RUN_SERIAL TRUE)
+    add_test(NAME AzureEngine.MaterialCompositeNearestDepthGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_material_composite_gpu.py"
+        --executable $<TARGET_FILE:AzurePlayer> --expected-validation "$<IF:$<CONFIG:Debug>,enabled,disabled>" --nearest-depth-only)
+    set_tests_properties(AzureEngine.MaterialCompositeGpu AzureEngine.MaterialCompositeMsaaGpu
+        AzureEngine.MaterialCompositeNearestDepthGpu PROPERTIES TIMEOUT 600 LABELS "gpu" RUN_SERIAL TRUE)
     add_test(NAME AzureEngine.ThirdPersonPlayer COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_third_person_player.py" --executable $<TARGET_FILE:AzurePlayer>)
     set_tests_properties(AzureEngine.IndependentAnimationGpu AzureEngine.ThirdPersonPlayer PROPERTIES TIMEOUT 300 LABELS "gpu" RUN_SERIAL TRUE)
     add_test(NAME AzureEngine.PlayablePlayer COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_playable_player.py" --executable $<TARGET_FILE:AzurePlayer>)

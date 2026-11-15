@@ -1123,8 +1123,16 @@ void loadMaterialComposite(const tinygltf::Material& material, AssetMaterial& re
             throw std::invalid_argument("Invalid multiply composite coverageScale");
         result.multiplyCoverageScale=static_cast<float>(value);
     }
+    if(raw.contains("depthPrepass")) {
+        const auto& prepass=raw.at("depthPrepass");
+        if(!prepass.is_boolean()||(prepass.get<bool>()
+            &&(result.multiplyReceiver==AssetMaterial::MultiplyReceiver::Unrestricted||result.blendDepth.present)))
+            throw std::invalid_argument("Invalid multiply composite depthPrepass");
+        result.multiplyDepthPrepass=prepass.get<bool>();
+    }
     for(const auto& field:raw.items())
-        if(field.key()!="schemaVersion"&&field.key()!="mode"&&field.key()!="receiver"&&field.key()!="coverageScale")
+        if(field.key()!="schemaVersion"&&field.key()!="mode"&&field.key()!="receiver"&&field.key()!="coverageScale"
+            &&field.key()!="depthPrepass")
             throw std::invalid_argument("Unknown composite field: "+field.key());
 }
 
@@ -1688,6 +1696,12 @@ AssetMaterial loadMaterial(
                     return faceSdf.Get(key).Get<std::string>();
                 };
                 const int sdfVersion=requireNumber("schemaVersion");
+                if(faceSdf.Has("maskSampling")) {
+                    const auto& value=faceSdf.Get("maskSampling");
+                    if(sdfVersion!=2||!value.IsString()||value.Get<std::string>()!="authored-mip")
+                        throw std::invalid_argument(result.name+" invalid faceSdf.maskSampling");
+                    result.faceSdf.authoredMaskMip=true;
+                }
                 if(sdfVersion!=2&&faceSdf.Has("highlight"))
                     throw std::invalid_argument(result.name+" faceSdf.highlight requires faceSdf version two");
                 if (sdfVersion!=1 && sdfVersion!=2) {
@@ -1782,6 +1796,16 @@ AssetMaterial loadMaterial(
                     for(const unsigned slot:{4U,5U,7U}) {
                         result.textureSettings[slot].wrapU="clamp";result.textureSettings[slot].wrapV="clamp";
                         result.textureSettings[slot].mipPolicy="none";
+                    }
+                    if(result.faceSdf.authoredMaskMip) {
+                        auto& settings=result.textureSettings[4];
+                        settings.filter="linear";
+                        settings.magFilter=azurerender::TextureImportSettings::MagFilter::Linear;
+                        settings.colorSpace="linear";
+                        settings.anisotropy=1;
+                        settings.mipPolicy="generate";
+                        settings.mipBias=-1.F;
+                        settings.mipFilter=azurerender::TextureImportSettings::MipFilter::Nearest;
                     }
                 } else {
                 const std::string channel = requireString("channel");
@@ -2016,6 +2040,8 @@ AssetMaterial loadMaterial(
             kNoFactor,
             result.styleMaskWidth,
             result.styleMaskHeight,false,authored,&result.authoredMipLevels[4]);
+        if(result.faceSdf.authoredMaskMip&&result.authoredMipLevels[4]<2)
+            throw std::invalid_argument(result.name+" faceSdf.maskSampling requires authored mip levels");
         if((result.materialFeatures&MaterialFeatureDiffuseRamp)
             &&(result.styleMaskWidth<2||result.styleMaskHeight!=1))
             throw std::runtime_error("diffuseRamp requires a horizontal single-row image");
@@ -2439,8 +2465,11 @@ AssetMaterial loadMaterial(
             if(lookup&&(settings.filter!=defaults.filter||magChanged||settings.wrapU!=defaults.wrapU
                 ||settings.wrapV!=defaults.wrapV||settings.mipPolicy!=defaults.mipPolicy
                 ||settings.anisotropy!=defaults.anisotropy||settings.mipBias!=defaults.mipBias
+                ||(slot==4&&result.faceSdf.authoredMaskMip&&settings.mipFilter!=defaults.mipFilter)
                 ||(slot==5&&result.specularRamp.present&&settings.mipFilter!=defaults.mipFilter)))
-                throw std::invalid_argument(result.name+" fixed lookup sampler violated at slot "+std::to_string(slot));
+                throw std::invalid_argument(result.name+
+                    (slot==4&&result.faceSdf.authoredMaskMip?" invalid faceSdf.maskSampling sampler settings":
+                        " fixed lookup sampler violated at slot "+std::to_string(slot)));
             result.textureSettings[slot]=std::move(settings);
         }
     }

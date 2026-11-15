@@ -204,6 +204,8 @@ Intel 头发颜色继续核对纹理梯度与层级选择。
 整体完成状态由全部适用门禁共同决定。
 
 角色固定姿态按[脸部与体表区域验收](../acceptance/nr/face-skin-color-sources.md)记录纹理、照明、描边和透明衣料的来源。
+
+[脸部正式材质对照](../acceptance/nr/evidence/2026-11-15/public-face-receiver-depth-and-mask/results.json)核对距离场遮罩选层、发影最近片元乘色与同驱动默认四帧。全脸一字节门槛和原始冻结参考保持开放。
 脸部按主光饱和度、视角染色与局部灯光分项核对。
 眼周及发影覆盖按接收类别、遮挡和线性颜色分项核对。
 近景眼部按[乘色与泛光对照](../acceptance/nr/eye-multiply-receiver.md)核对覆盖及颜色。

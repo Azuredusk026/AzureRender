@@ -205,7 +205,9 @@ inline PackedMaterialSurfaceProfile packMaterialSurfaceProfile(const AssetMateri
     }
     result.rows[19][3]=material.radianceScale;
     if((material.materialFeatures&MaterialFeatureMultiplyComposite)!=0)
-        result.rows[20]={static_cast<float>(material.multiplyReceiver),material.multiplyCoverageScale,0.F,0.F};
+        result.rows[20]={static_cast<float>(material.multiplyReceiver),material.multiplyCoverageScale,0.F,
+            material.multiplyDepthPrepass?1.F:0.F};
+    if(material.faceSdf.authoredMaskMip)result.rows[20][2]=1.F;
     result.rows[21][0]=static_cast<float>(material.displayTransform);
     const auto environmentFlags=materialEnvironmentFlags(material.environmentLighting);
     result.rows[21][1]=static_cast<float>(environmentFlags);

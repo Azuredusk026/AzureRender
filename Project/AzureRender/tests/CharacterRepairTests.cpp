@@ -679,6 +679,26 @@ void testMultiplyComposite(const nlohmann::json& fixture, const std::filesystem:
     const auto faceProfile=azurerender::packMaterialSurfaceProfile(load(faceOverlay).materials.at(0));
     require(faceProfile.rows[20][0]==2.F&&faceProfile.rows[20][1]==.95F,
         "Face multiply composite must carry a distinct receiver filter and the coverage scale");
+    auto depthOverlay=faceOverlay;
+    auto& depthComposite=depthOverlay["materials"][0]["extras"]["azureRenderMaterial"]["composite"];
+    depthComposite["depthPrepass"]=true;
+    const auto depthMaterial=load(depthOverlay).materials.at(0);
+    require(depthMaterial.multiplyDepthPrepass&&packMaterialSurfaceProfile(depthMaterial).rows[20][3]==1.F,
+        "Receiver-bound multiply must carry the depth prepass through the packed material");
+    depthComposite.erase("receiver");
+    reject(depthOverlay);
+    depthComposite["receiver"]="face";
+    for(const auto& value:Json::array({1,"true",nullptr})){
+        depthComposite["depthPrepass"]=value;
+        reject(depthOverlay);
+    }
+    depthComposite["depthPrepass"]=true;
+    auto depthConflict=depthOverlay;
+    depthConflict["materials"][0]["extras"]["azureRenderMaterial"]["blendDepth"]={{"schemaVersion",1},{"write",true}};
+    reject(depthConflict);
+    depthComposite["depthPrepass"]=false;
+    require(!load(depthOverlay).materials.at(0).multiplyDepthPrepass,
+        "An explicitly disabled prepass must keep ordinary multiply recording");
     const auto defaultProfile=azurerender::packMaterialSurfaceProfile(overlay);
     require(defaultProfile.rows[20][0]==0.F&&defaultProfile.rows[20][1]==1.F,
         "Multiply composite defaults must preserve unrestricted coverage");
@@ -926,6 +946,51 @@ void testFaceHighlightProfile(const nlohmann::json& fixture,const std::filesyste
         "Face highlight must retain the authored view shift and presence");
     auto legacy=source;profile(legacy)["faceSdf"].erase("highlight");
     require(packMaterialSurfaceProfile(load(legacy)).rows[12][2]==0.F,"Face highlight must be opt-in");
+    auto mipMask=source;
+    std::filesystem::copy_file(directory/"outline-mask.dds",directory/"face-geometry-mask.dds",
+        std::filesystem::copy_options::overwrite_existing);
+    const int maskImage=static_cast<int>(mipMask["images"].size());
+    const int maskTexture=static_cast<int>(mipMask["textures"].size());
+    mipMask["images"].push_back({{"uri","face-geometry-mask.dds"}});
+    mipMask["textures"].push_back({{"source",maskImage}});
+    auto& maskProfile=profile(mipMask)["faceSdf"];
+    maskProfile["maskTexture"]=maskTexture;
+    maskProfile["maskSampling"]="authored-mip";
+    const auto authoredMask=load(mipMask);
+    using MipFilter=TextureImportSettings::MipFilter;
+    require(authoredMask.textureSettings[4].mipPolicy=="generate"
+        &&authoredMask.textureSettings[4].mipBias==-1.F
+        &&authoredMask.textureSettings[4].mipFilter==MipFilter::Nearest
+        &&authoredMask.authoredMipLevels[4]==2
+        &&packMaterialSurfaceProfile(authoredMask).rows[20][2]==1.F,
+        "Face SDF mask sampling must retain the authored mip chain and select the shader policy");
+    require(authoredMask.textureSettings[5].mipPolicy=="none"&&authoredMask.textureSettings[7].mipPolicy=="none",
+        "Face distance-field and ramp lookups must retain explicit base-level sampling");
+    auto fixedMask=mipMask;
+    profile(fixedMask)["faceSdf"].erase("maskSampling");
+    const auto fixed=load(fixedMask);
+    require(fixed.textureSettings[4].mipPolicy=="none"&&packMaterialSurfaceProfile(fixed).rows[20][2]==0.F,
+        "Omitted mask sampling must preserve the fixed lookup");
+    const auto rejectMaskSampling=[&](const Json& document) {
+        std::string failure;
+        try{(void)load(document);}catch(const std::exception& error){failure=error.what();}
+        require(failure.find("faceSdf.maskSampling")!=std::string::npos,
+            "Invalid face SDF mask sampling must report its field");
+    };
+    auto invalidMask=mipMask;
+    profile(invalidMask)["faceSdf"]["maskSampling"]=true;
+    rejectMaskSampling(invalidMask);
+    invalidMask=mipMask;
+    invalidMask["images"][maskImage]["uri"]="face-highlight.png";
+    rejectMaskSampling(invalidMask);
+    invalidMask=mipMask;
+    profile(invalidMask)["faceSdf"]["schemaVersion"]=1;
+    profile(invalidMask)["faceSdf"].erase("highlight");
+    rejectMaskSampling(invalidMask);
+    const auto maskMetadata=directory/"face-geometry-mask.dds.azmeta";
+    std::ofstream(maskMetadata)<<Json{{"settings",{{"texture",{{"mipFilter","linear"}}}}}}.dump();
+    rejectMaskSampling(mipMask);
+    std::filesystem::remove(maskMetadata);
     require(packMaterialSurfaceProfile(loaded).rows[12][3]==0.F,"Face main brightness saturation must be opt-in");
     auto saturated=source;profile(saturated)["nprDiffuse"]["mainBrightnessSaturation"]=true;
     require(packMaterialSurfaceProfile(load(saturated)).rows[12][3]==1.F,

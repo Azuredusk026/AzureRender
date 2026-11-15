@@ -2373,6 +2373,13 @@ void CharacterSceneRenderer::uploadMaterialTexture(LoadedAsset& asset,std::vecto
         SampledTextureUpload request;request.width=width;request.height=height;request.format=colorFormat;
         request.mipLevels=levels;request.semantic=settings.semantic();request.alphaCutoff=cutoff;
         request.sampler=settings.sampler(1,16);request.sampler.maxLod=VK_LOD_CLAMP_NONE;
+        if(slot==4&&m.faceSdf.authoredMaskMip) {
+            // Keep filtered mask reads on the original base-level sampler.
+            // The face geometry calculation fetches authored levels directly.
+            auto fixedLookup=azurerender::TextureImportSettings{};
+            fixedLookup.wrapU=fixedLookup.wrapV="clamp";
+            request.sampler=fixedLookup.sampler(1,16);
+        }
         if(pixels.size()>=16U*1024U*1024U)RuntimeDiagnostics::instance().info("render",
             "Scene material texture begin: "+m.name+", slot="+std::to_string(slot)+", bytes="+std::to_string(pixels.size()));
         binding=materialTextureCache_->acquire(std::move(pixels),request);
@@ -4160,6 +4167,20 @@ void CharacterSceneRenderer::createGraphicsPipeline(
         multiplyDesc.depthCompare=VK_COMPARE_OP_LESS_OR_EQUAL;
         multiplyDesc.cullMode=context.faceCullingEnabled?VK_CULL_MODE_BACK_BIT:VK_CULL_MODE_NONE;
         createFacingPipelines(multiplyPipelines_,multiplyDesc);
+        const auto hasMultiplyDepth=[](const LoadedAsset& asset) {
+            return std::any_of(asset.materials.begin(),asset.materials.end(),[](const AssetMaterial& material) {
+                return material.multiplyDepthPrepass;
+            });
+        };
+        const bool multiplyDepthEnabled=hasMultiplyDepth(asset_)
+            ||std::any_of(additionalResources_.begin(),additionalResources_.end(),
+                [&](const auto& resource){return hasMultiplyDepth(resource->asset);});
+        if(context.depthTestEnabled&&multiplyDepthEnabled) {
+            auto prepass=multiplyDesc;
+            prepass.depthWrite=true;
+            prepass.colorWriteMasks.assign(prepass.colorAttachmentCount,0);
+            createFacingPipelines(multiplyDepthPipelines_,prepass);
+        }
         auto tintDesc=materialDesc;
         for(unsigned mirrored=0;mirrored<2;++mirrored){
             tintDesc.frontFace=mirrored?VK_FRONT_FACE_CLOCKWISE:VK_FRONT_FACE_COUNTER_CLOCKWISE;
@@ -4327,6 +4348,8 @@ void CharacterSceneRenderer::destroyResources() {
              &multiplyPipelines_[0],
              &multiplyPipelines_[1],
              &multiplyPipelines_[2],&multiplyPipelines_[3],
+             &multiplyDepthPipelines_[0],&multiplyDepthPipelines_[1],
+             &multiplyDepthPipelines_[2],&multiplyDepthPipelines_[3],
              &sceneTintPipelines_[0],&sceneTintPipelines_[1],
              &outlinePipeline_,&outlineDepthPipeline_,&outlineDepthMirroredPipeline_,
              &outlineMirroredPipeline_,
@@ -4488,6 +4511,8 @@ void CharacterSceneRenderer::destroyGraphicsPipelinesForRecreate() {
              &multiplyPipelines_[0],
              &multiplyPipelines_[1],
              &multiplyPipelines_[2],&multiplyPipelines_[3],
+             &multiplyDepthPipelines_[0],&multiplyDepthPipelines_[1],
+             &multiplyDepthPipelines_[2],&multiplyDepthPipelines_[3],
              &sceneTintPipelines_[0],&sceneTintPipelines_[1],
              &outlinePipeline_,&outlineDepthPipeline_,&outlineDepthMirroredPipeline_,
              &outlineMirroredPipeline_,
@@ -5510,9 +5535,18 @@ void CharacterSceneRenderer::drawPrimitive(
             ++recordedDrawCalls;
         }
     } else {
-        commands.drawIndexed(
-            primitive.indexCount, firstIndexOffset, instanceCount,
-            materialOriginFirstInstance(material,snapshot,firstInstance,instanceCount));
+        const auto drawInstance=materialOriginFirstInstance(material,snapshot,firstInstance,instanceCount);
+        if(material.multiplyDepthPrepass) {
+            const auto prepass=multiplyDepthPipelines_[surfaceFacingIndex(material.doubleSided,mirrored)];
+            if(prepass!=VK_NULL_HANDLE) {
+                commands.bindPipeline(materialUvPipeline(material,materialLightingPipeline(material,prepass)));
+                commands.drawIndexed(primitive.indexCount,firstIndexOffset,instanceCount,drawInstance);
+                commands.bindPipeline(fullPipeline);
+                ++recordedDrawCalls;
+                if(counters)counters->pipelineBinds+=2;
+            }
+        }
+        commands.drawIndexed(primitive.indexCount,firstIndexOffset,instanceCount,drawInstance);
         ++recordedDrawCalls;
     }
     if (counters != nullptr) {

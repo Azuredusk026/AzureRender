@@ -1,0 +1,2713 @@
+{
+  "status": "qualified-public-controls",
+  "overallVisualAcceptance": "failed-user-review",
+  "executable": "54e66fd9a0565915d1883dcb5e2fef6c5f773dcc5c5dc65b0be7f8008933c8a6",
+  "shaderCandidates": 26,
+  "devices": {
+    "nvidia": {
+      "syntheticMetrics": {
+        "singleLinearMaximumError": 0.000510854358105467,
+        "legacyLinearMaximumError": 0.002732267900810076,
+        "far-first": 0.0,
+        "near-first": 0.0,
+        "fixed": 0.0,
+        "zeroCoverage": 0.0,
+        "wrongReceiver": 0.0,
+        "zeroCoverageInFront": 0.0,
+        "multisample": 0.0
+      },
+      "capturedCases": 11,
+      "nativePose": {
+        "mask": {
+          "device": "nvidia",
+          "input": {
+            "overlayPair": false,
+            "player": "54e66fd9a0565915d1883dcb5e2fef6c5f773dcc5c5dc65b0be7f8008933c8a6",
+            "programs": {
+              "character_snapshot.frag.spv": "c1a91507b1486988126c9b8e30acd0245501325e6d2d55f61d1d069dfd7dcc23",
+              "character_snapshot_bindless.frag.spv": "9d9cb6f20675aa6a6038651f0a2eb1d2f23cd1c56270765b4848309246f93221",
+              "character_snapshot_object.frag.spv": "cbb47205f0a4c7055fd9e99d24ec65aa719ab2bc0598ecb230025d7b98e661ad",
+              "character_snapshot_object_bindless.frag.spv": "35694db17e9bb1580b7ad9ab7df30bde4bd60e97833a379a07d3ddfb84297d15",
+              "character_snapshot_object_bindless_lighting.frag.spv": "93b093df61574ebfc3c73fcc2a0733935d56ca805486f2f248eee4e0f7ff4a83",
+              "character_snapshot_object_lighting.frag.spv": "4f42dfd38f81be8a33a858071cb2fec42fa4b84a8146619168c63cd80d2d39a6",
+              "mesh.frag.spv": "7f26fb6aa6a1ddddec0bd6960e62ef970459c18cee38af9984e2c81c38539758",
+              "mesh_bindless.frag.spv": "72386f49dc04434364cdf005272cd1a0d8c8b66c6faa3f00cfe486ac31050704",
+              "mesh_bindless_early_lighting.frag.spv": "018723bc2c19950a239ec06760d526bde679fec7c15081bccb5535684fde0b07",
+              "mesh_bindless_lighting.frag.spv": "48fda93f786e1cd115548d6664dcb81a9aba661fecda1861e44d22845a0f0080",
+              "mesh_bindless_samples.frag.spv": "cbd7f4f143d6f8005220554685dc8eac9afe76b9ea9b831f9c2f1626addf908f",
+              "mesh_bindless_samples_lighting.frag.spv": "b660ffbb273ee0391e3e5602c80f0f6c519f0becf5629582b9091a0fbc850682",
+              "mesh_early_lighting.frag.spv": "2519a49c39ab3655d921bec8664947788043ee40000d04018562c416b32fac1e",
+              "mesh_lighting.frag.spv": "adbfde70a8054481e498b0b4c40068797a57bab3831d4b7e3f1dcb5f92b745fe",
+              "mesh_object.frag.spv": "b705bb8a8f46082fb71f7ff229f720ba714b895208faf5d0eb03112ee8634b93",
+              "mesh_object_bindless.frag.spv": "318d877909ceb6e7de7bcfcc7371a074eb3aa9161a091709545ecfdeefec0c8b",
+              "mesh_object_bindless_early_lighting.frag.spv": "2d855000984df66319fd7d6b800cfb985e6410a855132722c6dbaa8732805bb7",
+              "mesh_object_bindless_lighting.frag.spv": "58f81f0c4738e9756052884d933cbe70a1760d7dffa5a7869ec954b1cb810e9d",
+              "mesh_object_bindless_samples.frag.spv": "107893c691d5b3ea496c3659122e09c01de78d529c0cf11ee4238a863d4f7914",
+              "mesh_object_bindless_samples_lighting.frag.spv": "470ad9673d56118fb1abe396cc9b730c434ad7cccb90bf5b614db6c5f0751c72",
+              "mesh_object_early_lighting.frag.spv": "f097b0cd3073492d3e536e11d26da7d8b6c4afba821a6da60dada63bd0a53c11",
+              "mesh_object_lighting.frag.spv": "f93191a4bd18826420f025f46843538fb323c67b8208e91a54b17df15b729c35",
+              "mesh_object_samples.frag.spv": "55b6549ecb9c4e60504005e68869fed61728f4eaed259b9d6124f31c8aaac34c",
+              "mesh_object_samples_lighting.frag.spv": "0e1c7a48a65580c90f15ba20e86bf925861c19afe00b45d26e47778974d056f9",
+              "mesh_samples.frag.spv": "e7402813ba80447fe7055238aae46dd14197a5078a5f06863cb40cbad923b296",
+              "mesh_samples_lighting.frag.spv": "3242faf040766cf431cf3311bf541f091c2868ae7a88ba4869afbdd6d7b1156d"
+            },
+            "fixture": {
+              "materials/face-quality-public-mask.dds": "e4d7865a20fad774cc896c4b821442bf1649d91207ca2715b1b01255f8ed55ab",
+              "materials/face-quality-public-mask.dds.azmeta": "1d5187a1ab37b25ffe1b622206ad7942fbac42a4cf6f4ffc77517a48e6a69a45",
+              "face-quality-public-mask.azureproject": "5333f609dbbafb04bac7b030b59b54ec57312762beb7317bb0c179b95ce245b6",
+              "scene/face-quality-public-mask.azurelevel": "22fe90d3ad878804f774da80a6a7d6280e3126631c13f44eb1e2fd4d587a3340",
+              "materials/face-quality-public-mask.azurematerial": "1e9d6dff9e0a8a0d834675a452ea5dadbd48107456d977060dea32d43061216f",
+              "materials/face-quality-public-mask.azurematerial.azmeta": "aa7e3b59e4dc05666a04ee6b4eab444440cbeea45cc2f5ff5a9919fe78426cf9"
+            }
+          },
+          "frameSha256": "610cf155ca4721fc45b31e9641e3f405876b3f14e978d13bfdc02c83abf6e229",
+          "baselineSha256": "b2848d59cc968603e818d76813df7d9748224bc0222c10600b22212ed6c9ec35",
+          "regions": {
+            "face": {
+              "count": 3663,
+              "overOne": [
+                573,
+                572
+              ],
+              "overEight": [
+                356,
+                354
+              ],
+              "peak": [
+                54,
+                54
+              ],
+              "newOverOne": 0,
+              "changed": 22,
+              "baseline": {
+                "pixels": 3663,
+                "ssim": 0.9606830433909681,
+                "medianLuminanceRelativeError": 0.01676899275334613,
+                "passed": true
+              },
+              "candidate": {
+                "pixels": 3663,
+                "ssim": 0.9609079462587695,
+                "medianLuminanceRelativeError": 0.01676899275334613,
+                "passed": true
+              }
+            },
+            "faceCore": {
+              "count": 1176,
+              "overOne": [
+                17,
+                17
+              ],
+              "overEight": [
+                0,
+                0
+              ],
+              "peak": [
+                3,
+                3
+              ],
+              "newOverOne": 0,
+              "changed": 0,
+              "baseline": {
+                "pixels": 1176,
+                "ssim": 0.9980932538177006,
+                "medianLuminanceRelativeError": 0.00599252679563281,
+                "passed": true
+              },
+              "candidate": {
+                "pixels": 1176,
+                "ssim": 0.9980932538177006,
+                "medianLuminanceRelativeError": 0.00599252679563281,
+                "passed": true
+              }
+            },
+            "iris": {
+              "count": 255,
+              "overOne": [
+                52,
+                52
+              ],
+              "overEight": [
+                10,
+                10
+              ],
+              "peak": [
+                20,
+                20
+              ],
+              "newOverOne": 0,
+              "changed": 0,
+              "baseline": {
+                "pixels": 255,
+                "ssim": 0.9811525059347715,
+                "medianLuminanceRelativeError": 0.011089778228747777,
+                "passed": true
+              },
+              "candidate": {
+                "pixels": 255,
+                "ssim": 0.9811525059347715,
+                "medianLuminanceRelativeError": 0.011089778228747777,
+                "passed": true
+              }
+            },
+            "outsideFace": {
+              "count": 3682737,
+              "overOne": [
+                179142,
+                179142
+              ],
+              "overEight": [
+                29946,
+                29946
+              ],
+              "peak": [
+                228,
+                228
+              ],
+              "newOverOne": 0,
+              "changed": 0
+            },
+            "frame": {
+              "count": 3686400,
+              "overOne": [
+                179715,
+                179714
+              ],
+              "overEight": [
+                30302,
+                30300
+              ],
+              "peak": [
+                228,
+                228
+              ],
+              "newOverOne": 0,
+              "changed": 22
+            }
+          },
+          "samples": {
+            "traced": {
+              "points": [
+                [
+                  1280,
+                  318
+                ],
+                [
+                  1279,
+                  318
+                ],
+                [
+                  1306,
+                  304
+                ],
+                [
+                  1313,
+                  297
+                ],
+                [
+                  1312,
+                  298
+                ],
+                [
+                  1318,
+                  289
+                ],
+                [
+                  1316,
+                  292
+                ],
+                [
+                  1247,
+                  293
+                ],
+                [
+                  1314,
+                  295
+                ],
+                [
+                  1310,
+                  300
+                ],
+                [
+                  1307,
+                  303
+                ],
+                [
+                  1318,
+                  288
+                ]
+              ],
+              "improved": 2,
+              "worsened": 0,
+              "overOne": [
+                12,
+                12
+              ],
+              "overEight": [
+                12,
+                10
+              ],
+              "peak": [
+                41,
+                25
+              ],
+              "errors": [
+                [
+                  41,
+                  35,
+                  25,
+                  21,
+                  21,
+                  17,
+                  17,
+                  16,
+                  16,
+                  16,
+                  16,
+                  15
+                ],
+                [
+                  4,
+                  2,
+                  25,
+                  21,
+                  21,
+                  17,
+                  17,
+                  16,
+                  16,
+                  16,
+                  16,
+                  15
+                ]
+              ]
+            },
+            "outsideOverEight": {
+              "points": [
+                [
+                  1280,
+                  318
+                ],
+                [
+                  1279,
+                  318
+                ],
+                [
+                  1306,
+                  304
+                ],
+                [
+                  1313,
+                  297
+                ],
+                [
+                  1312,
+                  298
+                ],
+                [
+                  1318,
+                  289
+                ],
+                [
+                  1316,
+                  292
+                ],
+                [
+                  1247,
+                  293
+                ],
+                [
+                  1314,
+                  295
+                ],
+                [
+                  1310,
+                  300
+                ],
+                [
+                  1307,
+                  303
+                ],
+                [
+                  1318,
+                  288
+                ],
+                [
+                  1317,
+                  290
+                ],
+                [
+                  1317,
+                  291
+                ],
+                [
+                  1316,
+                  293
+                ],
+                [
+                  1315,
+                  294
+                ],
+                [
+                  1311,
+                  299
+                ],
+                [
+                  1253,
+                  301
+                ],
+                [
+                  1309,
+                  301
+                ],
+                [
+                  1302,
+                  307
+                ],
+                [
+                  1245,
+                  289
+                ],
+                [
+                  1246,
+                  291
+                ],
+                [
+                  1249,
+                  296
+                ],
+                [
+                  1313,
+                  296
+                ],
+                [
+                  1312,
+                  297
+                ],
+                [
+                  1308,
+                  302
+                ],
+                [
+                  1315,
+                  293
+                ],
+                [
+                  1314,
+                  294
+                ],
+                [
+                  1313,
+                  295
+                ],
+                [
+                  1311,
+                  298
+                ],
+                [
+                  1308,
+                  301
+                ],
+                [
+                  1307,
+                  302
+                ],
+                [
+                  1316,
+                  291
+                ],
+                [
+                  1310,
+                  299
+                ],
+                [
+                  1305,
+                  304
+                ],
+                [
+                  1261,
+                  308
+                ],
+                [
+                  1283,
+                  317
+                ],
+                [
+                  1317,
+                  289
+                ],
+                [
+                  1248,
+                  294
+                ],
+                [
+                  1252,
+                  299
+                ],
+                [
+                  1309,
+                  300
+                ],
+                [
+                  1306,
+                  303
+                ],
+                [
+                  1304,
+                  305
+                ],
+                [
+                  1300,
+                  308
+                ],
+                [
+                  1299,
+                  309
+                ],
+                [
+                  1316,
+                  290
+                ],
+                [
+                  1315,
+                  292
+                ],
+                [
+                  1312,
+                  296
+                ],
+                [
+                  1250,
+                  297
+                ],
+                [
+                  1251,
+                  298
+                ],
+                [
+                  1297,
+                  310
+                ]
+              ],
+              "improved": 3,
+              "worsened": 4,
+              "overOne": [
+                51,
+                51
+              ],
+              "overEight": [
+                51,
+                48
+              ],
+              "peak": [
+                41,
+                25
+              ],
+              "errors": [
+                [
+                  41,
+                  35,
+                  25,
+                  21,
+                  21,
+                  17,
+                  17,
+                  16,
+                  16,
+                  16,
+                  16,
+                  15,
+                  15,
+                  15,
+                  15,
+                  15,
+                  15,
+                  15,
+                  15,
+                  15,
+                  14,
+                  14,
+                  14,
+                  14,
+                  14,
+                  14,
+                  12,
+                  12,
+                  12,
+                  12,
+                  12,
+                  12,
+                  11,
+                  11,
+                  11,
+                  11,
+                  11,
+                  10,
+                  10,
+                  10,
+                  10,
+                  10,
+                  10,
+                  10,
+                  10,
+                  9,
+                  9,
+                  9,
+                  9,
+                  9,
+                  9
+                ],
+                [
+                  4,
+                  2,
+                  25,
+                  21,
+                  21,
+                  17,
+                  17,
+                  16,
+                  16,
+                  16,
+                  16,
+                  15,
+                  15,
+                  15,
+                  15,
+                  15,
+                  16,
+                  15,
+                  15,
+                  16,
+                  14,
+                  14,
+                  14,
+                  14,
+                  14,
+                  15,
+                  12,
+                  12,
+                  12,
+                  12,
+                  12,
+                  12,
+                  11,
+                  11,
+                  11,
+                  11,
+                  3,
+                  10,
+                  10,
+                  10,
+                  10,
+                  10,
+                  10,
+                  10,
+                  10,
+                  9,
+                  9,
+                  10,
+                  9,
+                  9,
+                  9
+                ]
+              ]
+            }
+          }
+        },
+        "nearest": {
+          "device": "nvidia",
+          "input": {
+            "overlayPair": true,
+            "player": "54e66fd9a0565915d1883dcb5e2fef6c5f773dcc5c5dc65b0be7f8008933c8a6",
+            "programs": {
+              "character_snapshot.frag.spv": "c1a91507b1486988126c9b8e30acd0245501325e6d2d55f61d1d069dfd7dcc23",
+              "character_snapshot_bindless.frag.spv": "9d9cb6f20675aa6a6038651f0a2eb1d2f23cd1c56270765b4848309246f93221",
+              "character_snapshot_object.frag.spv": "cbb47205f0a4c7055fd9e99d24ec65aa719ab2bc0598ecb230025d7b98e661ad",
+              "character_snapshot_object_bindless.frag.spv": "35694db17e9bb1580b7ad9ab7df30bde4bd60e97833a379a07d3ddfb84297d15",
+              "character_snapshot_object_bindless_lighting.frag.spv": "93b093df61574ebfc3c73fcc2a0733935d56ca805486f2f248eee4e0f7ff4a83",
+              "character_snapshot_object_lighting.frag.spv": "4f42dfd38f81be8a33a858071cb2fec42fa4b84a8146619168c63cd80d2d39a6",
+              "mesh.frag.spv": "7f26fb6aa6a1ddddec0bd6960e62ef970459c18cee38af9984e2c81c38539758",
+              "mesh_bindless.frag.spv": "72386f49dc04434364cdf005272cd1a0d8c8b66c6faa3f00cfe486ac31050704",
+              "mesh_bindless_early_lighting.frag.spv": "018723bc2c19950a239ec06760d526bde679fec7c15081bccb5535684fde0b07",
+              "mesh_bindless_lighting.frag.spv": "48fda93f786e1cd115548d6664dcb81a9aba661fecda1861e44d22845a0f0080",
+              "mesh_bindless_samples.frag.spv": "cbd7f4f143d6f8005220554685dc8eac9afe76b9ea9b831f9c2f1626addf908f",
+              "mesh_bindless_samples_lighting.frag.spv": "b660ffbb273ee0391e3e5602c80f0f6c519f0becf5629582b9091a0fbc850682",
+              "mesh_early_lighting.frag.spv": "2519a49c39ab3655d921bec8664947788043ee40000d04018562c416b32fac1e",
+              "mesh_lighting.frag.spv": "adbfde70a8054481e498b0b4c40068797a57bab3831d4b7e3f1dcb5f92b745fe",
+              "mesh_object.frag.spv": "b705bb8a8f46082fb71f7ff229f720ba714b895208faf5d0eb03112ee8634b93",
+              "mesh_object_bindless.frag.spv": "318d877909ceb6e7de7bcfcc7371a074eb3aa9161a091709545ecfdeefec0c8b",
+              "mesh_object_bindless_early_lighting.frag.spv": "2d855000984df66319fd7d6b800cfb985e6410a855132722c6dbaa8732805bb7",
+              "mesh_object_bindless_lighting.frag.spv": "58f81f0c4738e9756052884d933cbe70a1760d7dffa5a7869ec954b1cb810e9d",
+              "mesh_object_bindless_samples.frag.spv": "107893c691d5b3ea496c3659122e09c01de78d529c0cf11ee4238a863d4f7914",
+              "mesh_object_bindless_samples_lighting.frag.spv": "470ad9673d56118fb1abe396cc9b730c434ad7cccb90bf5b614db6c5f0751c72",
+              "mesh_object_early_lighting.frag.spv": "f097b0cd3073492d3e536e11d26da7d8b6c4afba821a6da60dada63bd0a53c11",
+              "mesh_object_lighting.frag.spv": "f93191a4bd18826420f025f46843538fb323c67b8208e91a54b17df15b729c35",
+              "mesh_object_samples.frag.spv": "55b6549ecb9c4e60504005e68869fed61728f4eaed259b9d6124f31c8aaac34c",
+              "mesh_object_samples_lighting.frag.spv": "0e1c7a48a65580c90f15ba20e86bf925861c19afe00b45d26e47778974d056f9",
+              "mesh_samples.frag.spv": "e7402813ba80447fe7055238aae46dd14197a5078a5f06863cb40cbad923b296",
+              "mesh_samples_lighting.frag.spv": "3242faf040766cf431cf3311bf541f091c2868ae7a88ba4869afbdd6d7b1156d"
+            },
+            "fixture": {
+              "materials/late-face-overlay-1230.azurematerial": "24a48584b252de8e93b74a5c13e78465452faa3076158a4a51c8212b87646387",
+              "materials/late-face-overlay-1230.azurematerial.azmeta": "4cddaca59b9ceff7e85ee56c4c674f9a12b9613d59a6c01108122b2b35577963",
+              "character/late-face-overlay-1230.bin": "c769c00280e189656cdbd2ad4a698501bbea28c1c05d1e8de127b676ad95d95e",
+              "materials/late-face-overlay-1230.dds": "0ea41ca2831851e697b6869c7248867547950eea8d7095d38e649717a2624497",
+              "materials/late-face-overlay-1230.dds.azmeta": "a3eff6fc542fed3d8104c8cb34d174a99593d9f34221d5d50ca2133b26d8e31f",
+              "character/late-face-overlay-1230.gltf": "fd4994cdb8cae5e238588d05388d10a450fca4ab6a5f967b47d7946f41dd7def",
+              "character/late-face-overlay-1230.gltf.azmeta": "4659c30424586935da642ec96bc5e8b73fb191aa7d53f01973757902890fcc94",
+              "character/late-face-overlay-1358.bin": "fdd6ab7d9a5857a7732cfb292e81fae9260fd87312cae4c9c985a67e93e637bf",
+              "materials/late-face-overlay-1358.dds": "30baf01840c98ae87338d826a9effb0bad4f01f9f868e3979b60381956a814e4",
+              "materials/late-face-overlay-1358.dds.azmeta": "aafa66ed5397d0d966c702c5c5d357d69f44d3a8cf3b6464bce9e765daaef77d",
+              "character/late-face-overlay-1358.gltf": "63f77bd66aad6b824863e201ceddf23fcaf61c3de2a84b4cef0dc39429436e95",
+              "character/late-face-overlay-1358.gltf.azmeta": "7b4c04bda6ab81406c9169626c20e0c0c1de83ee7eb2365173d381ad415bc3f1",
+              "face-quality-public-nearest.azureproject": "e7a5afb40fb5d9cd5bde8ccdf4943e7531bf9d64027786174a2cfd96fa427fd5",
+              "scene/face-quality-public-nearest.azurelevel": "ecfff27cc1b3058e7a76db3cde02e10be70b10bc17e50b44f7ca327b551741df",
+              "materials/face-quality-public-nearest.azurematerial": "94d87cc0cdfe85547760a2fc0f5cf13c6e12afc2327ca9688667519302e302f9",
+              "materials/face-quality-public-nearest.azurematerial.azmeta": "9a91ee05c0b478474f1cea7293f8846b0279acb259b481ed293c056de50789d6"
+            }
+          },
+          "frameSha256": "b7e5edda73172c51e8a3ac5d4af76d97dae02096336341609108fcd781ca5c7b",
+          "baselineSha256": "42f35ac0299c854bdc2ab72359e67cef1ab257aaa20bb0a3c5b2037b9b2b213b",
+          "regions": {
+            "face": {
+              "count": 3663,
+              "overOne": [
+                366,
+                356
+              ],
+              "overEight": [
+                64,
+                52
+              ],
+              "peak": [
+                41,
+                41
+              ],
+              "newOverOne": 0,
+              "changed": 12,
+              "baseline": {
+                "pixels": 3663,
+                "ssim": 0.991408645692437,
+                "medianLuminanceRelativeError": 0.006862159529449356,
+                "passed": true
+              },
+              "candidate": {
+                "pixels": 3663,
+                "ssim": 0.9920900285835029,
+                "medianLuminanceRelativeError": 0.006862159529449356,
+                "passed": true
+              }
+            },
+            "faceCore": {
+              "count": 1176,
+              "overOne": [
+                17,
+                17
+              ],
+              "overEight": [
+                0,
+                0
+              ],
+              "peak": [
+                3,
+                3
+              ],
+              "newOverOne": 0,
+              "changed": 0,
+              "baseline": {
+                "pixels": 1176,
+                "ssim": 0.9983024702959834,
+                "medianLuminanceRelativeError": 0.00599252679563281,
+                "passed": true
+              },
+              "candidate": {
+                "pixels": 1176,
+                "ssim": 0.9983024702959834,
+                "medianLuminanceRelativeError": 0.00599252679563281,
+                "passed": true
+              }
+            },
+            "iris": {
+              "count": 255,
+              "overOne": [
+                52,
+                52
+              ],
+              "overEight": [
+                10,
+                10
+              ],
+              "peak": [
+                20,
+                20
+              ],
+              "newOverOne": 0,
+              "changed": 0,
+              "baseline": {
+                "pixels": 255,
+                "ssim": 0.9899875328324826,
+                "medianLuminanceRelativeError": 0.011089778228747777,
+                "passed": true
+              },
+              "candidate": {
+                "pixels": 255,
+                "ssim": 0.9899875328324826,
+                "medianLuminanceRelativeError": 0.011089778228747777,
+                "passed": true
+              }
+            },
+            "outsideFace": {
+              "count": 3682737,
+              "overOne": [
+                179141,
+                179141
+              ],
+              "overEight": [
+                29945,
+                29945
+              ],
+              "peak": [
+                228,
+                228
+              ],
+              "newOverOne": 0,
+              "changed": 0
+            },
+            "frame": {
+              "count": 3686400,
+              "overOne": [
+                179507,
+                179497
+              ],
+              "overEight": [
+                30009,
+                29997
+              ],
+              "peak": [
+                228,
+                228
+              ],
+              "newOverOne": 0,
+              "changed": 12
+            }
+          },
+          "samples": {
+            "traced": {
+              "points": [
+                [
+                  1280,
+                  318
+                ],
+                [
+                  1279,
+                  318
+                ],
+                [
+                  1306,
+                  304
+                ],
+                [
+                  1313,
+                  297
+                ],
+                [
+                  1312,
+                  298
+                ],
+                [
+                  1318,
+                  289
+                ],
+                [
+                  1316,
+                  292
+                ],
+                [
+                  1247,
+                  293
+                ],
+                [
+                  1314,
+                  295
+                ],
+                [
+                  1310,
+                  300
+                ],
+                [
+                  1307,
+                  303
+                ],
+                [
+                  1318,
+                  288
+                ]
+              ],
+              "improved": 0,
+              "worsened": 0,
+              "overOne": [
+                12,
+                12
+              ],
+              "overEight": [
+                12,
+                12
+              ],
+              "peak": [
+                41,
+                41
+              ],
+              "errors": [
+                [
+                  41,
+                  35,
+                  25,
+                  21,
+                  21,
+                  17,
+                  17,
+                  16,
+                  16,
+                  16,
+                  16,
+                  15
+                ],
+                [
+                  41,
+                  35,
+                  25,
+                  21,
+                  21,
+                  17,
+                  17,
+                  16,
+                  16,
+                  16,
+                  16,
+                  15
+                ]
+              ]
+            },
+            "outsideOverEight": {
+              "points": [
+                [
+                  1280,
+                  318
+                ],
+                [
+                  1279,
+                  318
+                ],
+                [
+                  1306,
+                  304
+                ],
+                [
+                  1313,
+                  297
+                ],
+                [
+                  1312,
+                  298
+                ],
+                [
+                  1318,
+                  289
+                ],
+                [
+                  1316,
+                  292
+                ],
+                [
+                  1247,
+                  293
+                ],
+                [
+                  1314,
+                  295
+                ],
+                [
+                  1310,
+                  300
+                ],
+                [
+                  1307,
+                  303
+                ],
+                [
+                  1318,
+                  288
+                ],
+                [
+                  1317,
+                  290
+                ],
+                [
+                  1317,
+                  291
+                ],
+                [
+                  1316,
+                  293
+                ],
+                [
+                  1315,
+                  294
+                ],
+                [
+                  1311,
+                  299
+                ],
+                [
+                  1253,
+                  301
+                ],
+                [
+                  1309,
+                  301
+                ],
+                [
+                  1302,
+                  307
+                ],
+                [
+                  1245,
+                  289
+                ],
+                [
+                  1246,
+                  291
+                ],
+                [
+                  1249,
+                  296
+                ],
+                [
+                  1313,
+                  296
+                ],
+                [
+                  1312,
+                  297
+                ],
+                [
+                  1308,
+                  302
+                ],
+                [
+                  1315,
+                  293
+                ],
+                [
+                  1314,
+                  294
+                ],
+                [
+                  1313,
+                  295
+                ],
+                [
+                  1311,
+                  298
+                ],
+                [
+                  1308,
+                  301
+                ],
+                [
+                  1307,
+                  302
+                ],
+                [
+                  1316,
+                  291
+                ],
+                [
+                  1310,
+                  299
+                ],
+                [
+                  1305,
+                  304
+                ],
+                [
+                  1261,
+                  308
+                ],
+                [
+                  1283,
+                  317
+                ],
+                [
+                  1317,
+                  289
+                ],
+                [
+                  1248,
+                  294
+                ],
+                [
+                  1252,
+                  299
+                ],
+                [
+                  1309,
+                  300
+                ],
+                [
+                  1306,
+                  303
+                ],
+                [
+                  1304,
+                  305
+                ],
+                [
+                  1300,
+                  308
+                ],
+                [
+                  1299,
+                  309
+                ],
+                [
+                  1316,
+                  290
+                ],
+                [
+                  1315,
+                  292
+                ],
+                [
+                  1312,
+                  296
+                ],
+                [
+                  1250,
+                  297
+                ],
+                [
+                  1251,
+                  298
+                ],
+                [
+                  1297,
+                  310
+                ]
+              ],
+              "improved": 0,
+              "worsened": 0,
+              "overOne": [
+                51,
+                51
+              ],
+              "overEight": [
+                51,
+                51
+              ],
+              "peak": [
+                41,
+                41
+              ],
+              "errors": [
+                [
+                  41,
+                  35,
+                  25,
+                  21,
+                  21,
+                  17,
+                  17,
+                  16,
+                  16,
+                  16,
+                  16,
+                  15,
+                  15,
+                  15,
+                  15,
+                  15,
+                  15,
+                  15,
+                  15,
+                  15,
+                  14,
+                  14,
+                  14,
+                  14,
+                  14,
+                  14,
+                  12,
+                  12,
+                  12,
+                  12,
+                  12,
+                  12,
+                  11,
+                  11,
+                  11,
+                  11,
+                  11,
+                  10,
+                  10,
+                  10,
+                  10,
+                  10,
+                  10,
+                  10,
+                  10,
+                  9,
+                  9,
+                  9,
+                  9,
+                  9,
+                  9
+                ],
+                [
+                  41,
+                  35,
+                  25,
+                  21,
+                  21,
+                  17,
+                  17,
+                  16,
+                  16,
+                  16,
+                  16,
+                  15,
+                  15,
+                  15,
+                  15,
+                  15,
+                  15,
+                  15,
+                  15,
+                  15,
+                  14,
+                  14,
+                  14,
+                  14,
+                  14,
+                  14,
+                  12,
+                  12,
+                  12,
+                  12,
+                  12,
+                  12,
+                  11,
+                  11,
+                  11,
+                  11,
+                  11,
+                  10,
+                  10,
+                  10,
+                  10,
+                  10,
+                  10,
+                  10,
+                  10,
+                  9,
+                  9,
+                  9,
+                  9,
+                  9,
+                  9
+                ]
+              ]
+            }
+          },
+          "nearestWitnesses": {
+            "points": [
+              [
+                1320,
+                264
+              ],
+              [
+                1320,
+                265
+              ],
+              [
+                1256,
+                227
+              ],
+              [
+                1256,
+                228
+              ],
+              [
+                1302,
+                230
+              ],
+              [
+                1302,
+                231
+              ],
+              [
+                1302,
+                232
+              ],
+              [
+                1302,
+                233
+              ],
+              [
+                1256,
+                225
+              ],
+              [
+                1256,
+                226
+              ],
+              [
+                1302,
+                229
+              ],
+              [
+                1256,
+                224
+              ]
+            ],
+            "oldError": [
+              25,
+              24,
+              20,
+              21,
+              21,
+              21,
+              21,
+              21,
+              19,
+              20,
+              20,
+              19
+            ],
+            "newError": [
+              1,
+              0,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              2,
+              2
+            ]
+          }
+        }
+      }
+    },
+    "intel": {
+      "syntheticMetrics": {
+        "singleLinearMaximumError": 0.000510854358105467,
+        "legacyLinearMaximumError": 0.000759883435972275,
+        "far-first": 0.0,
+        "near-first": 0.0,
+        "fixed": 0.0,
+        "zeroCoverage": 0.0,
+        "wrongReceiver": 0.0,
+        "zeroCoverageInFront": 0.0,
+        "multisample": 0.0
+      },
+      "capturedCases": 11,
+      "nativePose": {
+        "mask": {
+          "device": "intel",
+          "input": {
+            "overlayPair": false,
+            "player": "54e66fd9a0565915d1883dcb5e2fef6c5f773dcc5c5dc65b0be7f8008933c8a6",
+            "programs": {
+              "character_snapshot.frag.spv": "c1a91507b1486988126c9b8e30acd0245501325e6d2d55f61d1d069dfd7dcc23",
+              "character_snapshot_bindless.frag.spv": "9d9cb6f20675aa6a6038651f0a2eb1d2f23cd1c56270765b4848309246f93221",
+              "character_snapshot_object.frag.spv": "cbb47205f0a4c7055fd9e99d24ec65aa719ab2bc0598ecb230025d7b98e661ad",
+              "character_snapshot_object_bindless.frag.spv": "35694db17e9bb1580b7ad9ab7df30bde4bd60e97833a379a07d3ddfb84297d15",
+              "character_snapshot_object_bindless_lighting.frag.spv": "93b093df61574ebfc3c73fcc2a0733935d56ca805486f2f248eee4e0f7ff4a83",
+              "character_snapshot_object_lighting.frag.spv": "4f42dfd38f81be8a33a858071cb2fec42fa4b84a8146619168c63cd80d2d39a6",
+              "mesh.frag.spv": "7f26fb6aa6a1ddddec0bd6960e62ef970459c18cee38af9984e2c81c38539758",
+              "mesh_bindless.frag.spv": "72386f49dc04434364cdf005272cd1a0d8c8b66c6faa3f00cfe486ac31050704",
+              "mesh_bindless_early_lighting.frag.spv": "018723bc2c19950a239ec06760d526bde679fec7c15081bccb5535684fde0b07",
+              "mesh_bindless_lighting.frag.spv": "48fda93f786e1cd115548d6664dcb81a9aba661fecda1861e44d22845a0f0080",
+              "mesh_bindless_samples.frag.spv": "cbd7f4f143d6f8005220554685dc8eac9afe76b9ea9b831f9c2f1626addf908f",
+              "mesh_bindless_samples_lighting.frag.spv": "b660ffbb273ee0391e3e5602c80f0f6c519f0becf5629582b9091a0fbc850682",
+              "mesh_early_lighting.frag.spv": "2519a49c39ab3655d921bec8664947788043ee40000d04018562c416b32fac1e",
+              "mesh_lighting.frag.spv": "adbfde70a8054481e498b0b4c40068797a57bab3831d4b7e3f1dcb5f92b745fe",
+              "mesh_object.frag.spv": "b705bb8a8f46082fb71f7ff229f720ba714b895208faf5d0eb03112ee8634b93",
+              "mesh_object_bindless.frag.spv": "318d877909ceb6e7de7bcfcc7371a074eb3aa9161a091709545ecfdeefec0c8b",
+              "mesh_object_bindless_early_lighting.frag.spv": "2d855000984df66319fd7d6b800cfb985e6410a855132722c6dbaa8732805bb7",
+              "mesh_object_bindless_lighting.frag.spv": "58f81f0c4738e9756052884d933cbe70a1760d7dffa5a7869ec954b1cb810e9d",
+              "mesh_object_bindless_samples.frag.spv": "107893c691d5b3ea496c3659122e09c01de78d529c0cf11ee4238a863d4f7914",
+              "mesh_object_bindless_samples_lighting.frag.spv": "470ad9673d56118fb1abe396cc9b730c434ad7cccb90bf5b614db6c5f0751c72",
+              "mesh_object_early_lighting.frag.spv": "f097b0cd3073492d3e536e11d26da7d8b6c4afba821a6da60dada63bd0a53c11",
+              "mesh_object_lighting.frag.spv": "f93191a4bd18826420f025f46843538fb323c67b8208e91a54b17df15b729c35",
+              "mesh_object_samples.frag.spv": "55b6549ecb9c4e60504005e68869fed61728f4eaed259b9d6124f31c8aaac34c",
+              "mesh_object_samples_lighting.frag.spv": "0e1c7a48a65580c90f15ba20e86bf925861c19afe00b45d26e47778974d056f9",
+              "mesh_samples.frag.spv": "e7402813ba80447fe7055238aae46dd14197a5078a5f06863cb40cbad923b296",
+              "mesh_samples_lighting.frag.spv": "3242faf040766cf431cf3311bf541f091c2868ae7a88ba4869afbdd6d7b1156d"
+            },
+            "fixture": {
+              "materials/face-quality-public-mask.dds": "e4d7865a20fad774cc896c4b821442bf1649d91207ca2715b1b01255f8ed55ab",
+              "materials/face-quality-public-mask.dds.azmeta": "1d5187a1ab37b25ffe1b622206ad7942fbac42a4cf6f4ffc77517a48e6a69a45",
+              "face-quality-public-mask.azureproject": "5333f609dbbafb04bac7b030b59b54ec57312762beb7317bb0c179b95ce245b6",
+              "scene/face-quality-public-mask.azurelevel": "22fe90d3ad878804f774da80a6a7d6280e3126631c13f44eb1e2fd4d587a3340",
+              "materials/face-quality-public-mask.azurematerial": "1e9d6dff9e0a8a0d834675a452ea5dadbd48107456d977060dea32d43061216f",
+              "materials/face-quality-public-mask.azurematerial.azmeta": "aa7e3b59e4dc05666a04ee6b4eab444440cbeea45cc2f5ff5a9919fe78426cf9"
+            }
+          },
+          "frameSha256": "51f4333c37cda827eadfa1bfc51adce6e209df4ed8781799a5d8bcba32955fec",
+          "baselineSha256": "47ea26e0a35eb08338f4fa17f451b98b8ea4bd22635232de9e5d0778f5fdc132",
+          "regions": {
+            "face": {
+              "count": 3663,
+              "overOne": [
+                592,
+                591
+              ],
+              "overEight": [
+                356,
+                354
+              ],
+              "peak": [
+                54,
+                54
+              ],
+              "newOverOne": 0,
+              "changed": 22,
+              "baseline": {
+                "pixels": 3663,
+                "ssim": 0.9618673164599938,
+                "medianLuminanceRelativeError": 0.01580705595530241,
+                "passed": true
+              },
+              "candidate": {
+                "pixels": 3663,
+                "ssim": 0.962091958531763,
+                "medianLuminanceRelativeError": 0.01580705595530241,
+                "passed": true
+              }
+            },
+            "faceCore": {
+              "count": 1176,
+              "overOne": [
+                23,
+                23
+              ],
+              "overEight": [
+                0,
+                0
+              ],
+              "peak": [
+                3,
+                3
+              ],
+              "newOverOne": 0,
+              "changed": 0,
+              "baseline": {
+                "pixels": 1176,
+                "ssim": 0.9981404027843793,
+                "medianLuminanceRelativeError": 0.005877674827978387,
+                "passed": true
+              },
+              "candidate": {
+                "pixels": 1176,
+                "ssim": 0.9981404027843793,
+                "medianLuminanceRelativeError": 0.005877674827978387,
+                "passed": true
+              }
+            },
+            "iris": {
+              "count": 255,
+              "overOne": [
+                56,
+                56
+              ],
+              "overEight": [
+                13,
+                13
+              ],
+              "peak": [
+                27,
+                27
+              ],
+              "newOverOne": 0,
+              "changed": 0,
+              "baseline": {
+                "pixels": 255,
+                "ssim": 0.9841700525097131,
+                "medianLuminanceRelativeError": 0.009946273866373248,
+                "passed": true
+              },
+              "candidate": {
+                "pixels": 255,
+                "ssim": 0.9841700525097131,
+                "medianLuminanceRelativeError": 0.009946273866373248,
+                "passed": true
+              }
+            },
+            "outsideFace": {
+              "count": 3682737,
+              "overOne": [
+                182685,
+                182685
+              ],
+              "overEight": [
+                30700,
+                30700
+              ],
+              "peak": [
+                228,
+                228
+              ],
+              "newOverOne": 0,
+              "changed": 0
+            },
+            "frame": {
+              "count": 3686400,
+              "overOne": [
+                183277,
+                183276
+              ],
+              "overEight": [
+                31056,
+                31054
+              ],
+              "peak": [
+                228,
+                228
+              ],
+              "newOverOne": 0,
+              "changed": 22
+            }
+          },
+          "samples": {
+            "traced": {
+              "points": [
+                [
+                  1280,
+                  318
+                ],
+                [
+                  1279,
+                  318
+                ],
+                [
+                  1306,
+                  304
+                ],
+                [
+                  1313,
+                  297
+                ],
+                [
+                  1312,
+                  298
+                ],
+                [
+                  1318,
+                  289
+                ],
+                [
+                  1316,
+                  292
+                ],
+                [
+                  1247,
+                  293
+                ],
+                [
+                  1314,
+                  295
+                ],
+                [
+                  1310,
+                  300
+                ],
+                [
+                  1307,
+                  303
+                ],
+                [
+                  1318,
+                  288
+                ]
+              ],
+              "improved": 2,
+              "worsened": 0,
+              "overOne": [
+                12,
+                12
+              ],
+              "overEight": [
+                12,
+                10
+              ],
+              "peak": [
+                41,
+                25
+              ],
+              "errors": [
+                [
+                  41,
+                  35,
+                  25,
+                  21,
+                  21,
+                  17,
+                  17,
+                  15,
+                  15,
+                  16,
+                  16,
+                  15
+                ],
+                [
+                  4,
+                  2,
+                  25,
+                  21,
+                  21,
+                  17,
+                  17,
+                  15,
+                  15,
+                  16,
+                  16,
+                  15
+                ]
+              ]
+            },
+            "outsideOverEight": {
+              "points": [
+                [
+                  1280,
+                  318
+                ],
+                [
+                  1279,
+                  318
+                ],
+                [
+                  1306,
+                  304
+                ],
+                [
+                  1313,
+                  297
+                ],
+                [
+                  1312,
+                  298
+                ],
+                [
+                  1318,
+                  289
+                ],
+                [
+                  1316,
+                  292
+                ],
+                [
+                  1317,
+                  291
+                ],
+                [
+                  1311,
+                  299
+                ],
+                [
+                  1310,
+                  300
+                ],
+                [
+                  1253,
+                  301
+                ],
+                [
+                  1307,
+                  303
+                ],
+                [
+                  1318,
+                  288
+                ],
+                [
+                  1317,
+                  290
+                ],
+                [
+                  1247,
+                  293
+                ],
+                [
+                  1316,
+                  293
+                ],
+                [
+                  1315,
+                  294
+                ],
+                [
+                  1314,
+                  295
+                ],
+                [
+                  1309,
+                  301
+                ],
+                [
+                  1302,
+                  307
+                ],
+                [
+                  1245,
+                  289
+                ],
+                [
+                  1246,
+                  291
+                ],
+                [
+                  1313,
+                  296
+                ],
+                [
+                  1312,
+                  297
+                ],
+                [
+                  1308,
+                  302
+                ],
+                [
+                  1315,
+                  293
+                ],
+                [
+                  1249,
+                  296
+                ],
+                [
+                  1316,
+                  291
+                ],
+                [
+                  1314,
+                  294
+                ],
+                [
+                  1313,
+                  295
+                ],
+                [
+                  1311,
+                  298
+                ],
+                [
+                  1308,
+                  301
+                ],
+                [
+                  1307,
+                  302
+                ],
+                [
+                  1310,
+                  299
+                ],
+                [
+                  1305,
+                  304
+                ],
+                [
+                  1261,
+                  308
+                ],
+                [
+                  1283,
+                  317
+                ],
+                [
+                  1317,
+                  289
+                ],
+                [
+                  1248,
+                  294
+                ],
+                [
+                  1312,
+                  296
+                ],
+                [
+                  1252,
+                  299
+                ],
+                [
+                  1309,
+                  300
+                ],
+                [
+                  1306,
+                  303
+                ],
+                [
+                  1304,
+                  305
+                ],
+                [
+                  1300,
+                  308
+                ],
+                [
+                  1299,
+                  309
+                ],
+                [
+                  1316,
+                  290
+                ],
+                [
+                  1315,
+                  292
+                ],
+                [
+                  1250,
+                  297
+                ],
+                [
+                  1251,
+                  298
+                ],
+                [
+                  1297,
+                  310
+                ]
+              ],
+              "improved": 3,
+              "worsened": 3,
+              "overOne": [
+                51,
+                51
+              ],
+              "overEight": [
+                51,
+                48
+              ],
+              "peak": [
+                41,
+                25
+              ],
+              "errors": [
+                [
+                  41,
+                  35,
+                  25,
+                  21,
+                  21,
+                  17,
+                  17,
+                  16,
+                  16,
+                  16,
+                  16,
+                  16,
+                  15,
+                  15,
+                  15,
+                  15,
+                  15,
+                  15,
+                  15,
+                  15,
+                  14,
+                  14,
+                  14,
+                  14,
+                  14,
+                  13,
+                  13,
+                  12,
+                  12,
+                  12,
+                  12,
+                  12,
+                  12,
+                  11,
+                  11,
+                  11,
+                  11,
+                  10,
+                  10,
+                  10,
+                  10,
+                  10,
+                  10,
+                  10,
+                  10,
+                  10,
+                  9,
+                  9,
+                  9,
+                  9,
+                  9
+                ],
+                [
+                  4,
+                  2,
+                  25,
+                  21,
+                  21,
+                  17,
+                  17,
+                  16,
+                  16,
+                  16,
+                  16,
+                  16,
+                  15,
+                  15,
+                  15,
+                  15,
+                  15,
+                  15,
+                  15,
+                  16,
+                  14,
+                  14,
+                  14,
+                  14,
+                  15,
+                  13,
+                  13,
+                  12,
+                  12,
+                  12,
+                  12,
+                  12,
+                  12,
+                  11,
+                  11,
+                  11,
+                  3,
+                  10,
+                  10,
+                  10,
+                  10,
+                  11,
+                  10,
+                  10,
+                  10,
+                  10,
+                  9,
+                  9,
+                  9,
+                  9,
+                  9
+                ]
+              ]
+            }
+          }
+        },
+        "nearest": {
+          "device": "intel",
+          "input": {
+            "overlayPair": true,
+            "player": "54e66fd9a0565915d1883dcb5e2fef6c5f773dcc5c5dc65b0be7f8008933c8a6",
+            "programs": {
+              "character_snapshot.frag.spv": "c1a91507b1486988126c9b8e30acd0245501325e6d2d55f61d1d069dfd7dcc23",
+              "character_snapshot_bindless.frag.spv": "9d9cb6f20675aa6a6038651f0a2eb1d2f23cd1c56270765b4848309246f93221",
+              "character_snapshot_object.frag.spv": "cbb47205f0a4c7055fd9e99d24ec65aa719ab2bc0598ecb230025d7b98e661ad",
+              "character_snapshot_object_bindless.frag.spv": "35694db17e9bb1580b7ad9ab7df30bde4bd60e97833a379a07d3ddfb84297d15",
+              "character_snapshot_object_bindless_lighting.frag.spv": "93b093df61574ebfc3c73fcc2a0733935d56ca805486f2f248eee4e0f7ff4a83",
+              "character_snapshot_object_lighting.frag.spv": "4f42dfd38f81be8a33a858071cb2fec42fa4b84a8146619168c63cd80d2d39a6",
+              "mesh.frag.spv": "7f26fb6aa6a1ddddec0bd6960e62ef970459c18cee38af9984e2c81c38539758",
+              "mesh_bindless.frag.spv": "72386f49dc04434364cdf005272cd1a0d8c8b66c6faa3f00cfe486ac31050704",
+              "mesh_bindless_early_lighting.frag.spv": "018723bc2c19950a239ec06760d526bde679fec7c15081bccb5535684fde0b07",
+              "mesh_bindless_lighting.frag.spv": "48fda93f786e1cd115548d6664dcb81a9aba661fecda1861e44d22845a0f0080",
+              "mesh_bindless_samples.frag.spv": "cbd7f4f143d6f8005220554685dc8eac9afe76b9ea9b831f9c2f1626addf908f",
+              "mesh_bindless_samples_lighting.frag.spv": "b660ffbb273ee0391e3e5602c80f0f6c519f0becf5629582b9091a0fbc850682",
+              "mesh_early_lighting.frag.spv": "2519a49c39ab3655d921bec8664947788043ee40000d04018562c416b32fac1e",
+              "mesh_lighting.frag.spv": "adbfde70a8054481e498b0b4c40068797a57bab3831d4b7e3f1dcb5f92b745fe",
+              "mesh_object.frag.spv": "b705bb8a8f46082fb71f7ff229f720ba714b895208faf5d0eb03112ee8634b93",
+              "mesh_object_bindless.frag.spv": "318d877909ceb6e7de7bcfcc7371a074eb3aa9161a091709545ecfdeefec0c8b",
+              "mesh_object_bindless_early_lighting.frag.spv": "2d855000984df66319fd7d6b800cfb985e6410a855132722c6dbaa8732805bb7",
+              "mesh_object_bindless_lighting.frag.spv": "58f81f0c4738e9756052884d933cbe70a1760d7dffa5a7869ec954b1cb810e9d",
+              "mesh_object_bindless_samples.frag.spv": "107893c691d5b3ea496c3659122e09c01de78d529c0cf11ee4238a863d4f7914",
+              "mesh_object_bindless_samples_lighting.frag.spv": "470ad9673d56118fb1abe396cc9b730c434ad7cccb90bf5b614db6c5f0751c72",
+              "mesh_object_early_lighting.frag.spv": "f097b0cd3073492d3e536e11d26da7d8b6c4afba821a6da60dada63bd0a53c11",
+              "mesh_object_lighting.frag.spv": "f93191a4bd18826420f025f46843538fb323c67b8208e91a54b17df15b729c35",
+              "mesh_object_samples.frag.spv": "55b6549ecb9c4e60504005e68869fed61728f4eaed259b9d6124f31c8aaac34c",
+              "mesh_object_samples_lighting.frag.spv": "0e1c7a48a65580c90f15ba20e86bf925861c19afe00b45d26e47778974d056f9",
+              "mesh_samples.frag.spv": "e7402813ba80447fe7055238aae46dd14197a5078a5f06863cb40cbad923b296",
+              "mesh_samples_lighting.frag.spv": "3242faf040766cf431cf3311bf541f091c2868ae7a88ba4869afbdd6d7b1156d"
+            },
+            "fixture": {
+              "materials/late-face-overlay-1230.azurematerial": "24a48584b252de8e93b74a5c13e78465452faa3076158a4a51c8212b87646387",
+              "materials/late-face-overlay-1230.azurematerial.azmeta": "4cddaca59b9ceff7e85ee56c4c674f9a12b9613d59a6c01108122b2b35577963",
+              "character/late-face-overlay-1230.bin": "c769c00280e189656cdbd2ad4a698501bbea28c1c05d1e8de127b676ad95d95e",
+              "materials/late-face-overlay-1230.dds": "0ea41ca2831851e697b6869c7248867547950eea8d7095d38e649717a2624497",
+              "materials/late-face-overlay-1230.dds.azmeta": "a3eff6fc542fed3d8104c8cb34d174a99593d9f34221d5d50ca2133b26d8e31f",
+              "character/late-face-overlay-1230.gltf": "fd4994cdb8cae5e238588d05388d10a450fca4ab6a5f967b47d7946f41dd7def",
+              "character/late-face-overlay-1230.gltf.azmeta": "4659c30424586935da642ec96bc5e8b73fb191aa7d53f01973757902890fcc94",
+              "character/late-face-overlay-1358.bin": "fdd6ab7d9a5857a7732cfb292e81fae9260fd87312cae4c9c985a67e93e637bf",
+              "materials/late-face-overlay-1358.dds": "30baf01840c98ae87338d826a9effb0bad4f01f9f868e3979b60381956a814e4",
+              "materials/late-face-overlay-1358.dds.azmeta": "aafa66ed5397d0d966c702c5c5d357d69f44d3a8cf3b6464bce9e765daaef77d",
+              "character/late-face-overlay-1358.gltf": "63f77bd66aad6b824863e201ceddf23fcaf61c3de2a84b4cef0dc39429436e95",
+              "character/late-face-overlay-1358.gltf.azmeta": "7b4c04bda6ab81406c9169626c20e0c0c1de83ee7eb2365173d381ad415bc3f1",
+              "face-quality-public-nearest.azureproject": "e7a5afb40fb5d9cd5bde8ccdf4943e7531bf9d64027786174a2cfd96fa427fd5",
+              "scene/face-quality-public-nearest.azurelevel": "ecfff27cc1b3058e7a76db3cde02e10be70b10bc17e50b44f7ca327b551741df",
+              "materials/face-quality-public-nearest.azurematerial": "94d87cc0cdfe85547760a2fc0f5cf13c6e12afc2327ca9688667519302e302f9",
+              "materials/face-quality-public-nearest.azurematerial.azmeta": "9a91ee05c0b478474f1cea7293f8846b0279acb259b481ed293c056de50789d6"
+            }
+          },
+          "frameSha256": "6aca5456808d32f595b7d1b7b8cc0cf334d3920f2457b229765df025819ac28c",
+          "baselineSha256": "5f10a90f9ad4b5ba510202bdd54be2ac5e317659aa2affd25999a103e181bba9",
+          "regions": {
+            "face": {
+              "count": 3663,
+              "overOne": [
+                376,
+                367
+              ],
+              "overEight": [
+                66,
+                54
+              ],
+              "peak": [
+                41,
+                41
+              ],
+              "newOverOne": 0,
+              "changed": 12,
+              "baseline": {
+                "pixels": 3663,
+                "ssim": 0.9925143865147846,
+                "medianLuminanceRelativeError": 0.005525623705578087,
+                "passed": true
+              },
+              "candidate": {
+                "pixels": 3663,
+                "ssim": 0.9931772809488464,
+                "medianLuminanceRelativeError": 0.005525623705578087,
+                "passed": true
+              }
+            },
+            "faceCore": {
+              "count": 1176,
+              "overOne": [
+                23,
+                23
+              ],
+              "overEight": [
+                0,
+                0
+              ],
+              "peak": [
+                3,
+                3
+              ],
+              "newOverOne": 0,
+              "changed": 0,
+              "baseline": {
+                "pixels": 1176,
+                "ssim": 0.9983492552471234,
+                "medianLuminanceRelativeError": 0.005877674827978387,
+                "passed": true
+              },
+              "candidate": {
+                "pixels": 1176,
+                "ssim": 0.9983492552471234,
+                "medianLuminanceRelativeError": 0.005877674827978387,
+                "passed": true
+              }
+            },
+            "iris": {
+              "count": 255,
+              "overOne": [
+                56,
+                56
+              ],
+              "overEight": [
+                13,
+                13
+              ],
+              "peak": [
+                27,
+                27
+              ],
+              "newOverOne": 0,
+              "changed": 0,
+              "baseline": {
+                "pixels": 255,
+                "ssim": 0.9931101621348171,
+                "medianLuminanceRelativeError": 0.009946273866373248,
+                "passed": true
+              },
+              "candidate": {
+                "pixels": 255,
+                "ssim": 0.9931101621348171,
+                "medianLuminanceRelativeError": 0.009946273866373248,
+                "passed": true
+              }
+            },
+            "outsideFace": {
+              "count": 3682737,
+              "overOne": [
+                182685,
+                182685
+              ],
+              "overEight": [
+                30700,
+                30700
+              ],
+              "peak": [
+                228,
+                228
+              ],
+              "newOverOne": 0,
+              "changed": 0
+            },
+            "frame": {
+              "count": 3686400,
+              "overOne": [
+                183061,
+                183052
+              ],
+              "overEight": [
+                30766,
+                30754
+              ],
+              "peak": [
+                228,
+                228
+              ],
+              "newOverOne": 0,
+              "changed": 12
+            }
+          },
+          "samples": {
+            "traced": {
+              "points": [
+                [
+                  1280,
+                  318
+                ],
+                [
+                  1279,
+                  318
+                ],
+                [
+                  1306,
+                  304
+                ],
+                [
+                  1313,
+                  297
+                ],
+                [
+                  1312,
+                  298
+                ],
+                [
+                  1318,
+                  289
+                ],
+                [
+                  1316,
+                  292
+                ],
+                [
+                  1247,
+                  293
+                ],
+                [
+                  1314,
+                  295
+                ],
+                [
+                  1310,
+                  300
+                ],
+                [
+                  1307,
+                  303
+                ],
+                [
+                  1318,
+                  288
+                ]
+              ],
+              "improved": 0,
+              "worsened": 0,
+              "overOne": [
+                12,
+                12
+              ],
+              "overEight": [
+                12,
+                12
+              ],
+              "peak": [
+                41,
+                41
+              ],
+              "errors": [
+                [
+                  41,
+                  35,
+                  25,
+                  21,
+                  21,
+                  17,
+                  17,
+                  15,
+                  15,
+                  16,
+                  16,
+                  15
+                ],
+                [
+                  41,
+                  35,
+                  25,
+                  21,
+                  21,
+                  17,
+                  17,
+                  15,
+                  15,
+                  16,
+                  16,
+                  15
+                ]
+              ]
+            },
+            "outsideOverEight": {
+              "points": [
+                [
+                  1280,
+                  318
+                ],
+                [
+                  1279,
+                  318
+                ],
+                [
+                  1306,
+                  304
+                ],
+                [
+                  1313,
+                  297
+                ],
+                [
+                  1312,
+                  298
+                ],
+                [
+                  1318,
+                  289
+                ],
+                [
+                  1316,
+                  292
+                ],
+                [
+                  1317,
+                  291
+                ],
+                [
+                  1311,
+                  299
+                ],
+                [
+                  1310,
+                  300
+                ],
+                [
+                  1253,
+                  301
+                ],
+                [
+                  1307,
+                  303
+                ],
+                [
+                  1318,
+                  288
+                ],
+                [
+                  1317,
+                  290
+                ],
+                [
+                  1247,
+                  293
+                ],
+                [
+                  1316,
+                  293
+                ],
+                [
+                  1315,
+                  294
+                ],
+                [
+                  1314,
+                  295
+                ],
+                [
+                  1309,
+                  301
+                ],
+                [
+                  1302,
+                  307
+                ],
+                [
+                  1245,
+                  289
+                ],
+                [
+                  1246,
+                  291
+                ],
+                [
+                  1313,
+                  296
+                ],
+                [
+                  1312,
+                  297
+                ],
+                [
+                  1308,
+                  302
+                ],
+                [
+                  1315,
+                  293
+                ],
+                [
+                  1249,
+                  296
+                ],
+                [
+                  1316,
+                  291
+                ],
+                [
+                  1314,
+                  294
+                ],
+                [
+                  1313,
+                  295
+                ],
+                [
+                  1311,
+                  298
+                ],
+                [
+                  1308,
+                  301
+                ],
+                [
+                  1307,
+                  302
+                ],
+                [
+                  1310,
+                  299
+                ],
+                [
+                  1305,
+                  304
+                ],
+                [
+                  1261,
+                  308
+                ],
+                [
+                  1283,
+                  317
+                ],
+                [
+                  1317,
+                  289
+                ],
+                [
+                  1248,
+                  294
+                ],
+                [
+                  1312,
+                  296
+                ],
+                [
+                  1252,
+                  299
+                ],
+                [
+                  1309,
+                  300
+                ],
+                [
+                  1306,
+                  303
+                ],
+                [
+                  1304,
+                  305
+                ],
+                [
+                  1300,
+                  308
+                ],
+                [
+                  1299,
+                  309
+                ],
+                [
+                  1316,
+                  290
+                ],
+                [
+                  1315,
+                  292
+                ],
+                [
+                  1250,
+                  297
+                ],
+                [
+                  1251,
+                  298
+                ],
+                [
+                  1297,
+                  310
+                ]
+              ],
+              "improved": 0,
+              "worsened": 0,
+              "overOne": [
+                51,
+                51
+              ],
+              "overEight": [
+                51,
+                51
+              ],
+              "peak": [
+                41,
+                41
+              ],
+              "errors": [
+                [
+                  41,
+                  35,
+                  25,
+                  21,
+                  21,
+                  17,
+                  17,
+                  16,
+                  16,
+                  16,
+                  16,
+                  16,
+                  15,
+                  15,
+                  15,
+                  15,
+                  15,
+                  15,
+                  15,
+                  15,
+                  14,
+                  14,
+                  14,
+                  14,
+                  14,
+                  13,
+                  13,
+                  12,
+                  12,
+                  12,
+                  12,
+                  12,
+                  12,
+                  11,
+                  11,
+                  11,
+                  11,
+                  10,
+                  10,
+                  10,
+                  10,
+                  10,
+                  10,
+                  10,
+                  10,
+                  10,
+                  9,
+                  9,
+                  9,
+                  9,
+                  9
+                ],
+                [
+                  41,
+                  35,
+                  25,
+                  21,
+                  21,
+                  17,
+                  17,
+                  16,
+                  16,
+                  16,
+                  16,
+                  16,
+                  15,
+                  15,
+                  15,
+                  15,
+                  15,
+                  15,
+                  15,
+                  15,
+                  14,
+                  14,
+                  14,
+                  14,
+                  14,
+                  13,
+                  13,
+                  12,
+                  12,
+                  12,
+                  12,
+                  12,
+                  12,
+                  11,
+                  11,
+                  11,
+                  11,
+                  10,
+                  10,
+                  10,
+                  10,
+                  10,
+                  10,
+                  10,
+                  10,
+                  10,
+                  9,
+                  9,
+                  9,
+                  9,
+                  9
+                ]
+              ]
+            }
+          },
+          "nearestWitnesses": {
+            "points": [
+              [
+                1320,
+                264
+              ],
+              [
+                1320,
+                265
+              ],
+              [
+                1256,
+                227
+              ],
+              [
+                1256,
+                228
+              ],
+              [
+                1302,
+                230
+              ],
+              [
+                1302,
+                231
+              ],
+              [
+                1302,
+                232
+              ],
+              [
+                1302,
+                233
+              ],
+              [
+                1256,
+                224
+              ],
+              [
+                1256,
+                225
+              ],
+              [
+                1256,
+                226
+              ],
+              [
+                1302,
+                229
+              ]
+            ],
+            "oldError": [
+              25,
+              24,
+              20,
+              21,
+              21,
+              21,
+              21,
+              21,
+              20,
+              19,
+              20,
+              20
+            ],
+            "newError": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              2,
+              2,
+              1,
+              2
+            ]
+          }
+        }
+      }
+    }
+  },
+  "originalFrozen": {
+    "playerSha256": "54e66fd9a0565915d1883dcb5e2fef6c5f773dcc5c5dc65b0be7f8008933c8a6",
+    "shaderSetCount": 895,
+    "driver": "595.79",
+    "driverVersion": 2496905216,
+    "recoveredCompletedCapture": false,
+    "frozenDriver": "592.82",
+    "sameDriverStatus": "passed",
+    "originalFrozenStatus": "failed",
+    "frames": [
+      {
+        "frame": "frame_000000.png",
+        "sha256": "b57a67f263f0bc0d9cc53a279f74e90696b47c5802e60cd5b54196cc647fbdc3",
+        "sameDriverExpectedSha256": "b57a67f263f0bc0d9cc53a279f74e90696b47c5802e60cd5b54196cc647fbdc3",
+        "sameDriverExact": true,
+        "frozenExpectedSha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "frozenExact": false,
+        "frozenDifferingPixels": 228,
+        "frozenOverOne": 0,
+        "frozenPeak": 1,
+        "sameDriverDifferingPixels": 0,
+        "sameDriverPeak": 0
+      },
+      {
+        "frame": "frame_000001.png",
+        "sha256": "dcf466cd4ea345671eaad5efd4128584e02de9a05e6f218acf2ebf5409abe90f",
+        "sameDriverExpectedSha256": "dcf466cd4ea345671eaad5efd4128584e02de9a05e6f218acf2ebf5409abe90f",
+        "sameDriverExact": true,
+        "frozenExpectedSha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "frozenExact": false,
+        "frozenDifferingPixels": 330,
+        "frozenOverOne": 3,
+        "frozenPeak": 7,
+        "sameDriverDifferingPixels": 0,
+        "sameDriverPeak": 0
+      },
+      {
+        "frame": "frame_000002.png",
+        "sha256": "974756b6d8dba263a333c613eaf24a33d53be96b24e6c000b78646341f492050",
+        "sameDriverExpectedSha256": "974756b6d8dba263a333c613eaf24a33d53be96b24e6c000b78646341f492050",
+        "sameDriverExact": true,
+        "frozenExpectedSha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "frozenExact": false,
+        "frozenDifferingPixels": 397,
+        "frozenOverOne": 4,
+        "frozenPeak": 37,
+        "sameDriverDifferingPixels": 0,
+        "sameDriverPeak": 0
+      },
+      {
+        "frame": "frame_000003.png",
+        "sha256": "e27b4d25426d5d36725ccb159d7fe2324f4eb60b0993d369e91e45260bc6fbeb",
+        "sameDriverExpectedSha256": "e27b4d25426d5d36725ccb159d7fe2324f4eb60b0993d369e91e45260bc6fbeb",
+        "sameDriverExact": true,
+        "frozenExpectedSha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "frozenExact": false,
+        "frozenDifferingPixels": 421,
+        "frozenOverOne": 4,
+        "frozenPeak": 23,
+        "sameDriverDifferingPixels": 0,
+        "sameDriverPeak": 0
+      }
+    ]
+  },
+  "archive": {
+    "sha256": "9eaba953e8f5c8ec8867db0a5f8543ca784ecf739a0e083ac79402abf55d9160",
+    "members": {
+      "face-sdf-mip-contract-receipt.json": "fbaf75f4af9b3ec8f14dc64166a371bb3b1612d12ad0ab7d8148771ba50b28d1",
+      "face-sdf-mip-green.log": "467524c385e2b796454c541c0547db4e7533397a52fa6bd32e3597d8935a5ef6",
+      "face-sdf-mip-green-validator.log": "f37a87c8205e7973a58a9ba33b4ad7ebb62567a7c1b222d0f219b14c0624d74a",
+      "face-sdf-mip-contract.py": "37678b7ea6645cbdea059f14d2f3ca67ffc26688a8e33d1b07b20798447d3bfa",
+      "archive-public-face-quality.py": "feb4c751339b033ec5ee6b4c35bef66716f3195dcff6b33fafc3520b35d6f625",
+      "test-face-quality-release.py": "9cb48e0878912ab64ae287621237f169eeb6211131c1cabfc4746d6fae320bd3",
+      "face-quality-production.py": "dbc5d5c4ec1a33f50a4af7e877491e711a11afd6018256be3894e6c93c8ab4bb",
+      "face-quality-candidate-catalog.py": "85b655ae0cd20831d0cb79cd04aa78da9d2ab075489af5c5d890085b98d8da2e",
+      "retest-isolated-face-mask-release.py": "837e992b5d96eb4bf1a9565492ebca8f2aeed6aa8a965911d9fe923cb999c66c",
+      "retest-face-quality-production.py": "59595961f2e56c1d8e16f3a2dce156adb291cde26eb928e41b8fc0226cd8f760",
+      "frozen-current-face-and-iris.py": "5dae51e00395581fca61fa18770a4738967d009791d14737d97cad04f246f301",
+      "link-receipt.json": "c13c8a607bb2d0c2ebc6f377fab0513d817076c4ef863662810ef106173e49bb",
+      "test-receipt.json": "f046c0c8926d9468e2953edc92d2b1f9736189109ff480cca129835a076796d7",
+      "original-material-validator/red.json": "5fcf5ed0735f329f00158b0199f2f7ae93bbf7ff00fcd5878bc0426ca74f0d4d",
+      "original-material-validator/green.json": "15c1c90d57f0e403d8ecdbc6753aaf5252b30017ffba4c63b38370a12ee2b95f",
+      "nearest-nvidia/summary.json": "9d912e373e47308d0921a2b7d70e89022ab7e2f6168159bcfba1b52b73e592d2",
+      "first-candidate/public-mask-nvidia/results.json": "97a11d27c027a956dc3e7a9fa0f425fa7150853510a6b5c78a8f69d889a1b7d9",
+      "public-mask-nvidia/command.json": "f5f69ca8f61b4529a695ebf84712e5e01246baa319c9a486aace6b6a3674ef5e",
+      "public-mask-nvidia/results.json": "d4a67abfae84d82cc2bcc6aab78f1b732abd862749e57b09123f8c7ecf89ca33",
+      "public-mask-nvidia/accepted.json": "6578de332c30465d4eeb8f6b6e33cc5b49253311dd7953771d85ff5bc9b0e21f",
+      "public-mask-nvidia/frames/gpu_capabilities.json": "93c9fb29461fae11a7e57d4e49112071a71940dee571f1f6696ffbf03c392879",
+      "public-nearest-nvidia/command.json": "7843c8992004800d486ea4bca4c9d7b859806b5b5d3e4a6df928e240e894b08a",
+      "public-nearest-nvidia/results.json": "7db6a629e43099e2e2fe29dd9197364e97f89a48106e34a07b8871dba29ad141",
+      "public-nearest-nvidia/accepted.json": "d2b39328e1883a73793f7665fcd7ccb1f6a1617ce8de68b69e49a7ad3003d5dd",
+      "public-nearest-nvidia/frames/gpu_capabilities.json": "93c9fb29461fae11a7e57d4e49112071a71940dee571f1f6696ffbf03c392879",
+      "nearest-intel/summary.json": "44584d81926657155a3938e5014681902357928819a8b2a2d5e352ac374d8865",
+      "first-candidate/public-mask-intel/results.json": "90c08e87d28dbbf78a2d2742c04adad70dce4da6518613abf8fac1e3e959475a",
+      "public-mask-intel/command.json": "51341eb46f3687421469dc1c6627bb54b74c73ad05661bab9c5f154fa1e6429a",
+      "public-mask-intel/results.json": "2aebdbfa88f0a9edf6e949accc2b182318b7d73a98d17e0836b90de0e408b96b",
+      "public-mask-intel/accepted.json": "ce9ebc1f81e3e6b033dd50cc27279ea61da1897bb67d52860e42b361dbd70950",
+      "public-mask-intel/frames/gpu_capabilities.json": "a38eaca3509b417cfe23614fe415bd9ccc5622fc682d8623142cdeb7dc3d85cc",
+      "public-nearest-intel/command.json": "e2489382ff1f97de01dd4b4627f2268a290b19602df0a39997bf75ed70946ee1",
+      "public-nearest-intel/results.json": "b935a725d01672326fd663935c60220ff395e90831257e0532d93018fc1a63a6",
+      "public-nearest-intel/accepted.json": "e98f9957ee6cd15ee47f55b96635e69b7479af4bc1776934d7038bcd211fa265",
+      "public-nearest-intel/frames/gpu_capabilities.json": "a38eaca3509b417cfe23614fe415bd9ccc5622fc682d8623142cdeb7dc3d85cc",
+      "frozen-current-face-and-iris/results.json": "308fed9ca21ee8ca7789bbab92b339e50f75f79c90c59b7b4131354a3628901f",
+      "intel-sampler-control/intel.json": "dec9695b2763b348812217aa6e1eb4c5aaa9598d5fea356d0ebd3c63acf2ea22",
+      "intel-sampler-control/intel-same-player-default/receipt.json": "e3b172c45c2e81b3086d733e35ea4cad37f93509569c77248511eb8024b4cd00",
+      "intel-sampler-control/intel-split-sampler-control/receipt.json": "048670d81799119d6309c363e00a368acaca90946b95ffd9d1d98acfba412ab1",
+      "public-face-mask-sampler-isolation.py": "fc27bb9a694db49dbee87a2646bf6c1a0016c734934a7ba40b98da19c23fc57a"
+    }
+  }
+}
