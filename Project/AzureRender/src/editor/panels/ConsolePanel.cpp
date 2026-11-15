@@ -93,7 +93,9 @@ void ImGuiEditorLayer::drawConsolePanel(PanelContext&) {
     if(ImGui::IsItemHovered())ImGui::SetTooltip(ui::tr("固定日志快照；后台任务继续运行"));
     ui::nextToolbarItem(ImGui::GetFrameHeight()+ImGui::CalcTextSize(ui::tr("自动跟随")).x+metrics.spacing);
     ImGui::Checkbox(ui::tr("自动跟随"),&consoleAutoFollow_);observeWidget("console.follow");
-    consoleLogs_.update(RuntimeDiagnostics::instance().messages());
+    RuntimeDiagnostics::instance().visitMessages([this](const auto& messages) {
+        consoleLogs_.update(messages);
+    });
     const auto minimum=static_cast<DiagnosticLevel>(consoleLevel_);
     const auto rows=consoleLogs_.visible(minimum,[&](const auto& text){return consoleFilter_.PassFilter(text.c_str());});
     ui::nextToolbarItem(ui::buttonWidth(ui::tr("复制可见日志")));

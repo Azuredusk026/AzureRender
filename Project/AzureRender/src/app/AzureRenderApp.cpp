@@ -6,6 +6,9 @@
 #include "assets/AssetDeformation.hpp"
 #include "AzureRenderApp.hpp"
 #include "app/ProjectRuntimeAssembly.hpp"
+#if AZURE_WITH_EDITOR
+#include "app/EditorSceneReload.hpp"
+#endif
 #include "runtime/GameplayKeys.hpp"
 #include "runtime/physics/PhysicsShapeFactory.hpp"
 #if AZURE_WITH_EDITOR
@@ -450,6 +453,9 @@ void AzureRenderApp::mainLoop(const std::uint64_t smokeFrameLimit) {
         }
     }
 
+#if AZURE_WITH_EDITOR
+    discardEditorSceneReload();
+#endif
     if (device_ != VK_NULL_HANDLE) {
         vkDeviceWaitIdle(device_);
     }
@@ -567,6 +573,9 @@ void AzureRenderApp::createSceneRenderer() {
             runOptions_.editorSession->setViewportDiagnosticModes(capabilities.diagnosticViewNames);
         }
         const auto loadedScene = runOptions_.editorSession->viewScene();
+        rejectedEditorResources_={};
+        preservingEditorScene_=false;
+        editorDisplayedScene_.reset();
         editorRenderResources_.load(loadedScene, [&] { sceneRenderer_->onLoad(context); });
     } else
 #endif
@@ -811,7 +820,12 @@ void AzureRenderApp::buildSceneFrameData(
 #if AZURE_WITH_EDITOR
     if(runOptions_.editorSession){
         if(gameScene)frame.sceneSnapshot=gameDescription;
-        else frame.sceneSnapshot=std::make_shared<const azurerender::scene::SceneDescription>(resolveRenderDescription(runOptions_.editorSession->viewScene()));
+        else if (preservingEditorScene_ && editorDisplayedScene_) frame.sceneSnapshot=editorDisplayedScene_;
+        else {
+            frame.sceneSnapshot=std::make_shared<const azurerender::scene::SceneDescription>(
+                resolveRenderDescription(runOptions_.editorSession->viewScene()));
+            editorDisplayedScene_=frame.sceneSnapshot;
+        }
     }
 #endif
     pausedTimeOffset_ += static_cast<double>(rawDeltaSeconds - deltaSeconds);
@@ -1216,6 +1230,7 @@ void AzureRenderApp::cleanup() {
     if(runOptions_.editorSession)runOptions_.editorSession->setPlacementRaycast({});
     if(runOptions_.editorSession && runOptions_.editorSession->playing())static_cast<void>(runOptions_.editorSession->execute(azurerender::EditorCommand::Stop));
     if(shaderReloader_)shaderReloader_->cancel();
+    discardEditorSceneReload();
 #endif
     runtimeModules_.stop();
     if (device_ != VK_NULL_HANDLE) {

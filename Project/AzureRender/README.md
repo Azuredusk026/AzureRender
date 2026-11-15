@@ -1,5 +1,7 @@
 # AzureRender 工程
 
+[编辑器场景管线准备验收](docs/acceptance/p0/2026-11-16-editor-background-preparation.md)记录驱动首次编译、预览缓存及两条原生工作流。
+
 [主线 CPU 注册回归](docs/acceptance/nr/current-registered-cpu.md#管线缓存保留构建)记录两种配置各 333 项检查的结果。
 [主线 GPU 定向复验](docs/acceptance/nr/current-registered-gpu-recoveries.md)记录三项 Release 用例的复验结果。
 [构建输入复核](docs/acceptance/nr/current-registered-gpu-recoveries.md#构建输入复核与复测)记录第三方输入恢复和九项注册复测。

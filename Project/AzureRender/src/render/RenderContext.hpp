@@ -283,6 +283,9 @@ struct RenderContext {
     // View-owned output. Retire renderer recording before replacing this target.
     MotionVectorTarget* motionOutput = nullptr;
     RecordingWorkerPool* preparationWorkers = nullptr;
+    // An editor replacement may compile graphics pipelines while the active
+    // renderer continues to submit frames. Uploads remain on the device owner.
+    bool backgroundPipelinePreparation = false;
     bool fragmentPrimitiveIdentity = false;
     bool fragmentStorageAtomics = false;
     bool fragmentQuadControl = false;

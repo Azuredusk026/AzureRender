@@ -245,6 +245,16 @@ private:
     std::string gameUiPath_;
 #if AZURE_WITH_EDITOR
     azurerender::EditorRenderResourceState editorRenderResources_;
+    azurerender::EditorRenderResourceState rejectedEditorResources_;
+    struct EditorSceneReload;
+    std::unique_ptr<EditorSceneReload> editorSceneReload_;
+    std::shared_ptr<const azurerender::scene::SceneDescription> editorDisplayedScene_;
+    bool editorReloadQueued_=false;
+    bool preservingEditorScene_=false;
+    void requestEditorSceneReload(bool retainCompatiblePreviews);
+    void rebuildEditorSceneRenderer();
+    void advanceEditorSceneReload();
+    void discardEditorSceneReload(bool restart=false);
 #endif
     std::uint64_t gameplayFrame_=0,uiSerial_=0,uiDrawCalls_=0,animationFrames_=0,audioStarts_=0;
     std::uint64_t editorPreviewFrames_=0;

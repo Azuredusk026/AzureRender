@@ -1,0 +1,157 @@
+{
+  "sourceTree": "910688515835f9bfee7766416a2af6a966e828e6",
+  "driver": "595.79",
+  "editorChangeBase": "36871ff",
+  "productionExecutableSha256": "fcb1790603831fab1e27ea5e676cff10ea0df03c286c19eefdac68984c6fec80",
+  "productionBuildInputSha256": {
+    "src/app/AzureRenderApp.cpp": "e9c5b03260980f0e12439bf7e62241c3ca53fa1e1f1f412023580bead41e3264",
+    "src/app/AzureRenderApp.hpp": "5f94141261cfcfd4e47cb3a42019e74a1487d7fb1bebc7720329722934027edf",
+    "src/app/AzureRenderDevtools.cpp": "53efa7af6058dbe54d7e4be0b77689e39a75134a0bb5211fbd44af6b0004132e",
+    "src/app/AzureRenderFrame.cpp": "f06ad44097e7c4a7141d08e94444555d9d8d0c32ceae7190a9aa8f53cbeb1b7f",
+    "src/app/AzureRenderGameplay.cpp": "d9525ea53f4d77cbb1c8c39706e09e275677a732f10fe5ae8f8fdc3e7a892442",
+    "src/app/AzureRenderSupport.cpp": "7503c15046a92f6babcdd7d0b6a3d50996514dda442b7729ebaf7103f3a373e8",
+    "src/app/EditorSceneReload.hpp": "f45d24386a13aa3af69481c14ce2e721aaaabc450b44480e346eaddd142455fd",
+    "src/diagnostics/RuntimeDiagnostics.cpp": "b7f9b89c1c36b64f113586c7bb9faaaa8ab2b4140a7e80f00272984f969b4997",
+    "src/diagnostics/RuntimeDiagnostics.hpp": "367f00c33419be670d6c3c6b2344402b0083c2d2dee5000c9c5c631e8715b703",
+    "src/editor/ImGuiEditorLayer.hpp": "4f91c1573878ce7af576dfb4abb33ee94dcd3e809804c28b1e97c9bce6585821",
+    "src/editor/panels/ConsolePanel.cpp": "42e669ca6ce328580fef76b34ff11e79babb7653fb8aae2ba9740ef6e4924b72",
+    "src/editor/panels/ViewportPanel.cpp": "94a3d1bfaa40a1ce91ce9c95b3e663c0c5260df9a7d7b3be58cf998db925f9c7",
+    "src/render/RenderContext.hpp": "2c52c99470b6baeaa0fad1adad35d664681c6f666c0bbb94909a08ba1d1f7345",
+    "src/rhi/VulkanRhi.cpp": "496e05edccc73b3262ae2c95a6a605be73afbe4b9c7a51badf4480ea293844b5",
+    "src/scenes/CharacterSceneRenderer.cpp": "4a6e554496dc19056d8d92e80bf5662860b3e6138c961dd65351f4b069d00eff",
+    "src/scenes/CharacterSceneRenderer.hpp": "53916524d601eb895835f4457b9ade569e42f4c8f000771d6629bd56976feb34"
+  },
+  "configuration": "Release",
+  "registeredTests": [
+    "AzureAssets.ProceduralHost",
+    "AzureEditor.DevtoolsHost",
+    "AzureEngine.EditorHost",
+    "AzureEngine.EditorPlayable"
+  ],
+  "nativeReplays": [
+    {
+      "workflow": "exploration",
+      "passed": true,
+      "inputSource": "Windows PostMessage + SetCursorPos + relative and dialog-click SendInput -> GLFW callbacks",
+      "physicalKeyboardMouse": "NotExecuted",
+      "dialogOpenSources": [
+        "Native Browse button (cancel)",
+        "Registered path.choose operation (file/directory selection and cancel)"
+      ],
+      "nativeFileChoose": true,
+      "nativeDirectoryChoose": true,
+      "nativeCancel": true,
+      "utf8Path": true,
+      "contentPreserved": true,
+      "gameCaptureRecovery": true,
+      "nativeImportDrop": null,
+      "tools": true,
+      "singleOnlySelects": true,
+      "doubleFrames": true,
+      "fFrames": true,
+      "rightLook": true,
+      "flight": true,
+      "flightRelease": true,
+      "outsideRelease": true,
+      "focusRelease": true,
+      "resize": true,
+      "rawMouse": true
+    },
+    {
+      "workflow": "inspector",
+      "passed": true,
+      "inputSource": "Windows PostMessage + SetCursorPos + relative and dialog-click SendInput -> GLFW callbacks",
+      "physicalKeyboardMouse": "NotExecuted",
+      "dialogOpenSources": [
+        "Native Browse button (cancel)",
+        "Registered path.choose operation (file/directory selection and cancel)"
+      ],
+      "nativeFileChoose": true,
+      "nativeDirectoryChoose": true,
+      "nativeCancel": true,
+      "utf8Path": true,
+      "contentPreserved": true,
+      "gameCaptureRecovery": null,
+      "nativeImportDrop": true,
+      "tools": true,
+      "singleOnlySelects": true,
+      "doubleFrames": true,
+      "fFrames": true,
+      "rightLook": true,
+      "flight": true,
+      "flightRelease": true,
+      "outsideRelease": true,
+      "focusRelease": true,
+      "resize": true,
+      "rawMouse": false
+    }
+  ],
+  "dispatch": {
+    "1312": {
+      "task": "editor-cold-control-13-refresh-all-inputs",
+      "state": "failed",
+      "code": 9
+    },
+    "1317": {
+      "task": "editor-production-native-registered",
+      "state": "failed",
+      "code": 1
+    },
+    "1321": {
+      "task": "editor-cold-preview-repair-14-driver-compile",
+      "state": "succeeded",
+      "code": 0
+    },
+    "1322": {
+      "task": "editor-production-preview-lifetime-registered",
+      "state": "succeeded",
+      "code": 0
+    }
+  },
+  "firstCompilation": [
+    {
+      "operation": "place",
+      "driverCompileMisses": 3,
+      "acknowledgementMs": 31,
+      "sixFollowingFramesMs": 187,
+      "controlSixFollowingFramesMs": 5391,
+      "presentsDuringActualCompile": 338,
+      "controlPresentsDuringActualCompile": 0,
+      "longestPresentIntervalMs": 41,
+      "firstNewScenePresentedAfterInputMs": 6356,
+      "firstVisibleFeedbackAfterInputMs": 86,
+      "viewportCompared": 524400,
+      "viewportChanged": 0,
+      "snapshots": {
+        "build/runs/20261116-030155-nr-editor-cold-fix-50de0a/replay-14-fix-cold/cases/place/editor/cold-place.png": "9e82e11d3952fdbbafe6c8dc10ae3e47a1db70d8f68056f7653b7f7aa1af00cf"
+      }
+    },
+    {
+      "operation": "cube",
+      "driverCompileMisses": 3,
+      "acknowledgementMs": 31,
+      "sixFollowingFramesMs": 203,
+      "controlSixFollowingFramesMs": 7079,
+      "presentsDuringActualCompile": 473,
+      "controlPresentsDuringActualCompile": 0,
+      "longestPresentIntervalMs": 34,
+      "firstNewScenePresentedAfterInputMs": 8777,
+      "firstVisibleFeedbackAfterInputMs": 117,
+      "viewportCompared": 524400,
+      "viewportChanged": 0,
+      "snapshots": {
+        "build/runs/20261116-030155-nr-editor-cold-fix-50de0a/replay-14-fix-cold/cases/cube/editor/cold-cube.png": "a9d0d931d1b3eb86ed4fccac2075b5fb9bced1cdb0b27a24a97608130de01d36"
+      }
+    }
+  ],
+  "evidence": {
+    "build/runs/20261116-040447-nr-editor-production-registration-preview-lifetime-7b10ed/qualification.json": "bf820cea29f1b04f5b6aab18084783a6ed0dbe723e0d79d57e49e7435625d097",
+    "build/runs/20261116-040447-nr-editor-production-registration-preview-lifetime-7b10ed/build.json": "f31222114b4a242b171235735c4c8bc51857e8348f526f8fb4ecd0e3369c4b22",
+    "build/runs/20261116-040447-nr-editor-production-registration-preview-lifetime-7b10ed/registered.xml": "6ebad6a71ea09e76980e4521b4dee16b361ce4b316d4a00ceac2ff98d4ffd0eb",
+    "build/runs/20261116-040447-nr-editor-production-registration-preview-lifetime-7b10ed/native/run-1794773663229800300/summary.json": "7de66173dccd8c8c601a4c5c76e425a1080ed03e18babfb91cd782194311a6f2",
+    "build/runs/20261116-034957-nr-editor-production-registration-953ba4/registered.xml": "265dc6a051e477170be1a0bc735b63b5e8f12d538e1133002e40a5dcae346844",
+    "build/runs/20261115-113412-nr-standard-cache-retention-qualification-d65701/editor-preview-lifetime-cold-timing.json": "4efbb52b4c00795f007e7c4b3cb8771103be2958cd61908f3daf91ff0dcbc281",
+    "build/runs/20261116-030155-nr-editor-cold-control-629f94/build-products/20261115-113412-nr-standard-cache-retention-qualification-d65701-editor-actual-compile-13-cold/results.json": "fee301fb4ffc7c701d57715b973ea44f9ca8fa855291dba7c6c5f7e7b9bdb9af",
+    "build/runs/20261116-030155-nr-editor-cold-fix-50de0a/build-products/20261115-113412-nr-standard-cache-retention-qualification-d65701-editor-actual-compile-14-fix-cold/results.json": "425f4f798e94c0af203ebc96d4a3dec19ebc139d7ba2eafffb8fdcae093bd980"
+  }
+}

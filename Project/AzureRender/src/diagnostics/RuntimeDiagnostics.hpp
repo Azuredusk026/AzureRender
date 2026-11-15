@@ -2,6 +2,7 @@
 
 #include <cstdint>
 #include <filesystem>
+#include <mutex>
 #include <string>
 #include <utility>
 #include <vector>
@@ -46,12 +47,18 @@ public:
         log(DiagnosticLevel::Error, std::move(subsystem), code,
             std::move(message));
     }
-    [[nodiscard]] const std::vector<std::string>& messages() const noexcept {
-        return messages_;
+    template<class Visitor>
+    void visitMessages(Visitor&& visitor) const {
+        const std::lock_guard<std::mutex> lock(mutex_);
+        std::forward<Visitor>(visitor)(messages_);
     }
-    [[nodiscard]] bool fileWritable() const noexcept { return fileWritable_; }
+    [[nodiscard]] bool fileWritable() const {
+        const std::lock_guard<std::mutex> lock(mutex_);
+        return fileWritable_;
+    }
 
 private:
+    mutable std::mutex mutex_;
     std::filesystem::path logPath_;
     std::vector<std::string> messages_;
     bool fileWritable_ = false;

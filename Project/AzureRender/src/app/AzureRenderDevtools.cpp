@@ -191,7 +191,7 @@ void AzureRenderApp::pollDevtools(){
     if(auto session=runOptions_.editorSession;session && previewDocumentRevision_!=session->context().revision()){
         invalidatePreviews();
     }
-    if(!shaderReloader_)return;
+    if(!shaderReloader_ || editorSceneReload_)return;
     shaderReloader_->poll();const auto candidate=shaderReloader_->candidate();if(!candidate)return;
     RenderContext context;buildRenderContext(context);context.shaderDirectory=candidate->directory.u8string();
     std::unique_ptr<ISceneRenderer> replacement;

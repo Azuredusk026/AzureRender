@@ -618,7 +618,11 @@ void CharacterSceneRenderer::initializeLoad(const RenderContext& context) {
     },true);
     enqueue("skinning",loadTimings_.skinningMs,[this]{createComputeSkinningResources();createOitIndexBuffers();},true);
     enqueue("descriptors",loadTimings_.descriptorsMs,[this,context]{createOverlayDepth(context);if(objectShadowPrepared_){objectShadowAtlas_=std::make_unique<ObjectShadowAtlas>(*rhi_);objectShadowAtlas_->initialize();}for(auto& bounds:shadowBounds_){bounds=std::make_unique<ShadowTileBounds>(*rhi_);bounds->initialize(readBinaryFile(shaderDirectory_+(kShadowBoundsTilesPerGroup==8?"/shadow_bounds_batch.comp.spv":"/shadow_bounds.comp.spv")),shadowImageView_,shadowSampler_,context.shadowMapSize,objectShadowPrepared_?kObjectShadowCapacity:0,kShadowBoundsTilesPerGroup);}createDescriptorSetLayout();createDescriptorPool();createDescriptorSets();},true);
-    enqueue("pipelines",loadTimings_.pipelinesMs,[this,context]{createGraphicsPipeline(context);initializeMotion(context);buildSceneState();},true);
+    if (context.backgroundPipelinePreparation) {
+        graphicsPreparationContext_ = context;
+    } else {
+        enqueue("pipelines",loadTimings_.pipelinesMs,[this,context]{createGraphicsPipeline(context);initializeMotion(context);buildSceneState();},true);
+    }
     loadTimings_.cpuPrepareMs=std::chrono::duration<double,std::milli>(std::chrono::steady_clock::now()-prepareStart).count();
     RuntimeDiagnostics::instance().info("render","Scene load CPU preparation: "+std::to_string(loadTimings_.cpuPrepareMs)
         +" ms, materialPixelBytes="+std::to_string(decodedMaterialPixelBytes_));
@@ -632,12 +636,32 @@ bool CharacterSceneRenderer::prepareLoad(const RenderContext& context,double bud
     const auto start=std::chrono::steady_clock::now();
     if(!loadInitialized_){loadInitialized_=true;preparationWorkers_=context.preparationWorkers;initializeLoad(context);}
     do{
-        if(loadJobs_.empty()){materialTextureCache_->seal();return true;}
+        if(loadJobs_.empty())break;
         auto job=std::move(loadJobs_.front());loadJobs_.pop_front();job();
     }while(std::chrono::duration<double,std::milli>(std::chrono::steady_clock::now()-start).count()<budgetMs);
-    const bool completed=loadJobs_.empty();
-    if(completed)materialTextureCache_->seal();
-    return completed;
+    if (!loadJobs_.empty() || !finishPreparedGraphics())return false;
+    materialTextureCache_->seal();
+    return true;
+}
+bool CharacterSceneRenderer::finishPreparedGraphics() {
+    if (!graphicsPreparationContext_)return true;
+    if (!graphicsPreparation_.valid()) {
+        graphicsPreparation_ = std::async(std::launch::async, [this, context=*graphicsPreparationContext_] {
+            const auto start=std::chrono::steady_clock::now();
+            createGraphicsPipeline(context);
+            loadTimings_.pipelinesMs=std::chrono::duration<double,std::milli>(
+                std::chrono::steady_clock::now()-start).count();
+        });
+    }
+    if (graphicsPreparation_.wait_for(std::chrono::milliseconds(0)) != std::future_status::ready)
+        return false;
+    graphicsPreparation_.get();
+    initializeMotion(*graphicsPreparationContext_);
+    buildSceneState();
+    frameRenderSettings_=*graphicsPreparationContext_->renderSettings;
+    renderSettings_=&frameRenderSettings_;
+    graphicsPreparationContext_.reset();
+    return true;
 }
 bool CharacterSceneRenderer::reuseScene(const RenderContext& context){
     if(referenceDepthRequested(context)!=static_cast<bool>(referenceSceneDepth_))return false;
@@ -1899,6 +1923,11 @@ void CharacterSceneRenderer::recordScene(const RenderContext& context) {
 }
 
 void CharacterSceneRenderer::onUnload(const RenderContext& context) {
+    if (graphicsPreparation_.valid()) {
+        try { graphicsPreparation_.get(); }
+        catch (...) { /* A discarded renderer still owns partial resources. */ }
+    }
+    graphicsPreparationContext_.reset();
     temporalView_.clear();
     motionPoses_.clear();motionPoseScratch_.clear();state_.temporalFrame=nullptr;
     (void)context;
@@ -4147,7 +4176,8 @@ void CharacterSceneRenderer::createGraphicsPipeline(
             };
 #if !defined(AZURE_COMPUTED_MATERIAL_VIEW_PROGRAMS) && !defined(AZURE_DEFAULT_ISOLATION_VARIANTS)
             // With no additional variants, each creation only consumes this immutable descriptor.
-            if (preparationWorkers_ && dynamic_cast<rhi::VulkanRhi*>(rhi_) && !materialUvNeeded_
+            if (!context.backgroundPipelinePreparation && preparationWorkers_
+                && dynamic_cast<rhi::VulkanRhi*>(rhi_) && !materialUvNeeded_
                 && !independentCoverageNeeded_ && !lightingBlendNeeded_ && !lightingFallbackNeeded_
                 && !materialDepthPoliciesNeeded_[1] && !materialDepthPoliciesNeeded_[2] && !materialDepthPoliciesNeeded_[3]) {
                 std::vector<RecordingWorkerPool::Task> tasks;

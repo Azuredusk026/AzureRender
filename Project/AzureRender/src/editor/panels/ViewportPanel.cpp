@@ -171,6 +171,14 @@ void ImGuiEditorLayer::drawViewportPanel(PanelContext&) {
         // and drag logic can hit-test against them.
         const ImVec2 itemMin = ImGui::GetItemRectMin();
         imageRect_={itemMin.x,itemMin.y,imageSize.x,imageSize.y};
+        if (sceneResourcesPending_) {
+            const auto* text=ui::tr("正在准备场景资源");
+            const ImVec2 origin{itemMin.x+12.F,itemMin.y+12.F};
+            const auto size=ImGui::CalcTextSize(text);
+            auto* draw=ImGui::GetWindowDrawList();
+            draw->AddRectFilled(origin,{origin.x+size.x+16.F,origin.y+size.y+12.F},IM_COL32(22,24,30,220),4.F);
+            draw->AddText({origin.x+8.F,origin.y+6.F},IM_COL32(240,241,243,255),text);
+        }
         widgets_["viewport.image"]=imageRect_;
         for(auto item=widgets_.begin();item!=widgets_.end();)if(item.key().rfind("pick.",0)==0)item=widgets_.erase(item);else ++item;
         if(context_->isProject()) {

@@ -64,6 +64,7 @@ public:
         std::uint32_t height);
     void clearViewportImages();
     void setViewportImageIndex(std::uint32_t imageIndex);
+    void setSceneResourcesPending(bool pending) noexcept { sceneResourcesPending_=pending; }
     [[nodiscard]] EditorViewportInput consumeViewportInput() noexcept;
     bool consumeViewportResizeRequest(
         std::uint32_t& width,
@@ -76,6 +77,7 @@ public:
 
 private:
     unsigned renderSamples_=0,renderTargetSamples_=0;
+    bool sceneResourcesPending_=false;
 
     struct CapturedFileDrop {FileDropEvent event;std::string document;bool importOnly=false;};
     std::deque<CapturedFileDrop> fileDrops_;

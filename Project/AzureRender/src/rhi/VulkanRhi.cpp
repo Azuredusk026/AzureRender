@@ -12,6 +12,12 @@
 #include <iterator>
 
 namespace azurerender::rhi {
+namespace {
+std::mutex& pipelineInspectionMutex() {
+    static std::mutex mutex;
+    return mutex;
+}
+}
 
 using azurerender::internal::vkCheck;
 
@@ -412,7 +418,10 @@ VkPipeline VulkanRhi::createComputePipeline(const ComputePipelineDesc& desc) {
     VkPipeline pipeline = VK_NULL_HANDLE;
     vkCheck(vkCreateComputePipelines(device_, pipelineCache_, 1, &info, nullptr, &pipeline), "vkCreateComputePipelines");
     notePipelineCache(feedback);
-    if (pipelineInspection_) pipelineInspection_->inspect(pipeline,info.flags);
+    if (pipelineInspection_) {
+        const std::lock_guard<std::mutex> lock(pipelineInspectionMutex());
+        pipelineInspection_->inspect(pipeline,info.flags);
+    }
     return pipeline;
 }
 void VulkanCommandRecorder::bindComputePipeline(VkPipeline pipeline) {
@@ -604,8 +613,7 @@ VkPipeline VulkanRhi::createGraphicsPipeline(
         "vkCreateGraphicsPipelines");
     notePipelineCache(feedback);
     if (pipelineInspection_) {
-        static std::mutex inspectionMutex;
-        const std::lock_guard<std::mutex> lock(inspectionMutex);
+        const std::lock_guard<std::mutex> lock(pipelineInspectionMutex());
         pipelineInspection_->inspect(pipeline,pipelineInfo.flags);
     }
     return pipeline;
