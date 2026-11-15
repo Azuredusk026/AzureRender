@@ -2,6 +2,7 @@
 
 [主线 CPU 注册回归](docs/acceptance/nr/current-registered-cpu.md#管线缓存保留构建)记录两种配置各 333 项检查的结果。
 [主线 GPU 定向复验](docs/acceptance/nr/current-registered-gpu-recoveries.md)记录三项 Release 用例的复验结果。
+[构建输入复核](docs/acceptance/nr/current-registered-gpu-recoveries.md#构建输入复核与复测)记录第三方输入恢复和九项注册复测。
 [GPU 注册回归的产物预约与管线缓存](docs/acceptance/nr/registered-gpu-infrastructure.md)记录双配置雾效结果、编辑器重建计时和目录规模复验。
 [编辑器与资产主线复验](docs/acceptance/nr/registered-gpu-infrastructure.md#编辑器与资产主线复验)记录标准构建的目录规模、热重载和两条编辑器工作流。
 [Windows 发布安装](docs/acceptance/nr/registered-gpu-infrastructure.md#windows-发布安装)记录安装文档核对和两种发布包的注册验收。

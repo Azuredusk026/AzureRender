@@ -45,3 +45,5 @@
 [标准发布包复验](registered-gpu-infrastructure.md#管线缓存保留的发布包复验)记录同一 Release 播放器的五项注册结果。
 
 [标准构建 CPU 回归](current-registered-cpu.md#管线缓存保留构建)记录 Release 和 Debug 各 333 项通过。
+
+[构建输入复核](current-registered-gpu-recoveries.md#构建输入复核与复测)记录共享工作区输入恢复和九项 GPU 注册结果。

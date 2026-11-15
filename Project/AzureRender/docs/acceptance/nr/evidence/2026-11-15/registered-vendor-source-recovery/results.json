@@ -1,0 +1,76 @@
+{
+  "status": "passed",
+  "restoredTrackedFiles": 34,
+  "releasedProducts": 1295,
+  "debugProducts": 1288,
+  "casesBeforeProvenanceFailure": {
+    "AzureRender.SpatialAntiAliasingAuxiliaryGpu": 63.1468,
+    "AzureRender.SpatialAntiAliasingTransferGpu": 7.45234,
+    "AzureRender.ColorGradingLutProduction": 87.3629,
+    "AzureRender.ColorGradingLutEditor": 9.04886,
+    "AzureRender.SamplingHostGpu": 17.4819,
+    "AzureRender.SharedMotionGpu": 1.40261,
+    "AzureRender.MultisampleViewsGpu": 1.10859,
+    "AzureRender.PreviewHost": 9.74527,
+    "AzureEditor.SelectionGpu": 23.0135
+  },
+  "acceptedReplayCases": {
+    "AzureRender.SpatialAntiAliasingAuxiliaryGpu": 47.2056,
+    "AzureRender.SpatialAntiAliasingTransferGpu": 4.34472,
+    "AzureRender.ColorGradingLutProduction": 18.5638,
+    "AzureRender.ColorGradingLutEditor": 8.41518,
+    "AzureRender.SamplingHostGpu": 14.7864,
+    "AzureRender.SharedMotionGpu": 0.29997,
+    "AzureRender.MultisampleViewsGpu": 0.313175,
+    "AzureRender.PreviewHost": 8.47636,
+    "AzureEditor.SelectionGpu": 21.4453
+  },
+  "dispatch": [
+    [
+      1052,
+      "release-gpu-13",
+      "failed",
+      1
+    ],
+    [
+      1057,
+      "restore-registered-vendored-source-files",
+      "failed",
+      1
+    ],
+    [
+      1061,
+      "restore-registered-vendored-source-files",
+      "succeeded",
+      0
+    ],
+    [
+      1064,
+      "release-gpu-13",
+      "succeeded",
+      0
+    ]
+  ],
+  "archive": {
+    "sha256": "c453f72ec2bf7096e00eb87d9424f2a551fffd5623d0b962705cdc94cc29f8f2",
+    "files": {
+      "release-gpu-13-source-drift/process.log": "26b5ceda7e2e3031498637e7c99b3b1b5f1ce1e149cfacf66389b0a753235395",
+      "release-gpu-13-source-drift/registered-summary.json": "4a86212acf15da75d4c77de31274d0a0d7ea8f041ac8e0d75f4350afc866b740",
+      "release-gpu-13-source-drift/release-gpu-13-queue.log": "4134ae6ed352242e312358689c77e8c736263e0b9b4f76838d93fc9f92b04fb6",
+      "release-gpu-13-source-drift/release-gpu-13.log": "f7e2e1b17f7a73d8bbd0d4c5b195198272148c3e84426680ef0a6f6da33615ff",
+      "release-gpu-13-source-drift/release-gpu-13.txt": "b928eff2378a480d4bb6a0e371895311142979cef4312c98ef66ef13eb0d5246",
+      "release-gpu-13-source-drift/release-gpu-13.xml": "3ef7e2ee9adef2d6b22b94fea1febd7325dcaf3a4ec832d691021d6da6ba6708",
+      "registered-source-files-recovered.json": "e629d574aaa9b7caa8249bee8ea9ad4a0675b66bbd9bf1416f23258b85edb4f5",
+      "archive_vendor_recovery.py": "1fe9865d0366918dcca09d6aae3f1bbfefdf1557d56ff455ddb8c458ba68d262",
+      "release-gpu-13.log": "1503840dccd4f3eacdaa30f865e41ac1140077372bc6d424d04d0b9751b84f37",
+      "release-gpu-13.xml": "dea49e1512dbcc4a99253760c5773fd0d143909e9a62174fb70de778c9f32d91",
+      "release-gpu-13.json": "6e48eee6a085580e560f8288cbd447d2847e66bcd4194439ab9ee2e8ba5f3497",
+      "release-gpu-13.txt": "b928eff2378a480d4bb6a0e371895311142979cef4312c98ef66ef13eb0d5246",
+      "release-gpu-13-queue.log": "95af02665b5ba5a28c5a783266c0d6056b0fb2d9c6da9c09079b17a7589a01f1",
+      "source-restore-1057-process.log": "83f2ec0cb6e03b65e9b7d240ad7afbe337c7f92a844d605f5828717456abd83e",
+      "repair_registered_source_files.py": "db873f375a1d1ee0463351e608af1f2921b841db34c82b01c5eb4930e0cdde7c",
+      "release-products.json": "b1283ecdd5079fc8205032e76774fd5c8ee60f18fea9c55f5c3c4448a014f422",
+      "debug-products.json": "1331d1c0b56cd263685db44cddb2d94bb106fda11468bc0ebff9d493e6ee5dfd"
+    }
+  }
+}

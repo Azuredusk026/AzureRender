@@ -28,3 +28,9 @@
 CoreCLR 首轮的安装子进程达到 180 秒时限。复验完成安装、移动后的独立启动以及篡改拒绝。动作混合首轮在生成物预约阶段停止。核对并回收 4,708 份重复生成文件，共 555,649,037 字节，原注册用例获得任务空间并通过。
 
 [结果清单](evidence/2026-11-15/registered-host-and-storage-recoveries/results.json)与[验证归档](evidence/2026-11-15/registered-host-and-storage-recoveries/verification.zip)保存失败与通过收据、应用缓存对照及保留文件的摘要映射。
+
+## 构建输入复核与复测
+
+Release 第十三组执行九项 GPU 检查。首次运行的执行结果全部通过，构建来源复核检出共享工作区缺失第三方文件，该次分组等待复测。恢复 34 份已跟踪文件后，按摘要核对 .NET 来源清单的字节，重新核对 Release 的 1,295 个产物和 Debug 的 1,288 个产物。Release 第十三组按原命令复测，九项全部通过。
+
+[复测结果](evidence/2026-11-15/registered-vendor-source-recovery/results.json)和[验证归档](evidence/2026-11-15/registered-vendor-source-recovery/verification.zip)保存两次注册输出、缺失来源记录和产物摘要。
