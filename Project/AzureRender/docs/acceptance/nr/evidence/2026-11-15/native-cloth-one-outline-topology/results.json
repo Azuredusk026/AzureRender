@@ -1,0 +1,360 @@
+{
+  "status": "qualified-fixed-pose-original-first-cloth-outline-topology",
+  "overallVisualAcceptance": "pending",
+  "originalCaptureSha256": "fa2ca267f7168f5603e83ad5f817a3074d8dbee23a216e6ab8ef2c340ec06a90",
+  "sourceShader": "009e6093-5e38eab9-3157b616-48c6da88",
+  "originalSkinOwnerPixels": 577,
+  "tests": {
+    "vertexPositionToleranceMeters": [
+      2.5e-05,
+      5e-05,
+      0.0005
+    ],
+    "textureCoordinateTolerance": 1e-06,
+    "subpixelGridBits": 8
+  },
+  "nativeCloth1": {
+    "event": 1079,
+    "fileSha256": {
+      "nvidia-1079-position.bin": "20e1d2b1d643097c86255b4563136f1de723b1c08f3cb579e90471cfa0348191",
+      "nvidia-1079-index.bin": "ee9dec6cf9021d71c8c60460c0e95aeccb06fe32a9eb0ae9631b133686c9ebf6",
+      "nvidia-1079-vs-cb0.bin": "04ac7183f0cf0853cc0484e799e35389d505116afb8ff4028e4124870ed02155",
+      "nvidia-1079-vs-cb1.bin": "30ed44bbe849bdb3a1cff0c94840eef52c79a6e412a126a3c7ee71d5546f8f55",
+      "nvidia-1079-vs-cb3.bin": "434722e4a0d403001e1ccb17b24dfd5c20aa987680d432bc4217450c7e89b322"
+    },
+    "triangleCompatibility": {
+      "2.5e-05": {
+        "unresolvedTriangles": 106,
+        "matchingTriangles": 34176,
+        "noCompatibleTriangles": 12,
+        "noCompatibleRasterized": 148,
+        "noCompatibleOwnedSkin": 0,
+        "unresolvedRasterized": 979,
+        "unresolvedOwnedSkin": 20,
+        "unresolvedSkinCoordinates": [
+          [
+            1177,
+            471
+          ],
+          [
+            1177,
+            472
+          ],
+          [
+            1177,
+            473
+          ],
+          [
+            1177,
+            474
+          ],
+          [
+            1177,
+            475
+          ],
+          [
+            1177,
+            476
+          ],
+          [
+            1177,
+            477
+          ],
+          [
+            1177,
+            478
+          ],
+          [
+            1177,
+            479
+          ],
+          [
+            1177,
+            480
+          ],
+          [
+            1178,
+            483
+          ],
+          [
+            1274,
+            523
+          ],
+          [
+            1276,
+            525
+          ],
+          [
+            1276,
+            526
+          ],
+          [
+            1276,
+            527
+          ],
+          [
+            1277,
+            527
+          ],
+          [
+            1277,
+            528
+          ],
+          [
+            1278,
+            529
+          ],
+          [
+            1279,
+            530
+          ],
+          [
+            1280,
+            531
+          ]
+        ]
+      },
+      "5e-05": {
+        "unresolvedTriangles": 106,
+        "matchingTriangles": 34176,
+        "noCompatibleTriangles": 12,
+        "noCompatibleRasterized": 148,
+        "noCompatibleOwnedSkin": 0,
+        "unresolvedRasterized": 979,
+        "unresolvedOwnedSkin": 20,
+        "unresolvedSkinCoordinates": [
+          [
+            1177,
+            471
+          ],
+          [
+            1177,
+            472
+          ],
+          [
+            1177,
+            473
+          ],
+          [
+            1177,
+            474
+          ],
+          [
+            1177,
+            475
+          ],
+          [
+            1177,
+            476
+          ],
+          [
+            1177,
+            477
+          ],
+          [
+            1177,
+            478
+          ],
+          [
+            1177,
+            479
+          ],
+          [
+            1177,
+            480
+          ],
+          [
+            1178,
+            483
+          ],
+          [
+            1274,
+            523
+          ],
+          [
+            1276,
+            525
+          ],
+          [
+            1276,
+            526
+          ],
+          [
+            1276,
+            527
+          ],
+          [
+            1277,
+            527
+          ],
+          [
+            1277,
+            528
+          ],
+          [
+            1278,
+            529
+          ],
+          [
+            1279,
+            530
+          ],
+          [
+            1280,
+            531
+          ]
+        ]
+      },
+      "0.0005": {
+        "unresolvedTriangles": 85,
+        "matchingTriangles": 34197,
+        "noCompatibleTriangles": 12,
+        "noCompatibleRasterized": 148,
+        "noCompatibleOwnedSkin": 0,
+        "unresolvedRasterized": 724,
+        "unresolvedOwnedSkin": 20,
+        "unresolvedSkinCoordinates": [
+          [
+            1177,
+            471
+          ],
+          [
+            1177,
+            472
+          ],
+          [
+            1177,
+            473
+          ],
+          [
+            1177,
+            474
+          ],
+          [
+            1177,
+            475
+          ],
+          [
+            1177,
+            476
+          ],
+          [
+            1177,
+            477
+          ],
+          [
+            1177,
+            478
+          ],
+          [
+            1177,
+            479
+          ],
+          [
+            1177,
+            480
+          ],
+          [
+            1178,
+            483
+          ],
+          [
+            1274,
+            523
+          ],
+          [
+            1276,
+            525
+          ],
+          [
+            1276,
+            526
+          ],
+          [
+            1276,
+            527
+          ],
+          [
+            1277,
+            527
+          ],
+          [
+            1277,
+            528
+          ],
+          [
+            1278,
+            529
+          ],
+          [
+            1279,
+            530
+          ],
+          [
+            1280,
+            531
+          ]
+        ]
+      }
+    },
+    "nativeVertices": 32021,
+    "nativeTriangles": 34294,
+    "candidateVertices": 32031,
+    "candidateTriangles": 34309,
+    "candidateSha256": "a183a03f38d40bc16a954aab92ed4f93f3171f1c54231ae989f9aefa1e2d2605",
+    "nativeShellOffsetPx": [
+      0.959945439169289,
+      0.9576856692803265
+    ],
+    "offsetFormulaResidualPx": [
+      2.315246820074983e-05,
+      7.517373422275817e-05
+    ],
+    "offsetFormulaPercentile99Px": [
+      1.637891051271344e-05,
+      3.183930539314616e-05
+    ],
+    "coordinateMapping": {
+      "identity": {
+        "uvMatched": 0,
+        "verified": 0,
+        "uniqueAuthoredAttributes": 0,
+        "geometryQuantiles": null,
+        "uvQuantiles": null,
+        "exactTrianglesByAttributes": 0,
+        "matchedTriangles": 0,
+        "indexIdentity": 0,
+        "nativeOnlyMatchedTriangles": 0
+      },
+      "flipV": {
+        "uvMatched": 31987,
+        "verified": 31887,
+        "uniqueAuthoredAttributes": 30546,
+        "geometryQuantiles": [
+          0.0,
+          1.3682520145332036e-07,
+          1.923277349166367e-05,
+          2.195684052739212e-05,
+          0.006609666639602397
+        ],
+        "uvQuantiles": [
+          0.0,
+          0.0,
+          2.9802322387695312e-08,
+          2.9802322387695312e-08,
+          8.083879947662354e-06
+        ],
+        "exactTrianglesByAttributes": 33910,
+        "matchedTriangles": 34117,
+        "indexIdentity": 697,
+        "nativeOnlyMatchedTriangles": 207
+      }
+    }
+  },
+  "pending": [
+    "second-cloth-outline",
+    "paired-player-composition",
+    "dynamic-cloth"
+  ],
+  "archiveSha256": "4aca1f1f378c583b384ab71dd3b48c64cb910d92be2e1459b52b3a3c6d0b3565"
+}
