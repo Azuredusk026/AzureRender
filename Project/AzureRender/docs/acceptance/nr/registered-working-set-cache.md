@@ -41,3 +41,5 @@
 [正式结果](evidence/2026-11-15/registered-cache-retention-formal-settled/results.json)和[验证归档](evidence/2026-11-15/registered-cache-retention-formal-settled/verification.zip)保存十五轮的来源摘要、逐帧计时、工作集序列和设备状态。
 
 [三条冻结画面路径](frozen-public-visual.md#管线缓存保留的标准构建复验)记录标准 Release 和 Debug 的 42 张零差异捕获。
+
+[标准发布包复验](registered-gpu-infrastructure.md#管线缓存保留的发布包复验)记录同一 Release 播放器的五项注册结果。

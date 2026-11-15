@@ -109,3 +109,9 @@ Release 游戏包和可玩包分别在 237.04 和 396.34 秒通过原注册用�
 六项检查各核对 33,280 个像素。Vulkan 验证错误均为零，资源释放检查通过。
 
 [结果清单](evidence/2026-11-15/material-view-pipeline-cache/results.json)和[验证归档](evidence/2026-11-15/material-view-pipeline-cache/verification.zip)保存初始时限记录、隔离对照和标准构建的 CTest 收据。
+
+## 管线缓存保留的发布包复验
+
+标准 Release 通过游戏包、可玩包、打包规则、安装清单往返和缺失构建拒绝五项注册检查。游戏包用时 155.22 秒，可玩包用时 354.10 秒。两个交付目录各自核对清单及播放器摘要，在源工程和安装目录移开后通过运行验证。可玩包完成 20 次切关、20 次重启，并通过安装包的篡改拒绝检查。
+
+[发布包结果](evidence/2026-11-15/registered-cache-retention-packages/results.json)和[验证归档](evidence/2026-11-15/registered-cache-retention-packages/verification.zip)保存五项注册结果、两个产品清单、运行路径和播放器摘要。

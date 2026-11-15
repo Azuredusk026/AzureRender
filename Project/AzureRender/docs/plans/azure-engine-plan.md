@@ -55,6 +55,7 @@ CPU 工作 P95 为 5.90 毫秒，GPU 帧 P95 为 20.33 毫秒。
 [标准构建定向复验](../acceptance/nr/current-registered-gpu-recoveries.md#标准构建定向复验)通过采样宿主、流程宿主、CoreCLR 发布和动作混合检查。
 [正式工作集与管线缓存](../acceptance/nr/registered-working-set-cache.md)记录五类正式负载十五轮通过，工作集最大增长为 0.448%。
 [冻结画面标准构建复验](../acceptance/nr/frozen-public-visual.md#管线缓存保留的标准构建复验)通过三条路径的双配置严格比较和管线缓存注册检查。
+[标准发布包复验](../acceptance/nr/registered-gpu-infrastructure.md#管线缓存保留的发布包复验)通过五项 Windows 注册检查及两个移动交付目录验证。
 [GPU 注册回归的产物预约与管线缓存](../acceptance/nr/registered-gpu-infrastructure.md)记录双配置 34 项采集验证、缓存分流、管线计时及着色器读取对照。
 [编辑器与目录规模复验](../acceptance/nr/registered-gpu-infrastructure.md#编辑器加载与目录规模)核对资产刷新阶段、混合材质路径和一万资产的缓存发布。
 [编辑器与资产主线复验](../acceptance/nr/registered-gpu-infrastructure.md#编辑器与资产主线复验)记录标准构建的目录、着色器和材质检查。完整注册回归按两种配置执行。
