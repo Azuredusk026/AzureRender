@@ -28,6 +28,7 @@
 
 [公开角色冻结画面](docs/acceptance/nr/frozen-public-visual.md#冻结驱动复测)记录 595.79 下三条渲染路径的逐像素核对。
 [普通透明混合画面验收](docs/acceptance/p0/2026-11-16-transparent-float-arithmetic.md)记录渲染路径、冻结画面及配对帧时间。
+[托管运行时验收](docs/acceptance/p0/2026-11-16-managed-runtime-patch.md)记录工具链版本与注册回归。
 
 [主线联合场景短测](docs/acceptance/nr/performance-bottlenecks.md#主线联合场景短测)记录帧耗时、渲染通道及显存峰值。
 

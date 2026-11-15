@@ -53,13 +53,16 @@ def build(output):
         results.append({'backend':backend,'buildSeconds':time.perf_counter()-started})
     core=output/'coreclr';native=output/'nativeaot'
     core_project=ROOT/'managed/EngineBindings/AzureEngineBindings.csproj'
+    runtime_version=ET.parse(core_project).findtext('./PropertyGroup/RuntimeFrameworkVersion')
+    if not runtime_version or not re.fullmatch(r'9\.0\.[0-9]+',runtime_version):
+        raise ValueError('Managed prototypes require a precise .NET 9 runtime patch version')
     run('coreclr',['build',str(core_project),'-c','Release','-o',str(core),'--artifacts-path',str(output/'artifacts/core'),'--nologo'])
     sample_project=ROOT/'managed/SampleScripts/AzureSamples.csproj'
     run('coreclr-samples',['build',str(sample_project),'-c','Release','-o',str(core),'--artifacts-path',str(output/'artifacts/samples'),
         '-p:EngineAssembly='+str(core/'Azure.Engine.dll'),'--nologo'])
     native_project=output/'projects/native/Azure.Engine.Native.csproj'
     project(native_project,'Azure.Engine.Native',sources+samples+[registry],{'PublishAot':'true','NativeLib':'Shared',
-        'SelfContained':'true','RuntimeIdentifier':'win-x64','RuntimeFrameworkVersion':'9.0.11','DefineConstants':'AZURE_NATIVEAOT'})
+        'SelfContained':'true','RuntimeIdentifier':'win-x64','RuntimeFrameworkVersion':runtime_version,'DefineConstants':'AZURE_NATIVEAOT'})
     run('nativeaot',['publish',str(native_project),'-c','Release','-o',str(native),'--nologo'])
     for result in results:
         directory=native if result['backend']=='nativeaot' else core

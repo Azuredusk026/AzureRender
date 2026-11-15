@@ -5,8 +5,9 @@
 
 ## 准备构建
 
-安装 .NET SDK 9、MSVC 和引擎工具链。
-CoreCLR 项目运行时使用 .NET 9.0.11。
+安装 .NET SDK 9.0.320、MSVC 和引擎工具链。
+CoreCLR 项目运行时使用 .NET 9.0.22。
+使用独立安装的 SDK 时，将 `DOTNET_ROOT` 设为 SDK 根目录，将根目录加入 `PATH`。
 NativeAOT 项目运行时使用原生模块。
 以下命令在工程目录执行。
 
