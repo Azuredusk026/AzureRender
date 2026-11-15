@@ -1,0 +1,77 @@
+{
+  "archived": [
+    {
+      "name": "20261110-195337-shader-catalog-73fc58",
+      "bytes": 208511023,
+      "archive": "20261110-195337-shader-catalog-73fc58-472339ad6f6e.zip",
+      "archiveSha256": "6455adca3eae9e9b7f1459a47234d1913ac15a13ef047913cf76428b594ab3f4",
+      "files": 680
+    },
+    {
+      "name": "20261111-043640-shader-catalog-0035d6",
+      "bytes": 68056907,
+      "archive": "20261111-043640-shader-catalog-0035d6-650fc3d4f9bb.zip",
+      "archiveSha256": "649f6200f651742f23d17d4ba31304a5e6971fc72e4355a2a78606a89b1c0e69",
+      "files": 347
+    },
+    {
+      "name": "20261111-054817-shader-catalog-099ee8",
+      "bytes": 68056906,
+      "archive": "20261111-054817-shader-catalog-099ee8-c0ca83b4b0ea.zip",
+      "archiveSha256": "db0901293808e4eac05c3ad4d937bb1b0432b5381ecfd68044d09a4740e2edf8",
+      "files": 347
+    },
+    {
+      "name": "20261111-043250-shader-catalog-9ddb52",
+      "bytes": 54577895,
+      "archive": "20261111-043250-shader-catalog-9ddb52-2b12b8b5e54e.zip",
+      "archiveSha256": "58b521282c664e01191219f21c0eb9c69dac9aea1d1fcdcc214d6ecb2c57c378",
+      "files": 303
+    },
+    {
+      "name": "20261111-054623-shader-catalog-a9036c",
+      "bytes": 54577894,
+      "archive": "20261111-054623-shader-catalog-a9036c-7fea2ef7aef8.zip",
+      "archiveSha256": "e972ee125bdba41c85fb8686ba5d19c79a040b102314122c60f5cecf713e53c0",
+      "files": 303
+    }
+  ],
+  "recoveredBytes": 453780625,
+  "reservedAfter": 16584547443,
+  "dispatch": [
+    {
+      "job": 1223,
+      "state": "failed",
+      "exitCode": 1,
+      "reason": null
+    },
+    {
+      "job": 1230,
+      "state": "interrupted",
+      "exitCode": null,
+      "reason": "Queue process exited"
+    },
+    {
+      "job": 1235,
+      "state": "error",
+      "exitCode": null,
+      "reason": "attempt to write a readonly database"
+    },
+    {
+      "job": 1255,
+      "state": "succeeded",
+      "exitCode": 0,
+      "reason": null
+    }
+  ],
+  "rollback": {
+    "backup": {
+      "artifact-index.sqlite3": "b1e7a821583b671dbf4ee42f8bc6aa93f7054b0c438648928cae61fa49ec50ed",
+      "artifact-index.sqlite3-journal": "08172b1783b9d3ffebda4f85e9ce9a8d7b2561f30af8e22be3a84f74bbdf839f"
+    },
+    "integrity": "ok",
+    "activeOrphan": false,
+    "journalExistsAfterRecovery": false,
+    "time": "2026-11-16T01:05:33.580270"
+  }
+}
