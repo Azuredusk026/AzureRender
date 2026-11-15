@@ -112,6 +112,18 @@
       "results": "docs/acceptance/nr/evidence/2026-11-15/joint-80w-balanced-cpu-energy-preference/results.json"
     },
     {
+      "path": "runs/20261115-100552-nr-joint-epp-repeat-02-513bcb",
+      "name": "联合场景平衡电源计划第二轮",
+      "evidence": "docs/acceptance/nr/joint-nonlocal-texture-placement.md#平衡电源计划的处理器节能首选项",
+      "results": "docs/acceptance/nr/evidence/2026-11-15/joint-80w-balanced-cpu-energy-preference-repeats/results.json"
+    },
+    {
+      "path": "runs/20261115-100553-nr-joint-epp-repeat-03-1137fe",
+      "name": "联合场景平衡电源计划第三轮",
+      "evidence": "docs/acceptance/nr/joint-nonlocal-texture-placement.md#平衡电源计划的处理器节能首选项",
+      "results": "docs/acceptance/nr/evidence/2026-11-15/joint-80w-balanced-cpu-energy-preference-repeats/results.json"
+    },
+    {
       "path": "runs/20261114-173220-nr-shader-host-compiler-concurrency-d140b8",
       "name": "编辑器加载与目录规模诊断",
       "evidence": "docs/acceptance/nr/registered-gpu-infrastructure.md",

@@ -1,0 +1,702 @@
+{
+  "passedRounds": 2,
+  "totalRounds": 2,
+  "rounds": [
+    {
+      "dispatch": [
+        978,
+        "joint-80w-balanced-cpu-energy-preference-02",
+        "succeeded",
+        0
+      ],
+      "run": "20261115-100552-nr-joint-epp-repeat-02-513bcb",
+      "results": {
+        "scope": "isolated-nonlocal-material-images-1080p60",
+        "nonlocalAllocations": 224,
+        "nonlocalBytes": 1588625408,
+        "source": "01cc6b26e52d8d602aae1b75d7259a5da4f10dbd",
+        "driver": "595.79",
+        "warmup": 300,
+        "frames": 1800,
+        "gpuPowerLimitWatts": [
+          80.0
+        ],
+        "environmentFailures": [],
+        "peakTemperatureC": 85.0,
+        "observationCount": 112,
+        "softwareThermalSlowdownObservations": 0,
+        "timings": {
+          "frameMs": {
+            "mean": 15.984715733333331,
+            "p95": 16.499116800000003,
+            "peak": 17.00128
+          },
+          "sceneMs": {
+            "mean": 13.99860224,
+            "p95": 14.3299072,
+            "peak": 14.608384
+          },
+          "shadowMs": {
+            "mean": 1.7117378133333334,
+            "p95": 2.1070816,
+            "peak": 2.143136
+          },
+          "postProcessMs": {
+            "mean": 0.27437568,
+            "p95": 0.280576,
+            "peak": 0.28672
+          },
+          "cpuWorkMs": {
+            "mean": 5.041660111111111,
+            "p95": 6.989754999999931,
+            "peak": 14.241100000000111
+          }
+        },
+        "deviceLocalPeakBytes": 1442503488,
+        "workingSetPeakBytes": 2043473920,
+        "allocatorZero": true,
+        "gates": {
+          "fixed80W": true,
+          "thermalAndAC": true,
+          "gpuP95": true,
+          "cpuP95": true,
+          "deviceLocal": true,
+          "workingSet": true
+        },
+        "windows": [
+          {
+            "frameMs": {
+              "mean": 15.829685973333335,
+              "p95": 16.2844464,
+              "peak": 16.742944
+            },
+            "sceneMs": {
+              "mean": 13.864901973333335,
+              "p95": 14.161152,
+              "peak": 14.4384
+            },
+            "shadowMs": {
+              "mean": 1.692550186666667,
+              "p95": 2.0884688000000002,
+              "peak": 2.117792
+            },
+            "postProcessMs": {
+              "mean": 0.27223381333333335,
+              "p95": 0.278528,
+              "peak": 0.283648
+            },
+            "cpuWorkMs": {
+              "mean": 4.932683,
+              "p95": 6.553610000000001,
+              "peak": 13.266400000000003
+            }
+          },
+          {
+            "frameMs": {
+              "mean": 15.925763199999999,
+              "p95": 16.423592,
+              "peak": 16.65968
+            },
+            "sceneMs": {
+              "mean": 13.92913408,
+              "p95": 14.2144,
+              "peak": 14.318592
+            },
+            "shadowMs": {
+              "mean": 1.7232450133333335,
+              "p95": 2.107608,
+              "peak": 2.12704
+            },
+            "postProcessMs": {
+              "mean": 0.2733841066666667,
+              "p95": 0.279552,
+              "peak": 0.2816
+            },
+            "cpuWorkMs": {
+              "mean": 5.219646333333333,
+              "p95": 7.118025000000131,
+              "peak": 13.792699999999941
+            }
+          },
+          {
+            "frameMs": {
+              "mean": 15.984383679999997,
+              "p95": 16.5411824,
+              "peak": 16.851008
+            },
+            "sceneMs": {
+              "mean": 13.995523413333334,
+              "p95": 14.275584,
+              "peak": 14.455808
+            },
+            "shadowMs": {
+              "mean": 1.7146740266666667,
+              "p95": 2.107376,
+              "peak": 2.135776
+            },
+            "postProcessMs": {
+              "mean": 0.27418623999999997,
+              "p95": 0.280576,
+              "peak": 0.284672
+            },
+            "cpuWorkMs": {
+              "mean": 5.116203666666666,
+              "p95": 6.8856150000001834,
+              "peak": 14.241100000000111
+            }
+          },
+          {
+            "frameMs": {
+              "mean": 15.955172266666668,
+              "p95": 16.406399999999998,
+              "peak": 16.838464
+            },
+            "sceneMs": {
+              "mean": 13.976244906666667,
+              "p95": 14.3022592,
+              "peak": 14.460928
+            },
+            "shadowMs": {
+              "mean": 1.7046626133333334,
+              "p95": 2.1039008,
+              "peak": 2.143136
+            },
+            "postProcessMs": {
+              "mean": 0.2742647466666666,
+              "p95": 0.280576,
+              "peak": 0.284672
+            },
+            "cpuWorkMs": {
+              "mean": 4.983259999999999,
+              "p95": 6.503600000000092,
+              "peak": 11.227000000000023
+            }
+          },
+          {
+            "frameMs": {
+              "mean": 16.067445546666665,
+              "p95": 16.5007072,
+              "peak": 17.00128
+            },
+            "sceneMs": {
+              "mean": 14.077682346666666,
+              "p95": 14.364876800000001,
+              "peak": 14.590976
+            },
+            "shadowMs": {
+              "mean": 1.7141297066666668,
+              "p95": 2.1077936,
+              "peak": 2.134976
+            },
+            "postProcessMs": {
+              "mean": 0.27563349333333337,
+              "p95": 0.2816,
+              "peak": 0.285696
+            },
+            "cpuWorkMs": {
+              "mean": 5.0343230000000005,
+              "p95": 7.267609999999988,
+              "peak": 12.285099999999888
+            }
+          },
+          {
+            "frameMs": {
+              "mean": 16.145843733333333,
+              "p95": 16.6936672,
+              "peak": 16.917504
+            },
+            "sceneMs": {
+              "mean": 14.14812672,
+              "p95": 14.4626688,
+              "peak": 14.608384
+            },
+            "shadowMs": {
+              "mean": 1.7211653333333334,
+              "p95": 2.1147408000000003,
+              "peak": 2.134112
+            },
+            "postProcessMs": {
+              "mean": 0.27655167999999997,
+              "p95": 0.282624,
+              "peak": 0.28672
+            },
+            "cpuWorkMs": {
+              "mean": 4.963844666666668,
+              "p95": 6.608050000000054,
+              "peak": 14.075799999999955
+            }
+          }
+        ]
+      },
+      "product": {
+        "measurementPath": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261114-034546-nr-joint-nonlocal-80w-timing-c8b31a\\measure_overlay.py",
+        "measurementSha256": "208e52e3c974e5d38f5f0dd33e46776de2206de6c5b113003e45366a59d82ef3",
+        "sourceCommit": "01cc6b26e52d8d602aae1b75d7259a5da4f10dbd",
+        "placementReceiptSha256": "b8f57806e16929dc278bf406c53da3f9cd1f076ad1814dfbb4eb8b570adc7447",
+        "playerPath": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261114-032038-nr-joint-nonlocal-image-candidate-92047b\\AzurePlayer.exe",
+        "playerSha256": "15df1b4471f3592d038ef504b0ec32ca7a3cc9e71a86a03f240c5873e795312c",
+        "frozenArchiveSha256": "585d50ab8d4167f41617bc7db01f304f7c0525370d6f8e41404045e494421ffd",
+        "frozenInputs": 1729,
+        "sourceResultsSha256": "42fc8dba4c800981b82da5640bfb87273d0e365b5fc2cb894a4a06b129452cb5",
+        "displayDriver": "595.79",
+        "gpuPowerLimitWatts": 80.0,
+        "powerMode": "balanced",
+        "fanMode": "maximum",
+        "minimumObservedFanRpm": 5600,
+        "warmupFrames": 300,
+        "measuredFrames": 1800,
+        "gates": {
+          "gpuP95Ms": 16.6,
+          "cpuWorkP95Ms": 8,
+          "deviceLocalBytes": 1610612736,
+          "workingSetBytes": 2147483648,
+          "softwareThermalSlowdownSamples": 0
+        }
+      },
+      "recordedPreference": {
+        "before": {
+          "original": "381b4222-f694-41f0-9685-ff5bb260df2e",
+          "temporary": "c5d5a754-af66-4eaf-9bbe-317b34938927",
+          "values": {
+            "PERFEPP": {
+              "ac": 25,
+              "dc": 50
+            },
+            "PERFEPP1": {
+              "ac": 25,
+              "dc": 50
+            }
+          }
+        },
+        "ready": {
+          "active": "c5d5a754-af66-4eaf-9bbe-317b34938927",
+          "values": {
+            "PERFEPP": {
+              "ac": 50,
+              "dc": 50
+            },
+            "PERFEPP1": {
+              "ac": 50,
+              "dc": 50
+            }
+          },
+          "time": "2026-11-15T10:27:37.8688230+08:00"
+        },
+        "samples": 32,
+        "restored": {
+          "active": "381b4222-f694-41f0-9685-ff5bb260df2e",
+          "values": {
+            "PERFEPP": {
+              "ac": 25,
+              "dc": 50
+            },
+            "PERFEPP1": {
+              "ac": 25,
+              "dc": 50
+            }
+          },
+          "time": "2026-11-15T10:32:49.6634633+08:00"
+        }
+      },
+      "restoredFan": {
+        "time": "2026-11-15T10:32:48.7388450+08:00",
+        "rpm": 6000,
+        "balanced": true,
+        "automatic": true,
+        "maximum": false
+      },
+      "startupTemperaturesC": [
+        49.0,
+        48.0,
+        47.0
+      ],
+      "framePacing": {
+        "maximumRate": 60,
+        "presentMode": "FIFO",
+        "vsync": true,
+        "waitFrames": 2090,
+        "waitMilliseconds": 25972.982100000037
+      }
+    },
+    {
+      "dispatch": [
+        979,
+        "joint-80w-balanced-cpu-energy-preference-03",
+        "succeeded",
+        0
+      ],
+      "run": "20261115-100553-nr-joint-epp-repeat-03-1137fe",
+      "results": {
+        "scope": "isolated-nonlocal-material-images-1080p60",
+        "nonlocalAllocations": 224,
+        "nonlocalBytes": 1588625408,
+        "source": "01cc6b26e52d8d602aae1b75d7259a5da4f10dbd",
+        "driver": "595.79",
+        "warmup": 300,
+        "frames": 1800,
+        "gpuPowerLimitWatts": [
+          80.0
+        ],
+        "environmentFailures": [],
+        "peakTemperatureC": 82.0,
+        "observationCount": 105,
+        "softwareThermalSlowdownObservations": 0,
+        "timings": {
+          "frameMs": {
+            "mean": 15.947821777777778,
+            "p95": 16.4345472,
+            "peak": 16.753152
+          },
+          "sceneMs": {
+            "mean": 13.953768675555557,
+            "p95": 14.239744,
+            "peak": 14.419968
+          },
+          "shadowMs": {
+            "mean": 1.7204710222222221,
+            "p95": 2.1052239999999998,
+            "peak": 2.131456
+          },
+          "postProcessMs": {
+            "mean": 0.27358208,
+            "p95": 0.279552,
+            "peak": 0.285696
+          },
+          "cpuWorkMs": {
+            "mean": 5.278853777777777,
+            "p95": 7.523185000000052,
+            "peak": 18.211199999999995
+          }
+        },
+        "deviceLocalPeakBytes": 1442503488,
+        "workingSetPeakBytes": 2043510784,
+        "allocatorZero": true,
+        "gates": {
+          "fixed80W": true,
+          "thermalAndAC": true,
+          "gpuP95": true,
+          "cpuP95": true,
+          "deviceLocal": true,
+          "workingSet": true
+        },
+        "windows": [
+          {
+            "frameMs": {
+              "mean": 15.870702186666664,
+              "p95": 16.371430399999998,
+              "peak": 16.650304
+            },
+            "sceneMs": {
+              "mean": 13.88628992,
+              "p95": 14.120345599999998,
+              "peak": 14.316544
+            },
+            "shadowMs": {
+              "mean": 1.7119668266666668,
+              "p95": 2.095064,
+              "peak": 2.11984
+            },
+            "postProcessMs": {
+              "mean": 0.27244544,
+              "p95": 0.27648,
+              "peak": 0.279552
+            },
+            "cpuWorkMs": {
+              "mean": 5.225811333333333,
+              "p95": 7.352709999999989,
+              "peak": 16.56900000000007
+            }
+          },
+          {
+            "frameMs": {
+              "mean": 15.9326848,
+              "p95": 16.459296,
+              "peak": 16.699072
+            },
+            "sceneMs": {
+              "mean": 13.926987093333334,
+              "p95": 14.201907199999999,
+              "peak": 14.322688
+            },
+            "shadowMs": {
+              "mean": 1.7325559466666665,
+              "p95": 2.1060304,
+              "peak": 2.12896
+            },
+            "postProcessMs": {
+              "mean": 0.27314176,
+              "p95": 0.278528,
+              "peak": 0.280576
+            },
+            "cpuWorkMs": {
+              "mean": 5.326223000000002,
+              "p95": 7.226165000000024,
+              "peak": 18.211199999999995
+            }
+          },
+          {
+            "frameMs": {
+              "mean": 15.855746240000002,
+              "p95": 16.4397024,
+              "peak": 16.703712
+            },
+            "sceneMs": {
+              "mean": 13.857481386666665,
+              "p95": 14.2124544,
+              "peak": 14.348288
+            },
+            "shadowMs": {
+              "mean": 1.7262733866666666,
+              "p95": 2.1053824000000003,
+              "peak": 2.126208
+            },
+            "postProcessMs": {
+              "mean": 0.2719914666666667,
+              "p95": 0.278528,
+              "peak": 0.285696
+            },
+            "cpuWorkMs": {
+              "mean": 5.221042333333334,
+              "p95": 7.752044999999955,
+              "peak": 12.255099999999967
+            }
+          },
+          {
+            "frameMs": {
+              "mean": 15.992669546666669,
+              "p95": 16.4566576,
+              "peak": 16.731552
+            },
+            "sceneMs": {
+              "mean": 13.994246826666664,
+              "p95": 14.2223872,
+              "peak": 14.403584
+            },
+            "shadowMs": {
+              "mean": 1.72413408,
+              "p95": 2.1144735999999997,
+              "peak": 2.131456
+            },
+            "postProcessMs": {
+              "mean": 0.27428864,
+              "p95": 0.279552,
+              "peak": 0.282624
+            },
+            "cpuWorkMs": {
+              "mean": 5.375757,
+              "p95": 7.519860000000056,
+              "peak": 16.825399999999913
+            }
+          },
+          {
+            "frameMs": {
+              "mean": 16.00694976,
+              "p95": 16.349886400000003,
+              "peak": 16.65136
+            },
+            "sceneMs": {
+              "mean": 14.034879146666666,
+              "p95": 14.248652799999999,
+              "peak": 14.364672
+            },
+            "shadowMs": {
+              "mean": 1.6970788266666668,
+              "p95": 2.0981776,
+              "peak": 2.125088
+            },
+            "postProcessMs": {
+              "mean": 0.2749917866666667,
+              "p95": 0.280576,
+              "peak": 0.282624
+            },
+            "cpuWorkMs": {
+              "mean": 5.190385333333334,
+              "p95": 7.1892900000000015,
+              "peak": 9.936000000000114
+            }
+          },
+          {
+            "frameMs": {
+              "mean": 16.028178133333334,
+              "p95": 16.4779024,
+              "peak": 16.753152
+            },
+            "sceneMs": {
+              "mean": 14.022727680000001,
+              "p95": 14.2962688,
+              "peak": 14.419968
+            },
+            "shadowMs": {
+              "mean": 1.730817066666667,
+              "p95": 2.1068944,
+              "peak": 2.129152
+            },
+            "postProcessMs": {
+              "mean": 0.2746333866666667,
+              "p95": 0.280576,
+              "peak": 0.282624
+            },
+            "cpuWorkMs": {
+              "mean": 5.333903666666665,
+              "p95": 7.7528850000000045,
+              "peak": 12.851899999999949
+            }
+          }
+        ]
+      },
+      "product": {
+        "measurementPath": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261114-034546-nr-joint-nonlocal-80w-timing-c8b31a\\measure_overlay.py",
+        "measurementSha256": "208e52e3c974e5d38f5f0dd33e46776de2206de6c5b113003e45366a59d82ef3",
+        "sourceCommit": "01cc6b26e52d8d602aae1b75d7259a5da4f10dbd",
+        "placementReceiptSha256": "b8f57806e16929dc278bf406c53da3f9cd1f076ad1814dfbb4eb8b570adc7447",
+        "playerPath": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261114-032038-nr-joint-nonlocal-image-candidate-92047b\\AzurePlayer.exe",
+        "playerSha256": "15df1b4471f3592d038ef504b0ec32ca7a3cc9e71a86a03f240c5873e795312c",
+        "frozenArchiveSha256": "585d50ab8d4167f41617bc7db01f304f7c0525370d6f8e41404045e494421ffd",
+        "frozenInputs": 1729,
+        "sourceResultsSha256": "42fc8dba4c800981b82da5640bfb87273d0e365b5fc2cb894a4a06b129452cb5",
+        "displayDriver": "595.79",
+        "gpuPowerLimitWatts": 80.0,
+        "powerMode": "balanced",
+        "fanMode": "maximum",
+        "minimumObservedFanRpm": 5600,
+        "warmupFrames": 300,
+        "measuredFrames": 1800,
+        "gates": {
+          "gpuP95Ms": 16.6,
+          "cpuWorkP95Ms": 8,
+          "deviceLocalBytes": 1610612736,
+          "workingSetBytes": 2147483648,
+          "softwareThermalSlowdownSamples": 0
+        }
+      },
+      "recordedPreference": {
+        "before": {
+          "original": "381b4222-f694-41f0-9685-ff5bb260df2e",
+          "temporary": "1085f392-60f9-4b7f-9200-460cbfec5711",
+          "values": {
+            "PERFEPP": {
+              "ac": 25,
+              "dc": 50
+            },
+            "PERFEPP1": {
+              "ac": 25,
+              "dc": 50
+            }
+          }
+        },
+        "ready": {
+          "active": "1085f392-60f9-4b7f-9200-460cbfec5711",
+          "values": {
+            "PERFEPP": {
+              "ac": 50,
+              "dc": 50
+            },
+            "PERFEPP1": {
+              "ac": 50,
+              "dc": 50
+            }
+          },
+          "time": "2026-11-15T10:32:52.4279783+08:00"
+        },
+        "samples": 30,
+        "restored": {
+          "active": "381b4222-f694-41f0-9685-ff5bb260df2e",
+          "values": {
+            "PERFEPP": {
+              "ac": 25,
+              "dc": 50
+            },
+            "PERFEPP1": {
+              "ac": 25,
+              "dc": 50
+            }
+          },
+          "time": "2026-11-15T10:37:46.9195933+08:00"
+        }
+      },
+      "restoredFan": {
+        "time": "2026-11-15T10:37:45.9611518+08:00",
+        "rpm": 6000,
+        "balanced": true,
+        "automatic": true,
+        "maximum": false
+      },
+      "startupTemperaturesC": [
+        42.0,
+        41.0,
+        41.0
+      ],
+      "framePacing": {
+        "maximumRate": 60,
+        "presentMode": "FIFO",
+        "vsync": true,
+        "waitFrames": 2081,
+        "waitMilliseconds": 25536.15179999996
+      }
+    }
+  ],
+  "archive": {
+    "sha256": "de4bb402f83d544fe01f8e905a45fb7ac3c6f32fa5e445c7f6aa2add3da7cbbc",
+    "files": {
+      "archive_balanced_epp.py": "f57e754b1d574214d26f4d6d591d8a16b1d26ea92181c76935bd3b03257932bc",
+      "20261115-100552-nr-joint-epp-repeat-02-513bcb/budget.json": "6f68d5ac0a012172c9d1cdc85bf4e0d6aa62bd72dd0256b8b0e7a2c36cc49e70",
+      "20261115-100552-nr-joint-epp-repeat-02-513bcb/command.json": "6a12f2d926802795f871fc03563080a6170eb086f9ce8956ae28069545b03645",
+      "20261115-100552-nr-joint-epp-repeat-02-513bcb/cooling-control-preflight.json": "9cdfe1914d2fa01aeafee97ce4013bdfb9ffaa64678a2a03e257ad90ac464a43",
+      "20261115-100552-nr-joint-epp-repeat-02-513bcb/cooling-control-result-identity.json": "921b88173ea5fe3233622a81ef0f6c53edb99abe0b54bba8972f784080e4e5de",
+      "20261115-100552-nr-joint-epp-repeat-02-513bcb/environment.json": "df71c4a538e85acc7df0df229696b66abce8e4e1885ecdc02c3c42026fd777d8",
+      "20261115-100552-nr-joint-epp-repeat-02-513bcb/fan-before.json": "c975c86c12b63263a38121d5dcdf0ee8c9e7f9df1a52cf334d417e13cfdb264f",
+      "20261115-100552-nr-joint-epp-repeat-02-513bcb/fan-controller.stdout.log": "9af6287783ad30a67a6ad07816cd3cb397197c44de5149d38d94c1aae56b341d",
+      "20261115-100552-nr-joint-epp-repeat-02-513bcb/fan-controller.stderr.log": "7eb70257593da06f682a3ddda54a9d260d4fc514f645237f5ca74b08f8da61a6",
+      "20261115-100552-nr-joint-epp-repeat-02-513bcb/fan-observations.json": "cf68667654eef2c55114b3c32afad757a857e02792652545b2b9c2289d4a9496",
+      "20261115-100552-nr-joint-epp-repeat-02-513bcb/fan-ready.json": "320b70306347e47d33966be6937f1bfa83cacf0aa8330550b2c30c3e2ed51198",
+      "20261115-100552-nr-joint-epp-repeat-02-513bcb/fan-restored.json": "cc068edd7694130137ff1d7102161e4755667e08aa12e52e45dd9c3c94166244",
+      "20261115-100552-nr-joint-epp-repeat-02-513bcb/measure_overlay.py": "208e52e3c974e5d38f5f0dd33e46776de2206de6c5b113003e45366a59d82ef3",
+      "20261115-100552-nr-joint-epp-repeat-02-513bcb/measurement.log": "001150f935675232d2b1c7194d14cf0db148ebf498fd47e12e9ca9877ade6e4a",
+      "20261115-100552-nr-joint-epp-repeat-02-513bcb/measurement.stderr.log": "7eb70257593da06f682a3ddda54a9d260d4fc514f645237f5ca74b08f8da61a6",
+      "20261115-100552-nr-joint-epp-repeat-02-513bcb/observe_omen_performance.ps1": "4c9d6154a08dee647ce7aa2442f655d1a60c6933f4c5bee4d3beaf8ded44b147",
+      "20261115-100552-nr-joint-epp-repeat-02-513bcb/omen-performance-controls.json": "fa5baf9dbb7d32f40be6ebff75187c744785e58de88cb1230796a7261325c420",
+      "20261115-100552-nr-joint-epp-repeat-02-513bcb/player.log": "4a145ea6cc9ebd74919bac019617ed78125cab9697f8fafb7c01447a5476da25",
+      "20261115-100552-nr-joint-epp-repeat-02-513bcb/power-policy-before.json": "bd8fb86ba391b2dfaa00476243d6a45f7de580fc5af9c6aeaa82724459e36ef3",
+      "20261115-100552-nr-joint-epp-repeat-02-513bcb/power-policy-observations.json": "9fa28d82b7539006a04b03338c28989d46235b5963dd8e47c1afa6ef345cdd25",
+      "20261115-100552-nr-joint-epp-repeat-02-513bcb/power-policy-ready.json": "33803384e66267e92086e1b713a7be92a4b085a3fb4b51070ba26815a4398e67",
+      "20261115-100552-nr-joint-epp-repeat-02-513bcb/power-policy-restored.json": "1639cd15916bd840d9ea5c35253223560735f40d122df8b5c88749b901e36684",
+      "20261115-100552-nr-joint-epp-repeat-02-513bcb/prepare_max_fan_replay.py": "7c8964af8e77a5f5370fe63b5deeeb41d37dee3774adb5fa500c9ad6dafb71aa",
+      "20261115-100552-nr-joint-epp-repeat-02-513bcb/process-memory.json": "f4e439294c8a4f89c8c1e887c33a0a182c8a7525ab3b4b4d6abbabe4a1d096da",
+      "20261115-100552-nr-joint-epp-repeat-02-513bcb/process.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "20261115-100552-nr-joint-epp-repeat-02-513bcb/results.json": "77350387532299f1ae9c89154b8610666baff2759fb48f92ab2a34217bdcba23",
+      "20261115-100552-nr-joint-epp-repeat-02-513bcb/run_balanced_epp_measurement.ps1": "a4a6bd7d8cd2701120f829216e9dbbff4993d16450795ad6c5f105332d8c4e55",
+      "20261115-100552-nr-joint-epp-repeat-02-513bcb/run_max_fan_measurement.ps1": "f95893957e3ac428065c70f030bd0716617e6ae95d60bc0010a5825a0dcede73",
+      "20261115-100552-nr-joint-epp-repeat-02-513bcb/timing.csv": "e622fd1763e3c2047e7bb8163ed25f26cbe8155f5abe159d87352a31da8e0d15",
+      "20261115-100552-nr-joint-epp-repeat-02-513bcb/timing.json": "17d6dbdd1dcd61be8b32c553481a77bf4545ef20788a25c272c30dd63f7a1657",
+      "20261115-100553-nr-joint-epp-repeat-03-1137fe/budget.json": "48045801d5615f37eea86b58dad3e70c2719b5d42ec6d5efcf63a0e29e86c074",
+      "20261115-100553-nr-joint-epp-repeat-03-1137fe/command.json": "231493e70e5858c1a30cfec18af4356d11d32f5f3d3243baea6fe4bf4a47a2c6",
+      "20261115-100553-nr-joint-epp-repeat-03-1137fe/cooling-control-preflight.json": "9cdfe1914d2fa01aeafee97ce4013bdfb9ffaa64678a2a03e257ad90ac464a43",
+      "20261115-100553-nr-joint-epp-repeat-03-1137fe/cooling-control-result-identity.json": "2be78d13dea4bfbedade6c8b65c69cfad55e1daaed37f5aa4c036da345700b67",
+      "20261115-100553-nr-joint-epp-repeat-03-1137fe/environment.json": "7413714709fae9867e31308f0b71772b789e3fee4641c55d6134e9233d15e433",
+      "20261115-100553-nr-joint-epp-repeat-03-1137fe/fan-before.json": "13d9ffa43ae1d2805d37f164938a4690a2d99fe1b46f5300ab5e48aa3e192df6",
+      "20261115-100553-nr-joint-epp-repeat-03-1137fe/fan-controller.stdout.log": "197bb0860ef50c7c3198e02ed278d72119650f1c3220daca36d1e1fd41ba869a",
+      "20261115-100553-nr-joint-epp-repeat-03-1137fe/fan-controller.stderr.log": "7eb70257593da06f682a3ddda54a9d260d4fc514f645237f5ca74b08f8da61a6",
+      "20261115-100553-nr-joint-epp-repeat-03-1137fe/fan-observations.json": "3d06b616f81d2e855193a44ff11ea477bd065365a1231ddef5e6fbc186fc6ddb",
+      "20261115-100553-nr-joint-epp-repeat-03-1137fe/fan-ready.json": "3105292371b9402f425413ab25d1aa02241a9beaa5ce337014c528164589a6b1",
+      "20261115-100553-nr-joint-epp-repeat-03-1137fe/fan-restored.json": "39ddee145bcf10a522d060fc93fef1cabad2a91f5f6cf898b4897015a36880d2",
+      "20261115-100553-nr-joint-epp-repeat-03-1137fe/measure_overlay.py": "208e52e3c974e5d38f5f0dd33e46776de2206de6c5b113003e45366a59d82ef3",
+      "20261115-100553-nr-joint-epp-repeat-03-1137fe/measurement.log": "001150f935675232d2b1c7194d14cf0db148ebf498fd47e12e9ca9877ade6e4a",
+      "20261115-100553-nr-joint-epp-repeat-03-1137fe/measurement.stderr.log": "7eb70257593da06f682a3ddda54a9d260d4fc514f645237f5ca74b08f8da61a6",
+      "20261115-100553-nr-joint-epp-repeat-03-1137fe/observe_omen_performance.ps1": "4c9d6154a08dee647ce7aa2442f655d1a60c6933f4c5bee4d3beaf8ded44b147",
+      "20261115-100553-nr-joint-epp-repeat-03-1137fe/omen-performance-controls.json": "fa5baf9dbb7d32f40be6ebff75187c744785e58de88cb1230796a7261325c420",
+      "20261115-100553-nr-joint-epp-repeat-03-1137fe/player.log": "e5538ea3e4e1cec8927625756242177c68a4779eff8e983f92b55c9c27572413",
+      "20261115-100553-nr-joint-epp-repeat-03-1137fe/power-policy-before.json": "17bd35fc1cf89d6198cba1ca31919787151928910ffafdac2930a3ee50330f17",
+      "20261115-100553-nr-joint-epp-repeat-03-1137fe/power-policy-observations.json": "252bc54efbe5b68a365c2dedb36cf7b6687deb897905c10836927045d2ef2831",
+      "20261115-100553-nr-joint-epp-repeat-03-1137fe/power-policy-ready.json": "89dfb4157dbca80dd24bc657a6d7636b7cd9fe4506631a5abf959ccc61a9f616",
+      "20261115-100553-nr-joint-epp-repeat-03-1137fe/power-policy-restored.json": "947eb95b2109157d0161a827656c991d6551f66a3201141b06f108a9fd29dcc0",
+      "20261115-100553-nr-joint-epp-repeat-03-1137fe/prepare_max_fan_replay.py": "7c8964af8e77a5f5370fe63b5deeeb41d37dee3774adb5fa500c9ad6dafb71aa",
+      "20261115-100553-nr-joint-epp-repeat-03-1137fe/process-memory.json": "462a1464a6ef29af6451e192acd60dbf149027704eae5cf6dfd3a80870ce2109",
+      "20261115-100553-nr-joint-epp-repeat-03-1137fe/process.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "20261115-100553-nr-joint-epp-repeat-03-1137fe/results.json": "fd257695f0ba79443575ebddb4f6206132e3a1beab4ce86d1e6cda1ea73e297f",
+      "20261115-100553-nr-joint-epp-repeat-03-1137fe/run_balanced_epp_measurement.ps1": "a4a6bd7d8cd2701120f829216e9dbbff4993d16450795ad6c5f105332d8c4e55",
+      "20261115-100553-nr-joint-epp-repeat-03-1137fe/run_max_fan_measurement.ps1": "f95893957e3ac428065c70f030bd0716617e6ae95d60bc0010a5825a0dcede73",
+      "20261115-100553-nr-joint-epp-repeat-03-1137fe/timing.csv": "e35215443d8f9ca3274bb2f8f691b43a399bd552128cb10aa8ff340bee4df21d",
+      "20261115-100553-nr-joint-epp-repeat-03-1137fe/timing.json": "fc96ac53abdf063c74344449c2a7314759269ced2d47edc813e1b592a1716d4a"
+    }
+  }
+}
