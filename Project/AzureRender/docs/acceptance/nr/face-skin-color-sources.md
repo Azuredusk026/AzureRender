@@ -654,7 +654,15 @@ Intel 的距离场对照同样改变 23 个脸部像素。两处嘴角的误差�
 
 按位置与 UV 核对 Player 夹具时，34,176 个原生三角形有对应三角形，12 个的角点组合只出现在原生索引中，106 个需继续核对角点。仅原生索引含有的 12 个三角形复算覆盖 148 个像素，与本次绘制持有的 577 个皮肤像素无交集。角点待核对的覆盖与其中 20 个皮肤像素相交，包含色差取样点 [1274,523]。
 
-[网格与覆盖结果](evidence/2026-11-15/native-cloth-one-outline-topology/results.json)和[验证归档](evidence/2026-11-15/native-cloth-one-outline-topology/validation.zip)保存原生输出、候选资产和复算程序的指纹。第二层衣料和动态姿态继续按实际采集核对。
+[网格与覆盖结果](evidence/2026-11-15/native-cloth-one-outline-topology/results.json)和[验证归档](evidence/2026-11-15/native-cloth-one-outline-topology/validation.zip)保存原生输出、候选资产和复算程序的指纹。动态姿态继续按实际采集核对。
+
+## 第二层衣料及合成
+
+第二层衣料绘制 1116 的描边投影最大偏移为 0.966 像素，复算与原生输出的差值至多为 0.000071 像素。20,645 个三角形中有 19,448 个按位置与 UV 对应，待核对的 1,197 个与五处可见皮肤位置相交。
+
+原生描边顺序与定向衣料合并后，衣料区域超过八个色阶的像素在 NVIDIA 上为 2,640，在 Intel 上为 2,650。两块显卡的配对对照分别为 5,338 和 5,315。新增超过一个色阶的像素分别为 1,002 和 1,014；该候选未通过整帧门槛。
+
+[双层衣料与覆盖结果](evidence/2026-11-16/native-two-cloth-overlay-controls/results.json)和[验证归档](evidence/2026-11-16/native-two-cloth-overlay-controls/validation.zip)保存两层轮廓的原生指纹、配对图像指标及各设备实际采集清单。
 
 ## 多重采样接收边缘
 

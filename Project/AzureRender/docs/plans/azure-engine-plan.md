@@ -1425,3 +1425,5 @@ Intel 头发颜色继续按冻结区域核对纹理选级。
 [角色硬件分项](../acceptance/nr/evidence/2026-11-16/native-hair-lighting-lanes/results.json)、[体表法线](../acceptance/nr/evidence/2026-11-16/native-body-normal-raw-samples/results.json)和[虹膜眼影覆盖](../acceptance/nr/evidence/2026-11-16/iris-projective-covered/results.json)保存原生和 Player 双设备回读。角色严格颜色门槛继续验收。
 
 [固定姿态材质对照](../acceptance/nr/evidence/2026-11-16/fixed-pose-material-controls/results.json)核对身体主光饱和度、第一层衣料及皮肤图集深度。两个画面对照存在新增超差，角色生产颜色和覆盖按原门槛验收。
+
+[双层衣料与覆盖](../acceptance/nr/evidence/2026-11-16/native-two-cloth-overlay-controls/results.json)核对两个原生绘制与定向衣料合成，覆盖及新增误差按原门槛验收。

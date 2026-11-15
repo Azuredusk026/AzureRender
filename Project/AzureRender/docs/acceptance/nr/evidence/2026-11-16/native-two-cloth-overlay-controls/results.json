@@ -1,0 +1,785 @@
+{
+  "status": "measured; strict thresholds open",
+  "productionCompositionAccepted": false,
+  "topology": [
+    {
+      "event": 1079,
+      "fileSha256": {
+        "nvidia-1079-position.bin": "20e1d2b1d643097c86255b4563136f1de723b1c08f3cb579e90471cfa0348191",
+        "nvidia-1079-index.bin": "ee9dec6cf9021d71c8c60460c0e95aeccb06fe32a9eb0ae9631b133686c9ebf6",
+        "nvidia-1079-vs-cb0.bin": "04ac7183f0cf0853cc0484e799e35389d505116afb8ff4028e4124870ed02155",
+        "nvidia-1079-vs-cb1.bin": "30ed44bbe849bdb3a1cff0c94840eef52c79a6e412a126a3c7ee71d5546f8f55",
+        "nvidia-1079-vs-cb3.bin": "434722e4a0d403001e1ccb17b24dfd5c20aa987680d432bc4217450c7e89b322"
+      },
+      "triangleCompatibility": {
+        "2.5e-05": {
+          "unresolvedTriangles": 106,
+          "matchingTriangles": 34176,
+          "noCompatibleTriangles": 12,
+          "noCompatibleRasterized": 148,
+          "noCompatibleOwnedSkin": 0,
+          "unresolvedRasterized": 979,
+          "unresolvedOwnedSkin": 20,
+          "unresolvedSkinCoordinates": [
+            [
+              1177,
+              471
+            ],
+            [
+              1177,
+              472
+            ],
+            [
+              1177,
+              473
+            ],
+            [
+              1177,
+              474
+            ],
+            [
+              1177,
+              475
+            ],
+            [
+              1177,
+              476
+            ],
+            [
+              1177,
+              477
+            ],
+            [
+              1177,
+              478
+            ],
+            [
+              1177,
+              479
+            ],
+            [
+              1177,
+              480
+            ],
+            [
+              1178,
+              483
+            ],
+            [
+              1274,
+              523
+            ],
+            [
+              1276,
+              525
+            ],
+            [
+              1276,
+              526
+            ],
+            [
+              1276,
+              527
+            ],
+            [
+              1277,
+              527
+            ],
+            [
+              1277,
+              528
+            ],
+            [
+              1278,
+              529
+            ],
+            [
+              1279,
+              530
+            ],
+            [
+              1280,
+              531
+            ]
+          ]
+        },
+        "5e-05": {
+          "unresolvedTriangles": 106,
+          "matchingTriangles": 34176,
+          "noCompatibleTriangles": 12,
+          "noCompatibleRasterized": 148,
+          "noCompatibleOwnedSkin": 0,
+          "unresolvedRasterized": 979,
+          "unresolvedOwnedSkin": 20,
+          "unresolvedSkinCoordinates": [
+            [
+              1177,
+              471
+            ],
+            [
+              1177,
+              472
+            ],
+            [
+              1177,
+              473
+            ],
+            [
+              1177,
+              474
+            ],
+            [
+              1177,
+              475
+            ],
+            [
+              1177,
+              476
+            ],
+            [
+              1177,
+              477
+            ],
+            [
+              1177,
+              478
+            ],
+            [
+              1177,
+              479
+            ],
+            [
+              1177,
+              480
+            ],
+            [
+              1178,
+              483
+            ],
+            [
+              1274,
+              523
+            ],
+            [
+              1276,
+              525
+            ],
+            [
+              1276,
+              526
+            ],
+            [
+              1276,
+              527
+            ],
+            [
+              1277,
+              527
+            ],
+            [
+              1277,
+              528
+            ],
+            [
+              1278,
+              529
+            ],
+            [
+              1279,
+              530
+            ],
+            [
+              1280,
+              531
+            ]
+          ]
+        },
+        "0.0005": {
+          "unresolvedTriangles": 85,
+          "matchingTriangles": 34197,
+          "noCompatibleTriangles": 12,
+          "noCompatibleRasterized": 148,
+          "noCompatibleOwnedSkin": 0,
+          "unresolvedRasterized": 724,
+          "unresolvedOwnedSkin": 20,
+          "unresolvedSkinCoordinates": [
+            [
+              1177,
+              471
+            ],
+            [
+              1177,
+              472
+            ],
+            [
+              1177,
+              473
+            ],
+            [
+              1177,
+              474
+            ],
+            [
+              1177,
+              475
+            ],
+            [
+              1177,
+              476
+            ],
+            [
+              1177,
+              477
+            ],
+            [
+              1177,
+              478
+            ],
+            [
+              1177,
+              479
+            ],
+            [
+              1177,
+              480
+            ],
+            [
+              1178,
+              483
+            ],
+            [
+              1274,
+              523
+            ],
+            [
+              1276,
+              525
+            ],
+            [
+              1276,
+              526
+            ],
+            [
+              1276,
+              527
+            ],
+            [
+              1277,
+              527
+            ],
+            [
+              1277,
+              528
+            ],
+            [
+              1278,
+              529
+            ],
+            [
+              1279,
+              530
+            ],
+            [
+              1280,
+              531
+            ]
+          ]
+        }
+      },
+      "nativeVertices": 32021,
+      "nativeTriangles": 34294,
+      "candidateVertices": 32031,
+      "candidateTriangles": 34309,
+      "candidateSha256": "a183a03f38d40bc16a954aab92ed4f93f3171f1c54231ae989f9aefa1e2d2605",
+      "nativeShellOffsetPx": [
+        0.959945439169289,
+        0.9576856692803265
+      ],
+      "offsetFormulaResidualPx": [
+        2.315246820074983e-05,
+        7.517373422275817e-05
+      ],
+      "offsetFormulaPercentile99Px": [
+        1.637891051271344e-05,
+        3.183930539314616e-05
+      ],
+      "coordinateMapping": {
+        "identity": {
+          "uvMatched": 0,
+          "verified": 0,
+          "uniqueAuthoredAttributes": 0,
+          "geometryQuantiles": null,
+          "uvQuantiles": null,
+          "exactTrianglesByAttributes": 0,
+          "matchedTriangles": 0,
+          "indexIdentity": 0,
+          "nativeOnlyMatchedTriangles": 0
+        },
+        "flipV": {
+          "uvMatched": 31987,
+          "verified": 31887,
+          "uniqueAuthoredAttributes": 30546,
+          "geometryQuantiles": [
+            0.0,
+            1.3682520145332036e-07,
+            1.923277349166367e-05,
+            2.195684052739212e-05,
+            0.006609666639602397
+          ],
+          "uvQuantiles": [
+            0.0,
+            0.0,
+            2.9802322387695312e-08,
+            2.9802322387695312e-08,
+            8.083879947662354e-06
+          ],
+          "exactTrianglesByAttributes": 33910,
+          "matchedTriangles": 34117,
+          "indexIdentity": 697,
+          "nativeOnlyMatchedTriangles": 207
+        }
+      }
+    },
+    {
+      "event": 1116,
+      "fileSha256": {
+        "nvidia-1116-position.bin": "70c6c4d11428a3a60959ed17bc228d21df47eb6e5087a518feacce212ad307a6",
+        "nvidia-1116-index.bin": "9b4554ebc05ac8c9ee9ae4ef4a5e24e3d7be8b7b5735d464160b71a7c4f0ccea",
+        "nvidia-1116-vs-cb0.bin": "04ac7183f0cf0853cc0484e799e35389d505116afb8ff4028e4124870ed02155",
+        "nvidia-1116-vs-cb1.bin": "30ed44bbe849bdb3a1cff0c94840eef52c79a6e412a126a3c7ee71d5546f8f55",
+        "nvidia-1116-vs-cb3.bin": "e0a62249ed34264e6e1ec4fae7a5c5a788f35e1f33115d9610c25b2e8c79f1f2"
+      },
+      "triangleCompatibility": {
+        "2.5e-05": {
+          "unresolvedTriangles": 1197,
+          "matchingTriangles": 19448,
+          "noCompatibleTriangles": 0,
+          "noCompatibleRasterized": 0,
+          "noCompatibleOwnedSkin": 0,
+          "unresolvedRasterized": 43939,
+          "unresolvedOwnedSkin": 5,
+          "unresolvedSkinCoordinates": [
+            [
+              1314,
+              758
+            ],
+            [
+              1313,
+              759
+            ],
+            [
+              1312,
+              760
+            ],
+            [
+              1311,
+              761
+            ],
+            [
+              1310,
+              762
+            ]
+          ]
+        },
+        "5e-05": {
+          "unresolvedTriangles": 1179,
+          "matchingTriangles": 19466,
+          "noCompatibleTriangles": 0,
+          "noCompatibleRasterized": 0,
+          "noCompatibleOwnedSkin": 0,
+          "unresolvedRasterized": 43927,
+          "unresolvedOwnedSkin": 5,
+          "unresolvedSkinCoordinates": [
+            [
+              1314,
+              758
+            ],
+            [
+              1313,
+              759
+            ],
+            [
+              1312,
+              760
+            ],
+            [
+              1311,
+              761
+            ],
+            [
+              1310,
+              762
+            ]
+          ]
+        },
+        "0.0005": {
+          "unresolvedTriangles": 741,
+          "matchingTriangles": 19904,
+          "noCompatibleTriangles": 0,
+          "noCompatibleRasterized": 0,
+          "noCompatibleOwnedSkin": 0,
+          "unresolvedRasterized": 30377,
+          "unresolvedOwnedSkin": 3,
+          "unresolvedSkinCoordinates": [
+            [
+              1312,
+              760
+            ],
+            [
+              1311,
+              761
+            ],
+            [
+              1310,
+              762
+            ]
+          ]
+        }
+      },
+      "nativeVertices": 17538,
+      "nativeTriangles": 20645,
+      "candidateVertices": 17541,
+      "candidateTriangles": 20641,
+      "candidateSha256": "a183a03f38d40bc16a954aab92ed4f93f3171f1c54231ae989f9aefa1e2d2605",
+      "nativeShellOffsetPx": [
+        0.9643763813359979,
+        0.9656229882602437
+      ],
+      "offsetFormulaResidualPx": [
+        2.5687927205449653e-05,
+        7.0335403659264e-05
+      ],
+      "offsetFormulaPercentile99Px": [
+        1.602142363646738e-05,
+        5.1234387663815495e-05
+      ],
+      "coordinateMapping": {
+        "identity": {
+          "uvMatched": 0,
+          "verified": 0,
+          "uniqueAuthoredAttributes": 0,
+          "geometryQuantiles": null,
+          "uvQuantiles": null,
+          "exactTrianglesByAttributes": 0,
+          "matchedTriangles": 0,
+          "indexIdentity": 0,
+          "nativeOnlyMatchedTriangles": 0
+        },
+        "flipV": {
+          "uvMatched": 17534,
+          "verified": 16955,
+          "uniqueAuthoredAttributes": 16662,
+          "geometryQuantiles": [
+            0.0,
+            1.0490512728936019e-07,
+            1.6244072456651955e-05,
+            0.0011264611544188586,
+            0.028918470370827443
+          ],
+          "uvQuantiles": [
+            0.0,
+            0.0,
+            2.9802322387695312e-08,
+            2.9802322387695312e-08,
+            2.641230821609497e-06
+          ],
+          "exactTrianglesByAttributes": 19392,
+          "matchedTriangles": 19444,
+          "indexIdentity": 3966,
+          "nativeOnlyMatchedTriangles": 52
+        }
+      }
+    }
+  ],
+  "productionComposition": {
+    "status": "measured-combination",
+    "reference": "48afd6546c23cfa85099a765cc94ada4813a684538c695faf6d70d6daf2261b5",
+    "player": "1a30d925a674ddb1d95876cb80181106a0217e12a7228a35b5980b134954cb69",
+    "shaderPrograms": {
+      "sourceCommit": "4d9068b",
+      "source": "848201ae3869c47cb8fd11d412e3714804a433967c016da0d71ba8518a3cfb30",
+      "original": {
+        "mesh_object_lighting.frag.spv": "fa6538ed2b15c58924b1e499940b0499f7714909c2f6fa99afd5f2348ea96c3c",
+        "mesh_object_early_lighting.frag.spv": "1ccde95d9e44fd50b209c10b4d15f0a5fda3a48adcf71823a8834da6f3c2957b"
+      },
+      "candidate": {
+        "mesh_object_lighting.frag.spv": "65d66f65b33cc1374c31652d42397a93ae4b3cf44170cbfd7fbd61deac4c0201",
+        "mesh_object_early_lighting.frag.spv": "b430933fed373bf6ca3dd6df31685257f5381fa500df2821676c84db240f9f5f"
+      }
+    },
+    "nativeOrderAsset": {
+      "original": "0fa4c4e28ee6eeb16aec32a4470e546f5881889dfaf2708d63e10a93c2082516",
+      "candidate": "a183a03f38d40bc16a954aab92ed4f93f3171f1c54231ae989f9aefa1e2d2605",
+      "parent": "chr_0016_laevat_postmodel",
+      "outline": 331,
+      "cloth": 316,
+      "previousChildren": [
+        313,
+        314,
+        315,
+        316,
+        317,
+        318,
+        319,
+        320,
+        321,
+        322,
+        323,
+        324,
+        325,
+        312,
+        331
+      ],
+      "currentChildren": [
+        331,
+        313,
+        314,
+        315,
+        316,
+        317,
+        318,
+        319,
+        320,
+        321,
+        322,
+        323,
+        324,
+        325,
+        312
+      ],
+      "originalBytes": 95962077,
+      "candidateBytes": 95962077
+    },
+    "devices": {
+      "nvidia": {
+        "frames": {
+          "origin": "9677c040c5498bd3d1f60a7f73413a6b998fc178bdfae62e2cb60dc09e264b8b",
+          "nativeOrder": "87ceab9ca80473c86708c15f95f8e831b6d1179a23de36061b638a2c169b6993",
+          "packed": "20c9b9518a2c58f85157d3ff452d724337891f769024c1e82ea63d557836a17d",
+          "directional": "0fc8ee41084bbdb4319f6ae10418ddf0b3d702835c0001264472db99a2b5e8a3",
+          "directional-ordered": "179cbf099d3b21b756c6749e2ab31d06e1ffff35c334f3b2388e83118f7befa1"
+        },
+        "combinedChangedOutsideOriginalCloth": 58,
+        "combinedNewOverOne": 1002,
+        "combinedWitnessErrors": {
+          "1252,839": [
+            1,
+            1
+          ],
+          "1255,837": [
+            1,
+            1
+          ],
+          "1152,797": [
+            4,
+            2
+          ],
+          "1234,789": [
+            37,
+            5
+          ]
+        },
+        "changesFromPacked": 10456,
+        "newFrameOverOne": 1010,
+        "overOne": {
+          "origin": {
+            "event1018": 1052,
+            "event1383": 57,
+            "clothDirectionalControls": 30,
+            "wholeCloth1383": 18602
+          },
+          "nativeOrder": {
+            "event1018": 1052,
+            "event1383": 48,
+            "clothDirectionalControls": 30,
+            "wholeCloth1383": 18593
+          },
+          "packed": {
+            "event1018": 1052,
+            "event1383": 57,
+            "clothDirectionalControls": 30,
+            "wholeCloth1383": 18591
+          },
+          "directional": {
+            "event1018": 1052,
+            "event1383": 57,
+            "clothDirectionalControls": 16,
+            "wholeCloth1383": 17943
+          },
+          "directional-ordered": {
+            "event1018": 1052,
+            "event1383": 48,
+            "clothDirectionalControls": 16,
+            "wholeCloth1383": 17934
+          }
+        },
+        "overEight": {
+          "origin": {
+            "event1018": 48,
+            "event1383": 56,
+            "clothDirectionalControls": 30,
+            "wholeCloth1383": 5338
+          },
+          "nativeOrder": {
+            "event1018": 48,
+            "event1383": 5,
+            "clothDirectionalControls": 30,
+            "wholeCloth1383": 5287
+          },
+          "packed": {
+            "event1018": 48,
+            "event1383": 56,
+            "clothDirectionalControls": 28,
+            "wholeCloth1383": 5105
+          },
+          "directional": {
+            "event1018": 48,
+            "event1383": 56,
+            "clothDirectionalControls": 11,
+            "wholeCloth1383": 2693
+          },
+          "directional-ordered": {
+            "event1018": 48,
+            "event1383": 3,
+            "clothDirectionalControls": 11,
+            "wholeCloth1383": 2640
+          }
+        },
+        "maxAtControls": {
+          "origin": 39,
+          "nativeOrder": 39,
+          "packed": 39,
+          "directional": 19,
+          "directional-ordered": 19
+        }
+      },
+      "intel": {
+        "frames": {
+          "origin": "d9e4765f29878ee57f4330a5403ce44bd6d726fdb22f9a8aed08b115c78cb8b9",
+          "nativeOrder": "6f133cc93ac4edb5309c5c852c22eee8ec8e05cb48070d49c980b343d7cfac47",
+          "packed": "809704ae7cbd2b62ef83eb783323eec5a4b934eb0a5d4935e2d7a3336c5172f7",
+          "directional": "318b9e0a8d3fcd9d9abc5378c55d19c7b86f227cf14ede9186f361861789b159",
+          "directional-ordered": "fea92556df9c41c527d8bd45ab3901d8945895d3289cf72c83b9dcc5d4c5f6d3"
+        },
+        "combinedChangedOutsideOriginalCloth": 58,
+        "combinedNewOverOne": 1014,
+        "combinedWitnessErrors": {
+          "1252,839": [
+            2,
+            2
+          ],
+          "1255,837": [
+            2,
+            2
+          ],
+          "1152,797": [
+            4,
+            2
+          ],
+          "1234,789": [
+            36,
+            5
+          ]
+        },
+        "changesFromPacked": 10437,
+        "newFrameOverOne": 1027,
+        "overOne": {
+          "origin": {
+            "event1018": 1052,
+            "event1383": 57,
+            "clothDirectionalControls": 30,
+            "wholeCloth1383": 18944
+          },
+          "nativeOrder": {
+            "event1018": 1052,
+            "event1383": 51,
+            "clothDirectionalControls": 30,
+            "wholeCloth1383": 18938
+          },
+          "packed": {
+            "event1018": 1052,
+            "event1383": 57,
+            "clothDirectionalControls": 30,
+            "wholeCloth1383": 18927
+          },
+          "directional": {
+            "event1018": 1052,
+            "event1383": 57,
+            "clothDirectionalControls": 16,
+            "wholeCloth1383": 18283
+          },
+          "directional-ordered": {
+            "event1018": 1052,
+            "event1383": 51,
+            "clothDirectionalControls": 16,
+            "wholeCloth1383": 18277
+          }
+        },
+        "overEight": {
+          "origin": {
+            "event1018": 49,
+            "event1383": 56,
+            "clothDirectionalControls": 30,
+            "wholeCloth1383": 5315
+          },
+          "nativeOrder": {
+            "event1018": 49,
+            "event1383": 5,
+            "clothDirectionalControls": 30,
+            "wholeCloth1383": 5264
+          },
+          "packed": {
+            "event1018": 49,
+            "event1383": 56,
+            "clothDirectionalControls": 28,
+            "wholeCloth1383": 5084
+          },
+          "directional": {
+            "event1018": 49,
+            "event1383": 56,
+            "clothDirectionalControls": 11,
+            "wholeCloth1383": 2703
+          },
+          "directional-ordered": {
+            "event1018": 49,
+            "event1383": 3,
+            "clothDirectionalControls": 11,
+            "wholeCloth1383": 2650
+          }
+        },
+        "maxAtControls": {
+          "origin": 39,
+          "nativeOrder": 39,
+          "packed": 39,
+          "directional": 19,
+          "directional-ordered": 19
+        }
+      }
+    }
+  },
+  "archive": {
+    "sha256": "b8d19cca8ea5902fb2d89c227184e4d0b28712c716b03a5881c5b33658e25135",
+    "members": {
+      "native/results.json": "b96d5d53c4c365ee9144645764cd7b2448bf5b1a2b0b8ebadf9dc5905f2fee22",
+      "native/request.json": "02ee3f5698b0abaab6de27e82a5d0212f707409f38243305825deb25e35a9fcc",
+      "body-native-cloth-outline-topology.json": "09d00e33e0dd58e392ad518fcfd2f15b4fba8a9a64581f711cf57c6bed3ba585",
+      "archive-native-two-cloth-overlay.py": "36b166cb59f49199e996b7c40b17d01d7a35ac0f5e02193139f30744f5f37fc9",
+      "score.py": "6519b10b1604496d235cef3f7985e6ae3168f6dc0e28cf55374c0227b6321217",
+      "composition/results.json": "931a302ef7e755349b63b1d94d145ea00837363addaec68062fa2e8ebab455e6",
+      "composition/preflight.json": "7eebba104ac7b3da54b03f5f4d9cd7351409d34d3776ef9f2c67cf4be4c5c684",
+      "composition.py": "a8c621367b8130ff821507207bc0f2710722cbd2b63474952ef3a5015c739ab6",
+      "composition/packed-nvidia/capture_manifest.json": "1085f4be92b334f382edd4e478544e16cc19745a1b3385e190457f527ba76160",
+      "composition/packed-nvidia/gpu_capabilities.json": "93c9fb29461fae11a7e57d4e49112071a71940dee571f1f6696ffbf03c392879",
+      "composition/directional-nvidia/capture_manifest.json": "3f914fc5a020aa90e3f5d4591c9727178be5dba8de9464d923f98023e1838b25",
+      "composition/directional-nvidia/gpu_capabilities.json": "93c9fb29461fae11a7e57d4e49112071a71940dee571f1f6696ffbf03c392879",
+      "composition/directional-ordered-nvidia/capture_manifest.json": "55b75fbeff9028a7f26767987db31717dc94d548a99c5f815b8a892eaba89c91",
+      "composition/directional-ordered-nvidia/gpu_capabilities.json": "93c9fb29461fae11a7e57d4e49112071a71940dee571f1f6696ffbf03c392879",
+      "composition/packed-intel/capture_manifest.json": "4a86b3ea06827dadd086a63b55751b1f04cd6db7862a8e8a317ed9b8de43ac29",
+      "composition/packed-intel/gpu_capabilities.json": "a38eaca3509b417cfe23614fe415bd9ccc5622fc682d8623142cdeb7dc3d85cc",
+      "composition/directional-intel/capture_manifest.json": "4e74f1bf243eb41ce56f2b893eda078b61c6e5d744b19eb864929af06aa7d8b0",
+      "composition/directional-intel/gpu_capabilities.json": "a38eaca3509b417cfe23614fe415bd9ccc5622fc682d8623142cdeb7dc3d85cc",
+      "composition/directional-ordered-intel/capture_manifest.json": "8f41ba6de10c5b7c71479fc22e1bb64adcb3d10a2de49c0c30b7d0f63823158b",
+      "composition/directional-ordered-intel/gpu_capabilities.json": "a38eaca3509b417cfe23614fe415bd9ccc5622fc682d8623142cdeb7dc3d85cc"
+    }
+  }
+}
