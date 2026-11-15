@@ -100,6 +100,12 @@
       "results": "docs/acceptance/nr/evidence/2026-11-15/joint-80w-maximum-fan/results.json"
     },
     {
+      "path": "runs/20261115-092507-nr-joint-player-cpu-efficiency-8b5dd2",
+      "name": "联合场景进程级 CPU 节能对照",
+      "evidence": "docs/acceptance/nr/joint-nonlocal-texture-placement.md#进程级-cpu-节能对照",
+      "results": "docs/acceptance/nr/evidence/2026-11-15/joint-80w-player-cpu-efficiency/results.json"
+    },
+    {
       "path": "runs/20261114-173220-nr-shader-host-compiler-concurrency-d140b8",
       "name": "编辑器加载与目录规模诊断",
       "evidence": "docs/acceptance/nr/registered-gpu-infrastructure.md",
