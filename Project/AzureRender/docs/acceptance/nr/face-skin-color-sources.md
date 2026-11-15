@@ -402,6 +402,16 @@ NVIDIA 画面颜色误差最大的十二处，在 Intel 法线视图中的角差
 
 [最终覆盖结果](evidence/2026-11-15/body-outline-remaining-draw-ownership/results.json)和[验证归档](evidence/2026-11-15/body-outline-remaining-draw-ownership/validation.zip)记录原生颜色附件、双设备逐点颜色及捕获指纹。
 
+### 透明衣料覆盖点照明
+
+原生事件 1383 的四个片元使用 `ResourceId::141925` 读回硬件颜色和混合前后的附件。四处的实测 Alpha 与片元跟踪逐位一致，混合复算与实际附件的最大线性误差低于 0.004。
+
+坐标 `[1252,839]` 和 `[1255,837]` 的跟踪红通道分别有 97.81% 和 97.57% 来自主光漫反射，两处的材质轮廓光贡献为零。坐标 `[1234,789]` 的材质轮廓光贡献为 `[0.12159, 0.01133, 0.01133]`。
+
+独立衣料朝向夹具在两块显卡上的四处峰差均为三个、一个、两个和五个色阶。原始描边姿态、服装参数与两项照明贡献继续在同一画面复测。
+
+[衣料覆盖照明结果](evidence/2026-11-15/body-late-cloth-native-components/results.json)和[验证归档](evidence/2026-11-15/body-late-cloth-native-components/validation.zip)保存原生片元寄存器、混合值及独立夹具的对照。
+
 ### 描边径向参考点
 
 固定姿态描边材质通过 `nprDiffuse.rimOrigin.node` 绑定模型节点 `CapturedBodyOrigin`。原生事件 1018 的六个硬件片元使用同一水平位置 `[-0.0489501953125, 0.0535888671875]`。坐标对应节点的 X 和 Z 分量。

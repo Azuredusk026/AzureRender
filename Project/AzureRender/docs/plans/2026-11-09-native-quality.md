@@ -208,6 +208,7 @@ Intel 头发颜色继续核对纹理梯度与层级选择。
 角色固定姿态按[脸部与体表区域验收](../acceptance/nr/face-skin-color-sources.md)记录纹理、照明、描边和透明衣料的来源。
 [完整皮肤区域对照](../acceptance/nr/evidence/2026-11-15/body-skin-coverage-composition/results.json)按原生绘制归属核对 47,458 个位置。描边局部光通过双设备区域结构相似度和中位亮度门槛，完整颜色继续按一字节门槛验收。
 [描边径向参考点](../acceptance/nr/evidence/2026-11-15/body-outline-native-rim-origin/results.json)通过双设备姿态实测，覆盖之外逐像素一致。描边保留区在 NVIDIA 和 Intel 上分别有 48 和 49 处超过八个色阶。
+[衣料覆盖照明](../acceptance/nr/evidence/2026-11-15/body-late-cloth-native-components/results.json)核对原生四个硬件片元。两处峰差的原生红通道以主光漫反射为主，独立衣料夹具与描边配置继续联合复测。
 
 [脸部正式材质对照](../acceptance/nr/evidence/2026-11-15/public-face-receiver-depth-and-mask/results.json)核对距离场遮罩选层、发影最近片元乘色与同驱动默认四帧。全脸一字节门槛和原始冻结参考保持开放。
 脸部按主光饱和度、视角染色与局部灯光分项核对。

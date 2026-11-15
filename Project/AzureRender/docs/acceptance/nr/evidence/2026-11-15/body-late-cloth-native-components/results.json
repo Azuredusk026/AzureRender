@@ -1,0 +1,576 @@
+{
+  "status": "measured-native-late-cloth-components",
+  "colorSpace": "linear exposure 0.25",
+  "sourceTrace": "280a4c7cf30ab71cc718ca47f316dccc063c137ead97c7a608f957dc5e0fbc54",
+  "reference": "48afd6546c23cfa85099a765cc94ada4813a684538c695faf6d70d6daf2261b5",
+  "witnesses": [
+    {
+      "point": [
+        1252,
+        839
+      ],
+      "primitive": 2980,
+      "alpha": 0.8985427618026733,
+      "shader": [
+        0.2824942171573639,
+        0.08944223821163177,
+        0.16396380960941315
+      ],
+      "normalDotView": 0.9036247134208679,
+      "nativeBefore": [
+        0.0732421875,
+        0.0556640625,
+        0.056640625
+      ],
+      "nativeAfter": [
+        0.2578125,
+        0.0859375,
+        0.15234375
+      ],
+      "blendPredicted": [
+        0.26126408414114266,
+        0.0860151977925856,
+        0.15307509570440025
+      ],
+      "blendRoundingPeak": 0.0034515841411426607,
+      "reference": [
+        139,
+        83,
+        109
+      ],
+      "beforeDisplay": [
+        77,
+        67,
+        67
+      ],
+      "afterDisplay": [
+        139,
+        83,
+        109
+      ],
+      "traceOutput": [
+        0.283462792634964,
+        0.09053163975477219,
+        0.16530868411064148
+      ],
+      "traceToHardwarePeak": 0.0013448745012283325,
+      "primaryDiffuseRedFraction": 0.9781266398028562,
+      "nativeComponents": {
+        "mainDiffuse": [
+          0.27726250886917114,
+          0.08566098660230637,
+          0.1610012948513031
+        ],
+        "mainSpecular": [
+          0.0045939721167087555,
+          0.0031859062146395445,
+          0.002227333839982748
+        ],
+        "mainSaturation": [
+          0.0002470575273036957,
+          -7.823179475963116e-05,
+          4.7134701162576675e-05
+        ],
+        "directionalRim": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "indirectSpecular": [
+          0.0017039719539513887,
+          0.0018536659176001669,
+          0.0022163033517845765
+        ],
+        "localLights": [
+          -0.0003447234630584717,
+          -9.068846702575684e-05,
+          -0.0001833885908126831
+        ],
+        "colorAdjustment": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "materialRim": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "fogAndExposure": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "players": {
+        "nvidia": {
+          "outlineOrigin": {
+            "color": [
+              82,
+              67,
+              67
+            ],
+            "peak": 57
+          },
+          "clothDirectional": {
+            "color": [
+              140,
+              80,
+              107
+            ],
+            "peak": 3
+          }
+        },
+        "intel": {
+          "outlineOrigin": {
+            "color": [
+              82,
+              67,
+              67
+            ],
+            "peak": 57
+          },
+          "clothDirectional": {
+            "color": [
+              140,
+              80,
+              107
+            ],
+            "peak": 3
+          }
+        }
+      }
+    },
+    {
+      "point": [
+        1255,
+        837
+      ],
+      "primitive": 2980,
+      "alpha": 0.8721904158592224,
+      "shader": [
+        0.2544601261615753,
+        0.06896516680717468,
+        0.14179867506027222
+      ],
+      "normalDotView": 0.8833540678024292,
+      "nativeBefore": [
+        0.04931640625,
+        0.0166015625,
+        0.010986328125
+      ],
+      "nativeAfter": [
+        0.2265625,
+        0.06201171875,
+        0.125
+      ],
+      "blendPredicted": [
+        0.22824079263058472,
+        0.062272596316562456,
+        0.12507960339799595
+      ],
+      "blendRoundingPeak": 0.0016782926305847212,
+      "reference": [
+        131,
+        70,
+        99
+      ],
+      "beforeDisplay": [
+        63,
+        35,
+        27
+      ],
+      "afterDisplay": [
+        131,
+        70,
+        99
+      ],
+      "traceOutput": [
+        0.2554911673069,
+        0.0701289251446724,
+        0.14325568079948425
+      ],
+      "traceToHardwarePeak": 0.0014570057392120361,
+      "primaryDiffuseRedFraction": 0.9756636670068487,
+      "nativeComponents": {
+        "mainDiffuse": [
+          0.24927344918251038,
+          0.06494370847940445,
+          0.138668030500412
+        ],
+        "mainSpecular": [
+          0.004635542631149292,
+          0.003153435653075576,
+          0.0022276020608842373
+        ],
+        "mainSaturation": [
+          0.0,
+          2.3283064365386963e-10,
+          2.3283064365386963e-09
+        ],
+        "directionalRim": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "indirectSpecular": [
+          0.0019303456671891928,
+          0.002103950620630707,
+          0.002534603896085841
+        ],
+        "localLights": [
+          -0.00034818053245544434,
+          -7.21663236618042e-05,
+          -0.00017455220222473145
+        ],
+        "colorAdjustment": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "materialRim": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "fogAndExposure": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "players": {
+        "nvidia": {
+          "outlineOrigin": {
+            "color": [
+              69,
+              35,
+              24
+            ],
+            "peak": 75
+          },
+          "clothDirectional": {
+            "color": [
+              132,
+              70,
+              99
+            ],
+            "peak": 1
+          }
+        },
+        "intel": {
+          "outlineOrigin": {
+            "color": [
+              70,
+              34,
+              24
+            ],
+            "peak": 75
+          },
+          "clothDirectional": {
+            "color": [
+              132,
+              70,
+              99
+            ],
+            "peak": 1
+          }
+        }
+      }
+    },
+    {
+      "point": [
+        1152,
+        797
+      ],
+      "primitive": 900,
+      "alpha": 0.766948938369751,
+      "shader": [
+        0.297353059053421,
+        0.06660706549882889,
+        0.12446460127830505
+      ],
+      "normalDotView": 0.5313351154327393,
+      "nativeBefore": [
+        0.05078125,
+        0.020263671875,
+        0.014892578125
+      ],
+      "nativeAfter": [
+        0.23828125,
+        0.0556640625,
+        0.09765625
+      ],
+      "blendPredicted": [
+        0.2398892371854302,
+        0.05580668841524705,
+        0.09892872495745308
+      ],
+      "blendRoundingPeak": 0.0016079871854302041,
+      "reference": [
+        134,
+        67,
+        88
+      ],
+      "beforeDisplay": [
+        64,
+        39,
+        33
+      ],
+      "afterDisplay": [
+        134,
+        67,
+        88
+      ],
+      "traceOutput": [
+        0.29742881655693054,
+        0.06668003648519516,
+        0.12443967163562775
+      ],
+      "traceToHardwarePeak": 7.575750350952148e-05,
+      "primaryDiffuseRedFraction": 0.9101590121497326,
+      "nativeComponents": {
+        "mainDiffuse": [
+          0.27070751786231995,
+          0.06223050132393837,
+          0.12091823667287827
+        ],
+        "mainSpecular": [
+          0.0022351781371980906,
+          0.001212618313729763,
+          0.000966508174315095
+        ],
+        "mainSaturation": [
+          -3.958120942115784e-09,
+          -2.7939677238464355e-09,
+          3.4924596548080444e-09
+        ],
+        "directionalRim": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "indirectSpecular": [
+          0.0013826448769461708,
+          0.0013939435271077827,
+          0.0015705823976392974
+        ],
+        "localLights": [
+          -0.003999173641204834,
+          -0.0006833821535110474,
+          -0.001542016863822937
+        ],
+        "colorAdjustment": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "materialRim": [
+          0.027102649211883545,
+          0.0025263577699661255,
+          0.0025263577699661255
+        ],
+        "fogAndExposure": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "players": {
+        "nvidia": {
+          "outlineOrigin": {
+            "color": [
+              70,
+              38,
+              29
+            ],
+            "peak": 64
+          },
+          "clothDirectional": {
+            "color": [
+              134,
+              68,
+              90
+            ],
+            "peak": 2
+          }
+        },
+        "intel": {
+          "outlineOrigin": {
+            "color": [
+              70,
+              38,
+              29
+            ],
+            "peak": 64
+          },
+          "clothDirectional": {
+            "color": [
+              134,
+              68,
+              90
+            ],
+            "peak": 2
+          }
+        }
+      }
+    },
+    {
+      "point": [
+        1234,
+        789
+      ],
+      "primitive": 1207,
+      "alpha": 0.8056610822677612,
+      "shader": [
+        0.2129947990179062,
+        0.02861410565674305,
+        0.053291160613298416
+      ],
+      "normalDotView": -0.055762507021427155,
+      "nativeBefore": [
+        0.0810546875,
+        0.04296875,
+        0.03125
+      ],
+      "nativeAfter": [
+        0.185546875,
+        0.03125,
+        0.048828125
+      ],
+      "blendPredicted": [
+        0.1873537005400454,
+        0.03140377170284281,
+        0.049007705314147554
+      ],
+      "blendRoundingPeak": 0.0018068255400454092,
+      "reference": [
+        119,
+        49,
+        62
+      ],
+      "beforeDisplay": [
+        80,
+        58,
+        49
+      ],
+      "afterDisplay": [
+        119,
+        49,
+        62
+      ],
+      "traceOutput": [
+        0.21189936995506287,
+        0.02732955850660801,
+        0.05167265981435776
+      ],
+      "traceToHardwarePeak": 0.0016185007989406586,
+      "primaryDiffuseRedFraction": 0.40815857526754307,
+      "nativeComponents": {
+        "mainDiffuse": [
+          0.08648854494094849,
+          0.012819761410355568,
+          0.037104152143001556
+        ],
+        "mainSpecular": [
+          0.001462816260755062,
+          0.0008089903858490288,
+          0.0007778927101753652
+        ],
+        "mainSaturation": [
+          9.313225746154785e-10,
+          -7.566995918750763e-10,
+          5.820766091346741e-11
+        ],
+        "directionalRim": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "indirectSpecular": [
+          0.0023542721393030597,
+          0.002366532637216534,
+          0.0024563415035429026
+        ],
+        "localLights": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "colorAdjustment": [
+          0.0,
+          -3.725290298461914e-09,
+          -3.725290298461914e-09
+        ],
+        "materialRim": [
+          0.12159373611211777,
+          0.011334279552102089,
+          0.01133427768945694
+        ],
+        "fogAndExposure": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "players": {
+        "nvidia": {
+          "outlineOrigin": {
+            "color": [
+              82,
+              43,
+              61
+            ],
+            "peak": 37
+          },
+          "clothDirectional": {
+            "color": [
+              120,
+              52,
+              67
+            ],
+            "peak": 5
+          }
+        },
+        "intel": {
+          "outlineOrigin": {
+            "color": [
+              83,
+              43,
+              61
+            ],
+            "peak": 36
+          },
+          "clothDirectional": {
+            "color": [
+              120,
+              52,
+              67
+            ],
+            "peak": 5
+          }
+        }
+      }
+    }
+  ],
+  "archive": {
+    "sha256": "292f5aaf8cdbd23554851a543675745f24f385c9e72310c24e9019c758dd5e86",
+    "members": {
+      "archive-body-native-late-cloth-components.py": "64243b0fc738d9f97a65077e37a7e4c6be5dbdeddeddc8ba7a2e597dafb19e6f",
+      "body-native-late-cloth-components.py": "95464ccb7d431d15eb8e673f91cdced7c7d8960a84821eec97931d6cd5e10aa7",
+      "body-native-late-cloth-traces.py": "692b12e1a3e7d3b988df5974cc503e84ab2c394479caa72aec526a07c79cd2cb",
+      "component-analysis.json": "81956b5333c16b708abaf9fc06f5f97f546021395dead6f37fd4ed5a04ab5655",
+      "request.json": "ea67c269b340244971251a2670f8c4510830a1fc2f5b7e9a35fb73504709e03e",
+      "results.json": "280a4c7cf30ab71cc718ca47f316dccc063c137ead97c7a608f957dc5e0fbc54",
+      "registers/e1383-1252-839-2980.json": "20f07797a4abf75149092b44ef0cb33a7941fc0877fc2d21e2accb491aab8410",
+      "registers/e1383-1255-837-2980.json": "d369a69899282dca6662c9635399960d13c6ee5f63e21a0476bbec50b2e0e495",
+      "registers/e1383-1152-797-900.json": "03736eb9ff3a7eaebb7185e756d0c6887dd64c9e19e787a6a580d8d0cc592bc2",
+      "registers/e1383-1234-789-1207.json": "471845c4f9ddc2e3555e5a685189af9ccd0dad50878fe5ba6de42872ce65248e",
+      "nvidia/cloth-directional.json": "204c9c40773019ff0d2d40f12ed07e0c712da049c2063eb9ce0843ebf85d0791",
+      "nvidia/outline-origin.json": "5bfa57bf1f7349bf34e5c1ade99068836958f02cfefbb20c17a2eb28fa6b917e",
+      "intel/cloth-directional.json": "d5b3d224eda3cd6d596aede3b1269608f9d7709700f3e15b11562fb4565c5e76",
+      "intel/outline-origin.json": "6c766a118a04a52b54bc125a4f06f70fe676dc269b4e44aa80d6bd1fdb04321c"
+    }
+  },
+  "qualification": "source-and-independent-player-fixtures"
+}
