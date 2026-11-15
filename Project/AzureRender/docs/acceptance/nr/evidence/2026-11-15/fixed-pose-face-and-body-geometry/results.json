@@ -328,15 +328,25 @@
       }
     }
   },
+  "faceOpaqueBase": {
+    "knownPrimitives": 12,
+    "sharedResidualPrimitives": 49,
+    "selectedMipDifferences": 0,
+    "modeledLinearBasePeak": 0.001043153546363862
+  },
   "frozenReference": "48afd6546c23cfa85099a765cc94ada4813a684538c695faf6d70d6daf2261b5",
   "archive": {
-    "sha256": "4e5659f213deabb41199e51e064d4a7ef180f47bde0179b1cbae98264c9da45d",
+    "sha256": "4d0dea41aa3da0e4ab040cf702cc49688b14dd6a0f544c62e26b61a097c53184",
     "members": {
-      "archive-fixed-pose-face-and-body-geometry.py": "d699212d2fab2720ad3885a61d676633280255c771c087c66e84c798287e535b",
+      "archive-fixed-pose-face-and-body-geometry.py": "a3a33bbfac6353471d8f4ae8ff24e5abd6e5f170e8990d5aadc1c23f9a985585",
       "score-fixed-pose-face-and-body-geometry.py": "19328072124f0f03c1e7d1d6c444b7c5c372fd1675ee6ca5d92327faff2ebd39",
       "fixed-pose-face-and-body-geometry.json": "5c2706dba054fead191a7c8dcdb8e29661904127e75b7b24c58c445923d13190",
       "score-native-body-contour-stage-controls.py": "a67c3f95d2b523638bccdf3f8c189de50b03f234b232549527c2bf4eb9e5172e",
       "body-contour-raw-stage-controls.json": "e32828cdb1bdb4a8945a61af507ab1db1a7dbdeb55cb92fc270d922771613577",
+      "score-face-opaque-primitive-residuals.py": "8d673f30b2604f36879e56cda4bcb5d7ac191a6cc6eff661f6ea9f8ea1a7d142",
+      "face-opaque-primitive-residuals.json": "f62efd3c8a19a78462101b2d8a24de673e1a41d10f0dfa5c7623318b2d4ca4da",
+      "score-face-projection-base-texture.py": "7ce2d8823a2fe380c3c873199023345cc3d703aceb428366400e1459056ad7f5",
+      "face-opaque-projection-texture-controls.json": "dcfd1e85e3afbe0a297b5b86da2f3fd52af4fad20a5fd2da5c29fcbf3ffa1c3b",
       "nvidia/frames/capture_manifest.json": "054bb8de6d9c1d7718acddaf10322816112f6d17694df2a78aa684461af0c474",
       "intel/frames/capture_manifest.json": "b30a905dd83cf90ad1c2385dc7f9407be52bb5e1adee22c74b51d0808022121f"
     }
