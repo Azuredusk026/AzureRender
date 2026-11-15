@@ -223,6 +223,8 @@ Intel 头发颜色继续核对纹理梯度与层级选择。
 硬依赖以具体输入、负责人和重试条件登记。
 整体完成状态由全部适用门禁共同决定。
 
+[原生地面画面对照](../acceptance/nr/evidence/2026-11-16/joint-scene-native-floor/results.json)核对原生第 3534 帧、辐照体开关和两种屏幕反射路径。中央地面与青色环带继续按 0.95 的门槛验收。
+
 角色固定姿态按[脸部与体表区域验收](../acceptance/nr/face-skin-color-sources.md)记录纹理、照明、描边和透明衣料的来源。
 [固定姿态网格与轮廓](../acceptance/nr/evidence/2026-11-15/fixed-pose-face-and-body-geometry/results.json)核对身体顶点、脸部索引和同机位的覆盖复算。固定姿态的剩余色差及六视图按各自门槛验收。
 [完整皮肤区域对照](../acceptance/nr/evidence/2026-11-15/body-skin-coverage-composition/results.json)按原生绘制归属核对 47,458 个位置。描边局部光通过双设备区域结构相似度和中位亮度门槛，完整颜色继续按一字节门槛验收。

@@ -1416,3 +1416,5 @@ Intel 头发颜色继续按冻结区域核对纹理选级。
 [体表接收法线小数精度](../acceptance/nr/body-fractional-normal.md)核对生产 Player 及新增可见量超差。
 
 [描边阴影查找表](../acceptance/nr/evidence/2026-11-16/body-outline-native-shadow-response/results.json)核对原生 1018 号绘制与双设备实际输出。完整颜色按一字节门槛验收。
+
+[原生地面画面对照](../acceptance/nr/evidence/2026-11-16/joint-scene-native-floor/results.json)保留第 3534 帧与实际场景的结构和亮度读数。中央地面与青色环带继续核对反射输入。
