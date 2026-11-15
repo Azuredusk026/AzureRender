@@ -556,13 +556,16 @@ void AzureRenderApp::createSceneRenderer() {
     azurerender::SceneRendererRegistry registry =
         azurerender::BuiltinRendererCatalog::createRegistry();
     sceneRenderer_ = registry.create(rendererId);
-    azurerender::validateSceneRendererCapabilities(
-        sceneRenderer_->capabilities());
+    const auto capabilities=sceneRenderer_->capabilities();
+    azurerender::validateSceneRendererCapabilities(capabilities);
     createMultisampleResources();context.rasterizationSamples=sceneMultisampling_?azurerender::SceneMultisampling::kSamples:VK_SAMPLE_COUNT_1_BIT;
     context.sceneRenderPass=sceneMultisampling_?sceneMultisampling_->renderPass():renderPass_;
     if(sceneMultisampling_)context.scenePassDescription.reset();
 #if AZURE_WITH_EDITOR
     if (runOptions_.editorSession) {
+        if(!runOptions_.editorSession->playing()){
+            runOptions_.editorSession->setViewportDiagnosticModes(capabilities.diagnosticViewNames);
+        }
         const auto loadedScene = runOptions_.editorSession->viewScene();
         editorRenderResources_.load(loadedScene, [&] { sceneRenderer_->onLoad(context); });
     } else
@@ -1795,7 +1798,6 @@ void AzureRenderApp::keyCallback(
         if(action==GLFW_PRESS) {
             if(key==GLFW_KEY_F9)values["stylized"]=!settings.stylizedLightingEnabled;
             if(key==GLFW_KEY_F10)values["innerOutline"]=!settings.innerOutlineEnabled;
-            if(key==GLFW_KEY_0)values["diagnosticView"]=(settings.diagnosticView+1)%5;
         }
         if(action==GLFW_PRESS||action==GLFW_REPEAT) {
             if(key==GLFW_KEY_F7)values["styleMaskStrength"]=std::max(settings.styleMaskStrength-.1F,0.F);
@@ -1811,7 +1813,7 @@ void AzureRenderApp::keyCallback(
     }
 #endif
 #if AZURE_WITH_EDITOR
-    if(application->editorLayer_ && (key==GLFW_KEY_W||key==GLFW_KEY_E||key==GLFW_KEY_R||key==GLFW_KEY_Q||key==GLFW_KEY_F))return;
+    if(application->editorLayer_ && (key==GLFW_KEY_W||key==GLFW_KEY_E||key==GLFW_KEY_R||key==GLFW_KEY_Q||key==GLFW_KEY_F||key==GLFW_KEY_0))return;
 #endif
     if (action == GLFW_PRESS) {
         if (key == GLFW_KEY_SPACE) {

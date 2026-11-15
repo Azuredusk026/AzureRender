@@ -161,6 +161,11 @@ void EditorSession::pollBuild() {
 }
 bool EditorSession::playing() const noexcept{return play_!=nullptr;}
 bool EditorSession::simulating() const noexcept{return play_&&play_->simulation;}
+void EditorSession::setViewportDiagnosticModes(std::vector<std::string> modes){
+    if(modes==viewportDiagnosticModes_)return;
+    viewportDiagnosticModes_=std::move(modes);
+    viewportDiagnosticMode_.reset();
+}
 GameRuntime* EditorSession::game() noexcept{return play_?play_->game.get():nullptr;}
 RuntimeLifecycle* EditorSession::runtime() noexcept{return play_?&play_->runtime:nullptr;}
 LevelSession* EditorSession::levels() noexcept{return play_?play_->levels.get():nullptr;}
@@ -257,6 +262,7 @@ void EditorSession::activatePendingProject() {
         references_.cancel();content_.reset();contentDirectories_.reset();materials_.clear();prefabs_.clear();context_->detachRenderSettings();proposals_.reset();
         selection_=std::move(selection);gizmo_=std::move(gizmo);edits_=std::move(edits);
         context_=std::move(pendingProject_);referenceViews_=std::move(referenceViews);
+        viewportDiagnosticMode_.reset();
         proposals_=std::move(proposals);documents_.clear();retainDocument();documentGuard_->reset();runtimeReset_=true;assetReloadRequested_=true;
     }catch(const std::exception& error){pendingProject_.reset();documentGuard_->reset();recordError("project.open",error.what());}
 }

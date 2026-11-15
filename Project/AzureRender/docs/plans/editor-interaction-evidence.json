@@ -42,5 +42,17 @@
     "warmResult": "import-green/run-2ecbfdf1/summary.json",
     "contentNavigation": "import-content-regression.log",
     "projectsPassed": 2
+  },
+  "viewportObservation": {
+    "configuration": "Release",
+    "candidateExecutableSha256": "356ee4caadddf040dd59e4396b5b36ecde9ab321e8c8febdd53fca46d401cf0a",
+    "finalDispatch": 1086,
+    "inputRouterRed": "diagnostic-input-red.log",
+    "inputRouterGreen": "diagnostic-input-green.log",
+    "productionReplay": "view-modes-final.log",
+    "captureComparison": "view-modes-final/run-d29e860e/edit/viewport-pixel-comparison.json",
+    "restoredPixels": 319188,
+    "restoredDifferentPixels": 0,
+    "auxiliaryUnchanged": true
   }
 }

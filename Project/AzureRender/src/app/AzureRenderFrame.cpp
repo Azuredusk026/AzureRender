@@ -230,6 +230,13 @@ void AzureRenderApp::drawFrame() {
     buildSceneFrameData(frameData);
     // UI commands and Play/Stop may replace settings while building this frame.
     // Bind the LUT only after the final settings are available for recording.
+#if AZURE_WITH_EDITOR
+    if(auto* session=runOptions_.editorSession.get();session && !session->playing()){
+        if(const auto mode=session->viewportDiagnosticMode()){
+            effectiveRenderSettings_.diagnosticView=*mode;
+        }
+    }
+#endif
     synchronizeColorGradingLut(effectiveRenderSettings_);
     const azurerender::RenderFrameSnapshot frameSnapshot(frameData);
     if (sceneRenderer_ != nullptr) {

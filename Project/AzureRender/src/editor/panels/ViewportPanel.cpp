@@ -95,6 +95,32 @@ void ImGuiEditorLayer::drawViewportPanel(PanelContext&) {
             }
             ImGui::EndDisabled();ImGui::EndPopup();
         }
+        const auto& modes=session_->viewportDiagnosticModes();
+        if(modes.size()>1){
+            const auto mode=session_->viewportDiagnosticMode();
+            const auto* current=mode?ui::tr(modes.at(*mode).c_str()):ui::tr("场景显示");
+            const std::string label=std::string(current)+"###viewport-diagnostics";
+            ui::nextToolbarItem(ui::buttonWidth(label.c_str()));
+            const ui::ButtonOptions options{ui::ButtonVariant::Toolbar,mode.has_value(),
+                session_->playing()||session_->building(),ui::tr("视口观察模式 (0)")};
+            if(ui::button(label.c_str(),options))ImGui::OpenPopup("viewport-diagnostics");
+            observeWidget("viewport.diagnostics");
+            if(ImGui::BeginPopup("viewport-diagnostics")){
+                ImGui::BeginDisabled(session_->playing()||session_->building());
+                if(ImGui::MenuItem(ui::tr("使用场景显示"),nullptr,!mode)){
+                    session_->edit("viewport.diagnostic-mode",{{"value",-1}});
+                }
+                observeWidget("viewport.diagnostic.default");
+                for(std::size_t i=0;i<modes.size();++i){
+                    if(ImGui::MenuItem(ui::tr(modes[i].c_str()),nullptr,mode && *mode==i)){
+                        session_->edit("viewport.diagnostic-mode",{{"value",i}});
+                    }
+                    observeWidget("viewport.diagnostic."+std::to_string(i));
+                }
+                ImGui::EndDisabled();
+                ImGui::EndPopup();
+            }
+        }
         const ImVec2 available = ImGui::GetContentRegionAvail();
         const ImVec2 framebufferScale = ImGui::GetIO().DisplayFramebufferScale;
         const std::uint32_t desiredWidth = static_cast<std::uint32_t>(
