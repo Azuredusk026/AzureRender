@@ -16,6 +16,22 @@ inline void checkEditorRenderResourceState() {
     require(state.needsReload(scene),"An unloaded renderer needs scene resources");
     state.load(scene,[]{});
     require(!state.needsReload(scene),"First synchronization after a successful load must be idle");
+    auto organization=scene;
+    SceneNode parent;
+    parent.id="group";
+    organization.nodes.push_back(parent);
+    organization.nodes.front().parentId=parent.id;
+    organization.lights.push_back({"light","group"});
+    require(!state.needsReload(organization),
+        "A resource-free parent and a light must use the per-frame scene path");
+    SceneNode camera;
+    camera.id="camera";
+    organization.nodes.push_back(camera);
+    require(!state.needsReload(organization),"Adding a camera must leave render resources loaded");
+    organization.nodes.back().objectShadow=ecs::ObjectShadowComponent{};
+    organization.nodes.back().objectShadow->enabled=true;
+    require(state.needsReload(organization),
+        "A declared object shadow feature can change the renderer's resource requirements");
     auto imported=scene;
     imported.resources.push_back({"mesh-b","mesh","models/b.glb"});
     require(!state.needsReload(imported),"Importing an unplaced model must leave the renderer idle");

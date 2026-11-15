@@ -138,5 +138,26 @@
     "viewport": [1280, 720],
     "filesImported": 2,
     "physicalInput": false
+  },
+  "sceneOrganizationAndColdApplicationCache": {
+    "configuration": "Release",
+    "baselineExecutableSha256": "4e0926c72ee38c10c28eee1775bf3b5efed0eb42036d12f2a2a7d3fdae0d03c0",
+    "candidateExecutableSha256": "afc8fefd020642858f51506eeb97959ca6eb80657daedbcd5ed95cd1b531fa50",
+    "baselineRun": "D:/Projects/FYP/Project/AzureRender/build/runs/20261115-191501-editor-cold-placement-6feb48",
+    "candidateRun": "D:/Projects/FYP/Project/AzureRender/build/runs/20261115-192256-editor-organization-reload-c8079f",
+    "baselineDispatch": 1182,
+    "candidateDispatch": 1185,
+    "baselineExecutableProvenance": "executable-provenance.txt",
+    "baselineCases": ["place.json", "cube.json"],
+    "candidateCases": ["cold-placement/place.json", "cold-placement/cube.json"],
+    "organizationPersistence": "organization/place.json",
+    "candidateAcceptance": "summary.json",
+    "viewportPixels": "viewport-pixel-comparison.json",
+    "failedSourceCheck": "editor-session-red.log",
+    "cpuLog": "editor-interaction-regression-source-ctest.log",
+    "cpuCasesPassed": 20,
+    "applicationPipelineCacheBytesAtStartup": 0,
+    "driverCache": "preserved",
+    "physicalInput": false
   }
 }
