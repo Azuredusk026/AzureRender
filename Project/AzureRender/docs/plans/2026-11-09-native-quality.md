@@ -182,6 +182,8 @@ Intel 头发颜色继续核对纹理梯度与层级选择。
 [虹膜覆盖来源](../acceptance/nr/iris-native-overlay.md)核对原生覆盖对 94 个虹膜位置的影响。
 头部平面主光下的双设备配对采集确认实际眼影覆盖与原生一致，最终虹膜仍分别有 22 处和 30 处超过一字节。
 
+[角色动态重开](../acceptance/nr/evidence/2026-11-15/current-joint-character-reopen/results.json)在 NVIDIA 595.79 下验证已保存场景、11 个动画实例及四个连续采集时点。四帧对旧驱动保留画面分别有 28、48、56、62 处超过一字节，原生连续画面验收保持开放。
+
 [固定姿态眼部阴影几何](../acceptance/nr/iris-overlay-geometry.md)通过双设备虹膜区域门槛，逐像素遮挡与乘色继续验收。
 
 [眼部阴影纹理与遮挡](../acceptance/nr/iris-overlay-source.md)核对原生纹理、乘色及完整几何覆盖。

@@ -1,0 +1,74 @@
+{
+  "current": {
+    "status": "current-persisted-project-reopens",
+    "nativeContinuousVisualAcceptance": "pending",
+    "historicalDriverUnqualified": true,
+    "projectSha256": "fc4f59e1ac132cac099346a629e4fa5ce941b8aae1cdd3f25939d664264b7188",
+    "playerSha256": "1a30d925a674ddb1d95876cb80181106a0217e12a7228a35b5980b134954cb69",
+    "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+    "driverVersion": 2496905216,
+    "animationInstances": 11,
+    "frames": [
+      {
+        "frame": "frame_000000.png",
+        "sha256": "3a9d942695bbc6102e93fa640ddf38616feccd98ff2fd6737f9d8ba3af5add7f",
+        "originalReopenSha256": "64ac23b9c5ac811e0f999d764cd0ef79df2333e2a4848188d917df2fa49d96d9",
+        "differingPixels": 393,
+        "overOne": 28,
+        "peak": 13
+      },
+      {
+        "frame": "frame_000001.png",
+        "sha256": "6d696e06d031efaedf2bb52f7b5c32941fe96f722b0690a63d7627f2f841fa01",
+        "originalReopenSha256": "0bd9a102cc09ce570d06890aaf18426d88911418673ebfc68272dbd6d9a9b00f",
+        "differingPixels": 438,
+        "overOne": 48,
+        "peak": 48
+      },
+      {
+        "frame": "frame_000002.png",
+        "sha256": "5803a61e882a6eda46345e16b8827bebb9f4e51f8d577807f454926bfe110822",
+        "originalReopenSha256": "a517987c47c8e8f6dcfe043c5a615b0bfd8803b1ff716b01b21964220533f8ef",
+        "differingPixels": 539,
+        "overOne": 56,
+        "peak": 37
+      },
+      {
+        "frame": "frame_000003.png",
+        "sha256": "07d5c14870279e69c6ec2508834ddd6a2c407c13eecf8c00e84cfb875a514d27",
+        "originalReopenSha256": "5e6549dee883d08c8d1702739a2b7a84d8dd1d895bf1c7a71ccecc9ad690ba48",
+        "differingPixels": 582,
+        "overOne": 62,
+        "peak": 53
+      }
+    ]
+  },
+  "retained": {
+    "status": "retained-motion-verified",
+    "historicalPlayerSha256": "e0c47f0f99be428145af067501b2a5b3ace5437e62948043ae8f1f86e5aadce5",
+    "archivedOriginalFrames": 192,
+    "staticFrames": 12,
+    "archivedClosedLoopFrames": 192,
+    "reopenedFramesCompared": 4,
+    "exactReopen": true,
+    "uniqueOriginalFrames": 192,
+    "uniqueLoopFrames": 192,
+    "animationInstances": 11,
+    "sourceClipsPreserved": 9,
+    "closedChannels": 939,
+    "currentPlayerCapture": "pending",
+    "nativeContinuousVisualAcceptance": "pending"
+  },
+  "archive": {
+    "sha256": "289f4cf6c9b81a67935182f5d576ce62b821ec3a0015da3b95aee6fe4e11308f",
+    "members": {
+      "results.json": "37a21ebce80bc5a62577a1f73f0b73f56002baed59f4a0731808fcd3aec33efd",
+      "command.json": "dcc1c85dff86d9575411978a75cadf075bee5881f94b12ace52fe99904c698b7",
+      "frames/capture_manifest.json": "3453c6d930463c847ade6550c4c7a3cd4e436e09c10149dc8cad4fe91787cc3c",
+      "frames/gpu_capabilities.json": "fcc84c76d84bace150db35ec07631ab83809bdd1c365b6d96cb8afe8e354190a",
+      "joint-character-reopen-current.py": "7bedc83851b10d9f86828292f8b604f462d6ca70ebf0c74aa90f3e2d0b67c55f",
+      "retained-character-motion.json": "59ae300eb54fffa7b0a400b0fa5e7286c381d79d6822611c2d36aebda6a55dd3",
+      "archive-current-dynamic-and-hair-owner.py": "edbbd5521dd192a471d81f51867516997ef987db214def10f425c4b05a260e68"
+    }
+  }
+}

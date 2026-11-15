@@ -1,0 +1,182 @@
+{
+  "status": "qualified-native-ownership",
+  "points": [
+    {
+      "point": [
+        1243,
+        342
+      ],
+      "primitive": [
+        1518,
+        1518
+      ],
+      "nativeTargetAbsolute": 0.1484375,
+      "packedLanes": {
+        "copy": [
+          1515598718,
+          1410630488
+        ],
+        "base": [
+          1465205596,
+          1456808793
+        ],
+        "layer": [
+          1981500351,
+          1994132416
+        ],
+        "normal": [
+          1876683647,
+          1885076318
+        ],
+        "alpha": [
+          1872331712,
+          1876521920
+        ]
+      }
+    },
+    {
+      "point": [
+        1322,
+        263
+      ],
+      "primitive": [
+        4087,
+        4087
+      ],
+      "nativeTargetAbsolute": 0.025390625,
+      "packedLanes": {
+        "copy": [
+          1553412999,
+          1607971721
+        ],
+        "base": [
+          1540805474,
+          1570175842
+        ],
+        "layer": [
+          1842931712,
+          1832910848
+        ],
+        "normal": [
+          1855720317,
+          1859914595
+        ],
+        "alpha": [
+          1901714305,
+          1897489282
+        ]
+      }
+    },
+    {
+      "point": [
+        1327,
+        287
+      ],
+      "primitive": [
+        13024,
+        13024
+      ],
+      "nativeTargetAbsolute": 0.0703125,
+      "packedLanes": {
+        "copy": [
+          1628963737,
+          1645755298
+        ],
+        "base": [
+          1591161729,
+          1591161729
+        ],
+        "layer": [
+          1930857408,
+          1930857408
+        ],
+        "normal": [
+          1901837193,
+          1901837193
+        ],
+        "alpha": [
+          1843182528,
+          1843182528
+        ]
+      }
+    },
+    {
+      "point": [
+        1333,
+        312
+      ],
+      "primitive": [
+        11767,
+        11767
+      ],
+      "nativeTargetAbsolute": 0.0390625,
+      "packedLanes": {
+        "copy": [
+          1633186718,
+          1675164577
+        ],
+        "base": [
+          1469412174,
+          1469412174
+        ],
+        "layer": [
+          1972709376,
+          1972709376
+        ],
+        "normal": [
+          1893464953,
+          1893464953
+        ],
+        "alpha": [
+          1876616128,
+          1876616128
+        ]
+      }
+    },
+    {
+      "point": [
+        1280,
+        195
+      ],
+      "primitive": [
+        1017,
+        1017
+      ],
+      "nativeTargetAbsolute": 0.0,
+      "packedLanes": {
+        "copy": [
+          1708737483,
+          1708737483
+        ],
+        "base": [
+          1574386568,
+          1574386568
+        ],
+        "layer": [
+          1981565335,
+          1981565335
+        ],
+        "normal": [
+          1838936954,
+          1838936954
+        ],
+        "alpha": [
+          1864207296,
+          1864207296
+        ]
+      }
+    }
+  ],
+  "archive": {
+    "sha256": "1d772e3eb484255db686117c55518bc54b0c654cee3180068b9178d0dbbf5262",
+    "members": {
+      "hair-native-owner-control.py": "d634a27b684c450aebbbae249cf6057094eec232d0d6235dc5b5d2f5e818b7ff",
+      "hair-native-owner-hardware-comparison.json": "30662b69c8edf465ffed7ead583a700dc34d3c2942952acf8c7e0aa5b7db0b27",
+      "nvidia/request.json": "c87fd4d60f2dd22562ec4ea77918e84708178c74d1b5a40cf32a2e2f5cd490a1",
+      "nvidia/results.json": "6c5c100e0d42fa043e3f8ea21b1b54b88fffff5ab5609bfe2085574e27bc8b57",
+      "intel/request.json": "527969f8566d47176ab78fc24d72626009fc5966bc2ef939c0869593c9f87115",
+      "intel/results.json": "c8e36ee6e6b53070d744468aa7c8f573e8d1b826199f35dd06f25734d2dce81b",
+      "archive-current-dynamic-and-hair-owner.py": "edbbd5521dd192a471d81f51867516997ef987db214def10f425c4b05a260e68"
+    }
+  }
+}
