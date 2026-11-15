@@ -94,6 +94,12 @@
       "results": "docs/acceptance/nr/evidence/2026-11-15/joint-80w-idle-retest/results.json"
     },
     {
+      "path": "runs/20261115-080840-nr-joint-fan-control-587b09",
+      "name": "联合场景最高风扇档复验",
+      "evidence": "docs/acceptance/nr/joint-nonlocal-texture-placement.md#最高风扇档复验",
+      "results": "docs/acceptance/nr/evidence/2026-11-15/joint-80w-maximum-fan/results.json"
+    },
+    {
       "path": "runs/20261114-173220-nr-shader-host-compiler-concurrency-d140b8",
       "name": "编辑器加载与目录规模诊断",
       "evidence": "docs/acceptance/nr/registered-gpu-infrastructure.md",
