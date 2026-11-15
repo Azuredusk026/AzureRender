@@ -205,6 +205,8 @@ Intel 头发颜色继续核对纹理梯度与层级选择。
 
 [冻结四帧差异位置](../acceptance/nr/evidence/2026-11-15/frozen-cross-driver-spatial/results.json)记录天花板区域及高差位置。原始四帧仍按 RGB 零差验收。
 
+[体表描边视口原点](../acceptance/nr/evidence/2026-11-15/body-outline-window-origin/results.json)复现 105 处原生整数取样地址。
+
 ## 后续外观
 
 - [ ] 按原计划核对皮肤、眼睛、GI 与反射。

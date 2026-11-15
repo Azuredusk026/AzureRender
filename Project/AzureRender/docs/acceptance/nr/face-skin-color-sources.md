@@ -365,6 +365,10 @@ NVIDIA 不透明末尾提交对照覆盖 571 处。61 处重点像素均缩小�
 
 [描边子像素取样结果](evidence/2026-11-15/body-outline-subpixel-address/results.json)和[验证归档](evidence/2026-11-15/body-outline-subpixel-address/validation.zip)保存片元历史、寄存器和复算步骤。
 
+新增 39 处原生片元控制，覆盖独立图元及整数地址附近。以原生左上角为视口原点，先执行 32 位浮点视口变换与八位子像素取整，再换算显示纵轴，共复现 105 处整数取样地址。坐标 [1272,1080] 在原生于纵向 359.99829 取样，使用显示坐标直接计算的值为 360.00156。采用原生视口原点的模型在 1,118 个描边源位置中有 327 处地址与连续投影计算不同。
+
+[视口原点结果](evidence/2026-11-15/body-outline-window-origin/results.json)和[验证归档](evidence/2026-11-15/body-outline-window-origin/validation.zip)保存硬件取样地址及运算对照。
+
 ### 描边光照来源
 
 四处原生片元按主光、全局轮廓光和局部灯复算。
