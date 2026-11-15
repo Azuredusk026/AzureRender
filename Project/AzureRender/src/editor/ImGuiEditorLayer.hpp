@@ -70,6 +70,8 @@ public:
     [[nodiscard]] bool acceptsViewportShortcuts() const noexcept {
         return viewportAcceptsShortcuts_;
     }
+    [[nodiscard]] bool requestsGameCapture() const noexcept { return gameCaptureRequested_; }
+    [[nodiscard]] bool acceptsGameInput() const noexcept { return gameInputAllowed_; }
 
 private:
     unsigned renderSamples_=0,renderTargetSamples_=0;
@@ -159,6 +161,8 @@ private:
     bool viewportGizmoDragActive_ = false;
     bool viewportFocused_ = false;
     bool viewportAcceptsShortcuts_ = false;
+    bool gameCaptureRequested_ = false;
+    bool gameInputAllowed_ = false;
     bool initialized_ = false;
     std::uint64_t debugLineCount_ = 0;
     bool dockingLayoutInitialized_ = false;

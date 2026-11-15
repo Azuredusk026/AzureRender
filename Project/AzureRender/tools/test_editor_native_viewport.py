@@ -220,6 +220,34 @@ def run(executable, output, workflow):
         key('W',False)
         assert call('query',name='document.contentHash')==saved,'Native view navigation must preserve authored content'
         post(0x7)
+        if workflow=='exploration':
+            def game_focused():return json.loads(call('query',name='game.state'))['focused']
+            edit=state()
+            native_click_widget('play')
+            assert state()['previewMode']=='play'
+            assert state()['navigation']['nativeCursorMode']=='normal','Play must leave the pointer in the editor until the game image is clicked'
+            assert not game_focused()
+            native_click_widget('viewport.image')
+            assert state()['navigation']['nativeCursorMode']=='disabled','Clicking the game image must capture the pointer'
+            assert game_focused()
+            key('Escape',True);key('Escape',False)
+            assert state()['navigation']['nativeCursorMode']=='normal','Escape must release game capture'
+            assert not game_focused()
+            native_click_widget('viewport.image')
+            assert state()['navigation']['nativeCursorMode']=='disabled'
+            post(0x8)
+            assert state()['navigation']['nativeCursorMode']=='normal','Focus loss must release game capture'
+            post(0x7);wait(10)
+            assert state()['navigation']['nativeCursorMode']=='normal','Focus regain must wait for an explicit click in the game image'
+            assert not game_focused()
+            native_click_widget('viewport.image')
+            assert state()['navigation']['nativeCursorMode']=='disabled','Game capture can be explicitly regained'
+            key('Escape',True);key('Escape',False)
+            native_click_widget('stop')
+            stopped=state()
+            assert stopped['previewMode']=='edit' and stopped['navigation']['nativeCursorMode']=='normal'
+            assert stopped['camera']==edit['camera'] and stopped['selection']==edit['selection']
+            assert call('query',name='document.contentHash')==saved
         for width,height in ((1920,1080),(1280,720)):
             immediate=window.resize(width,height);wait(12)
             actual=window.extent();evidence.append(dict(resizeRequested=[width,height],immediate=immediate,actual=actual))
@@ -243,7 +271,8 @@ def run(executable, output, workflow):
         summary=dict(workflow=workflow,passed=True,inputSource='Windows PostMessage + SetCursorPos + relative and dialog-click SendInput -> GLFW callbacks',physicalKeyboardMouse='NotExecuted',
             dialogOpenSources=['Native Browse button (cancel)','Registered path.choose operation (file/directory selection and cancel)'],
             tools=True,singleOnlySelects=True,doubleFrames=True,fFrames=True,rightLook=True,flight=True,flightRelease=True,outsideRelease=True,focusRelease=True,resize=True,rawMouse=raw_mouse,
-            nativeFileChoose=True,nativeDirectoryChoose=True,nativeCancel=True,utf8Path=True,contentPreserved=True)
+            nativeFileChoose=True,nativeDirectoryChoose=True,nativeCancel=True,utf8Path=True,contentPreserved=True,
+            gameCaptureRecovery=True if workflow=='exploration' else None)
         (output/'summary.json').write_text(json.dumps(summary,indent=2),encoding='utf-8')
         return summary
     finally:

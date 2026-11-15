@@ -326,6 +326,7 @@ void ImGuiEditorLayer::drawPanels() {
     drawWorkspace();
     const ImGuiIO& io = ImGui::GetIO();
     viewportFocused_=false;viewportAcceptsShortcuts_=false;
+    gameCaptureRequested_=false;gameInputAllowed_=false;
     const bool nativeFocus=!io.AppFocusLost;
     if(session_->references().active()&&(!nativeFocus||ImGui::IsKeyPressed(ImGuiKey_Escape,false)))session_->edit("reference.cancel");
     if(!nativeFocus || !workspace_.visible("viewport")) {

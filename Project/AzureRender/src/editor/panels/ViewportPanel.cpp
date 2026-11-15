@@ -37,6 +37,7 @@ void ImGuiEditorLayer::drawViewportPanel(PanelContext&) {
     if(!compact||session_->documents().describe(context_->documentId(),false).size()>1)drawDocumentTabs();
     viewportFocused_ = ImGui::IsWindowFocused(
         ImGuiFocusedFlags_RootAndChildWindows);
+    bool gameUiTyping=false;
     if (!viewportTextures_.empty()) {
         ImGui::BeginDisabled(session_->playing()||session_->building());
         struct ToolButton {const char* id;const char* label;const char* binding;EditorContext::GizmoMode mode;};
@@ -195,10 +196,22 @@ void ImGuiEditorLayer::drawViewportPanel(PanelContext&) {
             if(auto* game=session_->game();game && game->hasCamera())line({game->camera().target(),game->camera().position()},IM_COL32(255,80,170,255));
             draw->PopClipRect();
         }
+        const bool hovered=ImGui::IsItemHovered();
+        const bool play=session_->playing()&&!session_->simulating();
+        bool gameUiPointer=false;
         if(session_->playing() && gameUi_ && imageSize.x>0 && imageSize.y>0){
-            const auto mouse=ImGui::GetMousePos();const bool consumed=gameUi_->pointer(static_cast<int>((mouse.x-itemMin.x)*viewportWidth_/imageSize.x),static_cast<int>((mouse.y-itemMin.y)*viewportHeight_/imageSize.y),ImGui::IsItemHovered() && ImGui::IsMouseDown(ImGuiMouseButton_Left));
-            if(consumed||gameUi_->wantsKeyboard())viewportAcceptsShortcuts_=false;
+            if(hovered&&glfwGetInputMode(window_,GLFW_CURSOR)!=GLFW_CURSOR_DISABLED){
+                const auto mouse=ImGui::GetMousePos();
+                gameUiPointer=gameUi_->pointer(static_cast<int>((mouse.x-itemMin.x)*viewportWidth_/imageSize.x),
+                    static_cast<int>((mouse.y-itemMin.y)*viewportHeight_/imageSize.y),ImGui::IsMouseDown(ImGuiMouseButton_Left));
+            }else gameUi_->pointer(-1,-1,false);
+            gameUiTyping=play&&gameUi_->wantsKeyboard();
             if(viewportFocused_){for(auto character:ImGui::GetIO().InputQueueCharacters)gameUi_->character(character);}
+        }
+        if(play && hovered && ImGui::IsMouseClicked(ImGuiMouseButton_Left) && !gameUiPointer && !gameUiTyping){
+            ImGui::SetWindowFocus();
+            viewportFocused_=true;
+            gameCaptureRequested_=true;
         }
         if(!session_->editCameraActive()&&session_->game()){
             const auto selected=session_->game()->renderCamera();
@@ -207,7 +220,6 @@ void ImGuiEditorLayer::drawViewportPanel(PanelContext&) {
                 draw->AddText({itemMin.x+12,itemMin.y+12},IM_COL32(255,205,105,255),ui::tr("未找到启用的游戏相机，正在使用默认视角"));
             }
         }
-        const bool hovered=ImGui::IsItemHovered();
         if(session_->editCameraActive())drawViewportOverlays(itemMin,imageSize);
         const bool orientationOver=session_->editCameraActive()&&drawViewportOrientation(itemMin,imageSize);
         const bool gizmoOver=orientationOver||(session_->editCameraActive()&&drawViewportGizmo(itemMin,imageSize));
@@ -287,7 +299,7 @@ void ImGuiEditorLayer::drawViewportPanel(PanelContext&) {
 
         }
     }
-    if(!viewportTextures_.empty()){
+    if(!viewportTextures_.empty() && session_->editCameraActive()){
         auto* draw=ImGui::GetWindowDrawList();const bool flying=navigationButton_==ImGuiMouseButton_Right;
         const float speed=session_->settings().get("editor.camera.flySpeed").get<float>()*(flying&&ImGui::GetIO().KeyShift?session_->settings().get("editor.camera.boost").get<float>():1.F);
         char status[160];if(flying)std::snprintf(status,sizeof(status),ui::tr("Fly | %.2f m/s\nWASD  E/Q  Shift  Wheel speed  Esc release"),static_cast<double>(speed));
@@ -296,8 +308,27 @@ void ImGuiEditorLayer::drawViewportPanel(PanelContext&) {
         const ImVec2 lower{imageRect_[0]+imageRect_[2],imageRect_[1]+imageRect_[3]},hud{imageRect_[0]+metrics.padding,lower.y-46*dpi_};
         draw->PushClipRect({imageRect_[0],imageRect_[1]},lower,true);draw->AddRectFilled({hud.x-4*dpi_,hud.y-2*dpi_},{std::min(lower.x,hud.x+330*dpi_),hud.y+42*dpi_},ImGui::ColorConvertFloat4ToU32(background),4*dpi_);draw->AddText(hud,ImGui::ColorConvertFloat4ToU32(theme.text),status);draw->PopClipRect();
     }
+    if(!viewportTextures_.empty() && session_->playing() && !session_->simulating()){
+        const bool captured=glfwGetInputMode(window_,GLFW_CURSOR)==GLFW_CURSOR_DISABLED;
+        auto* draw=ImGui::GetWindowDrawList();
+        const ImVec2 minimum{imageRect_[0],imageRect_[1]};
+        const ImVec2 maximum{minimum.x+imageRect_[2],minimum.y+imageRect_[3]};
+        const auto* game=session_->game();
+        const auto* hint=ui::tr(captured?"按 Esc 释放鼠标":game&&game->hasCamera()?"点击游戏画面捕获鼠标":"点击游戏画面聚焦输入");
+        const auto size=ImGui::CalcTextSize(hint);
+        const ImVec2 position{minimum.x+metrics.padding,maximum.y-size.y-metrics.padding};
+        draw->PushClipRect(minimum,maximum,true);
+        draw->AddRectFilled({position.x-4*dpi_,position.y-2*dpi_},
+            {position.x+size.x+4*dpi_,position.y+size.y+2*dpi_},IM_COL32(20,25,32,215),4*dpi_);
+        draw->AddText(position,IM_COL32_WHITE,hint);
+        draw->PopClipRect();
+        const auto& io=ImGui::GetIO();
+        gameInputAllowed_=viewportFocused_&&!gameUiTyping&&!io.WantTextInput&&!io.AppFocusLost
+            && !ImGui::IsPopupOpen(nullptr,ImGuiPopupFlags_AnyPopupId|ImGuiPopupFlags_AnyPopupLevel);
+    }
     viewportAcceptsShortcuts_ = (viewportFocused_ || navigationButton_>=0)
         && !ImGui::GetIO().WantTextInput
+        && !ImGui::GetIO().AppFocusLost
         && !ImGui::IsAnyItemActive();
     if(compact)ImGui::PopStyleVar();
     ImGui::End();

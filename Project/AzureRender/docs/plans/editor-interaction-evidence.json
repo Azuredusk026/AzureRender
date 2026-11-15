@@ -82,5 +82,18 @@
     "candidateDispatch": 1099,
     "candidateReplay": "specialized-authoring-final/run-f972c06e/prefab/evidence.json",
     "specializedWorkflow": "specialized-authoring-final/run-f972c06e/summary.json"
+  },
+  "nativePlayCapture": {
+    "configuration": "Release",
+    "candidateExecutableSha256": "042d67baf48285c20ce777fdbf4d41ad90fd6e9560f61de6b76440b0607dcc75",
+    "baselineDispatch": 1100,
+    "baselineFailure": "native-capture-red.log",
+    "focusTraceDispatch": 1105,
+    "focusTrace": "native-capture-probe/run-1794729306660985700/exploration/stderr.log",
+    "candidateDispatch": 1109,
+    "candidateReplay": "native-capture-final/run-1794729947424086800/summary.json",
+    "explorationEvents": "native-capture-final/run-1794729947424086800/exploration/events.json",
+    "input": "Windows SendInput, SetCursorPos and messages through GLFW",
+    "physicalInput": false
   }
 }
