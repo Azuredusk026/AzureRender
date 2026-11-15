@@ -132,7 +132,7 @@ ImGuiEditorLayer::ImGuiEditorLayer(std::shared_ptr<EditorSession> session)
         [this]{inspectorPanel_->presentation.focusObjectName_=true;},
         [this](nlohmann::json request){assetPanel_->presentation.exportRequest_=std::move(request);assetPanel_->presentation.exportDialogRequested_=true;},
         [this](const auto& node){drawMaterialSlots(node);},[this](const auto& node){drawPhysicsAuthoring(node);},
-        [this]{drawTextureAssetPanel();},[this]{drawMaterialAssetPanel();},
+        [this]{drawTextureAssetPanel();},[this](const auto& asset){openMaterialAsset(asset);},
         [this](auto handle){return previewTexture(handle);},
         [this](const auto* label,auto& value,const auto& purpose,bool directory,const auto& extensions){drawPathInput(label,value,purpose,directory,extensions);}};
     registry.registerFactory({"panel.outliner",1,{"editor.panel"},{}},[this,services]{auto panel=std::make_unique<OutlinerPanel>(services);outlinerPanel_=panel.get();return panel;});
@@ -339,7 +339,12 @@ void ImGuiEditorLayer::drawPanels() {
         ImGui::BeginDisabled((session_->playing() || session_->building()) && !editable && panel->id()!="build" && panel->id()!="settings");auto panelContext=session_->panelContext();panel->draw(panelContext);ImGui::EndDisabled();
     }
     drawAssetTransferPanel();
+    drawMaterialAssetPanel();
     processFileDrops();
+    if(session_->assetRevealPending()){
+        workspace_.setVisible("assets",true);
+        ImGui::SetWindowFocus(ui::tr("资源###assets"));
+    }
     const auto* nav=ImGui::GetCurrentContext()->NavWindow;
     const bool sceneFocus=viewportFocused_ || (nav && std::string(nav->Name).find("###outliner")!=std::string::npos);
     const bool modal=ImGui::IsPopupOpen(nullptr,ImGuiPopupFlags_AnyPopupId|ImGuiPopupFlags_AnyPopupLevel);

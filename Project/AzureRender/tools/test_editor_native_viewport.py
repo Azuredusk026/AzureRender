@@ -14,6 +14,7 @@ import os
 from pathlib import Path
 import secrets
 import shutil
+import struct
 import subprocess
 import time
 from create_playable_project import create
@@ -21,7 +22,7 @@ from run_playable_long_run import NativeWindow
 from test_validation_protocol import exchange
 
 
-def run(executable, output, workflow):
+def run(executable, output, workflow, drop_only=False):
     output.mkdir(parents=True)
     project=output/'project'
     if workflow=='exploration': create(project)
@@ -94,14 +95,20 @@ def run(executable, output, workflow):
             mouse(0x200,cx-3,cy-3);mouse(0x200,cx,cy);mouse(0x201,cx,cy,1);mouse(0x202,cx,cy,settle=settle)
         def native_click_widget(identity,settle=True):
             activate_window()
-            rect=state()['widgets'][identity];point=wintypes.POINT(int(rect[0]+rect[2]/2),int(rect[1]+rect[3]/2))
-            assert window.user.ClientToScreen(window.handle,ctypes.byref(point))
-            # Refresh enter/leave state after capture release and window resizing.
-            assert window.user.SetCursorPos(point.x-3,point.y-3);wait(2)
-            assert window.user.SetCursorPos(point.x,point.y);wait(5)
-            actual=wintypes.POINT();assert window.user.GetCursorPos(ctypes.byref(actual))
-            evidence.append(dict(nativeClickTarget=identity,expectedScreen=[point.x,point.y],
-                                 actualScreen=[actual.x,actual.y],foreground=window.user.GetForegroundWindow()==window.handle))
+            for attempt in range(4):
+                rect=state()['widgets'][identity]
+                point=wintypes.POINT(int(rect[0]+rect[2]/2),int(rect[1]+rect[3]/2))
+                assert window.user.ClientToScreen(window.handle,ctypes.byref(point))
+                # Refresh enter/leave state after capture release and window resizing.
+                assert window.user.SetCursorPos(point.x-3,point.y-3);wait(2)
+                assert window.user.SetCursorPos(point.x,point.y);wait(5 if attempt==0 else 1)
+                actual=wintypes.POINT();assert window.user.GetCursorPos(ctypes.byref(actual))
+                foreground=window.user.GetForegroundWindow()==window.handle
+                evidence.append(dict(nativeClickTarget=identity,attempt=attempt,expectedScreen=[point.x,point.y],
+                                     actualScreen=[actual.x,actual.y],foreground=foreground))
+                if foreground and (actual.x,actual.y)==(point.x,point.y):break
+                activate_window()
+            else:raise AssertionError('Native pointer did not settle over '+identity)
             for flag in (2,4):
                 event=Input(0,InputUnion(MouseInput(0,0,0,flag,0,0)))
                 assert window.user.SendInput(1,ctypes.byref(event),ctypes.sizeof(Input))==1
@@ -112,11 +119,9 @@ def run(executable, output, workflow):
             activate_window()
             rect=state()['widgets'][identity];cx=rect[0]+rect[2]/2;cy=rect[1]+rect[3]/2
             mouse(0x200,cx-3,cy-3);mouse(0x200,cx,cy)
-            for flag in (2,4,2,4):
-                event=Input(0,InputUnion(MouseInput(0,0,0,flag,0,0)))
-                assert window.user.SendInput(1,ctypes.byref(event),ctypes.sizeof(Input))==1
-                evidence.append(dict(nativeMouseButton=flag,target=identity,inputSource='Win32 SendInput double click'))
-                wait(2)
+            point=(int(cx)&0xffff)|((int(cy)&0xffff)<<16)
+            for message,button in ((0x201,1),(0x202,0),(0x201,1),(0x202,0)):
+                post(message,button,point,settle=False);wait(1)
             wait(8)
         user=window.user
         user.GetClassNameW.argtypes=[wintypes.HWND,wintypes.LPWSTR,ctypes.c_int]
@@ -139,11 +144,12 @@ def run(executable, output, workflow):
             pending=None;pool=None
             if via_browse:
                 activate_window();wait(10)
-                native_click_widget('assets.import-create')
+                click = click_widget if drop_only else native_click_widget
+                click('assets.import-create')
                 if identity not in state()['widgets']:
                     call('screenshot',label='native-import-missing-'+workflow);wait(5)
                     raise AssertionError('Native click did not open the import popup; inspect cursor and foreground evidence')
-                native_click_widget(identity,settle=False)
+                click(identity,settle=False)
             else:
                 pool=ThreadPoolExecutor(max_workers=1)
                 purpose=identity.split('.')[0]
@@ -175,83 +181,88 @@ def run(executable, output, workflow):
                 if path:assert Path(result['path'])==path
             wait(10)
         raw_mouse=workflow=='exploration'
-        version=json.loads(call('query',name='document.version'))
-        call('edit',requestId='u12-native-mouse-mode',commandId='settings.set',baseVersion=version,
-             parameters={'name':'editor.camera.rawMouse','value':raw_mouse})
-        activate_window()
-        wait(20); baseline=state(); saved=call('query',name='document.contentHash')
-        image=baseline['image'];x=image['x']+image['width']/2;y=image['y']+image['height']/2
-        # A distinct second move refreshes GLFW/ImGui after queued enter/leave events.
-        # Focus away from the selected object's transform handles.
-        focus_x=image['x']+20;focus_y=image['y']+20
-        post(0x7);mouse(0x200,focus_x-3,focus_y-3);mouse(0x200,focus_x,focus_y);mouse(0x201,focus_x,focus_y,1);mouse(0x202,focus_x,focus_y)
-        for value,expected in (('E',1),('R',2),('W',0),('Q',3)):
-            key(value,True);key(value,False);assert state()['gizmoMode']==expected,(value,state()['gizmoMode'])
-        other='ground' if workflow=='exploration' else 'asset-b'
-        before_click=state()['camera'];click_widget('node.'+other)
-        assert state()['camera']==before_click,'Outliner single click must only select'
-        # Native click deadlines use wall time, independently of rendering speed.
-        time.sleep(.35);double_click_widget('node.'+other)
-        assert state()['camera']!=before_click,'Outliner double click must frame the object'
-        mouse(0x200,x,y);mouse(0x204,x,y,2);assert state()['capture']['navigationButton']==1
-        assert state()['navigation']['nativeCursorMode']=='disabled' and state()['navigation']['rawMouse']==raw_mouse
-        before=state()['camera'];mouse(0x200,x+24,y-18,2);turned=state()
-        assert turned['camera']['position']==before['position'],'Right look must preserve camera position'
-        def normalized(v):
-            size=math.sqrt(sum(a*a for a in v));return [a/size for a in v]
-        forward=normalized([b-a for a,b in zip(before['position'],before['target'])])
-        right=normalized([-forward[2],0,forward[0]])
-        up=[right[1]*forward[2]-right[2]*forward[1],right[2]*forward[0]-right[0]*forward[2],right[0]*forward[1]-right[1]*forward[0]]
-        direction=normalized([b-a for a,b in zip(turned['camera']['position'],turned['camera']['target'])])
-        assert sum(a*b for a,b in zip(direction,right))>0 and sum(a*b for a,b in zip(direction,up))>0
-        for value in ('W','E','Q'):
-            start=state()['camera']['position'];key(value,True)
-            assert state()['camera']['position']!=start,'Native navigation key must move: '+value
-            assert state()['gizmoMode']==3,'Navigation keys must preserve the selected tool'
-            key(value,False);stopped=state()['camera'];wait(8)
-            assert state()['camera']==stopped,'Native key release must stop flight'
-        mouse(0x205,x+image['width'],y);assert state()['capture']['navigationButton']==-1
-        assert state()['navigation']['nativeCursorMode']=='normal' and not state()['navigation']['rawMouse']
-        key('F',True);key('F',False)
-        assert state()['camera']!=turned['camera'],'F must frame the current selection'
-        mouse(0x200,x,y);mouse(0x204,x,y,2);key('W',True);post(0x8)
-        assert state()['capture']['navigationButton']==-1,'Native focus loss must release capture'
-        stopped=state()['camera'];wait(8);assert state()['camera']==stopped,'Native focus loss must stop flight'
-        key('W',False)
-        assert call('query',name='document.contentHash')==saved,'Native view navigation must preserve authored content'
-        post(0x7)
-        if workflow=='exploration':
-            def game_focused():return json.loads(call('query',name='game.state'))['focused']
-            edit=state()
-            native_click_widget('play')
-            assert state()['previewMode']=='play'
-            assert state()['navigation']['nativeCursorMode']=='normal','Play must leave the pointer in the editor until the game image is clicked'
-            assert not game_focused()
-            native_click_widget('viewport.image')
-            assert state()['navigation']['nativeCursorMode']=='disabled','Clicking the game image must capture the pointer'
-            assert game_focused()
-            key('Escape',True);key('Escape',False)
-            assert state()['navigation']['nativeCursorMode']=='normal','Escape must release game capture'
-            assert not game_focused()
-            native_click_widget('viewport.image')
-            assert state()['navigation']['nativeCursorMode']=='disabled'
-            post(0x8)
-            assert state()['navigation']['nativeCursorMode']=='normal','Focus loss must release game capture'
-            post(0x7);wait(10)
-            assert state()['navigation']['nativeCursorMode']=='normal','Focus regain must wait for an explicit click in the game image'
-            assert not game_focused()
-            native_click_widget('viewport.image')
-            assert state()['navigation']['nativeCursorMode']=='disabled','Game capture can be explicitly regained'
-            key('Escape',True);key('Escape',False)
-            native_click_widget('stop')
-            stopped=state()
-            assert stopped['previewMode']=='edit' and stopped['navigation']['nativeCursorMode']=='normal'
-            assert stopped['camera']==edit['camera'] and stopped['selection']==edit['selection']
-            assert call('query',name='document.contentHash')==saved
-        for width,height in ((1920,1080),(1280,720)):
-            immediate=window.resize(width,height);wait(12)
-            actual=window.extent();evidence.append(dict(resizeRequested=[width,height],immediate=immediate,actual=actual))
-            assert actual==[width,height],actual
+        def check_viewport():
+            version=json.loads(call('query',name='document.version'))
+            call('edit',requestId='u12-native-mouse-mode',commandId='settings.set',baseVersion=version,
+                 parameters={'name':'editor.camera.rawMouse','value':raw_mouse})
+            activate_window()
+            wait(20); baseline=state(); saved=call('query',name='document.contentHash')
+            image=baseline['image'];x=image['x']+image['width']/2;y=image['y']+image['height']/2
+            # A distinct second move refreshes GLFW/ImGui after queued enter/leave events.
+            # Focus away from the selected object's transform handles.
+            focus_x=image['x']+20;focus_y=image['y']+20
+            post(0x7);mouse(0x200,focus_x-3,focus_y-3);mouse(0x200,focus_x,focus_y);mouse(0x201,focus_x,focus_y,1);mouse(0x202,focus_x,focus_y)
+            for value,expected in (('E',1),('R',2),('W',0),('Q',3)):
+                key(value,True);key(value,False);assert state()['gizmoMode']==expected,(value,state()['gizmoMode'])
+            other='ground' if workflow=='exploration' else 'asset-b'
+            before_click=state()['camera'];click_widget('node.'+other)
+            assert state()['camera']==before_click,'Outliner single click must only select'
+            # Native click deadlines use wall time, independently of rendering speed.
+            time.sleep(.35);double_click_widget('node.'+other)
+            assert state()['camera']!=before_click,'Outliner double click must frame the object'
+            mouse(0x200,x,y);mouse(0x204,x,y,2);assert state()['capture']['navigationButton']==1
+            assert state()['navigation']['nativeCursorMode']=='disabled' and state()['navigation']['rawMouse']==raw_mouse
+            before=state()['camera'];mouse(0x200,x+24,y-18,2);turned=state()
+            assert turned['camera']['position']==before['position'],'Right look must preserve camera position'
+            def normalized(v):
+                size=math.sqrt(sum(a*a for a in v));return [a/size for a in v]
+            forward=normalized([b-a for a,b in zip(before['position'],before['target'])])
+            right=normalized([-forward[2],0,forward[0]])
+            up=[right[1]*forward[2]-right[2]*forward[1],right[2]*forward[0]-right[0]*forward[2],right[0]*forward[1]-right[1]*forward[0]]
+            direction=normalized([b-a for a,b in zip(turned['camera']['position'],turned['camera']['target'])])
+            assert sum(a*b for a,b in zip(direction,right))>0 and sum(a*b for a,b in zip(direction,up))>0
+            for value in ('W','E','Q'):
+                start=state()['camera']['position'];key(value,True)
+                assert state()['camera']['position']!=start,'Native navigation key must move: '+value
+                assert state()['gizmoMode']==3,'Navigation keys must preserve the selected tool'
+                key(value,False);stopped=state()['camera']['position'];wait(8)
+                assert state()['camera']['position']==stopped,'Native key release must stop flight translation'
+            mouse(0x205,x+image['width'],y);assert state()['capture']['navigationButton']==-1
+            assert state()['navigation']['nativeCursorMode']=='normal' and not state()['navigation']['rawMouse']
+            key('F',True);key('F',False)
+            assert state()['camera']!=turned['camera'],'F must frame the current selection'
+            mouse(0x200,x,y);mouse(0x204,x,y,2);key('W',True);post(0x8)
+            assert state()['capture']['navigationButton']==-1,'Native focus loss must release capture'
+            stopped=state()['camera'];wait(8);assert state()['camera']==stopped,'Native focus loss must stop flight'
+            key('W',False)
+            assert call('query',name='document.contentHash')==saved,'Native view navigation must preserve authored content'
+            post(0x7)
+            if workflow=='exploration':
+                def game_focused():return json.loads(call('query',name='game.state'))['focused']
+                edit=state()
+                native_click_widget('play')
+                assert state()['previewMode']=='play'
+                assert state()['navigation']['nativeCursorMode']=='normal','Play must leave the pointer in the editor until the game image is clicked'
+                assert not game_focused()
+                native_click_widget('viewport.image')
+                assert state()['navigation']['nativeCursorMode']=='disabled','Clicking the game image must capture the pointer'
+                assert game_focused()
+                key('Escape',True);key('Escape',False)
+                assert state()['navigation']['nativeCursorMode']=='normal','Escape must release game capture'
+                assert not game_focused()
+                native_click_widget('viewport.image')
+                assert state()['navigation']['nativeCursorMode']=='disabled'
+                post(0x8)
+                assert state()['navigation']['nativeCursorMode']=='normal','Focus loss must release game capture'
+                post(0x7);wait(10)
+                assert state()['navigation']['nativeCursorMode']=='normal','Focus regain must wait for an explicit click in the game image'
+                assert not game_focused()
+                native_click_widget('viewport.image')
+                assert state()['navigation']['nativeCursorMode']=='disabled','Game capture can be explicitly regained'
+                key('Escape',True);key('Escape',False)
+                native_click_widget('stop')
+                stopped=state()
+                assert stopped['previewMode']=='edit' and stopped['navigation']['nativeCursorMode']=='normal'
+                assert stopped['camera']==edit['camera'] and stopped['selection']==edit['selection']
+                assert call('query',name='document.contentHash')==saved
+            for width,height in ((1920,1080),(1280,720)):
+                immediate=window.resize(width,height);wait(12)
+                actual=window.extent();evidence.append(dict(resizeRequested=[width,height],immediate=immediate,actual=actual))
+                assert actual==[width,height],actual
+            return saved
+        if drop_only:
+            activate_window();wait(20);saved=call('query',name='document.contentHash')
+        else:saved=check_viewport()
         click_widget('tab.assets')
         history_path=output/'config/path-history.json'
         choose('import.browse',via_browse=True)
@@ -267,12 +278,69 @@ def run(executable, output, workflow):
         assert Path(json.loads(history_path.read_text(encoding='utf-8'))['directories']['project'][0])==source.parent
         choose('project.browse')
         assert call('query',name='document.contentHash')==saved
+        if workflow=='inspector':
+            before_drop=state()
+            popup_x,popup_y,popup_width,popup_height=before_drop['widgets']['assets.import-popup-region']
+            assert popup_y>=0 and popup_y+popup_height<=720,'The compact import menu must fit inside the window'
+            _,top,_,height=before_drop['widgets']['assets.drop-region']
+            drop_x,drop_y=int(popup_x+popup_width/2),int(popup_y+popup_height/2)
+            second_source=source.with_name('第二个模型.gltf')
+            shutil.copyfile(source,second_source)
+            mouse(0x200,drop_x,drop_y)
+            # DROPFILES contains a client point and a double-NUL terminated filename list.
+            files=(str(source),str(second_source))
+            payload=struct.pack('<IiiII',20,drop_x,drop_y,0,1)+('\0'.join(files)+'\0\0').encode('utf-16-le')
+            kernel=ctypes.WinDLL('kernel32')
+            kernel.GlobalAlloc.argtypes=[wintypes.UINT,ctypes.c_size_t]
+            kernel.GlobalAlloc.restype=ctypes.c_void_p
+            kernel.GlobalLock.argtypes=[ctypes.c_void_p]
+            kernel.GlobalLock.restype=ctypes.c_void_p
+            kernel.GlobalUnlock.argtypes=[ctypes.c_void_p]
+            kernel.GlobalFree.argtypes=[ctypes.c_void_p]
+            handle=kernel.GlobalAlloc(0x42,len(payload))
+            assert handle
+            delivered=False
+            try:
+                data=kernel.GlobalLock(handle)
+                assert data
+                ctypes.memmove(data,payload,len(payload));kernel.GlobalUnlock(handle)
+                delivered=bool(user.PostMessageW(window.handle,0x233,handle,0))
+                assert delivered,'Native file drop must be delivered to the editor window'
+            finally:
+                if not delivered:kernel.GlobalFree(handle)
+            evidence.append(dict(nativeMessage=0x233,target='assets.import-popup-region',paths=files,inputSource='Win32 WM_DROPFILES'))
+            deadline=time.monotonic()+30
+            while time.monotonic()<deadline:
+                wait()
+                receipts=[task for task in state()['tasks'] if task['source']=='asset.import-drop']
+                if len(receipts)==2 and all(task['state']!='running' for task in receipts):break
+            assert len(receipts)==2 and all(task['state']=='completed' for task in receipts),receipts
+            assert all(not task['result']['placed'] for task in receipts), 'Every file dropped in the import popup must stay in Assets'
+            receipt=receipts[-1]
+            locate='task.asset-reveal.'+receipt['id']
+            completed=state()
+            assert 'assets.import-popup-region' not in completed['widgets'], 'An accepted file drop must expose the receipt'
+            _,y,_,button_height=completed['widgets'][locate]
+            assert top<=y and y+button_height<=top+height, 'The compact import receipt must fit inside the Assets panel'
+            label='native-drop-receipt-before'
+            call('screenshot',label=label);wait(4)
+            shutil.copy2(executable.parent/'captures'/f'{label}.png',output/f'{label}.png')
+            # Target the owned window directly after WM_DROPFILES has supplied its client point.
+            click_widget(locate)
+            imported=state()
+            assert imported['contentNavigation']['selected']==[receipt['result']['asset']]
+            assert imported['nodeCount']==before_drop['nodeCount'],'A native drop in the Assets panel must import without placement'
+            click_widget('assets.return-to-browse')
+            assert state()['contentNavigation']['selected']==before_drop['contentNavigation']['selected']
         post(0x7);window.close();assert process.wait(timeout=30)==0
         summary=dict(workflow=workflow,passed=True,inputSource='Windows PostMessage + SetCursorPos + relative and dialog-click SendInput -> GLFW callbacks',physicalKeyboardMouse='NotExecuted',
             dialogOpenSources=['Native Browse button (cancel)','Registered path.choose operation (file/directory selection and cancel)'],
-            tools=True,singleOnlySelects=True,doubleFrames=True,fFrames=True,rightLook=True,flight=True,flightRelease=True,outsideRelease=True,focusRelease=True,resize=True,rawMouse=raw_mouse,
             nativeFileChoose=True,nativeDirectoryChoose=True,nativeCancel=True,utf8Path=True,contentPreserved=True,
-            gameCaptureRecovery=True if workflow=='exploration' else None)
+            gameCaptureRecovery=True if workflow=='exploration' and not drop_only else None,
+            nativeImportDrop=True if workflow=='inspector' else None)
+        if not drop_only:
+            summary.update(tools=True,singleOnlySelects=True,doubleFrames=True,fFrames=True,rightLook=True,flight=True,
+                           flightRelease=True,outsideRelease=True,focusRelease=True,resize=True,rawMouse=raw_mouse)
         (output/'summary.json').write_text(json.dumps(summary,indent=2),encoding='utf-8')
         return summary
     finally:
@@ -285,6 +353,8 @@ def run(executable, output, workflow):
 if __name__=='__main__':
     assert ctypes.WinDLL('user32').SetProcessDPIAware()
     parser=argparse.ArgumentParser(__doc__);parser.add_argument('--executable',type=Path,required=True);parser.add_argument('--output',type=Path,required=True)
+    parser.add_argument('--drop-only',action='store_true')
     args=parser.parse_args();root=args.output.resolve()/('run-'+str(time.time_ns()))
-    results=[run(args.executable.resolve(),root/workflow,workflow) for workflow in ('exploration','inspector')]
+    workflows=('inspector',) if args.drop_only else ('exploration','inspector')
+    results=[run(args.executable.resolve(),root/workflow,workflow,args.drop_only) for workflow in workflows]
     (root/'summary.json').write_text(json.dumps(results,indent=2),encoding='utf-8');print(json.dumps(results))

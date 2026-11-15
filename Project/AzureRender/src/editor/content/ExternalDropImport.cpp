@@ -9,7 +9,8 @@ bool EditorSession::dropImporting() const {
     return false;
 }
 std::string EditorSession::startDropImport(const nlohmann::json& request) {
-    if(!context_->isProject()||context_->importing()||dropImporting()||reimporting_||playing()||building())throw EditRejection("File drop requires an idle project");
+    if(!context_->isProject()||context_->importing()||dropImporting()||reimporting_||creatingProject_||pendingProject_||playing()||building())
+        throw EditRejection("File drop requires an idle project");
     const auto captured=context_;const auto version=captured->documentVersion();
     const auto parent=request.value("parent",std::string());
     if(!parent.empty()&&std::none_of(captured->scene().nodes.begin(),captured->scene().nodes.end(),[&](const auto& node){return node.id==parent;}))throw EditRejection("Unknown drop parent");
@@ -19,7 +20,7 @@ std::string EditorSession::startDropImport(const nlohmann::json& request) {
     const auto identity=newDocumentIdentity();const auto base=captured->project().file.parent_path();
     auto job=std::make_shared<AssetImportJob>(source,base/".azure/imports"/identity,captured->project().mounts.begin()->second/"imports"/identity);
     contentDirectories_.cancelRefresh();
-    return tasks_->add("asset.import-drop",source.u8string(),{
+    return tasks_->add("asset.import-drop",captured->project().file.u8string(),{
         [job]{return job->progress();},[job]{return job->ready();},
         [this,captured,version,job,request,parent,position,source]{
             if(context_!=captured||captured->documentVersion()!=version)throw EditRejection("Drop document changed; retry the file drop");
@@ -36,6 +37,7 @@ std::string EditorSession::startDropImport(const nlohmann::json& request) {
                 if(place)selection_->requestReveal();
                 return nlohmann::json{{"asset",asset},{"placed",place},{"summary",captured->importSummary()}};
             }catch(...){std::filesystem::remove_all(job->destination);throw;}
-        },[job]{job->cancel();}});
+        },[job]{job->cancel();},
+        [this,source](const auto& message){recordError("asset.import-drop",message,{{"path",source.u8string()}});}});
 }
 }

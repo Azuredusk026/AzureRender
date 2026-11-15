@@ -18,7 +18,8 @@ struct CorePanelServices {
     std::function<void()> rename;
     std::function<void(nlohmann::json)> exportSelection;
     std::function<void(const SceneNode&)> materialSlots,physics;
-    std::function<void()> textureDialog,materialDialog;
+    std::function<void()> textureDialog;
+    std::function<void(const std::string&)> openMaterial;
     std::function<VkDescriptorSet(std::uint64_t)> previewTexture;
     std::function<void(const char*,std::string&,const std::string&,bool,const std::vector<std::string>&)> pathInput;
 };
@@ -37,6 +38,7 @@ struct AssetPanelState {
     float assetScroll_ = 0;
     nlohmann::json contentView_=nlohmann::json::object();
     bool assetGrid_ = false;
+    bool closeImportPopup_ = false;
     std::string assetDirectory_;
     std::string assetMount_;
     std::string assetNavigationDiagnostic_;

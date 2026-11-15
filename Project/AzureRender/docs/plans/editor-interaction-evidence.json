@@ -6,6 +6,7 @@
   "candidateExecutableSha256": "735dfd65f0ac106777f41ffa289fc4df1770680e290cb170ea43d02081c4678e",
   "run": "D:/Projects/FYP/Project/AzureRender/build/runs/20261115-133208-editor-interaction-baseline-dd4266",
   "regressionRun": "D:/Projects/FYP/Project/AzureRender/build/runs/20261115-162933-editor-interaction-regression-878b95",
+  "recoveryRun": "D:/Projects/FYP/Project/AzureRender/build/runs/20261115-185313-editor-interaction-recovery-008edd",
   "input": "production ImGui replay",
   "physicalInput": false,
   "dispatch": {
@@ -104,5 +105,38 @@
     "projectModeSaveAndReset": "quadrant-runtime-165020/view_modes.log",
     "panelReplay": "quadrant-runtime-165020/panel_design/run-ac4e9eca/summary.json",
     "panelCasesPassed": 10
+  },
+  "assetBrowserAndMaterials": {
+    "twoProjectImport": "quadrant-resources-165846/summary.json",
+    "twoProjectImportLog": "quadrant-resources-165846/import_result.log",
+    "compactPanelReplay": "quadrant-runtime-170229/summary.json",
+    "contentAndGeneralWorkflow": "quadrant-resources-163739/summary.json",
+    "inspectorReference": "quadrant-scene-164332/properties/locate-in-assets/runtime.json",
+    "preRecoveryNativeFailure": "quadrant-runtime-170724/summary.json"
+  },
+  "affectedRegression": {
+    "sceneCases": "quadrant-scene-164332/summary.json",
+    "sceneCasesPassed": 7,
+    "cpuLog": "editor-interaction-regression-source-ctest.log",
+    "cpuCasesPassed": 19,
+    "lastCandidateBeforeHostRecovery": "quadrant-resources-173001/summary.json"
+  },
+  "resourceRecoveryAcceptance": {
+    "configuration": "Release",
+    "candidateExecutableSha256": "4e0926c72ee38c10c28eee1775bf3b5efed0eb42036d12f2a2a7d3fdae0d03c0",
+    "suiteDispatch": 1174,
+    "suite": "quadrant-resources-185921/summary.json",
+    "twoProjectImport": "quadrant-resources-185921/import_result/run-2579902f/summary.json",
+    "panelReplay": "quadrant-resources-185921/panel_design/run-1f402f3a/summary.json",
+    "fullNativeReplay": "quadrant-resources-185921/native_viewport/run-1794740521300169200/summary.json",
+    "cpuLog": "editor-interaction-regression-source-ctest.log",
+    "cpuCasesPassed": 19,
+    "targetedDispatch": 1175,
+    "nativeDropReplay": "native-drop-only/run-1794740558727109100/summary.json",
+    "nativeDropEvents": "native-drop-only/run-1794740558727109100/inspector/events.json",
+    "nativeReceiptScreenshot": "native-drop-only/run-1794740558727109100/inspector/native-drop-receipt-before.png",
+    "viewport": [1280, 720],
+    "filesImported": 2,
+    "physicalInput": false
   }
 }

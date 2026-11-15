@@ -145,6 +145,7 @@ public:
     const std::filesystem::path& userSettingsPath() const {return userSettingsPath_;}
     SettingRegistry& settings() noexcept { return settings_; }
     EditorPanelRegistry& panelRegistry() noexcept { return panelRegistry_; }
+    bool assetRevealPending() const noexcept {return !assetReveal_.empty();}
     std::string consumeAssetReveal(){auto result=assetReveal_;assetReveal_.clear();return result;}
     ReferencePickerService& references() noexcept {return references_;}
     SelectionService& selection() noexcept { return *selection_; }

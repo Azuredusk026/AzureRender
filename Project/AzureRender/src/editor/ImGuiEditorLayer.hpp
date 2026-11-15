@@ -76,7 +76,7 @@ public:
 private:
     unsigned renderSamples_=0,renderTargetSamples_=0;
 
-    struct CapturedFileDrop {FileDropEvent event;std::string document;};
+    struct CapturedFileDrop {FileDropEvent event;std::string document;bool importOnly=false;};
     std::deque<CapturedFileDrop> fileDrops_;
     void processFileDrops();
     struct PreviewTexture {VkDescriptorSet texture=VK_NULL_HANDLE;std::uint64_t lastUse=0;};
@@ -105,6 +105,7 @@ private:
     void drawAssetTransferPanel();
     void drawMaterialAssetPanel();
     void drawMaterialSlots(const SceneNode&);
+    void openMaterialAsset(const std::string& asset);
     void drawPhysicsAuthoring(const SceneNode&);
     void drawDocumentTabs();
     void drawScriptAuthoringPanel(PanelContext&);
