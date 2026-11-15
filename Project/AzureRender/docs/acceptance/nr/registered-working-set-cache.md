@@ -39,3 +39,5 @@
 正式复测在启动前连续观察系统 CPU 六十秒，其间的采样忙碌率为 2.26% 至 3.78%。五种负载各通过三轮，十五轮均预热 300 帧并统计 1,800 帧。工作集最大增长为 0.448%，GPU 帧 P95 最大为 7.07 毫秒，播放器 CPU P95 最大为 4.84 毫秒，编辑器 CPU P95 最大为 6.59 毫秒。全部轮次保留已验证的应用管线缓存，退出时核验系统平衡电源计划及自动风扇档位。
 
 [正式结果](evidence/2026-11-15/registered-cache-retention-formal-settled/results.json)和[验证归档](evidence/2026-11-15/registered-cache-retention-formal-settled/verification.zip)保存十五轮的来源摘要、逐帧计时、工作集序列和设备状态。
+
+[三条冻结画面路径](frozen-public-visual.md#管线缓存保留的标准构建复验)记录标准 Release 和 Debug 的 42 张零差异捕获。

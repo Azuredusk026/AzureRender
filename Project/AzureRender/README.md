@@ -16,6 +16,7 @@
 [平衡电源计划复验](docs/acceptance/nr/joint-nonlocal-texture-placement.md#平衡电源计划的处理器节能首选项)记录固定 80 W 联合场景三轮通过和每轮设备设置的恢复。
 [标准构建定向复验](docs/acceptance/nr/current-registered-gpu-recoveries.md#标准构建定向复验)记录四项注册用例和两项应用管线缓存对照。
 [正式工作集与管线缓存](docs/acceptance/nr/registered-working-set-cache.md)记录缓存保留配对验证及五类正式负载十五轮通过。
+[冻结画面标准构建复验](docs/acceptance/nr/frozen-public-visual.md#管线缓存保留的标准构建复验)记录三条路径在双配置下的 42 张零差异捕获。
 [聚光灯范围与辐照度系数](docs/acceptance/nr/joint-gpu-pass-budget.md#聚光灯范围与辐照度系数)记录联合场景缓冲、辐照度系数和快照绘制成本。
 
 [三纹理采样与视口选择集成](docs/acceptance/nr/projected-hair-viewport-integration.md)通过两种配置及双显卡参考附件核对。

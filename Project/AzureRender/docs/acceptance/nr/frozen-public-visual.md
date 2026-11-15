@@ -95,3 +95,9 @@ Release 的首次执行因受管池预留空间不足在编译前退出。任务
 ```powershell
 python build/archives/frozen-public-visual-shader-controls-20261114-restore.py --staging build/maintenance/public-shader-recovery/shader-controls
 ```
+
+## 管线缓存保留的标准构建复验
+
+标准 Release 和 Debug 宿主使用 NVIDIA 595.79。默认索引描述符、固定描述符和顶点着色器蒙皮三条路径均执行原注册严格检查。每种配置对三条路径各核对七张图，合计 42 张图与冻结参考的 RGB 和 PNG 摘要完全一致。两种配置各通过管线缓存文件和 Vulkan 管线缓存检查。
+
+[双配置结果](evidence/2026-11-15/registered-cache-retention-frozen/results.json)和[验证归档](evidence/2026-11-15/registered-cache-retention-frozen/verification.zip)保存 10 项注册结果、逐图设备信息、调试链接续编记录和构建产物摘要。
