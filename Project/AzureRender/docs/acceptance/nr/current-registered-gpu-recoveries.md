@@ -48,3 +48,9 @@ Release 第十四组首次运行记录开发工具宿主通信超时及临时日
 Release 第三十四组完成十一项注册检查。反射运动用例首次申请 134,217,728 字节时达到生成物池上限，执行在启动渲染前结束。三份到期着色器目录完成逐文件归档，释放 632,109,919 字节配额。同一 Release 产物使用原注册命令复测反射运动，用时 11.98 秒，通过后该组十一项均已通过。
 
 [复测结果](evidence/2026-11-15/registered-reflection-motion-storage-recovery/results.json)和[验证归档](evidence/2026-11-15/registered-reflection-motion-storage-recovery/verification.zip)保存两次注册收据、构建校验、归档摘要及调度结果。
+
+## 探索关与平台关切换复测
+
+Release 第四十二组的关卡切换检查首次达到 600 秒时限。使用同一播放器、相同输入摘要及原注册命令复测，用时 60.73 秒。同一进程完成探索关、平台关切换和平台关通关，收集八枚金币，并通过卸载资源计数检查。
+
+[复测结果](evidence/2026-11-15/registered-game-sequence-recovery/results.json)和[验证归档](evidence/2026-11-15/registered-game-sequence-recovery/verification.zip)保存首次超时、复测收据、输入与运行报告。
