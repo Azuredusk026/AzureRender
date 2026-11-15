@@ -228,6 +228,8 @@ Intel 头发颜色继续核对纹理梯度与层级选择。
 [完整皮肤区域对照](../acceptance/nr/evidence/2026-11-15/body-skin-coverage-composition/results.json)按原生绘制归属核对 47,458 个位置。描边局部光通过双设备区域结构相似度和中位亮度门槛，完整颜色继续按一字节门槛验收。
 [描边径向参考点](../acceptance/nr/evidence/2026-11-15/body-outline-native-rim-origin/results.json)通过双设备姿态实测，覆盖之外逐像素一致。描边保留区在 NVIDIA 和 Intel 上分别有 48 和 49 处超过八个色阶。
 
+[描边阴影查找表](../acceptance/nr/evidence/2026-11-16/body-outline-native-shadow-response/results.json)核对原生纹理与四个片元的漫反射响应。两设备分别有 20 和 15 处新增超差，完整画面继续按原门槛验收。
+
 [第一层衣料描边网格](../acceptance/nr/evidence/2026-11-15/native-cloth-one-outline-topology/results.json)核对原生绘制 1079 的直接位置、投影偏移和三角形对应关系。20 个皮肤像素与待核对三角形相交，按原生片元继续复测。
 
 [衣料覆盖照明](../acceptance/nr/evidence/2026-11-15/body-late-cloth-native-components/results.json)核对原生四个硬件片元。两处峰差的原生红通道以主光漫反射为主，独立衣料夹具与描边配置继续联合复测。
