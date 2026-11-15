@@ -1,0 +1,257 @@
+{
+  "status": "measured-native-body-receiver-normal-and-atlas",
+  "overall": "failed-user-review",
+  "originalScope": 9116,
+  "qualifiedNormalGeometry": 8827,
+  "heldOutNormals": 3793,
+  "explicitNormalMipCount": 11,
+  "normalMetrics": {
+    "nvidia": {
+      "exact": 77216,
+      "overOne": 61,
+      "perMipOverOne": [
+        1,
+        2,
+        39,
+        8,
+        2,
+        0,
+        9,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "intel": {
+      "exact": 94596,
+      "overOne": 0,
+      "perMipOverOne": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "atlasMetrics": {
+    "nvidia": {
+      "onlyAtlasOverOne": 5,
+      "comparisonFlips": 6,
+      "largestDisplayDifference": 20,
+      "nativeProducerMapping": {
+        "2484,1690": {
+          "native": [
+            237,
+            44344
+          ],
+          "historicVulkan": [
+            272,
+            44345
+          ],
+          "liveVulkanCode": 44345
+        },
+        "2552,1681": {
+          "native": [
+            191,
+            44060
+          ],
+          "historicVulkan": [
+            242,
+            44060
+          ],
+          "liveVulkanCode": 44061
+        },
+        "2565,1691": {
+          "native": [
+            237,
+            43954
+          ],
+          "historicVulkan": [
+            272,
+            43954
+          ],
+          "liveVulkanCode": 43955
+        },
+        "2566,1691": {
+          "native": [
+            237,
+            43932
+          ],
+          "historicVulkan": [
+            272,
+            43932
+          ],
+          "liveVulkanCode": 43933
+        },
+        "2566,1694": {
+          "native": [
+            237,
+            43903
+          ],
+          "historicVulkan": [
+            272,
+            43904
+          ],
+          "liveVulkanCode": 43904
+        }
+      },
+      "sampledCodeDifferences": {
+        "-2": 6,
+        "-1": 174,
+        "0": 9604,
+        "1": 699,
+        "2": 6
+      }
+    },
+    "intel": {
+      "onlyAtlasOverOne": 2,
+      "comparisonFlips": 2,
+      "largestDisplayDifference": 10,
+      "nativeProducerMapping": {
+        "2484,1690": {
+          "native": [
+            237,
+            44344
+          ],
+          "historicVulkan": [
+            272,
+            44345
+          ],
+          "liveVulkanCode": 44344
+        },
+        "2552,1681": {
+          "native": [
+            191,
+            44060
+          ],
+          "historicVulkan": [
+            242,
+            44060
+          ],
+          "liveVulkanCode": 44060
+        },
+        "2565,1691": {
+          "native": [
+            237,
+            43954
+          ],
+          "historicVulkan": [
+            272,
+            43954
+          ],
+          "liveVulkanCode": 43955
+        },
+        "2566,1691": {
+          "native": [
+            237,
+            43932
+          ],
+          "historicVulkan": [
+            272,
+            43932
+          ],
+          "liveVulkanCode": 43932
+        },
+        "2566,1694": {
+          "native": [
+            237,
+            43903
+          ],
+          "historicVulkan": [
+            272,
+            43904
+          ],
+          "liveVulkanCode": 43904
+        }
+      },
+      "sampledCodeDifferences": {
+        "-2": 6,
+        "-1": 190,
+        "0": 9996,
+        "1": 291,
+        "2": 6
+      }
+    }
+  },
+  "distinctAtlasTexels": 10922,
+  "residualAtlasTexels": 5,
+  "nativeAtlasProducerEvents": {
+    "2484,1690": [
+      [
+        163,
+        44013
+      ],
+      [
+        237,
+        44344
+      ]
+    ],
+    "2552,1681": [
+      [
+        163,
+        43701
+      ],
+      [
+        191,
+        44060
+      ]
+    ],
+    "2565,1691": [
+      [
+        163,
+        43540
+      ],
+      [
+        237,
+        43954
+      ]
+    ],
+    "2566,1691": [
+      [
+        163,
+        43534
+      ],
+      [
+        237,
+        43932
+      ]
+    ],
+    "2566,1694": [
+      [
+        163,
+        43492
+      ],
+      [
+        237,
+        43903
+      ]
+    ]
+  },
+  "sourceInputs": {
+    "pixelShader": "907e0a39de60c6fc742ef86c230eb59ef2034b9a92909ce529df469a1986e1bc",
+    "mipManifest": "940de948f0d3c480a9329ad7d2462ba18dc2394fca4fe7606c9a9c2d27aca2ea",
+    "normalTexture": "3d16ddcced1a4f482f969250b835c5ea569ce620d8ef16cc465fc19cbb266a9e",
+    "atlasValidation": "bd24898ef20119c4b12cc05e66f26f946f39fd0ab3d231084694ba41877e85cc",
+    "visibilityModel": "71affe8d326bce3366cfdd76fe61b8966eff2765d3ca2030db20b3f0e456fea0"
+  },
+  "archive": {
+    "sha256": "ecb45dc5938a74cb0c97b7c997c8caa70ee20aeb9bd6744e0e454274b1977f1d",
+    "members": {
+      "package-body-receiver-normal-and-atlas.py": "f84a91312f45d4b3e32f35e489293b47b05dab030804cb9f07e15450d65b1e06",
+      "body-receiver-normal-explicit-reconstruction.py": "4d004a8e3e9bd7849effa503b8a84ac0d893756a67e8ae5af0be2b2c920fb58b",
+      "body-receiver-normal-explicit-reconstruction.json": "88f160c9b6025c47842f230d83a5676392b1a3b5f1024eea17e0e87d65f442b5",
+      "body-receiver-atlas-texels.py": "4f611e8b8097328cb39d673b60e548f4c446f50a2b06b0d7db83dc6d3d4a3e86",
+      "body-receiver-atlas-texels.json": "01d993f9abe79598c14852432da0498172d99d139ab0e1b5e1fae8729142fef6",
+      "body-receiver-atlas-texel-producers.py": "3218e515a8585cddbd9e6612b40eed6e6b9aa94ba09bfe6a7eb40298e8d2e5e5",
+      "body-receiver-atlas-texel-producers.json": "c198d30c3ac862e638dab6f2fcfcdc9b3336971ce7f6c304156c6b594f6778ef"
+    }
+  }
+}
