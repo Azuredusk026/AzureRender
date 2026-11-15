@@ -39,6 +39,18 @@
           ]
         ]
       ],
+      "nativeFloat32Coverage": 136030,
+      "nativeFloat32VisibleMissing": [],
+      "nativeFloat32VulkanModelDisagreement": [
+        [
+          1181,
+          898
+        ],
+        [
+          1199,
+          951
+        ]
+      ],
       "facePublicSource": null,
       "exactWorldPositions": 3289,
       "worldPositionMaxMeters": 0.0,
@@ -83,6 +95,9 @@
         [],
         []
       ],
+      "nativeFloat32Coverage": 11462,
+      "nativeFloat32VisibleMissing": [],
+      "nativeFloat32VulkanModelDisagreement": [],
       "facePublicSource": {
         "scene": "df056aa9dc0e4f4edc1b27b4b762f5ccd4b4fa4f33ebe7974e130162ff039008",
         "asset": "ff83e532fb5d03f899197bd9e495a4a97a16b65b3fcb77203e56e1bc9d836a90",
@@ -201,13 +216,127 @@
       ]
     }
   },
+  "nativeContourStages": {
+    "1181,898": {
+      "nativeSequence": [
+        {
+          "stage": 782,
+          "packed": 0,
+          "display": [
+            0,
+            0,
+            0
+          ],
+          "candidateErrors": {
+            "nvidia": 113,
+            "intel": 113
+          }
+        },
+        {
+          "stage": 783,
+          "packed": 1763373971,
+          "display": [
+            112,
+            85,
+            75
+          ],
+          "candidateErrors": {
+            "nvidia": 2,
+            "intel": 2
+          }
+        },
+        {
+          "stage": 1383,
+          "packed": 1763373971,
+          "display": [
+            112,
+            85,
+            75
+          ],
+          "candidateErrors": {
+            "nvidia": 2,
+            "intel": 2
+          }
+        }
+      ],
+      "actual": {
+        "nvidia": [
+          113,
+          86,
+          77
+        ],
+        "intel": [
+          113,
+          86,
+          77
+        ]
+      }
+    },
+    "1199,951": {
+      "nativeSequence": [
+        {
+          "stage": 782,
+          "packed": 0,
+          "display": [
+            0,
+            0,
+            0
+          ],
+          "candidateErrors": {
+            "nvidia": 86,
+            "intel": 110
+          }
+        },
+        {
+          "stage": 783,
+          "packed": 1746574222,
+          "display": [
+            109,
+            80,
+            71
+          ],
+          "candidateErrors": {
+            "nvidia": 23,
+            "intel": 2
+          }
+        },
+        {
+          "stage": 1383,
+          "packed": 1746574222,
+          "display": [
+            109,
+            80,
+            71
+          ],
+          "candidateErrors": {
+            "nvidia": 23,
+            "intel": 2
+          }
+        }
+      ],
+      "actual": {
+        "nvidia": [
+          86,
+          59,
+          49
+        ],
+        "intel": [
+          110,
+          82,
+          73
+        ]
+      }
+    }
+  },
   "frozenReference": "48afd6546c23cfa85099a765cc94ada4813a684538c695faf6d70d6daf2261b5",
   "archive": {
-    "sha256": "cd69b5eeb1500c964f3423f9e8c97013ebc6071f616db6d23bf57ebdeac08160",
+    "sha256": "4e5659f213deabb41199e51e064d4a7ef180f47bde0179b1cbae98264c9da45d",
     "members": {
-      "archive-fixed-pose-face-and-body-geometry.py": "a3efdbdfdb05435639e0633f60316298dfc942f2dade12991d1737f1f73d8f44",
-      "score-fixed-pose-face-and-body-geometry.py": "8c01ea837be64fdf811f6e4e4cdfc19fa647cd655f2de83f8851aee179f7741b",
-      "fixed-pose-face-and-body-geometry.json": "170df12b51cfaab1ea9c96eb18d6cd114bb4044e130848fa0b9eb085527b8a5a",
+      "archive-fixed-pose-face-and-body-geometry.py": "d699212d2fab2720ad3885a61d676633280255c771c087c66e84c798287e535b",
+      "score-fixed-pose-face-and-body-geometry.py": "19328072124f0f03c1e7d1d6c444b7c5c372fd1675ee6ca5d92327faff2ebd39",
+      "fixed-pose-face-and-body-geometry.json": "5c2706dba054fead191a7c8dcdb8e29661904127e75b7b24c58c445923d13190",
+      "score-native-body-contour-stage-controls.py": "a67c3f95d2b523638bccdf3f8c189de50b03f234b232549527c2bf4eb9e5172e",
+      "body-contour-raw-stage-controls.json": "e32828cdb1bdb4a8945a61af507ab1db1a7dbdeb55cb92fc270d922771613577",
       "nvidia/frames/capture_manifest.json": "054bb8de6d9c1d7718acddaf10322816112f6d17694df2a78aa684461af0c474",
       "intel/frames/capture_manifest.json": "b30a905dd83cf90ad1c2385dc7f9407be52bb5e1adee22c74b51d0808022121f"
     }
