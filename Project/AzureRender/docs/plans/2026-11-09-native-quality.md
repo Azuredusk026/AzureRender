@@ -232,6 +232,7 @@ Intel 头发颜色继续核对纹理梯度与层级选择。
 [虹膜眼影覆盖](../acceptance/nr/evidence/2026-11-16/iris-projective-covered/results.json)及[原生体表法线取样](../acceptance/nr/evidence/2026-11-16/native-body-normal-raw-samples/results.json)完成双设备实测，完整颜色及可见量继续按原门槛验收。
 [固定姿态材质对照](../acceptance/nr/evidence/2026-11-16/fixed-pose-material-controls/results.json)保存身体主光、衣料和脸部漫反射的实机结果。生产颜色门槛包含可见区域与邻区的新增超差。
 [双层衣料与覆盖](../acceptance/nr/evidence/2026-11-16/native-two-cloth-overlay-controls/results.json)核对两个原生绘制与定向衣料合成，覆盖及新增误差按原门槛验收。
+[动态角色网格](../acceptance/nr/full-body-native-comparison.md#动态角色网格)记录身体与脸部的原生索引和静止顶点对照。身体候选按动态轮廓、接缝及双设备画面验收。
 [完整皮肤区域对照](../acceptance/nr/evidence/2026-11-15/body-skin-coverage-composition/results.json)按原生绘制归属核对 47,458 个位置。描边局部光通过双设备区域结构相似度和中位亮度门槛，完整颜色继续按一字节门槛验收。
 [描边径向参考点](../acceptance/nr/evidence/2026-11-15/body-outline-native-rim-origin/results.json)通过双设备姿态实测，覆盖之外逐像素一致。描边保留区在 NVIDIA 和 Intel 上分别有 48 和 49 处超过八个色阶。
 

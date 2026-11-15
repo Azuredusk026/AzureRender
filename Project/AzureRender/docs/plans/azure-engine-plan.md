@@ -1427,3 +1427,5 @@ Intel 头发颜色继续按冻结区域核对纹理选级。
 [固定姿态材质对照](../acceptance/nr/evidence/2026-11-16/fixed-pose-material-controls/results.json)核对身体主光饱和度、第一层衣料及皮肤图集深度。两个画面对照存在新增超差，角色生产颜色和覆盖按原门槛验收。
 
 [双层衣料与覆盖](../acceptance/nr/evidence/2026-11-16/native-two-cloth-overlay-controls/results.json)核对两个原生绘制与定向衣料合成，覆盖及新增误差按原门槛验收。
+
+[动态角色网格](../acceptance/nr/full-body-native-comparison.md#动态角色网格)记录身体和脸部的原生索引对照及身体网格候选，动态画面继续按原门槛验收。
