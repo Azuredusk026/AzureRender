@@ -1,0 +1,215 @@
+{
+  "status": "measured-fixed-pose-geometry-source-comparison",
+  "events": {
+    "body": {
+      "vertices": 3289,
+      "triangles": 5679,
+      "sameIndexedTriangleCount": 5679,
+      "projectedCoverage": [
+        136029,
+        136028
+      ],
+      "coverageDifferences": [
+        [
+          1181,
+          898
+        ]
+      ],
+      "highErrorInCoverageDiff": [],
+      "nativeVisibleScope": 47458,
+      "nativeVisibleCovered": [
+        47457,
+        47456
+      ],
+      "nativeVisibleMissing": [
+        [
+          [
+            1199,
+            951
+          ]
+        ],
+        [
+          [
+            1181,
+            898
+          ],
+          [
+            1199,
+            951
+          ]
+        ]
+      ],
+      "facePublicSource": null,
+      "exactWorldPositions": 3289,
+      "worldPositionMaxMeters": 0.0,
+      "viewportPixelPeak": [
+        5.955153346803854e-05,
+        0.00016779259982513395
+      ],
+      "viewportPixelP95": [
+        2.9666391264981925e-05,
+        0.00011158472208308012
+      ],
+      "quantizedVerticesDiffering": 68,
+      "depthMaxError": 5.239247302668559e-07,
+      "exactUvCount": 3289,
+      "uvPeak": [
+        0.0,
+        0.0
+      ],
+      "mirroredVUvPeak": [
+        0.0,
+        0.9983994960784912
+      ],
+      "nativeVertex": "fef0374bebc7e0848af9e97c441a339669847c55aa4a227d9a36c77c34fe9a82",
+      "nativeIndex": "507fcdc6d78e70f8f5a2dbbaf54190f20596a6236027f7a8f7cf2a940c6b5742"
+    },
+    "face": {
+      "vertices": 1792,
+      "triangles": 2906,
+      "sameIndexedTriangleCount": 2906,
+      "projectedCoverage": [
+        11462,
+        11462
+      ],
+      "coverageDifferences": [],
+      "highErrorInCoverageDiff": [],
+      "nativeVisibleScope": 3663,
+      "nativeVisibleCovered": [
+        3663,
+        3663
+      ],
+      "nativeVisibleMissing": [
+        [],
+        []
+      ],
+      "facePublicSource": {
+        "scene": "df056aa9dc0e4f4edc1b27b4b762f5ccd4b4fa4f33ebe7974e130162ff039008",
+        "asset": "ff83e532fb5d03f899197bd9e495a4a97a16b65b3fcb77203e56e1bc9d836a90",
+        "capture": "9ea4f390166d5ad49bb9b9b6c7b518d1714b53b89f562f9727d88ab0f98634fc"
+      },
+      "exactWorldPositions": 0,
+      "worldPositionMaxMeters": 2.448619406352563e-05,
+      "viewportPixelPeak": [
+        0.0006112982184731663,
+        0.017455753785071693
+      ],
+      "viewportPixelP95": [
+        0.00015626002838189286,
+        0.016601680980500078
+      ],
+      "quantizedVerticesDiffering": 233,
+      "depthMaxError": 1.8918586563998474e-06,
+      "exactUvCount": 0,
+      "uvPeak": [
+        0.0,
+        0.9837599992752075
+      ],
+      "mirroredVUvPeak": [
+        0.0,
+        2.9802322387695312e-08
+      ],
+      "nativeVertex": "1e248bf04bdabf5247c51529659c4daf4321124f47fa52129a37f0f2d5f53310",
+      "nativeIndex": "9efd0722771e8c3cf544bc276cabd27842b8531af6cf19b6cea5249373db973c"
+    }
+  },
+  "sources": {
+    "body-native-lit-outline-production-native-order.gltf": "a183a03f38d40bc16a954aab92ed4f93f3171f1c54231ae989f9aefa1e2d2605",
+    "body-native-lit-outline-blend-depth.azurelevel": "cc3b0dc801154869df57bc5c80f6d241740de9d45126c977d815ce4244490d1a",
+    "capture_manifest.json": "054bb8de6d9c1d7718acddaf10322816112f6d17694df2a78aa684461af0c474",
+    "captured-opaque-overlays.glb": "ff83e532fb5d03f899197bd9e495a4a97a16b65b3fcb77203e56e1bc9d836a90"
+  },
+  "overall": "failed-user-review",
+  "scope": "isolated-fixed-pose-projection-reconstruction",
+  "renderedBodyControls": {
+    "nvidia": {
+      "frame": "87ceab9ca80473c86708c15f95f8e831b6d1179a23de36061b638a2c169b6993",
+      "locationErrors": [
+        {
+          "point": [
+            1181,
+            898
+          ],
+          "original": [
+            112,
+            85,
+            75
+          ],
+          "rendered": [
+            113,
+            86,
+            77
+          ],
+          "maximum": 2
+        },
+        {
+          "point": [
+            1199,
+            951
+          ],
+          "original": [
+            109,
+            80,
+            71
+          ],
+          "rendered": [
+            86,
+            59,
+            49
+          ],
+          "maximum": 23
+        }
+      ]
+    },
+    "intel": {
+      "frame": "6f133cc93ac4edb5309c5c852c22eee8ec8e05cb48070d49c980b343d7cfac47",
+      "locationErrors": [
+        {
+          "point": [
+            1181,
+            898
+          ],
+          "original": [
+            112,
+            85,
+            75
+          ],
+          "rendered": [
+            113,
+            86,
+            77
+          ],
+          "maximum": 2
+        },
+        {
+          "point": [
+            1199,
+            951
+          ],
+          "original": [
+            109,
+            80,
+            71
+          ],
+          "rendered": [
+            110,
+            82,
+            73
+          ],
+          "maximum": 2
+        }
+      ]
+    }
+  },
+  "frozenReference": "48afd6546c23cfa85099a765cc94ada4813a684538c695faf6d70d6daf2261b5",
+  "archive": {
+    "sha256": "cd69b5eeb1500c964f3423f9e8c97013ebc6071f616db6d23bf57ebdeac08160",
+    "members": {
+      "archive-fixed-pose-face-and-body-geometry.py": "a3efdbdfdb05435639e0633f60316298dfc942f2dade12991d1737f1f73d8f44",
+      "score-fixed-pose-face-and-body-geometry.py": "8c01ea837be64fdf811f6e4e4cdfc19fa647cd655f2de83f8851aee179f7741b",
+      "fixed-pose-face-and-body-geometry.json": "170df12b51cfaab1ea9c96eb18d6cd114bb4044e130848fa0b9eb085527b8a5a",
+      "nvidia/frames/capture_manifest.json": "054bb8de6d9c1d7718acddaf10322816112f6d17694df2a78aa684461af0c474",
+      "intel/frames/capture_manifest.json": "b30a905dd83cf90ad1c2385dc7f9407be52bb5e1adee22c74b51d0808022121f"
+    }
+  }
+}
