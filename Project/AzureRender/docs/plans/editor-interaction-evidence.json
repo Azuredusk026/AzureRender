@@ -73,5 +73,14 @@
     "coldFailure": "material-workflow-pipeline-cold.log",
     "warmResult": "material-workflow-warm/summary.json",
     "coldPipelineMilliseconds": 35252.94
+  },
+  "prefabInstanceContext": {
+    "configuration": "Release",
+    "candidateExecutableSha256": "80ff36f50ce9c64b9c0188301bf6adf8baad3a9ef891892566ff02e3c1c2d082",
+    "baselineDispatch": 1097,
+    "baselineReplay": "specialized-authoring-candidate/run-042ae392/prefab/evidence.json",
+    "candidateDispatch": 1099,
+    "candidateReplay": "specialized-authoring-final/run-f972c06e/prefab/evidence.json",
+    "specializedWorkflow": "specialized-authoring-final/run-f972c06e/summary.json"
   }
 }

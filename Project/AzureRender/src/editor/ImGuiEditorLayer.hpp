@@ -109,6 +109,7 @@ private:
     void drawProblemsPanel(PanelContext&);
     void drawPrefabAuthoringPanel(PanelContext&);
     std::string prefabOutputPath_="assets:/NewPrefab.azureprefab",prefabOverrideInstance_,prefabFieldScope_;
+    std::string prefabDocument_,prefabSelectionNode_;
     std::set<std::string> prefabSelectedFields_;
     std::string scriptTemplateBackend_="lua",scriptTemplatePath_="assets:/NewBehaviour.lua",problemSearch_;
     std::string displayedDocument_,documentCloseTarget_;

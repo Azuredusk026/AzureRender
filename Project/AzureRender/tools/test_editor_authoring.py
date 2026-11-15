@@ -56,6 +56,17 @@ def retained_workflows(executable,root):
         assert (project/'assets/NewPrefab.azureprefab').is_file()
         host.edit('prefab.place',asset='assets:/NewPrefab.azureprefab',instance='door-copy');host.edit('node.select',id='door-copy:moving')
         host.edit('node.rename',value='Reusable door');host.frames()
+        host.edit('prefab.place',asset='assets:/NewPrefab.azureprefab',instance='door-other')
+        host.edit('node.select',id='door-other:moving')
+        host.edit('node.rename',value='Other door')
+        host.edit('node.select',id='door-copy:moving');host.frames()
+        host.click('prefab.instance');host.click('prefab.instance.door-other')
+        host.click('prefab.field.moving/name');host.click('prefab.revert')
+        other_fields=host.edit('prefab.overrides',instance='door-other')['fields']
+        assert not any(field['node']=='moving' and field['path']=='/name' for field in other_fields), (
+            'The manual instance choice must stay active while the scene selects another instance')
+        assert host.workspace()['selectedName']=='Reusable door'
+        host.click('prefab.instance');host.click('prefab.instance.door-copy')
         host.click('prefab.field.moving/name');host.click('prefab.revert');assert host.workspace()['selectedName']=='moving'
         host.edit('history.undo');host.frames();host.click('prefab.field.moving/name');host.click('prefab.apply')
         assert next(n for n in json.loads((project/'assets/NewPrefab.azureprefab').read_text())['nodes'] if n['id']=='moving')['name']=='Reusable door'

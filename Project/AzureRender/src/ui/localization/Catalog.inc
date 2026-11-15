@@ -134,6 +134,7 @@
 {"聚焦对象","Frame object"},
 {"聚焦选择","Frame selection"},
 {"选择","Select"},
+{"选择预制体实例","Choose prefab instance"},
 {"场景显示","Scene display"},
 {"使用场景显示","Use scene display"},
 {"视口观察模式 (0)","Viewport view mode (0)"},
