@@ -126,3 +126,11 @@ Intel 驱动缺少该 NVIDIA 捕获使用的 `VK_EXT_depth_bias_control`。Intel
 坐标 `[1262,257]` 的眼影后峰差为 15 个色阶。按两块显卡各自的眼影系数估计值，替换原生底层颜色后与参考的差分别为一个和零个色阶。其余位置继续使用原生线性附件核对底层颜色与乘色系数。
 
 [双设备配对结果](evidence/2026-11-15/iris-overlay-paired-controls/results.json)和[验证归档](evidence/2026-11-15/iris-overlay-paired-controls/validation.zip)保存覆盖、逐点颜色及运行参数。
+
+## 虹膜反射贴图选层
+
+原生反射贴图的九级 BC7 sRGB 数据与 Player 材质逐字节一致。原生事件 846 的两个设备回放中，255 个虹膜像素的隐式选层均与至少一个逐级固定回放输出吻合。两块显卡有 20 个共同位置唯一匹配第 7 级，另有 6 个位置各自唯一匹配不同层级。
+
+坐标 `[1262,257]` 在两块显卡的原生回放中均唯一匹配第 7 级，在 Intel Player 中读取第 3 级。两端取样坐标的最大分量差为 0.00000804。该处原生反射贴图透明度为 0.06287，Intel Player 读回为零。
+
+[反射贴图选层结果](evidence/2026-11-15/iris-matcap-level-selection/results.json)和[验证归档](evidence/2026-11-15/iris-matcap-level-selection/validation.zip)保存九级纹理、原生逐级回放和 Player 数据读回。
