@@ -1,0 +1,213 @@
+{
+  "status": "measured-opaque-wall-inputs-with-ground-wave",
+  "sampleResults": {
+    "a": {
+      "outputs": {
+        "png": "0528b8cb27a743d6c5df411e7c7b08c92e2e43cd879d66c47b0b715ff06ccde5",
+        "referencePng": "a9657b4558f9d3cb03872d60d5e9e979af3eb6eb6c1a69784096148ff6f73c35",
+        "raw": "faf5ad5e147cf4f0a24b8226904e40e8e33a568d64f8d076fce4a7953beea6ab",
+        "archive": "b4f7482aaa982105ed144a065ac180816d81519fbb4dec8d118f8c0e17223f56",
+        "changed": 35792,
+        "overOne": 35443,
+        "peak": 249,
+        "bounds": [
+          0,
+          0,
+          943,
+          712
+        ]
+      },
+      "matchedDisputedPixels": 456,
+      "signatureHistograms": {
+        "materialTextures": [
+          44,
+          60,
+          60,
+          60,
+          61,
+          66,
+          56,
+          49
+        ],
+        "directLighting": [
+          61,
+          63,
+          58,
+          54,
+          49,
+          54,
+          64,
+          53
+        ],
+        "indirectLighting": [
+          56,
+          67,
+          53,
+          55,
+          71,
+          48,
+          52,
+          54
+        ]
+      }
+    },
+    "b": {
+      "outputs": {
+        "png": "0528b8cb27a743d6c5df411e7c7b08c92e2e43cd879d66c47b0b715ff06ccde5",
+        "referencePng": "a9657b4558f9d3cb03872d60d5e9e979af3eb6eb6c1a69784096148ff6f73c35",
+        "raw": "faf5ad5e147cf4f0a24b8226904e40e8e33a568d64f8d076fce4a7953beea6ab",
+        "archive": "7388530981ef9f6c8fda8ca0ff2cdb744fa73d31d9b9a03450e5870622ddb3c1",
+        "changed": 35792,
+        "overOne": 35443,
+        "peak": 249,
+        "bounds": [
+          0,
+          0,
+          943,
+          712
+        ]
+      },
+      "matchedDisputedPixels": 456,
+      "signatureHistograms": {
+        "materialTextures": [
+          44,
+          60,
+          60,
+          60,
+          61,
+          66,
+          56,
+          49
+        ],
+        "directLighting": [
+          61,
+          63,
+          58,
+          54,
+          49,
+          54,
+          64,
+          53
+        ],
+        "indirectLighting": [
+          56,
+          67,
+          53,
+          55,
+          71,
+          48,
+          52,
+          54
+        ]
+      }
+    },
+    "c": {
+      "outputs": {
+        "png": "60649079b935b84670eb3c5785712db9ad4aa07565da81fc86e5f9ec3cc67ecd",
+        "referencePng": "a9657b4558f9d3cb03872d60d5e9e979af3eb6eb6c1a69784096148ff6f73c35",
+        "raw": "7c8ad29914b4e4ae9fcc14248846cd976cccdce7c7363c15578223d4ee92d7b0",
+        "archive": "078179629ca2a047bf65c239e6c3e8979e5b56d44a52bfd59388a06d5540ba1f",
+        "changed": 36626,
+        "overOne": 35697,
+        "peak": 249,
+        "bounds": [
+          0,
+          0,
+          1272,
+          712
+        ]
+      },
+      "matchedDisputedPixels": 456,
+      "signatureHistograms": {
+        "materialTextures": [
+          44,
+          60,
+          60,
+          60,
+          61,
+          66,
+          56,
+          49
+        ],
+        "directLighting": [
+          65,
+          47,
+          54,
+          57,
+          48,
+          61,
+          65,
+          59
+        ],
+        "indirectLighting": [
+          56,
+          67,
+          53,
+          55,
+          71,
+          48,
+          52,
+          54
+        ]
+      }
+    }
+  },
+  "paired": {
+    "labels": [
+      "a",
+      "c"
+    ],
+    "changedSignatures": {
+      "materialTextures": 0,
+      "directLighting": 277,
+      "indirectLighting": 0
+    },
+    "changedSourceSignatures": {
+      "materialTextures": 0,
+      "directLighting": 277,
+      "indirectLighting": 0
+    },
+    "pairedPixels": 456,
+    "sourceRgbChanged": 310,
+    "pairedChangedSource": 310,
+    "groundBeautyChanged": 1235,
+    "upperBeautyChanged": 427
+  },
+  "shaderPrograms": {
+    "mesh_object_clipmap_field.frag.spv": "30da187c04fb1d23a4852c9048786e28845f2455ffe86b382047fcea13dbaca1",
+    "mesh_object_clipmap_field_early.frag.spv": "dc8a5acb68ba5fe77f9e8d878e2b607fb4d19397ed7e70d0ad5d19065be40755",
+    "mesh_object_clipmap_field_lighting.frag.spv": "5171e925019bd51f7e41d94ac6d8d543d3a6c53a3d511f452be1c66253151793",
+    "mesh_object_clipmap_field_early_lighting.frag.spv": "a870d5ec1e6c49d8a6e8d4cd9dd3b97f4e6e6c4555848aedafcc323e7faad1cf",
+    "character_snapshot_clipmap_field.frag.spv": "d47be66504b97ae42b4a51baf7f907086e2103910dc1ae2b81fcf180f0a18f3f",
+    "character_snapshot_clipmap_field_early.frag.spv": "0e6beb55025e8ef58a18a59d37a14a492779fd380e44f314a6e2c9c732151693",
+    "character_snapshot_clipmap_field_lighting.frag.spv": "dfbeb29bff8e2b81212283c142d42cb8ca27a218eeb2b730fbbc134d4be97ea0",
+    "character_snapshot_clipmap_field_early_lighting.frag.spv": "97407f8d8a5cc7deb8ba45baa802021152ce783acc808d63ef0ad5e2411c6dac",
+    "character_snapshot_object_clipmap_field.frag.spv": "45c347aa46c6ad11b2f5c301890aded5a1c9dc504f601894d20f87de3104851e",
+    "character_snapshot_object_clipmap_field_early.frag.spv": "25ad1e89ef20a68b6c4b5f2d9709cd471862557eeaa321eb4713d8964a70f132",
+    "character_snapshot_object_clipmap_field_lighting.frag.spv": "cb51561179500dbac3bd2eedc4804cc96d068432d347092369786d11833fb314",
+    "character_snapshot_object_clipmap_field_early_lighting.frag.spv": "36a3f444853736c8d96e94d7c669ded962ccc2014207df9fee86274af54c1be2",
+    "spatial_antialiasing.frag.spv": "e840b391381a74c80bb3cdb68604ba19b942bd9b097e1d883721632a044e0d8e"
+  },
+  "source": "2df45c56e9f58a3b6bb18ade2ae2796f6cbab336be2e6a84a0953fde08101fd3",
+  "modifiedSource": "18ff0143c696da61e057bec44a752e5c1d1c0b8afad9c722c5c14cf9f40f279d",
+  "displayProbeSource": "b17af302622c6037f63675e1437aafd9de7c2027586a602b458e0bfa60936ab6",
+  "regions": {
+    "upper": {
+      "changed": 427,
+      "peak": 52
+    },
+    "ground": {
+      "changed": 1235,
+      "peak": 7
+    },
+    "snapshots": {
+      "changed": 310,
+      "peak": 47
+    },
+    "diffusePanel": {
+      "changed": 277,
+      "peak": 216
+    }
+  },
+  "archiveSha256": "7f322d1e891a46356d0f0cb10dd270be2d4d19eece37c5ce07f7637ad8b5db62"
+}
