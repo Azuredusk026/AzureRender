@@ -1,6 +1,6 @@
 # 角色与窗景资源转换
 
-> 状态为 P0 与 P1 局部验收。角色控制器已登记，角色部件通过 Player 资产读取。
+> 状态为 P0、P1 与 P4 局部验收。角色控制器已登记，角色部件与两段人体动画通过 Player 回放。
 
 ## 角色动画控制器
 
@@ -33,6 +33,36 @@ Release Player 通过基础部件及角色关卡校验。
 加入 65 关节的外套后，正面绑定姿态通过共享队列完成回放和截图，袖口和手腕可见。
 截图存放于本机私有目录的 `reference-preview/heroine-bind-pose.png`。
 实际造型、角色动作及同步时间以原版对照为准。
+
+## 人体动画采样
+
+隔离采样工程使用 Recovery 的 `CharacterAvatar` 和 371 个源场景变换。
+Recovery 工程版本为 `2022.3.62f2`，采样器实测运行于 `2022.3.62f2c1`。
+采样器核对髋部、头部、左手和右脚的人体骨骼绑定，按 60 Hz 记录局部变换。
+待机片段 `anim_story_base001_base` 含 182 个采样点，报告书写起始片段 `anim_work_report_base_start` 含 218 个采样点。
+采样使用 Unity 的手动动画图。 [AnimationClipPlayable](https://docs.unity3d.com/2022.3/Documentation/ScriptReference/Animations.AnimationClipPlayable.html) · [PlayableGraph.Evaluate](https://docs.unity3d.com/2022.3/Documentation/ScriptReference/Playables.PlayableGraph.Evaluate.html)
+
+转换器沿父级关系匹配 GLB 节点，经 Z 轴反射写入平移、旋转和缩放。
+七个原角色部件共比较 114,400 个局部变换。
+旋转最大误差为 0.0000057°，平移最大误差为 0.000000104 米，满足 0.1° 和 0.0005 米的采样容差。
+数据及精度报告以本机夹具记录为准。
+
+共享队列任务 1642 以 Release Player 从待机切换到报告书写片段。
+七个部件在同一帧切换，采集 12 帧供核对。
+回放期间无脚本或表现错误，退出后缓冲与图像计数均为零。
+本机可复验工程位于 `assets_private/npr-room-dev/heroine-body-motion`，移入后通过项目校验。
+待机与书写截图位于 `reference-preview/heroine-idle.png` 和 `reference-preview/heroine-writing.png`。
+控制器的图层混合、动画事件、道具约束及完整房间时序按对应验收项实现。
+
+| 验收文件 | SHA-256 |
+| --- | --- |
+| 人体逐帧变换 | `3dd906e7f933c497d375b4734064418739dd500b03b5e0d93db3f537915b9fb6` |
+| GLB 采样对账 | `99dd3c7a8ff36eaf51e09367814fb89468a4a42deb878e35e6b1ed23e4660250` |
+| Player 回放 | `61c011574ec2f90c9d1352f85a0eb75ba48551855f36c1566fb76dde240c26bb` |
+
+```powershell
+python -B -m tools.npr_room.humanoid_clip_export --rig $sourceRig --samples $humanoidSamples --input $originalSkinnedGlb --output $animatedGlb
+```
 
 ## 说话表情片段
 
