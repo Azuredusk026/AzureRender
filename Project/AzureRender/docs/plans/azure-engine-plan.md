@@ -1423,6 +1423,7 @@ Intel 头发颜色继续按冻结区域核对纹理选级。
 [原始反射颜色](../acceptance/nr/evidence/2026-11-16/projected-reflection-shared-hits/results.json)核对中央地面与青色环带的共同命中误差，完整画面按结构相似度和亮度门槛验收。
 [原生取样坐标](../acceptance/nr/evidence/2026-11-16/projected-history-native-endpoints/results.json)已核对两区的原生颜色来源。两端取样贡献继续用 Player 的实际坐标和颜色比较。
 [原生历史回移](../acceptance/nr/evidence/2026-11-16/projected-history-native-motion/results.json)核对地面和青色环带的运动幅度。
+[原生回移亮度](../acceptance/nr/evidence/2026-11-16/projected-history-native-motion-color/results.json)用原生颜色核对回移贡献，实际 Player 取样和历史颜色继续验收。
 
 [角色硬件分项](../acceptance/nr/evidence/2026-11-16/native-hair-lighting-lanes/results.json)、[体表法线](../acceptance/nr/evidence/2026-11-16/native-body-normal-raw-samples/results.json)和[虹膜眼影覆盖](../acceptance/nr/evidence/2026-11-16/iris-projective-covered/results.json)保存原生和 Player 双设备回读。角色严格颜色门槛继续验收。
 

@@ -234,4 +234,22 @@ Player 使用 `cd8d95d` 对应的受检构建。
 
 [运动纹理复算](evidence/2026-11-16/projected-history-native-motion/results.json)和[验证归档](evidence/2026-11-16/projected-history-native-motion/validation.zip)保存取样坐标、输入指纹及复算程序。
 
+## 原生回移的亮度对照
+
+保持原生上一帧颜色，分别按实际取样坐标和回移前坐标取色。
+样本须有唯一运动纹素，并能逐位复现原生反射颜色。
+两端须均有命中，接收位置相距至多两厘米。
+
+| 区域 | 配对样本 | 取消回移造成的亮度变动占现有误差 | 取消回移后的误差增幅 |
+| --- | ---: | ---: | ---: |
+| 中央地面 | 17,159 | 10.70% | 0.47% |
+| 青色环带 | 5,741 | 12.97% | 2.81% |
+
+亮度变动和误差均按两端较低置信度加权，范围为反射过滤前。
+固定世界点经过原生相机投影时，中位位移约为 0.60 像素。
+Player 已保存的运动裁切仅覆盖两区的 8 个和 9 个可配对源位置。
+环带的完整回移比较以实际 Player 取样为准。
+
+[亮度对照记录](evidence/2026-11-16/projected-history-native-motion-color/results.json)和[验证归档](evidence/2026-11-16/projected-history-native-motion-color/validation.zip)保存两端输入、相机对照及复算程序。
+
 当前运行入口统一见[完整场景显示](../../tutorials/restored-native-scene.md)。
