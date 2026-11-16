@@ -149,6 +149,8 @@ Player 的同机位诊断使用已有的无符号颜色截断，在虹膜颜色�
 
 Intel 轴向导数模型与 255 个 Intel 原生底色层级样本相符。将该模型用于 Player 裸眼切换试验，14 个位置超过一个色阶，峰差为 28。虹膜外逐像素一致。该候选未通过留存参考的颜色验收。[轴向选层结果](evidence/2026-11-16/iris-intel-base-axis-candidate/qualification.json)及[归档](evidence/2026-11-16/iris-intel-base-axis-candidate/validation.zip)保存三组画面对照及测试收据。
 
+双设备原生回放记录了 255 个虹膜片元的底色与采样坐标。252 个位置可唯一确定层级，其中 76 个用于留出验证。标准双线性计算在 NVIDIA 留出组的线性误差第 95 百分位为 0.001913。筛选得分最高的定点量化方案在留出组误差为 0.001953。当前保留双线性计算作为对照，继续检查纹理解码及颜色合成。[片元网格结果](evidence/2026-11-16/iris-native-base-lane-grid/qualification.json)及[归档](evidence/2026-11-16/iris-native-base-lane-grid/validation.zip)保存原生取样、指令和复算记录。
+
 ## 剩余门禁
 
 继续核对隐式采样梯度、层级边界和几何覆盖。

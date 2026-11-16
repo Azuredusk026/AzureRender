@@ -1,0 +1,632 @@
+{
+  "status": "measured-native-base-grid-two-adapters",
+  "strictIrisAcceptance": false,
+  "registeredPoints": 255,
+  "probeBitEncoding": "highest 20 FP32 bits preserved via exact 7/7/6-bit integer lanes",
+  "filterEvaluation": {
+    "status": "ranked-native-iris-filter-candidates-on-held-out-points",
+    "measurement": "d75fa6643d6c44ef281f31f615825270565930d4528e7f214979c94569eace01",
+    "devices": {
+      "nvidia": {
+        "eligible": 252,
+        "baseline": {
+          "model": {
+            "subtexel": 0,
+            "rounding": "rint",
+            "texelLinear": 0,
+            "output": "exact"
+          },
+          "fit": {
+            "count": 176,
+            "median": 0.000588547932477812,
+            "p95": 0.0018189588949380359,
+            "worst": 0.0038465331094772875,
+            "atMostOneOver255": 176,
+            "atMostOneIn1024": 138
+          },
+          "holdout": {
+            "count": 76,
+            "median": 0.0006124631487394033,
+            "p95": 0.0019134293498133115,
+            "worst": 0.0032818702215096918,
+            "atMostOneOver255": 76,
+            "atMostOneIn1024": 57
+          }
+        },
+        "study": [
+          {
+            "model": {
+              "subtexel": 0,
+              "rounding": "rint",
+              "texelLinear": 0,
+              "output": "fixed12"
+            },
+            "fit": {
+              "count": 176,
+              "median": 0.0006103515625,
+              "p95": 0.001708984375,
+              "worst": 0.0037689208984375,
+              "atMostOneOver255": 176,
+              "atMostOneIn1024": 149
+            },
+            "holdout": {
+              "count": 76,
+              "median": 0.0006103515625,
+              "p95": 0.001953125,
+              "worst": 0.003173828125,
+              "atMostOneOver255": 76,
+              "atMostOneIn1024": 57
+            }
+          },
+          {
+            "model": {
+              "subtexel": 0,
+              "rounding": "rint",
+              "texelLinear": 16,
+              "output": "fixed12"
+            },
+            "fit": {
+              "count": 176,
+              "median": 0.0006103515625,
+              "p95": 0.001708984375,
+              "worst": 0.0037689208984375,
+              "atMostOneOver255": 176,
+              "atMostOneIn1024": 149
+            },
+            "holdout": {
+              "count": 76,
+              "median": 0.0006103515625,
+              "p95": 0.001953125,
+              "worst": 0.003173828125,
+              "atMostOneOver255": 76,
+              "atMostOneIn1024": 57
+            }
+          },
+          {
+            "model": {
+              "subtexel": 9,
+              "rounding": "floor",
+              "texelLinear": 0,
+              "output": "fixed12"
+            },
+            "fit": {
+              "count": 176,
+              "median": 0.0006103515625,
+              "p95": 0.001708984375,
+              "worst": 0.0032806396484375,
+              "atMostOneOver255": 176,
+              "atMostOneIn1024": 149
+            },
+            "holdout": {
+              "count": 76,
+              "median": 0.000640869140625,
+              "p95": 0.001953125,
+              "worst": 0.003173828125,
+              "atMostOneOver255": 76,
+              "atMostOneIn1024": 57
+            }
+          },
+          {
+            "model": {
+              "subtexel": 9,
+              "rounding": "floor",
+              "texelLinear": 16,
+              "output": "fixed12"
+            },
+            "fit": {
+              "count": 176,
+              "median": 0.0006103515625,
+              "p95": 0.001708984375,
+              "worst": 0.0032806396484375,
+              "atMostOneOver255": 176,
+              "atMostOneIn1024": 149
+            },
+            "holdout": {
+              "count": 76,
+              "median": 0.000640869140625,
+              "p95": 0.001953125,
+              "worst": 0.003173828125,
+              "atMostOneOver255": 76,
+              "atMostOneIn1024": 57
+            }
+          },
+          {
+            "model": {
+              "subtexel": 10,
+              "rounding": "floor",
+              "texelLinear": 0,
+              "output": "fixed12"
+            },
+            "fit": {
+              "count": 176,
+              "median": 0.0006103515625,
+              "p95": 0.001708984375,
+              "worst": 0.0037689208984375,
+              "atMostOneOver255": 176,
+              "atMostOneIn1024": 149
+            },
+            "holdout": {
+              "count": 76,
+              "median": 0.0006103515625,
+              "p95": 0.001953125,
+              "worst": 0.003173828125,
+              "atMostOneOver255": 76,
+              "atMostOneIn1024": 57
+            }
+          },
+          {
+            "model": {
+              "subtexel": 10,
+              "rounding": "floor",
+              "texelLinear": 16,
+              "output": "fixed12"
+            },
+            "fit": {
+              "count": 176,
+              "median": 0.0006103515625,
+              "p95": 0.001708984375,
+              "worst": 0.0037689208984375,
+              "atMostOneOver255": 176,
+              "atMostOneIn1024": 149
+            },
+            "holdout": {
+              "count": 76,
+              "median": 0.0006103515625,
+              "p95": 0.001953125,
+              "worst": 0.003173828125,
+              "atMostOneOver255": 76,
+              "atMostOneIn1024": 57
+            }
+          },
+          {
+            "model": {
+              "subtexel": 8,
+              "rounding": "rint",
+              "texelLinear": 0,
+              "output": "fixed12"
+            },
+            "fit": {
+              "count": 176,
+              "median": 0.00054931640625,
+              "p95": 0.00177001953125,
+              "worst": 0.0032806396484375,
+              "atMostOneOver255": 176,
+              "atMostOneIn1024": 150
+            },
+            "holdout": {
+              "count": 76,
+              "median": 0.0006103515625,
+              "p95": 0.001983642578125,
+              "worst": 0.003173828125,
+              "atMostOneOver255": 76,
+              "atMostOneIn1024": 58
+            }
+          },
+          {
+            "model": {
+              "subtexel": 8,
+              "rounding": "rint",
+              "texelLinear": 16,
+              "output": "fixed12"
+            },
+            "fit": {
+              "count": 176,
+              "median": 0.00054931640625,
+              "p95": 0.00177001953125,
+              "worst": 0.0032806396484375,
+              "atMostOneOver255": 176,
+              "atMostOneIn1024": 150
+            },
+            "holdout": {
+              "count": 76,
+              "median": 0.0006103515625,
+              "p95": 0.001983642578125,
+              "worst": 0.003173828125,
+              "atMostOneOver255": 76,
+              "atMostOneIn1024": 58
+            }
+          }
+        ],
+        "anchors": {
+          "[1308, 266]": {
+            "point": [
+              1308,
+              266
+            ],
+            "value": [
+              0.1878662109375,
+              0.1485595703125,
+              0.53173828125
+            ],
+            "uv": [
+              0.680908203125,
+              0.117919921875
+            ],
+            "mipCandidates": [
+              4
+            ]
+          },
+          "[1255, 258]": {
+            "point": [
+              1255,
+              258
+            ],
+            "value": [
+              0.35302734375,
+              0.0269927978515625,
+              0.0292816162109375
+            ],
+            "uv": [
+              0.1495361328125,
+              0.017242431640625
+            ],
+            "mipCandidates": [
+              4
+            ]
+          },
+          "[1261, 262]": {
+            "point": [
+              1261,
+              262
+            ],
+            "value": [
+              0.171875,
+              0.0546875,
+              0.296875
+            ],
+            "uv": [
+              0.13201904296875,
+              0.289794921875
+            ],
+            "mipCandidates": [
+              5
+            ]
+          },
+          "[1260, 262]": {
+            "point": [
+              1260,
+              262
+            ],
+            "value": [
+              0.2265625,
+              0.109375,
+              0.30859375
+            ],
+            "uv": [
+              0.21868896484375,
+              0.298095703125
+            ],
+            "mipCandidates": [
+              5
+            ]
+          }
+        }
+      },
+      "intel": {
+        "eligible": 252,
+        "baseline": {
+          "model": {
+            "subtexel": 0,
+            "rounding": "rint",
+            "texelLinear": 0,
+            "output": "exact"
+          },
+          "fit": {
+            "count": 176,
+            "median": 0.0003862248696860776,
+            "p95": 0.001163692256251625,
+            "worst": 0.0025485703449780184,
+            "atMostOneOver255": 176,
+            "atMostOneIn1024": 161
+          },
+          "holdout": {
+            "count": 76,
+            "median": 0.00039863746104297493,
+            "p95": 0.0010385551024443551,
+            "worst": 0.0015118506902596918,
+            "atMostOneOver255": 76,
+            "atMostOneIn1024": 71
+          }
+        },
+        "study": [
+          {
+            "model": {
+              "subtexel": 0,
+              "rounding": "rint",
+              "texelLinear": 0,
+              "output": "fixed12"
+            },
+            "fit": {
+              "count": 176,
+              "median": 0.0003662109375,
+              "p95": 0.0010986328125,
+              "worst": 0.00244140625,
+              "atMostOneOver255": 176,
+              "atMostOneIn1024": 163
+            },
+            "holdout": {
+              "count": 76,
+              "median": 0.000396728515625,
+              "p95": 0.0009918212890625,
+              "worst": 0.00146484375,
+              "atMostOneOver255": 76,
+              "atMostOneIn1024": 72
+            }
+          },
+          {
+            "model": {
+              "subtexel": 0,
+              "rounding": "rint",
+              "texelLinear": 12,
+              "output": "fixed12"
+            },
+            "fit": {
+              "count": 176,
+              "median": 0.0003662109375,
+              "p95": 0.0010986328125,
+              "worst": 0.00244140625,
+              "atMostOneOver255": 176,
+              "atMostOneIn1024": 163
+            },
+            "holdout": {
+              "count": 76,
+              "median": 0.00042724609375,
+              "p95": 0.0009918212890625,
+              "worst": 0.00164794921875,
+              "atMostOneOver255": 76,
+              "atMostOneIn1024": 72
+            }
+          },
+          {
+            "model": {
+              "subtexel": 0,
+              "rounding": "rint",
+              "texelLinear": 14,
+              "output": "half"
+            },
+            "fit": {
+              "count": 176,
+              "median": 0.0003662109375,
+              "p95": 0.0010986328125,
+              "worst": 0.00244140625,
+              "atMostOneOver255": 176,
+              "atMostOneIn1024": 162
+            },
+            "holdout": {
+              "count": 76,
+              "median": 0.000396728515625,
+              "p95": 0.0009765625,
+              "worst": 0.00152587890625,
+              "atMostOneOver255": 76,
+              "atMostOneIn1024": 73
+            }
+          },
+          {
+            "model": {
+              "subtexel": 0,
+              "rounding": "rint",
+              "texelLinear": 14,
+              "output": "fixed12"
+            },
+            "fit": {
+              "count": 176,
+              "median": 0.0003662109375,
+              "p95": 0.0010986328125,
+              "worst": 0.00244140625,
+              "atMostOneOver255": 176,
+              "atMostOneIn1024": 163
+            },
+            "holdout": {
+              "count": 76,
+              "median": 0.000396728515625,
+              "p95": 0.0009918212890625,
+              "worst": 0.00164794921875,
+              "atMostOneOver255": 76,
+              "atMostOneIn1024": 72
+            }
+          },
+          {
+            "model": {
+              "subtexel": 0,
+              "rounding": "rint",
+              "texelLinear": 16,
+              "output": "fixed12"
+            },
+            "fit": {
+              "count": 176,
+              "median": 0.0003662109375,
+              "p95": 0.0010986328125,
+              "worst": 0.00244140625,
+              "atMostOneOver255": 176,
+              "atMostOneIn1024": 163
+            },
+            "holdout": {
+              "count": 76,
+              "median": 0.000396728515625,
+              "p95": 0.0009918212890625,
+              "worst": 0.00146484375,
+              "atMostOneOver255": 76,
+              "atMostOneIn1024": 72
+            }
+          },
+          {
+            "model": {
+              "subtexel": 8,
+              "rounding": "rint",
+              "texelLinear": 0,
+              "output": "fixed12"
+            },
+            "fit": {
+              "count": 176,
+              "median": 0.0003662109375,
+              "p95": 0.0010986328125,
+              "worst": 0.00244140625,
+              "atMostOneOver255": 176,
+              "atMostOneIn1024": 165
+            },
+            "holdout": {
+              "count": 76,
+              "median": 0.0003662109375,
+              "p95": 0.001129150390625,
+              "worst": 0.002685546875,
+              "atMostOneOver255": 76,
+              "atMostOneIn1024": 71
+            }
+          },
+          {
+            "model": {
+              "subtexel": 8,
+              "rounding": "rint",
+              "texelLinear": 14,
+              "output": "half"
+            },
+            "fit": {
+              "count": 176,
+              "median": 0.0003662109375,
+              "p95": 0.0010986328125,
+              "worst": 0.00244140625,
+              "atMostOneOver255": 176,
+              "atMostOneIn1024": 165
+            },
+            "holdout": {
+              "count": 76,
+              "median": 0.0003662109375,
+              "p95": 0.00103759765625,
+              "worst": 0.002685546875,
+              "atMostOneOver255": 76,
+              "atMostOneIn1024": 72
+            }
+          },
+          {
+            "model": {
+              "subtexel": 8,
+              "rounding": "rint",
+              "texelLinear": 14,
+              "output": "fixed12"
+            },
+            "fit": {
+              "count": 176,
+              "median": 0.0003662109375,
+              "p95": 0.0010986328125,
+              "worst": 0.00244140625,
+              "atMostOneOver255": 176,
+              "atMostOneIn1024": 165
+            },
+            "holdout": {
+              "count": 76,
+              "median": 0.0003662109375,
+              "p95": 0.001129150390625,
+              "worst": 0.002685546875,
+              "atMostOneOver255": 76,
+              "atMostOneIn1024": 71
+            }
+          }
+        ],
+        "anchors": {
+          "[1308, 266]": {
+            "point": [
+              1308,
+              266
+            ],
+            "value": [
+              0.18756103515625,
+              0.14813232421875,
+              0.532470703125
+            ],
+            "uv": [
+              0.680908203125,
+              0.117919921875
+            ],
+            "mipCandidates": [
+              4
+            ]
+          },
+          "[1255, 258]": {
+            "point": [
+              1255,
+              258
+            ],
+            "value": [
+              0.355224609375,
+              0.030303955078125,
+              0.0321502685546875
+            ],
+            "uv": [
+              0.1495361328125,
+              0.017242431640625
+            ],
+            "mipCandidates": [
+              4
+            ]
+          },
+          "[1261, 262]": {
+            "point": [
+              1261,
+              262
+            ],
+            "value": [
+              0.21746826171875,
+              0.055694580078125,
+              0.298583984375
+            ],
+            "uv": [
+              0.13201904296875,
+              0.289794921875
+            ],
+            "mipCandidates": [
+              4
+            ]
+          },
+          "[1260, 262]": {
+            "point": [
+              1260,
+              262
+            ],
+            "value": [
+              0.23126220703125,
+              0.076019287109375,
+              0.3653564453125
+            ],
+            "uv": [
+              0.21868896484375,
+              0.298095703125
+            ],
+            "mipCandidates": [
+              4
+            ]
+          }
+        }
+      }
+    },
+    "scope": "CPU filter matching on original device sampled base color; engine beauty acceptance is separate"
+  },
+  "queue": {
+    "id": 1476,
+    "task": "nr-iris-native-base-lanes-255-two-devices",
+    "state": "succeeded",
+    "exitCode": 0,
+    "elapsedSeconds": 12.812999999994645
+  },
+  "validation": {
+    "archive": "509c05f204f1ec5cee382f5b3255aeb6b10dc6c4ffa884880a315efdebaedcef",
+    "members": {
+      "gpu/request.json": "290bb68248e904d481518124a12f298dd6bf6ef1dbfc9e127717202ad4ecd1f9",
+      "gpu/results.json": "d75fa6643d6c44ef281f31f615825270565930d4528e7f214979c94569eace01",
+      "gpu/filter-grid-model.json": "a40c6dd8fc405af60c7cd3acb66556121b474a1ef6a1af80e0f98e808bca6d10",
+      "gpu/nvidia-uv-0.dxbc": "99548ff2ed2657edd66397179419add0e83bf58182024b400d544a932425c37b",
+      "gpu/nvidia-uv-1.dxbc": "d3482ee449811d7e8e50603c96c06d4564472f2de75d8d3f15d9291cf47787df",
+      "gpu/nvidia-rgb-0.dxbc": "9b04e762733749bfa92c28feaef02bf2909fd9a07993679c6a6f4b2f3963a953",
+      "gpu/nvidia-rgb-1.dxbc": "0460882ab378f9632bcc33101295b4758b5af3964aa8e8b5eb868fdf1d3f2bef",
+      "gpu/nvidia-rgb-2.dxbc": "b3a39d51cd7e21443d72227aeba3615c33ce46414184b2e48129d7e28b5f034f",
+      "gpu/intel-uv-0.dxbc": "99548ff2ed2657edd66397179419add0e83bf58182024b400d544a932425c37b",
+      "gpu/intel-uv-1.dxbc": "d3482ee449811d7e8e50603c96c06d4564472f2de75d8d3f15d9291cf47787df",
+      "gpu/intel-rgb-0.dxbc": "9b04e762733749bfa92c28feaef02bf2909fd9a07993679c6a6f4b2f3963a953",
+      "gpu/intel-rgb-1.dxbc": "0460882ab378f9632bcc33101295b4758b5af3964aa8e8b5eb868fdf1d3f2bef",
+      "gpu/intel-rgb-2.dxbc": "b3a39d51cd7e21443d72227aeba3615c33ce46414184b2e48129d7e28b5f034f",
+      "source/iris-native-base-lane-grid.py": "bd04f8f0d554bb8c5f90a420cc03ada0d96a034055e0cd885b4faa40356f7d57",
+      "source/iris-native-filter-precision-model.py": "1e4e157aecc02c88a32a6b239f7ab857a7be44892dce176f08695f93230cd8d3",
+      "source/score-iris-native-filter-grid.py": "f0b0c1dd7c3ae37b8772cad8a3792a887057b9c4a083c942ff11a30fb859408b",
+      "logs/replay.log": "e257fd14647490b5710858c954e75bb9164a97ff49c119997384166aae698a7a"
+    }
+  }
+}
