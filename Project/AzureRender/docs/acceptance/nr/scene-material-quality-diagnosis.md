@@ -388,6 +388,8 @@ Player 通过[反射历史图层](../../runtime/unlit-texture-layers.md#反射�
 
 [时间合成回读](evidence/2026-11-16/projected-history-native-temporal-writer/qualification.json)和[验证归档](evidence/2026-11-16/projected-history-native-temporal-writer/validation.zip)保存原生附件绑定、着色指令、取色样本和采集收据。
 
+合成指令的八点片元追踪确认，五个货箱落点的历史权重为 82.66% 至 90.00%，三个字形落点均约为 95.00%。五个货箱落点的合成结果均比同位置当前输入亮。记录的混合值与压缩亮度和色度空间中的线性插值一致，误差小于 0.000002。[合成权重结果](evidence/2026-11-16/projected-history-temporal-samples/qualification.json)及[验证归档](evidence/2026-11-16/projected-history-temporal-samples/validation.zip)保存当前输入、箝制后的历史样本、混合结果及附件回读。
+
 ### 联合场景字形提交
 
 只读播放器读取实际联合场景，在启动时将中央字形的资源路径指向独立候选。候选保留三个 DDS 及各自的负一层级偏移，只增加反射历史图层提交声明。工程、场景和原资产目录的指纹保持一致。
