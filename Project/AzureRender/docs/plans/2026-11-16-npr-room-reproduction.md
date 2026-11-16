@@ -79,6 +79,7 @@
 [静态网格目录](../acceptance/npr-room/static-meshes.md)登记 Windows 场景的合批、内置网格及生产编辑器导入。
 [角色与窗景资源转换](../acceptance/npr-room/character-assets.md)登记形变网格变体与 Player 校验。
 [纹理与源字体目录](../acceptance/npr-room/image-catalog.md)登记位图、精灵和字体资源槽。
+[原材质目录](../acceptance/npr-room/material-catalog.md)登记源参数、着色器、纹理和渲染器槽位。
 
 - [ ] 按五场景的入口与实际加载关系实现启动、预加载、房间和转场。复现正常进入、重进、取消、退出与失败恢复。区分持续服务、场景实例和共享资源的所有权。
 - [ ] 批量转换运行可达的网格、贴图、材质参数、动画、界面图集、字体和音频。保留预制体、实例覆盖和动态资源键。用稳定标识关联替换槽。记录单位、坐标、压缩、颜色空间和循环点。
