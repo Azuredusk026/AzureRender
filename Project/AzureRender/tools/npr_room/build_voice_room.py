@@ -29,7 +29,7 @@ def voice_source_index(catalog):
     return sources
 
 
-def spoken_line(row, localized, sources, native, context):
+def voiced_audio(localized, sources, native, context):
     voice = localized["Voice"]
     matches = sources[voice]
     if len(matches) != 1:
@@ -40,14 +40,20 @@ def spoken_line(row, localized, sources, native, context):
     media = {"source": clip["source"], "sha256": clip["sha256"], "guid": guid, "uuid": uuid, "asset": asset}
     sample = native[clip["sha256"] + ".ogg"]
     frames, rate = sample["frames"], sample["sampleRate"]
-    delay, hold = float(row["Arg1"]), float(row["Arg2"])
-    if frames <= 0 or rate <= 0 or not all(math.isfinite(value) and value >= 0 for value in (delay, hold)):
-        raise ValueError(f"Invalid spoken line timing in {context}")
-    return {"localization": row["LocalizationID"], "voice": voice, "audioGuid": guid, "asset": asset,
-            "frames": frames, "sampleRate": rate, "delay": delay, "hold": hold,
-            "bodyMotion": int(row["BodyMotion"]), "faceMotion": int(row["FacialMotion"]),
-            "moveMouth": row["Arg3"] == "0",
+    if frames <= 0 or rate <= 0:
+        raise ValueError(f"Invalid decoded line duration in {context}")
+    return {"localization": localized["ID"], "voice": voice, "audioGuid": guid, "asset": asset,
+            "frames": frames, "sampleRate": rate,
             "translations": {language: localized[language] for language in LANGUAGES}}, media
+
+
+def spoken_line(row, localized, sources, native, context):
+    line, media = voiced_audio(localized, sources, native, context)
+    delay, hold = float(row["Arg1"]), float(row["Arg2"])
+    if not all(math.isfinite(value) and value >= 0 for value in (delay, hold)):
+        raise ValueError(f"Invalid spoken line timing in {context}")
+    return {**line, "delay": delay, "hold": hold, "bodyMotion": int(row["BodyMotion"]),
+            "faceMotion": int(row["FacialMotion"]), "moveMouth": row["Arg3"] == "0"}, media
 
 
 def idle_responses(story, catalog, native):

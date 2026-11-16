@@ -106,6 +106,7 @@
 [工后对话与选项](../acceptance/npr-room/work-conversation.md)登记短对话触发、组内分支及独立进程续接。
 [环境声解锁](../acceptance/npr-room/ambient-access.md)登记原条件判断、截止时间和档内音量恢复。
 [房间语言设置](../acceptance/npr-room/room-language.md)登记七种语言的计时器、对白、原字体与深路径存档回放。
+[计时语音](../acceptance/npr-room/timer-voice-sources.md)登记原语音、选择规则及动作提示点。
 
 - [ ] 从 `TimerCoreService` 复现计时、工作休息循环、通知和暂停恢复。覆盖输入重复、焦点变化、切换阶段、退出重开和默认配置。界面、键盘和自动回放共享业务动作。
 - [ ] 实现笔记、待办、统计、进度、解锁、成就及设置。按源状态验证增删改、排序、解锁事件和持久状态。存档采用独立 D 盘根、版本校验与原子提交。检查损坏文件回退、版本升级和并发实例行为。
