@@ -68,6 +68,13 @@ Recovery 记录了相同 GUID 及缺少的程序集。
 命令值共有 44 种，按实际使用语义迁移。
 本地化主表含 2,111 条记录。
 目录登记简繁中文、日语、英语、韩语和俄语。
+脚本另有葡萄牙语字段及读取分支。
+Windows 菜单可选项继续复核。
+
+剧情清单保留原始顺序及 26 个重复命令 ID。
+组内选项和跳转使用首个匹配项。
+清单登记三个空组、两条组外命令和六条未解析的文本引用。
+组外命令与回退行为进入动态验证。
 
 主数据有 46 个环境及其解锁条目。
 `WindowViewType` 定义 29 种窗景表现。
@@ -132,6 +139,7 @@ Recovery 记录了相同 GUID 及缺少的程序集。
 python -B -m unittest discover -s tools/npr_room -p "test_*inventory.py"
 python -B -m unittest discover -s tools/npr_room -p "test_catalog_locations.py"
 python -B tools/npr_room/reference_inventory.py --recovery $recovery --output $localInventory
+python -B tools/npr_room/story_inventory.py --source $unitySource --output $localStory
 ```
 
 输出指向项目受管目录中的新文件。

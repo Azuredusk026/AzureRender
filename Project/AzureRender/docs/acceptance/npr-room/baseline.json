@@ -104,5 +104,16 @@
       "bytes": 31100840,
       "sha256": "a8dcc8f6f4cbee3da56552a4adbe56724228a0efcc2fcd737b516933f0418081"
     }
+  },
+  "storySummary": {
+    "commandsWithoutGroup": 2,
+    "unresolvedLocalizedCommands": 6,
+    "duplicateCommandIDs": 26,
+    "emptyGroups": 3,
+    "groups": 610,
+    "localizationRows": 2111,
+    "commandRows": 2289,
+    "privateInventorySHA256": "20021f5f8e2087916b99ce98cac00ec5ae408faf9c4283db74b27e42e72d6381",
+    "commandKinds": 44
   }
 }
