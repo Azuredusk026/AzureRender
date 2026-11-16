@@ -72,7 +72,7 @@ local function idle()
 end
 
 local function finish()
-    if workCalendar then workCalendar:flush() end
+    if workCalendar then workCalendar:settle() end
     idle()
     setHeroineState("idle")
     playCue("timer-finish")
@@ -195,11 +195,13 @@ function init()
         statsOpen = false
         self:ui_visible("timer-stats", true)
         self:ui_visible("work-stats", false)
+        self:ui_visible("work-progression", workCalendar:progress() ~= nil)
     end
     updateDisplay()
 end
 
 function update(dt)
+    if workCalendar then workCalendar:recover() end
     if workCalendar and phase ~= "idle" then
         local working = phase == "work" and not paused and not self:pressed("timer-toggle")
             and not self:pressed("timer-reset") and (countupMode or not self:pressed("timer-skip"))
@@ -245,6 +247,10 @@ function update(dt)
         if statsOpen then
             self:ui_text("work-today", durationText(workCalendar:today()))
             self:ui_text("work-total", durationText(workCalendar:totalTime()))
+            local growth = workCalendar:progress()
+            if growth then
+                self:ui_text("work-progression", string.format(" · Level %d · Points %d", growth[1], growth[3]))
+            end
         end
     end
 end

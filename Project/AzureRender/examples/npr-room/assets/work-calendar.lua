@@ -1,23 +1,34 @@
 local workSlot = "work-calendar"
 
-local function readWorkDays()
+local function readWorkDays(rewards)
     local value = self:read_save(workSlot)
     local result = {}
-    if type(value) ~= "table" or type(value[1]) ~= "number" then return result, true end
-    if value[1] > 1 then return result, false end
-    if value[1] ~= 1 or type(value[2]) ~= "table" then return result, true end
+    local initial = {1, 0, 0}
+    if type(value) ~= "table" or type(value[1]) ~= "number" then return result, true, initial, 0 end
+    if value[1] > (rewards and 2 or 1) then return result, false, initial, 0 end
+    if (value[1] ~= 1 and value[1] ~= 2) or type(value[2]) ~= "table" then return result, true, initial, 0 end
     for _, year in ipairs(value[2]) do
         if type(year) ~= "table" or type(year[1]) ~= "string" or not year[1]:match("^%d%d%d%d$")
-            or type(year[2]) ~= "table" then return {}, true end
+            or type(year[2]) ~= "table" then return {}, true, initial, 0 end
         for _, day in ipairs(year[2]) do
             if type(day) ~= "table" or type(day[1]) ~= "string" or not day[1]:match("^%d%d%d%d$")
-                or type(day[2]) ~= "number" or day[2] <= 0 or day[2] == math.huge then return {}, true end
+                or type(day[2]) ~= "number" or day[2] <= 0 or day[2] == math.huge then return {}, true, initial, 0 end
             local date = year[1] .. day[1]
-            if result[date] then return {}, true end
+            if result[date] then return {}, true, initial, 0 end
             result[date] = day[2]
         end
     end
-    return result, true
+    if value[1] == 2 and type(value[3]) == "table" and #value[3] == 3 then
+        local level, exp, points = table.unpack(value[3])
+        local active = value[4]
+        if type(level) == "number" and level >= 1 and math.tointeger(level)
+            and type(exp) == "number" and exp >= 0 and exp < math.huge
+            and type(points) == "number" and points >= 0 and math.tointeger(points)
+            and type(active) == "number" and active >= 0 and active < math.huge then
+            return result, true, value[3], active
+        end
+    end
+    return result, true, initial, 0
 end
 
 local function encodeWorkDays(data)
@@ -33,12 +44,15 @@ local function encodeWorkDays(data)
         entries[#entries + 1] = {year, days}
     end
     table.sort(entries, function(a, b) return a[1] < b[1] end)
-    return {1, entries}
+    return entries
 end
 
 function new_work_calendar()
-    local saved = readWorkDays()
+    local rewards = work_reward_config
+    local saved, _, progression, interrupted = readWorkDays(rewards)
     local pending = {}
+    local pendingSettlements, pendingActive = {}, 0
+    local recoverPending = interrupted > 0
     local lastDate, elapsed = nil, 0
     local calendar = {}
     local runtime = self
@@ -48,13 +62,42 @@ function new_work_calendar()
     end
 
     function calendar:flush()
-        if next(pending) == nil then return true end
-        local current, writable = readWorkDays()
+        if next(pending) == nil and #pendingSettlements == 0 then return true end
+        local current, writable, earned, active = readWorkDays(rewards)
         if not writable then return false end
         for day, delta in pairs(pending) do current[day] = (current[day] or 0) + delta end
-        if not runtime:try_write_save(workSlot, encodeWorkDays(current)) then return false end
+        local days = encodeWorkDays(current)
+        local document = {1, days}
+        if rewards then
+            for _, completed in ipairs(pendingSettlements) do
+                earned = settle_work_reward(rewards, earned, active + completed, 0)
+                active = 0
+            end
+            document = {2, days, earned, active + pendingActive}
+        end
+        if not runtime:try_write_save(workSlot, document) then return false end
         saved, pending, elapsed = current, {}, 0
+        progression, pendingSettlements, pendingActive = earned, {}, 0
         return true
+    end
+
+    function calendar:settle()
+        if rewards then
+            pendingSettlements[#pendingSettlements + 1] = pendingActive
+            pendingActive = 0
+        end
+        return self:flush()
+    end
+
+    function calendar:recover()
+        if recoverPending then
+            recoverPending = false
+            self:settle()
+        end
+    end
+
+    function calendar:progress()
+        if rewards then return progression end
     end
 
     function calendar:advance(delta, working)
@@ -63,6 +106,7 @@ function new_work_calendar()
         lastDate = day
         if not working or delta <= 0 then return end
         pending[day] = (pending[day] or 0) + delta
+        if rewards then pendingActive = pendingActive + delta end
         elapsed = elapsed + delta
         if elapsed >= 60 - 1e-7 then
             elapsed = 0

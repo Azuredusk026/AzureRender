@@ -37,7 +37,8 @@ body { width: 100%; height: 100%; margin: 0; color: white; font-family: LatoLati
 <button id="timer-end-button" data-action="timer-reset">End · R</button>
 <button id="timer-stats" data-action="timer-stats" style="display: none;">Statistics</button>
 </div>
-<div id="work-stats" style="display: none;">Today <span id="work-today"></span> · Total <span id="work-total"></span></div>
+<div id="work-stats" style="display: none;">Today <span id="work-today"></span> · Total <span id="work-total"></span>
+<span id="work-progression" style="display: none;"></span></div>
 </div>
 <button id="notes-toggle" data-action="notes-toggle" style="display: none;">Notes</button>
 <div id="notes-panel" style="display: none;">

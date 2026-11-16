@@ -47,7 +47,10 @@ def main():
     run(args.lua, [example / "assets/work-calendar.lua", example / "tests/work-calendar.lua"])
     run(args.lua, [example / "assets/work-calendar.lua", example / "assets/pomodoro.lua",
                    example / "tests/work-calendar-timer.lua"])
-    print("Timer state, cues, room startup, notes, todo and work calendar checks passed")
+    run(args.lua, [example / "assets/work-progression.lua", example / "tests/work-progression.lua"])
+    run(args.lua, [example / "assets/work-progression.lua", example / "assets/work-calendar.lua",
+                   example / "tests/work-progression-calendar.lua"])
+    print("Timer state, cues, room startup, notes, todo, work calendar and progression checks passed")
 
 
 if __name__ == "__main__":

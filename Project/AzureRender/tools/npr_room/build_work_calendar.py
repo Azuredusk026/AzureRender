@@ -2,6 +2,7 @@
 
 import argparse
 import json
+import math
 import os
 from pathlib import Path
 import shutil
@@ -9,10 +10,51 @@ import tempfile
 
 from tools.npr_room.catalog_storage import publish_directory
 from tools.npr_room.pbr_materials import write
+from tools.npr_room.reference_inventory import digest
 from tools.npr_room.room_geometry import ui_font_document
+from tools.npr_room.skinned_mesh_export import UnityScene
 
 
-def stage_calendar(room, output):
+PARAMETER_ASSET = "Assets/App/BulbulAssets/MasterData/ScriptableObjects/GameParameterMaster.asset"
+
+
+def work_rewards(source):
+    path = source / PARAMETER_ASSET
+    master = UnityScene(path).read(11400000)
+
+    def extract(key, stem):
+        row = master[key]
+        return {name: row[stem + suffix] for name, suffix in
+                (("minutes", "Minutes"), ("perBlock", "Max"), ("maxHours", "MaxHour"))}
+
+    level = master["LevelUpInfoData"]
+    exp = extract("LevelUpInfoData", "pomodoroExpBase")
+    points = extract("PointUpInfoData", "pomodoroPointBase")
+    thresholds = level["nextLevelNecessaryExpArray"]
+    fallback = level["nextLevelNecessaryExpBase"]
+    if len(thresholds) < 31 or any(not math.isfinite(v) or v <= 0 for v in
+                                  [*exp.values(), *points.values(), *thresholds, fallback]):
+        raise ValueError("Work rewards require positive source rates and level thresholds")
+    return {"exp": exp, "points": points, "levelThresholds": thresholds,
+            "fallbackThreshold": fallback, "sourceSHA256": digest(path)}
+
+
+def reward_config(properties):
+    def fields(values):
+        return "{" + ", ".join(f"{key} = {value}" for key, value in values.items()) + "}"
+
+    thresholds = ", ".join(str(value) for value in properties["levelThresholds"])
+    return (
+        "work_reward_config = {\n"
+        f"    exp = {fields(properties['exp'])},\n"
+        f"    points = {fields(properties['points'])},\n"
+        f"    levelThresholds = {{{thresholds}}},\n"
+        f"    fallbackThreshold = {properties['fallbackThreshold']},\n"
+        "}\n"
+    ).encode("utf-8")
+
+
+def stage_calendar(room, output, source=None):
     examples = Path(__file__).resolve().parents[2] / "examples/npr-room/assets"
     descriptor = json.loads((room / "project.azureproject").read_bytes())
     inputs = descriptor["runtime"]["input"]
@@ -28,8 +70,13 @@ def stage_calendar(room, output):
         assets = project / "assets"
         shutil.copytree(room / "assets", assets, copy_function=copy_asset, ignore=shutil.ignore_patterns(".azure"))
         write(project / "project.azureproject", descriptor)
-        controller = (examples / "work-calendar.lua").read_bytes() + b"\n" + (examples / "pomodoro.lua").read_bytes()
-        (assets / "pomodoro.lua").write_bytes(controller)
+        parts = []
+        if source is not None:
+            rewards = work_rewards(source)
+            parts.extend((reward_config(rewards), (examples / "work-progression.lua").read_bytes()))
+            write(project / "work-progression-receipt.json", rewards)
+        parts.extend((examples / name).read_bytes() for name in ("work-calendar.lua", "pomodoro.lua"))
+        (assets / "pomodoro.lua").write_bytes(b"\n".join(parts))
         rml = (examples / "timer.rml").read_text(encoding="utf-8")
         fonts = sorted(path.name for path in assets.glob("ui-fallback.*") if path.suffix.lower() in (".otf", ".ttf"))
         if fonts:
@@ -43,8 +90,9 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--room", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--source", type=Path, help="Bind the original work reward parameters")
     args = parser.parse_args()
-    stage_calendar(args.room, args.output)
+    stage_calendar(args.room, args.output, args.source)
 
 
 if __name__ == "__main__":
