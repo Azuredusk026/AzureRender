@@ -449,3 +449,11 @@ NVIDIA 和 Intel 分别采集两帧。两块设备的首帧均与各自实际对
 第 2 帧中央地面在 NVIDIA 和 Intel 上的 SSIM 分别为 0.85692 和 0.85635，亮度误差为 9.84% 和 9.85%。青色环带的 SSIM 分别为 0.78642 和 0.78636，亮度误差为 2.83% 和 2.85%。两区的亮度达标，结构相似度仍低于 0.95。天花板、门、墙及左侧地面仍有新增超差，联合验收保持开放。
 
 [有效历史帧结果](evidence/2026-11-16/projected-history-resolved-valid-steps/qualification.json)和[验证归档](evidence/2026-11-16/projected-history-resolved-valid-steps/validation.zip)保存分区指标、程序指纹及首帧差量。
+
+### 已提交 HDR 反射源取样
+
+在原生采集确定的 74 个历史地址，双设备实际读回第 2 帧投影反射消费的第 1 帧已提交 HDR 合成颜色。相对原生，压缩亮度绝对误差中位数从不透明历史的 0.24443 降至约 0.07899。NVIDIA 的 43 个地址误差变小，Intel 为 48 个。NVIDIA 两帧与无读回的对照逐像素一致，Intel 两帧分别有 4 和 6 处差异。
+
+偏暗的中性色组各有 8 个位置的误差降低。暖色组仍有明显欠亮，31 个实际地址的原生线性亮度中位比值在 NVIDIA 和 Intel 上分别约为 3.87 和 3.78。[1049,683] 的原生历史 RGB 约为 [0.271,0.233,0.204]，Player 已提交颜色约为 [0.090,0.077,0.069]。继续按暖色来源的材质及光照输入核对。联合场景的结构相似度验收保持开放。
+
+[已提交 HDR 取样结果](evidence/2026-11-16/projected-history-submitted-hdr-addresses/qualification.json)和[验证归档](evidence/2026-11-16/projected-history-submitted-hdr-addresses/validation.zip)保存双设备读回、原生坐标、构建收据及逐帧差量。
