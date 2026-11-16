@@ -1,0 +1,363 @@
+{
+  "status": "verified-head-aligned-capture",
+  "nativeMultiViewAcceptance": "pending",
+  "pose": {
+    "oldAngularErrorDegrees": {
+      "face-front": 38.15449664156372,
+      "face-three-quarter-left": 83.1062415066914,
+      "face-three-quarter-right": 7.236345893201237,
+      "face-side-left": 128.06838564781685,
+      "face-side-right": 51.93161435218314,
+      "back-detail": 141.84550335843625
+    },
+    "headForward": [
+      0.7186946372675197,
+      -0.038205758622767275,
+      -0.6942754052758652
+    ],
+    "headJoint": "Bip001_Head",
+    "animation": {
+      "blend": 1.0,
+      "clip": 9,
+      "morph": [
+        0.0,
+        0.0
+      ],
+      "node": "hero",
+      "previousClip": 9,
+      "samples": [],
+      "time": 0.0
+    },
+    "clipName": "a_actor_laevat_idle_loop_closed",
+    "views": {
+      "head-front": {
+        "t": [
+          -0.2410637395634772,
+          2.5866939374226874,
+          -21.547162787922417
+        ],
+        "target": [
+          -0.6866544146693394,
+          2.6103815077688033,
+          -21.116712036651382
+        ],
+        "forward": [
+          -0.7186946372675197,
+          0.038205758622767275,
+          0.6942754052758652
+        ],
+        "fov": 40,
+        "faceBoundsPx": [
+          [
+            507.4897601463107,
+            195.55573907580154
+          ],
+          [
+            764.9593004058695,
+            521.8346549220678
+          ]
+        ],
+        "projectedEyeCentersPx": [
+          [
+            597.9374154295982,
+            381.6925058448581
+          ],
+          [
+            682.3332091287274,
+            362.99935951792395
+          ]
+        ]
+      },
+      "head-three-quarter-left": {
+        "t": [
+          -0.6759488718590863,
+          2.5866939374226874,
+          -21.736166869842823
+        ],
+        "target": [
+          -0.6866544146693394,
+          2.6103815077688033,
+          -21.116712036651382
+        ],
+        "forward": [
+          -0.01726700453266639,
+          0.038205758622767275,
+          0.9991206986958721
+        ],
+        "fov": 40,
+        "faceBoundsPx": [
+          [
+            508.4345827575523,
+            197.86245131038748
+          ],
+          [
+            776.9097332417149,
+            522.524078771808
+          ]
+        ],
+        "projectedEyeCentersPx": [
+          [
+            597.4043050073392,
+            382.2538608980348
+          ],
+          [
+            655.4096144253575,
+            362.14286276893137
+          ]
+        ]
+      },
+      "head-three-quarter-right": {
+        "t": [
+          -0.06719958147789873,
+          2.5866939374226874,
+          -21.10600649384113
+        ],
+        "target": [
+          -0.6866544146693394,
+          2.6103815077688033,
+          -21.116712036651382
+        ],
+        "forward": [
+          -0.9991206986958721,
+          0.038205758622767275,
+          -0.01726700453266639
+        ],
+        "fov": 40,
+        "faceBoundsPx": [
+          [
+            503.80215438059184,
+            197.54412068438967
+          ],
+          [
+            762.221461266269,
+            515.7519214045547
+          ]
+        ],
+        "projectedEyeCentersPx": [
+          [
+            624.2686827060195,
+            381.2955512328755
+          ],
+          [
+            683.250972346057,
+            364.22463055418615
+          ]
+        ]
+      }
+    },
+    "project": "fc4f59e1ac132cac099346a629e4fa5ce941b8aae1cdd3f25939d664264b7188",
+    "startupLevel": "dbc1f99b05fcef84fc4bc3a9285f36072a1bb91fbb8df81bf59ba4840a0749d3",
+    "asset": "b1f9d78053c0e36c966502847c0a90688307a3d98808db93ff8465a620e6e883",
+    "player": "97461e73dbe281f335bb5e29b1ed880b80caa07800ec1fe24b17c807e0bfe77c"
+  },
+  "devices": {
+    "nvidia": {
+      "camera": "head-front",
+      "cameraInput": {
+        "runtimeTarget": [
+          -0.959758376830997,
+          2.6248996960454547,
+          -20.852887382646554
+        ],
+        "t": [
+          -0.2410637395634772,
+          2.5866939374226874,
+          -21.547162787922417
+        ],
+        "target": [
+          -0.6866544146693394,
+          2.6103815077688033,
+          -21.116712036651382
+        ],
+        "forward": [
+          -0.7186946372675197,
+          0.038205758622767275,
+          0.6942754052758652
+        ],
+        "fov": 40,
+        "faceBoundsPx": [
+          [
+            507.4897601463107,
+            195.55573907580154
+          ],
+          [
+            764.9593004058695,
+            521.8346549220678
+          ]
+        ],
+        "projectedEyeCentersPx": [
+          [
+            597.9374154295982,
+            381.6925058448581
+          ],
+          [
+            682.3332091287274,
+            362.99935951792395
+          ]
+        ]
+      },
+      "sha256": "b5f64252f36cd29a929828910d8bd3c6c91d512b33e98032e39a43c53c987246",
+      "driver": 2496905216,
+      "device": 10464,
+      "meanRgb": [
+        91.49905815972222,
+        78.60236979166666,
+        75.71403754340278
+      ],
+      "extent": [
+        1280,
+        720
+      ],
+      "command": [
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-150229-face-native-geometry-mask-sampling-d5d93e\\qa-camera-pose-release\\AzurePlayer.exe",
+        "--project",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-012115-joint-scene-dynamics-e9e4e1\\project\\joint-dynamic-loop-v2.azureproject",
+        "--width",
+        "1280",
+        "--height",
+        "720",
+        "--capture-frames",
+        "1",
+        "--capture-fps",
+        "24",
+        "--fixed-frame-step",
+        "--qa-camera",
+        "scene",
+        "--qa-light",
+        "scene",
+        "--capture-dir",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-150229-face-native-geometry-mask-sampling-d5d93e\\character-head-aligned-views\\nvidia-head-front\\frames",
+        "--runtime-report",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-150229-face-native-geometry-mask-sampling-d5d93e\\character-head-aligned-views\\nvidia-head-front\\runtime.json",
+        "--resource-root",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-125923-body-lit-outline-depth-order-a29b63\\msaa-release",
+        "--qa-camera-pose",
+        "-0.24106374",
+        "2.58669394",
+        "-21.5471628",
+        "-0.959758377",
+        "2.6248997",
+        "-20.8528874",
+        "40"
+      ],
+      "captureManifest": "d647387cfb119ccb0633ffb35faf4b05b369e093ee3f0f0f0925925a71e5a7a5",
+      "runtimeReport": "05406e3ef9f1cd987f2d2a5a8678ef0b299c44d50e787f18840503c6976c6e22",
+      "animationInstances": 11,
+      "appliedCameraPosition": [
+        -0.241064,
+        2.58669,
+        -21.5472
+      ],
+      "appliedCameraForward": [
+        -0.7186939999999999,
+        0.038209999999999855,
+        0.6942999999999984
+      ]
+    },
+    "intel": {
+      "camera": "head-front",
+      "cameraInput": {
+        "runtimeTarget": [
+          -0.959758376830997,
+          2.6248996960454547,
+          -20.852887382646554
+        ],
+        "t": [
+          -0.2410637395634772,
+          2.5866939374226874,
+          -21.547162787922417
+        ],
+        "target": [
+          -0.6866544146693394,
+          2.6103815077688033,
+          -21.116712036651382
+        ],
+        "forward": [
+          -0.7186946372675197,
+          0.038205758622767275,
+          0.6942754052758652
+        ],
+        "fov": 40,
+        "faceBoundsPx": [
+          [
+            507.4897601463107,
+            195.55573907580154
+          ],
+          [
+            764.9593004058695,
+            521.8346549220678
+          ]
+        ],
+        "projectedEyeCentersPx": [
+          [
+            597.9374154295982,
+            381.6925058448581
+          ],
+          [
+            682.3332091287274,
+            362.99935951792395
+          ]
+        ]
+      },
+      "sha256": "a01710942844462fa177b02d7795846ea2e3231f2f25e3ac892cec3000d1893b",
+      "driver": 1661340,
+      "device": 42888,
+      "meanRgb": [
+        91.46270182291667,
+        78.55136176215278,
+        75.65038411458333
+      ],
+      "extent": [
+        1280,
+        720
+      ],
+      "command": [
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-150229-face-native-geometry-mask-sampling-d5d93e\\qa-camera-pose-release\\AzurePlayer.exe",
+        "--project",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-012115-joint-scene-dynamics-e9e4e1\\project\\joint-dynamic-loop-v2.azureproject",
+        "--width",
+        "1280",
+        "--height",
+        "720",
+        "--capture-frames",
+        "1",
+        "--capture-fps",
+        "24",
+        "--fixed-frame-step",
+        "--qa-camera",
+        "scene",
+        "--qa-light",
+        "scene",
+        "--capture-dir",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-150229-face-native-geometry-mask-sampling-d5d93e\\character-head-aligned-views\\intel-head-front\\frames",
+        "--runtime-report",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-150229-face-native-geometry-mask-sampling-d5d93e\\character-head-aligned-views\\intel-head-front\\runtime.json",
+        "--resource-root",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-125923-body-lit-outline-depth-order-a29b63\\msaa-release",
+        "--qa-camera-pose",
+        "-0.24106374",
+        "2.58669394",
+        "-21.5471628",
+        "-0.959758377",
+        "2.6248997",
+        "-20.8528874",
+        "40"
+      ],
+      "captureManifest": "7c9620b95293d5edbc8568195e59e9c24e6b64853b00dd3c0db776f163b603d7",
+      "runtimeReport": "05406e3ef9f1cd987f2d2a5a8678ef0b299c44d50e787f18840503c6976c6e22",
+      "animationInstances": 11,
+      "appliedCameraPosition": [
+        -0.241064,
+        2.58669,
+        -21.5472
+      ],
+      "appliedCameraForward": [
+        -0.7186939999999999,
+        0.038209999999999855,
+        0.6942999999999984
+      ]
+    }
+  },
+  "facePreviewSha256": "7c9a10f70d86162ca6d3b12e9359c298127e6178d8be2c02405f4825ac07bcdc",
+  "archive": "271e7654a613c544cb33211a29b69e59222dec81499e49ef3afef4808d50e77b"
+}

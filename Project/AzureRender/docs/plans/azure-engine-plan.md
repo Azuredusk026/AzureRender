@@ -1434,7 +1434,8 @@ Intel 头发颜色继续按冻结区域核对纹理选级。
 
 [动态角色网格](../acceptance/nr/full-body-native-comparison.md#动态角色网格)记录身体和脸部的原生索引对照及身体网格候选，动态画面继续按原门槛验收。
 
-[角色六机位采集](../acceptance/nr/full-body-native-comparison.md#采集范围)记录 NVIDIA 与 Intel 的面部正视、四分之三侧视、侧视和背部特写，区域外观及原始冻结图继续验收。
+[角色机位采集](../acceptance/nr/full-body-native-comparison.md#采集范围)记录双设备角色根节点的六个方向与头骨骼对齐的正脸，区域外观及原始冻结图继续验收。
+[脸部局部光](../acceptance/nr/evidence/2026-11-16/face-local-light-player/qualification.json)核对六个同屏坐标的原生与 Player 着色读数，按光源和响应继续定位。
 
 [反射历史图层](../acceptance/nr/scene-material-quality-diagnosis.md#反射历史图层合成)通过双设备小场景合成核对；中央地面、青色环带及原始冻结图继续按区域门槛验收。
 [反射过滤器输入](../acceptance/nr/scene-material-quality-diagnosis.md#反射过滤器输入核对)通过 4,940 点校准。覆盖模型显示字形与货箱需联合核对，两区继续按实际成片验收。
