@@ -17,6 +17,9 @@
 
 ## 参考基线
 
+移植资产与行为按 Recovery Windows 1.17.3 锁定。
+[Steam 参考版本](../acceptance/npr-room/steam-reference.md)登记 1.18.1 的平台参照和内容差异。
+
 | 项目 | 已核实的本地依据 |
 | --- | --- |
 | 源工程 | Unity `2022.3.62f2`，Windows Mono、URP 与 D3D11。构建入口为 `Boot`、`AssetLoad`、`Entry`、`RoomScene` 和 `Transition`。 |
