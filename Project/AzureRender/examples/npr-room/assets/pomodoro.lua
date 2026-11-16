@@ -21,7 +21,9 @@ local statsOpen
 local heroineParts = {"face", "body", "hair", "top", "bottom", "socks", "jacket"}
 local roomVoice
 local workChoice, speaking
+local choiceSpeaking
 local roomLanguage
+local timerVoice
 
 local function durationText(value)
     local seconds = math.floor(value + 1e-7)
@@ -39,6 +41,15 @@ local function setHeroineState(state)
     for _, part in ipairs(heroineParts) do
         local actor = self:find("heroine-" .. part)
         if actor then actor:set("azure.animator", "state", state) end
+    end
+end
+
+local function announceTimer(event, fresh, midway)
+    if timerVoice then
+        local state = phase == "work" and not paused and "report" or "idle"
+        setHeroineState(state)
+        timerVoice:trigger(event, countupMode, round, settings[1] * settings[3] * 60, fresh, midway, state,
+                           speaking or choiceSpeaking)
     end
 end
 
@@ -75,12 +86,13 @@ local function idle()
     countupSinceSave = 0
 end
 
-local function finish()
+local function finish(midway)
     if workCalendar then workCalendar:settle() end
     if workChoice then workChoice:complete() end
     idle()
     setHeroineState("idle")
     playCue("timer-finish")
+    announceTimer("finish", false, midway)
 end
 
 local function finishInterval()
@@ -90,11 +102,13 @@ local function finishInterval()
         phase = "break"
         remaining = settings[2] * 60
         playCue("timer-finish")
+        announceTimer("break")
     else
         phase = "work"
         round = round + 1
         remaining = settings[1] * 60
         playCue("timer-start")
+        announceTimer("work")
     end
 end
 
@@ -155,10 +169,12 @@ local function updateCountup(dt)
             phase = "work"
             setHeroineState("report")
             playCue("timer-start")
+            announceTimer("work", true)
         else
             paused = not paused
             countupSinceSave = 0
             playCue(paused and "timer-finish" or "timer-start")
+            announceTimer(paused and "break" or "work")
         end
     elseif phase == "work" and not paused then
         countupElapsed = countupElapsed + dt
@@ -202,6 +218,10 @@ function init()
     end
     if new_room_voice then roomVoice = new_room_voice(translate) end
     if new_work_choice then workChoice = new_work_choice(nil, translate) end
+    if timer_voice_program then
+        timerVoice = new_timer_voice_action(timer_voice_program, setHeroineState,
+                                            translate or function(value) return value end)
+    end
     if new_work_calendar then
         workCalendar = new_work_calendar()
         statsOpen = false
@@ -215,14 +235,17 @@ end
 function update(dt)
     local languageChanged = roomLanguage and roomLanguage:update()
     if workCalendar then workCalendar:recover() end
-    if (workCalendar or workChoice) and phase ~= "idle" then
+    local voicedWork = 0
+    if (workCalendar or workChoice or timerVoice) and phase ~= "idle" then
         local working = phase == "work" and not paused and not self:pressed("timer-toggle")
             and not self:pressed("timer-reset") and (countupMode or not self:pressed("timer-skip"))
         local available = countupMode and maxCountupSeconds - countupElapsed or remaining
         local spent = math.min(dt, available)
         if workCalendar then workCalendar:advance(spent, working) end
         if workChoice and working then workChoice:recordWork(spent) end
+        if working then voicedWork = spent end
     end
+    if timerVoice then timerVoice:advanceClock(dt, voicedWork) end
     if phase == "idle" and self:pressed("timer-mode") then
         countupMode = not countupMode
         self:write_save("timer-mode", {1, countupMode and 1 or 0})
@@ -230,13 +253,14 @@ function update(dt)
     elseif countupMode then
         updateCountup(dt)
     elseif self:pressed("timer-reset") and phase ~= "idle" then
-        finish()
+        finish(true)
     elseif self:pressed("timer-toggle") then
         if phase == "idle" then
             phase = "work"
             round = 1
             setHeroineState("report")
             playCue("timer-start")
+            announceTimer("work", true)
         else
             paused = not paused
             playCue(paused and "timer-pause" or "timer-start")
@@ -268,8 +292,11 @@ function update(dt)
             end
         end
     end
-    local choiceActive = workChoice and workChoice:step(dt, phase == "idle" and not speaking, languageChanged)
-    if roomVoice then speaking = roomVoice(dt, phase == "idle", choiceActive, languageChanged) end
+    local timerVoiceActive = timerVoice and timerVoice:update(dt, languageChanged)
+    choiceSpeaking = workChoice and workChoice:step(dt, phase == "idle" and not speaking and not timerVoiceActive,
+                                                      languageChanged)
+    if roomVoice then speaking = roomVoice(dt, phase == "idle", choiceSpeaking or timerVoiceActive,
+                                           languageChanged) end
 end
 
 function shutdown()

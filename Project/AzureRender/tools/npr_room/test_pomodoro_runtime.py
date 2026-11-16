@@ -52,7 +52,8 @@ def main():
                    example / "tests/work-progression-calendar.lua"])
     run(args.lua, [example / "assets/room-language.lua", example / "assets/room-voice.lua",
                    example / "assets/work-choice.lua", example / "tests/room-language.lua"])
-    run(args.lua, [example / "assets/timer-voice-selector.lua", example / "tests/timer-voice-selector.lua"])
+    run(args.lua, [example / "assets/timer-voice-selector.lua", example / "assets/timer-voice-action.lua",
+                   example / "tests/timer-voice-selector.lua"])
     print("Timer state, cues, room startup, notes, todo, work calendar, progression, language and voice selector checks passed")
 
 

@@ -1,0 +1,3 @@
+#timer-voice-caption { position: absolute; left: 25%; width: 50%; bottom: 56dp; padding: 10dp 12dp; background-color: #19232c; text-align: center; font-size: 17dp; }
+</style>
+<div id="timer-voice-caption" style="display: none;"><span id="timer-voice-line"></span></div>

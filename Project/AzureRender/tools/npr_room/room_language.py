@@ -113,6 +113,16 @@ def language_panel(base, template, ids, faces):
     return base.replace("</style>", faces + style + "</style>", 1).replace("</body>", body + "</body>", 1)
 
 
+def localized_scripts(examples, strings, default, voice, choices, rewards):
+    return [
+        language_config(strings, default).encode("utf-8"),
+        voice_config(voice["responses"], FIELDS).encode("utf-8"),
+        choice_config(choices["episodes"], choices["parameters"], FIELDS).encode("utf-8"),
+        *((examples / file).read_bytes() for file in ("room-language.lua", "room-voice.lua", "work-choice.lua")),
+        calendar_script(examples, rewards),
+    ]
+
+
 def stage_languages(room, source, inventory, images, output, language):
     enum = source / GAME_LANGUAGE
     ids = read_locale_ids(enum)
@@ -132,13 +142,7 @@ def stage_languages(room, source, inventory, images, output, language):
         raise ValueError("The room already has a language selector")
     descriptor["runtime"]["input"].update(actions)
     examples = Path(__file__).resolve().parents[2] / "examples/npr-room/assets"
-    scripts = [
-        language_config(strings, default).encode("utf-8"),
-        voice_config(voice["responses"], FIELDS).encode("utf-8"),
-        choice_config(choices["episodes"], choices["parameters"], FIELDS).encode("utf-8"),
-        *((examples / file).read_bytes() for file in ("room-language.lua", "room-voice.lua", "work-choice.lua")),
-        calendar_script(examples, rewards),
-    ]
+    scripts = localized_scripts(examples, strings, default, voice, choices, rewards)
     receipt = {"schemaVersion": 1, "storySHA256": story_hash, "enumSHA256": digest(enum),
                "default": default, "languages": dict(zip(FIELDS, ids.values())),
                "ui": strings, "idleResponses": len(voice["responses"]), "workConversations": len(choices["episodes"])}

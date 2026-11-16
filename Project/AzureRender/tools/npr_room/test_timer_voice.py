@@ -4,9 +4,23 @@ import unittest
 
 from tools.npr_room.build_voice_room import LANGUAGES
 from tools.npr_room.timer_voice import timer_voice_rows
+from tools.npr_room.timer_voice_motion import resolve_motions
 
 
 class TimerVoiceTests(unittest.TestCase):
+    def test_native_clip_duration_can_include_one_terminal_sample(self):
+        source = {"55": {"clips": [{"clip": "Assets/hello.anim", "speed": 1, "loop": False,
+                                   "sha256": "proof", "start": 0, "stop": 4,
+                                   "voiceEvents": [{"cue": 1, "seconds": 1.2}]}]}}
+        clip = {"name": "hello", "human": True, "rate": 60, "length": 4 + 1 / 60, "frames": [0]}
+        motion = resolve_motions(source, [clip], [55])["55"]
+        self.assertEqual(motion["seconds"], clip["length"])
+        self.assertEqual(motion["serializedSeconds"], 4)
+        self.assertEqual(motion["cues"], {"1": 1.2})
+        clip["length"] += 1 / 60
+        with self.assertRaisesRegex(ValueError, "time range"):
+            resolve_motions(source, [clip], [55])
+
     def test_motion_wait_and_mouth_control_are_not_text_delays(self):
         guid = "cacf9d894afe37e4f98c9f4d9f16167d"
         checksum = "1" * 64

@@ -57,3 +57,32 @@ assert(bank:take(4).localization == "shared")
 assert(bank:take(3000).localization == "countup")
 assert(bank:take(4).localization == "work")
 assert(bank:take(4).localization == "shared")
+
+local voice = {asset = "assets:/same-source.ogg", localization = "source", text = "original", seconds = 2,
+               bodyMotion = 55, animationCue = 1, speakBeforeMotion = false}
+local motion = {state = "banzai", seconds = 4, cues = {1}}
+local starts, stops, restored, visible = 0, 0, {}, {}
+local source = {
+    set = function(_, component, key, value)
+        assert(component == "azure.audio-source" and key == "asset" and value == voice.asset)
+    end,
+    audio_play = function() starts = starts + 1 end,
+    audio_stop = function() stops = stops + 1 end,
+    audio_playing = function() return false end,
+    audio_position = function() return 0 end,
+}
+self = {
+    find = function(_, name) assert(name == "room-timer-voice"); return source end,
+    ui_text = function(_, id, text) assert(id == "timer-voice-line" and text == "original") end,
+    ui_visible = function(_, id, value) visible[id] = value end,
+}
+local function useMotion(state) restored[#restored + 1] = state end
+local function keepText(value) return value end
+local player = new_timer_voice_action({groups = {[4] = {voice}}, rules = rules,
+                                       motions = {[55] = motion}, random = random}, useMotion, keepText)
+assert(player:trigger("work", false, 1, 60, true, false, "idle"))
+assert(restored[1] == "banzai" and player:update(.99, false) and starts == 0)
+assert(player:update(.01, false) and starts == 1 and visible["timer-voice-caption"])
+assert(player:update(.01, false))
+assert(player:update(29.9, false) and restored[2] == "idle" and stops == 0)
+assert(not player:update(.1, false) and stops == 1 and not visible["timer-voice-caption"])
