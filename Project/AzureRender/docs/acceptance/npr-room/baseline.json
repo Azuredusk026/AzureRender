@@ -1,0 +1,108 @@
+{
+  "catalogSHA256": "d4f4c4ddd80599e6b78bd935cc98bdc8389d070a2b19ad84d04932af10852bd6",
+  "coverage": {
+    "authorizedPlatformRuns": "open",
+    "featureReachability": "open",
+    "pairedVisualReferences": "open",
+    "runtimeResourceReachability": "open",
+    "staticCatalog": "mapped"
+  },
+  "engineBase": "dbe4ab3f84f55ff6776634842c4ac794cf887345",
+  "formatVersion": 1,
+  "privateInventorySHA256": "f1a6e28bcc0a59144e9461af5e9e034e6c1f2226e16c3b4d2784c760620578a0",
+  "reference": "Recovery Windows 1.17.3",
+  "staticSummary": {
+    "additionalClosure": 5123,
+    "assetExtensions": {
+      "": 1,
+      ".anim": 496,
+      ".asmdef": 4,
+      ".asset": 1706,
+      ".bundle": 13,
+      ".cginc": 5,
+      ".compute": 7,
+      ".controller": 27,
+      ".cs": 1476,
+      ".dll": 127,
+      ".flare": 1,
+      ".hlsl": 321,
+      ".json": 10,
+      ".lighting": 1,
+      ".lilblock": 109,
+      ".lilinternal": 63,
+      ".mat": 258,
+      ".md": 5,
+      ".mixer": 2,
+      ".ogg": 1551,
+      ".otf": 4,
+      ".playable": 3,
+      ".png": 586,
+      ".prefab": 98,
+      ".recovery-backup": 3,
+      ".rendertexture": 1,
+      ".rsp": 2,
+      ".shader": 264,
+      ".shader-backup": 8,
+      ".shadervariants": 2,
+      ".terrainlayer": 1,
+      ".texture2d": 1,
+      ".ttf": 3,
+      ".txt": 11,
+      ".unity": 5,
+      ".wav": 3,
+      ".xml": 2
+    },
+    "assetFiles": 7180,
+    "catalogInternalIds": 1832,
+    "catalogKeys": 3687,
+    "catalogLocations": 1845,
+    "catalogMatchMethods": {
+      "build-scene": 5,
+      "exact": 37,
+      "exported-stem": 1530,
+      "resources-key": 20,
+      "resources-key-casefold": 228
+    },
+    "catalogMatchesWindowsPlayer": true,
+    "catalogProviders": {
+      "AssetBundleProvider": 12,
+      "BundledAssetProvider": 1568,
+      "LegacyResourcesProvider": 260,
+      "Scene": 5
+    },
+    "duplicateGuids": 0,
+    "missingBundles": 0,
+    "resourcesKeys": 275,
+    "sceneClosure": 3053,
+    "scenes": [
+      "Boot",
+      "AssetLoad",
+      "Entry",
+      "RoomScene",
+      "Transition"
+    ],
+    "uniqueStaticPaths": 5123,
+    "unityVersion": "2022.3.62f2",
+    "unresolvedAdditionalGuids": 1,
+    "unresolvedSceneGuids": 0,
+    "windowsFiles": 295
+  },
+  "windowsFiles": {
+    "ChillWithYouRecovery.exe": {
+      "bytes": 666624,
+      "sha256": "5cc71bf032f440ac46a5d24bb4101050a37001dd8f1b8325aec1067ea0d1ff52"
+    },
+    "ChillWithYouRecovery_Data/Managed/Assembly-CSharp.dll": {
+      "bytes": 2572800,
+      "sha256": "87cdb0d3f11f30f808018555e19dca1528efa116d99a00582f7b3b9e8e105e9f"
+    },
+    "ChillWithYouRecovery_Data/Managed/Unity.Addressables.dll": {
+      "bytes": 110592,
+      "sha256": "7cce5d31414a7a88e5d85b86686bc38228e180ff5508982da237972b5e3fa18c"
+    },
+    "UnityPlayer.dll": {
+      "bytes": 31100840,
+      "sha256": "a8dcc8f6f4cbee3da56552a4adbe56724228a0efcc2fcd737b516933f0418081"
+    }
+  }
+}

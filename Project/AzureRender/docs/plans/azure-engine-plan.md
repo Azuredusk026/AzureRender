@@ -30,6 +30,11 @@ Player 的 CPU 工作 P95 至多为八毫秒。
 
 ## 当前执行顺序
 
+房间游戏移植按专项计划的 P0 至 P7 实施。
+P0 已锁定 Recovery Windows 产物及静态目录。
+功能可达性、动态资源和画面对照继续核验。
+[移植计划](2026-11-16-npr-room-reproduction.md) · [验收基线](../acceptance/npr-room/baseline.md)
+
 [联合场景热点纹理分配](../acceptance/nr/joint-texture-hot-placement.md)完成 1440p 同驱动逐像素比较与 1080p60 配对计时。候选 GPU P95 高于首轮参考，保留隔离结果。
 
 [三纹理采样与视口选择集成](../acceptance/nr/projected-hair-viewport-integration.md)通过所属构建和双显卡复验。
