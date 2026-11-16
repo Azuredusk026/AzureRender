@@ -38,6 +38,10 @@ Intel 首次采集在右侧地面另有 662 个超差像素。该区域的超差
 
 Intel 关闭并行录制后，同一候选的两次采集逐像素一致。腰侧区域仍有 63 个像素超过一个色阶，右侧地面区域为零。串行配置可用于重复采集。默认并行录制的波动继续核对。[串行采集结果](evidence/2026-11-16/joint-character-intel-serial/qualification.json)及[归档](evidence/2026-11-16/joint-character-intel-serial/validation.zip)保存命令、实际成片差量和运行状态。
 
+Intel 单独输出反射分量时，两次默认采集逐像素一致。串行与默认配置在右侧地面有 845 个像素超过一个色阶，腰侧区域没有超差。完整画面的差异涉及地面反射。
+
+仅由主线程录制次级命令时，两次成片仍出现两种结果。第一帧与串行成片一致，第二帧与已有波动帧一致。后续需分别核对次级命令执行和并行场景准备。[录制路径核对](evidence/2026-11-16/joint-character-secondary-recording/qualification.json)及[验证归档](evidence/2026-11-16/joint-character-secondary-recording/validation.zip)保存两组对照、帧差、源码和构建收据。
+
 ## 采集范围
 
 角色根节点相对方向覆盖正向、左右四分之三侧向、左右侧向及背向六个机位。NVIDIA 与 Intel 均以 1280×720 采集，使用同一联合场景、资产和动画起点。[六机位采集记录](evidence/2026-11-16/character-six-view-inputs/qualification.json)保存相机参数、图像摘要和冻结回归结果。当前 NVIDIA 驱动下的四帧冻结回归逐像素一致；原始冻结图的 RGB 峰值差为 1、7、37、23。
