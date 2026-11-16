@@ -19,6 +19,7 @@ local previousSettings
 local workCalendar
 local statsOpen
 local heroineParts = {"face", "body", "hair", "top", "bottom", "socks", "jacket"}
+local roomVoice
 
 local function durationText(value)
     local seconds = math.floor(value + 1e-7)
@@ -190,6 +191,7 @@ function init()
     settings = loadSettings()
     loadCountup()
     idle()
+    if new_room_voice then roomVoice = new_room_voice() end
     if new_work_calendar then
         workCalendar = new_work_calendar()
         statsOpen = false
@@ -253,6 +255,7 @@ function update(dt)
             end
         end
     end
+    if roomVoice then roomVoice(dt, phase == "idle") end
 end
 
 function shutdown()

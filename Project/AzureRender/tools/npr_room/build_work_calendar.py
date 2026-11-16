@@ -54,6 +54,14 @@ def reward_config(properties):
     ).encode("utf-8")
 
 
+def calendar_script(examples, rewards=None):
+    parts = []
+    if rewards is not None:
+        parts.extend((reward_config(rewards), (examples / "work-progression.lua").read_bytes()))
+    parts.extend((examples / name).read_bytes() for name in ("work-calendar.lua", "pomodoro.lua"))
+    return b"\n".join(parts)
+
+
 def stage_calendar(room, output, source=None):
     examples = Path(__file__).resolve().parents[2] / "examples/npr-room/assets"
     descriptor = json.loads((room / "project.azureproject").read_bytes())
@@ -70,13 +78,10 @@ def stage_calendar(room, output, source=None):
         assets = project / "assets"
         shutil.copytree(room / "assets", assets, copy_function=copy_asset, ignore=shutil.ignore_patterns(".azure"))
         write(project / "project.azureproject", descriptor)
-        parts = []
-        if source is not None:
-            rewards = work_rewards(source)
-            parts.extend((reward_config(rewards), (examples / "work-progression.lua").read_bytes()))
+        rewards = work_rewards(source) if source is not None else None
+        if rewards is not None:
             write(project / "work-progression-receipt.json", rewards)
-        parts.extend((examples / name).read_bytes() for name in ("work-calendar.lua", "pomodoro.lua"))
-        (assets / "pomodoro.lua").write_bytes(b"\n".join(parts))
+        (assets / "pomodoro.lua").write_bytes(calendar_script(examples, rewards))
         rml = (examples / "timer.rml").read_text(encoding="utf-8")
         fonts = sorted(path.name for path in assets.glob("ui-fallback.*") if path.suffix.lower() in (".otf", ".ttf"))
         if fonts:
