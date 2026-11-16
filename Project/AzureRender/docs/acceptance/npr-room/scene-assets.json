@@ -29,6 +29,20 @@
     "exchangeSHA256": "17bb3b302bd02e578d9816807a8d937469c848cbc54141bf099b0b750ffb09ec",
     "previewSHA256": "3ef8e261ac2bed0ed8a5d5b6debfe49ae606d45b7024db591d8a3534f906c404"
   },
+  "roomPbr": {
+    "materialDocuments": 8,
+    "textureAssets": 1,
+    "pendingUrpLitMaterials": 2,
+    "roomSlotAssignments": 3,
+    "renderRunnerJob": 1621,
+    "editorSaveReopen": true,
+    "playerCaptures": 2,
+    "reusedCameraCaptureSize": [1280, 720],
+    "relocatedPlayerCheck": true,
+    "manifestSHA256": "8f534160802f90573b46c9eb68c71884321aaeb96065e9a0585ad5bb60236ca8",
+    "levelSHA256": "72e553ccddbff94c6739b98dc07385797fb12319cdbc728a400b0bcf667a5518",
+    "runtimeEvidenceSHA256": "3748f3f747e2764437f0e5d4510ccfa9bdce8c342bb6f65c36ea0f7ca7f256f8"
+  },
   "deformers": {
     "sourceMeshes": 34,
     "skinVariants": 34,
