@@ -1438,6 +1438,7 @@ Intel 头发颜色继续按冻结区域核对纹理选级。
 [脸部局部光](../acceptance/nr/evidence/2026-11-16/face-local-light-player/qualification.json)核对六个同屏坐标的原生与 Player 着色读数，按光源和响应继续定位。
 [脸部局部光输出](../acceptance/nr/evidence/2026-11-16/face-local-light-output/qualification.json)通过零倍率与等倍率回放验证局部漫反射对附件的作用，原生输出阶段继续对齐。
 [虹膜基色与眼影](../acceptance/nr/evidence/2026-11-16/iris-canonical-base-covered/qualification.json)通过双设备区域外和新增误差核对，区域内的剩余色差继续按一个色阶验收。
+[虹膜打包前颜色](../acceptance/nr/eye-npr-inputs.md#虹膜打包前颜色)确认三个异常点的原生与 Player 线性值在颜色打包前已分离。
 
 [反射历史图层](../acceptance/nr/scene-material-quality-diagnosis.md#反射历史图层合成)通过双设备小场景合成核对；中央地面、青色环带及原始冻结图继续按区域门槛验收。
 
