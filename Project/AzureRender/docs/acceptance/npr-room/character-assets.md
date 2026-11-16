@@ -17,6 +17,21 @@ Release Player 通过基础部件及角色关卡校验。
 截图存放于本机私有目录的 `reference-preview/heroine-bind-pose.png`。
 实际造型、角色动作及同步时间以原版对照为准。
 
+## 说话表情片段
+
+原 `anim_face_talk` 片段将九条曲线绑定到 `Character/Face`。
+导出器按源采样率与有效关键帧取样，将权重写入脸部 57 个目标的原顺序。
+片段使用线性采样帧，保留循环标记和其余目标的绑定权重。 [glTF 2.0 动画规格](https://registry.khronos.org/glTF/specs/2.0/glTF-2.0.html#animations)
+
+有效区间的 548 个原关键帧均与 GLB 对账。
+最大归一化权重误差约为 `2.93 × 10⁻⁸`。
+两个片段相位分别通过 Release Player 呈现，各写入两张截图。
+两张首帧有 105 个像素变化，位于嘴部区域。脚本与表现诊断为空，退出后缓冲与图像计数均为零。
+截图、GLB 和源采样核对存放于本机私有目录的 `reference-preview/heroine-talk`。
+人体动作、语音同步和原画面配对按角色专项验收。
+
+## 窗景网格
+
 窗景夹具使用郁金香场景的原网格。
 网格有 13,633 个顶点，并保留原几何范围和纹理，已通过独立 Player 加载校验。
 场景灯光、风、窗框和切换时序进入窗景验收。
@@ -37,9 +52,10 @@ Release Player 通过基础部件及角色关卡校验。
 ```powershell
 python -B -m unittest discover -s tools/npr_room
 python -B -m tools.npr_room.skinned_mesh_export --source $unitySource --scene $unityScene --renderer $rendererFileId --base-color-png $texture --output $targetGlb
+python -B -m tools.npr_room.skinned_mesh_export --source $unitySource --scene $unityScene --renderer 9483 --base-color-png $faceTexture --morph-clip $faceClip --morph-path Character/Face --output $faceGlb
 python -B -m tools.npr_room.deformer_catalog --source $unitySource --catalog $meshManifest --output $deformerCatalog
 ```
 
 转换支持单个渲染器的绑定层级。
-形变轨道使用单帧、全权重的形变输入。
+形变目标采用单帧、全权重的变形输入，片段转换支持目标渲染器的直接曲线。
 原网格引用和部件身份通过 Recovery 的文件 ID 核对。

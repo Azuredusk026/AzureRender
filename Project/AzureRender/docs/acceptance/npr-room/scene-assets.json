@@ -31,5 +31,20 @@
   "heroineBindPose": {
     "renderRunnerJob": 1566,
     "previewSHA256": "cb0fd4ac04735bbc268edb7dca24cca46a01d6d56808af284d13a81b9ae9a11c"
+  },
+  "heroineTalk": {
+    "clip": "anim_face_talk",
+    "sourceRate": 60,
+    "sourceCurves": 9,
+    "sourceKeysChecked": 548,
+    "keysAfterClipEnd": 3,
+    "samples": 187,
+    "durationSeconds": 2.8333334922790527,
+    "maxKeyWeightError": 2.930908205023286e-08,
+    "renderRunnerJob": 1587,
+    "playerCaptures": 4,
+    "differentRegion": [308, 124, 327, 135],
+    "changedPixels": 105,
+    "glbSHA256": "9546ae453cdfe18219afeb423776d093d420f6d2b98875c9ea100ed9f10c2059"
   }
 }

@@ -2,7 +2,7 @@ from collections import OrderedDict
 from struct import pack, unpack_from
 import unittest
 
-from skinned_mesh_export import append_skin, inverse_bind, rig_channels
+from skinned_mesh_export import append_morph_clip, append_skin, inverse_bind, rig_channels
 
 
 class SkinnedExportTests(unittest.TestCase):
@@ -54,6 +54,39 @@ class SkinnedExportTests(unittest.TestCase):
         joints, weights = rig_channels(mesh, 2)
         self.assertEqual(joints, [(1, 0, 0, 0)])
         self.assertEqual(weights, [(1.0, 0, 0, 0)])
+
+    def test_morph_clip_preserves_target_order_held_values_and_default_weights(self):
+        def keys(first_slope, last_slope):
+            return [
+                {"time": 0, "value": 0, "inSlope": 0, "outSlope": first_slope, "weightedMode": 0},
+                {"time": 1, "value": 100, "inSlope": last_slope, "outSlope": 0, "weightedMode": 0},
+            ]
+        bindings = []
+        for name, slopes in (("curve", (0, 100)), ("step", ("Infinity", 0))):
+            bindings.append({"classID": 137, "path": "Character/Face",
+                             "attribute": "blendShape." + name,
+                             "curve": {"m_Curve": keys(*slopes)}})
+        clip = {"m_Name": "expression", "m_SampleRate": 2, "m_FloatCurves": bindings,
+                "m_AnimationClipSettings": {"m_StartTime": 0, "m_StopTime": 1, "m_LoopTime": 1}}
+        document = {"meshes": [{
+            "extras": {"targetNames": ["step", "untouched", "curve"]}, "weights": [0, 0.25, 0],
+        }], "nodes": [{"mesh": 0}], "accessors": [], "bufferViews": []}
+        binary = bytearray()
+        append_morph_clip(document, binary, clip, "Character/Face", 0)
+        animation, = document["animations"]
+        self.assertEqual(animation["channels"][0]["target"], {"node": 0, "path": "weights"})
+        times, values = (document["accessors"][animation["samplers"][0][key]] for key in ("input", "output"))
+        self.assertEqual(times["count"], 3)
+        self.assertEqual(values["count"], 9)
+        offset = document["bufferViews"][values["bufferView"]]["byteOffset"]
+        self.assertEqual(unpack_from("<9f", binary, offset), (0, .25, 0, 0, .25, .375, 1, .25, 1))
+        bindings[1]["curve"]["m_Curve"][-1]["time"] = 0.7
+        append_morph_clip(document, binary, clip, "Character/Face", 0)
+        offset = document["bufferViews"][document["accessors"][-1]["bufferView"]]["byteOffset"]
+        self.assertEqual(unpack_from("<12f", binary, offset)[6], 1)
+        bindings[0]["classID"] = 95
+        with self.assertRaisesRegex(ValueError, "Only direct blend-shape bindings"):
+            append_morph_clip(document, bytearray(), clip, "Character/Face", 0)
 
 
 if __name__ == "__main__":

@@ -1,10 +1,11 @@
 """Export one Unity SkinnedMeshRenderer and its source bind hierarchy."""
 
 import argparse
+from bisect import bisect_right
 import math
 from pathlib import Path
 import re
-from struct import pack
+from struct import pack, unpack
 
 import yaml
 
@@ -146,6 +147,82 @@ def append_morphs(gltf, binary, mesh, source_weights):
     gltf["meshes"][0]["weights"] = [float(w) / 100 for w in source_weights]
 
 
+def sample_shape(times, values, tangents, time):
+    right = bisect_right(times, time)
+    if right == 0:
+        return values[0]
+    if right == len(times):
+        return values[-1]
+    left = right - 1
+    start, stop = values[left], values[right]
+    incoming, outgoing = tangents[right][0], tangents[left][1]
+    if math.isinf(incoming) or math.isinf(outgoing):
+        return start
+    duration = times[right] - times[left]
+    phase = (time - times[left]) / duration
+    phase2, phase3 = phase * phase, phase * phase * phase
+    return ((2 * phase3 - 3 * phase2 + 1) * start + (phase3 - 2 * phase2 + phase) * outgoing * duration
+            + (3 * phase2 - 2 * phase3) * stop + (phase3 - phase2) * incoming * duration)
+
+
+def float32(value):
+    return unpack("<f", pack("<f", value))[0]
+
+
+def append_morph_clip(gltf, binary, clip, target_path, target_node):
+    if any(clip.get(field) for field in ("m_RotationCurves", "m_CompressedRotationCurves",
+                                        "m_EulerCurves", "m_PositionCurves", "m_ScaleCurves",
+                                        "m_PPtrCurves", "m_Events", "m_Compressed")):
+        raise ValueError("Clip contains additional animation data")
+    mesh = gltf["meshes"][gltf["nodes"][target_node]["mesh"]]
+    names, defaults = mesh["extras"]["targetNames"], mesh["weights"]
+    if len(set(names)) != len(names):
+        raise ValueError("Morph target names must be unique")
+    settings = clip["m_AnimationClipSettings"]
+    start, stop, rate = (settings["m_StartTime"], settings["m_StopTime"], clip["m_SampleRate"])
+    if not all(map(math.isfinite, (start, stop, rate))) or stop <= start or rate <= 0:
+        raise ValueError("Invalid clip time range or sample rate")
+    duration = float32(stop - start)
+    curves = {}
+    sampled_times = {float32(i / rate) for i in range(math.ceil(duration * rate))}
+    sampled_times.add(duration)
+    for binding in clip["m_FloatCurves"]:
+        prefix = "blendShape."
+        attribute = binding["attribute"]
+        if binding["classID"] != 137 or binding["path"] != target_path or not attribute.startswith(prefix):
+            raise ValueError("Only direct blend-shape bindings on the selected renderer are supported")
+        name = attribute.removeprefix(prefix)
+        if name not in names or name in curves:
+            raise ValueError(f"Missing or ambiguous morph target {name}")
+        keys = binding["curve"]["m_Curve"]
+        times = [float32(key["time"] - start) for key in keys]
+        values = [key["value"] / 100 for key in keys]
+        tangents = [(float(key["inSlope"]) / 100, float(key["outSlope"]) / 100) for key in keys]
+        if (not keys or any(key["weightedMode"] for key in keys)
+                or not all(map(math.isfinite, times + values))
+                or any(math.isnan(value) for pair in tangents for value in pair)
+                or any(right <= left for left, right in zip(times, times[1:]))):
+            raise ValueError(f"Invalid or unsupported blend-shape keys for {name}")
+        curves[name] = (times, values, tangents)
+        sampled_times.update(time for time in times if 0 <= time <= duration)
+    if not curves:
+        raise ValueError("Clip has no blend-shape bindings")
+
+    times = sorted(sampled_times)
+    values = [
+        sample_shape(*curves[name], time) if name in curves else default
+        for time in times for name, default in zip(names, defaults)
+    ]
+    inputs = add_accessor(gltf, binary, pack(f"<{len(times)}f", *times), len(times), "SCALAR", 5126)
+    output = add_accessor(gltf, binary, pack(f"<{len(values)}f", *values), len(values), "SCALAR", 5126)
+    gltf["accessors"][inputs].update(min=[times[0]], max=[times[-1]])
+    gltf.setdefault("animations", []).append({
+        "name": clip["m_Name"], "extras": {"loop": bool(settings["m_LoopTime"])},
+        "channels": [{"sampler": 0, "target": {"node": target_node, "path": "weights"}}],
+        "samplers": [{"input": inputs, "output": output, "interpolation": "LINEAR"}],
+    })
+
+
 class UnityScene:
     def __init__(self, path):
         self.serialized = path.read_text(encoding="utf-8-sig")
@@ -202,10 +279,14 @@ def main():
     parser.add_argument("--scene", type=Path, required=True)
     parser.add_argument("--renderer", type=int, required=True)
     parser.add_argument("--base-color-png", type=Path, action="append", default=[])
+    parser.add_argument("--morph-clip", type=Path)
+    parser.add_argument("--morph-path", help="Source binding path relative to the animation root")
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     if args.output.suffix != ".glb" or args.output.exists():
         parser.error("Output must be a new .glb path")
+    if bool(args.morph_clip) != bool(args.morph_path):
+        parser.error("--morph-clip and --morph-path must be used together")
     scene = UnityScene(args.scene)
     if scene.documents[args.renderer][0] != 137:
         parser.error("--renderer must identify a SkinnedMeshRenderer")
@@ -218,6 +299,10 @@ def main():
     nodes, bones, mesh_id = scene.skin_hierarchy(renderer)
     append_skin(gltf, binary, mesh, nodes, bones, mesh_id)
     append_morphs(gltf, binary, mesh, renderer["m_BlendShapeWeights"])
+    if args.morph_clip:
+        animation = UnityScene(args.morph_clip)
+        clip_id, = [file_id for file_id, entry in animation.documents.items() if entry[0] == 74]
+        append_morph_clip(gltf, binary, animation.read(clip_id), args.morph_path, list(nodes).index(mesh_id))
     gltf["buffers"][0]["byteLength"] = len(binary)
     write_glb(args.output, gltf, binary)
     print(f"Exported {len(bones)} joints and {len(gltf['meshes'][0].get('weights', []))} morph channels.")

@@ -65,7 +65,7 @@
 
 [家具导入](../acceptance/npr-room/furniture.md)记录 Windows 子树的导入和播放宿主短检。
 当前已核对原家具、贴图及椅子片段采样。
-[角色与窗景资源转换](../acceptance/npr-room/character-assets.md)登记角色关节、形变及窗景网格。
+[角色与窗景资源转换](../acceptance/npr-room/character-assets.md)登记角色关节、说话表情片段及窗景网格。
 [房间计时回放](../acceptance/npr-room/room-probe.md)登记生产输入、原音效及关卡就绪。
 
 - [ ] 以原房间家具、角色、一个片段和一种窗景验证资产入口。记录比例、手性、共享实例、材质槽、骨架映射和关键姿态。验证 `scene.import` 拒绝坏引用，以及保存重开后标识与变换保持有效。
