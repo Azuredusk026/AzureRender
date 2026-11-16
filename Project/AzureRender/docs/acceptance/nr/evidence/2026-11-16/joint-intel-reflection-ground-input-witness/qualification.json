@@ -1,0 +1,258 @@
+{
+  "status": "ground-reproduced",
+  "player": "f8f86018d82b7e47a399a9cd451a61701122afb6f2dda680456862289167ae38",
+  "programs": {
+    "mesh_object_clipmap_field.frag.spv": "25939db1f7beceded5ffdb05ccd4c6a4445c12a510f7c4f3fa2e5666d1db41d9",
+    "mesh_object_clipmap_field_early.frag.spv": "6226e0b0f8454a85a53ce948b25d1f2f527068d396d97fe16e6efca1e817dcb4",
+    "mesh_object_clipmap_field_lighting.frag.spv": "0b937e3143478f186ccda79f18258f65fba91698ccc1095e1ed7d467da5cdd90",
+    "mesh_object_clipmap_field_early_lighting.frag.spv": "f089ab227780ebc633066e2599036b34395b2643cb93d67d5000366b8e51050c"
+  },
+  "records": [
+    {
+      "name": "opaque-source-floor-1",
+      "frame": {
+        "png": "d865ad7c1ed00ef93ef6c27a099d612716740e3f656082b48e1672122d1cac1c",
+        "referencePng": "a9657b4558f9d3cb03872d60d5e9e979af3eb6eb6c1a69784096148ff6f73c35",
+        "raw": "f43c8ad397cbf3025b3e048979ce3a6d6106d79056789b585a7ed92ec69c20a5",
+        "archive": "eae80ad646c2d49adcd1d467441b0784ec061ba6f62af2880c5f7e654bbfeec2",
+        "changed": 262506,
+        "overOne": 262151,
+        "peak": 255,
+        "bounds": [
+          0,
+          0,
+          1218,
+          712
+        ]
+      },
+      "archive": "40d792a7f3a04002de43e4ecbc323d5695139615a8973d9db4e921bdee9facca",
+      "deltaDonor": "18e3718467c6de7ad753bc4975e9dfb41eef32e7d75eee337cfd8a70e34f209b",
+      "state": "ground-stable",
+      "checks": {
+        "opaqueSource": {
+          "pixels": 0,
+          "peak": 0
+        },
+        "groundReflectionRgb": {
+          "pixels": 0,
+          "peak": 0
+        },
+        "groundConfidence": {
+          "pixels": 0,
+          "peak": 0
+        },
+        "groundSurfaceProbe": {
+          "pixels": 0,
+          "peak": 0
+        },
+        "upperReflectionRgb": {
+          "pixels": 0,
+          "peak": 0
+        },
+        "upperReflectionConfidence": {
+          "pixels": 0,
+          "peak": 0
+        },
+        "upperSurfaceProbe": {
+          "pixels": 0,
+          "peak": 0
+        },
+        "groundBeauty": {
+          "pixels": 0,
+          "peak": 0
+        },
+        "upperBeauty": {
+          "pixels": 427,
+          "peak": 52
+        }
+      }
+    },
+    {
+      "name": "opaque-source-floor-2",
+      "frame": {
+        "png": "1be6f52106dc4dd398aa5e13182f0c76c4614db949e82dc4c7064387539a2d75",
+        "referencePng": "a9657b4558f9d3cb03872d60d5e9e979af3eb6eb6c1a69784096148ff6f73c35",
+        "raw": "18e3718467c6de7ad753bc4975e9dfb41eef32e7d75eee337cfd8a70e34f209b",
+        "archive": "b9a45183028754baf9e48f8f0908cce472812611e21fdc6d6208d969762871c3",
+        "changed": 262933,
+        "overOne": 262558,
+        "peak": 255,
+        "bounds": [
+          0,
+          0,
+          1218,
+          712
+        ]
+      },
+      "archive": "3ee47aa77da4321b77a29e057e775f4b41bf24141fe2fe741f70bd1976d932a6",
+      "deltaDonor": "18e3718467c6de7ad753bc4975e9dfb41eef32e7d75eee337cfd8a70e34f209b",
+      "state": "ground-stable",
+      "checks": {
+        "opaqueSource": {
+          "pixels": 0,
+          "peak": 0
+        },
+        "groundReflectionRgb": {
+          "pixels": 0,
+          "peak": 0
+        },
+        "groundConfidence": {
+          "pixels": 0,
+          "peak": 0
+        },
+        "groundSurfaceProbe": {
+          "pixels": 0,
+          "peak": 0
+        },
+        "upperReflectionRgb": {
+          "pixels": 0,
+          "peak": 0
+        },
+        "upperReflectionConfidence": {
+          "pixels": 0,
+          "peak": 0
+        },
+        "upperSurfaceProbe": {
+          "pixels": 0,
+          "peak": 0
+        },
+        "groundBeauty": {
+          "pixels": 0,
+          "peak": 0
+        },
+        "upperBeauty": {
+          "pixels": 0,
+          "peak": 0
+        }
+      }
+    },
+    {
+      "name": "opaque-source-floor-3",
+      "frame": {
+        "png": "d865ad7c1ed00ef93ef6c27a099d612716740e3f656082b48e1672122d1cac1c",
+        "referencePng": "a9657b4558f9d3cb03872d60d5e9e979af3eb6eb6c1a69784096148ff6f73c35",
+        "raw": "f43c8ad397cbf3025b3e048979ce3a6d6106d79056789b585a7ed92ec69c20a5",
+        "archive": "0905fcac17d77b41c3b1c8e4a197fbf190dd9cb5fab5b133ee3aebf5e664cca8",
+        "changed": 262506,
+        "overOne": 262151,
+        "peak": 255,
+        "bounds": [
+          0,
+          0,
+          1218,
+          712
+        ]
+      },
+      "archive": "26f756a487be463c0d5ce338f5acb4087164b65dfd3eab78336333cc631e7e03",
+      "deltaDonor": "18e3718467c6de7ad753bc4975e9dfb41eef32e7d75eee337cfd8a70e34f209b",
+      "state": "ground-stable",
+      "checks": {
+        "opaqueSource": {
+          "pixels": 0,
+          "peak": 0
+        },
+        "groundReflectionRgb": {
+          "pixels": 0,
+          "peak": 0
+        },
+        "groundConfidence": {
+          "pixels": 0,
+          "peak": 0
+        },
+        "groundSurfaceProbe": {
+          "pixels": 0,
+          "peak": 0
+        },
+        "upperReflectionRgb": {
+          "pixels": 0,
+          "peak": 0
+        },
+        "upperReflectionConfidence": {
+          "pixels": 0,
+          "peak": 0
+        },
+        "upperSurfaceProbe": {
+          "pixels": 0,
+          "peak": 0
+        },
+        "groundBeauty": {
+          "pixels": 0,
+          "peak": 0
+        },
+        "upperBeauty": {
+          "pixels": 427,
+          "peak": 52
+        }
+      }
+    },
+    {
+      "name": "opaque-source-floor-4",
+      "frame": {
+        "png": "6b1628286ca774755d3ad62338737defb1e505a0b44c6f45b1c43d6a98209221",
+        "referencePng": "a9657b4558f9d3cb03872d60d5e9e979af3eb6eb6c1a69784096148ff6f73c35",
+        "raw": "a44ac9936725e087c3470df540675a0268a59cf402481438b77d4ce8fd67c05a",
+        "archive": "9478022f2b3e77ec0a23c21930ee64390e9a707c25abf4f42364b7d44737c0fb",
+        "changed": 264193,
+        "overOne": 263221,
+        "peak": 255,
+        "bounds": [
+          0,
+          0,
+          1272,
+          712
+        ]
+      },
+      "archive": "6889f24ffdc3d415c637779c1fbae9bb85345567b21ec2c177ebb99d467c3ab0",
+      "deltaDonor": "18e3718467c6de7ad753bc4975e9dfb41eef32e7d75eee337cfd8a70e34f209b",
+      "state": "ground-reproduced",
+      "checks": {
+        "opaqueSource": {
+          "pixels": 165,
+          "peak": 117
+        },
+        "groundReflectionRgb": {
+          "pixels": 0,
+          "peak": 0
+        },
+        "groundConfidence": {
+          "pixels": 0,
+          "peak": 0
+        },
+        "groundSurfaceProbe": {
+          "pixels": 0,
+          "peak": 0
+        },
+        "upperReflectionRgb": {
+          "pixels": 0,
+          "peak": 0
+        },
+        "upperReflectionConfidence": {
+          "pixels": 0,
+          "peak": 0
+        },
+        "upperSurfaceProbe": {
+          "pixels": 0,
+          "peak": 0
+        },
+        "groundBeauty": {
+          "pixels": 1235,
+          "peak": 7
+        },
+        "upperBeauty": {
+          "pixels": 0,
+          "peak": 0
+        }
+      }
+    }
+  ],
+  "job": 1511,
+  "sourceCandidateBounds": [
+    904,
+    168,
+    957,
+    193
+  ],
+  "overlaidGroundProbeChangedFromKnown": 15,
+  "overlappingGroundProbeQualified": false,
+  "archiveSha256": "e62be05bdc9742607deafec0d6d4cb0ed050a7be785aa06743d0cd3c99a806c2"
+}

@@ -52,6 +52,8 @@ Intel 使用顶点着色器蒙皮时，两次完整成片仍有 407 个像素超
 
 不透明快照探针同时读取四个纹素的颜色签名和滤波后的屏幕空间反射。Intel 上方区域复现 427 处变化，有符号差量与既有上方波动逐像素一致，峰差为 52 个色阶。三个同帧探针的快照颜色签名、反射及表面读数一致。该批次的地面保持一致，地面波动时的快照输入仍待核对。[快照输入记录](evidence/2026-11-16/joint-intel-reflection-opaque-input/qualification.json)及[验证归档](evidence/2026-11-16/joint-intel-reflection-opaque-input/validation.zip)保存完整差量和采集记录。
 
+后续四次 Intel 采集中，第四次复现地面波动。地面实际画面有 1,235 处改变，峰差为 7 个色阶。快照有 165 个颜色签名改变，输入集中于画面坐标 [904,168] 至 [957,193]。同帧反射颜色探针位置仅有 15 处可辨识改变，反射数值需在充分覆盖的位置重测。[地面输入结果](evidence/2026-11-16/joint-intel-reflection-ground-input-witness/qualification.json)和[验证归档](evidence/2026-11-16/joint-intel-reflection-ground-input-witness/validation.zip)保存四次采集及像素坐标。
+
 ## 采集范围
 
 角色根节点相对方向覆盖正向、左右四分之三侧向、左右侧向及背向六个机位。NVIDIA 与 Intel 均以 1280×720 采集，使用同一联合场景、资产和动画起点。[六机位采集记录](evidence/2026-11-16/character-six-view-inputs/qualification.json)保存相机参数、图像摘要和冻结回归结果。当前 NVIDIA 驱动下的四帧冻结回归逐像素一致；原始冻结图的 RGB 峰值差为 1、7、37、23。
