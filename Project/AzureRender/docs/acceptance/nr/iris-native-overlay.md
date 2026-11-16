@@ -233,3 +233,11 @@ NVIDIA 的 4 处和 Intel 的 9 处剩余超差位于原生眼影覆盖区，覆
 Intel 在 [1253,259]、[1254,259]、[1251,262]、[1256,265] 处的蓝通道落入高一个可表示值的区间。这些位置与 NVIDIA 的 [1308,266] 误差方向不同。后续按基色及反射贴图采样值核对输入。
 
 [蓝通道读回结果](evidence/2026-11-16/iris-prepack-blue-lane/qualification.json)和[验证归档](evidence/2026-11-16/iris-prepack-blue-lane/validation.zip)保存逐点区间、附件值和双设备差量。
+
+### 虹膜基色与反射贴图读回
+
+在 253 个虹膜位置，NVIDIA Vulkan 的基色和反射贴图蓝通道区间分别有 246 和 251 处与同设备原生回放相交。Intel Vulkan 分别有 240 和 252 处与 Intel 原生回放相交。以 NVIDIA 原生回放为参考，Intel Vulkan 分别有 66 和 203 处相交。
+
+NVIDIA 在 [1308,266] 的基色与反射贴图读数区间都包含原生读数。Intel 在 [1253,259]、[1254,259] 和 [1256,265] 的基色区间与 Intel 原生相交，与 NVIDIA 原生区间分离。NVIDIA 的剩余误差继续按主光合成阶段核对，双设备仍以原冻结图像验收。
+
+[双设备纹理读回](evidence/2026-11-16/iris-base-matcap-blue-readback/qualification.json)和[验证归档](evidence/2026-11-16/iris-base-matcap-blue-readback/validation.zip)保存取样区间、原生回放和实际帧差。
