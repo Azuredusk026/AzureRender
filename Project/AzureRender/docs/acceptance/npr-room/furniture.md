@@ -59,5 +59,4 @@ python -B -m tools.npr_room.mesh_export $unityMesh $targetGlb --base-color-png $
 椅子采样可按 `--motion-reference` 和 `--clip` 选择。
 输出使用受管任务内的新路径。
 
-房间流程仍需计时输入、原角色、窗景、音频及存档证据。
-完整 P1 交付按[移植计划](../../plans/2026-11-16-npr-room-reproduction.md#p1-原资产集成路线)核验。
+计时输入、原角色、窗景、音频及存档使用[城市窗景与房间集成](city-window.md)的工程复验。
