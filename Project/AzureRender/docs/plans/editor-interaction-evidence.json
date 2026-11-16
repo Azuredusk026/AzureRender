@@ -207,5 +207,22 @@
     "inspectorReveal": "candidate-selection/run-1794816865490986100/inspector/reveal-search/outliner-return-inspector.png",
     "inspectorSearchRestored": "candidate-selection/run-1794816865490986100/inspector/reveal-search/outliner-search-restored-inspector.png",
     "physicalInput": false
+  },
+  "nodeReferenceReveal": {
+    "baseCommit": "e729305",
+    "configuration": "Release",
+    "run": "D:/Projects/FYP/Project/AzureRender/build/runs/20261116-171608-editor-node-reference-reveal-802daf",
+    "baselineDispatch": 1495,
+    "baselineAssertion": "baseline-assertion.log",
+    "baselineExecutableSha256": "167086920fe648865f17b89207d0126b5a56556b409e3361bc9d1355ed014160",
+    "candidateDispatch": 1497,
+    "candidateExecutableSha256": "75778c34da23ceb5387e6baf195cbdcc63a9fac8ae05c304156cc1d1fb2ea9ee",
+    "cpuCasesPassed": 3,
+    "cpuLog": "release-ctest.log",
+    "propertiesSummary": "properties/summary.json",
+    "selectionSummary": "selection/run-1794821403043037300/summary.json",
+    "inspectorScreenshot": "properties/locate-node-inspector/reference-hierarchy-locate-node-inspector.png",
+    "explorationScreenshot": "properties/locate-node-exploration/reference-hierarchy-locate-node-exploration.png",
+    "physicalInput": false
   }
 }

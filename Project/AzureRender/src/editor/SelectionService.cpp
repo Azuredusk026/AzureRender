@@ -12,7 +12,11 @@ void SelectionService::set(const std::vector<std::string>& ids) {
         indices.push_back(static_cast<std::size_t>(node-nodes.begin()));
     }
     const auto result=edits_.current("node.select",{{"indices",indices}});if(!result)throw std::runtime_error(result.diagnostics.dump());
-    anchor_=ids.empty()?std::string():ids.back();reveal_=true;
+    anchor_=ids.empty()?std::string():ids.back();reveal_=true;hierarchyFocus_=false;
+}
+void SelectionService::revealInHierarchy(const std::string& identity) {
+    set({identity});
+    hierarchyFocus_=true;
 }
 std::string SelectionService::active() const{return context_.selectedNode()?context_.selectedNode()->id:std::string();}
 void SelectionService::click(const std::string& id,bool ctrl,bool shift,const std::vector<std::string>& visible){

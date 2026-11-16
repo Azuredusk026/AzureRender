@@ -102,6 +102,7 @@ void OutlinerPanel::draw(PanelContext& panelContext) {
     };
     ImGui::Separator();ImGui::BeginChild("hierarchy-list",{0,0});
     const auto sceneLabel=view.scene().sceneId+(services_.session.context().dirty()?" *":"")+"###scene-container";
+    if(!reveal.empty())ImGui::SetNextItemOpen(true,ImGuiCond_Always);
     const bool sceneOpen=ImGui::TreeNodeEx(sceneLabel.c_str(),ImGuiTreeNodeFlags_DefaultOpen|ImGuiTreeNodeFlags_SpanAvailWidth|ImGuiTreeNodeFlags_OpenOnArrow);
     services_.observe("hierarchy.root");acceptDrop("");
     if(ImGui::IsItemClicked()&&!ImGui::IsItemToggledOpen()&&!ImGui::GetDragDropPayload())panelContext.selection().set({});
