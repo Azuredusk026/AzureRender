@@ -137,6 +137,16 @@ Player 的同机位诊断使用已有的无符号颜色截断，在虹膜颜色�
 
 三处异常在打包前已经出现。当前验收需继续隔离虹膜底色、Matcap 与着色合成的贡献，按双设备裸眼和带眼影两组画面核对。[打包前颜色结果](evidence/2026-11-16/iris-player-prepacking-bins/qualification.json)和[验证归档](evidence/2026-11-16/iris-player-prepacking-bins/validation.zip)保存原生片元、实际探针值和设备收据。
 
+## 双设备原生底色采样
+
+同一原生绘制在 NVIDIA 和 Intel 上回放。四个坐标的图元相同，底色纹理坐标分量差小于 0.00000004。
+
+两块设备在 `[1255,258]` 均选底色第 4 层。Intel 原生绿色线性值为 0.046859。此值与 Intel Player 的打包前区间相距不到 0.000002。验收继续采用留存的 NVIDIA 参考。
+
+在 `[1261,262]`，NVIDIA 选第 5 层，Intel 选第 4 层。折算后的原生红色分量分别为 0.100302 和 0.120998。显式层级回放、纹理内容和读取坐标共同限定误差来源。
+
+[双设备回读](evidence/2026-11-16/iris-cross-device-native-filter/qualification.json)和[归档](evidence/2026-11-16/iris-cross-device-native-filter/validation.zip)保存底色、着色输出和附件取色。
+
 ## 剩余门禁
 
 继续核对隐式采样梯度、层级边界和几何覆盖。
