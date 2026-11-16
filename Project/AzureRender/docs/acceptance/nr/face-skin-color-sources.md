@@ -690,6 +690,8 @@ Player 的 Vulkan 绘制 876 在六个同屏坐标均拥有通过深度和模板
 
 [Player 局部光结果](evidence/2026-11-16/face-local-light-player/qualification.json)和[回放归档](evidence/2026-11-16/face-local-light-player/validation.zip)记录六个片元的漫反射、镜面反射、环境光和最终颜色。
 
+对已捕获的 Player 片元程序，只调整聚簇漫反射在光循环后的读取倍率。倍率为 1 时整个颜色附件逐字节一致；倍率为 0 时，三个脸缘点的附件红通道减少 0.10571 至 0.12256。六个点的附件增量约为聚簇漫反射读数的 23.3% 至 23.7%，0 至 3 倍的变化在回放精度内保持线性。原生合成颜色仍按同一输出阶段核对。[局部光输出结果](evidence/2026-11-16/face-local-light-output/qualification.json)和[验证归档](evidence/2026-11-16/face-local-light-output/validation.zip)保存倍率序列、实际读数与着色器替换范围。
+
 身体候选采用原生主光亮度饱和度。30,561 个无透明衣料覆盖的皮肤内部位置中，超过一个色阶的数量在 NVIDIA 上为 627，在 Intel 上为 581；配对对照分别为 11,018 和 10,522。皮肤区域之外逐像素一致。全皮肤新增超差分别为 6 和 17 处，均为两个色阶，候选未通过新增误差门槛。
 
 NVIDIA 的 6 处新增超差和 Intel 的 15 处新增超差位于皮肤边缘，距离皮肤掩码边界不超过六像素。Intel 另有两个内部坐标 [1327,394] 和 [1271,1085]。[主光与高光配对结果](evidence/2026-11-16/body-main-key-saturation/qualification.json)记录新增超差点的参考色、实际颜色及主光分项颜色。
