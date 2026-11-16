@@ -151,6 +151,10 @@ Intel 轴向导数模型与 255 个 Intel 原生底色层级样本相符。将�
 
 双设备原生回放记录了 255 个虹膜片元的底色与采样坐标。252 个位置可唯一确定层级，其中 76 个用于留出验证。标准双线性计算在 NVIDIA 留出组的线性误差第 95 百分位为 0.001913。筛选得分最高的定点量化方案在留出组误差为 0.001953。当前保留双线性计算作为对照，继续检查纹理解码及颜色合成。[片元网格结果](evidence/2026-11-16/iris-native-base-lane-grid/qualification.json)及[归档](evidence/2026-11-16/iris-native-base-lane-grid/validation.zip)保存原生取样、指令和复算记录。
 
+在固定底色层级，Player 对四个纹素执行显式双线性取样。NVIDIA 和 Intel 分别有 7 和 9 处超过一个色阶，峰差均为 4。NVIDIA 有 3 个位置较留存对照新增超差，候选未通过。
+
+双设备原生回读分别保存 651 和 645 个未滤波纹素。将显卡解码值代入双线性计算时，NVIDIA 的第 95 百分位误差为 0.001509，Intel 为 0.001022。[纹素与滤波结果](evidence/2026-11-16/iris-explicit-base-filter/qualification.json)及[归档](evidence/2026-11-16/iris-explicit-base-filter/validation.zip)保存实际材质输出、纹素和复算记录。
+
 ## 剩余门禁
 
 继续核对隐式采样梯度、层级边界和几何覆盖。
