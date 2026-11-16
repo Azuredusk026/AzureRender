@@ -46,6 +46,8 @@ Intel 将反射计算写入主命令缓冲区时，保留并行场景准备及�
 
 按线性时间反射限定录制方式的源码候选完成双设备复测。Intel 两次分别复现串行成片和已有波动帧，候选未通过稳定性验收。NVIDIA 两次与已知身体候选成片一致，四帧同驱动回归逐像素一致。[源码候选回执](evidence/2026-11-16/primary-linear-production-trial/qualification.json)和[归档](evidence/2026-11-16/primary-linear-production-trial/validation.zip)保存构建、失败帧和回归结果。
 
+Intel 使用顶点着色器蒙皮时，两次完整成片仍有 407 个像素超差。有符号的整帧差量与计算蒙皮对照完全一致。差异集中于画面上方的 37×22 像素范围。[蒙皮路径对照](evidence/2026-11-16/joint-intel-vertex-skinning-repeat/qualification.json)及[验证归档](evidence/2026-11-16/joint-intel-vertex-skinning-repeat/validation.zip)保存成片和输入记录。
+
 ## 采集范围
 
 角色根节点相对方向覆盖正向、左右四分之三侧向、左右侧向及背向六个机位。NVIDIA 与 Intel 均以 1280×720 采集，使用同一联合场景、资产和动画起点。[六机位采集记录](evidence/2026-11-16/character-six-view-inputs/qualification.json)保存相机参数、图像摘要和冻结回归结果。当前 NVIDIA 驱动下的四帧冻结回归逐像素一致；原始冻结图的 RGB 峰值差为 1、7、37、23。

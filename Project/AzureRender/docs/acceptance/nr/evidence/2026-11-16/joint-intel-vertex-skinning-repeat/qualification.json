@@ -1,0 +1,44 @@
+{
+  "status": "matched-frame-instability-across-skinning-paths",
+  "strictCaptureAcceptance": false,
+  "signedDifferencesIdentical": true,
+  "signedDifferencesSha256": "e778e07a0c1935a839a41d5d3a949c1e81d01a12907963032df9d48c0b5b0832",
+  "overOne": 407,
+  "differing": 427,
+  "peak": 52,
+  "bounds": [
+    907,
+    171,
+    943,
+    192
+  ],
+  "queue": {
+    "id": 1494,
+    "task": "nr-joint-character-intel-vertex-skinning-pair",
+    "state": "succeeded",
+    "exitCode": 0,
+    "elapsedSeconds": 355.8439999999973
+  },
+  "validation": {
+    "archive": "f2641332664fb75a301f58e88e2984929a3deca5f39685e58d86f8b2534dd3e2",
+    "files": {
+      "raw/qualification.json": "5036a500509d1db9d98ebae9027024c25075b44a43c53a891b0f97a10f9ff5d6",
+      "logs/vertex-skinning.log": "86ddec7e69f02c88a1311c87f311535e3c661dc77a312390ddbb3dd9f6423b39",
+      "source/joint-character-referenced-body.py": "344036b9e790423d67451192813c7cb15c65bedb7d902a4ffa0162bdb9681307",
+      "frames/intel-vertex-skinning-a.zip": "68da5cf695175036642681409b610a40d3c6c036ef98d6a5d55ad97696ab3a3c",
+      "player/vertex-skinning-a/command.json": "a162b390c28f76ee2c488abc9cf0b81adae7f7aadd83ef229cca3fd43a556069",
+      "player/vertex-skinning-a/runtime.json": "05406e3ef9f1cd987f2d2a5a8678ef0b299c44d50e787f18840503c6976c6e22",
+      "player/vertex-skinning-a/result.json": "b710c27d2f509818f1587a1494eefce99f8bb55587c7b8f7f13f69975941b1db",
+      "player/vertex-skinning-a/frames/capture_manifest.json": "99c703aeee92e0895a4f307945a03ce90c6fb5847837cb3ee3b56eadf38c7072",
+      "player/vertex-skinning-a/frames/gpu_capabilities.json": "052830ed89bea19f0e9a17839082b9f979cfab2b17908f9ee83df5f0e0bcd85f",
+      "player/vertex-skinning-a/player.log": "20a72ff56ff85d9beb1a4a42de5cbc5ace5eb8f4bd72e9ae6745d14076003aa6",
+      "frames/intel-vertex-skinning-b.zip": "fd3971573af6f7b8778554d36a607c5fdd7f7f9bdd6f5c4e24fadd6ed203fc62",
+      "player/vertex-skinning-b/command.json": "468ef540fdbfbc78697032bdcb5a1ce753e272d84d34b4ef6d09cfd354922b4e",
+      "player/vertex-skinning-b/runtime.json": "05406e3ef9f1cd987f2d2a5a8678ef0b299c44d50e787f18840503c6976c6e22",
+      "player/vertex-skinning-b/result.json": "579a44421e1d9a8e9e30cffad005a8edae3c46c1c27b05e36469d7fbe289744f",
+      "player/vertex-skinning-b/frames/capture_manifest.json": "d071cdf07c58feff93eef3302bba03e6b81f98d37e9b9490e8b73fb7e872f9cc",
+      "player/vertex-skinning-b/frames/gpu_capabilities.json": "052830ed89bea19f0e9a17839082b9f979cfab2b17908f9ee83df5f0e0bcd85f",
+      "player/vertex-skinning-b/player.log": "2c8463a5e77422700b04ccef3147de0c7d2cd7c7bf15a1b211c40e7662c0cddc"
+    }
+  }
+}
