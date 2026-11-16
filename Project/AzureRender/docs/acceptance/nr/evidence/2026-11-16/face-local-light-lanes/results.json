@@ -1,0 +1,327 @@
+{
+  "beamWindow": "native event 804 registers before and after the local-light loop",
+  "darkRedRange": [
+    1.0030990839004517,
+    1.386476457118988
+  ],
+  "brightRedRange": [
+    0.27572381496429443,
+    1.1047630310058594
+  ],
+  "devices": {
+    "nvidia": [
+      {
+        "point": [
+          1306,
+          304
+        ],
+        "origin": "darkEdge",
+        "primitive": 736,
+        "beforeLocalLights": [
+          0.6861574649810791,
+          0.3602648973464966,
+          0.2896713316440582
+        ],
+        "afterLocalLights": [
+          1.6892565488815308,
+          0.860100507736206,
+          0.6455010175704956
+        ],
+        "localLightContribution": [
+          1.0030990839004517,
+          0.4998356103897095,
+          0.3558296859264374
+        ],
+        "displayTransformBetweenStages": "identity",
+        "measuredDirectDiffuseDifference": 0.0006599177283527213
+      },
+      {
+        "point": [
+          1313,
+          297
+        ],
+        "origin": "darkEdge",
+        "primitive": 717,
+        "beforeLocalLights": [
+          0.6309728622436523,
+          0.31115615367889404,
+          0.2516527771949768
+        ],
+        "afterLocalLights": [
+          1.8294496536254883,
+          0.8907092213630676,
+          0.6699850559234619
+        ],
+        "localLightContribution": [
+          1.198476791381836,
+          0.5795530676841736,
+          0.4183322787284851
+        ],
+        "displayTransformBetweenStages": "identity",
+        "measuredDirectDiffuseDifference": 0.0011985669725046444
+      },
+      {
+        "point": [
+          1312,
+          298
+        ],
+        "origin": "darkEdge",
+        "primitive": 717,
+        "beforeLocalLights": [
+          0.6742205023765564,
+          0.3406405746936798,
+          0.2734009623527527
+        ],
+        "afterLocalLights": [
+          2.055995464324951,
+          1.0194222927093506,
+          0.7593770623207092
+        ],
+        "localLightContribution": [
+          1.3817749619483948,
+          0.6787817180156708,
+          0.48597609996795654
+        ],
+        "displayTransformBetweenStages": "identity",
+        "measuredDirectDiffuseDifference": 0.0002434089618645885
+      },
+      {
+        "point": [
+          1301,
+          306
+        ],
+        "origin": "brightHoldout",
+        "primitive": 763,
+        "beforeLocalLights": [
+          0.9666705131530762,
+          0.6047154068946838,
+          0.4824676215648651
+        ],
+        "afterLocalLights": [
+          2.0706193447113037,
+          1.223187804222107,
+          0.9138654470443726
+        ],
+        "localLightContribution": [
+          1.1039488315582275,
+          0.6184723973274231,
+          0.43139782547950745
+        ],
+        "displayTransformBetweenStages": "identity",
+        "measuredDirectDiffuseDifference": 0.008525206270537211
+      },
+      {
+        "point": [
+          1296,
+          310
+        ],
+        "origin": "brightHoldout",
+        "primitive": 764,
+        "beforeLocalLights": [
+          0.974693775177002,
+          0.6285052299499512,
+          0.4999324679374695
+        ],
+        "afterLocalLights": [
+          1.670318841934204,
+          1.027606725692749,
+          0.7766585350036621
+        ],
+        "localLightContribution": [
+          0.6956250667572021,
+          0.39910149574279785,
+          0.2767260670661926
+        ],
+        "displayTransformBetweenStages": "identity",
+        "measuredDirectDiffuseDifference": 0.01010627053419566
+      },
+      {
+        "point": [
+          1288,
+          315
+        ],
+        "origin": "brightHoldout",
+        "primitive": 1022,
+        "beforeLocalLights": [
+          0.9304594993591309,
+          0.603725254535675,
+          0.4849589467048645
+        ],
+        "afterLocalLights": [
+          1.2061833143234253,
+          0.7618112564086914,
+          0.5940667390823364
+        ],
+        "localLightContribution": [
+          0.27572381496429443,
+          0.15808600187301636,
+          0.10910779237747192
+        ],
+        "displayTransformBetweenStages": "identity",
+        "measuredDirectDiffuseDifference": 0.01360119238825086
+      }
+    ],
+    "intel": [
+      {
+        "point": [
+          1306,
+          304
+        ],
+        "origin": "darkEdge",
+        "primitive": 736,
+        "beforeLocalLights": [
+          0.6885313391685486,
+          0.3604680001735687,
+          0.2904129922389984
+        ],
+        "afterLocalLights": [
+          1.6947888135910034,
+          0.8607051372528076,
+          0.646966278553009
+        ],
+        "localLightContribution": [
+          1.0062574744224548,
+          0.5002371370792389,
+          0.3565532863140106
+        ],
+        "displayTransformBetweenStages": "identity",
+        "measuredDirectDiffuseDifference": 0.0006594375069083336
+      },
+      {
+        "point": [
+          1313,
+          297
+        ],
+        "origin": "darkEdge",
+        "primitive": 717,
+        "beforeLocalLights": [
+          0.6330893635749817,
+          0.31100329756736755,
+          0.2520314157009125
+        ],
+        "afterLocalLights": [
+          1.8352917432785034,
+          0.890746533870697,
+          0.6710088849067688
+        ],
+        "localLightContribution": [
+          1.2022023797035217,
+          0.5797432363033295,
+          0.4189774692058563
+        ],
+        "displayTransformBetweenStages": "identity",
+        "measuredDirectDiffuseDifference": 0.0011899586531914919
+      },
+      {
+        "point": [
+          1312,
+          298
+        ],
+        "origin": "darkEdge",
+        "primitive": 717,
+        "beforeLocalLights": [
+          0.677136242389679,
+          0.34013810753822327,
+          0.27368298172950745
+        ],
+        "afterLocalLights": [
+          2.063612699508667,
+          1.0182658433914185,
+          0.7599675059318542
+        ],
+        "localLightContribution": [
+          1.386476457118988,
+          0.6781277358531952,
+          0.4862845242023468
+        ],
+        "displayTransformBetweenStages": "identity",
+        "measuredDirectDiffuseDifference": 0.00024334464359032637
+      },
+      {
+        "point": [
+          1301,
+          306
+        ],
+        "origin": "brightHoldout",
+        "primitive": 763,
+        "beforeLocalLights": [
+          0.9678311347961426,
+          0.6052982807159424,
+          0.48227429389953613
+        ],
+        "afterLocalLights": [
+          2.072594165802002,
+          1.2241160869598389,
+          0.9134904742240906
+        ],
+        "localLightContribution": [
+          1.1047630310058594,
+          0.6188178062438965,
+          0.43121618032455444
+        ],
+        "displayTransformBetweenStages": "identity",
+        "measuredDirectDiffuseDifference": 0.00860245182096342
+      },
+      {
+        "point": [
+          1296,
+          310
+        ],
+        "origin": "brightHoldout",
+        "primitive": 764,
+        "beforeLocalLights": [
+          0.977332353591919,
+          0.6290432810783386,
+          0.49989891052246094
+        ],
+        "afterLocalLights": [
+          1.674581527709961,
+          1.028487205505371,
+          0.7766882181167603
+        ],
+        "localLightContribution": [
+          0.697249174118042,
+          0.39944392442703247,
+          0.2767893075942993
+        ],
+        "displayTransformBetweenStages": "identity",
+        "measuredDirectDiffuseDifference": 0.010263222578711484
+      },
+      {
+        "point": [
+          1288,
+          315
+        ],
+        "origin": "brightHoldout",
+        "primitive": 1022,
+        "beforeLocalLights": [
+          0.9322999715805054,
+          0.6037773489952087,
+          0.48471981287002563
+        ],
+        "afterLocalLights": [
+          1.2085844278335571,
+          0.7619158625602722,
+          0.5938181281089783
+        ],
+        "localLightContribution": [
+          0.27628445625305176,
+          0.15813851356506348,
+          0.10909831523895264
+        ],
+        "displayTransformBetweenStages": "identity",
+        "measuredDirectDiffuseDifference": 0.013673185398920928
+      }
+    ]
+  },
+  "status": "native-face-scoped-local-light-radiance",
+  "captureTraceSha256": "71beb8f189bd71d97f890cc6b9fd066fea75cd5b3bbb36b31f0370fb99a23446",
+  "directDiffuseProofSha256": "26090f14c7e08c006ffab11ce447b70d312d9b491cf7edb66a13daaa351c196c",
+  "inputs": {
+    "constants-1.bin": "30ed44bbe849bdb3a1cff0c94840eef52c79a6e412a126a3c7ee71d5546f8f55",
+    "constants-6.bin": "0bb4c5de0f0c95cf0895a5d8dcf4442257261b4cfff87797384437f6330f280e",
+    "registers.json": "d2d87870c48e6d7c5859a171f8b2514421f43a6507e7ec36375559b1a4e1ba84",
+    "blend-program.txt": "ea0a2e244a7cb09fd02dbc26e8e0c6638725e6753ad0a5fe763cfc3644bc0701"
+  },
+  "archiveSha256": "0ee24517a9c0a2ba56aa16649fa010ba4b592461fc362201bde43bd10d34f4cc"
+}
