@@ -8,7 +8,24 @@
 `Transition` 请求后台准备 `RoomScene`。Player 在转场期间保留当前关卡。
 转场至少运行 2 秒，目标就绪后再等待 0.5 秒并提交房间。
 Backspace 取消待处理请求，Enter 在取消或失败后重新准备房间。
-原版启动画面、叠加场景、主数据、音频服务和账户入口按各自的功能验收项实现。
+叠加场景、主数据、音频服务和账户入口按各自的功能验收项实现。
+
+## 桌面启动画面
+
+从原 `Boot` 的 `LoadingCanvas` 提取桌面布局和七张图像，使用 `anim_ui_loading` 的十条已绑定曲线。
+循环时长为 1.5 秒，按 60 Hz 生成 91 个采样时刻。图标和电话沿原位置及旋转曲线播放，光晕和图像透明度沿原曲线变化。
+前四个关卡共用一个 RmlUi 文档，保持加载动画连续。动画使用 RmlUi 的可动画属性和视口单位。 [RmlUi 动画](https://mikke89.github.io/RmlUiDoc/pages/rcss/animations_transitions_transforms.html) [RmlUi 长度单位](https://mikke89.github.io/RmlUiDoc/pages/rcss/syntax.html)
+
+游戏界面着色器在混合前按标准 sRGB 传递函数转为线性颜色。共享队列任务 1674 采集 100 张 1280×720 画面，中心区域有 48 种像素状态，每帧的背景抽样均为原场景的 RGBA `[22,20,35,255]`。
+同一着色器的任务 1675 通过 850 帧房间回放、三档计时控件和笔记重开。
+本机工程使用 `assets_private/npr-room-dev/room-splash`，预览位于 `reference-preview/splash.png`。
+游戏揭幕、错误动画和带原服务初始化的同步回放进入后续验收。
+
+| 证据 | SHA-256 |
+| --- | --- |
+| 启动画面验证 | `0ab187224a426e521304fc72f2fc06671dbeae523f4f5e84da21ade4e942b052` |
+| 房间回放 | `694f455ce1390c5f888b277190f1beb2e62d0e1774da12b73b4b866db12333cb` |
+| 界面片元着色器 | `bea138531fd66483a0440bc8d42ef5a429a05f68f74bb8f83c2ed6c3e737cc56` |
 
 ## 独立 Player 验收
 
@@ -65,4 +82,6 @@ python -B tools/npr_room/build_room_probe.py --source $unitySource --furniture $
 python -B tools/npr_room/build_room_probe.py --source $unitySource --furniture $importedFurnitureProject --audio-playback $audioPlayback --room-geometry $importedRoomProject --startup-flow --output $integratedRoom
 python -B tools/npr_room/test_pomodoro_runtime.py --lua $luaDll
 python -B tools/npr_room/test_room_startup_player.py --player $player --project $roomProject --output $startupReplay --resource-root $releaseBuild
+python -B -m tools.npr_room.startup_splash --source $unitySource --catalog $assetCatalog --room $cityRoom --output $splashRoom
+python -B -m tools.npr_room.verify_splash_capture --source $unitySource --capture $splashFrames --report $splashReport
 ```
