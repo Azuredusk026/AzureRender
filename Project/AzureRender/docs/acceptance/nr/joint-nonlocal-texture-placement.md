@@ -110,3 +110,5 @@ NVIDIA 独立夹具验证 RGBA8 两种格式的完整本地、完整非本地和
 [GPU 通道成本](joint-gpu-pass-budget.md)记录主颜色、不透明快照及阴影范围查询的实际开销。
 
 [结果清单](evidence/2026-11-14/joint-nonlocal-texture-placement/results.json)与[验证归档](evidence/2026-11-14/joint-nonlocal-texture-placement/validation.zip)保存隔离源码、分配检查、图像摘要、逐帧时间及设备观测。归档的 77 项成员已逐项核验。
+
+[联合场景阴影梯度验收](joint-shadow-cascade-derivatives.md)记录冻结图像和候选性能配对。
