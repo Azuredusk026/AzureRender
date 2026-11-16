@@ -758,7 +758,16 @@ void copySkinAttributes(
     std::vector<AssetVertex>& vertices) {
     const auto jointsAttribute = primitive.attributes.find("JOINTS_0");
     const auto weightsAttribute = primitive.attributes.find("WEIGHTS_0");
-    if (jointsAttribute == primitive.attributes.end()
+    bool preserveWeightCodes = false;
+    if (primitive.extras.IsObject()
+        && primitive.extras.Has("azurePreserveSkinWeightCodes")) {
+        const auto& setting = primitive.extras.Get("azurePreserveSkinWeightCodes");
+        if (!setting.IsBool()) {
+            throw std::runtime_error("azurePreserveSkinWeightCodes requires a boolean");
+        }
+        preserveWeightCodes = setting.Get<bool>();
+    }
+    if (!preserveWeightCodes && jointsAttribute == primitive.attributes.end()
         && weightsAttribute == primitive.attributes.end()) {
         return;
     }
@@ -778,6 +787,16 @@ void copySkinAttributes(
         || weightsAccessor.count != vertices.size()) {
         throw std::runtime_error("Unsupported glTF skin attribute layout");
     }
+    if (preserveWeightCodes
+        && (weightsAccessor.componentType != TINYGLTF_COMPONENT_TYPE_UNSIGNED_SHORT
+            || !weightsAccessor.normalized
+            || jointsAccessor.normalized
+            || (jointsAccessor.componentType != TINYGLTF_COMPONENT_TYPE_UNSIGNED_BYTE
+                && jointsAccessor.componentType != TINYGLTF_COMPONENT_TYPE_UNSIGNED_SHORT))) {
+        throw std::runtime_error(
+            "azurePreserveSkinWeightCodes requires normalized UNSIGNED_SHORT weights "
+            "and unsigned byte or unsigned short joints");
+    }
 
     const unsigned char* jointsSource = accessorData(model, jointsAccessor);
     const unsigned char* weightsSource = accessorData(model, weightsAccessor);
@@ -791,19 +810,32 @@ void copySkinAttributes(
          vertexIndex < vertices.size();
          ++vertexIndex) {
         float weightSum = 0.0F;
+        std::uint32_t weightCodeSum = 0;
         for (std::size_t component = 0; component < 4; ++component) {
             vertices[vertexIndex].joints[component] =
                 readUnsignedComponent(
                     jointsSource + vertexIndex * jointsStride
                         + component * jointComponentSize,
                     jointsAccessor.componentType);
-            const float weight = readWeightComponent(
-                weightsSource + vertexIndex * weightsStride
-                    + component * weightComponentSize,
-                weightsAccessor.componentType,
-                weightsAccessor.normalized);
-            vertices[vertexIndex].weights[component] = weight;
-            weightSum += weight;
+            const auto* source = weightsSource + vertexIndex * weightsStride
+                + component * weightComponentSize;
+            if (preserveWeightCodes) {
+                const auto code = readUnsignedComponent(source, weightsAccessor.componentType);
+                weightCodeSum += code;
+                vertices[vertexIndex].weights[component] = static_cast<float>(code) / 65535.0F;
+            } else {
+                const float weight = readWeightComponent(
+                    source, weightsAccessor.componentType, weightsAccessor.normalized);
+                vertices[vertexIndex].weights[component] = weight;
+                weightSum += weight;
+            }
+        }
+        if (preserveWeightCodes) {
+            if (weightCodeSum < 65534 || weightCodeSum > 65536) {
+                throw std::runtime_error(
+                    "azurePreserveSkinWeightCodes requires a weight sum within one UNORM16 code");
+            }
+            continue;
         }
         if (weightSum <= 1.0e-8F) {
             vertices[vertexIndex].joints = {};

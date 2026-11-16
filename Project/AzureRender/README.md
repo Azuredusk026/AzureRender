@@ -297,6 +297,7 @@ Lit 法线阈值、重建下限及实际材质见[解码验收](docs/acceptance/
 物流彩色环带的源实例及采样见[还原验收](docs/acceptance/nr/opaque-logistics-rings.md)。
 
 公共 glTF 采样器及完整场景结果见[采样器验收](docs/acceptance/nr/gltf-sampler-contract.md)。
+glTF 原始蒙皮权重的导入条件见[资产格式](docs/runtime/asset-formats.md#格式能力)。
 原版动态反射过滤及公共接入边界见[来源验收](docs/acceptance/nr/reflection-filter-source.md)。
 四通道表面快照及格式选择见[快照契约](docs/runtime/reflection-surface-snapshot.md)。
 最近深度、反向深度及奇数维度归约见[层级契约](docs/runtime/depth-pyramid.md)。

@@ -1,0 +1,46 @@
+{
+  "status": "importer-qualified",
+  "jobs": {
+    "negative": 1339,
+    "importRegression": 1415,
+    "morphAndPlayer": 1421
+  },
+  "tests": [
+    "AzureRender.SkinningBatch",
+    "AzureRender.AnimationPose",
+    "AzureRender.NodeOpacity",
+    "AzureAssets.MorphTargets"
+  ],
+  "testLogSha256": {
+    "import": "f7f3dcf791b9b0022cf6281d15098fe057d56008709c9b86824c8ed388d0ef37",
+    "morph": "208dd6c1e82d4875efb39f457180f691a8eb48080d97317cc6b2ced742d1c036"
+  },
+  "rejection": {
+    "mode": "red",
+    "input": {
+      "tests/AnimationPoseTests.cpp": "06298fdf0013e053eb752bffbe5c42fd449557cf1ae8a0961fc979a2e8e353da",
+      "src/assets/GltfLoader.cpp": "19b95e2136b088d90055114cbb9c6f8623d7c7313feb8271a8a41a602a77b408"
+    },
+    "targets": [
+      "AzureAnimationPoseTests"
+    ],
+    "testExit": 8
+  },
+  "passed": {
+    "mode": "green",
+    "input": {
+      "tests/AnimationPoseTests.cpp": "06298fdf0013e053eb752bffbe5c42fd449557cf1ae8a0961fc979a2e8e353da",
+      "src/assets/GltfLoader.cpp": "05ba11391d119e80a2324e28abfdde2e342efbf009a450b2325386f3ac74aa74"
+    },
+    "targets": [
+      "AzureAnimationPoseTests",
+      "AzureNodeOpacityTests",
+      "AzureMorphTargetTests",
+      "AzureSkinningBatchTests"
+    ],
+    "testExit": 0
+  },
+  "playerSha256": "98d1bede6d5f5ae4f3750b7f1403e54025007e1d633dd6b588768efa14da5d3e",
+  "unchangedShaderPrograms": 895,
+  "dynamicHardwareCoverage": "pending"
+}

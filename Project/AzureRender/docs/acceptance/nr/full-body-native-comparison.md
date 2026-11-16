@@ -18,7 +18,9 @@
 
 网格候选在十段动画的 70 个时点未产生新的退化三角形。这项检查使用独立网格候选；原生蒙皮数据的几何核对只覆盖固定捕获帧。实际播放器的双设备画面仍需确认动态轮廓、接缝、衣料遮挡和着色。[权重结果](evidence/2026-11-16/dynamic-body-native-weights/results.json)和[验证归档](evidence/2026-11-16/dynamic-body-native-weights/validation.zip)记录两项检查。
 
-原生权重候选的身体图元保存 3,289 个顶点的 16 位整数权重。直接解析候选文件，按项目十段动画各采样七个时点：没有新增退化三角形，245 对静止位置重合的顶点在采样时点均保持接合。同一候选的原始整数权重与再次归一化的权重所产生的顶点位移差不超过 0.046 毫米。采样使用项目动画，原生动态画面对照和实际播放器导入仍需分项验收。[候选资产结果](evidence/2026-11-16/dynamic-native-weight-asset/results.json)和[验证归档](evidence/2026-11-16/dynamic-native-weight-asset/validation.zip)记录资产、动作时点和核对脚本。
+原生权重候选的身体图元保存 3,289 个顶点的 16 位整数权重。直接解析候选文件，按项目十段动画各采样七个时点：没有新增退化三角形，245 对静止位置重合的顶点在采样时点均保持接合。同一候选的原始整数权重与再次归一化的权重所产生的顶点位移差不超过 0.046 毫米。[候选资产结果](evidence/2026-11-16/dynamic-native-weight-asset/results.json)和[验证归档](evidence/2026-11-16/dynamic-native-weight-asset/validation.zip)记录资产、动作时点和核对脚本。
+
+播放器候选包含[原始权重导入契约](../../runtime/asset-formats.md#格式能力)。动画姿态、节点透明度、形变目标及蒙皮批处理四项检查通过。[导入与构建记录](evidence/2026-11-16/dynamic-body-native-weights/importer-qualification.json)记录受检源码和可执行程序摘要。动态成片仍按同机位、同动作时点的双设备对照验收。
 
 ## 采集范围
 
