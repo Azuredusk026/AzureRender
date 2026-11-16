@@ -157,6 +157,7 @@ void ManagedScriptRuntime::dispatchInteraction(const InteractionTarget& event) {
 void ManagedScriptRuntime::reloadChanged(){impl_->reload();}
 void ManagedScriptRuntime::shutdown() noexcept{impl_->shutdown();}
 void ManagedScriptRuntime::setLevelHandler(std::function<void(std::string)> handler){impl_->host->setLevelHandler(std::move(handler));}
+void ManagedScriptRuntime::setLevelSession(LevelSession& levels){impl_->host->setLevelSession(levels);}
 void ManagedScriptRuntime::setAudioHandler(std::function<void(ecs::Entity)> handler){impl_->host->setAudioHandler(std::move(handler));}
 void ManagedScriptRuntime::setUiHandler(std::function<void(std::string,std::string)> handler){impl_->host->setUiHandler(std::move(handler));}
 void ManagedScriptRuntime::setSaveStore(std::shared_ptr<ProjectSaveStore> store){impl_->host->setSaveStore(std::move(store));}

@@ -16,6 +16,23 @@ def component(type_id, data):
     return {"type": type_id, "version": 1, "data": data}
 
 
+def add_startup_flow(output):
+    project = output / "project.azureproject"
+    descriptor = json.loads(project.read_text(encoding="utf-8"))
+    descriptor["runtime"]["input"].update({"transition-cancel": [259], "transition-retry": [257]})
+    project.write_text(json.dumps(descriptor, indent=2) + "\n", encoding="utf-8")
+    assets = output / "assets"
+    for stage in ("boot", "asset-load", "entry", "transition"):
+        components = {"azure.script": component("azure.script", {"asset": "assets:/startup-flow.lua"})}
+        if stage == "transition":
+            components["azure.game-ui"] = component("azure.game-ui", {"asset": "assets:/startup-flow.rml"})
+        level = {
+            "schemaVersion": 1, "id": stage, "sceneType": "sample", "resources": [], "lights": [],
+            "nodes": [{"id": "startup" if stage == "boot" else stage, "components": components}],
+        }
+        (assets / f"{stage}.azurelevel").write_text(json.dumps(level, indent=2) + "\n", encoding="utf-8")
+
+
 def make_probe(example, source, furniture, output, audio_playback=None):
     import re
 
@@ -82,10 +99,13 @@ def main():
     parser.add_argument("--source", type=Path, required=True)
     parser.add_argument("--furniture", type=Path, required=True)
     parser.add_argument("--audio-playback", type=Path)
+    parser.add_argument("--startup-flow", action="store_true")
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     example = Path(__file__).resolve().parents[2] / "examples/npr-room"
     make_probe(example, args.source, args.furniture, args.output, args.audio_playback)
+    if args.startup_flow:
+        add_startup_flow(args.output)
 
 
 if __name__ == "__main__":

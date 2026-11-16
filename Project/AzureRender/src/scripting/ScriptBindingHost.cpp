@@ -1,5 +1,6 @@
 #include "scripting/ScriptBindingHost.hpp"
 #include "runtime/ComponentCodec.hpp"
+#include "runtime/LevelSession.hpp"
 #include "runtime/ProjectSaveStore.hpp"
 #include <cmath>
 #include <stdexcept>
@@ -81,12 +82,16 @@ void ScriptBindingHost::commitInitialization(const std::function<void()>& retire
     }
 }
 void ScriptBindingHost::close() noexcept {
-    cancelInitialization();callback_=false;closed_=true;level_={};audio_={};ui_={};saveStore_.reset();
+    cancelInitialization();callback_=false;closed_=true;levels_=nullptr;level_={};audio_={};ui_={};saveStore_.reset();
 }
 void ScriptBindingHost::effect(std::function<void()> action,bool structural) {
     if(staging_)(structural?stagedStructural_:stagedEffects_).push_back(std::move(action));else action();
 }
 void ScriptBindingHost::setLevelHandler(std::function<void(std::string)> handler) {checkThread();level_=std::move(handler);}
+void ScriptBindingHost::setLevelSession(LevelSession& levels) {
+    checkThread();levels_=&levels;
+    level_=[&levels](std::string reference){levels.request(std::move(reference));};
+}
 void ScriptBindingHost::setAudioHandler(std::function<void(ecs::Entity)> handler) {checkThread();audio_=std::move(handler);}
 void ScriptBindingHost::setUiHandler(std::function<void(std::string,std::string)> handler) {checkThread();ui_=std::move(handler);}
 void ScriptBindingHost::setSaveStore(std::shared_ptr<ProjectSaveStore> store) {
@@ -134,6 +139,8 @@ Json ScriptBindingHost::invoke(const ScriptObject& object,const std::string& met
     if(method=="pressed")return game_.input().pressed(args[0].get<std::string>());
     if(method=="read_save")
         return saveStore_ ? saveStore_->read(args[0].get<std::string>()) : Json(nullptr);
+    if(method=="level_ready")return levels_ && levels_->preloaded(args[0].get<std::string>());
+    if(method=="level_load_error")return levels_ ? levels_->lastError() : std::string();
     if(method=="get" || method=="set") {
         const auto type=args[0].get<std::string>(),field=args[1].get<std::string>();
         const Key key{entity,type};
@@ -173,6 +180,13 @@ Json ScriptBindingHost::invoke(const ScriptObject& object,const std::string& met
     } else if(method=="load_level") {
         if(!level_)throw std::runtime_error("Level request handler unavailable");
         const auto reference=args[0].get<std::string>();effect([handler=level_,reference]{handler(reference);});
+    } else if(method=="preload_level" || method=="cancel_level_load") {
+        if(!levels_)throw std::runtime_error("Level session unavailable");
+        auto* levels=levels_;
+        if(method=="preload_level"){
+            const auto reference=args[0].get<std::string>();
+            effect([levels,reference]{levels->preload(reference);});
+        }else effect([levels]{levels->cancelPending();});
     } else if(method=="audio_play") {
         if(!audio_)throw std::runtime_error("Audio handler unavailable");effect([handler=audio_,entity]{handler(entity);});
     } else if(method=="ui_text") {

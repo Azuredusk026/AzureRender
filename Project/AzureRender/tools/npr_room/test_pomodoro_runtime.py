@@ -41,7 +41,8 @@ def main():
     args = parser.parse_args()
     example = Path(__file__).resolve().parents[2] / "examples/npr-room"
     run(args.lua, [example / "assets/pomodoro.lua", example / "tests/pomodoro.lua"])
-    print("Pomodoro state and cue checks passed")
+    run(args.lua, [example / "assets/startup-flow.lua", example / "tests/startup-flow.lua"])
+    print("Pomodoro state, cue and room startup checks passed")
 
 
 if __name__ == "__main__":

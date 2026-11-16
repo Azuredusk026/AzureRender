@@ -48,10 +48,16 @@ ScriptRuntime 将 Lua 5.4.8 与 sol2 3.5.0 接入固定步运行时。脚本控�
 | `self:spawn(id, resource, position)` | 下一固定步使用现有资源创建节点 |
 | `self:remove_component(type)` | 下一固定步移除可选组件 |
 | `self:load_level(reference)` | 将资源引用交给宿主的关卡请求处理器 |
+| `self:preload_level(reference)` | 后台准备目标关卡，当前关卡继续运行 |
+| `self:level_ready(reference)` | 查询目标关卡的资源与渲染准备状态 |
+| `self:cancel_level_load()` | 取消待处理的预加载或切换请求 |
+| `self:level_load_error()` | 读取关卡会话的最后一条加载错误，空字符串表示当前无错误 |
 | `self:audio_play()` | 播放当前实体的音频源 |
 | `self:ui_text(id, text)` | 设置游戏界面的纯文本 |
 
 关卡请求处理器负责排队，主循环在固定步之外准备和提交关卡。修改接口在顶层代码中调用产生错误。数组需稠密，最多 1024 项，嵌套深度最多 16。
+
+项目 Player 和编辑器播放会话使用同一关卡准备接口。Lua 和托管脚本均可先请求预加载，逐帧检查就绪或错误，再调用关卡切换。初始化回调中的切换、预加载和取消随初始化事务提交。
 
 ## 线程与同步
 

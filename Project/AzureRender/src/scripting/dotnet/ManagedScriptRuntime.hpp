@@ -22,6 +22,7 @@ public:
     const std::vector<StructuredDiagnostic>& diagnostics() const override;
     ScriptRuntimeCapabilities capabilities() const override;
     void setSaveStore(std::shared_ptr<ProjectSaveStore>) override;
+    void setLevelSession(LevelSession&) override;
 private:
     struct Impl;
     std::unique_ptr<Impl> impl_;

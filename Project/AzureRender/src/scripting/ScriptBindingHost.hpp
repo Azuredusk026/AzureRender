@@ -8,6 +8,7 @@
 #include <thread>
 namespace azurerender {
 class ProjectSaveStore;
+class LevelSession;
 struct ScriptObject {
     ecs::EntityHandle identity;
     std::string node;
@@ -27,6 +28,7 @@ public:
     void cancelInitialization() noexcept;
     void close() noexcept;
     void setLevelHandler(std::function<void(std::string)> handler);
+    void setLevelSession(LevelSession&);
     void setAudioHandler(std::function<void(ecs::Entity)> handler);
     void setUiHandler(std::function<void(std::string,std::string)> handler);
     void setSaveStore(std::shared_ptr<ProjectSaveStore>);
@@ -45,6 +47,7 @@ private:
     std::vector<std::function<void()>> stagedEffects_;
     std::vector<std::function<void()>> stagedStructural_;
     std::set<std::string> stagedSpawns_;
+    LevelSession* levels_=nullptr;
     std::function<void(std::string)> level_;
     std::function<void(ecs::Entity)> audio_;
     std::function<void(std::string,std::string)> ui_;

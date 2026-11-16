@@ -20,9 +20,47 @@ std::size_t privateMemoryBytes(){
 using namespace azurerender;
 void check(bool value) { if(!value)throw std::runtime_error("Script runtime contract failed"); }
 void write(const std::filesystem::path& p,const std::string& data){std::ofstream(p)<<data;}
+void checkScriptLevelControl(Project project){
+  const auto& assets=project.mounts.at("assets");
+  write(assets/"entry.azurelevel",R"({"schemaVersion":1,"id":"entry","resources":[],"nodes":[{"id":"entry","components":{"azure.script":{"type":"azure.script","version":1,"data":{"asset":"assets:/entry.lua"}}}}]})");
+  write(assets/"room.azurelevel",R"({"schemaVersion":1,"id":"room","resources":[],"nodes":[]})");
+  write(assets/"entry.lua",R"(
+local room = "assets:/room.azurelevel"
+local stage = 0
+function update()
+    if stage == 0 then
+        self:preload_level(room)
+        self:cancel_level_load()
+        self:preload_level("assets:/missing.azurelevel")
+        stage = 1
+    elseif stage == 1 and self:level_load_error() ~= "" then
+        assert(not self:level_ready(room))
+        self:preload_level(room)
+        stage = 2
+    elseif stage == 2 and self:level_ready(room) then
+        assert(self:level_load_error() == "")
+        self:load_level(room)
+        stage = 3
+    end
+end)");
+  project.startupScene="assets:/entry.azurelevel";
+  RuntimeLifecycle runtime;runtime.start();
+  LevelSession levels(project,runtime);
+  GameRuntime game(runtime,application::systems(),application::explorationConfiguration());
+  ScriptRuntime scripts(runtime,game,levels.assets());
+  scripts.setLevelSession(levels);
+  const auto deadline=std::chrono::steady_clock::now()+std::chrono::seconds(5);
+  while(levels.revision()==1 && scripts.errors().empty() && std::chrono::steady_clock::now()<deadline){
+    levels.poll();scripts.update(1.0/60.0);
+    std::this_thread::sleep_for(std::chrono::milliseconds(1));
+  }
+  if(!scripts.errors().empty())throw std::runtime_error(scripts.errors().front());
+  check(levels.revision()==2 && levels.current().scene.sceneId=="room" && levels.lastError().empty());
+}
 int main(){auto root=std::filesystem::temp_directory_path()/("azure_script_tests_"+std::to_string(std::chrono::steady_clock::now().time_since_epoch().count()));
  try {
   Project::create(root,"Scripts");auto project=Project::load(root/"project.azureproject");
+  checkScriptLevelControl(project);
   write(root/"assets/good.lua",R"(function update(dt) self:set('azure.transform','translation',{3,4,5}) end
 function trigger(other, entered) if entered then self:load_level('assets:/startup.azscene') end end)");
   write(root/"assets/bad.lua","function update(dt) error('isolated error') end");

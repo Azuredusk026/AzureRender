@@ -142,7 +142,7 @@ void AzureRenderApp::run(const AzureRenderOptions& options, const std::filesyste
         scriptRuntime_ = azurerender::application::scripts(levelSession_->project(),runtime_,*gameRuntime_,levelSession_->assets());
         if (!saveRoot.empty()) scriptRuntime_->setSaveStore(
             std::make_shared<azurerender::ProjectSaveStore>(saveRoot, levelSession_->project().id));
-        scriptRuntime_->setLevelHandler([this](std::string reference) { levelSession_->request(std::move(reference)); });
+        scriptRuntime_->setLevelSession(*levelSession_);
         gameRuntime_->setBeforeStep([this](double delta) { scriptRuntime_->fixedStep(delta); });
         gameRuntime_->setEventHandler([this](const auto& event) { scriptRuntime_->dispatch(event); });
         gameRuntime_->setInteractionHandler([this](const auto& event){scriptRuntime_->dispatchInteraction(event);});

@@ -41,7 +41,7 @@ struct EditorSession::PlayState {
         game->physics().validateScene(runtime);
         if(levels){presentation=std::make_unique<PresentationRuntime>(runtime,levels->assets());scripts=application::scripts(context.project(),runtime,*game,levels->assets());
             scripts->setAudioHandler([this](auto entity){presentation->play(entity);});
-            scripts->setLevelHandler([this](std::string reference){levels->request(std::move(reference));});
+            scripts->setLevelSession(*levels);
             game->setBeforeStep([this](double delta){scripts->fixedStep(delta);});
             game->setEventHandler([this](const auto& event){scripts->dispatch(event);});
             game->setInteractionHandler([this](const auto& event){scripts->dispatchInteraction(event);});}
