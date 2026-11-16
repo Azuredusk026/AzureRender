@@ -4,6 +4,7 @@
 #include "assets/MaterialPixelStorage.hpp"
 #include "diagnostics/RuntimeDiagnostics.hpp"
 #include <algorithm>
+#include <array>
 #include <cctype>
 #include <cmath>
 #include <fstream>
@@ -12,6 +13,35 @@
 namespace azurerender {
 using Json=nlohmann::json;
 namespace {
+std::uint8_t tintColorByte(std::uint8_t code,float factor,bool srgb){
+    double value=code/255.;
+    if(srgb)value=value<=.04045?value/12.92:std::pow((value+.055)/1.055,2.4);
+    value*=factor;
+    if(srgb)value=value<=.0031308?value*12.92:1.055*std::pow(value,1/2.4)-.055;
+    return static_cast<std::uint8_t>(std::lround(std::clamp(value,0.,1.)*255));
+}
+void applyBaseColorTint(std::vector<std::uint8_t>& pixels,const std::array<float,4>& tint,bool srgb){
+    if(tint==std::array{1.F,1.F,1.F,1.F})return;
+
+    // Each channel has only 256 input codes. Do not allocate work for the
+    // entire table when tinting a fallback color or a small texture.
+    constexpr std::size_t codeCount=256;
+    if(pixels.size()<tint.size()*codeCount){
+        for(std::size_t i=0;i<pixels.size();++i){
+            const auto channel=i%tint.size();
+            pixels[i]=tintColorByte(pixels[i],tint[channel],srgb&&channel!=3);
+        }
+        return;
+    }
+
+    std::array<std::array<std::uint8_t,codeCount>,4> remap;
+    for(std::size_t channel=0;channel<remap.size();++channel){
+        for(std::size_t code=0;code<codeCount;++code)
+            remap[channel][code]=tintColorByte(static_cast<std::uint8_t>(code),tint[channel],srgb&&channel!=3);
+    }
+    for(std::size_t i=0;i<pixels.size();++i)
+        pixels[i]=remap[i%remap.size()][pixels[i]];
+}
 std::string materialBinaryDocument(Json document,std::string binary){
     auto json=document.dump();while(json.size()%4)json+=' ';
     while(binary.size()%4)binary+='\0';
@@ -152,10 +182,9 @@ AssetMaterial MaterialData::interpret(const std::function<std::filesystem::path(
         result.textureSettings[index].usage=texture.value().at("usage").get<std::string>();
         if(index==1||index==2)result.textureSettings[index].colorSpace="linear";
     }
-    if(parameters.contains("baseColor")){
-    const auto color=parameters.at("baseColor").get<std::array<float,4>>();
-    for(std::size_t i=0;i<result.baseColorPixels.size();++i){const auto channel=i%4;double value=result.baseColorPixels[i]/255.;const bool srgb=channel!=3&&result.textureSettings[0].colorSpace=="srgb";if(srgb)value=value<=.04045?value/12.92:std::pow((value+.055)/1.055,2.4);value*=color[channel];if(srgb)value=value<=.0031308?value*12.92:1.055*std::pow(value,1/2.4)-.055;result.baseColorPixels[i]=static_cast<std::uint8_t>(std::lround(std::clamp(value,0.,1.)*255));}
-    }
+    if(parameters.contains("baseColor"))
+        applyBaseColorTint(result.baseColorPixels,parameters.at("baseColor").get<std::array<float,4>>(),
+                          result.textureSettings[0].colorSpace=="srgb");
     image("normal",result.normalPixels,result.normalWidth,result.normalHeight,{128,128,255,255});
     image("metallicRoughness",result.metallicRoughnessPixels,result.metallicRoughnessWidth,result.metallicRoughnessHeight,{255,255,255,255});
     for(std::size_t i=0;i<result.metallicRoughnessPixels.size();i+=4){result.metallicRoughnessPixels[i+1]=static_cast<std::uint8_t>(std::lround(result.metallicRoughnessPixels[i+1]*parameters.value("roughness",1.)));result.metallicRoughnessPixels[i+2]=static_cast<std::uint8_t>(std::lround(result.metallicRoughnessPixels[i+2]*parameters.value("metallic",1.)));}

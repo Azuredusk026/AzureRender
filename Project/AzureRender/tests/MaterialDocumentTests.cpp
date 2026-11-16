@@ -3,9 +3,13 @@
 #include "assets/MaterialSurfaceProfile.hpp"
 #include "assets/PrimitiveGenerator.hpp"
 #include "diagnostics/RuntimeDiagnostics.hpp"
+#include <algorithm>
+#include <array>
 #include <chrono>
+#include <cmath>
 #include <fstream>
 #include <iostream>
+#include <string_view>
 using namespace azurerender;
 int main(){try{
     auto require=[](bool condition,const char* message){if(!condition)throw std::runtime_error(message);};
@@ -146,6 +150,34 @@ int main(){try{
     auto pbr=MaterialData::defaults("azure.pbr");pbr.parameters["baseColor"]={.5,.25,.125,1};pbr.parameters["roughness"]=.3;pbr.parameters["metallic"]=.8;
     const auto material=MaterialData::parse(pbr.encode()).interpret([](const auto&)->std::filesystem::path{throw std::runtime_error("No texture expected");});
     require(material.baseColorPixels[0]>material.baseColorPixels[1]&&material.metallicRoughnessPixels[1]==77&&material.metallicRoughnessPixels[2]==204,"Runtime interpretation must consume actual linear color and PBR parameters");
+    for(const auto* space:{"srgb","linear"}) {
+        for(const auto& tint:std::array{std::array{.5F,.25F,1.F,.75F},std::array{1.F,1.F,1.F,1.F}}) {
+            for(const auto pixelCount:{16U,256U}) {
+                AssetMaterial input;
+                input.baseColorWidth=pixelCount;
+                input.baseColorHeight=1;
+                input.textureSettings[0].colorSpace=space;
+                for(unsigned value=0;value<pixelCount;++value)
+                    input.baseColorPixels.insert(input.baseColorPixels.end(),4,static_cast<std::uint8_t>(value));
+                MaterialData override;
+                override.typeId="azure.pbr";
+                override.parameterOverride=true;
+                override.parameters["baseColor"]=tint;
+                const auto result=override.interpret([](const auto&){return std::filesystem::path();},&input);
+                for(unsigned value=0;value<pixelCount;++value) {
+                    for(unsigned channel=0;channel<4;++channel) {
+                        const bool srgb=channel!=3&&std::string_view(space)=="srgb";
+                        double product=value/255.;
+                        if(srgb)product=product<=.04045?product/12.92:std::pow((product+.055)/1.055,2.4);
+                        product*=tint[channel];
+                        if(srgb)product=product<=.0031308?product*12.92:1.055*std::pow(product,1/2.4)-.055;
+                        require(result.baseColorPixels[value*4+channel]==std::lround(std::clamp(product,0.,1.)*255),
+                            "RGBA8 tint must preserve the per-channel transfer function and rounding");
+                    }
+                }
+            }
+        }
+    }
     auto style=MaterialData::defaults("azure.stylized");style.parameters["toonAmount"]=.5;
     const auto rendered=style.interpret([](const auto&){return std::filesystem::path();});
     require(rendered.materialFeatures==MaterialFeatureStylizedShadow&&rendered.styleParameters[0]==.5F,"Registered style parameters must change runtime material interpretation");
@@ -229,8 +261,14 @@ int main(){try{
     source.nprDiffuse.localDiffuseFloorScale=2;
     source.nprDiffuse.rimOrigin={true,10,"independent-body-origin"};
     mesh.materials={source};MaterialBinding binding;binding.path=replacementPath.u8string();
-    auto& messages=RuntimeDiagnostics::instance().messages();const auto firstMessage=messages.size();
+    const auto diagnostics=[] {
+        std::vector<std::string> result;
+        RuntimeDiagnostics::instance().visitMessages([&](const auto& messages){result=messages;});
+        return result;
+    };
+    const auto firstMessage=diagnostics().size();
     applyMaterialBindings(mesh,{{"source-slot",binding}});
+    const auto messages=diagnostics();
     require(messages.size()>firstMessage,"Full replacement must diagnose lost character capabilities");
     const auto& warning=messages.back();
     require(warning.find("source-slot")!=std::string::npos&&warning.find("faceSdf")!=std::string::npos
@@ -242,7 +280,7 @@ int main(){try{
     const auto noLossMessages=messages.size();
     applyMaterialBindings(mesh,{{"source-slot",binding}});
     std::filesystem::remove(replacementPath);
-    require(messages.size()==noLossMessages,"Equivalent ordinary material replacement must remain quiet");
+    require(diagnostics().size()==noLossMessages,"Equivalent ordinary material replacement must remain quiet");
     const nlohmann::json patch={{"schemaVersion",2},{"mode","parameters"},{"typeId","azure.pbr"},
         {"parameters",{{"emissiveStrength",3.0}}},{"textures",nlohmann::json::object()}};
     const auto patchDocument=MaterialData::parse(patch);
@@ -251,7 +289,7 @@ int main(){try{
     source.emissiveStrength=.5F;source.baseColorPixels={71,82,93,255};source.baseColorWidth=source.baseColorHeight=1;
     source.faceSdf.headNode=7;source.faceSdf.headNodeName="Head";source.faceSdf.pixels={9,8,7,6};
     source.specularRamp={true,true,.35F};
-    mesh.materials={source};const auto patchMessages=messages.size();applyMaterialBindings(mesh,{{"source-slot",binding}});
+    mesh.materials={source};const auto patchMessages=diagnostics().size();applyMaterialBindings(mesh,{{"source-slot",binding}});
     std::filesystem::remove(replacementPath);
     const auto& patched=mesh.materials[0];
     require(patched.emissiveStrength==3&&(patched.materialFeatures&MaterialFeatureEmissiveMask),"Override must reach its runtime consumer");
@@ -275,11 +313,11 @@ int main(){try{
         &&(patched.materialFeatures&MaterialFeatureGeometryShadow)!=0
         &&patched.materialClass==source.materialClass&&patched.baseColorPixels==source.baseColorPixels,
         "Parameter override must retain unselected source fields and character inputs");
-    require(messages.size()==patchMessages,"Preserving source semantics must not report replacement loss");
+    require(diagnostics().size()==patchMessages,"Preserving source semantics must not report replacement loss");
     auto sidedPatch=patch;sidedPatch["parameters"]={{"doubleSided",false}};source.doubleSided=true;
     {std::ofstream output(replacementPath);output<<sidedPatch;}
     mesh.materials={source};applyMaterialBindings(mesh,{{"source-slot",binding}});std::filesystem::remove(replacementPath);
-    require(!mesh.materials[0].doubleSided&&messages.size()==patchMessages,"Explicit parameter edits must not report full replacement loss");
+    require(!mesh.materials[0].doubleSided&&diagnostics().size()==patchMessages,"Explicit parameter edits must not report full replacement loss");
     auto physicalPatch=patch;physicalPatch["parameters"]={{"transmission",.5}};
     source.materialClass=AssetMaterialClass::Generic;source.specularInput.present=true;
     bool incompatible=false;try{MaterialData::parse(physicalPatch).interpret([](const auto&){return std::filesystem::path();},&source);}catch(const std::exception&){incompatible=true;}

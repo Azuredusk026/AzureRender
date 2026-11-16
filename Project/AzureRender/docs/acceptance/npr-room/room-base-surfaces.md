@@ -12,7 +12,13 @@
 
 任务 1733 固定相机和时步，采集一对 1280×720 画面。两个项目的关卡数据除新增槽位绑定外逐项一致。像素差异为 550,144 个，整幅平均线性亮度为 0.250549，基础对照为 0.163792。两侧退出时分别释放全部图像和缓冲区。
 
-任务 1734 通过 850 帧房间启动、取消加载和重入。23 个输入动作、七次音源启动及七个角色部件同步均符合预期。原生固定镜头采集记录材质准备耗时 75.4 秒、逻辑材质像素量 2.28 GB，装载成本继续核验。
+任务 1734 和 1740 各通过 850 帧房间启动、取消加载和重入。23 个输入动作、七次音源启动及七个角色部件同步均符合预期。
+
+## 底色计算
+
+引擎按通道查表处理大型 RGBA8 纹理，保留原有 sRGB 转换、线性乘法和量化规则。恒等颜色保持源字节。小纹理直接计算。材质文档测试核对两种颜色空间的全部 256 个通道输入码，覆盖 RGB、透明度及恒等颜色。
+
+任务 1738 和 1741 通过材质文档、覆盖通道和无光照层测试。任务 1739 在相同工程、镜头和时步下取得完全一致的 1280×720 图像。材质准备耗时为 5.682 秒，计算对照为 75.406 秒。两个样本的逻辑材质像素量均为 2,282,257,896 字节。该数据用于核对场景准备阶段。
 
 | 证据 | SHA-256 |
 | --- | --- |
@@ -20,8 +26,11 @@
 | 同镜头成对回放 | `bbacfd43148b6766b806af68ae3076f978d6f188be280304c6c5a2593923303a` |
 | 房间启动回归 | `1515fab0c1d13899abb85c55c99fcc9e897fca89b33a47046dc4ca5771f8c965` |
 | 材质画面 | `4f2d22001af2473e931013dad2bbf30f15cdbad0c610e73e2749e98a06340284` |
+| 底色计算对照 | `a40fdf086f0bc90ffd94c903a71c100f78e3ba5f21f27457f94be1e97c422ee4` |
+| 底色计算房间回归 | `77c2d42818678b0a403af6a1d1052d2383ac83d4b7a5bad372f7b069fea62f2d` |
 
 本机工程位于 `assets_private/npr-room-dev/room-base-surfaces`，画面位于 `reference-preview/room-base-surfaces.png`。
+底色计算回放的 Player 与构建摘要位于该工程的 `validation/tint`。
 
 ## 复验
 
@@ -29,4 +38,5 @@
 python -B -m tools.npr_room.room_surfaces --room $cloudyRoom --output $surfaceRoom --source $unitySource --catalog $materialCatalog --images $imageCatalog
 python -B tools/npr_room/test_room_surface_player.py --player $player --base $cloudyRoom --textured $surfaceRoom --resource-root $resources --output $pair
 python -B tools/npr_room/test_room_startup_player.py --player $player --project $project --resource-root $resources --output $replay --expect-heroine --expect-music
+ctest --test-dir $buildDir -R '^(AzureAssets\.MaterialDocument|AzureRender\.MaterialCoverage|AzureRender\.UnlitTextureMaterial)$' --output-on-failure
 ```
