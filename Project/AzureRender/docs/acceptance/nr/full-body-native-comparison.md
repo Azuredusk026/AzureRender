@@ -48,6 +48,8 @@ Intel 将反射计算写入主命令缓冲区时，保留并行场景准备及�
 
 Intel 使用顶点着色器蒙皮时，两次完整成片仍有 407 个像素超差。有符号的整帧差量与计算蒙皮对照完全一致。差异集中于画面上方的 37×22 像素范围。[蒙皮路径对照](evidence/2026-11-16/joint-intel-vertex-skinning-repeat/qualification.json)及[验证归档](evidence/2026-11-16/joint-intel-vertex-skinning-repeat/validation.zip)保存成片和输入记录。
 
+同帧探针在完整画面中读取滤波后的屏幕空间反射。Intel 默认配置出现两种成片，其中一种与串行对照逐像素一致。另一次采集中，地面反射颜色探针有 1,583 个像素变化，对应的正式画面采样区有 1,235 个像素变化。可信度、表面探针及上方对照区域的读数一致。地面波动发生在反射颜色进入材质合成之前。[反射颜色探针记录](evidence/2026-11-16/joint-intel-reflection-storage-field/qualification.json)及[验证归档](evidence/2026-11-16/joint-intel-reflection-storage-field/validation.zip)保存帧差、源码和运行回执。
+
 ## 采集范围
 
 角色根节点相对方向覆盖正向、左右四分之三侧向、左右侧向及背向六个机位。NVIDIA 与 Intel 均以 1280×720 采集，使用同一联合场景、资产和动画起点。[六机位采集记录](evidence/2026-11-16/character-six-view-inputs/qualification.json)保存相机参数、图像摘要和冻结回归结果。当前 NVIDIA 驱动下的四帧冻结回归逐像素一致；原始冻结图的 RGB 峰值差为 1、7、37、23。
