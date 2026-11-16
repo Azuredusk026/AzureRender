@@ -160,3 +160,4 @@ Player 使用 `--save-root` 指定存档根目录。
 
 会话默认使用内存存档。
 运行回调可以提交写入，脚本初始化的写入随宿主效果提交。
+需要展示失败并允许重试的界面可在运行回调中调用 Lua 的 `try_write_save` 或托管的 `TryWriteSave`。成功返回 `true`，存档拒绝或文件写入失败返回 `false`。初始化使用事务中的 `write_save` 或 `WriteSave`。

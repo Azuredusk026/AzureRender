@@ -104,6 +104,21 @@ void AzureRenderApp::initializeValidation() {
         }
         if(domain=="game-ui"){
             if(!gameUi_)throw std::logic_error("Game UI input requires an active document");
+            if(event.at("action")=="character"){
+                if(!gameUi_->wantsKeyboard())throw std::logic_error("Game UI field requires focus");
+                const auto value=event.at("value").get<std::int64_t>();
+                if(value<0 || value>0x10ffff || (value>=0xd800 && value<=0xdfff))
+                    throw std::invalid_argument("Invalid game UI character");
+                gameUi_->character(static_cast<char32_t>(value));
+                return nlohmann::json{{"domain",domain},{"typed",true}};
+            }
+            if(event.at("action")=="key"){
+                if(!gameUi_->wantsKeyboard())throw std::logic_error("Game UI field requires focus");
+                const auto key=event.at("key").get<int>();
+                if(!isGameplayKey(key))throw std::invalid_argument("Invalid game UI key");
+                gameUi_->key(key,event.at("down").get<bool>());
+                return nlohmann::json{{"domain",domain},{"typed",true}};
+            }
             if(event.at("action")!="click")throw std::invalid_argument("Unsupported game UI input");
             const auto id=event.at("target").get<std::string>();
             const auto bounds=gameUi_->bounds(id);

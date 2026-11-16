@@ -10,6 +10,13 @@ body { width: 100%; height: 100%; margin: 0; color: white; font-family: LatoLati
 #timer-controls { display: block; margin-top: 8dp; font-size: 13dp; }
 #timer-controls button { display: inline-block; padding: 4dp 7dp; margin-right: 3dp; color: white; background-color: #34434f; }
 #timer-controls button:hover { background-color: #506472; }
+#notes-toggle { position: absolute; left: 16dp; top: 16dp; padding: 6dp 10dp; color: white; background-color: #34434f; }
+#notes-panel { position: absolute; left: 16dp; top: 52dp; width: 310dp; padding: 14dp; background-color: #19232c; }
+#notes-panel button { display: inline-block; padding: 4dp 6dp; margin-right: 4dp; margin-bottom: 7dp; color: white; background-color: #34434f; }
+#notes-panel input, #notes-panel textarea { display: block; width: 290dp; padding: 5dp; margin-bottom: 8dp; color: white; background-color: #273541; }
+#notes-panel textarea { height: 135dp; }
+#note-page { display: block; margin-bottom: 6dp; }
+#note-status { display: block; color: #f0c58e; }
 </style>
 </head>
 <body>
@@ -22,6 +29,22 @@ body { width: 100%; height: 100%; margin: 0; color: white; font-family: LatoLati
 <button id="timer-toggle-button" data-action="timer-toggle">Start/Pause · T</button>
 <button id="timer-end-button" data-action="timer-reset">End · R</button>
 </div>
+</div>
+<button id="notes-toggle" data-action="notes-toggle" style="display: none;">Notes</button>
+<div id="notes-panel" style="display: none;">
+<span id="note-page"></span>
+<button id="note-prev" data-action="notes-prev">Previous</button>
+<button id="note-next" data-action="notes-next">Next</button>
+<button id="note-new" data-action="notes-new">New Page</button>
+<div id="note-fields">
+<input id="note-title" value="" />
+<textarea id="note-text"></textarea>
+<button id="note-save" data-action="notes-save">Save</button>
+<button id="note-up" data-action="notes-up">Move up</button>
+<button id="note-down" data-action="notes-down">Move down</button>
+<button id="note-delete" data-action="notes-delete">Delete</button>
+</div>
+<span id="note-status"></span>
 </div>
 </body>
 </rml>

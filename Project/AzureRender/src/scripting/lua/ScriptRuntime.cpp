@@ -257,6 +257,7 @@ void ScriptRuntime::setLevelHandler(std::function<void(std::string)> handler){im
 void ScriptRuntime::setLevelSession(LevelSession& levels){impl_->host.setLevelSession(levels);}
 void ScriptRuntime::setAudioHandler(std::function<void(ecs::Entity)> handler){impl_->host.setAudioHandler(std::move(handler));}
 void ScriptRuntime::setUiHandler(std::function<void(std::string,std::string)> handler){impl_->host.setUiHandler(std::move(handler));}
+void ScriptRuntime::setUiProvider(std::function<GameUi*()> provider){impl_->host.setUiProvider(std::move(provider));}
 void ScriptRuntime::setSaveStore(std::shared_ptr<ProjectSaveStore> store){impl_->host.setSaveStore(std::move(store));}
 std::size_t ScriptRuntime::activeCount() const {
     std::size_t result=0;for(const auto& entry:impl_->entries)if(entry.second.active)++result;return result;

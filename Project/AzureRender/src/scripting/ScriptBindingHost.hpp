@@ -9,6 +9,7 @@
 namespace azurerender {
 class ProjectSaveStore;
 class LevelSession;
+class GameUi;
 struct ScriptObject {
     ecs::EntityHandle identity;
     std::string node;
@@ -31,6 +32,7 @@ public:
     void setLevelSession(LevelSession&);
     void setAudioHandler(std::function<void(ecs::Entity)> handler);
     void setUiHandler(std::function<void(std::string,std::string)> handler);
+    void setUiProvider(std::function<GameUi*()> provider);
     void setSaveStore(std::shared_ptr<ProjectSaveStore>);
     static nlohmann::json encode(const ScriptObject&);
     static ScriptObject decode(const nlohmann::json&);
@@ -51,6 +53,7 @@ private:
     std::function<void(std::string)> level_;
     std::function<void(ecs::Entity)> audio_;
     std::function<void(std::string,std::string)> ui_;
+    std::function<GameUi*()> uiDocument_;
     std::shared_ptr<ProjectSaveStore> saveStore_;
 };
 }

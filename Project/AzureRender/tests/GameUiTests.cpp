@@ -36,6 +36,26 @@ int main(int argc,char** argv){
   const auto image=folder/std::filesystem::u8path(u8"精灵.svg");std::ofstream(image)<<"<svg width='16' height='16'/>";
   std::ofstream(folder/"scene.azure2d")<<u8R"({"schemaVersion":1,"size":[640,360],"items":[{"id":"tile","kind":"sprite","rect":[0,0,16,16],"image":"精灵.svg"}]})";
   {azurerender::GameUi sprites(folder/"scene.azure2d",font,renderer);sprites.update(.016);sprites.render();}
+  const auto form=folder/"notes.rml";
+  std::ofstream(form)<<"<rml><head></head><body><div id='note'><textarea id='body'></textarea></div></body></rml>";
+  {
+   azurerender::GameUi notes(form,font,renderer);notes.resize(640,360,1);notes.update(.016);
+   notes.setFormValue("body",u8"笔记\n<&>");
+   if(notes.formValue("body")!=u8"笔记\n<&>")throw std::runtime_error("UI UTF-8 form text changed");
+   notes.setFormValue("body","");
+   const auto field=notes.bounds("body");
+   const auto fieldX=static_cast<int>(field[0]+field[2]/2);
+   const auto fieldY=static_cast<int>(field[1]+field[3]/2);
+   notes.pointer(fieldX,fieldY,true);notes.pointer(fieldX,fieldY,false);
+   if(!notes.wantsKeyboard())throw std::runtime_error("UI textarea did not receive focus");
+   notes.character(U'一');notes.key(257,true);notes.key(257,false);notes.character(U'二');
+   if(notes.formValue("body")!=u8"一\n二")throw std::runtime_error("Enter did not insert a line break");
+   notes.setVisible("note",false);notes.update(.016);
+   if(notes.wantsPointer(12,12))throw std::runtime_error("Hidden form receives pointer input");
+   notes.setVisible("note",true);notes.update(.016);
+   bool wrongElement=false;try{notes.formValue("note");}catch(const std::invalid_argument&){wrongElement=true;}
+   if(!wrongElement)throw std::runtime_error("UI form binding must reject ordinary elements");
+  }
   std::filesystem::remove_all(folder);
   if(renderer.imageLoads!=1||std::filesystem::u8path(renderer.lastImage)!=image)throw std::runtime_error("Windows 2D documents must resolve relative Unicode textures against their own directory");
   std::cout<<"RmlUi document, text binding, button action, DPI resize and invalid element handling passed\n";

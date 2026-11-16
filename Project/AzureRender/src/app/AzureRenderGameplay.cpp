@@ -257,7 +257,10 @@ void AzureRenderApp::synchronizeGameUi(){
             });
         }
     }
-    if(auto* scripts=activeScripts())scripts->setUiHandler([this](std::string id,std::string text){if(gameUi_)gameUi_->setText(id,text);});
+    if(auto* scripts=activeScripts()){
+        scripts->setUiHandler([this](std::string id,std::string text){if(gameUi_)gameUi_->setText(id,text);});
+        scripts->setUiProvider([this]{return gameUi_.get();});
+    }
 #if AZURE_WITH_EDITOR
     if(editorLayer_)editorLayer_->setGameUi(gameUi_.get());
 #endif

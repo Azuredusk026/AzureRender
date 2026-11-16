@@ -24,6 +24,7 @@ public:
     ScriptRuntimeCapabilities capabilities() const override {return {"lua",true,false};}
     void setSaveStore(std::shared_ptr<ProjectSaveStore>) override;
     void setLevelSession(LevelSession&) override;
+    void setUiProvider(std::function<GameUi*()>) override;
 private:
     struct Impl;
     std::unique_ptr<Impl> impl_;

@@ -42,7 +42,8 @@ def main():
     example = Path(__file__).resolve().parents[2] / "examples/npr-room"
     run(args.lua, [example / "assets/pomodoro.lua", example / "tests/pomodoro.lua"])
     run(args.lua, [example / "assets/startup-flow.lua", example / "tests/startup-flow.lua"])
-    print("Pomodoro state, cue and room startup checks passed")
+    run(args.lua, [example / "assets/notes.lua", example / "tests/notes.lua"])
+    print("Timer state, cues, room startup and notes checks passed")
 
 
 if __name__ == "__main__":

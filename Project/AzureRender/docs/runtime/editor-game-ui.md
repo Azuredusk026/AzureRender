@@ -72,6 +72,10 @@ Lua 的 `self:audio_play()` 播放当前实体音源，`self:ui_text(id, text)` 
 RmlUi 负责文档布局、字体、文本与事件。GameUiRenderer 通过项目 RHI 创建几何、纹理和管线，并在公共后处理合成阶段绘制。Player 的链接边界为运行时与渲染模块。
 
 按钮的 `data-action` 对应项目输入表中的动作名称。点击在下一个固定步产生一次按下沿，脚本通过 `self:pressed` 接收，与物理按键共用玩法处理。宿主处理全局的 `pause` 与 `restart`。
+只由界面触发的动作在项目输入表中使用空按键数组。
+
+Lua 使用 `ui_value(id)` 和 `ui_set_value(id, value)` 读写表单值，使用 `ui_visible(id, visible)` 切换元素显示状态。托管脚本使用同一组宿主操作 `UiValue`、`UiSetValue` 和 `UiVisible`。
+单行和多行文本使用 UTF-8。RML 加载期间，行内字体路径可相对于文档目录解析。
 
 适配层支持纹理、字体、预乘透明、矩形裁剪和矩阵变换。文档使用这些能力构建界面。窗口尺寸与显示密度传给 RmlUi，编辑器将鼠标坐标转换到视口像素。
 
@@ -80,7 +84,8 @@ GPU 对象按在途帧延迟回收。交换链重建和退出在 GPU 空闲后�
 ## 自动验收
 
 Player 验证端点的 `game-ui` 输入域支持按元素标识点击可见交互控件。
-请求通过与窗口输入相同的 RmlUi 指针处理及项目动作回调。
+焦点位于表单时，`character` 接收 Unicode 码点，`key` 接收物理键值及按下或抬起状态。
+请求通过与窗口输入相同的 RmlUi 处理及项目动作回调。
 
 `--editor-actions <json>` 执行按帧排序的生产编辑命令。`--runtime-report <json>` 输出操作耗时、运行步数、切关、错误恢复、动画帧与界面绘制统计。
 

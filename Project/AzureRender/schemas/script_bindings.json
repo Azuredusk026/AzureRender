@@ -20,11 +20,15 @@
     {"name":"level_load_error","managed":"LevelLoadError","parameters":[],"result":"string","mutating":false},
     {"name":"audio_play","managed":"AudioPlay","parameters":[],"result":"void","mutating":true},
     {"name":"ui_text","managed":"UiText","parameters":[{"name":"id","type":"string"},{"name":"text","type":"string"}],"result":"void","mutating":true},
+    {"name":"ui_value","managed":"UiValue","parameters":[{"name":"id","type":"string"}],"result":"string","mutating":false},
+    {"name":"ui_set_value","managed":"UiSetValue","parameters":[{"name":"id","type":"string"},{"name":"value","type":"string"}],"result":"void","mutating":true},
+    {"name":"ui_visible","managed":"UiVisible","parameters":[{"name":"id","type":"string"},{"name":"visible","type":"boolean"}],"result":"void","mutating":true},
     {"name":"get","managed":"Get","parameters":[{"name":"type","type":"string"},{"name":"field","type":"string"}],"result":"value","mutating":false},
     {"name":"set","managed":"Set","parameters":[{"name":"type","type":"string"},{"name":"field","type":"string"},{"name":"value","type":"value"}],"result":"void","mutating":true},
     {"name":"grounded","managed":"Grounded","parameters":[],"result":"boolean","mutating":false},
     {"name":"velocity","managed":"Velocity","parameters":[],"result":"array","mutating":false},
     {"name":"read_save","managed":"ReadSave","parameters":[{"name":"slot","type":"string"}],"result":"value","mutating":false},
-    {"name":"write_save","managed":"WriteSave","parameters":[{"name":"slot","type":"string"},{"name":"payload","type":"value"}],"result":"void","mutating":true}
+    {"name":"write_save","managed":"WriteSave","parameters":[{"name":"slot","type":"string"},{"name":"payload","type":"value"}],"result":"void","mutating":true},
+    {"name":"try_write_save","managed":"TryWriteSave","parameters":[{"name":"slot","type":"string"},{"name":"payload","type":"value"}],"result":"boolean","mutating":true}
   ]
 }

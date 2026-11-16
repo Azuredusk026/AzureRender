@@ -23,6 +23,7 @@ public:
     ScriptRuntimeCapabilities capabilities() const override;
     void setSaveStore(std::shared_ptr<ProjectSaveStore>) override;
     void setLevelSession(LevelSession&) override;
+    void setUiProvider(std::function<GameUi*()>) override;
 private:
     struct Impl;
     std::unique_ptr<Impl> impl_;

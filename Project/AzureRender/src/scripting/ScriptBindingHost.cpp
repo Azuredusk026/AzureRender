@@ -1,9 +1,11 @@
 #include "scripting/ScriptBindingHost.hpp"
 #include "runtime/ComponentCodec.hpp"
+#include "runtime/GameUi.hpp"
 #include "runtime/LevelSession.hpp"
 #include "runtime/ProjectSaveStore.hpp"
 #include <cmath>
 #include <stdexcept>
+#include <system_error>
 namespace azurerender {
 using Json=nlohmann::json;
 ScriptBindingHost::ScriptBindingHost(RuntimeLifecycle& runtime,GameRuntime& game)
@@ -82,7 +84,7 @@ void ScriptBindingHost::commitInitialization(const std::function<void()>& retire
     }
 }
 void ScriptBindingHost::close() noexcept {
-    cancelInitialization();callback_=false;closed_=true;levels_=nullptr;level_={};audio_={};ui_={};saveStore_.reset();
+    cancelInitialization();callback_=false;closed_=true;levels_=nullptr;level_={};audio_={};ui_={};uiDocument_={};saveStore_.reset();
 }
 void ScriptBindingHost::effect(std::function<void()> action,bool structural) {
     if(staging_)(structural?stagedStructural_:stagedEffects_).push_back(std::move(action));else action();
@@ -94,6 +96,7 @@ void ScriptBindingHost::setLevelSession(LevelSession& levels) {
 }
 void ScriptBindingHost::setAudioHandler(std::function<void(ecs::Entity)> handler) {checkThread();audio_=std::move(handler);}
 void ScriptBindingHost::setUiHandler(std::function<void(std::string,std::string)> handler) {checkThread();ui_=std::move(handler);}
+void ScriptBindingHost::setUiProvider(std::function<GameUi*()> provider) {checkThread();uiDocument_=std::move(provider);}
 void ScriptBindingHost::setSaveStore(std::shared_ptr<ProjectSaveStore> store) {
     checkThread();
     if(!store)throw std::invalid_argument("Project save store must be available");
@@ -139,8 +142,25 @@ Json ScriptBindingHost::invoke(const ScriptObject& object,const std::string& met
     if(method=="pressed")return game_.input().pressed(args[0].get<std::string>());
     if(method=="read_save")
         return saveStore_ ? saveStore_->read(args[0].get<std::string>()) : Json(nullptr);
+    if(method=="try_write_save") {
+        if(staging_)throw std::logic_error("Use write_save for staged initialization");
+        if(!saveStore_)return false;
+        try {
+            saveStore_->write(args[0].get<std::string>(),args[1]);
+            return true;
+        } catch(const std::invalid_argument&) {
+            return false;
+        } catch(const std::system_error&) {
+            return false;
+        }
+    }
     if(method=="level_ready")return levels_ && levels_->preloaded(args[0].get<std::string>());
     if(method=="level_load_error")return levels_ ? levels_->lastError() : std::string();
+    if(method=="ui_value"){
+        const auto* document=uiDocument_ ? uiDocument_() : nullptr;
+        if(!document)throw std::runtime_error("Game UI document unavailable");
+        return document->formValue(args[0].get<std::string>());
+    }
     if(method=="get" || method=="set") {
         const auto type=args[0].get<std::string>(),field=args[1].get<std::string>();
         const Key key{entity,type};
@@ -192,6 +212,15 @@ Json ScriptBindingHost::invoke(const ScriptObject& object,const std::string& met
     } else if(method=="ui_text") {
         if(!ui_)throw std::runtime_error("UI handler unavailable");
         const auto id=args[0].get<std::string>(),text=args[1].get<std::string>();effect([handler=ui_,id,text]{handler(id,text);});
+    } else if(method=="ui_set_value" || method=="ui_visible") {
+        if(!uiDocument_)throw std::runtime_error("Game UI provider unavailable");
+        const auto id=args[0].get<std::string>();
+        effect([provider=uiDocument_,id,value=args[1],method]{
+            if(auto* document=provider()){
+                if(method=="ui_set_value")document->setFormValue(id,value.get<std::string>());
+                else document->setVisible(id,value.get<bool>());
+            }
+        });
     } else if(method=="write_save") {
         if(!saveStore_)throw std::runtime_error("Project save store unavailable");
         const auto slot=args[0].get<std::string>();
