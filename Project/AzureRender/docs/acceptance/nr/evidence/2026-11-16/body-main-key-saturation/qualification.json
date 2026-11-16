@@ -1,0 +1,937 @@
+{
+  "status": "rejected-new-over-one",
+  "candidateSha256": "0588725366b561a87878af893129b8824d99c96bf3e6713e15c33653d73eebb5",
+  "nativeFrameSha256": "48afd6546c23cfa85099a765cc94ada4813a684538c695faf6d70d6daf2261b5",
+  "measurementJob": 1419,
+  "minimumRgbStep": 1,
+  "devices": {
+    "nvidia": {
+      "full": {
+        "control": "87ceab9ca80473c86708c15f95f8e831b6d1179a23de36061b638a2c169b6993",
+        "frame": "8fe22b6503a8e239ebb4a0153f34f65be86045f11bab8f9f3e4a549de7599396",
+        "layers": {
+          "skin": {
+            "scope": 47458,
+            "changed": 21600,
+            "overOne": [
+              17985,
+              6158
+            ],
+            "overEight": [
+              1708,
+              1708
+            ],
+            "peak": [
+              115,
+              116
+            ],
+            "newOverOne": 6
+          },
+          "interior": {
+            "scope": 30561,
+            "changed": 18118,
+            "overOne": [
+              11018,
+              627
+            ],
+            "overEight": [
+              0,
+              0
+            ],
+            "peak": [
+              8,
+              8
+            ],
+            "newOverOne": 0
+          },
+          "edge": {
+            "scope": 13086,
+            "changed": 3480,
+            "overOne": [
+              4138,
+              2702
+            ],
+            "overEight": [
+              444,
+              444
+            ],
+            "peak": [
+              81,
+              81
+            ],
+            "newOverOne": 6
+          },
+          "covered": {
+            "scope": 3811,
+            "changed": 2,
+            "overOne": [
+              2829,
+              2829
+            ],
+            "overEight": [
+              1264,
+              1264
+            ],
+            "peak": [
+              115,
+              116
+            ],
+            "newOverOne": 0
+          }
+        },
+        "outsideSkinChanged": 0
+      },
+      "sourceOnly": {
+        "scope": 47458,
+        "changed": 21600,
+        "overOne": [
+          17985,
+          6158
+        ],
+        "overEight": [
+          1708,
+          1708
+        ],
+        "peak": [
+          115,
+          116
+        ],
+        "newOverOne": 6
+      },
+      "points": [
+        {
+          "xy": [
+            1250,
+            387
+          ],
+          "distance": 2.799999952316284,
+          "covered": false,
+          "control": [
+            137,
+            113,
+            102
+          ],
+          "candidate": [
+            138,
+            113,
+            102
+          ],
+          "noKeyGlossy": [
+            138,
+            113,
+            102
+          ],
+          "native": [
+            136,
+            112,
+            101
+          ],
+          "absoluteError": [
+            1,
+            2
+          ]
+        },
+        {
+          "xy": [
+            1373,
+            392
+          ],
+          "distance": 2.0,
+          "covered": false,
+          "control": [
+            180,
+            146,
+            130
+          ],
+          "candidate": [
+            181,
+            146,
+            130
+          ],
+          "noKeyGlossy": [
+            181,
+            146,
+            130
+          ],
+          "native": [
+            179,
+            145,
+            129
+          ],
+          "absoluteError": [
+            1,
+            2
+          ]
+        },
+        {
+          "xy": [
+            1303,
+            400
+          ],
+          "distance": 1.0,
+          "covered": false,
+          "control": [
+            138,
+            113,
+            103
+          ],
+          "candidate": [
+            139,
+            113,
+            103
+          ],
+          "noKeyGlossy": [
+            139,
+            113,
+            103
+          ],
+          "native": [
+            137,
+            112,
+            102
+          ],
+          "absoluteError": [
+            1,
+            2
+          ]
+        },
+        {
+          "xy": [
+            1304,
+            400
+          ],
+          "distance": 2.0,
+          "covered": false,
+          "control": [
+            138,
+            113,
+            103
+          ],
+          "candidate": [
+            139,
+            113,
+            103
+          ],
+          "noKeyGlossy": [
+            139,
+            113,
+            103
+          ],
+          "native": [
+            137,
+            112,
+            102
+          ],
+          "absoluteError": [
+            1,
+            2
+          ]
+        },
+        {
+          "xy": [
+            1265,
+            525
+          ],
+          "distance": 2.0,
+          "covered": false,
+          "control": [
+            134,
+            108,
+            97
+          ],
+          "candidate": [
+            135,
+            108,
+            97
+          ],
+          "noKeyGlossy": [
+            135,
+            108,
+            97
+          ],
+          "native": [
+            133,
+            107,
+            96
+          ],
+          "absoluteError": [
+            1,
+            2
+          ]
+        },
+        {
+          "xy": [
+            1203,
+            867
+          ],
+          "distance": 4.196899890899658,
+          "covered": false,
+          "control": [
+            133,
+            114,
+            103
+          ],
+          "candidate": [
+            134,
+            113,
+            102
+          ],
+          "noKeyGlossy": [
+            134,
+            113,
+            102
+          ],
+          "native": [
+            134,
+            115,
+            102
+          ],
+          "absoluteError": [
+            1,
+            2
+          ]
+        }
+      ]
+    },
+    "intel": {
+      "full": {
+        "control": "6f133cc93ac4edb5309c5c852c22eee8ec8e05cb48070d49c980b343d7cfac47",
+        "frame": "7791e691a716f8f52443ccc563034c9dbfc216c0bb19c5db1bb1cfaa8427bb76",
+        "layers": {
+          "skin": {
+            "scope": 47458,
+            "changed": 21721,
+            "overOne": [
+              17291,
+              6124
+            ],
+            "overEight": [
+              1713,
+              1713
+            ],
+            "peak": [
+              115,
+              116
+            ],
+            "newOverOne": 17
+          },
+          "interior": {
+            "scope": 30561,
+            "changed": 18190,
+            "overOne": [
+              10522,
+              581
+            ],
+            "overEight": [
+              0,
+              0
+            ],
+            "peak": [
+              8,
+              8
+            ],
+            "newOverOne": 2
+          },
+          "edge": {
+            "scope": 13086,
+            "changed": 3530,
+            "overOne": [
+              3959,
+              2733
+            ],
+            "overEight": [
+              444,
+              444
+            ],
+            "peak": [
+              81,
+              81
+            ],
+            "newOverOne": 15
+          },
+          "covered": {
+            "scope": 3811,
+            "changed": 1,
+            "overOne": [
+              2810,
+              2810
+            ],
+            "overEight": [
+              1269,
+              1269
+            ],
+            "peak": [
+              115,
+              116
+            ],
+            "newOverOne": 0
+          }
+        },
+        "outsideSkinChanged": 0
+      },
+      "sourceOnly": {
+        "scope": 47458,
+        "changed": 21721,
+        "overOne": [
+          17291,
+          6124
+        ],
+        "overEight": [
+          1713,
+          1713
+        ],
+        "peak": [
+          115,
+          116
+        ],
+        "newOverOne": 17
+      },
+      "points": [
+        {
+          "xy": [
+            1338,
+            348
+          ],
+          "distance": 3.0,
+          "covered": false,
+          "control": [
+            155,
+            124,
+            110
+          ],
+          "candidate": [
+            156,
+            124,
+            110
+          ],
+          "noKeyGlossy": [
+            156,
+            124,
+            110
+          ],
+          "native": [
+            154,
+            123,
+            109
+          ],
+          "absoluteError": [
+            1,
+            2
+          ]
+        },
+        {
+          "xy": [
+            1314,
+            360
+          ],
+          "distance": 5.196899890899658,
+          "covered": false,
+          "control": [
+            141,
+            120,
+            108
+          ],
+          "candidate": [
+            141,
+            120,
+            107
+          ],
+          "noKeyGlossy": [
+            141,
+            120,
+            107
+          ],
+          "native": [
+            142,
+            121,
+            109
+          ],
+          "absoluteError": [
+            1,
+            2
+          ]
+        },
+        {
+          "xy": [
+            1212,
+            362
+          ],
+          "distance": 2.0,
+          "covered": false,
+          "control": [
+            138,
+            117,
+            104
+          ],
+          "candidate": [
+            138,
+            117,
+            103
+          ],
+          "noKeyGlossy": [
+            138,
+            117,
+            103
+          ],
+          "native": [
+            139,
+            117,
+            105
+          ],
+          "absoluteError": [
+            1,
+            2
+          ]
+        },
+        {
+          "xy": [
+            1187,
+            368
+          ],
+          "distance": 3.59689998626709,
+          "covered": false,
+          "control": [
+            131,
+            107,
+            97
+          ],
+          "candidate": [
+            132,
+            107,
+            97
+          ],
+          "noKeyGlossy": [
+            132,
+            107,
+            97
+          ],
+          "native": [
+            130,
+            106,
+            96
+          ],
+          "absoluteError": [
+            1,
+            2
+          ]
+        },
+        {
+          "xy": [
+            1186,
+            371
+          ],
+          "distance": 4.196899890899658,
+          "covered": false,
+          "control": [
+            132,
+            109,
+            99
+          ],
+          "candidate": [
+            133,
+            109,
+            99
+          ],
+          "noKeyGlossy": [
+            133,
+            109,
+            99
+          ],
+          "native": [
+            131,
+            108,
+            98
+          ],
+          "absoluteError": [
+            1,
+            2
+          ]
+        },
+        {
+          "xy": [
+            1221,
+            375
+          ],
+          "distance": 3.196899890899658,
+          "covered": false,
+          "control": [
+            130,
+            107,
+            98
+          ],
+          "candidate": [
+            131,
+            107,
+            98
+          ],
+          "noKeyGlossy": [
+            131,
+            107,
+            98
+          ],
+          "native": [
+            129,
+            107,
+            97
+          ],
+          "absoluteError": [
+            1,
+            2
+          ]
+        },
+        {
+          "xy": [
+            1367,
+            377
+          ],
+          "distance": 3.0,
+          "covered": false,
+          "control": [
+            146,
+            114,
+            100
+          ],
+          "candidate": [
+            147,
+            114,
+            100
+          ],
+          "noKeyGlossy": [
+            147,
+            114,
+            100
+          ],
+          "native": [
+            145,
+            113,
+            99
+          ],
+          "absoluteError": [
+            1,
+            2
+          ]
+        },
+        {
+          "xy": [
+            1367,
+            378
+          ],
+          "distance": 3.196899890899658,
+          "covered": false,
+          "control": [
+            146,
+            114,
+            100
+          ],
+          "candidate": [
+            147,
+            114,
+            100
+          ],
+          "noKeyGlossy": [
+            147,
+            114,
+            100
+          ],
+          "native": [
+            145,
+            114,
+            99
+          ],
+          "absoluteError": [
+            1,
+            2
+          ]
+        },
+        {
+          "xy": [
+            1250,
+            387
+          ],
+          "distance": 2.799999952316284,
+          "covered": false,
+          "control": [
+            137,
+            113,
+            102
+          ],
+          "candidate": [
+            138,
+            113,
+            102
+          ],
+          "noKeyGlossy": [
+            138,
+            113,
+            102
+          ],
+          "native": [
+            136,
+            112,
+            101
+          ],
+          "absoluteError": [
+            1,
+            2
+          ]
+        },
+        {
+          "xy": [
+            1238,
+            388
+          ],
+          "distance": 5.0,
+          "covered": false,
+          "control": [
+            139,
+            117,
+            104
+          ],
+          "candidate": [
+            140,
+            116,
+            104
+          ],
+          "noKeyGlossy": [
+            140,
+            116,
+            104
+          ],
+          "native": [
+            140,
+            118,
+            103
+          ],
+          "absoluteError": [
+            1,
+            2
+          ]
+        },
+        {
+          "xy": [
+            1239,
+            389
+          ],
+          "distance": 5.793799877166748,
+          "covered": false,
+          "control": [
+            140,
+            117,
+            104
+          ],
+          "candidate": [
+            141,
+            117,
+            103
+          ],
+          "noKeyGlossy": [
+            141,
+            117,
+            103
+          ],
+          "native": [
+            141,
+            117,
+            105
+          ],
+          "absoluteError": [
+            1,
+            2
+          ]
+        },
+        {
+          "xy": [
+            1327,
+            394
+          ],
+          "distance": 14.181398391723633,
+          "covered": false,
+          "control": [
+            142,
+            115,
+            103
+          ],
+          "candidate": [
+            143,
+            115,
+            102
+          ],
+          "noKeyGlossy": [
+            143,
+            115,
+            102
+          ],
+          "native": [
+            141,
+            115,
+            102
+          ],
+          "absoluteError": [
+            1,
+            2
+          ]
+        },
+        {
+          "xy": [
+            1304,
+            399
+          ],
+          "distance": 2.196899890899658,
+          "covered": false,
+          "control": [
+            138,
+            114,
+            103
+          ],
+          "candidate": [
+            139,
+            114,
+            103
+          ],
+          "noKeyGlossy": [
+            139,
+            114,
+            103
+          ],
+          "native": [
+            137,
+            113,
+            102
+          ],
+          "absoluteError": [
+            1,
+            2
+          ]
+        },
+        {
+          "xy": [
+            1303,
+            400
+          ],
+          "distance": 1.0,
+          "covered": false,
+          "control": [
+            138,
+            113,
+            103
+          ],
+          "candidate": [
+            139,
+            113,
+            103
+          ],
+          "noKeyGlossy": [
+            139,
+            113,
+            103
+          ],
+          "native": [
+            137,
+            112,
+            102
+          ],
+          "absoluteError": [
+            1,
+            2
+          ]
+        },
+        {
+          "xy": [
+            1304,
+            402
+          ],
+          "distance": 1.399999976158142,
+          "covered": false,
+          "control": [
+            138,
+            112,
+            102
+          ],
+          "candidate": [
+            139,
+            112,
+            102
+          ],
+          "noKeyGlossy": [
+            139,
+            112,
+            102
+          ],
+          "native": [
+            137,
+            111,
+            101
+          ],
+          "absoluteError": [
+            1,
+            2
+          ]
+        },
+        {
+          "xy": [
+            1265,
+            525
+          ],
+          "distance": 2.0,
+          "covered": false,
+          "control": [
+            134,
+            108,
+            97
+          ],
+          "candidate": [
+            135,
+            108,
+            97
+          ],
+          "noKeyGlossy": [
+            135,
+            108,
+            97
+          ],
+          "native": [
+            133,
+            107,
+            96
+          ],
+          "absoluteError": [
+            1,
+            2
+          ]
+        },
+        {
+          "xy": [
+            1271,
+            1085
+          ],
+          "distance": 12.5906982421875,
+          "covered": false,
+          "control": [
+            121,
+            94,
+            83
+          ],
+          "candidate": [
+            121,
+            94,
+            82
+          ],
+          "noKeyGlossy": [
+            121,
+            94,
+            82
+          ],
+          "native": [
+            122,
+            94,
+            84
+          ],
+          "absoluteError": [
+            1,
+            2
+          ]
+        }
+      ]
+    }
+  }
+}
