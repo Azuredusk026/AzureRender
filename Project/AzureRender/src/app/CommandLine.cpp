@@ -28,6 +28,7 @@ constexpr const char* kUsage =
     "[--no-stylized] [--no-inner-outline] [--hud] "
     "[--technical-sequence] "
     "[--qa-camera <preset>] [--qa-light <preset>] "
+    "[--qa-camera-pose <px> <py> <pz> <tx> <ty> <tz> <fov-degrees>] "
     "[--qa-morph-weights <w0> <w1>] "
     "[--qa-effect <effect> --qa-effect-state <state>] "
     "[--qa-isolation <view>] [--qa-exposure <-8..8 EV>] [--render-path <traditional|subpasses|dynamic>] "
@@ -68,6 +69,8 @@ constexpr const char* kHelp =
     "Quality and QA:\n"
     "  --qa-camera <preset> --qa-light <preset>\n"
     "  --qa-camera scene --qa-light scene Preserve authored scene conditions\n"
+    "  --qa-camera-pose <px> <py> <pz> <tx> <ty> <tz> <fov-degrees>\n"
+    "                                      Override the runtime scene camera for capture\n"
     "  --qa-isolation <view>             Includes roughness, metallic, direct-specular, reflection, shaded-normal, object-shadow-visibility\n"
     "  --qa-exposure <-8..8 EV>          Radiometric isolation exposure; default 0 EV\n"
     "  --qa-light-scan                    Rotate the key light through 120 frames\n"
@@ -185,6 +188,29 @@ float parseFiniteFloat(
     return parsed;
 }
 
+CameraViewDescriptor parseCameraPose(
+    const std::vector<std::string>& arguments, std::size_t& index, const std::string& option) {
+    CameraViewDescriptor pose;
+    for (auto* point : {&pose.position, &pose.target}) {
+        for (float& coordinate : *point) {
+            coordinate = parseFiniteFloat(requireValue(arguments, index, option), option);
+        }
+    }
+    const float fovDegrees = parseFiniteFloat(requireValue(arguments, index, option), option);
+    const float dx = pose.target[0] - pose.position[0];
+    const float dy = pose.target[1] - pose.position[1];
+    const float dz = pose.target[2] - pose.position[2];
+    const float horizontalLengthSquared = dx * dx + dz * dz;
+    const float directionLengthSquared = horizontalLengthSquared + dy * dy;
+    if (!std::isfinite(directionLengthSquared) || horizontalLengthSquared <= 1e-8F
+        || horizontalLengthSquared <= 1e-8F * directionLengthSquared || fovDegrees < 1.F || fovDegrees > 179.F) {
+        fail(CommandLineErrorCode::InvalidValue, option,
+             "Camera pose requires a nonvertical direction and a vertical field of view from 1 to 179 degrees");
+    }
+    pose.fov = fovDegrees * (3.14159265358979323846F / 180.F);
+    return pose;
+}
+
 void validate(const ParsedCommandLine& parsed) {
     const auto& validation=parsed.options;
     if(validation.validationAddress!="127.0.0.1")fail(CommandLineErrorCode::InvalidValue,"--validation-address","Control address requires IPv4 loopback");
@@ -193,6 +219,9 @@ void validate(const ParsedCommandLine& parsed) {
     if(!validation.validationScript.empty()&&validation.validationReport.empty())
         fail(CommandLineErrorCode::InvalidCombination,"--validation-report","Script requires report output");
     const auto& options = parsed.options;
+    if (options.qaCameraPose && (options.qaCamera != "scene" || options.editorMode))
+        fail(CommandLineErrorCode::InvalidCombination, "--qa-camera-pose",
+             "Camera pose requires --qa-camera scene in a runtime scene");
     if(!options.aiConfig.empty()&&!options.aiFixture.empty())fail(CommandLineErrorCode::InvalidCombination,"--ai-config/--ai-fixture","Choose provider configuration or fixed responses");
     if(!options.editorMode&&(!options.aiConfig.empty()||!options.aiFixture.empty()))fail(CommandLineErrorCode::InvalidCombination,"--ai-config","Model tooling requires an editor session");
     if(!options.editorActionsPath.empty() && !options.editorMode)fail(CommandLineErrorCode::InvalidCombination,"--editor-actions","--editor-actions requires an editor project");
@@ -526,6 +555,8 @@ ParsedCommandLine parseCommandLine(
                 requireValue(arguments, index, argument), argument);
         } else if (argument == "--qa-camera") {
             parsed.options.qaCamera = requireValue(arguments, index, argument);
+        } else if (argument == "--qa-camera-pose") {
+            parsed.options.qaCameraPose = parseCameraPose(arguments, index, argument);
         } else if (argument == "--qa-light") {
             parsed.options.qaLight = requireValue(arguments, index, argument);
         } else if (argument == "--qa-light-scan") {

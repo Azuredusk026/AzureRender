@@ -1,5 +1,7 @@
 #include "app/CommandLine.hpp"
 
+#include <array>
+#include <cmath>
 #include <cstdint>
 #include <cstdio>
 #include <initializer_list>
@@ -97,6 +99,22 @@ int main() try {
     const auto sceneDiagnostic=azurerender::parseCommandLine({"--qa-camera","scene","--qa-light","scene","--qa-isolation","beauty"});
     require(sceneDiagnostic.options.qaCamera=="scene" && sceneDiagnostic.options.qaLight=="scene",
             "Authored scene diagnostics must preserve camera and light selection");
+    require(!sceneDiagnostic.options.qaCameraPose,"Authored scene camera is the default");
+    const auto pose = azurerender::parseCommandLine(
+        {"--qa-camera","scene","--qa-light","scene","--qa-camera-pose","2","3","-4","0","1","-5","40"}).options.qaCameraPose;
+    require(pose && pose->position==std::array<float,3>{2,3,-4} && pose->target==std::array<float,3>{0,1,-5}
+            && std::abs(pose->fov-0.6981317F)<1e-6F,"Explicit camera pose preserves world coordinates and FOV");
+    expectError(CommandLineErrorCode::MissingValue,"--qa-camera-pose",{"--qa-camera","scene","--qa-camera-pose","0","1"});
+    expectError(CommandLineErrorCode::InvalidValue,"--qa-camera-pose",
+        {"--qa-camera","scene","--qa-camera-pose","0","1","nan","0","0","1","45"});
+    expectError(CommandLineErrorCode::InvalidValue,"--qa-camera-pose",
+        {"--qa-camera","scene","--qa-camera-pose","0","1","0","0","0","0","45"});
+    expectError(CommandLineErrorCode::InvalidValue,"--qa-camera-pose",
+        {"--qa-camera","scene","--qa-camera-pose","0","1","0","0","0","1","180"});
+    expectError(CommandLineErrorCode::InvalidCombination,"--qa-camera-pose",
+        {"--qa-camera","face-front","--qa-camera-pose","0","1","0","0","0","1","45"});
+    expectError(CommandLineErrorCode::InvalidCombination,"--qa-camera-pose",
+        {"--project","example.azureproject","--qa-camera","scene","--qa-camera-pose","0","1","0","0","0","1","45"});
     for(const char* view:{"roughness","metallic","direct-specular","reflection","shaded-normal","object-shadow-visibility"})
         require(azurerender::parseCommandLine({"--qa-isolation",view}).options.qaIsolation==view,
                 "Surface and lighting components must be selectable independently");

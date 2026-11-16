@@ -66,6 +66,7 @@ struct AzureRenderOptions {
     bool hudEnabled = false;
     bool technicalSequence = false;
     std::string qaCamera;
+    std::optional<azurerender::CameraViewDescriptor> qaCameraPose;
     std::string qaLight;
     bool qaLightScan = false;
     bool qaAnimation = false;
