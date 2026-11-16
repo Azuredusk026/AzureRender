@@ -8,6 +8,20 @@ from tools.npr_room.timer_voice_motion import resolve_motions
 
 
 class TimerVoiceTests(unittest.TestCase):
+    def test_transition_chain_uses_original_clips_and_cue_ids(self):
+        sources = {"67": {"clips": [{"sha256": identity} for identity in ("intro", "cycle", "outro")],
+                          "requiredCues": [1, 2]}}
+        clip = {"name": "timer_voice_motion_67", "human": True, "rate": 60, "length": 10.1, "frames": [0]}
+        sequence = {"clip": clip["name"], "sourceHashes": ["intro", "cycle", "outro"],
+                    "cues": [{"cue": 1, "seconds": 5.883333333333334}, {"cue": 2, "seconds": 4.283333333333333}]}
+        motion = resolve_motions(sources, [clip], [67], {67: sequence})["67"]
+        self.assertEqual(motion["cues"], {"1": 5.883333333333334, "2": 4.283333333333333})
+        self.assertEqual(motion["sourceHashes"], sequence["sourceHashes"])
+        with self.assertRaisesRegex(ValueError, "source transition chain"):
+            resolve_motions(sources, [clip], [67], {67: {**sequence, "sourceHashes": ["intro", "outro", "cycle"]}})
+        with self.assertRaisesRegex(ValueError, "timeline or voice cues"):
+            resolve_motions(sources, [clip], [67], {67: {**sequence, "cues": sequence["cues"][:1]}})
+
     def test_native_clip_duration_can_include_one_terminal_sample(self):
         source = {"55": {"clips": [{"clip": "Assets/hello.anim", "speed": 1, "loop": False,
                                    "sha256": "proof", "start": 0, "stop": 4,

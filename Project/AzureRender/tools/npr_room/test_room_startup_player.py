@@ -7,7 +7,7 @@ from pathlib import Path
 import subprocess
 
 
-def replay(player, project, output, resource_root, expect_heroine=False, expect_music=False):
+def replay(player, project, output, resource_root, expect_heroine=False, expect_music=False, exercise_timer=True):
     output.mkdir()
     events = []
 
@@ -27,8 +27,9 @@ def replay(player, project, output, resource_root, expect_heroine=False, expect_
     wait(240, "transition", 4)
     key(245, 257)
     wait(252, "room", 5)
-    for frame, code in ((260, 84), (270, 84), (280, 84), (290, 75), (300, 82)):
-        key(frame, code)
+    if exercise_timer:
+        for frame, code in ((260, 84), (270, 84), (280, 84), (290, 75), (300, 82)):
+            key(frame, code)
     events.append({"frame": 320, "action": "load-level", "reference": "assets:/transition.azurelevel"})
     wait(321, "transition", 6)
     wait(322, "room", 7)
@@ -36,7 +37,8 @@ def replay(player, project, output, resource_root, expect_heroine=False, expect_
     route = output / "input.json"
     route.write_text(json.dumps({"schemaVersion": 1, "actions": events}, indent=2), encoding="utf-8")
     runtime = output / "runtime.json"
-    command = [str(player), "--project", str(project), "--runtime-report", str(runtime), "--game-actions",
+    command = [str(player), "--project", str(project), "--save-root", str(output / "profile"),
+               "--runtime-report", str(runtime), "--game-actions",
                str(route), "--fixed-frame-step", "--smoke-frames", "850", "--width", "640", "--height", "360"]
     if resource_root:
         command.extend(("--resource-root", str(resource_root)))
@@ -48,7 +50,9 @@ def replay(player, project, output, resource_root, expect_heroine=False, expect_
     assert "Allocator after unload: buffers=0 images=0" in result.stdout
     report = json.loads(runtime.read_bytes())
     assert report["scene"] == "room" and report["levelRevision"] == 7, report
-    assert report["replayedActions"] == len(events) and report["audioStarts"] == (7 if expect_music else 5), report
+    expected_starts = (2 if expect_music else 0) + (5 if exercise_timer else 0)
+    assert (report["replayedActions"], report["audioStarts"]) == (len(events), expected_starts), (
+        report["replayedActions"], report["audioStarts"])
     if expect_music:
         tracks = json.loads(project.with_name("music-receipt.json").read_bytes())["tracks"]
         first_track = next(track for track in tracks if not track["locked"])
@@ -77,7 +81,7 @@ def replay(player, project, output, resource_root, expect_heroine=False, expect_
                 assert len(parts) == 7 and len({(part["clip"], part["time"]) for part in parts}) == 1
                 sampled.append(parts[0]["clip"])
         sequence = [clip for clip, _ in groupby(sampled)]
-        assert sequence == [0, 1, 0], sequence
+        assert sequence == ([0, 1, 0] if exercise_timer else [0]), sequence
         result["heroineClips"] = sequence
     return result
 
@@ -90,7 +94,8 @@ if __name__ == "__main__":
     parser.add_argument("--resource-root", type=Path)
     parser.add_argument("--expect-heroine", action="store_true")
     parser.add_argument("--expect-music", action="store_true")
+    parser.add_argument("--startup-only", action="store_true", help="Check level re-entry with the timer idle.")
     args = parser.parse_args()
     print(json.dumps(replay(args.player.resolve(), args.project.resolve(), args.output.resolve(),
                             args.resource_root.resolve() if args.resource_root else None, args.expect_heroine,
-                            args.expect_music)))
+                            args.expect_music, not args.startup_only)))
