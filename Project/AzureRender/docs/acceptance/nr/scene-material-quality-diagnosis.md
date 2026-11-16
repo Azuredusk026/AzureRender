@@ -372,4 +372,10 @@ Player 通过[反射历史图层](../../runtime/unlit-texture-layers.md#反射�
 
 [双设备合成结果](evidence/2026-11-16/projected-history-layer/qualification.json)和[验证归档](evidence/2026-11-16/projected-history-layer/qualification.zip)保存着色器指纹、夹具、设备及运行收据。完整场景需同时验证实际字形、相邻货箱及原始冻结图，保持地面和环带的区域验收条件。
 
+### 反射射线采样相位
+
+以实际 32 步射线作为同设备对照，仅替换采样相位，NVIDIA 和 Intel 各配对三帧。中央地面 SSIM 为 0.83137 至 0.83422，中位相对亮度误差为 16.57% 至 19.08%；青色环带 SSIM 为 0.76090 至 0.76405，亮度误差为 7.71% 至 7.95%。相位候选在天花板、门、墙及左侧地面均产生新增超差，未通过区域验收。
+
+[采样相位结果](evidence/2026-11-16/projected-reflection-native-phase/qualification.json)和[验证归档](evidence/2026-11-16/projected-reflection-native-phase/validation.zip)保存逐帧指标、着色器差异和采集指纹。
+
 当前运行入口统一见[完整场景显示](../../tutorials/restored-native-scene.md)。
