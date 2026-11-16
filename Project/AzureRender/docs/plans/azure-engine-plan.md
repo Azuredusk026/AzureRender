@@ -1436,6 +1436,7 @@ Intel 头发颜色继续按冻结区域核对纹理选级。
 
 [角色机位采集](../acceptance/nr/full-body-native-comparison.md#采集范围)记录双设备角色根节点的六个方向与头骨骼对齐的正脸，区域外观及原始冻结图继续验收。
 [脸部局部光](../acceptance/nr/evidence/2026-11-16/face-local-light-player/qualification.json)核对六个同屏坐标的原生与 Player 着色读数，按光源和响应继续定位。
+[虹膜基色与眼影](../acceptance/nr/evidence/2026-11-16/iris-canonical-base-covered/qualification.json)通过双设备区域外和新增误差核对，区域内的剩余色差继续按一个色阶验收。
 
 [反射历史图层](../acceptance/nr/scene-material-quality-diagnosis.md#反射历史图层合成)通过双设备小场景合成核对；中央地面、青色环带及原始冻结图继续按区域门槛验收。
 [反射过滤器输入](../acceptance/nr/scene-material-quality-diagnosis.md#反射过滤器输入核对)通过 4,940 点校准。覆盖模型显示字形与货箱需联合核对，两区继续按实际成片验收。
