@@ -58,6 +58,8 @@ Intel 使用顶点着色器蒙皮时，两次完整成片仍有 407 个像素超
 
 只将不透明快照绘制放在主命令缓冲区。Intel 三次采集仍出现两种成片，两次上方区域各有 407 个像素超差，另一次与串行图逐像素一致。NVIDIA 的成片与对应控制图逐像素一致。该候选未通过 Intel 稳定性验收。[不透明快照录制结果](evidence/2026-11-16/joint-intel-primary-opaque-snapshot/qualification.json)和[验证归档](evidence/2026-11-16/joint-intel-primary-opaque-snapshot/validation.zip)保存源码、实际帧差和运行状态。
 
+首帧反射探针在空间滤波前核对实际取样。滤波变化区域对应的 469 个半分辨率位置中，387 个能解码且均有命中，其中 111 个取样覆盖已观察到变化的不透明颜色纹素。追踪和滤波程序分别写入校验标记，在图中可解码的位置全部读回预期值。该结果确认部分地面反射直接读取发生变化的快照颜色。[射线取样结果](evidence/2026-11-16/joint-intel-raw-reflection-donor-membership/qualification.json)和[验证归档](evidence/2026-11-16/joint-intel-raw-reflection-donor-membership/validation.zip)保存程序、实际帧差和解码标记。
+
 ## 采集范围
 
 角色根节点相对方向覆盖正向、左右四分之三侧向、左右侧向及背向六个机位。NVIDIA 与 Intel 均以 1280×720 采集，使用同一联合场景、资产和动画起点。[六机位采集记录](evidence/2026-11-16/character-six-view-inputs/qualification.json)保存相机参数、图像摘要和冻结回归结果。当前 NVIDIA 驱动下的四帧冻结回归逐像素一致；原始冻结图的 RGB 峰值差为 1、7、37、23。
