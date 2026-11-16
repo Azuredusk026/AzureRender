@@ -98,14 +98,14 @@ def attributes(mesh):
         yield semantic, size, rows
 
 
-def indices(mesh, vertex_count):
+def indices(mesh, vertex_count, ranges):
     index_format = int(mesh["m_IndexFormat"])
     if index_format not in (0, 1):
         raise ValueError(f"Unsupported index format: {index_format}")
     source_type = "H" if index_format == 0 else "I"
     item_size = 2 if index_format == 0 else 4
     source = bytes.fromhex(mesh["m_IndexBuffer"])
-    for mesh_range in mesh["m_SubMeshes"]:
+    for mesh_range in ranges:
         start = int(mesh_range["firstByte"])
         count = int(mesh_range["indexCount"])
         base = int(mesh_range["baseVertex"])
@@ -159,7 +159,7 @@ def export_static_mesh(path, base_color_textures=(), motion=None):
     return export_mesh_geometry(mesh, base_color_textures, motion)
 
 
-def export_mesh_geometry(mesh, base_color_textures=(), motion=None):
+def export_mesh_geometry(mesh, base_color_textures=(), motion=None, submesh_range=None):
     if int(mesh["m_MeshCompression"]):
         raise ValueError("Expected uncompressed mesh geometry")
 
@@ -194,7 +194,22 @@ def export_mesh_geometry(mesh, base_color_textures=(), motion=None):
 
     attribute_ids = {}
     vertex_count = int(mesh["m_VertexData"]["m_VertexCount"])
+    ranges = mesh["m_SubMeshes"]
+    vertex_selection = None
+    if submesh_range is not None:
+        first, count = submesh_range
+        if first < 0 or count <= 0 or first + count > len(ranges):
+            raise ValueError("Submesh selection is outside the source mesh")
+        ranges = ranges[first:first + count]
+    primitives = list(indices(mesh, vertex_count, ranges))
+    if submesh_range is not None:
+        vertex_selection = sorted({index for primitive in primitives for index in primitive})
+        remap = {original: compact for compact, original in enumerate(vertex_selection)}
+        primitives = [[remap[index] for index in primitive] for primitive in primitives]
+        vertex_count = len(vertex_selection)
     for semantic, size, rows in attributes(mesh):
+        if vertex_selection is not None:
+            rows = [rows[index] for index in vertex_selection]
         layout = Struct(f"<{size}f")
         payload = b"".join(layout.pack(*row) for row in rows)
         index = add_accessor(payload, vertex_count, f"VEC{size}", 5126, 34962)
@@ -204,7 +219,7 @@ def export_mesh_geometry(mesh, base_color_textures=(), motion=None):
             gltf["accessors"][index].update(
                 min=[min(axis) for axis in axes], max=[max(axis) for axis in axes]
             )
-    for slot, values in enumerate(indices(mesh, vertex_count)):
+    for slot, values in enumerate(primitives):
         wide = max(values) >= 65535
         payload = pack(f"<{len(values)}{'I' if wide else 'H'}", *values)
         index = add_accessor(payload, len(values), "SCALAR", 5125 if wide else 5123, 34963)

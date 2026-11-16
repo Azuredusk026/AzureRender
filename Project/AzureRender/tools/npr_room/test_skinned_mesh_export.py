@@ -2,7 +2,7 @@ from collections import OrderedDict
 from struct import pack, unpack_from
 import unittest
 
-from skinned_mesh_export import append_skin, inverse_bind
+from skinned_mesh_export import append_skin, inverse_bind, rig_channels
 
 
 class SkinnedExportTests(unittest.TestCase):
@@ -42,6 +42,18 @@ class SkinnedExportTests(unittest.TestCase):
         self.assertEqual(unpack_from("<4H", binary, view["byteOffset"]), (1, 0, 0, 0))
         view = document["bufferViews"][document["accessors"][att["WEIGHTS_0"]]["bufferView"]]
         self.assertEqual(unpack_from("<4f", binary, view["byteOffset"]), (0.25, 0.75, 0.0, 0.0))
+
+
+    def test_single_joint_channel_has_an_implicit_unit_weight(self):
+        data = pack("<I", 1)
+        mesh = {"m_VertexData": {
+            "m_VertexCount": 1, "m_DataSize": len(data), "_typelessdata": data.hex(),
+            "m_Channels": ([{"stream": 0, "offset": 0, "format": 0, "dimension": 0}] * 13
+                           + [{"stream": 0, "offset": 0, "format": 10, "dimension": 1}]),
+        }}
+        joints, weights = rig_channels(mesh, 2)
+        self.assertEqual(joints, [(1, 0, 0, 0)])
+        self.assertEqual(weights, [(1.0, 0, 0, 0)])
 
 
 if __name__ == "__main__":

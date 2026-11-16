@@ -15,6 +15,7 @@ from tools.npr_room.reference_inventory import asset_index, group_paths_by_guid
 
 DOCUMENT = re.compile(r"(?m)^--- !u!(\d+) &(-?\d+)(?: stripped)?\n")
 SCENE_LOADER = getattr(yaml, "CSafeLoader", yaml.SafeLoader)
+GUID_SCALAR = re.compile(r"(?<=guid: )([0-9a-fA-F]{32})(?=[,}])")
 AXIS = (1, 1, -1, 1)
 
 
@@ -52,8 +53,15 @@ def rig_channels(mesh, palette_size):
             for vertex in range(count)
         ]
 
+    joint_rows = rows(13)
+    if 12 in channels:
+        weight_rows = rows(12)
+    elif channels[13][3] == 1:
+        weight_rows = [(1.0,)] * count
+    else:
+        raise ValueError("Missing explicit weights for a multi-joint skin")
     joints, weights = [], []
-    for raw_weights, raw_joints in zip(rows(12), rows(13), strict=True):
+    for raw_weights, raw_joints in zip(weight_rows, joint_rows, strict=True):
         if len(raw_weights) != len(raw_joints):
             raise ValueError("Joint/weight counts differ")
         if any(not isinstance(j, int) or not 0 <= j < palette_size for j in raw_joints):
@@ -150,7 +158,8 @@ class UnityScene:
 
     def read(self, file_id):
         _, start, end = self.documents[file_id]
-        entry = yaml.load(self.serialized[start:end], Loader=SCENE_LOADER)
+        source = GUID_SCALAR.sub(lambda match: '"' + match[1] + '"', self.serialized[start:end])
+        entry = yaml.load(source, Loader=SCENE_LOADER)
         return next(iter(entry.values()))
 
     def skin_hierarchy(self, renderer):

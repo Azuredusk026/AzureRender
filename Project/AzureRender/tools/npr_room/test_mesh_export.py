@@ -3,7 +3,7 @@ from struct import pack, unpack_from
 import tempfile
 import unittest
 
-from mesh_export import export_static_mesh
+from mesh_export import export_mesh_geometry, export_static_mesh, read_unity_mesh
 from tools.build_face_sdf import encode_png
 
 
@@ -51,6 +51,11 @@ Mesh:
                 {"time": 1, "position": [2, 3, 4], "rotation": [0, 0.6, 0, 0.8]},
             ]}
             gltf, binary = export_static_mesh(source, [texture], motion)
+            mesh = read_unity_mesh(source)
+            subset, _ = export_mesh_geometry(mesh, submesh_range=(0, 1))
+            subset_position = subset["accessors"][0]
+            self.assertEqual(subset_position["count"], 3)
+            self.assertEqual(subset_position["max"], [1, 1, -1])
 
         primitive, = gltf["meshes"][0]["primitives"]
         self.assertEqual(primitive["material"], 0)

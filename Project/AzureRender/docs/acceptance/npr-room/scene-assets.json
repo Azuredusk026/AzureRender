@@ -1,0 +1,35 @@
+{
+  "formatVersion": 1,
+  "status": "partial",
+  "windowsRoom": {
+    "nodes": 274,
+    "renderables": 201,
+    "resources": 194,
+    "staticBatchSourceMeshes": 9,
+    "staticBatchInstances": 142,
+    "staticBatchBytes": 10238308,
+    "staticBatchManifestSHA256": "440486896ca48071f2d68ebc8b0afcb33526d0eab5e2bffb5ed98f2ab933cb5c",
+    "exchangeSHA256": "58242a4bba2dd4868e7f32fffda038caf073f99abc7a67291ff2045ee7b69e16",
+    "renderRunnerJob": 1578,
+    "editorSaveReopen": true,
+    "playerCheck": true
+  },
+  "deformers": {
+    "sourceMeshes": 34,
+    "skinVariants": 34,
+    "morphOnlyVariants": 2,
+    "mediaBytes": 8407268,
+    "manifestSHA256": "414cc07c1d4d836ae2adadc5716990f4ac5199fc646f8ad3d661cd633fecc8c8",
+    "playerCheck": true
+  },
+  "sprites": {
+    "sourceInventory": 931,
+    "staticClosure": 851,
+    "insideTextureBounds": 851,
+    "manifestSHA256": "4a03264c40871f88273cb748c0bb72e9eba2b6f173e5213da2bdf552a7b9fa55"
+  },
+  "heroineBindPose": {
+    "renderRunnerJob": 1566,
+    "previewSHA256": "cb0fd4ac04735bbc268edb7dca24cca46a01d6d56808af284d13a81b9ae9a11c"
+  }
+}
