@@ -1440,6 +1440,8 @@ Intel 头发颜色继续按冻结区域核对纹理选级。
 [虹膜基色与眼影](../acceptance/nr/evidence/2026-11-16/iris-canonical-base-covered/qualification.json)通过双设备区域外和新增误差核对，区域内的剩余色差继续按一个色阶验收。
 
 [反射历史图层](../acceptance/nr/scene-material-quality-diagnosis.md#反射历史图层合成)通过双设备小场景合成核对；中央地面、青色环带及原始冻结图继续按区域门槛验收。
+
+[播放器冻结画面](../acceptance/nr/scene-material-quality-diagnosis.md#播放器冻结画面)通过当前 NVIDIA 驱动的四帧回归；原始冻结图的四帧峰差为 1、7、37、23，逐像素门槛待验收。
 [反射过滤器输入](../acceptance/nr/scene-material-quality-diagnosis.md#反射过滤器输入核对)通过 4,940 点校准。覆盖模型显示字形与货箱需联合核对，两区继续按实际成片验收。
 [反射射线采样相位](../acceptance/nr/scene-material-quality-diagnosis.md#反射射线采样相位)完成双设备三帧配对，区域与邻区门槛未通过。
 原生身体权重和投影重建已确认固定捕获帧的几何覆盖。原始量化权重导入通过动画、形变和蒙皮回归。[独立动态轮廓](../acceptance/nr/evidence/2026-11-16/dynamic-body-geometry-player/qualification.json)通过双设备掩码核对；完整衣料遮挡与着色按联合场景成片验收。

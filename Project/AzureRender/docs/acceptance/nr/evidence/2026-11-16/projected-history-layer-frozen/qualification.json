@@ -1,0 +1,123 @@
+{
+  "player": "68dfb40292112643358a0b2970cc523718080d98c5a0a68739f1aaaa877ad632",
+  "retainedPlayer": "1a30d925a674ddb1d95876cb80181106a0217e12a7228a35b5980b134954cb69",
+  "currentDriver": 2496905216,
+  "programs": {
+    "character_projected_history.frag.spv": "b0ff43bb3c280137dbb86afb784c503c49e6b57875d3c6d292d57c6985ac14cf",
+    "character_projected_history_bindless.frag.spv": "1d7e32da25503fd61ce456a33fdaf67cb5ce577018936659fb7eef2b30d90bc1",
+    "projected_reflection_trace.comp.spv": "c9d8330bfb623308bc056efabd81c599633199389124667247169fa11f7bf4a8"
+  },
+  "sameDriverExact": true,
+  "originalFrozenExact": false,
+  "frames": [
+    {
+      "frame": "frame_000000.png",
+      "sha256": "b57a67f263f0bc0d9cc53a279f74e90696b47c5802e60cd5b54196cc647fbdc3",
+      "sameDriver": {
+        "differingPixels": 0,
+        "overOne": 0,
+        "peak": 0
+      },
+      "originalFrozen": {
+        "differingPixels": 228,
+        "overOne": 0,
+        "peak": 1
+      }
+    },
+    {
+      "frame": "frame_000001.png",
+      "sha256": "dcf466cd4ea345671eaad5efd4128584e02de9a05e6f218acf2ebf5409abe90f",
+      "sameDriver": {
+        "differingPixels": 0,
+        "overOne": 0,
+        "peak": 0
+      },
+      "originalFrozen": {
+        "differingPixels": 330,
+        "overOne": 3,
+        "peak": 7
+      }
+    },
+    {
+      "frame": "frame_000002.png",
+      "sha256": "974756b6d8dba263a333c613eaf24a33d53be96b24e6c000b78646341f492050",
+      "sameDriver": {
+        "differingPixels": 0,
+        "overOne": 0,
+        "peak": 0
+      },
+      "originalFrozen": {
+        "differingPixels": 397,
+        "overOne": 4,
+        "peak": 37
+      }
+    },
+    {
+      "frame": "frame_000003.png",
+      "sha256": "e27b4d25426d5d36725ccb159d7fe2324f4eb60b0993d369e91e45260bc6fbeb",
+      "sameDriver": {
+        "differingPixels": 0,
+        "overOne": 0,
+        "peak": 0
+      },
+      "originalFrozen": {
+        "differingPixels": 421,
+        "overOne": 4,
+        "peak": 23
+      }
+    }
+  ],
+  "queue": {
+    "id": 1449,
+    "task": "nr-combined-player-frozen-four-default-scene",
+    "status": "succeeded",
+    "exitCode": 0
+  },
+  "capture": {
+    "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+    "resolution": [
+      2560,
+      1440
+    ],
+    "reflectionProducer": "linear-temporal",
+    "runtimeErrors": {
+      "presentation": 0,
+      "scripts": 0,
+      "vulkanValidation": 0
+    },
+    "allocatorAfterUnload": {
+      "buffers": 0,
+      "images": 0
+    }
+  },
+  "retainedInputs": {
+    "currentDriver": [
+      "b57a67f263f0bc0d9cc53a279f74e90696b47c5802e60cd5b54196cc647fbdc3",
+      "dcf466cd4ea345671eaad5efd4128584e02de9a05e6f218acf2ebf5409abe90f",
+      "974756b6d8dba263a333c613eaf24a33d53be96b24e6c000b78646341f492050",
+      "e27b4d25426d5d36725ccb159d7fe2324f4eb60b0993d369e91e45260bc6fbeb"
+    ],
+    "originalFrozen": [
+      "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+      "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+      "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+      "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574"
+    ]
+  },
+  "validation": {
+    "archiveSha256": "a9f7e62a992d84cfcdff36e9256e81af3d1d52493f97afd2337a287995e7dc61",
+    "files": {
+      "source/qa-camera-pose-frozen-regression.py": "1e81c125976a3eee2fc42fddc958b8540b555c9dc0679f5ae4545575e2a973b9",
+      "source/projected-reflection-radiance-layer-fixture.py": "dc0dec832bbc16c315502268031838ae7f879369e81237b21aa6ad733aff8eac",
+      "actual/command.json": "a2c7d39507158eff4745a6b336b77653c681e02a16450be33335b022466fa6a7",
+      "actual/runtime.json": "08a10045c1ba35a7c6272192f7edac877e93b393237a1a6ee2ce6ea663ef67d6",
+      "actual/player.log": "653ee85f910941c99fc08487c572557347adfdf9743469b6dda37e3c718bf642",
+      "actual/capture_manifest.json": "e585b668203902415f729d8e5eb6a482882ff4d95486a362d82340106817b8f6",
+      "actual/gpu_capabilities.json": "fcc84c76d84bace150db35ec07631ab83809bdd1c365b6d96cb8afe8e354190a",
+      "actual/results.json": "8fdda9335f8da6ca62bf046c409dfaf9658ec9358051f017ed4bd354d8ec141a",
+      "actual/link-receipt.json": "7a210c1cb0cdfbff404f477a2e755018ef03348dfc0b89eb1500dbcbe4f90b63",
+      "controls/retained.json": "52bb091204615aaf2d07af9bff092a9c04e6e7405982e50a1ca4ab837aa6c412",
+      "controls/original.json": "8be55d0b7e991df2ad70588b43fdc4cd171d411d9de62a710c9ae5c18606b0ae"
+    }
+  }
+}

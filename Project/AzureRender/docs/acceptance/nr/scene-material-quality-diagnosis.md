@@ -372,6 +372,19 @@ Player 通过[反射历史图层](../../runtime/unlit-texture-layers.md#反射�
 
 [双设备合成结果](evidence/2026-11-16/projected-history-layer/qualification.json)和[验证归档](evidence/2026-11-16/projected-history-layer/qualification.zip)保存着色器指纹、夹具、设备及运行收据。完整场景需同时验证实际字形、相邻货箱及原始冻结图，保持地面和环带的区域验收条件。
 
+### 播放器冻结画面
+
+包含角色机位、量化蒙皮权重和透明反射历史图层的播放器，在 NVIDIA 595.79 下复跑默认场景的四帧。四帧与同驱动留存画面逐像素一致，退出时缓冲区与图像计数均为零。
+
+| 帧 | 原始冻结图的 RGB 峰差 | 最大通道差超过一个色阶的像素 |
+| --- | ---: | ---: |
+| 0 | 1 | 0 |
+| 1 | 7 | 3 |
+| 2 | 37 | 4 |
+| 3 | 23 | 4 |
+
+[冻结画面复测](evidence/2026-11-16/projected-history-layer-frozen/qualification.json)和[验证归档](evidence/2026-11-16/projected-history-layer-frozen/validation.zip)记录两套对照、当前设备和每帧摘要。原始冻结图仍按逐像素一致验收。
+
 ### 反射射线采样相位
 
 以实际 32 步射线作为同设备对照，仅替换采样相位，NVIDIA 和 Intel 各配对三帧。中央地面 SSIM 为 0.83137 至 0.83422，中位相对亮度误差为 16.57% 至 19.08%；青色环带 SSIM 为 0.76090 至 0.76405，亮度误差为 7.71% 至 7.95%。相位候选在天花板、门、墙及左侧地面均产生新增超差，未通过区域验收。
