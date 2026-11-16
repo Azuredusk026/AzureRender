@@ -1,0 +1,730 @@
+{
+  "status": "verified-native-e846-adapter-diagnostic",
+  "event": 846,
+  "points": 255,
+  "adapters": [
+    "nvidia",
+    "intel"
+  ],
+  "identity": {
+    "captureSha256": "fa2ca267f7168f5603e83ad5f817a3074d8dbee23a216e6ab8ef2c340ec06a90",
+    "pixelShaderSha256": "2fed357c703e0c981455a06d6e4e809cdb519aebca2838365137fdd5c8944b1e"
+  },
+  "packedDifferent": 124,
+  "clippedSrgb8MaxDeltaHistogram": {
+    "0": 168,
+    "1": 66,
+    "2": 13,
+    "3": 2,
+    "5": 1,
+    "9": 1,
+    "15": 1,
+    "22": 1,
+    "24": 1,
+    "29": 1
+  },
+  "controls": [
+    {
+      "point": [
+        1261,
+        257
+      ],
+      "implicitPacked": [
+        1805128566,
+        1813521282
+      ],
+      "implicitClippedSrgb8": [
+        [
+          181,
+          101,
+          162
+        ],
+        [
+          190,
+          102,
+          165
+        ]
+      ],
+      "implicitMax": 9,
+      "base": {
+        "implicitCompatibleLevels": {
+          "nvidia": [
+            5
+          ],
+          "intel": [
+            4
+          ]
+        },
+        "implicitLevelSetsDisjoint": true,
+        "fixedSameLevelDelta": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "bothAtNvidiaImplicitLevels": [
+          0
+        ],
+        "bothAtIntelImplicitLevels": [
+          0
+        ]
+      },
+      "matcap": {
+        "implicitCompatibleLevels": {
+          "nvidia": [
+            3
+          ],
+          "intel": [
+            3
+          ]
+        },
+        "implicitLevelSetsDisjoint": false,
+        "fixedSameLevelDelta": [
+          10,
+          10,
+          10,
+          9,
+          10,
+          11,
+          11,
+          9,
+          9
+        ],
+        "bothAtNvidiaImplicitLevels": [
+          9
+        ],
+        "bothAtIntelImplicitLevels": [
+          9
+        ]
+      }
+    },
+    {
+      "point": [
+        1255,
+        258
+      ],
+      "implicitPacked": [
+        1654174738,
+        1670970387
+      ],
+      "implicitClippedSrgb8": [
+        [
+          255,
+          114,
+          113
+        ],
+        [
+          255,
+          119,
+          118
+        ]
+      ],
+      "implicitMax": 5,
+      "base": {
+        "implicitCompatibleLevels": {
+          "nvidia": [
+            4
+          ],
+          "intel": [
+            4
+          ]
+        },
+        "implicitLevelSetsDisjoint": false,
+        "fixedSameLevelDelta": [
+          0,
+          0,
+          0,
+          1,
+          5,
+          0,
+          0,
+          0,
+          1,
+          1
+        ],
+        "bothAtNvidiaImplicitLevels": [
+          5
+        ],
+        "bothAtIntelImplicitLevels": [
+          5
+        ]
+      },
+      "matcap": {
+        "implicitCompatibleLevels": {
+          "nvidia": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8
+          ],
+          "intel": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8
+          ]
+        },
+        "implicitLevelSetsDisjoint": false,
+        "fixedSameLevelDelta": [
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5
+        ],
+        "bothAtNvidiaImplicitLevels": [
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5
+        ],
+        "bothAtIntelImplicitLevels": [
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5
+        ]
+      }
+    },
+    {
+      "point": [
+        1310,
+        260
+      ],
+      "implicitPacked": [
+        1893352334,
+        1897546638
+      ],
+      "implicitClippedSrgb8": [
+        [
+          205,
+          145,
+          195
+        ],
+        [
+          205,
+          145,
+          198
+        ]
+      ],
+      "implicitMax": 3,
+      "base": {
+        "implicitCompatibleLevels": {
+          "nvidia": [
+            4
+          ],
+          "intel": [
+            4
+          ]
+        },
+        "implicitLevelSetsDisjoint": false,
+        "fixedSameLevelDelta": [
+          2,
+          2,
+          2,
+          2,
+          3,
+          0,
+          1,
+          0,
+          0,
+          1
+        ],
+        "bothAtNvidiaImplicitLevels": [
+          3
+        ],
+        "bothAtIntelImplicitLevels": [
+          3
+        ]
+      },
+      "matcap": {
+        "implicitCompatibleLevels": {
+          "nvidia": [
+            3
+          ],
+          "intel": [
+            3
+          ]
+        },
+        "implicitLevelSetsDisjoint": false,
+        "fixedSameLevelDelta": [
+          0,
+          1,
+          0,
+          3,
+          0,
+          0,
+          2,
+          0,
+          0
+        ],
+        "bothAtNvidiaImplicitLevels": [
+          3
+        ],
+        "bothAtIntelImplicitLevels": [
+          3
+        ]
+      }
+    },
+    {
+      "point": [
+        1261,
+        261
+      ],
+      "implicitPacked": [
+        2006496102,
+        1956170625
+      ],
+      "implicitClippedSrgb8": [
+        [
+          169,
+          114,
+          251
+        ],
+        [
+          189,
+          116,
+          229
+        ]
+      ],
+      "implicitMax": 22,
+      "base": {
+        "implicitCompatibleLevels": {
+          "nvidia": [
+            5
+          ],
+          "intel": [
+            4
+          ]
+        },
+        "implicitLevelSetsDisjoint": true,
+        "fixedSameLevelDelta": [
+          1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0
+        ],
+        "bothAtNvidiaImplicitLevels": [
+          0
+        ],
+        "bothAtIntelImplicitLevels": [
+          0
+        ]
+      },
+      "matcap": {
+        "implicitCompatibleLevels": {
+          "nvidia": [
+            3
+          ],
+          "intel": [
+            3
+          ]
+        },
+        "implicitLevelSetsDisjoint": false,
+        "fixedSameLevelDelta": [
+          24,
+          22,
+          22,
+          22,
+          23,
+          25,
+          23,
+          25,
+          22
+        ],
+        "bothAtNvidiaImplicitLevels": [
+          22
+        ],
+        "bothAtIntelImplicitLevels": [
+          22
+        ]
+      }
+    },
+    {
+      "point": [
+        1260,
+        262
+      ],
+      "implicitPacked": [
+        2258318170,
+        2283424608
+      ],
+      "implicitClippedSrgb8": [
+        [
+          160,
+          169,
+          255
+        ],
+        [
+          165,
+          145,
+          255
+        ]
+      ],
+      "implicitMax": 24,
+      "base": {
+        "implicitCompatibleLevels": {
+          "nvidia": [
+            5
+          ],
+          "intel": [
+            4
+          ]
+        },
+        "implicitLevelSetsDisjoint": true,
+        "fixedSameLevelDelta": [
+          3,
+          4,
+          3,
+          2,
+          2,
+          3,
+          3,
+          3,
+          3,
+          2
+        ],
+        "bothAtNvidiaImplicitLevels": [
+          3
+        ],
+        "bothAtIntelImplicitLevels": [
+          2
+        ]
+      },
+      "matcap": {
+        "implicitCompatibleLevels": {
+          "nvidia": [
+            4
+          ],
+          "intel": [
+            3
+          ]
+        },
+        "implicitLevelSetsDisjoint": true,
+        "fixedSameLevelDelta": [
+          27,
+          27,
+          26,
+          27,
+          26,
+          26,
+          26,
+          26,
+          26
+        ],
+        "bothAtNvidiaImplicitLevels": [
+          26
+        ],
+        "bothAtIntelImplicitLevels": [
+          27
+        ]
+      }
+    },
+    {
+      "point": [
+        1261,
+        262
+      ],
+      "implicitPacked": [
+        1930974054,
+        1930974075
+      ],
+      "implicitClippedSrgb8": [
+        [
+          169,
+          106,
+          216
+        ],
+        [
+          184,
+          106,
+          216
+        ]
+      ],
+      "implicitMax": 15,
+      "base": {
+        "implicitCompatibleLevels": {
+          "nvidia": [
+            5
+          ],
+          "intel": [
+            4
+          ]
+        },
+        "implicitLevelSetsDisjoint": true,
+        "fixedSameLevelDelta": [
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          2,
+          1,
+          2
+        ],
+        "bothAtNvidiaImplicitLevels": [
+          3
+        ],
+        "bothAtIntelImplicitLevels": [
+          3
+        ]
+      },
+      "matcap": {
+        "implicitCompatibleLevels": {
+          "nvidia": [
+            4
+          ],
+          "intel": [
+            3
+          ]
+        },
+        "implicitLevelSetsDisjoint": true,
+        "fixedSameLevelDelta": [
+          18,
+          18,
+          17,
+          17,
+          18,
+          18,
+          17,
+          17,
+          15
+        ],
+        "bothAtNvidiaImplicitLevels": [
+          18
+        ],
+        "bothAtIntelImplicitLevels": [
+          17
+        ]
+      }
+    },
+    {
+      "point": [
+        1300,
+        263
+      ],
+      "implicitPacked": [
+        1847008112,
+        1842803568
+      ],
+      "implicitClippedSrgb8": [
+        [
+          177,
+          88,
+          177
+        ],
+        [
+          177,
+          85,
+          175
+        ]
+      ],
+      "implicitMax": 3,
+      "base": {
+        "implicitCompatibleLevels": {
+          "nvidia": [
+            4
+          ],
+          "intel": [
+            4
+          ]
+        },
+        "implicitLevelSetsDisjoint": false,
+        "fixedSameLevelDelta": [
+          2,
+          3,
+          2,
+          2,
+          3,
+          1,
+          1,
+          1,
+          0,
+          1
+        ],
+        "bothAtNvidiaImplicitLevels": [
+          3
+        ],
+        "bothAtIntelImplicitLevels": [
+          3
+        ]
+      },
+      "matcap": {
+        "implicitCompatibleLevels": {
+          "nvidia": [
+            4
+          ],
+          "intel": [
+            3
+          ]
+        },
+        "implicitLevelSetsDisjoint": true,
+        "fixedSameLevelDelta": [
+          0,
+          0,
+          0,
+          2,
+          1,
+          0,
+          1,
+          1,
+          1
+        ],
+        "bothAtNvidiaImplicitLevels": [
+          1
+        ],
+        "bothAtIntelImplicitLevels": [
+          2
+        ]
+      }
+    },
+    {
+      "point": [
+        1302,
+        265
+      ],
+      "implicitPacked": [
+        2107290501,
+        2035905421
+      ],
+      "implicitClippedSrgb8": [
+        [
+          194,
+          157,
+          255
+        ],
+        [
+          204,
+          128,
+          255
+        ]
+      ],
+      "implicitMax": 29,
+      "base": {
+        "implicitCompatibleLevels": {
+          "nvidia": [
+            5
+          ],
+          "intel": [
+            4
+          ]
+        },
+        "implicitLevelSetsDisjoint": true,
+        "fixedSameLevelDelta": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "bothAtNvidiaImplicitLevels": [
+          0
+        ],
+        "bothAtIntelImplicitLevels": [
+          0
+        ]
+      },
+      "matcap": {
+        "implicitCompatibleLevels": {
+          "nvidia": [
+            4
+          ],
+          "intel": [
+            4
+          ]
+        },
+        "implicitLevelSetsDisjoint": false,
+        "fixedSameLevelDelta": [
+          30,
+          30,
+          30,
+          30,
+          29,
+          28,
+          29,
+          29,
+          28
+        ],
+        "bothAtNvidiaImplicitLevels": [
+          29
+        ],
+        "bothAtIntelImplicitLevels": [
+          29
+        ]
+      }
+    }
+  ],
+  "sourceSha256": {
+    "points.bin": "9bfcbfb5194b733a9a4c78015121126465d7143aee28f31bf821c8b6c51c31c9",
+    "source-identity.json": "2776dd78c0bf2892bbea088c4a00468b604c1b76751935f69cb8e82bfd9a2280",
+    "base-source.json": "8381f7ab3b6f1c1bd60ca56acdeadc08a9504a1c717d1ced3999a6d2de784b1f",
+    "matcap-source.json": "3ad0bc8c7e102b0d83fd91712038be95e29d7ce63093479bf71a550bc9c7adcb",
+    "nvidia-implicit.bin": "b5f76e2bfe5979ebc9e43994e7d284e1080f32c0488344569956c78d3dc8760d",
+    "nvidia-mip-00.bin": "7041580d8a1ca22a669c5159538c026d63ba4022cb7f705c002093c209441244",
+    "nvidia-mip-01.bin": "40996e9e46b7a1fa26d6ee9d94e25994375467b17ff6bdec869c94735eebd5f0",
+    "nvidia-mip-02.bin": "b171ee0969a28df62c28f6c5f51f8acb1fae9a8540a451b2baa30a9c7c59c1cd",
+    "nvidia-mip-03.bin": "ebf10e3f3b48ca0a9e6823cd64bbfe91c596b375abc0f0c47de1803fbbb80f90",
+    "nvidia-mip-04.bin": "0a6e5d936fd75cb551638c79ef3cbfd69e9eaf13bdd9ee18f2cf9d19489dd2d6",
+    "nvidia-mip-05.bin": "66ccb3332e522661a987ec834ca140d68d0c2e8a2ce5ea330b071c2f54ff197b",
+    "nvidia-mip-06.bin": "2c96c008b487b021bf5ff9dda01780fc85d9f823797647a156bf82dd565cafd0",
+    "nvidia-mip-07.bin": "52675448e05e9f83cb9c34a9caf1853c69fab8f300767a3f1df0f6f9c088c546",
+    "nvidia-mip-08.bin": "b080a64de2b83920773d40d14e119f701b79317f6774c4ea6ac88c3274b2f37e",
+    "nvidia-mip-09.bin": "f56b1ae3081bbea663f04411a835ad3f13e569c8540677443c7ee422c449cf11",
+    "intel-implicit.bin": "7cc5a9836b7f6ce35ca64ad7f9f7e383fecbb55dac461428bb9a6b58b77a593b",
+    "intel-mip-00.bin": "b4865a66e71974ae44a337ba19d02a316b30b8bce18bb2dabe0b06ed6ae8636a",
+    "intel-mip-01.bin": "3844dfa787fc41d607a4f862fadcd200140d95bb23eae6d497580274e5d763b3",
+    "intel-mip-02.bin": "bcc0e7c86425d192eabf5400ef9ba1fa4d6d2812e97e9fbd9b0313cbe06bb863",
+    "intel-mip-03.bin": "dbec0301f8e54a2cf49a707a999f7f5be885404613594f9fda603f550cc06455",
+    "intel-mip-04.bin": "7e349601b054e7f5165c652b415a71da0404abb240220e984d990880d0f7b33f",
+    "intel-mip-05.bin": "e7b4b28f4c589869be3730bddb2a79e8426ae813a214544128cf1671483b90ad",
+    "intel-mip-06.bin": "8d96706a4d0512da2d9b9a73d52e4240c4f2e2d92f7682413b15a92306d0ca50",
+    "intel-mip-07.bin": "0d87d2a0073c96d1e3f963886c7f52e1110cd946ff8a6b2df363cbdebfd3890e",
+    "intel-mip-08.bin": "81c835a3b828e8a24885f95dd1703bdb67fec81d0eda0152c4424d07a583a184",
+    "intel-mip-09.bin": "bde4e42c87735594c5875f802ee8b5aa18958670737e690c6d4c4b2bac79cb59"
+  },
+  "scope": "Direct RGB conversion of the native R11G11B10 attachment at event 846. The final eye overlay, display pipeline, and formal reference are separate.",
+  "archiveSha256": "182442b1f8b08ca29243d2287f302668be0c8a2334072678cb55a7a009e0580e"
+}
