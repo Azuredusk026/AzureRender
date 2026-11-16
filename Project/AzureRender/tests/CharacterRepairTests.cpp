@@ -998,6 +998,20 @@ void testFaceHighlightProfile(const nlohmann::json& fixture,const std::filesyste
     profile(saturated)["faceSdf"].erase("highlight");
     require(packMaterialSurfaceProfile(load(saturated)).rows[12][3]==1.F,
         "Face main brightness saturation must also support a face without a highlight texture");
+    auto saturatedSkin=source;
+    profile(saturatedSkin)["class"]="skin";
+    profile(saturatedSkin)["features"]=Json::array();
+    profile(saturatedSkin).erase("faceSdf");
+    profile(saturatedSkin)["nprDiffuse"]["mainBrightnessSaturation"]=true;
+    const auto skin=load(saturatedSkin);
+    require(skin.materialClass==AssetMaterialClass::Skin
+        &&packMaterialSurfaceProfile(skin).rows[12][3]==1.F,
+        "Opaque NPR skin must carry explicit main brightness saturation");
+    saturatedSkin["materials"][0]["alphaMode"]="BLEND";
+    std::string saturationError;
+    try{(void)load(saturatedSkin);}catch(const std::exception& error){saturationError=error.what();}
+    require(saturationError.find("nprDiffuse.mainBrightnessSaturation")!=std::string::npos,
+        "Blended skin must reject main brightness saturation");
     auto maskedTint=source;
     profile(maskedTint)["nprDiffuse"]["viewTint"]={{"schemaVersion",1},{"scale",.85},
         {"color",{.38,.12,.14}},{"mode","face-mask"},{"geometryScale",.595}};

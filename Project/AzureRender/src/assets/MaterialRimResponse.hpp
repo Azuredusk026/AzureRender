@@ -10,12 +10,17 @@ inline void validateMaterialRimResponse(const AssetMaterial& material) {
             ||material.alphaMode!=AssetAlphaMode::Opaque
             ||(material.materialFeatures&(MaterialFeatureEmissiveMask|MaterialFeatureUnlitSurface|MaterialFeatureMultiplyComposite))))
         throw std::invalid_argument("faceSdf.highlight requires an opaque version-two NPR face without an emissive input");
-    if(npr.mainBrightnessSaturation
-        &&(!npr.present||material.materialProfileVersion!=2||material.materialClass!=AssetMaterialClass::Face
-            ||!material.faceSdf.present||material.faceSdf.schemaVersion!=2
-            ||material.alphaMode!=AssetAlphaMode::Opaque
-            ||!(material.materialFeatures&MaterialFeatureFaceSdfEligible)))
-        throw std::invalid_argument("nprDiffuse.mainBrightnessSaturation requires an opaque version-two dual face");
+    if(npr.mainBrightnessSaturation) {
+        const bool dualFace=material.materialClass==AssetMaterialClass::Face
+            &&material.faceSdf.present&&material.faceSdf.schemaVersion==2
+            &&(material.materialFeatures&MaterialFeatureFaceSdfEligible);
+        const bool litSkin=material.materialClass==AssetMaterialClass::Skin
+            &&!(material.materialFeatures&(MaterialFeatureUnlitSurface|MaterialFeatureMultiplyComposite|MaterialFeatureOverlay))
+            &&!material.unlitTextureLayers.present;
+        if(!npr.present||material.materialProfileVersion!=2||material.alphaMode!=AssetAlphaMode::Opaque
+            ||!(dualFace||litSkin))
+            throw std::invalid_argument("nprDiffuse.mainBrightnessSaturation requires an opaque version-two NPR skin or dual face");
+    }
     if(npr.viewTint.faceMask
         &&(!npr.present||!npr.viewTint.present||material.materialProfileVersion!=2
             ||material.materialClass!=AssetMaterialClass::Face||!material.faceSdf.present||material.faceSdf.schemaVersion!=2

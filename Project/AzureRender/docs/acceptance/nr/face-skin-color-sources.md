@@ -755,3 +755,14 @@ NVIDIA 的 6 处新增超差和 Intel 的 15 处新增超差位于皮肤边缘�
 [描边顶点与覆盖结果](evidence/2026-11-16/body-cloth-recorded-vertex-coverage/qualification.json)和[验证归档](evidence/2026-11-16/body-cloth-recorded-vertex-coverage/validation.zip)保存逐点三角形、实际裁剪坐标及索引。
 
 [第二层投影结果](evidence/2026-11-16/body-cloth-second-projection-owner/qualification.json)和[验证归档](evidence/2026-11-16/body-cloth-second-projection-owner/validation.zip)保存实际材质槽、投影参数、顶点输出及片元判定。
+
+### 皮肤主光饱和度
+
+不透明皮肤材质通过 `nprDiffuse.mainBrightnessSaturation` 启用主光饱和度。双设备使用同一发布构建和固定姿态，配对材质仅切换此字段。
+
+| 设备 | 控制组平均最大通道差 | 启用后平均最大通道差 | 超过一个色阶的像素 | 新增超差 |
+| --- | ---: | ---: | ---: | ---: |
+| NVIDIA | 2.284 | 1.774 | 6,158 | 6 |
+| Intel | 2.254 | 1.785 | 6,124 | 17 |
+
+两设备的皮肤范围外逐像素一致。关闭开关的 NVIDIA 画面与留存对照逐像素一致，Intel 的唯一区别位于 [1321,271]，对应已验证的发影深度修复。当前固定姿态保留衣料覆盖附近的峰值误差。角色材质加载测试、默认值检查、透明材质拒绝及 12 个受影响片元程序校验通过。[双设备结果](evidence/2026-11-16/body-opaque-skin-saturation-profile/qualification.json)和[验证归档](evidence/2026-11-16/body-opaque-skin-saturation-profile/validation.zip)包含实际画面差量及材质收据。

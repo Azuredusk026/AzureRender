@@ -2002,6 +2002,16 @@ void main()
         }
 #endif
         sceneMainDiffuse=response.color*illumination.direct;
+#if defined(AZURE_EXTENDED_MATERIAL_LIGHTING)
+        if(nprDiffuse&&AZURE_MATERIAL_CLASS==1U&&AZURE_ALPHA_MODE==0
+            &&materialSurfaceProfiles.profiles[material.materialPadding>>1U].rows[12].w>.5) {
+            float saturation=characterMainBrightnessSaturation(combinedAmbient+sceneMainDiffuse);
+            combinedAmbient=characterDiffuseSaturation(combinedAmbient,saturation);
+            vec3 saturatedMain=characterDiffuseSaturation(sceneMainDiffuse,saturation);
+            combinedDirect+=saturatedMain-sceneMainDiffuse;
+            sceneMainDiffuse=saturatedMain;
+        }
+#endif
         beautyColor+=combinedAmbient+combinedDirect-ambientDiffuse-directDiffuse;
         ambientDiffuse=combinedAmbient;directDiffuse=combinedDirect;
 #if defined(AZURE_EXTENDED_MATERIAL_LIGHTING)
