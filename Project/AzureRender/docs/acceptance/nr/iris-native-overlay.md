@@ -225,3 +225,11 @@ NVIDIA 的 4 处和 Intel 的 9 处剩余超差位于原生眼影覆盖区，覆
 两块显卡的眼影覆盖区外与配对候选逐像素一致。虹膜外与发布版控制逐像素一致，乘色精度调整的新增超差为零。全虹膜仍按一个色阶验收。
 
 [乘色精度结果](evidence/2026-11-16/iris-joint-postmultiply-output-precision/qualification.json)和[验证归档](evidence/2026-11-16/iris-joint-postmultiply-output-precision/validation.zip)保存双设备收据、各绘制阶段数据和逐点结果。
+
+### 虹膜蓝通道截断边界
+
+关闭眼影节点后，双设备各读回 253 个虹膜位置截断前的蓝通道。另两个位置用于验证色值传输。NVIDIA 在 [1308,266] 的蓝通道位于 0.390488 至 0.390495，低于附件可表示值 0.390625。原生同址截断前为 0.391016。两者写入附件后分别为 0.3828125 和 0.390625，对应最终显示的两个色阶。
+
+Intel 在 [1253,259]、[1254,259]、[1251,262]、[1256,265] 处的蓝通道落入高一个可表示值的区间。这些位置与 NVIDIA 的 [1308,266] 误差方向不同。后续按基色及反射贴图采样值核对输入。
+
+[蓝通道读回结果](evidence/2026-11-16/iris-prepack-blue-lane/qualification.json)和[验证归档](evidence/2026-11-16/iris-prepack-blue-lane/validation.zip)保存逐点区间、附件值和双设备差量。
