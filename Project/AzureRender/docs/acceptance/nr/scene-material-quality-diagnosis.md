@@ -457,3 +457,9 @@ NVIDIA 和 Intel 分别采集两帧。两块设备的首帧均与各自实际对
 偏暗的中性色组各有 8 个位置的误差降低。暖色组仍有明显欠亮，31 个实际地址的原生线性亮度中位比值在 NVIDIA 和 Intel 上分别约为 3.87 和 3.78。[1049,683] 的原生历史 RGB 约为 [0.271,0.233,0.204]，Player 已提交颜色约为 [0.090,0.077,0.069]。继续按暖色来源的材质及光照输入核对。联合场景的结构相似度验收保持开放。
 
 [已提交 HDR 取样结果](evidence/2026-11-16/projected-history-submitted-hdr-addresses/qualification.json)和[验证归档](evidence/2026-11-16/projected-history-submitted-hdr-addresses/validation.zip)保存双设备读回、原生坐标、构建收据及逐帧差量。
+
+### 地面反射颗粒
+
+实际场景在 NVIDIA 上对粗糙反射增大过滤足迹，并在相邻层级之间插值置信度。第 2 帧中央地面和青色环带的中位亮度误差分别为 8.12% 和 1.37%，SSIM 分别为 0.85667 和 0.78668。两区的颗粒幅度略有上升，候选未达到减少画面颗粒的目的，生产画面沿用当前过滤设置。
+
+渲染进程完成两帧并正常卸载。调度在差量写入期间触及产物池上限。两帧经重新读回计分，并可按留存对照及差量逐字节重建。[画面对照](evidence/2026-11-16/projected-reflection-roughness-footprint/comparison.png)、[区域结果](evidence/2026-11-16/projected-reflection-roughness-footprint/qualification.json)和[验证归档](evidence/2026-11-16/projected-reflection-roughness-footprint/validation.zip)保存实际采集、过滤程序和复原凭据。
