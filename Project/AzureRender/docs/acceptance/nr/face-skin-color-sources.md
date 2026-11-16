@@ -714,6 +714,8 @@ Player 回放中，三个偏暗脸缘点的轮廓光红通道贡献为 0.22852 �
 
 固定姿态的眼周位置 [1264,261] 在两块显卡上均通过乘色。局部放宽接收表面判定时，该点仍受乘色影响。发影位置 [1321,271] 的原生预处理及乘色均由图元 74 通过。Player 在 NVIDIA 的该点通过乘色，Intel 的该点在原判定和放宽接收表面判定时均保持原色。两设备的相邻像素均能通过同一探针。Intel 的该点继续核对深度和覆盖。[眼周与发影片元结果](evidence/2026-11-16/face-overlay-pixel-acceptance/qualification.json)及[验证归档](evidence/2026-11-16/face-overlay-pixel-acceptance/validation.zip)保存两个局部探针及逐像素对照。
 
+发影位置 [1321,271] 的深度探针允许对应片元通过时，Intel 读回乘色标记，目标点的 RGB 为 [122,88,79]，与 NVIDIA 的相同探针一致。原判定下 Intel 的 RGB 为 [223,161,139]。最近深度阶段前移一个可表示深度单位时，Intel 整帧与对应控制图逐像素一致，NVIDIA 有一个脸外像素变化。继续按原覆盖和脸外门槛核对该深度边界。[发影深度结果](evidence/2026-11-16/face-overlay-depth-witness/qualification.json)及[验证归档](evidence/2026-11-16/face-overlay-depth-witness/validation.zip)保存两次深度试验和资源目录的复核记录。
+
 身体候选采用原生主光亮度饱和度。30,561 个无透明衣料覆盖的皮肤内部位置中，超过一个色阶的数量在 NVIDIA 上为 627，在 Intel 上为 581；配对对照分别为 11,018 和 10,522。皮肤区域之外逐像素一致。全皮肤新增超差分别为 6 和 17 处，均为两个色阶，候选未通过新增误差门槛。
 
 新增超差的 23 个位置从原生身体绘制至最终颜色保持一致。17 个位置的超差通道需降低，6 个位置需提高。Intel 有 2 个位置距皮肤边界超过六个像素。继续按实际片元核对颜色和覆盖。[通道差值核对](evidence/2026-11-16/body-saturation-signed-edge/qualification.json)和[验证归档](evidence/2026-11-16/body-saturation-signed-edge/validation.zip)保存逐点结果。

@@ -1,0 +1,70 @@
+{
+  "status": "verified-hair-shadow-depth-dependency-in-current-frame",
+  "sample": {
+    "nvidia": {
+      "point": [
+        1321,
+        271
+      ],
+      "stages": {
+        "packed": [
+          186,
+          122,
+          101
+        ],
+        "receiver": [
+          122,
+          88,
+          79
+        ],
+        "depth": [
+          122,
+          88,
+          79
+        ],
+        "oneUlp": [
+          186,
+          122,
+          101
+        ]
+      },
+      "oneULPWholeFrameChanges": 1
+    },
+    "intel": {
+      "point": [
+        1321,
+        271
+      ],
+      "stages": {
+        "packed": [
+          223,
+          161,
+          139
+        ],
+        "receiver": [
+          223,
+          161,
+          139
+        ],
+        "depth": [
+          122,
+          88,
+          79
+        ],
+        "oneUlp": [
+          223,
+          161,
+          139
+        ]
+      },
+      "oneULPWholeFrameChanges": 0
+    }
+  },
+  "controls": {
+    "depthBypass": 1537,
+    "oneUlpCapturedWithSealTimeout": 1539,
+    "retainedCatalogResealed": 1542
+  },
+  "formalFaceAcceptance": false,
+  "archiveSha256": "ac529a8b60c336ba5003ea8d15a4bccff6979ec895c6d350ba7cf1fbb7ea751d"
+}
