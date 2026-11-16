@@ -1,0 +1,165 @@
+{
+  "status": "conditional-local-source-coverage-model",
+  "gpuFilterCalibration": "pending",
+  "filterShader": "7e305dcfc3227ad7f98d8a8832c976b378a4f62007b2044943e29fc98e1d76bc",
+  "controls": {
+    "glyph": {
+      "status": "conditional-local-source-ssim-ceiling",
+      "modifiedPackedHits": 813,
+      "sourceMaskSha256": "7045223cdc5eaabed6205b22f987bb92a456795cde279951a340b90705ec9f18",
+      "depthSha256": {
+        "native": "76a4b539ed98345f51ebbc0e686347aefd98e26ad1ffe1da65b82f16082d80a9",
+        "player": "b6c9b61c16c5f22020951ff80dafda2018aaab1710408da33346e93a1a2d119a"
+      },
+      "playerEarlierColor": "ff7c9086cec80cada14f34816ae5953975446f86a420e242b2cf7b1ce0f69778",
+      "scope": "Modeled fixed input/filter; perfect SSIM permitted wherever the four-tap full-resolution sampler can see a changed color and nonzero confidence. Downstream spread (e.g. bloom) and extra source draws are outside this ceiling.",
+      "captureFrame": "frame_000001.png",
+      "baselineSha256": "77c30284317b49d75bb833ae01c9906d8f3863f592f0a3ad2014a480102cc5d9",
+      "referenceSha256": "af67600fcbb25060f1770a4bedb5e13b64a981229c9b24d9db29492db1fb5e18",
+      "centerFloor": {
+        "fullBounds": [
+          1010,
+          990,
+          1550,
+          1170
+        ],
+        "pixels": 97200,
+        "halfChanged": 6312,
+        "eligibleFullPixels": 29501,
+        "affectedSsimWindows": 34472,
+        "baselineSsim": 0.8429770373958674,
+        "idealDirectReferenceCopySsim": 0.8861607909202576,
+        "conditionalSsimCeiling": 0.9205425618488657
+      },
+      "cyanRing": {
+        "fullBounds": [
+          1040,
+          1060,
+          1270,
+          1180
+        ],
+        "pixels": 27600,
+        "halfChanged": 2336,
+        "eligibleFullPixels": 10930,
+        "affectedSsimWindows": 12344,
+        "baselineSsim": 0.7546486941690598,
+        "idealDirectReferenceCopySsim": 0.8514688611030579,
+        "conditionalSsimCeiling": 0.9115910016970061
+      }
+    },
+    "known-draws": {
+      "oracle": "known-draws",
+      "modifiedPackedHits": 7046,
+      "depthSha256": {
+        "native": "76a4b539ed98345f51ebbc0e686347aefd98e26ad1ffe1da65b82f16082d80a9",
+        "player": "b6c9b61c16c5f22020951ff80dafda2018aaab1710408da33346e93a1a2d119a"
+      },
+      "thresholdMaxCompressedRgb": 0.02,
+      "playerEarlierColor": "ff7c9086cec80cada14f34816ae5953975446f86a420e242b2cf7b1ce0f69778",
+      "drawMaskSha256": {
+        "10480": "7045223cdc5eaabed6205b22f987bb92a456795cde279951a340b90705ec9f18",
+        "6587": "1ae2a4c5e8d7786db6c70b4e91c225279bbc33085fd98dced1d4e3a0aa18d22b",
+        "6600": "60f9c976900f2814c6288c4fde76f0ccc420a0b190d1e5c401ae4861abf7177f",
+        "6613": "77a75d1cc0d158572e7208f7e4b360b8cb42b34834262fc4c603f6287e3373b8",
+        "6626": "a7380c6b480139b679a6d389131ba8f7975ce0645d960e6714da55e3e65fd342",
+        "6652": "5a4b5741692300def71863b799c81b5a9efe6cfe3cdc8316321a14df53e4faa4"
+      },
+      "status": "conditional-local-source-ssim-ceiling",
+      "scope": "Modeled fixed input/filter; perfect SSIM permitted wherever the four-tap full-resolution sampler can see a changed color and nonzero confidence. Downstream spread (e.g. bloom) and extra source draws are outside this ceiling.",
+      "captureFrame": "frame_000001.png",
+      "baselineSha256": "77c30284317b49d75bb833ae01c9906d8f3863f592f0a3ad2014a480102cc5d9",
+      "referenceSha256": "af67600fcbb25060f1770a4bedb5e13b64a981229c9b24d9db29492db1fb5e18",
+      "centerFloor": {
+        "fullBounds": [
+          1010,
+          990,
+          1550,
+          1170
+        ],
+        "pixels": 97200,
+        "halfChanged": 20088,
+        "eligibleFullPixels": 81925,
+        "affectedSsimWindows": 90072,
+        "baselineSsim": 0.8429770373958674,
+        "idealDirectReferenceCopySsim": 0.9507705569267273,
+        "conditionalSsimCeiling": 0.9881962515779539
+      },
+      "cyanRing": {
+        "fullBounds": [
+          1040,
+          1060,
+          1270,
+          1180
+        ],
+        "pixels": 27600,
+        "halfChanged": 6560,
+        "eligibleFullPixels": 27434,
+        "affectedSsimWindows": 27600,
+        "baselineSsim": 0.7546486941690598,
+        "idealDirectReferenceCopySsim": 0.9825937151908875,
+        "conditionalSsimCeiling": 1.0
+      }
+    },
+    "registered-source": {
+      "oracle": "registered-source",
+      "modifiedPackedHits": 9177,
+      "depthSha256": {
+        "native": "76a4b539ed98345f51ebbc0e686347aefd98e26ad1ffe1da65b82f16082d80a9",
+        "player": "b6c9b61c16c5f22020951ff80dafda2018aaab1710408da33346e93a1a2d119a"
+      },
+      "thresholdMaxCompressedRgb": 0.02,
+      "playerEarlierColor": "ff7c9086cec80cada14f34816ae5953975446f86a420e242b2cf7b1ce0f69778",
+      "drawMaskSha256": null,
+      "status": "conditional-local-source-ssim-ceiling",
+      "scope": "Modeled fixed input/filter; perfect SSIM permitted wherever the four-tap full-resolution sampler can see a changed color and nonzero confidence. Downstream spread (e.g. bloom) and extra source draws are outside this ceiling.",
+      "captureFrame": "frame_000001.png",
+      "baselineSha256": "77c30284317b49d75bb833ae01c9906d8f3863f592f0a3ad2014a480102cc5d9",
+      "referenceSha256": "af67600fcbb25060f1770a4bedb5e13b64a981229c9b24d9db29492db1fb5e18",
+      "centerFloor": {
+        "fullBounds": [
+          1010,
+          990,
+          1550,
+          1170
+        ],
+        "pixels": 97200,
+        "halfChanged": 20384,
+        "eligibleFullPixels": 82201,
+        "affectedSsimWindows": 90184,
+        "baselineSsim": 0.8429770373958674,
+        "idealDirectReferenceCopySsim": 0.9554624557495117,
+        "conditionalSsimCeiling": 0.9882484926722723
+      },
+      "cyanRing": {
+        "fullBounds": [
+          1040,
+          1060,
+          1270,
+          1180
+        ],
+        "pixels": 27600,
+        "halfChanged": 6701,
+        "eligibleFullPixels": 27512,
+        "affectedSsimWindows": 27600,
+        "baselineSsim": 0.7546486941690598,
+        "idealDirectReferenceCopySsim": 0.989486813545227,
+        "conditionalSsimCeiling": 1.0
+      }
+    }
+  },
+  "payloadSha256": {
+    "archive-projected-history-local-coverage.py": "94e2c84070831fc77fb5d80ca883ac8663c57a64894ed17d1aed91d976d3ce9f",
+    "centerFloor/baseline.rgb8": "3816b8003d293100f883263dbd57dfe00fcebe1201cf38c699b9ce8afed9dabe",
+    "centerFloor/glyph.mask": "0bf066d829b6f81b2dd5a59bcbbe3a8666fab81bbdb9f760728d299c1dfbcf04",
+    "centerFloor/known-draws.mask": "b838a8e4a74ce4594564d4794231fd40a90b877f0556b8367029ba55fcc280c7",
+    "centerFloor/reference.rgb8": "2ab05918109b73ae37d5cf79a4c973fcffbeb45fcc874df156f189ac10084e25",
+    "centerFloor/registered-source.mask": "cf50f4fdaab907cc1c48675f0e0a33f3ceecdeb24789a0188611574a1f6c0b3d",
+    "cyanRing/baseline.rgb8": "388526ec0118d9b4866df392db7b24b0268f3fc84176df06d9246c6b3c0d8db3",
+    "cyanRing/glyph.mask": "c3f1abf5c3e181ae293d4f2359d038693659803150dfd4158934a4d77b128a1c",
+    "cyanRing/known-draws.mask": "1fa4a03d8a8f63db5c4242611f8e3e35b23a42338d3b200f5e6d5a22d78accc1",
+    "cyanRing/reference.rgb8": "feda9c5b758041cbb1570658ec6756411907f7b9a98992de80a41decdc0678b6",
+    "cyanRing/registered-source.mask": "ac549dfc02ba42eccd9a2205c5296d56f6488c4f6bd296029fc2f1fef656bc3b",
+    "preview-projected-history-filter.py": "4f4ab3c28af9c799f506afd8ab09c46a4c3741a63ebe0bf2a6ca670a23c5da7c"
+  },
+  "archiveSha256": "a463f4b91884e8e0e7242bef17c5463576f4840d75243892d6f80b3faaf19eac"
+}
