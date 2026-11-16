@@ -203,3 +203,9 @@ Intel 的剩余峰差位于 [1302,265]，为 27 个色阶。两个原生回放�
 原生第 1245 次绘制的 94 个眼影覆盖位置中，NVIDIA 有 5 处仍超过一个色阶，Intel 有 10 处。覆盖区之外分别有 34 和 42 处。后续几个透明绘制的原生附件在这些位置逐值一致。联合场景继续核对虹膜的基色取样和主光方向。
 
 [联合场景虹膜结果](evidence/2026-11-16/iris-covered-joint-output-precision/qualification.json)及[验证归档](evidence/2026-11-16/iris-covered-joint-output-precision/validation.zip)保存逐点结果、双设备帧差与原生绘制附件。
+
+### 联合场景虹膜主光坐标
+
+联合场景的虹膜材质通过模型节点 `capture_material_frame_10401` 建立主光色带坐标。配对测试仅切换该材质字段。255 个虹膜位置中，超过一个色阶的数量在 NVIDIA 上由 52 处降至 22 处，在 Intel 上由 56 处降至 30 处。两设备的峰差分别为 15 和 27，分别新增 2 处和 4 处超差。虹膜外逐像素一致。候选继续按逐像素门槛验收。
+
+[主光坐标结果](evidence/2026-11-16/iris-joint-main-ramp-frame/qualification.json)和[验证归档](evidence/2026-11-16/iris-joint-main-ramp-frame/validation.zip)保存实际帧差、材质指纹和双设备指标。
