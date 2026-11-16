@@ -170,6 +170,8 @@ def float32(value):
 
 
 def append_morph_clip(gltf, binary, clip, target_path, target_node):
+    if any(existing["name"] == clip["m_Name"] for existing in gltf.get("animations", ())):
+        raise ValueError(f"Duplicate clip name: {clip['m_Name']}")
     if any(clip.get(field) for field in ("m_RotationCurves", "m_CompressedRotationCurves",
                                         "m_EulerCurves", "m_PositionCurves", "m_ScaleCurves",
                                         "m_PPtrCurves", "m_Events", "m_Compressed")):
@@ -279,7 +281,7 @@ def main():
     parser.add_argument("--scene", type=Path, required=True)
     parser.add_argument("--renderer", type=int, required=True)
     parser.add_argument("--base-color-png", type=Path, action="append", default=[])
-    parser.add_argument("--morph-clip", type=Path)
+    parser.add_argument("--morph-clip", type=Path, action="append", default=[])
     parser.add_argument("--morph-path", help="Source binding path relative to the animation root")
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
@@ -299,8 +301,8 @@ def main():
     nodes, bones, mesh_id = scene.skin_hierarchy(renderer)
     append_skin(gltf, binary, mesh, nodes, bones, mesh_id)
     append_morphs(gltf, binary, mesh, renderer["m_BlendShapeWeights"])
-    if args.morph_clip:
-        animation = UnityScene(args.morph_clip)
+    for path in args.morph_clip:
+        animation = UnityScene(path)
         clip_id, = [file_id for file_id, entry in animation.documents.items() if entry[0] == 74]
         append_morph_clip(gltf, binary, animation.read(clip_id), args.morph_path, list(nodes).index(mesh_id))
     gltf["buffers"][0]["byteLength"] = len(binary)

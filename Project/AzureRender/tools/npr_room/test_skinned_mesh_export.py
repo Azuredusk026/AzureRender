@@ -80,11 +80,15 @@ class SkinnedExportTests(unittest.TestCase):
         self.assertEqual(values["count"], 9)
         offset = document["bufferViews"][values["bufferView"]]["byteOffset"]
         self.assertEqual(unpack_from("<9f", binary, offset), (0, .25, 0, 0, .25, .375, 1, .25, 1))
+        with self.assertRaisesRegex(ValueError, "Duplicate clip name"):
+            append_morph_clip(document, binary, clip, "Character/Face", 0)
         bindings[1]["curve"]["m_Curve"][-1]["time"] = 0.7
+        clip["m_Name"] = "second-expression"
         append_morph_clip(document, binary, clip, "Character/Face", 0)
         offset = document["bufferViews"][document["accessors"][-1]["bufferView"]]["byteOffset"]
         self.assertEqual(unpack_from("<12f", binary, offset)[6], 1)
         bindings[0]["classID"] = 95
+        clip["m_Name"] = "third-expression"
         with self.assertRaisesRegex(ValueError, "Only direct blend-shape bindings"):
             append_morph_clip(document, bytearray(), clip, "Character/Face", 0)
 

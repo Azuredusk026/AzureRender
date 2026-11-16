@@ -46,5 +46,16 @@
     "differentRegion": [308, 124, 327, 135],
     "changedPixels": 105,
     "glbSHA256": "9546ae453cdfe18219afeb423776d093d420f6d2b98875c9ea100ed9f10c2059"
+  },
+  "faceExpressions": {
+    "clips": 19,
+    "morphTargets": 57,
+    "sourceCurves": 853,
+    "sourceKeysChecked": 9574,
+    "samples": 5617,
+    "maxKeyWeightError": 2.9692077685439244e-08,
+    "relocatedPlayerCheck": true,
+    "glbSHA256": "93281bdeae840c52347c626b274cdfbd8097df44de8cda82037e65b872022ad5",
+    "sourceChecksSHA256": "3fc50c226d9e94a43339ee48ea883c56d2364093588f254cc0d450f786f32b3a"
   }
 }
