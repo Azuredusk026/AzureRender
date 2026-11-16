@@ -3,9 +3,11 @@
 #include "scripting/BindingDescriptor.hpp"
 #include <functional>
 #include <map>
+#include <memory>
 #include <set>
 #include <thread>
 namespace azurerender {
+class ProjectSaveStore;
 struct ScriptObject {
     ecs::EntityHandle identity;
     std::string node;
@@ -15,7 +17,7 @@ struct ScriptObject {
 // Callbacks execute on the owner thread; deferred effects retain lifecycle IDs.
 class ScriptBindingHost final {
 public:
-    ScriptBindingHost(RuntimeLifecycle& runtime,GameRuntime& game):runtime_(runtime),game_(game) {}
+    ScriptBindingHost(RuntimeLifecycle& runtime,GameRuntime& game);
     ScriptObject object(const std::string& node);
     bool valid(const ScriptObject& object);
     nlohmann::json invoke(const ScriptObject&,const std::string&,const nlohmann::json&);
@@ -27,6 +29,7 @@ public:
     void setLevelHandler(std::function<void(std::string)> handler);
     void setAudioHandler(std::function<void(ecs::Entity)> handler);
     void setUiHandler(std::function<void(std::string,std::string)> handler);
+    void setSaveStore(std::shared_ptr<ProjectSaveStore>);
     static nlohmann::json encode(const ScriptObject&);
     static ScriptObject decode(const nlohmann::json&);
 private:
@@ -45,5 +48,6 @@ private:
     std::function<void(std::string)> level_;
     std::function<void(ecs::Entity)> audio_;
     std::function<void(std::string,std::string)> ui_;
+    std::shared_ptr<ProjectSaveStore> saveStore_;
 };
 }

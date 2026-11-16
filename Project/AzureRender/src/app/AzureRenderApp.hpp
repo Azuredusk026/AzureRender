@@ -1,5 +1,6 @@
 #pragma once
 #include <deque>
+#include <filesystem>
 
 #ifndef AZURE_WITH_EDITOR
 #define AZURE_WITH_EDITOR 1
@@ -72,6 +73,7 @@ public:
     ~AzureRenderApp();
 
     void run(const AzureRenderOptions& options = {});
+    void run(const AzureRenderOptions& options, const std::filesystem::path& saveRoot);
 #if AZURE_WITH_EDITOR
     std::shared_ptr<azurerender::EditorContext> showProjectCenter(const AzureRenderOptions& options, const std::string& initialProject = {});
 #endif

@@ -18,5 +18,19 @@
   "relocatedProjectCheck": true,
   "projectSHA256": "204944008d503557efb147cc27637e6547420950fc5e9b68eb3f1b3e7b51a6ba",
   "levelSHA256": "ad7f28434b3ead55051a1e8744be8c4593ca4b5fcb0500c962773766051cae01",
-  "runtimeEvidenceSHA256": "d57f94151b4c09eb0603a571fbdd37ad8a09732ce2a170205306cbc7206080ec"
+  "runtimeEvidenceSHA256": "d57f94151b4c09eb0603a571fbdd37ad8a09732ce2a170205306cbc7206080ec",
+  "preferenceSave": {
+    "renderRunnerJob": 1610,
+    "workMinutes": 26,
+    "breakMinutes": 6,
+    "rounds": 3,
+    "writeActions": 13,
+    "writeAudioStarts": 6,
+    "reopenAudioStarts": 0,
+    "reopenedInSeparatePlayer": true,
+    "relocatedProjectCheck": true,
+    "playerSHA256": "96801569127e000d363a093d9f60597dafada7fb20adb7c828e5b06322d5b21a",
+    "writeRuntimeSHA256": "0865ede7fcb55ae463d6c9ac185755e7c416cb4e850be4687f0f02d4ebfac820",
+    "readRuntimeSHA256": "d98e05468d1641f5c44cfaf5f41198822bae90b2e369082cffaba90f19be84cb"
+  }
 }

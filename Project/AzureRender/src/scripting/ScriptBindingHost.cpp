@@ -1,9 +1,13 @@
 #include "scripting/ScriptBindingHost.hpp"
 #include "runtime/ComponentCodec.hpp"
+#include "runtime/ProjectSaveStore.hpp"
 #include <cmath>
 #include <stdexcept>
 namespace azurerender {
 using Json=nlohmann::json;
+ScriptBindingHost::ScriptBindingHost(RuntimeLifecycle& runtime,GameRuntime& game)
+    : runtime_(runtime),game_(game),saveStore_(std::make_shared<ProjectSaveStore>()) {}
+
 void ScriptBindingHost::checkThread() const {
     if(std::this_thread::get_id()!=owner_)throw std::logic_error("Script host called outside owner thread");
 }
@@ -77,7 +81,7 @@ void ScriptBindingHost::commitInitialization(const std::function<void()>& retire
     }
 }
 void ScriptBindingHost::close() noexcept {
-    cancelInitialization();callback_=false;closed_=true;level_={};audio_={};ui_={};
+    cancelInitialization();callback_=false;closed_=true;level_={};audio_={};ui_={};saveStore_.reset();
 }
 void ScriptBindingHost::effect(std::function<void()> action,bool structural) {
     if(staging_)(structural?stagedStructural_:stagedEffects_).push_back(std::move(action));else action();
@@ -85,6 +89,11 @@ void ScriptBindingHost::effect(std::function<void()> action,bool structural) {
 void ScriptBindingHost::setLevelHandler(std::function<void(std::string)> handler) {checkThread();level_=std::move(handler);}
 void ScriptBindingHost::setAudioHandler(std::function<void(ecs::Entity)> handler) {checkThread();audio_=std::move(handler);}
 void ScriptBindingHost::setUiHandler(std::function<void(std::string,std::string)> handler) {checkThread();ui_=std::move(handler);}
+void ScriptBindingHost::setSaveStore(std::shared_ptr<ProjectSaveStore> store) {
+    checkThread();
+    if(!store)throw std::invalid_argument("Project save store must be available");
+    saveStore_=std::move(store);
+}
 Json ScriptBindingHost::encode(const ScriptObject& object) {
     return {{"entity",object.identity.entity},{"generation",object.identity.generation},
             {"node",object.node},{"revision",object.revision}};
@@ -123,6 +132,8 @@ Json ScriptBindingHost::invoke(const ScriptObject& object,const std::string& met
     if(method=="velocity")return game_.physics().velocity(entity);
     if(method=="action")return game_.input().down(args[0].get<std::string>());
     if(method=="pressed")return game_.input().pressed(args[0].get<std::string>());
+    if(method=="read_save")
+        return saveStore_ ? saveStore_->read(args[0].get<std::string>()) : Json(nullptr);
     if(method=="get" || method=="set") {
         const auto type=args[0].get<std::string>(),field=args[1].get<std::string>();
         const Key key{entity,type};
@@ -167,6 +178,10 @@ Json ScriptBindingHost::invoke(const ScriptObject& object,const std::string& met
     } else if(method=="ui_text") {
         if(!ui_)throw std::runtime_error("UI handler unavailable");
         const auto id=args[0].get<std::string>(),text=args[1].get<std::string>();effect([handler=ui_,id,text]{handler(id,text);});
+    } else if(method=="write_save") {
+        if(!saveStore_)throw std::runtime_error("Project save store unavailable");
+        const auto slot=args[0].get<std::string>();
+        effect([store=saveStore_,slot,payload=args[1]] {store->write(slot,payload);});
     } else throw std::logic_error("Binding description has no host operation: "+method);
     return nullptr;
 }

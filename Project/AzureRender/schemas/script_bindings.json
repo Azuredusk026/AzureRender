@@ -19,6 +19,8 @@
     {"name":"get","managed":"Get","parameters":[{"name":"type","type":"string"},{"name":"field","type":"string"}],"result":"value","mutating":false},
     {"name":"set","managed":"Set","parameters":[{"name":"type","type":"string"},{"name":"field","type":"string"},{"name":"value","type":"value"}],"result":"void","mutating":true},
     {"name":"grounded","managed":"Grounded","parameters":[],"result":"boolean","mutating":false},
-    {"name":"velocity","managed":"Velocity","parameters":[],"result":"array","mutating":false}
+    {"name":"velocity","managed":"Velocity","parameters":[],"result":"array","mutating":false},
+    {"name":"read_save","managed":"ReadSave","parameters":[{"name":"slot","type":"string"}],"result":"value","mutating":false},
+    {"name":"write_save","managed":"WriteSave","parameters":[{"name":"slot","type":"string"},{"name":"payload","type":"value"}],"result":"void","mutating":true}
   ]
 }

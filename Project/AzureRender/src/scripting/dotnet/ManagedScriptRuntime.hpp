@@ -21,6 +21,7 @@ public:
     const std::vector<std::string>& errors() const override;
     const std::vector<StructuredDiagnostic>& diagnostics() const override;
     ScriptRuntimeCapabilities capabilities() const override;
+    void setSaveStore(std::shared_ptr<ProjectSaveStore>) override;
 private:
     struct Impl;
     std::unique_ptr<Impl> impl_;

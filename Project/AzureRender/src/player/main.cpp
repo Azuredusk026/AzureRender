@@ -24,7 +24,7 @@ int main(int argc, char** argv) {
         std::string projectPath, createPath;
         bool check = false, gameTemplate = false;
         std::vector<std::string> args;
-        std::string runtimeReport;
+        std::string runtimeReport, saveRoot;
         for (int i = 1; i < argc; ++i) {
             std::string arg = native[i];
             if (arg == "--project" || arg == "--create-project" || arg == "--create-game") {
@@ -36,13 +36,17 @@ int main(int argc, char** argv) {
             } else if (arg == "--runtime-report") {
                 if (++i >= argc || !runtimeReport.empty()) throw std::runtime_error("Expected one runtime report path");
                 runtimeReport = native[i];
+            } else if (arg == "--save-root") {
+                if (++i >= argc || !saveRoot.empty() || native[i].empty())
+                    throw std::runtime_error("Expected one project save directory");
+                saveRoot = native[i];
             } else if (arg == "--check-project") {
                 check = true;
             } else
                 args.push_back(arg);
         }
         if (!createPath.empty()) {
-            if (!projectPath.empty() || check || !args.empty() || !runtimeReport.empty())
+            if (!projectPath.empty() || check || !args.empty() || !runtimeReport.empty() || !saveRoot.empty())
                 throw std::runtime_error("--create-project is a standalone command");
             (gameTemplate ? azurerender::Project::createGame : azurerender::Project::create)(std::filesystem::u8path(createPath),
                                          std::filesystem::u8path(createPath).filename().u8string());
@@ -50,6 +54,7 @@ int main(int argc, char** argv) {
             return EXIT_SUCCESS;
         }
         AzureRenderOptions initial;
+        if (!saveRoot.empty() && projectPath.empty()) throw std::runtime_error("--save-root requires --project");
         initial.projectFile = projectPath;
         initial.runtimeReportPath = runtimeReport;
         if (!projectPath.empty()) {
@@ -72,7 +77,8 @@ int main(int argc, char** argv) {
                          "options]\nAzurePlayer --create-project <empty-directory>\nAzurePlayer --create-game <empty-directory>\nAzurePlayer "
                          "--project <file> --check-project\n"
                       << "P: pause/resume runtime, O: advance one paused frame\n"
-                      << "--runtime-report <file>: write final World snapshot\n";
+                      << "--runtime-report <file>: write final World snapshot\n"
+                      << "--save-root <directory>: store project saves under an explicit profile root\n";
             std::istringstream help(azurerender::commandLineHelp());
             for (std::string line; std::getline(help, line);)
                 if (line.find("--editor") == std::string::npos &&
@@ -125,7 +131,7 @@ int main(int argc, char** argv) {
             throw std::runtime_error("Player requires --project or --scene");
         azurerender::RuntimeDiagnostics::instance().configure("captures/azureplayer.log.jsonl");
         AzureRenderApp app;
-        app.run(cli.options);
+        app.run(cli.options, std::filesystem::u8path(saveRoot));
         return EXIT_SUCCESS;
     } catch (const std::exception& error) {
         std::cerr << "AzurePlayer: " << error.what() << '\n';

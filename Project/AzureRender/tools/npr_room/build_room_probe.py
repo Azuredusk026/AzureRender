@@ -5,17 +5,18 @@ import json
 from pathlib import Path
 import shutil
 
-from reference_inventory import asset_index, group_paths_by_guid
+from reference_inventory import asset_index, digest, group_paths_by_guid
 
 
 CUES = {"timer-start": (0, 0.5), "timer-pause": (6, 1.0), "timer-finish": (3, 0.5)}
+SYSTEM_CUES = {"settings-click": "bulbul_systemse_click.wav", "settings-cancel": "bulbul_systemse_cancel.wav"}
 
 
 def component(type_id, data):
     return {"type": type_id, "version": 1, "data": data}
 
 
-def make_probe(example, source, furniture, output):
+def make_probe(example, source, furniture, output, audio_playback=None):
     import re
 
     master = source / "Assets/App/BulbulAssets/MasterData/ScriptableObjects/TimerSeMaster.asset"
@@ -28,6 +29,17 @@ def make_probe(example, source, furniture, output):
         if original.suffix.lower() != ".ogg":
             raise ValueError(f"Expected OGG for {slot}")
         audio[slot] = (original, volume)
+    if audio_playback is not None:
+        playback = audio_playback.resolve(strict=True)
+        repairs = json.loads((playback / "audio-repairs.json").read_text(encoding="utf-8"))["repairs"]
+        for slot, name in SYSTEM_CUES.items():
+            original = source / "Assets/App/BulbulAssets/Audio/SE" / name
+            sha = digest(original)
+            entry = repairs[f"media/{sha}.wav"]
+            corrected = (playback / entry["media"]).resolve(strict=True)
+            if corrected.parent != playback or digest(corrected) != entry["sha256"] or entry["sourceSHA256"] != sha:
+                raise ValueError(f"Invalid playback media for {slot}")
+            audio[slot] = (corrected, 1.0)
 
     level = json.loads((furniture / "assets/furniture.azurelevel").read_text(encoding="utf-8"))
     import_record = level["sceneImports"]["recovery-furniture"]
@@ -44,11 +56,13 @@ def make_probe(example, source, furniture, output):
             "azure.game-ui": component("azure.game-ui", {"asset": "assets:/timer.rml", "enabled": True}),
         },
     })
-    for slot, (_, volume) in audio.items():
+    for slot, (original, volume) in audio.items():
         level["nodes"].append({
             "id": slot,
             "components": {
-                "azure.audio-source": component("azure.audio-source", {"asset": f"assets:/{slot}.ogg", "volume": volume}),
+                "azure.audio-source": component(
+                    "azure.audio-source", {"asset": f"assets:/{slot}{original.suffix}", "volume": volume},
+                ),
             },
         })
 
@@ -59,7 +73,7 @@ def make_probe(example, source, furniture, output):
     shutil.copytree(furniture / "assets/exchange", assets / "exchange",
                     ignore=shutil.ignore_patterns("dangling.azuresceneexchange*"))
     for slot, (original, _) in audio.items():
-        shutil.copyfile(original, assets / f"{slot}.ogg")
+        shutil.copyfile(original, assets / f"{slot}{original.suffix}")
     (assets / "room.azurelevel").write_text(json.dumps(level, indent=2) + "\n", encoding="utf-8")
 
 
@@ -67,10 +81,11 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--source", type=Path, required=True)
     parser.add_argument("--furniture", type=Path, required=True)
+    parser.add_argument("--audio-playback", type=Path)
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     example = Path(__file__).resolve().parents[2] / "examples/npr-room"
-    make_probe(example, args.source, args.furniture, args.output)
+    make_probe(example, args.source, args.furniture, args.output, args.audio_playback)
 
 
 if __name__ == "__main__":

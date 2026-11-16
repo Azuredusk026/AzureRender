@@ -2,6 +2,7 @@
 #include "rhi/VulkanPipelineCache.hpp"
 #include "runtime/InputPreferences.hpp"
 #include "runtime/ProjectReferenceViews.hpp"
+#include "runtime/ProjectSaveStore.hpp"
 #include "foundation/FramePacing.hpp"
 #include "assets/AssetDeformation.hpp"
 #include "AzureRenderApp.hpp"
@@ -98,8 +99,11 @@ AzureRenderApp::~AzureRenderApp() {
     cleanup();
 }
 
-void AzureRenderApp::run(
-    const AzureRenderOptions& options) {
+void AzureRenderApp::run(const AzureRenderOptions& options) {
+    run(options, {});
+}
+
+void AzureRenderApp::run(const AzureRenderOptions& options, const std::filesystem::path& saveRoot) {
     runOptions_ = options;
     azurerender::ProjectReferenceViews referenceConfiguration;
 #if AZURE_WITH_EDITOR
@@ -122,7 +126,7 @@ void AzureRenderApp::run(
     runtime_.start();
     }, [this] { runtime_.stop(); });
     if(!options.projectFile.empty() && !options.editorMode)
-    runtimeModules_.add({"runtime.project",1,{}, {"runtime.world"}}, [this,&options,views=std::move(referenceConfiguration.views)](auto&) {
+    runtimeModules_.add({"runtime.project",1,{}, {"runtime.world"}}, [this,&options,&saveRoot,views=std::move(referenceConfiguration.views)](auto&) {
     if (options.projectStartup) {
         if (std::filesystem::weakly_canonical(std::filesystem::u8path(options.projectFile)) != options.projectStartup->project().file)
             throw std::invalid_argument("Prepared startup does not match the project entry");
@@ -136,6 +140,8 @@ void AzureRenderApp::run(
         gameRuntime_->physics().setMeshResolver(azurerender::collisionMeshAssets(levelSession_->assets()));
         gameRuntime_->physics().validateScene(runtime_);
         scriptRuntime_ = azurerender::application::scripts(levelSession_->project(),runtime_,*gameRuntime_,levelSession_->assets());
+        if (!saveRoot.empty()) scriptRuntime_->setSaveStore(
+            std::make_shared<azurerender::ProjectSaveStore>(saveRoot, levelSession_->project().id));
         scriptRuntime_->setLevelHandler([this](std::string reference) { levelSession_->request(std::move(reference)); });
         gameRuntime_->setBeforeStep([this](double delta) { scriptRuntime_->fixedStep(delta); });
         gameRuntime_->setEventHandler([this](const auto& event) { scriptRuntime_->dispatch(event); });

@@ -1082,6 +1082,7 @@ add_library(AzureRuntime STATIC
     src/runtime/SceneRenderSnapshot.cpp
     src/runtime/RuntimeRenderSnapshotCache.cpp
     src/runtime/Project.cpp
+    src/runtime/ProjectSaveStore.cpp
     src/runtime/ProjectReferenceViews.cpp
     src/runtime/AssetDatabase.cpp
     src/runtime/AssetSourceCache.cpp
@@ -2503,6 +2504,9 @@ if(BUILD_TESTING)
     add_test(NAME AzureEngine.ProjectReferenceViews COMMAND AzureProjectReferenceViewsTests)
     target_link_libraries(AzureProjectTests PRIVATE AzureRuntime)
     add_test(NAME AzureEngine.Project COMMAND AzureProjectTests)
+    add_executable(AzureProjectSaveStoreTests tests/ProjectSaveStoreTests.cpp)
+    target_link_libraries(AzureProjectSaveStoreTests PRIVATE AzureRuntime)
+    add_test(NAME AzureEngine.ProjectSaveStore COMMAND AzureProjectSaveStoreTests "${CMAKE_CURRENT_BINARY_DIR}/project-save-tests")
     add_executable(AzureRuntimeLifecycleTests tests/RuntimeLifecycleTests.cpp)
     target_link_libraries(AzureRuntimeLifecycleTests PRIVATE AzureRuntime)
     add_test(NAME AzureEngine.RuntimeLifecycle COMMAND AzureRuntimeLifecycleTests)

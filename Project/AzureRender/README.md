@@ -2,6 +2,7 @@
 
 [房间游戏移植](docs/plans/2026-11-16-npr-room-reproduction.md)登记五场景、原资产及独立运行验收。
 [移植基线](docs/acceptance/npr-room/baseline.md)记录 Recovery 参考身份与核验范围。
+[房间计时回放](docs/acceptance/npr-room/room-probe.md)记录原音效、计时输入和本地存档。
 
 [编辑器场景管线准备验收](docs/acceptance/p0/2026-11-16-editor-background-preparation.md)记录驱动首次编译、预览缓存及两条原生工作流。
 [编辑器与渲染组合验收](docs/acceptance/p0/2026-11-16-editor-and-transparency-integration.md)记录画面、原生交互和托管工作流。

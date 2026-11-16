@@ -1,6 +1,8 @@
 local action
 local ui = {}
 local sounds = {}
+local saved
+local saves = 0
 
 self = {}
 function self:pressed(name)
@@ -13,6 +15,17 @@ end
 
 function self:find(id)
     return { audio_play = function() sounds[#sounds + 1] = id end }
+end
+
+function self:read_save(slot)
+    assert(slot == "pomodoro-settings")
+    return saved
+end
+
+function self:write_save(slot, value)
+    assert(slot == "pomodoro-settings")
+    saved = value
+    saves = saves + 1
 end
 
 local function step(seconds, input)
@@ -55,3 +68,30 @@ step(2)
 step(0, "timer-reset")
 expect("idle", "25:00")
 assert(sounds[8] == "timer-finish")
+
+step(0, "timer-work-up")
+step(0, "timer-break-up")
+step(0, "timer-rounds-up")
+expect("idle", "26:00")
+assert(saves == 3 and saved[1] == 1 and saved[2] == 26 and saved[3] == 6 and saved[4] == 3)
+step(0, "timer-toggle")
+step(0, "timer-work-down")
+expect("work", "26:00")
+assert(saves == 3)
+step(37)
+expect("work", "25:23")
+init()
+expect("idle", "26:00")
+assert(ui["timer-settings"] == "26m work · 6m break · 3 rounds")
+
+saved = {1, 999, 1, 99}
+init()
+expect("idle", "999:00")
+step(0, "timer-work-up")
+step(0, "timer-break-down")
+step(0, "timer-rounds-up")
+assert(saves == 3)
+
+saved = {2, 26, 0, 3}
+init()
+expect("idle", "25:00")
