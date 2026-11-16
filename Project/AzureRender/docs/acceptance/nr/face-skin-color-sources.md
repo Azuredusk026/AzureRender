@@ -696,6 +696,10 @@ Player 的 Vulkan 绘制 876 在六个同屏坐标均拥有通过深度和模板
 
 以三个脸缘点拟合局部项，得到约 2.62 的倍率。实际 Player 回放中，所有高于 1 的测试倍率均扩大六个位置的完整附件峰差。底光及后续颜色合成继续按原验收条件核对。[同阶段附件结果](evidence/2026-11-16/face-native-local-diffuse-output/qualification.json)和[验证归档](evidence/2026-11-16/face-native-local-diffuse-output/validation.zip)保存两端读数。
 
+Player 回放中，三个偏暗脸缘点的轮廓光红通道贡献为 0.22852 至 0.37280。仅关闭轮廓光时，六处不透明颜色附件的峰差由 0.23535 降至 0.14966。三个脸缘点在固定姿态最终显示图中三通道仍均偏暗。颜色附件和最终显示分别核对，脸部整帧门槛继续适用。
+
+[轮廓光输出结果](evidence/2026-11-16/face-retained-rim-output/qualification.json)和[验证归档](evidence/2026-11-16/face-retained-rim-output/validation.zip)保存轮廓光开关、六点读数及固定姿态显示差值。
+
 身体候选采用原生主光亮度饱和度。30,561 个无透明衣料覆盖的皮肤内部位置中，超过一个色阶的数量在 NVIDIA 上为 627，在 Intel 上为 581；配对对照分别为 11,018 和 10,522。皮肤区域之外逐像素一致。全皮肤新增超差分别为 6 和 17 处，均为两个色阶，候选未通过新增误差门槛。
 
 新增超差的 23 个位置从原生身体绘制至最终颜色保持一致。17 个位置的超差通道需降低，6 个位置需提高。Intel 有 2 个位置距皮肤边界超过六个像素。继续按实际片元核对颜色和覆盖。[通道差值核对](evidence/2026-11-16/body-saturation-signed-edge/qualification.json)和[验证归档](evidence/2026-11-16/body-saturation-signed-edge/validation.zip)保存逐点结果。
