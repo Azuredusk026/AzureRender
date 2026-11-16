@@ -23,10 +23,25 @@ Backspace 取消待处理请求，Enter 在取消或失败后重新准备房间�
 
 固定步回放与故障恢复均无脚本或表现错误。
 原生脚本单测覆盖关卡预加载、取消、错误读取和修复后提交。
+CoreCLR 9.0.22 的独立 Player 也通过了预加载、取消、错误读取与再次进入目标关卡。
 本机开发工程位于 `assets_private/npr-room-dev/room-startup-probe`，其 `validation` 目录保留 Release Player、构建摘要及回放证据。
 该 Player 通过工作树的相关源码和本机 Release 库链接。
 项目移入私有目录后再次通过项目校验。
 完整构建和发布验证按对应门禁执行。
+
+## 房间几何集成
+
+集成工程使用已保存的房间关卡、主相机和三个不透明材质槽。
+通过原变换标识定位桌椅，保留场景节点及资源 UUID。
+桌椅使用带原贴图的 GLB，椅子使用按原采样生成的窗边片段。
+房间包含 283 个节点，其中六个节点用于计时界面及声源。模型资源为 194 项。
+装配时复用同卷的网格文件。
+
+集成工程完成 850 帧回放，消费 23 个输入事件，播放五次原音效。
+Player 在原主相机取景下生成两张 1280×720 画面。
+浏览预览可使用本机私有目录中的 `reference-preview/room-integrated.png`。
+集成工程位于 `assets_private/npr-room-dev/room-integrated`，移入私有目录后通过项目校验。
+全材质、灯光与角色动作按对应验收项实现。
 
 | 证据 | 标识 |
 | --- | --- |
@@ -34,6 +49,12 @@ Backspace 取消待处理请求，Enter 在取消或失败后重新准备房间�
 | 回放运行报告 SHA-256 | `544635c33c4d4b933cb9f7694b2a52dc0f08cbaa50293022baa20f8f7bc7eccc` |
 | 修复前状态 SHA-256 | `6fda0b8c71d1a022973a293913c09ecd4fedd4adc5f3a0dcea7e92d9b32f45cb` |
 | 修复后状态 SHA-256 | `8dc731e4415533794d8b68a92348185d9df17c3115ea408c1e6f7372525ca10c` |
+| 托管脚本回放 | 共享队列 1631 |
+| 托管运行报告 SHA-256 | `7a81abec20fb05f6937486e7ac9cb235638602bd7414593563c494d6c5e2f6bc` |
+| 集成回放与取景 | 共享队列 1632、1633 |
+| 集成房间 SHA-256 | `ba67c2568d0d0c7cbbc94907007d33e1d6e386707cf4036f1ffbe8d2bc1db026` |
+| 集成回放 SHA-256 | `2acd39e5c7fa82591296c980ae48afe3595b6718c16252c62c0bee36b81018ab` |
+| 取景画面 SHA-256 | `0180fd238a669f741005f7bc98838f9e7c32d9288cb08d0c352cae69dd05d752` |
 
 ## 复验
 
@@ -41,6 +62,7 @@ Backspace 取消待处理请求，Enter 在取消或失败后重新准备房间�
 
 ```powershell
 python -B tools/npr_room/build_room_probe.py --source $unitySource --furniture $importedFurnitureProject --audio-playback $audioPlayback --startup-flow --output $roomStartupProbe
+python -B tools/npr_room/build_room_probe.py --source $unitySource --furniture $importedFurnitureProject --audio-playback $audioPlayback --room-geometry $importedRoomProject --startup-flow --output $integratedRoom
 python -B tools/npr_room/test_pomodoro_runtime.py --lua $luaDll
 python -B tools/npr_room/test_room_startup_player.py --player $player --project $roomProject --output $startupReplay --resource-root $releaseBuild
 ```
