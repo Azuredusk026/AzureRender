@@ -1,0 +1,10 @@
+{
+  "formatVersion": 1,
+  "status": "staged",
+  "textures": 570,
+  "fonts": 7,
+  "slots": 577,
+  "uniquePayloads": 574,
+  "payloadBytes": 250805857,
+  "manifestSHA256": "bf7f2b728c5ca5396efc5bff8386578ec7e2ebbc5227c6c0e369af9177fad17f"
+}
