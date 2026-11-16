@@ -41,6 +41,17 @@ Addressables 有 3,687 个键和 1,845 个加载位置。
 Recovery 记录了相同 GUID 及缺少的程序集。
 运行时按加载路径核对该项是否需要移植。
 
+## 动态加载入口
+
+Recovery 应用显式调用 Unity `Resources` 或 Addressables 初始化和加载的入口共有七处。
+启动流程从 `AssetLoadHolder` 获取作用域设置，从 `MasterData` 标签加载 20 个表。
+内置消息含一个本地图像键，其 Sprite 加载位置与同名纹理位置分别登记。
+`WebEnv` 运行配置和三个环境档均可按键对账。
+项目作用域的两个 `Resources` 备用键在导出目录中无对应文件。场景直接持有 `AssetLoadHolder` 与 `RoomLifetimeScope`，Recovery 独立运行已验证从 Boot 到达 RoomScene。备用分支的可达性按故障路径复验。
+
+Windows 构建的 `StreamingAssets` 有 18 个实际文件，涵盖 12 个 Addressables 资源包、来源着色器包和启动配置。清单登记相对路径、大小和摘要。
+本机私有清单 `source-lock/dynamic-loads.json` 的 SHA-256 为 `7d6da7d097057dc5491893881c8932dfac46c9ca6f50a7b952664ddb44e253ce`。
+
 ## 功能验收矩阵
 
 表内的静态来源位于 Recovery 导出工程。
@@ -67,9 +78,9 @@ Recovery 记录了相同 GUID 及缺少的程序集。
 剧情主表包含 610 个组和 2,289 条命令。
 命令值共有 44 种，按实际使用语义迁移。
 本地化主表含 2,111 条记录。
-目录登记简繁中文、日语、英语、韩语和俄语。
-脚本另有葡萄牙语字段及读取分支。
-Windows 菜单可选项继续复核。
+Windows 的 `SettingUI` 绑定七种语言按钮，覆盖简繁中文、日语、英语、巴西葡萄牙语、韩语和俄语。
+剧情与本地化主表提供七种语言的读取分支。
+Windows Addressables 目录另登记六种界面字符串表，葡萄牙语的实际界面回退行为由运行回放确认。
 
 剧情清单保留原始顺序及 26 个重复命令 ID。
 组内选项和跳转使用首个匹配项。
@@ -141,6 +152,7 @@ python -B -m unittest discover -s tools/npr_room -p "test_*inventory.py"
 python -B -m unittest discover -s tools/npr_room -p "test_catalog_locations.py"
 python -B tools/npr_room/reference_inventory.py --recovery $recovery --output $localInventory
 python -B tools/npr_room/story_inventory.py --source $unitySource --output $localStory
+python -B -m tools.npr_room.dynamic_load_inventory --source $unitySource --inventory $localInventory --recovery $recovery --output $localDynamicLoads
 ```
 
 输出指向项目受管目录中的新文件。
