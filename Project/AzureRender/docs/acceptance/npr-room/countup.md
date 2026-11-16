@@ -26,7 +26,23 @@ T 开始、暂停或恢复，R 结束。
 三次运行均无脚本或表现错误，退出后缓冲与图像计数均为零。
 本机工程位于 `assets_private/npr-room-dev/room-countup`，移动后通过项目校验。
 
+## 计时控件
+
+模式、开始或暂停、结束按钮与相应按键使用同一项目动作。
+生产 Player 在 1280×720、1920×1080 和 1280×800 分别处理四次 RmlUi 点击和一次键盘暂停。
+每档播放五次原音效，保存一秒工作时间，退出后释放全部缓冲与图像。
+更新后的 Player 同时通过五关卡启动、取消及重进回归回放。
+
+共享队列任务 1640 记录三档控件回放。任务 1641 记录启动回归。
+三档清单摘要为 `15305d90cd3787b0e0f78aadd79416b974b4f51109cd0ef405fec44ff45c02c2`。
+本机工程位于 `assets_private/npr-room-dev/room-timer-ui`。
+三档画面位于 `reference-preview/timer-ui`。
+完整原版界面与本地化按专项矩阵验收。
+
+## 复验
+
 ```powershell
 python -B tools/npr_room/test_pomodoro_runtime.py --lua $luaDll
 python -B tools/npr_room/test_countup_player.py --player $player --project $roomProject --output $countupReplay --resource-root $releaseBuild
+python -B tools/npr_room/test_timer_ui_player.py --player $player --project $roomProject --output $timerUiReplay --resource-root $releaseBuild --size 1280 720
 ```

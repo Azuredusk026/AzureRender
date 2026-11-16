@@ -102,6 +102,22 @@ void AzureRenderApp::initializeValidation() {
 #endif
             throw std::logic_error("Editor input requires an editor host");
         }
+        if(domain=="game-ui"){
+            if(!gameUi_)throw std::logic_error("Game UI input requires an active document");
+            if(event.at("action")!="click")throw std::invalid_argument("Unsupported game UI input");
+            const auto id=event.at("target").get<std::string>();
+            const auto bounds=gameUi_->bounds(id);
+            const auto x=bounds[0]+bounds[2]/2, y=bounds[1]+bounds[3]/2;
+            if(!(bounds[2]>0 && bounds[3]>0 && x>=0 && y>=0
+                && x<static_cast<float>(renderExtent_.width) && y<static_cast<float>(renderExtent_.height)))
+                throw std::invalid_argument("Game UI target is outside the viewport");
+            const auto pixelX=static_cast<int>(x),pixelY=static_cast<int>(y);
+            if(!gameUi_->wantsPointer(pixelX,pixelY))
+                throw std::invalid_argument("Game UI target has no pointer interaction");
+            gameUi_->pointer(pixelX,pixelY,true);
+            gameUi_->pointer(pixelX,pixelY,false);
+            return nlohmann::json{{"clicked",id},{"domain",domain}};
+        }
         if(domain!="game")throw std::invalid_argument("Unknown input domain");
         if(!activeGame())throw std::logic_error("Input requires an active project");
         if(!gameInputReplay_) {

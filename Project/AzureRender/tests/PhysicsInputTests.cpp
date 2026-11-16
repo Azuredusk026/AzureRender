@@ -44,6 +44,14 @@ int main() {try {
  InputActions input;input.configure(application::explorationConfiguration().at("input"));input.bind("jump",32);input.key(32,true);input.key(32,true);check(input.pressed("jump") && input.down("jump"));
  input.endStep();check(!input.pressed("jump") && input.down("jump"));input.setFocused(false);check(!input.down("jump"));
  input.setFocused(true);input.key(82,true);check(input.pressed("restart"));input.endStep();check(!input.pressed("restart"));
+ input.setFocused(false);
+ check(!input.activate("unbound") && input.activate("restart"));
+ input.setFocused(false);
+ check(input.pressed("restart") && !input.down("restart"));
+ input.endStep();
+ check(!input.pressed("restart"));
+ input.activate("restart");input.release();
+ check(!input.pressed("restart"));
  RuntimeLifecycle runtime;setup(runtime);GameRuntime game(runtime,application::systems(),application::explorationConfiguration());for(int i=0;i<180;++i)game.advance(1.0/60.0);
  auto hero=runtime.entity("hero");auto* transform=runtime.world().tryGet<ecs::TransformComponent>(hero);
  check(transform->translation[1]>0.8F && transform->translation[1]<1.2F);check(game.physics().grounded(hero));

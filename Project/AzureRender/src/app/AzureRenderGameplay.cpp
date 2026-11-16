@@ -251,6 +251,8 @@ void AzureRenderApp::synchronizeGameUi(){
 #endif
                     if(levels){levels->request(levels->currentReference());
                         if(runtime->state()==azurerender::RuntimeLifecycle::State::Paused)runtime->resume();}
+                }else if(auto* game=activeGame()){
+                    game->input().activate(action);
                 }
             });
         }

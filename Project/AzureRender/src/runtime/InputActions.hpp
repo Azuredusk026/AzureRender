@@ -33,10 +33,16 @@ public:
         else down_.erase(key);
     }
     bool down(const std::string& action) const { return active(action, down_); }
-    bool pressed(const std::string& action) const { return active(action, pressed_); }
-    void endStep() { pressed_.clear(); }
-    void release() { down_.clear(); pressed_.clear(); }
-    void setFocused(bool value) { focused_ = value; if (!value) release(); }
+    bool activate(const std::string& action) {
+        if (!hasAction(action)) return false;
+        activated_.insert(action);
+        return true;
+    }
+    bool pressed(const std::string& action) const { return activated_.count(action) != 0 || active(action, pressed_); }
+    void endStep() { pressed_.clear(); activated_.clear(); }
+    void release() { down_.clear(); endStep(); }
+    // Keyboard focus can move to the UI that emitted the action.
+    void setFocused(bool value) { focused_ = value; if (!value) { down_.clear(); pressed_.clear(); } }
     bool focused() const noexcept { return focused_; }
 private:
     bool active(const std::string& action, const std::set<int>& keys) const {
@@ -48,5 +54,6 @@ private:
     bool focused_ = true;
     std::map<std::string, std::set<int>> bindings_;
     std::set<int> down_, pressed_;
+    std::set<std::string> activated_;
 };
 }
