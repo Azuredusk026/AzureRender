@@ -1,0 +1,232 @@
+{
+  "status": "diagnosed-native-temporal-history-writer",
+  "strictReflection": false,
+  "pairedRenderedCandidate": false,
+  "queue": {
+    "id": 1460,
+    "task": "nr-native-reflection-temporal-writer-bindings",
+    "state": "succeeded",
+    "exitCode": 0,
+    "elapsedSeconds": 5.562999999994645
+  },
+  "nativeCapture": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261022-201845-endfield-capture-954719\\Endfield-games-child_frame3534.rdc",
+  "relatedEvidence": {
+    "results.json:projected-history-native-lineage": "21d3f0bc6276863bf8e2a25abbae237d867b843c984cac2656e1e7ed97037b01",
+    "results.json:projected-history-player-lineage": "1a2e66df7030ffec80c0139cf85c160f917982ed7ac10bb337a23b6abaaf5d34",
+    "results.json:projected-history-native-temporal-writer": "875f10d5477fc8e8c674d68ec38995c33b1b87a3c9042145c44870a21df70268"
+  },
+  "temporalPass": {
+    "event": 11195,
+    "shader": "b84733f669ffdc63699e603c7e276a8992ed3a4220da4aae2a2936dc8eab0509",
+    "inputs": {
+      "0": {
+        "resource": {
+          "resource": "ResourceId::33852",
+          "format": "R11G11B10_FLOAT",
+          "size": [
+            2560,
+            1440
+          ],
+          "name": "2D Render Target 33852"
+        },
+        "name": "texture0"
+      },
+      "1": {
+        "resource": {
+          "resource": "ResourceId::15849",
+          "format": "D32S8_TYPELESS",
+          "size": [
+            2560,
+            1440
+          ],
+          "name": "2D Depth Target 15849"
+        },
+        "name": "texture1"
+      },
+      "2": {
+        "resource": {
+          "resource": "ResourceId::15751",
+          "format": "R10G10B10A2_UNORM",
+          "size": [
+            2560,
+            1440
+          ],
+          "name": "2D Render Target 15751"
+        },
+        "name": "texture2"
+      },
+      "3": {
+        "resource": {
+          "resource": "ResourceId::15748",
+          "format": "R8_UNORM",
+          "size": [
+            640,
+            360
+          ],
+          "name": "2D Render Target 15748"
+        },
+        "name": "texture3"
+      },
+      "4": {
+        "resource": {
+          "resource": "ResourceId::14664",
+          "format": "R16G16B16A16_FLOAT",
+          "size": [
+            2560,
+            1440
+          ],
+          "name": "2D Render Target 14664"
+        },
+        "name": "texture4"
+      }
+    },
+    "output": {
+      "resource": "ResourceId::16349",
+      "format": "R16G16B16A16_FLOAT",
+      "size": [
+        2560,
+        1440
+      ],
+      "name": "2D Render Target 16349"
+    },
+    "outputSha256": "0dc2fbd314f20afdce56e21d63635dd10dd931b22df82b8497422103cf8ede26",
+    "historySha256": "9667b36a4cf8716ca807be9a5ea270b47c8981fd38427dc22304e649ffa679a8",
+    "nativeReferenceReflectionEvents": [
+      8702,
+      8713,
+      8723
+    ],
+    "laterDisplayReaders": [
+      11205,
+      11359
+    ]
+  },
+  "comparison": {
+    "scope": "Same-address HDR attachment comparison; temporal history and current color can have different visibility and times. This is not a replay of native temporal accumulation.",
+    "playerMain": {
+      "event": 27513,
+      "resource": "ResourceId::175",
+      "sha256": "8da9af1adb21cb35ef7662b93420ba471c977db04c84db4587fe62c6fdcef454"
+    },
+    "groups": {
+      "all": {
+        "nativePrevious": {
+          "samples": 74,
+          "improved": 43,
+          "worsened": 31,
+          "unchanged": 0,
+          "meanAbsolute": [
+            0.23083468243252547,
+            0.10170230033714787
+          ],
+          "highError": [
+            55,
+            31
+          ]
+        },
+        "nativeTemporal": {
+          "samples": 74,
+          "improved": 43,
+          "worsened": 31,
+          "unchanged": 0,
+          "meanAbsolute": [
+            0.1850619697347327,
+            0.05771721223502948
+          ],
+          "highError": [
+            37,
+            14
+          ]
+        }
+      },
+      "glyphOnly": {
+        "nativePrevious": {
+          "samples": 27,
+          "improved": 27,
+          "worsened": 0,
+          "unchanged": 0,
+          "meanAbsolute": [
+            0.4043943622700691,
+            0.05742251836371965
+          ],
+          "highError": [
+            27,
+            3
+          ]
+        },
+        "nativeTemporal": {
+          "samples": 27,
+          "improved": 27,
+          "worsened": 0,
+          "unchanged": 0,
+          "meanAbsolute": [
+            0.3958554389429906,
+            0.054200906928489063
+          ],
+          "highError": [
+            27,
+            4
+          ]
+        }
+      },
+      "boxesWithoutGlyph": {
+        "nativePrevious": {
+          "samples": 45,
+          "improved": 14,
+          "worsened": 31,
+          "unchanged": 0,
+          "meanAbsolute": [
+            0.12059194771122134,
+            0.11666909290842889
+          ],
+          "highError": [
+            26,
+            26
+          ]
+        },
+        "nativeTemporal": {
+          "samples": 45,
+          "improved": 14,
+          "worsened": 31,
+          "unchanged": 0,
+          "meanAbsolute": [
+            0.05206480782329718,
+            0.04789121522050504
+          ],
+          "highError": [
+            8,
+            8
+          ]
+        }
+      },
+      "both": {
+        "nativePrevious": {
+          "samples": 0,
+          "improved": 0,
+          "worsened": 0,
+          "unchanged": 0
+        },
+        "nativeTemporal": {
+          "samples": 0,
+          "improved": 0,
+          "worsened": 0,
+          "unchanged": 0
+        }
+      }
+    }
+  },
+  "validation": {
+    "archiveSha256": "d26b87bfec6781b65035161ac2e130163de5c8e499a7cc2d7892620fb6e29324",
+    "files": {
+      "raw/results.json": "875f10d5477fc8e8c674d68ec38995c33b1b87a3c9042145c44870a21df70268",
+      "raw/request.json": "2aca291dbba13e0b51f291be59b3a42956ee025a890e53bad642a1b378da81b1",
+      "raw/event-11127.asm": "6cd15cb9f9fa3555ba65de3ddfbde02d720d6a773c527230ddced33c1255e23c",
+      "raw/event-11195.asm": "c462664fa70161b1606b3b0fd8ad0cb4c1595dea4ebb5e6a64f742817dde8515",
+      "raw/hdr-source-comparison.json": "29c652aa978c806708bb65bf6d3358d442b6ceb797e885e7322930cb2fcf4314",
+      "sources/projected-history-native-temporal-writer.py": "c3fdda31dd479cdd06ec7f916a41ea43e764e633ed13b1eb7ae7d180fed1c703",
+      "sources/score-projector-actual-hdr-source-transfer.py": "b695fd942810eee97c92080780f51547a1551ae9831a5885ba75b7b8ca784da0",
+      "sources/run-with-stage-log.py": "edc0a9392285e7198606af2710bebefa9e6fc7abe5b5b369f2caa6d3ea4eb3a3",
+      "raw/dispatch-run.log": "68864ddb051995ada6ac1a582391d6ae89feeebd51e5f2426545f310a540fa78"
+    }
+  }
+}

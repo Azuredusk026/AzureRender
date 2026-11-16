@@ -1441,6 +1441,8 @@ Intel 头发颜色继续按冻结区域核对纹理选级。
 
 [反射历史图层](../acceptance/nr/scene-material-quality-diagnosis.md#反射历史图层合成)通过双设备小场景合成核对；中央地面、青色环带及原始冻结图继续按区域门槛验收。
 
+[原生时间合成](../acceptance/nr/scene-material-quality-diagnosis.md#原生反射历史的时间合成)确认反射与主画面时间合成共用上一帧 HDR 输入。固定取色对照确认字形与货箱的颜色还需要分别核对。
+
 [联合场景字形提交](../acceptance/nr/scene-material-quality-diagnosis.md#联合场景字形提交)完成双设备配对。首帧逐像素一致，第二帧中央亮度和邻区新增超差仍未通过。
 
 [播放器冻结画面](../acceptance/nr/scene-material-quality-diagnosis.md#播放器冻结画面)通过当前 NVIDIA 驱动的四帧回归；原始冻结图的四帧峰差为 1、7、37、23，逐像素门槛待验收。
