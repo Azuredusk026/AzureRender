@@ -1,0 +1,154 @@
+{
+  "status": "bounded-cpu-model-formal-acceptance-open",
+  "priorEvidence": "../projected-history-radiance-footprints/results.json",
+  "controlMaximumError": 0.0006700999326966495,
+  "priorMinusCurrentCameraShiftPixelRange": [
+    [
+      0.4998779296875,
+      -0.33336639404296875
+    ],
+    [
+      0.500030517578125,
+      -0.3331947326660156
+    ]
+  ],
+  "scope": "Use the current native glyph material and geometry at unique projected primitives, composited only over old Player prior color. Earlier screen projection uses the captured earlier trace camera. Previous material animation phase and final filtering are not measured.",
+  "adaptiveSourceDecision": "Actual attachment ownership and blending order must be verified before authoring a history source.",
+  "cases": {
+    "native": {
+      "centerFloor": {
+        "footprintAddressSamples": 1136,
+        "uniquePrimitiveSamples": 451,
+        "baseMedian": -0.11743076572126204,
+        "baselineMeanWeightedAbsoluteLuma": 0.15987390896551693,
+        "overshootAbovePoint02Before": 1,
+        "currentNativeProjection": {
+          "positiveSource": 451,
+          "remainingNegativeAbovePoint02": 200,
+          "compositedMedian": -0.016043197345381746,
+          "compositedMeanWeightedAbsoluteLuma": 0.03774384943925069,
+          "overshootAbovePoint02After": 60
+        },
+        "priorNativeProjection": {
+          "positiveSource": 346,
+          "remainingNegativeAbovePoint02": 137,
+          "compositedMedian": -0.011942209569912508,
+          "compositedMeanWeightedAbsoluteLuma": 0.05529178006347482,
+          "overshootAbovePoint02After": 164
+        }
+      },
+      "cyanRing": {
+        "footprintAddressSamples": 301,
+        "uniquePrimitiveSamples": 160,
+        "baseMedian": -0.08018630283657323,
+        "baselineMeanWeightedAbsoluteLuma": 0.13152185252999501,
+        "overshootAbovePoint02Before": 1,
+        "currentNativeProjection": {
+          "positiveSource": 160,
+          "remainingNegativeAbovePoint02": 89,
+          "compositedMedian": -0.0256503871579378,
+          "compositedMeanWeightedAbsoluteLuma": 0.03908439374228528,
+          "overshootAbovePoint02After": 3
+        },
+        "priorNativeProjection": {
+          "positiveSource": 145,
+          "remainingNegativeAbovePoint02": 55,
+          "compositedMedian": -0.012549622520981515,
+          "compositedMeanWeightedAbsoluteLuma": 0.05110974719921656,
+          "overshootAbovePoint02After": 47
+        }
+      },
+      "archivedFloor": {
+        "footprintAddressSamples": 1228,
+        "uniquePrimitiveSamples": 391,
+        "baseMedian": -0.01980201125503367,
+        "baselineMeanWeightedAbsoluteLuma": 0.08520702514855738,
+        "overshootAbovePoint02Before": 54,
+        "currentNativeProjection": {
+          "positiveSource": 391,
+          "remainingNegativeAbovePoint02": 160,
+          "compositedMedian": -0.016788067787476116,
+          "compositedMeanWeightedAbsoluteLuma": 0.02923370802933925,
+          "overshootAbovePoint02After": 15
+        },
+        "priorNativeProjection": {
+          "positiveSource": 308,
+          "remainingNegativeAbovePoint02": 177,
+          "compositedMedian": -0.01736266759132976,
+          "compositedMeanWeightedAbsoluteLuma": 0.0389614474165098,
+          "overshootAbovePoint02After": 74
+        }
+      }
+    },
+    "player": {
+      "centerFloor": {
+        "footprintAddressSamples": 1301,
+        "uniquePrimitiveSamples": 515,
+        "baseMedian": -0.09155332790024895,
+        "baselineMeanWeightedAbsoluteLuma": 0.11897400582843375,
+        "overshootAbovePoint02Before": 0,
+        "currentNativeProjection": {
+          "positiveSource": 515,
+          "remainingNegativeAbovePoint02": 150,
+          "compositedMedian": 0.01091603887959934,
+          "compositedMeanWeightedAbsoluteLuma": 0.08384469786765256,
+          "overshootAbovePoint02After": 246
+        },
+        "priorNativeProjection": {
+          "positiveSource": 460,
+          "remainingNegativeAbovePoint02": 193,
+          "compositedMedian": -0.014068133616331371,
+          "compositedMeanWeightedAbsoluteLuma": 0.044121019789813656,
+          "overshootAbovePoint02After": 162
+        }
+      },
+      "cyanRing": {
+        "footprintAddressSamples": 232,
+        "uniquePrimitiveSamples": 129,
+        "baseMedian": -0.06254043575652805,
+        "baselineMeanWeightedAbsoluteLuma": 0.11234272882581181,
+        "overshootAbovePoint02Before": 0,
+        "currentNativeProjection": {
+          "positiveSource": 129,
+          "remainingNegativeAbovePoint02": 24,
+          "compositedMedian": 0.0626227874844155,
+          "compositedMeanWeightedAbsoluteLuma": 0.06950332321024287,
+          "overshootAbovePoint02After": 72
+        },
+        "priorNativeProjection": {
+          "positiveSource": 115,
+          "remainingNegativeAbovePoint02": 38,
+          "compositedMedian": -0.014080084571712254,
+          "compositedMeanWeightedAbsoluteLuma": 0.04082404023364587,
+          "overshootAbovePoint02After": 39
+        }
+      },
+      "archivedFloor": {
+        "footprintAddressSamples": 1268,
+        "uniquePrimitiveSamples": 478,
+        "baseMedian": -0.017937509628644766,
+        "baselineMeanWeightedAbsoluteLuma": 0.06543697835303777,
+        "overshootAbovePoint02Before": 38,
+        "currentNativeProjection": {
+          "positiveSource": 478,
+          "remainingNegativeAbovePoint02": 178,
+          "compositedMedian": -0.015001821259497117,
+          "compositedMeanWeightedAbsoluteLuma": 0.046139290223444734,
+          "overshootAbovePoint02After": 79
+        },
+        "priorNativeProjection": {
+          "positiveSource": 385,
+          "remainingNegativeAbovePoint02": 181,
+          "compositedMedian": -0.01617798354095086,
+          "compositedMeanWeightedAbsoluteLuma": 0.029316462483314012,
+          "overshootAbovePoint02After": 72
+        }
+      }
+    }
+  },
+  "entries": {
+    "comparison.json": "a506f5a63bf40aaffd9c88f3de67eaa6ce7b3a228876ac4607b5fe08ccbb8952",
+    "reproduce.py": "f020515b1ae18decda6de5b3457412409b043eed6a1630b362b800cd505b68d5"
+  },
+  "archiveSha256": "ce7258587fbc7692161dacd2d2d4c551e39297f86a81c2645001c0f86f9231b4"
+}
