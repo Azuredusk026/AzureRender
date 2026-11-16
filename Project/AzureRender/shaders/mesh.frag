@@ -13,6 +13,12 @@ layout(full_quads) in;
 #if defined(AZURE_ORDINARY_EARLY_DEPTH) && !defined(AZURE_SURFACE_RADIANCE_FAST)
 layout(early_fragment_tests) in;
 #endif
+#if !defined(AZURE_OPAQUE_SNAPSHOT) && !defined(AZURE_GEOMETRY_SAMPLES) && \
+    !defined(AZURE_ORDINARY_EARLY_DEPTH) && !defined(AZURE_SURFACE_RADIANCE_REUSE) && \
+    !defined(AZURE_HAIR_PIXEL_INTEGRAL) && !defined(AZURE_PROJECTED_HISTORY_LAYER) && !defined(AZURE_VIEW_FOG)
+#define AZURE_FACE_RECEIVER_DEPTH 1
+layout(depth_less) out float gl_FragDepth;
+#endif
 #include "node_opacity.glsl"
 #if defined(AZURE_VIEW_FOG)
 #include "view_fog.glsl"
@@ -784,6 +790,9 @@ void main()
     [[maximally_reconverges]]
 #endif
 {
+#if defined(AZURE_FACE_RECEIVER_DEPTH)
+    gl_FragDepth = gl_FragCoord.z;
+#endif
     azurePreparePrimaryUv(textureCoordinate);
     prepareShadowReceiver();
 #if defined(AZURE_SURFACE_RADIANCE_REUSE) && defined(AZURE_OPAQUE_SNAPSHOT)
@@ -2344,6 +2353,25 @@ void main()
 #endif
         compositeCoverage*=compositeProfile.y;
         if(compositeProfile.w>.5&&compositeCoverage<=0.0)discard;
+#if defined(AZURE_FACE_RECEIVER_DEPTH)
+        if (compositeProfile.w > 0.5 && compositeProfile.x > 1.5) {
+            ivec2 pixel = ivec2(AZURE_FRAGMENT_COORD.xy);
+            ivec2 extent = textureSize(opaqueSceneColor, 0);
+            if (all(greaterThan(pixel, ivec2(0))) && all(lessThan(pixel, extent - ivec2(1)))) {
+                const ivec2 dx = ivec2(1, 0);
+                const ivec2 dy = ivec2(0, 1);
+                bool row = texelFetch(opaqueSceneColor, pixel - dx, 0).a > 1.5 &&
+                           texelFetch(opaqueSceneColor, pixel + dx, 0).a > 1.5;
+                bool column = texelFetch(opaqueSceneColor, pixel - dy, 0).a > 1.5 &&
+                              texelFetch(opaqueSceneColor, pixel + dy, 0).a > 1.5;
+                // Keep the receiver silhouette at its rasterized depth.
+                if (row || column) {
+                    uint depth = floatBitsToUint(gl_FragCoord.z);
+                    gl_FragDepth = uintBitsToFloat(max(depth, 2u) - 2u);
+                }
+            }
+        }
+#endif
         outputColor.rgb=mix(vec3(1.0),outputColor.rgb,compositeCoverage);
         outputColor.a=0.0;
     }
