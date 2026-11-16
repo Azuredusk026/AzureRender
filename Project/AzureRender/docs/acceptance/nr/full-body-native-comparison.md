@@ -42,6 +42,8 @@ Intel 单独输出反射分量时，两次默认采集逐像素一致。串行�
 
 仅由主线程录制次级命令时，两次成片仍出现两种结果。第一帧与串行成片一致，第二帧与已有波动帧一致。后续需分别核对次级命令执行和并行场景准备。[录制路径核对](evidence/2026-11-16/joint-character-secondary-recording/qualification.json)及[验证归档](evidence/2026-11-16/joint-character-secondary-recording/validation.zip)保存两组对照、帧差、源码和构建收据。
 
+Intel 将反射计算写入主命令缓冲区时，保留并行场景准备及其他绘制的录制方式。两次实际成片与串行对照逐像素一致。另一次同步验证确认验证层已加载，未报告同步或布局错误。[主命令缓冲区对照](evidence/2026-11-16/joint-character-reflection-primary/qualification.json)及[验证归档](evidence/2026-11-16/joint-character-reflection-primary/validation.zip)保存成片差量、构建和验证层记录。
+
 ## 采集范围
 
 角色根节点相对方向覆盖正向、左右四分之三侧向、左右侧向及背向六个机位。NVIDIA 与 Intel 均以 1280×720 采集，使用同一联合场景、资产和动画起点。[六机位采集记录](evidence/2026-11-16/character-six-view-inputs/qualification.json)保存相机参数、图像摘要和冻结回归结果。当前 NVIDIA 驱动下的四帧冻结回归逐像素一致；原始冻结图的 RGB 峰值差为 1、7、37、23。

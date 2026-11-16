@@ -1,0 +1,82 @@
+{
+  "status": "verified-intel-reflection-primary-repeat",
+  "strictBodyAcceptance": false,
+  "repeatedFrameExact": true,
+  "matchesExistingSerial": true,
+  "settingsScope": "only linear-temporal reflection-compute recording differed",
+  "primaryFrame": {
+    "png": "f55252639ef131b9c40373ec2340e105fbc81bfa22e8de72a7961de492c1b456",
+    "referencePng": "a9657b4558f9d3cb03872d60d5e9e979af3eb6eb6c1a69784096148ff6f73c35",
+    "raw": "fa3d9d2c38214b67761ec32039c6e52e6cb2dfc8ad48c3b23b860755976c0a8a",
+    "archive": "aec7ee41a33a6b67b09848bf789d3a4cecc84c3cac219f69f903d83ec6f85fca",
+    "changed": 319,
+    "overOne": 86,
+    "peak": 45,
+    "bounds": [
+      607,
+      99,
+      754,
+      712
+    ]
+  },
+  "synchronizationFindings": [],
+  "queue": [
+    {
+      "id": 1486,
+      "task": "nr-build-reflection-primary-recording-diagnostic",
+      "state": "succeeded",
+      "exitCode": 0,
+      "elapsedSeconds": 14.452999999994063
+    },
+    {
+      "id": 1487,
+      "task": "nr-joint-character-intel-reflection-primary-pair",
+      "state": "succeeded",
+      "exitCode": 0,
+      "elapsedSeconds": 176.20300000000861
+    },
+    {
+      "id": 1488,
+      "task": "nr-joint-character-intel-synchronization-validation",
+      "state": "succeeded",
+      "exitCode": 0,
+      "elapsedSeconds": 85.79699999999139
+    }
+  ],
+  "validation": {
+    "archive": "662554ade202fdf3dd5a146be3f1062a37a28ac105c8057ab5a68a028b86567f",
+    "files": {
+      "frames/intel-reflection-primary-a.zip": "aec7ee41a33a6b67b09848bf789d3a4cecc84c3cac219f69f903d83ec6f85fca",
+      "player/reflection-primary-a/command.json": "ad2dc584d20c41a2a15125853df822a115c3925f0c8708656c771d89bca106fb",
+      "player/reflection-primary-a/runtime.json": "05406e3ef9f1cd987f2d2a5a8678ef0b299c44d50e787f18840503c6976c6e22",
+      "player/reflection-primary-a/result.json": "eb82f7c7496057fa796f4e9df6d8cb988b8f92aaee43931397816ac3ace4978f",
+      "player/reflection-primary-a/player.log": "ec62eeff72f5120cd0a8d30abad5389108ddf037eafd50b4a5d3c6f8cf6fe5d8",
+      "player/reflection-primary-a/frames/capture_manifest.json": "87f64be5ced9f59c805b9c55f9d9687337c82f558ba40e954e0862e44f06511f",
+      "player/reflection-primary-a/frames/gpu_capabilities.json": "052830ed89bea19f0e9a17839082b9f979cfab2b17908f9ee83df5f0e0bcd85f",
+      "frames/intel-reflection-primary-b.zip": "ffc0de92156a45a361f32e35f680f2db3db5a97037f884c7ba2e5d06ece9a7a2",
+      "player/reflection-primary-b/command.json": "6f8898928d593e9e87c779f86fd07965d4ea058b3287cab25440c14d9fde3e9e",
+      "player/reflection-primary-b/runtime.json": "05406e3ef9f1cd987f2d2a5a8678ef0b299c44d50e787f18840503c6976c6e22",
+      "player/reflection-primary-b/result.json": "8ffa36da94268c5285d429a8d800c7929e8f721ad28a923e79fd9fe98011f6c7",
+      "player/reflection-primary-b/player.log": "4a8a4c23bced093ae38aaffdf9f3437af3822b1123c35c425b7c0a1ff927459c",
+      "player/reflection-primary-b/frames/capture_manifest.json": "b607737fc54ad0b7b652e6330fd65786ade55e613dfdec0c19d2b817bc3662cb",
+      "player/reflection-primary-b/frames/gpu_capabilities.json": "052830ed89bea19f0e9a17839082b9f979cfab2b17908f9ee83df5f0e0bcd85f",
+      "frames/intel-synchronization-validation.zip": "a0b49a376fbece5e25f98b581f8f3504b037ac8f01ceaeab1aa6a66bb34d9206",
+      "player/synchronization-validation/command.json": "c5a33b96da64e12c615d2014aa9e551522c1d7de573dcbd2df24f875db31e0d0",
+      "player/synchronization-validation/runtime.json": "05406e3ef9f1cd987f2d2a5a8678ef0b299c44d50e787f18840503c6976c6e22",
+      "player/synchronization-validation/result.json": "07b326e04789dff754ed63ded16dc8b01b4fd63537886f691360d9c183b2de39",
+      "player/synchronization-validation/player.log": "982803c11bfe7926561d21ab9e37a8702caaa009f73024279dcfa4f0cafb9acd",
+      "player/synchronization-validation/frames/capture_manifest.json": "d4dfa07b2d6c14c9d4646c5e90486de2752d147176ffb0f3d5cc5028e2220fd3",
+      "player/synchronization-validation/frames/gpu_capabilities.json": "052830ed89bea19f0e9a17839082b9f979cfab2b17908f9ee83df5f0e0bcd85f",
+      "build/AzureRenderFrame.cpp": "eb6bfab2323deacce60355abecb3ff92f3d20a0650b57d6d1d1e9c772d00cb6f",
+      "build/compile.log": "7991123a40220289b303a99a55dbc00a824b8ab0287f4547311ef6f8b6b95e67",
+      "build/link.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "build/qualification.json": "c0122dd8d0b0f13bab3ab692b322296aff19191e8696afa7bd3d30ebc7c9875f",
+      "build/player.rsp": "ef7e84c63a46f243c3e91e1a2b19834b9cd6a7a7264d68515a95a5c37f6b5c77",
+      "raw/intel-reflection-primary-qualification.json": "da8d7caccc51f352917daaf4cf02d1281fcc0e848249e377483606bb47159f92",
+      "raw/intel-sync-validation-qualification.json": "5232df37764638796f38457088eb2f3451f843d20721845f43cf0a7ac46cb704",
+      "sources/build-inline-secondary-diagnostic-player.py": "8df10c93f6828df29d1856f800308a458b5d13e9c240dedba7767e4d7d4af5f1",
+      "sources/joint-character-referenced-body.py": "605d92c4bb555c9c1b51b46b2dd222bdddfd2f9702a779268e882a43cbf6e740",
+      "sources/archive-intel-reflection-primary-pair.py": "c2aa035fd0491fd97e64408261e6e81825a207fbf899039ca25a446ec9cfc5ef"
+    }
+  }
+}
