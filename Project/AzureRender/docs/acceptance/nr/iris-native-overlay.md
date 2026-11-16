@@ -217,3 +217,11 @@ Intel 的剩余峰差位于 [1302,265]，为 27 个色阶。两个原生回放�
 NVIDIA 的 4 处和 Intel 的 9 处剩余超差位于原生眼影覆盖区，覆盖区外分别为 1 处和 5 处。两块显卡的多数剩余误差表现为蓝通道偏高。完整虹膜继续按一个色阶验收。
 
 [双设备组合结果](evidence/2026-11-16/iris-joint-main-frame-footprint-precision/qualification.json)和[验证归档](evidence/2026-11-16/iris-joint-main-frame-footprint-precision/validation.zip)保存所有超差坐标及可复算帧差。
+
+### 眼影乘色后的附件精度
+
+联合场景使用不透明快照中的虹膜颜色计算乘色结果，并按原生附件精度截断。NVIDIA 的 94 个眼影覆盖位置均达到一个色阶门槛。整片虹膜仅 [1308,266] 的蓝通道相差两个色阶，该点位于眼影覆盖外。Intel 在覆盖内外各有 5 处超差，虹膜峰差为 3 个色阶。
+
+两块显卡的眼影覆盖区外与配对候选逐像素一致。虹膜外与发布版控制逐像素一致，乘色精度调整的新增超差为零。全虹膜仍按一个色阶验收。
+
+[乘色精度结果](evidence/2026-11-16/iris-joint-postmultiply-output-precision/qualification.json)和[验证归档](evidence/2026-11-16/iris-joint-postmultiply-output-precision/validation.zip)保存双设备收据、各绘制阶段数据和逐点结果。
