@@ -66,7 +66,7 @@ Windows 构建的 `StreamingAssets` 有 18 个实际文件，涵盖 12 个 Addre
 | 笔记 | 新建、输入、保存、重排、删除及重开 | 文本和排序持久化，保持焦点及键盘操作 | `NoteList`、`NoteUIContentsView`。已有面板证据 | [房间笔记](notes.md)登记独立 Player 输入、存档重开与写入失败恢复 |
 | 待办 | 新建多列表，添加、完成、取消完成、拖动和删除 | 列表归属及任务顺序持久化 | `FacilityTodo`、`TodoAllData`。已有面板证据 | [房间待办](todo.md)登记本地编辑、排序、音效和重开 |
 | 统计与解锁 | 完成工作并跨日，按条件开启剧情和环境 | 统计、等级、解锁、通知及进度入档 | `StatisticsService`、`UnlockConditionService`。等候实机回放 | 领域事件、可控时钟、保存服务 |
-| 剧情 | 首次进入、满足解锁、选择分支及读档 | 台词、动作、场景及选择状态一致 | `ScenarioReader`、`ScenarioGroupMaster`、`NovelMaster`。运行分支待核验 | 源命令映射、语言和动作 |
+| 剧情 | 首次进入、满足解锁、选择分支及读档 | 台词、动作、场景及选择状态一致 | `ScenarioReader`、`ScenarioGroupMaster`、`NovelMaster` | [工后短对话](work-conversation.md)登记组内分支及读档续接 |
 | 音乐与环境声 | 切曲、调整混音、暂停、淡化及断开音频设备 | 播放位置、列表和设置持久化，设备失败可恢复 | `MusicService`、`AmbientMaster` 和音频主数据 | [原版曲库](music-playlist.md)和[环境声](ambient-sound.md)登记独立 Player 操作及设置回放 |
 | 窗景 | 满足解锁条件，切换天气、时段及自动模式 | 同步灯光、云、天气、音轨和设置 | `WindowViewService`。已有 29 种场景的隔离渲染证据 | 场景资源、材质和时间驱动 |
 | 装饰和角色 | 解锁装饰，切换摆设，触发计时和剧情动作 | 资源槽、挂点、姿态、表情和房间偏好一致 | `DecorationService`、`HeroineAI`。椅子采样可复用 | Prefab、动画和运行事件 |

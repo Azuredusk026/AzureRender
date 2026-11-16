@@ -19,12 +19,38 @@ from tools.npr_room.room_geometry import copy_room_asset, stage_live_audio_media
 LANGUAGES = ("ZhHans", "ZhHant", "Ja", "En", "Ko", "Pt", "Ru")
 
 
-def idle_responses(story, catalog, native):
+def voice_source_index(catalog):
     sources = defaultdict(list)
     for guid, row in catalog.items():
         path = Path(row["source"])
         if path.suffix.lower() == ".ogg":
             sources[path.stem].append((guid, row))
+    return sources
+
+
+def spoken_line(row, localized, sources, native, context):
+    voice = localized["Voice"]
+    matches = sources[voice]
+    if len(matches) != 1:
+        raise ValueError(f"Expected one original voice source for {context}: {voice}")
+    guid, clip = matches[0]
+    uuid = str(UUID(guid))
+    asset = f"voice/{uuid}.ogg"
+    media = {"source": clip["source"], "sha256": clip["sha256"], "guid": guid, "uuid": uuid, "asset": asset}
+    sample = native[clip["sha256"] + ".ogg"]
+    frames, rate = sample["frames"], sample["sampleRate"]
+    delay, hold = float(row["Arg1"]), float(row["Arg2"])
+    if frames <= 0 or rate <= 0 or not all(math.isfinite(value) and value >= 0 for value in (delay, hold)):
+        raise ValueError(f"Invalid spoken line timing in {context}")
+    return {"localization": row["LocalizationID"], "voice": voice, "audioGuid": guid, "asset": asset,
+            "frames": frames, "sampleRate": rate, "delay": delay, "hold": hold,
+            "bodyMotion": int(row["BodyMotion"]), "faceMotion": int(row["FacialMotion"]),
+            "moveMouth": row["Arg3"] == "0",
+            "translations": {language: localized[language] for language in LANGUAGES}}, media
+
+
+def idle_responses(story, catalog, native):
+    sources = voice_source_index(catalog)
     translations = {row["ID"]: row for row in story["localization"]}
     groups = sorted((row for row in story["groups"] if row["Scenario"] == "8"),
                     key=lambda row: int(row["EpisodeNumber"]))
@@ -38,34 +64,20 @@ def idle_responses(story, catalog, native):
             raise ValueError(f"Expected one idle response command in {group_id}")
         row = story["commands"][rows[0]]
         localized = translations[row["LocalizationID"]]
-        voice = localized["Voice"]
-        matches = sources[voice]
-        if len(matches) != 1:
-            raise ValueError(f"Expected one original voice source for {group_id}: {voice}")
-        guid, clip = matches[0]
-        uuid = str(UUID(guid))
-        asset = f"voice/{uuid}.ogg"
-        media[guid] = {"source": clip["source"], "sha256": clip["sha256"], "guid": guid, "uuid": uuid, "asset": asset}
-        sample = native[clip["sha256"] + ".ogg"]
-        frames, rate = sample["frames"], sample["sampleRate"]
-        delay, hold = float(row["Arg1"]), float(row["Arg2"])
-        if frames <= 0 or rate <= 0 or not all(math.isfinite(value) and value >= 0 for value in (delay, hold)):
-            raise ValueError(f"Invalid idle response timing in {group_id}")
-        responses.append({"group": group_id, "episode": int(group["EpisodeNumber"]),
-                          "localization": row["LocalizationID"], "voice": voice, "audioGuid": guid, "asset": asset,
-                          "frames": frames, "sampleRate": rate, "delay": delay, "hold": hold,
-                          "bodyMotion": int(row["BodyMotion"]), "faceMotion": int(row["FacialMotion"]),
-                          "moveMouth": row["Arg3"] == "0",
-                          "translations": {language: localized[language] for language in LANGUAGES}})
+        line, original = spoken_line(row, localized, sources, native, group_id)
+        responses.append({"group": group_id, "episode": int(group["EpisodeNumber"]), **line})
+        media[original["guid"]] = original
     return responses, list(media.values())
 
 
+def voice_line_config(row, language):
+    asset = json.dumps("assets:/" + row["asset"])
+    text = json.dumps(row["translations"][language], ensure_ascii=False)
+    return f"{{{asset}, {text}, {row['frames']} / {row['sampleRate']}, {row['delay']}, {row['hold']}}}"
+
+
 def voice_config(responses, language):
-    lines = []
-    for row in responses:
-        asset = json.dumps("assets:/" + row["asset"])
-        text = json.dumps(row["translations"][language], ensure_ascii=False)
-        lines.append(f"    {{{asset}, {text}, {row['frames']} / {row['sampleRate']}, {row['delay']}, {row['hold']}}},")
+    lines = [f"    {voice_line_config(row, language)}," for row in responses]
     return "local responses = {\n" + "\n".join(lines) + "\n}\n"
 
 

@@ -20,6 +20,7 @@ local workCalendar
 local statsOpen
 local heroineParts = {"face", "body", "hair", "top", "bottom", "socks", "jacket"}
 local roomVoice
+local workChoice, speaking
 
 local function durationText(value)
     local seconds = math.floor(value + 1e-7)
@@ -74,6 +75,7 @@ end
 
 local function finish()
     if workCalendar then workCalendar:settle() end
+    if workChoice then workChoice:complete() end
     idle()
     setHeroineState("idle")
     playCue("timer-finish")
@@ -192,6 +194,7 @@ function init()
     loadCountup()
     idle()
     if new_room_voice then roomVoice = new_room_voice() end
+    if new_work_choice then workChoice = new_work_choice() end
     if new_work_calendar then
         workCalendar = new_work_calendar()
         statsOpen = false
@@ -204,11 +207,13 @@ end
 
 function update(dt)
     if workCalendar then workCalendar:recover() end
-    if workCalendar and phase ~= "idle" then
+    if (workCalendar or workChoice) and phase ~= "idle" then
         local working = phase == "work" and not paused and not self:pressed("timer-toggle")
             and not self:pressed("timer-reset") and (countupMode or not self:pressed("timer-skip"))
         local available = countupMode and maxCountupSeconds - countupElapsed or remaining
-        workCalendar:advance(math.min(dt, available), working)
+        local spent = math.min(dt, available)
+        if workCalendar then workCalendar:advance(spent, working) end
+        if workChoice and working then workChoice:recordWork(spent) end
     end
     if phase == "idle" and self:pressed("timer-mode") then
         countupMode = not countupMode
@@ -255,7 +260,8 @@ function update(dt)
             end
         end
     end
-    if roomVoice then roomVoice(dt, phase == "idle") end
+    local choiceActive = workChoice and workChoice:step(dt, phase == "idle" and not speaking)
+    if roomVoice then speaking = roomVoice(dt, phase == "idle", choiceActive) end
 end
 
 function shutdown()

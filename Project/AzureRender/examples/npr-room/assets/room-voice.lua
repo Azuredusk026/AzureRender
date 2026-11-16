@@ -28,13 +28,13 @@ function new_room_voice()
         timer:ui_visible("room-voice-caption", true)
     end
 
-    return function(dt, idle)
+    return function(dt, idle, choiceActive)
         if idle ~= visible then
             visible = idle
             timer:ui_visible("room-voice-talk", visible)
         end
-        if not current and idle and timer:pressed("room-voice-talk") then selectResponse() end
-        if not current then return end
+        if not current and idle and not choiceActive and timer:pressed("room-voice-talk") then selectResponse() end
+        if not current then return false end
         if delay then
             delay = delay - dt
             if delay <= 0 then delay = nil; start() end
@@ -47,5 +47,6 @@ function new_room_voice()
         elseif not source:audio_playing() and source:audio_position() >= current[3] then
             hold = current[5]
         end
+        return current ~= nil
     end
 end

@@ -1,0 +1,13 @@
+#room-choice-caption, #room-choice-options { position: absolute; left: 25%; width: 50%; bottom: 56dp; padding: 10dp 12dp; background-color: #19232c; text-align: center; font-size: 17dp; }
+#room-choice-options button { display: block; width: 90%; padding: 6dp; margin: 5dp auto 0; color: white; background-color: #34434f; }
+#room-choice-options button:hover { background-color: #506472; }
+#room-choice-status { position: absolute; left: 35%; bottom: 5dp; color: #f0c58e; }
+</style>
+<div id="room-choice-caption" style="display: none;"><span id="room-choice-line"></span></div>
+<div id="room-choice-options" style="display: none;">
+<span id="room-choice-question"></span>
+<button id="room-choice-option-1" data-action="room-choice-option-1"></button>
+<button id="room-choice-option-2" data-action="room-choice-option-2"></button>
+<button id="room-choice-option-3" data-action="room-choice-option-3"></button>
+</div>
+<span id="room-choice-status"></span>
