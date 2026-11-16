@@ -19,7 +19,7 @@
 | 房间回归 | `c18432c8ab697ff7107e51cbecdd6d38477e1e5c4db45064e31cbedb61e36968` |
 | 环境声画面 | `451f9691845040e7a64b1328abf47f17535c034ef8a08e38662f355bde86ade3` |
 
-本机工程位于 `assets_private/npr-room-dev/room-ambient-controls`，画面位于 `reference-preview/ambient-sound.png`。启动时通过 `--save-root` 指定独立本地档。
+本机试听工程位于 `assets_private/npr-room-dev/room-ambient-controls`，画面位于 `reference-preview/ambient-sound.png`。启动时通过 `--save-root` 指定独立本地档。整合房间的可用范围见[环境声解锁](ambient-access.md)。
 
 ## 复验
 

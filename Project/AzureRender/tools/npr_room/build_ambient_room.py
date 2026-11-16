@@ -21,10 +21,14 @@ AMBIENT_ENUM = "Assets/Scripts/Assembly-CSharp/Bulbul/AmbientSoundType.cs"
 ACTIONS = ("toggle", "page-prev", "page-next", "quiet", "loud", "mute")
 
 
+def ambient_names(enum):
+    return {int(code): name for name, code in re.findall(r"(?m)^\s*(\w+)\s*=\s*(\d+)\s*,?\s*$",
+                                                         enum.read_text(encoding="utf-8-sig"))}
+
+
 def ambient_catalog(source, audio_catalog):
     master, enum = source / AMBIENT_MASTER, source / AMBIENT_ENUM
-    names = {int(code): name for name, code in re.findall(r"(?m)^\s*(\w+)\s*=\s*(\d+)\s*,?\s*$",
-                                                         enum.read_text(encoding="utf-8-sig"))}
+    names = ambient_names(enum)
     slots = json.loads(audio_catalog.read_bytes())["slots"]
     sounds = []
     seen = set()
