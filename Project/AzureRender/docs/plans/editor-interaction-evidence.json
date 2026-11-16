@@ -186,5 +186,26 @@
     "cpuLog": "editor-interaction-regression-source-ctest.log",
     "cpuCasesPassed": 21,
     "physicalInput": false
+  },
+  "outlinerSearchRestore": {
+    "baseCommit": "783889f",
+    "configuration": "Release",
+    "run": "D:/Projects/FYP/Project/AzureRender/build/runs/20261116-155429-editor-outliner-selection-reveal-6efd20",
+    "baselineExecutableSha256": "18ed39f64553260132f7f81e445278010c507d5b40fe49ad683ada90ec6c8f06",
+    "fixtureRecoveryDispatch": 1466,
+    "fixtureRecoveryLog": "baseline-fixture-recovery.log",
+    "baselineDispatch": 1471,
+    "baselineAssertion": "baseline-assertion.log",
+    "buildInputRecoveryDispatch": 1472,
+    "buildInputRecoveryLog": "release-build-missing-sparse-file.log",
+    "candidateDispatch": 1475,
+    "candidateExecutableSha256": "167086920fe648865f17b89207d0126b5a56556b409e3361bc9d1355ed014160",
+    "cpuLog": "release-ctest.log",
+    "cpuCasesPassed": 4,
+    "selectionSummary": "candidate-selection/run-1794816865490986100/summary.json",
+    "creationSummary": "candidate-creation/run-24d3754a/summary.json",
+    "inspectorReveal": "candidate-selection/run-1794816865490986100/inspector/reveal-search/outliner-return-inspector.png",
+    "inspectorSearchRestored": "candidate-selection/run-1794816865490986100/inspector/reveal-search/outliner-search-restored-inspector.png",
+    "physicalInput": false
   }
 }
