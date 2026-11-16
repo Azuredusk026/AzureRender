@@ -1,0 +1,13 @@
+{
+  "formatVersion": 1,
+  "status": "staged",
+  "manifestSHA256": "dafee766e3018037a7aff0e19611cdd5e78c77a50de5a964cb59172668b2c6f4",
+  "sourceCatalogSHA256": "d4f4c4ddd80599e6b78bd935cc98bdc8389d070a2b19ad84d04932af10852bd6",
+  "catalogLocations": 1533,
+  "sceneOnlySources": 13,
+  "sourceSlots": 1546,
+  "uniquePayloads": 1537,
+  "sourceBytes": 530688916,
+  "payloadBytes": 526406746,
+  "stagedPayloadHashesChecked": 1537
+}
