@@ -1,0 +1,144 @@
+{
+  "status": "candidate-rejected",
+  "job": 1341,
+  "guards": {
+    "requiredPeak": 1,
+    "allowedNewOverOne": 0
+  },
+  "pairedReportSha256": "0bfc85bab50248c69278604cd07aa4627d417e504cdac1138a961c0ad2d08001",
+  "devices": {
+    "nvidia": {
+      "reference": "a3da6fc98915f6661576a16693c55ae5a342274c4734c4fc32ec49a27018c755",
+      "candidate": "21f9a90fa12fa75ebbe103eec45011f48b1c6f814c591b03c64962931648b044",
+      "regions": {
+        "contour": {
+          "reference": {
+            "overOne": 841,
+            "overEight": 25,
+            "peak": 23
+          },
+          "candidate": {
+            "overOne": 1051,
+            "overEight": 319,
+            "peak": 42
+          },
+          "newOverOne": 267,
+          "changed": 1048
+        },
+        "laterDraws": {
+          "reference": {
+            "overOne": 70,
+            "overEight": 64,
+            "peak": 69
+          },
+          "candidate": {
+            "overOne": 70,
+            "overEight": 65,
+            "peak": 86
+          },
+          "newOverOne": 0,
+          "changed": 58
+        },
+        "outside": {
+          "reference": {
+            "overOne": 178536,
+            "overEight": 29166,
+            "peak": 228
+          },
+          "candidate": {
+            "overOne": 178536,
+            "overEight": 29166,
+            "peak": 228
+          },
+          "newOverOne": 0,
+          "changed": 1
+        },
+        "full": {
+          "reference": {
+            "overOne": 179447,
+            "overEight": 29255,
+            "peak": 228
+          },
+          "candidate": {
+            "overOne": 179657,
+            "overEight": 29550,
+            "peak": 228
+          },
+          "newOverOne": 267,
+          "changed": 1107
+        }
+      },
+      "strictPass": false
+    },
+    "intel": {
+      "reference": "85c951c3cb4681b49f57b419c0c9ef25ae421958f8cf713c60829e3ad2d3a419",
+      "candidate": "02e9d17bef7cebd40fda20ab685ec96971f28709302eac18d5fcaa0a355c68e9",
+      "regions": {
+        "contour": {
+          "reference": {
+            "overOne": 822,
+            "overEight": 27,
+            "peak": 23
+          },
+          "candidate": {
+            "overOne": 1033,
+            "overEight": 312,
+            "peak": 41
+          },
+          "newOverOne": 284,
+          "changed": 1050
+        },
+        "laterDraws": {
+          "reference": {
+            "overOne": 70,
+            "overEight": 64,
+            "peak": 69
+          },
+          "candidate": {
+            "overOne": 70,
+            "overEight": 65,
+            "peak": 86
+          },
+          "newOverOne": 0,
+          "changed": 58
+        },
+        "outside": {
+          "reference": {
+            "overOne": 182098,
+            "overEight": 29920,
+            "peak": 228
+          },
+          "candidate": {
+            "overOne": 182098,
+            "overEight": 29920,
+            "peak": 228
+          },
+          "newOverOne": 0,
+          "changed": 0
+        },
+        "full": {
+          "reference": {
+            "overOne": 182990,
+            "overEight": 30011,
+            "peak": 228
+          },
+          "candidate": {
+            "overOne": 183201,
+            "overEight": 30297,
+            "peak": 228
+          },
+          "newOverOne": 284,
+          "changed": 1108
+        }
+      },
+      "strictPass": false
+    }
+  },
+  "archiveSha256": "275d03b65b350322d047c050954f226bcf062efab83989241efceb5df1a314e0",
+  "files": {
+    "raw-results.json": "0bfc85bab50248c69278604cd07aa4627d417e504cdac1138a961c0ad2d08001",
+    "native-qualification.json": "9d200624e50cff925fc8b4238aca420666c5241e89b0d7b26bc9a10629bcb989",
+    "candidate.py": "09cd7b493e659fe385bf7539aba7e86c26f45b0e9affc05f5709c0ed671badd8",
+    "candidate.spv": "d9c57185adc8aed55c6a3f5551d24a1830fbff456f9820be05d5acf6bd009382"
+  }
+}
