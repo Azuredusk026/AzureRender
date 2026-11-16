@@ -21,6 +21,7 @@ local statsOpen
 local heroineParts = {"face", "body", "hair", "top", "bottom", "socks", "jacket"}
 local roomVoice
 local workChoice, speaking
+local roomLanguage
 
 local function durationText(value)
     local seconds = math.floor(value + 1e-7)
@@ -43,6 +44,9 @@ end
 
 local function updateDisplay()
     local label = paused and "paused" or phase
+    local text = countupMode and "Count-up"
+        or string.format("%dm work · %dm break · %d rounds", settings[1], settings[2], settings[3])
+    if roomLanguage then label, text = roomLanguage:timer(phase, paused, countupMode, settings) end
     local seconds = math.max(0, math.ceil(remaining - 1e-7))
     local time = string.format("%02d:%02d", seconds // 60, seconds % 60)
     if countupMode then
@@ -56,8 +60,6 @@ local function updateDisplay()
         self:ui_text("timer-value", time)
         previousTime = time
     end
-    local text = string.format("%dm work · %dm break · %d rounds", settings[1], settings[2], settings[3])
-    if countupMode then text = "Count-up" end
     if text ~= previousSettings then
         self:ui_text("timer-settings", text)
         previousSettings = text
@@ -193,8 +195,13 @@ function init()
     settings = loadSettings()
     loadCountup()
     idle()
-    if new_room_voice then roomVoice = new_room_voice() end
-    if new_work_choice then workChoice = new_work_choice() end
+    local translate
+    if room_language_config then
+        roomLanguage = new_room_language(room_language_config)
+        translate = function(value) return roomLanguage:text(value) end
+    end
+    if new_room_voice then roomVoice = new_room_voice(translate) end
+    if new_work_choice then workChoice = new_work_choice(nil, translate) end
     if new_work_calendar then
         workCalendar = new_work_calendar()
         statsOpen = false
@@ -206,6 +213,7 @@ function init()
 end
 
 function update(dt)
+    local languageChanged = roomLanguage and roomLanguage:update()
     if workCalendar then workCalendar:recover() end
     if (workCalendar or workChoice) and phase ~= "idle" then
         local working = phase == "work" and not paused and not self:pressed("timer-toggle")
@@ -260,8 +268,8 @@ function update(dt)
             end
         end
     end
-    local choiceActive = workChoice and workChoice:step(dt, phase == "idle" and not speaking)
-    if roomVoice then speaking = roomVoice(dt, phase == "idle", choiceActive) end
+    local choiceActive = workChoice and workChoice:step(dt, phase == "idle" and not speaking, languageChanged)
+    if roomVoice then speaking = roomVoice(dt, phase == "idle", choiceActive, languageChanged) end
 end
 
 function shutdown()

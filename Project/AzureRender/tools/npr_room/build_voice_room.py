@@ -5,6 +5,7 @@ from collections import defaultdict
 import json
 import math
 from pathlib import Path
+import re
 import shutil
 import tempfile
 from uuid import UUID
@@ -70,9 +71,19 @@ def idle_responses(story, catalog, native):
     return responses, list(media.values())
 
 
+def localized_text_config(translations, language):
+    def quote(value):
+        escaped = value.replace("\\", "\\\\").replace('"', '\\"')
+        return '"' + re.sub(r"[\x00-\x1f]", lambda match: f"\\{ord(match[0]):03d}", escaped) + '"'
+
+    if isinstance(language, str):
+        return quote(translations[language])
+    return "{" + ", ".join(quote(translations[field]) for field in language) + "}"
+
+
 def voice_line_config(row, language):
     asset = json.dumps("assets:/" + row["asset"])
-    text = json.dumps(row["translations"][language], ensure_ascii=False)
+    text = localized_text_config(row["translations"], language)
     return f"{{{asset}, {text}, {row['frames']} / {row['sampleRate']}, {row['delay']}, {row['hold']}}}"
 
 

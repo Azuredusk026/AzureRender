@@ -6,7 +6,7 @@ from pathlib import Path
 import shutil
 import tempfile
 
-from tools.npr_room.build_voice_room import voice_config, voice_line_config
+from tools.npr_room.build_voice_room import localized_text_config, voice_config, voice_line_config
 from tools.npr_room.build_work_calendar import calendar_script, work_rewards
 from tools.npr_room.catalog_storage import publish_directory
 from tools.npr_room.choice_story import choice_parameters, choice_program
@@ -27,7 +27,7 @@ def choice_config(episodes, parameters, language, seed=None):
         intro = voice_line_config(episode["intro"], language)
         code.append(f"    {{{intro}, {{")
         for option in episode["options"]:
-            label = json.dumps(option["label"][language], ensure_ascii=False)
+            label = localized_text_config(option["label"], language)
             line = voice_line_config(option["response"], language)
             code.append(f"        {{{label}, {line}}},")
         code.append("    }},")

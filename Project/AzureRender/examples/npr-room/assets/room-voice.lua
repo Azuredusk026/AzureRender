@@ -1,4 +1,5 @@
-function new_room_voice()
+function new_room_voice(translate)
+    translate = translate or function(text) return text end
     local timer = self
     local source = assert(timer:find("room-voice"))
     local remaining = {}
@@ -24,17 +25,18 @@ function new_room_voice()
     local function start()
         source:set("azure.audio-source", "asset", current[1])
         source:audio_play()
-        timer:ui_text("room-voice-line", current[2])
+        timer:ui_text("room-voice-line", translate(current[2]))
         timer:ui_visible("room-voice-caption", true)
     end
 
-    return function(dt, idle, choiceActive)
+    return function(dt, idle, choiceActive, languageChanged)
         if idle ~= visible then
             visible = idle
             timer:ui_visible("room-voice-talk", visible)
         end
         if not current and idle and not choiceActive and timer:pressed("room-voice-talk") then selectResponse() end
         if not current then return false end
+        if languageChanged and not delay then timer:ui_text("room-voice-line", translate(current[2])) end
         if delay then
             delay = delay - dt
             if delay <= 0 then delay = nil; start() end

@@ -1,5 +1,6 @@
-function new_work_choice(random)
+function new_work_choice(random, translate)
     random = random or math.random
+    translate = translate or function(text) return text end
     local timer = self
     local voice = assert(timer:find("room-choice-voice"))
     local slot = "work-conversation"
@@ -23,8 +24,8 @@ function new_work_choice(random)
 
     local function showOptions()
         local story = work_conversations[episode]
-        timer:ui_text("room-choice-question", story[1][2])
-        for index, option in ipairs(story[2]) do timer:ui_text("room-choice-option-" .. index, option[1]) end
+        timer:ui_text("room-choice-question", translate(story[1][2]))
+        for index, option in ipairs(story[2]) do timer:ui_text("room-choice-option-" .. index, translate(option[1])) end
         timer:ui_visible("room-choice-caption", false)
         timer:ui_visible("room-choice-options", true)
     end
@@ -64,7 +65,7 @@ function new_work_choice(random)
         available, worked = work_choice_parameters.availableSeconds, 0
     end
 
-    function controller:step(dt, mayStart)
+    function controller:step(dt, mayStart, languageChanged)
         available = math.max(0, available - dt)
         if episode == 0 then
             if not mayStart or not timer:pressed("room-voice-talk") or available <= 0 or probability <= 0
@@ -75,6 +76,7 @@ function new_work_choice(random)
         end
 
         if stage == options then
+            if languageChanged then showOptions() end
             for index, option in ipairs(work_conversations[episode][2]) do
                 if timer:pressed("room-choice-option-" .. index) then
                     stage, selected = response, index
@@ -89,7 +91,7 @@ function new_work_choice(random)
                 delay = nil
                 voice:set("azure.audio-source", "asset", line[1])
                 voice:audio_play()
-                timer:ui_text("room-choice-line", line[2])
+                timer:ui_text("room-choice-line", translate(line[2]))
                 timer:ui_visible("room-choice-caption", true)
             end
         elseif hold then
@@ -107,6 +109,9 @@ function new_work_choice(random)
             end
         elseif not voice:audio_playing() and voice:audio_position() >= line[3] then
             hold = line[5]
+        end
+        if languageChanged and stage ~= options and episode ~= 0 and not delay then
+            timer:ui_text("room-choice-line", translate(line[2]))
         end
         return true
     end

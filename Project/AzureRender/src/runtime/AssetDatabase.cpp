@@ -4,6 +4,7 @@
 #include "assets/TextureImportSettings.hpp"
 #include "assets/Scene2D.hpp"
 #include "assets/AssetFormatRegistry.hpp"
+#include "foundation/NativeFilePath.hpp"
 #include "runtime/AnimationStateMachine.hpp"
 #include <algorithm>
 #include <fstream>
@@ -24,14 +25,6 @@
 namespace azurerender {
 namespace {
 using Json = nlohmann::json;
-#ifdef _WIN32
-std::wstring nativeFilePath(const std::filesystem::path& path) {
-    const auto value=std::filesystem::absolute(path).lexically_normal().native();
-    if(value.rfind(L"\\\\?\\",0)==0)return value;
-    if(value.rfind(L"\\\\",0)==0)return L"\\\\?\\UNC\\"+value.substr(2);
-    return L"\\\\?\\"+value;
-}
-#endif
 std::string bytes(const std::filesystem::path& path, const std::function<void()>& check={}) {
     std::ifstream input(path, std::ios::binary|std::ios::ate);
     if (!input) {

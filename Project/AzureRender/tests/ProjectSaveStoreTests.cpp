@@ -77,6 +77,17 @@ int main(int argc, char** argv) {
         check(first.read("marker") == Json::array({0, 1, 2}), "First project lost its write");
         const auto shared = first.read("shared");
         check(shared == pref || shared == updated, "Concurrent writes created a partial snapshot");
+#ifdef _WIN32
+        const auto deepRoot = root / "nested" / std::string(115, 'd');
+        const std::string longProject = "18ab3c8e-b0d8-4fda-968b-a219e4fa4d63";
+        const auto deep = ProjectSaveStore(deepRoot, longProject);
+        check(deep.read("room-language").is_null(), "Deep paths must support empty slots");
+        deep.write("room-language", pref);
+        check(ProjectSaveStore(deepRoot, longProject).read("room-language") == pref,
+              "Another store must reopen a deep Windows save");
+        deep.write("room-language", updated);
+        check(deep.read("room-language") == updated, "Deep Windows saves must support atomic replacement");
+#endif
         std::cout << "Project save scope, replacement, fallback and repeat open passed\n";
         return 0;
     } catch (const std::exception& error) {

@@ -1,4 +1,5 @@
 #include "runtime/ProjectSaveStore.hpp"
+#include "foundation/NativeFilePath.hpp"
 
 #include <algorithm>
 #include <atomic>
@@ -56,11 +57,12 @@ void validateSlot(const std::string& slot) {
 }
 
 ProjectSaveStore::ProjectSaveStore(const fs::path& root, const std::string& projectId)
-    : directory_(fs::weakly_canonical(fs::absolute(root)) / encodeProjectId(projectId)) {
+    : directory_(nativeFilePath(fs::weakly_canonical(nativeFilePath(fs::absolute(root)))) /
+                 encodeProjectId(projectId)) {
 }
 
 fs::path ProjectSaveStore::path(const std::string& slot) const {
-    if (fs::weakly_canonical(directory_) != directory_)
+    if (nativeFilePath(fs::weakly_canonical(directory_)) != directory_)
         throw std::invalid_argument("Save project directory resolves outside its assigned path");
     return directory_ / ("save-" + slot + ".json");
 }
