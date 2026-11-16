@@ -1,0 +1,487 @@
+{
+  "status": "compared-local-diffuse-at-actual-color-attachments",
+  "strictFaceAcceptance": false,
+  "inputDigests": {
+    "native": "cd55116caf7142a9264c4e2a954c524765d3e5b9c2c01ab07e36620351e2cd36",
+    "player": "9081f05678fa2122007f2c23d50e0bb587f7758316754c03977bdea766ff83e8"
+  },
+  "referenceRadianceScale": 0.25,
+  "playerRecordedCapture": "6960267c0d71e4d05b6bfe0e2730c332ed71955f1fde6d69eb7d8aadf13eff24",
+  "nativeDeviceComparisons": {
+    "nvidia": {
+      "gainFromDark": 2.61536695436043,
+      "scores": {
+        "dark": {
+          "1": {
+            "mae": 0.1156955295138889,
+            "peak": 0.22705078125
+          },
+          "2.61536695436043": {
+            "mae": 0.01184774470754938,
+            "peak": 0.029073678933365266
+          }
+        },
+        "brightHoldout": {
+          "1": {
+            "mae": 0.06361219618055555,
+            "peak": 0.1796875
+          },
+          "2.61536695436043": {
+            "mae": 0.031011937817453428,
+            "peak": 0.07695956338763357
+          }
+        }
+      },
+      "samples": [
+        {
+          "point": [
+            1306,
+            304
+          ],
+          "group": "dark",
+          "nativeAddedQuarter": [
+            0.26171875,
+            0.1298828125,
+            0.091796875
+          ],
+          "nativeCompleteQuarter": [
+            0.421875,
+            0.21484375,
+            0.16015625
+          ],
+          "playerAdded": [
+            0.105712890625,
+            0.055419921875,
+            0.03564453125
+          ],
+          "leastSquaresGain": 2.457750428295958,
+          "redGain": 2.4757505773672057,
+          "differenceAtGainOne": [
+            0.156005859375,
+            0.074462890625,
+            0.05615234375
+          ]
+        },
+        {
+          "point": [
+            1313,
+            297
+          ],
+          "group": "dark",
+          "nativeAddedQuarter": [
+            0.30859375,
+            0.1484375,
+            0.103515625
+          ],
+          "nativeCompleteQuarter": [
+            0.45703125,
+            0.22265625,
+            0.1640625
+          ],
+          "playerAdded": [
+            0.12158203125,
+            0.0625,
+            0.039794921875
+          ],
+          "leastSquaresGain": 2.5116418559932256,
+          "redGain": 2.538152610441767,
+          "differenceAtGainOne": [
+            0.18701171875,
+            0.0859375,
+            0.063720703125
+          ]
+        },
+        {
+          "point": [
+            1312,
+            298
+          ],
+          "group": "dark",
+          "nativeAddedQuarter": [
+            0.349609375,
+            0.1728515625,
+            0.123046875
+          ],
+          "nativeCompleteQuarter": [
+            0.5078125,
+            0.25390625,
+            0.1875
+          ],
+          "playerAdded": [
+            0.12255859375,
+            0.064208984375,
+            0.040771484375
+          ],
+          "leastSquaresGain": 2.8339836476041507,
+          "redGain": 2.852589641434263,
+          "differenceAtGainOne": [
+            0.22705078125,
+            0.108642578125,
+            0.082275390625
+          ]
+        },
+        {
+          "point": [
+            1301,
+            306
+          ],
+          "group": "bright",
+          "nativeAddedQuarter": [
+            0.287109375,
+            0.162109375,
+            0.111328125
+          ],
+          "nativeCompleteQuarter": [
+            0.515625,
+            0.3046875,
+            0.2265625
+          ],
+          "playerAdded": [
+            0.107421875,
+            0.061767578125,
+            0.040283203125
+          ],
+          "leastSquaresGain": 2.670580057156098,
+          "redGain": 2.672727272727273,
+          "differenceAtGainOne": [
+            0.1796875,
+            0.100341796875,
+            0.071044921875
+          ]
+        },
+        {
+          "point": [
+            1296,
+            310
+          ],
+          "group": "bright",
+          "nativeAddedQuarter": [
+            0.18359375,
+            0.10546875,
+            0.072265625
+          ],
+          "nativeCompleteQuarter": [
+            0.4140625,
+            0.25390625,
+            0.19140625
+          ],
+          "playerAdded": [
+            0.0927734375,
+            0.053466796875,
+            0.0355224609375
+          ],
+          "leastSquaresGain": 1.9830165373920678,
+          "redGain": 1.9789473684210526,
+          "differenceAtGainOne": [
+            0.0908203125,
+            0.052001953125,
+            0.0367431640625
+          ]
+        },
+        {
+          "point": [
+            1288,
+            315
+          ],
+          "group": "bright",
+          "nativeAddedQuarter": [
+            0.08203125,
+            0.046875,
+            0.033203125
+          ],
+          "nativeCompleteQuarter": [
+            0.30078125,
+            0.189453125,
+            0.1484375
+          ],
+          "playerAdded": [
+            0.060791015625,
+            0.0355224609375,
+            0.02392578125
+          ],
+          "leastSquaresGain": 1.3465660291942085,
+          "redGain": 1.3493975903614457,
+          "differenceAtGainOne": [
+            0.021240234375,
+            0.0113525390625,
+            0.00927734375
+          ]
+        }
+      ],
+      "completeAttachmentSweeps": {
+        "0.0": {
+          "peak": 0.118896484375,
+          "mae": 0.052876790364583336
+        },
+        "1.0": {
+          "peak": 0.2353515625,
+          "mae": 0.11110432942708333
+        },
+        "1.5": {
+          "peak": 0.29638671875,
+          "mae": 0.14332411024305555
+        },
+        "2.0": {
+          "peak": 0.357421875,
+          "mae": 0.17548963758680555
+        },
+        "2.5": {
+          "peak": 0.41845703125,
+          "mae": 0.2077297634548611
+        },
+        "3.0": {
+          "peak": 0.47900390625,
+          "mae": 0.2398613823784722
+        }
+      }
+    },
+    "intel": {
+      "gainFromDark": 2.6297154833307883,
+      "scores": {
+        "dark": {
+          "1": {
+            "mae": 0.116455078125,
+            "peak": 0.23486328125
+          },
+          "2.6297154833307883": {
+            "mae": 0.013132187155887954,
+            "peak": 0.035127643400376996
+          }
+        },
+        "brightHoldout": {
+          "1": {
+            "mae": 0.06404622395833333,
+            "peak": 0.1796875
+          },
+          "2.6297154833307883": {
+            "mae": 0.03123096253113464,
+            "peak": 0.07978495003646638
+          }
+        }
+      },
+      "samples": [
+        {
+          "point": [
+            1306,
+            304
+          ],
+          "group": "dark",
+          "nativeAddedQuarter": [
+            0.259765625,
+            0.1298828125,
+            0.091796875
+          ],
+          "nativeCompleteQuarter": [
+            0.421875,
+            0.21484375,
+            0.16015625
+          ],
+          "playerAdded": [
+            0.105712890625,
+            0.055419921875,
+            0.03564453125
+          ],
+          "leastSquaresGain": 2.4444444444444446,
+          "redGain": 2.4572748267898383,
+          "differenceAtGainOne": [
+            0.154052734375,
+            0.074462890625,
+            0.05615234375
+          ]
+        },
+        {
+          "point": [
+            1313,
+            297
+          ],
+          "group": "dark",
+          "nativeAddedQuarter": [
+            0.30859375,
+            0.1494140625,
+            0.103515625
+          ],
+          "nativeCompleteQuarter": [
+            0.45703125,
+            0.22265625,
+            0.1640625
+          ],
+          "playerAdded": [
+            0.12158203125,
+            0.0625,
+            0.039794921875
+          ],
+          "leastSquaresGain": 2.5146526554722164,
+          "redGain": 2.538152610441767,
+          "differenceAtGainOne": [
+            0.18701171875,
+            0.0869140625,
+            0.063720703125
+          ]
+        },
+        {
+          "point": [
+            1312,
+            298
+          ],
+          "group": "dark",
+          "nativeAddedQuarter": [
+            0.357421875,
+            0.1728515625,
+            0.123046875
+          ],
+          "nativeCompleteQuarter": [
+            0.515625,
+            0.25390625,
+            0.1875
+          ],
+          "playerAdded": [
+            0.12255859375,
+            0.064208984375,
+            0.040771484375
+          ],
+          "leastSquaresGain": 2.88000412534163,
+          "redGain": 2.9163346613545817,
+          "differenceAtGainOne": [
+            0.23486328125,
+            0.108642578125,
+            0.082275390625
+          ]
+        },
+        {
+          "point": [
+            1301,
+            306
+          ],
+          "group": "bright",
+          "nativeAddedQuarter": [
+            0.287109375,
+            0.162109375,
+            0.11328125
+          ],
+          "nativeCompleteQuarter": [
+            0.515625,
+            0.3046875,
+            0.2265625
+          ],
+          "playerAdded": [
+            0.107421875,
+            0.061767578125,
+            0.040283203125
+          ],
+          "leastSquaresGain": 2.6752143353672664,
+          "redGain": 2.672727272727273,
+          "differenceAtGainOne": [
+            0.1796875,
+            0.100341796875,
+            0.072998046875
+          ]
+        },
+        {
+          "point": [
+            1296,
+            310
+          ],
+          "group": "bright",
+          "nativeAddedQuarter": [
+            0.1875,
+            0.10546875,
+            0.072265625
+          ],
+          "nativeCompleteQuarter": [
+            0.41796875,
+            0.25390625,
+            0.19140625
+          ],
+          "playerAdded": [
+            0.0927734375,
+            0.053466796875,
+            0.0355224609375
+          ],
+          "leastSquaresGain": 2.01149012146934,
+          "redGain": 2.0210526315789474,
+          "differenceAtGainOne": [
+            0.0947265625,
+            0.052001953125,
+            0.0367431640625
+          ]
+        },
+        {
+          "point": [
+            1288,
+            315
+          ],
+          "group": "bright",
+          "nativeAddedQuarter": [
+            0.080078125,
+            0.046875,
+            0.033203125
+          ],
+          "nativeCompleteQuarter": [
+            0.30078125,
+            0.189453125,
+            0.1484375
+          ],
+          "playerAdded": [
+            0.060791015625,
+            0.0355224609375,
+            0.02392578125
+          ],
+          "leastSquaresGain": 1.3250947855166113,
+          "redGain": 1.3172690763052208,
+          "differenceAtGainOne": [
+            0.019287109375,
+            0.0113525390625,
+            0.00927734375
+          ]
+        }
+      ],
+      "completeAttachmentSweeps": {
+        "0.0": {
+          "peak": 0.118896484375,
+          "mae": 0.05265977647569445
+        },
+        "1.0": {
+          "peak": 0.2353515625,
+          "mae": 0.11045328776041667
+        },
+        "1.5": {
+          "peak": 0.29638671875,
+          "mae": 0.1426730685763889
+        },
+        "2.0": {
+          "peak": 0.357421875,
+          "mae": 0.1748385959201389
+        },
+        "2.5": {
+          "peak": 0.41845703125,
+          "mae": 0.20707872178819445
+        },
+        "3.0": {
+          "peak": 0.47900390625,
+          "mae": 0.23921034071180555
+        }
+      }
+    }
+  },
+  "queue": {
+    "id": 1499,
+    "task": "nr-native-face-local-diffuse-output-two-adapters",
+    "state": "succeeded",
+    "exitCode": 0,
+    "elapsedSeconds": 11.968999999997322
+  },
+  "validation": {
+    "archive": "f68cfd080f7f79f36b3cec0ecc98219937c0600a8528bb1050b0082e1cfc4478",
+    "members": {
+      "native/request.json": "84305c5810531858a700bba4e06747c1dfd46431d5c6bf60854a1399b698a6da",
+      "native/results.json": "cd55116caf7142a9264c4e2a954c524765d3e5b9c2c01ab07e36620351e2cd36",
+      "native/comparison.json": "c244e888d966b2387386f50b6df571dc85a60d2d8156a2a937dffc3aa3714d95",
+      "native/nvidia-diffuse-disabled.dxbc": "696d435e009f226fbf172729347c5d38f20b089d579707c8267a69bb462e2a91",
+      "native/intel-diffuse-disabled.dxbc": "696d435e009f226fbf172729347c5d38f20b089d579707c8267a69bb462e2a91",
+      "sources/face-native-diffuse-at-output.py": "33d4201506512c91cc8f37a0e1107312376549e727be789d5a043046d4dc1611",
+      "sources/compare-face-local-diffuse-attachments.py": "f89ab7690c64bfeacfb1fe69063cd3b051cedffe3a3fdac2dbfb77e47e87464a",
+      "sources/archive-face-native-local-diffuse-output.py": "dbdba8b720304af70e8a56e22a16b9abd4aeda0fdc7d6a16ae8c3614e1db07bd",
+      "native/replay.log": "c093cd37c94088d509a1dce2b64886f30e6eb557bfbbcabc190d982d8eadd8d0"
+    }
+  }
+}
