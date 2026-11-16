@@ -36,6 +36,8 @@ Intel 首次采集在右侧地面另有 662 个超差像素。该区域的超差
 
 [后视机位回执](evidence/2026-11-16/joint-character-referenced-body/qualification.json)和[验证归档](evidence/2026-11-16/joint-character-referenced-body/validation.zip)保存真实成片差量、原资产指纹和设备记录。
 
+Intel 关闭并行录制后，同一候选的两次采集逐像素一致。腰侧区域仍有 63 个像素超过一个色阶，右侧地面区域为零。串行配置可用于重复采集。默认并行录制的波动继续核对。[串行采集结果](evidence/2026-11-16/joint-character-intel-serial/qualification.json)及[归档](evidence/2026-11-16/joint-character-intel-serial/validation.zip)保存命令、实际成片差量和运行状态。
+
 ## 采集范围
 
 角色根节点相对方向覆盖正向、左右四分之三侧向、左右侧向及背向六个机位。NVIDIA 与 Intel 均以 1280×720 采集，使用同一联合场景、资产和动画起点。[六机位采集记录](evidence/2026-11-16/character-six-view-inputs/qualification.json)保存相机参数、图像摘要和冻结回归结果。当前 NVIDIA 驱动下的四帧冻结回归逐像素一致；原始冻结图的 RGB 峰值差为 1、7、37、23。
