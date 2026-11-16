@@ -147,6 +147,8 @@ Player 的同机位诊断使用已有的无符号颜色截断，在虹膜颜色�
 
 [双设备回读](evidence/2026-11-16/iris-cross-device-native-filter/qualification.json)和[归档](evidence/2026-11-16/iris-cross-device-native-filter/validation.zip)保存底色、着色输出和附件取色。
 
+Intel 轴向导数模型与 255 个 Intel 原生底色层级样本相符。将该模型用于 Player 裸眼切换试验，14 个位置超过一个色阶，峰差为 28。虹膜外逐像素一致。该候选未通过留存参考的颜色验收。[轴向选层结果](evidence/2026-11-16/iris-intel-base-axis-candidate/qualification.json)及[归档](evidence/2026-11-16/iris-intel-base-axis-candidate/validation.zip)保存三组画面对照及测试收据。
+
 ## 剩余门禁
 
 继续核对隐式采样梯度、层级边界和几何覆盖。
