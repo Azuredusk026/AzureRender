@@ -1,0 +1,114 @@
+{
+  "status": "measured-opaque-wall-source-material-owner",
+  "sampleResults": {
+    "a": {
+      "outputs": {
+        "png": "322f1b26b5318886815d23fecdb106521151ac5494745f3a5d4f93a14449115d",
+        "referencePng": "a9657b4558f9d3cb03872d60d5e9e979af3eb6eb6c1a69784096148ff6f73c35",
+        "raw": "78d0cd47913fde8d09f38b38b6033c70d0fc576ea60db4987a78fb021a923075",
+        "archive": "ff19168b492b548e3fca8c26009aa3461dfe2a7cca2eb4c0adf3b41dae0bd209",
+        "changed": 35303,
+        "overOne": 35018,
+        "peak": 224,
+        "bounds": [
+          0,
+          0,
+          754,
+          712
+        ]
+      },
+      "matchedDisputedPixels": 456,
+      "globalMaterials": {
+        "307": 456
+      }
+    },
+    "b": {
+      "outputs": {
+        "png": "08cc4df269553d7fb3a1fbc8e730a5b0c40a24e358e208fdf6f2121260b563bf",
+        "referencePng": "a9657b4558f9d3cb03872d60d5e9e979af3eb6eb6c1a69784096148ff6f73c35",
+        "raw": "7a63249c50ab25bf46336f3198e0d396e08465eaf2c5753f0e6b8b7fc65479be",
+        "archive": "92bf103aac083e3e14c5c2d52bb5b0c42b06dfb579717de83bcf101c80626885",
+        "changed": 35730,
+        "overOne": 35425,
+        "peak": 224,
+        "bounds": [
+          0,
+          0,
+          943,
+          712
+        ]
+      },
+      "matchedDisputedPixels": 456,
+      "globalMaterials": {
+        "307": 456
+      }
+    }
+  },
+  "paired": {
+    "labels": [
+      "a",
+      "b"
+    ],
+    "materialIdsChanged": 0,
+    "pairedOwners": 456,
+    "upperBeautyChanged": 427
+  },
+  "shaderPrograms": {
+    "mesh_object_clipmap_field.frag.spv": "1edc8aae39d1af4e4b0b19bbe6f1a32e3eb0fde445c00ce8fd995d88f91fef14",
+    "mesh_object_clipmap_field_early.frag.spv": "670b4da50bd90f1b83d9ee08ce7ffec77edefce98925f3f28b6baea06f9230dc",
+    "mesh_object_clipmap_field_lighting.frag.spv": "8c0a15091128d2629c361d131c71009d076862fcc9d75a58bc49ec622e666ad8",
+    "mesh_object_clipmap_field_early_lighting.frag.spv": "8e90faa9991c311bfb054f0e050db3c579cbb41582202a687ce6f171800bd160",
+    "character_snapshot_clipmap_field.frag.spv": "ab2171e39d2d07955c15ec12ea0567d863cd4a840f66c0552ead3c07c79530be",
+    "character_snapshot_clipmap_field_early.frag.spv": "67f70e34d0c62eced5746a45106431283e08273e3b78d99d92c7cf59b71583fa",
+    "character_snapshot_clipmap_field_lighting.frag.spv": "e09eb5ac0864b888187356ef1d434ee4871a8f4adf4e6fa7c75ca6c93d2d9559",
+    "character_snapshot_clipmap_field_early_lighting.frag.spv": "de133f651f47469b7d7977f2d53fdf7d843003eea7eb3e53307cbc5e870338f2",
+    "character_snapshot_object_clipmap_field.frag.spv": "230d80275d51cc72a708911b7497533d9e74f0001c9590b45e2b696eab4d7404",
+    "character_snapshot_object_clipmap_field_early.frag.spv": "cc9416cb0ce8621812da64bc0048398d52e9b0db12de5fc21f5fbce6e9b8977e",
+    "character_snapshot_object_clipmap_field_lighting.frag.spv": "b959682d69232585b83cf6c8c5cc486d0bb251f0064656e340f4de6e2999aedc",
+    "character_snapshot_object_clipmap_field_early_lighting.frag.spv": "956093e5bfe4464f23ef22d78d3d28b1a77548f7f2ea89750ef2364f223013c1"
+  },
+  "source": "2df45c56e9f58a3b6bb18ade2ae2796f6cbab336be2e6a84a0953fde08101fd3",
+  "modifiedSource": "4cbcb2c046a7e2542823cff783c9dc0d6c9a24a50019ee66873b8a2f732ddcd6",
+  "materialIdentity": {
+    "materialCount": 761,
+    "fixedTextureSlots": 6851,
+    "distinctResources": 374,
+    "resource": "exchange-resource-17926049247997313-83",
+    "model": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-012115-joint-scene-dynamics-e9e4e1\\project\\content-back\\structure\\native-7c16ba31954da6e8.glb",
+    "slotOverrides": [],
+    "globalMaterialBase": 307,
+    "localMaterialIndex": 0,
+    "material": {
+      "doubleSided": true,
+      "emissiveFactor": [
+        1,
+        1,
+        1
+      ],
+      "emissiveTexture": {
+        "index": 0
+      },
+      "name": "M_mod_map01_zmdbuliding+1_002_12",
+      "normalTexture": {
+        "index": 1
+      },
+      "pbrMetallicRoughness": {
+        "baseColorTexture": {
+          "index": 2
+        },
+        "metallicRoughnessTexture": {
+          "index": 3
+        }
+      }
+    },
+    "nodes": [
+      {
+        "id": "exchange-node-17926049248405819-646",
+        "name": "native-73417099-draw-0"
+      }
+    ],
+    "sourceLevelSha256": "dbc1f99b05fcef84fc4bc3a9285f36072a1bb91fbb8df81bf59ba4840a0749d3",
+    "projectSha256": "fc4f59e1ac132cac099346a629e4fa5ce941b8aae1cdd3f25939d664264b7188"
+  },
+  "archiveSha256": "071f0b7f643ab4ec4841c4beaee3eb11e28fa0d08d56eb7cbe6edf0082b5b74f"
+}
