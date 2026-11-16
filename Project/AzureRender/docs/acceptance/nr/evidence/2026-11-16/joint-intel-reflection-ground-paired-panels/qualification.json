@@ -1,0 +1,192 @@
+{
+  "status": "paired-ground-reflection-and-opaque-source",
+  "reads": {
+    "a": {
+      "frame": {
+        "png": "2650d006eb94be90678f9d76a22e720393ef6c6564b091797c63b746c911f127",
+        "referencePng": "a9657b4558f9d3cb03872d60d5e9e979af3eb6eb6c1a69784096148ff6f73c35",
+        "raw": "704ca6add2425c8aa7046a8b506eb38cb1ddadf39ed6c56fb0485c71089aa796",
+        "archive": "a10f3234afbf022cd1bcd2eba4e4b2efe1bc67ec0583af6045a087b28bca4969",
+        "changed": 42668,
+        "overOne": 42320,
+        "peak": 254,
+        "bounds": [
+          0,
+          0,
+          943,
+          712
+        ]
+      },
+      "againstKnown": {
+        "native": 2006,
+        "native-repeat": 318,
+        "serial-a": 745
+      }
+    },
+    "b": {
+      "frame": {
+        "png": "2650d006eb94be90678f9d76a22e720393ef6c6564b091797c63b746c911f127",
+        "referencePng": "a9657b4558f9d3cb03872d60d5e9e979af3eb6eb6c1a69784096148ff6f73c35",
+        "raw": "704ca6add2425c8aa7046a8b506eb38cb1ddadf39ed6c56fb0485c71089aa796",
+        "archive": "12b0df59d292bcddb0cd2b7adc2c701f83da483dbc56ea81d062a666fc184986",
+        "changed": 42668,
+        "overOne": 42320,
+        "peak": 254,
+        "bounds": [
+          0,
+          0,
+          943,
+          712
+        ]
+      },
+      "againstKnown": {
+        "native": 2006,
+        "native-repeat": 318,
+        "serial-a": 745
+      }
+    },
+    "c": {
+      "frame": {
+        "png": "2650d006eb94be90678f9d76a22e720393ef6c6564b091797c63b746c911f127",
+        "referencePng": "a9657b4558f9d3cb03872d60d5e9e979af3eb6eb6c1a69784096148ff6f73c35",
+        "raw": "704ca6add2425c8aa7046a8b506eb38cb1ddadf39ed6c56fb0485c71089aa796",
+        "archive": "1ce8bd62e4a1ff5de4b5ea6bb807e85f9ed75b326439b2d709e084f9bce065dc",
+        "changed": 42668,
+        "overOne": 42320,
+        "peak": 254,
+        "bounds": [
+          0,
+          0,
+          943,
+          712
+        ]
+      },
+      "againstKnown": {
+        "native": 2006,
+        "native-repeat": 318,
+        "serial-a": 745
+      }
+    },
+    "d": {
+      "frame": {
+        "png": "f5aa26374baf5ba4b02f27a1d5fb0a71ae6acd15e75956cf1be32808912be439",
+        "referencePng": "a9657b4558f9d3cb03872d60d5e9e979af3eb6eb6c1a69784096148ff6f73c35",
+        "raw": "0e23c5ab6185e44081d5127d07107a2c9b8d71d34c93505a1e422fb7636c4ee0",
+        "archive": "0043dd81f0c724c999688a4126dccb254b54caf9f72e2b5aa8ef15cad6ddf633",
+        "changed": 43502,
+        "overOne": 42575,
+        "peak": 254,
+        "bounds": [
+          0,
+          0,
+          1272,
+          712
+        ]
+      },
+      "againstKnown": {
+        "native": 318,
+        "native-repeat": 2006,
+        "serial-a": 1579
+      }
+    }
+  },
+  "pairs": {
+    "a-b": {
+      "storedRgbChanged": 0,
+      "storedConfidenceChanged": 0,
+      "floorInputSurfaceChanged": 0,
+      "upperOpaqueSourceRgbChanged": 0,
+      "upperOpaqueSourceAlphaChanged": 0,
+      "upperInputSurfaceChanged": 0,
+      "realFloorChanged": 0,
+      "realUpperChanged": 0,
+      "otherImageChanged": 0
+    },
+    "a-c": {
+      "storedRgbChanged": 0,
+      "storedConfidenceChanged": 0,
+      "floorInputSurfaceChanged": 0,
+      "upperOpaqueSourceRgbChanged": 0,
+      "upperOpaqueSourceAlphaChanged": 0,
+      "upperInputSurfaceChanged": 0,
+      "realFloorChanged": 0,
+      "realUpperChanged": 0,
+      "otherImageChanged": 0
+    },
+    "a-d": {
+      "storedRgbChanged": 1583,
+      "storedConfidenceChanged": 0,
+      "floorInputSurfaceChanged": 0,
+      "upperOpaqueSourceRgbChanged": 456,
+      "upperOpaqueSourceAlphaChanged": 0,
+      "upperInputSurfaceChanged": 0,
+      "realFloorChanged": 1235,
+      "realUpperChanged": 427,
+      "otherImageChanged": 1688
+    },
+    "b-c": {
+      "storedRgbChanged": 0,
+      "storedConfidenceChanged": 0,
+      "floorInputSurfaceChanged": 0,
+      "upperOpaqueSourceRgbChanged": 0,
+      "upperOpaqueSourceAlphaChanged": 0,
+      "upperInputSurfaceChanged": 0,
+      "realFloorChanged": 0,
+      "realUpperChanged": 0,
+      "otherImageChanged": 0
+    },
+    "b-d": {
+      "storedRgbChanged": 1583,
+      "storedConfidenceChanged": 0,
+      "floorInputSurfaceChanged": 0,
+      "upperOpaqueSourceRgbChanged": 456,
+      "upperOpaqueSourceAlphaChanged": 0,
+      "upperInputSurfaceChanged": 0,
+      "realFloorChanged": 1235,
+      "realUpperChanged": 427,
+      "otherImageChanged": 1688
+    },
+    "c-d": {
+      "storedRgbChanged": 1583,
+      "storedConfidenceChanged": 0,
+      "floorInputSurfaceChanged": 0,
+      "upperOpaqueSourceRgbChanged": 456,
+      "upperOpaqueSourceAlphaChanged": 0,
+      "upperInputSurfaceChanged": 0,
+      "realFloorChanged": 1235,
+      "realUpperChanged": 427,
+      "otherImageChanged": 1688
+    }
+  },
+  "groundPair": [
+    "a",
+    "d"
+  ],
+  "player": "f8f86018d82b7e47a399a9cd451a61701122afb6f2dda680456862289167ae38",
+  "programs": {
+    "mesh_object_clipmap_field.frag.spv": "c6647b29c2c64ef322803f1da4153be3c5e332ac3b40a8adf1235fc2d51d47da",
+    "mesh_object_clipmap_field_early.frag.spv": "fad63fd875481c676942cd9afd36ba3134df388b0a461be15a1dde3baa18af47",
+    "mesh_object_clipmap_field_lighting.frag.spv": "626ce0c21087d57c79f94abc1b60a82c947b95dc0cbe462e4509b7575c3876eb",
+    "mesh_object_clipmap_field_early_lighting.frag.spv": "e3564ce95c4a5c9da5ef63c1d05871ee898db1b2c2003834ab0184ae4345903f"
+  },
+  "source": "2df45c56e9f58a3b6bb18ade2ae2796f6cbab336be2e6a84a0953fde08101fd3",
+  "diagnosticSource": "b8d5f464289c92985aa12be0dadf89f2689d66fe3d973fabd1311142d74a5215",
+  "job": 1514,
+  "sourceRgbBounds": [
+    907,
+    170,
+    943,
+    215
+  ],
+  "reflectionRgbBounds": [
+    896,
+    621,
+    952,
+    676
+  ],
+  "sourceRgbEncodedPeak": 47,
+  "upperSignedMatchesPrevious": true,
+  "actualFloorPeak": 7,
+  "proofScope": "per-sample encoded same-frame probes; common variation does not prove traced donor mapping",
+  "archiveSha256": "7afa7ce8532a663496128334724ce9405d8309fea4db2b06094ad52d90bd075d"
+}
