@@ -1450,4 +1450,5 @@ Intel 头发颜色继续按冻结区域核对纹理选级。
 [反射过滤器输入](../acceptance/nr/scene-material-quality-diagnosis.md#反射过滤器输入核对)通过 4,940 点校准。覆盖模型显示字形与货箱需联合核对，两区继续按实际成片验收。
 [反射射线采样相位](../acceptance/nr/scene-material-quality-diagnosis.md#反射射线采样相位)完成双设备三帧配对，区域与邻区门槛未通过。
 原生身体权重和投影重建已确认固定捕获帧的几何覆盖。原始量化权重导入通过动画、形变和蒙皮回归。[独立动态轮廓](../acceptance/nr/evidence/2026-11-16/dynamic-body-geometry-player/qualification.json)通过双设备掩码核对；完整衣料遮挡与着色按联合场景成片验收。
+[完整场景后视机位](../acceptance/nr/full-body-native-comparison.md#完整场景后视机位)确认双设备原模型对照精确。身体候选的腰侧变化可复现，Intel 地面差异继续定位。
 近景泛光的双设备线性读回已完成。原生泛光外观按同机位同姿态的完整画面验收，全身虹膜按已知覆盖区域核对采样与遮挡。

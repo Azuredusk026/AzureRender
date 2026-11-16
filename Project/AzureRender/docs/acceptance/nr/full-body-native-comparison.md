@@ -26,6 +26,16 @@
 
 [双设备轮廓结果](evidence/2026-11-16/dynamic-body-geometry-player/qualification.json)和[验证归档](evidence/2026-11-16/dynamic-body-geometry-player/validation.zip)保存实际画面、动画状态与三角形覆盖核对程序。
 
+### 完整场景后视机位
+
+引用式 glTF 复用原角色的网格缓冲和 67 张纹理。候选仅随附 270,884 字节的身体数据。两块显卡的原模型引用对照与各自留存画面逐像素一致。
+
+身体候选在腰侧的 16×6 像素区域产生稳定变化。NVIDIA 的超差像素为 64 个，Intel 两次均为 63 个。该机位使用同一动作起点和 1280×720 画面。
+
+Intel 首次采集在右侧地面另有 662 个超差像素。该区域的超差在同一候选复跑时消失。画面仍有其他差异，动画状态完全一致。完整衣料与照明仍需按同姿态原生画面验收。
+
+[后视机位回执](evidence/2026-11-16/joint-character-referenced-body/qualification.json)和[验证归档](evidence/2026-11-16/joint-character-referenced-body/validation.zip)保存真实成片差量、原资产指纹和设备记录。
+
 ## 采集范围
 
 角色根节点相对方向覆盖正向、左右四分之三侧向、左右侧向及背向六个机位。NVIDIA 与 Intel 均以 1280×720 采集，使用同一联合场景、资产和动画起点。[六机位采集记录](evidence/2026-11-16/character-six-view-inputs/qualification.json)保存相机参数、图像摘要和冻结回归结果。当前 NVIDIA 驱动下的四帧冻结回归逐像素一致；原始冻结图的 RGB 峰值差为 1、7、37、23。
