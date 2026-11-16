@@ -161,3 +161,5 @@ Player 使用 `--save-root` 指定存档根目录。
 会话默认使用内存存档。
 运行回调可以提交写入，脚本初始化的写入随宿主效果提交。
 需要展示失败并允许重试的界面可在运行回调中调用 Lua 的 `try_write_save` 或托管的 `TryWriteSave`。成功返回 `true`，存档拒绝或文件写入失败返回 `false`。初始化使用事务中的 `write_save` 或 `WriteSave`。
+
+Lua 的 `local_datetime()` 和托管的 `LocalDateTime()` 返回系统本地时间，格式为 `yyyyMMddHHmmss`。任务完成时刻和按日分组使用此接口。固定步的持续时间由脚本回调的时间参数提供。

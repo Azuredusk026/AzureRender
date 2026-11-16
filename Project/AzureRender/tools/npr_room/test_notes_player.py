@@ -16,7 +16,7 @@ from test_validation_protocol import exchange
 
 
 @contextlib.contextmanager
-def playing(player, project, resources, profile, output):
+def playing(player, project, resources, profile, output, expected_audio_starts=None):
     output.mkdir()
     endpoint = output / "endpoint.json"
     token = secrets.token_hex(32)
@@ -62,6 +62,7 @@ def playing(player, project, resources, profile, output):
             def check_state():
                 state = json.loads(call("query", name="game.state"))
                 assert not state["scriptErrors"] and not state["presentationErrors"] and not state["loadError"], state
+                return state
 
             def press(key):
                 for down in (True, False):
@@ -86,7 +87,9 @@ def playing(player, project, resources, profile, output):
                 capture.rename(output / "notes.png")
 
             yield click, press, type_text, screenshot
-            check_state()
+            state = check_state()
+            if expected_audio_starts is not None:
+                assert state["audioStarts"] == expected_audio_starts, state
             assert window.find()
             window.close()
             assert process.wait(timeout=45) == 0

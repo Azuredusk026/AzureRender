@@ -29,6 +29,7 @@
     {"name":"velocity","managed":"Velocity","parameters":[],"result":"array","mutating":false},
     {"name":"read_save","managed":"ReadSave","parameters":[{"name":"slot","type":"string"}],"result":"value","mutating":false},
     {"name":"write_save","managed":"WriteSave","parameters":[{"name":"slot","type":"string"},{"name":"payload","type":"value"}],"result":"void","mutating":true},
-    {"name":"try_write_save","managed":"TryWriteSave","parameters":[{"name":"slot","type":"string"},{"name":"payload","type":"value"}],"result":"boolean","mutating":true}
+    {"name":"try_write_save","managed":"TryWriteSave","parameters":[{"name":"slot","type":"string"},{"name":"payload","type":"value"}],"result":"boolean","mutating":true},
+    {"name":"local_datetime","managed":"LocalDateTime","parameters":[],"result":"string","mutating":false}
   ]
 }

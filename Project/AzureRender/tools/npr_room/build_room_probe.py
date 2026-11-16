@@ -7,12 +7,12 @@ from pathlib import Path
 import shutil
 
 from reference_inventory import asset_index, digest, group_paths_by_guid
-from room_geometry import install_heroine_motion, install_room_geometry, merge_room_geometry
+from room_geometry import NOTE_ACTIONS, TODO_ACTIONS, activate_room_control, ui_font_document
+from room_geometry import install_heroine_motion, install_room_geometry, install_todo_audio, merge_room_geometry
 
 
 CUES = {"timer-start": (0, 0.5), "timer-pause": (6, 1.0), "timer-finish": (3, 0.5)}
 SYSTEM_CUES = {"settings-click": "bulbul_systemse_click.wav", "settings-cancel": "bulbul_systemse_cancel.wav"}
-NOTE_ACTIONS = ("toggle", "prev", "next", "new", "save", "up", "down", "delete")
 
 
 def component(type_id, data):
@@ -37,7 +37,7 @@ def add_startup_flow(output):
 
 
 def make_probe(example, source, furniture, output, audio_playback=None, geometry=None, heroine=None, notes=False,
-               ui_font=None):
+               ui_font=None, todo=False):
     import re
 
     master = source / "Assets/App/BulbulAssets/MasterData/ScriptableObjects/TimerSeMaster.asset"
@@ -94,24 +94,24 @@ def make_probe(example, source, furniture, output, audio_playback=None, geometry
     output.mkdir()
     project = output / "project.azureproject"
     shutil.copy2(example / "project.azureproject", project)
-    if notes:
+    if notes or todo:
         descriptor = json.loads(project.read_bytes())
-        descriptor["runtime"]["input"].update({f"notes-{action}": [] for action in NOTE_ACTIONS})
-        level["nodes"].append({"id": "room-notes", "components": {
-            "azure.script": component("azure.script", {"asset": "assets:/notes.lua"}),
-        }})
+        if notes:
+            activate_room_control(descriptor, level, "notes", NOTE_ACTIONS)
+        if todo:
+            activate_room_control(descriptor, level, "todo", TODO_ACTIONS)
         project.write_text(json.dumps(descriptor, indent=2) + "\n", encoding="utf-8")
     assets = output / "assets"
     shutil.copytree(example / "assets", assets)
+    if todo and audio_playback is not None:
+        install_todo_audio(source, audio_playback, assets, level)
     if ui_font is not None:
         if ui_font.suffix.lower() not in (".otf", ".ttf"):
             raise ValueError("The UI fallback requires an OpenType or TrueType font")
         filename = "ui-fallback" + ui_font.suffix.lower()
         os.link(ui_font, assets / filename)
         rml = assets / "timer.rml"
-        stylesheet = '@font-face { font-family: "Room UI Fallback"; src: "' + filename + '"; -rmlui-fallback-face: true; }'
-        rml.write_text(rml.read_text(encoding="utf-8").replace("<style>", "<style>\n" + stylesheet, 1),
-                       encoding="utf-8")
+        rml.write_text(ui_font_document(rml.read_text(encoding="utf-8"), filename), encoding="utf-8")
     if geometry is None:
         shutil.copytree(furniture / "assets/exchange", assets / "exchange",
                         ignore=shutil.ignore_patterns("dangling.azuresceneexchange*"))
@@ -132,13 +132,14 @@ def main():
     parser.add_argument("--room-geometry", type=Path, help="Imported room project with room-camera.azurelevel")
     parser.add_argument("--heroine-motion", type=Path, help="Verified project with sampled heroine motions")
     parser.add_argument("--notes", action="store_true")
+    parser.add_argument("--todo", action="store_true")
     parser.add_argument("--ui-font", type=Path, help="Source font used for glyph fallback in the room UI")
     parser.add_argument("--startup-flow", action="store_true")
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     example = Path(__file__).resolve().parents[2] / "examples/npr-room"
     make_probe(example, args.source, args.furniture, args.output, args.audio_playback, args.room_geometry,
-               args.heroine_motion, args.notes, args.ui_font)
+               args.heroine_motion, args.notes, args.ui_font, args.todo)
     if args.startup_flow:
         add_startup_flow(args.output)
 

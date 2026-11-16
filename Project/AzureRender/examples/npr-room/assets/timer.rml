@@ -17,6 +17,12 @@ body { width: 100%; height: 100%; margin: 0; color: white; font-family: LatoLati
 #notes-panel textarea { height: 135dp; }
 #note-page { display: block; margin-bottom: 6dp; }
 #note-status { display: block; color: #f0c58e; }
+#todo-toggle { position: absolute; left: 82dp; top: 16dp; padding: 6dp 10dp; color: white; background-color: #34434f; }
+#todo-panel { position: absolute; right: 16dp; top: 148dp; width: 316dp; max-height: 70%; overflow-y: auto; padding: 12dp; background-color: #19232c; }
+#todo-panel button { display: inline-block; padding: 4dp 6dp; margin-right: 3dp; margin-bottom: 6dp; color: white; background-color: #34434f; }
+#todo-panel input { display: block; width: 288dp; padding: 4dp; margin-bottom: 6dp; color: white; background-color: #273541; }
+.todo-caption { display: block; margin-bottom: 4dp; }
+#todo-status { display: block; color: #f0c58e; }
 </style>
 </head>
 <body>
@@ -45,6 +51,30 @@ body { width: 100%; height: 100%; margin: 0; color: white; font-family: LatoLati
 <button id="note-delete" data-action="notes-delete">Delete</button>
 </div>
 <span id="note-status"></span>
+</div>
+<button id="todo-toggle" data-action="todo-toggle" style="display: none;">Tasks</button>
+<div id="todo-panel" style="display: none;">
+<span class="todo-caption">List <span id="todo-list-position"></span></span>
+<input id="todo-list-title" placeholder="List title" />
+<button id="todo-list-prev" data-action="todo-list-prev">Previous list</button>
+<button id="todo-list-next" data-action="todo-list-next">Next list</button>
+<button id="todo-list-new" data-action="todo-list-new">New list</button>
+<button id="todo-list-delete" data-action="todo-list-delete">Delete list</button>
+<span class="todo-caption">Completed <span id="todo-progress"></span></span>
+<button id="todo-task-new" data-action="todo-task-new">Add task</button>
+<button id="todo-save" data-action="todo-save">Save</button>
+<div id="todo-task-details">
+<span class="todo-caption">Task <span id="todo-task-position"></span> · <span id="todo-task-state"></span></span>
+<input id="todo-task-text" placeholder="Task name" />
+<input id="todo-task-due" placeholder="Due date YYYY-MM-DD" />
+<button id="todo-task-prev" data-action="todo-task-prev">Previous</button>
+<button id="todo-task-next" data-action="todo-task-next">Next</button>
+<button id="todo-task-complete" data-action="todo-task-complete">Complete</button>
+<button id="todo-task-up" data-action="todo-task-up">Up</button>
+<button id="todo-task-down" data-action="todo-task-down">Down</button>
+<button id="todo-task-delete" data-action="todo-task-delete">Delete</button>
+</div>
+<span id="todo-status"></span>
 </div>
 </body>
 </rml>

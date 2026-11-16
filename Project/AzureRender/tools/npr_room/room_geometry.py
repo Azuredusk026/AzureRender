@@ -1,6 +1,7 @@
 """Assemble the imported room with its textured furniture and gameplay nodes."""
 
 import copy
+from hashlib import file_digest
 import json
 import os
 from pathlib import Path
@@ -10,6 +11,45 @@ import shutil
 FURNITURE_TRANSFORMS = (7570, 7993)
 EXCHANGE_DOCUMENT = "RoomScene-WithCamera.azuresceneexchange"
 HEROINE_PARTS = ("face", "body", "hair", "top", "bottom", "socks", "jacket")
+NOTE_ACTIONS = ("toggle", "prev", "next", "new", "save", "up", "down", "delete")
+TODO_ACTIONS = ("toggle", "save", *(f"list-{name}" for name in ("prev", "next", "new", "delete")),
+                *(f"task-{name}" for name in ("prev", "next", "new", "up", "down", "complete", "delete")))
+
+
+def activate_room_control(project, level, name, actions):
+    project["runtime"]["input"].update({f"{name}-{action}": [] for action in actions})
+    node_id = f"room-{name}"
+    if any(node["id"] == node_id for node in level["nodes"]):
+        raise ValueError(f"Room already has a controller: {name}")
+    level["nodes"].append({"id": node_id, "components": {
+        "azure.script": {"type": "azure.script", "version": 1, "data": {"asset": f"assets:/{name}.lua"}},
+    }})
+
+
+def ui_font_document(rml, filename):
+    stylesheet = '@font-face { font-family: "Room UI Fallback"; src: "' + filename + '"; -rmlui-fallback-face: true; }'
+    return rml.replace("<style>", "<style>\n" + stylesheet, 1)
+
+
+def install_todo_audio(source, playback, assets, level):
+    original = source / "Assets/App/BulbulAssets/Audio/SE/bulbul_systemse_completetask.wav"
+    with original.open("rb") as stream:
+        sha = file_digest(stream, "sha256").hexdigest()
+    playback = playback.resolve(strict=True)
+    repairs = json.loads((playback / "audio-repairs.json").read_bytes())["repairs"]
+    entry = repairs["media/" + sha + ".wav"]
+    media = (playback / entry["media"]).resolve(strict=True)
+    if media.parent != playback or sha != entry["sourceSHA256"]:
+        raise ValueError("Task completion audio source identity differs")
+    with media.open("rb") as stream:
+        if file_digest(stream, "sha256").hexdigest() != entry["sha256"]:
+            raise ValueError("Task completion audio playback identity differs")
+    filename = "todo-complete.wav"
+    os.link(media, assets / filename)
+    level["nodes"].append({"id": "todo-complete", "components": {
+        "azure.audio-source": {"type": "azure.audio-source", "version": 1,
+                               "data": {"asset": "assets:/" + filename, "volume": 1}},
+    }})
 
 
 def merge_room_geometry(furniture, imported_room):

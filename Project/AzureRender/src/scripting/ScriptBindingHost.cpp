@@ -4,6 +4,7 @@
 #include "runtime/LevelSession.hpp"
 #include "runtime/ProjectSaveStore.hpp"
 #include <cmath>
+#include <ctime>
 #include <stdexcept>
 #include <system_error>
 namespace azurerender {
@@ -140,6 +141,19 @@ Json ScriptBindingHost::invoke(const ScriptObject& object,const std::string& met
     if(method=="velocity")return game_.physics().velocity(entity);
     if(method=="action")return game_.input().down(args[0].get<std::string>());
     if(method=="pressed")return game_.input().pressed(args[0].get<std::string>());
+    if(method=="local_datetime") {
+        const auto now = std::time(nullptr);
+        std::tm local{};
+#ifdef _WIN32
+        if (localtime_s(&local, &now) != 0) throw std::runtime_error("Local date unavailable");
+#else
+        if (!localtime_r(&now, &local)) throw std::runtime_error("Local date unavailable");
+#endif
+        char value[15]{};
+        if (std::strftime(value, sizeof(value), "%Y%m%d%H%M%S", &local) != 14)
+            throw std::runtime_error("Local date cannot be represented");
+        return std::string(value);
+    }
     if(method=="read_save")
         return saveStore_ ? saveStore_->read(args[0].get<std::string>()) : Json(nullptr);
     if(method=="try_write_save") {

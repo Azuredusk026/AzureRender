@@ -64,7 +64,7 @@ Windows 构建的 `StreamingAssets` 有 18 个实际文件，涵盖 12 个 Addre
 | 番茄钟 | 设置工作和休息时间，开始、暂停、恢复、跳过及完成 | 工作和休息交替，提示音、进度和工作时长一致 | `TimerCoreService`、`PomodoroTimerService`。已有倒计时、暂停恢复与重置证据 | 固定步脚本、项目动作、音频 |
 | 正计时 | 切换模式，开始、暂停、恢复与结束 | 已用时间及统计入档，切换后设置可恢复 | `CountupTimerService`、`TimerCoreService`。等候实机回放 | 固定步脚本、保存服务 |
 | 笔记 | 新建、输入、保存、重排、删除及重开 | 文本和排序持久化，保持焦点及键盘操作 | `NoteList`、`NoteUIContentsView`。已有面板证据 | [房间笔记](notes.md)登记独立 Player 输入、存档重开与写入失败恢复 |
-| 待办 | 新建多列表，添加、完成、取消完成、拖动和删除 | 列表归属及任务顺序持久化 | `TodoAllData`、`TodoListUIModel`。已有面板证据 | RmlUi 输入和应用状态 |
+| 待办 | 新建多列表，添加、完成、取消完成、拖动和删除 | 列表归属及任务顺序持久化 | `FacilityTodo`、`TodoAllData`。已有面板证据 | [房间待办](todo.md)登记本地编辑、排序、音效和重开 |
 | 统计与解锁 | 完成工作并跨日，按条件开启剧情和环境 | 统计、等级、解锁、通知及进度入档 | `StatisticsService`、`UnlockConditionService`。等候实机回放 | 领域事件、可控时钟、保存服务 |
 | 剧情 | 首次进入、满足解锁、选择分支及读档 | 台词、动作、场景及选择状态一致 | `ScenarioReader`、`ScenarioGroupMaster`、`NovelMaster`。运行分支待核验 | 源命令映射、语言和动作 |
 | 音乐与环境声 | 切曲、调整混音、暂停、淡化及断开音频设备 | 播放位置、列表和设置持久化，设备失败可恢复 | `MusicService` 和音频主数据。已有音频采样前进证据 | 解码、音频与本地选曲 |

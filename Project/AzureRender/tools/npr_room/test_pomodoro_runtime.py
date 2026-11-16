@@ -43,7 +43,8 @@ def main():
     run(args.lua, [example / "assets/pomodoro.lua", example / "tests/pomodoro.lua"])
     run(args.lua, [example / "assets/startup-flow.lua", example / "tests/startup-flow.lua"])
     run(args.lua, [example / "assets/notes.lua", example / "tests/notes.lua"])
-    print("Timer state, cues, room startup and notes checks passed")
+    run(args.lua, [example / "assets/todo.lua", example / "tests/todo.lua"])
+    print("Timer state, cues, room startup, notes and todo checks passed")
 
 
 if __name__ == "__main__":
