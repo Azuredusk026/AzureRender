@@ -1,0 +1,144 @@
+{
+  "status": "measured-opaque-wall-direct-lighting-inputs",
+  "sampleResults": {
+    "a": {
+      "outputs": {
+        "png": "c3e90e26039cff42de387b66471c027392b2908de3aa474c894f48b40685c1e7",
+        "referencePng": "a9657b4558f9d3cb03872d60d5e9e979af3eb6eb6c1a69784096148ff6f73c35",
+        "raw": "fb734eea4a96f90bfe9e96cbf855e295366b20144a1fdd411911064109e98d0a",
+        "archive": "04a92f444efc946089d9078a18532afe344a893efe7a4325dea67e09ab18d830",
+        "changed": 36600,
+        "overOne": 35678,
+        "peak": 249,
+        "bounds": [
+          0,
+          0,
+          1272,
+          712
+        ]
+      },
+      "matchedDisputedPixels": 456,
+      "signatureHistograms": {
+        "shadowVisibility": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          456
+        ],
+        "clusteredLighting": [
+          56,
+          54,
+          54,
+          69,
+          59,
+          60,
+          50,
+          54
+        ],
+        "composedDirect": [
+          52,
+          63,
+          51,
+          59,
+          63,
+          56,
+          62,
+          50
+        ]
+      }
+    },
+    "b": {
+      "outputs": {
+        "png": "a173155ef749331a7ce3864ffb2963158b8869f817b4cd866a5f876e8a2b75f0",
+        "referencePng": "a9657b4558f9d3cb03872d60d5e9e979af3eb6eb6c1a69784096148ff6f73c35",
+        "raw": "df7c0273c2913dcf9624b52534101bdeac59b206dd03ea7c5b077576702c2d10",
+        "archive": "e45ceaa3f44998ae9c5ba341c6eb9cf745836487300b94a07e5d050827684e5a",
+        "changed": 35339,
+        "overOne": 35017,
+        "peak": 249,
+        "bounds": [
+          0,
+          0,
+          754,
+          712
+        ]
+      },
+      "matchedDisputedPixels": 456,
+      "signatureHistograms": {
+        "shadowVisibility": [
+          7,
+          7,
+          9,
+          7,
+          259,
+          7,
+          9,
+          151
+        ],
+        "clusteredLighting": [
+          67,
+          51,
+          50,
+          63,
+          68,
+          44,
+          62,
+          51
+        ],
+        "composedDirect": [
+          43,
+          46,
+          51,
+          65,
+          57,
+          65,
+          68,
+          61
+        ]
+      }
+    }
+  },
+  "paired": {
+    "labels": [
+      "a",
+      "b"
+    ],
+    "changedSignatures": {
+      "shadowVisibility": 305,
+      "clusteredLighting": 261,
+      "composedDirect": 271
+    },
+    "changedSourceSignatures": {
+      "shadowVisibility": 305,
+      "clusteredLighting": 261,
+      "composedDirect": 271
+    },
+    "pairedPixels": 456,
+    "sourceRgbChanged": 310,
+    "pairedChangedSource": 310,
+    "groundBeautyChanged": 1235,
+    "upperBeautyChanged": 0
+  },
+  "shaderPrograms": {
+    "mesh_object_clipmap_field.frag.spv": "30da187c04fb1d23a4852c9048786e28845f2455ffe86b382047fcea13dbaca1",
+    "mesh_object_clipmap_field_early.frag.spv": "dc8a5acb68ba5fe77f9e8d878e2b607fb4d19397ed7e70d0ad5d19065be40755",
+    "mesh_object_clipmap_field_lighting.frag.spv": "5171e925019bd51f7e41d94ac6d8d543d3a6c53a3d511f452be1c66253151793",
+    "mesh_object_clipmap_field_early_lighting.frag.spv": "a870d5ec1e6c49d8a6e8d4cd9dd3b97f4e6e6c4555848aedafcc323e7faad1cf",
+    "character_snapshot_clipmap_field.frag.spv": "cf84ed7642bc28823d5ed33158ba57249b537032be5757fa5b34b245fc6c66b1",
+    "character_snapshot_clipmap_field_early.frag.spv": "226e92fe71222bbe5d99ec34c6eb9ef7317557d750c354e12074cbb23bbbe6a6",
+    "character_snapshot_clipmap_field_lighting.frag.spv": "4b35e166cc08786ee31f8e0b24649404f2bd35250edd421814026a14995290b2",
+    "character_snapshot_clipmap_field_early_lighting.frag.spv": "1f152d006ce75ae98318c48274198cd5936292d7983b06a567396991bda804f3",
+    "character_snapshot_object_clipmap_field.frag.spv": "b701a9b7004f78970dc721c254c73be68ae5f5b908135aa088c42d005ce23068",
+    "character_snapshot_object_clipmap_field_early.frag.spv": "a1896c404da9b0875704f8e7c69df2a6451e387dd41242d1df2ba7becf629720",
+    "character_snapshot_object_clipmap_field_lighting.frag.spv": "bfe97da2d5331e64dba3867226ea576495e4fc08a64aabf91df98ce69fe2a503",
+    "character_snapshot_object_clipmap_field_early_lighting.frag.spv": "7fc8bdad3a5bfa6f2f0073b78ca415d3d134b448f793ff7784a607f1af649079",
+    "spatial_antialiasing.frag.spv": "e840b391381a74c80bb3cdb68604ba19b942bd9b097e1d883721632a044e0d8e"
+  },
+  "source": "2df45c56e9f58a3b6bb18ade2ae2796f6cbab336be2e6a84a0953fde08101fd3",
+  "modifiedSource": "e81bd2f9c896ba734457f9b7c9b2c278402b6a9ae38135c3a92de7831014f708",
+  "displayProbeSource": "b17af302622c6037f63675e1437aafd9de7c2027586a602b458e0bfa60936ab6"
+}

@@ -62,6 +62,8 @@ Intel 两次配对采集均在 456 个快照颜色波动位置读到材质槽 30
 
 地面复现 1,235 处波动时，同帧的不透明快照颜色探针在建筑材质上有 310 处改变。其中 277 处的直接光三位签名变化，纹理及间接光签名一致。画面上方同时复现 427 处变化。后续核对直接光的阴影可见度和聚簇灯光输入。[地面与建筑直接光结果](evidence/2026-11-16/joint-intel-wall-ground-direct-input/qualification.json)及[验证归档](evidence/2026-11-16/joint-intel-wall-ground-direct-input/validation.zip)保存相关像素及双帧差量。
 
+独立的地面波动采集在下方区域复现 1,235 处变化，上方区域逐像素一致。建筑材质的 456 个配对位置中，310 处快照颜色变化。其中 305 处的阴影可见度签名改变，261 处的聚簇灯光贡献签名改变，271 处的合成直接光签名改变。阴影图集、采样深度范围与接收位置继续按同帧取样核对。[阴影可见度结果](evidence/2026-11-16/joint-intel-wall-shadow-visibility-input/qualification.json)和[验证归档](evidence/2026-11-16/joint-intel-wall-shadow-visibility-input/validation.zip)保存采集指纹、取样程序和配对统计。
+
 只将不透明快照绘制放在主命令缓冲区。Intel 三次采集仍出现两种成片，两次上方区域各有 407 个像素超差，另一次与串行图逐像素一致。NVIDIA 的成片与对应控制图逐像素一致。该候选未通过 Intel 稳定性验收。[不透明快照录制结果](evidence/2026-11-16/joint-intel-primary-opaque-snapshot/qualification.json)和[验证归档](evidence/2026-11-16/joint-intel-primary-opaque-snapshot/validation.zip)保存源码、实际帧差和运行状态。
 
 首帧反射探针在空间滤波前核对实际取样。滤波变化区域对应的 469 个半分辨率位置中，387 个能解码且均有命中，其中 111 个取样覆盖已观察到变化的不透明颜色纹素。追踪和滤波程序分别写入校验标记，在图中可解码的位置全部读回预期值。该结果确认部分地面反射直接读取发生变化的快照颜色。[射线取样结果](evidence/2026-11-16/joint-intel-raw-reflection-donor-membership/qualification.json)和[验证归档](evidence/2026-11-16/joint-intel-raw-reflection-donor-membership/validation.zip)保存程序、实际帧差和解码标记。
