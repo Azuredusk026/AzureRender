@@ -360,4 +360,10 @@ Player 裁切区内 63,800 处的颜色和置信度与同事件存档逐字节�
 
 [覆盖估算结果](evidence/2026-11-16/projected-history-source-coverage/results.json)和[验证归档](evidence/2026-11-16/projected-history-source-coverage/validation.zip)保留同机位裁图、覆盖掩码和独立复算程序。实际过滤校准待完成；画质门槛保持 SSIM 0.95、区域中位亮度误差 10% 和冻结四帧零差。
 
+### 反射历史图层合成
+
+Player 通过[反射历史图层](../../runtime/unlit-texture-layers.md#反射历史图层)读取指定透明表面。NVIDIA 和 Intel 分别执行九组两帧对照。首帧反射区域逐像素一致；第二帧的单层和双层合成与不透明物理颜色对照最多相差一个 RGB 色阶。普通透明、被遮挡及零透明度图层的反射区域逐像素一致。
+
+[双设备合成结果](evidence/2026-11-16/projected-history-layer/qualification.json)和[验证归档](evidence/2026-11-16/projected-history-layer/qualification.zip)保存着色器指纹、夹具、设备及运行收据。完整场景需同时验证实际字形、相邻货箱及原始冻结图，保持地面和环带的区域验收条件。
+
 当前运行入口统一见[完整场景显示](../../tutorials/restored-native-scene.md)。

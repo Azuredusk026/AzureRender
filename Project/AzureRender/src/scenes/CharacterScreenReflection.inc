@@ -33,6 +33,7 @@ void CharacterSceneRenderer::createScreenReflectionResources(const RenderContext
                             reflectionHistoryPreparation_="projected-temporal";
                         }catch(const std::exception& error){destroyReflectionHistoryResources();reflectionHistoryPreparation_=error.what();}
                     }
+                    if(projectedReflectionHistoryPrepared_)createProjectedHistoryLayer(context);
                     return;
                 }catch(const std::exception& error){projectedReflections_.reset();reflectionFallbackReason_=error.what();}
             }else reflectionFallbackReason_="projected-formats-or-budget";
@@ -66,10 +67,70 @@ void CharacterSceneRenderer::destroyScreenReflectionResources(){
     allocator_->destroyImage(reflectionFallback_);
 }
 void CharacterSceneRenderer::destroyReflectionHistoryResources(){
+    destroyProjectedHistoryLayer();
     for(auto& framebuffer:reflectionMotionFramebuffers_){if(framebuffer)rhi_->destroyFramebuffer(framebuffer);framebuffer=VK_NULL_HANDLE;}
     reflectionReprojection_.reset();reflectionOwnedMotion_.reset();reflectionPendingSlot_.reset();reflectionPendingView_.reset();projectedReflectionHistoryPrepared_=false;
     reflectionHistoryView_={};reflectionPendingJitterUv_={};reflectionHistoryJitterUv_={};reflectionMotionUvOffsets_={};reflectionInputSubmissions_={};
     reflectionHistorySubmission_=0;reflectionHistorySlot_=0;reflectionHistoryValid_.fill(false);reflectionHistoryPreparation_="not-requested";
+}
+void CharacterSceneRenderer::createProjectedHistoryLayer(const RenderContext& context){
+    const auto marked=[](const LoadedAsset& asset){
+        return std::any_of(asset.materials.begin(),asset.materials.end(),projectedHistoryOverlay);
+    };
+    if(!marked(asset_)&&std::none_of(additionalResources_.begin(),additionalResources_.end(),
+        [&](const auto& resource){return marked(resource->asset);}))return;
+    constexpr auto format=VK_FORMAT_R16G16B16A16_SFLOAT;
+    constexpr auto usage=VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT|VK_IMAGE_USAGE_SAMPLED_BIT;
+    constexpr std::uint64_t budget=128ULL*1024*1024;
+    const auto bytes=std::uint64_t(context.renderExtent.width)*context.renderExtent.height*8*kMaxFramesInFlight;
+    if(!context.depthTestEnabled||bytes>budget||!rhi_->supportsSampledImage(format,false)
+        ||!(rhi_->imageSampleCounts(format,usage)&VK_SAMPLE_COUNT_1_BIT)){
+        reflectionHistoryPreparation_="projected-temporal-color-layer-unavailable";
+        return;
+    }
+    try{
+        constexpr auto read=VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL;
+        rhi::RenderPassDesc pass;pass.depthAttachment=1;pass.depthReadOnly=true;pass.externalReadDependency=true;
+        pass.attachments={{format,VK_IMAGE_LAYOUT_UNDEFINED,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,true,true,false},
+            {context.depthFormat,read,read,false,true,true,true}};
+        projectedHistoryLayerPass_=rhi_->createRenderPass(pass);
+        for(unsigned slot=0;slot<kMaxFramesInFlight;++slot){
+            auto& layer=projectedHistoryLayer_[slot];
+            layer.image=allocator_->createImage2D(context.renderExtent.width,context.renderExtent.height,format,usage);
+            layer.view=rhi_->createImageView(layer.image.image,format,VK_IMAGE_ASPECT_COLOR_BIT,1);
+            projectedHistoryLayerFrames_[slot]=rhi_->createFramebuffer({projectedHistoryLayerPass_,
+                {layer.view,overlayDepthViews_[slot]},context.renderExtent.width,context.renderExtent.height});
+        }
+    }catch(const std::exception& error){
+        destroyProjectedHistoryLayer();
+        reflectionHistoryPreparation_="projected-temporal-color-layer: "+std::string(error.what());
+    }
+}
+void CharacterSceneRenderer::destroyProjectedHistoryLayer() noexcept{
+    if(!rhi_)return;
+    for(auto& depths:projectedHistoryLayerPipelines_)for(auto& variants:depths)for(auto& pipeline:variants){
+        if(pipeline)rhi_->destroyPipeline(pipeline);
+        pipeline={};
+    }
+    for(unsigned slot=0;slot<kMaxFramesInFlight;++slot){
+        auto& framebuffer=projectedHistoryLayerFrames_[slot];
+        if(framebuffer)rhi_->destroyFramebuffer(framebuffer);
+        framebuffer={};
+        auto& layer=projectedHistoryLayer_[slot];
+        if(layer.view)rhi_->destroyImageView(layer.view);
+        if(layer.image.image)allocator_->destroyImage(layer.image);
+        layer={};
+    }
+    if(projectedHistoryLayerPass_)rhi_->destroyRenderPass(projectedHistoryLayerPass_);
+    projectedHistoryLayerPass_={};
+}
+rhi::RenderPassBeginDesc CharacterSceneRenderer::projectedHistoryLayerBegin(const RenderContext& context) const{
+    rhi::RenderPassBeginDesc begin;
+    begin.renderPass=projectedHistoryLayerPass_;
+    begin.framebuffer=projectedHistoryLayerFrames_.at(context.currentFrame);
+    begin.extent=context.renderExtent;
+    begin.clearValues={VkClearValue{}};
+    return begin;
 }
 void CharacterSceneRenderer::createReflectionMotionResources(const RenderContext& context){
     if(!context.motionOutput)reflectionOwnedMotion_=std::make_unique<MotionVectorTarget>(*rhi_,*allocator_,context.renderExtent,context.depthFormat,
@@ -93,7 +154,8 @@ void CharacterSceneRenderer::recordScreenReflection(rhi::ICommandRecorder& comma
         const bool valid=projectedReflectionHistoryPrepared_&&reflectionHistoryAvailable(slot);
         ProjectedScreenReflectionHistory history;
         if(valid){
-            history={reflectionHistorySlot_,opaqueSceneColor_[reflectionHistorySlot_].view,reflectionHistoryView_};
+            history={reflectionHistorySlot_,opaqueSceneColor_[reflectionHistorySlot_].view,reflectionHistoryView_,
+                projectedHistoryLayer_[reflectionHistorySlot_].view};
             for(unsigned axis=0;axis<2;++axis)parameters.motionUvOffset[axis]=jitterUv[axis]-reflectionHistoryJitterUv_[axis];
             parameters.requireTrackedMotion=true;
         }

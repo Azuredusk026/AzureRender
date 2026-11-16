@@ -15,6 +15,7 @@ Texture2D<float4> currentDepth:register(t3);
 Texture2D<float4> motionInput:register(t4);
 Texture2D<float4> surfaceMask:register(t5);
 Texture2D<float4> normalRoughness:register(t6);
+Texture2D<float4> previousColorLayer:register(t11); // Vulkan binding 12.
 SamplerState pointSampler:register(s0);
 [[vk::image_format("r11g11b10f")]] RWTexture2D<float4> outputColor:register(u0);
 [[vk::image_format("rg16")]] RWTexture2D<unorm float4> outputFootprint:register(u1);
@@ -382,7 +383,12 @@ uint4 v316=((r0.zzzz)!=uint4(0,0,0,0)?uint4(0x00000000u,0x00000000u,0x00000000u,
 uint4 v318=uint4(0x00000000u,0x00000000u,0x00000000u,0x00000000u);r4.xy=v318.xy;
 }
 // Encode HDR color and publish the signal.
-float4 v320=previousColor.SampleLevel(pointSampler,(asfloat(r2.xyxx)).xy,(asfloat(uint4(0x00000000u,0x00000000u,0x00000000u,0x00000000u))).x).wxyz;r1.yzw=asuint(v320).yzw;
+float4 v320=previousColor.SampleLevel(pointSampler,(asfloat(r2.xyxx)).xy,(asfloat(uint4(0x00000000u,0x00000000u,0x00000000u,0x00000000u))).x).wxyz;
+if(historyConfig.x>0.5){
+    float4 layer=previousColorLayer.SampleLevel(pointSampler,asfloat(r2.xy),0);
+    if(layer.a>0.0)v320.yzw=layer.rgb+v320.yzw*(1.0-saturate(layer.a));
+}
+r1.yzw=asuint(v320).yzw;
 float4 v321=max(asfloat(r1.zzzz),asfloat(r1.yyyy));r0.z=asuint(v321).z;
 float4 v322=max(asfloat(r1.wwww),asfloat(r0.zzzz));r0.z=asuint(v322).z;
 float4 v323=(asfloat(r0.zzzz))+(asfloat(uint4(0x3f800000u,0x3f800000u,0x3f800000u,0x3f800000u)));r0.z=asuint(v323).z;

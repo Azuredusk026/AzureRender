@@ -83,6 +83,25 @@ def main():
             different=sum(a!=b for a,b in zip(baseline,wide));assert different>0
             assert all((run/'positive'/name).read_bytes()==(run/'wide-edge'/name).read_bytes() for name in ('0.bin','1.bin'))
             report['edgeSensitivity']=dict(confidenceDifferentBytes=different,monotonic=True,colorExact=True,footprintExact=True)
+            if args.composition:
+                layer_cases=('history-alpha-layer-reference','history-alpha-layer','history-alpha-layer-empty')
+                for mode in layer_cases:
+                    output=run/mode
+                    command=[str(args.executable.resolve()),str(args.shader.resolve()),str(output),
+                             mode,'--composition',str(args.composition.resolve())]
+                    result=subprocess.run(command,cwd=engine,capture_output=True,timeout=60)
+                    (run/(mode+'.log')).write_bytes(result.stdout+result.stderr)
+                    child=json.loads((output/'result.json').read_text(encoding='utf-8'))
+                    report['cases'].append(dict(mode=mode,exitCode=result.returncode,result=child,command=command))
+                    assert result.returncode==0 and child['status']=='passed',child
+                    assert child['validationErrors']==child['liveBuffers']==child['liveImages']==0,child
+                reference=run/layer_cases[0]
+                report['historyColorLayer']={
+                    mode:[hashlib.sha256((run/mode/f'{i}.bin').read_bytes()).hexdigest() for i in range(4)]
+                    for mode in layer_cases}
+                for mode in layer_cases[1:]:
+                    assert all((run/mode/f'{i}.bin').read_bytes()==(reference/f'{i}.bin').read_bytes()
+                               for i in range(4)),mode
         report['status']='passed'
         subprocess.run([sys.executable,str(engine/'tools/artifact_cleanup.py'),'--finish',str(run)],check=True)
         print('Projected camera GPU cases passed:',len(report['cases']),run)

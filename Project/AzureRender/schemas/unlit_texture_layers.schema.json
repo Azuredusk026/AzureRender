@@ -530,7 +530,8 @@
       "type": "string",
       "enum": [
         "transparent",
-        "opaque-overlay"
+        "opaque-overlay",
+        "projected-history"
       ],
       "default": "transparent"
     },
@@ -553,6 +554,20 @@
   },
   "description": "公共材质解释器另行验证能力组合、纹理资源及采样器所有权。",
   "allOf": [
+    {
+      "if": {
+        "required": ["submission"],
+        "properties": {
+          "submission": {"const": "projected-history"}
+        }
+      },
+      "then": {
+        "properties": {
+          "composite": {"const": "alpha"},
+          "fogMode": {"const": "none"}
+        }
+      }
+    },
     {
       "if": {
         "properties": {

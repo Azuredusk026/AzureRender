@@ -253,9 +253,14 @@ float materialCharacterVisibility(uint source,vec3 normal,float sceneVisibility,
     return source==1u?mainShadow:source==3u?1.0:sceneVisibility;
 }
 layout(location = 0) out vec4 outputColor;
+#if defined(AZURE_PROJECTED_HISTORY_LAYER)
+vec4 outputNormal;
+vec4 outputDisplayMask;
+#else
 layout(location = 1) out vec4 outputNormal;
 #if !defined(AZURE_OPAQUE_SNAPSHOT)
 layout(location=2) out vec4 outputDisplayMask;
+#endif
 #endif
 
 struct SceneLightSample { vec3 incoming;vec3 direction;float distanceSquared;float attenuation; };
@@ -894,6 +899,10 @@ void main()
     if (!gl_FrontFacing) {
         geometricNormal = -geometricNormal;
     }
+#if defined(AZURE_PROJECTED_HISTORY_LAYER)
+    if(azureWriteUnlitBlendBeauty(baseColor,geometricNormal,platformMask,vec3(0),1.0))return;
+    discard;
+#endif
 #if defined(AZURE_SURFACE_RADIANCE_REUSE) && !defined(AZURE_OPAQUE_SNAPSHOT)
 #if defined(AZURE_SURFACE_RADIANCE_FAST)
     if(!azureWriteSurfaceRadiance(geometricNormal))discard;return;

@@ -1,0 +1,440 @@
+{
+  "status": "qualified-alpha-history-layer-fixture",
+  "strictJointSceneStatus": "pending",
+  "originalFrozenStatus": "pending",
+  "jobs": {
+    "1418": {
+      "task": "nr-projected-history-unlit-policy-red",
+      "state": "succeeded",
+      "exitCode": 0
+    },
+    "1420": {
+      "task": "nr-projected-history-policy-green",
+      "state": "succeeded",
+      "exitCode": 0
+    },
+    "1427": {
+      "task": "nr-projected-history-layer-player-build",
+      "state": "succeeded",
+      "exitCode": 0
+    },
+    "1428": {
+      "task": "nr-projected-history-layer-fixture-nvidia",
+      "state": "succeeded",
+      "exitCode": 0
+    },
+    "1429": {
+      "task": "nr-projected-history-layer-fixture-intel",
+      "state": "succeeded",
+      "exitCode": 0
+    }
+  },
+  "player": "68dfb40292112643358a0b2970cc523718080d98c5a0a68739f1aaaa877ad632",
+  "programs": {
+    "character_projected_history.frag.spv": "b0ff43bb3c280137dbb86afb784c503c49e6b57875d3c6d292d57c6985ac14cf",
+    "character_projected_history_bindless.frag.spv": "1d7e32da25503fd61ce456a33fdaf67cb5ce577018936659fb7eef2b30d90bc1",
+    "projected_reflection_trace.comp.spv": "c9d8330bfb623308bc056efabd81c599633199389124667247169fa11f7bf4a8"
+  },
+  "trackedBuildInputs": {
+    "CMakeLists.txt": "17d34093886cb4b3bb3aa302bd447f5f9be03cb02b63fa4549b3d7f066f521d9",
+    "src/app/AzureRenderApp.cpp": "3f384f5ac52aa9e5559968b58e3504f6087e96de697976be2917d447de2545ce",
+    "src/app/AzureRenderOptions.hpp": "999f4d4509398292578300deab481472cb1e8d77c38cb043dc5c4acc2862f724",
+    "src/app/CommandLine.cpp": "740ebfb9bdbefdfd6a58d4ef3dc8398dd3416dac79e1ded5233f58710f1be507",
+    "tests/CommandLineTests.cpp": "266dfcd2ed593f70b7dc7ebf531e63ade29a52caa69e675370d09a3b28e3697a",
+    "src/assets/GltfLoader.cpp": "05ba11391d119e80a2324e28abfdde2e342efbf009a450b2325386f3ac74aa74",
+    "src/assets/UnlitTextureLayers.cpp": "3f938cf2674343e05c260998c61fa80a64104cea64ee280ab48c032754984cba",
+    "src/scenes/CharacterSceneRenderer.cpp": "9360707c5ebfe1a814fa900227da651e20c0d39a8c6ec1c1548a64d03e7af418",
+    "src/scenes/CharacterScreenReflection.inc": "ac94f2a07f778a6c9b1ab92ace3d5e81d7640ba7d1a33989f0b5412c16e5afb4",
+    "src/render/ProjectedReflectionRay.cpp": "fac3ab1f8352261c2d5f50a9f646b9a0f52ee96091325f4f11ab5d762d452969",
+    "src/render/ProjectedScreenReflectionGpu.cpp": "4069275ca48efa21ce379ae77906f006477ce81187ac1802cd4123929b6de6c0",
+    "shaders/projected_reflection_trace.hlsl": "5d0c8281a576eb8a9ef659cccaafacee6b846ecc0605e8e0c011b2495055b259",
+    "shaders/mesh.frag": "2df45c56e9f58a3b6bb18ade2ae2796f6cbab336be2e6a84a0953fde08101fd3",
+    "shaders/unlit_blend.glsl": "2749a51805dc4c0ba9ea6cdcd7a3cad245c7210da95155f5d2021373494727a7"
+  },
+  "archiveSha256": "c8b95b941915805e555847c1c53f4e1ad63d5f43ddc8b9e8d7a5688ea1df322d",
+  "devices": {
+    "nvidia": {
+      "checks": {
+        "regular-one-first-reflection": {
+          "peak": 0,
+          "pixels": 0,
+          "mean": 0.0,
+          "limit": 0
+        },
+        "history-one-first-reflection": {
+          "peak": 0,
+          "pixels": 0,
+          "mean": 0.0,
+          "limit": 0
+        },
+        "history-two-first-reflection": {
+          "peak": 0,
+          "pixels": 0,
+          "mean": 0.0,
+          "limit": 0
+        },
+        "history-ordinary-in-front-first-reflection": {
+          "peak": 0,
+          "pixels": 0,
+          "mean": 0.0,
+          "limit": 0
+        },
+        "history-occluded-first-reflection": {
+          "peak": 0,
+          "pixels": 0,
+          "mean": 0.0,
+          "limit": 0
+        },
+        "history-zero-first-reflection": {
+          "peak": 0,
+          "pixels": 0,
+          "mean": 0.0,
+          "limit": 0
+        },
+        "regular-one-second-reflection": {
+          "peak": 0,
+          "pixels": 0,
+          "mean": 0.0,
+          "limit": 0
+        },
+        "history-occluded-second-reflection": {
+          "peak": 0,
+          "pixels": 0,
+          "mean": 0.0,
+          "limit": 0
+        },
+        "history-zero-second-reflection": {
+          "peak": 0,
+          "pixels": 0,
+          "mean": 0.0,
+          "limit": 0
+        },
+        "history-one-second-oracle": {
+          "peak": 1,
+          "pixels": 0,
+          "mean": 0.4630053394355454,
+          "limit": 2
+        },
+        "history-two-second-oracle": {
+          "peak": 0,
+          "pixels": 0,
+          "mean": 0.0,
+          "limit": 2
+        },
+        "ordinary-front-second-reflection": {
+          "peak": 0,
+          "pixels": 0,
+          "mean": 0.0,
+          "limit": 0
+        },
+        "opt-in-only-source-beauty": {
+          "peak": 0,
+          "pixels": 0,
+          "mean": 0.0,
+          "limit": 0
+        }
+      },
+      "reflectionChangedOver2": {
+        "history-one": 437,
+        "history-two": 437
+      },
+      "ordinarySourceMax": 72,
+      "records": {
+        "base": {
+          "material": "fcb6cdc7f3ac7b2b295c9d7335514210ce1c801599e5cb05d66fa9534bb33040",
+          "manifest": "2fe25f26ff188729d02b951b6b4722982338b83606eb261aea5adf2610abd46e",
+          "output": {
+            "frame_000000.png": "ede032df56910019545f6a7f0c9f37bb9b2cb629675b463adc98eb4eeafa112b",
+            "frame_000001.png": "07692c0399789ddd03fc4a77cc1f276d1fbf87c81741bf1eeda9816e932e5780"
+          },
+          "log": "ba633e2e34f4093cf56871dee44a6086b7365707cec700ccc4e9cc3d4acc8c2a",
+          "captureDevice": "NVIDIA GeForce RTX 4060 Laptop GPU",
+          "historySubmission": 1
+        },
+        "oracle-one": {
+          "material": "3fac681452edc260cd505d66237f831d777cbb98005361851e7c6842bac911a4",
+          "manifest": "0ed8fe0d28c600bab9a5df3befcb87c86e99d69129b7b23e72f83fc69d2315a8",
+          "output": {
+            "frame_000000.png": "fc7fbf0796f4e90eda300c828bae0b0f95845ffccd3368c6f84a12ae0b7efdb7",
+            "frame_000001.png": "fcf76c957fb567db6b1f6d71b606901a7071d71dc943833b3d67f6c3c687b88b"
+          },
+          "log": "cb4359e985e85df5bd0ca970d1bc56434a7ae3a5cd1288189697f42353257365",
+          "captureDevice": "NVIDIA GeForce RTX 4060 Laptop GPU",
+          "historySubmission": 1
+        },
+        "oracle-two": {
+          "material": "007e9ba0d7717b11fe4b79f1461822184eee96d5a815bade89f79ada7057f558",
+          "manifest": "b72e44187438bd491c637cc2a3ff6edf1373d463d34d92509f144e1133aaf33f",
+          "output": {
+            "frame_000000.png": "c849eac9017b45b8224645bd4d3a7f63cef586af0fa20bb192d0969794e61083",
+            "frame_000001.png": "8d57d49ccc707c8f2245e54a0bfd2692010933f397b8be9c94fcb79b8c6e190f"
+          },
+          "log": "d363cc9f862b16c340fa5c1f1b5039bcc142dd162b996dca7d4ed53b8ad1b40c",
+          "captureDevice": "NVIDIA GeForce RTX 4060 Laptop GPU",
+          "historySubmission": 1
+        },
+        "regular-one": {
+          "material": "dabe4e7a92a5b9907b8c3aff49726c06f32eb5b5ccff43cae7fb9b68c391f6fc",
+          "manifest": "a09d092a9457ac96687a9411c2bf3584a97afb69a6a539dbc378ea786d564f9d",
+          "output": {
+            "frame_000000.png": "0a675ae6c1322d98e4dfa5f447d337707c62d939454eb2971f0e320cbda544af",
+            "frame_000001.png": "706e0bae1b63f957576cfbf64e0a8bb3420dee9e41d96135e4339e87c6238bf0"
+          },
+          "log": "451e1792b28eef4e76fe8dfcb53a230c3f3e3880f0fe896649233dee8c4c1c47",
+          "captureDevice": "NVIDIA GeForce RTX 4060 Laptop GPU",
+          "historySubmission": 1
+        },
+        "history-one": {
+          "material": "cec8fd72cd2b7f0f10b61320fe38700bbf7ff48f4118bc8901ff0aba1330b773",
+          "manifest": "20f676052d9524fdd9a280c84e48f9c22a1637a79aa4e05f76c432f299c8d7bf",
+          "output": {
+            "frame_000000.png": "0a675ae6c1322d98e4dfa5f447d337707c62d939454eb2971f0e320cbda544af",
+            "frame_000001.png": "d62cd80f11da8c94de2f74c46e440d403d7839ccc4bd6a6ec6b3cb038c97759e"
+          },
+          "log": "4dc95121719ec067aa887d4b39738485cd4d9dd9d0b900c68f41043b3e5f3758",
+          "captureDevice": "NVIDIA GeForce RTX 4060 Laptop GPU",
+          "historySubmission": 1
+        },
+        "history-two": {
+          "material": "70fe215c8118e89eeb9398be1545dc645ec9558234c0b60eb97b59b829333e20",
+          "manifest": "dbc2b7a48e16e4e4bec62f7e04033a5abdbb0430465086fc504a97328c6c75ce",
+          "output": {
+            "frame_000000.png": "5bb2591ce67a875b2bc643bad4f8a43121cfcf0a95f7ad96e559af2e4c01ea03",
+            "frame_000001.png": "aa3a2beb1fda5efdd0b7e5e49784285e88d6de321408bb9a6beaee8916eae152"
+          },
+          "log": "1d3e90d9688eff0e865166bd734a947b3629cc829c1e1841f7adb1e4cf7fb241",
+          "captureDevice": "NVIDIA GeForce RTX 4060 Laptop GPU",
+          "historySubmission": 1
+        },
+        "history-ordinary-in-front": {
+          "material": "b5d3fd7aebde5404fb10c179599473be99011022ac697c694f90b046a276e31c",
+          "manifest": "96b85c575ec825f8e124a7be430ca5f6465cb284a7cb372545ae92a915d56ec2",
+          "output": {
+            "frame_000000.png": "f59c5ce05e61368d1809c89b6a9386c7d01b82fd8fe53c025660685b4cb8b080",
+            "frame_000001.png": "e1caae47a06cdefa2c2a1379de5b0a9e05226e7a6fe067196b9f09fa7b4aab1c"
+          },
+          "log": "a91f883ec0e973941cf15f48632321bfa347b3334baadf3cb76622d7c304a9cf",
+          "captureDevice": "NVIDIA GeForce RTX 4060 Laptop GPU",
+          "historySubmission": 1
+        },
+        "history-occluded": {
+          "material": "d7e7154dec80055c63ef81983bd307418ae4acf5c610f20546bd80aba20621f7",
+          "manifest": "0ed1338b735b0eac8efbb9252b1a078891ee3ccdd48ded562056c223aad45923",
+          "output": {
+            "frame_000000.png": "caf1a8ba858285b9d824b8d06cc7094cdeb7d89a338d517b02462fea0a2abd39",
+            "frame_000001.png": "aade996d9279a6697dea544c9e4380045580062b8db2e9653d9696f515d6668e"
+          },
+          "log": "42009f55bd82a4994e55882a1c5eda774508040d46ea74bb239bb14d6cb17ee5",
+          "captureDevice": "NVIDIA GeForce RTX 4060 Laptop GPU",
+          "historySubmission": 1
+        },
+        "history-zero": {
+          "material": "7e09883d6129af406ea12dd244c663e3c888527c68790433f01b3a1a6c1b86b0",
+          "manifest": "eb85db0c6efe9fd0e97bc2efd78940ad50f16d8528dc0fc7bd43611681ea68eb",
+          "output": {
+            "frame_000000.png": "ede032df56910019545f6a7f0c9f37bb9b2cb629675b463adc98eb4eeafa112b",
+            "frame_000001.png": "07692c0399789ddd03fc4a77cc1f276d1fbf87c81741bf1eeda9816e932e5780"
+          },
+          "log": "de894b48d0b99cbde88a3c4aa7b325ee1d435d2504bfc60e81360d5eb64e348d",
+          "captureDevice": "NVIDIA GeForce RTX 4060 Laptop GPU",
+          "historySubmission": 1
+        }
+      }
+    },
+    "intel": {
+      "checks": {
+        "regular-one-first-reflection": {
+          "peak": 0,
+          "pixels": 0,
+          "mean": 0.0,
+          "limit": 0
+        },
+        "history-one-first-reflection": {
+          "peak": 0,
+          "pixels": 0,
+          "mean": 0.0,
+          "limit": 0
+        },
+        "history-two-first-reflection": {
+          "peak": 0,
+          "pixels": 0,
+          "mean": 0.0,
+          "limit": 0
+        },
+        "history-ordinary-in-front-first-reflection": {
+          "peak": 0,
+          "pixels": 0,
+          "mean": 0.0,
+          "limit": 0
+        },
+        "history-occluded-first-reflection": {
+          "peak": 0,
+          "pixels": 0,
+          "mean": 0.0,
+          "limit": 0
+        },
+        "history-zero-first-reflection": {
+          "peak": 0,
+          "pixels": 0,
+          "mean": 0.0,
+          "limit": 0
+        },
+        "regular-one-second-reflection": {
+          "peak": 0,
+          "pixels": 0,
+          "mean": 0.0,
+          "limit": 0
+        },
+        "history-occluded-second-reflection": {
+          "peak": 0,
+          "pixels": 0,
+          "mean": 0.0,
+          "limit": 0
+        },
+        "history-zero-second-reflection": {
+          "peak": 0,
+          "pixels": 0,
+          "mean": 0.0,
+          "limit": 0
+        },
+        "history-one-second-oracle": {
+          "peak": 0,
+          "pixels": 0,
+          "mean": 0.0,
+          "limit": 2
+        },
+        "history-two-second-oracle": {
+          "peak": 0,
+          "pixels": 0,
+          "mean": 0.0,
+          "limit": 2
+        },
+        "ordinary-front-second-reflection": {
+          "peak": 0,
+          "pixels": 0,
+          "mean": 0.0,
+          "limit": 0
+        },
+        "opt-in-only-source-beauty": {
+          "peak": 0,
+          "pixels": 0,
+          "mean": 0.0,
+          "limit": 0
+        }
+      },
+      "reflectionChangedOver2": {
+        "history-one": 437,
+        "history-two": 437
+      },
+      "ordinarySourceMax": 72,
+      "records": {
+        "base": {
+          "material": "fcb6cdc7f3ac7b2b295c9d7335514210ce1c801599e5cb05d66fa9534bb33040",
+          "manifest": "8312046abe7e5176086addd3917eaea1bcf87f04aa04b2846d58a8d40860a3c3",
+          "output": {
+            "frame_000000.png": "9ba17c457442b41a4cc5c4723db4e7b4d693a324b7c9bb58b5a64fd87460ec27",
+            "frame_000001.png": "caec5b78d9e12d1bfae4eb3f978e53ac4a92e10edd348a3cf249c9a1510da5c9"
+          },
+          "log": "7bfc43ff6055b67dc4ba55a0d99e9ed498ba132b97759aa8f4d45cade8a2a542",
+          "captureDevice": "Intel(R) RaptorLake-S Mobile Graphics Controller",
+          "historySubmission": 1
+        },
+        "oracle-one": {
+          "material": "3fac681452edc260cd505d66237f831d777cbb98005361851e7c6842bac911a4",
+          "manifest": "ce410235917e256c93fefeaa855b8db07de3581e7af8bc60d316b199ba90f4be",
+          "output": {
+            "frame_000000.png": "64390ec2e86cf65a5eb2ce6cd0f75ccc262ca82a2f39148efc479e2a891ea058",
+            "frame_000001.png": "7f5bdf353208c508601d395f23bcf7aecf479716c002f02d9ed4f4e1cf0b4d9e"
+          },
+          "log": "70ae983534c6ddb195ea2fe959aa04543dfad3634e2cae87c728c3231d456cda",
+          "captureDevice": "Intel(R) RaptorLake-S Mobile Graphics Controller",
+          "historySubmission": 1
+        },
+        "oracle-two": {
+          "material": "007e9ba0d7717b11fe4b79f1461822184eee96d5a815bade89f79ada7057f558",
+          "manifest": "5b5614c3509ce8479923bef93a92d626f6053c95c2b891552f07747c76ce31a9",
+          "output": {
+            "frame_000000.png": "a0b3b804a639ea187aa37ae14a63aa1c896af07bd6790680adc77afe3351524a",
+            "frame_000001.png": "ba1bd65869df33fada85e99b81f586c9c6610469ea40c0ab41985fd037e4eb9d"
+          },
+          "log": "0d798e478959663a92c2130a82843a1b55293c2906e26742dbed14e87ad4670b",
+          "captureDevice": "Intel(R) RaptorLake-S Mobile Graphics Controller",
+          "historySubmission": 1
+        },
+        "regular-one": {
+          "material": "dabe4e7a92a5b9907b8c3aff49726c06f32eb5b5ccff43cae7fb9b68c391f6fc",
+          "manifest": "fd30e9063e741f580cf0e772d181ae41c17af1a82b9a5ea05d6cc75cf264a52c",
+          "output": {
+            "frame_000000.png": "5d439240da71da3cd808bbe32396178355d588677450c1dfdc9b54abfcd4297a",
+            "frame_000001.png": "b5c421967bc2925159b8aff79117a5029fde6fa0bfbe5f536f6c61ebd4dcdaae"
+          },
+          "log": "2fcaf285cec2d66345f4879493a8e2e6d657814b384ad1ee0993b6f5b1657d8b",
+          "captureDevice": "Intel(R) RaptorLake-S Mobile Graphics Controller",
+          "historySubmission": 1
+        },
+        "history-one": {
+          "material": "cec8fd72cd2b7f0f10b61320fe38700bbf7ff48f4118bc8901ff0aba1330b773",
+          "manifest": "c41f6824b61fa472031a6d73a906fe3af1189b005dcecb8d4e6e4b5e2a6e61c5",
+          "output": {
+            "frame_000000.png": "5d439240da71da3cd808bbe32396178355d588677450c1dfdc9b54abfcd4297a",
+            "frame_000001.png": "94b96efde65e63e427ab592900e79fafbd1707d52ee3b7b92d7660d828803ec3"
+          },
+          "log": "09a22571901747b4cc7aef5c3715e4782bcc7041d1c9b4cad22bb4a88713c4d2",
+          "captureDevice": "Intel(R) RaptorLake-S Mobile Graphics Controller",
+          "historySubmission": 1
+        },
+        "history-two": {
+          "material": "70fe215c8118e89eeb9398be1545dc645ec9558234c0b60eb97b59b829333e20",
+          "manifest": "de42a7d775ecce7e07640cc046f9b65764ae40d7bb18b19b7409a2154b59169b",
+          "output": {
+            "frame_000000.png": "800624d135b5b514bba6edf6e8fa2118aab40a7f69cf08fff9258cd84197505c",
+            "frame_000001.png": "f17f7069f67961f6dee9b0f4a4700be271077bd119e7b98cab93fa5ba13eaf71"
+          },
+          "log": "0140a059248160691026622aa4aca6c26e476cf703185865cc7a86f5a345ed57",
+          "captureDevice": "Intel(R) RaptorLake-S Mobile Graphics Controller",
+          "historySubmission": 1
+        },
+        "history-ordinary-in-front": {
+          "material": "b5d3fd7aebde5404fb10c179599473be99011022ac697c694f90b046a276e31c",
+          "manifest": "04323fe541cd8cae64cde630c4323d2f1d1fdfed7a560eab97bc3b9d7142d722",
+          "output": {
+            "frame_000000.png": "4df7bcfd0d71800c60e957df7ff6a96226c9fca9677225d4da1ec1cff76286b8",
+            "frame_000001.png": "cd3ee3ed7d3ff482faea2363f6ef2384597e3a797b6001199317a8f29156f7ff"
+          },
+          "log": "e9edfaf1a11903e68fdd68fedfe72de0c20f302fbb4d63a3c6a8ecf7cf15471f",
+          "captureDevice": "Intel(R) RaptorLake-S Mobile Graphics Controller",
+          "historySubmission": 1
+        },
+        "history-occluded": {
+          "material": "d7e7154dec80055c63ef81983bd307418ae4acf5c610f20546bd80aba20621f7",
+          "manifest": "fe322caf7ed363671a5c3895cbd8c04905e9e9f8fda85e7cc871bb7f28d70094",
+          "output": {
+            "frame_000000.png": "44c9153e8a9071c6c8c221ff1aae416363b24492ec0b1ae61d52688f1fdd78d2",
+            "frame_000001.png": "8860dfe2350d68326b956ad43e6e4c586cc343fdaf8bd4ce7619d494badd1478"
+          },
+          "log": "f498c3bec7ae821aaea81715aedc4462e30f84be89ed3f912bc2bf79637cac58",
+          "captureDevice": "Intel(R) RaptorLake-S Mobile Graphics Controller",
+          "historySubmission": 1
+        },
+        "history-zero": {
+          "material": "7e09883d6129af406ea12dd244c663e3c888527c68790433f01b3a1a6c1b86b0",
+          "manifest": "9a21177a4202036ee788b8d54060d079fd1d793909b64cba722927cd3695f8c0",
+          "output": {
+            "frame_000000.png": "9ba17c457442b41a4cc5c4723db4e7b4d693a324b7c9bb58b5a64fd87460ec27",
+            "frame_000001.png": "caec5b78d9e12d1bfae4eb3f978e53ac4a92e10edd348a3cf249c9a1510da5c9"
+          },
+          "log": "75b969d413286ee6b5e811aaa7429ce8ac76523b4b4c8bc11d4507cc2f5f93a9",
+          "captureDevice": "Intel(R) RaptorLake-S Mobile Graphics Controller",
+          "historySubmission": 1
+        }
+      }
+    }
+  },
+  "hostChecks": [
+    "UnlitTextureLayers",
+    "CommandLine",
+    "ProjectedReflectionRay"
+  ],
+  "compiledCameraGpuTest": "MSVC syntax check",
+  "fullCameraGpuSuite": "pending"
+}

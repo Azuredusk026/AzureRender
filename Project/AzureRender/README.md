@@ -222,6 +222,7 @@ GPU 可映射缓冲的用途选择及双设备检查见[内存分配](docs/accep
 投影深度、法线转换及分帧所有权见[表面准备](docs/runtime/projected-reflection-preparation.md)。
 
 公共生产、历史输入和足迹过滤见[投影反射组合](docs/runtime/projected-screen-reflection.md)。
+无光照透明内容可声明参与[反射历史图层](docs/runtime/unlit-texture-layers.md#反射历史图层)。
 
 完整程序清单及 DXC 热重载见[编译配置](docs/development/shader-hot-reload.md)。
 

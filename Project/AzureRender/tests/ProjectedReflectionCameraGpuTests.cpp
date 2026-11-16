@@ -30,10 +30,14 @@ int main(int argc,char** argv)try{
     const auto output=std::filesystem::absolute(std::filesystem::u8path(args[2]));
     if(!std::filesystem::create_directory(output))throw std::runtime_error("Expected a new output directory");
     const auto& mode=args[3];const std::set<std::string> modes{"positive","wide-edge","history-static","nonfinite-motion","wrong-convention","wrong-motion","history-tinted","history-shifted","history-wrong-pose","history-disoccluded",
-        "history-response-tracked","history-response-assumed","history-response-cutout","history-response-partial","history-response-background","history-response-missing","history-response-reactive","history-response-nonfinite","history-response-depth","history-response-zero-depth","history-response-outside","history-response-mixed","response-current","history-offset","history-wrong-offset"};
+        "history-response-tracked","history-response-assumed","history-response-cutout","history-response-partial","history-response-background","history-response-missing","history-response-reactive","history-response-nonfinite","history-response-depth","history-response-zero-depth","history-response-outside","history-response-mixed","response-current","history-offset","history-wrong-offset",
+        "history-alpha-layer","history-alpha-layer-empty","history-alpha-layer-reference"};
     if(!modes.count(mode))throw std::runtime_error("Unknown physical mirror mode");
     const bool response=mode.rfind("history-response-",0)==0,offset=mode=="history-offset"||mode=="history-wrong-offset";
     const bool historyUsed=mode.rfind("history-",0)==0,shifted=mode=="history-shifted"||mode=="history-wrong-pose"||offset;
+    const bool alphaLayer=mode=="history-alpha-layer",emptyLayer=mode=="history-alpha-layer-empty";
+    if((alphaLayer||emptyLayer||mode=="history-alpha-layer-reference")&&!composed)
+        throw std::runtime_error("Alpha layer requires the composition fixture");
     const bool reduced=mode=="history-response-cutout"||mode=="history-response-partial";
     const unsigned minimumConfidence=reduced?32U:128U;
     const float geometryScale=(historyUsed&&mode!="history-static")||mode=="response-current"?.1F:1.F;
@@ -79,12 +83,21 @@ int main(int argc,char** argv)try{
         normal[i*4]=.5F;normal[i*4+1]=value[1]>0?.5F-.04F/1.08F:1.F;normal[i*4+2]=value[1]>0?.15F:1.F;
         eligibility[i]=value[1]>0?255:0;}
     std::vector<std::uint32_t> tiles;for(unsigned y=0;y<traceHeight/8;++y)for(unsigned x=0;x<traceWidth/8;++x)tiles.push_back((x<<16)|y);
+    std::vector<float> previousLayer;
+    if(alphaLayer||emptyLayer){
+        previousLayer.resize(scene.size());
+        if(alphaLayer)for(std::size_t i=0;i<scene.size();i+=4)
+            if(scene[i]==1.F){scene[i]=.5F;previousLayer[i]=.75F;previousLayer[i+3]=.5F;}
+    }
     test::VulkanComputeFixture host;Json report={{"status","failed"},{"mode",mode},{"device",host.properties.deviceName}};bool correct=false;
     {
         auto& backend=*host.backend;Buffers buffers(backend);const auto tileData=bytes(tiles);
         buffers.values[0]=backend.allocator().createBuffer(tileData.size(),VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,true);
         std::memcpy(buffers.values[0].mapped,tileData.data(),tileData.size());backend.allocator().flush(buffers.values[0],0,tileData.size());
         test::ComputeTexture color(backend,width,height,1,VK_FORMAT_R32G32B32A32_SFLOAT,bytes(scene),16);
+        std::unique_ptr<test::ComputeTexture> layer;
+        if(!previousLayer.empty())layer=std::make_unique<test::ComputeTexture>(backend,width,height,1,
+            VK_FORMAT_R32G32B32A32_SFLOAT,bytes(previousLayer),16);
         test::ComputeTexture deviceDepth(backend,traceWidth,traceHeight,1,VK_FORMAT_R32_SFLOAT,bytes(depth),4);
         test::ComputeTexture delta(backend,width,height,1,VK_FORMAT_R32G32B32A32_SFLOAT,bytes(motion),16);
         test::ComputeTexture surfaceMask(backend,traceWidth,traceHeight,1,VK_FORMAT_R8_UNORM,bytes(mask),1);
@@ -93,7 +106,8 @@ int main(int argc,char** argv)try{
         auto pastSnapshot=snapshot,currentColor=scene;
         if(mode=="history-disoccluded")for(std::size_t i=0;i<pastSnapshot.size();i+=4)pastSnapshot[i]=1;
         if(mode=="history-response-zero-depth")for(std::size_t i=0;i<pastSnapshot.size();i+=4)pastSnapshot[i]=100000;
-        if(mode=="history-tinted")for(std::size_t i=0;i<currentColor.size();i+=4){currentColor[i]=currentColor[i+1]=0;currentColor[i+2]=1;}
+        if(mode=="history-tinted"||alphaLayer||emptyLayer||mode=="history-alpha-layer-reference")
+            for(std::size_t i=0;i<currentColor.size();i+=4){currentColor[i]=currentColor[i+1]=0;currentColor[i+2]=1;}
         test::ComputeTexture previousSurface(backend,width,height,1,VK_FORMAT_R32G32B32A32_SFLOAT,bytes(pastSnapshot),16);
         test::ComputeTexture changedColor(backend,width,height,1,VK_FORMAT_R32G32B32A32_SFLOAT,bytes(currentColor),16);
         test::ComputeTexture occludedDepth(backend,traceWidth,traceHeight,1,VK_FORMAT_R32_SFLOAT,bytes(std::vector<float>(traceWidth*traceHeight,mode=="history-response-zero-depth"?0.F:(1.F-view.depthReciprocal[1])/view.depthReciprocal[0])),4);
@@ -142,7 +156,8 @@ int main(int argc,char** argv)try{
                 ProjectedScreenReflectionInputs snapshot{snapshotSurface.view,changedColor.view,mode=="nonfinite-motion"||historyUsed?delta.view:VK_NULL_HANDLE,{width,height}};
                 if(historyUsed){
                     composition->record(commands,0,{previousSurface.view,color.view,VK_NULL_HANDLE,{width,height}},previousCamera,parameters);
-                    const ProjectedScreenReflectionHistory history{0,color.view,declaredPrevious};composition->record(commands,1,snapshot,camera,parameters,&history);
+                    const ProjectedScreenReflectionHistory history{0,color.view,declaredPrevious,layer?layer->view:VK_NULL_HANDLE};
+                    composition->record(commands,1,snapshot,camera,parameters,&history);
                 }else composition->record(commands,0,snapshot,camera,parameters);
             }else{
             if(control)controlSignal->beginBaseWrite(commands,0);

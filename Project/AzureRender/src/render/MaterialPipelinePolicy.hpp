@@ -8,6 +8,10 @@ inline bool opaqueSurfaceOverlay(const AssetMaterial& material) noexcept {
     return material.unlitTextureLayers.present
         &&material.unlitTextureLayers.submission==UnlitTextureLayers::Submission::OpaqueOverlay;
 }
+inline bool projectedHistoryOverlay(const AssetMaterial& material) noexcept {
+    return material.unlitTextureLayers.present
+        &&material.unlitTextureLayers.submission==UnlitTextureLayers::Submission::ProjectedHistory;
+}
 // Matches shadow.frag priority: geometry coverage precedes alpha policies.
 inline bool fullyCoveredShadow(const AssetMaterial& material,float nodeOpacity) noexcept {
     return nodeOpacity==1.F&&((material.materialFeatures&MaterialFeatureGeometryShadow)!=0

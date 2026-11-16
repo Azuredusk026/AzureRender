@@ -40,6 +40,7 @@
 | `composite` | 可选 `alpha` 或 `additive`，默认 `alpha` |
 | `fogMode` | 可选 `none` 或 `scene`，默认 `none` |
 | `depthCompare` | 可选 `less` 或 `less-or-equal`，默认 `less` |
+| `submission` | 可选 `transparent`、`opaque-overlay` 或 `projected-history`，默认 `transparent` |
 | `coverageLayer` | 可选覆盖率纹理、独立 UV、阈值及增益 |
 | `baseUvDistortion` | 可选基础坐标扰动纹理、独立 UV 及线性映射 |
 
@@ -294,3 +295,9 @@ baseSampleUv = evaluateLayerUv(uv0, baseUv, materialSeconds) + offset
 诊断视图及其余功能组合使用通用材质计算。
 固定与索引描述符共同遵守上述语义。
 实现入口为 `shaders/unlit_blend.glsl`。
+
+## 反射历史图层
+
+`submission: projected-history` 用于普通或自发光类别的无光照透明材质。材质声明 `alphaMode: BLEND`、`composite: alpha` 和 `fogMode: none`。图层按透明排序写入反射历史，使用同机位的不透明深度、图层自身透明度和节点透明度。
+
+图层照常参与当帧透明合成。投影反射使用成功提交的前帧图层，颜色与所在槽位的不透明快照在同一命中地址合成。资源准备和限制见[投影反射公共组合](projected-screen-reflection.md#当前与历史模式)。
