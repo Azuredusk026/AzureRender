@@ -77,14 +77,14 @@ def idle_responses(story, catalog, native):
     return responses, list(media.values())
 
 
-def localized_text_config(translations, language):
-    def quote(value):
-        escaped = value.replace("\\", "\\\\").replace('"', '\\"')
-        return '"' + re.sub(r"[\x00-\x1f]", lambda match: f"\\{ord(match[0]):03d}", escaped) + '"'
+def lua_string(value):
+    escaped = value.replace("\\", "\\\\").replace('"', '\\"')
+    return '"' + re.sub(r"[\x00-\x1f]", lambda match: f"\\{ord(match[0]):03d}", escaped) + '"'
 
+def localized_text_config(translations, language):
     if isinstance(language, str):
-        return quote(translations[language])
-    return "{" + ", ".join(quote(translations[field]) for field in language) + "}"
+        return lua_string(translations[language])
+    return "{" + ", ".join(lua_string(translations[field]) for field in language) + "}"
 
 
 def voice_line_config(row, language):
