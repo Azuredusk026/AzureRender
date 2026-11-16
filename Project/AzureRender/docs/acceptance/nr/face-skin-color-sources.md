@@ -700,6 +700,8 @@ Player 回放中，三个偏暗脸缘点的轮廓光红通道贡献为 0.22852 �
 
 [轮廓光输出结果](evidence/2026-11-16/face-retained-rim-output/qualification.json)和[验证归档](evidence/2026-11-16/face-retained-rim-output/validation.zip)保存轮廓光开关、六点读数及固定姿态显示差值。
 
+保留回放的交换链输出确认，三个脸缘点在该次采集中偏亮，红通道比原生显示图高 26 至 37 个色阶。当前联合采集的同三个红通道低 15 至 20 个色阶。轮廓光开关的保留回放对应前一组输入。当前联合采集沿用同一逐像素门槛，并按实际材质输入继续核对。[显示链路结果](evidence/2026-11-16/face-retained-display-lineage/qualification.json)及[验证归档](evidence/2026-11-16/face-retained-display-lineage/validation.zip)保存交换链、坐标和两组帧指纹。
+
 身体候选采用原生主光亮度饱和度。30,561 个无透明衣料覆盖的皮肤内部位置中，超过一个色阶的数量在 NVIDIA 上为 627，在 Intel 上为 581；配对对照分别为 11,018 和 10,522。皮肤区域之外逐像素一致。全皮肤新增超差分别为 6 和 17 处，均为两个色阶，候选未通过新增误差门槛。
 
 新增超差的 23 个位置从原生身体绘制至最终颜色保持一致。17 个位置的超差通道需降低，6 个位置需提高。Intel 有 2 个位置距皮肤边界超过六个像素。继续按实际片元核对颜色和覆盖。[通道差值核对](evidence/2026-11-16/body-saturation-signed-edge/qualification.json)和[验证归档](evidence/2026-11-16/body-saturation-signed-edge/validation.zip)保存逐点结果。
