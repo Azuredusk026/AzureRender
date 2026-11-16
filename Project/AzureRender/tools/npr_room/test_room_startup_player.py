@@ -7,7 +7,7 @@ from pathlib import Path
 import subprocess
 
 
-def replay(player, project, output, resource_root):
+def replay(player, project, output, resource_root, expect_heroine=False):
     output.mkdir()
     events = []
 
@@ -60,8 +60,19 @@ def replay(player, project, output, resource_root):
     ], visits
     assert visits[3][1] >= 240 and visits[5][1] >= 150, visits
     assert all(not item["loadError"] for item in frames), visits
-    return {key: report[key] for key in ("scene", "levelRevision", "replayedActions", "replayDelayedFrames",
-                                         "audioStarts", "animationFrames", "uiDrawCalls")} | {"visits": visits}
+    result = {key: report[key] for key in ("scene", "levelRevision", "replayedActions", "replayDelayedFrames",
+                                          "audioStarts", "animationFrames", "uiDrawCalls")} | {"visits": visits}
+    if expect_heroine:
+        sampled = []
+        for frame in frames:
+            parts = [item for item in frame["animations"] if item["node"].startswith("heroine-")]
+            if parts:
+                assert len(parts) == 7 and len({(part["clip"], part["time"]) for part in parts}) == 1
+                sampled.append(parts[0]["clip"])
+        sequence = [clip for clip, _ in groupby(sampled)]
+        assert sequence == [0, 1, 0], sequence
+        result["heroineClips"] = sequence
+    return result
 
 
 if __name__ == "__main__":
@@ -70,6 +81,7 @@ if __name__ == "__main__":
     parser.add_argument("--project", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--resource-root", type=Path)
+    parser.add_argument("--expect-heroine", action="store_true")
     args = parser.parse_args()
     print(json.dumps(replay(args.player.resolve(), args.project.resolve(), args.output.resolve(),
-                            args.resource_root.resolve() if args.resource_root else None)))
+                            args.resource_root.resolve() if args.resource_root else None, args.expect_heroine)))

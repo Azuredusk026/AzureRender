@@ -6,7 +6,7 @@ from pathlib import Path
 import shutil
 
 from reference_inventory import asset_index, digest, group_paths_by_guid
-from room_geometry import install_room_geometry, merge_room_geometry
+from room_geometry import install_heroine_motion, install_room_geometry, merge_room_geometry
 
 
 CUES = {"timer-start": (0, 0.5), "timer-pause": (6, 1.0), "timer-finish": (3, 0.5)}
@@ -34,7 +34,7 @@ def add_startup_flow(output):
         (assets / f"{stage}.azurelevel").write_text(json.dumps(level, indent=2) + "\n", encoding="utf-8")
 
 
-def make_probe(example, source, furniture, output, audio_playback=None, geometry=None):
+def make_probe(example, source, furniture, output, audio_playback=None, geometry=None, heroine=None):
     import re
 
     master = source / "Assets/App/BulbulAssets/MasterData/ScriptableObjects/TimerSeMaster.asset"
@@ -99,6 +99,8 @@ def make_probe(example, source, furniture, output, audio_playback=None, geometry
         install_room_geometry(geometry, furniture / "assets/exchange", assets, replacements)
     for slot, (original, _) in audio.items():
         shutil.copyfile(original, assets / f"{slot}{original.suffix}")
+    if heroine is not None:
+        install_heroine_motion(heroine, assets, level)
     (assets / "room.azurelevel").write_text(json.dumps(level, indent=2) + "\n", encoding="utf-8")
 
 
@@ -108,11 +110,13 @@ def main():
     parser.add_argument("--furniture", type=Path, required=True)
     parser.add_argument("--audio-playback", type=Path)
     parser.add_argument("--room-geometry", type=Path, help="Imported room project with room-camera.azurelevel")
+    parser.add_argument("--heroine-motion", type=Path, help="Verified project with sampled heroine motions")
     parser.add_argument("--startup-flow", action="store_true")
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     example = Path(__file__).resolve().parents[2] / "examples/npr-room"
-    make_probe(example, args.source, args.furniture, args.output, args.audio_playback, args.room_geometry)
+    make_probe(example, args.source, args.furniture, args.output, args.audio_playback, args.room_geometry,
+               args.heroine_motion)
     if args.startup_flow:
         add_startup_flow(args.output)
 

@@ -4,6 +4,7 @@ local sounds = {}
 local saved
 local saves = 0
 local otherSaves = {}
+local bodyState
 
 self = {}
 function self:pressed(name)
@@ -15,6 +16,13 @@ function self:ui_text(id, text)
 end
 
 function self:find(id)
+    if id == "heroine-body" then
+        return { set = function(_, component, field, state)
+            assert(component == "azure.animator" and field == "state")
+            bodyState = state
+        end }
+    end
+    if id:sub(1, 8) == "heroine-" then return nil end
     return { audio_play = function() sounds[#sounds + 1] = id end }
 end
 
@@ -47,6 +55,7 @@ init()
 expect("idle", "25:00")
 step(0, "timer-toggle")
 expect("work", "25:00")
+assert(bodyState == "report")
 assert(sounds[1] == "timer-start")
 step(1)
 expect("work", "24:59")
@@ -66,6 +75,7 @@ expect("work", "25:00")
 assert(sounds[5] == "timer-start")
 step(0, "timer-skip")
 expect("idle", "25:00")
+assert(bodyState == "idle")
 assert(sounds[6] == "timer-finish")
 step(0, "timer-toggle")
 step(2)

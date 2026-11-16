@@ -16,11 +16,19 @@ local paused = false
 local previousPhase
 local previousTime
 local previousSettings
+local heroineParts = {"face", "body", "hair", "top", "bottom", "socks", "jacket"}
 
 local function playCue(id)
     local cue = self:find(id)
     if cue then
         cue:audio_play()
+    end
+end
+
+local function setHeroineState(state)
+    for _, part in ipairs(heroineParts) do
+        local actor = self:find("heroine-" .. part)
+        if actor then actor:set("azure.animator", "state", state) end
     end
 end
 
@@ -59,6 +67,7 @@ end
 
 local function finish()
     idle()
+    setHeroineState("idle")
     playCue("timer-finish")
 end
 
@@ -132,6 +141,7 @@ local function updateCountup(dt)
     elseif self:pressed("timer-toggle") then
         if phase == "idle" then
             phase = "work"
+            setHeroineState("report")
             playCue("timer-start")
         else
             paused = not paused
@@ -189,6 +199,7 @@ function update(dt)
         if phase == "idle" then
             phase = "work"
             round = 1
+            setHeroineState("report")
             playCue("timer-start")
         else
             paused = not paused

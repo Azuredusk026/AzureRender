@@ -9,6 +9,7 @@ import shutil
 
 FURNITURE_TRANSFORMS = (7570, 7993)
 EXCHANGE_DOCUMENT = "RoomScene-WithCamera.azuresceneexchange"
+HEROINE_PARTS = ("face", "body", "hair", "top", "bottom", "socks", "jacket")
 
 
 def merge_room_geometry(furniture, imported_room):
@@ -66,3 +67,25 @@ def install_room_geometry(geometry, furniture_assets, destination, replacements)
         shutil.copytree(geometry / name, destination / name, copy_function=install_file)
     for name in (EXCHANGE_DOCUMENT, EXCHANGE_DOCUMENT + ".azmeta"):
         shutil.copyfile(geometry / name, destination / name)
+
+
+def install_heroine_motion(source, assets, level):
+    root = source / "assets"
+    target = assets / "heroine"
+    target.mkdir()
+    graph = "humanoid-motion.json"
+    shutil.copyfile(root / graph, target / graph)
+    existing = {node["id"] for node in level["nodes"]} | {resource["id"] for resource in level["resources"]}
+    for part in HEROINE_PARTS:
+        node_id = f"heroine-{part}"
+        if node_id in existing:
+            raise ValueError(f"Heroine slot collides with a room identity: {node_id}")
+        filename = f"{part}.glb"
+        os.link(root / filename, target / filename)
+        level["resources"].append({"id": node_id, "asset": f"assets:/heroine/{filename}"})
+        level["nodes"].append({
+            "id": node_id, "resourceId": node_id,
+            "components": {"azure.animator": {
+                "type": "azure.animator", "version": 1, "data": {"asset": f"assets:/heroine/{graph}", "state": "idle"},
+            }},
+        })

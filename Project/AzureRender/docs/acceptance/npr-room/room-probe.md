@@ -58,6 +58,19 @@ Release Player 处理 11 个动作，播放五次原音效。
 两个进程均无脚本错误，退出后缓冲与图像计数均为零。
 本机 `assets_private/npr-room-dev/managed-save-probe` 保存托管项目、运行时来源校验、样例源码和运行记录。
 
+## 计时与角色动作
+
+集成工程在原房间和主相机下装配七个角色部件。
+夹具将报告书写设为工作动作，计时开始时同步切换七个部件，计时结束时回到待机。
+两段动作使用原 Avatar 的逐帧数据。 [人体动画采样](character-assets.md#人体动画采样)
+
+共享队列任务 1646 回放 850 帧及 23 个输入事件，完成取消、进入、计时、结束及重进。
+七个角色部件在每个有效回放帧的片段索引和播放时间一致，依次经过待机、报告书写和待机。
+运行触发五次原音效，脚本与表现诊断为空，退出后缓冲和图像计数均为零。
+本机工程位于 `assets_private/npr-room-dev/room-heroine`，移动后通过项目校验。
+回放报告摘要为 `68d175e382d0dd2f7bed08f593c0782205f16f6c05e139cb2a7389cb90f8215a`。
+原版动作选择、语音时序、道具和窗景联动按相应验收路径实现。
+
 ## 复验命令
 
 在 AzureRender 根目录执行以下命令。
@@ -68,6 +81,8 @@ python -B tools/npr_room/test_pomodoro_runtime.py --lua $luaDll
 python -B tools/npr_room/build_room_probe.py --source $unitySource --furniture $importedFurnitureProject --audio-playback $audioPlayback --output $roomProbe
 python -B tools/npr_room/test_room_probe_player.py --player $player --project $roomProject --output $replayOutput
 python -B tools/npr_room/test_room_save_player.py --player $player --project $roomProject --output $saveReplayOutput --resource-root $releaseBuild
+python -B tools/npr_room/build_room_probe.py --source $unitySource --furniture $importedFurnitureProject --audio-playback $audioPlayback --room-geometry $importedRoomProject --heroine-motion $heroineMotionProject --startup-flow --output $heroineRoom
+python -B tools/npr_room/test_room_startup_player.py --player $player --project $heroineRoomProject --output $heroineReplay --resource-root $releaseBuild --expect-heroine
 ```
 
 `$importedFurnitureProject` 指向保存后的 Windows 家具项目目录。
