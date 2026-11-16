@@ -38,6 +38,49 @@ MeshRenderer:
 
 
 class SceneCatalogTests(unittest.TestCase):
+    def test_exports_selected_active_camera_with_parent_and_source_planes(self):
+        camera = """--- !u!1 &50
+GameObject:
+  m_Name: MainCamera
+  m_IsActive: 1
+  m_Component:
+  - component: {fileID: 51}
+  - component: {fileID: 52}
+--- !u!4 &51
+Transform:
+  m_GameObject: {fileID: 50}
+  m_LocalPosition: {x: 2, y: 3, z: 4}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Father: {fileID: 11}
+--- !u!20 &52
+Camera:
+  m_GameObject: {fileID: 50}
+  m_Enabled: 1
+  m_projectionMatrixMode: 1
+  m_FOVAxisMode: 0
+  m_LensShift: {x: 0, y: 0}
+  m_NormalizedViewPortRect: {x: 0, y: 0, width: 1, height: 1}
+  near clip plane: 0.05
+  far clip plane: 1500
+  field of view: 35
+  orthographic: 0
+  orthographic size: 5
+"""
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "scene.unity"
+            path.write_text(mesh_object(10, 1, "parent", 0) + camera, encoding="utf-8")
+            scene = UnityScene(path)
+            exchange, stats = build_static_exchange(scene, "scene", {}, {}, camera_id=52)
+            with self.assertRaisesRegex(ValueError, "inactive"):
+                build_static_exchange(scene, "scene", {}, {10: False}, camera_id=52)
+        node = next(node for node in exchange["nodes"] if node["id"] == "unity-51")
+        self.assertEqual(node["parent"], "unity-11")
+        self.assertEqual(node["localTransform"]["matrix"][12:15], [2, 3, -4])
+        self.assertEqual(node["camera"], {"enabled": True, "priority": 0, "orthographic": False,
+                         "fieldOfView": 35, "orthographicHeight": 10, "nearPlane": 0.05, "farPlane": 1500})
+        self.assertEqual(stats["cameras"], 1)
+
     def test_obeys_platform_activation_and_keeps_shared_mesh_resources(self):
         with tempfile.TemporaryDirectory() as tmp:
             p = Path(tmp) / "scene.unity"

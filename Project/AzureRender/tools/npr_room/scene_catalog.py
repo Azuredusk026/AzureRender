@@ -25,7 +25,7 @@ def local_matrix(transform):
     ]
 
 
-def build_static_exchange(scene, scene_id, slots, overrides, batches=None):
+def build_static_exchange(scene, scene_id, slots, overrides, batches=None, camera_id=None):
     batches = {} if batches is None else batches
     world_nodes = []
     resources, nodes, active = {}, {}, {}
@@ -115,6 +115,27 @@ def build_static_exchange(scene, scene_id, slots, overrides, batches=None):
         resources[resource_key] = {"id": resource_key, "path": slot["media"]}
         stats["renderables"] += 1
 
+    if camera_id is not None:
+        if scene.documents.get(camera_id, (None,))[0] != 20:
+            raise ValueError(f"Camera override must identify a Unity Camera: {camera_id}")
+        camera = scene.read(camera_id)
+        game = scene.read(camera["m_GameObject"]["fileID"])
+        transform_id, = [item["component"]["fileID"] for item in game["m_Component"]
+                         if scene.documents.get(item["component"]["fileID"], (None,))[0] == 4]
+        if not camera["m_Enabled"] or not transform_active(transform_id):
+            raise ValueError(f"Selected camera is inactive: {camera_id}")
+        viewport = camera["m_NormalizedViewPortRect"]
+        if (camera["m_projectionMatrixMode"] != 1 or camera["m_FOVAxisMode"] != 0
+                or camera["m_LensShift"] != {"x": 0, "y": 0}
+                or [viewport[field] for field in ("x", "y", "width", "height")] != [0, 0, 1, 1]):
+            raise ValueError(f"Unsupported camera projection or viewport: {camera_id}")
+        add_node(transform_id)["camera"] = {
+            "enabled": True, "priority": 0, "orthographic": bool(camera["orthographic"]),
+            "fieldOfView": camera["field of view"], "orthographicHeight": 2 * camera["orthographic size"],
+            "nearPlane": camera["near clip plane"], "farPlane": camera["far clip plane"],
+        }
+        stats["cameras"] += 1
+
     stats["nodes"] = len(nodes) + len(world_nodes)
     stats["resources"] = len(resources)
     exchange = {
@@ -135,6 +156,7 @@ def main():
     parser.add_argument("--builtins", type=Path)
     parser.add_argument("--activate", type=int, action="append", default=[])
     parser.add_argument("--deactivate", type=int, action="append", default=[])
+    parser.add_argument("--camera", type=int, help="File ID of the active Unity Camera")
     args = parser.parse_args()
     folder = args.catalog.resolve().parent
     if args.output.resolve().parent != folder:
@@ -150,7 +172,7 @@ def main():
         slots.update(builtin_slots)
     source = UnityScene(args.scene)
     batches = json.loads(args.batches.read_text(encoding="utf-8"))["slots"] if args.batches else None
-    output, stats = build_static_exchange(source, args.scene.stem, slots, overrides, batches)
+    output, stats = build_static_exchange(source, args.scene.stem, slots, overrides, batches, args.camera)
     for resource in output["resources"]:
         asset = (folder / resource["path"]).resolve(strict=True)
         if not asset.is_relative_to(folder) or not asset.is_file():

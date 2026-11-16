@@ -27,6 +27,15 @@
 其余四个参考场景在此入口的直接静态网格计数为零，预加载、界面和运行时装配按各场景的行为路线验收。
 原材质及动态场景状态进入各自的验收项。
 
+## 房间主相机
+
+房间主相机保留 `MainCamera` 的父级、变换、35° 垂直视场角和 0.05 至 1500 米裁剪范围。
+相机交换文件含 277 个节点及 194 项模型资源。
+独立工程通过生产编辑器异步导入、保存重开和移动后的 Player 项目校验。
+Player 在 1280 × 720 下捕获两帧，房间几何和取景预览位于本机私有目录的 `reference-preview/room-main-camera.png`。
+取景夹具工程位于同一私有目录的 `room-camera/room-camera-probe.azureproject`。
+相机裁剪层、后处理和多镜头叠加按画面专项验收。
+
 ## 复验
 
 在 AzureRender 根目录执行以下命令。
@@ -36,6 +45,7 @@
 python -B -m tools.npr_room.mesh_catalog --source $unitySource --inventory $referenceInventory --output $meshCatalog
 python -B -m tools.npr_room.static_batch_catalog --source $unitySource --scene $roomScene --catalog $meshManifest --output $batchOutput
 python -B -m tools.npr_room.scene_catalog --scene $roomScene --catalog $meshManifest --batches $batchManifest --builtins $builtinManifest --activate 1439 --deactivate 5531 --output $roomExchange
+python -B -m tools.npr_room.scene_catalog --scene $roomScene --catalog $meshManifest --batches $batchManifest --builtins $builtinManifest --activate 1439 --deactivate 5531 --camera 8551 --output $cameraExchange
 ```
 
 在 Player 中以项目挂载加载生成的 GLB。

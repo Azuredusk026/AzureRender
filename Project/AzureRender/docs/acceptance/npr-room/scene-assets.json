@@ -14,6 +14,21 @@
     "editorSaveReopen": true,
     "playerCheck": true
   },
+  "roomCamera": {
+    "sourceCameraFileId": 8551,
+    "verticalFieldOfView": 35,
+    "nearPlane": 0.05,
+    "farPlane": 1500,
+    "nodes": 277,
+    "modelResources": 194,
+    "renderRunnerJob": 1607,
+    "editorSaveReopen": true,
+    "playerCaptures": 2,
+    "captureSize": [1280, 720],
+    "relocatedPlayerCheck": true,
+    "exchangeSHA256": "17bb3b302bd02e578d9816807a8d937469c848cbc54141bf099b0b750ffb09ec",
+    "previewSHA256": "3ef8e261ac2bed0ed8a5d5b6debfe49ae606d45b7024db591d8a3534f906c404"
+  },
   "deformers": {
     "sourceMeshes": 34,
     "skinVariants": 34,
