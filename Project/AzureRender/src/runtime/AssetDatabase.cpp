@@ -85,6 +85,11 @@ std::uint64_t hash(const std::string& data) {
     for (const unsigned char c : data) { result ^= c; result *= 1099511628211ULL; }
     return result;
 }
+bool retainSourceSnapshot(const Json& metadata) {
+    const auto settings = metadata.find("settings");
+    if (settings == metadata.end() || !settings->contains("retainSourceSnapshot")) return true;
+    return settings->at("retainSourceSnapshot").get<bool>();
+}
 void write(const std::filesystem::path& path, const std::string& data) {
     std::filesystem::create_directories(path.parent_path());
     auto temporary = path;temporary += ".tmp";
@@ -422,7 +427,8 @@ std::vector<std::string> AssetDatabase::refresh(bool verifyAll,std::function<voi
         const auto old = records_.find(entry.first);
         if (old != records_.end() && old->second.fingerprint == entry.second.fingerprint && old->second.path == entry.second.path) continue;
         changed.push_back(entry.first);
-        snapshots.emplace_back(cacheDirectory / entry.first / (std::to_string(entry.second.fingerprint) + ".azcache"), &entry.second);
+        if (retainSourceSnapshot(sources.at(entry.second.path).metadata))
+            snapshots.emplace_back(cacheDirectory / entry.first / (std::to_string(entry.second.fingerprint) + ".azcache"), &entry.second);
     }
     // Cancellation belongs to the caller. Small and cancellable publications
     // retain the same owner-thread order and checks.
@@ -478,6 +484,12 @@ std::filesystem::path AssetDatabase::cacheFile(const std::string& id) const {
 }
 std::string AssetDatabase::readSource(const std::string& id) const {
     const auto& record = records_.at(id);
+    if (!retainSourceSnapshot(sources_->at(record.path).metadata)) {
+        auto source = bytes(record.path);
+        if (hash(source) != record.contentHash)
+            throw std::runtime_error("Live asset source changed; refresh required: " + record.virtualPath);
+        return source;
+    }
     const auto path = cacheFile(id);
     if (std::filesystem::exists(path)) {
         const auto data = cacheBytes(path);

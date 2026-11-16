@@ -54,6 +54,8 @@ azurerender::LevelSession secondSession(startup, second);
 
 源文件的 `.azmeta` 侧车持有版本、UUID、导入设置与显式依赖。移动资源时同时移动侧车文件，引用使用 UUID 或项目虚拟路径。文件指纹由内容、导入设置、导入器版本和依赖指纹共同计算。
 
+将 `settings.retainSourceSnapshot` 设为 `false` 可直接使用已登记指纹的源文件。流式媒体可采用此设置。读取和打包的规则见[资产源文件快照](../development/asset-source-cache.md#实时源文件)。
+
 LevelSession 持有资源数据库与当前关卡，RuntimeLifecycle 持有 World。关卡替换先建立候选 World 和渲染资源，通过验证后提交。加载错误保留当前 World 与渲染器，并保存诊断。
 
 资产源快照保存元数据、文件指纹及待解析的引用。

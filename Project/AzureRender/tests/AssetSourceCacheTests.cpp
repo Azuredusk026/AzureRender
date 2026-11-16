@@ -44,7 +44,31 @@ void verifySnapshotStorage(){
     std::vector<std::future<void>> publishers;
     for(unsigned i=0;i<3;++i)publishers.push_back(std::async(std::launch::async,[&]{AssetDatabase candidate(project);candidate.refresh();check(candidate.readSource(id)==second,"Concurrent snapshot publisher returned different bytes");}));
     for(auto& job:publishers)job.get();check(read(warm.cacheFile(id))==compact,"Concurrent publishers preserve one complete compressed envelope");
-    db.writePack(fixture.root/"pack");check(read(AssetDatabase::resolvePack(fixture.root/"pack",id))==second,"Packing resolves the original source bytes from compressed snapshots");
+    const auto live=fixture.root/"assets/stream.ogg";
+    const std::string liveId="7006acf1-94ac-459b-bbf4-981143736d47";
+    write(live,first);
+    const auto liveMetadata=[&](const nlohmann::json& mode) {
+        write(live.string()+".azmeta",nlohmann::json{{"schemaVersion",1},{"id",liveId},
+            {"settings",{{"retainSourceSnapshot",mode}}}}.dump());
+    };
+    liveMetadata(false);
+    db.refresh();
+    check(!fs::exists(db.cacheFile(liveId))&&db.readSource(liveId)==first&&!fs::exists(db.cacheFile(liveId)),
+        "Live sources must verify the current bytes without duplicating them");
+    write(live,second);
+    bool staleLive=false;
+    try { (void)db.readSource(liveId); } catch (const std::exception&) { staleLive=true; }
+    check(staleLive,"A modified live source must require an inventory refresh");
+    db.refresh(true);
+    check(db.readSource(liveId)==second&&!fs::exists(db.cacheFile(liveId)),"Refresh must advance the live source identity");
+    liveMetadata("yes");
+    bool invalidMode=false;
+    try { db.refresh(true); } catch (const std::exception&) { invalidMode=true; }
+    check(invalidMode&&db.readSource(liveId)==second,"Invalid metadata must leave the active inventory intact");
+    liveMetadata(false);
+    db.writePack(fixture.root/"pack");
+    check(read(AssetDatabase::resolvePack(fixture.root/"pack",id))==second,"Packing resolves the original source bytes from compressed snapshots");
+    check(read(AssetDatabase::resolvePack(fixture.root/"pack",liveId))==second,"Packing includes verified live source bytes");
     const auto moved=fixture.root.string()+"-moved";check(fs::path(moved).parent_path()==parent,"Moved fixture remains in its temporary parent");
     fs::rename(fixture.root,moved);fixture.root=moved;
     AssetDatabase relocated(Project::load(fixture.root/"project.azureproject"));relocated.refresh();
