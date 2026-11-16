@@ -1,6 +1,23 @@
 # 角色与窗景资源转换
 
-> 状态为 P1 局部验收。角色部件通过 Player 资产读取。
+> 状态为 P0 与 P1 局部验收。角色控制器已登记，角色部件通过 Player 资产读取。
+
+## 角色动画控制器
+
+Recovery 角色控制器包含五个有序图层、30 个参数、32 个状态机和 390 个状态。
+源记录包含 504 条状态转场、59 条入口与状态机转场，以及 42 项状态行为。
+目录以文件 ID 区分同名状态，并保留转场顺序、条件、入口、混合参数和状态行为。
+静态引用覆盖 352 项动画和一个行为脚本，全部文件 ID 与外部 GUID 均可解析。
+运行时可达性通过剧情、计时、交互与设置回放核验。
+
+本机目录 `assets_private/npr-room-dev/source-lock/animation-graph.json` 保存完整清单。
+两次独立扫描的清单摘要均为 `30799bb37e1d92757f94df4ee10a4a12876d2e259c009f4d8214ae75378cbdf6`。
+
+```powershell
+python -B -m tools.npr_room.animator_inventory --source $unitySource --output $animatorManifest
+```
+
+## 角色骨架与部件
 
 角色转换器读取 `SkinnedMeshRenderer` 的骨骼引用。
 骨骼层级沿场景父级关系装配。
