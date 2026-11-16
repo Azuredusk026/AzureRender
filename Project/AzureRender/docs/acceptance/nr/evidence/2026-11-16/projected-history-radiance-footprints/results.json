@@ -1,0 +1,521 @@
+{
+  "status": "source-radiance-localized-formal-gates-open",
+  "scope": "Prior HDR at paired screen addresses whose prior depth positions agree within 2 cm.",
+  "sourceComparison": "Current native frame draw contribution footprint only; this does not independently establish the exact previous-frame contribution or visibility order. Source samples compare previous HDR point values at matching pick locations and prior-depth world positions.",
+  "baseline": "projected-history-bilateral-endpoints/results.json",
+  "candidateDecision": "Inspect whether the captured color producer includes the central glyph composition before choosing a scene history source. The footprint intersection alone does not establish the cause of the prior-frame deficit.",
+  "previousDepth": {
+    "native": "76a4b539ed98345f51ebbc0e686347aefd98e26ad1ffe1da65b82f16082d80a9",
+    "player": "b6c9b61c16c5f22020951ff80dafda2018aaab1710408da33346e93a1a2d119a"
+  },
+  "nativePriorColorSha256": "9667b36a4cf8716ca807be9a5ea270b47c8981fd38427dc22304e649ffa679a8",
+  "playerPriorColorSha256": "ff7c9086cec80cada14f34816ae5953975446f86a420e242b2cf7b1ce0f69778",
+  "paired": {
+    "native": {
+      "centerFloor": {
+        "samples": 7557,
+        "weight": "Minimum of the native and Player trace confidence",
+        "negativeCompressedLuma": 341.73483890083156,
+        "drawFootprintShare": {
+          "centralGlyph": 0.5711130338397679,
+          "logisticsBoxes": 0.32188691671564584,
+          "opaqueCyanRing": 0.07170067903436583,
+          "knownUnion": 0.9056655523753538,
+          "knownOverlap": 0.05903507721442576
+        },
+        "centralGlyphMedianSignedCompressedLuma": -0.1514184935311374,
+        "cyanRingMedianSignedCompressedLuma": 0.0007699706088621673,
+        "severeNeutralMaxAbsRgbMedian": [
+          0.2696201088273944,
+          0.01731363320102325,
+          0.013789365023057432
+        ],
+        "allSampleFixedShiftCrossValidation": [
+          {
+            "trainFold": 0,
+            "nativeOffset": [
+              1,
+              1
+            ],
+            "trainCount": 3870,
+            "testCount": 3687,
+            "testBaselineMeanAbsoluteRgb": 0.06832745895919481,
+            "testShiftedMeanAbsoluteRgb": 0.0643503519683467
+          },
+          {
+            "trainFold": 1,
+            "nativeOffset": [
+              1,
+              1
+            ],
+            "trainCount": 3687,
+            "testCount": 3870,
+            "testBaselineMeanAbsoluteRgb": 0.0695191803955949,
+            "testShiftedMeanAbsoluteRgb": 0.06568809400498586
+          }
+        ]
+      },
+      "cyanRing": {
+        "samples": 3262,
+        "weight": "Minimum of the native and Player trace confidence",
+        "negativeCompressedLuma": 106.30940165537237,
+        "drawFootprintShare": {
+          "centralGlyph": 0.40333274724442236,
+          "logisticsBoxes": 0.4487018203771281,
+          "opaqueCyanRing": 0.20026767978531104,
+          "knownUnion": 0.8911365875580056,
+          "knownOverlap": 0.16116565984885597
+        },
+        "centralGlyphMedianSignedCompressedLuma": -0.10663040289972851,
+        "cyanRingMedianSignedCompressedLuma": 0.0006072449288935859,
+        "severeNeutralMaxAbsRgbMedian": [
+          0.21611165374032143,
+          0.029892076090161743,
+          0.014402162271972878
+        ],
+        "allSampleFixedShiftCrossValidation": [
+          {
+            "trainFold": 0,
+            "nativeOffset": [
+              0,
+              1
+            ],
+            "trainCount": 1654,
+            "testCount": 1608,
+            "testBaselineMeanAbsoluteRgb": 0.06228136433957179,
+            "testShiftedMeanAbsoluteRgb": 0.057050844795976115
+          },
+          {
+            "trainFold": 1,
+            "nativeOffset": [
+              0,
+              2
+            ],
+            "trainCount": 1608,
+            "testCount": 1654,
+            "testBaselineMeanAbsoluteRgb": 0.06683112791238341,
+            "testShiftedMeanAbsoluteRgb": 0.06022127545680106
+          }
+        ]
+      }
+    },
+    "player": {
+      "centerFloor": {
+        "samples": 6913,
+        "weight": "Minimum of the native and Player trace confidence",
+        "negativeCompressedLuma": 297.6000379373324,
+        "drawFootprintShare": {
+          "centralGlyph": 0.5918509184429518,
+          "logisticsBoxes": 0.2742837941939509,
+          "opaqueCyanRing": 0.07232187461122704,
+          "knownUnion": 0.879661131277201,
+          "knownOverlap": 0.05879545597092854
+        },
+        "centralGlyphMedianSignedCompressedLuma": -0.10384084646865091,
+        "cyanRingMedianSignedCompressedLuma": 0.0007047115890132049,
+        "severeNeutralMaxAbsRgbMedian": [
+          0.19242876429431022,
+          0.01512460372598056,
+          0.013816996667180857
+        ],
+        "allSampleFixedShiftCrossValidation": [
+          {
+            "trainFold": 0,
+            "nativeOffset": [
+              0,
+              1
+            ],
+            "trainCount": 3523,
+            "testCount": 3390,
+            "testBaselineMeanAbsoluteRgb": 0.06589835970996968,
+            "testShiftedMeanAbsoluteRgb": 0.06257386421456175
+          },
+          {
+            "trainFold": 1,
+            "nativeOffset": [
+              0,
+              1
+            ],
+            "trainCount": 3390,
+            "testCount": 3523,
+            "testBaselineMeanAbsoluteRgb": 0.06521990148833914,
+            "testShiftedMeanAbsoluteRgb": 0.06401696672217162
+          }
+        ]
+      },
+      "cyanRing": {
+        "samples": 3231,
+        "weight": "Minimum of the native and Player trace confidence",
+        "negativeCompressedLuma": 87.61990745962852,
+        "drawFootprintShare": {
+          "centralGlyph": 0.3674051579500864,
+          "logisticsBoxes": 0.4555928842908078,
+          "opaqueCyanRing": 0.2195032328340111,
+          "knownUnion": 0.8689403722115557,
+          "knownOverlap": 0.17356090286334966
+        },
+        "centralGlyphMedianSignedCompressedLuma": -0.1199549191372524,
+        "cyanRingMedianSignedCompressedLuma": 0.0007055166618134179,
+        "severeNeutralMaxAbsRgbMedian": [
+          0.17867028526451684,
+          0.018955119931939025,
+          0.0147834070337362
+        ],
+        "allSampleFixedShiftCrossValidation": [
+          {
+            "trainFold": 0,
+            "nativeOffset": [
+              1,
+              1
+            ],
+            "trainCount": 1671,
+            "testCount": 1560,
+            "testBaselineMeanAbsoluteRgb": 0.06083882392018082,
+            "testShiftedMeanAbsoluteRgb": 0.05546704339214122
+          },
+          {
+            "trainFold": 1,
+            "nativeOffset": [
+              0,
+              1
+            ],
+            "trainCount": 1560,
+            "testCount": 1671,
+            "testBaselineMeanAbsoluteRgb": 0.06301373896109382,
+            "testShiftedMeanAbsoluteRgb": 0.05800133856193366
+          }
+        ]
+      }
+    }
+  },
+  "originalDrawFootprints": {
+    "10480": {
+      "manifest": "Project/AzureRender/docs/acceptance/nr/evidence/2026-10-28/central-glyph-composition.json",
+      "manifestSha256": "37ebd7a12e41d32c0c7dece426c37eaa8a4dfaefd7780e5af5b6813f99a70cb8",
+      "sha256": "7045223cdc5eaabed6205b22f987bb92a456795cde279951a340b90705ec9f18",
+      "storedFlipY": true,
+      "count": 41656,
+      "check": "tracked exact digest"
+    },
+    "9160": {
+      "manifest": "Project/AzureRender/docs/acceptance/nr/evidence/2026-10-28/central-glyph-composition.json",
+      "manifestSha256": "37ebd7a12e41d32c0c7dece426c37eaa8a4dfaefd7780e5af5b6813f99a70cb8",
+      "sha256": "01adfbccd167ff8ed8f662344debb73f39b072d31006040ed9ad84ef38b6d423",
+      "storedFlipY": true,
+      "count": 30531,
+      "check": "tracked exact digest"
+    },
+    "10875": {
+      "manifest": "Project/AzureRender/docs/acceptance/nr/evidence/2026-10-28/central-glyph-composition.json",
+      "manifestSha256": "37ebd7a12e41d32c0c7dece426c37eaa8a4dfaefd7780e5af5b6813f99a70cb8",
+      "sha256": "8c412b0c3c6febec93f9e60d350c6709064888f932bf5b28646ae56a7a87d7fb",
+      "storedFlipY": true,
+      "count": 30428,
+      "check": "tracked exact digest"
+    },
+    "6587": {
+      "manifest": "Project/AzureRender/docs/acceptance/nr/evidence/2026-10-28/captured-logistics-boxes.json",
+      "manifestSha256": "d3a5ee047b89df2b2c3bbff4cd3003cbb8f1e2b25cb460044813d1c469fde355",
+      "sha256": "1ae2a4c5e8d7786db6c70b4e91c225279bbc33085fd98dced1d4e3a0aa18d22b",
+      "storedFlipY": true,
+      "count": 31188,
+      "check": "tracked exact digest"
+    },
+    "6600": {
+      "manifest": "Project/AzureRender/docs/acceptance/nr/evidence/2026-10-28/captured-logistics-boxes.json",
+      "manifestSha256": "d3a5ee047b89df2b2c3bbff4cd3003cbb8f1e2b25cb460044813d1c469fde355",
+      "sha256": "60f9c976900f2814c6288c4fde76f0ccc420a0b190d1e5c401ae4861abf7177f",
+      "storedFlipY": true,
+      "count": 34683,
+      "check": "tracked exact digest"
+    },
+    "6613": {
+      "manifest": "Project/AzureRender/docs/acceptance/nr/evidence/2026-10-28/captured-logistics-boxes.json",
+      "manifestSha256": "d3a5ee047b89df2b2c3bbff4cd3003cbb8f1e2b25cb460044813d1c469fde355",
+      "sha256": "77a75d1cc0d158572e7208f7e4b360b8cb42b34834262fc4c603f6287e3373b8",
+      "storedFlipY": true,
+      "count": 30059,
+      "check": "tracked exact digest"
+    },
+    "6626": {
+      "manifest": "Project/AzureRender/docs/acceptance/nr/evidence/2026-10-28/captured-logistics-boxes.json",
+      "manifestSha256": "d3a5ee047b89df2b2c3bbff4cd3003cbb8f1e2b25cb460044813d1c469fde355",
+      "sha256": "a7380c6b480139b679a6d389131ba8f7975ce0645d960e6714da55e3e65fd342",
+      "storedFlipY": true,
+      "count": 16657,
+      "check": "tracked exact digest"
+    },
+    "6652": {
+      "manifest": "Project/AzureRender/docs/acceptance/nr/evidence/2026-10-28/captured-logistics-boxes.json",
+      "manifestSha256": "d3a5ee047b89df2b2c3bbff4cd3003cbb8f1e2b25cb460044813d1c469fde355",
+      "sha256": "5a4b5741692300def71863b799c81b5a9efe6cfe3cdc8316321a14df53e4faa4",
+      "storedFlipY": true,
+      "count": 27441,
+      "check": "tracked exact digest"
+    },
+    "5066": {
+      "manifest": "Project/AzureRender/docs/acceptance/nr/evidence/2026-10-28/opaque-logistics-rings.json",
+      "manifestSha256": "c4da467219a5e66b0c571e98c2b802b03cef47c46c815fe21504ad33cf3a0ae7",
+      "sha256": "b28e2e110f37520ae705fb98f32226072bba3a7dd971e902804bc8c4ee1e4c0c",
+      "storedFlipY": true,
+      "count": 10294,
+      "check": "draw-count from qualified original attachment readback"
+    },
+    "5078": {
+      "manifest": "Project/AzureRender/docs/acceptance/nr/evidence/2026-10-28/opaque-logistics-rings.json",
+      "manifestSha256": "c4da467219a5e66b0c571e98c2b802b03cef47c46c815fe21504ad33cf3a0ae7",
+      "sha256": "d8cd375d7e6dc7a014c0597534e7b35965e04eb51eaf2f11c2b239387c124380",
+      "storedFlipY": true,
+      "count": 5383,
+      "check": "draw-count from qualified original attachment readback"
+    }
+  },
+  "selectedWitnesses": {
+    "neutralDarker": [
+      {
+        "pixel": [
+          1264,
+          751
+        ],
+        "events": [
+          10480
+        ]
+      },
+      {
+        "pixel": [
+          1305,
+          608
+        ],
+        "events": [
+          10480
+        ]
+      },
+      {
+        "pixel": [
+          1235,
+          599
+        ],
+        "events": [
+          10480
+        ]
+      },
+      {
+        "pixel": [
+          1305,
+          640
+        ],
+        "events": [
+          10480
+        ]
+      },
+      {
+        "pixel": [
+          1272,
+          653
+        ],
+        "events": [
+          10480
+        ]
+      },
+      {
+        "pixel": [
+          1292,
+          717
+        ],
+        "events": [
+          10480
+        ]
+      },
+      {
+        "pixel": [
+          1260,
+          599
+        ],
+        "events": [
+          10480
+        ]
+      },
+      {
+        "pixel": [
+          1284,
+          694
+        ],
+        "events": [
+          10480
+        ]
+      }
+    ],
+    "warmDarker": [
+      {
+        "pixel": [
+          1167,
+          607
+        ],
+        "events": [
+          6652
+        ]
+      },
+      {
+        "pixel": [
+          1498,
+          666
+        ],
+        "events": [
+          6613
+        ]
+      },
+      {
+        "pixel": [
+          1539,
+          666
+        ],
+        "events": [
+          6613
+        ]
+      },
+      {
+        "pixel": [
+          1515,
+          665
+        ],
+        "events": [
+          6613
+        ]
+      },
+      {
+        "pixel": [
+          1521,
+          665
+        ],
+        "events": [
+          6613
+        ]
+      },
+      {
+        "pixel": [
+          1531,
+          666
+        ],
+        "events": [
+          6613
+        ]
+      },
+      {
+        "pixel": [
+          1509,
+          664
+        ],
+        "events": [
+          6613
+        ]
+      },
+      {
+        "pixel": [
+          1262,
+          756
+        ],
+        "events": [
+          10480
+        ]
+      }
+    ],
+    "cyanClose": [
+      {
+        "pixel": [
+          1153,
+          653
+        ],
+        "events": [
+          5066
+        ]
+      },
+      {
+        "pixel": [
+          1209,
+          676
+        ],
+        "events": [
+          5066
+        ]
+      },
+      {
+        "pixel": [
+          1141,
+          655
+        ],
+        "events": [
+          5066
+        ]
+      },
+      {
+        "pixel": [
+          1198,
+          642
+        ],
+        "events": [
+          5066
+        ]
+      },
+      {
+        "pixel": [
+          1184,
+          651
+        ],
+        "events": [
+          5066
+        ]
+      },
+      {
+        "pixel": [
+          1121,
+          654
+        ],
+        "events": [
+          5066
+        ]
+      },
+      {
+        "pixel": [
+          1168,
+          647
+        ],
+        "events": [
+          5066
+        ]
+      },
+      {
+        "pixel": [
+          1202,
+          669
+        ],
+        "events": [
+          5066
+        ]
+      }
+    ]
+  },
+  "entries": {
+    "original-draw-footprints/10480.pgm": "7045223cdc5eaabed6205b22f987bb92a456795cde279951a340b90705ec9f18",
+    "original-draw-footprints/10875.pgm": "8c412b0c3c6febec93f9e60d350c6709064888f932bf5b28646ae56a7a87d7fb",
+    "original-draw-footprints/5066.pgm": "b28e2e110f37520ae705fb98f32226072bba3a7dd971e902804bc8c4ee1e4c0c",
+    "original-draw-footprints/5078.pgm": "d8cd375d7e6dc7a014c0597534e7b35965e04eb51eaf2f11c2b239387c124380",
+    "original-draw-footprints/6587.pgm": "1ae2a4c5e8d7786db6c70b4e91c225279bbc33085fd98dced1d4e3a0aa18d22b",
+    "original-draw-footprints/6600.pgm": "60f9c976900f2814c6288c4fde76f0ccc420a0b190d1e5c401ae4861abf7177f",
+    "original-draw-footprints/6613.pgm": "77a75d1cc0d158572e7208f7e4b360b8cb42b34834262fc4c603f6287e3373b8",
+    "original-draw-footprints/6626.pgm": "a7380c6b480139b679a6d389131ba8f7975ce0645d960e6714da55e3e65fd342",
+    "original-draw-footprints/6652.pgm": "5a4b5741692300def71863b799c81b5a9efe6cfe3cdc8316321a14df53e4faa4",
+    "original-draw-footprints/9160.pgm": "01adfbccd167ff8ed8f662344debb73f39b072d31006040ed9ad84ef38b6d423",
+    "readback/history-source-draw-mask-intersection.json": "715069310fa09bb05cee9169a9d1752461c311b206542dccac46f16c3ac9804c",
+    "readback/history-source-fixed-address-chroma.json": "a13d460d16d998c639898e060408a5d3f8c73cf26858b1ba54f19c5eedefc667",
+    "readback/history-source-local-radiance.json": "6443431592571631201549b2fe7bb4179b8f3733299c5247da1aed7c467d4e88",
+    "readback/history-source-producer-witnesses.json": "751f9af23ba55fc65a805a3d7f569fdcbbb7154e963075ae0aa1ce7853bdec83",
+    "readback/history-source-witness-positions.png": "0af9421785c75c60237e5cf32c419426f8270edb87f69ea52d15efff57e9b6b7",
+    "scripts/archive-projected-history-radiance-footprints.py": "ceeb1320230cec9e1f58c22ec60194de7e1d3e77823e4be3bab9777ae475a104",
+    "scripts/plan-projected-history-producer-witnesses.py": "f03a5868b167a4f7eaebc668160476b13559e660b1f129cc23e0d7d9c09191df",
+    "scripts/plot-projected-history-source-witnesses.py": "b84075a9b2441732524828a82a95c9d1b56ffc2ac5335b826dac21a07761b81e",
+    "scripts/score-projected-history-chroma.py": "074aeb44d7737c297f837dd1d3db278bf270633f414ba6dec3c319f8573d025d",
+    "scripts/score-projected-history-draw-masks.py": "063e9f14c3c1a407b5f5587acf30fe2f39b5c767e4de4777f11be436c18711f5",
+    "scripts/score-projected-history-local-radiance.py": "7f2ea4739c6767dd818af0a78f40511e2096e573e6bc9fa3ca8c269feb1518ea"
+  },
+  "archiveSha256": "7cb1c808cc9732a763844d5eedddfd6c45107e0ffe30c0f792be148cc6438900"
+}
