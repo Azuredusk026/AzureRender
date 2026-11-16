@@ -427,3 +427,7 @@ NVIDIA 和 Intel 分别采集两帧。两块设备的首帧均与各自实际对
 [采样相位结果](evidence/2026-11-16/projected-reflection-native-phase/qualification.json)和[验证归档](evidence/2026-11-16/projected-reflection-native-phase/validation.zip)保存逐帧指标、着色器差异和采集指纹。
 
 当前运行入口统一见[完整场景显示](../../tutorials/restored-native-scene.md)。
+
+### 联合场景的时间抗锯齿复测
+
+同一联合场景启用原生分辨率的 HDR 时间抗锯齿，两块显卡均以原机位和固定时间输出两帧。第 2 帧中央地面的 SSIM 在 NVIDIA 和 Intel 上为 0.83560 和 0.83459，中位亮度误差为 16.03% 和 16.42%。青色环带的 SSIM 为 0.76403 和 0.76376。中央地面与青色环带继续按原门槛验收。该批采集保留投影反射的现有历史输入。[实际时间合成结果](evidence/2026-11-16/projected-history-actual-temporal-resolve/qualification.json)和[验证归档](evidence/2026-11-16/projected-history-actual-temporal-resolve/validation.zip)保存两帧指标、命令及设备记录。
