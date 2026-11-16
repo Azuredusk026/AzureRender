@@ -147,7 +147,7 @@ void AzureRenderApp::run(const AzureRenderOptions& options, const std::filesyste
         gameRuntime_->setEventHandler([this](const auto& event) { scriptRuntime_->dispatch(event); });
         gameRuntime_->setInteractionHandler([this](const auto& event){scriptRuntime_->dispatchInteraction(event);});
     }
-    if(levelSession_){presentationRuntime_=std::make_unique<azurerender::PresentationRuntime>(runtime_,levelSession_->assets());scriptRuntime_->setAudioHandler([this](auto entity){presentationRuntime_->play(entity);});}
+    if(levelSession_){presentationRuntime_=std::make_unique<azurerender::PresentationRuntime>(runtime_,levelSession_->assets());scriptRuntime_->setAudioTransport(*presentationRuntime_);}
     }, [this] {
         scriptRuntime_.reset(); gameRuntime_.reset(); presentationRuntime_.reset(); levelSession_.reset();
     });

@@ -11,6 +11,7 @@ struct InteractionTarget;
 class ProjectSaveStore;
 class LevelSession;
 class GameUi;
+class PresentationRuntime;
 struct ScriptRuntimeCapabilities {
     std::string backend;
     bool hotReload=false;
@@ -36,5 +37,6 @@ public:
     virtual void setSaveStore(std::shared_ptr<ProjectSaveStore>)=0;
     virtual void setLevelSession(LevelSession&)=0;
     virtual void setUiProvider(std::function<GameUi*()>)=0;
+    virtual void setAudioTransport(PresentationRuntime&)=0;
 };
 }

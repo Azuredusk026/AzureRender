@@ -53,6 +53,10 @@ ScriptRuntime 将 Lua 5.4.8 与 sol2 3.5.0 接入固定步运行时。脚本控�
 | `self:cancel_level_load()` | 取消待处理的预加载或切换请求 |
 | `self:level_load_error()` | 读取关卡会话的最后一条加载错误，空字符串表示当前无错误 |
 | `self:audio_play()` | 播放当前实体的音频源 |
+| `self:audio_stop()` | 停止当前实体音源的播放 |
+| `self:audio_pause(paused)` | 暂停或继续当前实体音源，保留播放位置 |
+| `self:audio_playing()` | 查询当前实体音源是否正在播放 |
+| `self:audio_position()` | 获取当前实体音源的播放位置，单位为秒 |
 | `self:ui_text(id, text)` | 设置游戏界面的纯文本 |
 
 关卡请求处理器负责排队，主循环在固定步之外准备和提交关卡。修改接口在顶层代码中调用产生错误。数组需稠密，最多 1024 项，嵌套深度最多 16。

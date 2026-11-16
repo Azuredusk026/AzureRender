@@ -17,6 +17,7 @@ public:
     void shutdown() noexcept override;
     void setLevelHandler(std::function<void(std::string)> handler) override;
     void setAudioHandler(std::function<void(ecs::Entity)> handler) override;
+    void setAudioTransport(PresentationRuntime& presentation) override;
     void setUiHandler(std::function<void(std::string,std::string)> handler) override;
     std::size_t activeCount() const override;
     const std::vector<std::string>& errors() const override;

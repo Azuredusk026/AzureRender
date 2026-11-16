@@ -13,6 +13,10 @@ public:
     ~PresentationRuntime();
     void update(double delta);
     void play(ecs::Entity entity);
+    void stop(ecs::Entity entity);
+    void pause(ecs::Entity entity, bool paused);
+    bool playing(ecs::Entity entity) const;
+    double audioPosition(ecs::Entity entity) const;
     const std::vector<NodeAnimationFrame>& animations() const { return frames_; }
     const std::vector<std::string>& errors() const { return errors_; }
     std::string uiDocument();
@@ -22,11 +26,13 @@ public:
     bool hasAudioDevice() const { return audio_.hasDevice(); }
 private:
     void synchronize();
+    AudioRuntime::Handle requireAudioSource(ecs::Entity entity);
     RuntimeLifecycle& runtime_;
     AssetDatabase& assets_;
     AudioRuntime audio_;
     struct Animation { std::string asset,state,node;AnimationStateMachine machine;LocomotionBlendState locomotion; };
-    struct Sound { std::string key,node;AudioRuntime::Handle handle; };
+    struct Sound { std::string asset,node;AudioRuntime::Handle handle;float volume;bool loop; };
+    const Sound* activeAudioSource(ecs::Entity entity) const;
     std::map<ecs::Entity,Animation> animations_;
     std::map<ecs::Entity,Sound> sounds_;
     std::set<std::string> failed_;

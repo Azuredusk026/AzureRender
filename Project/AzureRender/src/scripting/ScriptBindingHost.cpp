@@ -2,6 +2,7 @@
 #include "runtime/ComponentCodec.hpp"
 #include "runtime/GameUi.hpp"
 #include "runtime/LevelSession.hpp"
+#include "runtime/PresentationRuntime.hpp"
 #include "runtime/ProjectSaveStore.hpp"
 #include <cmath>
 #include <ctime>
@@ -85,7 +86,7 @@ void ScriptBindingHost::commitInitialization(const std::function<void()>& retire
     }
 }
 void ScriptBindingHost::close() noexcept {
-    cancelInitialization();callback_=false;closed_=true;levels_=nullptr;level_={};audio_={};ui_={};uiDocument_={};saveStore_.reset();
+    cancelInitialization();callback_=false;closed_=true;levels_=nullptr;level_={};audio_={};transport_=nullptr;ui_={};uiDocument_={};saveStore_.reset();
 }
 void ScriptBindingHost::effect(std::function<void()> action,bool structural) {
     if(staging_)(structural?stagedStructural_:stagedEffects_).push_back(std::move(action));else action();
@@ -96,6 +97,7 @@ void ScriptBindingHost::setLevelSession(LevelSession& levels) {
     level_=[&levels](std::string reference){levels.request(std::move(reference));};
 }
 void ScriptBindingHost::setAudioHandler(std::function<void(ecs::Entity)> handler) {checkThread();audio_=std::move(handler);}
+void ScriptBindingHost::setAudioTransport(PresentationRuntime& presentation) {checkThread();transport_=&presentation;}
 void ScriptBindingHost::setUiHandler(std::function<void(std::string,std::string)> handler) {checkThread();ui_=std::move(handler);}
 void ScriptBindingHost::setUiProvider(std::function<GameUi*()> provider) {checkThread();uiDocument_=std::move(provider);}
 void ScriptBindingHost::setSaveStore(std::shared_ptr<ProjectSaveStore> store) {
@@ -141,6 +143,8 @@ Json ScriptBindingHost::invoke(const ScriptObject& object,const std::string& met
     if(method=="velocity")return game_.physics().velocity(entity);
     if(method=="action")return game_.input().down(args[0].get<std::string>());
     if(method=="pressed")return game_.input().pressed(args[0].get<std::string>());
+    if(method=="audio_playing")return transport_ && transport_->playing(entity);
+    if(method=="audio_position")return transport_ ? transport_->audioPosition(entity) : 0.0;
     if(method=="local_datetime") {
         const auto now = std::time(nullptr);
         std::tm local{};
@@ -221,8 +225,16 @@ Json ScriptBindingHost::invoke(const ScriptObject& object,const std::string& met
             const auto reference=args[0].get<std::string>();
             effect([levels,reference]{levels->preload(reference);});
         }else effect([levels]{levels->cancelPending();});
-    } else if(method=="audio_play") {
-        if(!audio_)throw std::runtime_error("Audio handler unavailable");effect([handler=audio_,entity]{handler(entity);});
+    } else if(method=="audio_play" && audio_) {
+        effect([handler=audio_,entity]{handler(entity);});
+    } else if(method=="audio_play" || method=="audio_stop" || method=="audio_pause") {
+        if(!transport_)throw std::runtime_error("Audio transport unavailable");
+        const bool paused=method=="audio_pause" && args[0].get<bool>();
+        effect([transport=transport_,entity,method,paused] {
+            if(method=="audio_play")transport->play(entity);
+            else if(method=="audio_stop")transport->stop(entity);
+            else transport->pause(entity,paused);
+        });
     } else if(method=="ui_text") {
         if(!ui_)throw std::runtime_error("UI handler unavailable");
         const auto id=args[0].get<std::string>(),text=args[1].get<std::string>();effect([handler=ui_,id,text]{handler(id,text);});

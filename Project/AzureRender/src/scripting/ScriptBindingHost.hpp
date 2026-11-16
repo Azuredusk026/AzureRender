@@ -10,6 +10,7 @@ namespace azurerender {
 class ProjectSaveStore;
 class LevelSession;
 class GameUi;
+class PresentationRuntime;
 struct ScriptObject {
     ecs::EntityHandle identity;
     std::string node;
@@ -31,6 +32,7 @@ public:
     void setLevelHandler(std::function<void(std::string)> handler);
     void setLevelSession(LevelSession&);
     void setAudioHandler(std::function<void(ecs::Entity)> handler);
+    void setAudioTransport(PresentationRuntime& presentation);
     void setUiHandler(std::function<void(std::string,std::string)> handler);
     void setUiProvider(std::function<GameUi*()> provider);
     void setSaveStore(std::shared_ptr<ProjectSaveStore>);
@@ -52,6 +54,7 @@ private:
     LevelSession* levels_=nullptr;
     std::function<void(std::string)> level_;
     std::function<void(ecs::Entity)> audio_;
+    PresentationRuntime* transport_=nullptr;
     std::function<void(std::string,std::string)> ui_;
     std::function<GameUi*()> uiDocument_;
     std::shared_ptr<ProjectSaveStore> saveStore_;

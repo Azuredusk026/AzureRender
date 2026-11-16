@@ -1,5 +1,6 @@
 #include "runtime/PresentationRuntime.hpp"
 #include "runtime/LevelSession.hpp"
+#include <algorithm>
 #include <iostream>
 #include <stdexcept>
 #include <thread>
@@ -22,6 +23,33 @@ int main(int argc,char** argv){
       check(rejected,"Version one locomotion extensions and unsupported graph versions must reject");
   }
   RuntimeLifecycle runtime;LevelSession levels(Project::load(argv[1]),runtime);runtime.start();
+  AudioRuntime mixer(false);
+  const auto handle=mixer.load(levels.assets().resolveReference("assets:/portal.wav"),true,0.5F);
+  mixer.play(handle);
+  mixer.mix(512);
+  const auto cursor=mixer.position(handle);
+  check(cursor>0,"The mixer must advance a playing source");
+  mixer.setPaused(handle,true);
+  mixer.pauseAll(true);mixer.pauseAll(false);
+  mixer.setVolume(handle,0.25F);
+  const auto silent=mixer.mix(512);
+  check(mixer.position(handle)==cursor && std::all_of(silent.begin(),silent.end(),[](float v){return v==0;}),
+        "A paused source must keep its position across global pause and gain changes");
+  mixer.setPaused(handle,false);
+  const auto resumed=mixer.mix(512);
+  check(mixer.position(handle)>cursor && std::any_of(resumed.begin(),resumed.end(),[](float v){return v!=0;}),
+        "Resuming a source must continue from its paused cursor");
+  const auto source=mixer.description(handle);
+  const auto finishFrames=static_cast<std::uint32_t>((source.duration+.1)*48000);
+  mixer.mix(finishFrames);
+  check(mixer.playing(handle) && mixer.position(handle)<source.frames,"A looping source must wrap its cursor");
+  mixer.release(handle);
+  const auto oneShot=mixer.load(levels.assets().resolveReference("assets:/portal.wav"),false,0.5F);
+  mixer.play(oneShot);
+  mixer.mix(finishFrames);
+  check(!mixer.playing(oneShot) && mixer.position(oneShot)==source.frames,
+        "A completed one-shot must stop at the last PCM frame");
+  mixer.release(oneShot);
   auto entity=runtime.entity("hero");
   runtime.world().addComponent(entity,game::Animator{"assets:/motion.json","idle",true});
   runtime.world().addComponent(entity,game::AudioSource{"assets:/portal.wav",false,false,0.5F,true});
@@ -30,6 +58,10 @@ int main(int argc,char** argv){
   runtime.world().tryGet<game::Animator>(entity)->state="run";presentation.play(entity);presentation.update(0.1);
   check(presentation.animations().at(0).clip==1,"Reflected state must drive renderer clip");
   check(presentation.audioStarts()==1 && presentation.mixedEnergy()>0.01,"Gameplay sound must reach real mixer");
+  const double energy=presentation.mixedEnergy();
+  runtime.world().tryGet<game::AudioSource>(entity)->volume=0;
+  presentation.update(.05);
+  check(presentation.audioStarts()==1 && presentation.mixedEnergy()==energy,"A volume change must not replay the source");
   runtime.pause();auto time=presentation.animations().at(0).time;presentation.update(0);
   check(presentation.animations().at(0).time==time,"Paused animation must stay frozen");
   const auto sounds=presentation.soundCount();runtime.resume();runtime.world().destroyEntity(entity);presentation.update(0.1);

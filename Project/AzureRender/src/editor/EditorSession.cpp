@@ -40,7 +40,7 @@ struct EditorSession::PlayState {
         if(context.isProject())game->physics().setMeshResolver(collisionMeshAssets(levels?levels->assets():context.assets()));
         game->physics().validateScene(runtime);
         if(levels){presentation=std::make_unique<PresentationRuntime>(runtime,levels->assets());scripts=application::scripts(context.project(),runtime,*game,levels->assets());
-            scripts->setAudioHandler([this](auto entity){presentation->play(entity);});
+            scripts->setAudioTransport(*presentation);
             scripts->setLevelSession(*levels);
             game->setBeforeStep([this](double delta){scripts->fixedStep(delta);});
             game->setEventHandler([this](const auto& event){scripts->dispatch(event);});
