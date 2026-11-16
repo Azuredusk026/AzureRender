@@ -9,5 +9,14 @@
   "uniquePayloads": 1537,
   "sourceBytes": 530688916,
   "payloadBytes": 526406746,
-  "stagedPayloadHashesChecked": 1537
+  "stagedPayloadHashesChecked": 1537,
+  "playback": {
+    "repairedWavHeaders": 3,
+    "nativeDecodedPayloads": 1537,
+    "nativeDecodeFailures": 0,
+    "predecoded": 1474,
+    "streamed": 63,
+    "repairManifestSHA256": "47485e0c575ee29fc1919f045e0df22ff7aa9e226cf796705e7cda04b8e85f22",
+    "nativeReportSHA256": "fa7472b040d9bc0c6dbac84aff786b1de9a438cffe8d452a4400f745c861a08a"
+  }
 }

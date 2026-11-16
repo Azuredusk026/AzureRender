@@ -1,6 +1,6 @@
 # 原音频目录与资源槽
 
-> 状态为 P2 局部验收。已完成本机媒体与目录对账。
+> 状态为 P2 局部验收。已完成目录、媒体和原生解码对账。
 
 音频入口使用 Recovery Addressables 和五场景的静态依赖。
 目录映射包含 1,533 个音频位置及 13 个仅场景引用的来源。
@@ -22,6 +22,17 @@ Windows 临时目录占用按两秒预算重试。
 [清单摘要](audio-catalog.json)登记本机目录身份。
 原媒体位于 `assets_private/npr-room-dev/audio-catalog`。
 
+## 播放媒体
+
+三个系统音效的 Recovery WAV 文件使用零值长度字段。
+播放副本根据 PCM 长度填写 RIFF 和数据块的大小，保持采样内容与其他头字段。
+每个副本登记原媒体、播放媒体和 PCM 摘要，资源槽沿用原 GUID。
+
+Release 原生解码器逐帧读取 1,537 份播放媒体，并验证重新定位到首帧时的 PCM。
+全部音频通过，1,474 份采用预解码，63 份采用流式读取。
+媒体包含 1,389 份单声道和 148 份立体声，采样率为 44.1 kHz 或 48 kHz。
+修复映射和逐文件解码结果位于本机私有目录的 `audio-playback`。
+
 ## 复验命令
 
 在 AzureRender 根目录运行命令。
@@ -30,7 +41,8 @@ Windows 临时目录占用按两秒预算重试。
 ```powershell
 python -B tools/npr_room/audio_catalog.py --source $unitySource --inventory $referenceInventory
 python -B tools/npr_room/audio_catalog.py --source $unitySource --inventory $referenceInventory --output $newAudioCatalog
+python -B -m tools.npr_room.audio_repair --catalog $audioManifest --output $audioPlayback
 ```
 
-资源槽按宿主支持的格式接入播放。
-完整音频运行验收包括解码、循环点、事件路由和窗景联动。
+应用按原 GUID 解析音频，三个 WAV 使用播放映射中的副本。
+运行验收还包括循环点、事件路由和窗景联动。

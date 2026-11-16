@@ -75,7 +75,7 @@
 
 ## P2 场景和资产管线
 
-[原音频目录与资源槽](../acceptance/npr-room/audio-catalog.md)登记本机音频写入和来源对账。
+[原音频目录与资源槽](../acceptance/npr-room/audio-catalog.md)登记本机音频来源、播放副本和原生解码结果。
 [静态网格目录](../acceptance/npr-room/static-meshes.md)登记 Windows 场景的合批、内置网格及生产编辑器导入。
 [角色与窗景资源转换](../acceptance/npr-room/character-assets.md)登记形变网格变体与 Player 校验。
 [纹理与源字体目录](../acceptance/npr-room/image-catalog.md)登记位图、精灵和字体资源槽。
