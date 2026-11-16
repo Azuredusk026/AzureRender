@@ -7,6 +7,7 @@ body { width: 100%; height: 100%; margin: 0; color: white; font-family: LatoLati
 #timer-value { display: block; font-size: 26dp; }
 #timer-phase { display: block; font-size: 16dp; }
 #timer-settings { display: block; font-size: 14dp; }
+#timer-controls { display: block; margin-top: 4dp; font-size: 12dp; }
 </style>
 </head>
 <body>
@@ -14,6 +15,7 @@ body { width: 100%; height: 100%; margin: 0; color: white; font-family: LatoLati
 <span id="timer-value">25:00</span>
 <span id="timer-phase">idle</span>
 <span id="timer-settings">25m work · 5m break · 2 rounds</span>
+<span id="timer-controls">M mode · T start or pause · R end</span>
 </div>
 </body>
 </rml>

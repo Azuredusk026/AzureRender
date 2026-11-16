@@ -10,6 +10,7 @@
       "timer-toggle": [84],
       "timer-skip": [75],
       "timer-reset": [82],
+      "timer-mode": [77],
       "timer-work-up": [87],
       "timer-work-down": [88],
       "timer-break-up": [66],

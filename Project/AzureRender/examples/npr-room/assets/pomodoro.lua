@@ -3,6 +3,11 @@ local defaults = {25, 5, 2}
 local limits = {999, 999, 99}
 local controls = {"work", "break", "rounds"}
 local settings = defaults
+local maxCountupSeconds = 359999
+local countupMode = false
+local countupElapsed = 0
+local countupSinceSave = 0
+local lastCountup = 0
 
 local phase = "idle"
 local round = 0
@@ -23,6 +28,10 @@ local function updateDisplay()
     local label = paused and "paused" or phase
     local seconds = math.max(0, math.ceil(remaining - 1e-7))
     local time = string.format("%02d:%02d", seconds // 60, seconds % 60)
+    if countupMode then
+        seconds = math.floor(countupElapsed + 1e-7)
+        time = string.format("%02d:%02d:%02d", seconds // 3600, seconds // 60 % 60, seconds % 60)
+    end
     if label ~= previousPhase then
         self:ui_text("timer-phase", label)
         previousPhase = label
@@ -32,6 +41,7 @@ local function updateDisplay()
         previousTime = time
     end
     local text = string.format("%dm work · %dm break · %d rounds", settings[1], settings[2], settings[3])
+    if countupMode then text = "Count-up" end
     if text ~= previousSettings then
         self:ui_text("timer-settings", text)
         previousSettings = text
@@ -43,6 +53,8 @@ local function idle()
     round = 0
     remaining = settings[1] * 60
     paused = false
+    countupElapsed = 0
+    countupSinceSave = 0
 end
 
 local function finish()
@@ -81,6 +93,63 @@ local function loadSettings()
     return values
 end
 
+local function completedSeconds(value)
+    if type(value) == "number" and value >= 0 and value <= maxCountupSeconds and value % 1 == 0 then
+        return value
+    end
+    return 0
+end
+
+local function loadCountup()
+    local mode = self:read_save("timer-mode")
+    countupMode = type(mode) == "table" and #mode == 2 and mode[1] == 1 and mode[2] == 1
+    lastCountup = 0
+    local session = self:read_save("countup-session")
+    if type(session) == "table" and #session == 3 and session[1] == 1 then
+        local interrupted = completedSeconds(session[2])
+        lastCountup = completedSeconds(session[3])
+        if interrupted > 0 then
+            lastCountup = interrupted
+            self:write_save("countup-session", {1, 0, lastCountup})
+        end
+    end
+end
+
+local function checkpointCountup(active)
+    local seconds = math.min(maxCountupSeconds, math.floor(countupElapsed + 1e-7))
+    if not active then lastCountup = seconds end
+    self:write_save("countup-session", {1, active and seconds or 0, lastCountup})
+end
+
+local function finishCountup()
+    checkpointCountup(false)
+    finish()
+end
+
+local function updateCountup(dt)
+    if self:pressed("timer-reset") and phase ~= "idle" then
+        finishCountup()
+    elseif self:pressed("timer-toggle") then
+        if phase == "idle" then
+            phase = "work"
+            playCue("timer-start")
+        else
+            paused = not paused
+            countupSinceSave = 0
+            playCue(paused and "timer-finish" or "timer-start")
+        end
+    elseif phase == "work" and not paused then
+        countupElapsed = countupElapsed + dt
+        countupSinceSave = countupSinceSave + dt
+        if math.floor(countupElapsed + 1e-7) > maxCountupSeconds then
+            finishCountup()
+        elseif countupSinceSave >= 60 then
+            checkpointCountup(true)
+            countupSinceSave = 0
+        end
+    end
+end
+
 local function adjustSettings()
     for index, name in ipairs(controls) do
         local prefix = "timer-" .. name
@@ -102,12 +171,19 @@ end
 
 function init()
     settings = loadSettings()
+    loadCountup()
     idle()
     updateDisplay()
 end
 
 function update(dt)
-    if self:pressed("timer-reset") and phase ~= "idle" then
+    if phase == "idle" and self:pressed("timer-mode") then
+        countupMode = not countupMode
+        self:write_save("timer-mode", {1, countupMode and 1 or 0})
+        playCue("settings-click")
+    elseif countupMode then
+        updateCountup(dt)
+    elseif self:pressed("timer-reset") and phase ~= "idle" then
         finish()
     elseif self:pressed("timer-toggle") then
         if phase == "idle" then
@@ -131,4 +207,10 @@ function update(dt)
         adjustSettings()
     end
     updateDisplay()
+end
+
+function shutdown()
+    if countupMode and phase == "work" and countupElapsed >= 1 then
+        checkpointCountup(true)
+    end
 end

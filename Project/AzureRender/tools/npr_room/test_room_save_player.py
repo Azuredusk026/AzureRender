@@ -10,14 +10,15 @@ import subprocess
 SAVED = [1, 26, 6, 3]
 
 
-def run_player(player, project, save_root, output, keys, resource_root):
+def run_player(player, project, save_root, output, keys, resource_root, *, keyframes=None, frames=360):
     output.mkdir()
     input_path = output / "input.json"
     events = [{
         "frame": 1, "action": "wait-level", "reference": "assets:/room.azurelevel", "timeoutFrames": 300,
     }]
-    for position, key in enumerate(keys):
-        frame = 5 + 8 * position
+    if keyframes is None:
+        keyframes = [(5 + 8 * position, key) for position, key in enumerate(keys)]
+    for frame, key in keyframes:
         events.extend([
             {"frame": frame, "action": "key", "key": key, "down": True},
             {"frame": frame + 2, "action": "key", "key": key, "down": False},
@@ -26,7 +27,7 @@ def run_player(player, project, save_root, output, keys, resource_root):
     runtime = output / "runtime.json"
     command = [
         str(player), "--project", str(project), "--save-root", str(save_root), "--game-actions", str(input_path),
-        "--fixed-frame-step", "--smoke-frames", "360", "--width", "640", "--height", "360",
+        "--fixed-frame-step", "--smoke-frames", str(frames), "--width", "640", "--height", "360",
         "--runtime-report", str(runtime),
     ]
     if resource_root:

@@ -3,6 +3,7 @@ local ui = {}
 local sounds = {}
 local saved
 local saves = 0
+local otherSaves = {}
 
 self = {}
 function self:pressed(name)
@@ -18,14 +19,17 @@ function self:find(id)
 end
 
 function self:read_save(slot)
-    assert(slot == "pomodoro-settings")
-    return saved
+    if slot == "pomodoro-settings" then return saved end
+    return otherSaves[slot]
 end
 
 function self:write_save(slot, value)
-    assert(slot == "pomodoro-settings")
-    saved = value
-    saves = saves + 1
+    if slot == "pomodoro-settings" then
+        saved = value
+        saves = saves + 1
+    else
+        otherSaves[slot] = value
+    end
 end
 
 local function step(seconds, input)
@@ -95,3 +99,46 @@ assert(saves == 3)
 saved = {2, 26, 0, 3}
 init()
 expect("idle", "25:00")
+
+step(0, "timer-mode")
+expect("idle", "00:00:00")
+assert(otherSaves["timer-mode"][2] == 1)
+step(0, "timer-toggle")
+step(2)
+expect("work", "00:00:02")
+step(0, "timer-toggle")
+assert(sounds[#sounds] == "timer-finish")
+step(1, "timer-mode")
+expect("paused", "00:00:02")
+step(12)
+expect("paused", "00:00:02")
+step(0, "timer-toggle")
+assert(sounds[#sounds] == "timer-start")
+step(58)
+expect("work", "00:01:00")
+assert(otherSaves["countup-session"] == nil)
+step(60)
+assert(otherSaves["countup-session"][2] == 120)
+step(0, "timer-reset")
+expect("idle", "00:00:00")
+assert(otherSaves["countup-session"][2] == 0 and otherSaves["countup-session"][3] == 120)
+
+step(0, "timer-toggle")
+step(7)
+shutdown()
+assert(otherSaves["countup-session"][2] == 7)
+init()
+expect("idle", "00:00:00")
+assert(otherSaves["countup-session"][2] == 0 and otherSaves["countup-session"][3] == 7)
+init()
+assert(otherSaves["countup-session"][3] == 7)
+
+step(0, "timer-toggle")
+step(359999)
+expect("work", "99:59:59")
+step(1)
+expect("idle", "00:00:00")
+assert(otherSaves["countup-session"][3] == 359999)
+step(0, "timer-mode")
+expect("idle", "25:00")
+assert(otherSaves["timer-mode"][2] == 0)
