@@ -14,6 +14,33 @@ HEROINE_PARTS = ("face", "body", "hair", "top", "bottom", "socks", "jacket")
 NOTE_ACTIONS = ("toggle", "prev", "next", "new", "save", "up", "down", "delete")
 TODO_ACTIONS = ("toggle", "save", *(f"list-{name}" for name in ("prev", "next", "new", "delete")),
                 *(f"task-{name}" for name in ("prev", "next", "new", "up", "down", "complete", "delete")))
+ROOM_MEDIA = {".glb", ".png", ".otf", ".ttf", ".wav", ".ogg"}
+
+
+def copy_room_asset(source, destination):
+    if Path(source).suffix.lower() in ROOM_MEDIA:
+        return os.link(source, destination)
+    return shutil.copyfile(source, destination)
+
+
+def stage_live_audio_media(source, rows, assets):
+    root = source.resolve(strict=True)
+    media = []
+    for row in rows:
+        raw = (root / row["source"]).resolve(strict=True)
+        if not raw.is_relative_to(root / "Assets"):
+            raise ValueError(f"Audio source escapes the project: {row['uuid']}")
+        with raw.open("rb") as stream:
+            sha = file_digest(stream, "sha256").hexdigest()
+        if sha != row["sha256"]:
+            raise ValueError(f"Audio source identity differs: {row['uuid']}")
+        media.append((raw, assets / row["asset"], row["uuid"]))
+    for raw, destination, uuid in media:
+        destination.parent.mkdir(exist_ok=True)
+        os.link(raw, destination)
+        destination.with_name(destination.name + ".azmeta").write_text(json.dumps({
+            "schemaVersion": 1, "id": uuid, "settings": {"retainSourceSnapshot": False},
+        }), encoding="utf-8")
 
 
 def activate_room_control(project, level, name, actions):

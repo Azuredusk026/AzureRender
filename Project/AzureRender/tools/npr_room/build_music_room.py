@@ -3,7 +3,6 @@
 import argparse
 from html import escape
 import json
-import os
 from pathlib import Path
 import re
 import shutil
@@ -13,7 +12,7 @@ from uuid import UUID
 from tools.npr_room.catalog_storage import publish_directory
 from tools.npr_room.pbr_materials import write
 from tools.npr_room.reference_inventory import digest
-from tools.npr_room.room_geometry import activate_room_control
+from tools.npr_room.room_geometry import activate_room_control, copy_room_asset, stage_live_audio_media
 from tools.npr_room.skinned_mesh_export import UnityScene
 
 
@@ -21,7 +20,6 @@ MUSIC_MASTER = "Assets/App/BulbulAssets/MasterData/ScriptableObjects/MusicMaster
 MUSIC_ACTIONS = ("toggle", "play", "previous", "next", "repeat", "shuffle", "quiet", "loud", "mute", "list",
                  "page-prev", "page-next")
 SIZE_TAG = re.compile(r"</?size(?:=[\d.]+%?)?>", re.IGNORECASE)
-MEDIA_SUFFIXES = {".glb", ".png", ".otf", ".ttf", ".wav", ".ogg"}
 
 
 def music_catalog(source, audio_catalog, audio_probe):
@@ -57,21 +55,6 @@ def music_catalog(source, audio_catalog, audio_probe):
     return {"schemaVersion": 1, "sourceSHA256": digest(master), "tracks": tracks}
 
 
-def stage_tracks(source, playlist, assets):
-    root = source.resolve(strict=True)
-    (assets / "music").mkdir(exist_ok=True)
-    media = []
-    for track in playlist["tracks"]:
-        raw = (root / track["source"]).resolve(strict=True)
-        if not raw.is_relative_to(root / "Assets") or digest(raw) != track["sha256"]:
-            raise ValueError(f"Music source identity differs: {track['uuid']}")
-        media.append((raw, assets / track["asset"], track["uuid"]))
-    for raw, destination, uuid in media:
-        os.link(raw, destination)
-        write(destination.with_suffix(".ogg.azmeta"), {"schemaVersion": 1, "id": uuid,
-              "settings": {"retainSourceSnapshot": False}})
-
-
 def music_config(playlist):
     rows = []
     for row in playlist["tracks"]:
@@ -89,15 +72,10 @@ def stage_music(room, output, source, audio_catalog, audio_probe):
     selections = [f"select-{index}" for index in range(1, len(available) + 1)]
     descriptor = json.loads((room / "project.azureproject").read_bytes())
 
-    def copy_asset(path, destination):
-        if Path(path).suffix.lower() in MEDIA_SUFFIXES:
-            return os.link(path, destination)
-        return shutil.copyfile(path, destination)
-
     with tempfile.TemporaryDirectory(prefix="room-music-", dir=output.parent) as parent:
         project = Path(parent) / "project"
         assets = project / "assets"
-        shutil.copytree(room / "assets", assets, copy_function=copy_asset, ignore=shutil.ignore_patterns(".azure"))
+        shutil.copytree(room / "assets", assets, copy_function=copy_room_asset, ignore=shutil.ignore_patterns(".azure"))
         level_path, ui_path = assets / "room.azurelevel", assets / "timer.rml"
         level = json.loads(level_path.read_bytes())
         ui = ui_path.read_text(encoding="utf-8")
@@ -112,7 +90,7 @@ def stage_music(room, output, source, audio_catalog, audio_probe):
         controls = (example / "music.rml").read_text(encoding="utf-8").replace("{{tracks}}", listing)
         style, body = controls.split("</style>\n", 1)
         ui = ui.replace("</style>", style + "</style>", 1).replace("</body>", body + "</body>", 1)
-        stage_tracks(source, playlist, assets)
+        stage_live_audio_media(source, playlist["tracks"], assets)
         write(project / "project.azureproject", descriptor)
         write(project / "music-receipt.json", playlist)
         write(level_path, level)

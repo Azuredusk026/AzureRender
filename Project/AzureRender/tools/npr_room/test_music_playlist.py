@@ -52,7 +52,7 @@ class MusicPlaylistTests(unittest.TestCase):
             self.assertEqual(rows[2]["tag"], 4)
             output = root / "assets"
             output.mkdir()
-            music.stage_tracks(source, playlist, output)
+            music.stage_live_audio_media(source, rows, output)
             self.assertTrue(os.path.samefile(source / rows[2]["source"], output / rows[2]["asset"]))
             metadata = json.loads((output / rows[2]["asset"]).with_suffix(".ogg.azmeta").read_bytes())
             self.assertEqual(metadata["id"], rows[2]["uuid"])
@@ -61,7 +61,7 @@ class MusicPlaylistTests(unittest.TestCase):
             self.assertIn("96000 / 48000", music.music_config(playlist))
             (source / rows[2]["source"]).write_bytes(b"Changed")
             with self.assertRaisesRegex(ValueError, "identity"):
-                music.stage_tracks(source, playlist, output)
+                music.stage_live_audio_media(source, rows, output)
 
 
 if __name__ == "__main__":

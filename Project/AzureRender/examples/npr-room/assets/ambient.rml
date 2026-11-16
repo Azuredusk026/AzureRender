@@ -1,0 +1,24 @@
+#ambient-toggle { position: absolute; right: 16dp; bottom: 16dp; padding: 6dp 10dp; color: white; background-color: #34434f; }
+#ambient-panel { position: absolute; right: 16dp; bottom: 52dp; width: 242dp; padding: 12dp; background-color: #19232c; }
+#ambient-panel button { display: inline-block; padding: 4dp 6dp; margin: 0 4dp 5dp 0; color: white; background-color: #34434f; }
+#ambient-panel button:hover { background-color: #506472; }
+#ambient-title { display: block; font-size: 18dp; margin-bottom: 4dp; }
+#ambient-volume, #ambient-page { margin: 0 4dp; }
+#ambient-rows button { display: block; width: 214dp; text-align: left; }
+#ambient-status { display: block; color: #f0c58e; }
+</style>
+<button id="ambient-toggle" data-action="ambient-toggle">Ambient sounds</button>
+<div id="ambient-panel" style="display: none;">
+<span id="ambient-title"></span>
+<button id="ambient-quiet" data-action="ambient-quiet">−</button>
+<span id="ambient-volume"></span>
+<button id="ambient-loud" data-action="ambient-loud">+</button>
+<button id="ambient-mute" data-action="ambient-mute">Enable</button>
+<div id="ambient-rows">
+{{sounds}}
+</div>
+<button id="ambient-page-prev" data-action="ambient-page-prev">Previous page</button>
+<span id="ambient-page"></span>
+<button id="ambient-page-next" data-action="ambient-page-next">Next page</button>
+<span id="ambient-status"></span>
+</div>
