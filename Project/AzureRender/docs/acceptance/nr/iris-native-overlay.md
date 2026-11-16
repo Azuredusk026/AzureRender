@@ -241,3 +241,11 @@ Intel 在 [1253,259]、[1254,259]、[1251,262]、[1256,265] 处的蓝通道落�
 NVIDIA 在 [1308,266] 的基色与反射贴图读数区间都包含原生读数。Intel 在 [1253,259]、[1254,259] 和 [1256,265] 的基色区间与 Intel 原生相交，与 NVIDIA 原生区间分离。NVIDIA 的剩余误差继续按主光合成阶段核对，双设备仍以原冻结图像验收。
 
 [双设备纹理读回](evidence/2026-11-16/iris-base-matcap-blue-readback/qualification.json)和[验证归档](evidence/2026-11-16/iris-base-matcap-blue-readback/validation.zip)保存取样区间、原生回放和实际帧差。
+
+### 虹膜主光蓝通道
+
+双设备各有 223 个位置可核对主光饱和度处理前后的蓝通道。NVIDIA Vulkan 区间分别有 192 和 191 处包含同设备原生值，Intel 分别有 183 和 186 处。
+
+NVIDIA 在 [1308,266] 的主光蓝通道位于 0.338217 至 0.338462。原生读值为 0.338745，差值在主光饱和度处理前已经出现。该处原生与 Player 的主光饱和度处理均未改变蓝通道，继续分别核对漫反射和反射贴图的贡献。Intel 在 [1261,262] 的同设备原生蓝通道高于 Player 区间，该位置仍按冻结图像的红通道误差验收。
+
+[主光蓝通道结果](evidence/2026-11-16/iris-main-light-blue-readback/qualification.json)和[验证归档](evidence/2026-11-16/iris-main-light-blue-readback/validation.zip)保存原生指令改写、双设备逐点区间和画面差量。
