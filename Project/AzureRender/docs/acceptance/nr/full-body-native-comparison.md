@@ -58,6 +58,8 @@ Intel 使用顶点着色器蒙皮时，两次完整成片仍有 407 个像素超
 
 Intel 两次配对采集均在 456 个快照颜色波动位置读到材质槽 307，画面上方同时有 427 处色值变化。按加载顺序和实际请求的 6,851 个纹理槽复算，材质归属建筑网格 `native-7c16ba31954da6e8.glb` 的 `M_mod_map01_zmdbuliding+1_002_12`。继续核对该材质的纹理、直接光与间接光输入。[快照材质归属](evidence/2026-11-16/joint-intel-wall-material-owner/qualification.json)和[验证归档](evidence/2026-11-16/joint-intel-wall-material-owner/validation.zip)保存两次采集、解码和材质索引复算。
 
+去除读数范围内的空间抗锯齿后，两帧均能解码全部 456 个材质取样位置。两帧在画面上方有 427 处变化，地面及读数区逐像素一致。材质纹理、直接光和间接光的三位签名逐点一致。地面波动时的各项输入仍按同帧取样继续核对。[材质输入签名](evidence/2026-11-16/joint-intel-wall-input-signatures/qualification.json)和[验证归档](evidence/2026-11-16/joint-intel-wall-input-signatures/validation.zip)保存验证记录。
+
 只将不透明快照绘制放在主命令缓冲区。Intel 三次采集仍出现两种成片，两次上方区域各有 407 个像素超差，另一次与串行图逐像素一致。NVIDIA 的成片与对应控制图逐像素一致。该候选未通过 Intel 稳定性验收。[不透明快照录制结果](evidence/2026-11-16/joint-intel-primary-opaque-snapshot/qualification.json)和[验证归档](evidence/2026-11-16/joint-intel-primary-opaque-snapshot/validation.zip)保存源码、实际帧差和运行状态。
 
 首帧反射探针在空间滤波前核对实际取样。滤波变化区域对应的 469 个半分辨率位置中，387 个能解码且均有命中，其中 111 个取样覆盖已观察到变化的不透明颜色纹素。追踪和滤波程序分别写入校验标记，在图中可解码的位置全部读回预期值。该结果确认部分地面反射直接读取发生变化的快照颜色。[射线取样结果](evidence/2026-11-16/joint-intel-raw-reflection-donor-membership/qualification.json)和[验证归档](evidence/2026-11-16/joint-intel-raw-reflection-donor-membership/validation.zip)保存程序、实际帧差和解码标记。
