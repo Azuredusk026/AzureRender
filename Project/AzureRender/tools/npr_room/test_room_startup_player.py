@@ -7,7 +7,7 @@ from pathlib import Path
 import subprocess
 
 
-def replay(player, project, output, resource_root, expect_heroine=False):
+def replay(player, project, output, resource_root, expect_heroine=False, expect_music=False):
     output.mkdir()
     events = []
 
@@ -48,7 +48,14 @@ def replay(player, project, output, resource_root, expect_heroine=False):
     assert "Allocator after unload: buffers=0 images=0" in result.stdout
     report = json.loads(runtime.read_bytes())
     assert report["scene"] == "room" and report["levelRevision"] == 7, report
-    assert report["replayedActions"] == len(events) and report["audioStarts"] == 5, report
+    assert report["replayedActions"] == len(events) and report["audioStarts"] == (7 if expect_music else 5), report
+    if expect_music:
+        tracks = json.loads(project.with_name("music-receipt.json").read_bytes())["tracks"]
+        first_track = next(track for track in tracks if not track["locked"])
+        music = [line for line in result.stderr.splitlines() if "Streaming source:" in line]
+        assert len(music) == 2 and all(line.endswith(Path(first_track["asset"]).name) for line in music), music
+        cache = project.parent / ".azure/cache"
+        assert all(not list((cache / track["uuid"]).glob("*.azcache")) for track in tracks)
     assert report["uiDrawCalls"] and report["animationFrames"], report
     assert not report["presentationErrors"] and not report["scriptErrors"], report
     frames = report["routeFrames"]
@@ -82,6 +89,8 @@ if __name__ == "__main__":
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--resource-root", type=Path)
     parser.add_argument("--expect-heroine", action="store_true")
+    parser.add_argument("--expect-music", action="store_true")
     args = parser.parse_args()
     print(json.dumps(replay(args.player.resolve(), args.project.resolve(), args.output.resolve(),
-                            args.resource_root.resolve() if args.resource_root else None, args.expect_heroine)))
+                            args.resource_root.resolve() if args.resource_root else None, args.expect_heroine,
+                            args.expect_music)))

@@ -1,0 +1,41 @@
+#music-toggle { position: absolute; left: 16dp; bottom: 16dp; padding: 6dp 10dp; color: white; background-color: #34434f; }
+#music-panel { position: absolute; left: 16dp; bottom: 52dp; width: 318dp; padding: 12dp; color: white; background-color: #19232c; }
+#music-panel button { display: inline-block; padding: 4dp 6dp; margin: 0 4dp 5dp 0; color: white; background-color: #34434f; }
+#music-panel button:hover { background-color: #506472; }
+#music-title { display: block; font-size: 18dp; }
+#music-credit { display: block; margin-bottom: 7dp; font-size: 13dp; }
+#music-volume { margin: 0 4dp; }
+#music-rows button { display: block; width: 292dp; text-align: left; }
+#music-page { margin: 0 4dp; }
+#music-status { display: block; color: #f0c58e; }
+</style>
+<button id="music-toggle" data-action="music-toggle">Music</button>
+<div id="music-panel" style="display: none;">
+<span id="music-title"></span>
+<span id="music-credit"></span>
+<div>
+<button id="music-previous" data-action="music-previous">Previous</button>
+<button id="music-play" data-action="music-play">Pause</button>
+<button id="music-next" data-action="music-next">Next</button>
+<button id="music-list" data-action="music-list">Library</button>
+</div>
+<div>
+<button id="music-repeat" data-action="music-repeat">Repeat off</button>
+<button id="music-shuffle" data-action="music-shuffle">Shuffle off</button>
+</div>
+<div>
+<button id="music-quiet" data-action="music-quiet">−</button>
+<span id="music-volume">50%</span>
+<button id="music-loud" data-action="music-loud">+</button>
+<button id="music-mute" data-action="music-mute">Mute</button>
+</div>
+<div id="music-list-box" style="display: none;">
+<div id="music-rows">
+{{tracks}}
+</div>
+<button id="music-page-prev" data-action="music-page-prev">Previous page</button>
+<span id="music-page"></span>
+<button id="music-page-next" data-action="music-page-next">Next page</button>
+</div>
+<span id="music-status"></span>
+</div>
