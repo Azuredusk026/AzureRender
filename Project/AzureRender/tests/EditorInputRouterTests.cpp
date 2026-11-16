@@ -32,5 +32,16 @@ int main(){
     if(EditorInputRouter::route(event).operation!="preview.stop")return 16;
     event.navigating=false;event.playing=false;event.key="D";
     if(EditorInputRouter::route(event).operation!="node.duplicate")return 17;
+    event.ctrl=false;
+    event.key="0";
+    if(EditorInputRouter::route(event).operation!="viewport.diagnostic-cycle"){
+        std::cerr<<"0 must cycle the viewport diagnostic mode without editing the scene\n";
+        return 19;
+    }
+    event.text=true;
+    if(EditorInputRouter::route(event).consumed)return 20;
+    event.text=false;
+    event.viewport=false;
+    if(EditorInputRouter::route(event).consumed)return 21;
     return 0;
 }

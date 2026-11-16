@@ -60,10 +60,16 @@ private:
             append(resource.id);
             append(resource.path.generic_u8string());
         }
-        append(std::to_string(document.nodes.size()));
+        const auto usesRenderResources = [](const SceneNode& node) {
+            return !node.resourceId.empty() || !node.resolvedMaterials.empty()
+                || (node.objectShadow && node.objectShadow->enabled);
+        };
+        append(std::to_string(std::count_if(document.nodes.begin(), document.nodes.end(), usesRenderResources)));
         for (const auto& node : document.nodes) {
+            if (!usesRenderResources(node)) continue;
             append(node.id);
             append(node.resourceId);
+            append(node.objectShadow && node.objectShadow->enabled ? "1" : "0");
             append(std::to_string(node.resolvedMaterials.size()));
             for (const auto& [slot, binding] : node.resolvedMaterials) {
                 append(slot);

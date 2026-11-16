@@ -6,6 +6,7 @@
 #include "ui/AppChrome.hpp"
 #include "ui/BrandMark.hpp"
 #include <algorithm>
+#include <cstdio>
 #include <map>
 #ifdef AZURERENDER_HAS_IMGUI
 #include <imgui.h>
@@ -98,7 +99,7 @@ void EditorChrome::draw(EditorSession& s,EditorWorkspace& workspace,float dpi,co
     static_cast<void>(context);
     ImGui::End();
 }
-void EditorChrome::status(EditorSession& s,float dpi) {
+void EditorChrome::status(EditorSession& s,float dpi,const Observer& observe,const Observer& openTask) {
     const auto* vp=ImGui::GetMainViewport();
     ImGui::SetNextWindowPos({vp->Pos.x,vp->Pos.y+vp->Size.y-24*dpi});ImGui::SetNextWindowSize({vp->Size.x,24*dpi});
     ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding,{8*dpi,2*dpi});
@@ -106,8 +107,21 @@ void EditorChrome::status(EditorSession& s,float dpi) {
     const auto& c=s.context();
     ImGui::Text("%s | %s%s",c.isProject()?c.project().name.c_str():"Scene",c.scene().sceneId.c_str(),c.dirty()?ui::tr(" * 未保存"):"");
     if(s.building()){ImGui::SameLine();ImGui::TextUnformatted(ui::tr("正在发布项目…"));}
-    else if(c.importing()){ImGui::SameLine();ImGui::Text(ui::tr("Import %.0f%%"),c.importProgress()*100);}
-    for(const auto& task:s.tasks().report())if(task.at("state")=="running"){ImGui::SameLine();ImGui::Text("%s %.0f%%",task.at("source").get<std::string>().c_str(),task.at("progress").get<float>()*100);break;}
+    const auto tasks=s.tasks().report();
+    if(!tasks.empty()){
+        const auto active=std::find_if(tasks.begin(),tasks.end(),[](const auto& task){return task.at("state")=="running";});
+        const auto& task=active==tasks.end()?tasks.back():*active;
+        const auto state=task.at("state").get<std::string>();
+        const auto id=task.at("id").get<std::string>();
+        char progress[80];
+        std::snprintf(progress,sizeof(progress),ui::tr("后台任务 %.0f%%"),task.at("progress").get<float>()*100);
+        const auto* label=state=="completed"?ui::tr("任务完成"):state=="failed"?ui::tr("任务失败"):
+            state=="cancelled"?ui::tr("任务已取消"):task.at("cancelling")==true?ui::tr("正在取消任务"):progress;
+        ImGui::SameLine();
+        if(ImGui::SmallButton(label))openTask(id);
+        observe("status.task."+id);
+        if(ImGui::IsItemHovered())ImGui::SetTooltip("%s",task.at("source").get<std::string>().c_str());
+    }
     if(!s.lastError().empty()){ImGui::SameLine();ui::resultMessage(s.lastError(),true);}
     const char* help=ui::tr("操作提示");
     const float helpWidth=ImGui::CalcTextSize(help).x;
@@ -125,6 +139,6 @@ void EditorChrome::status(EditorSession& s,float dpi) {
 #else
 namespace azurerender {
 void EditorChrome::draw(EditorSession&,EditorWorkspace&,float,const Observer&){}
-void EditorChrome::status(EditorSession&,float){}
+void EditorChrome::status(EditorSession&,float,const Observer&,const Observer&){}
 }
 #endif

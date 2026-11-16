@@ -64,8 +64,15 @@ void InspectorPanel::draw(PanelContext& panelContext) {
         if(view.isProject())for(const auto& link:objectReferences(services_.session.context(),*node)){
             ImGui::PushID(link.at("label").get<std::string>().c_str());
             ImGui::TextUnformatted(ui::tr(link.at("label").get<std::string>().c_str()));
-            ui::statusText(link.at("id").get<std::string>().c_str(),link.at("valid").get<bool>()?ui::StatusKind::Neutral:ui::StatusKind::Warning);
-            if(ui::button(ui::tr("定位资源"),{ui::ButtonVariant::Default,false,!link.at("valid").get<bool>()}))services_.session.edit("reference.reveal",{{"kind","asset"},{"id",link.at("id")}});
+            const auto& identity=link.at("id").get_ref<const std::string&>();
+            const auto& path=link.at("path").get_ref<const std::string&>();
+            const auto name=path.empty()?identity:std::filesystem::u8path(path).filename().u8string();
+            ui::statusText(name.c_str(),link.at("valid").get<bool>()?ui::StatusKind::Neutral:ui::StatusKind::Warning);
+            if(ImGui::IsItemHovered())ImGui::SetTooltip("%s",path.empty()?identity.c_str():path.c_str());
+            if(ui::button(ui::tr("定位资源"),{ui::ButtonVariant::Default,false,!link.at("valid").get<bool>()}))services_.session.edit("reference.reveal",{{"kind","asset"},{"id",identity}});
+            services_.observe("reference.object-asset."+identity);
+            ui::nextToolbarItem(ui::buttonWidth(ui::tr("复制标识")));
+            if(ui::button(ui::tr("复制标识")))ImGui::SetClipboardText(identity.c_str());
             if(!link.at("message").get<std::string>().empty())ui::resultMessage(link.at("message").get<std::string>(),true);
             ImGui::PopID();
         }
@@ -104,7 +111,20 @@ void InspectorPanel::draw(PanelContext& panelContext) {
                 }else {
                     ImGui::TextUnformatted(ui::tr(field.label.c_str()));ImGui::SetNextItemWidth(-1);
                     const auto reference=event.value.get<std::string>();
-                    if(ImGui::BeginCombo("##value",state.at("mixed").get<bool>()?ui::tr("Mixed"):reference.empty()?ui::tr("Choose reference"):reference.c_str())) {
+                    std::string caption;
+                    if(field.reference=="node"){
+                        const auto& nodes=view.scene().nodes;
+                        const auto item=std::find_if(nodes.begin(),nodes.end(),[&](const auto& node){return node.id==reference;});
+                        if(item!=nodes.end())caption=item->name;
+                    }else if(view.isProject()){
+                        const auto& records=view.assets().records();
+                        const auto item=records.find(reference);
+                        if(item!=records.end())caption=item->second.virtualPath;
+                        else if(reference.find(":/")!=std::string::npos)caption=reference;
+                    }
+                    if(caption.empty())caption=ui::tr(reference.empty()?"Choose reference":"缺失引用");
+                    const bool mixed=state.at("mixed").get<bool>();
+                    if(ImGui::BeginCombo("##value",mixed?ui::tr("Mixed"):caption.c_str())) {
                         ui::searchField("##Reference search",ui::tr("搜索兼容引用"),this->presentation.referenceFilter_);
                         if(field.reference=="node")for(const auto& node:view.scene().nodes) {
                             if((this->presentation.referenceFilter_.PassFilter(node.name.c_str())||this->presentation.referenceFilter_.PassFilter(node.id.c_str()))&&ImGui::Selectable((node.name+"##"+node.id).c_str(),reference==node.id)){event.value=node.id;event.changed=true;}
@@ -114,16 +134,22 @@ void InspectorPanel::draw(PanelContext& panelContext) {
                         }ImGui::EndCombo();
                     }
                     services_.observe("field."+type+"."+field.name);
+                    if(!mixed&&!reference.empty()&&ImGui::IsItemHovered())ImGui::SetTooltip("%s",reference.c_str());
                     if(ImGui::BeginDragDropTarget()) {
                         const auto* payload=ImGui::AcceptDragDropPayload(field.reference=="node"?"AZURE_NODE":"AZURE_RESOURCE");
                         if(payload){event.value=std::string(static_cast<const char*>(payload->Data));event.changed=true;event.ended=true;}ImGui::EndDragDropTarget();
                     }
                     if(ui::button(ui::tr("选取"))){services_.session.edit("reference.begin",{{"nodes",owners},{"type",type},{"field",field.name}});}
                     services_.observe("reference.pick."+type+"."+field.name);ui::nextToolbarItem(ui::buttonWidth(ui::tr("定位")));
-                    if(ui::button(ui::tr("定位"),{ui::ButtonVariant::Default,false,reference.empty()}))services_.session.edit("reference.reveal",{{"kind",field.reference},{"id",reference}});
+                    if(ui::button(ui::tr("定位"),{ui::ButtonVariant::Default,false,mixed||reference.empty()}))services_.session.edit("reference.reveal",{{"kind",field.reference},{"id",reference}});
                     services_.observe("reference.reveal."+type+"."+field.name);ui::nextToolbarItem(ui::buttonWidth(ui::tr("清空")));
                     if(ui::button(ui::tr("清空"),{ui::ButtonVariant::Default,false,field.referenceDefault=="selected-node"})){event.value="";event.changed=true;event.ended=true;}
                     services_.observe("reference.clear."+type+"."+field.name);
+                    if(!mixed&&!reference.empty()){
+                        ui::nextToolbarItem(ui::buttonWidth(ui::tr("复制标识")));
+                        if(ui::button(ui::tr("复制标识")))ImGui::SetClipboardText(reference.c_str());
+                        services_.observe("reference.copy."+type+"."+field.name);
+                    }
                 }
                 services_.observe("field."+type+"."+field.name);ImGui::EndDisabled();
                 if(!state.at("editable").get<bool>())ImGui::TextDisabled("%s",field.readOnly?ui::tr("只读属性"):ui::tr("此属性仅支持单个对象"));

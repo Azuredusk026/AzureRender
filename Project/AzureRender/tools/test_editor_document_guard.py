@@ -80,13 +80,19 @@ def run(executable, output, workflow, decision):
             call('wait-frames', frames=5)
             click('document.save')
             call('wait-frames', frames=5)
-            assert workspace()['documentGuard'] == 3 and process.poll() is None
+            failed = workspace()
+            assert failed['documentGuard'] == 3 and process.poll() is None
+            for action in ('save', 'discard', 'cancel'):
+                x, y, width, height = failed['widgets']['document.' + action]
+                assert 0 <= x < x + width <= 1280 and 0 <= y < y + height <= 720, (action, x, y, width, height)
             assert call('query', name='document.contentHash') == authored
             assert call('query', name='selection.id') == selection
             assert call('query', name='editor.dirty') is True
             click('document.cancel')
             call('wait-frames', frames=5)
-            previous = workspace()['contentNavigation']['statistics']['directoryEnumerations']
+            recovered = workspace()
+            assert recovered['documentGuard'] == 0, 'Cancel must leave the failed close dialog'
+            previous = recovered['contentNavigation']['statistics']['directoryEnumerations']
             level.rmdir()
             backup.rename(level)
             wait_content_scan(workspace, lambda: call('wait-frames', frames=6), previous)

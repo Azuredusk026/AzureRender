@@ -5,6 +5,8 @@
 #include "platform/GlfwFrontend.hpp"
 #if AZURE_WITH_EDITOR
 #include "editor/EditorSession.hpp"
+#include "app/EditorSceneReload.hpp"
+#include "diagnostics/RuntimeDiagnostics.hpp"
 #include "editor/EditorAutomation.hpp"
 #include "editor/ImGuiEditorLayer.hpp"
 #endif
@@ -93,15 +95,121 @@ void AzureRenderApp::releasePreparedRenderer(){
     }
     preparedResourceKey_.clear();preparedRendererReady_=false;preparedRendererLastSubmission_=0;
 }
+#if AZURE_WITH_EDITOR
+void AzureRenderApp::requestEditorSceneReload(bool retainCompatiblePreviews) {
+    // Refresh the views against the changed assets now. Publishing the pending
+    // renderer leaves views created during preparation available.
+    editorReloadQueued_=true;
+    preservingEditorScene_=true;
+    invalidatePreviews(retainCompatiblePreviews);
+}
+void AzureRenderApp::discardEditorSceneReload(bool restart) {
+    if (editorSceneReload_) {
+        auto& pending=*editorSceneReload_;
+        if (pending.renderer)pending.renderer->onUnload(pending.context);
+        editorSceneReload_.reset();
+        editorReloadQueued_=restart;
+    }
+    if (!restart)editorReloadQueued_=false;
+    if (editorLayer_)editorLayer_->setSceneResourcesPending(false);
+}
+void AzureRenderApp::rebuildEditorSceneRenderer() {
+    vkCheck(vkDeviceWaitIdle(device_), "vkDeviceWaitIdle(asset reload)");
+    graphicsCompleted_=graphicsSubmission_;
+    releasePreparedRenderer();
+    if (renderViews_)renderViews_->complete(graphicsCompleted_);
+    if (sceneRenderer_) {
+        azurerender::RenderContext old;
+        buildRenderContext(old,nullptr,nullptr,false);
+        sceneRenderer_->onUnload(old);
+        sceneRenderer_.reset();
+    }
+    createSceneRenderer();
+    azurerender::RuntimeDiagnostics::instance().info("editor","Renderer resources reloaded");
+}
+void AzureRenderApp::advanceEditorSceneReload() {
+    auto& session=*runOptions_.editorSession;
+    if (session.playing())return;
+    if (!editorSceneReload_ && editorReloadQueued_) {
+        editorReloadQueued_=false;
+        // These targets have renderer-dependent ownership or history. Their
+        // replacement still uses the render-target rebuilding transaction.
+        if (temporalRequested_ || multisampleRequested_) {
+            rebuildEditorSceneRenderer();
+            return;
+        }
+        auto next=std::make_unique<EditorSceneReload>();
+        next->settings=effectiveRenderSettings_;
+        const auto document=session.viewScene();
+        // Explicit asset refreshes can change an on-disk target for the same reference.
+        next->resources.load(document,[]{});
+        try {
+            sceneResourcePaths_.reset();
+            buildRenderContext(next->context,&next->settings);
+            const auto id=azurerender::BuiltinRendererCatalog::documentRendererId(
+                next->settings.sceneType,!next->context.scene.resources.empty());
+            next->renderer=azurerender::BuiltinRendererCatalog::createRegistry().create(id);
+            azurerender::validateSceneRendererCapabilities(next->renderer->capabilities());
+        } catch (const std::exception& error) {
+            rejectedEditorResources_=std::move(next->resources);
+            session.context().log(std::string("Renderer resource preparation failed: ")+error.what());
+            return;
+        }
+        next->context.backgroundPipelinePreparation=true;
+        preservingEditorScene_=true;
+        editorSceneReload_=std::move(next);
+        if (editorLayer_)editorLayer_->setSceneResourcesPending(true);
+        azurerender::RuntimeDiagnostics::instance().info("editor","Preparing renderer resources");
+        return; // Publish the first busy frame before beginning preparation.
+    }
+    if (!editorSceneReload_)return;
+    auto& pending=*editorSceneReload_;
+    try {
+        if (!pending.renderer->prepareLoad(pending.context,3.0))return;
+        if (editorReloadQueued_ || pending.resources.needsReload(session.viewScene())) {
+            discardEditorSceneReload(true);
+            return;
+        }
+        const auto capabilities=pending.renderer->capabilities();
+        session.setViewportDiagnosticModes(capabilities.diagnosticViewNames);
+        vkCheck(vkDeviceWaitIdle(device_),"vkDeviceWaitIdle(editor resource publication)");
+        graphicsCompleted_=graphicsSubmission_;
+        releasePreparedRenderer();
+        if (renderViews_)renderViews_->complete(graphicsCompleted_);
+        if (sceneRenderer_)sceneRenderer_->onUnload(pending.context);
+        sceneRenderer_=std::move(pending.renderer);
+        editorRenderResources_=std::move(pending.resources);
+        rejectedEditorResources_={};
+        editorSceneReload_.reset();
+        preservingEditorScene_=false;
+    } catch (const std::exception& error) {
+        rejectedEditorResources_=std::move(pending.resources);
+        const bool restart=editorReloadQueued_ || rejectedEditorResources_.needsReload(session.viewScene());
+        discardEditorSceneReload(restart);
+        const std::string reason=error.what();
+        session.context().log("Renderer resource preparation failed: "+reason);
+        azurerender::RuntimeDiagnostics::instance().warning("editor","Renderer resource preparation failed: "+reason);
+        return;
+    }
+    if (editorLayer_)editorLayer_->setSceneResourcesPending(false);
+    azurerender::RuntimeDiagnostics::instance().info("editor","Renderer resources reloaded");
+}
+#endif
 void AzureRenderApp::synchronizeEditorRuntime(){
 #if AZURE_WITH_EDITOR
     if(!runOptions_.editorSession)return;
     auto& session=*runOptions_.editorSession;
     session.pollTasks();
     if(editorAutomation_)editorAutomation_->advance(gameplayFrame_,session);
-    if(!session.playing() && editorRenderResources_.needsReload(session.viewScene()))
-        static_cast<void>(session.execute(azurerender::EditorCommand::ReloadAssets));
+    if (!session.playing() && !editorSceneReload_ && !editorReloadQueued_) {
+        const auto document=session.viewScene();
+        if (editorRenderResources_.needsReload(document) && rejectedEditorResources_.needsReload(document))
+            static_cast<void>(session.execute(azurerender::EditorCommand::ReloadAssets));
+    }
     if(session.consumeRuntimeReset()){
+        discardEditorSceneReload();
+        editorDisplayedScene_.reset();
+        preservingEditorScene_=false;
         if(session.playing() && !editorWasPlaying_){savedEditorCamera_=cameraPosition_;savedEditorTarget_=cameraTarget_;}
         if(!session.playing() && editorWasPlaying_){cameraPosition_=savedEditorCamera_;cameraTarget_=savedEditorTarget_;}
         editorWasPlaying_=session.playing();gameViewportFocus_=false;gameCursorPrimed_=false;

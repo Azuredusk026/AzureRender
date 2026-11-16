@@ -26,37 +26,47 @@ void ImGuiEditorLayer::drawBuildPanel(PanelContext& panelContext) {
     const auto& view=panelContext.view();
     if(!ImGui::Begin(ui::tr("发布项目###build"),workspace_.open("build"))){ImGui::End();return;}
     auto& replace=buildReplace_;
-    ui::sectionHeading(ui::tr("发布 Windows 游戏"),ui::tr("生成可移动的独立游戏目录，包含程序、运行依赖、资源与配置。"));
-    drawPathInput(ui::tr("新项目目录"),projectPath_,"project",true);
-    const auto parent=std::filesystem::u8path(projectPath_).parent_path();
-    const bool validProject=!projectPath_.empty()&&!parent.empty()&&std::filesystem::is_directory(parent);
-    ui::ButtonOptions create;create.disabled=session_->building()||!validProject;
-    create.tooltip=ui::tr("选择已有父目录下的新项目路径。");
-    if(ui::button(ui::tr("创建可玩项目"),create)) {
-        const auto path=std::filesystem::u8path(projectPath_);
-        const auto result=session_->edit("project.create",{{"path",projectPath_},{"name",path.filename().u8string()}});
-        if(result)session_->edit("path.remember",{{"purpose","project"},{"path",parent.u8string()},{"directory",true}});
-    }observeWidget("project.create");
-    ImGui::Separator();
-    drawPathInput(ui::tr("引擎安装目录"),installPath_,"install",true);
-    drawPathInput(ui::tr("发布输出目录"),outputPath_,"output",true);
-    ImGui::Checkbox(ui::tr("覆盖已有发布包"), &replace);
+    const auto& receipt=session_->buildResult();
+    const bool completed=!session_->building()&&!receipt.message.empty();
+    const auto footerHeight=ImGui::GetFrameHeightWithSpacing()*(completed?2.F:1.F);
+    if(ImGui::BeginChild("publish-details",{0,-footerHeight})){
+        const auto drawInstall=[&]{drawPathInput(ui::tr("引擎安装目录"),installPath_,"install",true);};
+        const auto drawOutput=[&]{drawPathInput(ui::tr("发布输出目录"),outputPath_,"output",true);};
+        if(ImGui::GetContentRegionAvail().x>=720.F*dpi_ && ImGui::BeginTable("publish-paths",2,ImGuiTableFlags_SizingStretchSame)){
+            ImGui::TableNextColumn();drawInstall();
+            ImGui::TableNextColumn();drawOutput();
+            ImGui::EndTable();
+        }else{
+            drawInstall();
+            drawOutput();
+        }
+        ImGui::Checkbox(ui::tr("覆盖已有发布包"), &replace);
+        if(session_->building())ui::taskFeedback(session_->buildProgress(),ui::tr("下方显示发布工具报告的实际步骤，任务期间可以查看其他面板。"));
+        if(completed){
+            ui::resultMessage(receipt.passed?ui::tr("发布完成"):ui::tr("发布失败"),!receipt.passed);
+            ImGui::TextWrapped(ui::tr("本次发布目标：%s"),receipt.outputDirectory.u8string().c_str());
+            ui::card(ui::tr("Build result"),[&]{ImGui::TextWrapped("%s",receipt.message.c_str());});
+        }
+    }
+    ImGui::EndChild();
     ui::ButtonOptions build;build.variant=ui::ButtonVariant::Primary;build.disabled=!view.isProject()||session_->building()||session_->playing()||installPath_.empty()||outputPath_.empty();
     build.tooltip=ui::tr("需要可编辑项目、Release 引擎安装目录和发布输出目录。");
     if(ui::button(ui::tr("发布 Windows 游戏"),build))session_->startBuild(std::filesystem::u8path(installPath_),std::filesystem::u8path(outputPath_),replace);
     observeWidget("project.build");
-    if(session_->building())ui::taskFeedback(session_->buildProgress(),ui::tr("下方显示发布工具报告的实际步骤，任务期间可以查看其他面板。"));
-    else if(!session_->buildResult().message.empty()) {
-        ui::resultMessage(session_->buildResult().passed?ui::tr("发布完成"):ui::tr("发布失败"),!session_->buildResult().passed);
-        ui::card(ui::tr("Build result"),[&]{ImGui::TextWrapped("%s",session_->buildResult().message.c_str());});
-    }
-    if(!outputPath_.empty())ImGui::TextWrapped(ui::tr("输出目录：%s"),outputPath_.c_str());
-    ui::ButtonOptions reveal;reveal.disabled=outputPath_.empty()||!std::filesystem::is_directory(std::filesystem::u8path(outputPath_));
-    if(ui::button(ui::tr("打开发布目录"),reveal))session_->edit("path.reveal",{{"path",outputPath_}});observeWidget("project.build.reveal");
-    if(view.isProject()) {
-        ImGui::SameLine();const auto log=session_->context().project().file.parent_path()/".azure/game-build.log";
-        ui::ButtonOptions showLog;showLog.disabled=!std::filesystem::is_regular_file(log);
-        if(ui::button(ui::tr("查看发布日志"),showLog))session_->edit("path.reveal",{{"path",log.u8string()}});observeWidget("project.build.log");
+    if(completed) {
+        if(receipt.passed){
+            std::error_code error;
+            ui::ButtonOptions reveal;
+            reveal.disabled=!std::filesystem::is_directory(receipt.outputDirectory,error);
+            if(ui::button(ui::tr("打开发布目录"),reveal))session_->edit("path.reveal",{{"path",receipt.outputDirectory.u8string()}});
+            observeWidget("project.build.reveal");
+            ui::nextToolbarItem(ui::buttonWidth(ui::tr("查看发布日志")));
+        }
+        std::error_code error;
+        ui::ButtonOptions showLog;
+        showLog.disabled=!std::filesystem::is_regular_file(receipt.logFile,error);
+        if(ui::button(ui::tr("查看发布日志"),showLog))session_->edit("path.reveal",{{"path",receipt.logFile.u8string()}});
+        observeWidget("project.build.log");
     }
     ImGui::End();
 }

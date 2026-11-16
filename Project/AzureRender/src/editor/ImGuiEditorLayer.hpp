@@ -17,6 +17,7 @@
 
 #include <array>
 #include <memory>
+#include <optional>
 #include <vector>
 #include <map>
 #include <set>
@@ -63,6 +64,7 @@ public:
         std::uint32_t height);
     void clearViewportImages();
     void setViewportImageIndex(std::uint32_t imageIndex);
+    void setSceneResourcesPending(bool pending) noexcept { sceneResourcesPending_=pending; }
     [[nodiscard]] EditorViewportInput consumeViewportInput() noexcept;
     bool consumeViewportResizeRequest(
         std::uint32_t& width,
@@ -70,11 +72,14 @@ public:
     [[nodiscard]] bool acceptsViewportShortcuts() const noexcept {
         return viewportAcceptsShortcuts_;
     }
+    [[nodiscard]] bool requestsGameCapture() const noexcept { return gameCaptureRequested_; }
+    [[nodiscard]] bool acceptsGameInput() const noexcept { return gameInputAllowed_; }
 
 private:
     unsigned renderSamples_=0,renderTargetSamples_=0;
+    bool sceneResourcesPending_=false;
 
-    struct CapturedFileDrop {FileDropEvent event;std::string document;};
+    struct CapturedFileDrop {FileDropEvent event;std::string document;bool importOnly=false;};
     std::deque<CapturedFileDrop> fileDrops_;
     void processFileDrops();
     struct PreviewTexture {VkDescriptorSet texture=VK_NULL_HANDLE;std::uint64_t lastUse=0;};
@@ -103,14 +108,22 @@ private:
     void drawAssetTransferPanel();
     void drawMaterialAssetPanel();
     void drawMaterialSlots(const SceneNode&);
+    void openMaterialAsset(const std::string& asset);
     void drawPhysicsAuthoring(const SceneNode&);
     void drawDocumentTabs();
     void drawScriptAuthoringPanel(PanelContext&);
     void drawProblemsPanel(PanelContext&);
     void drawPrefabAuthoringPanel(PanelContext&);
     std::string prefabOutputPath_="assets:/NewPrefab.azureprefab",prefabOverrideInstance_,prefabFieldScope_;
+    std::string prefabDocument_,prefabSelectionNode_;
     std::set<std::string> prefabSelectedFields_;
     std::string scriptTemplateBackend_="lua",scriptTemplatePath_="assets:/NewBehaviour.lua",problemSearch_;
+    struct ScriptCreationReceipt {
+        std::filesystem::path project;
+        std::string asset;
+        std::string path;
+    };
+    std::optional<ScriptCreationReceipt> scriptCreation_;
     std::string displayedDocument_,documentCloseTarget_;
     void drawCapturePanel(PanelContext& context);
     void drawConsolePanel(PanelContext& context);
@@ -158,6 +171,8 @@ private:
     bool viewportGizmoDragActive_ = false;
     bool viewportFocused_ = false;
     bool viewportAcceptsShortcuts_ = false;
+    bool gameCaptureRequested_ = false;
+    bool gameInputAllowed_ = false;
     bool initialized_ = false;
     std::uint64_t debugLineCount_ = 0;
     bool dockingLayoutInitialized_ = false;
@@ -194,8 +209,9 @@ private:
     nlohmann::json consoleView_=nlohmann::json::object();
     std::string consoleLastLine_;
     std::string consoleLastFeedback_;
-    bool navigationMoved_=false;
-    std::string prefabInstance_,installPath_,outputPath_,projectPath_;
+    std::string consoleTaskReveal_;
+    bool navigationUsed_=false;
+    std::string prefabInstance_,installPath_,outputPath_;
 };
 
 }  // namespace azurerender

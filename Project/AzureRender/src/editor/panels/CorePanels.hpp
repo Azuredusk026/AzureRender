@@ -5,6 +5,7 @@
 #include <imgui.h>
 #include <vulkan/vulkan.h>
 #include <functional>
+#include <optional>
 #include <set>
 namespace azurerender {
 // Borrowed host capabilities; panel objects own their presentation state.
@@ -17,16 +18,27 @@ struct CorePanelServices {
     std::function<void()> rename;
     std::function<void(nlohmann::json)> exportSelection;
     std::function<void(const SceneNode&)> materialSlots,physics;
-    std::function<void()> textureDialog,materialDialog;
+    std::function<void()> textureDialog;
+    std::function<void(const std::string&)> openMaterial;
     std::function<VkDescriptorSet(std::uint64_t)> previewTexture;
     std::function<void(const char*,std::string&,const std::string&,bool,const std::vector<std::string>&)> pathInput;
 };
 struct OutlinerPanelState { ImGuiTextFilter outlinerFilter_;std::set<std::string> openNodeIds_; };
 struct InspectorPanelState { ImGuiTextFilter referenceFilter_,componentFilter_,propertyFilter_;bool focusObjectName_=false; };
 struct AssetPanelState {
+    struct BrowseLocation {
+        std::string mount, directory, type, search;
+        std::set<std::string> selection;
+        float scroll = 0;
+    };
     ImGuiTextFilter assetFilter_;
+    std::optional<BrowseLocation> beforeReveal_;
+    std::optional<float> restoreScroll_;
+    std::string browseProject_, pendingReveal_;
+    float assetScroll_ = 0;
     nlohmann::json contentView_=nlohmann::json::object();
     bool assetGrid_ = false;
+    bool closeImportPopup_ = false;
     std::string assetDirectory_;
     std::string assetMount_;
     std::string assetNavigationDiagnostic_;

@@ -147,6 +147,9 @@ bool AzureRenderApp::recreateSwapchain() {
     }
     if(!drawable)return false;
 
+#if AZURE_WITH_EDITOR
+    discardEditorSceneReload(true);
+#endif
     vkCheck(vkDeviceWaitIdle(device_), "vkDeviceWaitIdle(swapchain recreate)");
     graphicsCompleted_=graphicsSubmission_;
     releasePreparedRenderer();

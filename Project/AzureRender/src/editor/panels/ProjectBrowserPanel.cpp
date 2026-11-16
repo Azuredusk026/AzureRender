@@ -6,7 +6,7 @@ namespace azurerender {
 void ImGuiEditorLayer::drawProjectBrowserPanel(PanelContext&) {
     if(!ImGui::Begin(ui::tr("项目中心###projects"),workspace_.open("projects"))){ImGui::End();return;}
     ui::sectionHeading(ui::tr("Projects"),ui::tr("Create, open and resume independently stored projects."));
-    ImGui::BeginDisabled(session_->playing()||session_->building()||session_->context().importing());
+    ImGui::BeginDisabled(session_->playing()||session_->building()||session_->context().importing()||session_->dropImporting());
     drawPathInput(ui::tr("Project document"),projectOpenPath_,"project.open",false,{"azureproject"});
     if(ui::button(ui::tr("Open project"),{ui::ButtonVariant::Primary,false,projectOpenPath_.empty()}))
         session_->edit("project.open",{{"path",projectOpenPath_}});

@@ -24,7 +24,7 @@ def run(executable, output):
         host.click('hierarchy.empty')
         host.click('outliner.create'); host.click('preset.empty')
         parent = host.workspace()['selection'][0]
-        host.click('outliner.create'); host.click('preset.empty')
+        host.click('outliner.create-child'); host.click('preset.empty')
         child = host.workspace()['selection'][0]
         before = host.workspace()['undoCount']
         host.call('input', event=dict(action='mouse', target='node.' + child, down=True)); host.frames()

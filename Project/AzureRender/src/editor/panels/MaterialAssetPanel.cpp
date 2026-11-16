@@ -48,6 +48,14 @@ void materialGraphCanvas(EditorSession& session,const std::string& asset,const n
     if(material.authoringGraph.is_null()&&ui::button(ui::tr("保存节点图")))session.edit("material.graph",{{"asset",asset},{"graph",graph}});
 }
 }
+void ImGuiEditorLayer::openMaterialAsset(const std::string& asset){
+    const auto result=session_->edit("material.describe",{{"asset",asset}});
+    if(!result)return;
+    auto& state=assetPanel_->presentation;
+    state.materialAsset_=asset;
+    state.materialSnapshot_=result.value;
+    state.materialDialogRequested_=true;
+}
 void ImGuiEditorLayer::drawMaterialAssetPanel(){
     if(assetPanel_->presentation.materialDialogRequested_){ImGui::OpenPopup(ui::tr("Material asset"));assetPanel_->presentation.materialDialogRequested_=false;}
     const auto work=ImGui::GetMainViewport()->WorkSize;
@@ -136,6 +144,11 @@ void ImGuiEditorLayer::drawMaterialSlots(const SceneNode& node){
             }ImGui::EndCombo();
         }observeWidget("material.slot."+id);
         if(ImGui::BeginDragDropTarget()){if(const auto* payload=ImGui::AcceptDragDropPayload("AZURE_RESOURCE"))session_->edit("material.assign",{{"nodes",session_->selection().selected()},{"slotId",id},{"material",std::string(static_cast<const char*>(payload->Data))}});ImGui::EndDragDropTarget();}
+        if(!assigned.empty()){
+            if(ui::button(ui::tr("编辑材质")))openMaterialAsset(assigned);
+            observeWidget("material.open."+id);
+            ui::nextToolbarItem(ui::buttonWidth(ui::tr("Reset slot")));
+        }
         if(ui::button(ui::tr("Reset slot"),{ui::ButtonVariant::Default,false,assigned.empty()}))session_->edit("material.reset-slot",{{"nodes",session_->selection().selected()},{"slotId",id}});observeWidget("material.reset."+id);
         if(!slot.at("stable").get<bool>())ImGui::TextWrapped(ui::tr("模型材质槽名称重复或缺失。可在源模型中设置 azureSlotId，保持重新导入时的对应关系。"));
         ImGui::PopID();

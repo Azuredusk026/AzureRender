@@ -88,25 +88,17 @@ void AzureRenderApp::drawFrame() {
         const auto revisionBeforeAssetScan=session.context().revision();
         const auto changedAssets=session.playing()?0:session.context().reloadChangedAssets();
         const bool fullReload=session.consumeAssetReloadRequest();
-        if (fullReload || changedAssets) {
+        if (!session.playing()) {
+            if (fullReload || changedAssets)
+                requestEditorSceneReload(!fullReload && previewDocumentRevision_==revisionBeforeAssetScan);
+            advanceEditorSceneReload();
+        } else if (fullReload || changedAssets) {
             if(changedAssets)session.context().log("Asset reload requested; changed files: "+std::to_string(changedAssets));
-            vkCheck(vkDeviceWaitIdle(device_), "vkDeviceWaitIdle(asset reload)");
-            graphicsCompleted_=graphicsSubmission_;
-            releasePreparedRenderer();
             invalidatePreviews(!fullReload && previewDocumentRevision_==revisionBeforeAssetScan);
-            renderViews_->complete(graphicsCompleted_);
-            if (sceneRenderer_ != nullptr) {
-                azurerender::RenderContext unloadContext;
-                buildRenderContext(unloadContext);
-                sceneRenderer_->onUnload(unloadContext);
-                sceneRenderer_.reset();
-            }
-            createSceneRenderer();
-            azurerender::RuntimeDiagnostics::instance().info(
-                "editor", "Renderer resources reloaded");
+            rebuildEditorSceneRenderer();
         }
         std::string captureLabel;
-        if (session.consumeCaptureRequest(captureLabel)) {
+        if (!editorSceneReload_ && !editorReloadQueued_ && session.consumeCaptureRequest(captureLabel)) {
             pendingScreenshotLabel_ = std::move(captureLabel);
             screenshotRequested_ = true;
         }
@@ -230,6 +222,13 @@ void AzureRenderApp::drawFrame() {
     buildSceneFrameData(frameData);
     // UI commands and Play/Stop may replace settings while building this frame.
     // Bind the LUT only after the final settings are available for recording.
+#if AZURE_WITH_EDITOR
+    if(auto* session=runOptions_.editorSession.get();session && !session->playing()){
+        if(const auto mode=session->viewportDiagnosticMode()){
+            effectiveRenderSettings_.diagnosticView=*mode;
+        }
+    }
+#endif
     synchronizeColorGradingLut(effectiveRenderSettings_);
     const azurerender::RenderFrameSnapshot frameSnapshot(frameData);
     if (sceneRenderer_ != nullptr) {
@@ -365,7 +364,11 @@ void AzureRenderApp::drawFrame() {
     } else if (presentResult != VK_SUCCESS) {
         vkCheck(presentResult, "vkQueuePresentKHR");
     }
-    if (editorViewportResizeRequested_) {
+    if (editorViewportResizeRequested_
+#if AZURE_WITH_EDITOR
+        && !editorSceneReload_
+#endif
+    ) {
         editorViewportResizeRequested_ = false;
         recreateEditorViewportResources();
     }

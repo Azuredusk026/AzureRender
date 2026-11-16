@@ -57,6 +57,7 @@
 #include <string>
 #include <vector>
 #include <deque>
+#include <future>
 #include <functional>
 #include <unordered_map>
 
@@ -207,6 +208,9 @@ private:
     struct GpuMaterial;
     void initializeLoad(const RenderContext& context);
     std::deque<std::function<void()>> loadJobs_;
+    std::optional<RenderContext> graphicsPreparationContext_;
+    std::future<void> graphicsPreparation_;
+    bool finishPreparedGraphics();
     bool loadInitialized_=false;
     struct LoadTimings {
         double cpuPrepareMs=0,meshUploadMs=0,materialUploadMs=0,sharedTexturesMs=0;

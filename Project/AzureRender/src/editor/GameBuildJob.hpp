@@ -4,7 +4,13 @@
 #include <string>
 
 namespace azurerender {
-struct GameBuildResult { bool passed = false; std::string message; double milliseconds = 0; };
+struct GameBuildResult {
+    bool passed = false;
+    std::string message;
+    double milliseconds = 0;
+    std::filesystem::path outputDirectory;
+    std::filesystem::path logFile;
+};
 class GameBuildJob final {
 public:
     GameBuildJob(const std::filesystem::path& project, const std::filesystem::path& install,

@@ -28,15 +28,24 @@ def run(executable, root):
           dict(frame=31,action='click',target='component.azure.third-person-camera'),
           dict(frame=36,action='click',target='reference.pick.azure.third-person-camera.target'),
           dict(frame=42,action='click',target='node.asset-b')]
-    reference=launch(executable,root,'reference-pick',(1920,1080),1,pick,capture=False)
+    reference=launch(executable,root,'reference-pick',(1920,1080),1,pick)
     assert reference['selection']==['observer'], reference['selection']
     assert not reference['referencePicker']
     assert reference['undoCount']==1, reference['undoCount']
     assert reference['feedback']==[], reference['feedback']
+    assert 'reference.copy.azure.third-person-camera.target' in reference['widgets']
     saved=json.loads(level.read_text(encoding='utf-8'))
     assert saved['nodes'][0]['components']['azure.third-person-camera']['data']['target']=='asset-b'
     restored=launch(executable,root,'saved-reference',(1920,1080),1,capture=False)
     assert restored['undoCount']==0
+    cube=json.loads((root/'game/assets/cube.gltf.azmeta').read_text(encoding='utf-8'))['id']
+    located=launch(executable,root,'locate-in-assets',(1920,1080),1,[
+        dict(frame=25,action='click',target='node.asset-a'),
+        dict(frame=31,action='click',target='tab.console'),
+        dict(frame=39,action='click',target='reference.object-asset.'+cube)],capture=False)
+    assert located['contentNavigation']['selected']==[cube]
+    assert 'asset.'+cube in located['widgets']
+    assert located['selection']==['asset-a'] and located['undoCount']==0
     cancel=launch(executable,root,'cancel-pick',(1920,1080),1,pick[:-1]+[
         dict(frame=42,action='key',key='Escape',down=True),dict(frame=43,action='key',key='Escape',down=False)],capture=False)
     assert not cancel['referencePicker'] and cancel['undoCount']==0

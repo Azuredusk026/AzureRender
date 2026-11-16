@@ -26,6 +26,11 @@ RenderViewDescriptor AzureRenderApp::previewDescriptor(const nlohmann::json& par
     descriptor.rendererId=parameters.value("renderer",std::string(sceneTypeName(renderSettings_.sceneType)));
     if(base.scene.resources.empty() && !parameters.contains("renderer"))descriptor.rendererId="sample";
     descriptor.scene=base.scene;descriptor.settings=effectiveRenderSettings_;
+    if(auto session=runOptions_.editorSession;session && session->viewportDiagnosticMode()){
+        const auto source=engineSettings_->source("render.diagnosticView");
+        descriptor.settings.diagnosticView=source==SettingSource::Default
+            ?renderSettings_.diagnosticView:engineSettings_->get("render.diagnosticView").get<unsigned>();
+    }
     descriptor.sceneWorldCoordinates=base.sceneWorldCoordinates;
     if(parameters.contains("antiAliasing")){
         descriptor.settings.antiAliasing=parameters.at("antiAliasing").get<int>();validateRenderSettings(descriptor.settings);
@@ -186,7 +191,7 @@ void AzureRenderApp::pollDevtools(){
     if(auto session=runOptions_.editorSession;session && previewDocumentRevision_!=session->context().revision()){
         invalidatePreviews();
     }
-    if(!shaderReloader_)return;
+    if(!shaderReloader_ || editorSceneReload_)return;
     shaderReloader_->poll();const auto candidate=shaderReloader_->candidate();if(!candidate)return;
     RenderContext context;buildRenderContext(context);context.shaderDirectory=candidate->directory.u8string();
     std::unique_ptr<ISceneRenderer> replacement;

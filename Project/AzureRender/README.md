@@ -1,5 +1,8 @@
 # AzureRender 工程
 
+[编辑器场景管线准备验收](docs/acceptance/p0/2026-11-16-editor-background-preparation.md)记录驱动首次编译、预览缓存及两条原生工作流。
+[编辑器与渲染组合验收](docs/acceptance/p0/2026-11-16-editor-and-transparency-integration.md)记录画面、原生交互和托管工作流。
+
 [主线 CPU 注册回归](docs/acceptance/nr/current-registered-cpu.md#管线缓存保留构建)记录两种配置各 333 项检查的结果。
 [主线 GPU 定向复验](docs/acceptance/nr/current-registered-gpu-recoveries.md)记录三项 Release 用例的复验结果。
 [构建输入复核](docs/acceptance/nr/current-registered-gpu-recoveries.md#构建输入复核与复测)记录第三方输入恢复和九项注册复测。
@@ -685,6 +688,21 @@ UX-A 至 UX-D 完成，UX-E 为 Ready。
 
 ED0 至 ED7 开发交付完成，P8 状态为 Ready。
 开发任务见[编辑器实施计划](docs/plans/2026-10-14-editor-generalization.md)。
+层级提供顶层创建和子级创建入口。
+文档保护对话框提供保存、放弃和取消。
+文件导入回执可定位结果并返回原浏览位置。
+紧凑资源面板显示导入进度、定位和错误入口。
+资源菜单接受文件后回到回执，同一批文件保持原用途。
+属性面板可直接定位资源、复制标识及编辑槽位材质。
+视口观察菜单显示活动渲染器提供的模式。
+选择「使用场景显示」可恢复场景的渲染设置。
+发布面板保留本次发布目录和对应日志。
+项目模板采用可移植的引擎资产标识，支持目录联接。
+预制体面板支持独立选择实例并处理该实例的覆盖。
+运行预览进入时保留编辑器光标。点击游戏画面可聚焦，按 Esc 或窗口失焦可释放。
+项目设置显示生效来源，底部保存区写入当前项目配置。
+状态栏的任务入口可打开相应的进度和错误记录。
+对应回放见[编辑器交互专项](docs/plans/2026-10-14-editor-generalization.md#编辑器交互专项)。
 本轮机器批次已收尾，实体与历史条件待满足。
 
 阶段状态见[当前状态](docs/plans/current-stage-status.md)。

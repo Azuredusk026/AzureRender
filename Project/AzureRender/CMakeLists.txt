@@ -178,6 +178,11 @@ set(SHADER_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/shaders")
 set(SHADER_BINARY_DIR "${CMAKE_CURRENT_BINARY_DIR}/shaders")
 option(AZURE_ENABLE_BATCHED_SHADOW_BOUNDS "Enable eight-tile shadow workgroups" ON)
 set_property(SOURCE src/scenes/CharacterSceneRenderer.cpp APPEND PROPERTY COMPILE_DEFINITIONS "$<$<BOOL:${AZURE_ENABLE_BATCHED_SHADOW_BOUNDS}>:AZURE_BATCHED_SHADOW_BOUNDS=1>")
+if(MSVC)
+    # Debug symbols can exceed the standard COFF section index in this translation unit.
+    set_property(SOURCE src/scenes/CharacterSceneRenderer.cpp APPEND PROPERTY
+        COMPILE_OPTIONS "$<$<CONFIG:Debug>:/bigobj>")
+endif()
 option(AZURE_ENABLE_SURFACE_RADIANCE_REUSE "Enable experimental same-frame surface-radiance reuse" OFF)
 option(AZURE_ENABLE_SHADOW_HISTORY "Enable experimental temporal shadow visibility history" OFF)
 if(AZURE_ENABLE_SHADOW_HISTORY AND AZURE_ENABLE_SURFACE_RADIANCE_REUSE)

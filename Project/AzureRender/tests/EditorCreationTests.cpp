@@ -61,7 +61,9 @@ int main(int argc,char** argv){
         const auto wait=[&](const std::string& task){for(unsigned i=0;i<1000;++i){session.pollTasks();for(const auto& item:session.tasks().report())if(item.at("id")==task&&item.at("state")!="running")return item;std::this_thread::sleep_for(std::chrono::milliseconds(5));}throw std::runtime_error("Drop import exceeded its short budget");};
         const auto task=session.edit("asset.import-drop",{{"path",source.u8string()},{"place",true},{"parent",parent},{"position",{0,0,0}}});
         require(bool(task),"External drop enters the registered import task");
-        require(wait(task.value.get<std::string>()).at("state")=="completed","Drop must import and place real geometry");
+        const auto completed=wait(task.value.get<std::string>());
+        require(completed.at("state")=="completed","Drop must import and place real geometry");
+        require(completed.at("target")==context->project().file.u8string(),"The drop receipt belongs to its submitting project");
         require(context->selectedNode()->parentId==parent,"Hierarchy drop must preserve the captured parent");
         const auto droppedBody=context->componentData(context->selectedNode()->id,"azure.rigid-body");
         require(!droppedBody.is_null()&&droppedBody.at("shape")=="mesh","Dropped model receives collision from its actual geometry");
@@ -70,7 +72,10 @@ int main(int argc,char** argv){
         require(bool(stale),"Start stale drop fixture");session.edit("node.rename",{{"value","Changed while importing"}});
         require(wait(stale.value.get<std::string>()).at("state")=="failed"&&context->scene().nodes.size()==nodesBefore,"Changed document rejects asynchronous placement");
         const auto cancelled=session.edit("asset.import-drop",{{"path",source.u8string()}});require(bool(cancelled),"Start cancellation fixture");
-        session.edit("tasks.cancel",{{"id",cancelled.value}});require(wait(cancelled.value.get<std::string>()).at("state")=="cancelled","Cancelled drop releases unpublished work");
+        const auto beforeCancel=context->documentContent();
+        require(!session.edit("project.open",{{"path",context->project().file.u8string()}}),"Switching project waits for its active drop import");
+        session.edit("tasks.cancel",{{"id",cancelled.value}});
+        require(wait(cancelled.value.get<std::string>()).at("state")=="cancelled"&&context->documentContent()==beforeCancel,"Cancelled drop releases unpublished work");
         require(bool(session.edit("settings.set",{{"name","render.exposure"},{"value",1.25},{"source","project"}})),"Project settings use typed registry writes");
         require(bool(session.edit("settings.project-save")),"Project settings have a production save operation");
         EditorSession settingsReopened(EditorContext::openProject(root/"project.azureproject"));
