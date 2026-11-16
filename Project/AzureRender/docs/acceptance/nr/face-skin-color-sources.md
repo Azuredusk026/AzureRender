@@ -730,9 +730,9 @@ Player 回放中，三个偏暗脸缘点的轮廓光红通道贡献为 0.22852 �
 
 两块显卡的皮肤区域峰差均为 115 个色阶，位于 [1200,379]。原生第 1079 次衣料描边写入该位置和 [1206,374]，原生第 1116 次写入 [1211,830]。[1197,854] 保留第 783 次身体绘制的颜色。四处候选误差均与配对控制一致。[联合皮肤结果](evidence/2026-11-16/body-joint-saturation-precision/qualification.json)和[验证归档](evidence/2026-11-16/body-joint-saturation-precision/validation.zip)保存分区指标、绘制归属和实际帧差。
 
-保留的 Player 帧在六个核对点与当前固定姿态逐像素一致。两个最大峰差点 [1200,379] 和 [1206,374] 的最后颜色写入均为第 825 次绘制。Player 第一层衣料描边第 839 次绘制改写相邻的 [1201,379] 及 [1274,523]。第 845 次绘制改写 [1197,854]，[1211,830] 保留第 825 次绘制的颜色。描边覆盖继续按实际片元判定复测。[衣料绘制附件](evidence/2026-11-16/body-retained-cloth-draw-coverage/qualification.json)和[验证归档](evidence/2026-11-16/body-retained-cloth-draw-coverage/validation.zip)保存六处取样和各次写入的颜色。
+保留的 Player 帧在六个核对点与当前固定姿态逐像素一致。两个最大峰差点 [1200,379] 和 [1206,374] 的最后颜色写入均为第 825 次绘制。Player 第一层衣料描边第 839 次绘制改写相邻的 [1201,379] 及 [1274,523]。第二层衣料的底层绘制第 845 次改写 [1197,854]，[1211,830] 保留第 825 次绘制的颜色。描边覆盖继续按实际片元判定复测。[衣料绘制附件](evidence/2026-11-16/body-retained-cloth-draw-coverage/qualification.json)和[验证归档](evidence/2026-11-16/body-retained-cloth-draw-coverage/validation.zip)保存六处取样和各次写入的颜色。
 
-Player 第 839 次绘制在 [1200,379] 和 [1206,374] 均无片元，相邻 [1201,379] 有一个片元通过。第 845 次绘制在 [1211,830] 有一个片元，深度比该位置已有值大约 0.002691，未通过深度测试。原生第一层描边网格的配对采集将前两处峰差降至 33 和 38 个色阶，表明描边覆盖和颜色均影响这些位置。[描边片元判定](evidence/2026-11-16/body-cloth-boundary-fragment-tests/qualification.json)及[验证归档](evidence/2026-11-16/body-cloth-boundary-fragment-tests/validation.zip)保存片元、深度及实际画面对照。
+Player 第 839 次绘制在 [1200,379] 和 [1206,374] 均无片元，相邻 [1201,379] 有一个片元通过。第二层衣料的底层绘制第 845 次在 [1211,830] 有一个片元，深度比该位置已有值大约 0.002691，未通过深度测试。原生第一层描边网格的配对采集将前两处峰差降至 33 和 38 个色阶，表明描边覆盖和颜色均影响这些位置。[描边片元判定](evidence/2026-11-16/body-cloth-boundary-fragment-tests/qualification.json)及[验证归档](evidence/2026-11-16/body-cloth-boundary-fragment-tests/validation.zip)保存片元、深度及实际画面对照。
 
 新增超差的 23 个位置从原生身体绘制至最终颜色保持一致。17 个位置的超差通道需降低，6 个位置需提高。Intel 有 2 个位置距皮肤边界超过六个像素。继续按实际片元核对颜色和覆盖。[通道差值核对](evidence/2026-11-16/body-saturation-signed-edge/qualification.json)和[验证归档](evidence/2026-11-16/body-saturation-signed-edge/validation.zip)保存逐点结果。
 
@@ -750,6 +750,8 @@ NVIDIA 的 6 处新增超差和 Intel 的 15 处新增超差位于皮肤边缘�
 
 保留的 Player 第 839 和 845 次绘制分别读回 32,031 和 17,541 个实际裁剪空间顶点。按八位子像素坐标复算覆盖后，第一层描边对 [1200,379] 和 [1206,374] 均无候选图元。原生对应三角形与 Player 最接近三角形的角点偏移约为 0.015 像素。相邻的 [1201,379] 和 [1274,523] 均有 Player 实际通过的候选。
 
-第二层在 [1211,830] 的原生候选有三个。各候选与最接近的 Player 三角形的最大角点偏移分别约为 0.987、0.987 和 0.856 像素。Player 在该位置有一个不同的候选图元，保留的片元历史显示它未通过深度测试。第一层继续核对亚像素偏移，第二层继续核对绑定的投影参数及顶点方向。
+第二层衣料投影由 Player 第 851 次绘制的材质槽 21 提交，第 845 次的材质槽 2 提交底层衣料。实际投影片元在 [1197,854] 和 [1211,830] 均因深度测试被拒。在 [1211,830]，三个原生投影候选与最接近 Player 投影图元的最大角点偏移约为 0.008 像素。衣料边界的整体画面继续按真实覆盖、深度和受光表现复核。
 
 [描边顶点与覆盖结果](evidence/2026-11-16/body-cloth-recorded-vertex-coverage/qualification.json)和[验证归档](evidence/2026-11-16/body-cloth-recorded-vertex-coverage/validation.zip)保存逐点三角形、实际裁剪坐标及索引。
+
+[第二层投影结果](evidence/2026-11-16/body-cloth-second-projection-owner/qualification.json)和[验证归档](evidence/2026-11-16/body-cloth-second-projection-owner/validation.zip)保存实际材质槽、投影参数、顶点输出及片元判定。
