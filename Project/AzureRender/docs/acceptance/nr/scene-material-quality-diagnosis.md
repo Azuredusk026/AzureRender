@@ -441,3 +441,11 @@ NVIDIA 和 Intel 分别采集两帧。两块设备的首帧均与各自实际对
 ### HDR 历史与射线步数
 
 在已合成 HDR 历史的采集中，计算着色器使用原生的 32 步上限。第 2 帧中央地面的 SSIM 在 NVIDIA 和 Intel 上分别为 0.85238 和 0.85172，亮度误差为 9.35% 和 9.37%。青色环带的 SSIM 为 0.77846 和 0.77849，亮度误差为 2.70% 和 2.68%。两设备的结构相似度仍低于 0.95。首帧中央地面的亮度误差为 18.85% 和 19.08%。射线步数继续按历史有效状态分帧复测。[射线步数配对结果](evidence/2026-11-16/projected-history-resolved-hdr-native-steps/qualification.json)及[验证归档](evidence/2026-11-16/projected-history-resolved-hdr-native-steps/validation.zip)保存双设备完整区域指标。
+
+### 有效历史帧的射线步数
+
+在已提交 HDR 历史有效时，投影反射最多追踪 32 步。NVIDIA 首帧与配对控制逐像素一致。Intel 首帧在中央地面和青色环带外有 4 处差异，全帧新增超差为零。
+
+第 2 帧中央地面在 NVIDIA 和 Intel 上的 SSIM 分别为 0.85692 和 0.85635，亮度误差为 9.84% 和 9.85%。青色环带的 SSIM 分别为 0.78642 和 0.78636，亮度误差为 2.83% 和 2.85%。两区的亮度达标，结构相似度仍低于 0.95。天花板、门、墙及左侧地面仍有新增超差，联合验收保持开放。
+
+[有效历史帧结果](evidence/2026-11-16/projected-history-resolved-valid-steps/qualification.json)和[验证归档](evidence/2026-11-16/projected-history-resolved-valid-steps/validation.zip)保存分区指标、程序指纹及首帧差量。
