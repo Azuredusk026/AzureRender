@@ -14,6 +14,19 @@ from tools.npr_room.reference_inventory import digest
 LIT_SHADER = "Assets/Shader/Universal Render Pipeline_Lit.shader"
 
 
+def pbr_document(rgba, roughness, metallic, double_sided, texture):
+    textures = {}
+    if texture:
+        textures["albedo"] = {"asset": str(UUID(hex=texture)), "usage": "albedo"}
+    return {
+        "schemaVersion": 1, "typeId": "azure.pbr", "parameters": {
+            "baseColor": rgba, "roughness": roughness, "metallic": metallic,
+            "emissiveStrength": 0, "transmission": 0, "ior": 1.5, "thickness": 0,
+            "attenuationDistance": 0, "attenuationColor": [1, 1, 1, 1], "doubleSided": double_sided,
+        }, "textures": textures,
+    }
+
+
 def room_slot_assignments(level, import_id, renderers, transforms, materials):
     node_map = level["sceneImports"][import_id]["nodeMap"]
     mesh_nodes = {node["id"] for node in level["nodes"] if node.get("resourceId")}
@@ -53,7 +66,6 @@ def opaque_lit_document(source, images):
     base = occupied.get("_BaseMap")
     if occupied.keys() - {"_BaseMap", "_MainTex"} or ("_MainTex" in occupied and occupied["_MainTex"] != base):
         raise ValueError("Source texture layout needs a dedicated material profile")
-    textures = {}
     texture = None
     if base:
         if base["m_Scale"] != {"x": 1, "y": 1} or base["m_Offset"] != {"x": 0, "y": 0}:
@@ -61,14 +73,7 @@ def opaque_lit_document(source, images):
         texture = base["m_Texture"].get("guid")
         if images.get(texture, {}).get("srgb") is not True:
             raise ValueError("Albedo requires a mapped sRGB source texture")
-        textures["albedo"] = {"asset": str(UUID(hex=texture)), "usage": "albedo"}
-    return {
-        "schemaVersion": 1, "typeId": "azure.pbr", "parameters": {
-            "baseColor": rgba, "roughness": 1 - smoothness, "metallic": metallic,
-            "emissiveStrength": 0, "transmission": 0, "ior": 1.5, "thickness": 0,
-            "attenuationDistance": 0, "attenuationColor": [1, 1, 1, 1], "doubleSided": floats["_Cull"] == 0,
-        }, "textures": textures,
-    }, texture
+    return pbr_document(rgba, 1 - smoothness, metallic, floats["_Cull"] == 0, texture), texture
 
 
 def write(path, data):

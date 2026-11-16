@@ -11,7 +11,7 @@ from PIL import Image
 from reference_inventory import digest
 
 
-def capture(player, room, resources, output):
+def capture(player, room, resources, output, frames=2):
     output.mkdir()
     project = json.loads((room / "project.azureproject").read_bytes())
     project["startupScene"] = "assets:/room.azurelevel"
@@ -23,7 +23,7 @@ def capture(player, room, resources, output):
         result = subprocess.run([
             str(player), "--project", str(descriptor), "--resource-root", str(resources), "--width", "1280",
             "--height", "720", "--fixed-frame-step", "--capture-dir", str(output / "frames"),
-            "--capture-frames", "2", "--runtime-report", str(stats_path),
+            "--capture-frames", str(frames), "--runtime-report", str(stats_path),
         ], cwd=output, capture_output=True, encoding="utf-8", errors="replace", timeout=150)
     finally:
         descriptor.unlink()
