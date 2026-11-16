@@ -60,6 +60,9 @@
 
 ## P1 原资产集成路线
 
+[家具导入](../acceptance/npr-room/furniture.md)记录 Windows 子树的导入和播放宿主短检。
+当前已核对原家具、贴图及椅子片段采样。
+
 - [ ] 以原房间家具、角色、一个片段和一种窗景验证资产入口。记录比例、手性、共享实例、材质槽、骨架映射和关键姿态。验证 `scene.import` 拒绝坏引用，以及保存重开后标识与变换保持有效。
 - [ ] 实现启动到房间的首条路径。接入真实计时输入、一次角色相位切换和音频。保存、退出、重开，并在独立 Player 中回放。这一阶段验证各跨模块入口能在同一项目工作。
 - [ ] 按已测缺口确定 GLB 转换或原曲线烘焙路线。需要 FBX 时仅作中间格式。验证 Humanoid 骨架限制和替代导出结果。 [Unity FBX 导出说明](https://docs.unity.cn/Packages/com.unity.formats.fbx@4.2/manual/exporting.html)
