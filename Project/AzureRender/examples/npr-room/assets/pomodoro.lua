@@ -16,7 +16,14 @@ local paused = false
 local previousPhase
 local previousTime
 local previousSettings
+local workCalendar
+local statsOpen
 local heroineParts = {"face", "body", "hair", "top", "bottom", "socks", "jacket"}
+
+local function durationText(value)
+    local seconds = math.floor(value + 1e-7)
+    return string.format("%02d:%02d:%02d", seconds // 3600, seconds // 60 % 60, seconds % 60)
+end
 
 local function playCue(id)
     local cue = self:find(id)
@@ -37,8 +44,7 @@ local function updateDisplay()
     local seconds = math.max(0, math.ceil(remaining - 1e-7))
     local time = string.format("%02d:%02d", seconds // 60, seconds % 60)
     if countupMode then
-        seconds = math.floor(countupElapsed + 1e-7)
-        time = string.format("%02d:%02d:%02d", seconds // 3600, seconds // 60 % 60, seconds % 60)
+        time = durationText(countupElapsed)
     end
     if label ~= previousPhase then
         self:ui_text("timer-phase", label)
@@ -66,6 +72,7 @@ local function idle()
 end
 
 local function finish()
+    if workCalendar then workCalendar:flush() end
     idle()
     setHeroineState("idle")
     playCue("timer-finish")
@@ -183,10 +190,22 @@ function init()
     settings = loadSettings()
     loadCountup()
     idle()
+    if new_work_calendar then
+        workCalendar = new_work_calendar()
+        statsOpen = false
+        self:ui_visible("timer-stats", true)
+        self:ui_visible("work-stats", false)
+    end
     updateDisplay()
 end
 
 function update(dt)
+    if workCalendar and phase ~= "idle" then
+        local working = phase == "work" and not paused and not self:pressed("timer-toggle")
+            and not self:pressed("timer-reset") and (countupMode or not self:pressed("timer-skip"))
+        local available = countupMode and maxCountupSeconds - countupElapsed or remaining
+        workCalendar:advance(math.min(dt, available), working)
+    end
     if phase == "idle" and self:pressed("timer-mode") then
         countupMode = not countupMode
         self:write_save("timer-mode", {1, countupMode and 1 or 0})
@@ -218,10 +237,21 @@ function update(dt)
         adjustSettings()
     end
     updateDisplay()
+    if workCalendar then
+        if self:pressed("timer-stats") then
+            statsOpen = not statsOpen
+            self:ui_visible("work-stats", statsOpen)
+        end
+        if statsOpen then
+            self:ui_text("work-today", durationText(workCalendar:today()))
+            self:ui_text("work-total", durationText(workCalendar:totalTime()))
+        end
+    end
 end
 
 function shutdown()
     if countupMode and phase == "work" and countupElapsed >= 1 then
         checkpointCountup(true)
     end
+    if workCalendar then workCalendar:flush() end
 end

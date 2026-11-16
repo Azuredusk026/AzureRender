@@ -10,6 +10,7 @@ body { width: 100%; height: 100%; margin: 0; color: white; font-family: LatoLati
 #timer-controls { display: block; margin-top: 8dp; font-size: 13dp; }
 #timer-controls button { display: inline-block; padding: 4dp 7dp; margin-right: 3dp; color: white; background-color: #34434f; }
 #timer-controls button:hover { background-color: #506472; }
+#work-stats { display: block; margin-top: 8dp; font-size: 13dp; }
 #notes-toggle { position: absolute; left: 16dp; top: 16dp; padding: 6dp 10dp; color: white; background-color: #34434f; }
 #notes-panel { position: absolute; left: 16dp; top: 52dp; width: 310dp; padding: 14dp; background-color: #19232c; }
 #notes-panel button { display: inline-block; padding: 4dp 6dp; margin-right: 4dp; margin-bottom: 7dp; color: white; background-color: #34434f; }
@@ -18,7 +19,7 @@ body { width: 100%; height: 100%; margin: 0; color: white; font-family: LatoLati
 #note-page { display: block; margin-bottom: 6dp; }
 #note-status { display: block; color: #f0c58e; }
 #todo-toggle { position: absolute; left: 82dp; top: 16dp; padding: 6dp 10dp; color: white; background-color: #34434f; }
-#todo-panel { position: absolute; right: 16dp; top: 148dp; width: 316dp; max-height: 70%; overflow-y: auto; padding: 12dp; background-color: #19232c; }
+#todo-panel { position: absolute; right: 16dp; top: 168dp; width: 316dp; max-height: 70%; overflow-y: auto; padding: 12dp; background-color: #19232c; }
 #todo-panel button { display: inline-block; padding: 4dp 6dp; margin-right: 3dp; margin-bottom: 6dp; color: white; background-color: #34434f; }
 #todo-panel input { display: block; width: 288dp; padding: 4dp; margin-bottom: 6dp; color: white; background-color: #273541; }
 .todo-caption { display: block; margin-bottom: 4dp; }
@@ -34,7 +35,9 @@ body { width: 100%; height: 100%; margin: 0; color: white; font-family: LatoLati
 <button id="timer-mode-button" data-action="timer-mode">Mode · M</button>
 <button id="timer-toggle-button" data-action="timer-toggle">Start/Pause · T</button>
 <button id="timer-end-button" data-action="timer-reset">End · R</button>
+<button id="timer-stats" data-action="timer-stats" style="display: none;">Statistics</button>
 </div>
+<div id="work-stats" style="display: none;">Today <span id="work-today"></span> · Total <span id="work-total"></span></div>
 </div>
 <button id="notes-toggle" data-action="notes-toggle" style="display: none;">Notes</button>
 <div id="notes-panel" style="display: none;">
