@@ -18,6 +18,7 @@ FORMATS = {
     3: ("b", 1 / 127),
     4: ("H", 1 / 65535),
     5: ("h", 1 / 32767),
+    10: ("I", 1.0),
 }
 ATTRIBUTES = (
     (0, "POSITION", 3),
@@ -36,7 +37,7 @@ def read_unity_mesh(path):
                 break
         else:
             raise ValueError(f"{path.name}: expected a Unity Mesh object")
-        return yaml.load(source, Loader=yaml.BaseLoader)["Mesh"]
+        return yaml.load(source, Loader=getattr(yaml, "CBaseLoader", yaml.BaseLoader))["Mesh"]
 
 
 def vertex_channels(vertex_data):
@@ -153,8 +154,14 @@ def gltf_motion(motion, add_accessor):
 
 def export_static_mesh(path, base_color_textures=(), motion=None):
     mesh = read_unity_mesh(path)
-    if int(mesh["m_MeshCompression"]) or mesh["m_BindPose"] or mesh.get("m_Shapes", {}).get("shapes"):
-        raise ValueError("Expected an uncompressed mesh without skin or morph targets")
+    if mesh["m_BindPose"] or mesh.get("m_Shapes", {}).get("shapes"):
+        raise ValueError("Expected a mesh without skin or morph targets")
+    return export_mesh_geometry(mesh, base_color_textures, motion)
+
+
+def export_mesh_geometry(mesh, base_color_textures=(), motion=None):
+    if int(mesh["m_MeshCompression"]):
+        raise ValueError("Expected uncompressed mesh geometry")
 
     name = mesh["m_Name"]
     binary = bytearray()
