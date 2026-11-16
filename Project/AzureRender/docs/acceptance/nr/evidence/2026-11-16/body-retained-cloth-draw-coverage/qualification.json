@@ -1,0 +1,523 @@
+{
+  "status": "retained-body-and-cloth-color-stages",
+  "request": {
+    "capture": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-231945-projected-hair-reference-grid-4b775d\\iris-overlay-player-rdc\\overlay_frame1.rdc",
+    "captureSha256": "6960267c0d71e4d05b6bfe0e2730c332ed71955f1fde6d69eb7d8aadf13eff24",
+    "currentFixedPoseSha256": "f1ab2e655871812f15c47b67a541251d43b96a5a4d85e0c5b705295c26767ba3",
+    "controlEvent": 876,
+    "points": [
+      [
+        1200,
+        379
+      ],
+      [
+        1206,
+        374
+      ],
+      [
+        1197,
+        854
+      ],
+      [
+        1211,
+        830
+      ],
+      [
+        1274,
+        523
+      ],
+      [
+        1201,
+        379
+      ]
+    ],
+    "currentFixedPoseRGB": [
+      [
+        138,
+        117,
+        105
+      ],
+      [
+        136,
+        115,
+        103
+      ],
+      [
+        46,
+        47,
+        49
+      ],
+      [
+        85,
+        63,
+        59
+      ],
+      [
+        59,
+        62,
+        66
+      ],
+      [
+        57,
+        61,
+        65
+      ]
+    ]
+  },
+  "playerDisplaySha256": "9d11c1e964f385a33a8f585d4475c161f94d2986addc76204992a22a56fdaf67",
+  "displayEvent": 1021,
+  "attachment": "ResourceId::175",
+  "points": [
+    {
+      "point": [
+        1200,
+        379
+      ],
+      "retainedDisplay": [
+        138,
+        117,
+        105
+      ],
+      "currentFixedPose": [
+        138,
+        117,
+        105
+      ],
+      "exact": true,
+      "draws": [
+        {
+          "event": 773,
+          "indices": 17037,
+          "after": [
+            0.03497314453125,
+            0.05499267578125,
+            0.074951171875,
+            1.0
+          ]
+        },
+        {
+          "event": 825,
+          "indices": 17037,
+          "after": [
+            0.253662109375,
+            0.1793212890625,
+            0.14208984375,
+            1.0
+          ]
+        }
+      ],
+      "nativeFinal": [
+        23,
+        23,
+        25
+      ],
+      "peakAgainstNative": 115
+    },
+    {
+      "point": [
+        1206,
+        374
+      ],
+      "retainedDisplay": [
+        136,
+        115,
+        103
+      ],
+      "currentFixedPose": [
+        136,
+        115,
+        103
+      ],
+      "exact": true,
+      "draws": [
+        {
+          "event": 773,
+          "indices": 17037,
+          "after": [
+            0.03497314453125,
+            0.05499267578125,
+            0.074951171875,
+            1.0
+          ]
+        },
+        {
+          "event": 825,
+          "indices": 17037,
+          "after": [
+            0.2449951171875,
+            0.170166015625,
+            0.1370849609375,
+            1.0
+          ]
+        }
+      ],
+      "nativeFinal": [
+        23,
+        22,
+        23
+      ],
+      "peakAgainstNative": 113
+    },
+    {
+      "point": [
+        1197,
+        854
+      ],
+      "retainedDisplay": [
+        46,
+        47,
+        49
+      ],
+      "currentFixedPose": [
+        46,
+        47,
+        49
+      ],
+      "exact": true,
+      "draws": [
+        {
+          "event": 773,
+          "indices": 17037,
+          "after": [
+            0.03497314453125,
+            0.05499267578125,
+            0.074951171875,
+            1.0
+          ]
+        },
+        {
+          "event": 845,
+          "indices": 61923,
+          "after": [
+            0.0273590087890625,
+            0.0284881591796875,
+            0.0302886962890625,
+            1.0
+          ]
+        }
+      ],
+      "nativeFinal": [
+        127,
+        93,
+        80
+      ],
+      "peakAgainstNative": 81
+    },
+    {
+      "point": [
+        1211,
+        830
+      ],
+      "retainedDisplay": [
+        85,
+        63,
+        59
+      ],
+      "currentFixedPose": [
+        85,
+        63,
+        59
+      ],
+      "exact": true,
+      "draws": [
+        {
+          "event": 773,
+          "indices": 17037,
+          "after": [
+            0.03497314453125,
+            0.05499267578125,
+            0.074951171875,
+            1.0
+          ]
+        },
+        {
+          "event": 825,
+          "indices": 17037,
+          "after": [
+            0.0916748046875,
+            0.049163818359375,
+            0.04412841796875,
+            1.0
+          ]
+        }
+      ],
+      "nativeFinal": [
+        11,
+        12,
+        14
+      ],
+      "peakAgainstNative": 74
+    },
+    {
+      "point": [
+        1274,
+        523
+      ],
+      "retainedDisplay": [
+        59,
+        62,
+        66
+      ],
+      "currentFixedPose": [
+        59,
+        62,
+        66
+      ],
+      "exact": true,
+      "draws": [
+        {
+          "event": 773,
+          "indices": 17037,
+          "after": [
+            0.03497314453125,
+            0.05499267578125,
+            0.074951171875,
+            1.0
+          ]
+        },
+        {
+          "event": 839,
+          "indices": 102927,
+          "after": [
+            0.04345703125,
+            0.0479736328125,
+            0.053863525390625,
+            1.0
+          ]
+        }
+      ],
+      "nativeFinal": [
+        22,
+        21,
+        25
+      ],
+      "peakAgainstNative": 41
+    },
+    {
+      "point": [
+        1201,
+        379
+      ],
+      "retainedDisplay": [
+        57,
+        61,
+        65
+      ],
+      "currentFixedPose": [
+        57,
+        61,
+        65
+      ],
+      "exact": true,
+      "draws": [
+        {
+          "event": 773,
+          "indices": 17037,
+          "after": [
+            0.03497314453125,
+            0.05499267578125,
+            0.074951171875,
+            1.0
+          ]
+        },
+        {
+          "event": 839,
+          "indices": 102927,
+          "after": [
+            0.041168212890625,
+            0.046661376953125,
+            0.05230712890625,
+            1.0
+          ]
+        }
+      ],
+      "nativeFinal": [
+        20,
+        21,
+        23
+      ],
+      "peakAgainstNative": 42
+    }
+  ],
+  "sceneCandidates": [
+    {
+      "event": 773,
+      "indices": 17037,
+      "name": ""
+    },
+    {
+      "event": 777,
+      "indices": 102927,
+      "name": ""
+    },
+    {
+      "event": 782,
+      "indices": 102927,
+      "name": ""
+    },
+    {
+      "event": 787,
+      "indices": 61923,
+      "name": ""
+    },
+    {
+      "event": 792,
+      "indices": 61923,
+      "name": ""
+    },
+    {
+      "event": 797,
+      "indices": 7698,
+      "name": ""
+    },
+    {
+      "event": 801,
+      "indices": 21489,
+      "name": ""
+    },
+    {
+      "event": 805,
+      "indices": 1878,
+      "name": ""
+    },
+    {
+      "event": 809,
+      "indices": 8718,
+      "name": ""
+    },
+    {
+      "event": 813,
+      "indices": 948,
+      "name": ""
+    },
+    {
+      "event": 825,
+      "indices": 17037,
+      "name": ""
+    },
+    {
+      "event": 832,
+      "indices": 102927,
+      "name": "vkCmdDrawIndexedIndirect(1) => <102927, 1>"
+    },
+    {
+      "event": 839,
+      "indices": 102927,
+      "name": "vkCmdDrawIndexedIndirect(1) => <102927, 1>"
+    },
+    {
+      "event": 845,
+      "indices": 61923,
+      "name": ""
+    },
+    {
+      "event": 851,
+      "indices": 61923,
+      "name": ""
+    },
+    {
+      "event": 857,
+      "indices": 7698,
+      "name": ""
+    },
+    {
+      "event": 862,
+      "indices": 21489,
+      "name": ""
+    },
+    {
+      "event": 869,
+      "indices": 1878,
+      "name": "vkCmdDrawIndexedIndirect(1) => <1878, 1>"
+    },
+    {
+      "event": 876,
+      "indices": 8718,
+      "name": "vkCmdDrawIndexedIndirect(1) => <8718, 1>"
+    },
+    {
+      "event": 883,
+      "indices": 43044,
+      "name": "vkCmdDrawIndexedIndirect(1) => <43044, 1>"
+    },
+    {
+      "event": 890,
+      "indices": 43044,
+      "name": "vkCmdDrawIndexedIndirect(1) => <43044, 1>"
+    },
+    {
+      "event": 897,
+      "indices": 948,
+      "name": "vkCmdDrawIndexedIndirect(1) => <948, 1>"
+    },
+    {
+      "event": 906,
+      "indices": 13824,
+      "name": "vkCmdDrawIndexedIndirect(1) => <13824, 1>"
+    },
+    {
+      "event": 916,
+      "indices": 61923,
+      "name": ""
+    },
+    {
+      "event": 921,
+      "indices": 61923,
+      "name": ""
+    },
+    {
+      "event": 926,
+      "indices": 21489,
+      "name": ""
+    },
+    {
+      "event": 931,
+      "indices": 21489,
+      "name": ""
+    },
+    {
+      "event": 940,
+      "indices": 17037,
+      "name": ""
+    },
+    {
+      "event": 946,
+      "indices": 7698,
+      "name": ""
+    },
+    {
+      "event": 952,
+      "indices": 21489,
+      "name": ""
+    },
+    {
+      "event": 958,
+      "indices": 8718,
+      "name": ""
+    },
+    {
+      "event": 967,
+      "indices": 10698,
+      "name": ""
+    },
+    {
+      "event": 974,
+      "indices": 43044,
+      "name": ""
+    },
+    {
+      "event": 981,
+      "indices": 43044,
+      "name": ""
+    },
+    {
+      "event": 992,
+      "indices": 96,
+      "name": ""
+    }
+  ],
+  "lastAppliedEvent": 992,
+  "exactCurrentWitnesses": 6,
+  "archiveSha256": "876b7e7b42ff25d347cd6bfa181b3c75d42e1906f419f95877c3e63e957a9172",
+  "nativeFinalSha256": "48afd6546c23cfa85099a765cc94ada4813a684538c695faf6d70d6daf2261b5"
+}

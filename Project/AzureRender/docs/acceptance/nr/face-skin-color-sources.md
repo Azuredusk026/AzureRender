@@ -730,6 +730,8 @@ Player 回放中，三个偏暗脸缘点的轮廓光红通道贡献为 0.22852 �
 
 两块显卡的皮肤区域峰差均为 115 个色阶，位于 [1200,379]。原生第 1079 次衣料描边写入该位置和 [1206,374]，原生第 1116 次写入 [1211,830]。[1197,854] 保留第 783 次身体绘制的颜色。四处候选误差均与配对控制一致。[联合皮肤结果](evidence/2026-11-16/body-joint-saturation-precision/qualification.json)和[验证归档](evidence/2026-11-16/body-joint-saturation-precision/validation.zip)保存分区指标、绘制归属和实际帧差。
 
+保留的 Player 帧在六个核对点与当前固定姿态逐像素一致。两个最大峰差点 [1200,379] 和 [1206,374] 的最后颜色写入均为第 825 次绘制。Player 第一层衣料描边第 839 次绘制改写相邻的 [1201,379] 及 [1274,523]。第 845 次绘制改写 [1197,854]，[1211,830] 保留第 825 次绘制的颜色。描边覆盖继续按实际片元判定复测。[衣料绘制附件](evidence/2026-11-16/body-retained-cloth-draw-coverage/qualification.json)和[验证归档](evidence/2026-11-16/body-retained-cloth-draw-coverage/validation.zip)保存六处取样和各次写入的颜色。
+
 新增超差的 23 个位置从原生身体绘制至最终颜色保持一致。17 个位置的超差通道需降低，6 个位置需提高。Intel 有 2 个位置距皮肤边界超过六个像素。继续按实际片元核对颜色和覆盖。[通道差值核对](evidence/2026-11-16/body-saturation-signed-edge/qualification.json)和[验证归档](evidence/2026-11-16/body-saturation-signed-edge/validation.zip)保存逐点结果。
 
 NVIDIA 的 6 处新增超差和 Intel 的 15 处新增超差位于皮肤边缘，距离皮肤掩码边界不超过六像素。Intel 另有两个内部坐标 [1327,394] 和 [1271,1085]。[主光与高光配对结果](evidence/2026-11-16/body-main-key-saturation/qualification.json)记录新增超差点的参考色、实际颜色及主光分项颜色。
