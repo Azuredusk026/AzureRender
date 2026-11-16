@@ -48,7 +48,15 @@ Release Player 处理 11 个动作，播放五次原音效。
 本机夹具位于 `assets_private/npr-room-dev/room-saved-probe`。
 其中 `validation` 保存验收用 Release Player 和回放记录。
 该 Player 使用工作树的存档源码与本机 Release 构建库链接。
-整套工作树构建、托管存档回放和项目发布按对应验收项执行。
+整套工作树构建和项目发布按对应验收项执行。
+
+## 托管存档
+
+通过固定版本的 CoreCLR 9.0.22，两个独立 Release Player 各运行 24 帧。
+托管脚本读取计数并将递增值分别写回存档和场景节点。
+两个运行报告记录的节点横坐标分别为 1 和 2，最终存档值为 2。
+两个进程均无脚本错误，退出后缓冲与图像计数均为零。
+本机 `assets_private/npr-room-dev/managed-save-probe` 保存托管项目、运行时来源校验、样例源码和运行记录。
 
 ## 复验命令
 

@@ -31,6 +31,18 @@
     "relocatedProjectCheck": true,
     "playerSHA256": "96801569127e000d363a093d9f60597dafada7fb20adb7c828e5b06322d5b21a",
     "writeRuntimeSHA256": "0865ede7fcb55ae463d6c9ac185755e7c416cb4e850be4687f0f02d4ebfac820",
-    "readRuntimeSHA256": "d98e05468d1641f5c44cfaf5f41198822bae90b2e369082cffaba90f19be84cb"
+    "readRuntimeSHA256": "d98e05468d1641f5c44cfaf5f41198822bae90b2e369082cffaba90f19be84cb",
+    "coreClr": {
+      "renderRunnerJob": 1619,
+      "runtimeVersion": "9.0.22",
+      "playerProcesses": 2,
+      "framesPerProcess": 24,
+      "savedValues": [1, 2],
+      "runtimeEvidenceSHA256": [
+        "869a4e382e0ff4c27c02a904c62fc21520d70beea6f6a0f104b205e7981fad34",
+        "6e9dc7fdfe2459724ec6aa2a9cee84851a40a505cf81d9874721774fdac07f9b"
+      ],
+      "saveSHA256": "35fd27a510a72430f3212ccb547c4ba705dfba5f85348e897975c45239a274fd"
+    }
   }
 }
