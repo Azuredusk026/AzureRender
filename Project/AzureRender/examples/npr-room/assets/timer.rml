@@ -1,0 +1,14 @@
+<rml>
+<head>
+<title>Timer</title>
+<style>
+body { width: 100%; height: 100%; margin: 0; color: white; font-family: LatoLatin; }
+#timer { position: absolute; right: 16dp; top: 16dp; padding: 10dp 14dp; background-color: #19232c; }
+#timer-value { display: block; font-size: 26dp; }
+#timer-phase { display: block; font-size: 16dp; }
+</style>
+</head>
+<body>
+<div id="timer"><span id="timer-value">25:00</span><span id="timer-phase">idle</span></div>
+</body>
+</rml>

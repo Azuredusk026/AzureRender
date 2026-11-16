@@ -1,0 +1,22 @@
+{
+  "formatVersion": 1,
+  "status": "partial",
+  "queueJob": 1561,
+  "hostConfiguration": "Release",
+  "finalScene": "room",
+  "levelRevision": 2,
+  "replayedActions": 11,
+  "replayDelayedFrames": 14,
+  "renderedFrames": 360,
+  "animationFrames": 346,
+  "audioStarts": 5,
+  "uiDrawCalls": 1038,
+  "scriptErrors": 0,
+  "presentationErrors": 0,
+  "buffersAfterUnload": 0,
+  "imagesAfterUnload": 0,
+  "relocatedProjectCheck": true,
+  "projectSHA256": "204944008d503557efb147cc27637e6547420950fc5e9b68eb3f1b3e7b51a6ba",
+  "levelSHA256": "ad7f28434b3ead55051a1e8744be8c4593ca4b5fcb0500c962773766051cae01",
+  "runtimeEvidenceSHA256": "d57f94151b4c09eb0603a571fbdd37ad8a09732ce2a170205306cbc7206080ec"
+}

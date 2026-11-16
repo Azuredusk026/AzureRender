@@ -1,0 +1,6 @@
+{
+  "schemaVersion": 1,
+  "initial": "window",
+  "states": [{"name": "window", "clip": 0, "loop": false}],
+  "transitions": []
+}
