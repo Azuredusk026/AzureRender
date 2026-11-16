@@ -217,4 +217,21 @@ Player 使用 `cd8d95d` 对应的受检构建。
 
 [原生取样记录](evidence/2026-11-16/projected-history-native-endpoints/results.json)及[读回归档](evidence/2026-11-16/projected-history-native-endpoints/validation.zip)保存实际坐标和指纹。两端实际取样的分解还需 Player 的坐标和颜色附件。
 
+## 原生反射的历史回移
+
+从原生 8702 号调度的运动纹理反推重投影前的取样位置。
+复算保留坐标量化区间内所有符合点采样规则的运动纹素。
+中央地面和青色环带的 21,340 和 6,657 个有效坐标均有解。
+
+| 原生区域 | 唯一运动纹素 | 中位回移上界（像素） | 最大回移上界（像素） |
+| --- | ---: | ---: | ---: |
+| 中央地面 | 19,394 | 小于 0.01 | 2.71 |
+| 青色环带 | 6,053 | 1.68 | 2.23 |
+
+像素数以 2560×1440 图像为尺度。
+中央地面有 11,838 个坐标的回移可界定在半像素内，青色环带有 2,064 个。
+结果用于分开核对环带和地面，并与实际 Player 取样路径配对。
+
+[运动纹理复算](evidence/2026-11-16/projected-history-native-motion/results.json)和[验证归档](evidence/2026-11-16/projected-history-native-motion/validation.zip)保存取样坐标、输入指纹及复算程序。
+
 当前运行入口统一见[完整场景显示](../../tutorials/restored-native-scene.md)。

@@ -1,0 +1,89 @@
+{
+  "status": "qualified-native-motion-interval-inversion",
+  "originalMotionSha256": "5c114bb08d77d97949439fae4b43a9c62ff21636ca8a71768da408706ffb9549",
+  "actualNativeHistoryUvSha256": "06b62ec48bd53ccf1a29bc73202bbafcb55ddc78bff2db3cf485bebc699396d6",
+  "confidenceSha256": "a1230c9801b2c12015a781fe07e39fd3e14150d6e9a3e6a9d472f0397a1466a9",
+  "regions": {
+    "centerFloor": {
+      "endpoints": 21340,
+      "inverted": 21340,
+      "uniqueMotionCell": 19394,
+      "minimumPossibleDisplacementRenderPixels": [
+        8.432761803021987e-07,
+        6.439066168319452e-06,
+        2.232909202805861,
+        2.7065078650448733,
+        2.7065078650448733
+      ],
+      "maximumPossibleDisplacementRenderPixels": [
+        8.432761803021987e-07,
+        8.628452586102375e-06,
+        2.232909202805861,
+        2.7065078650448733,
+        2.7065078650448733
+      ],
+      "unconditionallyAtMostHalfPixel": 11838
+    },
+    "cyanRing": {
+      "endpoints": 6657,
+      "inverted": 6657,
+      "uniqueMotionCell": 6053,
+      "minimumPossibleDisplacementRenderPixels": [
+        1.6761417052137142e-06,
+        1.6776978214458833,
+        2.232875320055471,
+        2.232909202805861,
+        2.232909202805861
+      ],
+      "maximumPossibleDisplacementRenderPixels": [
+        3.15682542710486e-06,
+        1.6776978214458833,
+        2.232875320055471,
+        2.232909202805861,
+        2.232909202805861
+      ],
+      "unconditionallyAtMostHalfPixel": 2064
+    },
+    "archivedFloor": {
+      "endpoints": 23938,
+      "inverted": 23938,
+      "uniqueMotionCell": 21974,
+      "minimumPossibleDisplacementRenderPixels": [
+        1.6761417052137142e-06,
+        8.628452586102375e-06,
+        1.6077971305654557,
+        2.232875320055471,
+        2.706426836845692
+      ],
+      "maximumPossibleDisplacementRenderPixels": [
+        1.6761417052137142e-06,
+        8.628452586102375e-06,
+        1.607817728368076,
+        2.232875320055471,
+        2.706426836845692
+      ],
+      "unconditionallyAtMostHalfPixel": 18886
+    }
+  },
+  "scope": "Native motion filter is point sampled. Bounds reflect all compatible source cells and do not assert Player motion.",
+  "archive": {
+    "sha256": "4f099c9b1d0e9e6cf38b9a3083a5541c9e0f67ee0d97f9dcb65496c9934273e7",
+    "members": {
+      "input/portable-manifest.json": "ff6db98eea984a47975d597e42e56f20dccb96b5baba054d1f6f43f52262d0ba",
+      "input/native-replay-receipt.json": "e5b9a651952e49774867365d1ebf6d51a5f1f61faa77da03b1d5630367c4afbe",
+      "input/native-history-uv.bin": "06b62ec48bd53ccf1a29bc73202bbafcb55ddc78bff2db3cf485bebc699396d6",
+      "input/native-confidence.bin": "a1230c9801b2c12015a781fe07e39fd3e14150d6e9a3e6a9d472f0397a1466a9",
+      "input/native-event.json": "85f50cec46fa7bff88eb02f0ad63b8bbcefb3ececb09349a0f8ff70d36a79639",
+      "analysis/score-projected-native-motion-bounds.py": "dfef62bd59cb322cbbe30c982f86a551061784d4ade309d0c58ef49e12559d56",
+      "analysis/native-motion-inverse-bounds.json": "cd0f0c2152baa06b0f0adad13130069d5374839054b36d3baaf76e207bf78892"
+    }
+  },
+  "event": 8702,
+  "archivedMotionInput": {
+    "manifestSha256": "ff6db98eea984a47975d597e42e56f20dccb96b5baba054d1f6f43f52262d0ba",
+    "role": "motion",
+    "name": "motion.bin",
+    "bytes": 14745600
+  },
+  "frozenRgbGateChanged": false
+}
