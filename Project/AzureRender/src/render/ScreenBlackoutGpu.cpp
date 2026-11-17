@@ -1,33 +1,12 @@
 #include "render/ScreenBlackoutGpu.hpp"
 
-#include "assets/image/ImageCodec.hpp"
+#include "render/ScreenEffectTexture.hpp"
 #include "resources/BinaryFile.hpp"
 
 #include <array>
 #include <stdexcept>
 
 namespace azurerender {
-namespace {
-
-SampledTextureBinding load(rhi::IRhi& backend, SampledTextureCache& textures, const std::filesystem::path& path,
-                           std::uint32_t width, std::uint32_t height, VkFilter filter) {
-    const auto source = decodeImageFile(path);
-    if (source.width != width || source.height != height)
-        throw std::invalid_argument("Unexpected blackout texture dimensions");
-    SampledTextureUpload upload;
-    upload.width = width;
-    upload.height = height;
-    upload.format = VK_FORMAT_R8G8B8A8_SRGB;
-    upload.mipLevels = 1;
-    upload.sampler.filter = filter;
-    upload.sampler.maxLod = 0;
-    upload.sampler.mipmapLinear = false;
-    if (!backend.supportsSampledImage(upload.format, filter == VK_FILTER_LINEAR))
-        throw std::runtime_error("The device cannot sample the blackout texture format");
-    return textures.acquire(convertImageToRgba8(source).pixels, upload);
-}
-
-} // namespace
 
 ScreenBlackoutGpu::ScreenBlackoutGpu(rhi::IRhi& backend, VkRenderPass target, std::uint32_t frames,
                                      const std::filesystem::path& shaders, const std::filesystem::path& ramp,
@@ -36,8 +15,8 @@ ScreenBlackoutGpu::ScreenBlackoutGpu(rhi::IRhi& backend, VkRenderPass target, st
       precedingRampRow_(precedingRampRow), opaque_(frames) {
     VkShaderModule vertex{}, fragment{};
     try {
-        const auto rampSampler = load(backend_, textures_, rampPath_, 32, 32, VK_FILTER_NEAREST);
-        const auto timeSampler = load(backend_, textures_, timelinePath_, 64, 1, VK_FILTER_LINEAR);
+        const auto rampSampler = loadScreenEffectTexture(backend_, textures_, rampPath_, {32, 32}, VK_FILTER_NEAREST);
+        const auto timeSampler = loadScreenEffectTexture(backend_, textures_, timelinePath_, {64, 1}, VK_FILTER_LINEAR);
         textures_.seal();
         constexpr auto sampler = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
         constexpr auto stage = VK_SHADER_STAGE_FRAGMENT_BIT;

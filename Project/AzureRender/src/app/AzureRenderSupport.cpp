@@ -259,6 +259,7 @@ void AzureRenderApp::recreateEditorViewportResources() {
 
 void AzureRenderApp::cleanupEditorViewportResources(
     const bool destroySampler) {
+    screenChromatic_.reset();
     if (postProcessDescriptorPool_ != VK_NULL_HANDLE) {
         vkDestroyDescriptorPool(device_, postProcessDescriptorPool_, nullptr);
         postProcessDescriptorPool_ = VK_NULL_HANDLE;

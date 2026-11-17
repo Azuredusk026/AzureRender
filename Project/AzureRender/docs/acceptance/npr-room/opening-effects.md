@@ -1,6 +1,6 @@
 # 开场全屏特效
 
-> 状态为 P5 局部验收。五个 Windows 原版程序及其材质已锁定。开场单色噪声和黑屏通过原生房间回放。
+> 状态为 P5 局部验收。五个 Windows 原版程序及其材质已锁定。色差、黑屏和单色噪声通过原生房间回放。
 
 `DirectionService` 引用三个画质档的房间渲染器。三个档位的开场渲染功能顺序均为色差、画面偏移、故障、黑屏和单色噪声。五个功能的挂载时机为 URP 事件 600，使用第 0 个 `DrawProcedural` 通道。
 
@@ -38,13 +38,32 @@ Vulkan 着色器以原程序的时间种子计算红色通道位移，读取当�
 
 RTX 4060 的任务 2008 和 2009 各执行四帧。Intel 核显的任务 2011 和 2012 各执行相同四帧。每台显卡的 Vulkan 回放与同一显卡的 Direct3D 11 原程序结果逐字节一致，分别核对 230,400 个 RGBA32F 像素。四次回放均通过 Vulkan 校验与资源释放检查。任务 2010 的单色噪声使用同设备工具对照，黑屏使用同设备归档，两项回归均逐字节一致。
 
-本机报告与编译程序位于 `windows-opening-reference/chromatic-validation/`。常规房间的画面输入与剧情命令另行验收。
+本机报告与编译程序位于 `windows-opening-reference/chromatic-validation/`。
 
 | 记录 | SHA-256 |
 | --- | --- |
 | Intel Vulkan 对照 | `e8c57c143c2f61bba2b890d2a0f0e66cdc41e506ef89fd9efdd9556ba4cdef35` |
 | NVIDIA Vulkan 对照 | `b908546625216695623c36e8ac670bf6c96f960883498c2181ced28ea5efef4d` |
 | Vulkan 色差程序 | `e363362f77c2eeccf60bca00745ab3d3e76482e5aa68ef8e059895909af254d7` |
+
+## 房间色差时序与合成
+
+`azure.screen-chromatic` 读取调色和抗锯齿后的当前画面与房间装配的两张原纹理。非零比率使用独立的在途帧副本，随后合成黑屏、单色噪声和游戏界面。
+
+教学剧情按原行 2 在 2 秒内升至 0.2，按行 20 在 0.2 秒内归零。历史回放使用准备段的初始值，取消或结束剧情时清除待执行命令。任务 2020 从普通入口回放教学及第一章，核对两个渐变、黑屏遮罩与单色噪声的组合，以及第一章的零比率。语音、音乐、身体与表情、成就和存档通过同次回归。
+
+任务 2021 使用四个 640×360 原生 Player 检查默认画面、场景配置和脚本驱动。默认画面逐像素一致。脚本从第 1 帧起与同参数的场景配置一致，不透明界面抽样区的差异为零。Vulkan 校验层及同步校验通过。任务 2024 使用运行时着色器重新对照两种显卡，各有 230,400 个 RGBA32F 像素逐字节一致。
+
+本机回放、画面、诊断构建及两份同设备报告位于 `windows-opening-reference/chromatic-validation/room-runtime/`。
+
+| 记录 | SHA-256 |
+| --- | --- |
+| 常规房间回放 | `9f494c40fcd82fc5204a26a1458d5486d5c4192edd7afd86870c29c5c3d9bc88` |
+| 色差画面 | `97e09148cc7bdc69c801b9a37ff0bb31edf97514ac4ec379bda78a1e08ef8844` |
+| 同步回放 | `3ce46254201b70f1cf2300ffe9cb8c6796b676f3aeee1e32e8f9db5603b58e4e` |
+| 原生 Player | `62c3fe58f03a8b02e644e57f6a3eaf4cbb6166f6647f74d72ae1cf7d645b83d1` |
+| 诊断构建清单 | `21f5f555f24c4abf3bcd40dfde343c94cc3bf59b8bdf04c12b4c7a5b8959e188` |
+| 运行时色差程序 | `a2605c2825a0417ccfd8047708a67fc3671b33e7f35a0d8d9bdf48fd8769107d` |
 
 ## 单色噪声实机参照
 
@@ -146,7 +165,8 @@ python -B -m tools.npr_room.windows_noise_probe verify-blackout --first $blackou
 & $vulkanNoiseProbe $fullscreenVertex $blackoutFragment $vulkanBlackout $blackoutInputs
 & $vulkanNoiseProbe $fullscreenVertex $blackoutFragment $vulkanBlackoutRepeat $blackoutInputs
 python -B -m tools.npr_room.windows_noise_probe compare-blackout --reference $blackoutAdapterCapture --candidate $vulkanBlackout --repeat $vulkanBlackoutRepeat --output $vulkanBlackoutReport
-python -B tools/npr_room/test_story_signal_room_player.py --player $player --room $deskRoom --resource-root $runtimeResources --catalog $bodyCatalog --graph $animatorGraph --chapters $openingChapters --source-receipt $tutorialSource --models $bodyMorphModels --camera-trace $cameraTrace --camera-audio-source $unitySource --face-catalog $plankCatalog --blackout-source-lock $effectsReceipt --image-catalog $imageCatalog --achievements --output $blackoutRoomReplay
+python -B tools/npr_room/test_story_signal_room_player.py --player $player --room $deskRoom --resource-root $runtimeResources --catalog $bodyCatalog --graph $animatorGraph --chapters $openingChapters --source-receipt $tutorialSource --models $bodyMorphModels --camera-trace $cameraTrace --camera-audio-source $unitySource --face-catalog $plankCatalog --blackout-source-lock $effectsReceipt --chromatic-source-lock $effectsReceipt --image-catalog $imageCatalog --achievements --output $openingRoomReplay
+python -B -m tools.npr_room.test_screen_chromatic_player --player $player --resource-root $runtimeResources --source-lock $effectsReceipt --image-catalog $imageCatalog --output $chromaticRoomReplay
 & $glslc --target-env=vulkan1.3 shaders/monochrome_screen_noise.frag -o $noiseFragment
 & $vulkanNoiseProbe $fullscreenVertex $noiseFragment $vulkanCapture
 & $vulkanNoiseProbe $fullscreenVertex $noiseFragment $vulkanRepeatCapture
@@ -154,4 +174,4 @@ python -B -m tools.npr_room.windows_noise_probe compare --reference $originalCap
 python -B tools/test_screen_noise_player.py --player $player --resource-root $runtimeResources --output $playerNoiseReplay
 ```
 
-Lua 5.4 依次载入 `assets/story-noise.lua` 和 `tests/story-noise.lua`。
+Lua 5.4 载入 `assets/story-noise.lua`，分别运行 `tests/story-noise.lua` 和 `tests/story-chromatic.lua`。

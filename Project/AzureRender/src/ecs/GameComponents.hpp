@@ -237,6 +237,21 @@ struct ScreenBlackout {
     AZURE_FIELD("Blind bottom", 0, 128)
     float blindBottom = 6.3F;
 };
+AZURE_TYPE("azure.screen-chromatic", 1)
+struct ScreenChromatic {
+    AZURE_FIELD("Ratio", 0, 1)
+    float ratio = 0;
+    AZURE_FIELD("Noise texture", 0, 0)
+    std::string noise;
+    AZURE_FIELD("Timeline texture", 0, 0)
+    std::string timeline;
+    AZURE_FIELD("Instability", 0, 1)
+    float unstable = 0;
+    AZURE_FIELD("Filament scale", 1, 128)
+    float filamentScale = 5.F;
+    AZURE_FIELD("Displacement", 0, 1)
+    float rage = .075F;
+};
 AZURE_TYPE("azure.window-presentation", 1)
 struct WindowPresentation {
     AZURE_FIELD("Window mode", 0, 1)

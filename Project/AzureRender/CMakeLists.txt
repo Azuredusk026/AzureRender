@@ -262,7 +262,7 @@ function(compile_shader source_file)
         OR shader_source_base STREQUAL "outline.vert" OR shader_source_base STREQUAL "scene_instance_layout_test.comp")
         list(APPEND shader_lut_dependency "${SHADER_SOURCE_DIR}/instance_data.glsl")
     endif()
-    if(shader_source_base STREQUAL "inner_outline.frag" OR shader_source_base STREQUAL "view_resolve.frag" OR shader_source_base STREQUAL "color_grading_lut_test.comp" OR shader_source_base STREQUAL "spatial_antialiasing.frag")
+    if(shader_source_base STREQUAL "inner_outline.frag" OR shader_source_base STREQUAL "view_resolve.frag" OR shader_source_base STREQUAL "color_grading_lut_test.comp" OR shader_source_base STREQUAL "spatial_antialiasing.frag" OR shader_source_base STREQUAL "opening_chromatic.frag")
         set(shader_lut_dependency "${SHADER_SOURCE_DIR}/color_grading_lut.glsl")
     endif()
     if(shader_source_base STREQUAL "spatial_antialiasing.frag")
@@ -583,6 +583,7 @@ compile_shader(
 compile_shader("${SHADER_SOURCE_DIR}/inner_outline.vert")
 compile_shader("${SHADER_SOURCE_DIR}/monochrome_screen_noise.frag")
 compile_shader("${SHADER_SOURCE_DIR}/opening_blackout.frag")
+compile_shader("${SHADER_SOURCE_DIR}/opening_chromatic.frag")
 compile_shader("${SHADER_SOURCE_DIR}/inner_outline.frag")
 compile_shader("${SHADER_SOURCE_DIR}/inner_outline.frag"
     DEFINES AZURE_SHOWCASE_DISPLAY=1
@@ -967,6 +968,7 @@ add_library(AzureRenderCore STATIC
     src/render/ColorGradingLut.cpp
     src/render/ColorGradingLutGpu.cpp
     src/render/ScreenBlackoutGpu.cpp
+    src/render/ScreenChromaticGpu.cpp
     src/render/ReflectionSpatialFilter.cpp
     src/render/ReflectionSignalPyramid.cpp
     src/render/DepthPyramid.cpp

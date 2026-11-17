@@ -20,7 +20,7 @@ def component(type_name, data):
     return {"type": type_name, "version": 1, "data": data}
 
 
-def capture(player, resources, root, opacity, scripted=False):
+def capture(player, resources, root, opacity, scripted=False, configure=None):
     assets = root / "assets"
     assets.mkdir(parents=True)
     project = root / "project.azureproject"
@@ -40,6 +40,8 @@ def capture(player, resources, root, opacity, scripted=False):
                 'function init() self:set("azure.screen-noise", "opacity", .25) end\n', encoding="utf-8")
             noise["azure.script"] = component("azure.script", {"asset": "assets:/enable.lua"})
         nodes.append({"id": "noise", "components": noise})
+    if configure:
+        configure(assets, nodes)
     write(assets / "screen.azurelevel", {"schemaVersion": 1, "id": "screen-noise", "sceneType": "sample",
                                        "nodes": nodes, "resources": []})
     capture_dir = root / "frames"
@@ -51,7 +53,8 @@ def capture(player, resources, root, opacity, scripted=False):
     (root / "stdout.log").write_text(result.stdout, encoding="utf-8")
     (root / "stderr.log").write_text(result.stderr, encoding="utf-8")
     assert result.returncode == 0, result.stderr
-    assert "VUID-" not in result.stderr and "Validation Error" not in result.stderr, result.stderr
+    diagnostics = result.stdout + result.stderr
+    assert not any(marker in diagnostics for marker in ("VUID-", "Validation Error", "SYNC-HAZARD")), diagnostics
     assert "Allocator after unload: buffers=0 images=0" in result.stdout, result.stdout
     report = json.loads(report_path.read_bytes())
     assert report["uiDrawCalls"] > 0 and not report["scriptErrors"] and not report["presentationErrors"], report
