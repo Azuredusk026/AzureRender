@@ -4,6 +4,7 @@ local nextId
 local selected
 local open
 local writable
+local achievements, edited
 
 local function load()
     local saved = self:read_save(slot)
@@ -24,19 +25,24 @@ local function load()
     if #saved[3] == 0 then
         return {{1, "New Page", ""}}, 2
     end
+    edited = saved[4] == true
     return saved[3], saved[2]
 end
 
-local function publish(proposed, id)
+local function publish(proposed, id, changedText)
     if not writable then
         self:ui_text("note-status", "This notebook requires a newer version.")
         return false
     end
-    if not self:try_write_save(slot, {1, id, proposed}) then
+    local document = {1, id, proposed}
+    if edited or (achievements and changedText) then document[4] = true end
+    if not self:try_write_save(slot, document) then
         self:ui_text("note-status", "Could not save this note.")
         return false
     end
     pages, nextId = proposed, id
+    edited = document[4] == true
+    if achievements and edited then achievements:once("END_EDIT_NOTE_COUNT") end
     self:ui_text("note-status", "")
     return true
 end
@@ -55,7 +61,7 @@ local function savePage()
     if title == current[2] and text == current[3] then return true end
     local changed = {table.unpack(pages)}
     changed[selected] = {current[1], title, text}
-    return publish(changed, nextId)
+    return publish(changed, nextId, text ~= current[3])
 end
 
 local function addPage()
@@ -96,7 +102,10 @@ local function deletePage()
 end
 
 function init()
+    achievements = new_room_achievements and new_room_achievements(self)
+    edited = false
     pages, nextId = load()
+    if achievements and edited then achievements:once("END_EDIT_NOTE_COUNT") end
     selected = 1
     open = false
     self:ui_visible("notes-toggle", true)

@@ -43,8 +43,21 @@ python -B tools/npr_room/test_room_window_player.py --player $player --project $
 
 Lua 回归注入初始化、读取、写入和提交失败。任务 1878 在四个独立 Player 中测试待办成就。离线触发只写房间记录；提交失败时可读到缓存值。第三次启动补交成功，第四次读回统计且未重复写入。
 
-回放报告位于本机 `platform-achievement-reference/local-validation/`。报告 SHA-256 为 `a0ffc5d5f74229f78d9886a45154bd14092e19ada9545092dbd6cea89a2504c0`。记录使用本地夹具，常规房间事件接线及 Steam 真实统计仍需分别验收。
+回放报告位于本机 `platform-achievement-reference/local-validation/`。报告 SHA-256 为 `a0ffc5d5f74229f78d9886a45154bd14092e19ada9545092dbd6cea89a2504c0`。
 
 ```powershell
 python -B tools/npr_room/test_achievement_store_player.py --player $player --resource-root $resources --output $localAchievementReplay
+```
+
+## 房间成就记录
+
+教学通关、首次完成待办、提交便签正文和结束计时都写入本地成就存档。教学进度、待办、便签和工时存档各自提供恢复依据。重开时恢复缺失事件，每项只记录一次。便签标题修改、待办重开使用各自的房间行为。
+
+任务 1927 使用两个原生 Player 进程，从启动关卡进入常规房间。首个进程完成教学、完成并重开待办、保存便签。第二个进程读回三项记录，结束正计时并完成第一章。最终存档包含四条事件。Lua 回归覆盖待办与便签的主存档写入失败，以及三项房间工具完成后成就存档写入失败的重开恢复。
+
+本机回放位于 `platform-achievement-reference/room-validation/`，SHA-256 为 `0a360397a00f0bbf4982364818bf168e23319c6dab859287947aa57126c9a874`。房间事件使用本地存档，Steam 统计、云存档和账户场景使用授权测试会话另行采证。
+
+```powershell
+python -B -m tools.npr_room.tutorial_camera_body stage --room $deskRoom --catalog $bodyCatalog --controller $animatorGraph --chapters $openingChapters --source-receipt $tutorialSource --models $bodyMorphModels --camera-trace $cameraTrace --camera-audio-source $unitySource --face-catalog $plankCatalog --achievements --output $roomCandidate
+python -B tools/npr_room/test_story_signal_room_player.py --player $player --room $deskRoom --resource-root $resources --catalog $bodyCatalog --graph $animatorGraph --chapters $openingChapters --source-receipt $tutorialSource --models $bodyMorphModels --camera-trace $cameraTrace --camera-audio-source $unitySource --face-catalog $plankCatalog --achievements --output $roomAchievementReplay
 ```

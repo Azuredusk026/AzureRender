@@ -1,5 +1,13 @@
 function new_story_player(host, chapters, dialogue, currentLanguage, currentLevel, presentation, labels)
     local progress = new_story_progress(host, chapters)
+    local achievements = new_room_achievements and new_room_achievements(host)
+    if achievements then
+        for _, chapter in ipairs(chapters) do
+            if chapter.category == 18 and progress:canStart(chapter, 1, true) then
+                achievements:once("COMPLETE_TUTORIAL_COUNT")
+            end
+        end
+    end
     local driver = {}
     local player = {}
     local options, seen, automatic, logOpen
@@ -49,6 +57,9 @@ function new_story_player(host, chapters, dialogue, currentLanguage, currentLeve
     function driver:finish(chapter, replay, completed)
         self:clear()
         presentation:finish(chapter, replay, completed)
+        if achievements and completed and not replay and chapter.category == 18 then
+            achievements:once("COMPLETE_TUTORIAL_COUNT")
+        end
     end
 
     function driver:choices(rows, used)

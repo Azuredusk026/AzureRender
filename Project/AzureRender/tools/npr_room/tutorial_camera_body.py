@@ -18,6 +18,7 @@ from tools.npr_room.opening_camera import attach_audio, project as camera_projec
 from tools.npr_room.opening_face_layers import bind as face_program
 from tools.npr_room.pbr_materials import write
 from tools.npr_room.reference_inventory import digest
+from tools.npr_room.room_achievement_events import bind as achievement_programs
 from tools.npr_room.room_geometry import HEROINE_PARTS, copy_room_asset, stage_live_audio_media
 from tools.npr_room.story_body_morphs import MORPH_RECEIPT
 
@@ -98,7 +99,8 @@ def project(room, catalog, controller, chapters, source_receipt, models):
     return graph, script, tutorial, bindings
 
 
-def stage(room, catalog, controller, chapters, source_receipt, models, output, camera_trace=None, camera_audio_source=None, face_catalog=None):
+def stage(room, catalog, controller, chapters, source_receipt, models, output, camera_trace=None,
+          camera_audio_source=None, face_catalog=None, achievements=False):
     body, program, route, states = project(room, catalog, controller, chapters, source_receipt, models)
     camera = load(models / TUTORIAL_RECEIPT)
     camera_path = None
@@ -108,6 +110,7 @@ def stage(room, catalog, controller, chapters, source_receipt, models, output, c
         program, camera_path = camera_project(room, program, camera_trace, camera_audio_source)
     if face_catalog:
         program = face_program(program, load(face_catalog), models, chapters)
+    scripts = achievement_programs(program) if achievements else {"pomodoro.lua": program}
     with tempfile.TemporaryDirectory(prefix="tutorial-camera-room-", dir=output.parent) as workspace:
         target = Path(workspace) / "project"
         assets = target / "assets"
@@ -123,7 +126,8 @@ def stage(room, catalog, controller, chapters, source_receipt, models, output, c
             os.link(model, staged)
         write(assets / GRAPH, body)
         script = assets / "pomodoro.lua"
-        script.write_text(program, encoding="utf-8", newline="\n")
+        for name, content in scripts.items():
+            (assets / name).write_text(content, encoding="utf-8", newline="\n")
         level = assets / "room.azurelevel"
         if camera_audio_source:
             sound = camera_path["cue"]
@@ -156,6 +160,10 @@ def stage(room, catalog, controller, chapters, source_receipt, models, output, c
             write(target / "opening-face-layer-receipt.json", {
                 "schemaVersion": 1, "catalogSHA256": digest(face_catalog), "scriptSHA256": digest(script),
                 "faceGlbSHA256": camera["parts"]["face"]["sha256"]})
+        if achievements:
+            write(target / "room-achievement-events-receipt.json", {
+                "schemaVersion": 1, "controllers": {name: digest(assets / name) for name in scripts},
+                "mode": "local-room-events"})
         if camera_path:
             write(target / "opening-camera-receipt.json", camera_path | {
                 "scriptSHA256": digest(script), "levelSHA256": digest(level)})
@@ -174,9 +182,12 @@ if __name__ == "__main__":
             action.add_argument("--" + name, type=Path, required=True)
     for name in ("camera-trace", "camera-audio-source", "face-catalog"):
         steps.choices["stage"].add_argument("--" + name, type=Path)
+    steps.choices["stage"].add_argument("--achievements", action="store_true")
     args = vars(parser.parse_args())
     arguments = bake_args if args["step"] == "bake" else room_args
     handler = bake if args["step"] == "bake" else stage
     options = {name: args[name].resolve(strict=True) for name in ("camera_trace", "camera_audio_source", "face_catalog")
                if args.get(name)}
+    if args.get("achievements"):
+        options["achievements"] = True
     print(json.dumps(handler(*(args[name.replace("-", "_")].resolve() for name in arguments), **options)))

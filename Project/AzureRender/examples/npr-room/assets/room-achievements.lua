@@ -65,6 +65,7 @@ function new_room_achievements(host, stats)
         return entries
     end
     local function send(key)
+        if not stats then return end
         local prior = stats:progress(key)
         if prior ~= nil and prior ~= 1 then stats:set_progress(key, 1) end
     end
@@ -84,13 +85,14 @@ function new_room_achievements(host, stats)
         return true
     end
     function room:work_time(totalSeconds)
-        if type(totalSeconds) ~= "number" or totalSeconds < 0 then return end
+        if not stats or type(totalSeconds) ~= "number" or totalSeconds < 0 then return end
         local value = math.floor(totalSeconds / 3600)
         if not stat_integer(value) then return end
         local prior = stats:progress(hours)
         if prior ~= nil and prior < value then stats:set_progress(hours, value) end
     end
     function room:penguin()
+        if not stats then return end
         local prior = stats:progress(penguin)
         if prior ~= nil and prior ~= 5 then stats:increment(penguin) end
     end

@@ -17,12 +17,13 @@ from tools.npr_room.opening_camera import attach_audio, project as camera_projec
 from tools.npr_room.opening_face_layers import bind as face_program
 from tools.npr_room.pbr_materials import write
 from tools.npr_room.reference_inventory import digest
+from tools.npr_room.room_achievement_events import bind as achievement_programs
 from tools.npr_room.story_chapters import lua_value
 from tools.npr_room.tutorial_camera_body import project as tutorial_project
 
 
 @contextmanager
-def entry(room, graph, program, models=None, camera_sound=None, camera_source=None):
+def entry(room, graph, program, models=None, camera_sound=None, camera_source=None, room_scripts=None):
     tag = "capture-main-conditional"
     root = room / "assets"
     names = {kind: tag + suffix for kind, suffix in (
@@ -57,6 +58,8 @@ def entry(room, graph, program, models=None, camera_sound=None, camera_source=No
         assert audio_file.is_relative_to(camera_source / "Assets") and digest(audio_file) == camera_sound["sha256"]
         links[root / camera_sound["asset"]] = audio_file
     animators, timers = 0, 0
+    script_files = {}
+    extra_scripts = room_scripts or {}
     for node in scene["nodes"]:
         for kind, value in node["components"].items():
             data = value["data"]
@@ -66,13 +69,20 @@ def entry(room, graph, program, models=None, camera_sound=None, camera_source=No
             if kind == "azure.script" and data.get("asset") == "assets:/pomodoro.lua":
                 data["asset"] = paths["script"]
                 timers += 1
+            elif kind == "azure.script" and data.get("asset", "").removeprefix("assets:/") in extra_scripts:
+                original = data["asset"].removeprefix("assets:/")
+                alias = tag + "-" + original
+                data["asset"] = "assets:/" + alias
+                script_files[root / alias] = extra_scripts[original]
     assert (animators, timers) == (7, 1)
+    if room_scripts and len(script_files) != len(room_scripts):
+        raise ValueError("The room does not bind every requested controller")
     descriptor = room / (tag + ".azureproject")
     project = json.loads((room / "project.azureproject").read_bytes())
     assert project["startupScene"] == "assets:/boot.azurelevel"
     project["startupScene"] = paths["boot"]
     fixture = {
-        descriptor: json.dumps(project), **startup,
+        descriptor: json.dumps(project), **startup, **script_files,
         root / names["bootstrap"]: source_bootstrap.replace("assets:/room.azurelevel", paths["level"]),
         root / names["level"]: json.dumps(scene), root / names["script"]: program,
         root / names["graph"]: json.dumps(graph),
@@ -238,7 +248,7 @@ def face_proof(profile, trace, gaze_nodes, plank_nodes):
 
 
 def replay(player, room, resources, catalog, graph, chapters, output, source_receipt=None, models=None,
-           camera_trace=None, camera_audio_source=None, face_catalog=None):
+           camera_trace=None, camera_audio_source=None, face_catalog=None, achievements=False):
     if bool(source_receipt) != bool(models):
         raise ValueError("The tutorial replay needs both source receipt and sampled models")
     original_script = room / "assets/pomodoro.lua"
@@ -267,6 +277,12 @@ def replay(player, room, resources, catalog, graph, chapters, output, source_rec
         gaze_nodes = [part["node"] for part in catalog_data["program"].get("look", {}).get("targets", ())]
         plank_nodes = [part["node"] for part in catalog_data["program"].get("plank", {}).get("targets", ())]
         program = face_program(program, catalog_data, models, chapters) + face_observer(gaze_nodes, plank_nodes)
+    scripts, achieved = {}, []
+    if achievements:
+        if not models:
+            raise ValueError("Achievement replay needs the normal tutorial body route")
+        scripts = achievement_programs(program)
+        program = scripts.pop("pomodoro.lua")
     face_results = {}
     trace = MotionTrace(room, chapters)
     output.mkdir()
@@ -274,12 +290,12 @@ def replay(player, room, resources, catalog, graph, chapters, output, source_rec
     authored = json.loads(chapters.read_bytes())["chapters"]
     tracks = json.loads((room / "music-receipt.json").read_bytes())["tracks"]
     tutorial = None
-    with entry(room, compiled, program, models, sound, camera_audio_source) as (project, level):
+    with entry(room, compiled, program, models, sound, camera_audio_source, scripts) as (project, level):
         if models:
             startup = output / "tutorial"
             save(profile, project, "room-book-layout", [1, "Book_5"])
             with playing(player, project, resources, profile, startup, level_reference=level,
-                         **trace.observe("tutorial")) as (click, press, _, _):
+                         **trace.observe("tutorial")) as (click, press, type_text, _):
                 click(PREFIX + "start")
                 click(PREFIX + "option-1", wait=70)
                 press(77, domain="game")
@@ -290,6 +306,21 @@ def replay(player, room, resources, catalog, graph, chapters, output, source_rec
                 wait_for_slot(profile, "room-unlocks", lambda value: "tutorial_01" in value[1], 40, trace.sample)
                 if face_catalog:
                     face_results["tutorial"] = face_proof(profile, trace, gaze_nodes, plank_nodes)
+                if achievements:
+                    tutorial_key = "COMPLETE_TUTORIAL_COUNT"
+                    assert slot(profile, "room-achievements") == [1, [tutorial_key]]
+                    click("todo-toggle")
+                    click("todo-task-new")
+                    click("todo-task-complete")
+                    click("todo-task-complete")
+                    click("todo-toggle")
+                    click("notes-toggle")
+                    click("note-text")
+                    type_text("Room replay")
+                    click("note-save")
+                    click("notes-toggle")
+                    achieved = [tutorial_key, "COMPLETE_TODO_COUNT", "END_EDIT_NOTE_COUNT"]
+                    assert slot(profile, "room-achievements") == [1, achieved]
             assert slot(profile, "room-book-layout") == [1, "Book_5"]
             assert opened_music(startup) == [Path(tracks[0]["asset"]).name]
             assert "Allocator after unload: buffers=0 images=0" in (startup / "stdout.log").read_text(encoding="utf-8")
@@ -323,11 +354,16 @@ def replay(player, room, resources, catalog, graph, chapters, output, source_rec
             save(profile, project, "room-unlocks", [1, ["tutorial_01"], [], []])
         with playing(player, project, resources, profile, run, level_reference=level,
                      **trace.observe("chapter")) as (click, _, _, _):
+            if achievements:
+                assert slot(profile, "room-achievements") == [1, achieved]
             click("timer-mode-button")
             click("timer-toggle-button")
             time.sleep(1.25)
             click("timer-end-button")
             progress = wait_for_slot(profile, "work-calendar", lambda value: value[0] == 2 and value[2][0] == 2, 12)
+            if achievements:
+                achieved.append("COMPLETE_POMODORO_COUNT")
+                assert slot(profile, "room-achievements") == [1, achieved]
             click(PREFIX + "start", wait=10)
             wait_for_slot(profile, "room-unlocks", lambda value: "main_01" in value[1], 110, trace.sample)
             if face_catalog:
@@ -378,6 +414,9 @@ def replay(player, room, resources, catalog, graph, chapters, output, source_rec
                            "movementPoseError": start_error, "finishPoseError": end_error}
     if face_catalog:
         proof["facialLayers"] = {"catalogSHA256": digest(face_catalog), "responses": face_results}
+    if achievements:
+        assert slot(profile, "room-achievements") == [1, achieved]
+        proof["localAchievements"] = {"keys": achieved, "reloaded": True}
     write(output / "first-chapter-room-replay.json", proof)
     return proof
 
@@ -392,8 +431,10 @@ if __name__ == "__main__":
     parser.add_argument("--camera-trace", type=Path)
     parser.add_argument("--camera-audio-source", type=Path)
     parser.add_argument("--face-catalog", type=Path)
+    parser.add_argument("--achievements", action="store_true")
     args = vars(parser.parse_args())
     print(json.dumps(replay(*(args[name.replace("-", "_")].resolve() for name in parameters),
                             source_receipt=args["source_receipt"], models=args["models"],
                             camera_trace=args["camera_trace"],
-                            camera_audio_source=args["camera_audio_source"], face_catalog=args["face_catalog"])))
+                            camera_audio_source=args["camera_audio_source"], face_catalog=args["face_catalog"],
+                            achievements=args["achievements"])))

@@ -25,6 +25,7 @@ local choiceSpeaking
 local roomLanguage
 local timerVoice
 local roomOpening, timerVoiceActive
+local roomAchievements, timerAchievementSaved
 
 local function durationText(value)
     local seconds = math.floor(value + 1e-7)
@@ -87,8 +88,15 @@ local function idle()
     countupSinceSave = 0
 end
 
+local function syncTimerAchievement()
+    if roomAchievements and not timerAchievementSaved and (not workCalendar or workCalendar:completed_timer()) then
+        timerAchievementSaved = roomAchievements:once("COMPLETE_POMODORO_COUNT")
+    end
+end
+
 local function finish(midway)
-    if workCalendar then workCalendar:settle() end
+    if workCalendar then workCalendar:settle(roomAchievements ~= nil) end
+    syncTimerAchievement()
     if workChoice then workChoice:complete() end
     idle()
     setHeroineState("idle")
@@ -212,6 +220,8 @@ function init()
     settings = loadSettings()
     loadCountup()
     idle()
+    roomAchievements = new_room_achievements and new_room_achievements(self)
+    timerAchievementSaved = false
     local translate
     if room_language_config then
         roomLanguage = new_room_language(room_language_config)
@@ -225,6 +235,7 @@ function init()
     end
     if new_work_calendar then
         workCalendar = new_work_calendar()
+        syncTimerAchievement()
         statsOpen = false
         self:ui_visible("timer-stats", true)
         self:ui_visible("work-stats", false)

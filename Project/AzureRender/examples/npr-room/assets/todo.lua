@@ -1,5 +1,6 @@
 local slot = "todo"
 local lists, nextId, listIndex, taskIndex, ordered, open, writable
+local achievements, completed
 
 local function dateValid(date)
     if date == "" then return true end
@@ -46,6 +47,7 @@ local function load()
         end
     end
     if #value == 0 then return fallback, 2 end
+    completed = document[4] == true
     return value, document[2]
 end
 
@@ -58,16 +60,20 @@ local function cue(id)
     if sound then sound:audio_play() end
 end
 
-local function publish(proposed, id)
+local function publish(proposed, id, completedNow)
     if not writable then
         status("This task list requires a newer version.")
         return false
     end
-    if not self:try_write_save(slot, {1, id, proposed}) then
+    local document = {1, id, proposed}
+    if completed or (achievements and completedNow) then document[4] = true end
+    if not self:try_write_save(slot, document) then
         status("Could not save the task list.")
         return false
     end
     lists, nextId = proposed, id
+    completed = document[4] == true
+    if achievements and completed then achievements:once("COMPLETE_TODO_COUNT") end
     status("")
     return true
 end
@@ -166,7 +172,7 @@ local function changeTask(taskAction)
     end
     local proposed = {table.unpack(lists)}
     proposed[listIndex] = {current[1], current[2], tasks}
-    if publish(proposed, next) then
+    if publish(proposed, next, sound == "todo-complete") then
         if sound then cue(sound) end
         showTask(id)
     end
@@ -191,7 +197,10 @@ local function changeList(listAction)
 end
 
 function init()
+    achievements = new_room_achievements and new_room_achievements(self)
+    completed = false
     lists, nextId = load()
+    if achievements and completed then achievements:once("COMPLETE_TODO_COUNT") end
     listIndex, taskIndex, ordered, open = 1, 1, {}, false
     self:ui_visible("todo-toggle", true)
     self:ui_visible("todo-panel", false)

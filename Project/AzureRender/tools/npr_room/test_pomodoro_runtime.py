@@ -64,6 +64,11 @@ def main():
     run(args.lua, [example / "assets/story-face.lua", example / "tests/story-gaze.lua"])
     run(args.lua, [example / "assets/story-face.lua", example / "tests/story-plank.lua"])
     run(args.lua, [example / "assets/room-achievements.lua", example / "tests/room-achievements.lua"])
+    run(args.lua, [example / "assets/room-achievements.lua", example / "assets/work-calendar.lua",
+                   example / "assets/pomodoro.lua", example / "tests/room-timer-achievement.lua"])
+    for room_tool in ("notes.lua", "todo.lua"):
+        run(args.lua, [example / "assets/room-achievements.lua", example / "assets" / room_tool,
+                       example / "tests/room-tool-achievement.lua"])
     print("Timer, room startup, tools, progression, story and platform fixture checks passed")
 
 

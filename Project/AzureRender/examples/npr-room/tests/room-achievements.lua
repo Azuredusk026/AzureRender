@@ -80,3 +80,10 @@ assert(durable[hours] == 4)
 for _ = 1, 7 do room:penguin() end
 assert(durable[kou] == 5)
 assert(room:once(notes) and save[2][1] == todo and save[2][2] == notes and writes == 3)
+
+local offline = new_room_achievements(host)
+assert(offline:once("COMPLETE_POMODORO_COUNT"))
+assert(save[2][3] == "COMPLETE_POMODORO_COUNT" and writes == 4)
+offline:restore(true, {}, 0, 3600)
+offline:penguin()
+assert(offline:once("COMPLETE_POMODORO_COUNT") and writes == 4)

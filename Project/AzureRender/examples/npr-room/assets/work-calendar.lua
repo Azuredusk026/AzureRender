@@ -25,10 +25,10 @@ local function readWorkDays(rewards)
             and type(exp) == "number" and exp >= 0 and exp < math.huge
             and type(points) == "number" and points >= 0 and math.tointeger(points)
             and type(active) == "number" and active >= 0 and active < math.huge then
-            return result, true, value[3], active
+            return result, true, value[3], active, value[5] == true
         end
     end
-    return result, true, initial, 0
+    return result, true, initial, 0, value[1] == 1 and value[3] == true
 end
 
 local function encodeWorkDays(data)
@@ -49,9 +49,10 @@ end
 
 function new_work_calendar()
     local rewards = work_reward_config
-    local saved, _, progression, interrupted = readWorkDays(rewards)
+    local saved, _, progression, interrupted, completedTimer = readWorkDays(rewards)
     local pending = {}
     local pendingSettlements, pendingActive = {}, 0
+    local pendingCompletion = false
     local recoverPending = interrupted > 0
     local lastDate, elapsed = nil, 0
     local calendar = {}
@@ -62,8 +63,8 @@ function new_work_calendar()
     end
 
     function calendar:flush()
-        if next(pending) == nil and #pendingSettlements == 0 then return true end
-        local current, writable, earned, active = readWorkDays(rewards)
+        if next(pending) == nil and #pendingSettlements == 0 and not pendingCompletion then return true end
+        local current, writable, earned, active, completed = readWorkDays(rewards)
         if not writable then return false end
         for day, delta in pairs(pending) do current[day] = (current[day] or 0) + delta end
         local days = encodeWorkDays(current)
@@ -75,18 +76,26 @@ function new_work_calendar()
             end
             document = {2, days, earned, active + pendingActive}
         end
+        completed = completed or pendingCompletion
+        if completed then document[rewards and 5 or 3] = true end
         if not runtime:try_write_save(workSlot, document) then return false end
         saved, pending, elapsed = current, {}, 0
         progression, pendingSettlements, pendingActive = earned, {}, 0
+        completedTimer, pendingCompletion = completed, false
         return true
     end
 
-    function calendar:settle()
+    function calendar:settle(recordCompletion)
+        pendingCompletion = pendingCompletion or (recordCompletion and not completedTimer) or false
         if rewards then
             pendingSettlements[#pendingSettlements + 1] = pendingActive
             pendingActive = 0
         end
         return self:flush()
+    end
+
+    function calendar:completed_timer()
+        return completedTimer == true
     end
 
     function calendar:recover()
