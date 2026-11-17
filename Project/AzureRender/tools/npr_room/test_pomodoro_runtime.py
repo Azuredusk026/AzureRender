@@ -59,7 +59,8 @@ def main():
     run(args.lua, [example / "assets/story-book-layout.lua", example / "tests/story-book-layout.lua"])
     run(args.lua, [example / "assets/story-body.lua", example / "tests/story-body.lua"])
     run(args.lua, [example / "assets/story-desk.lua", example / "tests/story-desk.lua"])
-    print("Timer state, cues, room startup, notes, todo, work calendar, progression, language and voice selector checks passed")
+    run(args.lua, [example / "assets/room-achievements.lua", example / "tests/room-achievements.lua"])
+    print("Timer, room startup, tools, progression, story and platform fixture checks passed")
 
 
 if __name__ == "__main__":

@@ -1,6 +1,6 @@
 # 平台场景与验证条件
 
-> 已登记 P0 平台场景，并通过 P6 本机窗口回归。平台实机结果按应用构建和测试身份单独归档。
+> 已登记 P0 平台场景，并通过 P6 本机窗口回归及成就夹具回放。平台实机结果按应用构建和测试身份单独归档。
 
 移植基线为 Recovery Windows 1.17.3。平台采证可使用 [Steam 1.18.1 参考构建](steam-reference.md)。[源接口清单](platform-scenarios.json)保存相关程序集类型和导出文件摘要。
 
@@ -27,4 +27,24 @@
 
 ```powershell
 python -B tools/npr_room/test_room_window_player.py --player $player --project $roomProject --resource-root $resources --output $windowReplay
+```
+
+## 成就统计夹具
+
+`SteamAchievements` 在平台初始化后写入统计。增加进度时先读当前值；写入成功后更新本地缓存，再提交统计。是否已持久化以重开后读到的结果为准。
+
+`AchievementService` 从教学、章节和本地事件记录恢复一次性成就。小时统计采用已完成工作时长的整小时数。房间记录使用版本为 1 的 `room-achievements` 存档。
+
+| 来源 | SHA-256 |
+| --- | --- |
+| `SteamAchievements.cs` | `396b1a6bb6b8a0cc8e0e3cb2a5846017e0a8e2fb4216a31ea08cbcd117e98296` |
+| `AchievementService.cs` | `39f0ca193fde0e89ee375d93317db6ec7c109ae386bfbb747ae70e785e6c3811` |
+| `AchievementNoticeService.cs` | `e5adede9775a7a49bae770aff5f216c0e5976ac402f3976e6c99fb7deac132a8` |
+
+Lua 回归注入初始化、读取、写入和提交失败。任务 1878 在四个独立 Player 中测试待办成就。离线触发只写房间记录；提交失败时可读到缓存值。第三次启动补交成功，第四次读回统计且未重复写入。
+
+回放报告位于本机 `platform-achievement-reference/local-validation/`。报告 SHA-256 为 `a0ffc5d5f74229f78d9886a45154bd14092e19ada9545092dbd6cea89a2504c0`。记录使用本地夹具，常规房间事件接线及 Steam 真实统计仍需分别验收。
+
+```powershell
+python -B tools/npr_room/test_achievement_store_player.py --player $player --resource-root $resources --output $localAchievementReplay
 ```
