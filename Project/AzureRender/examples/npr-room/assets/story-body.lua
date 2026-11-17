@@ -1,15 +1,22 @@
-function new_story_body(select, states)
-    local motion, current = {}, nil
+function new_story_body(select, states, routes)
+    local motion, current, route = {}, nil, nil
     local preparation = {Text = true, ChangeMotion = true, AddTextLoop = true, DirectionGameStartCamera = true}
 
     local function play(number)
         if number == -1 or current == number then return end
-        select(assert(states[tostring(number)], "Missing opening body motion " .. tostring(number)))
+        local bindings = route and route.signals or states
+        select(assert(bindings[tostring(number)], "Missing opening body motion " .. tostring(number)))
         current = number
     end
 
     function motion:begin(chapter)
         current = nil
+        route = routes and routes[chapter.group]
+        if route then
+            select(route.entry)
+            current = 0
+            return
+        end
         for _, row in ipairs(chapter.commands) do
             if preparation[row.command] then
                 local number = row.bodyMotion or -1
@@ -25,7 +32,7 @@ function new_story_body(select, states)
 
     function motion:finish()
         select("idle")
-        current = nil
+        current, route = nil, nil
     end
 
     return motion

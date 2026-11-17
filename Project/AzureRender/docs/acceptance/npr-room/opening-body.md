@@ -62,6 +62,23 @@
 | 常规房间装配清单 | `08b79d44119ee9d9d73c51ae5c602c574db0b8f660b9904c15636935e743b0ff` |
 | 常规剧情回放 | `73b28c56f51c74d6de3cedcedea406c95cb762eb719fcaa3ea019b5fd1335c07` |
 
+## 第一章动作返回
+
+第一章动作图根据原控制器的 `MotionType` 条件生成入口和返回路径。坐姿指令保留当前动作的收尾片段。1003 指令在等待状态触发一次手势，手势结束后返回等待。教学沿用本页登记的动作入口。
+
+任务 1874 使用 Unity 2022.3.62f2c1 读取原控制器和 13 个源片段。以 60 Hz 记录 1,140 帧，每条记录包含原状态路径及混合时机。程序覆盖提前返回、入场期间发出手势指令，以及手势结束后回坐姿。
+
+任务 1875 在原生 Player 上用同一指令序列回放 1,150 帧。18 次转场顺序一致，起始时刻最多相差 2 帧。七个部件逐帧同步，1003 手势进入一次，退出时 GPU 图像和缓冲区计数归零。
+
+| 记录 | SHA-256 |
+| --- | --- |
+| 原控制器采样输入 | `f1543508e58055947ddf2fc67dc76551716d70983dd7db7388e0fb825c7e0fe7` |
+| Unity 状态与混合记录 | `9d16aed313f3715ee546aa612e54ea8a66a9c5ecdab228b0b43227b23a7331fa` |
+| 房间动作图 | `820312b7e6e1acab68ba8c69594ec1e3813503798ca2ba73c0af40d623b0318f` |
+| 原生对照报告 | `838e28952486b3e249bba263b18f7929bb06dfe5bbe2c7824bbcef947be7f273` |
+
+本机 `story-motion-reference/first-chapter-controller/` 保存采样及回放记录。装配入口为 `tools.npr_room.build_story_signal_room`。整房验收需从启动关卡重跑教学和第一章，并复查书本、进度及语音。图层叠加和教学条件转场各自采证。
+
 ## 复验
 
 ```powershell
@@ -74,4 +91,8 @@ python -B tools/npr_room/test_story_body_player.py --player $player --room $stor
 python -B -m tools.npr_room.build_story_motion_room --room $bookRoom --catalog $bodyCatalog --chapters $openingChapters --output $storyMotionRoom
 python -B tools/npr_room/test_animation_signals_player.py --player $player --room $storyMotionRoom --resource-root $resources --output $signalReplay
 python -B tools/npr_room/test_story_player.py --normal-room --verify-books --verify-body --player $player --room $storyMotionRoom --resource-root $resources --chapters $openingChapters --inventory $storyInventory --output $motionRouteReplay
+python -B -m tools.npr_room.story_body_probe --source $unitySource --layout $avatarProbe --catalog $bodyCatalog --graph $animatorGraph --output $unityProbe
+& $unity -batchmode -nographics -quit -projectPath $unityProbe -executeMethod StoryBodyControllerProbe.Run -logFile $unityLog
+python -B tools/npr_room/test_story_signals_player.py --player $player --room $deskRoom --resource-root $resources --catalog $bodyCatalog --graph $animatorGraph --chapters $openingChapters --source-trace $unityTrace --output $firstChapterReplay
+python -B -m tools.npr_room.build_story_signal_room --room $deskRoom --catalog $bodyCatalog --graph $animatorGraph --chapters $openingChapters --output $signalRoom
 ```

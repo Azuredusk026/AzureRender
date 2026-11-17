@@ -19,3 +19,18 @@ motion:begin({commands = {row("Text", 12)}})
 assert(played[#played] == "nod")
 motion:finish()
 assert(played[#played] == "idle")
+
+played = {}
+local chapter = {group = "main_01", commands = {row("Text", 0)}}
+motion = new_story_body(select, {["0"] = "legacy-base", ["12"] = "nod"}, {
+    main_01 = {entry = "main-base", signals = {["0"] = "main-0", ["5"] = "main-5", ["1003"] = "main-1003"}}
+})
+motion:begin(chapter)
+motion:row(chapter.commands[1])
+motion:row(row("Text", 5))
+motion:row(row("Text", -1))
+motion:row(row("Text", 0))
+motion:row(row("Text", 1003))
+motion:finish()
+motion:begin({group = "tutorial_01", commands = {row("Text", 12)}})
+assert(table.concat(played, ",") == "main-base,main-5,main-0,main-1003,idle,nod")
