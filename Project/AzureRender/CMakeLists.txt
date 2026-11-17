@@ -581,6 +581,7 @@ compile_shader(
     DEFINES AZURE_BINDLESS=1
     OUTPUT_NAME shadow_bindless.frag)
 compile_shader("${SHADER_SOURCE_DIR}/inner_outline.vert")
+compile_shader("${SHADER_SOURCE_DIR}/monochrome_screen_noise.frag")
 compile_shader("${SHADER_SOURCE_DIR}/inner_outline.frag")
 compile_shader("${SHADER_SOURCE_DIR}/inner_outline.frag"
     DEFINES AZURE_SHOWCASE_DISPLAY=1
@@ -2459,6 +2460,9 @@ if(BUILD_TESTING)
     set_tests_properties(AzureEngine.MaterialFixtureGpu PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 240)
     add_test(NAME AzureEngine.PresentationGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_game_presentation.py" --executable $<TARGET_FILE:AzurePlayer> --project "${CMAKE_CURRENT_SOURCE_DIR}/assets_public/gameplay/project.azureproject")
     set_tests_properties(AzureEngine.PresentationGpu PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 180)
+    add_test(NAME AzureEngine.ScreenNoiseGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_screen_noise_player.py"
+        --player $<TARGET_FILE:AzurePlayer> --resource-root "${CMAKE_CURRENT_BINARY_DIR}")
+    set_tests_properties(AzureEngine.ScreenNoiseGpu PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 420)
     add_test(NAME AzureEngine.EditorHost COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_editor_workflow.py" --executable $<TARGET_FILE:AzureRender> --project "${CMAKE_CURRENT_SOURCE_DIR}/assets_public/gameplay/project.azureproject")
     add_test(NAME AzureEngine.EditorPlayable COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_editor_playable.py" --executable $<TARGET_FILE:AzureRender>)
     set_tests_properties(AzureEngine.EditorPlayable PROPERTIES LABELS "gpu" TIMEOUT 240)

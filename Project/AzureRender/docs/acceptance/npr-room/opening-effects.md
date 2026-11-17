@@ -22,6 +22,15 @@
 
 Vulkan 全屏测试使用相同的底色、合成系数和时间输入。任务 1827 与 1828 的 172,800 个像素逐次一致，校验层错误数和退出后的分配数均为零。与 D3D11 对照时，控制帧逐像素一致，两帧活动噪声分别有 6,712 和 6,223 个像素位置存在差异，平均 RGB 绝对误差为 0.00583 和 0.00540。精确噪声位置及完整房间合成继续按 P5 验收。报告位于 `vulkan-noise-comparison.json`。
 
+## 原生画面合成
+
+版本 1 的 `azure.screen-noise` 组件接受 0 至 1 的透明度。默认值 0 对应原画面。活动场景包含多个组件时，取其中的最大透明度，以帧时间推进图案。全屏绘制位于色彩处理和抗锯齿之后、游戏界面之前。
+
+任务 1837 使用 640×360 的四个独立 Player 进程。未声明组件和使用默认值时，三帧的像素逐帧一致。脚本设置 0.25 后，首个固定模拟步生成的图像与同透明度的场景数据一致。39,084 个背景像素在相邻采样之间改变噪声图案。不透明界面抽样区保持原色，四个进程正常退出后的分配数均为零。
+
+精简证据位于 `windows-opening-reference/player-validation/`。剧情指令的时序及完整特效组合使用房间回放验收。
+同一 Player 的房间回归覆盖两个进程的笔记编辑、排序、删除、重开及存档版本保护。
+
 ## 复验
 
 ```powershell
@@ -38,4 +47,5 @@ python -B -m tools.npr_room.windows_noise_probe verify --first $originalCapture 
 & $vulkanNoiseProbe $fullscreenVertex $noiseFragment $vulkanCapture
 & $vulkanNoiseProbe $fullscreenVertex $noiseFragment $vulkanRepeatCapture
 python -B -m tools.npr_room.windows_noise_probe compare --reference $originalCapture --candidate $vulkanCapture --repeat $vulkanRepeatCapture --output $vulkanComparison
+python -B tools/test_screen_noise_player.py --player $player --resource-root $runtimeResources --output $playerNoiseReplay
 ```

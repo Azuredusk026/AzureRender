@@ -574,4 +574,5 @@ private:
         const VkDebugUtilsMessengerCallbackDataEXT* callbackData,
         void* userData);
     static void populateDebugMessengerCreateInfo(VkDebugUtilsMessengerCreateInfoEXT& createInfo);
+    VkPipeline screenNoisePipeline_ = VK_NULL_HANDLE;
 };

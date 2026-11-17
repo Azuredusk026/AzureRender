@@ -134,7 +134,7 @@ P3 按功能组实施与验收。完成一个功能组后更新矩阵，再继�
 [阴天房间光照](../acceptance/npr-room/cloudy-lighting.md)登记原版灯具、固定镜头渲染对照和房间回归。
 [房间底色与主纹理](../acceptance/npr-room/room-base-surfaces.md)登记静态房间和道具的 170 个原材质绑定及固定镜头回放。
 [Windows 窗景大气来源](../acceptance/npr-room/windows-atmosphere.md)登记原着色器、资源绑定和四个时段的运行参数。
-[开场全屏特效](../acceptance/npr-room/opening-effects.md)登记五个原版程序、全屏通道顺序和原材质。
+[开场全屏特效](../acceptance/npr-room/opening-effects.md)登记五个原版程序、全屏通道顺序和原材质。单色噪声通过原生组件合成，覆盖默认画面、脚本设置和游戏界面区域。
 
 - [ ] 按帧确认人物、房间、窗景与 UI 的合成顺序。重建使用中的色带、阴影、发丝、轮廓、透明、窗外环境、光照和后处理。原 D3D11 着色器及配置用于识别参考效果，Vulkan 实现按对应结果验收。
 - [ ] 逐一加载 P0 确认的窗景，并覆盖现有 29 种参考窗景。对每类截图记录镜头、时间、色彩、光线和动画姿态。核查桌椅、皮肤、头发、窗与 UI 的区域结果。

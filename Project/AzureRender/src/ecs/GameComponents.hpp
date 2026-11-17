@@ -207,4 +207,9 @@ struct GameUiDocument {
     AZURE_FIELD("Enabled", 0, 1)
     bool enabled = true;
 };
+AZURE_TYPE("azure.screen-noise", 1)
+struct ScreenNoise {
+    AZURE_FIELD("Opacity", 0, 1)
+    float opacity = 0;
+};
 } // namespace azurerender::game

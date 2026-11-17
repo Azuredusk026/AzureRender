@@ -326,6 +326,10 @@ void AzureRenderApp::cleanupSwapchain() {
         vkDestroyPipeline(device_, hudPipeline_, nullptr);
         hudPipeline_ = VK_NULL_HANDLE;
     }
+    if (screenNoisePipeline_ != VK_NULL_HANDLE) {
+        vkDestroyPipeline(device_, screenNoisePipeline_, nullptr);
+        screenNoisePipeline_ = VK_NULL_HANDLE;
+    }
     if (postProcessPipelineLayout_ != VK_NULL_HANDLE) {
         vkDestroyPipelineLayout(
             device_,

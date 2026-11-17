@@ -2,6 +2,7 @@
 #include "AzureRenderApp.hpp"
 #include "AzureRenderInternal.hpp"
 #include "diagnostics/RuntimeDiagnostics.hpp"
+#include "ecs/GameComponents.hpp"
 #include "render/CameraProjection.hpp"
 #if AZURE_WITH_EDITOR
 #include "editor/EditorCameraController.hpp"
@@ -1144,6 +1145,16 @@ void AzureRenderApp::recordCommandBuffer(
         graph.use(pass,resources.shadow,azurerender::RenderGraphUsage::Sampled,false);
     };
     auto* spatial=showcaseDisplay ? nullptr : spatialAntiAliasing_.at(imageIndex).get();
+    float noiseOpacity = 0;
+    if (effectiveRenderSettings_.diagnosticView == 0) {
+        if (const auto* runtime = activeRuntime()) {
+            const auto* noise = runtime->world().findComponentArray<azurerender::game::ScreenNoise>();
+            if (noise) {
+                for (const auto& value : noise->dense())
+                    noiseOpacity = std::max(noiseOpacity, value.opacity);
+            }
+        }
+    }
     std::optional<std::uint32_t> linearDisplay;
     if (spatial) {
         linearDisplay=importAttachment("linear-display",spatial->inputImage().image,VK_IMAGE_ASPECT_COLOR_BIT);
@@ -1175,6 +1186,15 @@ void AzureRenderApp::recordCommandBuffer(
             encodeSrgb,effectiveRenderSettings_.diagnosticView!=0);
     } else {
         drawGrade();
+    }
+    if (noiseOpacity > 0) {
+        const std::array<float, 4> noise{
+            noiseOpacity, static_cast<float>(frame.timeSeconds),
+            static_cast<float>(renderExtent_.width), static_cast<float>(renderExtent_.height)};
+        vkCmdBindPipeline(commandBuffer, VK_PIPELINE_BIND_POINT_GRAPHICS, screenNoisePipeline_);
+        vkCmdPushConstants(commandBuffer, postProcessPipelineLayout_, VK_SHADER_STAGE_FRAGMENT_BIT,
+            0, sizeof(noise), noise.data());
+        vkCmdDraw(commandBuffer, 3, 1, 0, 0);
     }
     if ((hudEnabled_ || runOptions_.technicalSequence) &&
         hudVertexCounts_[currentFrame_] > 0) {
