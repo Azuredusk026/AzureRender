@@ -8,8 +8,8 @@
 </style>
 <button id="display-toggle" data-action="display-toggle" style="display: none;">Display</button>
 <div id="display-panel" style="display: none;">
-  <div class="display-row">Window mode <button id="display-mode" data-action="display-mode">Windowed</button></div>
-  <div class="display-row" id="display-resolution-row">Resolution <button id="display-resolution" data-action="display-resolution">Custom</button></div>
-  <div class="display-row">Always on top <button id="display-topmost" data-action="display-topmost">Off</button></div>
+  <div class="display-row"><span id="display-mode-label">Window mode</span> <button id="display-mode" data-action="display-mode">Windowed</button></div>
+  <div class="display-row" id="display-resolution-row"><span id="display-resolution-label">Resolution</span> <button id="display-resolution" data-action="display-resolution">Custom</button></div>
+  <div class="display-row"><span id="display-topmost-label">Always on top</span> <button id="display-topmost" data-action="display-topmost">Off</button></div>
   <span id="display-status"></span>
 </div>

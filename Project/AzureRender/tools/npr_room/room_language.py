@@ -61,9 +61,9 @@ def read_locale_ids(path):
     return ids
 
 
-def ui_strings(rows):
+def ui_strings(rows, keys=UI_KEYS.values()):
     selected = {}
-    expected = set(UI_KEYS.values())
+    expected = set(keys)
     for row in rows:
         key = row["ID"]
         if key in expected:

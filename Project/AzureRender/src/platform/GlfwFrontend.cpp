@@ -2,6 +2,7 @@
 
 #include <algorithm>
 #include <array>
+#include <limits>
 #include <stdexcept>
 
 #ifdef _WIN32
@@ -20,8 +21,15 @@ constexpr std::array<std::pair<int, int>, 3> windowSizes{{{1280, 720}, {1600, 90
 constexpr UINT kTopmostCommand = 8191;
 constexpr UINT_PTR kTopmostSubclassId = 1;
 
-const wchar_t* topmostMenuTitle(bool topmost) {
-    return topmost ? L"Always on Top(Off)" : L"Always on Top(On)";
+std::wstring wideMenuCaption(std::string_view caption) {
+    if (caption.size() > static_cast<std::size_t>(std::numeric_limits<int>::max())) return {};
+    const auto size = static_cast<int>(caption.size());
+    const auto count = MultiByteToWideChar(CP_UTF8, MB_ERR_INVALID_CHARS, caption.data(), size, nullptr, 0);
+    if (count <= 0) return {};
+    std::wstring result(count, L'\0');
+    if (MultiByteToWideChar(CP_UTF8, MB_ERR_INVALID_CHARS, caption.data(), size, result.data(), count) != count)
+        return {};
+    return result;
 }
 
 LRESULT CALLBACK topmostMenuProcedure(HWND window, UINT message, WPARAM wParam, LPARAM lParam,
@@ -87,7 +95,7 @@ GlfwFrontend::GlfwFrontend(const GlfwFrontendConfig& config) {
 
 GlfwFrontend::~GlfwFrontend() {
     if (window_ != nullptr) {
-        setTopmostMenuEnabled(false);
+        setTopmostMenu(false);
         glfwDestroyWindow(window_);
     }
     glfwTerminate();
@@ -150,13 +158,6 @@ void GlfwFrontend::applyWindowPresentation(WindowMode mode, WindowResolution res
     const auto floating = alwaysOnTop ? GLFW_TRUE : GLFW_FALSE;
     if (glfwGetWindowAttrib(window_, GLFW_FLOATING) != floating)
         glfwSetWindowAttrib(window_, GLFW_FLOATING, floating);
-#ifdef _WIN32
-    if (topmostMenuEnabled_) {
-        const auto menu = GetSystemMenu(glfwGetWin32Window(window_), FALSE);
-        ModifyMenuW(menu, kTopmostCommand, MF_BYCOMMAND | MF_STRING, kTopmostCommand,
-                    topmostMenuTitle(glfwGetWindowAttrib(window_, GLFW_FLOATING) == GLFW_TRUE));
-    }
-#endif
     resolution_ = resolution;
 }
 
@@ -170,9 +171,11 @@ WindowPresentation GlfwFrontend::windowPresentation() {
         glfwGetWindowAttrib(window_, GLFW_FLOATING) == GLFW_TRUE};
 }
 
-void GlfwFrontend::setTopmostMenuEnabled(bool enabled) {
+void GlfwFrontend::setTopmostMenu(bool enabled, std::string_view caption) {
 #ifdef _WIN32
-    if (enabled == topmostMenuEnabled_) return;
+    const bool topmost = glfwGetWindowAttrib(window_, GLFW_FLOATING) == GLFW_TRUE;
+    if (caption.empty()) caption = topmost ? "Always on Top(Off)" : "Always on Top(On)";
+    if (enabled == topmostMenuEnabled_ && (!enabled || std::string_view(topmostMenuCaption_) == caption)) return;
     const auto window = glfwGetWin32Window(window_);
     const auto menu = GetSystemMenu(window, FALSE);
     if (!enabled) {
@@ -180,18 +183,27 @@ void GlfwFrontend::setTopmostMenuEnabled(bool enabled) {
         if (menu) RemoveMenu(menu, kTopmostCommand, MF_BYCOMMAND);
         topmostMenuEnabled_ = false;
         topmostMenuToggle_ = false;
+        topmostMenuCaption_.clear();
+        return;
+    }
+    auto title = wideMenuCaption(caption);
+    if (title.empty()) title = topmost ? L"Always on Top(Off)" : L"Always on Top(On)";
+    if (topmostMenuEnabled_) {
+        if (ModifyMenuW(menu, kTopmostCommand, MF_BYCOMMAND | MF_STRING, kTopmostCommand, title.c_str()))
+            topmostMenuCaption_ = caption;
         return;
     }
     if (!menu || !SetWindowSubclass(window, topmostMenuProcedure, kTopmostSubclassId,
                                    reinterpret_cast<DWORD_PTR>(&topmostMenuToggle_))) return;
-    if (!InsertMenuW(menu, 0, MF_BYPOSITION | MF_STRING, kTopmostCommand,
-                     topmostMenuTitle(glfwGetWindowAttrib(window_, GLFW_FLOATING) == GLFW_TRUE))) {
+    if (!InsertMenuW(menu, 0, MF_BYPOSITION | MF_STRING, kTopmostCommand, title.c_str())) {
         RemoveWindowSubclass(window, topmostMenuProcedure, kTopmostSubclassId);
         return;
     }
     topmostMenuEnabled_ = true;
+    topmostMenuCaption_ = caption;
 #else
     (void)enabled;
+    (void)caption;
 #endif
 }
 

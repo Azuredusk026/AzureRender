@@ -5,6 +5,7 @@
 #include <cstdint>
 #include <optional>
 #include <string>
+#include <string_view>
 #include <utility>
 #include <vector>
 #include "platform/FileDropEvent.hpp"
@@ -48,7 +49,7 @@ public:
     [[nodiscard]] std::vector<const char*> requiredVulkanExtensions() const;
     void applyWindowPresentation(WindowMode mode, WindowResolution resolution, bool alwaysOnTop);
     [[nodiscard]] WindowPresentation windowPresentation();
-    void setTopmostMenuEnabled(bool enabled);
+    void setTopmostMenu(bool enabled, std::string_view caption = {});
     [[nodiscard]] bool consumeTopmostMenuToggle();
 
     void pollEvents() const;
@@ -71,6 +72,7 @@ private:
     WindowResolution resolution_ = WindowResolution::Custom;
     bool topmostMenuEnabled_ = false;
     bool topmostMenuToggle_ = false;
+    std::string topmostMenuCaption_;
 };
 
 }  // namespace azurerender

@@ -22,6 +22,7 @@ from tools.npr_room.reference_inventory import digest
 from tools.npr_room.room_achievement_events import bind as achievement_programs
 from tools.npr_room.room_geometry import HEROINE_PARTS, copy_room_asset, stage_live_audio_media
 from tools.npr_room.story_body_morphs import MORPH_RECEIPT
+from tools.npr_room.window_settings_room import bind_display_language, display_localization
 from tools.npr_room.window_settings_room import install as install_window_settings
 
 
@@ -103,8 +104,13 @@ def project(room, catalog, controller, chapters, source_receipt, models):
 
 def stage(room, catalog, controller, chapters, source_receipt, models, output, camera_trace=None,
           camera_audio_source=None, face_catalog=None, achievements=False, blackout_source_lock=None, image_catalog=None,
-          window_settings=False):
+          window_settings=False, window_settings_inventory=None):
     body, program, route, states = project(room, catalog, controller, chapters, source_receipt, models)
+    display_rows = None
+    if window_settings_inventory:
+        display_rows = display_localization(room, window_settings_inventory)
+        program = bind_display_language(program)
+        window_settings = True
     camera = load(models / TUTORIAL_RECEIPT)
     camera_path = None
     if camera_audio_source and not camera_trace:
@@ -145,7 +151,7 @@ def stage(room, catalog, controller, chapters, source_receipt, models, output, c
                 descriptor = target / "project.azureproject"
                 project_configuration = load(descriptor)
                 display = install_window_settings(project_configuration, scene,
-                    (assets / "timer.rml").read_text(encoding="utf-8"))
+                    (assets / "timer.rml").read_text(encoding="utf-8"), localization=display_rows)
                 write(descriptor, project_configuration)
                 for name, content in display.items():
                     (assets / name).write_text(content, encoding="utf-8", newline="\n")
@@ -196,9 +202,12 @@ def stage(room, catalog, controller, chapters, source_receipt, models, output, c
             write(target / "opening-blackout-receipt.json", blackout_receipt | {
                 "scriptSHA256": digest(script), "levelSHA256": digest(level)})
         if display:
-            write(target / "window-settings-receipt.json", {
+            display_receipt = {
                 "schemaVersion": 1, "assets": {name: digest(assets / name) for name in display},
-                "levelSHA256": digest(level), "projectSHA256": digest(target / "project.azureproject")})
+                "levelSHA256": digest(level), "projectSHA256": digest(target / "project.azureproject")}
+            if window_settings_inventory:
+                display_receipt.update(inventorySHA256=digest(window_settings_inventory), timerSHA256=digest(script))
+            write(target / "window-settings-receipt.json", display_receipt)
         if camera_path:
             write(target / "opening-camera-receipt.json", camera_path | {
                 "scriptSHA256": digest(script), "levelSHA256": digest(level)})
@@ -215,15 +224,16 @@ if __name__ == "__main__":
         action = steps.add_parser(step)
         for name in names:
             action.add_argument("--" + name, type=Path, required=True)
-    for name in ("camera-trace", "camera-audio-source", "face-catalog", "blackout-source-lock", "image-catalog"):
+    stage_options = ("camera-trace", "camera-audio-source", "face-catalog", "blackout-source-lock", "image-catalog",
+                     "window-settings-inventory")
+    for name in stage_options:
         steps.choices["stage"].add_argument("--" + name, type=Path)
     steps.choices["stage"].add_argument("--achievements", action="store_true")
     steps.choices["stage"].add_argument("--window-settings", action="store_true")
     args = vars(parser.parse_args())
     arguments = bake_args if args["step"] == "bake" else room_args
     handler = bake if args["step"] == "bake" else stage
-    options = {name: args[name].resolve(strict=True) for name in ("camera_trace", "camera_audio_source", "face_catalog",
-                                                                "blackout_source_lock", "image_catalog")
+    options = {name: args[name].resolve(strict=True) for name in (option.replace("-", "_") for option in stage_options)
                if args.get(name)}
     if args.get("achievements"):
         options["achievements"] = True

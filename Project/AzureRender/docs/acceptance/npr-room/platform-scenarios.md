@@ -53,7 +53,7 @@ python -B tools/npr_room/test_room_window_player.py --player $player --project $
 
 ## 房间显示面板
 
-组装常规房间时使用 `tutorial_camera_body stage --window-settings` 接入显示面板。从房间左下角打开 Display，可切换窗口模式、选择分辨率和设置置顶。使用普通窗口时显示分辨率设置。手动调整窗口会将分辨率记为自定义。设置保存在版本为 1 的 `room-window-settings` 存档中。写入成功后应用选项。交换链重建期间保留当前界面及控件状态。
+组装常规房间时使用 `tutorial_camera_body stage --window-settings-inventory $storyInventory` 接入显示面板和原版文本。从房间左下角打开图形设置，可切换窗口模式、选择分辨率和设置置顶。使用普通窗口时显示分辨率设置。手动调整窗口会将分辨率记为自定义。设置保存在版本为 1 的 `room-window-settings` 存档中。写入成功后应用选项。交换链重建期间保留当前界面及控件状态。`--window-settings` 可组装采用内置英语文本的房间。
 
 任务 1982 从普通窗口进入房间，从 1280×720 切至 1600×900 并启用置顶。面板保持打开，实际截图为 1600×900。无边框窗口覆盖当前 2560×1440 显示器，返回普通窗口时恢复 1600×900。将客户区手动改为 1100×700 后存档记录自定义分辨率。第二个 Player 恢复无边框置顶，并能在面板关闭置顶。两个进程退出后的 GPU 缓冲区和图像计数均为零。
 
@@ -90,6 +90,26 @@ python -B tools/npr_room/test_room_window_player.py --player $player --project $
 
 ```powershell
 python -B tools/npr_room/test_room_window_player.py --player $player --project $roomProject --resource-root $resources --output $windowSystemMenuReplay --system-menu
+```
+
+## 显示设置语言
+
+显示面板和 Windows 系统菜单使用与房间相同的 Recovery 语言清单，包含九条原版文本。语言选择生效时同步更新面板与菜单。组装清单 `window-settings-receipt.json` 记录文本来源、计时器脚本与面板资产的摘要。
+
+任务 1990 在常规入口读到默认简体中文，依次切换日语、英语、繁体中文、葡萄牙语、韩语和俄语，逐项核对 Windows 菜单标题与本地语言存档。俄语下执行系统菜单置顶开关、分辨率调整和无边框切换，并保存 1600×900 的面板截图。第二个 Player 恢复俄语和置顶。任务 1991 验证内置英语文本与窗口流程。
+
+本机证据位于 `platform-achievement-reference/window-preferences/localized/`。
+
+| 记录 | SHA-256 |
+| --- | --- |
+| 原始文本清单 | `20021f5f8e2087916b99ce98cac00ec5ae408faf9c4283db74b27e42e72d6381` |
+| 七种语言回放 | `6ccf444b8ab6f2118d8c444d834affe5eee115b9bbf6a582a1f71d0c3cdc354d` |
+| 内置英语回归 | `493791fe6b42d742be70ea28941b576b0ecef73e13cb79d1f77e87a6c04a02e1` |
+| 俄语显示面板截图 | `a6bb40d85f6ac0b0ea56f892e58e171671cfc62e34859be1e68073623b46c018` |
+| 原生诊断构建清单 | `28ef30394eab0004034961eac32076bad509ccd07a3fee7c8de2cec7a53873f6` |
+
+```powershell
+python -B tools/npr_room/test_room_window_player.py --player $player --project $roomProject --resource-root $resources --output $localizedWindowReplay --system-menu --display-inventory $storyInventory
 ```
 
 ## 成就统计夹具

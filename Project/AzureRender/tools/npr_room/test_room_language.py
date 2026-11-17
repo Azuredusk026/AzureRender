@@ -34,6 +34,16 @@ class RoomLanguageTests(unittest.TestCase):
     def test_unicode_and_control_characters_remain_valid_lua_literals(self):
         self.assertEqual(localized_text_config({"Ru": 'Русский\n"\\'}, ("Ru",)), r'{"Русский\010\"\\"}')
 
+    def test_display_settings_translate_every_source_column(self):
+        from tools.npr_room.window_settings_room import DISPLAY_UI_KEYS, display_config
+
+        rows = [{"ID": key, **{field: field for field in FIELDS}} for key in DISPLAY_UI_KEYS.values()]
+        config = display_config(rows)
+        self.assertIn('topmost = {"Ja", "En", "ZhHans", "ZhHant", "Pt", "Ko", "Ru"}', config)
+        self.assertIn('custom = {"Ja", "En", "ZhHans", "ZhHant", "Pt", "Ko", "Ru"}', config)
+        with self.assertRaisesRegex(ValueError, "Missing UI text"):
+            display_config(rows[:-1])
+
 
 if __name__ == "__main__":
     unittest.main()

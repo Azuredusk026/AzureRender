@@ -247,5 +247,9 @@ struct WindowPresentation {
     bool alwaysOnTop = false;
     AZURE_FIELD("Apply requested settings", 0, 1)
     bool pending = false;
+    AZURE_FIELD("Room language", 0, 7)
+    std::uint32_t locale = 0;
+    AZURE_FIELD("System menu title", 0, 0)
+    std::string menuCaption;
 };
 } // namespace azurerender::game

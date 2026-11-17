@@ -2,7 +2,7 @@ local slot = "room-window-settings"
 local component = "azure.window-presentation"
 local modes = {"Windowed", "Borderless"}
 local resolutions = {"1280 × 720", "1600 × 900", "1920 × 1080", "Custom"}
-local window, open, saved, displayed, writable
+local window, open, saved, displayed, writable, displayedLocale, menuCaption
 
 local function current()
     return {1, window:get(component, "mode"), window:get(component, "resolution"),
@@ -13,12 +13,32 @@ local function same(a, b)
     return a and b and a[2] == b[2] and a[3] == b[3] and a[4] == b[4]
 end
 
+local function label(name, fallback)
+    return display_labels and display_labels[name][displayedLocale] or fallback
+end
+
 local function show(value)
+    local locale = window:get(component, "locale") or 0
+    if locale ~= displayedLocale then
+        displayedLocale = locale
+        self:ui_text("display-toggle", label("display", "Display"))
+        self:ui_text("display-mode-label", label("mode", "Window mode"))
+        self:ui_text("display-resolution-label", label("resolution", "Resolution"))
+        self:ui_text("display-topmost-label", label("topmost", "Always on Top"))
+        displayed = nil
+    end
+    local caption = label("topmost", "Always on Top") .. "("
+        .. (value[4] and label("off", "Off") or label("on", "On")) .. ")"
+    if caption ~= menuCaption then
+        window:set(component, "menuCaption", caption)
+        menuCaption = caption
+    end
     if not open or same(displayed, value) then return end
-    self:ui_text("display-mode", modes[value[2] + 1])
-    self:ui_text("display-resolution", resolutions[value[3] + 1])
+    self:ui_text("display-mode", label(value[2] == 0 and "windowed" or "borderless", modes[value[2] + 1]))
+    local resolution = value[3] == 3 and label("custom", resolutions[4]) or resolutions[value[3] + 1]
+    self:ui_text("display-resolution", resolution)
     self:ui_visible("display-resolution-row", value[2] == 0)
-    self:ui_text("display-topmost", value[4] and "On" or "Off")
+    self:ui_text("display-topmost", value[4] and label("on", "On") or label("off", "Off"))
     displayed = value
 end
 
@@ -46,6 +66,7 @@ end
 function init()
     window = assert(self:find("room-display-window"))
     open, displayed, saved = false, nil, nil
+    displayedLocale, menuCaption = nil, nil
     self:ui_visible("display-toggle", true)
     self:ui_visible("display-panel", false)
     local value = self:read_save(slot)

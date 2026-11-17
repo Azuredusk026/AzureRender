@@ -14,7 +14,8 @@ from test_notes_player import playing
 from test_story_player import slot, wait_for_slot
 from test_story_signal_room_player import entry
 from tools.npr_room.build_story_signal_room import GRAPH
-from tools.npr_room.window_settings_room import install
+from tools.npr_room.room_language import FIELDS
+from tools.npr_room.window_settings_room import bind_display_language, display_localization, install
 
 
 def native_placement(window):
@@ -116,7 +117,7 @@ def startup_preferences(player, project, resources, output):
     return report
 
 
-def settings_panel(player, project, resources, output, system_menu=False):
+def settings_panel(player, project, resources, output, system_menu=False, inventory=None):
     output.mkdir()
     profile = output / "profile"
     room = project.parent
@@ -124,7 +125,16 @@ def settings_panel(player, project, resources, output, system_menu=False):
     document = (root / "timer.rml").read_text(encoding="utf-8")
     graph = json.loads((root / GRAPH).read_bytes())
     timer = (root / "pomodoro.lua").read_text(encoding="utf-8")
+    localization = None
+    translated = {}
+    if inventory:
+        localization = display_localization(room, inventory)
+        timer = bind_display_language(timer)
+        translated = {row["ID"]: row for row in localization if row["ID"] in (
+            "ui_setting_general_alwaysontop_title", "ui_global_on", "ui_global_off")}
     prepared = {}
+    locale = "ZhHans" if inventory else "En"
+    locale_titles = {}
 
     def ready(window, _):
         prepared["window"] = window
@@ -132,25 +142,47 @@ def settings_panel(player, project, resources, output, system_menu=False):
     def state():
         return native_placement(prepared["window"])
 
+    def caption(topmost):
+        if not translated:
+            return "Always on Top(Off)" if topmost else "Always on Top(On)"
+        title = translated["ui_setting_general_alwaysontop_title"][locale]
+        verb = translated["ui_global_off" if topmost else "ui_global_on"][locale]
+        return title + "(" + verb + ")"
+
     def menu_toggle(on):
         window = prepared["window"]
-        assert native_menu_title(window) == ("Always on Top(On)" if on else "Always on Top(Off)")
+        assert native_menu_title(window) == caption(not on)
         activate_native_topmost(window)
         saved = wait_for_slot(profile, "room-window-settings", lambda value: value == [1, 0, 3, on], 10)
         deadline = time.monotonic() + 10
-        expected_title = "Always on Top(Off)" if on else "Always on Top(On)"
+        expected_title = caption(on)
         while state()["topmost"] != on or native_menu_title(window) != expected_title:
             assert time.monotonic() < deadline, (state(), native_menu_title(window))
             time.sleep(.03)
         return {"saved": saved, "nativeTopmost": on, "caption": expected_title}
 
     def configure(descriptor, level, prefix):
-        return install(descriptor, level, document, prefix)
+        return install(descriptor, level, document, prefix, localization)
 
     with entry(room, graph, timer, additional_room=configure) as (fixture, level):
         with playing(player, fixture, resources, profile, output / "edit", level_reference=level,
                      on_ready=ready) as (click, _, _, screenshot):
             assert state()["clientPixels"] == [1280, 720]
+            if inventory:
+                window = prepared["window"]
+                assert native_menu_title(window) == caption(False)
+                locale_titles[locale] = caption(False)
+                click("room-language-toggle")
+                for index, selection in enumerate(FIELDS, 1):
+                    if selection == "ZhHans":
+                        continue
+                    click(f"room-language-{index}")
+                    locale = selection
+                    assert slot(profile, "room-language") == [1, index]
+                    observed = native_menu_title(window)
+                    assert observed == caption(False), (locale, observed, caption(False))
+                    locale_titles[locale] = observed
+                click("room-language-toggle")
             menu = [menu_toggle(True), menu_toggle(False)] if system_menu else []
             click("display-toggle")
             click("display-resolution")
@@ -177,6 +209,9 @@ def settings_panel(player, project, resources, output, system_menu=False):
             reopened = state()
             assert reopened["window"] == reopened["monitor"] and not reopened["decorated"] and reopened["topmost"]
             assert slot(profile, "room-window-settings") == selected
+            if inventory:
+                assert slot(profile, "room-language") == [1, FIELDS.index(locale) + 1]
+                assert native_menu_title(prepared["window"]) == caption(True)
             click("display-toggle")
             click("display-topmost")
             assert not state()["topmost"]
@@ -188,6 +223,9 @@ def settings_panel(player, project, resources, output, system_menu=False):
               "panelSHA256": hashlib.sha256(panel.read_bytes()).hexdigest()}
     if system_menu:
         report["systemMenu"] = menu
+    if inventory:
+        report["localeTitles"] = locale_titles
+        report["reopenedLocale"] = locale
     (output / "window-settings-panel-replay.json").write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
     return report
 
@@ -260,7 +298,8 @@ def replay(player, project, resources, output):
     return report
 
 
-def run_in_physical_pixels(player, project, resources, output, preferences=False, panel=False, system_menu=False):
+def run_in_physical_pixels(player, project, resources, output, preferences=False, panel=False, system_menu=False,
+                           display_inventory=None):
     user = ctypes.WinDLL("user32", use_last_error=True)
     set_context = user.SetThreadDpiAwarenessContext
     set_context.argtypes = [ctypes.c_void_p]
@@ -271,7 +310,7 @@ def run_in_physical_pixels(player, project, resources, output, preferences=False
         raise ctypes.WinError(ctypes.get_last_error())
     try:
         if panel or system_menu:
-            return settings_panel(player, project, resources, output, system_menu)
+            return settings_panel(player, project, resources, output, system_menu, display_inventory)
         verify = startup_preferences if preferences else replay
         return verify(player, project, resources, output)
     finally:
@@ -286,7 +325,10 @@ if __name__ == "__main__":
     mode.add_argument("--preferences", action="store_true")
     mode.add_argument("--settings-panel", action="store_true")
     mode.add_argument("--system-menu", action="store_true")
+    parser.add_argument("--display-inventory", type=Path)
     args = parser.parse_args()
+    if args.display_inventory and not (args.settings_panel or args.system_menu):
+        parser.error("--display-inventory requires a display panel or system menu replay")
     print(json.dumps(run_in_physical_pixels(args.player.resolve(), args.project.resolve(),
                                            args.resource_root.resolve(), args.output.resolve(), args.preferences,
-                                           args.settings_panel, args.system_menu)))
+                                           args.settings_panel, args.system_menu, args.display_inventory)))
