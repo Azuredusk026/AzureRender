@@ -20,6 +20,8 @@
 
 任务 1816 使用原生 D3D11 顶点和片元程序，以及原材质的 64×1 sRGB 时间纹理，在固定底色上捕获三个 320×180 RGBA32F 帧。比率为 0 时控制帧逐像素一致。比率为 0.05 时，每个像素按原混合系数与黑色或白色合成，透明度保持为 1。时间从 9.302 秒移到 9.802 秒时，18,319 个像素变化。两次硬件回放的摘要一致，均为 `5a17e42cb1f1dfda269de9d61619865df57ffc4b8500f2e57809b53a96e86389`。
 
+Vulkan 全屏测试使用相同的底色、合成系数和时间输入。任务 1827 与 1828 的 172,800 个像素逐次一致，校验层错误数和退出后的分配数均为零。与 D3D11 对照时，控制帧逐像素一致，两帧活动噪声分别有 6,712 和 6,223 个像素位置存在差异，平均 RGB 绝对误差为 0.00583 和 0.00540。精确噪声位置及完整房间合成继续按 P5 验收。报告位于 `vulkan-noise-comparison.json`。
+
 ## 复验
 
 ```powershell
@@ -31,4 +33,9 @@ python -B -m tools.npr_room.windows_noise_probe prepare --effects $programDirect
 & $noiseProbe $programDirectory $originalCapture
 & $noiseProbe $programDirectory $repeatCapture
 python -B -m tools.npr_room.windows_noise_probe verify --first $originalCapture --repeat $repeatCapture --output $noiseReport
+& $glslc --target-env=vulkan1.3 shaders/inner_outline.vert -o $fullscreenVertex
+& $glslc --target-env=vulkan1.3 shaders/monochrome_screen_noise.frag -o $noiseFragment
+& $vulkanNoiseProbe $fullscreenVertex $noiseFragment $vulkanCapture
+& $vulkanNoiseProbe $fullscreenVertex $noiseFragment $vulkanRepeatCapture
+python -B -m tools.npr_room.windows_noise_probe compare --reference $originalCapture --candidate $vulkanCapture --repeat $vulkanRepeatCapture --output $vulkanComparison
 ```

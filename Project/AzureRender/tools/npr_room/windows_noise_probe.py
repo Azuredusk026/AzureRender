@@ -41,33 +41,56 @@ def prepare(effects, catalog):
             output.write(image.convert("RGBA").tobytes())
 
 
-def verify(first, repeat):
-    checksum = digest(first)
-    if checksum != digest(repeat):
-        raise ValueError("Original noise captures differ under identical inputs")
-    frames = np.fromfile(first, dtype="<f4").reshape(3, 180, 320, 4)
+def frame_counts(frames):
     if not np.array_equal(frames[0], np.broadcast_to(BACKGROUND, frames[0].shape)):
-        raise ValueError("Zero original noise changed the control frame")
+        raise ValueError("Zero noise changed the control frame")
     if not np.isfinite(frames).all() or not np.allclose(frames[:, :, :, 3], 1, atol=1e-7, rtol=0):
-        raise ValueError("Original noise changed the target alpha or produced a non-finite value")
+        raise ValueError("Noise changed the target alpha or produced a non-finite value")
     expected = np.array([[.2375, .475, .7125], [.2875, .525, .7625]], dtype=np.float32)
     count = []
     for frame in frames[1:]:
         unique, pixels = np.unique(frame[..., :3].reshape(-1, 3), axis=0, return_counts=True)
         if unique.shape != expected.shape or not np.allclose(unique, expected, atol=2e-7, rtol=0):
-            raise ValueError("Original noise was not composited at the specified 0.05 ratio")
+            raise ValueError("Noise was not composited at the specified 0.05 ratio")
         count.append([int(value) for value in pixels])
     moving = int(np.count_nonzero(np.any(frames[1] != frames[2], axis=2)))
     if moving < 0.2 * 320 * 180:
-        raise ValueError("Original time input failed to advance the noise pattern")
+        raise ValueError("Time input failed to advance the noise pattern")
+    return count, moving
+
+
+def load_capture(path):
+    return np.fromfile(path, dtype="<f4").reshape(3, 180, 320, 4)
+
+
+def verify(first, repeat):
+    checksum = digest(first)
+    if checksum != digest(repeat):
+        raise ValueError("Original noise captures differ under identical inputs")
+    count, moving = frame_counts(load_capture(first))
     return {"size": [320, 180], "frames": [[9.302, 0], [9.302, .05], [9.802, .05]],
             "pixelCounts": count, "timeChangedPixels": moving, "captureSHA256": checksum}
+
+
+def compare(reference, candidate, repeat):
+    original = load_capture(reference)
+    actual = load_capture(candidate)
+    count, moving = frame_counts(actual)
+    if digest(candidate) != digest(repeat):
+        raise ValueError("Vulkan noise capture changed under identical inputs")
+    original_count, _ = frame_counts(original)
+    difference = np.abs(original - actual)
+    return {"originalSHA256": digest(reference), "vulkanSHA256": digest(candidate),
+            "sourcePixelCounts": original_count, "vulkanPixelCounts": count, "vulkanTimeChangedPixels": moving,
+            "differentPixels": np.count_nonzero(np.any(difference > 1e-6, axis=3), axis=(1, 2)).tolist(),
+            "meanRgbError": difference[..., :3].mean(axis=(1, 2, 3)).tolist()}
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     subparsers = parser.add_subparsers(dest="operation", required=True)
-    options = {"prepare": ("effects", "catalog"), "verify": ("first", "repeat", "output")}
+    options = {"prepare": ("effects", "catalog"), "verify": ("first", "repeat", "output"),
+               "compare": ("reference", "candidate", "repeat", "output")}
     for operation, paths in options.items():
         command = subparsers.add_parser(operation)
         for path in paths:
@@ -76,7 +99,8 @@ if __name__ == "__main__":
     if args.operation == "prepare":
         prepare(args.effects, args.catalog)
     else:
-        report = verify(args.first, args.repeat)
+        report = (verify(args.first, args.repeat) if args.operation == "verify"
+                  else compare(args.reference, args.candidate, args.repeat))
         with args.output.open("x", encoding="utf-8", newline="\n") as output:
             json.dump(report, output, sort_keys=True)
             output.write("\n")
