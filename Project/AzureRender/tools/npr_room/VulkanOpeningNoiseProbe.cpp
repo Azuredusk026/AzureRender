@@ -46,9 +46,11 @@ int main(int argc, char** argv) try {
         throw std::invalid_argument("Expected vertex and fragment shaders, unused capture path and optional source inputs");
     const bool chromatic = argc == 6 && std::string_view(argv[5]) == "chromatic";
     const bool screenMove = argc == 6 && std::string_view(argv[5]) == "screen-move";
-    if (argc == 6 && !chromatic && !screenMove) throw std::invalid_argument("Expected chromatic or screen-move source inputs");
+    const bool glitch = argc == 6 && std::string_view(argv[5]) == "glitch";
+    if (argc == 6 && !chromatic && !screenMove && !glitch)
+        throw std::invalid_argument("Expected chromatic, screen-move or glitch source inputs");
     const bool blackout = argc == 5;
-    const bool textured = blackout || chromatic || screenMove;
+    const bool textured = blackout || chromatic || screenMove || glitch;
     using namespace azurerender;
     test::VulkanComputeFixture host(true);
     auto& backend = *host.backend;
@@ -60,7 +62,7 @@ int main(int argc, char** argv) try {
     VkDescriptorSetLayout descriptors{};
     VkDescriptorPool pool{};
     VkDescriptorSet set{};
-    const unsigned textureCount = screenMove ? 5 : 3;
+    const unsigned textureCount = screenMove ? 5 : glitch ? 2 : 3;
     std::vector<Texture> textures(textured ? textureCount : 0);
     VkPipelineLayout layout{};
     VkShaderModule vertex{}, fragment{};
@@ -93,10 +95,10 @@ int main(int argc, char** argv) try {
     std::array<float, 24> material{};
     if (textured) {
         const std::filesystem::path source(argv[4]);
-        const char* materialFile = blackout ? "blackout-material.bin"
-            : screenMove ? "screen-move-material.bin" : "chromatic-material.bin";
+        const char* materialFile = blackout ? "blackout-material.bin" : screenMove ? "screen-move-material.bin"
+            : glitch ? "glitch-material.bin" : "chromatic-material.bin";
         const auto constants = readBinaryFile((source / materialFile).string());
-        const unsigned materialFloats = blackout ? 20 : screenMove ? 24 : 12;
+        const unsigned materialFloats = blackout ? 20 : screenMove ? 24 : glitch ? 16 : 12;
         if (constants.size() != materialFloats * sizeof(float))
             throw std::invalid_argument("Unexpected source material constants");
         std::memcpy(material.data(), constants.data(), constants.size());
@@ -130,6 +132,10 @@ int main(int argc, char** argv) try {
             upload(2, "screen-move-flow.rgba", {32, 18}, flow);
             upload(3, "screen-move-timeline.rgba", {32, 1}, point);
             uploadScreen(4, "screen-move-source.rgba32f");
+        } else if (glitch) {
+            clamp.filter = VK_FILTER_NEAREST;
+            upload(0, "glitch-timeline.rgba", {64, 1}, linear);
+            upload(1, "glitch-source.rgba", {512, 288}, clamp, VK_FORMAT_R8G8B8A8_UNORM);
         } else {
             upload(0, "chromatic-noise.rgba", {256, 256}, linear);
             upload(1, "chromatic-timeline.rgba", {64, 1}, linear);
@@ -147,7 +153,7 @@ int main(int argc, char** argv) try {
             backend.writeDescriptorImage({set, binding, VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, texture.view, texture.sampler});
         }
     }
-    const auto pushSize = static_cast<unsigned>((blackout ? 12 : (chromatic || screenMove) ? 8 : 4) * sizeof(float));
+    const auto pushSize = static_cast<unsigned>(((blackout || glitch) ? 12 : textured ? 8 : 4) * sizeof(float));
     const rhi::PushConstantRangeDesc range{VK_SHADER_STAGE_FRAGMENT_BIT, pushSize};
     layout = backend.createPipelineLayout(descriptors, &range);
     vertex = backend.createShaderModule(readBinaryFile(argv[1]));
@@ -166,6 +172,7 @@ int main(int argc, char** argv) try {
     if (blackout) samples = {{9.302F, 0, 0}, {9.302F, .5F, 0}, {9.802F, .5F, 0}, {9.302F, 1, 0}, {9.302F, .5F, 1}};
     if (chromatic) samples = {{9.302F, 0, 0}, {9.302F, .2F, 0}, {9.802F, .2F, 0}, {9.302F, .5F, 0}};
     if (screenMove) samples = {{9.302F, 0, 0}, {9.302F, .5F, 0}, {9.802F, .5F, 0}, {9.302F, 1, 0}};
+    if (glitch) samples = {{9.302F, 0, 0}, {9.302F, .5F, 0}, {9.802F, .5F, 0}, {9.302F, .3F, 0}};
     const float precedingRampRow = host.properties.vendorID == 0x10DE ? 1.F : 0.F;
     std::ofstream capture(argv[3], std::ios::binary);
     for (const auto& sample : samples) {
@@ -178,6 +185,17 @@ int main(int argc, char** argv) try {
         if (screenMove)
             parameters = {sample[0], sample[1], material[20], material[21], float(extent.width), float(extent.height),
                           precedingRampRow};
+        if (glitch) {
+            parameters = {sample[0], sample[1], material[4], material[6], material[7], material[12]};
+            if (host.properties.vendorID == 0x8086) {
+                const float step = std::floor(sample[0] * material[7]);
+                parameters[6] = step * 12.9898F + step * 78.233002F;
+                parameters[7] = 1.F;
+            }
+            const std::array<std::uint32_t, 4> sampling{extent.width, extent.height, 0,
+                host.properties.vendorID == 0x10DE ? 1u : 0u};
+            std::memcpy(parameters.data() + 8, sampling.data(), sizeof(sampling));
+        }
         host.submit([&](rhi::ICommandRecorder& commands, VkCommandBuffer native) {
             constexpr VkClearValue background{{{.25F, .5F, .75F, 1}}};
             commands.beginRenderPass({pass, framebuffer, extent, {background}});
@@ -205,7 +223,8 @@ int main(int argc, char** argv) try {
     cleanup.reset();
     if (host.errors.load() || host.allocator.statistics().liveBuffers || host.allocator.statistics().liveImages)
         throw std::runtime_error("Vulkan validation or allocation retirement failed");
-    std::cout << (blackout ? "Blackout" : chromatic ? "Chromatic" : screenMove ? "Screen move" : "Monochrome noise")
+    std::cout << (blackout ? "Blackout" : chromatic ? "Chromatic" : screenMove ? "Screen move"
+              : glitch ? "Glitch" : "Monochrome noise")
               << " sampled on " << host.properties.deviceName << '\n';
     return 0;
 } catch (const std::exception& error) {

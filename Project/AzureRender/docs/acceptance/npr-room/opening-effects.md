@@ -126,6 +126,18 @@ Lua 回归覆盖教学行 14 的 0.7 秒延迟、1 秒持续、历史回放、�
 | NVIDIA 浮点画面 | `4bc7bfe70e7a32e8b533f768cd5dddc9fbf4b03def2255114fac5b1c2447bfea` |
 | 原始采样归档清单 | `5e71c62f8428f4842aa8389502e1e2f984d6f0d4c9a9a187e123fe8b87e6a398` |
 
+## Vulkan 故障合成
+
+着色器按原材质生成主遮罩和反色遮罩。反色遮罩使用比率的 0.03 倍作为判定阈值。故障相机的 RGBA8 目标沿用整数点采样，RTX 4060 在垂直边界取前一行。Intel 的时间角先按原程序分别舍入两个乘积，再由显卡计算正弦。
+
+任务 2045 在两种显卡上各执行两次四帧回放。对应设备的 Direct3D 11 与 Vulkan 画面均有 230,400 个 RGBA32F 像素逐字节一致，通过 Vulkan 校验和资源释放检查。任务 2046 的色差、画面偏移、黑屏及单色噪声与 RTX 4060 归档逐字节一致。
+
+| 记录 | SHA-256 |
+| --- | --- |
+| Intel Vulkan 对照 | `574d3f755ccf296044a0637f1682e33f677ea4f19bf27d69071ec560b6f5745a` |
+| NVIDIA Vulkan 对照 | `604b661dba0dd57a2c4f6a857b53755a760d767d32eb88882a5036f9ca31da46` |
+| Vulkan 故障程序 | `81ed64db433a4c773ccc345f72d5dc98eeac4f995f617bb3a8cc22b7279f3927` |
+
 ## 单色噪声实机参照
 
 任务 1816 使用原生 D3D11 顶点和片元程序，以及原材质的 64×1 sRGB 时间纹理，在固定底色上捕获三个 320×180 RGBA32F 帧。比率为 0 时控制帧逐像素一致。比率为 0.05 时，每个像素按原混合系数与黑色或白色合成，透明度保持为 1。时间从 9.302 秒移到 9.802 秒时，18,319 个像素变化。两次硬件回放的摘要一致，均为 `5a17e42cb1f1dfda269de9d61619865df57ffc4b8500f2e57809b53a96e86389`。
@@ -229,6 +241,10 @@ python -B -m tools.npr_room.windows_noise_probe prepare-glitch --effects $progra
 & $noiseProbe $glitchInputs $glitchCapture glitch $dxgiAdapterIndex
 & $noiseProbe $glitchInputs $glitchRepeat glitch $dxgiAdapterIndex
 python -B -m tools.npr_room.windows_noise_probe verify-glitch --first $glitchCapture --repeat $glitchRepeat --output $glitchReport
+& $glslc --target-env=vulkan1.3 shaders/opening_glitch.frag -o $glitchFragment
+& $vulkanNoiseProbe $fullscreenVertex $glitchFragment $vulkanGlitch $glitchInputs glitch
+& $vulkanNoiseProbe $fullscreenVertex $glitchFragment $vulkanGlitchRepeat $glitchInputs glitch
+python -B -m tools.npr_room.windows_noise_probe compare-glitch --reference $glitchCapture --candidate $vulkanGlitch --repeat $vulkanGlitchRepeat --output $vulkanGlitchReport
 python -B -m tools.npr_room.windows_noise_probe prepare-blackout --effects $programDirectory --catalog $imageCatalog --source $unitySource --output $blackoutInputs
 & $noiseProbe $blackoutInputs $blackoutCapture blackout
 & $noiseProbe $blackoutInputs $blackoutRepeat blackout

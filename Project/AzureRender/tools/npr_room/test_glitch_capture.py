@@ -4,7 +4,7 @@ import unittest
 
 import numpy as np
 
-from tools.npr_room.windows_noise_probe import BACKGROUND, glitch_screen_source, verify_glitch
+from tools.npr_room.windows_noise_probe import BACKGROUND, compare_glitch, glitch_screen_source, verify_glitch
 
 
 class GlitchCaptureTest(unittest.TestCase):
@@ -21,6 +21,11 @@ class GlitchCaptureTest(unittest.TestCase):
             for path in (first, repeat):
                 path.write_bytes(frames.tobytes())
             self.assertEqual(verify_glitch(first, repeat)["changedPixels"], [0, 6400, 11200, 11200])
+            self.assertEqual(compare_glitch(first, first, repeat)["matchingPixels"], 230400)
+            alternate = Path(temporary) / "alternate.rgba32f"
+            alternate.write_bytes(frames[[0, 2, 1, 3]].tobytes())
+            with self.assertRaisesRegex(ValueError, "differs"):
+                compare_glitch(alternate, first, repeat)
             frames[0, 0, 0, 0] = .75
             for path in (first, repeat):
                 path.write_bytes(frames.tobytes())

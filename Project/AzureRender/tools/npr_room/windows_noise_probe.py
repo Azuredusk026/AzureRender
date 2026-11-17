@@ -407,6 +407,19 @@ def verify_glitch(first, repeat):
             "rgbRange": [[float(frame[..., :3].min()), float(frame[..., :3].max())] for frame in capture]}
 
 
+def compare_glitch(reference, candidate, repeat):
+    result = verify_glitch(candidate, repeat)
+    raw = gzip.decompress(reference.read_bytes()) if reference.suffix == ".gz" else reference.read_bytes()
+    expected = np.frombuffer(raw, dtype="<f4").reshape(len(GLITCH_SAMPLES), 180, 320, 4)
+    actual = np.fromfile(candidate, dtype="<f4").reshape(expected.shape)
+    difference = np.abs(actual - expected)
+    counts = np.count_nonzero(np.any(difference > 2e-7, axis=3), axis=(1, 2)).tolist()
+    if any(counts):
+        raise ValueError(f"Vulkan glitch differs from the original on the same adapter: {counts} pixels")
+    return result | {"originalSHA256": sha256(raw).hexdigest(), "matchingPixels": len(GLITCH_SAMPLES) * 320 * 180,
+                     "maxAbsoluteError": difference.max(axis=(1, 2, 3)).tolist()}
+
+
 def frame_counts(frames):
     if not np.array_equal(frames[0], np.broadcast_to(BACKGROUND, frames[0].shape)):
         raise ValueError("Zero noise changed the control frame")
@@ -467,7 +480,8 @@ if __name__ == "__main__":
                "verify-screen-move": ("first", "repeat", "output"),
                "compare-screen-move": ("reference", "candidate", "repeat", "output"),
                "prepare-glitch": ("effects", "catalog", "source", "output"),
-               "verify-glitch": ("first", "repeat", "output")}
+               "verify-glitch": ("first", "repeat", "output"),
+               "compare-glitch": ("reference", "candidate", "repeat", "output")}
     for operation, paths in options.items():
         command = subparsers.add_parser(operation)
         for path in paths:
@@ -493,6 +507,8 @@ if __name__ == "__main__":
             report = compare_screen_move(args.reference, args.candidate, args.repeat)
         elif args.operation == "verify-glitch":
             report = verify_glitch(args.first, args.repeat)
+        elif args.operation == "compare-glitch":
+            report = compare_glitch(args.reference, args.candidate, args.repeat)
         elif args.operation == "compare-chromatic":
             report = compare_chromatic(args.reference, args.candidate, args.repeat)
         elif args.operation == "compare-blackout":
