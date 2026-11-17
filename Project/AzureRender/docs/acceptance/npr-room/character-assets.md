@@ -106,7 +106,7 @@ Recovery 的 19 个 `anim_face_*.anim` 直接绑定同一脸部网格。
 
 任务 1905 以固定帧步回放 631 帧。35,967 项权重与 Unity 对照，最大归一化误差为 0.000014。任务 1906 从常规房间入口跑完教学和第一章。两章均验证眉部表情、语音嘴型和收尾清理。
 
-本机 `story-motion-reference/opening-face/facial-layer/` 保存原生骨架检查、图层输入和回放报告。视线层、身体附加层及原版画面配对分别采证。
+本机 `story-motion-reference/opening-face/facial-layer/` 保存原生骨架检查、图层输入和回放报告。身体附加层及原版画面配对分别采证。
 
 | 记录 | SHA-256 |
 | --- | --- |
@@ -160,12 +160,25 @@ Recovery 的 19 个 `anim_face_*.anim` 直接绑定同一脸部网格。
 
 表达式第二版接收校准姿态、三个正交轴、正负通道速率及偏移。引擎从当前局部旋转分解摆动和扭转，再按各轴速率叠加偏移。形变目标可声明加法，保留身体片段已有权重。
 
-任务 1912 使用 Release 工具链验证新旧表达式读写。原生测试对 15,120 个源旋转求值，最大误差为 0.000046 度。受检程序和构建清单位于本机 `story-motion-reference/opening-face/humanoid-basis/native/`。常规房间视线入口按下游验收运行。
+任务 1912 使用 Release 工具链验证新旧表达式读写。原生测试对 15,120 个源旋转求值，最大误差为 0.000046 度。受检程序和构建清单位于本机 `story-motion-reference/opening-face/humanoid-basis/native/`。常规房间视线入口见下节。
 
 | 记录 | SHA-256 |
 | --- | --- |
 | 独立原生测试程序 | `fa8839d530f1835f37f6ba5362ece0d81e5f18192db359974c9b73e47fd2cd16` |
 | 构建清单 | `22ed45071baed1855448f819ab767539cc902f5c4dacaa717685561dcc7a5b04` |
+
+## 开场视线回放
+
+教学和第一章按剧情指令缓动视线强度。引擎对六个有目标关节的部件叠加胸、颈和头部旋转。原眼部增量进入表情和嘴型计算前的权重。较上层的已绑定目标使用该层结果。
+
+任务 1920 通过两次正常房间启动。两章均记录六部件视线状态和收尾清理，并通过语音、相机、嘴型和存档回归。构建、图层输入及运行报告位于本机 `story-motion-reference/opening-face/gaze-validation/`。
+
+| 记录 | SHA-256 |
+| --- | --- |
+| 原生 Player | `5134a7c70c7c61de6834e7fcbb061c21ec24098027e6251c1af0043efa9b0a11` |
+| 诊断构建清单 | `8b294c1030275e302ac91d970e076d434dfd76b49fd93c8477cb181b25da34c1` |
+| 视线与表情输入 | `7ed64587e1838eae1aefaf98f922baa92f18887586e34cfae0da7223471797e2` |
+| 常规房间回放 | `27ab3081003e48fb58a3a37b20ef46f9cdd5358fa3f46b57d3f58d6274b7a0bb` |
 
 ## 窗景网格
 
@@ -205,6 +218,7 @@ python -B -m tools.npr_room.verify_story_body_morphs --models $bodyMorphModels -
 python -B tools/npr_room/test_story_body_morph_player.py --player $player --room $deskRoom --resource-root $resources --original $tutorialModels --models $bodyMorphModels --output $bodyMorphRender
 & $expressionTest --inspect $bodyMorphFaceGlb $faceSkeleton
 python -B -m tools.npr_room.opening_face_layers --source $unitySource --source-receipt $faceSource --graph $animatorGraph --models $bodyMorphModels --skeleton $faceSkeleton --output $faceCatalog
+python -B -m tools.npr_room.opening_face_layers --source $unitySource --source-receipt $faceSource --graph $animatorGraph --models $bodyMorphModels --skeleton $faceSkeleton --look-basis $lookBasisAudit --look-source-receipt $additiveSource --expression-inspector $expressionTest --output $gazeCatalog
 python -B tools/npr_room/test_story_face_player.py --player $player --room $deskRoom --resource-root $resources --models $bodyMorphModels --catalog $faceCatalog --source-trace $faceTrace --output $faceReplay
 ```
 

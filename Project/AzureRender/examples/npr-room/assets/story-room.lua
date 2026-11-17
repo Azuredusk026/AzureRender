@@ -59,7 +59,7 @@ function new_story_room(host, chapters, tracks, speeds, labels, language, level,
         end
     end
 
-    function presentation:finish()
+    function presentation:finish(chapter, replay)
         clearFocus()
         host:ui_visible("opening-story-input-mask", false)
         if books then books:finish() end
@@ -67,7 +67,7 @@ function new_story_room(host, chapters, tracks, speeds, labels, language, level,
         music:finish()
         noise:finish()
         if camera then camera:finish() end
-        if face then face:finish() end
+        if face then face:finish(chapter, replay) end
     end
 
     return new_story_player(host, chapters, dialogue, language, level, presentation, labels)

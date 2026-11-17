@@ -144,10 +144,13 @@ end
 """
 
 
-def face_observer():
+def face_observer(gaze_nodes):
     return """
 local originalFaceUpdate = update
 local faceSample, voiceSample, finished = nil, nil, false
+local gazeNodes = REPLAY_GAZE_NODES
+local gazeParts = 0
+local gazeCleared = false
 local sawExpression, initialized = false, false
 function update(dt)
     if not initialized then
@@ -160,6 +163,15 @@ function update(dt)
         local pose = actor:get("azure.animator", "expression")
         if pose ~= "" then
             sawExpression = true
+            if #gazeNodes > 0 and pose:find('"humanoidRotations":', 1, true) then
+                local count = 0
+                for _, node in ipairs(gazeNodes) do
+                    local target = assert(self:find(node))
+                    local value = target:get("azure.animator", "expression")
+                    if value:find('"humanoidRotations":', 1, true) then count = count + 1 end
+                end
+                gazeParts = math.max(gazeParts, count)
+            end
             for name, text in pose:gmatch('"targetId":"([^"]+)","weight":([%+%-%d%.eE]+)') do
                 local weight = assert(tonumber(text))
                 if math.abs(weight) > .025 then
@@ -173,19 +185,30 @@ function update(dt)
                 end
             end
         elseif sawExpression then
-            self:write_save("opening-face-room-proof", {1, true, faceSample or false, voiceSample or false})
+            gazeCleared = true
+            for _, node in ipairs(gazeNodes) do
+                local target = assert(self:find(node))
+                if target:get("azure.animator", "expression") ~= "" then gazeCleared = false end
+            end
+            self:write_save("opening-face-room-proof", {1, true, faceSample or false, voiceSample or false,
+                gazeParts, gazeCleared})
             finished = true
         end
     end
     originalFaceUpdate(dt)
 end
-"""
+""".replace("REPLAY_GAZE_NODES", lua_value(gaze_nodes))
 
 
-def face_proof(profile, trace):
+def face_proof(profile, trace, gaze_nodes):
     value = wait_for_slot(profile, "opening-face-room-proof", lambda item: item[1] is True, 12, trace.sample)
     assert value[0] == 1 and value[2] and value[3], value
-    return {"face": value[2], "mouth": value[3], "cleared": value[1]}
+    report = {"face": value[2], "mouth": value[3], "cleared": value[1]}
+    if gaze_nodes:
+        assert value[4] == len(gaze_nodes) and value[5] is True, value
+        report["gazeParts"] = value[4]
+        report["gazeCleared"] = value[5]
+    return report
 
 
 def replay(player, room, resources, catalog, graph, chapters, output, source_receipt=None, models=None,
@@ -209,10 +232,13 @@ def replay(player, room, resources, catalog, graph, chapters, output, source_rec
         track = camera_receipt["track"]
         sound = camera_receipt.get("cue")
         program += camera_observer(track)
+    gaze_nodes = []
     if face_catalog:
         if not models:
             raise ValueError("The real face replay requires body morphology")
-        program = face_program(program, json.loads(face_catalog.read_bytes()), models, chapters) + face_observer()
+        catalog_data = json.loads(face_catalog.read_bytes())
+        gaze_nodes = [part["node"] for part in catalog_data["program"].get("look", {}).get("targets", ())]
+        program = face_program(program, catalog_data, models, chapters) + face_observer(gaze_nodes)
     face_results = {}
     trace = MotionTrace(room, chapters)
     output.mkdir()
@@ -235,7 +261,7 @@ def replay(player, room, resources, catalog, graph, chapters, output, source_rec
                     click(PREFIX + f"option-{option}", wait=85)
                 wait_for_slot(profile, "room-unlocks", lambda value: "tutorial_01" in value[1], 40, trace.sample)
                 if face_catalog:
-                    face_results["tutorial"] = face_proof(profile, trace)
+                    face_results["tutorial"] = face_proof(profile, trace, gaze_nodes)
             assert slot(profile, "room-book-layout") == [1, "Book_5"]
             assert opened_music(startup) == [Path(tracks[0]["asset"]).name]
             assert "Allocator after unload: buffers=0 images=0" in (startup / "stdout.log").read_text(encoding="utf-8")
@@ -277,7 +303,7 @@ def replay(player, room, resources, catalog, graph, chapters, output, source_rec
             click(PREFIX + "start", wait=10)
             wait_for_slot(profile, "room-unlocks", lambda value: "main_01" in value[1], 110, trace.sample)
             if face_catalog:
-                face_results["chapter"] = face_proof(profile, trace)
+                face_results["chapter"] = face_proof(profile, trace, gaze_nodes)
     assert digest(original_script) == original_hash
     voice_rows = [96, 97, 98, 99, 100, 101, 105, 106, 107, 108]
     compare_voices(run, authored, voice_rows)

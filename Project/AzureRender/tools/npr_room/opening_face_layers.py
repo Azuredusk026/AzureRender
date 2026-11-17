@@ -4,14 +4,17 @@ import argparse
 import json
 import math
 from pathlib import Path
+import subprocess
+import tempfile
 
 from tools.build_face_sdf import parse_glb
 from tools.npr_room.build_story_signal_room import EXAMPLE, load
 from tools.npr_room.opening_camera import use_presentation
+from tools.npr_room.opening_look_basis import source_overlay
 from tools.npr_room.pbr_materials import write
 from tools.npr_room.reference_inventory import digest
 from tools.npr_room.skinned_mesh_export import UnityScene, read_morph_curves
-from tools.npr_room.story_body_morphs import FACE, MORPH_RECEIPT
+from tools.npr_room.story_body_morphs import BODY_RECEIPT, FACE, MORPH_RECEIPT
 from tools.npr_room.story_chapters import lua_value
 
 ACTOR = "heroine-face"
@@ -96,6 +99,50 @@ def compile_catalog(source, receipt_path, graph_file, models, skeleton_file):
                         "silent": facial["0"], "voiced": voiced, "speakIn": times["anim_face_talk"], "speakOut": times["_None"]}}
 
 
+def compile_gaze(catalog, source, models, basis_path, receipt, inspector, output_parent):
+    calibration = load(basis_path)
+    clip_sha, seconds, curves, eyes = source_overlay(source, receipt)
+    if clip_sha != calibration["clipSHA256"]:
+        raise ValueError("The gaze basis and its source clip differ")
+    joints = calibration["jointBasis"]
+    model_parts = load(models / BODY_RECEIPT)["parts"]
+    parts = []
+    model_hashes = {}
+    with tempfile.TemporaryDirectory(prefix="gaze-skeleton-", dir=output_parent) as temp:
+        inspection_file = Path(temp) / "skeleton.json"
+        for part, record in sorted(model_parts.items()):
+            model = models / "assets/heroine" / (part + ".glb")
+            if digest(model) != record["sha256"]:
+                raise ValueError(f"Changed gaze target: {part}")
+            document, _ = parse_glb(model)
+            nodes = {row["name"] for row in document["nodes"]}
+            present = [(idx, row) for idx, row in enumerate(joints, 1) if row["joint"] in nodes]
+            if not present:
+                continue
+            subprocess.run([str(inspector), "--inspect", str(model), str(inspection_file)], check=True, cwd=temp)
+            inspected = load(inspection_file)
+            node_paths = {row["name"]: row["path"] for row in inspected["nodes"] if row["name"] in nodes}
+            prefix = {"schemaVersion": 2, "id": "opening-story-gaze", "skeletonFingerprint": inspected["skeletonFingerprint"]}
+            bound = []
+            for index, row in present:
+                data = {"path": node_paths[row["joint"]], **{key: row[key] for key in ("zero", "axes", "rates")}}
+                bound.append({"index": index, "prefix": json.dumps(data, separators=(",", ":"))[:-1] + ',"offset":['})
+            parts.append({"node": "heroine-" + part, "joints": bound,
+                          "prefix": json.dumps(prefix, separators=(",", ":"))[:-1] + ',"humanoidRotations":['})
+            model_hashes[part] = record["sha256"]
+    if not any(part["node"] == ACTOR for part in parts):
+        raise ValueError("The source gaze must bind the native face")
+    slots = {name: idx for idx, name in enumerate(catalog["targets"], 1)}
+    catalog["look"] = {"basisSHA256": digest(basis_path), "receiptSHA256": digest(receipt),
+                       "inspectorSHA256": digest(inspector), "models": model_hashes, "clipSHA256": clip_sha}
+    catalog["program"]["look"] = {
+        "seconds": seconds, "targets": parts,
+        "jointCurves": [[curve_values(curves[name]) for name in row["muscles"]] for row in joints],
+        "eyes": [[slots[name], curve_values(curve)] for name, curve in eyes.items()]
+    }
+    return catalog
+
+
 def source_program():
     return (EXAMPLE / "story-face.lua").read_text(encoding="utf-8").rstrip()
 
@@ -103,6 +150,9 @@ def source_program():
 def bind(script, catalog, models, chapters):
     if catalog["meshSHA256"] != digest(models / FACE) or catalog["chaptersSHA256"] != digest(chapters):
         raise ValueError("Opening expression inputs differ from the staged room")
+    for part, expected in catalog.get("look", {}).get("models", {}).items():
+        if digest(models / "assets/heroine" / (part + ".glb")) != expected:
+            raise ValueError(f"Opening gaze target differs from the staged room: {part}")
     camera = "new_story_camera(self, story_camera_track))"
     desk = "new_story_desk(self, story_desk_poses))"
     factory = camera if camera in script else desk
@@ -127,8 +177,16 @@ if __name__ == "__main__":
     names = ("source", "source-receipt", "graph", "models", "skeleton", "output")
     for name in names:
         parser.add_argument("--" + name, type=Path, required=True)
+    options = ("look-basis", "look-source-receipt", "expression-inspector")
+    for name in options:
+        parser.add_argument("--" + name, type=Path)
     args = vars(parser.parse_args())
     paths = [args[name.replace("-", "_")].resolve() for name in names]
     catalog = compile_catalog(*paths[:-1])
+    basis, receipt, inspector = [args[name.replace("-", "_")] for name in options]
+    if any((basis, receipt, inspector)):
+        if not all((basis, receipt, inspector)):
+            parser.error("Gaze compilation requires the basis, locked source and expression inspector")
+        compile_gaze(catalog, paths[0], paths[3], basis.resolve(), receipt.resolve(), inspector.resolve(), paths[-1].parent)
     write(paths[-1], catalog)
     print(json.dumps({"faceEntries": len(catalog["program"]["facial"]), "targets": len(catalog["targets"])}))

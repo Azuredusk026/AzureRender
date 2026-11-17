@@ -46,8 +46,13 @@ def playing(player, project, resources, profile, output, expected_audio_starts=N
                 return reply.get("value")
 
             while True:
-                assert process.poll() is None and time.monotonic() < deadline
-                query = exchange(address, token, {"op": "query", "name": "game.state"})
+                assert process.poll() is None and time.monotonic() < deadline, (
+                    process.poll(), "normal room did not become ready", level_reference)
+                try:
+                    query = exchange(address, token, {"op": "query", "name": "game.state"})
+                except TimeoutError:
+                    # The main thread can be preparing the room while the listener is already open.
+                    continue
                 if query.get("code") == "Timeout" and not query["passed"]:
                     continue
                 assert query["passed"], query
