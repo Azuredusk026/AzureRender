@@ -4,6 +4,7 @@
     "authorizedPlatformRuns": "open",
     "featureReachability": "open",
     "pairedVisualReferences": "open",
+    "platformScenarioInventory": "mapped",
     "runtimeResourceReachability": "open",
     "staticCatalog": "mapped"
   },
