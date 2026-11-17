@@ -1,4 +1,4 @@
-"""Extract the original Windows atmosphere shader programs and binding tables."""
+"""Extract original Windows shader programs and binding tables."""
 
 import argparse
 import ctypes
@@ -19,6 +19,14 @@ ATMOSPHERE = {
     "ghibli-cloud": "Distant Lands/Cozy/URP/Stylized Clouds (Ghibli Desktop)",
     "fog": "Distant Lands/Cozy/URP/Stylized Fog (Desktop)",
     "moon": "Distant Lands/Cozy/URP/Stylized Moon",
+}
+
+OPENING_EFFECTS = {
+    "chromatic": "Shader Graphs/ScreenColorGlitch",
+    "blackout": "Shader Graphs/ScreenBlackout",
+    "noise": "Shader Graphs/NoiseShader",
+    "screen-move": "Shader Graphs/ScreenMoveGlitch",
+    "glitch": "Shader Graphs/ScreenGlitch",
 }
 
 
@@ -85,7 +93,7 @@ def disassemble(program):
         ctypes.WINFUNCTYPE(ctypes.c_ulong, ctypes.c_void_p)(vtable[2])(blob)
 
 
-def extract(source, manifest, target):
+def extract(source, manifest, target, shaders=ATMOSPHERE):
     # The source archive and its shader inventory are local, private inputs.
     import lz4.block
     import UnityPy
@@ -94,7 +102,7 @@ def extract(source, manifest, target):
     payloads = {obj.path_id: obj for obj in UnityPy.load(str(source)).objects if obj.type.name == "Shader"}
     target.mkdir()
     programs = {}
-    for role, name in ATMOSPHERE.items():
+    for role, name in shaders.items():
         original = locked[name]
         obj = payloads[original["sourcePathId"]]
         shader = obj.read_typetree()
@@ -134,13 +142,15 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     for option in ("source", "manifest", "output"):
         parser.add_argument("--" + option, type=Path, required=True)
+    families = {"atmosphere": ATMOSPHERE, "opening-effects": OPENING_EFFECTS}
+    parser.add_argument("--family", choices=families, default="atmosphere")
     args = parser.parse_args()
     if args.output.exists():
         raise FileExistsError(args.output)
     with tempfile.TemporaryDirectory(prefix="d3d11-programs-", dir=args.output.parent) as container:
         staged = Path(container) / "programs"
-        data = extract(args.source, args.manifest, staged)
-        name = "windows-atmosphere-programs.json"
+        data = extract(args.source, args.manifest, staged, families[args.family])
+        name = f"windows-{args.family}-programs.json"
         (staged / name).write_text(json.dumps(data, sort_keys=True, separators=(",", ":")) + "\n",
                                    encoding="utf-8", newline="\n")
         publish_directory(staged, args.output)
