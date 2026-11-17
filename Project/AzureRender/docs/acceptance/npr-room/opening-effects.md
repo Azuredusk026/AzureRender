@@ -32,6 +32,20 @@
 | Intel 回放报告 | `0b458b877a369810ea4fe87d2e490a68ea1189f5ba7a167735255a73d935d4fe` |
 | NVIDIA 回放报告 | `5cc67f4c47ad2c59d7ba53da390b3d9eb114a360ea224ad2a1cc2ccf57e5b01d` |
 
+## Vulkan 色差合成
+
+Vulkan 着色器以原程序的时间种子计算红色通道位移，读取当前画面，并使用两张原纹理计算颜色扰动和扫描线。零比率的输出采用当前画面。
+
+RTX 4060 的任务 2008 和 2009 各执行四帧。Intel 核显的任务 2011 和 2012 各执行相同四帧。每台显卡的 Vulkan 回放与同一显卡的 Direct3D 11 原程序结果逐字节一致，分别核对 230,400 个 RGBA32F 像素。四次回放均通过 Vulkan 校验与资源释放检查。任务 2010 的单色噪声使用同设备工具对照，黑屏使用同设备归档，两项回归均逐字节一致。
+
+本机报告与编译程序位于 `windows-opening-reference/chromatic-validation/`。常规房间的画面输入与剧情命令另行验收。
+
+| 记录 | SHA-256 |
+| --- | --- |
+| Intel Vulkan 对照 | `e8c57c143c2f61bba2b890d2a0f0e66cdc41e506ef89fd9efdd9556ba4cdef35` |
+| NVIDIA Vulkan 对照 | `b908546625216695623c36e8ac670bf6c96f960883498c2181ced28ea5efef4d` |
+| Vulkan 色差程序 | `e363362f77c2eeccf60bca00745ab3d3e76482e5aa68ef8e059895909af254d7` |
+
 ## 单色噪声实机参照
 
 任务 1816 使用原生 D3D11 顶点和片元程序，以及原材质的 64×1 sRGB 时间纹理，在固定底色上捕获三个 320×180 RGBA32F 帧。比率为 0 时控制帧逐像素一致。比率为 0.05 时，每个像素按原混合系数与黑色或白色合成，透明度保持为 1。时间从 9.302 秒移到 9.802 秒时，18,319 个像素变化。两次硬件回放的摘要一致，均为 `5a17e42cb1f1dfda269de9d61619865df57ffc4b8500f2e57809b53a96e86389`。
@@ -117,6 +131,11 @@ python -B -m tools.npr_room.windows_noise_probe prepare-chromatic --effects $pro
 & $noiseProbe $chromaticInputs $chromaticCapture chromatic $dxgiAdapterIndex
 & $noiseProbe $chromaticInputs $chromaticRepeat chromatic $dxgiAdapterIndex
 python -B -m tools.npr_room.windows_noise_probe verify-chromatic --first $chromaticCapture --repeat $chromaticRepeat --output $chromaticReport
+& $glslc --target-env=vulkan1.3 shaders/inner_outline.vert -o $fullscreenVertex
+& $glslc --target-env=vulkan1.3 shaders/opening_chromatic.frag -o $chromaticFragment
+& $vulkanNoiseProbe $fullscreenVertex $chromaticFragment $vulkanChromatic $chromaticInputs chromatic
+& $vulkanNoiseProbe $fullscreenVertex $chromaticFragment $vulkanChromaticRepeat $chromaticInputs chromatic
+python -B -m tools.npr_room.windows_noise_probe compare-chromatic --reference $chromaticCapture --candidate $vulkanChromatic --repeat $vulkanChromaticRepeat --output $vulkanChromaticReport
 python -B -m tools.npr_room.windows_noise_probe prepare-blackout --effects $programDirectory --catalog $imageCatalog --source $unitySource --output $blackoutInputs
 & $noiseProbe $blackoutInputs $blackoutCapture blackout
 & $noiseProbe $blackoutInputs $blackoutRepeat blackout

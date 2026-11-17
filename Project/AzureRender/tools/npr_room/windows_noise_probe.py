@@ -212,6 +212,15 @@ def verify_chromatic(first, repeat):
             "rgbRange": [[float(frame[..., :3].min()), float(frame[..., :3].max())] for frame in capture]}
 
 
+def compare_chromatic(reference, candidate, repeat):
+    result = verify_chromatic(candidate, repeat)
+    original = gzip.decompress(reference.read_bytes()) if reference.suffix == ".gz" else reference.read_bytes()
+    expected = sha256(original).hexdigest()
+    if expected != result["captureSHA256"]:
+        raise ValueError("Vulkan chromatic output differs from the original on the same adapter")
+    return result | {"originalSHA256": expected, "matchingPixels": len(CHROMATIC_SAMPLES) * 320 * 180}
+
+
 def frame_counts(frames):
     if not np.array_equal(frames[0], np.broadcast_to(BACKGROUND, frames[0].shape)):
         raise ValueError("Zero noise changed the control frame")
@@ -266,7 +275,8 @@ if __name__ == "__main__":
                "verify-blackout": ("first", "repeat", "output"),
                "compare-blackout": ("reference", "candidate", "repeat", "output"),
                "prepare-chromatic": ("effects", "catalog", "source", "output"),
-               "verify-chromatic": ("first", "repeat", "output")}
+               "verify-chromatic": ("first", "repeat", "output"),
+               "compare-chromatic": ("reference", "candidate", "repeat", "output")}
     for operation, paths in options.items():
         command = subparsers.add_parser(operation)
         for path in paths:
@@ -285,6 +295,8 @@ if __name__ == "__main__":
             report = verify_blackout(args.first, args.repeat)
         elif args.operation == "verify-chromatic":
             report = verify_chromatic(args.first, args.repeat)
+        elif args.operation == "compare-chromatic":
+            report = compare_chromatic(args.reference, args.candidate, args.repeat)
         elif args.operation == "compare-blackout":
             report = compare_blackout(args.reference, args.candidate, args.repeat)
         elif args.operation == "verify":
