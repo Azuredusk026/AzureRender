@@ -36,6 +36,21 @@ Vulkan 全屏测试使用相同的底色、合成系数和时间输入。任务 
 | 原始浮点画面 | `2d7f6d4d12d2ef97d5bb048a2c515969fca254805c5d524e62a182b95e3d6a80` |
 | 回放报告 | `cd8f42b29019a6c093afd747dc8f538caf1f25be8e324922d188cd5646b30371` |
 
+## Vulkan 黑屏合成
+
+Vulkan 着色器按原程序计算时间种子、块遮罩和百叶窗。渐变纹理按对应显卡的 D3D11 点采样规则处理垂直边界。每台显卡分别运行原始 D3D11 程序和 Vulkan 着色器，保持纹理、目标底色及五组时间和比率一致。
+
+Intel 核显的任务 1952 记录最大通道误差 1.49×10⁻⁸。RTX 4060 的任务 1953 记录最大通道误差 1.86×10⁻⁹。两种显卡均重复采样两次，Vulkan 校验层与资源释放检查通过。零比率和全黑帧逐像素一致。RTX 4060 的单色噪声回归逐字节匹配归档的 Vulkan 参照。
+
+独立全屏采样使用固定的相机不透明颜色输入。房间画面、通道顺序和剧情触发各自按正常入口采证。
+
+| 记录 | SHA-256 |
+| --- | --- |
+| Intel 核显对照 | `a010db01ee67dd265315ea14fc6e9552bb44281f7b08d3839e836cd4147a63ac` |
+| RTX 4060 对照 | `073b9c11287f28843ee64a93951e711054daae7ca2393e519feda6df92bf2ad9` |
+| RTX 4060 原始浮点画面 | `1a8b8efcbe5aab34b73b04e4005df7263a563a8d5bbca94af939ecdcba1dc5a8` |
+| Vulkan 黑屏程序 | `b15133e7ed89a1c27ea43a90492194bde82926470f187d050dd17d7af0757405` |
+
 ## 原生画面合成
 
 版本 1 的 `azure.screen-noise` 组件接受 0 至 1 的透明度。默认值 0 对应原画面。活动场景包含多个组件时，取其中的最大透明度，以帧时间推进图案。全屏绘制位于色彩处理和抗锯齿之后、游戏界面之前。
@@ -61,7 +76,7 @@ Vulkan 全屏测试使用相同的底色、合成系数和时间输入。任务 
 python -B -m tools.npr_room.unity_d3d11_programs --source $nativeArchive --manifest $recoveryShaderManifest --family opening-effects --output $programDirectory
 python -B -m tools.npr_room.windows_opening_effects --source $unitySource --catalog $privateAssets --native $nativeArchive --programs $programReceipt --output $effectsReceipt
 python -B -m unittest tools.npr_room.test_unity_d3d11_programs
-cl.exe /nologo /EHsc /std:c++20 /O2 /W4 tools/npr_room/WindowsOpeningNoiseProbe.cpp d3d11.lib
+cl.exe /nologo /EHsc /std:c++20 /O2 /W4 tools/npr_room/WindowsOpeningNoiseProbe.cpp d3d11.lib dxgi.lib
 python -B -m tools.npr_room.windows_noise_probe prepare --effects $programDirectory --catalog $imageCatalog
 & $noiseProbe $programDirectory $originalCapture
 & $noiseProbe $programDirectory $repeatCapture
@@ -70,7 +85,12 @@ python -B -m tools.npr_room.windows_noise_probe prepare-blackout --effects $prog
 & $noiseProbe $blackoutInputs $blackoutCapture blackout
 & $noiseProbe $blackoutInputs $blackoutRepeat blackout
 python -B -m tools.npr_room.windows_noise_probe verify-blackout --first $blackoutCapture --repeat $blackoutRepeat --output $blackoutReport
+& $noiseProbe $blackoutInputs $blackoutAdapterCapture blackout $dxgiAdapterIndex
 & $glslc --target-env=vulkan1.3 shaders/inner_outline.vert -o $fullscreenVertex
+& $glslc --target-env=vulkan1.3 shaders/opening_blackout.frag -o $blackoutFragment
+& $vulkanNoiseProbe $fullscreenVertex $blackoutFragment $vulkanBlackout $blackoutInputs
+& $vulkanNoiseProbe $fullscreenVertex $blackoutFragment $vulkanBlackoutRepeat $blackoutInputs
+python -B -m tools.npr_room.windows_noise_probe compare-blackout --reference $blackoutAdapterCapture --candidate $vulkanBlackout --repeat $vulkanBlackoutRepeat --output $vulkanBlackoutReport
 & $glslc --target-env=vulkan1.3 shaders/monochrome_screen_noise.frag -o $noiseFragment
 & $vulkanNoiseProbe $fullscreenVertex $noiseFragment $vulkanCapture
 & $vulkanNoiseProbe $fullscreenVertex $noiseFragment $vulkanRepeatCapture

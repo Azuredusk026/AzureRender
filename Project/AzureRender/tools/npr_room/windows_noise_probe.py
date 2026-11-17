@@ -1,6 +1,8 @@
 """Prepare and verify the original Windows opening noise capture."""
 
 import argparse
+import gzip
+from hashlib import sha256
 import json
 from pathlib import Path
 import re
@@ -114,6 +116,24 @@ def verify_blackout(first, repeat):
             "rgbRange": [[float(frame[..., :3].min()), float(frame[..., :3].max())] for frame in capture]}
 
 
+def compare_blackout(reference, candidate, repeat):
+    result = verify_blackout(candidate, repeat)
+    raw = gzip.decompress(reference.read_bytes()) if reference.suffix == ".gz" else reference.read_bytes()
+    original = np.frombuffer(raw, dtype="<f4").reshape(len(BLACKOUT_SAMPLES), 180, 320, 4)
+    actual = np.fromfile(candidate, dtype="<f4").reshape(original.shape)
+    if not np.isfinite(original).all() or not np.array_equal(original[[0, 3]], actual[[0, 3]]):
+        raise ValueError("Blackout Vulkan control or fully opaque frame differs from the original")
+    difference = np.abs(original - actual)
+    return result | {
+        "originalSHA256": sha256(raw).hexdigest(),
+        "meanRgbAbsoluteError": difference[..., :3].mean(axis=(1, 2, 3)).tolist(),
+        "maxAbsoluteError": difference.max(axis=(1, 2, 3)).tolist(),
+        "differentPixelsAboveTwoThousandths": np.count_nonzero(
+            np.any(difference > .002, axis=3), axis=(1, 2)).tolist(),
+        "differentPixels": np.count_nonzero(np.any(difference > 1e-6, axis=3), axis=(1, 2)).tolist(),
+    }
+
+
 def frame_counts(frames):
     if not np.array_equal(frames[0], np.broadcast_to(BACKGROUND, frames[0].shape)):
         raise ValueError("Zero noise changed the control frame")
@@ -165,7 +185,8 @@ if __name__ == "__main__":
     options = {"prepare": ("effects", "catalog"), "verify": ("first", "repeat", "output"),
                "compare": ("reference", "candidate", "repeat", "output"),
                "prepare-blackout": ("effects", "catalog", "source", "output"),
-               "verify-blackout": ("first", "repeat", "output")}
+               "verify-blackout": ("first", "repeat", "output"),
+               "compare-blackout": ("reference", "candidate", "repeat", "output")}
     for operation, paths in options.items():
         command = subparsers.add_parser(operation)
         for path in paths:
@@ -180,6 +201,8 @@ if __name__ == "__main__":
     else:
         if args.operation == "verify-blackout":
             report = verify_blackout(args.first, args.repeat)
+        elif args.operation == "compare-blackout":
+            report = compare_blackout(args.reference, args.candidate, args.repeat)
         elif args.operation == "verify":
             report = verify(args.first, args.repeat)
         else:

@@ -1,4 +1,5 @@
 #include <d3d11.h>
+#include <dxgi.h>
 #include <wrl/client.h>
 
 #include <array>
@@ -8,7 +9,9 @@
 #include <filesystem>
 #include <fstream>
 #include <iostream>
+#include <optional>
 #include <stdexcept>
+#include <string>
 #include <string_view>
 #include <vector>
 
@@ -105,12 +108,26 @@ void bindSources(ID3D11Device& device, ID3D11DeviceContext& context, const fs::p
     context.PSSetSamplers(0, 4, samplers);
 }
 
-void run(const fs::path& source, const fs::path& output, bool blackout) {
+void run(const fs::path& source, const fs::path& output, bool blackout, std::optional<UINT> adapterIndex) {
     if (fs::exists(output)) throw std::invalid_argument("Original capture output already exists");
+    ComPtr<IDXGIAdapter1> requestedAdapter;
+    if (adapterIndex) {
+        ComPtr<IDXGIFactory1> factory;
+        require(CreateDXGIFactory1(IID_PPV_ARGS(&factory)), "CreateDXGIFactory1");
+        require(factory->EnumAdapters1(*adapterIndex, &requestedAdapter), "EnumAdapters1");
+    }
     ComPtr<ID3D11Device> device;
     ComPtr<ID3D11DeviceContext> context;
-    require(D3D11CreateDevice(nullptr, D3D_DRIVER_TYPE_HARDWARE, nullptr, 0, nullptr, 0, D3D11_SDK_VERSION,
+    require(D3D11CreateDevice(requestedAdapter.Get(), requestedAdapter ? D3D_DRIVER_TYPE_UNKNOWN : D3D_DRIVER_TYPE_HARDWARE,
+                              nullptr, 0, nullptr, 0, D3D11_SDK_VERSION,
                               &device, nullptr, &context), "D3D11CreateDevice");
+    ComPtr<IDXGIDevice> dxgi;
+    ComPtr<IDXGIAdapter> adapter;
+    DXGI_ADAPTER_DESC properties{};
+    require(device.As(&dxgi), "Query DXGI device");
+    require(dxgi->GetAdapter(&adapter), "Query DXGI adapter");
+    require(adapter->GetDesc(&properties), "Read DXGI adapter");
+    std::wcout << L"Direct3D adapter " << properties.Description << '\n';
     const auto vs = read(source / (blackout ? "blackout-vertex.dxbc" : "noise-vertex.dxbc"));
     const auto ps = read(source / (blackout ? "blackout-fragment.dxbc" : "noise-fragment.dxbc"));
     ComPtr<ID3D11VertexShader> vertex;
@@ -205,9 +222,16 @@ void run(const fs::path& source, const fs::path& output, bool blackout) {
 }
 
 int wmain(int argc, wchar_t** argv) try {
-    if (argc != 3 && !(argc == 4 && std::wstring_view(argv[3]) == L"blackout"))
-        throw std::invalid_argument("Expected original effect directory, unused capture path and optional blackout");
-    run(argv[1], argv[2], argc == 4);
+    if (argc != 3 && !((argc == 4 || argc == 5) && std::wstring_view(argv[3]) == L"blackout"))
+        throw std::invalid_argument("Expected input directory, unused capture path, optional blackout and adapter index");
+    std::optional<UINT> index;
+    if (argc == 5) {
+        const std::wstring_view text(argv[4]);
+        if (text.empty() || text.find_first_not_of(L"0123456789") != std::wstring_view::npos)
+            throw std::invalid_argument("Expected a numeric DXGI adapter index");
+        index = std::stoul(std::wstring(text));
+    }
+    run(argv[1], argv[2], argc >= 4, index);
     return 0;
 } catch (const std::exception& error) {
     std::cerr << error.what() << '\n';
