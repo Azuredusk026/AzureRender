@@ -1,4 +1,4 @@
-"""Compare all baked timer pose samples to the original Avatar evaluation."""
+"""Compare baked pose samples to the original Avatar evaluation."""
 
 import argparse
 import gzip
@@ -29,8 +29,10 @@ def angle(first, second):
     return math.degrees(4 * math.atan2(math.dist(first, second), math.hypot(*(x + y for x, y in zip(first, second)))))
 
 
-def verify(room, sample_root, rig_path):
-    receipt_path = room / "timer-motion-receipt.json"
+def verify(room, sample_root, rig_path, receipt_name="timer-motion-receipt.json"):
+    if Path(receipt_name).name != receipt_name:
+        raise ValueError("The pose receipt must be a file in the room root")
+    receipt_path = room / receipt_name
     receipt = json.loads(receipt_path.read_bytes())
     if digest(rig_path) != receipt["rigSHA256"]:
         raise ValueError("The timer pose comparison requires the original rig")
@@ -90,9 +92,10 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     for name in ("room", "sample-root", "rig", "output"):
         parser.add_argument("--" + name, type=Path, required=True)
+    parser.add_argument("--receipt", default="timer-motion-receipt.json")
     args = parser.parse_args()
     if args.output.exists():
         raise FileExistsError(args.output)
-    proof = verify(args.room, args.sample_root, args.rig)
+    proof = verify(args.room, args.sample_root, args.rig, args.receipt)
     write(args.output, proof)
     print(json.dumps(proof))
