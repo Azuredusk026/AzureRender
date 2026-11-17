@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include <optional>
+#include <set>
 #include "animation/LocomotionBlend.hpp"
 namespace azurerender {
 class AnimationStateMachine {
@@ -22,6 +23,7 @@ public:
     float blend() const { return duration_ > 0 ? static_cast<float>(std::min(elapsed_ / duration_, 1.0)) : 1.0F; }
     const std::optional<LocomotionBlendProfile>& locomotionProfile() const noexcept { return locomotion_; }
 private:
+    void selectState(const std::string& state, double blendSeconds);
     struct State { std::uint32_t clip; bool loop; };
     struct Transition { std::string from, to, parameter; bool value; double blendSeconds; };
     std::map<std::string, State> states_;
@@ -36,5 +38,10 @@ private:
     double previousTime_ = 0, duration_ = 0, elapsed_ = 0;
     struct TimedTransition { std::string to; double afterSeconds, blendSeconds, startSeconds; };
     std::map<std::string, TimedTransition> timeline_;
+    struct Branch { TimedTransition transition; bool once; };
+    std::set<std::string> signals_;
+    std::map<std::string, std::map<std::string, Branch>> branches_;
+    std::string signal_;
+    bool freshSignal_ = false;
 };
 }

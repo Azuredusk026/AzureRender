@@ -46,6 +46,39 @@ int main(int argc,char** argv){
   bool rejectedTime=false;
   try{(void)AnimationStateMachine::parse(malformed);}catch(const std::invalid_argument&){rejectedTime=true;}
   check(rejectedTime,"Negative timed transition boundaries must be rejected");
+  const auto routed=nlohmann::json::parse(R"({
+    "schemaVersion":4,"initial":"enter",
+    "states":[{"name":"enter","clip":0},{"name":"loop","clip":1},{"name":"accent","clip":2},
+              {"name":"leave","clip":3},{"name":"idle","clip":4}],
+    "signals":["gesture","stop"],
+    "transitions":[],
+    "timeline":[{"from":"enter","to":"loop","afterSeconds":0.4,"blendSeconds":0.25,"startSeconds":0.1},
+                {"from":"accent","to":"loop","afterSeconds":0.15,"blendSeconds":0.1},
+                {"from":"leave","to":"idle","afterSeconds":0.3,"blendSeconds":0.05}],
+    "branches":[{"from":"loop","to":"accent","signals":["gesture"],"once":true,"blendSeconds":0.1},
+                {"from":"loop","to":"leave","signals":["stop"],"blendSeconds":0.2}]})");
+  auto signals=AnimationStateMachine::parse(routed);
+  signals.advance(.3);
+  signals.select("gesture");
+  signals.advance(.2);
+  check(signals.state()=="loop"&&std::abs(signals.time()-.2)<1e-9&&std::abs(signals.blend()-.4)<1e-6,
+        "A signal must wait for the authored entry and retain its destination offset");
+  signals.advance(.16);
+  check(signals.state()=="accent"&&signals.previousClip()==1&&std::abs(signals.blend()-.1)<1e-6,
+        "A queued signal must blend from the completed pose using only remaining frame time");
+  signals.advance(.3);
+  check(signals.state()=="loop"&&signals.blend()==1,"A consumed signal must not retrigger when the loop resumes");
+  signals.select("stop");
+  signals.advance(.05);
+  check(signals.state()=="leave"&&signals.previousClip()==1&&std::abs(signals.blend()-.25)<1e-6,
+        "Changing the signal must run the authored return before choosing the next state");
+  signals.advance(.31);
+  check(signals.state()=="idle"&&signals.previousClip()==3&&signals.blend()==1,"The return must exit at its authored boundary");
+  auto badSignal=routed;
+  badSignal["branches"][0]["signals"][0]="unknown";
+  bool rejectedSignal=false;
+  try{(void)AnimationStateMachine::parse(badSignal);}catch(const std::invalid_argument&){rejectedSignal=true;}
+  check(rejectedSignal,"Branch signals must be declared by the animation graph");
   bool invalid=false;try{auto bad=AnimationStateMachine::parse(nlohmann::json::parse(R"({"schemaVersion":1,"initial":"missing","states":[],"transitions":[]})"));(void)bad;}catch(const std::exception&){invalid=true;}check(invalid,"Invalid state graph must be rejected");
   AudioRuntime audio(false);auto sound=audio.load(argv[1],false,0.5F);audio.play(sound);
   auto samples=audio.mix(480);double energy=0;for(float sample:samples)energy+=sample*sample;

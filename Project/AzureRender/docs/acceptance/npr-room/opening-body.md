@@ -32,6 +32,21 @@
 
 剧情验收覆盖动作指令、带条件的返回和中断，以及与表情、视线的叠加。
 
+## 条件转场
+
+动作图第四版通过 `signals` 声明指令，通过 `branches` 声明条件出边。指令更新当前条件。同一状态的每种指令对应一条出边；标为 `once` 的出边在触发后消耗本次指令。直接选择片段状态会清除当前条件。
+
+出边等待源片段到达 `afterSeconds`，并等待当前混合完成。条件出边和固定出边在同一时刻可用时，优先使用条件出边。混合时长和目标起始时刻分别由 `blendSeconds` 和 `startSeconds` 指定。
+
+任务 1870 验证指令等待、目标偏移、一次触发和退出混合。任务 1871 在原生 Player 记录 170 帧，七个部件的动作和混合时钟一致。回放包含一次手势和指定的收尾动作，GPU 资源在退出时归零。此记录使用独立夹具，常规剧情按下节所列入口运行。
+
+| 记录 | SHA-256 |
+| --- | --- |
+| 原生条件转场报告 | `4d246d714caea23745510d8bf0e16a9257dda52ee78c109c16b0be66d286ac7b` |
+| 原生构建清单 | `22834ea2d000b6338ad22518b8cabd37e0143c5b3f190c2d671e03347e362fce` |
+
+本机 `story-motion-reference/signal-validation/` 保存逐帧记录、输入清单和受检程序。
+
 ## 常规剧情入口
 
 常规房间按剧情命令选择原动作入口。准备段读取首个动作指令，未指定时进入坐姿。动作编号 `-1` 保持当前动作，连续相同编号保持播放进度。剧情结束后恢复房间待机。
@@ -57,5 +72,6 @@ python -B tools/npr_room/test_story_body_player.py --player $player --room $stor
 python -B -m tools.npr_room.story_body_timeline --room $storyBodyRoom --catalog $bodyCatalog --output $openingTimeline
 python -B tools/npr_room/test_story_body_player.py --player $player --room $storyBodyRoom --resource-root $resources --output $timelineReplay --timeline $openingTimeline
 python -B -m tools.npr_room.build_story_motion_room --room $bookRoom --catalog $bodyCatalog --chapters $openingChapters --output $storyMotionRoom
+python -B tools/npr_room/test_animation_signals_player.py --player $player --room $storyMotionRoom --resource-root $resources --output $signalReplay
 python -B tools/npr_room/test_story_player.py --normal-room --verify-books --verify-body --player $player --room $storyMotionRoom --resource-root $resources --chapters $openingChapters --inventory $storyInventory --output $motionRouteReplay
 ```
