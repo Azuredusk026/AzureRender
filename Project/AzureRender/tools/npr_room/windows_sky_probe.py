@@ -1,10 +1,13 @@
-"""Prepare the original Windows Sunset sky for an offscreen Direct3D draw."""
+"""Prepare a matching original Windows sky capture for an offscreen Direct3D draw."""
 
 import argparse
+from hashlib import sha256
 import json
+import math
 from pathlib import Path
 import re
 from struct import pack_into
+import zlib
 
 import numpy as np
 from PIL import Image
@@ -13,6 +16,7 @@ from tools.npr_room.build_city_window import verified_path
 from tools.npr_room.mesh_export import attributes, indices, read_unity_mesh
 from tools.npr_room.reference_inventory import digest
 from tools.npr_room.skinned_mesh_export import UnityScene
+from tools.npr_room.windows_atmosphere import MODES
 from tools.npr_room.window_scene_inventory import ROOM_SCENE
 
 
@@ -34,17 +38,23 @@ FACES = (((1, 0, 0), (0, 1, 0)), ((-1, 0, 0), (0, 1, 0)), ((0, 1, 0), (0, 0, -1)
          ((0, -1, 0), (0, 0, 1)), ((0, 0, 1), (0, 1, 0)), ((0, 0, -1), (0, 1, 0)))
 
 
-def capture_globals(path, values):
-    old = values["skyHorizonColor"]
-    match_horizon = tuple(round(old[channel], 6) for channel in "rgba")
+def capture_globals(path, values, day_fraction, mode):
+    if not math.isfinite(day_fraction) or not 0 <= day_fraction < 1:
+        raise ValueError(f"Invalid original atmosphere clock: {mode}")
+    hours, minutes = divmod(round(day_fraction * 1440) % 1440, 60)
+    expected_clock = re.compile(rf"\bhours={hours} minutes={minutes}\b")
+    colors = {binding: tuple(values[field][channel] for channel in "rgba") for binding, field in COLOR_FIELDS.items()}
     for line in path.read_text(encoding="utf-8").splitlines():
-        if "hours=18 minutes=30" not in line or "shader=Distant Lands/Cozy/URP/Stylized Sky Desktop" not in line:
+        if not expected_clock.search(line) or "shader=Distant Lands/Cozy/URP/Stylized Sky Desktop" not in line:
             continue
         fields = dict(re.findall(r"global:(\w+)ID=(?:RGBA)?\(([^)]+)\)", line))
         shader = {key: tuple(map(float, entry.split(","))) for key, entry in fields.items()}
-        if shader.get("CZY_HorizonColor") == match_horizon:
-            return float(re.search(r"\bt=(\d+(?:\.\d+)?)", line).group(1)), shader
-    raise ValueError("The original desktop Sunset capture and shader parameters do not agree")
+        stamp = re.search(r"\bt=(\d+(?:\.\d+)?)", line)
+        if stamp and all(len(shader.get(key, ())) == 4 and
+                         all(math.isclose(a, b, rel_tol=0, abs_tol=2e-6) for a, b in zip(expected, shader[key]))
+                         for key, expected in colors.items()):
+            return float(stamp.group(1)), shader
+    raise ValueError(f"Original desktop sky capture does not match the clock and colors for {mode}")
 
 
 def stage_constants(stage, name, values):
@@ -86,7 +96,7 @@ def unity_rotation(scene, renderer):
         transform = scene.read(parent)
 
 
-def prepare(source, catalog, references, programs, original_log, output):
+def prepare(source, catalog, references, programs, original_log, output, mode="Sunset"):
     recipe = json.loads(references.read_bytes())
     program_file = programs / "windows-atmosphere-programs.json"
     if recipe["d3d11ProgramSHA256"] != digest(program_file) or recipe["sceneSHA256"] != digest(source / ROOM_SCENE):
@@ -113,8 +123,9 @@ def prepare(source, catalog, references, programs, original_log, output):
                                       {"unity_WorldToObject": np.linalg.inv(world).T.flatten()})
     objects = bytes(a | b for a, b in zip(object_to_world, world_to_object, strict=True))
 
-    snapshot = recipe["windowsReference"]["Sunset"]["data"]
-    seconds, globals_ = capture_globals(original_log, snapshot)
+    reference = recipe["windowsReference"][mode]
+    snapshot = reference["data"]
+    seconds, globals_ = capture_globals(original_log, snapshot, recipe["modes"][mode]["dayFraction"], mode)
     fields = {name: (snapshot[key],) for name, key in SCALAR_FIELDS.items()}
     fields.update({name: globals_[name] for name in COLOR_FIELDS})
     fields.update({"CZY_SunDirection": globals_["CZY_SunDirection"][:3],
@@ -137,6 +148,7 @@ def prepare(source, catalog, references, programs, original_log, output):
         constants = stage_constants(sky["vertex"], "$Globals", {"_ProjectionParams": (1, .05, 1500, 1 / 1500),
                                     "unity_MatrixVP": view_projection(forward, up)})
         (output / f"view-{i}.bin").write_bytes(constants)
+    textures = {}
     for texture in sky["fragment"]["textures"]:
         slot, binding = texture["binding"], texture["name"]
         srgb = False
@@ -148,17 +160,24 @@ def prepare(source, catalog, references, programs, original_log, output):
                 image = pixels.convert("RGBA")
             srgb = item["srgb"]
         (output / f"texture-{slot}.txt").write_text(f"{image.width} {image.height} {int(srgb)}\n", encoding="ascii")
-        (output / f"texture-{slot}.rgba").write_bytes(image.tobytes())
-    return {"vertexCount": len(vertices), "triangleCount": len(triangles), "sourceSeconds": seconds,
+        pixels = image.tobytes()
+        compressed = output / f"texture-{slot}.rgba.zlib"
+        compressed.write_bytes(zlib.compress(pixels))
+        textures[str(slot)] = {"width": image.width, "height": image.height, "srgb": srgb,
+                               "pixelSHA256": sha256(pixels).hexdigest(), "fileSHA256": digest(compressed)}
+    return {"mode": mode, "referenceSHA256": reference["sha256"], "vertexCount": len(vertices),
+            "triangleCount": len(triangles), "sourceSeconds": seconds,
             "sunDirection": fields["CZY_SunDirection"], "meshSHA256": mesh_entry["sourceSHA256"],
-            "programSHA256": {key: value["sha256"] for key, value in sky.items()}, "logSHA256": digest(original_log)}
+            "programSHA256": {key: value["sha256"] for key, value in sky.items()}, "logSHA256": digest(original_log),
+            "textures": textures}
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     for option in ("source", "catalog", "references", "programs", "original-log", "output"):
         parser.add_argument("--" + option, type=Path, required=True)
+    parser.add_argument("--mode", choices=MODES, default="Sunset")
     args = parser.parse_args()
-    result = prepare(args.source, args.catalog, args.references, args.programs, args.original_log, args.output)
+    result = prepare(args.source, args.catalog, args.references, args.programs, args.original_log, args.output, args.mode)
     (args.output / "preparation.json").write_text(json.dumps(result) + "\n", encoding="utf-8")
     print(json.dumps(result))

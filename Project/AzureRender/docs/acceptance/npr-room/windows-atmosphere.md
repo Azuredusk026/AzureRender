@@ -1,6 +1,6 @@
 # Windows 窗景大气来源
 
-> 状态为 P5 局部验收。Windows 的原始着色器程序、资源绑定和四个时段的运行参数已核对。画面对照使用对应的 Vulkan 场景验收。
+> 状态为 P5 局部验收。Windows 的原始着色器程序、资源绑定和四个时段的运行参数已核对。白天与傍晚的天空通道已通过原生采样和 Vulkan 房间对照。
 
 `RoomScene` 中的 `MyCozyWeatherService` 绑定 `BaseCozy Weather Sphere` 和四个时段的时间模块。Windows 实例使用天空、云层和雾三个网格渲染器。三个原材质分别引用 `Stylized Sky Desktop`、`Stylized Clouds (COZY Desktop)` 和 `Stylized Fog (Desktop)`，基准天气组件引用十张原图。移动端备用天空的四个场景对象按独立引用登记。
 
@@ -34,6 +34,22 @@
 
 环境图 SHA-256 为 `5e0e2c4e448495ff00932d17fa8db7d0064abe65e09433781f4f36e9b90f4c83`。本机 `windows-atmosphere-reference/sunset-vulkan-transfer.json` 记录两张原生画面和实际 Player 的摘要。房间合成画面的原版对照、实时天空切换及其他时段仍按完整窗景矩阵验收。
 
+## 白天天空通道
+
+采样工具按时段的原始时钟和整组颜色绑定选择对应的桌面绘制记录。白天记录的时钟为 12:30，运行时间为 7.253 秒。夜晚和多云采样需要补齐对应的桌面绘制记录。
+
+任务 1852 使用同一天空网格、原 Direct3D 11 程序和纹理，执行两个独立进程。六个方向的 393,216 个 RGBA32F 像素逐字节相同，线性 RGB 最大值为 10.95267。纹理输入使用无损压缩，解码内容逐一核对摘要。任务 1853 使用同一解码路径复验傍晚，输出摘要与傍晚记录相同。
+
+任务 1854 在 1280×720 的 Vulkan 房间进行对照。白天环境图使可见窗区 11,352 个抽样位置中的 11,205 个发生变化，椅背对照区的 7,000 个像素逐一相同。两个 Player 正常退出后，缓冲区和图像的计数均为零。
+
+| 记录 | SHA-256 |
+| --- | --- |
+| 白天原始浮点采样 | `7800ad27038b8d836d5a2050dd2c673e9034df90dd9f85527e820e86b091f096` |
+| 白天 HDR 环境图 | `d9cc56a9fd8bf9d6c01622afd7cb8efe29a978abf85faa5d659e328c267d231d` |
+| 白天 Vulkan 对照报告 | `c5c81408136474ebc8d6de90069baa73a7da38c32513768d5cb0889de9f21770` |
+
+白天的采样输入、环境图、构建记录和对照画面位于本机 `windows-atmosphere-reference/day-validation/`。天空通道验证使用独立背景，云层、雾和不同天气的合成使用窗景矩阵。
+
 ## 复验
 
 原 DXBC、反汇编和绑定清单写入本机私有目录。`PYTHONPATH` 指向本项目的 UnityPy 转换工具目录。
@@ -44,12 +60,14 @@ python -B -m tools.npr_room.windows_atmosphere --source $unitySource --catalog $
 python -B -m unittest tools.npr_room.test_unity_d3d11_programs
 ```
 
-在 Visual Studio x64 开发者命令行编译和运行天空采样工具。源记录使用 Recovery `ReferenceProbe/reference-sky.log`。六张纹理缓冲区和返回的浮点数据写入本机工作目录。
+在 Visual Studio x64 开发者命令行编译和运行天空采样工具。`$zlibRoot` 指向包含 `include/zlib.h`、`lib/z.lib` 和 `bin/z.dll` 的依赖目录。`$skyMode` 选择 `Day` 或 `Sunset`，源记录使用 Recovery `ReferenceProbe/reference-sky.log`。压缩纹理和浮点数据写入本机工作目录。
 
 ```powershell
-cl.exe /nologo /EHsc /std:c++20 /O2 /W4 tools/npr_room/WindowsSkyProbe.cpp d3d11.lib "/Fe:$skyProbe"
-python -B -m tools.npr_room.windows_sky_probe --source $unitySource --catalog $assetCatalogRoot --references $atmosphereReceipt --programs $programFolder --original-log $originalSkyLog --output $preparedProbe
+$env:PATH = "$zlibRoot/bin;" + $env:PATH
+cl.exe /nologo /EHsc /std:c++20 /O2 /W4 "/I$zlibRoot/include" tools/npr_room/WindowsSkyProbe.cpp d3d11.lib "$zlibRoot/lib/z.lib" "/Fe:$skyProbe"
+python -B -m tools.npr_room.windows_sky_probe --source $unitySource --catalog $assetCatalogRoot --references $atmosphereReceipt --programs $programFolder --original-log $originalSkyLog --mode $skyMode --output $preparedProbe
 & $skyProbe $preparedProbe $skyCube
+python -B -m unittest tools.npr_room.test_windows_sky_probe
 ```
 
 ```powershell

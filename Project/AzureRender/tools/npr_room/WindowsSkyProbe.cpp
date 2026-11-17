@@ -1,5 +1,6 @@
 #include <d3d11.h>
 #include <wrl/client.h>
+#include <zlib.h>
 
 #include <array>
 #include <cstddef>
@@ -48,14 +49,30 @@ ComPtr<ID3D11Buffer> buffer(ID3D11Device& device, const fs::path& file, UINT bin
     return result;
 }
 
+std::vector<std::byte> texturePixels(fs::path raw, std::size_t expected) {
+    auto compact = raw;
+    compact += L".zlib";
+    if (!fs::exists(compact)) return read(raw);
+    const auto input = read(compact);
+    std::vector<std::byte> pixels(expected);
+    uLong inputBytes = static_cast<uLong>(input.size());
+    uLongf outputBytes = static_cast<uLongf>(pixels.size());
+    if (uncompress2(reinterpret_cast<Bytef*>(pixels.data()), &outputBytes,
+                    reinterpret_cast<const Bytef*>(input.data()), &inputBytes) != Z_OK ||
+        outputBytes != pixels.size() || inputBytes != input.size())
+        throw std::runtime_error("Corrupt compressed source texture");
+    return pixels;
+}
+
 ComPtr<ID3D11ShaderResourceView> image(ID3D11Device& device, const fs::path& root, UINT slot) {
     const auto key = std::to_wstring(slot);
     std::ifstream source(root / (L"texture-" + key + L".txt"));
     UINT width = 0, height = 0, srgb = 0;
     if (!(source >> width >> height >> srgb) || width == 0 || width > 8192 || height == 0 || height > 8192 || srgb > 1)
         throw std::runtime_error("Invalid source texture format");
-    const auto data = read(root / (L"texture-" + key + L".rgba"));
-    if (data.size() != static_cast<std::size_t>(width) * height * 4)
+    const auto expected = static_cast<std::size_t>(width) * height * 4;
+    const auto data = texturePixels(root / (L"texture-" + key + L".rgba"), expected);
+    if (data.size() != expected)
         throw std::runtime_error("Source texture payload does not match its dimensions");
     D3D11_TEXTURE2D_DESC description{};
     description.Width = width;
