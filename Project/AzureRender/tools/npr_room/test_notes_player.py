@@ -79,9 +79,11 @@ def playing(player, project, resources, profile, output, expected_audio_starts=N
                 assert not state["scriptErrors"] and not state["presentationErrors"] and not state["loadError"], state
                 return state
 
-            def press(key):
+            def press(key, domain="game-ui"):
                 for down in (True, False):
-                    call("input", domain="game-ui", event={"action": "key", "key": key, "down": down})
+                    call("input", domain=domain, event={"action": "key", "key": key, "down": down})
+                    if domain == "game":
+                        call("wait-frames", frames=2)
 
             def type_text(value):
                 for character in value:

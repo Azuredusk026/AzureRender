@@ -1,0 +1,13 @@
+#opening-story-input-mask { position: absolute; width: 100%; height: 100%; left: 0; top: 0; z-index: 10; }
+#opening-story-caption, #opening-story-options, #opening-story-auto,
+#opening-story-next, #opening-story-heroine, #room-language-toggle, #room-language-panel { z-index: 12; }
+#opening-story-log, #opening-story-log-panel { right: 150dp; z-index: 12; }
+.opening-focus { position: absolute; top: 12dp; border-width: 2dp; border-color: #f0c58e; pointer-events: none; z-index: 11; }
+#opening-focus-clock { right: 12dp; width: 245dp; height: 90dp; }
+#opening-focus-notes { left: 12dp; width: 60dp; height: 32dp; }
+#opening-focus-todo { left: 78dp; width: 60dp; height: 32dp; }
+</style>
+<div id="opening-story-input-mask" style="display: none;"></div>
+<div class="opening-focus" id="opening-focus-clock" style="display: none;"></div>
+<div class="opening-focus" id="opening-focus-notes" style="display: none;"></div>
+<div class="opening-focus" id="opening-focus-todo" style="display: none;"></div>

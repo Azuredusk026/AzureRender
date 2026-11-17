@@ -1,0 +1,55 @@
+function new_story_room(host, chapters, tracks, speeds, labels, language, level)
+    local music = new_story_music(host, tracks)
+    local noise = new_story_noise(host)
+    local dialogue = new_story_dialogue(host, speeds, language)
+    local presentation = {}
+    local focus
+    local highlights = {TutorialFocusPomodoro = "opening-focus-clock",
+        TutorialFocusTodo = "opening-focus-todo", TutorialFocusNote = "opening-focus-notes"}
+
+    local function clearFocus()
+        if not focus then return end
+        host:ui_visible(focus.id, false)
+        focus = nil
+    end
+
+    function presentation:begin(chapter, replay)
+        host:ui_visible("opening-story-input-mask", true)
+        noise:begin(chapter, replay)
+    end
+
+    function presentation:motion() end
+
+    function presentation:update(dt)
+        music:update(dt)
+        noise:update(dt)
+        if focus then focus.remaining = focus.remaining - dt end
+    end
+
+    function presentation:effect(row, delay)
+        noise:effect(row, delay)
+        if row.command == "PlayBGM" or row.command == "TalkLogOnlyPlayBGM" then music:play(row.arguments) end
+        local id = highlights[row.command]
+        if not id then return end
+        clearFocus()
+        dialogue:clear()
+        local active = {id = id, remaining = 3.5}
+        focus = active
+        host:ui_visible(id, true)
+        return function()
+            if focus ~= active then return true end
+            if active.remaining > 1e-7 then return false end
+            clearFocus()
+            return true
+        end
+    end
+
+    function presentation:finish()
+        clearFocus()
+        host:ui_visible("opening-story-input-mask", false)
+        music:finish()
+        noise:finish()
+    end
+
+    return new_story_player(host, chapters, dialogue, language, level, presentation, labels)
+end

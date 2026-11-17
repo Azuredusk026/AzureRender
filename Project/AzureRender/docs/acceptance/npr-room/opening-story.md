@@ -1,6 +1,6 @@
 # 教学与第一章剧情命令
 
-> 状态为 P3 局部验收。原生 Player 的定向关卡验证原语音、字幕、分支、等级门槛和章节进度。正式房间的剧情视听验收覆盖场景状态与原效果。
+> 状态为 P3 局部验收。原语音、字幕、分支、等级门槛和章节进度接入房间启动路线。场景状态、动作和完整特效使用剧情画面对照验收。
 
 教学组 `tutorial_01` 有 90 条命令。第一章 `main_01` 有 20 条命令，等级门槛为 2。两组共使用 25 种命令、33 段原语音和七种语言的原文。命令按原表行序执行，分支目标通过组内命令标识定位。标题、对白、选项、等待、角色动作参数和原语音时长均从资源表读取。
 
@@ -34,7 +34,17 @@ Lua 脚本使用编译后的源组执行两条完整路线。两条路线各覆�
 
 原生任务 1829 使用两个进程再次完成 32 段语音与等级解锁回放。首次教学期间仅加载房间歌单。第二个进程依次加载房间歌单、第一章音乐和教学重播音乐。教学重播的音乐开始后，两个章节的完成记录均保留。
 
-音乐采用原 OGG 文件，文件摘要与音乐清单一致。回放记录和日志位于 `room-opening-voices-verified/validation/opening-route-music/`。原版场景淡化、混音总线和实际剧情入口按独立场景对照验收。
+音乐采用原 OGG 文件，文件摘要与音乐清单一致。回放记录和日志位于 `room-opening-voices-verified/validation/opening-route-music/`。场景淡化和混音总线按原版场景对照验收。
+
+## 常规房间入口
+
+`build_story_room` 将剧情输入、音源和界面装配进常规房间，启动入口保持为 `boot.azurelevel`。房间直接使用计时脚本的当前等级和语言。计时或其他角色语音进行时，剧情入口暂不可用。播放剧情期间，房间输入交由剧情界面和语言选择。教学提示高亮对应的计时器、笔记或待办入口，各持续 3.5 秒。
+
+装配清单记录源数据、房间关卡、计时脚本和界面文档的摘要。原始语音和音乐按文件核对。复验使用独立存档目录，依据剧情完成记录、计时进度和实际载入的音频验证正常入口。
+
+任务 1847 从开机画面启动两个独立 Player。首次教学的 22 段原语音及第一章的 10 段原语音均按源行序播放。回放核对剧情期间的计时快捷键、剧情结束后的笔记入口、正计时升至等级 2 后的章节解锁，以及教学重播音乐。两次启动均通过关卡、脚本、界面和退出检查。运行记录和截图位于本机 `room-opening-playable/validation/opening-route/`，回放报告 SHA-256 为 `41c0bcefd941933f13435fc11364a7f6570b21a3e4dfe197ce6b6b70686f132d`。
+
+任务 1848 使用同一房间核对中文多行笔记、排序、删除、重开和存档版本保护。报告位于本机 `room-opening-playable/validation/notes-replay.json`。
 
 ## 复验
 
@@ -44,7 +54,10 @@ python -B -m unittest tools.npr_room.test_story_chapters
 python -B -m tools.npr_room.story_dialogue_room --room $bodyRoom --output $dialogueRoom --source $unitySource --chapters $chapters
 python -B tools/npr_room/test_story_dialogue_player.py --player $player --room $dialogueRoom --resource-root $runtimeResources --chapters $chapters --output $replay
 python -B tools/npr_room/test_story_player.py --player $player --room $dialogueRoom --resource-root $runtimeResources --chapters $chapters --inventory $storyInventory --output $routeReplay
+python -B -m tools.npr_room.build_story_room --room $dialogueRoom --chapters $chapters --inventory $storyInventory --output $playableRoom
+python -B tools/npr_room/test_story_player.py --normal-room --player $player --room $playableRoom --resource-root $runtimeResources --chapters $chapters --inventory $storyInventory --output $normalRoomReplay
 ```
 
 Lua 5.4 按顺序加载 `story-progress.lua`、`story-reader.lua`、编译后的剧情程序与 `story-opening-routes.lua`，以同一个程序块执行。
 音乐测试按顺序加载 `assets/story-music.lua` 与 `tests/story-music.lua`。
+房间输入与教学提示测试按顺序加载 `assets/story-room.lua` 与 `tests/story-room.lua`。

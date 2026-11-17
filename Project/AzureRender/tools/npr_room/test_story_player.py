@@ -132,29 +132,54 @@ def opened_music(folder):
             for line in lines if " source: " in line and "assets\\music\\" in line]
 
 
-def replay(player, room, resources, chapters, inventory, output):
+@contextmanager
+def normal_room_fixture(room, chapters, inventory):
+    receipt = json.loads((room / "opening-story-room-receipt.json").read_bytes())
+    project = room / "project.azureproject"
+    assert receipt["chaptersSHA256"] == digest(chapters) and receipt["inventorySHA256"] == digest(inventory)
+    assert receipt["startupScene"] == json.loads(project.read_bytes())["startupScene"] == "assets:/boot.azurelevel"
+    assert receipt["roomScene"] == "assets:/room.azurelevel"
+    for asset, field in (("room.azurelevel", "levelSHA256"), ("pomodoro.lua", "scriptSHA256"),
+                         ("timer.rml", "documentSHA256")):
+        assert digest(room / "assets" / asset) == receipt[field]
+    playlist = json.loads((room / "music-receipt.json").read_bytes())["tracks"]
+    yield project, receipt["roomScene"], json.loads(chapters.read_bytes())["chapters"], {
+        "playlist": playlist[0]["asset"], **receipt["tracks"]}
+
+
+def replay(player, room, resources, chapters, inventory, output, normal=False):
     output.mkdir()
     profile = output / "profile"
     tutorial = output / "tutorial"
     chapter = output / "chapter"
-    with route_fixture(room, chapters, inventory) as (project, level, authored, music):
+    fixture = normal_room_fixture if normal else route_fixture
+    with fixture(room, chapters, inventory) as (project, level, authored, music):
         files = {label: Path(path).name for label, path in music.items()}
-        with playing(player, project, resources, profile, tutorial, level_reference=level) as (click, _, _, screenshot):
+        with playing(player, project, resources, profile, tutorial, level_reference=level) as (click, press, _, screenshot):
             click(PREFIX + "start")
             click(PREFIX + "option-1", wait=70)
+            if normal:
+                press(77, domain="game")
+                assert slot(profile, "timer-mode") is None
             click(PREFIX + "heroine", wait=38)
             for option in (1, 2, 3, 4, 1):
                 click(PREFIX + f"option-{option}", wait=85)
-            tutorial_proof = wait_for_slot(profile, "opening-replay-proof", lambda value: value[0] == "tutorial_01", 40)
+            if normal:
+                wait_for_slot(profile, "room-unlocks", lambda value: "tutorial_01" in value[1], 40)
+                click("notes-toggle", wait=8)
+                click("notes-toggle")
+            else:
+                tutorial_proof = wait_for_slot(profile, "opening-replay-proof", lambda value: value[0] == "tutorial_01", 40)
             assert slot(profile, "room-unlocks")[1] == ["tutorial_01"]
             assert_locked(click)
             screenshot()
         tutorial_rows = [9, 24, 30, 39, 44, 45, 46, 48, 57, 59, 62, 64, 67, 69, 72, 73, 74, 75, 76, 80, 85, 86]
         compare_voices(tutorial, authored, tutorial_rows)
         assert opened_music(tutorial) == [files["playlist"]]
-        assert {58, 63, 68} <= {row for row, _ in tutorial_proof[2]} and not tutorial_proof[1]
-        assert [12, .7] in tutorial_proof[2] and [14, .7] in tutorial_proof[2] and [0, 0] not in tutorial_proof[2]
-        assert tutorial_proof[3][0] > 0 and abs(tutorial_proof[3][1] - .05) < 1e-6
+        if not normal:
+            assert {58, 63, 68} <= {row for row, _ in tutorial_proof[2]} and not tutorial_proof[1]
+            assert [12, .7] in tutorial_proof[2] and [14, .7] in tutorial_proof[2] and [0, 0] not in tutorial_proof[2]
+            assert tutorial_proof[3][0] > 0 and abs(tutorial_proof[3][1] - .05) < 1e-6
 
         with playing(player, project, resources, profile, chapter, level_reference=level) as (click, _, _, screenshot):
             assert_locked(click)
@@ -164,7 +189,10 @@ def replay(player, room, resources, chapters, inventory, output):
             click("timer-end-button")
             progress = wait_for_slot(profile, "work-calendar", lambda value: value[0] == 2 and value[2][0] == 2, 12)
             click(PREFIX + "start", wait=10)
-            chapter_proof = wait_for_slot(profile, "opening-replay-proof", lambda value: value[0] == "main_01", 110)
+            if normal:
+                wait_for_slot(profile, "room-unlocks", lambda value: "main_01" in value[1], 110)
+            else:
+                chapter_proof = wait_for_slot(profile, "opening-replay-proof", lambda value: value[0] == "main_01", 110)
             assert slot(profile, "room-unlocks")[1] == ["tutorial_01", "main_01"]
             chapter_rows = [96, 97, 98, 99, 100, 101, 105, 106, 107, 108]
             compare_voices(chapter, authored, chapter_rows)
@@ -177,13 +205,22 @@ def replay(player, room, resources, chapters, inventory, output):
                 time.sleep(.25)
             assert slot(profile, "room-unlocks")[1] == ["tutorial_01", "main_01"]
         assert opened_music(chapter) == [files["playlist"], files["NEWings"], files["Nostalgia"]]
-        assert [index for index, _ in chapter_proof[2]] == [90, 91, 92, 93, 95, 102, 104, 109] and not chapter_proof[1]
-        assert chapter_proof[3][0] > 0 and .029999 < chapter_proof[3][1] <= .050001
+        if not normal:
+            assert [index for index, _ in chapter_proof[2]] == [90, 91, 92, 93, 95, 102, 104, 109] and not chapter_proof[1]
+            assert chapter_proof[3][0] > 0 and .029999 < chapter_proof[3][1] <= .050001
     report = {"launches": 2, "levelFromCountup": progress[2][0], "tutorialVoiceRows": tutorial_rows,
-              "chapterVoiceRows": chapter_rows, "tutorialEffects": tutorial_proof[2], "chapterEffects": chapter_proof[2],
+              "chapterVoiceRows": chapter_rows,
               "tutorialMusic": opened_music(tutorial), "chapterAndReplayMusic": opened_music(chapter),
-              "nonzeroNoiseFramesAndPeak": {"tutorial": tutorial_proof[3], "chapter": chapter_proof[3]},
               "playerSHA256": digest(player), "chaptersSHA256": digest(chapters)}
+    if normal:
+        for launch in (tutorial, chapter):
+            warnings = (launch / "stderr.log").read_text(encoding="utf-8").splitlines()
+            assert not [line for line in warnings if "[game-ui]" in line and "Syntax error parsing" in line], launch
+        report.update(startupScene="assets:/boot.azurelevel", roomScene=level,
+                      roomReceiptSHA256=digest(room / "opening-story-room-receipt.json"))
+    else:
+        report.update(tutorialEffects=tutorial_proof[2], chapterEffects=chapter_proof[2],
+                      nonzeroNoiseFramesAndPeak={"tutorial": tutorial_proof[3], "chapter": chapter_proof[3]})
     (output / "opening-route-replay.json").write_text(json.dumps(report) + "\n", encoding="utf-8")
     return report
 
@@ -192,6 +229,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     for option in ("player", "room", "resource-root", "chapters", "inventory", "output"):
         parser.add_argument("--" + option, type=Path, required=True)
+    parser.add_argument("--normal-room", action="store_true")
     args = parser.parse_args()
     print(json.dumps(replay(args.player.resolve(), args.room.resolve(), args.resource_root.resolve(),
-                            args.chapters.resolve(), args.inventory.resolve(), args.output.resolve())))
+                            args.chapters.resolve(), args.inventory.resolve(), args.output.resolve(), args.normal_room)))

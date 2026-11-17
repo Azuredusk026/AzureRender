@@ -24,6 +24,7 @@ local workChoice, speaking
 local choiceSpeaking
 local roomLanguage
 local timerVoice
+local roomOpening, timerVoiceActive
 
 local function durationText(value)
     local seconds = math.floor(value + 1e-7)
@@ -230,11 +231,19 @@ function init()
         self:ui_visible("work-progression", workCalendar:progress() ~= nil)
     end
     updateDisplay()
+    if new_room_opening then
+        roomOpening = new_room_opening(roomLanguage, function()
+            local progress = workCalendar and workCalendar:progress()
+            return progress and progress[1] or 1
+        end)
+    end
 end
 
 function update(dt)
     local languageChanged = roomLanguage and roomLanguage:update()
     if workCalendar then workCalendar:recover() end
+    if roomOpening and roomOpening:update(dt, phase == "idle" and not speaking and not choiceSpeaking and not timerVoiceActive,
+                                         languageChanged) then return end
     local voicedWork = 0
     if (workCalendar or workChoice or timerVoice) and phase ~= "idle" then
         local working = phase == "work" and not paused and not self:pressed("timer-toggle")
@@ -292,7 +301,7 @@ function update(dt)
             end
         end
     end
-    local timerVoiceActive = timerVoice and timerVoice:update(dt, languageChanged)
+    timerVoiceActive = timerVoice and timerVoice:update(dt, languageChanged)
     choiceSpeaking = workChoice and workChoice:step(dt, phase == "idle" and not speaking and not timerVoiceActive,
                                                       languageChanged)
     if roomVoice then speaking = roomVoice(dt, phase == "idle", choiceSpeaking or timerVoiceActive,
