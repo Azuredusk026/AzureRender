@@ -99,9 +99,11 @@ def slot(profile, name):
     return data["payload"]
 
 
-def wait_for_slot(profile, name, predicate, wait):
+def wait_for_slot(profile, name, predicate, wait, on_wait=None):
     deadline = time.monotonic() + wait
     while time.monotonic() < deadline:
+        if on_wait is not None:
+            on_wait()
         value = slot(profile, name)
         if value is not None and predicate(value):
             return value
@@ -159,14 +161,62 @@ def book_pixels(before, after):
     return int(np.count_nonzero(np.any(region(before) != region(after), axis=2)))
 
 
-def replay(player, room, resources, chapters, inventory, output, normal=False, books=False):
-    if books and not normal:
-        raise ValueError("Book layout verification requires the normal room")
+class MotionTrace:
+    def __init__(self, room, chapters):
+        self.path = room / "opening-story-motion-receipt.json"
+        self.receipt = json.loads(self.path.read_bytes())
+        assert self.receipt["chaptersSHA256"] == digest(chapters)
+        assert self.receipt["graphSHA256"] == digest(room / "assets/heroine/humanoid-motion.json")
+        self.parts = {"heroine-" + part for part in self.receipt["parts"]}
+        assert len(self.parts) == 7
+        self.routes = {}
+
+    def observe(self, phase):
+        samples = self.routes[phase] = []
+
+        def record(state):
+            parts = {pose["node"]: (pose["clip"], pose["time"], pose["previousClip"], pose["blend"])
+                     for pose in state["animations"] if pose["node"] in self.parts}
+            assert parts.keys() == self.parts and len(set(parts.values())) == 1, parts
+            current, = set(parts.values())
+            if not samples or state["frame"] != samples[-1][0]:
+                samples.append((state["frame"], *current))
+
+        def started(_, call):
+            self.sample = lambda: record(json.loads(call("query", name="game.state")))
+
+        return {"on_ready": started, "on_state": record}
+
+    def proof(self):
+        result = {}
+        expected = {"tutorial": (401, 12, 15, 3), "chapter": (5, 1, 3, 1000, 1003)}
+        for phase, commands in expected.items():
+            frames = self.routes[phase]
+            clips = [self.receipt["clipEntries"][str(command)] for command in commands]
+            index = 0
+            for _, clip, _, _, _ in frames:
+                if clip == clips[index]:
+                    index += 1
+                    if index == len(clips):
+                        break
+            seen = sorted({clip for _, clip, _, _, _ in frames})
+            assert index == len(clips), (phase, commands[index], seen)
+            result[phase] = {"samples": len(frames), "orderedSourceMotions": list(commands), "observedClips": seen,
+                             "blends": sorted({(previous, clip) for _, clip, _, previous, blend in frames
+                                               if blend < 1 and previous != clip})}
+            assert result[phase]["blends"], (phase, seen)
+        return {"motionReceiptSHA256": digest(self.path), "synchronizedParts": len(self.parts), "routes": result}
+
+
+def replay(player, room, resources, chapters, inventory, output, normal=False, books=False, body=False):
+    if (books or body) and not normal:
+        raise ValueError("Book and body verification require the normal room")
     output.mkdir()
     profile = output / "profile"
     tutorial = output / "tutorial"
     chapter = output / "chapter"
     fixture = normal_room_fixture if normal else route_fixture
+    motion = MotionTrace(room, chapters) if body else None
     with fixture(room, chapters, inventory) as (project, level, authored, music):
         files = {label: Path(path).name for label, path in music.items()}
         book_slot = "room-book-layout"
@@ -178,7 +228,9 @@ def replay(player, room, resources, chapters, inventory, output, normal=False, b
             save(profile, project, book_slot, [1, "Book_5"])
             book_file, = profile.glob("project-*/save-room-book-layout.json")
             original = book_file.read_bytes()
-        with playing(player, project, resources, profile, tutorial, level_reference=level) as (click, press, _, screenshot):
+        tutorial_hooks = motion.observe("tutorial") if motion else {}
+        with playing(player, project, resources, profile, tutorial, level_reference=level,
+                     **tutorial_hooks) as (click, press, _, screenshot):
             if books:
                 tutorial_before = screenshot("books-before-tutorial.png")
             click(PREFIX + "start")
@@ -193,7 +245,8 @@ def replay(player, room, resources, chapters, inventory, output, normal=False, b
             for option in (1, 2, 3, 4, 1):
                 click(PREFIX + f"option-{option}", wait=85)
             if normal:
-                wait_for_slot(profile, "room-unlocks", lambda value: "tutorial_01" in value[1], 40)
+                wait_for_slot(profile, "room-unlocks", lambda value: "tutorial_01" in value[1], 40,
+                              motion.sample if motion else None)
                 click("notes-toggle", wait=8)
                 click("notes-toggle")
             else:
@@ -211,7 +264,9 @@ def replay(player, room, resources, chapters, inventory, output, normal=False, b
             assert [12, .7] in tutorial_proof[2] and [14, .7] in tutorial_proof[2] and [0, 0] not in tutorial_proof[2]
             assert tutorial_proof[3][0] > 0 and abs(tutorial_proof[3][1] - .05) < 1e-6
 
-        with playing(player, project, resources, profile, chapter, level_reference=level) as (click, _, _, screenshot):
+        chapter_hooks = motion.observe("chapter") if motion else {}
+        with playing(player, project, resources, profile, chapter, level_reference=level,
+                     **chapter_hooks) as (click, _, _, screenshot):
             assert_locked(click)
             click("timer-mode-button")
             click("timer-toggle-button")
@@ -222,7 +277,8 @@ def replay(player, room, resources, chapters, inventory, output, normal=False, b
             if books:
                 assert slot(profile, book_slot) == [1, "Book_1"]
             if normal:
-                wait_for_slot(profile, "room-unlocks", lambda value: "main_01" in value[1], 110)
+                wait_for_slot(profile, "room-unlocks", lambda value: "main_01" in value[1], 110,
+                              motion.sample if motion else None)
             else:
                 chapter_proof = wait_for_slot(profile, "opening-replay-proof", lambda value: value[0] == "main_01", 110)
             assert slot(profile, "room-unlocks")[1] == ["tutorial_01", "main_01"]
@@ -269,6 +325,8 @@ def replay(player, room, resources, chapters, inventory, output, normal=False, b
             report.update(launches=3, bookPixels=deltas, bookRegion=[347, 484, 466, 539],
                           layoutReceiptSHA256=digest(room / "story-book-layout-receipt.json"),
                           bookSaveAfterLatestMain=slot(profile, book_slot), tutorialSavePreserved=True)
+        if motion:
+            report["bodyMotion"] = motion.proof()
     else:
         report.update(tutorialEffects=tutorial_proof[2], chapterEffects=chapter_proof[2],
                       nonzeroNoiseFramesAndPeak={"tutorial": tutorial_proof[3], "chapter": chapter_proof[3]})
@@ -282,7 +340,8 @@ if __name__ == "__main__":
         parser.add_argument("--" + option, type=Path, required=True)
     parser.add_argument("--normal-room", action="store_true")
     parser.add_argument("--verify-books", action="store_true")
+    parser.add_argument("--verify-body", action="store_true")
     args = parser.parse_args()
     print(json.dumps(replay(args.player.resolve(), args.room.resolve(), args.resource_root.resolve(),
                             args.chapters.resolve(), args.inventory.resolve(), args.output.resolve(),
-                            args.normal_room, args.verify_books)))
+                            args.normal_room, args.verify_books, args.verify_body)))

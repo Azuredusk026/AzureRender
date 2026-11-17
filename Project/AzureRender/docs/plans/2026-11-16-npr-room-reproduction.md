@@ -126,7 +126,7 @@ P3 按功能组实施与验收。完成一个功能组后更新矩阵，再继�
 
 [人体动画采样](../acceptance/npr-room/character-assets.md#人体动画采样)登记原 Avatar、两段逐帧动作及七个角色部件的同步回放。
 [计时动作采样](../acceptance/npr-room/timer-voice-cues.md)登记 16 种原版计时动作的七部件变换和实机提示点。
-[教学与第一章角色动作](../acceptance/npr-room/opening-body.md)登记九种剧情动作的源控制器、原 Avatar 采样和八条自动转场的原生逐帧回放。
+[教学与第一章角色动作](../acceptance/npr-room/opening-body.md)登记九种源动作、八条自动转场及常规剧情入口。
 [开场书本布置](../acceptance/npr-room/opening-book-layout.md)登记五套布置、剧情临时状态和存档恢复。
 
 - [ ] 迁移角色完整行为与动画控制器。覆盖 5 图层上的混合、遮罩、重定向、转场和中断。核对身体、视线、表情、语音和动作事件。按 P0 确认的状态分母验证可达路线。

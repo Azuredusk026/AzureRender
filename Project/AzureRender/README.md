@@ -6,6 +6,7 @@
 [房间计时回放](docs/acceptance/npr-room/room-probe.md)记录原音效、计时输入和本地存档。
 [房间曲库](docs/acceptance/npr-room/music-playlist.md)与[环境声](docs/acceptance/npr-room/ambient-sound.md)记录原资产、播放控制和独立 Player 恢复。
 [开场书本布置](docs/acceptance/npr-room/opening-book-layout.md)记录房间道具、剧情临时状态和读档。
+[开场身体动作](docs/acceptance/npr-room/opening-body.md)记录原角色动作、转场和剧情入口。
 
 [编辑器场景管线准备验收](docs/acceptance/p0/2026-11-16-editor-background-preparation.md)记录驱动首次编译、预览缓存及两条原生工作流。
 [编辑器与渲染组合验收](docs/acceptance/p0/2026-11-16-editor-and-transparency-integration.md)记录画面、原生交互和托管工作流。

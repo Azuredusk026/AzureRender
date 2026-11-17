@@ -32,6 +32,21 @@
 
 剧情验收覆盖动作指令、带条件的返回和中断，以及与表情、视线的叠加。
 
+## 常规剧情入口
+
+常规房间按剧情命令选择原动作入口。准备段读取首个动作指令，未指定时进入坐姿。动作编号 `-1` 保持当前动作，连续相同编号保持播放进度。剧情结束后恢复房间待机。
+
+九个原编号使用同一份装配清单。七个角色部件共享动作状态和八条自动转场。受条件驱动的返回、触发器消耗及其他图层单列验收。
+
+任务 1865 在常规剧情记录 583 次帧状态。七个部件的片段、时钟及混合进度逐次一致。教学按源顺序进入 401、12、15、3。第一章按源顺序进入 5、1、3、1000、1003。
+
+回放同时通过书本布置、章节读档、原语音与音乐检查。三个进程退出后 GPU 缓冲和图像归零。运行报告位于本机工程 `room-opening-body-route/validation/opening-body-route/`。
+
+| 记录 | SHA-256 |
+| --- | --- |
+| 常规房间装配清单 | `08b79d44119ee9d9d73c51ae5c602c574db0b8f660b9904c15636935e743b0ff` |
+| 常规剧情回放 | `73b28c56f51c74d6de3cedcedea406c95cb762eb719fcaa3ea019b5fd1335c07` |
+
 ## 复验
 
 ```powershell
@@ -41,4 +56,6 @@ python -B -m tools.npr_room.verify_timer_motion --room $storyBodyRoom --sample-r
 python -B tools/npr_room/test_story_body_player.py --player $player --room $storyBodyRoom --resource-root $resources --output $bodyReplay
 python -B -m tools.npr_room.story_body_timeline --room $storyBodyRoom --catalog $bodyCatalog --output $openingTimeline
 python -B tools/npr_room/test_story_body_player.py --player $player --room $storyBodyRoom --resource-root $resources --output $timelineReplay --timeline $openingTimeline
+python -B -m tools.npr_room.build_story_motion_room --room $bookRoom --catalog $bodyCatalog --chapters $openingChapters --output $storyMotionRoom
+python -B tools/npr_room/test_story_player.py --normal-room --verify-books --verify-body --player $player --room $storyMotionRoom --resource-root $resources --chapters $openingChapters --inventory $storyInventory --output $motionRouteReplay
 ```

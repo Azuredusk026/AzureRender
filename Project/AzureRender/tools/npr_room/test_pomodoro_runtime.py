@@ -57,6 +57,7 @@ def main():
     run(args.lua, [example / "assets/room-wallet.lua", example / "tests/room-wallet.lua"])
     run(args.lua, [example / "assets/room-window.lua", example / "tests/room-window.lua"])
     run(args.lua, [example / "assets/story-book-layout.lua", example / "tests/story-book-layout.lua"])
+    run(args.lua, [example / "assets/story-body.lua", example / "tests/story-body.lua"])
     print("Timer state, cues, room startup, notes, todo, work calendar, progression, language and voice selector checks passed")
 
 

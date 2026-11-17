@@ -17,7 +17,7 @@ from test_validation_protocol import exchange
 
 @contextlib.contextmanager
 def playing(player, project, resources, profile, output, expected_audio_starts=None,
-            level_reference="assets:/room.azurelevel", *, on_ready=None):
+            level_reference="assets:/room.azurelevel", *, on_ready=None, on_state=None):
     output.mkdir()
     endpoint = output / "endpoint.json"
     token = secrets.token_hex(32)
@@ -70,6 +70,8 @@ def playing(player, project, resources, profile, output, expected_audio_starts=N
                             and reply.get("message") in ("Game UI target is outside the viewport",
                                                         "Game UI target has no pointer interaction")
                             and time.monotonic() < deadline), reply
+                    if on_state is not None:
+                        check_state()
                     time.sleep(.25)
                 assert response["clicked"] == target
                 call("wait-frames", frames=4)
@@ -78,6 +80,8 @@ def playing(player, project, resources, profile, output, expected_audio_starts=N
             def check_state():
                 state = json.loads(call("query", name="game.state"))
                 assert not state["scriptErrors"] and not state["presentationErrors"] and not state["loadError"], state
+                if on_state is not None:
+                    on_state(state)
                 return state
 
             def press(key, domain="game-ui"):
@@ -106,6 +110,8 @@ def playing(player, project, resources, profile, output, expected_audio_starts=N
 
             if on_ready is not None:
                 on_ready(window, call)
+            if on_state is not None:
+                check_state()
             yield click, press, type_text, screenshot
             state = check_state()
             if expected_audio_starts is not None:

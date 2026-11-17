@@ -1,4 +1,4 @@
-function new_story_room(host, chapters, tracks, speeds, labels, language, level, books)
+function new_story_room(host, chapters, tracks, speeds, labels, language, level, books, body)
     local music = new_story_music(host, tracks)
     local noise = new_story_noise(host)
     local dialogue = new_story_dialogue(host, speeds, language)
@@ -16,10 +16,13 @@ function new_story_room(host, chapters, tracks, speeds, labels, language, level,
     function presentation:begin(chapter, replay)
         host:ui_visible("opening-story-input-mask", true)
         if books then books:begin(chapter, replay) end
+        if body then body:begin(chapter) end
         noise:begin(chapter, replay)
     end
 
-    function presentation:motion() end
+    function presentation:motion(row)
+        if body then body:row(row) end
+    end
 
     function presentation:update(dt)
         music:update(dt)
@@ -50,6 +53,7 @@ function new_story_room(host, chapters, tracks, speeds, labels, language, level,
         clearFocus()
         host:ui_visible("opening-story-input-mask", false)
         if books then books:finish() end
+        if body then body:finish() end
         music:finish()
         noise:finish()
     end

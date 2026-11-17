@@ -47,6 +47,7 @@ Lua 脚本使用编译后的源组执行两条完整路线。两条路线各覆�
 任务 1848 使用同一房间核对中文多行笔记、排序、删除、重开和存档版本保护。报告位于本机 `room-opening-playable/validation/notes-replay.json`。
 
 [开场书本布置](opening-book-layout.md)登记教学与第一章的场景状态和恢复规则。
+[开场身体动作](opening-body.md#常规剧情入口)登记两章的原动作选择和待机恢复。
 
 ## 复验
 
