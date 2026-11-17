@@ -8,6 +8,7 @@
 [开场书本布置](docs/acceptance/npr-room/opening-book-layout.md)记录房间道具、剧情临时状态和读档。
 [开场身体动作](docs/acceptance/npr-room/opening-body.md)记录原角色动作、转场和剧情入口。
 [开场桌面姿态](docs/acceptance/npr-room/opening-desk.md)记录桌面道具状态和原生回放。
+[开场全屏特效](docs/acceptance/npr-room/opening-effects.md)记录色差、单色噪声及黑屏的原程序和采样证据。
 [房间成就记录](docs/acceptance/npr-room/platform-scenarios.md#房间成就记录)记录四种房间操作的本地成就与存档恢复。
 [房间显示面板](docs/acceptance/npr-room/platform-scenarios.md#房间显示面板)与[系统菜单置顶](docs/acceptance/npr-room/platform-scenarios.md#windows-系统菜单置顶)记录窗口选项和存档恢复。
 [显示设置语言](docs/acceptance/npr-room/platform-scenarios.md#显示设置语言)记录面板和系统菜单的原文本与语言恢复。

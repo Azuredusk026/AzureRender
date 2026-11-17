@@ -16,6 +16,22 @@
 
 房间来源锁包含三个渲染器的有序通道、材质、默认浮点参数、纹理色彩空间、纹理原始摘要、着色器参数缓冲位置和混合状态。运行时纹理保留原槽位，分别对应相机不透明颜色、当前全屏输入和故障画面。来源锁的 SHA-256 为 `364c55422025e1ebaa19579062ecb0c497dc79a11aa79996abd033d25188c5ba`。本机编译程序和清单位于 `assets_private/npr-room-dev/windows-opening-reference/`。
 
+## 色差硬件参照
+
+色差使用两张原版 sRGB 纹理，均以线性过滤和循环寻址采样。输入画面使用 320×180 的线性 RGBA32F 固定图案。原 Direct3D 11 程序读取不同位置的颜色，并按原时间种子、纹理和扫描线参数输出替换画面。
+
+任务 2007 在 Intel 核显和 RTX 4060 各执行两次相同采样。四帧包含零比率、教学比率 0.2、半秒后的 0.2 和比率 0.5。每台设备的重复采样逐字节一致，零比率帧与输入逐像素一致，所有帧的透明度均为 1。比率 0.2 下，半秒间隔改变 Intel 的 57,595 个像素与 NVIDIA 的 57,600 个像素。单色噪声及黑屏回归与各自归档的 Direct3D 参照逐字节一致。
+
+本机证据位于 `windows-opening-reference/chromatic-validation/`。硬件参照用于对应设备的 Vulkan 逐帧对照。
+
+| 记录 | SHA-256 |
+| --- | --- |
+| 色差源绑定清单 | `dd116548b12edb0edba44e305d48f10f22ce56fa18dcde074cde2d3b6178efca` |
+| Intel 原始浮点画面 | `b58a463dab43dad075fe3d9dd68e147a6de10140507ae19d6927a945893fc15d` |
+| NVIDIA 原始浮点画面 | `1a2b0536af1b467d49baa8c95b26344737f42fa39ae83803e2ed94507d06f264` |
+| Intel 回放报告 | `0b458b877a369810ea4fe87d2e490a68ea1189f5ba7a167735255a73d935d4fe` |
+| NVIDIA 回放报告 | `5cc67f4c47ad2c59d7ba53da390b3d9eb114a360ea224ad2a1cc2ccf57e5b01d` |
+
 ## 单色噪声实机参照
 
 任务 1816 使用原生 D3D11 顶点和片元程序，以及原材质的 64×1 sRGB 时间纹理，在固定底色上捕获三个 320×180 RGBA32F 帧。比率为 0 时控制帧逐像素一致。比率为 0.05 时，每个像素按原混合系数与黑色或白色合成，透明度保持为 1。时间从 9.302 秒移到 9.802 秒时，18,319 个像素变化。两次硬件回放的摘要一致，均为 `5a17e42cb1f1dfda269de9d61619865df57ffc4b8500f2e57809b53a96e86389`。
@@ -97,6 +113,10 @@ python -B -m tools.npr_room.windows_noise_probe prepare --effects $programDirect
 & $noiseProbe $programDirectory $originalCapture
 & $noiseProbe $programDirectory $repeatCapture
 python -B -m tools.npr_room.windows_noise_probe verify --first $originalCapture --repeat $repeatCapture --output $noiseReport
+python -B -m tools.npr_room.windows_noise_probe prepare-chromatic --effects $programDirectory --catalog $imageCatalog --source $unitySource --output $chromaticInputs
+& $noiseProbe $chromaticInputs $chromaticCapture chromatic $dxgiAdapterIndex
+& $noiseProbe $chromaticInputs $chromaticRepeat chromatic $dxgiAdapterIndex
+python -B -m tools.npr_room.windows_noise_probe verify-chromatic --first $chromaticCapture --repeat $chromaticRepeat --output $chromaticReport
 python -B -m tools.npr_room.windows_noise_probe prepare-blackout --effects $programDirectory --catalog $imageCatalog --source $unitySource --output $blackoutInputs
 & $noiseProbe $blackoutInputs $blackoutCapture blackout
 & $noiseProbe $blackoutInputs $blackoutRepeat blackout

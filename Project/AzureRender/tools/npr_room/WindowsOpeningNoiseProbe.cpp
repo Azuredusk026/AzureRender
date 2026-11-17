@@ -23,6 +23,7 @@ using Vector = std::array<float, 4>;
 constexpr Vector background{.25F, .5F, .75F, 1};
 
 struct Sample { float time, ratio, blind; };
+enum class Effect { Noise, Blackout, Chromatic };
 
 void require(HRESULT status, const char* operation) {
     if (FAILED(status)) {
@@ -87,14 +88,27 @@ ComPtr<ID3D11SamplerState> sampler(ID3D11Device& device, D3D11_FILTER filter, D3
     return result;
 }
 
-void bindSources(ID3D11Device& device, ID3D11DeviceContext& context, const fs::path& source, bool blackout) {
+void bindSources(ID3D11Device& device, ID3D11DeviceContext& context, const fs::path& source,
+                 Effect effect, const std::string& prefix) {
     const auto linear = sampler(device, D3D11_FILTER_MIN_MAG_LINEAR_MIP_POINT, D3D11_TEXTURE_ADDRESS_WRAP);
-    const auto timeline = rgbaView(device, source / (blackout ? "blackout-timeline.rgba" : "noise-timeline.rgba"), 64, 1);
-    if (!blackout) {
+    const auto timeline = rgbaView(device, source / (prefix + "-timeline.rgba"), 64, 1);
+    if (effect == Effect::Noise) {
         ID3D11ShaderResourceView* view = timeline.Get();
         ID3D11SamplerState* sampling = linear.Get();
         context.PSSetShaderResources(0, 1, &view);
         context.PSSetSamplers(0, 1, &sampling);
+        return;
+    }
+    if (effect == Effect::Chromatic) {
+        const auto noise = rgbaView(device, source / "chromatic-noise.rgba", 256, 256);
+        const auto input = read(source / "chromatic-source.rgba32f");
+        if (input.size() != width * height * sizeof(Vector)) throw std::invalid_argument("Unexpected screen source dimensions");
+        const auto screen = textureView(device, width, height, DXGI_FORMAT_R32G32B32A32_FLOAT,
+                                        input.data(), width * sizeof(Vector));
+        ID3D11ShaderResourceView* views[]{noise.Get(), timeline.Get(), screen.Get()};
+        ID3D11SamplerState* samplers[]{linear.Get(), linear.Get()};
+        context.PSSetShaderResources(0, 3, views);
+        context.PSSetSamplers(0, 2, samplers);
         return;
     }
     const auto point = sampler(device, D3D11_FILTER_MIN_MAG_MIP_POINT, D3D11_TEXTURE_ADDRESS_WRAP);
@@ -108,7 +122,7 @@ void bindSources(ID3D11Device& device, ID3D11DeviceContext& context, const fs::p
     context.PSSetSamplers(0, 4, samplers);
 }
 
-void run(const fs::path& source, const fs::path& output, bool blackout, std::optional<UINT> adapterIndex) {
+void run(const fs::path& source, const fs::path& output, Effect effect, std::optional<UINT> adapterIndex) {
     if (fs::exists(output)) throw std::invalid_argument("Original capture output already exists");
     ComPtr<IDXGIAdapter1> requestedAdapter;
     if (adapterIndex) {
@@ -128,14 +142,15 @@ void run(const fs::path& source, const fs::path& output, bool blackout, std::opt
     require(dxgi->GetAdapter(&adapter), "Query DXGI adapter");
     require(adapter->GetDesc(&properties), "Read DXGI adapter");
     std::wcout << L"Direct3D adapter " << properties.Description << '\n';
-    const auto vs = read(source / (blackout ? "blackout-vertex.dxbc" : "noise-vertex.dxbc"));
-    const auto ps = read(source / (blackout ? "blackout-fragment.dxbc" : "noise-fragment.dxbc"));
+    const std::string prefix = effect == Effect::Blackout ? "blackout" : effect == Effect::Chromatic ? "chromatic" : "noise";
+    const auto vs = read(source / (prefix + "-vertex.dxbc"));
+    const auto ps = read(source / (prefix + "-fragment.dxbc"));
     ComPtr<ID3D11VertexShader> vertex;
     ComPtr<ID3D11PixelShader> fragment;
     require(device->CreateVertexShader(vs.data(), vs.size(), nullptr, &vertex), "CreateVertexShader");
     require(device->CreatePixelShader(ps.data(), ps.size(), nullptr, &fragment), "CreatePixelShader");
 
-    bindSources(*device.Get(), *context.Get(), source, blackout);
+    bindSources(*device.Get(), *context.Get(), source, effect, prefix);
     D3D11_TEXTURE2D_DESC texture{};
     texture.Width = width;
     texture.Height = height;
@@ -155,7 +170,7 @@ void run(const fs::path& source, const fs::path& output, bool blackout, std::opt
     ID3D11RenderTargetView* selected = target.Get();
 
     D3D11_BLEND_DESC blending{};
-    blending.RenderTarget[0] = {TRUE, D3D11_BLEND_SRC_ALPHA, D3D11_BLEND_INV_SRC_ALPHA, D3D11_BLEND_OP_ADD,
+    blending.RenderTarget[0] = {effect != Effect::Chromatic, D3D11_BLEND_SRC_ALPHA, D3D11_BLEND_INV_SRC_ALPHA, D3D11_BLEND_OP_ADD,
                                 D3D11_BLEND_ONE, D3D11_BLEND_INV_SRC_ALPHA, D3D11_BLEND_OP_ADD,
                                 D3D11_COLOR_WRITE_ENABLE_ALL};
     ComPtr<ID3D11BlendState> blend;
@@ -180,26 +195,34 @@ void run(const fs::path& source, const fs::path& output, bool blackout, std::opt
     const auto vertexBuffer = constants(*device.Get(), vertexGlobals);
     ID3D11Buffer* vertexConstant = vertexBuffer.Get();
     context->VSSetConstantBuffers(0, 1, &vertexConstant);
-    const auto samples = blackout
-        ? std::vector<Sample>{{9.302F, 0, 0}, {9.302F, .5F, 0}, {9.802F, .5F, 0},
-                             {9.302F, 1, 0}, {9.302F, .5F, 1}}
-        : std::vector<Sample>{{9.302F, 0, 0}, {9.302F, .05F, 0}, {9.802F, .05F, 0}};
+    std::vector<Sample> samples;
+    switch (effect) {
+    case Effect::Noise: samples = {{9.302F, 0, 0}, {9.302F, .05F, 0}, {9.802F, .05F, 0}}; break;
+    case Effect::Blackout:
+        samples = {{9.302F, 0, 0}, {9.302F, .5F, 0}, {9.802F, .5F, 0}, {9.302F, 1, 0}, {9.302F, .5F, 1}};
+        break;
+    case Effect::Chromatic: samples = {{9.302F, 0, 0}, {9.302F, .2F, 0}, {9.802F, .2F, 0}, {9.302F, .5F, 0}}; break;
+    }
     std::array<Vector, 5> initialMaterial{};
-    if (blackout) {
-        const auto data = read(source / "blackout-material.bin");
-        if (data.size() != sizeof(initialMaterial)) throw std::invalid_argument("Unexpected blackout constant buffer");
+    if (effect != Effect::Noise) {
+        const auto data = read(source / (prefix + "-material.bin"));
+        const auto expectedBytes = effect == Effect::Chromatic ? 3 * sizeof(Vector) : sizeof(initialMaterial);
+        if (data.size() != expectedBytes) throw std::invalid_argument("Unexpected original material constant buffer");
         std::memcpy(initialMaterial.data(), data.data(), data.size());
     }
     std::ofstream stream(output, std::ios::binary);
     if (!stream) throw std::runtime_error("Could not create original capture");
     for (const auto& sample : samples) {
-        std::array<Vector, 29> globals{};
+        std::array<Vector, 135> globals{};
         globals[25] = {sample.time, std::sin(sample.time), std::cos(sample.time), 0};
         globals[28] = {float(width), float(height), 1 + 1.F / width, 1 + 1.F / height};
         auto material = initialMaterial;
-        if (blackout) {
+        if (effect == Effect::Blackout) {
             material[3][1] = sample.ratio;
             material[4][3] = sample.blind;
+        } else if (effect == Effect::Chromatic) {
+            globals[126] = {float(width), float(height), 1.F / width, 1.F / height};
+            material[2][0] = sample.ratio;
         } else {
             material[1][0] = sample.ratio;
         }
@@ -222,8 +245,14 @@ void run(const fs::path& source, const fs::path& output, bool blackout, std::opt
 }
 
 int wmain(int argc, wchar_t** argv) try {
-    if (argc != 3 && !((argc == 4 || argc == 5) && std::wstring_view(argv[3]) == L"blackout"))
-        throw std::invalid_argument("Expected input directory, unused capture path, optional blackout and adapter index");
+    if (argc < 3 || argc > 5) throw std::invalid_argument("Expected input directory and unused capture path");
+    Effect effect = Effect::Noise;
+    if (argc >= 4) {
+        const std::wstring_view name(argv[3]);
+        if (name == L"blackout") effect = Effect::Blackout;
+        else if (name == L"chromatic") effect = Effect::Chromatic;
+        else throw std::invalid_argument("Expected blackout or chromatic and an optional adapter index");
+    }
     std::optional<UINT> index;
     if (argc == 5) {
         const std::wstring_view text(argv[4]);
@@ -231,7 +260,7 @@ int wmain(int argc, wchar_t** argv) try {
             throw std::invalid_argument("Expected a numeric DXGI adapter index");
         index = std::stoul(std::wstring(text));
     }
-    run(argv[1], argv[2], argc >= 4, index);
+    run(argv[1], argv[2], effect, index);
     return 0;
 } catch (const std::exception& error) {
     std::cerr << error.what() << '\n';

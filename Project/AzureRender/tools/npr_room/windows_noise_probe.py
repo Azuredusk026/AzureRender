@@ -20,6 +20,7 @@ PROGRAM = "windows-opening-effects-programs.json"
 BINDINGS = "windows-opening-effects-source-lock.json"
 BACKGROUND = np.array([.25, .5, .75, 1], dtype=np.float32)
 BLACKOUT_SAMPLES = [[9.302, 0, 0], [9.302, .5, 0], [9.802, .5, 0], [9.302, 1, 0], [9.302, .5, 1]]
+CHROMATIC_SAMPLES = [[9.302, 0], [9.302, .2], [9.802, .2], [9.302, .5]]
 
 
 def prepare(effects, catalog):
@@ -134,6 +135,83 @@ def compare_blackout(reference, candidate, repeat):
     }
 
 
+def chromatic_source():
+    y, x = np.indices((180, 320))
+    return np.stack(((x % 17) / 16, (y % 9) / 8, ((x + y) % 32) / 32,
+                     np.ones_like(x)), axis=2).astype("<f4")
+
+
+def prepare_chromatic(effects, catalog, source, output):
+    lock = json.loads((effects / BINDINGS).read_bytes())
+    program_file = effects / PROGRAM
+    if digest(program_file) != lock["programsSHA256"]:
+        raise ValueError("Chromatic bytecode receipt differs from the source lock")
+    stages = json.loads(program_file.read_bytes())["programs"]["chromatic"]["stages"]
+    authored, = [item for item in lock["renderers"]["High"]["passes"] if item["shaderProgram"] == "chromatic"]
+    if authored["renderState"]["blend"] != {"srcBlend": 1, "destBlend": 0, "srcBlendAlpha": 1,
+                                             "destBlendAlpha": 0, "blendOp": 0, "blendOpAlpha": 0, "colMask": 15}:
+        raise ValueError("Unexpected original chromatic blend")
+    if digest(source / authored["material"]) != authored["materialSHA256"]:
+        raise ValueError("Chromatic material differs from the source lock")
+    layout, = [buffer for buffer in stages["fragment"]["constantBuffers"] if buffer["binding"] == 1]
+    offsets = {item["name"]: item["offset"] for item in layout["vectors"]}
+    names = ("_Ratio", "_Unstable", "_FilamentScale", "_Rage")
+    if layout["bytes"] != 48 or [offsets[name] for name in names] != [32, 36, 40, 44] or authored["floats"]["_Ratio"] != 0:
+        raise ValueError("Unexpected original chromatic constant layout")
+    slots = {value["binding"]: value for value in authored["textures"].values()}
+    if set(slots) != {0, 1, 2} or not slots[2]["runtime"]:
+        raise ValueError("Unexpected original chromatic texture slots")
+    output.mkdir()
+    for stage in stages.values():
+        bytecode = effects / stage["path"]
+        if digest(bytecode) != stage["sha256"]:
+            raise ValueError("Original chromatic bytecode differs")
+        shutil.copyfile(bytecode, output / bytecode.name)
+    texture_inputs = {}
+    for slot, label, size in ((0, "noise", (256, 256)), (1, "timeline", (64, 1))):
+        texture = slots[slot]
+        settings = source / (texture["source"] + ".meta")
+        values = dict(re.findall(r"^\s*(filterMode|wrap[UVW]):\s*(\d+)\s*$",
+                                 settings.read_text(encoding="utf-8"), re.M))
+        if not texture["srgb"] or values != {"filterMode": "1", "wrapU": "0", "wrapV": "0", "wrapW": "0"}:
+            raise ValueError(f"Chromatic texture sampler differs: {label}")
+        png = verified_path(catalog, texture)
+        target = output / f"chromatic-{label}.rgba"
+        with Image.open(png) as image:
+            if image.size != size:
+                raise ValueError(f"Chromatic texture dimensions differ: {label}")
+            target.write_bytes(image.convert("RGBA").tobytes())
+        texture_inputs[label] = {"sourceSHA256": digest(png), "settingsSHA256": digest(settings),
+                                 "rgbaSHA256": digest(target), "size": size}
+    material = output / "chromatic-material.bin"
+    material.write_bytes(struct.pack("<12f", *([0] * 8 + [authored["floats"][name] for name in names])))
+    screen = output / "chromatic-source.rgba32f"
+    screen.write_bytes(chromatic_source().tobytes())
+    return {"programSHA256": digest(program_file), "sourceLockSHA256": digest(effects / BINDINGS),
+            "textures": texture_inputs, "materialSHA256": authored["materialSHA256"],
+            "materialConstantsSHA256": digest(material), "screenSourceSHA256": digest(screen)}
+
+
+def verify_chromatic(first, repeat):
+    checksum = digest(first)
+    if checksum != digest(repeat):
+        raise ValueError("Original chromatic captures differ under identical inputs")
+    capture = np.fromfile(first, dtype="<f4").reshape(len(CHROMATIC_SAMPLES), 180, 320, 4)
+    if not np.isfinite(capture).all() or not (capture[..., 3] == 1).all():
+        raise ValueError("Chromatic capture changed alpha or produced a non-finite value")
+    if not np.array_equal(capture[0], chromatic_source()):
+        raise ValueError("Zero chromatic ratio changed the screen source")
+    changes = np.count_nonzero(capture[1:, ..., :3] != capture[0, ..., :3], axis=(1, 2))
+    time_changed = int(np.count_nonzero(np.any(capture[1] != capture[2], axis=2)))
+    ratio_changed = int(np.count_nonzero(np.any(capture[1] != capture[3], axis=2)))
+    if (changes == 0).any() or not time_changed or not ratio_changed:
+        raise ValueError("Original chromatic effect lost a color, ratio, or time input")
+    return {"size": [320, 180], "frames": CHROMATIC_SAMPLES, "captureSHA256": checksum,
+            "changedChannelPixels": changes.tolist(), "timeChangedPixels": time_changed,
+            "ratioChangedPixels": ratio_changed,
+            "rgbRange": [[float(frame[..., :3].min()), float(frame[..., :3].max())] for frame in capture]}
+
+
 def frame_counts(frames):
     if not np.array_equal(frames[0], np.broadcast_to(BACKGROUND, frames[0].shape)):
         raise ValueError("Zero noise changed the control frame")
@@ -186,7 +264,9 @@ if __name__ == "__main__":
                "compare": ("reference", "candidate", "repeat", "output"),
                "prepare-blackout": ("effects", "catalog", "source", "output"),
                "verify-blackout": ("first", "repeat", "output"),
-               "compare-blackout": ("reference", "candidate", "repeat", "output")}
+               "compare-blackout": ("reference", "candidate", "repeat", "output"),
+               "prepare-chromatic": ("effects", "catalog", "source", "output"),
+               "verify-chromatic": ("first", "repeat", "output")}
     for operation, paths in options.items():
         command = subparsers.add_parser(operation)
         for path in paths:
@@ -194,13 +274,17 @@ if __name__ == "__main__":
     args = parser.parse_args()
     if args.operation == "prepare":
         prepare(args.effects, args.catalog)
-    elif args.operation == "prepare-blackout":
-        report = prepare_blackout(args.effects, args.catalog, args.source, args.output)
-        (args.output / "blackout-source-receipt.json").write_text(json.dumps(report, sort_keys=True) + "\n",
-                                                                 encoding="utf-8", newline="\n")
+    elif args.operation in ("prepare-blackout", "prepare-chromatic"):
+        effect = args.operation.removeprefix("prepare-")
+        prepare_effect = prepare_blackout if effect == "blackout" else prepare_chromatic
+        report = prepare_effect(args.effects, args.catalog, args.source, args.output)
+        (args.output / (effect + "-source-receipt.json")).write_text(json.dumps(report, sort_keys=True) + "\n",
+                                                                   encoding="utf-8", newline="\n")
     else:
         if args.operation == "verify-blackout":
             report = verify_blackout(args.first, args.repeat)
+        elif args.operation == "verify-chromatic":
+            report = verify_chromatic(args.first, args.repeat)
         elif args.operation == "compare-blackout":
             report = compare_blackout(args.reference, args.candidate, args.repeat)
         elif args.operation == "verify":
