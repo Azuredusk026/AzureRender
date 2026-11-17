@@ -14,10 +14,10 @@ from tools.npr_room.build_story_book_room import skip_capture_orphans
 from tools.npr_room.build_story_signal_room import GRAPH, compile_signals, inputs, integration, load
 from tools.npr_room.catalog_storage import publish_directory
 from tools.npr_room.humanoid_clip_export import export_model
-from tools.npr_room.opening_camera import project as camera_project
+from tools.npr_room.opening_camera import attach_audio, project as camera_project
 from tools.npr_room.pbr_materials import write
 from tools.npr_room.reference_inventory import digest
-from tools.npr_room.room_geometry import HEROINE_PARTS, copy_room_asset
+from tools.npr_room.room_geometry import HEROINE_PARTS, copy_room_asset, stage_live_audio_media
 
 
 TUTORIAL_RECEIPT = "tutorial-camera-body-receipt.json"
@@ -96,12 +96,14 @@ def project(room, catalog, controller, chapters, source_receipt, models):
     return graph, script, tutorial, bindings
 
 
-def stage(room, catalog, controller, chapters, source_receipt, models, output, camera_trace=None):
+def stage(room, catalog, controller, chapters, source_receipt, models, output, camera_trace=None, camera_audio_source=None):
     body, program, route, states = project(room, catalog, controller, chapters, source_receipt, models)
     camera = load(models / TUTORIAL_RECEIPT)
     camera_path = None
+    if camera_audio_source and not camera_trace:
+        raise ValueError("Camera audio requires the original camera trace")
     if camera_trace:
-        program, camera_path = camera_project(room, program, camera_trace)
+        program, camera_path = camera_project(room, program, camera_trace, camera_audio_source)
     with tempfile.TemporaryDirectory(prefix="tutorial-camera-room-", dir=output.parent) as workspace:
         target = Path(workspace) / "project"
         assets = target / "assets"
@@ -118,9 +120,18 @@ def stage(room, catalog, controller, chapters, source_receipt, models, output, c
         write(assets / GRAPH, body)
         script = assets / "pomodoro.lua"
         script.write_text(program, encoding="utf-8", newline="\n")
+        level = assets / "room.azurelevel"
+        if camera_audio_source:
+            sound = camera_path["cue"]
+            scene = load(level)
+            attach_audio(scene, sound)
+            write(level, scene)
+            stage_live_audio_media(camera_audio_source, [sound], assets)
         for name in ("opening-desk-receipt.json", "opening-story-room-receipt.json", "opening-story-motion-receipt.json"):
             manifest = load(target / name)
             manifest["scriptSHA256"] = digest(script)
+            if camera_audio_source and "levelSHA256" in manifest:
+                manifest["levelSHA256"] = digest(level)
             if name == "opening-story-motion-receipt.json":
                 manifest.update(graphSHA256=digest(assets / GRAPH), tutorialCamera=route, tutorialStates=states)
             write(target / name, manifest)
@@ -133,7 +144,8 @@ def stage(room, catalog, controller, chapters, source_receipt, models, output, c
                 write(path, manifest)
         write(target / TUTORIAL_RECEIPT, camera)
         if camera_path:
-            write(target / "opening-camera-receipt.json", camera_path | {"scriptSHA256": digest(script)})
+            write(target / "opening-camera-receipt.json", camera_path | {
+                "scriptSHA256": digest(script), "levelSHA256": digest(level)})
         publish_directory(target, output)
     return camera
 
@@ -147,9 +159,11 @@ if __name__ == "__main__":
         action = steps.add_parser(step)
         for name in names:
             action.add_argument("--" + name, type=Path, required=True)
-    steps.choices["stage"].add_argument("--camera-trace", type=Path)
+    for name in ("camera-trace", "camera-audio-source"):
+        steps.choices["stage"].add_argument("--" + name, type=Path)
     args = vars(parser.parse_args())
     arguments = bake_args if args["step"] == "bake" else room_args
     handler = bake if args["step"] == "bake" else stage
-    options = {"camera_trace": args["camera_trace"].resolve(strict=True)} if args.get("camera_trace") else {}
+    options = {name: args[name].resolve(strict=True) for name in ("camera_trace", "camera_audio_source")
+               if args.get(name)}
     print(json.dumps(handler(*(args[name.replace("-", "_")].resolve() for name in arguments), **options)))

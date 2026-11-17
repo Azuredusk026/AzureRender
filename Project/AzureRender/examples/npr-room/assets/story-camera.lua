@@ -1,6 +1,7 @@
 function new_story_camera(host, track)
     local actor = assert(host:find(track.node))
     local component = "azure.transform"
+    local cue = track.cueNode and assert(host:find(track.cueNode))
     local elapsed
     local sampleCount = #track.rotations
     local camera = {}
@@ -10,6 +11,7 @@ function new_story_camera(host, track)
         elapsed = 0
         actor:set(component, "translation", track.translation)
         actor:set(component, "rotation", track.rotations[1])
+        if cue then cue:audio_play() end
     end
 
     function camera:update(dt)
@@ -34,6 +36,7 @@ function new_story_camera(host, track)
     function camera:finish()
         if elapsed == nil then return end
         elapsed = nil
+        if cue then cue:audio_stop() end
         actor:set(component, "rotation", track.finish)
     end
 

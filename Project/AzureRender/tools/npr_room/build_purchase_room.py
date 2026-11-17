@@ -40,17 +40,17 @@ CITY_CONTROLS = '''
 '''
 
 
-def purchase_sound(source):
+def system_sound(source, sound_name):
     master = "Assets/App/BulbulAssets/MasterData/ScriptableObjects/SystemSeMaster.asset"
     enum = "Assets/Scripts/Assembly-CSharp/Bulbul/SystemSeType.cs"
     code, = (number for number, name in enum_values((source / enum).read_text(encoding="utf-8-sig")).items()
-             if name == "BuyItem")
+             if name == sound_name)
     clip, = (row["AudioClip"] for row in UnityScene(source / master).read(11400000)["SystemSes"]
              if row["SeSound"] == code)
     relative, = group_paths_by_guid(asset_index(source))[clip["guid"]]
     raw = source / relative
     if raw.suffix.lower() != ".ogg":
-        raise ValueError("Expected original BuyItem cue as Ogg")
+        raise ValueError(f"Expected original {sound_name} cue as Ogg")
     return {"source": relative, "asset": "system/" + raw.name, "sha256": digest(raw), "fileID": clip["fileID"],
             "uuid": str(UUID(clip["guid"])), "cue": code, "masterSHA256": digest(source / master),
             "enumSHA256": digest(source / enum)}
@@ -87,7 +87,7 @@ def build(room, output, source, unlock_catalog, window_scenes=None, city_receipt
     offers = {name: [row["cost"], row.get("expires", "")] for name, row in catalog["environment"].items()
               if row["policy"] == "purchase"}
     enabled = {names[row["id"]]: row["id"] for row in assets["sounds"] if row["loop"] and names[row["id"]] in offers}
-    sound = purchase_sound(source)
+    sound = system_sound(source, "BuyItem")
     program = [
         "local wallet_catalog = " + lua_value(offers),
         (ASSETS / "room-wallet.lua").read_text(encoding="utf-8"),

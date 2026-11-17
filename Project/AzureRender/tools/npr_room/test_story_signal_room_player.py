@@ -13,7 +13,7 @@ from test_story_player import MotionTrace, PREFIX, compare_voices, opened_music,
 from test_story_signals_player import camera_model_links
 from test_unlock_room_player import save
 from tools.npr_room.build_story_signal_room import GRAPH, inputs, integration
-from tools.npr_room.opening_camera import project as camera_project
+from tools.npr_room.opening_camera import attach_audio, project as camera_project
 from tools.npr_room.pbr_materials import write
 from tools.npr_room.reference_inventory import digest
 from tools.npr_room.story_chapters import lua_value
@@ -21,7 +21,7 @@ from tools.npr_room.tutorial_camera_body import project as tutorial_project
 
 
 @contextmanager
-def entry(room, graph, program, models=None):
+def entry(room, graph, program, models=None, camera_sound=None, camera_source=None):
     tag = "capture-main-conditional"
     root = room / "assets"
     names = {kind: tag + suffix for kind, suffix in (
@@ -50,6 +50,11 @@ def entry(room, graph, program, models=None):
         parts = [node for node in scene["nodes"] if node["id"].startswith("heroine-")
                  and "azure.animator" in node["components"]]
         links = camera_model_links(root, scene, parts, models, tag)
+    if camera_sound:
+        attach_audio(scene, camera_sound)
+        audio_file = (camera_source / camera_sound["source"]).resolve(strict=True)
+        assert audio_file.is_relative_to(camera_source / "Assets") and digest(audio_file) == camera_sound["sha256"]
+        links[root / camera_sound["asset"]] = audio_file
     animators, timers = 0, 0
     for node in scene["nodes"]:
         for kind, value in node["components"].items():
@@ -89,6 +94,7 @@ def entry(room, graph, program, models=None):
 def camera_observer(track):
     return f"""
 local cameraNode = {lua_value(track["node"])}
+local cueNode = {lua_value(track["cueNode"]) if "cueNode" in track else "nil"}
 local boundCamera = new_story_camera
 local readyForFinish = false
 function new_story_camera(host, data)
@@ -102,7 +108,17 @@ function new_story_camera(host, data)
 end
 local originalUpdate = update
 local moved, rebound = false, false
+local previousPlaying, cueStarts
 function update(dt)
+    local cue = cueNode and assert(self:find(cueNode))
+    if cue then
+        local playing = cue:audio_playing()
+        if cueStarts == nil or (playing and not previousPlaying) then
+            cueStarts = (cueStarts or 0) + (playing and 1 or 0)
+            self:write_save("opening-camera-play-count", {{1, cueStarts}})
+        end
+        previousPlaying = playing
+    end
     if not rebound then
         local actor = assert(self:find(cameraNode))
         local position = actor:get("azure.transform", "translation")
@@ -112,12 +128,12 @@ function update(dt)
             local finishAngle = {track["finish"][0]:.12f}
             local onPlateau = math.abs((rotation[1] - movedAngle + 180) % 360 - 180) < .0001
             if not moved and onPlateau then
-                self:write_save("opening-camera-movement", {{1, position, rotation}})
+                self:write_save("opening-camera-movement", {{1, position, rotation, cue and cue:audio_playing() or false}})
                 moved = true
             end
             local atFinish = math.abs((rotation[1] - finishAngle + 180) % 360 - 180) < .00003
             if moved and readyForFinish and atFinish then
-                self:write_save("opening-camera-finish", {{1, position, rotation}})
+                self:write_save("opening-camera-finish", {{1, position, rotation, cue and cue:audio_playing() or false}})
                 rebound = true
             end
         end
@@ -128,7 +144,7 @@ end
 
 
 def replay(player, room, resources, catalog, graph, chapters, output, source_receipt=None, models=None,
-           camera_trace=None):
+           camera_trace=None, camera_audio_source=None):
     if bool(source_receipt) != bool(models):
         raise ValueError("The tutorial replay needs both source receipt and sampled models")
     original_script = room / "assets/pomodoro.lua"
@@ -138,12 +154,15 @@ def replay(player, room, resources, catalog, graph, chapters, output, source_rec
         compiled, program, _, camera = tutorial_project(room, catalog, graph, chapters, source_receipt, models)
     else:
         program = integration(original_script.read_text(encoding="utf-8"), route)
-    track = None
+    track, sound = None, None
+    if camera_audio_source and not camera_trace:
+        raise ValueError("Camera audio requires the original camera trace")
     if camera_trace:
         if not models:
             raise ValueError("The normal camera replay requires the tutorial body models")
-        program, camera_receipt = camera_project(room, program, camera_trace)
+        program, camera_receipt = camera_project(room, program, camera_trace, camera_audio_source)
         track = camera_receipt["track"]
+        sound = camera_receipt.get("cue")
         program += camera_observer(track)
     trace = MotionTrace(room, chapters)
     output.mkdir()
@@ -151,7 +170,7 @@ def replay(player, room, resources, catalog, graph, chapters, output, source_rec
     authored = json.loads(chapters.read_bytes())["chapters"]
     tracks = json.loads((room / "music-receipt.json").read_bytes())["tracks"]
     tutorial = None
-    with entry(room, compiled, program, models) as (project, level):
+    with entry(room, compiled, program, models, sound, camera_audio_source) as (project, level):
         if models:
             startup = output / "tutorial"
             save(profile, project, "room-book-layout", [1, "Book_5"])
@@ -172,8 +191,8 @@ def replay(player, room, resources, catalog, graph, chapters, output, source_rec
             compare_voices(startup, authored, rows)
             if track:
                 unity = json.loads(camera_trace.read_bytes())
-                start_schema, position, movement = slot(profile, "opening-camera-movement")
-                end_schema, endpoint, rotation = slot(profile, "opening-camera-finish")
+                start_schema, position, movement, cue_playing = slot(profile, "opening-camera-movement")
+                end_schema, endpoint, rotation, cue_finished = slot(profile, "opening-camera-finish")
                 assert start_schema == end_schema == 1
                 anchor = unity["anchor"]["position"]
                 origin = [value - local for value, local in zip(
@@ -182,6 +201,9 @@ def replay(player, room, resources, catalog, graph, chapters, output, source_rec
                 end_error = pose_error(endpoint, rotation, unity["disabled"], origin)
                 assert start_error[0] < 1e-6 and start_error[1] < .002, start_error
                 assert end_error[0] < 1e-6 and end_error[1] < 3e-5, end_error
+                if sound:
+                    assert slot(profile, "opening-camera-play-count") == [1, 1]
+                    assert cue_playing is True and cue_finished is False
             camera_clips = {state.split(".")[-1]: value["clip"] for state, value in camera.items()}
             states = ["GameStart_Start", "GameStartDirectionLoop", "GameStart_End", "Base001_Motion12_Start_Nod"]
             frames = trace.routes["tutorial"]
@@ -236,6 +258,13 @@ def replay(player, room, resources, catalog, graph, chapters, output, source_rec
              "bookLayout": "Book_1", "cleanAllocatorExits": 1}
     if tutorial:
         proof.update(tutorial=tutorial, cleanAllocatorExits=2)
+    if sound:
+        name = Path(sound["asset"]).name
+        openings = lambda folder: sum(" source: " in row and Path(row.rsplit(" source: ", 1)[1]).name == name
+                                      for row in (folder / "stderr.log").read_text(encoding="utf-8").splitlines())
+        assert (openings(startup), openings(run)) == (1, 1)
+        assert slot(profile, "opening-camera-play-count") == [1, 0]
+        proof["cameraAudio"] = sound | {"tutorialStarts": 1, "firstChapterStarts": 0}
     if track:
         proof["camera"] = {"sourceTraceSHA256": digest(camera_trace),
                            "movementPoseError": start_error, "finishPoseError": end_error}
@@ -251,7 +280,9 @@ if __name__ == "__main__":
     for name in ("source-receipt", "models"):
         parser.add_argument("--" + name, type=Path)
     parser.add_argument("--camera-trace", type=Path)
+    parser.add_argument("--camera-audio-source", type=Path)
     args = vars(parser.parse_args())
     print(json.dumps(replay(*(args[name.replace("-", "_")].resolve() for name in parameters),
                             source_receipt=args["source_receipt"], models=args["models"],
-                            camera_trace=args["camera_trace"])))
+                            camera_trace=args["camera_trace"],
+                            camera_audio_source=args["camera_audio_source"])))

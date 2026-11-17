@@ -30,3 +30,26 @@ camera:finish()
 assert(#calls == 6)
 camera:effect({command = "DirectionGameStartCamera"})
 assert(#calls == 8 and calls[8][2][1] == 179)
+local starts, stops = 0, 0
+local cue = {
+    audio_play = function() starts = starts + 1 end,
+    audio_stop = function() stops = stops + 1 end,
+}
+local findCamera = host.find
+function host:find(node)
+    if node == "source-cue" then return cue end
+    return findCamera(self, node)
+end
+track.cueNode = "source-cue"
+local withSound = new_story_camera(host, track)
+withSound:finish()
+withSound:effect({command = "DirectionMonochromeNoise"})
+assert(starts == 0 and stops == 0)
+withSound:effect({command = "DirectionGameStartCamera"})
+assert(starts == 1 and stops == 0)
+withSound:update(3)
+assert(starts == 1 and stops == 0)
+withSound:finish()
+assert(starts == 1 and stops == 1)
+withSound:finish()
+assert(stops == 1)

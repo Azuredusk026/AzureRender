@@ -127,6 +127,17 @@
 | 原生固定帧步回放 | `a0551d0e7cdf61775940bcd6ca5c2365e2a117cf226ba903f35abaccbf8f3a21` |
 | 常规入口回放 | `1142947fd6ba68d1a7ff67c9d1adad20618fd9413ce523cc8066a5cee9af9664` |
 
+## 教学相机音效
+
+系统音效表的第 0 项绑定原立体声音频。音频采样率为 48 kHz，时长为 2.4755 秒。相机指令启动播放，剧情收尾清理音效。
+
+任务 1893 在两个正常房间进程采样播放状态。教学启动一次，第一章启动零次。两个进程均通过剧情动作、语音和存档回归。报告保存在本机 `story-motion-reference/tutorial-camera/windows-camera/audio/`。
+
+| 记录 | SHA-256 |
+| --- | --- |
+| 原系统音效 | `78eb311f4dccb975bdf627e9687dbc7a70b3ab26d2dbd8247af355075a603072` |
+| 原生回放 | `836cc9e12cfc7e6a1e1620af19ff98871a23706a48828ccf8b8d3e42cb55ade7` |
+
 ## 复验
 
 ```powershell
@@ -159,6 +170,6 @@ python -B tools/npr_room/test_story_signal_room_player.py --player $player --roo
 python -B -m tools.npr_room.opening_camera_probe --source $unitySource --project $tutorialProbe
 & $unity -batchmode -nographics -quit -projectPath $tutorialProbe -executeMethod OpeningCameraProbe.Run -logFile $cameraLog
 python -B tools/npr_room/test_opening_camera_player.py --player $player --room $deskRoom --resource-root $resources --source-trace $cameraTrace --output $cameraReplay
-python -B tools/npr_room/test_story_signal_room_player.py --player $player --room $deskRoom --resource-root $resources --catalog $bodyCatalog --graph $animatorGraph --chapters $openingChapters --source-receipt $tutorialSource --models $tutorialModels --camera-trace $cameraTrace --output $cameraRoomReplay
-python -B -m tools.npr_room.tutorial_camera_body stage --room $deskRoom --catalog $bodyCatalog --controller $animatorGraph --chapters $openingChapters --source-receipt $tutorialSource --models $tutorialModels --camera-trace $cameraTrace --output $cameraRoom
+python -B tools/npr_room/test_story_signal_room_player.py --player $player --room $deskRoom --resource-root $resources --catalog $bodyCatalog --graph $animatorGraph --chapters $openingChapters --source-receipt $tutorialSource --models $tutorialModels --camera-trace $cameraTrace --camera-audio-source $unitySource --output $cameraRoomReplay
+python -B -m tools.npr_room.tutorial_camera_body stage --room $deskRoom --catalog $bodyCatalog --controller $animatorGraph --chapters $openingChapters --source-receipt $tutorialSource --models $tutorialModels --camera-trace $cameraTrace --camera-audio-source $unitySource --output $cameraRoom
 ```

@@ -3,12 +3,14 @@
 import math
 from pathlib import Path
 
+from tools.npr_room.build_purchase_room import system_sound
 from tools.npr_room.build_story_desk_room import euler_xyz
 from tools.npr_room.build_story_signal_room import EXAMPLE, load
 from tools.npr_room.reference_inventory import digest
 from tools.npr_room.story_chapters import lua_value
 
 ASSET = "story-camera.lua"
+CUE = "opening-camera-sound"
 
 
 def engine_euler(quaternion):
@@ -85,9 +87,21 @@ def bind(script, track):
     return script
 
 
-def project(room, program, trace_path):
+def attach_audio(level, sound):
+    if any(node["id"] == CUE for node in level["nodes"]):
+        raise ValueError("The room already has an opening camera cue")
+    level["nodes"].append({"id": CUE, "components": {"azure.audio-source": {
+        "type": "azure.audio-source", "version": 1,
+        "data": {"asset": "assets:/" + sound["asset"], "volume": .5}}}})
+
+
+def project(room, program, trace_path, source=None):
     level_path = room / "assets/room.azurelevel"
     trace = load(trace_path)
     track = compile_track(load(level_path), trace)
-    return bind(program, track), {"schemaVersion": 1, "levelSHA256": digest(level_path),
-                                  "traceSHA256": digest(trace_path), "track": track}
+    receipt = {"schemaVersion": 1, "levelSourceSHA256": digest(level_path),
+               "traceSHA256": digest(trace_path), "track": track}
+    if source:
+        receipt["cue"] = system_sound(source, "GameStartCameraNoise")
+        track["cueNode"] = CUE
+    return bind(program, track), receipt
