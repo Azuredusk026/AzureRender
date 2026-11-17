@@ -1,6 +1,6 @@
 # 平台场景与验证条件
 
-> 状态为 P0 场景登记。平台实机结果按应用构建和测试身份单独归档。
+> 已登记 P0 平台场景，并通过 P6 本机窗口回归。平台实机结果按应用构建和测试身份单独归档。
 
 移植基线为 Recovery Windows 1.17.3。平台采证可使用 [Steam 1.18.1 参考构建](steam-reference.md)。[源接口清单](platform-scenarios.json)保存相关程序集类型和导出文件摘要。
 
@@ -16,3 +16,15 @@
 | 消息与图片 | `LoginFlow` 更新消息提示，`ImageContent` 按来源加载本地资源或网络图片并处理加载错误。 | 本地夹具覆盖提示、过期内容、取消、连接失败和损坏图片。发行方消息的真实返回按实际服务记录登记。 |
 
 窗口和本地媒体场景使用本机测试档。服务夹具仅记录本地执行结果。外部服务记录包含应用构建、脱敏测试身份、执行步骤和结果；成就统计、游戏账户同步与 Steam 客户端云存档分别归档。
+
+## Windows 窗口回归
+
+任务 1858 从项目的启动关卡进入常规房间。测试进程使用按显示器感知的 DPI 上下文读取实际像素。客户区依次为 1280×720、960×540、恢复后的 960×540 及 1920×1080；各阶段的 Vulkan 截图尺寸与客户区一致。系统报告窗口进入最小化状态并成功恢复。房间关卡在每次操作后继续出帧，并保持相同修订号；加载、脚本和呈现错误均为空。
+
+玩家在紧凑窗口启动正计时，在 1920×1080 窗口结束，记录 3 秒。第二个 Player 读到同一模式和计时记录，并能打开笔记。两个进程退出后，GPU 缓冲区和图像计数均为零。本次使用房间验证构建；无边框全屏、窗口置顶、前后台帧率、休眠和独立安装包各自采证。
+
+本机存档目录为 `room-opening-playable/validation/windows-lifecycle/`。回放报告 SHA-256 为 `49e09993f741c1e86ca48c9b4ed02107c5c0540508c9484fbd21cd05c312fec7`，Player SHA-256 为 `efbc5a1d27c9b3db0cb91695dff770c4dfaa1de5f66f4d529e14a89fa44898c6`。
+
+```powershell
+python -B tools/npr_room/test_room_window_player.py --player $player --project $roomProject --resource-root $resources --output $windowReplay
+```

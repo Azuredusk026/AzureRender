@@ -16,7 +16,8 @@ from test_validation_protocol import exchange
 
 
 @contextlib.contextmanager
-def playing(player, project, resources, profile, output, expected_audio_starts=None, level_reference="assets:/room.azurelevel"):
+def playing(player, project, resources, profile, output, expected_audio_starts=None,
+            level_reference="assets:/room.azurelevel", *, on_ready=None):
     output.mkdir()
     endpoint = output / "endpoint.json"
     token = secrets.token_hex(32)
@@ -92,7 +93,7 @@ def playing(player, project, resources, profile, output, expected_audio_starts=N
                     else:
                         call("input", domain="game-ui", event={"action": "character", "value": ord(character)})
 
-            def screenshot():
+            def screenshot(filename="notes.png"):
                 label = "npr-notes-" + secrets.token_hex(8)
                 assert call("screenshot", label=label)["scheduled"]
                 capture = resources / "captures" / (label + ".png")
@@ -101,8 +102,10 @@ def playing(player, project, resources, profile, output, expected_audio_starts=N
                     assert process.poll() is None and time.monotonic() < deadline
                     time.sleep(.03)
                 call("wait-frames", frames=1)
-                capture.rename(output / "notes.png")
+                return capture.rename(output / filename)
 
+            if on_ready is not None:
+                on_ready(window, call)
             yield click, press, type_text, screenshot
             state = check_state()
             if expected_audio_starts is not None:
