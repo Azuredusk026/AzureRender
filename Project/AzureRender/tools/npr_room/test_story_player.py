@@ -43,6 +43,7 @@ def route_fixture(room, chapters, inventory):
     for identifier, type_name, data in (
         ("opening-story-voice", "azure.audio-source", {"volume": .5}),
         ("opening-story-music", "azure.audio-source", {"volume": 0, "loop": True}),
+        ("opening-story-noise", "azure.screen-noise", {}),
         ("opening-story-route", "azure.script", {"asset": f"assets:/{name}.lua"}),
     ):
         scene["nodes"].append({"id": identifier, "components": {type_name: {"type": type_name, "version": 1, "data": data}}})
@@ -61,7 +62,7 @@ def route_fixture(room, chapters, inventory):
     source = "\n".join(f"local {key} = {lua_value(value)}" for key, value in config.items()).encode("utf-8")
     code = b"\n".join((source, (room / "assets/opening-dialogue-program.lua").read_bytes(),
                        *((EXAMPLE / "assets" / item).read_bytes() for item in
-                         ("story-progress.lua", "story-reader.lua", "story-player.lua", "story-music.lua")),
+                         ("story-progress.lua", "story-reader.lua", "story-player.lua", "story-music.lua", "story-noise.lua")),
                        (EXAMPLE / "tests/story-player-native.lua").read_bytes()))
     template = (EXAMPLE / "assets/story-player.rml").read_text(encoding="utf-8")
     style, controls = template.split("</style>", 1)
@@ -153,6 +154,7 @@ def replay(player, room, resources, chapters, inventory, output):
         assert opened_music(tutorial) == [files["playlist"]]
         assert {58, 63, 68} <= {row for row, _ in tutorial_proof[2]} and not tutorial_proof[1]
         assert [12, .7] in tutorial_proof[2] and [14, .7] in tutorial_proof[2] and [0, 0] not in tutorial_proof[2]
+        assert tutorial_proof[3][0] > 0 and abs(tutorial_proof[3][1] - .05) < 1e-6
 
         with playing(player, project, resources, profile, chapter, level_reference=level) as (click, _, _, screenshot):
             assert_locked(click)
@@ -176,9 +178,11 @@ def replay(player, room, resources, chapters, inventory, output):
             assert slot(profile, "room-unlocks")[1] == ["tutorial_01", "main_01"]
         assert opened_music(chapter) == [files["playlist"], files["NEWings"], files["Nostalgia"]]
         assert [index for index, _ in chapter_proof[2]] == [90, 91, 92, 93, 95, 102, 104, 109] and not chapter_proof[1]
+        assert chapter_proof[3][0] > 0 and .029999 < chapter_proof[3][1] <= .050001
     report = {"launches": 2, "levelFromCountup": progress[2][0], "tutorialVoiceRows": tutorial_rows,
               "chapterVoiceRows": chapter_rows, "tutorialEffects": tutorial_proof[2], "chapterEffects": chapter_proof[2],
               "tutorialMusic": opened_music(tutorial), "chapterAndReplayMusic": opened_music(chapter),
+              "nonzeroNoiseFramesAndPeak": {"tutorial": tutorial_proof[3], "chapter": chapter_proof[3]},
               "playerSHA256": digest(player), "chaptersSHA256": digest(chapters)}
     (output / "opening-route-replay.json").write_text(json.dumps(report) + "\n", encoding="utf-8")
     return report

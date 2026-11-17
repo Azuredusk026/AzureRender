@@ -28,8 +28,18 @@ Vulkan 全屏测试使用相同的底色、合成系数和时间输入。任务 
 
 任务 1837 使用 640×360 的四个独立 Player 进程。未声明组件和使用默认值时，三帧的像素逐帧一致。脚本设置 0.25 后，首个固定模拟步生成的图像与同透明度的场景数据一致。39,084 个背景像素在相邻采样之间改变噪声图案。不透明界面抽样区保持原色，四个进程正常退出后的分配数均为零。
 
-精简证据位于 `windows-opening-reference/player-validation/`。剧情指令的时序及完整特效组合使用房间回放验收。
+精简证据位于 `windows-opening-reference/player-validation/`。
 同一 Player 的房间回归覆盖两个进程的笔记编辑、排序、删除、重开及存档版本保护。
+
+## 剧情噪声时序
+
+教程首次播放按源行 3 在 2 秒内升至 0.05。第一章和历史回放读取准备段最后一条噪声命令作为初始值。后续命令保留各自的延迟，开始时接续当时的透明度。结束剧情清空待执行命令。
+
+原版 `Ease` 枚举确认 `isSine` 走线性回退。参数 `0` 使用 `DOTweenSettings.asset` 的 `OutQuad`。脚本测试覆盖延迟先后、重叠、即时变更、取消和结束清理。
+
+任务 1839 使用原生房间夹具。教程录得 589 个非零帧，峰值为 0.05。第一章录得 80 个非零帧，峰值为 0.03。章节完成写入前核对组件已归零。报告位于 `room-opening-voices-verified/validation/opening-route-noise/`。
+
+本次房间回放覆盖单色噪声、32 段原语音和背景音乐。场景淡化、对应环境音和五个特效的组合进入完整画面对照。
 
 ## 复验
 
@@ -49,3 +59,5 @@ python -B -m tools.npr_room.windows_noise_probe verify --first $originalCapture 
 python -B -m tools.npr_room.windows_noise_probe compare --reference $originalCapture --candidate $vulkanCapture --repeat $vulkanRepeatCapture --output $vulkanComparison
 python -B tools/test_screen_noise_player.py --player $player --resource-root $runtimeResources --output $playerNoiseReplay
 ```
+
+Lua 5.4 依次载入 `assets/story-noise.lua` 和 `tests/story-noise.lua`。
