@@ -1,4 +1,4 @@
-function new_story_room(host, chapters, tracks, speeds, labels, language, level, books, body)
+function new_story_room(host, chapters, tracks, speeds, labels, language, level, books, body, desk)
     local music = new_story_music(host, tracks)
     local noise = new_story_noise(host)
     local dialogue = new_story_dialogue(host, speeds, language)
@@ -16,6 +16,7 @@ function new_story_room(host, chapters, tracks, speeds, labels, language, level,
     function presentation:begin(chapter, replay)
         host:ui_visible("opening-story-input-mask", true)
         if books then books:begin(chapter, replay) end
+        if desk then desk:begin(chapter) end
         if body then body:begin(chapter) end
         noise:begin(chapter, replay)
     end
