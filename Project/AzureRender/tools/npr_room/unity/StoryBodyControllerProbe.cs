@@ -21,6 +21,7 @@ public static class StoryBodyControllerProbe
     {
         public int animatorNode;
         public string avatar, controller;
+        public bool tutorialCamera;
         public Node[] nodes;
     }
 
@@ -84,7 +85,15 @@ public static class StoryBodyControllerProbe
             {0, 0}, {15, 5}, {40, 0}, {285, 1}, {330, 0}, {485, 3}, {550, 0},
             {720, 1000}, {735, 1003}, {1020, 0}
         };
-        var report = new Report { editor = Application.unityVersion, sampleRate = 60, totalFrames = 1140 };
+        if (rig.tutorialCamera)
+        {
+            schedule = new Dictionary<int, int>
+            {
+                {0, 0}, {30, 400}, {335, 401}, {370, 12}, {550, 15}, {640, 0}, {790, 3}, {865, 0}
+            };
+        }
+        var report = new Report { editor = Application.unityVersion, sampleRate = 60,
+                                  totalFrames = rig.tutorialCamera ? 1030 : 1140 };
         var graph = PlayableGraph.Create("Original opening body controller");
         try
         {
@@ -101,8 +110,17 @@ public static class StoryBodyControllerProbe
                 if (hasCommand)
                 {
                     motion = command;
-                    if (motion == 1003) playable.SetTrigger("Story_SubBase001_Fun");
+                    var trigger = motion == 1003 ? "Story_SubBase001_Fun" :
+                                  motion == 400 ? "GameStart_Start" : motion == 401 ? "GameStart_End" : null;
+                    if (trigger != null)
+                    {
+                        playable.ResetTrigger("GameStart_Start");
+                        playable.ResetTrigger("GameStart_End");
+                        playable.ResetTrigger("Story_SubBase001_Fun");
+                        playable.SetTrigger(trigger);
+                    }
                     playable.SetInteger("MotionType", motion);
+                    if (motion == 400) playable.Play(Animator.StringToHash("GameStart_Start"), 0, 0);
                 }
                 graph.Evaluate(frame == 0 ? 0 : 1f / report.sampleRate);
                 var current = playable.GetCurrentAnimatorStateInfo(0);

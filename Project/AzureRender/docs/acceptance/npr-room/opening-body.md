@@ -82,6 +82,20 @@
 
 本机 `story-motion-reference/first-chapter-controller/` 保存采样及回放记录。房间诊断以临时关卡引用共享资产。独立包仍需从首次教学重跑完整路线。图层叠加和教学条件转场各自采证。
 
+## 教学相机段身体动作
+
+教学第 16 行的相机指令直接启动原身体动作。初始片段播放完成后，以 0.3 秒混合进入循环。第 26 行的 401 指令触发收尾。随后到达的点头指令等待收尾，再从原入口起播。
+
+任务 1881 以原控制器记录 1,030 帧。任务 1882 使用同一原 Avatar 采样启动和循环片段，共 413 帧。Unity 记录的片段时长分别为 4 秒和 2.85 秒。本机 `story-motion-reference/tutorial-camera/` 保存以下输入。
+
+| 记录 | SHA-256 |
+| --- | --- |
+| 源控制器与片段清单 | `dc0f80764490863adbf8ce14e5f1eb27e3f82751d14a03c803ac3e71fa5d464d` |
+| Unity 状态与混合记录 | `e10215c46dcf0d77e06ddd8a3b355acc76fef2f28459d8783b723176753d18f3` |
+| 两段动作采样 | `3972ed2885218792df21152cb8b1bb6a700f60eb0dad0857889c64f2b022258f` |
+
+七部件装配、相机轨迹、画面和音效按各自路径复验。
+
 ## 复验
 
 ```powershell
@@ -99,4 +113,8 @@ python -B -m tools.npr_room.story_body_probe --source $unitySource --layout $ava
 python -B tools/npr_room/test_story_signals_player.py --player $player --room $deskRoom --resource-root $resources --catalog $bodyCatalog --graph $animatorGraph --chapters $openingChapters --source-trace $unityTrace --output $firstChapterReplay
 python -B tools/npr_room/test_story_signal_room_player.py --player $player --room $deskRoom --resource-root $resources --catalog $bodyCatalog --graph $animatorGraph --chapters $openingChapters --output $firstChapterRoomReplay
 python -B -m tools.npr_room.build_story_signal_room --room $deskRoom --catalog $bodyCatalog --graph $animatorGraph --chapters $openingChapters --output $signalRoom
+python -B -m tools.npr_room.story_body_probe --tutorial-camera --source $unitySource --layout $avatarProbe --catalog $bodyCatalog --graph $animatorGraph --output $tutorialProbe
+& $unity -batchmode -nographics -quit -projectPath $tutorialProbe -executeMethod StoryBodyControllerProbe.Run -logFile $tutorialLog
+$env:AZURE_NPR_MOTION_BATCH = "tutorialCamera"
+& $unity -batchmode -nographics -quit -projectPath $tutorialProbe -executeMethod TimerHumanoidSampler.Run -logFile $tutorialPoseLog
 ```
