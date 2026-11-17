@@ -156,6 +156,17 @@ Recovery 的 19 个 `anim_face_*.anim` 直接绑定同一脸部网格。
 | 原 Avatar 采样 | `83447b5a1c50fc7752308e0f2782036ecf139990bf56fff8d8400a10bea1c502` |
 | 视线旋转对照 | `7a19d2422bd9d88706bc37afebde4f5fe2f1c916dd901bfb6f8d8fcc506442c2` |
 
+## 原生人体旋转求值
+
+表达式第二版接收校准姿态、三个正交轴、正负通道速率及偏移。引擎从当前局部旋转分解摆动和扭转，再按各轴速率叠加偏移。形变目标可声明加法，保留身体片段已有权重。
+
+任务 1912 使用 Release 工具链验证新旧表达式读写。原生测试对 15,120 个源旋转求值，最大误差为 0.000046 度。受检程序和构建清单位于本机 `story-motion-reference/opening-face/humanoid-basis/native/`。常规房间视线入口按下游验收运行。
+
+| 记录 | SHA-256 |
+| --- | --- |
+| 独立原生测试程序 | `fa8839d530f1835f37f6ba5362ece0d81e5f18192db359974c9b73e47fd2cd16` |
+| 构建清单 | `22ed45071baed1855448f819ab767539cc902f5c4dacaa717685561dcc7a5b04` |
+
 ## 窗景网格
 
 窗景夹具使用郁金香场景的原网格。
@@ -188,7 +199,8 @@ python -B -m tools.npr_room.story_face_probe --source $unitySource --project $tu
 python -B -m tools.npr_room.story_face_probe --source $unitySource --project $tutorialProbe --graph $animatorGraph --chapters $openingChapters --model $faceGlb --body-morphs $bodyMorphReceipt --additive-overlays
 & $unity -batchmode -nographics -quit -projectPath $tutorialProbe -executeMethod StoryFaceControllerProbe.RunAdditiveLayers -logFile $additiveLayerLog
 & $unity -batchmode -nographics -quit -projectPath $tutorialProbe -executeMethod StoryFaceControllerProbe.RunHumanoidBasis -logFile $humanoidBasisLog
-python -B -m tools.npr_room.opening_look_basis --source $unitySource --receipt $additiveSource --basis $humanoidBasis --additive $additiveTrace --output $lookBasisAudit
+python -B -m tools.npr_room.opening_look_basis --source $unitySource --receipt $additiveSource --basis $humanoidBasis --additive $additiveTrace --output $lookBasisAudit --native-fixture $nativeLookCases
+& $expressionTest --audit-humanoid $nativeLookCases
 python -B -m tools.npr_room.verify_story_body_morphs --models $bodyMorphModels --original $tutorialModels --samples $bodyMorphSamples --output $bodyMorphAudit
 python -B tools/npr_room/test_story_body_morph_player.py --player $player --room $deskRoom --resource-root $resources --original $tutorialModels --models $bodyMorphModels --output $bodyMorphRender
 & $expressionTest --inspect $bodyMorphFaceGlb $faceSkeleton

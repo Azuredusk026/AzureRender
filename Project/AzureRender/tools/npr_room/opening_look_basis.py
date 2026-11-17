@@ -109,20 +109,25 @@ def source_overlay(path, receipt):
     return digest(clip), length, curves, eyes
 
 
-def verify(source, receipt, basis_file, additive_file):
+def mirrored(q):
+    return [*(q[:3] * MIRROR), q[3]]
+
+
+def verify(source, receipt, basis_file, additive_file, native_fixture=None):
     with gzip.open(basis_file, "rt", encoding="utf-8-sig") as stream:
         ref = json.load(stream)
     with gzip.open(additive_file, "rt", encoding="utf-8-sig") as stream:
         overlay = json.load(stream)
     sha, length, curves, eyes = source_overlay(source, receipt)
-    model, basis_worst, animation_worst, eyes_worst, pose_count = [], 0., 0., 0., 0
+    model, native, basis_worst, animation_worst, eyes_worst, pose_count = [], [], 0., 0., 0., 0
     for index, joint in enumerate(ref["basis"]):
         basis = calibrate(joint["samples"])
         for row in joint["samples"]:
             basis_worst = max(basis_worst, angle(encode(row["muscle"], basis), quaternion(row["rotation"])))
         zero, axes, rates = basis
-        model.append({"joint": joint["joint"], "zero": [*(zero[:3]*MIRROR), zero[3]],
+        model.append({"joint": joint["joint"], "zero": mirrored(zero),
                       "axes": [(axis*MIRROR).tolist() for axis in axes], "rates": rates, "muscles": joint["muscles"]})
+        native_cases = []
         for recorded, other in zip(ref["animated"], overlay["frames"], strict=True):
             raw = quaternion(recorded["normal"][index]["rotation"])
             origin = decode(raw, basis)
@@ -136,12 +141,19 @@ def verify(source, receipt, basis_file, additive_file):
                     assert angle(target, quaternion(recorded["gaze"][index]["rotation"])) < 1e-5
                 animation_worst = max(animation_worst, angle(computed, target))
                 pose_count += 1
+                if native_fixture:
+                    native_cases.append({"base": mirrored(raw), "offset": added, "expected": mirrored(target)})
+        if native_fixture:
+            native.append({"basis": {key: model[-1][key] for key in ("zero", "axes", "rates")},
+                           "samples": native_cases})
     for frame in overlay["frames"]:
         for row in frame["look"]:
             for side in ("left", "right"):
                 expected = sample_shape(*eyes["blendShape1.Eye_look_" + side], row["scale"] * length)
                 eyes_worst = max(eyes_worst, abs(expected - row[side] / 100))
     assert basis_worst < .001 and animation_worst < .001 and eyes_worst < 1e-6, (basis_worst, animation_worst, eyes_worst)
+    if native_fixture:
+        write(native_fixture, {"schemaVersion": 1, "joints": native})
     return {"schemaVersion": 1, "clipSHA256": sha, "basisSHA256": digest(basis_file), "referenceSHA256": digest(additive_file),
             "unityVersion": ref["editor"], "calibrationPoses": sum(len(row["samples"]) for row in ref["basis"]),
             "checkedRotations": pose_count, "maxCalibrationDegrees": basis_worst, "maxRotationDegrees": animation_worst,
@@ -153,8 +165,9 @@ if __name__ == "__main__":
     names = ("source", "receipt", "basis", "additive", "output")
     for name in names:
         parser.add_argument("--" + name, type=Path, required=True)
+    parser.add_argument("--native-fixture", type=Path)
     args = vars(parser.parse_args())
     paths = [args[name].resolve() for name in names]
-    evidence = verify(*paths[:-1])
+    evidence = verify(*paths[:-1], native_fixture=args["native_fixture"])
     write(paths[-1], evidence)
     print(json.dumps({key: value for key, value in evidence.items() if key != "jointBasis"}))
