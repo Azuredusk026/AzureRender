@@ -85,6 +85,21 @@ Recovery 的 19 个 `anim_face_*.anim` 直接绑定同一脸部网格。
 全部片段随包含 57 个形变目标的 GLB 移入私有目录 `face-expressions`，并通过移动后 Player 项目校验。
 剧情触发表、表情混合及原版画面对照按角色专项验收。
 
+## 开场表情层采样
+
+第一段教学和第一章使用同一角色控制器。九种入口由 `Facial` 参数选择，固定混合时长为 0.25 秒。嘴型层由 `Enable_Talk` 控制，以 0.1 秒进入，以 0.25 秒退出。
+
+任务 1895 在 Unity 2022.3.62f2c1 采样 631 帧。三组角色分别记录底层、表情层和表情叠加嘴型的 57 项权重。快速指令覆盖测试了混合期间的条件变化。嘴型层在这条路线改变七种嘴部权重。
+
+测试工程使用原控制器、原 Avatar 和源片段。形变测试网格保留源目标名称和初值。常规房间叠加及画面对照按各自验收运行。
+
+本机 `story-motion-reference/opening-face/` 保存以下记录。
+
+| 记录 | SHA-256 |
+| --- | --- |
+| 表情来源清单 | `7f6fb354a50e76cf7141c4d434893720a3388749dd6ee36c3adafb7a88e7dfce` |
+| Unity 表情采样 | `06f31e0be98472844e61a02758030aeb5c2aa69c38cb7bc4a66531936e048ac0` |
+
 ## 窗景网格
 
 窗景夹具使用郁金香场景的原网格。
@@ -109,6 +124,8 @@ python -B -m unittest discover -s tools/npr_room
 python -B -m tools.npr_room.skinned_mesh_export --source $unitySource --scene $unityScene --renderer $rendererFileId --base-color-png $texture --output $targetGlb
 python -B -m tools.npr_room.skinned_mesh_export --source $unitySource --scene $unityScene --renderer 9483 --base-color-png $faceTexture --morph-clip $faceClip --morph-path Character/Face --output $faceGlb
 python -B -m tools.npr_room.deformer_catalog --source $unitySource --catalog $meshManifest --output $deformerCatalog
+python -B -m tools.npr_room.story_face_probe --source $unitySource --project $tutorialProbe --graph $animatorGraph --chapters $openingChapters --model $faceGlb
+& $unity -batchmode -nographics -quit -projectPath $tutorialProbe -executeMethod StoryFaceControllerProbe.Run -logFile $faceLog
 ```
 
 转换支持单个渲染器的绑定层级。
