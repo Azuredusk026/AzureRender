@@ -33,6 +33,7 @@ function new_story_room(host, chapters, tracks, speeds, labels, language, level,
 
     function presentation:effect(row, delay)
         if books then books:effect(row) end
+        if body and body.effect then body:effect(row) end
         noise:effect(row, delay)
         if row.command == "PlayBGM" or row.command == "TalkLogOnlyPlayBGM" then music:play(row.arguments) end
         local id = highlights[row.command]

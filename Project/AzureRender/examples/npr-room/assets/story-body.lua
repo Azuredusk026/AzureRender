@@ -30,6 +30,13 @@ function new_story_body(select, states, routes)
         play(row.bodyMotion or -1)
     end
 
+    function motion:effect(row)
+        if route and route.camera and row.command == "DirectionGameStartCamera" then
+            select(route.camera)
+            current = 400
+        end
+    end
+
     function motion:finish()
         select("idle")
         current, route = nil, nil

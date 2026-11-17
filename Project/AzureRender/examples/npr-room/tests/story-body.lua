@@ -34,3 +34,15 @@ motion:row(row("Text", 1003))
 motion:finish()
 motion:begin({group = "tutorial_01", commands = {row("Text", 12)}})
 assert(table.concat(played, ",") == "main-base,main-5,main-0,main-1003,idle,nod")
+
+played = {}
+motion = new_story_body(select, {["0"] = "legacy-base"}, {
+    tutorial_01 = {entry = "tutorial-base", camera = "camera-start", signals = {["401"] = "camera-end", ["12"] = "nod"}}
+})
+motion:begin({group = "tutorial_01", commands = {row("Text", -1)}})
+motion:effect(row("DirectionGameStartCamera"))
+motion:row(row("Text", -1))
+motion:row(row("ChangeMotion", 401))
+motion:row(row("Text", 12))
+motion:finish()
+assert(table.concat(played, ",") == "tutorial-base,camera-start,camera-end,nod,idle")

@@ -3,19 +3,22 @@
 import argparse
 from contextlib import contextmanager
 import json
+import os
 from pathlib import Path
 import time
 
 from test_notes_player import playing
 from test_story_player import MotionTrace, PREFIX, compare_voices, opened_music, slot, wait_for_slot
+from test_story_signals_player import camera_model_links
 from test_unlock_room_player import save
 from tools.npr_room.build_story_signal_room import GRAPH, inputs, integration
 from tools.npr_room.pbr_materials import write
 from tools.npr_room.reference_inventory import digest
+from tools.npr_room.tutorial_camera_body import project as tutorial_project
 
 
 @contextmanager
-def entry(room, graph, program):
+def entry(room, graph, program, models=None):
     tag = "capture-main-conditional"
     root = room / "assets"
     names = {kind: tag + suffix for kind, suffix in (
@@ -39,6 +42,11 @@ def entry(room, graph, program):
     assert source_bootstrap.count("assets:/room.azurelevel") == 1
 
     scene = json.loads((root / "room.azurelevel").read_bytes())
+    links = {}
+    if models:
+        parts = [node for node in scene["nodes"] if node["id"].startswith("heroine-")
+                 and "azure.animator" in node["components"]]
+        links = camera_model_links(root, scene, parts, models, tag)
     animators, timers = 0, 0
     for node in scene["nodes"]:
         for kind, value in node["components"].items():
@@ -62,6 +70,9 @@ def entry(room, graph, program):
     }
     created = []
     try:
+        for alias, original in links.items():
+            os.link(original, alias)
+            created.append(alias)
         for path, text in fixture.items():
             with path.open("x", encoding="utf-8") as output:
                 created.append(path)
@@ -72,16 +83,52 @@ def entry(room, graph, program):
             path.unlink()
 
 
-def replay(player, room, resources, catalog, graph, chapters, output):
-    compiled, route, bindings = inputs(room, catalog, graph, chapters)
+def replay(player, room, resources, catalog, graph, chapters, output, source_receipt=None, models=None):
+    if bool(source_receipt) != bool(models):
+        raise ValueError("The tutorial replay needs both source receipt and sampled models")
     original_script = room / "assets/pomodoro.lua"
     original_hash = digest(original_script)
-    program = integration(original_script.read_text(encoding="utf-8"), route)
+    compiled, route, bindings = inputs(room, catalog, graph, chapters)
+    if models:
+        compiled, program, _, camera = tutorial_project(room, catalog, graph, chapters, source_receipt, models)
+    else:
+        program = integration(original_script.read_text(encoding="utf-8"), route)
     trace = MotionTrace(room, chapters)
     output.mkdir()
     profile, run = output / "profile", output / "chapter"
-    with entry(room, compiled, program) as (project, level):
-        save(profile, project, "room-unlocks", [1, ["tutorial_01"], [], []])
+    authored = json.loads(chapters.read_bytes())["chapters"]
+    tracks = json.loads((room / "music-receipt.json").read_bytes())["tracks"]
+    tutorial = None
+    with entry(room, compiled, program, models) as (project, level):
+        if models:
+            startup = output / "tutorial"
+            save(profile, project, "room-book-layout", [1, "Book_5"])
+            with playing(player, project, resources, profile, startup, level_reference=level,
+                         **trace.observe("tutorial")) as (click, press, _, _):
+                click(PREFIX + "start")
+                click(PREFIX + "option-1", wait=70)
+                press(77, domain="game")
+                assert slot(profile, "timer-mode") is None
+                click(PREFIX + "heroine", wait=38)
+                for option in (1, 2, 3, 4, 1):
+                    click(PREFIX + f"option-{option}", wait=85)
+                wait_for_slot(profile, "room-unlocks", lambda value: "tutorial_01" in value[1], 40, trace.sample)
+            assert slot(profile, "room-book-layout") == [1, "Book_5"]
+            assert opened_music(startup) == [Path(tracks[0]["asset"]).name]
+            assert "Allocator after unload: buffers=0 images=0" in (startup / "stdout.log").read_text(encoding="utf-8")
+            rows = [9, 24, 30, 39, 44, 45, 46, 48, 57, 59, 62, 64, 67, 69, 72, 73, 74, 75, 76, 80, 85, 86]
+            compare_voices(startup, authored, rows)
+            camera_clips = {state.split(".")[-1]: value["clip"] for state, value in camera.items()}
+            states = ["GameStart_Start", "GameStartDirectionLoop", "GameStart_End", "Base001_Motion12_Start_Nod"]
+            frames = trace.routes["tutorial"]
+            write(output / "tutorial-frames.json", frames)
+            cursor = iter(row[1] for row in frames)
+            for name in states:
+                assert camera_clips[name] in cursor, (name, sorted({row[1] for row in frames}))
+            tutorial = {"samples": len(frames), "route": states, "voiceRows": rows, "bookSave": "Book_5",
+                        "cleanAllocatorExits": 1}
+        else:
+            save(profile, project, "room-unlocks", [1, ["tutorial_01"], [], []])
         with playing(player, project, resources, profile, run, level_reference=level,
                      **trace.observe("chapter")) as (click, _, _, _):
             click("timer-mode-button")
@@ -92,13 +139,11 @@ def replay(player, room, resources, catalog, graph, chapters, output):
             click(PREFIX + "start", wait=10)
             wait_for_slot(profile, "room-unlocks", lambda value: "main_01" in value[1], 110, trace.sample)
     assert digest(original_script) == original_hash
-    authored = json.loads(chapters.read_bytes())["chapters"]
     voice_rows = [96, 97, 98, 99, 100, 101, 105, 106, 107, 108]
     compare_voices(run, authored, voice_rows)
     assert slot(profile, "room-unlocks")[1] == ["tutorial_01", "main_01"]
     assert slot(profile, "room-book-layout") == [1, "Book_1"]
     music = opened_music(run)
-    tracks = json.loads((room / "music-receipt.json").read_bytes())["tracks"]
     named, = [Path(item["asset"]).name for item in tracks if item["title"] == "NEWings"]
     assert music == [Path(tracks[0]["asset"]).name, named], music
     assert "Allocator after unload: buffers=0 images=0" in (run / "stdout.log").read_text(encoding="utf-8")
@@ -125,6 +170,8 @@ def replay(player, room, resources, catalog, graph, chapters, output):
              "parts": len(trace.parts), "level": progress[2][0], "voiceRows": voice_rows, "music": music,
              "samples": len(frames), "route": expected, "finishedChapters": ["tutorial_01", "main_01"],
              "bookLayout": "Book_1", "cleanAllocatorExits": 1}
+    if tutorial:
+        proof.update(tutorial=tutorial, cleanAllocatorExits=2)
     write(output / "first-chapter-room-replay.json", proof)
     return proof
 
@@ -134,5 +181,8 @@ if __name__ == "__main__":
     parameters = ("player", "room", "resource-root", "catalog", "graph", "chapters", "output")
     for name in parameters:
         parser.add_argument("--" + name, type=Path, required=True)
+    for name in ("source-receipt", "models"):
+        parser.add_argument("--" + name, type=Path)
     args = vars(parser.parse_args())
-    print(json.dumps(replay(*(args[name.replace("-", "_")].resolve() for name in parameters))))
+    print(json.dumps(replay(*(args[name.replace("-", "_")].resolve() for name in parameters),
+                            source_receipt=args["source_receipt"], models=args["models"])))

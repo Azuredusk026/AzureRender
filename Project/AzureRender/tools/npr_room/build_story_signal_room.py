@@ -14,13 +14,13 @@ from tools.npr_room.catalog_storage import publish_directory
 from tools.npr_room.pbr_materials import write
 from tools.npr_room.reference_inventory import digest
 from tools.npr_room.room_geometry import copy_room_asset
-from tools.npr_room.story_body_probe import FIRST_CHAPTER
+from tools.npr_room.story_body_probe import CAMERA_START, FIRST_CHAPTER, TUTORIAL
 from tools.npr_room.story_chapters import lua_value
 
 
 GROUP = "main_01"
-FUN = "Story_SubBase001_Fun"
 CONDITIONS = {3: int.__gt__, 4: int.__lt__, 6: int.__eq__, 7: int.__ne__}
+TRIGGERS = {"Story_SubBase001_Fun": 1003, "GameStart_End": 401}
 
 
 def load(path):
@@ -38,7 +38,7 @@ def enabled(edge, number, parameters):
             if not CONDITIONS[mode](number, int(value)):
                 return False
         elif parameters[field]["m_Type"] == 9 and mode == 1:
-            if field != FUN or number != 1003:
+            if number != TRIGGERS.get(field):
                 return False
         elif parameters[field]["m_Type"] == 4 and mode in (1, 2):
             if bool(parameters[field]["m_DefaultBool"]) != (mode == 1):
@@ -48,9 +48,11 @@ def enabled(edge, number, parameters):
     return True
 
 
-def compile_signals(body, controller, catalog, durations):
-    if body["schemaVersion"] != 3:
+def compile_signals(body, controller, catalog, durations, camera=None):
+    if body["schemaVersion"] not in (3, 4):
         raise ValueError("Expected the assembled timed body graph")
+    chapter = "tutorial" if camera else "main"
+    commands = TUTORIAL if camera else FIRST_CHAPTER
     root_layer = controller["layers"][0]
     if root_layer["m_Name"] != "Base Layer":
         raise ValueError("Missing original base layer")
@@ -59,15 +61,22 @@ def compile_signals(body, controller, catalog, durations):
     authored_states = controller["states"]
     entry_edges = controller["entryAndMachineTransitions"]
     parameters = {parameter["m_Name"]: parameter for parameter in controller["parameters"]}
-    signal = {number: "main-motion-" + number for number in FIRST_CHAPTER}
+    signal = {number: chapter + "-motion-" + number for number in commands}
     state_by_name = {state["name"]: state["clip"] for state in body["states"]}
     selected = {}
-    for number in FIRST_CHAPTER:
+    for number in commands:
         for row in catalog["motions"][number]["states"]:
             for variant in row["variants"]:
                 key = variant["id"]
                 if selected.setdefault(key, row) != row:
                     raise ValueError(f"Conflicting source body bindings: {key}")
+    if camera:
+        for key in CAMERA_START:
+            state = authored_states[key]
+            clip, = controller["externalAssets"][state["m_Motion"]["guid"]]
+            if clip not in camera:
+                raise ValueError("Expected the sampled tutorial camera asset")
+            selected[key] = {"state": state["m_Name"], "clip": clip}
     owner = {str(child["m_State"]["fileID"]): key for key, machine in machines.items()
              for child in machine["m_ChildStates"]}
     parent = {str(child["m_StateMachine"]["fileID"]): key for key, machine in machines.items()
@@ -83,7 +92,7 @@ def compile_signals(body, controller, catalog, durations):
         raise ValueError("Opening states must belong to the base layer")
 
     source_paths = {key: path(owner[key]) + "." + row["state"] for key, row in selected.items()}
-    aliases = {key: "main-" + name for key, name in source_paths.items()}
+    aliases = {key: chapter + "-" + name for key, name in source_paths.items()}
 
     def check_edge(edge):
         if edge["m_Solo"] or edge["m_Mute"]:
@@ -106,6 +115,7 @@ def compile_signals(body, controller, catalog, durations):
                 outer = machines[parent[machine]]["m_StateMachineTransitions"]
                 if any(str(item["first"]["fileID"]) == machine for item in outer):
                     raise ValueError("An opening machine exit requires its parent transition table")
+                return str(machines[root]["m_DefaultState"]["fileID"])
             return enter(root, number)
         if edge["m_DstStateMachine"]["fileID"]:
             return enter(str(edge["m_DstStateMachine"]["fileID"]), number)
@@ -119,6 +129,8 @@ def compile_signals(body, controller, catalog, durations):
     if not set(entries.values()) <= aliases.keys():
         raise ValueError("Opening command requires an unsampled entry state")
     clips, seconds, branches = {}, {}, []
+    repeated = None
+    timeline = list(body["timeline"])
     for key, row in selected.items():
         state = authored_states[key]
         if state["m_Name"] != row["state"] or state["m_StateMachineBehaviours"]:
@@ -131,34 +143,70 @@ def compile_signals(body, controller, catalog, durations):
     for key, row in selected.items():
         candidates = [controller["stateTransitions"][str(link["fileID"])]
                       for link in authored_states[key]["m_Transitions"]]
+        if camera and key == CAMERA_START[0]:
+            edge, = candidates
+            check_edge(edge)
+            target = dest(owner[key], edge, 400)
+            if (edge["m_Conditions"] or not edge["m_HasFixedDuration"] or not edge["m_HasExitTime"]
+                    or edge["m_InterruptionSource"] or target != CAMERA_START[1]):
+                raise ValueError("Expected the original tutorial camera loop entrance")
+            timeline.append({"from": aliases[key], "to": aliases[target],
+                             "afterSeconds": edge["m_ExitTime"] * seconds[key],
+                             "startSeconds": edge["m_TransitionOffset"] * seconds[target],
+                             "blendSeconds": edge["m_TransitionDuration"]})
+            continue
         grouped = defaultdict(list)
         for number, name in signal.items():
             active = [edge for edge in candidates if enabled(edge, int(number), parameters)]
             if not active:
                 continue
-            if len(active) != 1:
+            # The camera loop tests the end trigger before its MotionType fallback.
+            if len(active) != 1 and not (camera and key == CAMERA_START[1] and number == "401"):
                 raise ValueError(f"Source conditions for {key} overlap on opening motion {number}")
-            edge, = active
+            edge = active[0]
             check_edge(edge)
-            if not edge["m_HasFixedDuration"] or edge["m_InterruptionSource"]:
+            if edge["m_InterruptionSource"] or (not edge["m_HasFixedDuration"] and key != CAMERA_START[1]):
                 raise ValueError("Expected fixed, non-interruptible source transitions")
             target = dest(owner[key], edge, int(number))
-            if target == key or target not in seconds:
+            if target not in seconds:
                 raise ValueError(f"Opening transition reaches an unprojected state: {key} -> {target}")
-            once = any(condition["m_ConditionEvent"] == FUN for condition in edge["m_Conditions"])
+            once = any(condition["m_ConditionEvent"] in TRIGGERS for condition in edge["m_Conditions"])
             at = edge["m_ExitTime"] * seconds[key] if edge["m_HasExitTime"] else 0
             offset = edge["m_TransitionOffset"] * seconds[target]
-            grouped[(target, at, offset, edge["m_TransitionDuration"], once)].append(name)
+            blend = edge["m_TransitionDuration"] * (1 if edge["m_HasFixedDuration"] else seconds[key])
+            if target == key:
+                if not (camera and key == entries["0"] and number == "401" and blend > 0
+                        and edge["m_CanTransitionToSelf"] and at == 0):
+                    raise ValueError(f"Unexpected same-state entrance for {key}")
+                repeated = key
+                # Unity checks this exit on the evaluation after the blend completes.
+                at = blend + 1 / 60
+            grouped[(target, at, offset, blend, once)].append(name)
         for (target, at, offset, blend, once), names in grouped.items():
             branches.append({"from": aliases[key], "to": aliases[target], "signals": names, "once": once,
                              "afterSeconds": at, "startSeconds": offset, "blendSeconds": blend})
-    return {**body, "schemaVersion": 4, "signals": list(signal.values()), "branches": branches,
-            "states": [*body["states"], *({"name": aliases[key], "clip": clip} for key, clip in clips.items())]}, {
-        "entry": aliases[entries["0"]], "signals": signal,
-        }, {source_paths[key]: {"name": aliases[key], "clip": clips[key], "seconds": seconds[key]} for key in aliases}
+    additions = [{"name": aliases[key], "clip": clip} for key, clip in clips.items()]
+    if repeated is not None:
+        name, duplicate = aliases[repeated], aliases[repeated] + "-repeat"
+        additions.append({"name": duplicate, "clip": clips[repeated]})
+        for row in tuple(branches):
+            if row["from"] != name:
+                continue
+            twin = {**row, "from": duplicate}
+            if row["to"] == name:
+                row["to"] = duplicate
+            branches.append(twin)
+    route = {"entry": aliases[entries["0"]], "signals": signal}
+    if camera:
+        route["camera"] = aliases[CAMERA_START[0]]
+    graph = {**body, "schemaVersion": 4, "signals": [*body.get("signals", ()), *signal.values()],
+             "branches": [*body.get("branches", ()), *branches], "timeline": timeline,
+             "states": [*body["states"], *additions]}
+    return graph, route, {source_paths[key]: {"name": aliases[key], "clip": clips[key], "seconds": seconds[key]}
+                          for key in aliases}
 
 
-def integration(script, route):
+def integration(script, route, tutorial=None):
     body_anchor, desk_anchor = "function new_story_body(", "function new_story_desk("
     config_anchor = "local story_body_states = "
     selector = "new_story_body(setMotion, story_body_states)"
@@ -168,7 +216,16 @@ def integration(script, route):
     if end <= start:
         raise ValueError("Expected the body helper before the desk helper")
     body = (EXAMPLE / "story-body.lua").read_text(encoding="utf-8").rstrip()
-    config = "local story_body_routes = " + lua_value({GROUP: route}) + "\n"
+    routes = {GROUP: route}
+    if tutorial:
+        routes["tutorial_01"] = tutorial
+        effect = '        if books then books:effect(row) end'
+        camera = '        if body and body.effect then body:effect(row) end'
+        if camera not in script:
+            if script.count(effect) != 1:
+                raise ValueError("Expected the normal story effect hook")
+            script = script.replace(effect, effect + "\n" + camera)
+    config = "local story_body_routes = " + lua_value(routes) + "\n"
     return (script[:start] + body + "\n\n" + script[end:]).replace(
         config_anchor, config + config_anchor).replace(
         selector, "new_story_body(setMotion, story_body_states, story_body_routes)")

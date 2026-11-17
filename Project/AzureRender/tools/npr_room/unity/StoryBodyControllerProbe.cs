@@ -85,12 +85,19 @@ public static class StoryBodyControllerProbe
             {0, 0}, {15, 5}, {40, 0}, {285, 1}, {330, 0}, {485, 3}, {550, 0},
             {720, 1000}, {735, 1003}, {1020, 0}
         };
+        var hold = rig.tutorialCamera && Environment.GetEnvironmentVariable("AZURE_NPR_TUTORIAL_HOLD") == "1";
         if (rig.tutorialCamera)
         {
             schedule = new Dictionary<int, int>
             {
                 {0, 0}, {30, 400}, {335, 401}, {370, 12}, {550, 15}, {640, 0}, {790, 3}, {865, 0}
             };
+            if (hold)
+            {
+                schedule.Remove(370);
+                schedule.Remove(550);
+                schedule[620] = 12;
+            }
         }
         var report = new Report { editor = Application.unityVersion, sampleRate = 60,
                                   totalFrames = rig.tutorialCamera ? 1030 : 1140 };
@@ -147,6 +154,7 @@ public static class StoryBodyControllerProbe
             graph.Destroy();
             UnityEngine.Object.DestroyImmediate(transforms[0].gameObject);
         }
-        File.WriteAllText(Path.Combine(project, "story-body-controller-trace.json"), JsonUtility.ToJson(report, true));
+        var output = hold ? "story-body-controller-hold-trace.json" : "story-body-controller-trace.json";
+        File.WriteAllText(Path.Combine(project, output), JsonUtility.ToJson(report, true));
     }
 }

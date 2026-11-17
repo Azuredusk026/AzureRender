@@ -94,7 +94,23 @@
 | Unity 状态与混合记录 | `e10215c46dcf0d77e06ddd8a3b355acc76fef2f28459d8783b723176753d18f3` |
 | 两段动作采样 | `3972ed2885218792df21152cb8b1bb6a700f60eb0dad0857889c64f2b022258f` |
 
-七部件装配、相机轨迹、画面和音效按各自路径复验。
+原控制器在收尾后仍收到 401 时，每四帧重启坐姿。任务 1884 记录延迟指令时的 36 次重启。动作图用同一坐姿片段的两条入口表达这段循环。点头指令到达后，动作图进入点头片段。
+
+任务 1883 核对七个部件的 118,118 个变换。位置最大偏差为 0.000000104 米，旋转最大偏差为 0.00000561 度。任务 1885 和 1886 各跑 1,040 帧。两条原生路线各处转场与 Unity 最多相差两帧，七个部件始终同步。
+
+任务 1887 从实际房间入口跑完教学和第一章。两次启动分别核对 22 和 10 段源语音，并检查解锁、布置存档和配乐。两个进程均正常退出，GPU 缓冲和图像计数归零。独立包、相机轨迹、表情、视线及画面各有单列验收。
+
+本机 `story-motion-reference/tutorial-camera/native-validation/` 保存以下记录。
+
+| 记录 | SHA-256 |
+| --- | --- |
+| 延迟指令 Unity 回放 | `7153bbec4946e5b22d5d511ba2ff5d6be8f42719a7444cd3a1d27c07837fb49d` |
+| 模型与动作装配清单 | `465a0356cb2db22a507e18ca613121c7d18e8d4d94e119ab1c9c758ce58d5c60` |
+| 七部件姿态对照 | `96de612f2cf754905b1aca39881cc429295f8e7c79f289a11b4af9ba1194f7f4` |
+| 教学与第一章动作图 | `3eb274f55d486f8754519f6965e8e5cd303f4f37c5a5ababa914152f784853f6` |
+| 原生及时指令回放 | `42a276d28189c2dc574de27ebd42d6ef404886aa1384442f9f5b6c2d09e68e5f` |
+| 原生延迟指令回放 | `bf6ee00d1fedc5b3d3ad08901b05f58020684439179bed45488479a5d97d7ca1` |
+| 常规入口回放 | `656158e33f30ef1a0be28c9ff8c5d32b6ead5d8be3ea0390691c682f3f97c0d5` |
 
 ## 复验
 
@@ -117,4 +133,7 @@ python -B -m tools.npr_room.story_body_probe --tutorial-camera --source $unitySo
 & $unity -batchmode -nographics -quit -projectPath $tutorialProbe -executeMethod StoryBodyControllerProbe.Run -logFile $tutorialLog
 $env:AZURE_NPR_MOTION_BATCH = "tutorialCamera"
 & $unity -batchmode -nographics -quit -projectPath $tutorialProbe -executeMethod TimerHumanoidSampler.Run -logFile $tutorialPoseLog
+python -B -m tools.npr_room.tutorial_camera_body bake --room $deskRoom --rig $rig --source-receipt $tutorialSource --samples $tutorialSamples --output $tutorialModels
+python -B tools/npr_room/test_story_signals_player.py --player $player --room $deskRoom --resource-root $resources --catalog $bodyCatalog --graph $animatorGraph --chapters $openingChapters --source-trace $tutorialTrace --source-receipt $tutorialSource --models $tutorialModels --output $tutorialReplay
+python -B tools/npr_room/test_story_signal_room_player.py --player $player --room $deskRoom --resource-root $resources --catalog $bodyCatalog --graph $animatorGraph --chapters $openingChapters --source-receipt $tutorialSource --models $tutorialModels --output $tutorialRoomReplay
 ```
