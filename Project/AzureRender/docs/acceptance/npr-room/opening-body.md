@@ -76,8 +76,11 @@
 | Unity 状态与混合记录 | `9d16aed313f3715ee546aa612e54ea8a66a9c5ecdab228b0b43227b23a7331fa` |
 | 房间动作图 | `820312b7e6e1acab68ba8c69594ec1e3813503798ca2ba73c0af40d623b0318f` |
 | 原生对照报告 | `838e28952486b3e249bba263b18f7929bb06dfe5bbe2c7824bbcef947be7f273` |
+| 房间第一章回放 | `b107e93d3a4c847f173d019d411aadf96b6e000d18fd3efb3971dbb3fc8e1cee` |
 
-本机 `story-motion-reference/first-chapter-controller/` 保存采样及回放记录。装配入口为 `tools.npr_room.build_story_signal_room`。整房验收需从启动关卡重跑教学和第一章，并复查书本、进度及语音。图层叠加和教学条件转场各自采证。
+任务 1880 通过五关卡启动链进入实际房间。测试档已完成教学，玩家使用正计时升至 2 级，随后解锁并读完第一章。150 次采样核对七个部件、动作收尾及一次手势。10 段原语音、原曲、书本和章节存档均与该路线一致。
+
+本机 `story-motion-reference/first-chapter-controller/` 保存采样及回放记录。房间诊断以临时关卡引用共享资产。独立包仍需从首次教学重跑完整路线。图层叠加和教学条件转场各自采证。
 
 ## 复验
 
@@ -94,5 +97,6 @@ python -B tools/npr_room/test_story_player.py --normal-room --verify-books --ver
 python -B -m tools.npr_room.story_body_probe --source $unitySource --layout $avatarProbe --catalog $bodyCatalog --graph $animatorGraph --output $unityProbe
 & $unity -batchmode -nographics -quit -projectPath $unityProbe -executeMethod StoryBodyControllerProbe.Run -logFile $unityLog
 python -B tools/npr_room/test_story_signals_player.py --player $player --room $deskRoom --resource-root $resources --catalog $bodyCatalog --graph $animatorGraph --chapters $openingChapters --source-trace $unityTrace --output $firstChapterReplay
+python -B tools/npr_room/test_story_signal_room_player.py --player $player --room $deskRoom --resource-root $resources --catalog $bodyCatalog --graph $animatorGraph --chapters $openingChapters --output $firstChapterRoomReplay
 python -B -m tools.npr_room.build_story_signal_room --room $deskRoom --catalog $bodyCatalog --graph $animatorGraph --chapters $openingChapters --output $signalRoom
 ```
