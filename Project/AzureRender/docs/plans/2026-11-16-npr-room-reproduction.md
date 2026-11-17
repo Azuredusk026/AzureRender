@@ -108,7 +108,7 @@
 [房间语言设置](../acceptance/npr-room/room-language.md)登记七种语言的计时器、对白、原字体与深路径存档回放。
 [计时语音](../acceptance/npr-room/timer-voice-sources.md)登记原语音、选择规则及动作提示点。
 [计时语音提示点实机对照](../acceptance/npr-room/timer-voice-cues.md)登记番茄钟与正计时的正式语音库、原生回放和起声时刻。
-[教学与第一章剧情命令](../acceptance/npr-room/opening-story.md)登记原命令、选项回跳和解锁写入的脚本回放。
+[教学与第一章剧情命令](../acceptance/npr-room/opening-story.md)登记原命令、选项回跳、解锁写入、原语音和字幕切换。
 
 - [ ] 从 `TimerCoreService` 复现计时、工作休息循环、通知和暂停恢复。覆盖输入重复、焦点变化、切换阶段、退出重开和默认配置。界面、键盘和自动回放共享业务动作。
 - [ ] 实现笔记、待办、统计、进度、解锁、成就及设置。按源状态验证增删改、排序、解锁事件和持久状态。存档采用独立 D 盘根、版本校验与原子提交。检查损坏文件回退、版本升级和并发实例行为。

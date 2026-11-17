@@ -16,7 +16,7 @@ from test_validation_protocol import exchange
 
 
 @contextlib.contextmanager
-def playing(player, project, resources, profile, output, expected_audio_starts=None):
+def playing(player, project, resources, profile, output, expected_audio_starts=None, level_reference="assets:/room.azurelevel"):
     output.mkdir()
     endpoint = output / "endpoint.json"
     token = secrets.token_hex(32)
@@ -45,10 +45,14 @@ def playing(player, project, resources, profile, output, expected_audio_starts=N
                 return reply.get("value")
 
             while True:
-                state = json.loads(call("query", name="game.state"))
+                assert process.poll() is None and time.monotonic() < deadline
+                query = exchange(address, token, {"op": "query", "name": "game.state"})
+                if query.get("code") == "Timeout" and not query["passed"]:
+                    continue
+                assert query["passed"], query
+                state = json.loads(query["value"])
                 assert not state["scriptErrors"] and not state["presentationErrors"], state
-                assert time.monotonic() < deadline
-                if state["levelReference"] == "assets:/room.azurelevel" and not state["loading"]:
+                if state["levelReference"] == level_reference and not state["loading"]:
                     break
                 time.sleep(.05)
             call("wait-frames", frames=5)
