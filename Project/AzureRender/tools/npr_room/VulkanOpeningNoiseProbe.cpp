@@ -45,9 +45,10 @@ int main(int argc, char** argv) try {
     if (argc < 4 || argc > 6 || std::filesystem::exists(argv[3]))
         throw std::invalid_argument("Expected vertex and fragment shaders, unused capture path and optional source inputs");
     const bool chromatic = argc == 6 && std::string_view(argv[5]) == "chromatic";
-    if (argc == 6 && !chromatic) throw std::invalid_argument("Expected chromatic source inputs");
+    const bool screenMove = argc == 6 && std::string_view(argv[5]) == "screen-move";
+    if (argc == 6 && !chromatic && !screenMove) throw std::invalid_argument("Expected chromatic or screen-move source inputs");
     const bool blackout = argc == 5;
-    const bool textured = blackout || chromatic;
+    const bool textured = blackout || chromatic || screenMove;
     using namespace azurerender;
     test::VulkanComputeFixture host(true);
     auto& backend = *host.backend;
@@ -59,7 +60,8 @@ int main(int argc, char** argv) try {
     VkDescriptorSetLayout descriptors{};
     VkDescriptorPool pool{};
     VkDescriptorSet set{};
-    std::array<Texture, 3> textures;
+    const unsigned textureCount = screenMove ? 5 : 3;
+    std::vector<Texture> textures(textured ? textureCount : 0);
     VkPipelineLayout layout{};
     VkShaderModule vertex{}, fragment{};
     VkPipeline pipeline{};
@@ -88,11 +90,14 @@ int main(int argc, char** argv) try {
     pass = backend.createRenderPass(description);
     framebuffer = backend.createFramebuffer({pass, {view}, extent.width, extent.height});
     std::vector<rhi::DescriptorBindingDesc> bindings;
-    std::array<float, 20> material{};
+    std::array<float, 24> material{};
     if (textured) {
         const std::filesystem::path source(argv[4]);
-        const auto constants = readBinaryFile((source / (blackout ? "blackout-material.bin" : "chromatic-material.bin")).string());
-        if (constants.size() != (blackout ? sizeof(material) : 12 * sizeof(float)))
+        const char* materialFile = blackout ? "blackout-material.bin"
+            : screenMove ? "screen-move-material.bin" : "chromatic-material.bin";
+        const auto constants = readBinaryFile((source / materialFile).string());
+        const unsigned materialFloats = blackout ? 20 : screenMove ? 24 : 12;
+        if (constants.size() != materialFloats * sizeof(float))
             throw std::invalid_argument("Unexpected source material constants");
         std::memcpy(material.data(), constants.data(), constants.size());
         constexpr std::array<float, 4> opaque{.7F, .45F, .2F, 1};
@@ -101,36 +106,48 @@ int main(int argc, char** argv) try {
         clamp.addressU = clamp.addressV = clamp.addressW = VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE;
         auto point = linear;
         point.filter = VK_FILTER_NEAREST;
-        const auto upload = [&](unsigned binding, const char* name, VkExtent2D size, rhi::SamplerDesc sampling) {
+        const auto upload = [&](unsigned binding, const char* name, VkExtent2D size, rhi::SamplerDesc sampling,
+                                VkFormat colorSpace = VK_FORMAT_R8G8B8A8_SRGB) {
             const auto bytes = readBinaryFile((source / name).string());
             if (bytes.size() != size.width * size.height * 4)
                 throw std::invalid_argument("Unexpected source effect raster");
-            textures[binding].upload(host, VK_FORMAT_R8G8B8A8_SRGB, size, bytes.data(), bytes.size(), 4, sampling);
+            textures[binding].upload(host, colorSpace, size, bytes.data(), bytes.size(), 4, sampling);
+        };
+        const auto uploadScreen = [&](unsigned binding, const char* name) {
+            const auto screen = readBinaryFile((source / name).string());
+            if (screen.size() != output.size) throw std::invalid_argument("Unexpected source screen dimensions");
+            textures[binding].upload(host, format, extent, screen.data(), screen.size(), 4 * sizeof(float), clamp);
         };
         if (blackout) {
             textures[0].upload(host, format, {1, 1}, opaque.data(), sizeof(opaque), sizeof(opaque), clamp);
             upload(1, "blackout-ramp.rgba", {32, 32}, point);
             upload(2, "blackout-timeline.rgba", {64, 1}, linear);
+        } else if (screenMove) {
+            auto flow = point;
+            flow.addressU = flow.addressV = VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE;
+            upload(0, "screen-move-bands.rgba", {1, 32}, point, VK_FORMAT_R8G8B8A8_UNORM);
+            upload(1, "screen-move-instability.rgba", {64, 1}, linear);
+            upload(2, "screen-move-flow.rgba", {32, 18}, flow);
+            upload(3, "screen-move-timeline.rgba", {32, 1}, point);
+            uploadScreen(4, "screen-move-source.rgba32f");
         } else {
-            const auto screen = readBinaryFile((source / "chromatic-source.rgba32f").string());
-            if (screen.size() != output.size) throw std::invalid_argument("Unexpected source screen dimensions");
             upload(0, "chromatic-noise.rgba", {256, 256}, linear);
             upload(1, "chromatic-timeline.rgba", {64, 1}, linear);
-            textures[2].upload(host, format, extent, screen.data(), screen.size(), 4 * sizeof(float), clamp);
+            uploadScreen(2, "chromatic-source.rgba32f");
         }
         for (unsigned binding = 0; binding < textures.size(); ++binding)
             bindings.push_back({binding, VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, 1, VK_SHADER_STAGE_FRAGMENT_BIT});
     }
     descriptors = backend.createDescriptorSetLayout(bindings);
     if (textured) {
-        pool = backend.createDescriptorPool({{{VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, 3}}, 1});
+        pool = backend.createDescriptorPool({{{VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, textureCount}}, 1});
         set = backend.allocateDescriptorSets(pool, descriptors, 1).at(0);
         for (unsigned binding = 0; binding < textures.size(); ++binding) {
             const auto& texture = textures[binding];
             backend.writeDescriptorImage({set, binding, VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, texture.view, texture.sampler});
         }
     }
-    const auto pushSize = static_cast<unsigned>((blackout ? 12 : chromatic ? 8 : 4) * sizeof(float));
+    const auto pushSize = static_cast<unsigned>((blackout ? 12 : (chromatic || screenMove) ? 8 : 4) * sizeof(float));
     const rhi::PushConstantRangeDesc range{VK_SHADER_STAGE_FRAGMENT_BIT, pushSize};
     layout = backend.createPipelineLayout(descriptors, &range);
     vertex = backend.createShaderModule(readBinaryFile(argv[1]));
@@ -143,11 +160,12 @@ int main(int argc, char** argv) try {
     graphics.colorAttachmentCount = 1;
     graphics.depthTest = graphics.depthWrite = false;
     graphics.cullMode = VK_CULL_MODE_NONE;
-    graphics.alphaBlend = !chromatic;
+    graphics.alphaBlend = !chromatic && !screenMove;
     pipeline = backend.createGraphicsPipeline(graphics);
     std::vector<std::array<float, 3>> samples{{9.302F, 0, 0}, {9.302F, .05F, 0}, {9.802F, .05F, 0}};
     if (blackout) samples = {{9.302F, 0, 0}, {9.302F, .5F, 0}, {9.802F, .5F, 0}, {9.302F, 1, 0}, {9.302F, .5F, 1}};
     if (chromatic) samples = {{9.302F, 0, 0}, {9.302F, .2F, 0}, {9.802F, .2F, 0}, {9.302F, .5F, 0}};
+    if (screenMove) samples = {{9.302F, 0, 0}, {9.302F, .5F, 0}, {9.802F, .5F, 0}, {9.302F, 1, 0}};
     const float precedingRampRow = host.properties.vendorID == 0x10DE ? 1.F : 0.F;
     std::ofstream capture(argv[3], std::ios::binary);
     for (const auto& sample : samples) {
@@ -157,6 +175,9 @@ int main(int argc, char** argv) try {
                           material[15], precedingRampRow, float(extent.width), float(extent.height), material[17], material[18]};
         if (chromatic)
             parameters = {sample[0], sample[1], material[9], material[10], material[11], float(extent.width), float(extent.height)};
+        if (screenMove)
+            parameters = {sample[0], sample[1], material[20], material[21], float(extent.width), float(extent.height),
+                          precedingRampRow};
         host.submit([&](rhi::ICommandRecorder& commands, VkCommandBuffer native) {
             constexpr VkClearValue background{{{.25F, .5F, .75F, 1}}};
             commands.beginRenderPass({pass, framebuffer, extent, {background}});
@@ -184,7 +205,7 @@ int main(int argc, char** argv) try {
     cleanup.reset();
     if (host.errors.load() || host.allocator.statistics().liveBuffers || host.allocator.statistics().liveImages)
         throw std::runtime_error("Vulkan validation or allocation retirement failed");
-    std::cout << (blackout ? "Blackout" : chromatic ? "Chromatic" : "Monochrome noise")
+    std::cout << (blackout ? "Blackout" : chromatic ? "Chromatic" : screenMove ? "Screen move" : "Monochrome noise")
               << " sampled on " << host.properties.deviceName << '\n';
     return 0;
 } catch (const std::exception& error) {

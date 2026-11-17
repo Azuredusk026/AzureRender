@@ -584,6 +584,7 @@ compile_shader("${SHADER_SOURCE_DIR}/inner_outline.vert")
 compile_shader("${SHADER_SOURCE_DIR}/monochrome_screen_noise.frag")
 compile_shader("${SHADER_SOURCE_DIR}/opening_blackout.frag")
 compile_shader("${SHADER_SOURCE_DIR}/opening_chromatic.frag")
+compile_shader("${SHADER_SOURCE_DIR}/opening_screen_move.frag")
 compile_shader("${SHADER_SOURCE_DIR}/inner_outline.frag")
 compile_shader("${SHADER_SOURCE_DIR}/inner_outline.frag"
     DEFINES AZURE_SHOWCASE_DISPLAY=1

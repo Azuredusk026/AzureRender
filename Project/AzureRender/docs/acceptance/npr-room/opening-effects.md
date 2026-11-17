@@ -80,6 +80,18 @@ RTX 4060 的任务 2008 和 2009 各执行四帧。Intel 核显的任务 2011 �
 | NVIDIA 浮点画面 | `71c029e551faeedf876cfabcc79792f3fc67c8d82aa8fe289909cfa86312a2ce` |
 | 原始采样归档清单 | `84fb8e12e581ff7e9a9bc55ddf7d98729de98e60d01453e04209189c91578cd4` |
 
+## Vulkan 画面偏移
+
+着色器读取原材质的四张纹理，合成条带和二维位移，将偏移坐标环绕至画面内，再读取整数坐标的源像素。RTX 4060 的条带点采样在纹理边界取前一行。Intel 核显使用 Vulkan 的点采样。
+
+任务 2028 在两种显卡各执行两次四帧回放，各有 230,400 个 RGBA32F 像素逐字节匹配同设备的原 Direct3D 11 画面。四次回放均通过 Vulkan 校验与资源释放检查。任务 2029 的单色噪声、黑屏及色差逐字节匹配 RTX 4060 归档。
+
+| 记录 | SHA-256 |
+| --- | --- |
+| Intel Vulkan 对照 | `51ab4bd68d1d7d922e72b2b33e1c77fea183b09b347f74d67e8e89f6110e58ef` |
+| NVIDIA Vulkan 对照 | `c7137c9032e3918d0513c7b6001de268f2b491a6b32cb370228d8e253a5f85c7` |
+| Vulkan 画面偏移程序 | `3febd15e0a7eeb2bb0e46bcc4892410fc94d9b26ba254ce91796e4aab9b9078f` |
+
 ## 单色噪声实机参照
 
 任务 1816 使用原生 D3D11 顶点和片元程序，以及原材质的 64×1 sRGB 时间纹理，在固定底色上捕获三个 320×180 RGBA32F 帧。比率为 0 时控制帧逐像素一致。比率为 0.05 时，每个像素按原混合系数与黑色或白色合成，透明度保持为 1。时间从 9.302 秒移到 9.802 秒时，18,319 个像素变化。两次硬件回放的摘要一致，均为 `5a17e42cb1f1dfda269de9d61619865df57ffc4b8500f2e57809b53a96e86389`。
@@ -174,6 +186,10 @@ python -B -m tools.npr_room.windows_noise_probe prepare-screen-move --effects $p
 & $noiseProbe $screenMoveInputs $screenMoveCapture screen-move $dxgiAdapterIndex
 & $noiseProbe $screenMoveInputs $screenMoveRepeat screen-move $dxgiAdapterIndex
 python -B -m tools.npr_room.windows_noise_probe verify-screen-move --first $screenMoveCapture --repeat $screenMoveRepeat --output $screenMoveReport
+& $glslc --target-env=vulkan1.3 shaders/opening_screen_move.frag -o $screenMoveFragment
+& $vulkanNoiseProbe $fullscreenVertex $screenMoveFragment $vulkanScreenMove $screenMoveInputs screen-move
+& $vulkanNoiseProbe $fullscreenVertex $screenMoveFragment $vulkanScreenMoveRepeat $screenMoveInputs screen-move
+python -B -m tools.npr_room.windows_noise_probe compare-screen-move --reference $screenMoveCapture --candidate $vulkanScreenMove --repeat $vulkanScreenMoveRepeat --output $vulkanScreenMoveReport
 python -B -m tools.npr_room.windows_noise_probe prepare-blackout --effects $programDirectory --catalog $imageCatalog --source $unitySource --output $blackoutInputs
 & $noiseProbe $blackoutInputs $blackoutCapture blackout
 & $noiseProbe $blackoutInputs $blackoutRepeat blackout

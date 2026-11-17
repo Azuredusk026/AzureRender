@@ -4,7 +4,7 @@ import unittest
 
 import numpy as np
 
-from tools.npr_room.windows_noise_probe import screen_move_source, verify_screen_move
+from tools.npr_room.windows_noise_probe import compare_screen_move, screen_move_source, verify_screen_move
 
 
 class ScreenMoveCaptureTest(unittest.TestCase):
@@ -19,6 +19,11 @@ class ScreenMoveCaptureTest(unittest.TestCase):
                 path.write_bytes(frames.tobytes())
             report = verify_screen_move(first, repeat)
             self.assertEqual(report["changedPixels"], [0, 57600, 57600, 57600])
+            self.assertEqual(compare_screen_move(first, first, repeat)["matchingPixels"], 230400)
+            other = Path(temporary) / "other.rgba32f"
+            other.write_bytes(frames[[0, 2, 1, 3]].tobytes())
+            with self.assertRaisesRegex(ValueError, "differs"):
+                compare_screen_move(other, first, repeat)
             frames[1, 0, 0, 2] = 0.123
             for path in (first, repeat):
                 path.write_bytes(frames.tobytes())

@@ -313,6 +313,18 @@ def verify_screen_move(first, repeat):
             "changedPixels": changed, "timeChangedPixels": int(time_changed), "ratioChangedPixels": int(ratio_changed)}
 
 
+def compare_screen_move(reference, candidate, repeat):
+    result = verify_screen_move(candidate, repeat)
+    original = gzip.decompress(reference.read_bytes()) if reference.suffix == ".gz" else reference.read_bytes()
+    expected = sha256(original).hexdigest()
+    if expected != result["captureSHA256"]:
+        reference_frames = np.frombuffer(original, dtype="<f4").reshape(len(SCREEN_MOVE_SAMPLES), 180, 320, 4)
+        actual = np.fromfile(candidate, dtype="<f4").reshape(reference_frames.shape)
+        counts = np.count_nonzero(np.any(actual != reference_frames, axis=3), axis=(1, 2)).tolist()
+        raise ValueError(f"Vulkan screen move differs from the original on the same adapter: {counts} pixels")
+    return result | {"originalSHA256": expected, "matchingPixels": len(SCREEN_MOVE_SAMPLES) * 320 * 180}
+
+
 def frame_counts(frames):
     if not np.array_equal(frames[0], np.broadcast_to(BACKGROUND, frames[0].shape)):
         raise ValueError("Zero noise changed the control frame")
@@ -370,7 +382,8 @@ if __name__ == "__main__":
                "verify-chromatic": ("first", "repeat", "output"),
                "compare-chromatic": ("reference", "candidate", "repeat", "output"),
                "prepare-screen-move": ("effects", "catalog", "source", "output"),
-               "verify-screen-move": ("first", "repeat", "output")}
+               "verify-screen-move": ("first", "repeat", "output"),
+               "compare-screen-move": ("reference", "candidate", "repeat", "output")}
     for operation, paths in options.items():
         command = subparsers.add_parser(operation)
         for path in paths:
@@ -392,6 +405,8 @@ if __name__ == "__main__":
             report = verify_chromatic(args.first, args.repeat)
         elif args.operation == "verify-screen-move":
             report = verify_screen_move(args.first, args.repeat)
+        elif args.operation == "compare-screen-move":
+            report = compare_screen_move(args.reference, args.candidate, args.repeat)
         elif args.operation == "compare-chromatic":
             report = compare_chromatic(args.reference, args.candidate, args.repeat)
         elif args.operation == "compare-blackout":
