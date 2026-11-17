@@ -13,6 +13,7 @@ import numpy as np
 from PIL import Image
 
 from tools.npr_room.build_city_window import verified_path
+from tools.npr_room.opening_glitch_camera import camera_source as glitch_camera_source
 from tools.npr_room.reference_inventory import digest
 
 
@@ -22,6 +23,7 @@ BACKGROUND = np.array([.25, .5, .75, 1], dtype=np.float32)
 BLACKOUT_SAMPLES = [[9.302, 0, 0], [9.302, .5, 0], [9.802, .5, 0], [9.302, 1, 0], [9.302, .5, 1]]
 CHROMATIC_SAMPLES = [[9.302, 0], [9.302, .2], [9.802, .2], [9.302, .5]]
 SCREEN_MOVE_SAMPLES = [[9.302, 0], [9.302, .5], [9.802, .5], [9.302, 1]]
+GLITCH_SAMPLES = [[9.302, 0], [9.302, .5], [9.802, .5], [9.302, .3]]
 SCREEN_MOVE_TEXTURES = (
     ("bands", (1, 32), False, 0, (0, 0, 0)),
     ("instability", (64, 1), True, 1, (0, 0, 0)),
@@ -325,6 +327,86 @@ def compare_screen_move(reference, candidate, repeat):
     return result | {"originalSHA256": expected, "matchingPixels": len(SCREEN_MOVE_SAMPLES) * 320 * 180}
 
 
+def glitch_screen_source():
+    y, x = np.indices((288, 512))
+    return np.stack((32 + x % 128, 48 + y % 144, 48 + (3 * x + 5 * y) % 144,
+                     np.full_like(x, 255)), axis=2).astype(np.uint8)
+
+
+def prepare_glitch(effects, catalog, source, output):
+    locked_path = effects / BINDINGS
+    lock = json.loads(locked_path.read_bytes())
+    program = effects / PROGRAM
+    if digest(program) != lock["programsSHA256"]:
+        raise ValueError("Glitch bytecode receipt differs from the source lock")
+    camera = glitch_camera_source(source, locked_path)
+    target = camera["target"]
+    if (target["size"], target["colorFormat"], target["srgb"], target["filter"], target["wrap"]) != (
+            [512, 288], 8, False, 0, [1, 1, 1]):
+        raise ValueError("Unexpected original glitch camera target")
+    stages = json.loads(program.read_bytes())["programs"]["glitch"]["stages"]
+    authored, = (item for item in lock["renderers"]["High"]["passes"] if item["shaderProgram"] == "glitch")
+    blend = {"srcBlend": 5, "destBlend": 10, "srcBlendAlpha": 1, "destBlendAlpha": 10,
+             "blendOp": 0, "blendOpAlpha": 0, "colMask": 15}
+    if authored["renderState"]["blend"] != blend:
+        raise ValueError("Unexpected original glitch blend")
+    layout, = (buffer for buffer in stages["fragment"]["constantBuffers"] if buffer["binding"] == 1)
+    offsets = {item["name"]: item["offset"] for item in layout["vectors"]}
+    fields = {"_Length": 16, "_Ratio": 20, "_DotScale": 24, "_Speed": 28, "_Unstable": 48}
+    if layout["bytes"] != 64 or any(offsets[name] != offset for name, offset in fields.items()):
+        raise ValueError("Unexpected original glitch shader constants")
+    material = bytearray(layout["bytes"])
+    for name, offset in fields.items():
+        struct.pack_into("<f", material, offset, authored["floats"][name])
+    timeline, = (texture for texture in authored["textures"].values() if texture["binding"] == 0)
+    if not (timeline["srgb"] and authored["textures"]["_RenderTexture"]["binding"] == 1):
+        raise ValueError("Unexpected original glitch texture slots")
+    png = verified_path(catalog, timeline)
+    metadata = source / (timeline["source"] + ".meta")
+    sampler = dict(re.findall(r"^\s*(filterMode|wrap[UVW]):\s*(\d+)\s*$",
+                              metadata.read_text(encoding="utf-8"), re.M))
+    if sampler != {"filterMode": "1", "wrapU": "0", "wrapV": "0", "wrapW": "0"}:
+        raise ValueError("Unexpected original glitch timeline sampler")
+    output.mkdir()
+    for stage in stages.values():
+        bytecode = effects / stage["path"]
+        if digest(bytecode) != stage["sha256"]:
+            raise ValueError("Original glitch bytecode differs")
+        shutil.copyfile(bytecode, output / bytecode.name)
+    timeline_path = output / "glitch-timeline.rgba"
+    with Image.open(png) as image:
+        if image.size != (64, 1):
+            raise ValueError("Unexpected original glitch timeline dimensions")
+        timeline_path.write_bytes(image.convert("RGBA").tobytes())
+    constants = output / "glitch-material.bin"
+    constants.write_bytes(material)
+    screen = output / "glitch-source.rgba"
+    screen.write_bytes(glitch_screen_source().tobytes())
+    return {"programSHA256": digest(program), "camera": camera, "materialSHA256": authored["materialSHA256"],
+            "materialConstantsSHA256": digest(constants), "screenSourceSHA256": digest(screen),
+            "timelineSHA256": digest(png), "timelineRgbaSHA256": digest(timeline_path),
+            "timelineSamplerSHA256": digest(metadata)}
+
+
+def verify_glitch(first, repeat):
+    checksum = digest(first)
+    if checksum != digest(repeat):
+        raise ValueError("Glitch captures changed under identical inputs")
+    capture = np.fromfile(first, dtype="<f4").reshape(len(GLITCH_SAMPLES), 180, 320, 4)
+    if not np.isfinite(capture).all() or not np.all(capture[..., 3] == 1):
+        raise ValueError("Glitch capture produced invalid color or alpha")
+    if not np.array_equal(capture[0], np.broadcast_to(BACKGROUND, capture[0].shape)):
+        raise ValueError("The original glitch requires an unchanged zero-ratio frame")
+    changed = np.count_nonzero(np.any(capture != BACKGROUND, axis=3), axis=(1, 2)).tolist()
+    time_changed = int(np.count_nonzero(np.any(capture[1] != capture[2], axis=2)))
+    ratio_changed = int(np.count_nonzero(np.any(capture[1] != capture[3], axis=2)))
+    if not (min(changed[1:]) > 0 and time_changed and ratio_changed):
+        raise ValueError("The original glitch lost its ratio or time input")
+    return {"size": [320, 180], "frames": GLITCH_SAMPLES, "captureSHA256": checksum,
+            "changedPixels": changed, "timeChangedPixels": time_changed, "ratioChangedPixels": ratio_changed,
+            "rgbRange": [[float(frame[..., :3].min()), float(frame[..., :3].max())] for frame in capture]}
+
+
 def frame_counts(frames):
     if not np.array_equal(frames[0], np.broadcast_to(BACKGROUND, frames[0].shape)):
         raise ValueError("Zero noise changed the control frame")
@@ -383,7 +465,9 @@ if __name__ == "__main__":
                "compare-chromatic": ("reference", "candidate", "repeat", "output"),
                "prepare-screen-move": ("effects", "catalog", "source", "output"),
                "verify-screen-move": ("first", "repeat", "output"),
-               "compare-screen-move": ("reference", "candidate", "repeat", "output")}
+               "compare-screen-move": ("reference", "candidate", "repeat", "output"),
+               "prepare-glitch": ("effects", "catalog", "source", "output"),
+               "verify-glitch": ("first", "repeat", "output")}
     for operation, paths in options.items():
         command = subparsers.add_parser(operation)
         for path in paths:
@@ -394,7 +478,7 @@ if __name__ == "__main__":
     elif args.operation.startswith("prepare-"):
         effect = args.operation.removeprefix("prepare-")
         prepare_effect = {"blackout": prepare_blackout, "chromatic": prepare_chromatic,
-                          "screen-move": prepare_screen_move}[effect]
+                          "screen-move": prepare_screen_move, "glitch": prepare_glitch}[effect]
         report = prepare_effect(args.effects, args.catalog, args.source, args.output)
         (args.output / (effect + "-source-receipt.json")).write_text(json.dumps(report, sort_keys=True) + "\n",
                                                                    encoding="utf-8", newline="\n")
@@ -407,6 +491,8 @@ if __name__ == "__main__":
             report = verify_screen_move(args.first, args.repeat)
         elif args.operation == "compare-screen-move":
             report = compare_screen_move(args.reference, args.candidate, args.repeat)
+        elif args.operation == "verify-glitch":
+            report = verify_glitch(args.first, args.repeat)
         elif args.operation == "compare-chromatic":
             report = compare_chromatic(args.reference, args.candidate, args.repeat)
         elif args.operation == "compare-blackout":

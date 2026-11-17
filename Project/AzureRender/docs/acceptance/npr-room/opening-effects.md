@@ -110,6 +110,22 @@ Lua 回归覆盖教学行 14 的 0.7 秒延迟、1 秒持续、历史回放、�
 | 原生 Player | `9e8f74144bc66f4411721fb1ae0752cdd9ee617558b8fd0aed3e08dda5f00139` |
 | 诊断构建清单 | `10345393258b2c1d2f303d1c1d31e227f281ac805c543bd891fbef02112de658` |
 
+## 故障硬件参照
+
+`GlitchCamera` 随主相机移动，局部位姿为零位置及单位旋转，视野为 35°。相机输出写入 512×288 的线性 RGBA8 目标，材质按点采样和边缘钳位读取。启动命令激活相机，播放中的相机每隔 0.3 至 1 秒切换激活状态，清除时关闭。教学行 12 延迟 0.7 秒，以 0.5 比率持续 1 秒。教学行 28 以 0.3 比率持续 0.7 秒。
+
+任务 2035 按原材质提供故障相机固定图案和 sRGB 时间纹理，在两种显卡上各运行两次 Direct3D 11 原程序。四帧覆盖零比率、两个时刻的 0.5 及 0.3。每台设备两次采样逐字节一致，透明度全为 1。零比率保持目标底色。半秒时间间隔分别改变 Intel 的 35,952 个像素和 NVIDIA 的 21,264 个像素。画面偏移回归逐字节匹配 Intel 归档。
+
+固定图案用于独立通道验收。原房间的相机渲染、激活状态及 Vulkan 合成另行采证。本机来源和浮点画面位于 `windows-opening-reference/glitch-validation/`。
+
+| 记录 | SHA-256 |
+| --- | --- |
+| 原故障相机和目标 | `33276ab96da21860571c585a0a61d0c12067d9ee3ac534b5ad932c24be316c36` |
+| 原材质与纹理输入 | `f8025c0546fd5119856270bba3ed320bd229d85c6b59ebb410a437c44fdfb665` |
+| Intel 浮点画面 | `fd11b309a122cfedf47b229d3e9a92941372cee366fa5d1484b994dbc0458744` |
+| NVIDIA 浮点画面 | `4bc7bfe70e7a32e8b533f768cd5dddc9fbf4b03def2255114fac5b1c2447bfea` |
+| 原始采样归档清单 | `5e71c62f8428f4842aa8389502e1e2f984d6f0d4c9a9a187e123fe8b87e6a398` |
+
 ## 单色噪声实机参照
 
 任务 1816 使用原生 D3D11 顶点和片元程序，以及原材质的 64×1 sRGB 时间纹理，在固定底色上捕获三个 320×180 RGBA32F 帧。比率为 0 时控制帧逐像素一致。比率为 0.05 时，每个像素按原混合系数与黑色或白色合成，透明度保持为 1。时间从 9.302 秒移到 9.802 秒时，18,319 个像素变化。两次硬件回放的摘要一致，均为 `5a17e42cb1f1dfda269de9d61619865df57ffc4b8500f2e57809b53a96e86389`。
@@ -208,6 +224,11 @@ python -B -m tools.npr_room.windows_noise_probe verify-screen-move --first $scre
 & $vulkanNoiseProbe $fullscreenVertex $screenMoveFragment $vulkanScreenMove $screenMoveInputs screen-move
 & $vulkanNoiseProbe $fullscreenVertex $screenMoveFragment $vulkanScreenMoveRepeat $screenMoveInputs screen-move
 python -B -m tools.npr_room.windows_noise_probe compare-screen-move --reference $screenMoveCapture --candidate $vulkanScreenMove --repeat $vulkanScreenMoveRepeat --output $vulkanScreenMoveReport
+python -B -m tools.npr_room.opening_glitch_camera --source $unitySource --effects $effectsReceipt --output $glitchCameraReceipt
+python -B -m tools.npr_room.windows_noise_probe prepare-glitch --effects $programDirectory --catalog $imageCatalog --source $unitySource --output $glitchInputs
+& $noiseProbe $glitchInputs $glitchCapture glitch $dxgiAdapterIndex
+& $noiseProbe $glitchInputs $glitchRepeat glitch $dxgiAdapterIndex
+python -B -m tools.npr_room.windows_noise_probe verify-glitch --first $glitchCapture --repeat $glitchRepeat --output $glitchReport
 python -B -m tools.npr_room.windows_noise_probe prepare-blackout --effects $programDirectory --catalog $imageCatalog --source $unitySource --output $blackoutInputs
 & $noiseProbe $blackoutInputs $blackoutCapture blackout
 & $noiseProbe $blackoutInputs $blackoutRepeat blackout

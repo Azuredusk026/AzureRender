@@ -23,7 +23,7 @@ using Vector = std::array<float, 4>;
 constexpr Vector background{.25F, .5F, .75F, 1};
 
 struct Sample { float time, ratio, blind; };
-enum class Effect { Noise, Blackout, Chromatic, ScreenMove };
+enum class Effect { Noise, Blackout, Chromatic, ScreenMove, Glitch };
 
 void require(HRESULT status, const char* operation) {
     if (FAILED(status)) {
@@ -129,6 +129,15 @@ void bindSources(ID3D11Device& device, ID3D11DeviceContext& context, const fs::p
         context.PSSetSamplers(0, 2, samplers);
         return;
     }
+    if (effect == Effect::Glitch) {
+        const auto pointClamp = sampler(device, D3D11_FILTER_MIN_MAG_MIP_POINT, D3D11_TEXTURE_ADDRESS_CLAMP);
+        const auto camera = rgbaView(device, source / "glitch-source.rgba", 512, 288, false);
+        ID3D11ShaderResourceView* views[]{timeline.Get(), camera.Get()};
+        ID3D11SamplerState* samplers[]{linear.Get(), pointClamp.Get()};
+        context.PSSetShaderResources(0, 2, views);
+        context.PSSetSamplers(0, 2, samplers);
+        return;
+    }
     const auto point = sampler(device, D3D11_FILTER_MIN_MAG_MIP_POINT, D3D11_TEXTURE_ADDRESS_WRAP);
     const auto clamp = sampler(device, D3D11_FILTER_MIN_MAG_LINEAR_MIP_POINT, D3D11_TEXTURE_ADDRESS_CLAMP);
     const auto ramp = rgbaView(device, source / "blackout-ramp.rgba", 32, 32);
@@ -166,6 +175,7 @@ void run(const fs::path& source, const fs::path& output, Effect effect, std::opt
     case Effect::Blackout: prefix = "blackout"; break;
     case Effect::Chromatic: prefix = "chromatic"; break;
     case Effect::ScreenMove: prefix = "screen-move"; break;
+    case Effect::Glitch: prefix = "glitch"; break;
     }
     const auto vs = read(source / (prefix + "-vertex.dxbc"));
     const auto ps = read(source / (prefix + "-fragment.dxbc"));
@@ -194,7 +204,7 @@ void run(const fs::path& source, const fs::path& output, Effect effect, std::opt
     ID3D11RenderTargetView* selected = target.Get();
 
     D3D11_BLEND_DESC blending{};
-    const bool alphaBlend = effect == Effect::Noise || effect == Effect::Blackout;
+    const bool alphaBlend = effect != Effect::Chromatic && effect != Effect::ScreenMove;
     blending.RenderTarget[0] = {alphaBlend, D3D11_BLEND_SRC_ALPHA, D3D11_BLEND_INV_SRC_ALPHA, D3D11_BLEND_OP_ADD,
                                 D3D11_BLEND_ONE, D3D11_BLEND_INV_SRC_ALPHA, D3D11_BLEND_OP_ADD,
                                 D3D11_COLOR_WRITE_ENABLE_ALL};
@@ -228,11 +238,12 @@ void run(const fs::path& source, const fs::path& output, Effect effect, std::opt
         break;
     case Effect::Chromatic: samples = {{9.302F, 0, 0}, {9.302F, .2F, 0}, {9.802F, .2F, 0}, {9.302F, .5F, 0}}; break;
     case Effect::ScreenMove: samples = {{9.302F, 0, 0}, {9.302F, .5F, 0}, {9.802F, .5F, 0}, {9.302F, 1, 0}}; break;
+    case Effect::Glitch: samples = {{9.302F, 0, 0}, {9.302F, .5F, 0}, {9.802F, .5F, 0}, {9.302F, .3F, 0}}; break;
     }
     std::array<Vector, 6> initialMaterial{};
     if (effect != Effect::Noise) {
         const auto data = read(source / (prefix + "-material.bin"));
-        const auto vectors = effect == Effect::Blackout ? 5 : effect == Effect::Chromatic ? 3 : 6;
+        const auto vectors = effect == Effect::Blackout ? 5 : effect == Effect::Chromatic ? 3 : effect == Effect::Glitch ? 4 : 6;
         const auto expectedBytes = vectors * sizeof(Vector);
         if (data.size() != expectedBytes) throw std::invalid_argument("Unexpected original material constant buffer");
         std::memcpy(initialMaterial.data(), data.data(), data.size());
@@ -250,6 +261,8 @@ void run(const fs::path& source, const fs::path& output, Effect effect, std::opt
         } else if (effect == Effect::Chromatic || effect == Effect::ScreenMove) {
             globals[126] = {float(width), float(height), 1.F / width, 1.F / height};
             material[2][0] = sample.ratio;
+        } else if (effect == Effect::Glitch) {
+            material[1][1] = sample.ratio;
         } else {
             material[1][0] = sample.ratio;
         }
@@ -279,7 +292,8 @@ int wmain(int argc, wchar_t** argv) try {
         if (name == L"blackout") effect = Effect::Blackout;
         else if (name == L"chromatic") effect = Effect::Chromatic;
         else if (name == L"screen-move") effect = Effect::ScreenMove;
-        else throw std::invalid_argument("Expected blackout, chromatic or screen-move and an optional adapter index");
+        else if (name == L"glitch") effect = Effect::Glitch;
+        else throw std::invalid_argument("Expected blackout, chromatic, screen-move or glitch and an optional adapter index");
     }
     std::optional<UINT> index;
     if (argc == 5) {
