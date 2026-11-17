@@ -98,7 +98,7 @@
 
 任务 1883 核对七个部件的 118,118 个变换。位置最大偏差为 0.000000104 米，旋转最大偏差为 0.00000561 度。任务 1885 和 1886 各跑 1,040 帧。两条原生路线各处转场与 Unity 最多相差两帧，七个部件始终同步。
 
-任务 1887 从实际房间入口跑完教学和第一章。两次启动分别核对 22 和 10 段源语音，并检查解锁、布置存档和配乐。两个进程均正常退出，GPU 缓冲和图像计数归零。独立包、相机轨迹、表情、视线及画面各有单列验收。
+任务 1887 从实际房间入口跑完教学和第一章。两次启动分别核对 22 和 10 段源语音，并检查解锁、布置存档和配乐。两个进程均正常退出，GPU 缓冲和图像计数归零。独立包、表情、视线及画面各有单列验收。
 
 本机 `story-motion-reference/tutorial-camera/native-validation/` 保存以下记录。
 
@@ -111,6 +111,21 @@
 | 原生及时指令回放 | `42a276d28189c2dc574de27ebd42d6ef404886aa1384442f9f5b6c2d09e68e5f` |
 | 原生延迟指令回放 | `bf6ee00d1fedc5b3d3ad08901b05f58020684439179bed45488479a5d97d7ca1` |
 | 常规入口回放 | `656158e33f30ef1a0be28c9ff8c5d32b6ead5d8be3ea0390691c682f3f97c0d5` |
+
+## Windows 教学相机
+
+第 16 行的相机指令将相机移至书桌锚点。原控制器随后播放两秒旋转，位置保持在锚点。播放结束后，相机保持末帧。剧情收尾恢复开场旋转，保留书桌位置。
+
+任务 1888 采样 151 个 Unity 姿态。任务 1890 核对 156 个原生姿态，位置逐帧一致，最大旋转偏差为 0.000012 度。任务 1891 从房间入口跑完教学和第一章。教学相机活动及收尾姿态均符合源样本，同时通过身体动作、语音和存档回归。
+
+本机 `story-motion-reference/tutorial-camera/windows-camera/` 保存采样、回放及运行日志。
+
+| 记录 | SHA-256 |
+| --- | --- |
+| 来源清单 | `aa0407d601b3585ae921ea391ad3e9a6b2d3a264dcf4ec4669729ba9d0565092` |
+| Unity 姿态 | `adaad1c95cec3313b8472840fbc81df8e42646c87f2028932e120da42be45242` |
+| 原生固定帧步回放 | `a0551d0e7cdf61775940bcd6ca5c2365e2a117cf226ba903f35abaccbf8f3a21` |
+| 常规入口回放 | `1142947fd6ba68d1a7ff67c9d1adad20618fd9413ce523cc8066a5cee9af9664` |
 
 ## 复验
 
@@ -136,4 +151,14 @@ $env:AZURE_NPR_MOTION_BATCH = "tutorialCamera"
 python -B -m tools.npr_room.tutorial_camera_body bake --room $deskRoom --rig $rig --source-receipt $tutorialSource --samples $tutorialSamples --output $tutorialModels
 python -B tools/npr_room/test_story_signals_player.py --player $player --room $deskRoom --resource-root $resources --catalog $bodyCatalog --graph $animatorGraph --chapters $openingChapters --source-trace $tutorialTrace --source-receipt $tutorialSource --models $tutorialModels --output $tutorialReplay
 python -B tools/npr_room/test_story_signal_room_player.py --player $player --room $deskRoom --resource-root $resources --catalog $bodyCatalog --graph $animatorGraph --chapters $openingChapters --source-receipt $tutorialSource --models $tutorialModels --output $tutorialRoomReplay
+```
+
+复验 Windows 教学相机时，使用同一份教学采样工程。正式装配和常规入口回放接收同一份相机姿态记录。
+
+```powershell
+python -B -m tools.npr_room.opening_camera_probe --source $unitySource --project $tutorialProbe
+& $unity -batchmode -nographics -quit -projectPath $tutorialProbe -executeMethod OpeningCameraProbe.Run -logFile $cameraLog
+python -B tools/npr_room/test_opening_camera_player.py --player $player --room $deskRoom --resource-root $resources --source-trace $cameraTrace --output $cameraReplay
+python -B tools/npr_room/test_story_signal_room_player.py --player $player --room $deskRoom --resource-root $resources --catalog $bodyCatalog --graph $animatorGraph --chapters $openingChapters --source-receipt $tutorialSource --models $tutorialModels --camera-trace $cameraTrace --output $cameraRoomReplay
+python -B -m tools.npr_room.tutorial_camera_body stage --room $deskRoom --catalog $bodyCatalog --controller $animatorGraph --chapters $openingChapters --source-receipt $tutorialSource --models $tutorialModels --camera-trace $cameraTrace --output $cameraRoom
 ```

@@ -14,6 +14,7 @@ from tools.npr_room.build_story_book_room import skip_capture_orphans
 from tools.npr_room.build_story_signal_room import GRAPH, compile_signals, inputs, integration, load
 from tools.npr_room.catalog_storage import publish_directory
 from tools.npr_room.humanoid_clip_export import export_model
+from tools.npr_room.opening_camera import project as camera_project
 from tools.npr_room.pbr_materials import write
 from tools.npr_room.reference_inventory import digest
 from tools.npr_room.room_geometry import HEROINE_PARTS, copy_room_asset
@@ -95,9 +96,12 @@ def project(room, catalog, controller, chapters, source_receipt, models):
     return graph, script, tutorial, bindings
 
 
-def stage(room, catalog, controller, chapters, source_receipt, models, output):
+def stage(room, catalog, controller, chapters, source_receipt, models, output, camera_trace=None):
     body, program, route, states = project(room, catalog, controller, chapters, source_receipt, models)
     camera = load(models / TUTORIAL_RECEIPT)
+    camera_path = None
+    if camera_trace:
+        program, camera_path = camera_project(room, program, camera_trace)
     with tempfile.TemporaryDirectory(prefix="tutorial-camera-room-", dir=output.parent) as workspace:
         target = Path(workspace) / "project"
         assets = target / "assets"
@@ -128,6 +132,8 @@ def stage(room, catalog, controller, chapters, source_receipt, models, output):
                     manifest["parts"][part]["sha256"] = expected["sha256"]
                 write(path, manifest)
         write(target / TUTORIAL_RECEIPT, camera)
+        if camera_path:
+            write(target / "opening-camera-receipt.json", camera_path | {"scriptSHA256": digest(script)})
         publish_directory(target, output)
     return camera
 
@@ -141,7 +147,9 @@ if __name__ == "__main__":
         action = steps.add_parser(step)
         for name in names:
             action.add_argument("--" + name, type=Path, required=True)
+    steps.choices["stage"].add_argument("--camera-trace", type=Path)
     args = vars(parser.parse_args())
     arguments = bake_args if args["step"] == "bake" else room_args
     handler = bake if args["step"] == "bake" else stage
-    print(json.dumps(handler(*(args[name.replace("-", "_")].resolve() for name in arguments))))
+    options = {"camera_trace": args["camera_trace"].resolve(strict=True)} if args.get("camera_trace") else {}
+    print(json.dumps(handler(*(args[name.replace("-", "_")].resolve() for name in arguments), **options)))

@@ -1,0 +1,32 @@
+local calls = {}
+local actor = {}
+function actor:set(component, field, value)
+    assert(component == "azure.transform")
+    calls[#calls + 1] = {field, value}
+end
+local host = {}
+function host:find(node) assert(node == "source-camera"); return actor end
+local track = {node = "source-camera", sampleRate = 2, translation = {1, 2, -3},
+    rotations = {{179, 0, 0}, {-179, 2, 0}, {-175, 2, 0}}, finish = {178, 0, 0}}
+local camera = new_story_camera(host, track)
+camera:update(.25)
+camera:effect({command = "DirectionMonochromeNoise"})
+camera:finish()
+assert(#calls == 0)
+camera:effect({command = "DirectionGameStartCamera"})
+assert(#calls == 2 and calls[1][1] == "translation" and calls[1][2][3] == -3)
+assert(calls[2][2][1] == 179)
+camera:update(.25)
+assert(calls[3][2][1] == 180 and calls[3][2][2] == 1)
+camera:update(.25)
+assert(calls[4][2][1] == -179 and calls[4][2][2] == 2)
+camera:update(3)
+assert(calls[5][2][1] == -175)
+camera:update(.1)
+assert(#calls == 5)
+camera:finish()
+assert(#calls == 6 and calls[6][1] == "rotation" and calls[6][2][1] == 178)
+camera:finish()
+assert(#calls == 6)
+camera:effect({command = "DirectionGameStartCamera"})
+assert(#calls == 8 and calls[8][2][1] == 179)
