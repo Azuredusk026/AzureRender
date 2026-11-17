@@ -22,6 +22,30 @@ int main(int argc,char** argv){
   check(blended.state()=="idle"&&std::abs(blended.blend()-.25)<1e-6,"Interrupted fades must preserve the current mixed pose");
   blended.advance(.15,2);
   check(blended.state()=="walk"&&blended.previousClip()==0&&blended.blend()==0,"Queued transition must begin from the completed outgoing pose");
+  const auto timeline=nlohmann::json::parse(R"({
+    "schemaVersion":3,"initial":"enter","states":[{"name":"enter","clip":0},{"name":"turn","clip":1},{"name":"settled","clip":2}],
+    "transitions":[],"timeline":[{"from":"enter","to":"turn","afterSeconds":0.8,"blendSeconds":0.25,"startSeconds":0.2},
+                                {"from":"turn","to":"settled","afterSeconds":0.5,"blendSeconds":0.1}]})");
+  auto authored=AnimationStateMachine::parse(timeline);
+  authored.advance(.39,2);
+  check(authored.state()=="enter"&&std::abs(authored.time()-.78)<1e-9,"Timed transition started before the source clip boundary");
+  authored.advance(.06,2);
+  check(authored.state()=="turn"&&std::abs(authored.time()-.3)<1e-9&&std::abs(authored.previousTime()-.9)<1e-9,
+        "Crossing the clip boundary must preserve both sample times and the authored target offset");
+  check(std::abs(authored.blend()-.2)<1e-6,"Timed fade must use only the frame portion after its source boundary");
+  authored.advance(.23,2);
+  check(authored.state()=="settled"&&std::abs(authored.time()-.06)<1e-9&&std::abs(authored.blend()-.3)<1e-6,
+        "Subsequent exit must wait for the previous non-interruptible transition");
+  auto malformed=timeline;
+  malformed["timeline"].push_back({{"from","settled"},{"to","enter"},{"afterSeconds",0}});
+  bool rejectedCycle=false;
+  try{(void)AnimationStateMachine::parse(malformed);}catch(const std::invalid_argument&){rejectedCycle=true;}
+  check(rejectedCycle,"Automatic transitions must form finite chains");
+  malformed=timeline;
+  malformed["timeline"][0]["afterSeconds"]=-.1;
+  bool rejectedTime=false;
+  try{(void)AnimationStateMachine::parse(malformed);}catch(const std::invalid_argument&){rejectedTime=true;}
+  check(rejectedTime,"Negative timed transition boundaries must be rejected");
   bool invalid=false;try{auto bad=AnimationStateMachine::parse(nlohmann::json::parse(R"({"schemaVersion":1,"initial":"missing","states":[],"transitions":[]})"));(void)bad;}catch(const std::exception&){invalid=true;}check(invalid,"Invalid state graph must be rejected");
   AudioRuntime audio(false);auto sound=audio.load(argv[1],false,0.5F);audio.play(sound);
   auto samples=audio.mix(480);double energy=0;for(float sample:samples)energy+=sample*sample;

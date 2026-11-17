@@ -34,5 +34,7 @@ private:
     std::string pending_;
     double pendingDuration_ = 0;
     double previousTime_ = 0, duration_ = 0, elapsed_ = 0;
+    struct TimedTransition { std::string to; double afterSeconds, blendSeconds, startSeconds; };
+    std::map<std::string, TimedTransition> timeline_;
 };
 }
