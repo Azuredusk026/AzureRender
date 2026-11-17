@@ -23,7 +23,7 @@ using Vector = std::array<float, 4>;
 constexpr Vector background{.25F, .5F, .75F, 1};
 
 struct Sample { float time, ratio, blind; };
-enum class Effect { Noise, Blackout, Chromatic };
+enum class Effect { Noise, Blackout, Chromatic, ScreenMove };
 
 void require(HRESULT status, const char* operation) {
     if (FAILED(status)) {
@@ -72,10 +72,17 @@ ComPtr<ID3D11ShaderResourceView> textureView(ID3D11Device& device, UINT w, UINT 
     return view;
 }
 
-ComPtr<ID3D11ShaderResourceView> rgbaView(ID3D11Device& device, const fs::path& path, UINT w, UINT h) {
+ComPtr<ID3D11ShaderResourceView> rgbaView(ID3D11Device& device, const fs::path& path, UINT w, UINT h, bool srgb = true) {
     const auto pixels = read(path);
     if (pixels.size() != w * h * 4) throw std::invalid_argument("Unexpected source RGBA dimensions");
-    return textureView(device, w, h, DXGI_FORMAT_R8G8B8A8_UNORM_SRGB, pixels.data(), w * 4);
+    const auto format = srgb ? DXGI_FORMAT_R8G8B8A8_UNORM_SRGB : DXGI_FORMAT_R8G8B8A8_UNORM;
+    return textureView(device, w, h, format, pixels.data(), w * 4);
+}
+
+ComPtr<ID3D11ShaderResourceView> sourceScreen(ID3D11Device& device, const fs::path& path) {
+    const auto input = read(path);
+    if (input.size() != width * height * sizeof(Vector)) throw std::invalid_argument("Unexpected screen source dimensions");
+    return textureView(device, width, height, DXGI_FORMAT_R32G32B32A32_FLOAT, input.data(), width * sizeof(Vector));
 }
 
 ComPtr<ID3D11SamplerState> sampler(ID3D11Device& device, D3D11_FILTER filter, D3D11_TEXTURE_ADDRESS_MODE wrap) {
@@ -91,6 +98,20 @@ ComPtr<ID3D11SamplerState> sampler(ID3D11Device& device, D3D11_FILTER filter, D3
 void bindSources(ID3D11Device& device, ID3D11DeviceContext& context, const fs::path& source,
                  Effect effect, const std::string& prefix) {
     const auto linear = sampler(device, D3D11_FILTER_MIN_MAG_LINEAR_MIP_POINT, D3D11_TEXTURE_ADDRESS_WRAP);
+    if (effect == Effect::ScreenMove) {
+        const auto point = sampler(device, D3D11_FILTER_MIN_MAG_MIP_POINT, D3D11_TEXTURE_ADDRESS_WRAP);
+        const auto clamp = sampler(device, D3D11_FILTER_MIN_MAG_MIP_POINT, D3D11_TEXTURE_ADDRESS_CLAMP);
+        const auto bands = rgbaView(device, source / "screen-move-bands.rgba", 1, 32, false);
+        const auto instability = rgbaView(device, source / "screen-move-instability.rgba", 64, 1);
+        const auto flow = rgbaView(device, source / "screen-move-flow.rgba", 32, 18);
+        const auto movement = rgbaView(device, source / "screen-move-timeline.rgba", 32, 1);
+        const auto screen = sourceScreen(device, source / "screen-move-source.rgba32f");
+        ID3D11ShaderResourceView* views[]{bands.Get(), instability.Get(), flow.Get(), movement.Get(), screen.Get()};
+        ID3D11SamplerState* samplers[]{point.Get(), linear.Get(), clamp.Get(), point.Get()};
+        context.PSSetShaderResources(0, 5, views);
+        context.PSSetSamplers(0, 4, samplers);
+        return;
+    }
     const auto timeline = rgbaView(device, source / (prefix + "-timeline.rgba"), 64, 1);
     if (effect == Effect::Noise) {
         ID3D11ShaderResourceView* view = timeline.Get();
@@ -101,10 +122,7 @@ void bindSources(ID3D11Device& device, ID3D11DeviceContext& context, const fs::p
     }
     if (effect == Effect::Chromatic) {
         const auto noise = rgbaView(device, source / "chromatic-noise.rgba", 256, 256);
-        const auto input = read(source / "chromatic-source.rgba32f");
-        if (input.size() != width * height * sizeof(Vector)) throw std::invalid_argument("Unexpected screen source dimensions");
-        const auto screen = textureView(device, width, height, DXGI_FORMAT_R32G32B32A32_FLOAT,
-                                        input.data(), width * sizeof(Vector));
+        const auto screen = sourceScreen(device, source / "chromatic-source.rgba32f");
         ID3D11ShaderResourceView* views[]{noise.Get(), timeline.Get(), screen.Get()};
         ID3D11SamplerState* samplers[]{linear.Get(), linear.Get()};
         context.PSSetShaderResources(0, 3, views);
@@ -142,7 +160,13 @@ void run(const fs::path& source, const fs::path& output, Effect effect, std::opt
     require(dxgi->GetAdapter(&adapter), "Query DXGI adapter");
     require(adapter->GetDesc(&properties), "Read DXGI adapter");
     std::wcout << L"Direct3D adapter " << properties.Description << '\n';
-    const std::string prefix = effect == Effect::Blackout ? "blackout" : effect == Effect::Chromatic ? "chromatic" : "noise";
+    std::string prefix;
+    switch (effect) {
+    case Effect::Noise: prefix = "noise"; break;
+    case Effect::Blackout: prefix = "blackout"; break;
+    case Effect::Chromatic: prefix = "chromatic"; break;
+    case Effect::ScreenMove: prefix = "screen-move"; break;
+    }
     const auto vs = read(source / (prefix + "-vertex.dxbc"));
     const auto ps = read(source / (prefix + "-fragment.dxbc"));
     ComPtr<ID3D11VertexShader> vertex;
@@ -170,7 +194,8 @@ void run(const fs::path& source, const fs::path& output, Effect effect, std::opt
     ID3D11RenderTargetView* selected = target.Get();
 
     D3D11_BLEND_DESC blending{};
-    blending.RenderTarget[0] = {effect != Effect::Chromatic, D3D11_BLEND_SRC_ALPHA, D3D11_BLEND_INV_SRC_ALPHA, D3D11_BLEND_OP_ADD,
+    const bool alphaBlend = effect == Effect::Noise || effect == Effect::Blackout;
+    blending.RenderTarget[0] = {alphaBlend, D3D11_BLEND_SRC_ALPHA, D3D11_BLEND_INV_SRC_ALPHA, D3D11_BLEND_OP_ADD,
                                 D3D11_BLEND_ONE, D3D11_BLEND_INV_SRC_ALPHA, D3D11_BLEND_OP_ADD,
                                 D3D11_COLOR_WRITE_ENABLE_ALL};
     ComPtr<ID3D11BlendState> blend;
@@ -202,11 +227,13 @@ void run(const fs::path& source, const fs::path& output, Effect effect, std::opt
         samples = {{9.302F, 0, 0}, {9.302F, .5F, 0}, {9.802F, .5F, 0}, {9.302F, 1, 0}, {9.302F, .5F, 1}};
         break;
     case Effect::Chromatic: samples = {{9.302F, 0, 0}, {9.302F, .2F, 0}, {9.802F, .2F, 0}, {9.302F, .5F, 0}}; break;
+    case Effect::ScreenMove: samples = {{9.302F, 0, 0}, {9.302F, .5F, 0}, {9.802F, .5F, 0}, {9.302F, 1, 0}}; break;
     }
-    std::array<Vector, 5> initialMaterial{};
+    std::array<Vector, 6> initialMaterial{};
     if (effect != Effect::Noise) {
         const auto data = read(source / (prefix + "-material.bin"));
-        const auto expectedBytes = effect == Effect::Chromatic ? 3 * sizeof(Vector) : sizeof(initialMaterial);
+        const auto vectors = effect == Effect::Blackout ? 5 : effect == Effect::Chromatic ? 3 : 6;
+        const auto expectedBytes = vectors * sizeof(Vector);
         if (data.size() != expectedBytes) throw std::invalid_argument("Unexpected original material constant buffer");
         std::memcpy(initialMaterial.data(), data.data(), data.size());
     }
@@ -220,7 +247,7 @@ void run(const fs::path& source, const fs::path& output, Effect effect, std::opt
         if (effect == Effect::Blackout) {
             material[3][1] = sample.ratio;
             material[4][3] = sample.blind;
-        } else if (effect == Effect::Chromatic) {
+        } else if (effect == Effect::Chromatic || effect == Effect::ScreenMove) {
             globals[126] = {float(width), float(height), 1.F / width, 1.F / height};
             material[2][0] = sample.ratio;
         } else {
@@ -251,7 +278,8 @@ int wmain(int argc, wchar_t** argv) try {
         const std::wstring_view name(argv[3]);
         if (name == L"blackout") effect = Effect::Blackout;
         else if (name == L"chromatic") effect = Effect::Chromatic;
-        else throw std::invalid_argument("Expected blackout or chromatic and an optional adapter index");
+        else if (name == L"screen-move") effect = Effect::ScreenMove;
+        else throw std::invalid_argument("Expected blackout, chromatic or screen-move and an optional adapter index");
     }
     std::optional<UINT> index;
     if (argc == 5) {

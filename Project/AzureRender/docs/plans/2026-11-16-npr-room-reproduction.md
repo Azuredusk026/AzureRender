@@ -147,6 +147,7 @@ P3 按功能组实施与验收。完成一个功能组后更新矩阵，再继�
 [色差硬件参照](../acceptance/npr-room/opening-effects.md#色差硬件参照)登记两种显卡的原版画面、材质比例与时间输入。
 [Vulkan 色差合成](../acceptance/npr-room/opening-effects.md#vulkan-色差合成)登记同设备的原程序、Vulkan 着色器和浮点画面对照。
 [房间色差时序与合成](../acceptance/npr-room/opening-effects.md#房间色差时序与合成)登记教学渐变、第一章的零比率和界面合成。
+[画面偏移硬件参照](../acceptance/npr-room/opening-effects.md#画面偏移硬件参照)登记四张输入纹理、教学时序和两种显卡的浮点画面。
 [黑屏硬件参照](../acceptance/npr-room/opening-effects.md#黑屏特效硬件参照)登记比率、时间和百叶窗的五组原版画面。
 [Vulkan 黑屏合成](../acceptance/npr-room/opening-effects.md#vulkan-黑屏合成)登记 Intel 核显和 RTX 4060 上的同设备画面对照。
 [房间黑屏时序与合成](../acceptance/npr-room/opening-effects.md#房间黑屏时序与合成)登记正常入口的全黑、半黑、画面恢复和界面叠加。

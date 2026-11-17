@@ -65,6 +65,21 @@ RTX 4060 的任务 2008 和 2009 各执行四帧。Intel 核显的任务 2011 �
 | 诊断构建清单 | `21f5f555f24c4abf3bcd40dfde343c94cc3bf59b8bdf04c12b4c7a5b8959e188` |
 | 运行时色差程序 | `a2605c2825a0417ccfd8047708a67fc3671b33e7f35a0d8d9bdf48fd8769107d` |
 
+## 画面偏移硬件参照
+
+画面偏移从当前画面按整数像素取色。原材质读取四张纹理，分别控制条带、强度扰动、二维偏移和时间。条带使用线性颜色空间的点采样，二维偏移使用 sRGB 点采样和边缘钳位，两张时间纹理沿用各自的过滤方式和循环寻址。
+
+任务 2025 在 Intel 核显与 RTX 4060 各执行两次原 Direct3D 11 程序，采集零比率、教学比率 0.5、半秒后的 0.5 和比率 1。各设备的重复画面逐字节一致。零比率逐像素保持输入画面，活动帧的颜色均等于输入画面上唯一的采样点。时间变化时，Intel 的 25,600 个像素与 NVIDIA 的 25,920 个像素变化。单色噪声、黑屏和色差的同设备回放与各自归档逐字节一致。
+
+教学行 14 在 0.7 秒延迟后以 0.5 比率启动，保持 1 秒并清除。来源清单、原浮点画面和硬件报告位于 `windows-opening-reference/screen-move-validation/`。
+
+| 记录 | SHA-256 |
+| --- | --- |
+| 原材质与纹理输入 | `3b19df8ebfb6ccf0257c0aa161a67e550bdad58b0f703d989485f6dd384ba80d` |
+| Intel 浮点画面 | `28a01ce02e6db621d5fdf2889cbcfefad4b328d68453d338df265c799f3a7851` |
+| NVIDIA 浮点画面 | `71c029e551faeedf876cfabcc79792f3fc67c8d82aa8fe289909cfa86312a2ce` |
+| 原始采样归档清单 | `84fb8e12e581ff7e9a9bc55ddf7d98729de98e60d01453e04209189c91578cd4` |
+
 ## 单色噪声实机参照
 
 任务 1816 使用原生 D3D11 顶点和片元程序，以及原材质的 64×1 sRGB 时间纹理，在固定底色上捕获三个 320×180 RGBA32F 帧。比率为 0 时控制帧逐像素一致。比率为 0.05 时，每个像素按原混合系数与黑色或白色合成，透明度保持为 1。时间从 9.302 秒移到 9.802 秒时，18,319 个像素变化。两次硬件回放的摘要一致，均为 `5a17e42cb1f1dfda269de9d61619865df57ffc4b8500f2e57809b53a96e86389`。
@@ -155,6 +170,10 @@ python -B -m tools.npr_room.windows_noise_probe verify-chromatic --first $chroma
 & $vulkanNoiseProbe $fullscreenVertex $chromaticFragment $vulkanChromatic $chromaticInputs chromatic
 & $vulkanNoiseProbe $fullscreenVertex $chromaticFragment $vulkanChromaticRepeat $chromaticInputs chromatic
 python -B -m tools.npr_room.windows_noise_probe compare-chromatic --reference $chromaticCapture --candidate $vulkanChromatic --repeat $vulkanChromaticRepeat --output $vulkanChromaticReport
+python -B -m tools.npr_room.windows_noise_probe prepare-screen-move --effects $programDirectory --catalog $imageCatalog --source $unitySource --output $screenMoveInputs
+& $noiseProbe $screenMoveInputs $screenMoveCapture screen-move $dxgiAdapterIndex
+& $noiseProbe $screenMoveInputs $screenMoveRepeat screen-move $dxgiAdapterIndex
+python -B -m tools.npr_room.windows_noise_probe verify-screen-move --first $screenMoveCapture --repeat $screenMoveRepeat --output $screenMoveReport
 python -B -m tools.npr_room.windows_noise_probe prepare-blackout --effects $programDirectory --catalog $imageCatalog --source $unitySource --output $blackoutInputs
 & $noiseProbe $blackoutInputs $blackoutCapture blackout
 & $noiseProbe $blackoutInputs $blackoutRepeat blackout

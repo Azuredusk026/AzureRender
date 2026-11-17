@@ -1,4 +1,4 @@
-"""Prepare and verify the original Windows opening noise capture."""
+"""Prepare and verify Windows opening effect captures."""
 
 import argparse
 import gzip
@@ -21,6 +21,13 @@ BINDINGS = "windows-opening-effects-source-lock.json"
 BACKGROUND = np.array([.25, .5, .75, 1], dtype=np.float32)
 BLACKOUT_SAMPLES = [[9.302, 0, 0], [9.302, .5, 0], [9.802, .5, 0], [9.302, 1, 0], [9.302, .5, 1]]
 CHROMATIC_SAMPLES = [[9.302, 0], [9.302, .2], [9.802, .2], [9.302, .5]]
+SCREEN_MOVE_SAMPLES = [[9.302, 0], [9.302, .5], [9.802, .5], [9.302, 1]]
+SCREEN_MOVE_TEXTURES = (
+    ("bands", (1, 32), False, 0, (0, 0, 0)),
+    ("instability", (64, 1), True, 1, (0, 0, 0)),
+    ("flow", (32, 18), True, 0, (1, 1, 0)),
+    ("timeline", (32, 1), True, 0, (0, 0, 0)),
+)
 
 
 def prepare(effects, catalog):
@@ -221,6 +228,91 @@ def compare_chromatic(reference, candidate, repeat):
     return result | {"originalSHA256": expected, "matchingPixels": len(CHROMATIC_SAMPLES) * 320 * 180}
 
 
+def screen_move_source():
+    y, x = np.indices((180, 320))
+    return np.stack((x / 512, y / 256, ((x + 5 * y) % 256) / 256,
+                     np.ones_like(x)), axis=2).astype("<f4")
+
+
+def prepare_screen_move(effects, catalog, source, output):
+    lock = json.loads((effects / BINDINGS).read_bytes())
+    program = effects / PROGRAM
+    if digest(program) != lock["programsSHA256"]:
+        raise ValueError("Screen move bytecode receipt differs from the source lock")
+    stages = json.loads(program.read_bytes())["programs"]["screen-move"]["stages"]
+    authored, = (item for item in lock["renderers"]["High"]["passes"] if item["shaderProgram"] == "screen-move")
+    blend = {"srcBlend": 1, "destBlend": 0, "srcBlendAlpha": 1, "destBlendAlpha": 0,
+             "blendOp": 0, "blendOpAlpha": 0, "colMask": 15}
+    if authored["renderState"]["blend"] != blend or digest(source / authored["material"]) != authored["materialSHA256"]:
+        raise ValueError("Original screen move material differs")
+    layout, = (buffer for buffer in stages["fragment"]["constantBuffers"] if buffer["binding"] == 1)
+    offsets = {item["name"]: item["offset"] for item in layout["vectors"]}
+    settings = {"_Ratio": (32, 0), "_Speed": (80, .5), "_Unstable": (84, 0)}
+    if layout["bytes"] != 96 or any(offsets[name] != offset or authored["floats"][name] != value
+                                    for name, (offset, value) in settings.items()):
+        raise ValueError("Unexpected screen move shader constants")
+    material = bytearray(layout["bytes"])
+    for offset, value in settings.values():
+        struct.pack_into("<f", material, offset, value)
+    slots = {value["binding"]: value for value in authored["textures"].values()}
+    if set(slots) != set(range(5)) or not slots[4]["runtime"]:
+        raise ValueError("Unexpected screen move texture slots")
+    output.mkdir()
+    for stage in stages.values():
+        bytecode = effects / stage["path"]
+        if digest(bytecode) != stage["sha256"]:
+            raise ValueError("Original screen move bytecode differs")
+        shutil.copyfile(bytecode, output / bytecode.name)
+    textures = {}
+    for slot, (name, size, srgb, filter_mode, wrap) in enumerate(SCREEN_MOVE_TEXTURES):
+        texture = slots[slot]
+        metadata = source / (texture["source"] + ".meta")
+        actual = dict(re.findall(r"^\s*(filterMode|wrap[UVW]|sRGBTexture):\s*(\d+)\s*$",
+                                 metadata.read_text(encoding="utf-8"), re.M))
+        sampler = {"filterMode": str(filter_mode), "sRGBTexture": str(int(srgb))}
+        sampler.update({f"wrap{axis}": str(mode) for axis, mode in zip("UVW", wrap)})
+        if actual != sampler or texture["srgb"] != srgb:
+            raise ValueError(f"Screen move texture sampler differs: {name}")
+        png = verified_path(catalog, texture)
+        target = output / f"screen-move-{name}.rgba"
+        with Image.open(png) as image:
+            if image.size != size:
+                raise ValueError(f"Screen move texture dimensions differ: {name}")
+            target.write_bytes(image.convert("RGBA").tobytes())
+        textures[name] = {"binding": slot, "size": size, "sampler": sampler, "sourceSHA256": digest(png),
+                          "settingsSHA256": digest(metadata), "rgbaSHA256": digest(target)}
+    parameters = output / "screen-move-material.bin"
+    parameters.write_bytes(material)
+    screen = output / "screen-move-source.rgba32f"
+    screen.write_bytes(screen_move_source().tobytes())
+    return {"programSHA256": digest(program), "sourceLockSHA256": digest(effects / BINDINGS),
+            "materialSHA256": authored["materialSHA256"], "materialConstantsSHA256": digest(parameters),
+            "screenSourceSHA256": digest(screen), "textures": textures}
+
+
+def verify_screen_move(first, repeat):
+    checksum = digest(first)
+    if checksum != digest(repeat):
+        raise ValueError("Screen move captures changed under identical inputs")
+    capture = np.fromfile(first, dtype="<f4").reshape(len(SCREEN_MOVE_SAMPLES), 180, 320, 4)
+    source = screen_move_source()
+    if not np.isfinite(capture).all() or not np.array_equal(capture[0], source):
+        raise ValueError("Screen move requires a finite capture with a matching zero-ratio frame")
+    coordinates = capture[..., :2] * [512, 256]
+    if (coordinates < 0).any() or (coordinates >= [320, 180]).any():
+        raise ValueError("Screen move sampled source outside the wrapped image")
+    x, y = np.moveaxis(coordinates.astype(np.int64), -1, 0)
+    if not np.array_equal(capture, source[y, x]):
+        raise ValueError("Screen move changed sampled source colors")
+    changed = np.count_nonzero(np.any(capture != source, axis=3), axis=(1, 2)).tolist()
+    time_changed = np.count_nonzero(np.any(capture[1] != capture[2], axis=2))
+    ratio_changed = np.count_nonzero(np.any(capture[1] != capture[3], axis=2))
+    if min(changed[1:]) == 0 or not time_changed or not ratio_changed:
+        raise ValueError("Screen move lost its ratio or time input")
+    return {"size": [320, 180], "frames": SCREEN_MOVE_SAMPLES, "captureSHA256": checksum,
+            "changedPixels": changed, "timeChangedPixels": int(time_changed), "ratioChangedPixels": int(ratio_changed)}
+
+
 def frame_counts(frames):
     if not np.array_equal(frames[0], np.broadcast_to(BACKGROUND, frames[0].shape)):
         raise ValueError("Zero noise changed the control frame")
@@ -276,7 +368,9 @@ if __name__ == "__main__":
                "compare-blackout": ("reference", "candidate", "repeat", "output"),
                "prepare-chromatic": ("effects", "catalog", "source", "output"),
                "verify-chromatic": ("first", "repeat", "output"),
-               "compare-chromatic": ("reference", "candidate", "repeat", "output")}
+               "compare-chromatic": ("reference", "candidate", "repeat", "output"),
+               "prepare-screen-move": ("effects", "catalog", "source", "output"),
+               "verify-screen-move": ("first", "repeat", "output")}
     for operation, paths in options.items():
         command = subparsers.add_parser(operation)
         for path in paths:
@@ -284,9 +378,10 @@ if __name__ == "__main__":
     args = parser.parse_args()
     if args.operation == "prepare":
         prepare(args.effects, args.catalog)
-    elif args.operation in ("prepare-blackout", "prepare-chromatic"):
+    elif args.operation.startswith("prepare-"):
         effect = args.operation.removeprefix("prepare-")
-        prepare_effect = prepare_blackout if effect == "blackout" else prepare_chromatic
+        prepare_effect = {"blackout": prepare_blackout, "chromatic": prepare_chromatic,
+                          "screen-move": prepare_screen_move}[effect]
         report = prepare_effect(args.effects, args.catalog, args.source, args.output)
         (args.output / (effect + "-source-receipt.json")).write_text(json.dumps(report, sort_keys=True) + "\n",
                                                                    encoding="utf-8", newline="\n")
@@ -295,6 +390,8 @@ if __name__ == "__main__":
             report = verify_blackout(args.first, args.repeat)
         elif args.operation == "verify-chromatic":
             report = verify_chromatic(args.first, args.repeat)
+        elif args.operation == "verify-screen-move":
+            report = verify_screen_move(args.first, args.repeat)
         elif args.operation == "compare-chromatic":
             report = compare_chromatic(args.reference, args.candidate, args.repeat)
         elif args.operation == "compare-blackout":
