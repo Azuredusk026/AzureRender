@@ -22,6 +22,7 @@
 #include "assets/GltfLoader.hpp"
 #include "render/RenderSettings.hpp"
 #include "render/ColorGradingLutGpu.hpp"
+#include "render/ScreenBlackoutGpu.hpp"
 #include "render/SpatialAntiAliasing.hpp"
 #include "render/TemporalReconstruction.hpp"
 #include "render/SceneMultisampling.hpp"
@@ -575,4 +576,5 @@ private:
         void* userData);
     static void populateDebugMessengerCreateInfo(VkDebugUtilsMessengerCreateInfoEXT& createInfo);
     VkPipeline screenNoisePipeline_ = VK_NULL_HANDLE;
+    std::unique_ptr<azurerender::ScreenBlackoutGpu> screenBlackout_;
 };

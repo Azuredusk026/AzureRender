@@ -15,6 +15,7 @@ from tools.npr_room.build_story_signal_room import GRAPH, compile_signals, input
 from tools.npr_room.catalog_storage import publish_directory
 from tools.npr_room.humanoid_clip_export import export_model
 from tools.npr_room.opening_camera import attach_audio, project as camera_project
+from tools.npr_room.opening_blackout import bind_room as bind_blackout, room_inputs as blackout_inputs
 from tools.npr_room.opening_face_layers import bind as face_program
 from tools.npr_room.pbr_materials import write
 from tools.npr_room.reference_inventory import digest
@@ -100,7 +101,7 @@ def project(room, catalog, controller, chapters, source_receipt, models):
 
 
 def stage(room, catalog, controller, chapters, source_receipt, models, output, camera_trace=None,
-          camera_audio_source=None, face_catalog=None, achievements=False):
+          camera_audio_source=None, face_catalog=None, achievements=False, blackout_source_lock=None, image_catalog=None):
     body, program, route, states = project(room, catalog, controller, chapters, source_receipt, models)
     camera = load(models / TUTORIAL_RECEIPT)
     camera_path = None
@@ -110,6 +111,12 @@ def stage(room, catalog, controller, chapters, source_receipt, models, output, c
         program, camera_path = camera_project(room, program, camera_trace, camera_audio_source)
     if face_catalog:
         program = face_program(program, load(face_catalog), models, chapters)
+    if bool(blackout_source_lock) != bool(image_catalog):
+        raise ValueError("Blackout needs both its source lock and the room image catalog")
+    blackout = None
+    if blackout_source_lock:
+        program = bind_blackout(program)
+        blackout = blackout_inputs(blackout_source_lock, image_catalog)
     scripts = achievement_programs(program) if achievements else {"pomodoro.lua": program}
     with tempfile.TemporaryDirectory(prefix="tutorial-camera-room-", dir=output.parent) as workspace:
         target = Path(workspace) / "project"
@@ -129,16 +136,24 @@ def stage(room, catalog, controller, chapters, source_receipt, models, output, c
         for name, content in scripts.items():
             (assets / name).write_text(content, encoding="utf-8", newline="\n")
         level = assets / "room.azurelevel"
-        if camera_audio_source:
-            sound = camera_path["cue"]
+        if camera_audio_source or blackout:
             scene = load(level)
-            attach_audio(scene, sound)
+            if blackout:
+                node, media, blackout_receipt = blackout
+                if any(value["id"] == node["id"] for value in scene["nodes"]):
+                    raise ValueError("Room already has a blackout source")
+                scene["nodes"].append(node)
+                for name, path in media.items():
+                    os.link(path, assets / name)
+            if camera_audio_source:
+                sound = camera_path["cue"]
+                attach_audio(scene, sound)
+                stage_live_audio_media(camera_audio_source, [sound], assets)
             write(level, scene)
-            stage_live_audio_media(camera_audio_source, [sound], assets)
         for name in ("opening-desk-receipt.json", "opening-story-room-receipt.json", "opening-story-motion-receipt.json"):
             manifest = load(target / name)
             manifest["scriptSHA256"] = digest(script)
-            if camera_audio_source and "levelSHA256" in manifest:
+            if (camera_audio_source or blackout) and "levelSHA256" in manifest:
                 manifest["levelSHA256"] = digest(level)
             if name == "opening-story-motion-receipt.json":
                 manifest.update(graphSHA256=digest(assets / GRAPH), tutorialCamera=route, tutorialStates=states)
@@ -164,6 +179,9 @@ def stage(room, catalog, controller, chapters, source_receipt, models, output, c
             write(target / "room-achievement-events-receipt.json", {
                 "schemaVersion": 1, "controllers": {name: digest(assets / name) for name in scripts},
                 "mode": "local-room-events"})
+        if blackout:
+            write(target / "opening-blackout-receipt.json", blackout_receipt | {
+                "scriptSHA256": digest(script), "levelSHA256": digest(level)})
         if camera_path:
             write(target / "opening-camera-receipt.json", camera_path | {
                 "scriptSHA256": digest(script), "levelSHA256": digest(level)})
@@ -180,13 +198,14 @@ if __name__ == "__main__":
         action = steps.add_parser(step)
         for name in names:
             action.add_argument("--" + name, type=Path, required=True)
-    for name in ("camera-trace", "camera-audio-source", "face-catalog"):
+    for name in ("camera-trace", "camera-audio-source", "face-catalog", "blackout-source-lock", "image-catalog"):
         steps.choices["stage"].add_argument("--" + name, type=Path)
     steps.choices["stage"].add_argument("--achievements", action="store_true")
     args = vars(parser.parse_args())
     arguments = bake_args if args["step"] == "bake" else room_args
     handler = bake if args["step"] == "bake" else stage
-    options = {name: args[name].resolve(strict=True) for name in ("camera_trace", "camera_audio_source", "face_catalog")
+    options = {name: args[name].resolve(strict=True) for name in ("camera_trace", "camera_audio_source", "face_catalog",
+                                                                "blackout_source_lock", "image_catalog")
                if args.get(name)}
     if args.get("achievements"):
         options["achievements"] = True

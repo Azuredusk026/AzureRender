@@ -1,6 +1,6 @@
 # 开场全屏特效
 
-> 状态为 P5 源程序验收。Windows 原版程序、房间渲染配置、材质和纹理引用已锁定。下游按原始构图和时序验证 Vulkan 视觉结果。
+> 状态为 P5 局部验收。五个 Windows 原版程序及其材质已锁定。开场单色噪声和黑屏通过原生房间回放。
 
 `DirectionService` 引用三个画质档的房间渲染器。三个档位的开场渲染功能顺序均为色差、画面偏移、故障、黑屏和单色噪声。五个功能的挂载时机为 URP 事件 600，使用第 0 个 `DrawProcedural` 通道。
 
@@ -51,6 +51,22 @@ Intel 核显的任务 1952 记录最大通道误差 1.49×10⁻⁸。RTX 4060 �
 | RTX 4060 原始浮点画面 | `1a8b8efcbe5aab34b73b04e4005df7263a563a8d5bbca94af939ecdcba1dc5a8` |
 | Vulkan 黑屏程序 | `b15133e7ed89a1c27ea43a90492194bde82926470f187d050dd17d7af0757405` |
 
+## 房间黑屏时序与合成
+
+`azure.screen-blackout` 读取当前相机的不透明颜色及房间装配的两张原纹理。黑屏在游戏界面之前合成，单色噪声叠加在其上。每个在途帧使用独立的图像绑定，切换场景和调整窗口时按渲染资源生命周期重建。
+
+剧情命令按源延迟启动。持续时间为 −1 时保持至下一次变更或剧情结束。指定持续时间时，按原命令调度清屏。教学首次播放依次使用 1、0.5、0，第一章使用正常画面。
+
+任务 1954 从正常入口核对命令时序。任务 1968 使用原生诊断构建回放教学和第一章，半黑到清屏间隔 0.8 秒。全黑帧的场景区只包含黑底与单色噪声，半黑帧保留 40,896 个彩色场景像素，83,266 个彩色界面像素跨两个状态保持一致。身体动作、视线、相机、语音、嘴型、成就及存档通过回归。
+
+本机回放、画面和诊断构建位于 `windows-opening-reference/blackout-validation/room-roundtrip/`。
+
+| 记录 | SHA-256 |
+| --- | --- |
+| 常规房间回放 | `b682a8c9b62d0292159565425cbd654b58727c068376bb544940b7ff58527d8a` |
+| 原生 Player | `88cc278567c6508fbd6f080ed7bd0a53b22258912294fc5b417e3beca2ea3d95` |
+| 诊断构建清单 | `679d4267260d15940f69f35c1b1bd272733a00d32f55e4d1cbf444f5daf17433` |
+
 ## 原生画面合成
 
 版本 1 的 `azure.screen-noise` 组件接受 0 至 1 的透明度。默认值 0 对应原画面。活动场景包含多个组件时，取其中的最大透明度，以帧时间推进图案。全屏绘制位于色彩处理和抗锯齿之后、游戏界面之前。
@@ -91,6 +107,7 @@ python -B -m tools.npr_room.windows_noise_probe verify-blackout --first $blackou
 & $vulkanNoiseProbe $fullscreenVertex $blackoutFragment $vulkanBlackout $blackoutInputs
 & $vulkanNoiseProbe $fullscreenVertex $blackoutFragment $vulkanBlackoutRepeat $blackoutInputs
 python -B -m tools.npr_room.windows_noise_probe compare-blackout --reference $blackoutAdapterCapture --candidate $vulkanBlackout --repeat $vulkanBlackoutRepeat --output $vulkanBlackoutReport
+python -B tools/npr_room/test_story_signal_room_player.py --player $player --room $deskRoom --resource-root $runtimeResources --catalog $bodyCatalog --graph $animatorGraph --chapters $openingChapters --source-receipt $tutorialSource --models $bodyMorphModels --camera-trace $cameraTrace --camera-audio-source $unitySource --face-catalog $plankCatalog --blackout-source-lock $effectsReceipt --image-catalog $imageCatalog --achievements --output $blackoutRoomReplay
 & $glslc --target-env=vulkan1.3 shaders/monochrome_screen_noise.frag -o $noiseFragment
 & $vulkanNoiseProbe $fullscreenVertex $noiseFragment $vulkanCapture
 & $vulkanNoiseProbe $fullscreenVertex $noiseFragment $vulkanRepeatCapture

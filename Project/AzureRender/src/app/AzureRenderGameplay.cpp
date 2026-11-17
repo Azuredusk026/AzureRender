@@ -73,10 +73,12 @@ void AzureRenderApp::prepareLevelRenderer(const azurerender::Level& level){
     // The previous scene remains cached. Only reusing a renderer with work
     // still in flight needs GPU retirement; ordinary alternating loads reuse
     // a renderer whose last submission completed many frames earlier.
-    if(preparedRendererLastSubmission_>graphicsCompleted_){
+    if(preparedRendererLastSubmission_>graphicsCompleted_ ||
+        (screenBlackout_ && graphicsSubmission_>graphicsCompleted_)){
         vkCheck(vkDeviceWaitIdle(device_),"vkDeviceWaitIdle(renderer reuse)");
         graphicsCompleted_=graphicsSubmission_;
     }
+    screenBlackout_.reset();
     static_cast<void>(preparedRenderer_->reuseScene(context));
     sceneRenderer_.swap(preparedRenderer_);
     preparedResourceKey_=rendererResourceKey_;rendererResourceKey_=level.resourceKey;
@@ -118,6 +120,7 @@ void AzureRenderApp::rebuildEditorSceneRenderer() {
     graphicsCompleted_=graphicsSubmission_;
     releasePreparedRenderer();
     if (renderViews_)renderViews_->complete(graphicsCompleted_);
+    screenBlackout_.reset();
     if (sceneRenderer_) {
         azurerender::RenderContext old;
         buildRenderContext(old,nullptr,nullptr,false);
@@ -176,6 +179,7 @@ void AzureRenderApp::advanceEditorSceneReload() {
         graphicsCompleted_=graphicsSubmission_;
         releasePreparedRenderer();
         if (renderViews_)renderViews_->complete(graphicsCompleted_);
+        screenBlackout_.reset();
         if (sceneRenderer_)sceneRenderer_->onUnload(pending.context);
         sceneRenderer_=std::move(pending.renderer);
         editorRenderResources_=std::move(pending.resources);
@@ -217,6 +221,7 @@ void AzureRenderApp::synchronizeEditorRuntime(){
         vkCheck(vkDeviceWaitIdle(device_),"vkDeviceWaitIdle(editor runtime)");gameUi_.reset();gameUiPath_.clear();
         invalidatePreviews();graphicsCompleted_=graphicsSubmission_;renderViews_->complete(graphicsCompleted_);
         releasePreparedRenderer();
+        screenBlackout_.reset();
         azurerender::RenderContext context;buildRenderContext(context);if(sceneRenderer_){sceneRenderer_->onUnload(context);sceneRenderer_.reset();}
         applyProjectReferenceViews(session.referenceViews());
         renderSettings_=session.viewScene().renderSettings;createSceneRenderer();

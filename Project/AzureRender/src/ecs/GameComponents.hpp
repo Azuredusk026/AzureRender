@@ -212,4 +212,29 @@ struct ScreenNoise {
     AZURE_FIELD("Opacity", 0, 1)
     float opacity = 0;
 };
+AZURE_TYPE("azure.screen-blackout", 1)
+struct ScreenBlackout {
+    AZURE_FIELD("Ratio", 0, 1)
+    float ratio = 0;
+    AZURE_FIELD("Blind", 0, 1)
+    bool blind = false;
+    AZURE_FIELD("Ramp image", 0, 0)
+    AZURE_FIELD_REFERENCE("asset", "texture", "")
+    std::string ramp;
+    AZURE_FIELD("Timeline image", 0, 0)
+    AZURE_FIELD_REFERENCE("asset", "texture", "")
+    std::string timeline;
+    AZURE_FIELD("Instability", 0, 1)
+    float unstable = 0;
+    AZURE_FIELD("Length", 0, 1)
+    float length = .2F;
+    AZURE_FIELD("Dot scale", 1, 128)
+    float dotScale = 15.F;
+    AZURE_FIELD("Speed", 0, 128)
+    float speed = 5.F;
+    AZURE_FIELD("Blind top", 0, 128)
+    float blindTop = 15.3F;
+    AZURE_FIELD("Blind bottom", 0, 128)
+    float blindBottom = 6.3F;
+};
 } // namespace azurerender::game

@@ -209,6 +209,7 @@ void AzureRenderApp::pollDevtools(){
         invalidatePreviews();if(renderViews_)renderViews_->complete(graphicsCompleted_);
         if(editorLayer_)editorLayer_->completePreviewTextures(graphicsCompleted_);
         if(preparedRenderer_){RenderContext previous;buildRenderContext(previous);preparedRenderer_->onUnload(previous);preparedRenderer_.reset();preparedRendererReady_=false;}
+        screenBlackout_.reset();
         RenderContext previous;buildRenderContext(previous);sceneRenderer_->onUnload(previous);sceneRenderer_=std::move(replacement);
         activeShaderDirectory_.swap(nextDirectory);
         thumbnails_.reset();renderViews_.swap(nextViews);thumbnails_.swap(nextThumbnails);

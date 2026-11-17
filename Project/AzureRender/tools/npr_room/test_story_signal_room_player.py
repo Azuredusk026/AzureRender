@@ -7,6 +7,9 @@ import os
 from pathlib import Path
 import time
 
+import numpy as np
+from PIL import Image
+
 from test_notes_player import playing
 from test_opening_camera_player import pose_error
 from test_story_player import MotionTrace, PREFIX, compare_voices, opened_music, slot, wait_for_slot
@@ -14,6 +17,8 @@ from test_story_signals_player import camera_model_links
 from test_unlock_room_player import save
 from tools.npr_room.build_story_signal_room import GRAPH, inputs, integration
 from tools.npr_room.opening_camera import attach_audio, project as camera_project
+from tools.npr_room.opening_blackout import bind as blackout_program, bind_room as rendered_blackout
+from tools.npr_room.opening_blackout import room_inputs as blackout_inputs
 from tools.npr_room.opening_face_layers import bind as face_program
 from tools.npr_room.pbr_materials import write
 from tools.npr_room.reference_inventory import digest
@@ -23,7 +28,7 @@ from tools.npr_room.tutorial_camera_body import project as tutorial_project
 
 
 @contextmanager
-def entry(room, graph, program, models=None, camera_sound=None, camera_source=None, room_scripts=None):
+def entry(room, graph, program, models=None, camera_sound=None, camera_source=None, room_scripts=None, blackout=None):
     tag = "capture-main-conditional"
     root = room / "assets"
     names = {kind: tag + suffix for kind, suffix in (
@@ -57,6 +62,10 @@ def entry(room, graph, program, models=None, camera_sound=None, camera_source=No
         audio_file = (camera_source / camera_sound["source"]).resolve(strict=True)
         assert audio_file.is_relative_to(camera_source / "Assets") and digest(audio_file) == camera_sound["sha256"]
         links[root / camera_sound["asset"]] = audio_file
+    if blackout:
+        node, media, _ = blackout
+        scene["nodes"].append(node)
+        links.update({root / name: source for name, source in media.items()})
     animators, timers = 0, 0
     script_files = {}
     extra_scripts = room_scripts or {}
@@ -247,8 +256,38 @@ def face_proof(profile, trace, gaze_nodes, plank_nodes):
     return report
 
 
+def blackout_observer(program, rendered):
+    binder = rendered_blackout if rendered else blackout_program
+    return binder(program, """(function()
+        local changes = {}
+        return function(ratio, blind, seconds)
+            changes[#changes + 1] = {ratio, blind, seconds}
+            self:write_save("opening-blackout-timing", {1, changes})
+        end
+    end)()""")
+
+
+def blackout_pixels(control, full, partial):
+    center = np.s_[230:480, 350:900, :3]
+    with Image.open(control) as before, Image.open(full) as black, Image.open(partial) as transition:
+        assert before.size == black.size == transition.size == (1280, 720)
+        samples = [np.asarray(frame.convert("RGBA")) for frame in (before, black, transition)]
+    scene = [frame[center] for frame in samples]
+    full_levels = np.unique(scene[1].reshape(-1, 3), axis=0)
+    assert full_levels.shape == (2, 3) and np.all(full_levels[0] == 0), full_levels
+    assert np.all(full_levels[1] == full_levels[1, 0]) and 0 < full_levels[1, 0] <= 64, full_levels
+    counts = [int(np.count_nonzero(np.any(frame != frame[..., :1], axis=2))) for frame in scene]
+    assert counts[0] > 0 and counts[1] == 0 and 0 < counts[2] < 250 * 550, counts
+    hud = np.any(samples[1][..., :3] != samples[1][..., :1], axis=2)
+    assert hud.any() and np.array_equal(samples[1][hud], samples[2][hud]), "Blackout changed the room UI"
+    return {"sceneRect": [350, 230, 900, 480], "coloredScenePixels": counts,
+            "blackFrameGrayLevels": full_levels[:, 0].tolist(), "unchangedUiPixels": int(hud.sum()),
+            "images": [digest(path) for path in (control, full, partial)]}
+
+
 def replay(player, room, resources, catalog, graph, chapters, output, source_receipt=None, models=None,
-           camera_trace=None, camera_audio_source=None, face_catalog=None, achievements=False):
+           camera_trace=None, camera_audio_source=None, face_catalog=None, achievements=False, blackout_timing=False,
+           blackout_source_lock=None, image_catalog=None):
     if bool(source_receipt) != bool(models):
         raise ValueError("The tutorial replay needs both source receipt and sampled models")
     original_script = room / "assets/pomodoro.lua"
@@ -283,6 +322,11 @@ def replay(player, room, resources, catalog, graph, chapters, output, source_rec
             raise ValueError("Achievement replay needs the normal tutorial body route")
         scripts = achievement_programs(program)
         program = scripts.pop("pomodoro.lua")
+    if bool(blackout_source_lock) != bool(image_catalog):
+        raise ValueError("Rendered blackout replay needs the source lock and the image catalog")
+    rendered = blackout_inputs(blackout_source_lock, image_catalog) if blackout_source_lock else None
+    if blackout_timing or rendered:
+        program = blackout_observer(program, bool(rendered))
     face_results = {}
     trace = MotionTrace(room, chapters)
     output.mkdir()
@@ -290,13 +334,21 @@ def replay(player, room, resources, catalog, graph, chapters, output, source_rec
     authored = json.loads(chapters.read_bytes())["chapters"]
     tracks = json.loads((room / "music-receipt.json").read_bytes())["tracks"]
     tutorial = None
-    with entry(room, compiled, program, models, sound, camera_audio_source, scripts) as (project, level):
+    with entry(room, compiled, program, models, sound, camera_audio_source, scripts, rendered) as (project, level):
         if models:
             startup = output / "tutorial"
             save(profile, project, "room-book-layout", [1, "Book_5"])
             with playing(player, project, resources, profile, startup, level_reference=level,
-                         **trace.observe("tutorial")) as (click, press, type_text, _):
+                         **trace.observe("tutorial")) as (click, press, type_text, screenshot):
+                if rendered:
+                    control = screenshot("blackout-control.png")
                 click(PREFIX + "start")
+                if rendered:
+                    wait_for_slot(profile, "opening-blackout-timing", lambda value: value[1][-1][0] == 1, 12, trace.sample)
+                    full = screenshot("blackout-full.png")
+                    wait_for_slot(profile, "opening-blackout-timing", lambda value: value[1][-1][0] == .5, 15, trace.sample)
+                    partial = screenshot("blackout-partial.png")
+                    black_pixels = blackout_pixels(control, full, partial)
                 click(PREFIX + "option-1", wait=70)
                 press(77, domain="game")
                 assert slot(profile, "timer-mode") is None
@@ -306,6 +358,11 @@ def replay(player, room, resources, catalog, graph, chapters, output, source_rec
                 wait_for_slot(profile, "room-unlocks", lambda value: "tutorial_01" in value[1], 40, trace.sample)
                 if face_catalog:
                     face_results["tutorial"] = face_proof(profile, trace, gaze_nodes, plank_nodes)
+                if blackout_timing or rendered:
+                    version, blackout = slot(profile, "opening-blackout-timing")
+                    assert version == 1 and [(row[0], row[1]) for row in blackout] == [
+                        (1, False), (.5, False), (0, False)], blackout
+                    assert abs(blackout[2][2] - blackout[1][2] - .8) <= 2 / 60, blackout
                 if achievements:
                     tutorial_key = "COMPLETE_TUTORIAL_COUNT"
                     assert slot(profile, "room-achievements") == [1, [tutorial_key]]
@@ -417,6 +474,12 @@ def replay(player, room, resources, catalog, graph, chapters, output, source_rec
     if achievements:
         assert slot(profile, "room-achievements") == [1, achieved]
         proof["localAchievements"] = {"keys": achieved, "reloaded": True}
+    if blackout_timing or rendered:
+        assert slot(profile, "opening-blackout-timing") == [1, blackout]
+        proof["blackoutTiming"] = {"tutorial": blackout, "firstChapter": [], "rendered": bool(rendered)}
+        if rendered:
+            proof["blackoutTiming"]["pixels"] = black_pixels
+            proof["blackoutTiming"]["material"] = rendered[2]
     write(output / "first-chapter-room-replay.json", proof)
     return proof
 
@@ -432,9 +495,13 @@ if __name__ == "__main__":
     parser.add_argument("--camera-audio-source", type=Path)
     parser.add_argument("--face-catalog", type=Path)
     parser.add_argument("--achievements", action="store_true")
+    parser.add_argument("--blackout-timing", action="store_true")
+    parser.add_argument("--blackout-source-lock", type=Path)
+    parser.add_argument("--image-catalog", type=Path)
     args = vars(parser.parse_args())
     print(json.dumps(replay(*(args[name.replace("-", "_")].resolve() for name in parameters),
                             source_receipt=args["source_receipt"], models=args["models"],
                             camera_trace=args["camera_trace"],
                             camera_audio_source=args["camera_audio_source"], face_catalog=args["face_catalog"],
-                            achievements=args["achievements"])))
+                            achievements=args["achievements"], blackout_timing=args["blackout_timing"],
+                            blackout_source_lock=args["blackout_source_lock"], image_catalog=args["image_catalog"])))

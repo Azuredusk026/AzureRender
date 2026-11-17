@@ -1,4 +1,4 @@
-function new_story_room(host, chapters, tracks, speeds, labels, language, level, books, body, desk, camera, face)
+function new_story_room(host, chapters, tracks, speeds, labels, language, level, books, body, desk, camera, face, blackout)
     local music = new_story_music(host, tracks)
     local noise = new_story_noise(host)
     local dialogue = new_story_dialogue(host, speeds, language)
@@ -19,6 +19,7 @@ function new_story_room(host, chapters, tracks, speeds, labels, language, level,
         if desk then desk:begin(chapter) end
         if body then body:begin(chapter) end
         noise:begin(chapter, replay)
+        if blackout then blackout:begin(chapter, replay) end
         if face then face:begin(chapter, replay) end
     end
 
@@ -30,6 +31,7 @@ function new_story_room(host, chapters, tracks, speeds, labels, language, level,
     function presentation:update(dt)
         music:update(dt)
         noise:update(dt)
+        if blackout then blackout:update(dt) end
         if camera then camera:update(dt) end
         if face then
             face:voice(dialogue:speaking())
@@ -43,6 +45,7 @@ function new_story_room(host, chapters, tracks, speeds, labels, language, level,
         if body and body.effect then body:effect(row) end
         if camera then camera:effect(row) end
         noise:effect(row, delay)
+        if blackout then blackout:effect(row, delay) end
         if row.command == "PlayBGM" or row.command == "TalkLogOnlyPlayBGM" then music:play(row.arguments) end
         local id = highlights[row.command]
         if not id then return end
@@ -66,6 +69,7 @@ function new_story_room(host, chapters, tracks, speeds, labels, language, level,
         if body then body:finish() end
         music:finish()
         noise:finish()
+        if blackout then blackout:finish() end
         if camera then camera:finish() end
         if face then face:finish(chapter, replay) end
     end

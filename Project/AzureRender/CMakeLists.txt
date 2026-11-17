@@ -582,6 +582,7 @@ compile_shader(
     OUTPUT_NAME shadow_bindless.frag)
 compile_shader("${SHADER_SOURCE_DIR}/inner_outline.vert")
 compile_shader("${SHADER_SOURCE_DIR}/monochrome_screen_noise.frag")
+compile_shader("${SHADER_SOURCE_DIR}/opening_blackout.frag")
 compile_shader("${SHADER_SOURCE_DIR}/inner_outline.frag")
 compile_shader("${SHADER_SOURCE_DIR}/inner_outline.frag"
     DEFINES AZURE_SHOWCASE_DISPLAY=1
@@ -965,6 +966,7 @@ add_library(AzureRenderCore STATIC
     src/render/ReferenceDepth.cpp
     src/render/ColorGradingLut.cpp
     src/render/ColorGradingLutGpu.cpp
+    src/render/ScreenBlackoutGpu.cpp
     src/render/ReflectionSpatialFilter.cpp
     src/render/ReflectionSignalPyramid.cpp
     src/render/DepthPyramid.cpp

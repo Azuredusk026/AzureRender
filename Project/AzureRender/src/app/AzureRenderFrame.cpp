@@ -24,6 +24,7 @@
 #include "render/RenderGraph.hpp"
 #include "render/RenderFrameSnapshot.hpp"
 #include "render/FrameTaskScheduler.hpp"
+#include "runtime/AssetDatabase.hpp"
 
 #include <stb_easy_font.h>
 
@@ -1055,11 +1056,46 @@ void AzureRenderApp::recordCommandBuffer(
         else temporalReconstruction_->cancel();
     }
     auto sceneResources=resources;
+    const azurerender::game::ScreenBlackout* blackout = nullptr;
+    std::optional<azurerender::RenderGraph::ResourceId> opaqueColor;
+    if (effectiveRenderSettings_.diagnosticView == 0) {
+        if (const auto* runtime = activeRuntime()) {
+            if (const auto* effects = runtime->world().findComponentArray<azurerender::game::ScreenBlackout>()) {
+                for (const auto& effect : effects->dense())
+                    if (effect.ratio > 0 && (!blackout || effect.ratio > blackout->ratio)) blackout = &effect;
+            }
+        }
+    }
     std::array<azurerender::RenderGraph::ResourceId,3> multisampleSources{};
     if(sceneMultisampling_){multisampleSources=sceneMultisampling_->importSources(graph,sceneContext.currentFrame,"main-samples");
         sceneResources.color=multisampleSources[0];sceneResources.depth=multisampleSources[1];sceneResources.normal=multisampleSources[2];
         sceneResources.displayMask=sceneMultisampling_->importDisplayMaskSource(graph,sceneContext.currentFrame,"main-samples");}
     if (sceneRenderer_ != nullptr) sceneRenderer_->registerPasses(graph, sceneResources, sceneContext);
+    if (blackout) {
+        const auto& registered = graph.resources();
+        const auto found = std::find_if(registered.begin(), registered.end(), [](const auto& resource) {
+            return resource.name == azurerender::kCameraOpaqueColorResource && resource.initial.image;
+        });
+        if (found != registered.end())
+            opaqueColor = static_cast<azurerender::RenderGraph::ResourceId>(found - registered.begin());
+    }
+    if (opaqueColor) {
+        auto* assets = activeAssets();
+        if (!assets) throw std::logic_error("Blackout requires the active room asset database");
+        const auto ramp = assets->resolveReference(blackout->ramp);
+        const auto timeline = assets->resolveReference(blackout->timeline);
+        if (!screenBlackout_ || !screenBlackout_->matches(ramp, timeline)) {
+            VkPhysicalDeviceProperties properties{};
+            vkGetPhysicalDeviceProperties(physicalDevice_, &properties);
+            auto candidate = std::make_unique<azurerender::ScreenBlackoutGpu>(*rhi_, postProcessRenderPass_,
+                static_cast<std::uint32_t>(kMaxFramesInFlight), resourceLocator_.shaderDirectory(), ramp, timeline,
+                properties.vendorID == 0x10DE);
+            if (screenBlackout_) vkCheck(vkDeviceWaitIdle(device_), "vkDeviceWaitIdle(replace screen blackout)");
+            screenBlackout_ = std::move(candidate);
+        }
+        screenBlackout_->bindOpaqueColor(sceneContext.currentFrame, graph.resources().at(*opaqueColor).initial.image,
+            sceneContext.sceneColorFormat, screenAttachmentSampler_);
+    }
     if(sceneMultisampling_)sceneMultisampling_->schedule(graph,sceneContext.currentFrame,imageIndex,multisampleSources,{resources.color,resources.depth,resources.normal},"main-multisample-resolve",
         std::array<azurerender::RenderGraph::ResourceId,2>{sceneResources.displayMask,resources.displayMask});
     auto displayMaskForGrade=resources.displayMask;
@@ -1187,6 +1223,14 @@ void AzureRenderApp::recordCommandBuffer(
     } else {
         drawGrade();
     }
+    if (opaqueColor) {
+        const azurerender::ScreenBlackoutParameters values{
+            blackout->ratio, blackout->blind, blackout->unstable, blackout->length, blackout->dotScale,
+            blackout->speed, blackout->blindTop, blackout->blindBottom,
+        };
+        screenBlackout_->record(commandRecorder, sceneContext.currentFrame, renderExtent_,
+            static_cast<float>(frame.timeSeconds), values);
+    }
     if (noiseOpacity > 0) {
         const std::array<float, 4> noise{
             noiseOpacity, static_cast<float>(frame.timeSeconds),
@@ -1221,6 +1265,7 @@ void AzureRenderApp::recordCommandBuffer(
     });
     if (linearDisplay) graph.use(composite,*linearDisplay,azurerender::RenderGraphUsage::Sampled,false);
     else gradeInputs(composite);
+    if (opaqueColor) graph.use(composite,*opaqueColor,azurerender::RenderGraphUsage::Sampled,false);
     graph.write(composite, output);
     const auto editor = graph.addPass("editor-ui", [&] {
 #if AZURE_WITH_EDITOR

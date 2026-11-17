@@ -307,6 +307,7 @@ void AzureRenderApp::cleanupEditorViewportResources(
 }
 
 void AzureRenderApp::cleanupSwapchain() {
+    screenBlackout_.reset();
     for (const auto semaphore : renderFinishedSemaphores_) {
         vkDestroySemaphore(device_, semaphore, nullptr);
     }

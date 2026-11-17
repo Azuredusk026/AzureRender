@@ -1539,7 +1539,7 @@ void CharacterSceneRenderer::registerPasses(
     if(snapshotMultisampling_)snapshotSources=snapshotMultisampling_->importSources(graph,context.currentFrame,"character-opaque-source");
     if(surfaceRadiance_)for(unsigned kind=0;kind<SurfaceRadianceCache::kAttachments;++kind)overlayBegin.clearValues.push_back(SurfaceRadianceCache::clearValue(kind));
     rhi::ImageBarrierDesc snapshotState{};snapshotState.image=opaqueSceneColor_[context.currentFrame].image.image;
-    const auto snapshotColor=graph.importImage("character-opaque-color",snapshotState);
+    const auto snapshotColor=graph.importImage(kCameraOpaqueColorResource,snapshotState);
     rhi::ImageBarrierDesc depthState{};depthState.image=overlayDepthAttachments_[context.currentFrame].image;depthState.aspectMask=VK_IMAGE_ASPECT_DEPTH_BIT;
     const auto snapshotDepth=graph.importImage("character-opaque-hardware-depth",depthState);
     const auto prepass=graph.addGraphicsPass("character-opaque-depth",overlayBegin,[this,frozenContext,frozenInstances](rhi::ICommandRecorder& commands){

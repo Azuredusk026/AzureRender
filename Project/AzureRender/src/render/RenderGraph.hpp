@@ -8,6 +8,8 @@
 
 namespace azurerender {
 
+inline constexpr const char* kCameraOpaqueColorResource = "character-opaque-color";
+
 struct RenderGraphResource {
     std::string name;
     rhi::ImageBarrierDesc initial{};
