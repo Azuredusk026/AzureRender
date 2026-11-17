@@ -28,7 +28,8 @@ from tools.npr_room.tutorial_camera_body import project as tutorial_project
 
 
 @contextmanager
-def entry(room, graph, program, models=None, camera_sound=None, camera_source=None, room_scripts=None, blackout=None):
+def entry(room, graph, program, models=None, camera_sound=None, camera_source=None, room_scripts=None, blackout=None,
+          additional_room=None):
     tag = "capture-main-conditional"
     root = room / "assets"
     names = {kind: tag + suffix for kind, suffix in (
@@ -90,8 +91,10 @@ def entry(room, graph, program, models=None, camera_sound=None, camera_source=No
     project = json.loads((room / "project.azureproject").read_bytes())
     assert project["startupScene"] == "assets:/boot.azurelevel"
     project["startupScene"] = paths["boot"]
+    additional = {root / name: content for name, content in
+                  additional_room(project, scene, tag + "-").items()} if additional_room else {}
     fixture = {
-        descriptor: json.dumps(project), **startup, **script_files,
+        descriptor: json.dumps(project), **startup, **script_files, **additional,
         root / names["bootstrap"]: source_bootstrap.replace("assets:/room.azurelevel", paths["level"]),
         root / names["level"]: json.dumps(scene), root / names["script"]: program,
         root / names["graph"]: json.dumps(graph),

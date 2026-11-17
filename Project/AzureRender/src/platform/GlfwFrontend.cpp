@@ -7,6 +7,8 @@
 namespace azurerender {
 namespace {
 
+constexpr std::array<std::pair<int, int>, 3> windowSizes{{{1280, 720}, {1600, 900}, {1920, 1080}}};
+
 GLFWmonitor* displayFor(GLFWwindow* window) {
     int left, top, width, height, count;
     glfwGetWindowPos(window, &left, &top);
@@ -80,9 +82,8 @@ std::pair<int, int> GlfwFrontend::framebufferSize() const {
 }
 
 void GlfwFrontend::applyWindowPresentation(WindowMode mode, WindowResolution resolution, bool alwaysOnTop) {
-    constexpr std::array<std::pair<int, int>, 3> sizes{{{1280, 720}, {1600, 900}, {1920, 1080}}};
     auto preset = std::pair{0, 0};
-    if (resolution != WindowResolution::Custom) preset = sizes.at(static_cast<std::size_t>(resolution));
+    if (resolution != WindowResolution::Custom) preset = windowSizes.at(static_cast<std::size_t>(resolution));
     if (mode == WindowMode::Borderless) {
         auto* monitor = displayFor(window_);
         const auto* current = monitor ? glfwGetVideoMode(monitor) : nullptr;
@@ -122,6 +123,17 @@ void GlfwFrontend::applyWindowPresentation(WindowMode mode, WindowResolution res
     const auto floating = alwaysOnTop ? GLFW_TRUE : GLFW_FALSE;
     if (glfwGetWindowAttrib(window_, GLFW_FLOATING) != floating)
         glfwSetWindowAttrib(window_, GLFW_FLOATING, floating);
+    resolution_ = resolution;
+}
+
+WindowPresentation GlfwFrontend::windowPresentation() {
+    if (!windowedPlacement_ && resolution_ != WindowResolution::Custom) {
+        const auto size = framebufferSize();
+        if (size.first > 0 && size.second > 0 && size != windowSizes.at(static_cast<std::size_t>(resolution_)))
+            resolution_ = WindowResolution::Custom;
+    }
+    return {windowedPlacement_ ? WindowMode::Borderless : WindowMode::Windowed, resolution_,
+        glfwGetWindowAttrib(window_, GLFW_FLOATING) == GLFW_TRUE};
 }
 
 std::vector<const char*> GlfwFrontend::requiredVulkanExtensions() const {

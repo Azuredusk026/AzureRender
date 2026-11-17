@@ -14,6 +14,12 @@ namespace azurerender {
 enum class WindowMode { Windowed, Borderless };
 enum class WindowResolution { HD, HDPlus, FullHD, Custom };
 
+struct WindowPresentation {
+    WindowMode mode;
+    WindowResolution resolution;
+    bool alwaysOnTop;
+};
+
 struct GlfwFrontendConfig {
     std::uint32_t width = 1280;
     std::uint32_t height = 720;
@@ -41,6 +47,7 @@ public:
     [[nodiscard]] std::pair<int, int> framebufferSize() const;
     [[nodiscard]] std::vector<const char*> requiredVulkanExtensions() const;
     void applyWindowPresentation(WindowMode mode, WindowResolution resolution, bool alwaysOnTop);
+    [[nodiscard]] WindowPresentation windowPresentation();
 
     void pollEvents() const;
     void recordFileDrop(int count,const char** paths);
@@ -59,6 +66,7 @@ private:
         bool maximized = false;
     };
     std::optional<WindowedPlacement> windowedPlacement_;
+    WindowResolution resolution_ = WindowResolution::Custom;
 };
 
 }  // namespace azurerender

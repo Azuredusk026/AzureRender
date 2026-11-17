@@ -1,5 +1,6 @@
 #include "app/AzureRenderApp.hpp"
 #include "app/AzureRenderInternal.hpp"
+#include "ecs/GameComponents.hpp"
 #include "extensions/ISceneRenderer.hpp"
 #include "scenes/BuiltinRendererCatalog.hpp"
 #include "platform/GlfwFrontend.hpp"
@@ -237,6 +238,24 @@ void AzureRenderApp::synchronizeEditorRuntime(){
 #endif
 }
 void AzureRenderApp::synchronizeGameUi(){
+    if (!fixedSimulation_) {
+        if (auto* runtime = activeRuntime()) {
+            auto& world = runtime->world();
+            const auto* windows = world.findComponentArray<azurerender::game::WindowPresentation>();
+            if (windows && !windows->dense().empty()) {
+                auto& state = *world.tryGet<azurerender::game::WindowPresentation>(windows->entities().front());
+                if (state.pending) {
+                    frontend_->applyWindowPresentation(static_cast<azurerender::WindowMode>(state.mode),
+                        static_cast<azurerender::WindowResolution>(state.resolution), state.alwaysOnTop);
+                    state.pending = false;
+                }
+                const auto applied = frontend_->windowPresentation();
+                state.mode = static_cast<std::uint32_t>(applied.mode);
+                state.resolution = static_cast<std::uint32_t>(applied.resolution);
+                state.alwaysOnTop = applied.alwaysOnTop;
+            }
+        }
+    }
     auto* presentation=activePresentation();auto* assets=activeAssets();const auto reference=presentation?presentation->uiDocument():std::string();
     const auto path=assets&&!reference.empty()?assets->resolveReference(reference).generic_u8string():std::string();
     if(path!=gameUiPath_){

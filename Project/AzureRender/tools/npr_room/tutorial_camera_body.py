@@ -22,6 +22,7 @@ from tools.npr_room.reference_inventory import digest
 from tools.npr_room.room_achievement_events import bind as achievement_programs
 from tools.npr_room.room_geometry import HEROINE_PARTS, copy_room_asset, stage_live_audio_media
 from tools.npr_room.story_body_morphs import MORPH_RECEIPT
+from tools.npr_room.window_settings_room import install as install_window_settings
 
 
 TUTORIAL_RECEIPT = "tutorial-camera-body-receipt.json"
@@ -101,7 +102,8 @@ def project(room, catalog, controller, chapters, source_receipt, models):
 
 
 def stage(room, catalog, controller, chapters, source_receipt, models, output, camera_trace=None,
-          camera_audio_source=None, face_catalog=None, achievements=False, blackout_source_lock=None, image_catalog=None):
+          camera_audio_source=None, face_catalog=None, achievements=False, blackout_source_lock=None, image_catalog=None,
+          window_settings=False):
     body, program, route, states = project(room, catalog, controller, chapters, source_receipt, models)
     camera = load(models / TUTORIAL_RECEIPT)
     camera_path = None
@@ -136,8 +138,17 @@ def stage(room, catalog, controller, chapters, source_receipt, models, output, c
         for name, content in scripts.items():
             (assets / name).write_text(content, encoding="utf-8", newline="\n")
         level = assets / "room.azurelevel"
-        if camera_audio_source or blackout:
+        display = None
+        if camera_audio_source or blackout or window_settings:
             scene = load(level)
+            if window_settings:
+                descriptor = target / "project.azureproject"
+                project_configuration = load(descriptor)
+                display = install_window_settings(project_configuration, scene,
+                    (assets / "timer.rml").read_text(encoding="utf-8"))
+                write(descriptor, project_configuration)
+                for name, content in display.items():
+                    (assets / name).write_text(content, encoding="utf-8", newline="\n")
             if blackout:
                 node, media, blackout_receipt = blackout
                 if any(value["id"] == node["id"] for value in scene["nodes"]):
@@ -153,8 +164,10 @@ def stage(room, catalog, controller, chapters, source_receipt, models, output, c
         for name in ("opening-desk-receipt.json", "opening-story-room-receipt.json", "opening-story-motion-receipt.json"):
             manifest = load(target / name)
             manifest["scriptSHA256"] = digest(script)
-            if (camera_audio_source or blackout) and "levelSHA256" in manifest:
+            if (camera_audio_source or blackout or display) and "levelSHA256" in manifest:
                 manifest["levelSHA256"] = digest(level)
+            if display and "documentSHA256" in manifest:
+                manifest["documentSHA256"] = digest(assets / "timer.rml")
             if name == "opening-story-motion-receipt.json":
                 manifest.update(graphSHA256=digest(assets / GRAPH), tutorialCamera=route, tutorialStates=states)
             write(target / name, manifest)
@@ -182,6 +195,10 @@ def stage(room, catalog, controller, chapters, source_receipt, models, output, c
         if blackout:
             write(target / "opening-blackout-receipt.json", blackout_receipt | {
                 "scriptSHA256": digest(script), "levelSHA256": digest(level)})
+        if display:
+            write(target / "window-settings-receipt.json", {
+                "schemaVersion": 1, "assets": {name: digest(assets / name) for name in display},
+                "levelSHA256": digest(level), "projectSHA256": digest(target / "project.azureproject")})
         if camera_path:
             write(target / "opening-camera-receipt.json", camera_path | {
                 "scriptSHA256": digest(script), "levelSHA256": digest(level)})
@@ -201,6 +218,7 @@ if __name__ == "__main__":
     for name in ("camera-trace", "camera-audio-source", "face-catalog", "blackout-source-lock", "image-catalog"):
         steps.choices["stage"].add_argument("--" + name, type=Path)
     steps.choices["stage"].add_argument("--achievements", action="store_true")
+    steps.choices["stage"].add_argument("--window-settings", action="store_true")
     args = vars(parser.parse_args())
     arguments = bake_args if args["step"] == "bake" else room_args
     handler = bake if args["step"] == "bake" else stage
@@ -209,4 +227,6 @@ if __name__ == "__main__":
                if args.get(name)}
     if args.get("achievements"):
         options["achievements"] = True
+    if args.get("window_settings"):
+        options["window_settings"] = True
     print(json.dumps(handler(*(args[name.replace("-", "_")].resolve() for name in arguments), **options)))

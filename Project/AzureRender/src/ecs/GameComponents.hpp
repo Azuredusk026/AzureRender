@@ -237,4 +237,15 @@ struct ScreenBlackout {
     AZURE_FIELD("Blind bottom", 0, 128)
     float blindBottom = 6.3F;
 };
+AZURE_TYPE("azure.window-presentation", 1)
+struct WindowPresentation {
+    AZURE_FIELD("Window mode", 0, 1)
+    std::uint32_t mode = 0;
+    AZURE_FIELD("Window resolution", 0, 3)
+    std::uint32_t resolution = 3;
+    AZURE_FIELD("Always on top", 0, 1)
+    bool alwaysOnTop = false;
+    AZURE_FIELD("Apply requested settings", 0, 1)
+    bool pending = false;
+};
 } // namespace azurerender::game

@@ -160,7 +160,7 @@ bool AzureRenderApp::recreateSwapchain() {
         editorLayer_->shutdownVulkan();
     }
 #endif
-    gameUi_.reset();gameUiRenderer_.reset();gameUiPath_.clear();
+    const auto previousFormat = swapchainFormat_;
     cleanupSwapchain();
     createSwapchain();
     createImageViews();
@@ -170,6 +170,9 @@ bool AzureRenderApp::recreateSwapchain() {
     createNormalResources();
     createRenderPass();
     createPostProcessRenderPass();
+    if (gameUiRenderer_ && previousFormat != swapchainFormat_) {
+        gameUiRenderer_->recreatePipeline(postProcessRenderPass_, resourceLocator_.shaderDirectory());
+    }
     createEditorUiRenderPass();
     createGraphicsPipeline();
     createFramebuffers();

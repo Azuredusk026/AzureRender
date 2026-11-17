@@ -63,6 +63,7 @@ def main():
     run(args.lua, [example / "assets/story-face.lua", example / "tests/story-face.lua"])
     run(args.lua, [example / "assets/story-face.lua", example / "tests/story-gaze.lua"])
     run(args.lua, [example / "assets/story-blackout.lua", example / "tests/story-blackout.lua"])
+    run(args.lua, [example / "assets/window-settings.lua", example / "tests/window-settings.lua"])
     run(args.lua, [example / "assets/story-face.lua", example / "tests/story-plank.lua"])
     run(args.lua, [example / "assets/room-achievements.lua", example / "tests/room-achievements.lua"])
     run(args.lua, [example / "assets/room-achievements.lua", example / "assets/work-calendar.lua",

@@ -31,7 +31,7 @@ python -B tools/npr_room/test_room_window_player.py --player $player --project $
 
 ## Windows 启动显示设置
 
-`runtime.windowMode` 采用窗口模式 0 或无边框全屏 1。`runtime.windowResolution` 使用 0、1、2 选择 1280×720、1600×900、1920×1080，或使用 3 保留自定义窗口尺寸。`runtime.alwaysOnTop` 接受布尔值。启动时通过 `--settings-file` 加载设置，命令行的同名 `--set` 优先。无边框窗口使用当前显示器范围，窗口模式恢复自定义位置、尺寸和边框。游戏内设置面板及系统菜单按交互场景验收。
+`runtime.windowMode` 采用窗口模式 0 或无边框全屏 1。`runtime.windowResolution` 使用 0、1、2 选择 1280×720、1600×900、1920×1080，或使用 3 保留自定义窗口尺寸。`runtime.alwaysOnTop` 接受布尔值。启动时通过 `--settings-file` 加载设置，命令行的同名 `--set` 优先。无边框窗口使用当前显示器范围，窗口模式恢复自定义位置、尺寸和边框。
 
 Win32 探针任务 1972 核对三档客户区像素、自定义窗口往返、窗口边框及置顶状态。任务 1974 核对设置类型、范围和加载顺序。任务 1976 使用三个独立 Player 进程进入常规房间，分别核对 2560×1440 无边框置顶、命令行覆盖为 1600×900 普通窗口、以及重开后的无边框置顶。两次截图尺寸与客户区一致，三个进程退出后的 GPU 缓冲区和图像计数均为零。
 
@@ -49,6 +49,29 @@ Win32 探针任务 1972 核对三档客户区像素、自定义窗口往返、�
 
 ```powershell
 python -B tools/npr_room/test_room_window_player.py --player $player --project $roomProject --resource-root $resources --output $windowPreferencesReplay --preferences
+```
+
+## 房间显示面板
+
+组装常规房间时使用 `tutorial_camera_body stage --window-settings` 接入显示面板。从房间左下角打开 Display，可切换窗口模式、选择分辨率和设置置顶。使用普通窗口时显示分辨率设置。手动调整窗口会将分辨率记为自定义。设置保存在版本为 1 的 `room-window-settings` 存档中。写入成功后应用选项。交换链重建期间保留当前界面及控件状态。
+
+任务 1982 从普通窗口进入房间，从 1280×720 切至 1600×900 并启用置顶。面板保持打开，实际截图为 1600×900。无边框窗口覆盖当前 2560×1440 显示器，返回普通窗口时恢复 1600×900。将客户区手动改为 1100×700 后存档记录自定义分辨率。第二个 Player 恢复无边框置顶，并能在面板关闭置顶。两个进程退出后的 GPU 缓冲区和图像计数均为零。
+
+任务 1983 核对普通窗口调整尺寸、最小化、恢复及计时存档。任务 1984 核对启动设置、命令行覆盖和独立进程恢复。房间 Lua 回归覆盖设置写入失败及较新存档版本。
+
+本机证据位于 `platform-achievement-reference/window-preferences/panel/`。
+
+| 记录 | SHA-256 |
+| --- | --- |
+| 面板回放 | `0d434a79ca9e945878e60b6e6ade4024132360d299c226119b421c45c98b0519` |
+| 普通窗口回归 | `eeb8fb9f0c5f1d6bbc393a2a69a5200b7e3ce97459c660d4901987b0fab8d54f` |
+| 启动设置回归 | `01788dd10b6252faa7acf14fcdd83104843aff04a5db632513ddb36683ee1b0e` |
+| 房间截图 | `dab286fcdf449bc4399e3ad3ffe155430f4c903b871411f051524397e84b9cd5` |
+| 原生诊断构建清单 | `82e7725cfb10128d1ee81dc73c3dff036e914fbca8330133b862b01743939bee` |
+| 诊断 Player | `4362a8616436e5195f9cdf3ef780bafc03715b7c65d861b852ca2f4b0cd372dd` |
+
+```powershell
+python -B tools/npr_room/test_room_window_player.py --player $player --project $roomProject --resource-root $resources --output $windowPanelReplay --settings-panel
 ```
 
 ## 成就统计夹具

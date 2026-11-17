@@ -12,6 +12,9 @@ from PIL import Image
 
 from test_notes_player import playing
 from test_story_player import slot, wait_for_slot
+from test_story_signal_room_player import entry
+from tools.npr_room.build_story_signal_room import GRAPH
+from tools.npr_room.window_settings_room import install
 
 
 def native_placement(window):
@@ -79,6 +82,67 @@ def startup_preferences(player, project, resources, output):
     assert settings.read_bytes() == saved
     report = {"windows": results, "independentPlayers": 3, "cleanAllocatorExits": 3}
     (output / "window-preferences-replay.json").write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
+    return report
+
+
+def settings_panel(player, project, resources, output):
+    output.mkdir()
+    profile = output / "profile"
+    room = project.parent
+    root = room / "assets"
+    document = (root / "timer.rml").read_text(encoding="utf-8")
+    graph = json.loads((root / GRAPH).read_bytes())
+    timer = (root / "pomodoro.lua").read_text(encoding="utf-8")
+    prepared = {}
+
+    def ready(window, _):
+        prepared["window"] = window
+
+    def state():
+        return native_placement(prepared["window"])
+
+    def configure(descriptor, level, prefix):
+        return install(descriptor, level, document, prefix)
+
+    with entry(room, graph, timer, additional_room=configure) as (fixture, level):
+        with playing(player, fixture, resources, profile, output / "edit", level_reference=level,
+                     on_ready=ready) as (click, _, _, screenshot):
+            assert state()["clientPixels"] == [1280, 720]
+            click("display-toggle")
+            click("display-resolution")
+            click("display-resolution")
+            preset = state()
+            assert preset["clientPixels"] == [1600, 900] and preset["decorated"], preset
+            click("display-topmost")
+            assert state()["topmost"]
+            panel = screenshot("display-settings.png")
+            with Image.open(panel) as image:
+                assert image.size == (1600, 900)
+            click("display-mode")
+            borderless = state()
+            assert borderless["window"] == borderless["monitor"] and not borderless["decorated"] and borderless["topmost"]
+            click("display-mode")
+            restored = state()
+            assert restored["clientPixels"] == [1600, 900] and restored["decorated"] and restored["topmost"]
+            assert prepared["window"].resize(1100, 700)
+            custom = wait_for_slot(profile, "room-window-settings", lambda value: value == [1, 0, 3, True], 10)
+            click("display-mode")
+            selected = wait_for_slot(profile, "room-window-settings", lambda value: value == [1, 1, 3, True], 10)
+        with playing(player, fixture, resources, profile, output / "reload", level_reference=level,
+                     on_ready=ready) as (click, _, _, _):
+            reopened = state()
+            assert reopened["window"] == reopened["monitor"] and not reopened["decorated"] and reopened["topmost"]
+            assert slot(profile, "room-window-settings") == selected
+            click("display-toggle")
+            click("display-topmost")
+            assert not state()["topmost"]
+            assert slot(profile, "room-window-settings") == [1, 1, 3, False]
+    for folder in ("edit", "reload"):
+        assert "Allocator after unload: buffers=0 images=0" in (output / folder / "stdout.log").read_text(encoding="utf-8")
+    report = {"preset": preset, "borderless": borderless, "restored": restored, "reopened": reopened,
+              "savedCustom": custom, "savedBorderless": selected, "finalTopmost": False, "cleanAllocatorExits": 2,
+              "panelSHA256": hashlib.sha256(panel.read_bytes()).hexdigest()}
+    (output / "window-settings-panel-replay.json").write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
     return report
 
 
@@ -150,7 +214,7 @@ def replay(player, project, resources, output):
     return report
 
 
-def run_in_physical_pixels(player, project, resources, output, preferences=False):
+def run_in_physical_pixels(player, project, resources, output, preferences=False, panel=False):
     user = ctypes.WinDLL("user32", use_last_error=True)
     set_context = user.SetThreadDpiAwarenessContext
     set_context.argtypes = [ctypes.c_void_p]
@@ -160,7 +224,8 @@ def run_in_physical_pixels(player, project, resources, output, preferences=False
     if not previous:
         raise ctypes.WinError(ctypes.get_last_error())
     try:
-        return (startup_preferences if preferences else replay)(player, project, resources, output)
+        verify = settings_panel if panel else startup_preferences if preferences else replay
+        return verify(player, project, resources, output)
     finally:
         assert set_context(previous)
 
@@ -169,7 +234,10 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     for argument in ("player", "project", "resource-root", "output"):
         parser.add_argument("--" + argument, type=Path, required=True)
-    parser.add_argument("--preferences", action="store_true")
+    mode = parser.add_mutually_exclusive_group()
+    mode.add_argument("--preferences", action="store_true")
+    mode.add_argument("--settings-panel", action="store_true")
     args = parser.parse_args()
     print(json.dumps(run_in_physical_pixels(args.player.resolve(), args.project.resolve(),
-                                           args.resource_root.resolve(), args.output.resolve(), args.preferences)))
+                                           args.resource_root.resolve(), args.output.resolve(), args.preferences,
+                                           args.settings_panel)))
