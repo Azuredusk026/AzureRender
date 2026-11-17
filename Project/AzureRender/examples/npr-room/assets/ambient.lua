@@ -2,7 +2,7 @@ local slot = "ambient"
 local open = false
 local selected, page, pageSize = 1, 1, 7
 local state, indexes = {}, {}
-local access, wallet, confirmPurchase
+local access, wallet, confirmPurchase, cityWindow
 
 local function accessFor(index)
     if access then return access:state(sounds[index][1]) end
@@ -53,10 +53,19 @@ local function displaySelection(showAccess)
         if confirmPurchase and kind == "locked" then price, affordable = wallet:offer(name) end
         self:ui_visible("ambient-purchase", price ~= nil)
         self:ui_visible("ambient-purchase-confirm", price ~= nil and affordable == true)
-        self:ui_text("ambient-purchase-balance", "Points: " .. wallet:balance())
+        self:ui_text("ambient-purchase-balance", string.format("Points: %d", wallet:balance()))
         if price then
             self:ui_text("ambient-purchase-price", name .. " · " .. price .. " points")
             if showAccess then self:ui_text("ambient-status", affordable and "" or "Not enough points") end
+        end
+    end
+    if cityWindow then
+        local show = sounds[selected][1] == city_sound_id and kind == "open"
+        self:ui_visible("ambient-city-controls", show)
+        if show then
+            self:ui_text("ambient-city-window", cityWindow:active() and "Hide window view" or "Show window view")
+            self:ui_text("ambient-city-combined",
+                (cityWindow:active() or not row.muted) and "Turn off environment" or "Turn on environment")
         end
     end
 end
@@ -81,6 +90,11 @@ end
 function init()
     if new_room_wallet and wallet_catalog then wallet = new_room_wallet(self, wallet_catalog) end
     if new_ambient_access then access = new_ambient_access(wallet) end
+    if new_room_window and city_window_node then
+        cityWindow = new_room_window(self, "City", city_window_node,
+            function() return access:state(city_sound_id) == "open" end,
+            function() return wallet:bought("City") end)
+    end
     for index, sound in ipairs(sounds) do
         indexes[sound[1]] = index
         state[index] = {volume = 0, muted = true, started = false}
@@ -148,6 +162,7 @@ function update()
             if purchased then
                 confirmPurchase = false
                 self:find("room-buy-item"):audio_play()
+                if cityWindow and sounds[selected][1] == city_sound_id then cityWindow:restore() end
                 local row = state[selected]
                 if row.volume == 0 then row.volume = 50 end
                 row.muted = false
@@ -164,7 +179,22 @@ function update()
     end
     if accessFor(selected) ~= "open" then return end
     local row = state[selected]
-    if self:pressed("ambient-mute") then
+    if cityWindow and sounds[selected][1] == city_sound_id and self:pressed("ambient-city-window") then
+        if cityWindow:set(not cityWindow:active()) then
+            displaySelection(true)
+        else
+            self:ui_text("ambient-status", "Window setting could not be saved")
+        end
+        return
+    elseif cityWindow and sounds[selected][1] == city_sound_id and self:pressed("ambient-city-combined") then
+        local enabled = not (cityWindow:active() or not row.muted)
+        if not cityWindow:set(enabled) then
+            self:ui_text("ambient-status", "Window setting could not be saved")
+            return
+        end
+        if enabled and row.volume == 0 then row.volume = 50 end
+        row.muted = not enabled
+    elseif self:pressed("ambient-mute") then
         if row.muted and row.volume == 0 then row.volume = 50 end
         row.muted = not row.muted
     elseif self:pressed("ambient-quiet") then

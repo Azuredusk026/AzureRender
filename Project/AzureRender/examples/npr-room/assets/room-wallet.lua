@@ -45,6 +45,13 @@ function new_room_wallet(host, catalog)
         return owned[name] == true
     end
 
+    function wallet:bought(name)
+        for _, row in ipairs(entries or {}) do
+            if row[1] == name then return true end
+        end
+        return false
+    end
+
     function wallet:offer(name)
         local rule = catalog[name]
         if not rule or self:owns(name) or (rule[2] ~= "" and host:local_datetime() > rule[2]) then return end

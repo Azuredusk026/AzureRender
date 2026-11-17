@@ -122,6 +122,8 @@ P3 按功能组实施与验收。完成一个功能组后更新矩阵，再继�
 
 ## P4 角色、道具与房间状态
 
+[城市窗景开关与恢复](../acceptance/npr-room/city-window.md#窗景开关与恢复)登记实际购买后的画面联动和两种开关方式。
+
 [人体动画采样](../acceptance/npr-room/character-assets.md#人体动画采样)登记原 Avatar、两段逐帧动作及七个角色部件的同步回放。
 [计时动作采样](../acceptance/npr-room/timer-voice-cues.md)登记 16 种原版计时动作的七部件变换和实机提示点。
 [教学与第一章角色动作](../acceptance/npr-room/opening-body.md)登记九种剧情动作的源控制器、原 Avatar 采样和八条自动转场的原生逐帧回放。
