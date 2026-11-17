@@ -1,0 +1,32 @@
+.opening-story-button { color: white; background-color: #34434f; padding: 6dp 10dp; }
+.opening-story-button:hover { background-color: #506472; }
+#opening-story-start { position: absolute; left: 92dp; bottom: 16dp; }
+#opening-story-log { position: absolute; right: 16dp; bottom: 16dp; }
+#opening-story-log-panel { position: absolute; right: 16dp; bottom: 54dp; padding: 8dp; background-color: #19232c; }
+#opening-story-log-panel button { display: block; margin-bottom: 4dp; }
+#opening-story-caption { position: absolute; left: 25%; bottom: 90dp; width: 50%; min-height: 70dp; padding: 14dp; background-color: #19232c; font-size: 24dp; white-space: pre-wrap; }
+#opening-story-options { position: absolute; left: 25%; bottom: 90dp; width: 50%; padding: 12dp; background-color: #19232c; }
+#opening-story-options button { display: block; margin-top: 4dp; width: 100%; }
+.opening-story-used { color: #b3bbc3; padding-right: 7dp; }
+#opening-story-next { position: absolute; left: 68%; bottom: 54dp; }
+#opening-story-auto { position: absolute; left: 25%; bottom: 54dp; }
+#opening-story-auto-active { padding-right: 7dp; }
+#opening-story-heroine { position: absolute; left: 46%; top: 31%; height: 38%; width: 14%; color: white; background-color: transparent; }
+#opening-story-heroine:hover { background-color: #19232c24; }
+</style>
+<button id="opening-story-start" class="opening-story-button" data-action="opening-story-start" style="display: none;"></button>
+<button id="opening-story-log" class="opening-story-button" data-action="opening-story-log" style="display: none;"></button>
+<div id="opening-story-log-panel" style="display: none;">
+<button id="opening-story-replay-1" class="opening-story-button" data-action="opening-story-replay-1"></button>
+<button id="opening-story-replay-2" class="opening-story-button" data-action="opening-story-replay-2"></button>
+</div>
+<div id="opening-story-caption" style="display: none;"><span id="opening-story-line"></span></div>
+<div id="opening-story-options" style="display: none;">
+<button id="opening-story-option-1" class="opening-story-button" data-action="opening-story-option-1"><span id="opening-story-option-used-1" class="opening-story-used">✓</span><span id="opening-story-option-label-1"></span></button>
+<button id="opening-story-option-2" class="opening-story-button" data-action="opening-story-option-2"><span id="opening-story-option-used-2" class="opening-story-used">✓</span><span id="opening-story-option-label-2"></span></button>
+<button id="opening-story-option-3" class="opening-story-button" data-action="opening-story-option-3"><span id="opening-story-option-used-3" class="opening-story-used">✓</span><span id="opening-story-option-label-3"></span></button>
+<button id="opening-story-option-4" class="opening-story-button" data-action="opening-story-option-4"><span id="opening-story-option-used-4" class="opening-story-used">✓</span><span id="opening-story-option-label-4"></span></button>
+</div>
+<button id="opening-story-auto" class="opening-story-button" data-action="opening-story-auto" style="display: none;"><span id="opening-story-auto-active">✓</span><span id="opening-story-auto-label"></span></button>
+<button id="opening-story-next" class="opening-story-button" data-action="opening-story-next" style="display: none;">▶</button>
+<button id="opening-story-heroine" data-action="opening-story-heroine" aria-label="Satone" style="display: none;"></button>

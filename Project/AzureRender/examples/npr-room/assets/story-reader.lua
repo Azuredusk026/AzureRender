@@ -69,9 +69,9 @@ function new_room_story(driver, progress)
 
     function story:state() return phase end
 
-    function story:start(selected, level, log)
+    function story:start(selected, level, log, automatic)
         if phase ~= "idle" or not progress:canStart(selected, level, log) then return false end
-        chapter, replay, auto, used, ready, effectDelay = selected, log, false, {}, nil, 0
+        chapter, replay, auto, used, ready, effectDelay = selected, log, automatic == true, {}, nil, 0
         seek(1)
         driver:begin(chapter, replay)
         return true

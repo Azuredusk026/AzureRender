@@ -1,6 +1,6 @@
 # 教学与第一章剧情命令
 
-> 状态为 P3 局部验收。命令、原语音引用、章节门槛和分支在脚本层通过回放。原语音播放和字幕切换在原生 Player 中通过定向回放。
+> 状态为 P3 局部验收。原生 Player 的定向关卡验证原语音、字幕、分支、等级门槛和章节进度。正式房间的剧情视听验收覆盖场景状态与原效果。
 
 教学组 `tutorial_01` 有 90 条命令。第一章 `main_01` 有 20 条命令，等级门槛为 2。两组共使用 25 种命令、33 段原语音和七种语言的原文。命令按原表行序执行，分支目标通过组内命令标识定位。标题、对白、选项、等待、角色动作参数和原语音时长均从资源表读取。
 
@@ -22,6 +22,12 @@ Lua 脚本使用编译后的源组执行两条完整路线。两条路线各覆�
 
 原生任务 1810 通过房间内按钮分别触发教学源行 30 和第一章源行 96，日志记录两段对应的原 OGG 文件。由简体中文切换到俄语时，语音启动计数保持为 1，语言设置写入测试档。字幕框内有 4,123 个像素改变，进入第一章样本时有 4,286 个像素改变。图片和 `dialogue-replay.json` 位于挂载目录的 `validation/`。任务 1811 使用两个独立 Player，回归了多行笔记、排序、删除、重开和未来版本保护。
 
+## 房间输入与章节解锁
+
+任务 1814 使用两个独立的原生 Player。第一个进程完成教学，通过画面中的角色点击继续脚本，依次选择三个工具介绍，播放 22 段原语音并写入教学完成记录。第二个进程从同一测试档启动，通过实际正计时结束动作升到等级 2，解锁第一章，播放 10 段原语音并写入第一章记录。等级 1 在两个进程中均锁定第一章。两个进程正常关闭后，缓冲区和图像的分配计数均为零。
+
+原生关卡挂载相同的房间和原语音。剧情呈现端打开对应的笔记或待办面板并记录其他效果命令的分发。自动播放、文本按钮和剧本点击入口由房间界面接收。验证记录、截图和日志位于 `room-opening-voices-verified/validation/opening-route/`。
+
 ## 复验
 
 ```powershell
@@ -29,6 +35,7 @@ python -B -m tools.npr_room.story_chapters --source $unitySource --inventory $st
 python -B -m unittest tools.npr_room.test_story_chapters
 python -B -m tools.npr_room.story_dialogue_room --room $bodyRoom --output $dialogueRoom --source $unitySource --chapters $chapters
 python -B tools/npr_room/test_story_dialogue_player.py --player $player --room $dialogueRoom --resource-root $runtimeResources --chapters $chapters --output $replay
+python -B tools/npr_room/test_story_player.py --player $player --room $dialogueRoom --resource-root $runtimeResources --chapters $chapters --inventory $storyInventory --output $routeReplay
 ```
 
 Lua 5.4 按顺序加载 `story-progress.lua`、`story-reader.lua`、编译后的剧情程序与 `story-opening-routes.lua`，以同一个程序块执行。

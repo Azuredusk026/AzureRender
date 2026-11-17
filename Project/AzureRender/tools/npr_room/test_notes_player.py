@@ -57,8 +57,19 @@ def playing(player, project, resources, profile, output, expected_audio_starts=N
                 time.sleep(.05)
             call("wait-frames", frames=5)
 
-            def click(target):
-                response = call("input", domain="game-ui", event={"action": "click", "target": target})
+            def click(target, wait=0):
+                request = {"op": "input", "domain": "game-ui", "event": {"action": "click", "target": target}}
+                deadline = time.monotonic() + wait
+                while True:
+                    reply = exchange(address, token, request)
+                    if reply["passed"]:
+                        response = reply["value"]
+                        break
+                    assert (reply.get("code") == "InvalidRequest"
+                            and reply.get("message") in ("Game UI target is outside the viewport",
+                                                        "Game UI target has no pointer interaction")
+                            and time.monotonic() < deadline), reply
+                    time.sleep(.25)
                 assert response["clicked"] == target
                 call("wait-frames", frames=4)
                 check_state()
