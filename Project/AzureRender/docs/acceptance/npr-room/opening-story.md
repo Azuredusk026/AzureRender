@@ -28,6 +28,14 @@ Lua 脚本使用编译后的源组执行两条完整路线。两条路线各覆�
 
 原生关卡挂载相同的房间和原语音。剧情呈现端打开对应的笔记或待办面板并记录其他效果命令的分发。自动播放、文本按钮和剧本点击入口由房间界面接收。验证记录、截图和日志位于 `room-opening-voices-verified/validation/opening-route/`。
 
+## 剧情音乐
+
+第一章使用源行 90 的 `NEWings`，目标音量为 0.6。教学重播使用源行 0 的 `Nostalgia`，目标音量为 1。两段音乐从曲首循环，默认淡入时间为 1.5 秒。脚本测试覆盖音量变化、结束淡出、歌单位置恢复和手动暂停保留。
+
+原生任务 1829 使用两个进程再次完成 32 段语音与等级解锁回放。首次教学期间仅加载房间歌单。第二个进程依次加载房间歌单、第一章音乐和教学重播音乐。教学重播的音乐开始后，两个章节的完成记录均保留。
+
+音乐采用原 OGG 文件，文件摘要与音乐清单一致。回放记录和日志位于 `room-opening-voices-verified/validation/opening-route-music/`。原版场景淡化、混音总线和实际剧情入口按独立场景对照验收。
+
 ## 复验
 
 ```powershell
@@ -39,3 +47,4 @@ python -B tools/npr_room/test_story_player.py --player $player --room $dialogueR
 ```
 
 Lua 5.4 按顺序加载 `story-progress.lua`、`story-reader.lua`、编译后的剧情程序与 `story-opening-routes.lua`，以同一个程序块执行。
+音乐测试按顺序加载 `assets/story-music.lua` 与 `tests/story-music.lua`。

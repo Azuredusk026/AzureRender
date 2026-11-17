@@ -1,4 +1,4 @@
-local player, language
+local player, language, music
 local effects, focus
 local present = {}
 local focusPanels = {TutorialFocusPomodoro = "opening-tutorial-clock", TutorialFocusNote = "notes-panel",
@@ -7,11 +7,13 @@ local focusPanels = {TutorialFocusPomodoro = "opening-tutorial-clock", TutorialF
 function present:begin() effects = {} end
 function present:motion() end
 function present:update(dt)
+    music:update(dt)
     if focus then focus.remaining = focus.remaining - dt end
 end
 
 function present:effect(row, delay)
     effects[#effects + 1] = {row.row, delay}
+    if row.command == "PlayBGM" or row.command == "TalkLogOnlyPlayBGM" then music:play(row.arguments) end
     local panel = focusPanels[row.command]
     if not panel then return end
     self.host:ui_visible(panel, true)
@@ -26,6 +28,7 @@ end
 
 function present:finish(chapter, replay, completed)
     assert(completed)
+    music:finish()
     assert(self.host:try_write_save("opening-replay-proof", {chapter.group, replay, effects}))
 end
 
@@ -43,6 +46,7 @@ end
 function init()
     language = currentLanguage()
     present.host = self
+    music = new_story_music(self, opening_music)
     player = new_story_player(self, room_story_chapters,
         new_story_dialogue(self, opening_caption_speeds, function() return language end),
         function() return language end, currentLevel, present, opening_labels)

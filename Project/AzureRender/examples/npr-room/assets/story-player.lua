@@ -110,6 +110,7 @@ function new_story_player(host, chapters, dialogue, currentLanguage, currentLeve
     end
 
     function player:update(dt, available, languageChanged)
+        presentation:update(dt)
         if languageChanged then localizeControls() end
         if story:state() == "idle" then
             local level = currentLevel()
@@ -139,7 +140,6 @@ function new_story_player(host, chapters, dialogue, currentLanguage, currentLeve
             if options then showChoices() end
         end
         dialogue:update(dt)
-        presentation:update(dt)
         story:update(dt, storyInput())
         syncControls()
         return true
