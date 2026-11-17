@@ -162,6 +162,7 @@ P3 按功能组实施与验收。完成一个功能组后更新矩阵，再继�
 [Windows 系统菜单置顶](../acceptance/npr-room/platform-scenarios.md#windows-系统菜单置顶)登记标题栏菜单的切换、菜单文字和存档。
 [显示设置语言](../acceptance/npr-room/platform-scenarios.md#显示设置语言)登记原文本、七种菜单标题及进程重开的语言恢复。
 [Windows 前后台帧率](../acceptance/npr-room/platform-scenarios.md#windows-前后台帧率)登记输入范围、进程重开和真实前台切换。
+[Windows 屏幕休眠](../acceptance/npr-room/platform-scenarios.md#windows-屏幕休眠)登记房间进入、离开及返回时的显示器电源请求。
 [成就统计夹具](../acceptance/npr-room/platform-scenarios.md#成就统计夹具)记录离线、提交失败、恢复和重开。
 [房间成就记录](../acceptance/npr-room/platform-scenarios.md#房间成就记录)登记教学、待办、便签和计时的本地事件回放。
 

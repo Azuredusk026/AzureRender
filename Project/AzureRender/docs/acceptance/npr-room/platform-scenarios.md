@@ -139,6 +139,26 @@ python -B tools/npr_room/test_room_window_player.py --player $player --project $
 python -B tools/npr_room/test_room_window_player.py --player $player --project $roomProject --resource-root $resources --output $framePacingReplay --frame-pacing
 ```
 
+## Windows 屏幕休眠
+
+房间遵循 Recovery Windows 的屏幕休眠默认值。组装时将 `screenSleepMode` 设为 1，运行期间持有 Windows 的显示器电源请求。值 0 由系统电源设置决定显示器待机。离开房间或退出时释放请求。 [Windows 显示器电源请求](https://learn.microsoft.com/en-us/windows/win32/api/winbase/nf-winbase-powersetrequest)
+
+任务 2002 从常规入口进入房间，确认 Windows 接受显示器电源请求。切换到系统默认待机关卡后，应用释放请求。返回房间时再次取得请求，退出后的 GPU 缓冲区和图像计数均为零。任务 2003 通过前后台帧率、设置重开和覆盖回归。系统电源请求列表需要提升权限，屏幕实际待机时刻可通过独立系统观察复验。
+
+本机证据位于 `platform-achievement-reference/window-preferences/display-sleep/`。
+
+| 记录 | SHA-256 |
+| --- | --- |
+| 原版 `ScreenSleepModeExtensions.cs` | `226dca8842d1375dc625c58ac08df66d18762d629b572783ffae348f9f22ead4` |
+| 显示器电源请求回放 | `240b12957ba869e3eb59b4c289d2dc319fd5b77b8a2009e22d8b754686a8de8e` |
+| 前后台帧率回归 | `cc002802a2d63105ee3a9cee3316a35f7ef979c7e94e1f7d56e3f6176e84ce92` |
+| 原生诊断构建清单 | `7ca8a80b581fb9c9f4bcb612c974016e7889c32684cb0419422109a2abb90127` |
+| 诊断 Player | `24453af807b790ac97d05b14288c65dd92f7f38091177787ba96fb559c49dd16` |
+
+```powershell
+python -B tools/npr_room/test_room_display_sleep_player.py --player $player --project $roomProject --resource-root $resources --output $displaySleepReplay
+```
+
 ## 成就统计夹具
 
 `SteamAchievements` 在平台初始化后写入统计。增加进度时先读当前值；写入成功后更新本地缓存，再提交统计。是否已持久化以重开后读到的结果为准。

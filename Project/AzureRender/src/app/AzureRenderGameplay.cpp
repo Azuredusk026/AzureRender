@@ -258,6 +258,7 @@ void AzureRenderApp::synchronizeGameUi(){
         constexpr auto menuAction = "display-topmost-menu";
         auto* game = activeGame();
         bool menuEnabled = false;
+        bool keepDisplayAwake = false;
         std::string_view menuCaption;
         if (auto* runtime = activeRuntime()) {
             auto& world = runtime->world();
@@ -275,10 +276,12 @@ void AzureRenderApp::synchronizeGameUi(){
                 state.alwaysOnTop = applied.alwaysOnTop;
                 menuEnabled = game && game->input().hasAction(menuAction);
                 menuCaption = state.menuCaption;
+                keepDisplayAwake = state.screenSleepMode == 1;
             }
         }
         frontend_->setTopmostMenu(menuEnabled, menuCaption);
         if (menuEnabled && frontend_->consumeTopmostMenuToggle()) game->input().activate(menuAction);
+        frontend_->setDisplayAwake(keepDisplayAwake);
     }
     auto* presentation=activePresentation();auto* assets=activeAssets();const auto reference=presentation?presentation->uiDocument():std::string();
     const auto path=assets&&!reference.empty()?assets->resolveReference(reference).generic_u8string():std::string();

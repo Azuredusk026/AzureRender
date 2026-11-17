@@ -40,6 +40,7 @@ void AzureRenderApp::initializeValidation() {
             {"waitFrames",framePacingWaitFrames_}}.dump());
     });
     observations_->add("engine.screenshots",[this]{return ObservationValue(static_cast<std::int64_t>(validationScreenshots_));});
+    observations_->add("window.displayWakeRequested",[this]{return ObservationValue(frontend_->displayWakeRequested());});
     observations_->add("engine.gameInputSource",[this]{return ObservationValue(std::string(gameInputReplay_?"replay":"window"));});
     observations_->add("scene.nodeCount",[this]{
 #if AZURE_WITH_EDITOR

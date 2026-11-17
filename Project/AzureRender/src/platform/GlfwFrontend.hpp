@@ -52,6 +52,8 @@ public:
     [[nodiscard]] WindowPresentation windowPresentation();
     void setTopmostMenu(bool enabled, std::string_view caption = {});
     [[nodiscard]] bool consumeTopmostMenuToggle();
+    void setDisplayAwake(bool enabled);
+    [[nodiscard]] bool displayWakeRequested() const { return displayPowerRequest_ != nullptr; }
 
     void pollEvents() const;
     void recordFileDrop(int count,const char** paths);
@@ -74,6 +76,8 @@ private:
     bool topmostMenuEnabled_ = false;
     bool topmostMenuToggle_ = false;
     std::string topmostMenuCaption_;
+    bool keepDisplayAwake_ = false;
+    void* displayPowerRequest_ = nullptr;
 };
 
 }  // namespace azurerender

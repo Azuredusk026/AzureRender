@@ -53,7 +53,7 @@ def install(project, scene, document, prefix="", localization=None):
     scene["nodes"][-1]["components"]["azure.script"]["data"]["asset"] = "assets:/" + script
     component = "azure.window-presentation"
     scene["nodes"].append({"id": "room-display-window", "components": {
-        component: {"type": component, "version": 1, "data": {}}}})
+        component: {"type": component, "version": 1, "data": {"screenSleepMode": 1}}}})
     ui, = [node["components"]["azure.game-ui"]["data"] for node in scene["nodes"] if
            node["components"].get("azure.game-ui", {}).get("data", {}).get("asset") == "assets:/timer.rml"]
     path = prefix + "timer.rml"

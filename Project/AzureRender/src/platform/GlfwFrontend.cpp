@@ -94,6 +94,7 @@ GlfwFrontend::GlfwFrontend(const GlfwFrontendConfig& config) {
 }
 
 GlfwFrontend::~GlfwFrontend() {
+    setDisplayAwake(false);
     if (window_ != nullptr) {
         setTopmostMenu(false);
         glfwDestroyWindow(window_);
@@ -219,6 +220,32 @@ void GlfwFrontend::setTopmostMenu(bool enabled, std::string_view caption) {
 
 bool GlfwFrontend::consumeTopmostMenuToggle() {
     return std::exchange(topmostMenuToggle_, false);
+}
+
+void GlfwFrontend::setDisplayAwake(bool enabled) {
+#ifdef _WIN32
+    if (enabled == keepDisplayAwake_) return;
+    keepDisplayAwake_ = enabled;
+    if (!enabled) {
+        if (const auto request = std::exchange(displayPowerRequest_, nullptr)) {
+            PowerClearRequest(request, PowerRequestDisplayRequired);
+            CloseHandle(request);
+        }
+        return;
+    }
+
+    wchar_t reason[] = L"AzureRender room display";
+    REASON_CONTEXT context{};
+    context.Version = POWER_REQUEST_CONTEXT_VERSION;
+    context.Flags = POWER_REQUEST_CONTEXT_SIMPLE_STRING;
+    context.Reason.SimpleReasonString = reason;
+    const auto request = PowerCreateRequest(&context);
+    if (request == INVALID_HANDLE_VALUE) return;
+    if (PowerSetRequest(request, PowerRequestDisplayRequired)) displayPowerRequest_ = request;
+    else CloseHandle(request);
+#else
+    (void)enabled;
+#endif
 }
 
 std::vector<const char*> GlfwFrontend::requiredVulkanExtensions() const {
