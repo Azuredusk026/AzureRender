@@ -130,6 +130,19 @@ Recovery 的 19 个 `anim_face_*.anim` 直接绑定同一脸部网格。
 | 常规房间回放 | `132652365c9b2d6d8fcd20a58a7117b7b4209cefb24b8fc36dbc4caa216f31bd` |
 | 原生画面对照 | `6f84771454e637a815567d46cf4194b17eace8e3ea39caf7588a8f0d935bf6dc` |
 
+## 开场视线与身体附加层采样
+
+原 `LookPlayer` 层以 0 到 1 的 `LookScale` 选择片段时刻。原 `plankshake` 层以 0.5 权重循环。任务 1907 使用原 Avatar、两个源片段和八种身体指令，采样 720 帧。每帧记录七种视线强度及身体附加层的单独结果。
+
+视线影响胸、颈、头部旋转和左视线形变。强度为 1 时，颈部最大转角为 8.7795 度。相同强度随身体姿态产生的局部旋转差异最高为 0.8153 度。视线装配按当前人体姿态求值，对照容差为 0.1 度。
+
+本机 `story-motion-reference/opening-face/additive-layers/` 保存源采样。常规房间的附加层装配及叠加画面按各自验收运行。
+
+| 记录 | SHA-256 |
+| --- | --- |
+| 附加层来源清单 | `da02736dfd412b59b85a2bc4f6aceca1a4404a92b6b88c5df0a33f08d1e28e6c` |
+| Unity 附加层采样 | `f78f9e47c738fdcf508b59817d66864abf3d197c38d48502baa1a8173b33a88e` |
+
 ## 窗景网格
 
 窗景夹具使用郁金香场景的原网格。
@@ -159,6 +172,8 @@ python -B -m tools.npr_room.story_face_probe --source $unitySource --project $tu
 python -B -m tools.npr_room.story_body_morphs --source $unitySource --room $deskRoom --models $tutorialModels --catalog $bodyCatalog --source-receipt $tutorialSource --output $bodyMorphModels
 python -B -m tools.npr_room.story_face_probe --source $unitySource --project $tutorialProbe --graph $animatorGraph --chapters $openingChapters --model $faceGlb --body-morphs $bodyMorphReceipt
 & $unity -batchmode -nographics -quit -projectPath $tutorialProbe -executeMethod StoryFaceControllerProbe.RunBodyClips -logFile $bodyMorphLog
+python -B -m tools.npr_room.story_face_probe --source $unitySource --project $tutorialProbe --graph $animatorGraph --chapters $openingChapters --model $faceGlb --body-morphs $bodyMorphReceipt --additive-overlays
+& $unity -batchmode -nographics -quit -projectPath $tutorialProbe -executeMethod StoryFaceControllerProbe.RunAdditiveLayers -logFile $additiveLayerLog
 python -B -m tools.npr_room.verify_story_body_morphs --models $bodyMorphModels --original $tutorialModels --samples $bodyMorphSamples --output $bodyMorphAudit
 python -B tools/npr_room/test_story_body_morph_player.py --player $player --room $deskRoom --resource-root $resources --original $tutorialModels --models $bodyMorphModels --output $bodyMorphRender
 & $expressionTest --inspect $bodyMorphFaceGlb $faceSkeleton

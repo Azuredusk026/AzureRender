@@ -10,7 +10,7 @@ from tools.npr_room.pbr_materials import write
 from tools.npr_room.reference_inventory import digest
 
 
-def stage(source, project, graph, chapter_file, model, body_morphs=None):
+def stage(source, project, graph, chapter_file, model, body_morphs=None, additive_overlays=False):
     controller = json.loads(graph.read_bytes())
     chapters = json.loads(chapter_file.read_bytes())["chapters"]
     numbers = {row["faceMotion"] for chapter in chapters for row in chapter["commands"]
@@ -18,7 +18,8 @@ def stage(source, project, graph, chapter_file, model, body_morphs=None):
     wanted = {controller["source"]: controller["sourceSHA256"]}
     routes = {}
     state_layers = {row["m_Name"]: row for row in controller["layers"]}
-    for name in ("Facial", "Talk", "LookPlayer"):
+    layer_names = ("Facial", "Talk", "LookPlayer", "plankshake") if additive_overlays else ("Facial", "Talk", "LookPlayer")
+    for name in layer_names:
         layer = state_layers[name]
         machine = controller["machines"][str(layer["m_StateMachine"]["fileID"])]
         records = {str(item["m_State"]["fileID"]): controller["states"][str(item["m_State"]["fileID"])]
@@ -89,6 +90,7 @@ if __name__ == "__main__":
     for name in names:
         parser.add_argument("--" + name, type=Path, required=True)
     parser.add_argument("--body-morphs", type=Path)
+    parser.add_argument("--additive-overlays", action="store_true")
     args = vars(parser.parse_args())
     print(json.dumps(stage(*(args[arg].resolve(strict=True) for arg in names),
-                           body_morphs=args["body_morphs"])))
+                           body_morphs=args["body_morphs"], additive_overlays=args["additive_overlays"])))

@@ -36,12 +36,13 @@ public static class StoryFaceControllerProbe
     {
         public GameObject root;
         public SkinnedMeshRenderer face;
+        public Transform[] nodes;
         public AnimatorControllerPlayable controller;
         public PlayableGraph graph;
     }
 
     private static Actor Create(StoryBodyControllerProbe.Rig rig, Settings config,
-                                AnimatorController controller, float facial, float talk)
+                                AnimatorController controller, float facial, float talk, float look = 1, float plank = .5f)
     {
         var nodes = new Transform[rig.nodes.Length];
         for (var i = 0; i < nodes.Length; i++)
@@ -72,11 +73,13 @@ public static class StoryFaceControllerProbe
         var playable = AnimatorControllerPlayable.Create(graph, controller);
         AnimationPlayableOutput.Create(graph, "Face", animator).SetSourcePlayable(playable);
         graph.Play();
+        playable.SetLayerWeight(1, look);
         playable.SetLayerWeight(2, facial);
         playable.SetLayerWeight(3, talk);
+        playable.SetLayerWeight(4, plank);
         var path = controller.layers[0].stateMachine.name + ".Base001";
         playable.Play(Animator.StringToHash(path), 0, 0);
-        return new Actor { root = nodes[0].gameObject, face = renderer, controller = playable, graph = graph };
+        return new Actor { root = nodes[0].gameObject, face = renderer, nodes = nodes, controller = playable, graph = graph };
     }
 
     private static float[] Weights(Actor actor, int size)
@@ -158,6 +161,122 @@ public static class StoryFaceControllerProbe
         Debug.Log("Sampled face bindings in " + report.clips.Length + " original body clips");
     }
 
+    [Serializable] public sealed class OverlayPose
+    {
+        public float scale, left, right;
+        public Quaternion[] rotations;
+        public Vector3[] translations;
+    }
+
+    [Serializable] public sealed class OverlayFrame
+    {
+        public int frame, motion;
+        public OverlayPose[] look;
+        public OverlayPose plank;
+    }
+
+    [Serializable] public sealed class OverlayReport
+    {
+        public string editor;
+        public int sampleRate;
+        public string[] joints;
+        public OverlayFrame[] frames;
+    }
+
+    private static OverlayPose Difference(Actor control, Actor other, int[] joints, float scale, int left, int right)
+    {
+        var result = new OverlayPose { scale = scale, rotations = new Quaternion[joints.Length],
+                                       translations = new Vector3[joints.Length] };
+        for (var i = 0; i < joints.Length; i++)
+        {
+            var from = control.nodes[joints[i]];
+            var to = other.nodes[joints[i]];
+            result.rotations[i] = Quaternion.Inverse(from.localRotation) * to.localRotation;
+            result.translations[i] = to.localPosition - from.localPosition;
+        }
+        result.left = other.face.GetBlendShapeWeight(left) - control.face.GetBlendShapeWeight(left);
+        result.right = other.face.GetBlendShapeWeight(right) - control.face.GetBlendShapeWeight(right);
+        return result;
+    }
+
+    private static void SetBody(AnimatorControllerPlayable playable, int motion)
+    {
+        playable.SetInteger("MotionType", motion);
+        if (motion == 400)
+        {
+            playable.SetTrigger("GameStart_Start");
+            playable.Play(Animator.StringToHash("GameStart_Start"), 0, 0);
+        }
+        else if (motion == 401)
+        {
+            playable.ResetTrigger("GameStart_Start");
+            playable.SetTrigger("GameStart_End");
+        }
+    }
+
+    public static void RunAdditiveLayers()
+    {
+        var folder = Path.GetDirectoryName(Application.dataPath);
+        var rig = JsonUtility.FromJson<StoryBodyControllerProbe.Rig>(File.ReadAllText(Path.Combine(folder, "story-body-probe.json")));
+        var config = JsonUtility.FromJson<Settings>(File.ReadAllText(Path.Combine(folder, "story-face-probe.json")));
+        var controller = AssetDatabase.LoadAssetAtPath<AnimatorController>(rig.controller);
+        if (!controller || controller.layers.Length != 5 || controller.layers[1].name != "LookPlayer" ||
+            controller.layers[4].name != "plankshake" || controller.layers[4].defaultWeight != .5f ||
+            !controller.layers[1].stateMachine.defaultState.motion || !controller.layers[4].stateMachine.defaultState.motion)
+            throw new InvalidOperationException("Expected both authored additive layers");
+        var scales = new[] { 0f, .3f, .4f, .5f, .65f, .7f, 1f };
+        var control = Create(rig, config, controller, 0, 0, 0, 0);
+        var plank = Create(rig, config, controller, 0, 0, 0, .5f);
+        var lookActors = Array.ConvertAll(scales, _ => Create(rig, config, controller, 0, 0, 1, 0));
+        var actors = new List<Actor> { control, plank };
+        actors.AddRange(lookActors);
+        var report = new OverlayReport {
+            editor = Application.unityVersion, sampleRate = 60, frames = new OverlayFrame[720],
+            joints = new[] { "Character_Spine", "Character_Spine1", "Character_Spine2", "Character_Neck", "Character_Head" }
+        };
+        var joints = Array.ConvertAll(report.joints, name => Array.FindIndex(rig.nodes, node => node.name == name));
+        var left = Array.IndexOf(config.names, "blendShape1.Eye_look_left");
+        var right = Array.IndexOf(config.names, "blendShape1.Eye_look_right");
+        if (left < 0 || right < 0 || Array.Exists(joints, value => value < 0))
+            throw new InvalidOperationException("Missing original additive joint bindings");
+        var commands = new Dictionary<int, int> {
+            {0, 0}, {40, 5}, {95, 1}, {150, 3}, {205, 0}, {280, 400}, {590, 401}, {650, 12}
+        };
+        var motion = 0;
+        try
+        {
+            for (var index = 0; index < lookActors.Length; index++)
+                lookActors[index].controller.SetFloat("LookScale", scales[index]);
+            for (var frame = 0; frame < report.frames.Length; frame++)
+            {
+                if (commands.TryGetValue(frame, out var next))
+                {
+                    motion = next;
+                    foreach (var actor in actors) SetBody(actor.controller, motion);
+                }
+                foreach (var actor in actors) actor.graph.Evaluate(frame == 0 ? 0 : 1f / report.sampleRate);
+                var look = new OverlayPose[scales.Length];
+                for (var i = 0; i < scales.Length; i++)
+                    look[i] = Difference(control, lookActors[i], joints, scales[i], left, right);
+                report.frames[frame] = new OverlayFrame {
+                    frame = frame, motion = motion, look = look,
+                    plank = Difference(control, plank, joints, .5f, left, right)
+                };
+            }
+            SaveGzip(Path.Combine(folder, "story-additive-layer-trace.json.gz"), JsonUtility.ToJson(report));
+            Debug.Log("Sampled " + report.frames.Length + " frames of the original additive layers");
+        }
+        finally
+        {
+            foreach (var actor in actors)
+            {
+                actor.graph.Destroy();
+                UnityEngine.Object.DestroyImmediate(actor.face.sharedMesh);
+                UnityEngine.Object.DestroyImmediate(actor.root);
+            }
+        }
+    }
+
     public static void Run()
     {
         var folder = Path.GetDirectoryName(Application.dataPath);
@@ -196,17 +315,7 @@ public static class StoryFaceControllerProbe
                     if (bodyCommands.TryGetValue(frame, out var motion))
                     {
                         body = motion;
-                        playable.SetInteger("MotionType", body);
-                        if (body == 400)
-                        {
-                            playable.SetTrigger("GameStart_Start");
-                            playable.Play(Animator.StringToHash("GameStart_Start"), 0, 0);
-                        }
-                        else if (body == 401)
-                        {
-                            playable.ResetTrigger("GameStart_Start");
-                            playable.SetTrigger("GameStart_End");
-                        }
+                        SetBody(playable, body);
                     }
                     if (faceCommands.TryGetValue(frame, out var expression)) playable.SetInteger("Facial", facial = expression);
                     if (talkCommands.TryGetValue(frame, out var voice)) playable.SetBool("Enable_Talk", talking = voice);
