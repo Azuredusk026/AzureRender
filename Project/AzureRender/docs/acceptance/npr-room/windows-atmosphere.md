@@ -28,6 +28,12 @@
 
 原始采样的 SHA-256 为 `b0682e513746c5dd32b86307f66ce277cc9df6740c0af5cd73d77033e1759457`。本机 `windows-atmosphere-reference/sunset-native-probe.json` 记录坐标面顺序、运行编号和源资产。该采样对应天空通道，云、雾、室内光照与色彩输出使用合成画面的独立验收。
 
+## Vulkan 天空通道
+
+六面浮点采样按 Unity 与 AzureRender 的坐标关系换算为 1024 × 512 线性 HDR 环境图。编码最大绝对误差为 0.00701。任务 1794 在同一环境光条件下，从同一机位各采两帧，分别选择纯色和原采样天空。两条路线均隐藏室外大气占位网格与城市景物。左侧可见天空区域的 11,204 个像素发生变化，椅背对照区的 7,000 个像素逐一相同。两次运行均确认 GPU 图像和缓冲区退出后归零。
+
+环境图 SHA-256 为 `5e0e2c4e448495ff00932d17fa8db7d0064abe65e09433781f4f36e9b90f4c83`。本机 `windows-atmosphere-reference/sunset-vulkan-transfer.json` 记录两张原生画面和实际 Player 的摘要。房间合成画面的原版对照、实时天空切换及其他时段仍按完整窗景矩阵验收。
+
 ## 复验
 
 原 DXBC、反汇编和绑定清单写入本机私有目录。`PYTHONPATH` 指向本项目的 UnityPy 转换工具目录。
@@ -44,4 +50,9 @@ python -B -m unittest tools.npr_room.test_unity_d3d11_programs
 cl.exe /nologo /EHsc /std:c++20 /O2 /W4 tools/npr_room/WindowsSkyProbe.cpp d3d11.lib "/Fe:$skyProbe"
 python -B -m tools.npr_room.windows_sky_probe --source $unitySource --catalog $assetCatalogRoot --references $atmosphereReceipt --programs $programFolder --original-log $originalSkyLog --output $preparedProbe
 & $skyProbe $preparedProbe $skyCube
+```
+
+```powershell
+python -B -m tools.npr_room.windows_sky_environment --capture $packedSkyCube --reference $skyProbeReceipt --output $skyHdr
+python -B tools/npr_room/test_windows_sky_environment_player.py --player $player --room $room --resource-root $resources --environment $skyHdr --references $atmosphereReceipt --output $vulkanReplay
 ```
