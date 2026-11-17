@@ -1,5 +1,6 @@
 local slot = "room-window-settings"
 local frameRateSlot = "room-frame-rates"
+local vsyncSlot = "room-vsync"
 local component = "azure.window-presentation"
 local modes = {"Windowed", "Borderless"}
 local resolutions = {"1280 × 720", "1600 × 900", "1920 × 1080", "Custom"}
@@ -8,6 +9,7 @@ local frameRateProperties = {"activeFrameRate", "inactiveFrameRate"}
 local frameRateDefaults = {60, 24}
 local window, open, saved, displayed, writable, displayedLocale, menuCaption
 local frameRates, frameRatesWritable
+local vsyncWritable, displayedVsync
 
 local function current()
     return {1, window:get(component, "mode"), window:get(component, "resolution"),
@@ -32,6 +34,8 @@ local function show(value)
         self:ui_text("display-topmost-label", label("topmost", "Always on Top"))
         self:ui_text("display-frame-active-label", label("activeRate", "When Active"))
         self:ui_text("display-frame-inactive-label", label("inactiveRate", "When Inactive"))
+        self:ui_text("display-vsync-label", label("vsync", "V-Sync"))
+        displayedVsync = nil
         displayed = nil
     end
     local caption = label("topmost", "Always on Top") .. "("
@@ -40,7 +44,13 @@ local function show(value)
         window:set(component, "menuCaption", caption)
         menuCaption = caption
     end
-    if not open or same(displayed, value) then return end
+    if not open then return end
+    local vsync = window:get(component, "vsync") == true
+    if displayedVsync ~= vsync then
+        self:ui_text("display-vsync", vsync and label("on", "On") or label("off", "Off"))
+        displayedVsync = vsync
+    end
+    if same(displayed, value) then return end
     self:ui_text("display-mode", label(value[2] == 0 and "windowed" or "borderless", modes[value[2] + 1]))
     local resolution = value[3] == 3 and label("custom", resolutions[4]) or resolutions[value[3] + 1]
     self:ui_text("display-resolution", resolution)
@@ -49,17 +59,22 @@ local function show(value)
     displayed = value
 end
 
-local function store(value)
-    if not writable then
+local function persist(key, value, allowed)
+    if not allowed then
         self:ui_text("display-status", "Display settings require a newer version.")
         return false
     end
-    if not self:try_write_save(slot, value) then
+    if not self:try_write_save(key, value) then
         self:ui_text("display-status", "Could not save display settings.")
         return false
     end
-    saved = value
     self:ui_text("display-status", "")
+    return true
+end
+
+local function store(value)
+    if not persist(slot, value, writable) then return false end
+    saved = value
     return true
 end
 
@@ -111,14 +126,9 @@ local function editFrameRates()
                 if changed ~= frameRates[index] then
                     local values = {frameRates[1], frameRates[2]}
                     values[index] = changed
-                    if not frameRatesWritable then
-                        self:ui_text("display-status", "Display settings require a newer version.")
-                    elseif self:try_write_save(frameRateSlot, {1, values[1], values[2]}) then
+                    if persist(frameRateSlot, {1, values[1], values[2]}, frameRatesWritable) then
                         frameRates = values
                         applyFrameRates()
-                        self:ui_text("display-status", "")
-                    else
-                        self:ui_text("display-status", "Could not save display settings.")
                     end
                 end
             end
@@ -134,6 +144,11 @@ function init()
     self:ui_visible("display-toggle", true)
     self:ui_visible("display-panel", false)
     loadFrameRates()
+    local vsync = self:read_save(vsyncSlot)
+    vsyncWritable = type(vsync) ~= "table" or type(vsync[1]) ~= "number" or vsync[1] <= 1
+    if type(vsync) == "table" and #vsync == 2 and vsync[1] == 1 and type(vsync[2]) == "boolean" then
+        window:set(component, "vsync", vsync[2])
+    end
     local value = self:read_save(slot)
     writable = type(value) ~= "table" or type(value[1]) ~= "number" or value[1] <= 1
     if type(value) == "table" and #value == 4 and value[1] == 1 and modes[(tonumber(value[2]) or -1) + 1]
@@ -153,6 +168,7 @@ function update()
     elseif self:pressed("display-toggle") then
         open = not open
         displayed = nil
+        displayedVsync = nil
         self:ui_visible("display-panel", open)
         if open then showFrameRates() end
     elseif open then
@@ -160,6 +176,9 @@ function update()
             proposed = {1, 1 - value[2], value[3], value[4]}
         elseif self:pressed("display-resolution") and value[2] == 0 then
             proposed = {1, value[2], (value[3] + 1) % #resolutions, value[4]}
+        elseif self:pressed("display-vsync") then
+            local vsync = not window:get(component, "vsync")
+            if persist(vsyncSlot, {1, vsync}, vsyncWritable) then window:set(component, "vsync", vsync) end
         end
     end
     if proposed and store(proposed) then

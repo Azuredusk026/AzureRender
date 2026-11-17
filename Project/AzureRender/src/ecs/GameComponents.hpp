@@ -257,5 +257,7 @@ struct WindowPresentation {
     std::uint32_t inactiveFrameRate = 24;
     AZURE_FIELD("Screen sleep mode", 0, 1)
     std::uint32_t screenSleepMode = 0;
+    AZURE_FIELD("Vertical sync", 0, 1)
+    bool vsync = false;
 };
 } // namespace azurerender::game

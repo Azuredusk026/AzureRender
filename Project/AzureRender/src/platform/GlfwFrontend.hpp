@@ -54,6 +54,7 @@ public:
     [[nodiscard]] bool consumeTopmostMenuToggle();
     void setDisplayAwake(bool enabled);
     [[nodiscard]] bool displayWakeRequested() const { return displayPowerRequest_ != nullptr; }
+    bool updatePresentationSync(bool synchronized);
 
     void pollEvents() const;
     void recordFileDrop(int count,const char** paths);
@@ -78,6 +79,7 @@ private:
     std::string topmostMenuCaption_;
     bool keepDisplayAwake_ = false;
     void* displayPowerRequest_ = nullptr;
+    bool synchronizedPresentation_ = true;
 };
 
 }  // namespace azurerender

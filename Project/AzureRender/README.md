@@ -11,7 +11,7 @@
 [房间成就记录](docs/acceptance/npr-room/platform-scenarios.md#房间成就记录)记录四种房间操作的本地成就与存档恢复。
 [房间显示面板](docs/acceptance/npr-room/platform-scenarios.md#房间显示面板)与[系统菜单置顶](docs/acceptance/npr-room/platform-scenarios.md#windows-系统菜单置顶)记录窗口选项和存档恢复。
 [显示设置语言](docs/acceptance/npr-room/platform-scenarios.md#显示设置语言)记录面板和系统菜单的原文本与语言恢复。
-[Windows 前后台帧率](docs/acceptance/npr-room/platform-scenarios.md#windows-前后台帧率)和[屏幕休眠](docs/acceptance/npr-room/platform-scenarios.md#windows-屏幕休眠)记录房间运行时的平台设置。
+[Windows 前后台帧率](docs/acceptance/npr-room/platform-scenarios.md#windows-前后台帧率)、[屏幕休眠](docs/acceptance/npr-room/platform-scenarios.md#windows-屏幕休眠)和[垂直同步](docs/acceptance/npr-room/platform-scenarios.md#windows-垂直同步)记录房间运行时的平台设置。
 
 [编辑器场景管线准备验收](docs/acceptance/p0/2026-11-16-editor-background-preparation.md)记录驱动首次编译、预览缓存及两条原生工作流。
 [编辑器与渲染组合验收](docs/acceptance/p0/2026-11-16-editor-and-transparency-integration.md)记录画面、原生交互和托管工作流。

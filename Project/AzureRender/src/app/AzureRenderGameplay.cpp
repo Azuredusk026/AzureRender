@@ -14,6 +14,12 @@
 #include "editor/ImGuiEditorLayer.hpp"
 #endif
 using namespace azurerender::internal;
+namespace {
+const azurerender::game::WindowPresentation* windowPresentation(azurerender::RuntimeLifecycle* runtime) {
+    const auto* windows = runtime ? runtime->world().findComponentArray<azurerender::game::WindowPresentation>() : nullptr;
+    return windows && !windows->dense().empty() ? &windows->dense().front() : nullptr;
+}
+}
 azurerender::RuntimeLifecycle* AzureRenderApp::activeRuntime(){
 #if AZURE_WITH_EDITOR
     if(runOptions_.editorSession)return runOptions_.editorSession->runtime();
@@ -242,16 +248,20 @@ void AzureRenderApp::synchronizeEditorRuntime(){
 unsigned AzureRenderApp::effectiveFrameRateLimit() {
     constexpr auto key = "runtime.maxFrameRate";
     if (!fixedSimulation_ && engineSettings_->source(key) == azurerender::SettingSource::Default) {
-        if (auto* runtime = activeRuntime()) {
-            const auto* windows = runtime->world().findComponentArray<azurerender::game::WindowPresentation>();
-            if (windows && !windows->dense().empty()) {
-                const auto& window = windows->dense().front();
-                const auto rate = frontend_->isForeground() ? window.activeFrameRate : window.inactiveFrameRate;
-                return std::clamp(rate, 10U, 250U);
-            }
+        if (const auto* window = windowPresentation(activeRuntime())) {
+            if (effectiveVsync()) return 0;
+            const auto rate = frontend_->isForeground() ? window->activeFrameRate : window->inactiveFrameRate;
+            return std::clamp(rate, 10U, 250U);
         }
     }
     return engineSettings_->get(key).get<unsigned>();
+}
+bool AzureRenderApp::effectiveVsync() {
+    constexpr auto key = "runtime.vsync";
+    if (!fixedSimulation_ && engineSettings_->source(key) == azurerender::SettingSource::Default) {
+        if (const auto* window = windowPresentation(activeRuntime())) return window->vsync;
+    }
+    return engineSettings_->get(key).get<bool>();
 }
 void AzureRenderApp::synchronizeGameUi(){
     if (!fixedSimulation_) {
@@ -282,6 +292,7 @@ void AzureRenderApp::synchronizeGameUi(){
         frontend_->setTopmostMenu(menuEnabled, menuCaption);
         if (menuEnabled && frontend_->consumeTopmostMenuToggle()) game->input().activate(menuAction);
         frontend_->setDisplayAwake(keepDisplayAwake);
+        if (frontend_->updatePresentationSync(effectiveVsync())) framebufferResized_ = true;
     }
     auto* presentation=activePresentation();auto* assets=activeAssets();const auto reference=presentation?presentation->uiDocument():std::string();
     const auto path=assets&&!reference.empty()?assets->resolveReference(reference).generic_u8string():std::string();

@@ -248,6 +248,10 @@ void GlfwFrontend::setDisplayAwake(bool enabled) {
 #endif
 }
 
+bool GlfwFrontend::updatePresentationSync(bool synchronized) {
+    return std::exchange(synchronizedPresentation_, synchronized) != synchronized;
+}
+
 std::vector<const char*> GlfwFrontend::requiredVulkanExtensions() const {
     std::uint32_t count = 0;
     const char** extensions = glfwGetRequiredInstanceExtensions(&count);

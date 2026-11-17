@@ -41,6 +41,11 @@ void AzureRenderApp::initializeValidation() {
     });
     observations_->add("engine.screenshots",[this]{return ObservationValue(static_cast<std::int64_t>(validationScreenshots_));});
     observations_->add("window.displayWakeRequested",[this]{return ObservationValue(frontend_->displayWakeRequested());});
+    observations_->add("window.surfacePresentation",[this]{
+        return ObservationValue(nlohmann::json{
+            {"vsync",effectiveVsync()},
+            {"mode",selectedPresentMode_==VK_PRESENT_MODE_MAILBOX_KHR ? "MAILBOX" : "FIFO"}}.dump());
+    });
     observations_->add("engine.gameInputSource",[this]{return ObservationValue(std::string(gameInputReplay_?"replay":"window"));});
     observations_->add("scene.nodeCount",[this]{
 #if AZURE_WITH_EDITOR

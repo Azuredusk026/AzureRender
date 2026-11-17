@@ -94,7 +94,7 @@ python -B tools/npr_room/test_room_window_player.py --player $player --project $
 
 ## 显示设置语言
 
-显示面板和 Windows 系统菜单使用与房间相同的 Recovery 语言清单，包含窗口模式、分辨率、置顶与帧率文本。语言选择生效时同步更新面板与菜单。组装清单 `window-settings-receipt.json` 记录文本来源、计时器脚本与面板资产的摘要。
+显示面板和 Windows 系统菜单使用与房间相同的 Recovery 语言清单，包含窗口模式、分辨率、置顶、帧率与垂直同步文本。语言选择生效时同步更新面板与菜单。组装清单 `window-settings-receipt.json` 记录文本来源、计时器脚本与面板资产的摘要。
 
 任务 1990 在常规入口读到默认简体中文，依次切换日语、英语、繁体中文、葡萄牙语、韩语和俄语，逐项核对 Windows 菜单标题与本地语言存档。俄语下执行系统菜单置顶开关、分辨率调整和无边框切换，并保存 1600×900 的面板截图。第二个 Player 恢复俄语和置顶。任务 1991 验证内置英语文本与窗口流程。
 
@@ -157,6 +157,27 @@ python -B tools/npr_room/test_room_window_player.py --player $player --project $
 
 ```powershell
 python -B tools/npr_room/test_room_display_sleep_player.py --player $player --project $roomProject --resource-root $resources --output $displaySleepReplay
+```
+
+## Windows 垂直同步
+
+房间显示面板的垂直同步默认关闭，状态保存在版本为 1 的 `room-vsync` 存档。开启时使用 Vulkan FIFO 呈现，由显示器刷新节奏控制。关闭时优先采用 MAILBOX，设备只提供 FIFO 时沿用该呈现方式，并采用已配置的前后台帧率。显式配置 `runtime.vsync` 和 `runtime.maxFrameRate` 时分别使用该值。 [Unity 帧率与垂直同步](https://docs.unity3d.com/2022.3/Documentation/ScriptReference/Application-targetFrameRate.html)
+
+任务 2005 通过三个独立 Player 回放。首个进程从 MAILBOX 切换至 FIFO，再切回 MAILBOX。第二个进程恢复已保存的 FIFO 与显示器节奏。第三个进程使用显式的 MAILBOX 和 15 FPS 覆盖，保留房间存档。三个进程退出后的 GPU 缓冲区和图像计数均为零。Lua 回归覆盖写入失败和较新存档版本。
+
+任务 2006 在同一构建中通过七种语言的系统菜单、分辨率、无边框模式及置顶回归，保存俄语显示面板截图。
+
+本机证据位于 `platform-achievement-reference/window-preferences/vsync/`。
+
+| 记录 | SHA-256 |
+| --- | --- |
+| 垂直同步回放 | `a4a4ecc23eda992d8056a485ad730540247da9e4382f888520f640fe7ccdf552` |
+| 窗口语言回归 | `3b5c0b8c3e1fd0428decec3f34b4c908486a911d127b6d8dcb884dd3f20b700b` |
+| 原生诊断构建清单 | `1d207d0e5f1f3c19020a3ad01280be13d5f8159372365025126b6f8b491b6956` |
+| 诊断 Player | `e179f387919016015a1ffe8f6050f2dd7c34b81aca27e2cda4e45185aed39d1d` |
+
+```powershell
+python -B tools/npr_room/test_room_vsync_player.py --player $player --project $roomProject --resource-root $resources --output $vsyncReplay
 ```
 
 ## 成就统计夹具

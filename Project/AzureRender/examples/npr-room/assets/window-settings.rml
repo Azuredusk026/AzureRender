@@ -12,6 +12,7 @@
   <div class="display-row"><span id="display-mode-label">Window mode</span> <button id="display-mode" data-action="display-mode">Windowed</button></div>
   <div class="display-row" id="display-resolution-row"><span id="display-resolution-label">Resolution</span> <button id="display-resolution" data-action="display-resolution">Custom</button></div>
   <div class="display-row"><span id="display-topmost-label">Always on top</span> <button id="display-topmost" data-action="display-topmost">Off</button></div>
+  <div class="display-row"><span id="display-vsync-label">V-Sync</span> <button id="display-vsync" data-action="display-vsync">Off</button></div>
   <div class="display-row"><span id="display-frame-active-label">When Active</span> · FPS <input id="display-frame-active" type="text" maxlength="6" data-action-on-blur="display-frame-active" /></div>
   <div class="display-row"><span id="display-frame-inactive-label">When Inactive</span> · FPS <input id="display-frame-inactive" type="text" maxlength="6" data-action-on-blur="display-frame-inactive" /></div>
   <span id="display-status"></span>

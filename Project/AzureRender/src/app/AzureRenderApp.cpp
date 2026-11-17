@@ -1639,8 +1639,9 @@ void AzureRenderApp::createLogicalDevice() {
 void AzureRenderApp::createSwapchain() {
     const SwapchainSupport support = querySwapchainSupport(physicalDevice_);
     const VkSurfaceFormatKHR surfaceFormat = chooseSurfaceFormat(support.formats);
-    const VkPresentModeKHR presentMode = choosePresentMode(support.presentModes,
-        engineSettings_->get("runtime.vsync").get<bool>());
+    const bool synchronized = effectiveVsync();
+    const VkPresentModeKHR presentMode = choosePresentMode(support.presentModes, synchronized);
+    frontend_->updatePresentationSync(synchronized);
     selectedPresentMode_ = presentMode;
     const VkExtent2D extent = chooseExtent(support.capabilities);
 

@@ -1,5 +1,5 @@
 local preferences = {mode = 0, resolution = 3, alwaysOnTop = false, pending = false}
-local saved, failure, action, frameRates
+local saved, failure, action, frameRates, sync
 local text, visible, fields = {}, {}, {}
 local window = {}
 function window:get(component, field)
@@ -14,13 +14,20 @@ self = {}
 function self:find(name) assert(name == "room-display-window"); return window end
 function self:read_save(slot)
     if slot == "room-frame-rates" then return frameRates end
+    if slot == "room-vsync" then return sync end
     assert(slot == "room-window-settings")
     return saved
 end
 function self:try_write_save(slot, value)
-    assert(slot == "room-window-settings" or slot == "room-frame-rates")
+    assert(slot == "room-window-settings" or slot == "room-frame-rates" or slot == "room-vsync")
     if failure then return false end
-    if slot == "room-frame-rates" then frameRates = value else saved = value end
+    if slot == "room-frame-rates" then
+        frameRates = value
+    elseif slot == "room-vsync" then
+        sync = value
+    else
+        saved = value
+    end
     return true
 end
 function self:pressed(name) return action == name end
@@ -102,3 +109,21 @@ failure = false
 preferences.activeFrameRate, preferences.inactiveFrameRate = 60, 24
 init()
 assert(preferences.activeFrameRate == 250 and preferences.inactiveFrameRate == 10)
+
+preferences.vsync = false
+press("display-toggle")
+assert(text["display-vsync"] == "Off")
+press("display-vsync")
+assert(preferences.vsync and sync[2] == true and text["display-vsync"] == "On")
+failure = true
+press("display-vsync")
+assert(preferences.vsync and sync[2] == true)
+failure = false
+preferences.vsync = false
+init()
+assert(preferences.vsync and not visible["display-panel"])
+sync = {2, false}
+init()
+press("display-toggle")
+press("display-vsync")
+assert(preferences.vsync and sync[1] == 2)
