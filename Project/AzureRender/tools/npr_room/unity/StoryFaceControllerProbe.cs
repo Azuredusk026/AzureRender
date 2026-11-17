@@ -214,6 +214,135 @@ public static class StoryFaceControllerProbe
         }
     }
 
+    [Serializable] public sealed class MuscleSample
+    {
+        public float[] muscle;
+        public Quaternion rotation;
+    }
+
+    [Serializable] public sealed class MuscleBasis
+    {
+        public string joint;
+        public string[] muscles;
+        public MuscleSample[] samples;
+    }
+
+    [Serializable] public sealed class MuscleMotion
+    {
+        public int frame, motion;
+        public MuscleSample[] normal, gaze;
+    }
+
+    [Serializable] public sealed class MuscleReport
+    {
+        public string editor;
+        public MuscleBasis[] basis;
+        public MuscleMotion[] animated;
+    }
+
+    public static void RunHumanoidBasis()
+    {
+        var folder = Path.GetDirectoryName(Application.dataPath);
+        var rig = JsonUtility.FromJson<StoryBodyControllerProbe.Rig>(File.ReadAllText(Path.Combine(folder, "story-body-probe.json")));
+        var config = JsonUtility.FromJson<Settings>(File.ReadAllText(Path.Combine(folder, "story-face-probe.json")));
+        var controller = AssetDatabase.LoadAssetAtPath<AnimatorController>(rig.controller);
+        var calibration = Create(rig, config, controller, 0, 0, 0, 0);
+        var normal = Create(rig, config, controller, 0, 0, 0, 0);
+        var gaze = Create(rig, config, controller, 0, 0, 1, 0);
+        var actors = new[] { calibration, normal, gaze };
+        var boneIds = new[] { HumanBodyBones.Chest, HumanBodyBones.Neck, HumanBodyBones.Head };
+        var names = new[] {
+            new[] { "Chest Left-Right", "Chest Front-Back", "Chest Twist Left-Right" },
+            new[] { "Neck Nod Down-Up", "Neck Tilt Left-Right", "Neck Turn Left-Right" },
+            new[] { "Head Nod Down-Up", "Head Tilt Left-Right", "Head Turn Left-Right" }
+        };
+        var muscleIds = Array.ConvertAll(names, trio => Array.ConvertAll(trio, name => Array.IndexOf(HumanTrait.MuscleName, name)));
+        if (Array.Exists(muscleIds, trio => Array.Exists(trio, id => id < 0)))
+            throw new InvalidOperationException("Missing source gaze muscle in the Avatar");
+        var report = new MuscleReport { editor = Application.unityVersion, basis = new MuscleBasis[boneIds.Length],
+                                        animated = new MuscleMotion[720] };
+        HumanPoseHandler Handler(Actor actor)
+        {
+            var animator = actor.root.GetComponent<Animator>();
+            return new HumanPoseHandler(animator.avatar, animator.transform);
+        }
+        Transform Bone(Actor actor, int index) => actor.root.GetComponent<Animator>().GetBoneTransform(boneIds[index]);
+        MuscleSample[] Capture(Actor actor, HumanPoseHandler handler)
+        {
+            var pose = new HumanPose();
+            handler.GetHumanPose(ref pose);
+            var samples = new MuscleSample[boneIds.Length];
+            for (var index = 0; index < boneIds.Length; index++)
+                samples[index] = new MuscleSample {
+                    muscle = Array.ConvertAll(muscleIds[index], id => pose.muscles[id]),
+                    rotation = Bone(actor, index).localRotation
+                };
+            return samples;
+        }
+        try
+        {
+            using (var handler = Handler(calibration))
+            {
+                var pose = new HumanPose();
+                calibration.graph.Evaluate(0);
+                handler.GetHumanPose(ref pose);
+                var grid = new[] { -.8f, -.4f, 0f, .4f, .8f };
+                for (var index = 0; index < boneIds.Length; index++)
+                {
+                    var results = new List<MuscleSample>();
+                    foreach (var first in grid)
+                    foreach (var second in grid)
+                    foreach (var third in grid)
+                    {
+                        Array.Clear(pose.muscles, 0, pose.muscles.Length);
+                        var values = new[] { first, second, third };
+                        for (var coordinate = 0; coordinate < values.Length; coordinate++)
+                            pose.muscles[muscleIds[index][coordinate]] = values[coordinate];
+                        handler.SetHumanPose(ref pose);
+                        results.Add(new MuscleSample { muscle = values, rotation = Bone(calibration, index).localRotation });
+                    }
+                    report.basis[index] = new MuscleBasis { joint = Bone(calibration, index).name,
+                                                          muscles = names[index], samples = results.ToArray() };
+                }
+            }
+            using (var source = Handler(normal))
+            using (var adjusted = Handler(gaze))
+            {
+                var commands = new Dictionary<int, int> {
+                    {0, 0}, {40, 5}, {95, 1}, {150, 3}, {205, 0}, {280, 400}, {590, 401}, {650, 12}
+                };
+                gaze.controller.SetFloat("LookScale", .7f);
+                var motion = 0;
+                for (var frame = 0; frame < report.animated.Length; frame++)
+                {
+                    if (commands.TryGetValue(frame, out var next))
+                    {
+                        motion = next;
+                        SetBody(normal.controller, motion);
+                        SetBody(gaze.controller, motion);
+                    }
+                    var dt = frame == 0 ? 0 : 1f / 60;
+                    normal.graph.Evaluate(dt);
+                    gaze.graph.Evaluate(dt);
+                    report.animated[frame] = new MuscleMotion {
+                        frame = frame, motion = motion, normal = Capture(normal, source), gaze = Capture(gaze, adjusted)
+                    };
+                }
+            }
+            SaveGzip(Path.Combine(folder, "story-humanoid-basis.json.gz"), JsonUtility.ToJson(report));
+            Debug.Log("Sampled source Avatar muscle basis and " + report.animated.Length + " animated frames");
+        }
+        finally
+        {
+            foreach (var actor in actors)
+            {
+                actor.graph.Destroy();
+                UnityEngine.Object.DestroyImmediate(actor.face.sharedMesh);
+                UnityEngine.Object.DestroyImmediate(actor.root);
+            }
+        }
+    }
+
     public static void RunAdditiveLayers()
     {
         var folder = Path.GetDirectoryName(Application.dataPath);

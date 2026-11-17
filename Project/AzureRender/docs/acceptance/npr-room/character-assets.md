@@ -143,6 +143,19 @@ Recovery 的 19 个 `anim_face_*.anim` 直接绑定同一脸部网格。
 | 附加层来源清单 | `da02736dfd412b59b85a2bc4f6aceca1a4404a92b6b88c5df0a33f08d1e28e6c` |
 | Unity 附加层采样 | `f78f9e47c738fdcf508b59817d66864abf3d197c38d48502baa1a8173b33a88e` |
 
+## 人体视线旋转口径
+
+任务 1908 对原 Avatar 采样 375 个校准姿态。胸、颈、头使用两轴摆动和一轴扭转。视线在人体通道中叠加，再转换为局部旋转。
+
+按原片段和当前姿态复算 15,120 个旋转。最大角度误差为 0.000041 度，眼部归一化权重误差小于 0.00000011。原生求值及常规入口按后续回放验收。
+
+本机 `story-motion-reference/opening-face/humanoid-basis/` 保存采样和旋转口径。
+
+| 记录 | SHA-256 |
+| --- | --- |
+| 原 Avatar 采样 | `83447b5a1c50fc7752308e0f2782036ecf139990bf56fff8d8400a10bea1c502` |
+| 视线旋转对照 | `7a19d2422bd9d88706bc37afebde4f5fe2f1c916dd901bfb6f8d8fcc506442c2` |
+
 ## 窗景网格
 
 窗景夹具使用郁金香场景的原网格。
@@ -174,6 +187,8 @@ python -B -m tools.npr_room.story_face_probe --source $unitySource --project $tu
 & $unity -batchmode -nographics -quit -projectPath $tutorialProbe -executeMethod StoryFaceControllerProbe.RunBodyClips -logFile $bodyMorphLog
 python -B -m tools.npr_room.story_face_probe --source $unitySource --project $tutorialProbe --graph $animatorGraph --chapters $openingChapters --model $faceGlb --body-morphs $bodyMorphReceipt --additive-overlays
 & $unity -batchmode -nographics -quit -projectPath $tutorialProbe -executeMethod StoryFaceControllerProbe.RunAdditiveLayers -logFile $additiveLayerLog
+& $unity -batchmode -nographics -quit -projectPath $tutorialProbe -executeMethod StoryFaceControllerProbe.RunHumanoidBasis -logFile $humanoidBasisLog
+python -B -m tools.npr_room.opening_look_basis --source $unitySource --receipt $additiveSource --basis $humanoidBasis --additive $additiveTrace --output $lookBasisAudit
 python -B -m tools.npr_room.verify_story_body_morphs --models $bodyMorphModels --original $tutorialModels --samples $bodyMorphSamples --output $bodyMorphAudit
 python -B tools/npr_room/test_story_body_morph_player.py --player $player --room $deskRoom --resource-root $resources --original $tutorialModels --models $bodyMorphModels --output $bodyMorphRender
 & $expressionTest --inspect $bodyMorphFaceGlb $faceSkeleton
