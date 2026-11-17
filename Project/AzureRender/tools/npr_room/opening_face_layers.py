@@ -150,9 +150,10 @@ def source_program():
 def bind(script, catalog, models, chapters):
     if catalog["meshSHA256"] != digest(models / FACE) or catalog["chaptersSHA256"] != digest(chapters):
         raise ValueError("Opening expression inputs differ from the staged room")
-    for part, expected in catalog.get("look", {}).get("models", {}).items():
-        if digest(models / "assets/heroine" / (part + ".glb")) != expected:
-            raise ValueError(f"Opening gaze target differs from the staged room: {part}")
+    for layer in ("look", "plank"):
+        for part, expected in catalog.get(layer, {}).get("models", {}).items():
+            if digest(models / "assets/heroine" / (part + ".glb")) != expected:
+                raise ValueError(f"Opening {layer} target differs from the staged room: {part}")
     camera = "new_story_camera(self, story_camera_track))"
     desk = "new_story_desk(self, story_desk_poses))"
     factory = camera if camera in script else desk

@@ -144,11 +144,14 @@ end
 """
 
 
-def face_observer(gaze_nodes):
+def face_observer(gaze_nodes, plank_nodes):
     return """
 local originalFaceUpdate = update
 local faceSample, voiceSample, finished = nil, nil, false
 local gazeNodes = REPLAY_GAZE_NODES
+local plankNodes = REPLAY_PLANK_NODES
+local plankCleanPose
+local plankDuring = 0
 local gazeParts = 0
 local gazeCleared = false
 local sawExpression, initialized = false, false
@@ -161,8 +164,14 @@ function update(dt)
         local actor = assert(self:find("heroine-face"))
         local cue = assert(self:find("opening-story-voice"))
         local pose = actor:get("azure.animator", "expression")
-        if pose ~= "" then
+        if pose:find('"morphs":', 1, true) then
             sawExpression = true
+            local plankCount = 0
+            for _, node in ipairs(plankNodes) do
+                local value = assert(self:find(node)):get("azure.animator", "expression")
+                if value:find('"bones":[{', 1, true) then plankCount = plankCount + 1 end
+            end
+            plankDuring = math.max(plankDuring, plankCount)
             if #gazeNodes > 0 and pose:find('"humanoidRotations":', 1, true) then
                 local count = 0
                 for _, node in ipairs(gazeNodes) do
@@ -188,19 +197,33 @@ function update(dt)
             gazeCleared = true
             for _, node in ipairs(gazeNodes) do
                 local target = assert(self:find(node))
-                if target:get("azure.animator", "expression") ~= "" then gazeCleared = false end
+                if target:get("azure.animator", "expression"):find('"humanoidRotations":', 1, true) then
+                    gazeCleared = false
+                end
             end
-            self:write_save("opening-face-room-proof", {1, true, faceSample or false, voiceSample or false,
-                gazeParts, gazeCleared})
-            finished = true
+            local plankNow, plankAfter, plankMoving = {}, 0, 0
+            for index, node in ipairs(plankNodes) do
+                local value = assert(self:find(node)):get("azure.animator", "expression")
+                plankNow[index] = value
+                if value:find('"bones":[{', 1, true) then
+                    plankAfter = plankAfter + 1
+                    if plankCleanPose and plankCleanPose[index] ~= value then plankMoving = plankMoving + 1 end
+                end
+            end
+            if plankCleanPose or #plankNodes == 0 then
+                self:write_save("opening-face-room-proof", {1, true, faceSample or false, voiceSample or false,
+                    gazeParts, gazeCleared, plankDuring, plankAfter, plankMoving})
+                finished = true
+            end
+            plankCleanPose = plankNow
         end
     end
     originalFaceUpdate(dt)
 end
-""".replace("REPLAY_GAZE_NODES", lua_value(gaze_nodes))
+""".replace("REPLAY_GAZE_NODES", lua_value(gaze_nodes)).replace("REPLAY_PLANK_NODES", lua_value(plank_nodes))
 
 
-def face_proof(profile, trace, gaze_nodes):
+def face_proof(profile, trace, gaze_nodes, plank_nodes):
     value = wait_for_slot(profile, "opening-face-room-proof", lambda item: item[1] is True, 12, trace.sample)
     assert value[0] == 1 and value[2] and value[3], value
     report = {"face": value[2], "mouth": value[3], "cleared": value[1]}
@@ -208,6 +231,9 @@ def face_proof(profile, trace, gaze_nodes):
         assert value[4] == len(gaze_nodes) and value[5] is True, value
         report["gazeParts"] = value[4]
         report["gazeCleared"] = value[5]
+    if plank_nodes:
+        assert value[6:9] == [len(plank_nodes)] * 3, value
+        report["bodyOverlay"] = {"partsDuring": value[6], "partsAfter": value[7], "partsMovingAfter": value[8]}
     return report
 
 
@@ -233,12 +259,14 @@ def replay(player, room, resources, catalog, graph, chapters, output, source_rec
         sound = camera_receipt.get("cue")
         program += camera_observer(track)
     gaze_nodes = []
+    plank_nodes = []
     if face_catalog:
         if not models:
             raise ValueError("The real face replay requires body morphology")
         catalog_data = json.loads(face_catalog.read_bytes())
         gaze_nodes = [part["node"] for part in catalog_data["program"].get("look", {}).get("targets", ())]
-        program = face_program(program, catalog_data, models, chapters) + face_observer(gaze_nodes)
+        plank_nodes = [part["node"] for part in catalog_data["program"].get("plank", {}).get("targets", ())]
+        program = face_program(program, catalog_data, models, chapters) + face_observer(gaze_nodes, plank_nodes)
     face_results = {}
     trace = MotionTrace(room, chapters)
     output.mkdir()
@@ -261,7 +289,7 @@ def replay(player, room, resources, catalog, graph, chapters, output, source_rec
                     click(PREFIX + f"option-{option}", wait=85)
                 wait_for_slot(profile, "room-unlocks", lambda value: "tutorial_01" in value[1], 40, trace.sample)
                 if face_catalog:
-                    face_results["tutorial"] = face_proof(profile, trace, gaze_nodes)
+                    face_results["tutorial"] = face_proof(profile, trace, gaze_nodes, plank_nodes)
             assert slot(profile, "room-book-layout") == [1, "Book_5"]
             assert opened_music(startup) == [Path(tracks[0]["asset"]).name]
             assert "Allocator after unload: buffers=0 images=0" in (startup / "stdout.log").read_text(encoding="utf-8")
@@ -303,7 +331,7 @@ def replay(player, room, resources, catalog, graph, chapters, output, source_rec
             click(PREFIX + "start", wait=10)
             wait_for_slot(profile, "room-unlocks", lambda value: "main_01" in value[1], 110, trace.sample)
             if face_catalog:
-                face_results["chapter"] = face_proof(profile, trace, gaze_nodes)
+                face_results["chapter"] = face_proof(profile, trace, gaze_nodes, plank_nodes)
     assert digest(original_script) == original_hash
     voice_rows = [96, 97, 98, 99, 100, 101, 105, 106, 107, 108]
     compare_voices(run, authored, voice_rows)

@@ -32,7 +32,7 @@ public static class StoryFaceControllerProbe
         public Frame[] frames;
     }
 
-    private sealed class Actor
+    internal sealed class Actor
     {
         public GameObject root;
         public SkinnedMeshRenderer face;
@@ -41,7 +41,7 @@ public static class StoryFaceControllerProbe
         public PlayableGraph graph;
     }
 
-    private static Actor Create(StoryBodyControllerProbe.Rig rig, Settings config,
+    internal static Actor Create(StoryBodyControllerProbe.Rig rig, Settings config,
                                 AnimatorController controller, float facial, float talk, float look = 1, float plank = .5f)
     {
         var nodes = new Transform[rig.nodes.Length];
@@ -109,7 +109,7 @@ public static class StoryFaceControllerProbe
         public ClipSamples[] clips;
     }
 
-    private static void SaveGzip(string path, string json)
+    internal static void SaveGzip(string path, string json)
     {
         using (var stream = File.Create(path))
         using (var gzip = new GZipStream(stream, System.IO.Compression.CompressionLevel.Optimal))
@@ -199,7 +199,7 @@ public static class StoryFaceControllerProbe
         return result;
     }
 
-    private static void SetBody(AnimatorControllerPlayable playable, int motion)
+    internal static void SetBody(AnimatorControllerPlayable playable, int motion)
     {
         playable.SetInteger("MotionType", motion);
         if (motion == 400)

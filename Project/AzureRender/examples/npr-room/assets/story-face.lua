@@ -60,14 +60,10 @@ local function apply_story_face_layer(layer, defaults, combined)
     for index, value in pairs(weights) do combined[index] = value end
 end
 
-local function story_gaze(host, faceConfig)
+local function story_gaze(faceConfig)
     local config = faceConfig.look
     local value, tween = 0, nil
-    local actors, published = {}, {}
     local gaze = {}
-    for _, track in ipairs(config.targets) do
-        actors[track.node] = assert(host:find(track.node))
-    end
 
     function gaze:select(target, seconds)
         if seconds <= 0 or target == value then
@@ -84,18 +80,10 @@ local function story_gaze(host, faceConfig)
             value = tween.to + (tween.from - tween.to) * (1 - t)^2
             if tween.elapsed + 1e-7 >= tween.seconds then value, tween = tween.to, nil end
         end
-        if value == 0 then
-            for node, actor in pairs(actors) do
-                if node ~= faceConfig.node and published[node] then
-                    actor:set("azure.animator", "expression", "")
-                    published[node] = nil
-                end
-            end
-        end
         return value
     end
 
-    function gaze:pose(morphs, upper)
+    function gaze:sample(morphs, upper)
         if value == 0 then return nil end
         local time = value * config.seconds
         local offsets = {}
@@ -116,42 +104,88 @@ local function story_gaze(host, faceConfig)
                 end
             end
         end
-        local faceResult
-        for _, track in ipairs(config.targets) do
-            local parts = {}
-            for index, joint in ipairs(track.joints) do
-                parts[index] = joint.prefix .. offsets[joint.index] .. ']}'
-            end
-            local pose = track.prefix .. table.concat(parts, ",") .. ']'
-            if track.node == faceConfig.node then
-                faceResult = pose .. ',"morphs":[' .. table.concat(morphs, ",") .. ']}'
-            else
-                pose = pose .. '}'
-                if published[track.node] ~= pose then
-                    actors[track.node]:set("azure.animator", "expression", pose)
-                    published[track.node] = pose
-                end
-            end
-        end
-        return assert(faceResult)
+        return offsets
     end
 
     return gaze
 end
 
-function new_story_face(host, config)
-    local actor = assert(host:find(config.node))
-    local neutral = assert(config.facial["0"])
-    local gaze = config.look and story_gaze(host, config)
-    local facial, speak
-    local active, ending, published = false, false, ""
-    local face = {}
-
-    local function publish(value)
-        if published == value then return end
-        published = value
-        actor:set("azure.animator", "expression", value)
+local function story_plank_sample(config, clock)
+    local base = math.floor(clock)
+    local fraction = clock - base
+    local left = config.frames[base + 1]
+    local right = config.frames[(base + 1) % #config.frames + 1]
+    local samples = {}
+    for index, a in ipairs(left) do
+        local b = right[index]
+        local values = {}
+        for channel = 1, 7 do
+            values[channel] = string.format("%.9g", a[channel] + (b[channel] - a[channel]) * fraction)
+        end
+        samples[index] = ',"rotation":[' .. table.concat(values, ",", 1, 4)
+            .. '],"translation":[' .. table.concat(values, ",", 5, 7) .. ']}'
     end
+    return samples
+end
+
+local function story_expression(host, config)
+    local actors, published, clock = {}, {}, 0
+    local function actor(node)
+        if not actors[node] then actors[node] = {target = assert(host:find(node))} end
+        return actors[node]
+    end
+    local face = actor(config.node)
+    face.prefix = config.prefix:sub(1, -#',"morphs":[' - 1)
+    for _, track in ipairs(config.look and config.look.targets or {}) do
+        actor(track.node).look = track
+    end
+    for _, track in ipairs(config.plank and config.plank.targets or {}) do
+        actor(track.node).plank = track
+    end
+
+    return function(dt, morphs, offsets)
+        local samples
+        if config.plank then
+            clock = (clock + dt * config.plank.sampleRate) % #config.plank.frames
+            samples = story_plank_sample(config.plank, clock)
+        end
+        for node, part in pairs(actors) do
+            local prefix, sections = part.prefix, {}
+            if part.plank then
+                prefix = part.plank.prefix
+                local bones = {}
+                for index, joint in ipairs(part.plank.joints) do
+                    bones[index] = joint.prefix .. samples[joint.index]
+                end
+                sections[#sections + 1] = ',"bones":[' .. table.concat(bones, ",") .. ']'
+            end
+            if offsets and part.look then
+                prefix = part.look.prefix:sub(1, -#',"humanoidRotations":[' - 1)
+                local joints = {}
+                for index, joint in ipairs(part.look.joints) do
+                    joints[index] = joint.prefix .. offsets[joint.index] .. ']}'
+                end
+                sections[#sections + 1] = ',"humanoidRotations":[' .. table.concat(joints, ",") .. ']'
+            end
+            if part == face and morphs then
+                sections[#sections + 1] = ',"morphs":[' .. table.concat(morphs, ",") .. ']'
+            end
+            local pose = #sections > 0 and (prefix .. table.concat(sections) .. '}') or ""
+            if pose ~= (published[node] or "") then
+                part.target:set("azure.animator", "expression", pose)
+                published[node] = pose
+            end
+        end
+    end
+end
+
+function new_story_face(host, config)
+    local neutral = assert(config.facial["0"])
+    local gaze = config.look and story_gaze(config)
+    local publish = story_expression(host, config)
+    local facial, speak
+    local active, ending = false, false
+    local face = {}
 
     function face:expression(row)
         if not active then return end
@@ -196,14 +230,17 @@ function new_story_face(host, config)
     end
 
     function face:update(dt)
-        if not active then return end
+        if not active then
+            if config.plank then publish(dt) end
+            return
+        end
         facial:advance(dt)
         speak:advance(dt)
         local look = gaze and gaze:update(dt) or 0
         if ending and look == 0 and not facial.next and facial.current == neutral
             and not speak.next and speak.current == config.silent then
             active = false
-            publish("")
+            publish(dt)
             return
         end
         local weights = {}
@@ -216,8 +253,8 @@ function new_story_face(host, config)
                     .. ',"weight":' .. string.format("%.9g", weights[index]) .. '}'
             end
         end
-        local pose = gaze and gaze:pose(morphs, weights)
-        publish(pose or (config.prefix .. table.concat(morphs, ",") .. ']}'))
+        local offsets = gaze and gaze:sample(morphs, weights)
+        publish(dt, morphs, offsets)
     end
 
     return face

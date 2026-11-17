@@ -62,6 +62,7 @@ def main():
     run(args.lua, [example / "assets/story-camera.lua", example / "tests/story-camera.lua"])
     run(args.lua, [example / "assets/story-face.lua", example / "tests/story-face.lua"])
     run(args.lua, [example / "assets/story-face.lua", example / "tests/story-gaze.lua"])
+    run(args.lua, [example / "assets/story-face.lua", example / "tests/story-plank.lua"])
     run(args.lua, [example / "assets/room-achievements.lua", example / "tests/room-achievements.lua"])
     print("Timer, room startup, tools, progression, story and platform fixture checks passed")
 

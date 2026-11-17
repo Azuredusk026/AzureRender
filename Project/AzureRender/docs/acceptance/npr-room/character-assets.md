@@ -180,6 +180,23 @@ Recovery 的 19 个 `anim_face_*.anim` 直接绑定同一脸部网格。
 | 视线与表情输入 | `7ed64587e1838eae1aefaf98f922baa92f18887586e34cfae0da7223471797e2` |
 | 常规房间回放 | `27ab3081003e48fb58a3a37b20ef46f9cdd5358fa3f46b57d3f58d6274b7a0bb` |
 
+## 房间身体附加层
+
+`plankshake` 是原身体控制器第五层，权重为 0.5，状态周期为 4.5 秒。房间按每秒 60 个姿态的周期表采样，在两帧之间插值。八个关节的本地偏移分配给七个带相应骨骼的角色部件。剧情和待机共用连续时钟。
+
+任务 1924 和 1923 分别采样关闭视线及视线强度 0.7 的原控制器。每组采样 720 帧，覆盖八次身体动作指令。使用第一组的首个周期验证全部样本，两个场景的最大旋转偏差分别为 0.0353° 和 0.0451°，最大平移偏差分别为 0.0442 毫米和 0.0433 毫米。姿态边界为 0.1° 和 0.5 毫米。
+
+任务 1925 从正常入口分别完成教学和第一章。两章都记录七部件的身体叠加，收尾后七部件继续更新。六部件的视线叠加和脸部表情、嘴型均完成清理，相机、语音、布置和存档也通过回归。
+
+采样、房间图层输入和回放报告位于本机 `story-motion-reference/opening-face/plank-layer/`。
+
+| 记录 | SHA-256 |
+| --- | --- |
+| 身体附加层采样 | `70afc967fbe0097282bb75b2977aeacb860545c0a90b239765489bc7e1ee3af3` |
+| 身体与视线同时采样 | `cf4a251abcd777c29ffd2666be5bceac7990737fb3bdbefb3ce0f2ef4931ea83` |
+| 房间图层输入 | `f074be3ed257f370778976e0ba8f59347279a148c968a46c90548b5ffefc7534` |
+| 常规房间回放 | `3a128fd1ccf537edd2aa39c59d97f55c5149d7bf4d892c0aa2f29422a80f33a7` |
+
 ## 窗景网格
 
 窗景夹具使用郁金香场景的原网格。
@@ -214,6 +231,11 @@ python -B -m tools.npr_room.story_face_probe --source $unitySource --project $tu
 & $unity -batchmode -nographics -quit -projectPath $tutorialProbe -executeMethod StoryFaceControllerProbe.RunHumanoidBasis -logFile $humanoidBasisLog
 python -B -m tools.npr_room.opening_look_basis --source $unitySource --receipt $additiveSource --basis $humanoidBasis --additive $additiveTrace --output $lookBasisAudit --native-fixture $nativeLookCases
 & $expressionTest --audit-humanoid $nativeLookCases
+& $unity -batchmode -nographics -quit -projectPath $tutorialProbe -executeMethod StoryPlankControllerProbe.Run -logFile $plankLog
+$env:AZURE_NPR_PLANK_WITH_LOOK = "1"
+& $unity -batchmode -nographics -quit -projectPath $tutorialProbe -executeMethod StoryPlankControllerProbe.Run -logFile $plankGazeLog
+Remove-Item Env:AZURE_NPR_PLANK_WITH_LOOK
+python -B -m tools.npr_room.opening_plank --catalog $gazeCatalog --source $unitySource --receipt $additiveSource --graph $animatorGraph --baseline $plankTrace --gaze $plankGazeTrace --models $bodyMorphModels --inspector $expressionTest --output $plankCatalog
 python -B -m tools.npr_room.verify_story_body_morphs --models $bodyMorphModels --original $tutorialModels --samples $bodyMorphSamples --output $bodyMorphAudit
 python -B tools/npr_room/test_story_body_morph_player.py --player $player --room $deskRoom --resource-root $resources --original $tutorialModels --models $bodyMorphModels --output $bodyMorphRender
 & $expressionTest --inspect $bodyMorphFaceGlb $faceSkeleton

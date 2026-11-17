@@ -68,6 +68,9 @@ def stage(source, project, graph, chapter_file, model, body_morphs=None, additiv
             else:
                 shutil.copyfile(path, target)
     shutil.copyfile(sampler, assets / "Editor/StoryFaceControllerProbe.cs")
+    plank_sampler = sampler.with_name("StoryPlankControllerProbe.cs")
+    if additive_overlays:
+        shutil.copyfile(plank_sampler, assets / "Editor/StoryPlankControllerProbe.cs")
 
     gltf, _ = parse_glb(model)
     mesh, = gltf["meshes"]
@@ -80,6 +83,8 @@ def stage(source, project, graph, chapter_file, model, body_morphs=None, additiv
     receipt = {"schemaVersion": 1, "graphSHA256": digest(graph), "chaptersSHA256": digest(chapter_file),
                "meshSHA256": digest(model), "samplerSHA256": digest(sampler), "assets": wanted,
                "facialRoutes": routes}
+    if additive_overlays:
+        receipt["plankSamplerSHA256"] = digest(plank_sampler)
     write(project / "story-face-source-receipt.json", receipt)
     return receipt
 

@@ -129,6 +129,7 @@ P3 按功能组实施与验收。完成一个功能组后更新矩阵，再继�
 [教学与第一章角色动作](../acceptance/npr-room/opening-body.md)登记源动作、固定转场和条件转场。常规入口回放覆盖教学身体动作、Windows 相机轨迹和第一章。
 [开场表情与嘴型](../acceptance/npr-room/character-assets.md#开场表情与嘴型回放)登记台词、原图层叠加和收尾清理。
 [开场视线](../acceptance/npr-room/character-assets.md#开场视线回放)登记原 Avatar 旋转、六部件叠加和常规入口回放。
+[房间身体附加层](../acceptance/npr-room/character-assets.md#房间身体附加层)登记七部件的连续循环，以及叠加视线时的姿态误差。
 [开场书本布置](../acceptance/npr-room/opening-book-layout.md)登记五套布置、剧情临时状态和存档恢复。
 [开场桌面姿态](../acceptance/npr-room/opening-desk.md)登记原道具末帧、课本蒙皮和教学切换回放。
 
