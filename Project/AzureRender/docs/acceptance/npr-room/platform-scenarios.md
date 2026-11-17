@@ -74,6 +74,24 @@ python -B tools/npr_room/test_room_window_player.py --player $player --project $
 python -B tools/npr_room/test_room_window_player.py --player $player --project $roomProject --resource-root $resources --output $windowPanelReplay --settings-panel
 ```
 
+## Windows 系统菜单置顶
+
+房间普通窗口的系统菜单首项使用原版命令编号 8191。选择后切换置顶并保存房间显示设置。菜单标题显示下一步可执行的操作。英语验证使用 `Always on Top(On)` 与 `Always on Top(Off)`。
+
+任务 1987 通过两个独立 Player 回放。显示面板关闭时，从系统菜单开启和关闭置顶，两次均核对 Windows 扩展样式、菜单标题和本地存档。随后通过显示面板、无边框窗口及设置重开回归。两个进程退出后的 GPU 缓冲区和图像计数均为零。
+
+本机证据位于 `platform-achievement-reference/window-preferences/system-menu/`。
+
+| 记录 | SHA-256 |
+| --- | --- |
+| 系统菜单及面板回放 | `d2c218d0c9306d60a3959f083dff700505302efded3d03f3e63547823fdc09e4` |
+| 原生诊断构建清单 | `428d3de1efc4789cf4bac3df6361a7539dba6916e59bd8a7c5c477d9d0bc2bc5` |
+| 诊断 Player | `b1339c7394d730305432a46f77d23bd20c4dff92cfd57a82998e1351107013ff` |
+
+```powershell
+python -B tools/npr_room/test_room_window_player.py --player $player --project $roomProject --resource-root $resources --output $windowSystemMenuReplay --system-menu
+```
+
 ## 成就统计夹具
 
 `SteamAchievements` 在平台初始化后写入统计。增加进度时先读当前值；写入成功后更新本地缓存，再提交统计。是否已持久化以重开后读到的结果为准。

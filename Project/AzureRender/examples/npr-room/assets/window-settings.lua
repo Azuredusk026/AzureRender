@@ -60,23 +60,23 @@ end
 function update()
     local value = current()
     if saved and not same(value, saved) and not window:get(component, "pending") then store(value) end
-    if self:pressed("display-toggle") then
+    local proposed
+    if self:pressed("display-topmost-menu") or (open and self:pressed("display-topmost")) then
+        proposed = {1, value[2], value[3], not value[4]}
+    elseif self:pressed("display-toggle") then
         open = not open
         displayed = nil
         self:ui_visible("display-panel", open)
     elseif open then
-        local proposed
         if self:pressed("display-mode") then
             proposed = {1, 1 - value[2], value[3], value[4]}
         elseif self:pressed("display-resolution") and value[2] == 0 then
             proposed = {1, value[2], (value[3] + 1) % #resolutions, value[4]}
-        elseif self:pressed("display-topmost") then
-            proposed = {1, value[2], value[3], not value[4]}
         end
-        if proposed and store(proposed) then
-            apply(proposed)
-            value = proposed
-        end
+    end
+    if proposed and store(proposed) then
+        apply(proposed)
+        value = proposed
     end
     show(value)
 end

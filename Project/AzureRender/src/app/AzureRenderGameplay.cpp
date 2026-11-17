@@ -239,6 +239,9 @@ void AzureRenderApp::synchronizeEditorRuntime(){
 }
 void AzureRenderApp::synchronizeGameUi(){
     if (!fixedSimulation_) {
+        constexpr auto menuAction = "display-topmost-menu";
+        auto* game = activeGame();
+        bool menuEnabled = false;
         if (auto* runtime = activeRuntime()) {
             auto& world = runtime->world();
             const auto* windows = world.findComponentArray<azurerender::game::WindowPresentation>();
@@ -253,8 +256,11 @@ void AzureRenderApp::synchronizeGameUi(){
                 state.mode = static_cast<std::uint32_t>(applied.mode);
                 state.resolution = static_cast<std::uint32_t>(applied.resolution);
                 state.alwaysOnTop = applied.alwaysOnTop;
+                menuEnabled = game && game->input().hasAction(menuAction);
             }
         }
+        frontend_->setTopmostMenuEnabled(menuEnabled);
+        if (menuEnabled && frontend_->consumeTopmostMenuToggle()) game->input().activate(menuAction);
     }
     auto* presentation=activePresentation();auto* assets=activeAssets();const auto reference=presentation?presentation->uiDocument():std::string();
     const auto path=assets&&!reference.empty()?assets->resolveReference(reference).generic_u8string():std::string();

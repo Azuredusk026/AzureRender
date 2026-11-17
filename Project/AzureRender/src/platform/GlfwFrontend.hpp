@@ -48,6 +48,8 @@ public:
     [[nodiscard]] std::vector<const char*> requiredVulkanExtensions() const;
     void applyWindowPresentation(WindowMode mode, WindowResolution resolution, bool alwaysOnTop);
     [[nodiscard]] WindowPresentation windowPresentation();
+    void setTopmostMenuEnabled(bool enabled);
+    [[nodiscard]] bool consumeTopmostMenuToggle();
 
     void pollEvents() const;
     void recordFileDrop(int count,const char** paths);
@@ -67,6 +69,8 @@ private:
     };
     std::optional<WindowedPlacement> windowedPlacement_;
     WindowResolution resolution_ = WindowResolution::Custom;
+    bool topmostMenuEnabled_ = false;
+    bool topmostMenuToggle_ = false;
 };
 
 }  // namespace azurerender

@@ -5,7 +5,7 @@ from tools.npr_room.room_geometry import activate_room_control
 
 
 def install(project, scene, document, prefix=""):
-    actions = ("toggle", "mode", "resolution", "topmost")
+    actions = ("toggle", "mode", "resolution", "topmost", "topmost-menu")
     if any("display-" + action in project["runtime"]["input"] for action in actions):
         raise ValueError("Room already has display actions")
     activate_room_control(project, scene, "display", actions)

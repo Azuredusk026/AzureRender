@@ -1254,7 +1254,7 @@ target_link_libraries(AzureFoundation PRIVATE zstd::libzstd)
 target_compile_definitions(AzureFoundation PRIVATE AZURERENDER_DEVELOPMENT_ROOT="${CMAKE_CURRENT_SOURCE_DIR}")
 target_link_libraries(AzurePlatform PUBLIC AzureFoundation Vulkan::Vulkan glfw)
 if(WIN32)
-    target_link_libraries(AzurePlatform PRIVATE ole32 shell32 uuid)
+    target_link_libraries(AzurePlatform PRIVATE ole32 shell32 uuid comctl32)
 endif()
 target_link_libraries(AzureRenderCore PUBLIC AzureFoundation Vulkan::Vulkan nlohmann_json::nlohmann_json RmlUi::RmlUi
     GPUOpen::VulkanMemoryAllocator OpenEXR::OpenEXR)

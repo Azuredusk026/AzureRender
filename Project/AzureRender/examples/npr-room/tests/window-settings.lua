@@ -64,3 +64,12 @@ init()
 press("display-toggle")
 press("display-topmost")
 assert(saved == later and not preferences.pending and not preferences.alwaysOnTop)
+
+saved = nil
+init()
+press("display-topmost-menu")
+assert(not visible["display-panel"] and preferences.alwaysOnTop and preferences.pending and saved[4])
+preferences.pending = false
+failure = true
+press("display-topmost-menu")
+assert(not preferences.pending and preferences.alwaysOnTop and saved[4])

@@ -41,6 +41,37 @@ def native_placement(window):
             "topmost": bool(user.GetWindowLongPtrW(hwnd, -20) & 8)}
 
 
+TOPMOST_MENU_COMMAND = 8191
+
+
+def native_menu_title(window):
+    hwnd = window.find()
+    assert hwnd
+    user = window.user
+    user.GetSystemMenu.argtypes = [wintypes.HWND, wintypes.BOOL]
+    user.GetSystemMenu.restype = wintypes.HMENU
+    user.GetMenuItemID.argtypes = [wintypes.HMENU, ctypes.c_int]
+    user.GetMenuItemID.restype = wintypes.UINT
+    user.GetMenuStringW.argtypes = [wintypes.HMENU, wintypes.UINT, wintypes.LPWSTR, ctypes.c_int, wintypes.UINT]
+    user.GetMenuStringW.restype = ctypes.c_int
+    menu = user.GetSystemMenu(hwnd, False)
+    assert menu and user.GetMenuItemID(menu, 0) == TOPMOST_MENU_COMMAND, "Missing topmost system menu entry"
+    title = ctypes.create_unicode_buffer(128)
+    assert user.GetMenuStringW(menu, TOPMOST_MENU_COMMAND, title, len(title), 0)
+    return title.value
+
+
+def activate_native_topmost(window):
+    hwnd = window.find()
+    assert hwnd
+    send = window.user.SendMessageTimeoutW
+    send.argtypes = [wintypes.HWND, wintypes.UINT, wintypes.WPARAM, wintypes.LPARAM, wintypes.UINT,
+                     wintypes.UINT, ctypes.POINTER(ctypes.c_size_t)]
+    send.restype = wintypes.LPARAM
+    result = ctypes.c_size_t()
+    assert send(hwnd, 0x0112, TOPMOST_MENU_COMMAND, 0, 2, 2000, ctypes.byref(result))
+
+
 def startup_preferences(player, project, resources, output):
     output.mkdir()
     profile = output / "profile"
@@ -85,7 +116,7 @@ def startup_preferences(player, project, resources, output):
     return report
 
 
-def settings_panel(player, project, resources, output):
+def settings_panel(player, project, resources, output, system_menu=False):
     output.mkdir()
     profile = output / "profile"
     room = project.parent
@@ -101,6 +132,18 @@ def settings_panel(player, project, resources, output):
     def state():
         return native_placement(prepared["window"])
 
+    def menu_toggle(on):
+        window = prepared["window"]
+        assert native_menu_title(window) == ("Always on Top(On)" if on else "Always on Top(Off)")
+        activate_native_topmost(window)
+        saved = wait_for_slot(profile, "room-window-settings", lambda value: value == [1, 0, 3, on], 10)
+        deadline = time.monotonic() + 10
+        expected_title = "Always on Top(Off)" if on else "Always on Top(On)"
+        while state()["topmost"] != on or native_menu_title(window) != expected_title:
+            assert time.monotonic() < deadline, (state(), native_menu_title(window))
+            time.sleep(.03)
+        return {"saved": saved, "nativeTopmost": on, "caption": expected_title}
+
     def configure(descriptor, level, prefix):
         return install(descriptor, level, document, prefix)
 
@@ -108,6 +151,7 @@ def settings_panel(player, project, resources, output):
         with playing(player, fixture, resources, profile, output / "edit", level_reference=level,
                      on_ready=ready) as (click, _, _, screenshot):
             assert state()["clientPixels"] == [1280, 720]
+            menu = [menu_toggle(True), menu_toggle(False)] if system_menu else []
             click("display-toggle")
             click("display-resolution")
             click("display-resolution")
@@ -142,6 +186,8 @@ def settings_panel(player, project, resources, output):
     report = {"preset": preset, "borderless": borderless, "restored": restored, "reopened": reopened,
               "savedCustom": custom, "savedBorderless": selected, "finalTopmost": False, "cleanAllocatorExits": 2,
               "panelSHA256": hashlib.sha256(panel.read_bytes()).hexdigest()}
+    if system_menu:
+        report["systemMenu"] = menu
     (output / "window-settings-panel-replay.json").write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
     return report
 
@@ -214,7 +260,7 @@ def replay(player, project, resources, output):
     return report
 
 
-def run_in_physical_pixels(player, project, resources, output, preferences=False, panel=False):
+def run_in_physical_pixels(player, project, resources, output, preferences=False, panel=False, system_menu=False):
     user = ctypes.WinDLL("user32", use_last_error=True)
     set_context = user.SetThreadDpiAwarenessContext
     set_context.argtypes = [ctypes.c_void_p]
@@ -224,7 +270,9 @@ def run_in_physical_pixels(player, project, resources, output, preferences=False
     if not previous:
         raise ctypes.WinError(ctypes.get_last_error())
     try:
-        verify = settings_panel if panel else startup_preferences if preferences else replay
+        if panel or system_menu:
+            return settings_panel(player, project, resources, output, system_menu)
+        verify = startup_preferences if preferences else replay
         return verify(player, project, resources, output)
     finally:
         assert set_context(previous)
@@ -237,7 +285,8 @@ if __name__ == "__main__":
     mode = parser.add_mutually_exclusive_group()
     mode.add_argument("--preferences", action="store_true")
     mode.add_argument("--settings-panel", action="store_true")
+    mode.add_argument("--system-menu", action="store_true")
     args = parser.parse_args()
     print(json.dumps(run_in_physical_pixels(args.player.resolve(), args.project.resolve(),
                                            args.resource_root.resolve(), args.output.resolve(), args.preferences,
-                                           args.settings_panel)))
+                                           args.settings_panel, args.system_menu)))

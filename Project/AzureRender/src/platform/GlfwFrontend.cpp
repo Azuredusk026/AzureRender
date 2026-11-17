@@ -4,10 +4,36 @@
 #include <array>
 #include <stdexcept>
 
+#ifdef _WIN32
+#define NOMINMAX
+#define GLFW_EXPOSE_NATIVE_WIN32
+#include <GLFW/glfw3native.h>
+#include <commctrl.h>
+#endif
+
 namespace azurerender {
 namespace {
 
 constexpr std::array<std::pair<int, int>, 3> windowSizes{{{1280, 720}, {1600, 900}, {1920, 1080}}};
+
+#ifdef _WIN32
+constexpr UINT kTopmostCommand = 8191;
+constexpr UINT_PTR kTopmostSubclassId = 1;
+
+const wchar_t* topmostMenuTitle(bool topmost) {
+    return topmost ? L"Always on Top(Off)" : L"Always on Top(On)";
+}
+
+LRESULT CALLBACK topmostMenuProcedure(HWND window, UINT message, WPARAM wParam, LPARAM lParam,
+                                     UINT_PTR subclass, DWORD_PTR data) {
+    if (message == WM_SYSCOMMAND && wParam == kTopmostCommand) {
+        *reinterpret_cast<bool*>(data) = true;
+        return 0;
+    }
+    if (message == WM_NCDESTROY) RemoveWindowSubclass(window, topmostMenuProcedure, subclass);
+    return DefSubclassProc(window, message, wParam, lParam);
+}
+#endif
 
 GLFWmonitor* displayFor(GLFWwindow* window) {
     int left, top, width, height, count;
@@ -61,6 +87,7 @@ GlfwFrontend::GlfwFrontend(const GlfwFrontendConfig& config) {
 
 GlfwFrontend::~GlfwFrontend() {
     if (window_ != nullptr) {
+        setTopmostMenuEnabled(false);
         glfwDestroyWindow(window_);
     }
     glfwTerminate();
@@ -123,6 +150,13 @@ void GlfwFrontend::applyWindowPresentation(WindowMode mode, WindowResolution res
     const auto floating = alwaysOnTop ? GLFW_TRUE : GLFW_FALSE;
     if (glfwGetWindowAttrib(window_, GLFW_FLOATING) != floating)
         glfwSetWindowAttrib(window_, GLFW_FLOATING, floating);
+#ifdef _WIN32
+    if (topmostMenuEnabled_) {
+        const auto menu = GetSystemMenu(glfwGetWin32Window(window_), FALSE);
+        ModifyMenuW(menu, kTopmostCommand, MF_BYCOMMAND | MF_STRING, kTopmostCommand,
+                    topmostMenuTitle(glfwGetWindowAttrib(window_, GLFW_FLOATING) == GLFW_TRUE));
+    }
+#endif
     resolution_ = resolution;
 }
 
@@ -134,6 +168,35 @@ WindowPresentation GlfwFrontend::windowPresentation() {
     }
     return {windowedPlacement_ ? WindowMode::Borderless : WindowMode::Windowed, resolution_,
         glfwGetWindowAttrib(window_, GLFW_FLOATING) == GLFW_TRUE};
+}
+
+void GlfwFrontend::setTopmostMenuEnabled(bool enabled) {
+#ifdef _WIN32
+    if (enabled == topmostMenuEnabled_) return;
+    const auto window = glfwGetWin32Window(window_);
+    const auto menu = GetSystemMenu(window, FALSE);
+    if (!enabled) {
+        RemoveWindowSubclass(window, topmostMenuProcedure, kTopmostSubclassId);
+        if (menu) RemoveMenu(menu, kTopmostCommand, MF_BYCOMMAND);
+        topmostMenuEnabled_ = false;
+        topmostMenuToggle_ = false;
+        return;
+    }
+    if (!menu || !SetWindowSubclass(window, topmostMenuProcedure, kTopmostSubclassId,
+                                   reinterpret_cast<DWORD_PTR>(&topmostMenuToggle_))) return;
+    if (!InsertMenuW(menu, 0, MF_BYPOSITION | MF_STRING, kTopmostCommand,
+                     topmostMenuTitle(glfwGetWindowAttrib(window_, GLFW_FLOATING) == GLFW_TRUE))) {
+        RemoveWindowSubclass(window, topmostMenuProcedure, kTopmostSubclassId);
+        return;
+    }
+    topmostMenuEnabled_ = true;
+#else
+    (void)enabled;
+#endif
+}
+
+bool GlfwFrontend::consumeTopmostMenuToggle() {
+    return std::exchange(topmostMenuToggle_, false);
 }
 
 std::vector<const char*> GlfwFrontend::requiredVulkanExtensions() const {
