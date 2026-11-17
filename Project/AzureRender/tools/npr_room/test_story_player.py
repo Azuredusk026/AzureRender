@@ -147,7 +147,21 @@ def normal_room_fixture(room, chapters, inventory):
         "playlist": playlist[0]["asset"], **receipt["tracks"]}
 
 
-def replay(player, room, resources, chapters, inventory, output, normal=False):
+def book_pixels(before, after):
+    import numpy as np
+    from PIL import Image
+
+    def region(path):
+        with Image.open(path) as image:
+            assert image.size == (1280, 720)
+            return np.asarray(image.convert("RGB"))[484:539, 347:466]
+
+    return int(np.count_nonzero(np.any(region(before) != region(after), axis=2)))
+
+
+def replay(player, room, resources, chapters, inventory, output, normal=False, books=False):
+    if books and not normal:
+        raise ValueError("Book layout verification requires the normal room")
     output.mkdir()
     profile = output / "profile"
     tutorial = output / "tutorial"
@@ -155,9 +169,23 @@ def replay(player, room, resources, chapters, inventory, output, normal=False):
     fixture = normal_room_fixture if normal else route_fixture
     with fixture(room, chapters, inventory) as (project, level, authored, music):
         files = {label: Path(path).name for label, path in music.items()}
+        book_slot = "room-book-layout"
+        if books:
+            from test_unlock_room_player import save
+
+            receipt = json.loads((room / "story-book-layout-receipt.json").read_bytes())
+            assert receipt["default"] == "Book_1" and len(receipt["geometry"]) == 11
+            save(profile, project, book_slot, [1, "Book_5"])
+            book_file, = profile.glob("project-*/save-room-book-layout.json")
+            original = book_file.read_bytes()
         with playing(player, project, resources, profile, tutorial, level_reference=level) as (click, press, _, screenshot):
+            if books:
+                tutorial_before = screenshot("books-before-tutorial.png")
             click(PREFIX + "start")
             click(PREFIX + "option-1", wait=70)
+            if books:
+                tutorial_during = screenshot("books-during-tutorial.png")
+                assert book_file.read_bytes() == original
             if normal:
                 press(77, domain="game")
                 assert slot(profile, "timer-mode") is None
@@ -172,7 +200,9 @@ def replay(player, room, resources, chapters, inventory, output, normal=False):
                 tutorial_proof = wait_for_slot(profile, "opening-replay-proof", lambda value: value[0] == "tutorial_01", 40)
             assert slot(profile, "room-unlocks")[1] == ["tutorial_01"]
             assert_locked(click)
-            screenshot()
+            tutorial_after = screenshot()
+            if books:
+                assert book_file.read_bytes() == original
         tutorial_rows = [9, 24, 30, 39, 44, 45, 46, 48, 57, 59, 62, 64, 67, 69, 72, 73, 74, 75, 76, 80, 85, 86]
         compare_voices(tutorial, authored, tutorial_rows)
         assert opened_music(tutorial) == [files["playlist"]]
@@ -189,6 +219,8 @@ def replay(player, room, resources, chapters, inventory, output, normal=False):
             click("timer-end-button")
             progress = wait_for_slot(profile, "work-calendar", lambda value: value[0] == 2 and value[2][0] == 2, 12)
             click(PREFIX + "start", wait=10)
+            if books:
+                assert slot(profile, book_slot) == [1, "Book_1"]
             if normal:
                 wait_for_slot(profile, "room-unlocks", lambda value: "main_01" in value[1], 110)
             else:
@@ -197,6 +229,8 @@ def replay(player, room, resources, chapters, inventory, output, normal=False):
             chapter_rows = [96, 97, 98, 99, 100, 101, 105, 106, 107, 108]
             compare_voices(chapter, authored, chapter_rows)
             assert opened_music(chapter) == [files["playlist"], files["NEWings"]]
+            if books:
+                chapter_after = screenshot("books-after-chapter.png")
             click(PREFIX + "log", wait=8)
             screenshot()
             click(PREFIX + "replay-1", wait=8)
@@ -205,6 +239,19 @@ def replay(player, room, resources, chapters, inventory, output, normal=False):
                 time.sleep(.25)
             assert slot(profile, "room-unlocks")[1] == ["tutorial_01", "main_01"]
         assert opened_music(chapter) == [files["playlist"], files["NEWings"], files["Nostalgia"]]
+        if books:
+            fresh = output / "fresh-profile"
+            with playing(player, project, resources, fresh, output / "fresh", level_reference=level) as (_, _, _, screenshot):
+                default_books = screenshot("default-books.png")
+                assert slot(fresh, book_slot) is None
+            deltas = {
+                "tutorialApply": book_pixels(tutorial_before, tutorial_during),
+                "tutorialRestore": book_pixels(tutorial_before, tutorial_after),
+                "chapterApply": book_pixels(tutorial_before, chapter_after),
+                "chapterMatchesDefault": book_pixels(chapter_after, default_books),
+            }
+            assert deltas["tutorialApply"] > 100 and deltas["chapterApply"] > 100, deltas
+            assert deltas["tutorialRestore"] == deltas["chapterMatchesDefault"] == 0, deltas
         if not normal:
             assert [index for index, _ in chapter_proof[2]] == [90, 91, 92, 93, 95, 102, 104, 109] and not chapter_proof[1]
             assert chapter_proof[3][0] > 0 and .029999 < chapter_proof[3][1] <= .050001
@@ -218,6 +265,10 @@ def replay(player, room, resources, chapters, inventory, output, normal=False):
             assert not [line for line in warnings if "[game-ui]" in line and "Syntax error parsing" in line], launch
         report.update(startupScene="assets:/boot.azurelevel", roomScene=level,
                       roomReceiptSHA256=digest(room / "opening-story-room-receipt.json"))
+        if books:
+            report.update(launches=3, bookPixels=deltas, bookRegion=[347, 484, 466, 539],
+                          layoutReceiptSHA256=digest(room / "story-book-layout-receipt.json"),
+                          bookSaveAfterLatestMain=slot(profile, book_slot), tutorialSavePreserved=True)
     else:
         report.update(tutorialEffects=tutorial_proof[2], chapterEffects=chapter_proof[2],
                       nonzeroNoiseFramesAndPeak={"tutorial": tutorial_proof[3], "chapter": chapter_proof[3]})
@@ -230,6 +281,8 @@ if __name__ == "__main__":
     for option in ("player", "room", "resource-root", "chapters", "inventory", "output"):
         parser.add_argument("--" + option, type=Path, required=True)
     parser.add_argument("--normal-room", action="store_true")
+    parser.add_argument("--verify-books", action="store_true")
     args = parser.parse_args()
     print(json.dumps(replay(args.player.resolve(), args.room.resolve(), args.resource_root.resolve(),
-                            args.chapters.resolve(), args.inventory.resolve(), args.output.resolve(), args.normal_room)))
+                            args.chapters.resolve(), args.inventory.resolve(), args.output.resolve(),
+                            args.normal_room, args.verify_books)))

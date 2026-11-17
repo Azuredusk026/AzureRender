@@ -1,4 +1,4 @@
-function new_story_room(host, chapters, tracks, speeds, labels, language, level)
+function new_story_room(host, chapters, tracks, speeds, labels, language, level, books)
     local music = new_story_music(host, tracks)
     local noise = new_story_noise(host)
     local dialogue = new_story_dialogue(host, speeds, language)
@@ -15,6 +15,7 @@ function new_story_room(host, chapters, tracks, speeds, labels, language, level)
 
     function presentation:begin(chapter, replay)
         host:ui_visible("opening-story-input-mask", true)
+        if books then books:begin(chapter, replay) end
         noise:begin(chapter, replay)
     end
 
@@ -27,6 +28,7 @@ function new_story_room(host, chapters, tracks, speeds, labels, language, level)
     end
 
     function presentation:effect(row, delay)
+        if books then books:effect(row) end
         noise:effect(row, delay)
         if row.command == "PlayBGM" or row.command == "TalkLogOnlyPlayBGM" then music:play(row.arguments) end
         local id = highlights[row.command]
@@ -47,6 +49,7 @@ function new_story_room(host, chapters, tracks, speeds, labels, language, level)
     function presentation:finish()
         clearFocus()
         host:ui_visible("opening-story-input-mask", false)
+        if books then books:finish() end
         music:finish()
         noise:finish()
     end
