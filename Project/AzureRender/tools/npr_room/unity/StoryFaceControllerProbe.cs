@@ -12,7 +12,7 @@ public static class StoryFaceControllerProbe
 {
     [Serializable] public sealed class Settings
     {
-        public string[] paths, names;
+        public string[] bodyClips, names;
         public float[] defaults;
     }
 
@@ -84,6 +84,78 @@ public static class StoryFaceControllerProbe
         var values = new float[size];
         for (var i = 0; i < size; i++) values[i] = actor.face.GetBlendShapeWeight(i);
         return values;
+    }
+
+    [Serializable] public sealed class ClipFrame
+    {
+        public float seconds;
+        public float[] weights;
+    }
+
+    [Serializable] public sealed class ClipSamples
+    {
+        public string name;
+        public float duration;
+        public ClipFrame[] frames;
+    }
+
+    [Serializable] public sealed class BodyClipReport
+    {
+        public string editor;
+        public string[] targets;
+        public ClipSamples[] clips;
+    }
+
+    private static void SaveGzip(string path, string json)
+    {
+        using (var stream = File.Create(path))
+        using (var gzip = new GZipStream(stream, System.IO.Compression.CompressionLevel.Optimal))
+        using (var writer = new StreamWriter(gzip))
+            writer.Write(json);
+    }
+
+    public static void RunBodyClips()
+    {
+        var folder = Path.GetDirectoryName(Application.dataPath);
+        var rig = JsonUtility.FromJson<StoryBodyControllerProbe.Rig>(File.ReadAllText(Path.Combine(folder, "story-body-probe.json")));
+        var config = JsonUtility.FromJson<Settings>(File.ReadAllText(Path.Combine(folder, "story-face-probe.json")));
+        var controller = AssetDatabase.LoadAssetAtPath<AnimatorController>(rig.controller);
+        if (config.bodyClips.Length == 0) throw new InvalidOperationException("Expected locked opening body clips");
+        var report = new BodyClipReport { editor = Application.unityVersion, targets = config.names,
+                                          clips = new ClipSamples[config.bodyClips.Length] };
+        for (var index = 0; index < config.bodyClips.Length; index++)
+        {
+            var clip = AssetDatabase.LoadAssetAtPath<AnimationClip>(config.bodyClips[index]);
+            if (!clip || clip.length <= 0) throw new InvalidOperationException(config.bodyClips[index]);
+            var actor = Create(rig, config, controller, 0, 0);
+            actor.graph.Destroy();
+            var animator = actor.root.GetComponent<Animator>();
+            var graph = PlayableGraph.Create("Direct body clip face binding");
+            try
+            {
+                graph.SetTimeUpdateMode(DirectorUpdateMode.Manual);
+                var playable = AnimationClipPlayable.Create(graph, clip);
+                AnimationPlayableOutput.Create(graph, "Face", animator).SetSourcePlayable(playable);
+                graph.Play();
+                var frames = new List<ClipFrame>();
+                for (var frame = 0; frame / 60f < clip.length - .000001f; frame++)
+                {
+                    var time = frame / 60f;
+                    playable.SetTime(time);
+                    graph.Evaluate(0);
+                    frames.Add(new ClipFrame { seconds = time, weights = Weights(actor, config.names.Length) });
+                }
+                report.clips[index] = new ClipSamples { name = clip.name, duration = clip.length, frames = frames.ToArray() };
+            }
+            finally
+            {
+                graph.Destroy();
+                UnityEngine.Object.DestroyImmediate(actor.face.sharedMesh);
+                UnityEngine.Object.DestroyImmediate(actor.root);
+            }
+        }
+        SaveGzip(Path.Combine(folder, "story-body-face-clips.json.gz"), JsonUtility.ToJson(report));
+        Debug.Log("Sampled face bindings in " + report.clips.Length + " original body clips");
     }
 
     public static void Run()
@@ -158,10 +230,7 @@ public static class StoryFaceControllerProbe
                     faceWeights = Weights(actors[2], config.names.Length)
                 };
             }
-            using (var stream = File.Create(Path.Combine(folder, "story-face-controller-trace.json.gz")))
-            using (var gzip = new GZipStream(stream, System.IO.Compression.CompressionLevel.Optimal))
-            using (var writer = new StreamWriter(gzip))
-                writer.Write(JsonUtility.ToJson(report));
+            SaveGzip(Path.Combine(folder, "story-face-controller-trace.json.gz"), JsonUtility.ToJson(report));
             Debug.Log("Sampled " + report.frames.Length + " frames of the original face and talk controller");
         }
         finally

@@ -10,7 +10,7 @@ from tools.npr_room.pbr_materials import write
 from tools.npr_room.reference_inventory import digest
 
 
-def stage(source, project, graph, chapter_file, model):
+def stage(source, project, graph, chapter_file, model, body_morphs=None):
     controller = json.loads(graph.read_bytes())
     chapters = json.loads(chapter_file.read_bytes())["chapters"]
     numbers = {row["faceMotion"] for chapter in chapters for row in chapter["commands"]
@@ -44,6 +44,13 @@ def stage(source, project, graph, chapter_file, model):
     if set(routes) != numbers:
         raise ValueError("Opening expressions do not resolve to the source graph")
 
+    bodies = {}
+    if body_morphs:
+        bodies = json.loads(body_morphs.read_bytes())["clips"]
+        if any(row["relative"] in wanted for row in bodies.values()):
+            raise ValueError("Body probe inputs overlap the facial layer")
+        wanted.update({row["relative"]: row["sha256"] for row in bodies.values()})
+
     sampler = Path(__file__).with_name("unity") / "StoryFaceControllerProbe.cs"
     assets = project / "Assets"
     for relative, sha in wanted.items():
@@ -66,7 +73,8 @@ def stage(source, project, graph, chapter_file, model):
     names, weights = mesh["extras"]["targetNames"], mesh["weights"]
     if len(names) != 57 or len(set(names)) != 57 or len(weights) != len(names):
         raise ValueError("Expected all source face bindings")
-    config = {"paths": list(wanted), "names": names, "defaults": [weight * 100 for weight in weights]}
+    config = {"names": names, "defaults": [weight * 100 for weight in weights],
+              "bodyClips": [row["relative"] for row in bodies.values()]}
     write(project / "story-face-probe.json", config)
     receipt = {"schemaVersion": 1, "graphSHA256": digest(graph), "chaptersSHA256": digest(chapter_file),
                "meshSHA256": digest(model), "samplerSHA256": digest(sampler), "assets": wanted,
@@ -80,5 +88,7 @@ if __name__ == "__main__":
     names = ("source", "project", "graph", "chapters", "model")
     for name in names:
         parser.add_argument("--" + name, type=Path, required=True)
+    parser.add_argument("--body-morphs", type=Path)
     args = vars(parser.parse_args())
-    print(json.dumps(stage(*(args[arg].resolve(strict=True) for arg in names))))
+    print(json.dumps(stage(*(args[arg].resolve(strict=True) for arg in names),
+                           body_morphs=args["body_morphs"])))

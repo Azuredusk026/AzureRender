@@ -18,6 +18,7 @@ from tools.npr_room.opening_camera import attach_audio, project as camera_projec
 from tools.npr_room.pbr_materials import write
 from tools.npr_room.reference_inventory import digest
 from tools.npr_room.room_geometry import HEROINE_PARTS, copy_room_asset, stage_live_audio_media
+from tools.npr_room.story_body_morphs import MORPH_RECEIPT
 
 
 TUTORIAL_RECEIPT = "tutorial-camera-body-receipt.json"
@@ -143,6 +144,11 @@ def stage(room, catalog, controller, chapters, source_receipt, models, output, c
                     manifest["parts"][part]["sha256"] = expected["sha256"]
                 write(path, manifest)
         write(target / TUTORIAL_RECEIPT, camera)
+        morphology = models / MORPH_RECEIPT
+        if morphology.is_file():
+            if load(morphology)["faceGlbSHA256"] != camera["parts"]["face"]["sha256"]:
+                raise ValueError("Face asset does not match its body binding receipt")
+            shutil.copyfile(morphology, target / MORPH_RECEIPT)
         if camera_path:
             write(target / "opening-camera-receipt.json", camera_path | {
                 "scriptSHA256": digest(script), "levelSHA256": digest(level)})

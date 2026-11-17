@@ -169,26 +169,9 @@ def float32(value):
     return unpack("<f", pack("<f", value))[0]
 
 
-def append_morph_clip(gltf, binary, clip, target_path, target_node):
-    if any(existing["name"] == clip["m_Name"] for existing in gltf.get("animations", ())):
-        raise ValueError(f"Duplicate clip name: {clip['m_Name']}")
-    if any(clip.get(field) for field in ("m_RotationCurves", "m_CompressedRotationCurves",
-                                        "m_EulerCurves", "m_PositionCurves", "m_ScaleCurves",
-                                        "m_PPtrCurves", "m_Events", "m_Compressed")):
-        raise ValueError("Clip contains additional animation data")
-    mesh = gltf["meshes"][gltf["nodes"][target_node]["mesh"]]
-    names, defaults = mesh["extras"]["targetNames"], mesh["weights"]
-    if len(set(names)) != len(names):
-        raise ValueError("Morph target names must be unique")
-    settings = clip["m_AnimationClipSettings"]
-    start, stop, rate = (settings["m_StartTime"], settings["m_StopTime"], clip["m_SampleRate"])
-    if not all(map(math.isfinite, (start, stop, rate))) or stop <= start or rate <= 0:
-        raise ValueError("Invalid clip time range or sample rate")
-    duration = float32(stop - start)
+def read_morph_curves(bindings, target_path, names, start):
     curves = {}
-    sampled_times = {float32(i / rate) for i in range(math.ceil(duration * rate))}
-    sampled_times.add(duration)
-    for binding in clip["m_FloatCurves"]:
+    for binding in bindings:
         prefix = "blendShape."
         attribute = binding["attribute"]
         if binding["classID"] != 137 or binding["path"] != target_path or not attribute.startswith(prefix):
@@ -206,11 +189,10 @@ def append_morph_clip(gltf, binary, clip, target_path, target_node):
                 or any(right <= left for left, right in zip(times, times[1:]))):
             raise ValueError(f"Invalid or unsupported blend-shape keys for {name}")
         curves[name] = (times, values, tangents)
-        sampled_times.update(time for time in times if 0 <= time <= duration)
-    if not curves:
-        raise ValueError("Clip has no blend-shape bindings")
+    return curves
 
-    times = sorted(sampled_times)
+
+def add_morph_sampler(gltf, binary, names, defaults, curves, times):
     values = [
         sample_shape(*curves[name], time) if name in curves else default
         for time in times for name, default in zip(names, defaults)
@@ -218,10 +200,39 @@ def append_morph_clip(gltf, binary, clip, target_path, target_node):
     inputs = add_accessor(gltf, binary, pack(f"<{len(times)}f", *times), len(times), "SCALAR", 5126)
     output = add_accessor(gltf, binary, pack(f"<{len(values)}f", *values), len(values), "SCALAR", 5126)
     gltf["accessors"][inputs].update(min=[times[0]], max=[times[-1]])
+    return {"input": inputs, "output": output, "interpolation": "LINEAR"}
+
+
+def append_morph_clip(gltf, binary, clip, target_path, target_node):
+    if any(existing["name"] == clip["m_Name"] for existing in gltf.get("animations", ())):
+        raise ValueError(f"Duplicate clip name: {clip['m_Name']}")
+    if any(clip.get(field) for field in ("m_RotationCurves", "m_CompressedRotationCurves",
+                                        "m_EulerCurves", "m_PositionCurves", "m_ScaleCurves",
+                                        "m_PPtrCurves", "m_Events", "m_Compressed")):
+        raise ValueError("Clip contains additional animation data")
+    mesh = gltf["meshes"][gltf["nodes"][target_node]["mesh"]]
+    names, defaults = mesh["extras"]["targetNames"], mesh["weights"]
+    if len(set(names)) != len(names):
+        raise ValueError("Morph target names must be unique")
+    settings = clip["m_AnimationClipSettings"]
+    start, stop, rate = (settings["m_StartTime"], settings["m_StopTime"], clip["m_SampleRate"])
+    if not all(map(math.isfinite, (start, stop, rate))) or stop <= start or rate <= 0:
+        raise ValueError("Invalid clip time range or sample rate")
+    duration = float32(stop - start)
+    curves = read_morph_curves(clip["m_FloatCurves"], target_path, names, start)
+    if not curves:
+        raise ValueError("Clip has no blend-shape bindings")
+
+    sampled_times = {float32(i / rate) for i in range(math.ceil(duration * rate))}
+    sampled_times.add(duration)
+    for key_times, _, _ in curves.values():
+        sampled_times.update(time for time in key_times if 0 <= time <= duration)
+    times = sorted(sampled_times)
+    sampler = add_morph_sampler(gltf, binary, names, defaults, curves, times)
     gltf.setdefault("animations", []).append({
         "name": clip["m_Name"], "extras": {"loop": bool(settings["m_LoopTime"])},
         "channels": [{"sampler": 0, "target": {"node": target_node, "path": "weights"}}],
-        "samplers": [{"input": inputs, "output": output, "interpolation": "LINEAR"}],
+        "samplers": [sampler],
     })
 
 

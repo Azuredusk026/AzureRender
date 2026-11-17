@@ -100,6 +100,22 @@ Recovery 的 19 个 `anim_face_*.anim` 直接绑定同一脸部网格。
 | 表情来源清单 | `7f6fb354a50e76cf7141c4d434893720a3388749dd6ee36c3adafb7a88e7dfce` |
 | Unity 表情采样 | `06f31e0be98472844e61a02758030aeb5c2aa69c38cb7bc4a66531936e048ac0` |
 
+## 身体片段的脸部曲线
+
+装配读取 20 个开场身体片段。其中 18 段携带脸部曲线，共有 955 条有效绑定。六条无目标曲线经源哈希、目标表和零权重核对后登记在清单。装配按源目标顺序写入脸部 GLB，并使用该身体片段的现有时钟。
+
+任务 1898 使用 Unity 分别采样 20 个片段。GLB 与 139,992 项源权重的最大归一化误差为 0.00000451。任务 1899 从常规房间入口跑完教学和第一章，检查七部件、相机、语音和存档。任务 1904 在同一时间点呈现两组脸部姿态，脸部区域有 1,872 个像素变化。
+
+本机 `story-motion-reference/opening-face/body-bindings/` 保存模型、源采样、回放和图片。
+
+| 记录 | SHA-256 |
+| --- | --- |
+| 模型装配清单 | `ae50bde51eb820a096378bbb36b24e17dc5eda6cf1d56e8ee8209c221083f45e` |
+| Unity 片段采样 | `cb9322499bc5edc5f37cfca4c6f493fcaaaedbe4301b7341e17f97847a3e9986` |
+| 权重对照 | `aeb481cfc35720221ab1ca5fa67acbd0d99db746c9c44b976eb392ee5a929b8a` |
+| 常规房间回放 | `132652365c9b2d6d8fcd20a58a7117b7b4209cefb24b8fc36dbc4caa216f31bd` |
+| 原生画面对照 | `6f84771454e637a815567d46cf4194b17eace8e3ea39caf7588a8f0d935bf6dc` |
+
 ## 窗景网格
 
 窗景夹具使用郁金香场景的原网格。
@@ -126,6 +142,11 @@ python -B -m tools.npr_room.skinned_mesh_export --source $unitySource --scene $u
 python -B -m tools.npr_room.deformer_catalog --source $unitySource --catalog $meshManifest --output $deformerCatalog
 python -B -m tools.npr_room.story_face_probe --source $unitySource --project $tutorialProbe --graph $animatorGraph --chapters $openingChapters --model $faceGlb
 & $unity -batchmode -nographics -quit -projectPath $tutorialProbe -executeMethod StoryFaceControllerProbe.Run -logFile $faceLog
+python -B -m tools.npr_room.story_body_morphs --source $unitySource --room $deskRoom --models $tutorialModels --catalog $bodyCatalog --source-receipt $tutorialSource --output $bodyMorphModels
+python -B -m tools.npr_room.story_face_probe --source $unitySource --project $tutorialProbe --graph $animatorGraph --chapters $openingChapters --model $faceGlb --body-morphs $bodyMorphReceipt
+& $unity -batchmode -nographics -quit -projectPath $tutorialProbe -executeMethod StoryFaceControllerProbe.RunBodyClips -logFile $bodyMorphLog
+python -B -m tools.npr_room.verify_story_body_morphs --models $bodyMorphModels --original $tutorialModels --samples $bodyMorphSamples --output $bodyMorphAudit
+python -B tools/npr_room/test_story_body_morph_player.py --player $player --room $deskRoom --resource-root $resources --original $tutorialModels --models $bodyMorphModels --output $bodyMorphRender
 ```
 
 转换支持单个渲染器的绑定层级。
