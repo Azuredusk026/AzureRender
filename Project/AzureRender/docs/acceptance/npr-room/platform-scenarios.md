@@ -94,7 +94,7 @@ python -B tools/npr_room/test_room_window_player.py --player $player --project $
 
 ## 显示设置语言
 
-显示面板和 Windows 系统菜单使用与房间相同的 Recovery 语言清单，包含九条原版文本。语言选择生效时同步更新面板与菜单。组装清单 `window-settings-receipt.json` 记录文本来源、计时器脚本与面板资产的摘要。
+显示面板和 Windows 系统菜单使用与房间相同的 Recovery 语言清单，包含窗口模式、分辨率、置顶与帧率文本。语言选择生效时同步更新面板与菜单。组装清单 `window-settings-receipt.json` 记录文本来源、计时器脚本与面板资产的摘要。
 
 任务 1990 在常规入口读到默认简体中文，依次切换日语、英语、繁体中文、葡萄牙语、韩语和俄语，逐项核对 Windows 菜单标题与本地语言存档。俄语下执行系统菜单置顶开关、分辨率调整和无边框切换，并保存 1600×900 的面板截图。第二个 Player 恢复俄语和置顶。任务 1991 验证内置英语文本与窗口流程。
 
@@ -110,6 +110,33 @@ python -B tools/npr_room/test_room_window_player.py --player $player --project $
 
 ```powershell
 python -B tools/npr_room/test_room_window_player.py --player $player --project $roomProject --resource-root $resources --output $localizedWindowReplay --system-menu --display-inventory $storyInventory
+```
+
+## Windows 前后台帧率
+
+从房间图形设置输入前台和后台帧率，按回车或移开输入焦点后保存。两项按原场景限制为 10–250 FPS 的整数，Windows 默认值为 60 和 24。版本为 1 的 `room-frame-rates` 保存两个值。重复打开面板时显示已保存的值。
+
+可见且位于系统前台的窗口采用前台帧率，其余状态采用后台帧率。显式配置 `runtime.maxFrameRate` 时使用该值。固定步长采集沿用采集配置。 [Win32 前台窗口接口](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getforegroundwindow?WT_mc_id=SEC-MVP-5005282)
+
+任务 1997 使用三个独立 Player 进程核对常规入口、存档重开和命令行覆盖。首个进程由回车保存 20 FPS，由焦点转移保存 10 FPS。前台、隐藏后台各连续观察 16 帧，分别耗时 0.859 秒与 1.735 秒。第二个进程读回两项限制，第三个进程采用显式的 15 FPS 并保留房间存档。三个进程退出后的 GPU 缓冲区和图像计数均为零。Lua 回归覆盖越界整数、非整数和写入失败。
+
+任务 1998 通过中文多行笔记输入与重开回归。任务 1999 通过七种语言菜单、置顶和窗口切换回归。
+
+本机证据位于 `platform-achievement-reference/window-preferences/frame-pacing/`。
+
+| 记录 | SHA-256 |
+| --- | --- |
+| 原版 `SettingData.cs` | `b1eb6de749848fab7b1cf512dcefbcf8d806a860ad3577976f091cb613d9e002` |
+| 原版 `ClampIntegerInputField.cs` | `beb91c8c3128fbca0ddf0fa2491273994bae249b7aef0eaabe320338831ff928` |
+| 帧率回放 | `37185b0b2578f573e78d2bf2ab1ff6aa5e99dce492a1d814fe865bf6abba81de` |
+| 帧率面板截图 | `0fcf4bd36f620e111c8db00ae4a04ffc29bde6fd64032e57cd281df185401d6e` |
+| 笔记输入回归 | `9983f3d735b24e976dbc908ddd822c092ca33fe3135d14a43efb320516e4f3ee` |
+| 窗口语言回归 | `ea9299d1e5a28c483a772d528ca43cefba0ee89345aa5665457b1ce918cd8439` |
+| 原生诊断构建清单 | `ca79508c13e078bb95c711108bc66ded1d22925ddfc310c734c6a550abdbb914` |
+| 诊断 Player | `86698b6b327107f5b2cedd81587df628ae13e65689fb0820b92f99ac4d8f8010` |
+
+```powershell
+python -B tools/npr_room/test_room_window_player.py --player $player --project $roomProject --resource-root $resources --output $framePacingReplay --frame-pacing
 ```
 
 ## 成就统计夹具

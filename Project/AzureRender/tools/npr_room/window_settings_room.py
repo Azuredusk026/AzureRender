@@ -19,6 +19,8 @@ DISPLAY_UI_KEYS = {
     "topmost": "ui_setting_general_alwaysontop_title",
     "on": "ui_global_on",
     "off": "ui_global_off",
+    "activeRate": "ui_setting_framerate_active",
+    "inactiveRate": "ui_setting_framerate_deactive",
 }
 
 
@@ -43,7 +45,7 @@ def bind_display_language(program):
 
 
 def install(project, scene, document, prefix="", localization=None):
-    actions = ("toggle", "mode", "resolution", "topmost", "topmost-menu")
+    actions = ("toggle", "mode", "resolution", "topmost", "topmost-menu", "frame-active", "frame-inactive")
     if any("display-" + action in project["runtime"]["input"] for action in actions):
         raise ValueError("Room already has display actions")
     activate_room_control(project, scene, "display", actions)

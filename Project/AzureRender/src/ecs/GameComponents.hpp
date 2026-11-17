@@ -251,5 +251,9 @@ struct WindowPresentation {
     std::uint32_t locale = 0;
     AZURE_FIELD("System menu title", 0, 0)
     std::string menuCaption;
+    AZURE_FIELD("Focused frame rate", 10, 250)
+    std::uint32_t activeFrameRate = 60;
+    AZURE_FIELD("Unfocused frame rate", 10, 250)
+    std::uint32_t inactiveFrameRate = 24;
 };
 } // namespace azurerender::game

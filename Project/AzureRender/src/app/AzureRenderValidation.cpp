@@ -1,5 +1,6 @@
 #include "AzureRenderApp.hpp"
 #include "extensions/ISceneRenderer.hpp"
+#include "platform/GlfwFrontend.hpp"
 #include "runtime/LevelRenderSettings.hpp"
 #if AZURE_WITH_EDITOR
 #include "editor/ImGuiEditorLayer.hpp"
@@ -32,6 +33,12 @@ void AzureRenderApp::initializeValidation() {
             {"uiBuffers",ui.buffers},{"uiBufferBytes",ui.bufferBytes}}.dump());
     });
     observations_->add("engine.frameCount",[this]{return ObservationValue(static_cast<std::int64_t>(gameplayFrame_));});
+    observations_->add("engine.framePacing",[this]{
+        return ObservationValue(nlohmann::json{
+            {"maximumRate",effectiveFrameRateLimit()},
+            {"focused",frontend_->isForeground()},
+            {"waitFrames",framePacingWaitFrames_}}.dump());
+    });
     observations_->add("engine.screenshots",[this]{return ObservationValue(static_cast<std::int64_t>(validationScreenshots_));});
     observations_->add("engine.gameInputSource",[this]{return ObservationValue(std::string(gameInputReplay_?"replay":"window"));});
     observations_->add("scene.nodeCount",[this]{

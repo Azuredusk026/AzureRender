@@ -44,6 +44,7 @@ public:
 
     [[nodiscard]] GLFWwindow* nativeHandle() const { return window_; }
     [[nodiscard]] bool shouldClose() const;
+    [[nodiscard]] bool isForeground() const;
     [[nodiscard]] double timeSeconds() const;
     [[nodiscard]] std::pair<int, int> framebufferSize() const;
     [[nodiscard]] std::vector<const char*> requiredVulkanExtensions() const;

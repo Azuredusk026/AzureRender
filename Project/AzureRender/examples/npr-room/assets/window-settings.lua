@@ -1,8 +1,13 @@
 local slot = "room-window-settings"
+local frameRateSlot = "room-frame-rates"
 local component = "azure.window-presentation"
 local modes = {"Windowed", "Borderless"}
 local resolutions = {"1280 × 720", "1600 × 900", "1920 × 1080", "Custom"}
+local frameRateFields = {"display-frame-active", "display-frame-inactive"}
+local frameRateProperties = {"activeFrameRate", "inactiveFrameRate"}
+local frameRateDefaults = {60, 24}
 local window, open, saved, displayed, writable, displayedLocale, menuCaption
+local frameRates, frameRatesWritable
 
 local function current()
     return {1, window:get(component, "mode"), window:get(component, "resolution"),
@@ -25,6 +30,8 @@ local function show(value)
         self:ui_text("display-mode-label", label("mode", "Window mode"))
         self:ui_text("display-resolution-label", label("resolution", "Resolution"))
         self:ui_text("display-topmost-label", label("topmost", "Always on Top"))
+        self:ui_text("display-frame-active-label", label("activeRate", "When Active"))
+        self:ui_text("display-frame-inactive-label", label("inactiveRate", "When Inactive"))
         displayed = nil
     end
     local caption = label("topmost", "Always on Top") .. "("
@@ -63,12 +70,70 @@ local function apply(value)
     window:set(component, "pending", true)
 end
 
+local function applyFrameRates()
+    for index, property in ipairs(frameRateProperties) do
+        window:set(component, property, frameRates[index])
+    end
+end
+
+local function showFrameRates()
+    for index, field in ipairs(frameRateFields) do
+        self:ui_set_value(field, string.format("%d", frameRates[index]))
+    end
+end
+
+local function validFrameRate(rate)
+    return type(rate) == "number" and rate >= 10 and rate <= 250 and rate % 1 == 0
+end
+
+local function loadFrameRates()
+    frameRates = {}
+    for index, property in ipairs(frameRateProperties) do
+        local rate = window:get(component, property)
+        frameRates[index] = validFrameRate(rate) and rate or frameRateDefaults[index]
+    end
+    local value = self:read_save(frameRateSlot)
+    frameRatesWritable = type(value) ~= "table" or type(value[1]) ~= "number" or value[1] <= 1
+    if type(value) == "table" and #value == 3 and value[1] == 1
+        and validFrameRate(value[2]) and validFrameRate(value[3]) then
+        frameRates = {value[2], value[3]}
+        applyFrameRates()
+    end
+end
+
+local function editFrameRates()
+    for index, field in ipairs(frameRateFields) do
+        if self:pressed(field) then
+            local text = self:ui_value(field)
+            local number = text:match("^%s*[+%-]?%d+%s*$") and tonumber(text)
+            if number then
+                local changed = math.max(10, math.min(250, number))
+                if changed ~= frameRates[index] then
+                    local values = {frameRates[1], frameRates[2]}
+                    values[index] = changed
+                    if not frameRatesWritable then
+                        self:ui_text("display-status", "Display settings require a newer version.")
+                    elseif self:try_write_save(frameRateSlot, {1, values[1], values[2]}) then
+                        frameRates = values
+                        applyFrameRates()
+                        self:ui_text("display-status", "")
+                    else
+                        self:ui_text("display-status", "Could not save display settings.")
+                    end
+                end
+            end
+            self:ui_set_value(field, string.format("%d", frameRates[index]))
+        end
+    end
+end
+
 function init()
     window = assert(self:find("room-display-window"))
     open, displayed, saved = false, nil, nil
     displayedLocale, menuCaption = nil, nil
     self:ui_visible("display-toggle", true)
     self:ui_visible("display-panel", false)
+    loadFrameRates()
     local value = self:read_save(slot)
     writable = type(value) ~= "table" or type(value[1]) ~= "number" or value[1] <= 1
     if type(value) == "table" and #value == 4 and value[1] == 1 and modes[(tonumber(value[2]) or -1) + 1]
@@ -81,6 +146,7 @@ end
 function update()
     local value = current()
     if saved and not same(value, saved) and not window:get(component, "pending") then store(value) end
+    if open then editFrameRates() end
     local proposed
     if self:pressed("display-topmost-menu") or (open and self:pressed("display-topmost")) then
         proposed = {1, value[2], value[3], not value[4]}
@@ -88,6 +154,7 @@ function update()
         open = not open
         displayed = nil
         self:ui_visible("display-panel", open)
+        if open then showFrameRates() end
     elseif open then
         if self:pressed("display-mode") then
             proposed = {1, 1 - value[2], value[3], value[4]}

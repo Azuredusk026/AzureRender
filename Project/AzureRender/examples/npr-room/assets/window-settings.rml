@@ -2,8 +2,9 @@
 #display-toggle { position: absolute; left: 16dp; bottom: 16dp; padding: 6dp 10dp; color: white; background-color: #34434f; }
 #display-panel { position: absolute; left: 16dp; bottom: 52dp; width: 268dp; padding: 12dp; background-color: #19232c; }
 .display-row { display: block; padding: 4dp 0; min-height: 28dp; }
-.display-row button { float: right; min-width: 104dp; text-align: left; padding: 4dp 8dp; color: white; background-color: #34434f; }
-.display-row button:hover, .display-row button:focus, #display-toggle:focus { background-color: #506472; }
+.display-row button, .display-row input { float: right; min-width: 104dp; text-align: left; padding: 4dp 8dp; color: white; background-color: #34434f; }
+.display-row input { width: 104dp; }
+.display-row button:hover, .display-row button:focus, .display-row input:focus, #display-toggle:focus { background-color: #506472; }
 #display-status { display: block; color: #f0c58e; }
 </style>
 <button id="display-toggle" data-action="display-toggle" style="display: none;">Display</button>
@@ -11,5 +12,7 @@
   <div class="display-row"><span id="display-mode-label">Window mode</span> <button id="display-mode" data-action="display-mode">Windowed</button></div>
   <div class="display-row" id="display-resolution-row"><span id="display-resolution-label">Resolution</span> <button id="display-resolution" data-action="display-resolution">Custom</button></div>
   <div class="display-row"><span id="display-topmost-label">Always on top</span> <button id="display-topmost" data-action="display-topmost">Off</button></div>
+  <div class="display-row"><span id="display-frame-active-label">When Active</span> · FPS <input id="display-frame-active" type="text" maxlength="6" data-action-on-blur="display-frame-active" /></div>
+  <div class="display-row"><span id="display-frame-inactive-label">When Inactive</span> · FPS <input id="display-frame-inactive" type="text" maxlength="6" data-action-on-blur="display-frame-inactive" /></div>
   <span id="display-status"></span>
 </div>

@@ -1,6 +1,6 @@
 local preferences = {mode = 0, resolution = 3, alwaysOnTop = false, pending = false}
-local saved, failure, action
-local text, visible = {}, {}
+local saved, failure, action, frameRates
+local text, visible, fields = {}, {}, {}
 local window = {}
 function window:get(component, field)
     assert(component == "azure.window-presentation")
@@ -12,16 +12,22 @@ function window:set(component, field, value)
 end
 self = {}
 function self:find(name) assert(name == "room-display-window"); return window end
-function self:read_save(slot) assert(slot == "room-window-settings"); return saved end
-function self:try_write_save(slot, value)
+function self:read_save(slot)
+    if slot == "room-frame-rates" then return frameRates end
     assert(slot == "room-window-settings")
+    return saved
+end
+function self:try_write_save(slot, value)
+    assert(slot == "room-window-settings" or slot == "room-frame-rates")
     if failure then return false end
-    saved = value
+    if slot == "room-frame-rates" then frameRates = value else saved = value end
     return true
 end
 function self:pressed(name) return action == name end
 function self:ui_visible(id, state) visible[id] = state end
 function self:ui_text(id, value) text[id] = value end
+function self:ui_value(id) return fields[id] end
+function self:ui_set_value(id, value) fields[id] = value end
 
 local function press(id)
     action = id
@@ -73,3 +79,26 @@ preferences.pending = false
 failure = true
 press("display-topmost-menu")
 assert(not preferences.pending and preferences.alwaysOnTop and saved[4])
+
+failure = false
+preferences.activeFrameRate, preferences.inactiveFrameRate = 60.0, 24.0
+init()
+press("display-toggle")
+assert(fields["display-frame-active"] == "60" and fields["display-frame-inactive"] == "24")
+fields["display-frame-active"] = "256"
+press("display-frame-active")
+assert(preferences.activeFrameRate == 250 and fields["display-frame-active"] == "250")
+fields["display-frame-inactive"] = "1"
+press("display-frame-inactive")
+assert(preferences.inactiveFrameRate == 10 and frameRates[2] == 250 and frameRates[3] == 10)
+fields["display-frame-active"] = "62.5"
+press("display-frame-active")
+assert(preferences.activeFrameRate == 250 and fields["display-frame-active"] == "250")
+failure = true
+fields["display-frame-inactive"] = "64"
+press("display-frame-inactive")
+assert(preferences.inactiveFrameRate == 10 and fields["display-frame-inactive"] == "10")
+failure = false
+preferences.activeFrameRate, preferences.inactiveFrameRate = 60, 24
+init()
+assert(preferences.activeFrameRate == 250 and preferences.inactiveFrameRate == 10)

@@ -443,7 +443,7 @@ void AzureRenderApp::mainLoop(const std::uint64_t smokeFrameLimit) {
         if(validation_)validation_->pump(gameplayFrame_);
         drawFrame();
         const double elapsed = std::chrono::duration<double>(std::chrono::steady_clock::now() - hostFrameStart).count();
-        const auto maximumRate = engineSettings_->get("runtime.maxFrameRate").get<unsigned>();
+        const auto maximumRate = effectiveFrameRateLimit();
         const double waitSeconds = azurerender::framePacingWaitSeconds(elapsed, maximumRate);
         if (waitSeconds > 0) {
             const auto waitStart = std::chrono::steady_clock::now();

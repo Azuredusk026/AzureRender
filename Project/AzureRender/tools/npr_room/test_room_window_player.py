@@ -230,6 +230,93 @@ def settings_panel(player, project, resources, output, system_menu=False, invent
     return report
 
 
+def frame_pacing(player, project, resources, output):
+    output.mkdir()
+    profile = output / "profile"
+    room = project.parent
+    assets = room / "assets"
+    document = (assets / "timer.rml").read_text(encoding="utf-8")
+    graph = json.loads((assets / GRAPH).read_bytes())
+    timer = (assets / "pomodoro.lua").read_text(encoding="utf-8")
+    client = {}
+
+    def ready(window, call):
+        client.update(window=window, call=call)
+
+    def pacing():
+        return json.loads(client["call"]("query", name="engine.framePacing"))
+
+    def sample(rate, focused):
+        deadline = time.monotonic() + 10
+        while True:
+            first = pacing()
+            if first["focused"] == focused and first["maximumRate"] == rate:
+                break
+            assert time.monotonic() < deadline, (rate, focused, first)
+            time.sleep(.05)
+        frames = 16
+        start = time.monotonic()
+        client["call"]("wait-frames", frames=frames)
+        elapsed = time.monotonic() - start
+        result = pacing()
+        assert result["focused"] == focused and result["maximumRate"] == rate, result
+        assert result["waitFrames"] - first["waitFrames"] >= frames // 2, (first, result)
+        assert elapsed >= (frames - 1) / rate * .9, (rate, elapsed)
+        return dict(rate=rate, focused=focused, frames=frames, seconds=elapsed,
+                    waits=result["waitFrames"] - first["waitFrames"])
+
+    def configure(descriptor, level, prefix):
+        return install(descriptor, level, document, prefix)
+
+    with entry(room, graph, timer, additional_room=configure) as (fixture, level):
+        with playing(player, fixture, resources, profile, output / "edit", level_reference=level,
+                     on_ready=ready) as (click, press, type_text, screenshot):
+            current = pacing()
+            assert current["maximumRate"] == (60 if current["focused"] else 24), current
+            click("display-toggle")
+
+            def edit(field, value):
+                click(field)
+                press(269)
+                for _ in range(2):
+                    press(259)
+                type_text(value)
+
+            edit("display-frame-active", "20")
+            press(257)
+            wait_for_slot(profile, "room-frame-rates", lambda value: value == [1, 20, 24], 5)
+            edit("display-frame-inactive", "10")
+            click("display-frame-active")
+            wait_for_slot(profile, "room-frame-rates", lambda value: value == [1, 20, 10], 5)
+            path = screenshot("frame-rate-panel.png")
+            window = client["window"]
+            hwnd = window.find()
+            assert hwnd
+            window.hide()
+            background = sample(10, False)
+            window.user.ShowWindow(hwnd, 5)
+            window.user.SetForegroundWindow.argtypes = [wintypes.HWND]
+            window.user.SetForegroundWindow(hwnd)
+            foreground = sample(20, True)
+            window.hide()
+        with playing(player, fixture, resources, profile, output / "reload", level_reference=level,
+                     on_ready=ready) as (_, _, _, _):
+            saved = slot(profile, "room-frame-rates")
+            assert saved == [1, 20, 10]
+            current = pacing()
+            assert current["maximumRate"] == (20 if current["focused"] else 10), current
+        with playing(player, fixture, resources, profile, output / "override", level_reference=level,
+                     on_ready=ready, player_args=("--set", "runtime.maxFrameRate=15")) as (_, _, _, _):
+            assert pacing()["maximumRate"] == 15
+            assert slot(profile, "room-frame-rates") == saved
+    for folder in ("edit", "reload", "override"):
+        assert "Allocator after unload: buffers=0 images=0" in (output / folder / "stdout.log").read_text(encoding="utf-8")
+    report = {"foreground": foreground, "background": background, "saved": saved, "explicitOverride": 15,
+              "independentPlayers": 3, "panelSHA256": hashlib.sha256(path.read_bytes()).hexdigest()}
+    (output / "frame-pacing-replay.json").write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
+    return report
+
+
 def replay(player, project, resources, output):
     output.mkdir()
     profile = output / "profile"
@@ -299,7 +386,7 @@ def replay(player, project, resources, output):
 
 
 def run_in_physical_pixels(player, project, resources, output, preferences=False, panel=False, system_menu=False,
-                           display_inventory=None):
+                           display_inventory=None, pacing=False):
     user = ctypes.WinDLL("user32", use_last_error=True)
     set_context = user.SetThreadDpiAwarenessContext
     set_context.argtypes = [ctypes.c_void_p]
@@ -311,7 +398,7 @@ def run_in_physical_pixels(player, project, resources, output, preferences=False
     try:
         if panel or system_menu:
             return settings_panel(player, project, resources, output, system_menu, display_inventory)
-        verify = startup_preferences if preferences else replay
+        verify = frame_pacing if pacing else startup_preferences if preferences else replay
         return verify(player, project, resources, output)
     finally:
         assert set_context(previous)
@@ -325,10 +412,12 @@ if __name__ == "__main__":
     mode.add_argument("--preferences", action="store_true")
     mode.add_argument("--settings-panel", action="store_true")
     mode.add_argument("--system-menu", action="store_true")
+    mode.add_argument("--frame-pacing", action="store_true")
     parser.add_argument("--display-inventory", type=Path)
     args = parser.parse_args()
     if args.display_inventory and not (args.settings_panel or args.system_menu):
         parser.error("--display-inventory requires a display panel or system menu replay")
     print(json.dumps(run_in_physical_pixels(args.player.resolve(), args.project.resolve(),
                                            args.resource_root.resolve(), args.output.resolve(), args.preferences,
-                                           args.settings_panel, args.system_menu, args.display_inventory)))
+                                           args.settings_panel, args.system_menu, args.display_inventory,
+                                           args.frame_pacing)))

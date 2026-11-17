@@ -1,9 +1,11 @@
 #include "app/AzureRenderApp.hpp"
 #include "app/AzureRenderInternal.hpp"
 #include "ecs/GameComponents.hpp"
+#include "runtime/EngineSettings.hpp"
 #include "extensions/ISceneRenderer.hpp"
 #include "scenes/BuiltinRendererCatalog.hpp"
 #include "platform/GlfwFrontend.hpp"
+#include <algorithm>
 #if AZURE_WITH_EDITOR
 #include "editor/EditorSession.hpp"
 #include "app/EditorSceneReload.hpp"
@@ -236,6 +238,20 @@ void AzureRenderApp::synchronizeEditorRuntime(){
     }
     if(!session.playing())session.context().attachRenderSettings(renderSettings_);
 #endif
+}
+unsigned AzureRenderApp::effectiveFrameRateLimit() {
+    constexpr auto key = "runtime.maxFrameRate";
+    if (!fixedSimulation_ && engineSettings_->source(key) == azurerender::SettingSource::Default) {
+        if (auto* runtime = activeRuntime()) {
+            const auto* windows = runtime->world().findComponentArray<azurerender::game::WindowPresentation>();
+            if (windows && !windows->dense().empty()) {
+                const auto& window = windows->dense().front();
+                const auto rate = frontend_->isForeground() ? window.activeFrameRate : window.inactiveFrameRate;
+                return std::clamp(rate, 10U, 250U);
+            }
+        }
+    }
+    return engineSettings_->get(key).get<unsigned>();
 }
 void AzureRenderApp::synchronizeGameUi(){
     if (!fixedSimulation_) {

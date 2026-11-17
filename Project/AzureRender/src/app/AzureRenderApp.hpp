@@ -437,6 +437,7 @@ private:
     void initVulkan(const std::string& assetPath);
     void initEditorUi();
     void mainLoop(std::uint64_t smokeFrameLimit);
+    unsigned effectiveFrameRateLimit();
     void activatePortfolioOrbit();
     void configureQaHarness();
     void updateTechnicalSequenceState(std::uint64_t frameIndex);

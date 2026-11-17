@@ -105,6 +105,16 @@ bool GlfwFrontend::shouldClose() const {
     return glfwWindowShouldClose(window_) == GLFW_TRUE;
 }
 
+bool GlfwFrontend::isForeground() const {
+    if (glfwGetWindowAttrib(window_, GLFW_VISIBLE) != GLFW_TRUE
+        || glfwGetWindowAttrib(window_, GLFW_ICONIFIED) == GLFW_TRUE) return false;
+#ifdef _WIN32
+    return glfwGetWin32Window(window_) == GetForegroundWindow();
+#else
+    return glfwGetWindowAttrib(window_, GLFW_FOCUSED) == GLFW_TRUE;
+#endif
+}
+
 double GlfwFrontend::timeSeconds() const {
     return glfwGetTime();
 }

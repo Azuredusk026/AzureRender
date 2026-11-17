@@ -65,14 +65,17 @@ struct GameUi::Impl: Rml::EventListener {
             if(!context)throw std::runtime_error("Game UI context failed to initialize");
             const DocumentDirectoryScope documentDirectory(path.parent_path());
             document=path.extension()==".azure2d"?context->LoadDocumentFromMemory(Scene2D::load(path).toRml(),Rml::StringUtilities::Replace(path.generic_u8string(), ':', '|')):context->LoadDocument(path.generic_u8string());if(!document)throw std::runtime_error("Game UI document failed to load");
-            document->AddEventListener("click",this);document->Show();
+            document->AddEventListener("click",this);
+            document->AddEventListener("blur",this,true);
+            document->Show();
         }catch(...){clear();throw;}
     }
     void clear(){if(context){Rml::RemoveContext(context->GetName());context=nullptr;document=nullptr;}if(registered){registered=false;if(--users==0)Rml::Shutdown();}}
     ~Impl(){clear();}
     void ProcessEvent(Rml::Event& event) override {
+        const auto* attribute=event.GetType()=="blur"?"data-action-on-blur":"data-action";
         for(auto* target=event.GetTargetElement();target;target=target->GetParentNode()){
-            const auto command=target->GetAttribute<Rml::String>("data-action","");if(!command.empty()){if(action)action(command);break;}
+            const auto command=target->GetAttribute<Rml::String>(attribute,"");if(!command.empty()){if(action)action(command);break;}
         }
     }
     Rml::Element* element(const std::string& id)const{auto* value=document->GetElementById(id);if(!value)throw std::invalid_argument("Unknown game UI element: "+id);return value;}
@@ -125,6 +128,15 @@ void GameUi::key(int key, bool down) {
     case 268: code = KI_HOME; break;
     case 269: code = KI_END; break;
     case 335: code = KI_NUMPADENTER; break;
+    }
+    if (code == KI_RETURN || code == KI_NUMPADENTER) {
+        if (auto* element = impl_->context->GetFocusElement()) {
+            const auto command = element->GetAttribute<Rml::String>("data-action-on-blur", "");
+            if (!command.empty()) {
+                if (down && impl_->action) impl_->action(command);
+                return;
+            }
+        }
     }
     if (down) {
         impl_->context->ProcessKeyDown(code, 0);
