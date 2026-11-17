@@ -2,7 +2,7 @@ local slot = "ambient"
 local open = false
 local selected, page, pageSize = 1, 1, 7
 local state, indexes = {}, {}
-local access
+local access, wallet, confirmPurchase
 
 local function accessFor(index)
     if access then return access:state(sounds[index][1]) end
@@ -47,6 +47,18 @@ local function displaySelection(showAccess)
         end
         if showAccess then self:ui_text("ambient-status", hint or "") end
     end
+    if wallet then
+        local name = environment_access[sounds[selected][1]][4]
+        local price, affordable
+        if confirmPurchase and kind == "locked" then price, affordable = wallet:offer(name) end
+        self:ui_visible("ambient-purchase", price ~= nil)
+        self:ui_visible("ambient-purchase-confirm", price ~= nil and affordable == true)
+        self:ui_text("ambient-purchase-balance", "Points: " .. wallet:balance())
+        if price then
+            self:ui_text("ambient-purchase-price", name .. " · " .. price .. " points")
+            if showAccess then self:ui_text("ambient-status", affordable and "" or "Not enough points") end
+        end
+    end
 end
 
 local function displayPage(direction)
@@ -67,7 +79,8 @@ local function displayPage(direction)
 end
 
 function init()
-    if new_ambient_access then access = new_ambient_access() end
+    if new_room_wallet and wallet_catalog then wallet = new_room_wallet(self, wallet_catalog) end
+    if new_ambient_access then access = new_ambient_access(wallet) end
     for index, sound in ipairs(sounds) do
         indexes[sound[1]] = index
         state[index] = {volume = 0, muted = true, started = false}
@@ -99,6 +112,7 @@ end
 function update()
     if self:pressed("ambient-toggle") then
         open = not open
+        confirmPurchase = false
         self:ui_visible("ambient-panel", open)
         if open then
             if access then access:refresh() end
@@ -108,11 +122,43 @@ function update()
     end
     if not open then return end
     local direction = self:pressed("ambient-page-prev") and -1 or self:pressed("ambient-page-next") and 1 or 0
-    if direction ~= 0 then displayPage(direction); return end
+    if direction ~= 0 then
+        confirmPurchase = false
+        displayPage(direction)
+        displaySelection(true)
+        return
+    end
     for index, sound in ipairs(sounds) do
         if accessFor(index) ~= "expired" and self:pressed("ambient-select-" .. sound[1]) then
             selected = index
+            confirmPurchase = wallet ~= nil and environment_access[sound[1]][1] == "purchase"
             displaySelection(true)
+            return
+        end
+    end
+    if confirmPurchase then
+        if self:pressed("ambient-purchase-cancel") then
+            confirmPurchase = false
+            displaySelection(true)
+            return
+        end
+        if self:pressed("ambient-purchase-confirm") then
+            local name = environment_access[sounds[selected][1]][4]
+            local purchased, reason = wallet:purchase(name)
+            if purchased then
+                confirmPurchase = false
+                self:find("room-buy-item"):audio_play()
+                local row = state[selected]
+                if row.volume == 0 then row.volume = 50 end
+                row.muted = false
+                apply(selected)
+                save()
+                displayPage(0)
+                displaySelection(false)
+            else
+                displaySelection(true)
+                if reason == "save-failed" then self:ui_text("ambient-status", "Purchase could not be saved") end
+            end
             return
         end
     end

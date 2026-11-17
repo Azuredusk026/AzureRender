@@ -106,7 +106,7 @@
 [房间环境声](../acceptance/npr-room/ambient-sound.md)登记原音频编号、独立混音和本地设置恢复。
 [角色空闲语音](../acceptance/npr-room/room-voice.md)登记原语音、字幕和播放完成时序。
 [工后对话与选项](../acceptance/npr-room/work-conversation.md)登记短对话触发、组内分支及独立进程续接。
-[环境声解锁](../acceptance/npr-room/ambient-access.md)登记原条件判断、截止时间和档内音量恢复。
+[环境声解锁与购买](../acceptance/npr-room/ambient-access.md)登记原条件、原价、扣点、写入失败及房间重开。
 [房间语言设置](../acceptance/npr-room/room-language.md)登记七种语言的计时器、对白、原字体与深路径存档回放。
 [计时语音](../acceptance/npr-room/timer-voice-sources.md)登记原语音、选择规则及动作提示点。
 [计时语音提示点实机对照](../acceptance/npr-room/timer-voice-cues.md)登记番茄钟与正计时的正式语音库、原生回放和起声时刻。
