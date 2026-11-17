@@ -1058,6 +1058,7 @@ void AzureRenderApp::recordCommandBuffer(
     auto sceneResources=resources;
     const azurerender::game::ScreenBlackout* blackout = nullptr;
     const azurerender::game::ScreenChromatic* chromatic = nullptr;
+    const azurerender::game::ScreenMove* screenMove = nullptr;
     std::optional<azurerender::RenderGraph::ResourceId> opaqueColor;
     if (effectiveRenderSettings_.diagnosticView == 0) {
         if (const auto* runtime = activeRuntime()) {
@@ -1068,6 +1069,10 @@ void AzureRenderApp::recordCommandBuffer(
             if (const auto* effects = runtime->world().findComponentArray<azurerender::game::ScreenChromatic>()) {
                 for (const auto& effect : effects->dense())
                     if (effect.ratio > 0 && (!chromatic || effect.ratio > chromatic->ratio)) chromatic = &effect;
+            }
+            if (const auto* effects = runtime->world().findComponentArray<azurerender::game::ScreenMove>()) {
+                for (const auto& effect : effects->dense())
+                    if (effect.ratio > 0 && (!screenMove || effect.ratio > screenMove->ratio)) screenMove = &effect;
             }
         }
     }
@@ -1240,23 +1245,20 @@ void AzureRenderApp::recordCommandBuffer(
     auto displayTarget = output;
     const auto displayLayout = editorUiEnabled_ ? VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL : VK_IMAGE_LAYOUT_PRESENT_SRC_KHR;
     std::optional<azurerender::RenderGraph::ResourceId> chromaticInput;
-    if (chromatic) {
+    std::optional<azurerender::RenderGraph::ResourceId> movementInput;
+    const float seconds = static_cast<float>(frame.timeSeconds);
+    const float width = static_cast<float>(renderExtent_.width);
+    const float height = static_cast<float>(renderExtent_.height);
+    const auto drawChromatic = [&] {
+        screenChromatic_->record(commandRecorder, sceneContext.currentFrame, {seconds, chromatic->ratio,
+            chromatic->unstable, chromatic->filamentScale, chromatic->rage, width, height, encodeSrgb ? 1.F : 0.F});
+    };
+    if (chromatic || screenMove) {
         auto* assets = activeAssets();
-        if (!assets) throw std::logic_error("Chromatic effect requires the active room asset database");
-        const auto noise = assets->resolveReference(chromatic->noise);
-        const auto timeline = assets->resolveReference(chromatic->timeline);
-        if (!screenChromatic_ || !screenChromatic_->matches(noise, timeline)) {
-            auto candidate = std::make_unique<azurerender::ScreenChromaticGpu>(*rhi_, postProcessRenderPass_,
-                swapchainFormat_, renderExtent_, static_cast<std::uint32_t>(kMaxFramesInFlight),
-                screenAttachmentSampler_, resourceLocator_.shaderDirectory(), noise, timeline);
-            if (screenChromatic_) vkCheck(vkDeviceWaitIdle(device_), "vkDeviceWaitIdle(replace screen chromatic)");
-            screenChromatic_ = std::move(candidate);
-        }
+        if (!assets) throw std::logic_error("Opening effects require the active room asset database");
         const auto source = editorUiEnabled_ ? editorViewportImages_[imageIndex].image : swapchainImages_[imageIndex];
         if (editorUiEnabled_)
             displayTarget = importAttachment("viewport-display-color", source, VK_IMAGE_ASPECT_COLOR_BIT);
-        const auto destination = screenChromatic_->inputImage(sceneContext.currentFrame);
-        chromaticInput = importAttachment("chromatic-screen-source", destination, VK_IMAGE_ASPECT_COLOR_BIT);
         const auto prepareColor = graph.addPass("post-process-display-color", [&] {
             beginDisplayPass();
             drawDisplay();
@@ -1265,24 +1267,69 @@ void AzureRenderApp::recordCommandBuffer(
         displayInputs(prepareColor);
         graph.attachment(prepareColor, displayTarget, azurerender::RenderGraphUsage::ColorAttachment, displayLayout);
 
-        const auto copyColor = graph.addPass("post-process-chromatic-source", [&, source, destination] {
-            VkImageCopy copy{};
-            copy.srcSubresource = copy.dstSubresource = {VK_IMAGE_ASPECT_COLOR_BIT, 0, 0, 1};
-            copy.extent = {renderExtent_.width, renderExtent_.height, 1};
-            vkCmdCopyImage(commandBuffer, source, VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL,
-                destination, VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL, 1, &copy);
-        });
-        graph.use(copyColor, displayTarget, azurerender::RenderGraphUsage::TransferSrc, false);
-        graph.use(copyColor, *chromaticInput, azurerender::RenderGraphUsage::TransferDst, true);
-        const auto reuseTarget = graph.addPass("post-process-chromatic-target");
-        graph.use(reuseTarget, displayTarget, azurerender::RenderGraphUsage::ColorAttachment, true);
+        const auto captureInput = [&](auto& gpu, const char* shader,
+                                      std::initializer_list<azurerender::ScreenEffectTexture> textures,
+                                      const char* imageName, const char* copyName, const char* targetName) {
+            if (!gpu || !gpu->matches(textures)) {
+                auto candidate = std::make_unique<azurerender::ScreenEffectGpu>(*rhi_, postProcessRenderPass_,
+                    swapchainFormat_, renderExtent_, static_cast<std::uint32_t>(kMaxFramesInFlight),
+                    screenAttachmentSampler_, resourceLocator_.shaderDirectory() / shader, textures);
+                if (gpu) vkCheck(vkDeviceWaitIdle(device_), "vkDeviceWaitIdle(replace screen effect)");
+                gpu = std::move(candidate);
+            }
+            const auto destination = gpu->inputImage(sceneContext.currentFrame);
+            const auto input = importAttachment(imageName, destination, VK_IMAGE_ASPECT_COLOR_BIT);
+            const auto copyColor = graph.addPass(copyName, [&, source, destination] {
+                VkImageCopy copy{};
+                copy.srcSubresource = copy.dstSubresource = {VK_IMAGE_ASPECT_COLOR_BIT, 0, 0, 1};
+                copy.extent = {renderExtent_.width, renderExtent_.height, 1};
+                vkCmdCopyImage(commandBuffer, source, VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL,
+                    destination, VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL, 1, &copy);
+            });
+            graph.use(copyColor, displayTarget, azurerender::RenderGraphUsage::TransferSrc, false);
+            graph.use(copyColor, input, azurerender::RenderGraphUsage::TransferDst, true);
+            const auto reuseTarget = graph.addPass(targetName);
+            graph.use(reuseTarget, displayTarget, azurerender::RenderGraphUsage::ColorAttachment, true);
+            return input;
+        };
+        if (chromatic) {
+            const std::initializer_list<azurerender::ScreenEffectTexture> textures{
+                {assets->resolveReference(chromatic->noise), {256, 256}, VK_FILTER_LINEAR},
+                {assets->resolveReference(chromatic->timeline), {64, 1}, VK_FILTER_LINEAR}};
+            chromaticInput = captureInput(screenChromatic_, "opening_chromatic.frag.spv", textures,
+                "chromatic-screen-source", "post-process-chromatic-source", "post-process-chromatic-target");
+        }
+        if (screenMove) {
+            if (chromaticInput) {
+                const auto tint = graph.addPass("post-process-chromatic", [&] {
+                    beginDisplayPass();
+                    drawChromatic();
+                    vkCmdEndRenderPass(commandBuffer);
+                });
+                graph.use(tint, *chromaticInput, azurerender::RenderGraphUsage::Sampled, false);
+                graph.attachment(tint, displayTarget, azurerender::RenderGraphUsage::ColorAttachment, displayLayout);
+            }
+            if (!screenMove_) {
+                VkPhysicalDeviceProperties properties{};
+                vkGetPhysicalDeviceProperties(physicalDevice_, &properties);
+                screenMovePrecedingBand_ = properties.vendorID == 0x10DE;
+            }
+            const std::initializer_list<azurerender::ScreenEffectTexture> textures{
+                {assets->resolveReference(screenMove->bands), {1, 32}, VK_FILTER_NEAREST, VK_FORMAT_R8G8B8A8_UNORM},
+                {assets->resolveReference(screenMove->instability), {64, 1}, VK_FILTER_LINEAR},
+                {assets->resolveReference(screenMove->flow), {32, 18}, VK_FILTER_NEAREST, VK_FORMAT_R8G8B8A8_SRGB, true},
+                {assets->resolveReference(screenMove->timeline), {32, 1}, VK_FILTER_NEAREST}};
+            movementInput = captureInput(screenMove_, "opening_screen_move.frag.spv", textures,
+                "movement-screen-source", "post-process-movement-source", "post-process-movement-target");
+        }
     }
     const auto composite=graph.addPass("post-process-hud",[&]{
     beginDisplayPass();
-    if (chromaticInput) {
-        const azurerender::ScreenChromaticParameters values{chromatic->ratio, chromatic->unstable,
-            chromatic->filamentScale, chromatic->rage, encodeSrgb};
-        screenChromatic_->record(commandRecorder, sceneContext.currentFrame, static_cast<float>(frame.timeSeconds), values);
+    if (movementInput) {
+        screenMove_->record(commandRecorder, sceneContext.currentFrame, {seconds, screenMove->ratio,
+            screenMove->speed, screenMove->unstable, width, height, screenMovePrecedingBand_ ? 1.F : 0.F});
+    } else if (chromaticInput) {
+        drawChromatic();
     } else {
         drawDisplay();
     }
@@ -1326,8 +1373,9 @@ void AzureRenderApp::recordCommandBuffer(
     if(gameUiRenderer_ && gameUi_){const auto before=gameUiRenderer_->drawCalls();gameUiRenderer_->record(commandRecorder);uiDrawCalls_+=gameUiRenderer_->drawCalls()-before;}
     vkCmdEndRenderPass(commandBuffer);
     });
-    if (chromaticInput) {
-        graph.use(composite, *chromaticInput, azurerender::RenderGraphUsage::Sampled, false);
+    const auto effectInput = movementInput ? movementInput : chromaticInput;
+    if (effectInput) {
+        graph.use(composite, *effectInput, azurerender::RenderGraphUsage::Sampled, false);
         graph.attachment(composite, displayTarget, azurerender::RenderGraphUsage::ColorAttachment, displayLayout);
     } else {
         displayInputs(composite);
@@ -1364,7 +1412,7 @@ void AzureRenderApp::recordCommandBuffer(
     }
 #endif
     });
-    if (chromaticInput && editorUiEnabled_)
+    if (effectInput && editorUiEnabled_)
         graph.use(editor, displayTarget, azurerender::RenderGraphUsage::Sampled, false);
     graph.write(editor, output);
     const auto capture = graph.addPass("capture", [&] {

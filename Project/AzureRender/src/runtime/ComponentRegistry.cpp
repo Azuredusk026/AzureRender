@@ -109,6 +109,7 @@ ComponentRegistry makeRuntimeComponentRegistry() {
     result.setPresentation("azure.screen-noise",{"单色屏幕噪声","呈现"});
     result.setPresentation("azure.screen-blackout",{"屏幕黑场","呈现"});
     result.setPresentation("azure.screen-chromatic",{"屏幕色差","呈现"});
+    result.setPresentation("azure.screen-move",{"屏幕偏移","呈现"});
     result.setPresentation("azure.window-presentation",{"窗口显示设置","呈现"});
     result.setPresentation("azure.script",{"脚本","行为"});
     for(const auto& entry:std::vector<std::pair<std::string,std::string>>{{"interactable","交互目标"},{"collectible","收集物"},{"door","门状态"},{"checkpoint","检查点"},{"task-state","任务状态"}})

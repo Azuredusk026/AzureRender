@@ -969,7 +969,7 @@ add_library(AzureRenderCore STATIC
     src/render/ColorGradingLut.cpp
     src/render/ColorGradingLutGpu.cpp
     src/render/ScreenBlackoutGpu.cpp
-    src/render/ScreenChromaticGpu.cpp
+    src/render/ScreenEffectGpu.cpp
     src/render/ReflectionSpatialFilter.cpp
     src/render/ReflectionSignalPyramid.cpp
     src/render/DepthPyramid.cpp

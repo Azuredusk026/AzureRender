@@ -1,6 +1,6 @@
 # 开场全屏特效
 
-> 状态为 P5 局部验收。五个 Windows 原版程序及其材质已锁定。色差、黑屏和单色噪声通过原生房间回放。
+> 状态为 P5 局部验收。五个 Windows 原版程序及其材质已锁定。色差、画面偏移、黑屏和单色噪声通过原生房间回放。
 
 `DirectionService` 引用三个画质档的房间渲染器。三个档位的开场渲染功能顺序均为色差、画面偏移、故障、黑屏和单色噪声。五个功能的挂载时机为 URP 事件 600，使用第 0 个 `DrawProcedural` 通道。
 
@@ -91,6 +91,24 @@ RTX 4060 的任务 2008 和 2009 各执行四帧。Intel 核显的任务 2011 �
 | Intel Vulkan 对照 | `51ab4bd68d1d7d922e72b2b33e1c77fea183b09b347f74d67e8e89f6110e58ef` |
 | NVIDIA Vulkan 对照 | `c7137c9032e3918d0513c7b6001de268f2b491a6b32cb370228d8e253a5f85c7` |
 | Vulkan 画面偏移程序 | `3febd15e0a7eeb2bb0e46bcc4892410fc94d9b26ba254ce91796e4aab9b9078f` |
+
+## 房间画面偏移时序与合成
+
+`azure.screen-move` 在色差之后读取当前画面的在途帧副本，并在黑屏、单色噪声和游戏界面之前合成。原版四张纹理由来源清单装配。比率为零时直接使用正常画面。
+
+Lua 回归覆盖教学行 14 的 0.7 秒延迟、1 秒持续、历史回放、持续型命令和剧情取消。任务 2034 从正常入口回放教学和第一章。教学记录 0.5 比率及其 1 秒后清除，第一章保持零比率。该回放同时核对色差、黑屏、单色噪声、相机、动作、语音、成就与存档。两个进程干净退出。
+
+任务 2033 以六个 640×360 原生 Player 检查默认值、场景配置和脚本驱动。脚本从第 1 帧起匹配场景配置。三张色差叠加帧分别有 16,605、75,660 和 33,858 个背景像素发生偏移，取样颜色均来自对应的色差画面。不透明界面抽样区差异为零，所有进程通过 Vulkan 同步校验和资源释放检查。
+
+本机证据位于 `windows-opening-reference/screen-move-validation/room-runtime/`。
+
+| 记录 | SHA-256 |
+| --- | --- |
+| 常规房间回放 | `ff56da1caac3ea16562166ffd1e3321c71027bb4b59da11328c01787cea23170` |
+| 教学组合画面 | `1fdcb0dcd847c5f6b6a01b69559e3ba26b31374b9a9a599437cd1848f4cdc191` |
+| 同步回放 | `0697f38a79210bd278589e1bc23b629bb1592e3d181ca910f07a999a8a1e54e0` |
+| 原生 Player | `9e8f74144bc66f4411721fb1ae0752cdd9ee617558b8fd0aed3e08dda5f00139` |
+| 诊断构建清单 | `10345393258b2c1d2f303d1c1d31e227f281ac805c543bd891fbef02112de658` |
 
 ## 单色噪声实机参照
 
@@ -200,8 +218,9 @@ python -B -m tools.npr_room.windows_noise_probe verify-blackout --first $blackou
 & $vulkanNoiseProbe $fullscreenVertex $blackoutFragment $vulkanBlackout $blackoutInputs
 & $vulkanNoiseProbe $fullscreenVertex $blackoutFragment $vulkanBlackoutRepeat $blackoutInputs
 python -B -m tools.npr_room.windows_noise_probe compare-blackout --reference $blackoutAdapterCapture --candidate $vulkanBlackout --repeat $vulkanBlackoutRepeat --output $vulkanBlackoutReport
-python -B tools/npr_room/test_story_signal_room_player.py --player $player --room $deskRoom --resource-root $runtimeResources --catalog $bodyCatalog --graph $animatorGraph --chapters $openingChapters --source-receipt $tutorialSource --models $bodyMorphModels --camera-trace $cameraTrace --camera-audio-source $unitySource --face-catalog $plankCatalog --blackout-source-lock $effectsReceipt --chromatic-source-lock $effectsReceipt --image-catalog $imageCatalog --achievements --output $openingRoomReplay
+python -B tools/npr_room/test_story_signal_room_player.py --player $player --room $deskRoom --resource-root $runtimeResources --catalog $bodyCatalog --graph $animatorGraph --chapters $openingChapters --source-receipt $tutorialSource --models $bodyMorphModels --camera-trace $cameraTrace --camera-audio-source $unitySource --face-catalog $plankCatalog --blackout-source-lock $effectsReceipt --chromatic-source-lock $effectsReceipt --screen-move-source-lock $effectsReceipt --image-catalog $imageCatalog --achievements --output $openingRoomReplay
 python -B -m tools.npr_room.test_screen_chromatic_player --player $player --resource-root $runtimeResources --source-lock $effectsReceipt --image-catalog $imageCatalog --output $chromaticRoomReplay
+python -B -m tools.npr_room.test_screen_move_player --player $player --resource-root $runtimeResources --source-lock $effectsReceipt --image-catalog $imageCatalog --output $screenMoveRoomReplay
 & $glslc --target-env=vulkan1.3 shaders/monochrome_screen_noise.frag -o $noiseFragment
 & $vulkanNoiseProbe $fullscreenVertex $noiseFragment $vulkanCapture
 & $vulkanNoiseProbe $fullscreenVertex $noiseFragment $vulkanRepeatCapture

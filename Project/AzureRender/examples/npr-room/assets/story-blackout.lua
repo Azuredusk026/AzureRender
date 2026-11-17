@@ -1,8 +1,7 @@
-function new_story_blackout(apply)
+function new_story_hold(command, apply, readsBlind)
     local effect = {}
     local time, pending, prepared = 0, {}, {}
     local ratio, blind = 0, false
-    local command = "DirectionBlackOut"
     local firstRun = {Text = true, ChangeMotion = true, AddTextLoop = true,
         DirectionGameStartCamera = true, WaitForSeconds = true}
 
@@ -11,7 +10,7 @@ function new_story_blackout(apply)
         local hold = assert(tonumber(row.arguments[2]))
         local useBlind = row.arguments[3]
         assert(amount >= 0 and amount <= 1 and (hold == -1 or hold >= 0))
-        return amount, hold, useBlind ~= nil and useBlind ~= "" and tonumber(useBlind) == 1
+        return amount, hold, readsBlind and useBlind ~= nil and useBlind ~= "" and tonumber(useBlind) == 1
     end
 
     local function publish(amount, useBlind)
@@ -62,4 +61,8 @@ function new_story_blackout(apply)
     end
 
     return effect
+end
+
+function new_story_blackout(apply)
+    return new_story_hold("DirectionBlackOut", apply, true)
 end

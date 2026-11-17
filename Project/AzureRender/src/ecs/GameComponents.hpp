@@ -252,6 +252,27 @@ struct ScreenChromatic {
     AZURE_FIELD("Displacement", 0, 1)
     float rage = .075F;
 };
+AZURE_TYPE("azure.screen-move", 1)
+struct ScreenMove {
+    AZURE_FIELD("Ratio", 0, 1)
+    float ratio = 0;
+    AZURE_FIELD("Bands texture", 0, 0)
+    AZURE_FIELD_REFERENCE("asset", "texture", "")
+    std::string bands;
+    AZURE_FIELD("Instability texture", 0, 0)
+    AZURE_FIELD_REFERENCE("asset", "texture", "")
+    std::string instability;
+    AZURE_FIELD("Flow texture", 0, 0)
+    AZURE_FIELD_REFERENCE("asset", "texture", "")
+    std::string flow;
+    AZURE_FIELD("Timeline texture", 0, 0)
+    AZURE_FIELD_REFERENCE("asset", "texture", "")
+    std::string timeline;
+    AZURE_FIELD("Speed", 0, 128)
+    float speed = .5F;
+    AZURE_FIELD("Instability", 0, 1)
+    float unstable = 0;
+};
 AZURE_TYPE("azure.window-presentation", 1)
 struct WindowPresentation {
     AZURE_FIELD("Window mode", 0, 1)

@@ -20,6 +20,7 @@ from tools.npr_room.opening_camera import attach_audio, project as camera_projec
 from tools.npr_room.opening_blackout import bind as blackout_program, bind_room as rendered_blackout
 from tools.npr_room.opening_blackout import room_inputs as blackout_inputs
 from tools.npr_room.opening_chromatic import bind as rendered_chromatic, room_inputs as chromatic_inputs
+from tools.npr_room.opening_screen_move import bind as rendered_screen_move, room_inputs as screen_move_inputs
 from tools.npr_room.opening_face_layers import bind as face_program
 from tools.npr_room.pbr_materials import write
 from tools.npr_room.reference_inventory import digest
@@ -30,7 +31,7 @@ from tools.npr_room.tutorial_camera_body import project as tutorial_project
 
 @contextmanager
 def entry(room, graph, program, models=None, camera_sound=None, camera_source=None, room_scripts=None, blackout=None,
-          additional_room=None, chromatic=None):
+          additional_room=None, chromatic=None, screen_move=None):
     tag = "capture-main-conditional"
     root = room / "assets"
     names = {kind: tag + suffix for kind, suffix in (
@@ -64,7 +65,7 @@ def entry(room, graph, program, models=None, camera_sound=None, camera_source=No
         audio_file = (camera_source / camera_sound["source"]).resolve(strict=True)
         assert audio_file.is_relative_to(camera_source / "Assets") and digest(audio_file) == camera_sound["sha256"]
         links[root / camera_sound["asset"]] = audio_file
-    for effect in (blackout, chromatic):
+    for effect in (blackout, chromatic, screen_move):
         if effect is None:
             continue
         node, media, _ = effect
@@ -316,9 +317,19 @@ def chromatic_timing(profile):
     return samples, rise_seconds, decay_seconds
 
 
+def screen_move_observer(program):
+    return rendered_screen_move(program, """(function()
+        local samples = {}
+        return function(ratio, seconds)
+            samples[#samples + 1] = {ratio, seconds}
+            self:write_save("opening-screen-move-timing", {1, samples})
+        end
+    end)()""")
+
+
 def replay(player, room, resources, catalog, graph, chapters, output, source_receipt=None, models=None,
            camera_trace=None, camera_audio_source=None, face_catalog=None, achievements=False, blackout_timing=False,
-           blackout_source_lock=None, image_catalog=None, chromatic_source_lock=None):
+           blackout_source_lock=None, image_catalog=None, chromatic_source_lock=None, screen_move_source_lock=None):
     if bool(source_receipt) != bool(models):
         raise ValueError("The tutorial replay needs both source receipt and sampled models")
     original_script = room / "assets/pomodoro.lua"
@@ -353,7 +364,7 @@ def replay(player, room, resources, catalog, graph, chapters, output, source_rec
             raise ValueError("Achievement replay needs the normal tutorial body route")
         scripts = achievement_programs(program)
         program = scripts.pop("pomodoro.lua")
-    if bool(blackout_source_lock or chromatic_source_lock) != bool(image_catalog):
+    if bool(blackout_source_lock or chromatic_source_lock or screen_move_source_lock) != bool(image_catalog):
         raise ValueError("Rendered opening effects need a source lock and the image catalog")
     rendered = blackout_inputs(blackout_source_lock, image_catalog) if blackout_source_lock else None
     if blackout_timing or rendered:
@@ -364,6 +375,12 @@ def replay(player, room, resources, catalog, graph, chapters, output, source_rec
             raise ValueError("Chromatic replay requires the normal tutorial body route")
         chromatic = chromatic_inputs(chromatic_source_lock, image_catalog)
         program = chromatic_observer(program)
+    screen_move = None
+    if screen_move_source_lock:
+        if not models:
+            raise ValueError("Screen move replay requires the normal tutorial body route")
+        screen_move = screen_move_inputs(screen_move_source_lock, image_catalog)
+        program = screen_move_observer(program)
     face_results = {}
     trace = MotionTrace(room, chapters)
     output.mkdir()
@@ -372,7 +389,7 @@ def replay(player, room, resources, catalog, graph, chapters, output, source_rec
     tracks = json.loads((room / "music-receipt.json").read_bytes())["tracks"]
     tutorial = None
     with entry(room, compiled, program, models, sound, camera_audio_source, scripts, rendered,
-               chromatic=chromatic) as (project, level):
+               chromatic=chromatic, screen_move=screen_move) as (project, level):
         if models:
             startup = output / "tutorial"
             save(profile, project, "room-book-layout", [1, "Book_5"])
@@ -407,6 +424,11 @@ def replay(player, room, resources, catalog, graph, chapters, output, source_rec
                     assert abs(blackout[2][2] - blackout[1][2] - .8) <= 2 / 60, blackout
                 if chromatic:
                     effect_samples, rise_seconds, decay_seconds = chromatic_timing(profile)
+                if screen_move:
+                    schema, screen_move_events = slot(profile, "opening-screen-move-timing")
+                    assert schema == 1 and [event[0] for event in screen_move_events] == [.5, 0], screen_move_events
+                    movement_hold = screen_move_events[1][1] - screen_move_events[0][1]
+                    assert abs(movement_hold - 1) <= 2 / 60, screen_move_events
                 if achievements:
                     tutorial_key = "COMPLETE_TUTORIAL_COUNT"
                     assert slot(profile, "room-achievements") == [1, [tutorial_key]]
@@ -529,6 +551,10 @@ def replay(player, room, resources, catalog, graph, chapters, output, source_rec
         proof["chromaticTiming"] = {"tutorial": effect_samples, "firstChapter": [], "riseSeconds": rise_seconds,
                                     "decaySeconds": decay_seconds, "imageSHA256": digest(effect_frame),
                                     "material": chromatic[2]}
+    if screen_move:
+        assert slot(profile, "opening-screen-move-timing") == [1, screen_move_events]
+        proof["screenMoveTiming"] = {"tutorial": screen_move_events, "firstChapter": [], "holdSeconds": movement_hold,
+                                     "material": screen_move[2]}
     write(output / "first-chapter-room-replay.json", proof)
     return proof
 
@@ -547,6 +573,7 @@ if __name__ == "__main__":
     parser.add_argument("--blackout-timing", action="store_true")
     parser.add_argument("--blackout-source-lock", type=Path)
     parser.add_argument("--chromatic-source-lock", type=Path)
+    parser.add_argument("--screen-move-source-lock", type=Path)
     parser.add_argument("--image-catalog", type=Path)
     args = vars(parser.parse_args())
     print(json.dumps(replay(*(args[name.replace("-", "_")].resolve() for name in parameters),
@@ -555,4 +582,5 @@ if __name__ == "__main__":
                             camera_audio_source=args["camera_audio_source"], face_catalog=args["face_catalog"],
                             achievements=args["achievements"], blackout_timing=args["blackout_timing"],
                             blackout_source_lock=args["blackout_source_lock"], image_catalog=args["image_catalog"],
-                            chromatic_source_lock=args["chromatic_source_lock"])))
+                            chromatic_source_lock=args["chromatic_source_lock"],
+                            screen_move_source_lock=args["screen_move_source_lock"])))

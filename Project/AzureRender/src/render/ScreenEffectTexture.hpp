@@ -10,16 +10,18 @@ namespace azurerender {
 
 inline SampledTextureBinding loadScreenEffectTexture(rhi::IRhi& backend, SampledTextureCache& textures,
                                                      const std::filesystem::path& path, VkExtent2D extent,
-                                                     VkFilter filter) {
+                                                     VkFilter filter, VkFormat format = VK_FORMAT_R8G8B8A8_SRGB,
+                                                     bool clampUv = false) {
     const auto source = decodeImageFile(path);
     if (source.width != extent.width || source.height != extent.height)
         throw std::invalid_argument("Unexpected opening effect texture dimensions");
     SampledTextureUpload upload;
     upload.width = extent.width;
     upload.height = extent.height;
-    upload.format = VK_FORMAT_R8G8B8A8_SRGB;
+    upload.format = format;
     upload.mipLevels = 1;
     upload.sampler.filter = filter;
+    if (clampUv) upload.sampler.addressU = upload.sampler.addressV = VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE;
     upload.sampler.maxLod = 0;
     upload.sampler.mipmapLinear = false;
     if (!backend.supportsSampledImage(upload.format, filter == VK_FILTER_LINEAR))
