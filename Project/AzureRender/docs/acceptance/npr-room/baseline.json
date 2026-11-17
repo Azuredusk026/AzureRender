@@ -2,6 +2,7 @@
   "catalogSHA256": "d4f4c4ddd80599e6b78bd935cc98bdc8389d070a2b19ad84d04932af10852bd6",
   "coverage": {
     "authorizedPlatformRuns": "open",
+    "featureCatalogMatrix": "mapped",
     "featureReachability": "open",
     "pairedVisualReferences": "open",
     "platformScenarioInventory": "mapped",
@@ -9,6 +10,7 @@
     "staticCatalog": "mapped"
   },
   "engineBase": "dbe4ab3f84f55ff6776634842c4ac794cf887345",
+  "featureMatrixSHA256": "840b5319070dc2c6180b03aac4adad1f254973c72e8bcd6e5a1e508716d6f2f5",
   "formatVersion": 1,
   "privateInventorySHA256": "f1a6e28bcc0a59144e9461af5e9e034e6c1f2226e16c3b4d2784c760620578a0",
   "reference": "Recovery Windows 1.17.3",

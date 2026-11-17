@@ -2,6 +2,7 @@
 
 [房间游戏移植](docs/plans/2026-11-16-npr-room-reproduction.md)登记五场景、原资产及独立运行验收。
 [移植基线](docs/acceptance/npr-room/baseline.md)记录 Recovery 参考身份与核验范围。
+[功能矩阵](docs/acceptance/npr-room/feature-matrix.md)登记源条目与对应的运行证据。
 [房间计时回放](docs/acceptance/npr-room/room-probe.md)记录原音效、计时输入和本地存档。
 [房间曲库](docs/acceptance/npr-room/music-playlist.md)与[环境声](docs/acceptance/npr-room/ambient-sound.md)记录原资产、播放控制和独立 Player 恢复。
 

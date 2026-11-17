@@ -56,6 +56,7 @@
 [剧情命令与跳转](../acceptance/npr-room/story-routes.md)登记原命令编号、选项区间和组内跳转目标。
 [环境与装饰解锁](../acceptance/npr-room/unlock-catalog.md)登记源条件、点数价格和截止时间。
 [平台场景与验证条件](../acceptance/npr-room/platform-scenarios.md)登记操作系统能力、外部服务及各场景的采证条件。
+[功能矩阵](../acceptance/npr-room/feature-matrix.md)登记七类源条目、各项验证条件和已有运行证据。
 
 - [x] 锁定 Recovery 的源版本、构建、存档口径和原版证据。逐项读取五个场景、主数据、Addressables、`Resources`、`StreamingAssets` 和动态加载入口。先复用参考目录的现有统计、引用索引和资源身份。
 - [ ] 建立功能矩阵。每行登记入口、前置状态、输入、预期输出、存档影响、源证据和引擎缺口。得出剧情章节、窗景、装饰、解锁、语言、设置与平台分支的实际分母。
