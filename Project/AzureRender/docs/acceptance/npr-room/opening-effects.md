@@ -22,6 +22,20 @@
 
 Vulkan 全屏测试使用相同的底色、合成系数和时间输入。任务 1827 与 1828 的 172,800 个像素逐次一致，校验层错误数和退出后的分配数均为零。与 D3D11 对照时，控制帧逐像素一致，两帧活动噪声分别有 6,712 和 6,223 个像素位置存在差异，平均 RGB 绝对误差为 0.00583 和 0.00540。精确噪声位置及完整房间合成继续按 P5 验收。报告位于 `vulkan-noise-comparison.json`。
 
+## 黑屏特效硬件参照
+
+任务 1929 使用原 Windows 顶点和片元程序、原材质常量及两张原纹理。坡度纹理使用点采样，时间纹理使用线性采样，两张纹理均按 sRGB 解码及循环寻址。测试为相机不透明颜色和目标底色分别提供固定输入，采集五张 320×180 RGBA32F 画面。
+
+比率为 0 时控制帧逐像素一致。固定时间从 9.302 秒推进至 9.802 秒，比率 0.5 的画面有 53,653 个像素变化。同一时刻开启百叶窗有 17,916 个像素变化。比率为 1 时全帧 57,600 个像素均参与替换。原程序的浮点中间值最低为 −0.75，最终显示和原生房间组合需按完整画面对照验收。重复采样的摘要一致。单色噪声回归逐字节匹配已归档的 D3D11 参照。
+
+本机证据位于 `windows-opening-reference/blackout-validation/`。
+
+| 记录 | SHA-256 |
+| --- | --- |
+| 原材质与纹理输入 | `3fd3ba0742a743eae8eb238c0ce548190e9de78c2806556cf5bbb2cbc13cb699` |
+| 原始浮点画面 | `2d7f6d4d12d2ef97d5bb048a2c515969fca254805c5d524e62a182b95e3d6a80` |
+| 回放报告 | `cd8f42b29019a6c093afd747dc8f538caf1f25be8e324922d188cd5646b30371` |
+
 ## 原生画面合成
 
 版本 1 的 `azure.screen-noise` 组件接受 0 至 1 的透明度。默认值 0 对应原画面。活动场景包含多个组件时，取其中的最大透明度，以帧时间推进图案。全屏绘制位于色彩处理和抗锯齿之后、游戏界面之前。
@@ -52,6 +66,10 @@ python -B -m tools.npr_room.windows_noise_probe prepare --effects $programDirect
 & $noiseProbe $programDirectory $originalCapture
 & $noiseProbe $programDirectory $repeatCapture
 python -B -m tools.npr_room.windows_noise_probe verify --first $originalCapture --repeat $repeatCapture --output $noiseReport
+python -B -m tools.npr_room.windows_noise_probe prepare-blackout --effects $programDirectory --catalog $imageCatalog --source $unitySource --output $blackoutInputs
+& $noiseProbe $blackoutInputs $blackoutCapture blackout
+& $noiseProbe $blackoutInputs $blackoutRepeat blackout
+python -B -m tools.npr_room.windows_noise_probe verify-blackout --first $blackoutCapture --repeat $blackoutRepeat --output $blackoutReport
 & $glslc --target-env=vulkan1.3 shaders/inner_outline.vert -o $fullscreenVertex
 & $glslc --target-env=vulkan1.3 shaders/monochrome_screen_noise.frag -o $noiseFragment
 & $vulkanNoiseProbe $fullscreenVertex $noiseFragment $vulkanCapture

@@ -3,6 +3,9 @@
 import argparse
 import json
 from pathlib import Path
+import re
+import shutil
+import struct
 
 import numpy as np
 from PIL import Image
@@ -14,6 +17,7 @@ from tools.npr_room.reference_inventory import digest
 PROGRAM = "windows-opening-effects-programs.json"
 BINDINGS = "windows-opening-effects-source-lock.json"
 BACKGROUND = np.array([.25, .5, .75, 1], dtype=np.float32)
+BLACKOUT_SAMPLES = [[9.302, 0, 0], [9.302, .5, 0], [9.802, .5, 0], [9.302, 1, 0], [9.302, .5, 1]]
 
 
 def prepare(effects, catalog):
@@ -39,6 +43,75 @@ def prepare(effects, catalog):
             raise ValueError("The original noise timeline requires 64 color samples")
         with (effects / "noise-timeline.rgba").open("xb") as output:
             output.write(image.convert("RGBA").tobytes())
+
+
+def prepare_blackout(effects, catalog, source, output):
+    lock = json.loads((effects / BINDINGS).read_bytes())
+    program_file = effects / PROGRAM
+    if digest(program_file) != lock["programsSHA256"]:
+        raise ValueError("Blackout bytecode receipt differs from the source lock")
+    stages = json.loads(program_file.read_bytes())["programs"]["blackout"]["stages"]
+    authored, = [item for item in lock["renderers"]["High"]["passes"] if item["shaderProgram"] == "blackout"]
+    if authored["renderState"]["blend"] != {"srcBlend": 5, "destBlend": 10, "srcBlendAlpha": 1,
+                                             "destBlendAlpha": 10, "blendOp": 0, "blendOpAlpha": 0, "colMask": 15}:
+        raise ValueError("Unexpected original blackout blend")
+    if digest(source / authored["material"]) != authored["materialSHA256"]:
+        raise ValueError("Blackout material differs from the source lock")
+    layout, = [buffer for buffer in stages["fragment"]["constantBuffers"] if buffer["binding"] == 1]
+    offsets = {item["name"]: item["offset"] for item in layout["vectors"]}
+    expected = ("_Length", "_Ratio", "_DotScale", "_Speed", "_Unstable", "_BlindTop", "_BlindBottom", "_UseBlind")
+    if (layout["bytes"] != 80 or [offsets[name] for name in expected] != list(range(48, 80, 4))
+            or authored["floats"]["_Ratio"] != 0 or authored["floats"]["_UseBlind"] != 0):
+        raise ValueError("Unexpected original blackout material layout")
+    data = struct.pack("<20f", *([0] * 12 + [authored["floats"][name] for name in expected]))
+    slots = {value["binding"]: value for value in authored["textures"].values()}
+    if set(slots) != {0, 1, 2, 3} or not slots[0]["runtime"] or slots[1]["sha256"] != slots[2]["sha256"]:
+        raise ValueError("Unexpected blackout texture slots")
+    output.mkdir()
+    for stage in stages.values():
+        bytecode = effects / stage["path"]
+        if digest(bytecode) != stage["sha256"]:
+            raise ValueError("Original blackout bytecode differs")
+        shutil.copyfile(bytecode, output / bytecode.name)
+    texture_inputs = {}
+    for binding, name, size, filter_mode in ((1, "ramp", (32, 32), 0), (3, "timeline", (64, 1), 1)):
+        texture = slots[binding]
+        if not texture["srgb"] or not texture["source"].startswith("Assets/Texture2D/"):
+            raise ValueError("Expected an original sRGB blackout texture")
+        texture_file = verified_path(catalog, texture)
+        settings = source / (texture["source"] + ".meta")
+        values = dict(re.findall(r"^\s*(filterMode|wrap[UVW]):\s*(\d+)\s*$",
+                                 settings.read_text(encoding="utf-8"), re.M))
+        if values != {"filterMode": str(filter_mode), "wrapU": "0", "wrapV": "0", "wrapW": "0"}:
+            raise ValueError(f"Blackout texture sampler differs: {name}")
+        with Image.open(texture_file) as image:
+            if image.size != size:
+                raise ValueError(f"Blackout texture dimensions differ: {name}")
+            target = output / f"blackout-{name}.rgba"
+            target.write_bytes(image.convert("RGBA").tobytes())
+        texture_inputs[name] = {"sourceSHA256": digest(texture_file), "settingsSHA256": digest(settings),
+                                "rgbaSHA256": digest(target), "size": size, "filterMode": filter_mode}
+    (output / "blackout-material.bin").write_bytes(data)
+    return {"programSHA256": digest(program_file), "sourceLockSHA256": digest(effects / BINDINGS),
+            "textures": texture_inputs, "materialSHA256": authored["materialSHA256"],
+            "materialConstantsSHA256": digest(output / "blackout-material.bin")}
+
+
+def verify_blackout(first, repeat):
+    checksum = digest(first)
+    if digest(repeat) != checksum:
+        raise ValueError("Blackout source replays differ under identical inputs")
+    capture = np.fromfile(first, dtype="<f4").reshape(len(BLACKOUT_SAMPLES), 180, 320, 4)
+    if not np.isfinite(capture).all() or not np.array_equal(capture[0], np.broadcast_to(BACKGROUND, capture[0].shape)):
+        raise ValueError("The original blackout requires a finite capture and unchanged zero-ratio frame")
+    changed = np.count_nonzero(np.any(capture[..., :3] != BACKGROUND[:3], axis=3), axis=(1, 2)).tolist()
+    time_changed = int(np.count_nonzero(np.any(capture[1] != capture[2], axis=2)))
+    blind_changed = int(np.count_nonzero(np.any(capture[1] != capture[4], axis=2)))
+    if min(changed[1:]) <= 0 or time_changed == 0 or blind_changed == 0:
+        raise ValueError("The original blackout lost its ratio, time, or blind input")
+    return {"size": [320, 180], "frames": BLACKOUT_SAMPLES, "captureSHA256": checksum,
+            "changedPixels": changed, "timeChangedPixels": time_changed, "blindChangedPixels": blind_changed,
+            "rgbRange": [[float(frame[..., :3].min()), float(frame[..., :3].max())] for frame in capture]}
 
 
 def frame_counts(frames):
@@ -90,7 +163,9 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     subparsers = parser.add_subparsers(dest="operation", required=True)
     options = {"prepare": ("effects", "catalog"), "verify": ("first", "repeat", "output"),
-               "compare": ("reference", "candidate", "repeat", "output")}
+               "compare": ("reference", "candidate", "repeat", "output"),
+               "prepare-blackout": ("effects", "catalog", "source", "output"),
+               "verify-blackout": ("first", "repeat", "output")}
     for operation, paths in options.items():
         command = subparsers.add_parser(operation)
         for path in paths:
@@ -98,9 +173,17 @@ if __name__ == "__main__":
     args = parser.parse_args()
     if args.operation == "prepare":
         prepare(args.effects, args.catalog)
+    elif args.operation == "prepare-blackout":
+        report = prepare_blackout(args.effects, args.catalog, args.source, args.output)
+        (args.output / "blackout-source-receipt.json").write_text(json.dumps(report, sort_keys=True) + "\n",
+                                                                 encoding="utf-8", newline="\n")
     else:
-        report = (verify(args.first, args.repeat) if args.operation == "verify"
-                  else compare(args.reference, args.candidate, args.repeat))
+        if args.operation == "verify-blackout":
+            report = verify_blackout(args.first, args.repeat)
+        elif args.operation == "verify":
+            report = verify(args.first, args.repeat)
+        else:
+            report = compare(args.reference, args.candidate, args.repeat)
         with args.output.open("x", encoding="utf-8", newline="\n") as output:
             json.dump(report, output, sort_keys=True)
             output.write("\n")
