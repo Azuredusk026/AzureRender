@@ -1,4 +1,4 @@
-function new_story_room(host, chapters, tracks, speeds, labels, language, level, books, body, desk, camera)
+function new_story_room(host, chapters, tracks, speeds, labels, language, level, books, body, desk, camera, face)
     local music = new_story_music(host, tracks)
     local noise = new_story_noise(host)
     local dialogue = new_story_dialogue(host, speeds, language)
@@ -19,16 +19,22 @@ function new_story_room(host, chapters, tracks, speeds, labels, language, level,
         if desk then desk:begin(chapter) end
         if body then body:begin(chapter) end
         noise:begin(chapter, replay)
+        if face then face:begin(chapter, replay) end
     end
 
     function presentation:motion(row)
         if body then body:row(row) end
+        if face then face:expression(row) end
     end
 
     function presentation:update(dt)
         music:update(dt)
         noise:update(dt)
         if camera then camera:update(dt) end
+        if face then
+            face:voice(dialogue:speaking())
+            face:update(dt)
+        end
         if focus then focus.remaining = focus.remaining - dt end
     end
 
@@ -61,6 +67,7 @@ function new_story_room(host, chapters, tracks, speeds, labels, language, level,
         music:finish()
         noise:finish()
         if camera then camera:finish() end
+        if face then face:finish() end
     end
 
     return new_story_player(host, chapters, dialogue, language, level, presentation, labels)

@@ -98,7 +98,7 @@
 
 任务 1883 核对七个部件的 118,118 个变换。位置最大偏差为 0.000000104 米，旋转最大偏差为 0.00000561 度。任务 1885 和 1886 各跑 1,040 帧。两条原生路线各处转场与 Unity 最多相差两帧，七个部件始终同步。
 
-任务 1887 从实际房间入口跑完教学和第一章。两次启动分别核对 22 和 10 段源语音，并检查解锁、布置存档和配乐。两个进程均正常退出，GPU 缓冲和图像计数归零。独立包、表情、视线及画面各有单列验收。
+任务 1887 从实际房间入口跑完教学和第一章。两次启动分别核对 22 和 10 段源语音，并检查解锁、布置存档和配乐。两个进程均正常退出，GPU 缓冲和图像计数归零。独立包、视线及原版画面对照各有单列验收。表情及嘴型见[开场表情与嘴型回放](character-assets.md#开场表情与嘴型回放)。
 
 本机 `story-motion-reference/tutorial-camera/native-validation/` 保存以下记录。
 
@@ -170,6 +170,6 @@ python -B tools/npr_room/test_story_signal_room_player.py --player $player --roo
 python -B -m tools.npr_room.opening_camera_probe --source $unitySource --project $tutorialProbe
 & $unity -batchmode -nographics -quit -projectPath $tutorialProbe -executeMethod OpeningCameraProbe.Run -logFile $cameraLog
 python -B tools/npr_room/test_opening_camera_player.py --player $player --room $deskRoom --resource-root $resources --source-trace $cameraTrace --output $cameraReplay
-python -B tools/npr_room/test_story_signal_room_player.py --player $player --room $deskRoom --resource-root $resources --catalog $bodyCatalog --graph $animatorGraph --chapters $openingChapters --source-receipt $tutorialSource --models $tutorialModels --camera-trace $cameraTrace --camera-audio-source $unitySource --output $cameraRoomReplay
-python -B -m tools.npr_room.tutorial_camera_body stage --room $deskRoom --catalog $bodyCatalog --controller $animatorGraph --chapters $openingChapters --source-receipt $tutorialSource --models $tutorialModels --camera-trace $cameraTrace --camera-audio-source $unitySource --output $cameraRoom
+python -B tools/npr_room/test_story_signal_room_player.py --player $player --room $deskRoom --resource-root $resources --catalog $bodyCatalog --graph $animatorGraph --chapters $openingChapters --source-receipt $tutorialSource --models $tutorialModels --camera-trace $cameraTrace --camera-audio-source $unitySource --face-catalog $faceCatalog --output $cameraRoomReplay
+python -B -m tools.npr_room.tutorial_camera_body stage --room $deskRoom --catalog $bodyCatalog --controller $animatorGraph --chapters $openingChapters --source-receipt $tutorialSource --models $tutorialModels --camera-trace $cameraTrace --camera-audio-source $unitySource --face-catalog $faceCatalog --output $cameraRoom
 ```

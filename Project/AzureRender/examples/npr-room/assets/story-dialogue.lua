@@ -46,6 +46,10 @@ function new_story_dialogue(host, speeds, currentLanguage)
         fast = true
     end
 
+    function dialogue:speaking()
+        return line and line.moveMouth and audio:audio_playing()
+    end
+
     function dialogue:update(dt)
         if not line then return end
         if pending then pending = false

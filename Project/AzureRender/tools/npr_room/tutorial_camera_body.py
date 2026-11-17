@@ -15,6 +15,7 @@ from tools.npr_room.build_story_signal_room import GRAPH, compile_signals, input
 from tools.npr_room.catalog_storage import publish_directory
 from tools.npr_room.humanoid_clip_export import export_model
 from tools.npr_room.opening_camera import attach_audio, project as camera_project
+from tools.npr_room.opening_face_layers import bind as face_program
 from tools.npr_room.pbr_materials import write
 from tools.npr_room.reference_inventory import digest
 from tools.npr_room.room_geometry import HEROINE_PARTS, copy_room_asset, stage_live_audio_media
@@ -97,7 +98,7 @@ def project(room, catalog, controller, chapters, source_receipt, models):
     return graph, script, tutorial, bindings
 
 
-def stage(room, catalog, controller, chapters, source_receipt, models, output, camera_trace=None, camera_audio_source=None):
+def stage(room, catalog, controller, chapters, source_receipt, models, output, camera_trace=None, camera_audio_source=None, face_catalog=None):
     body, program, route, states = project(room, catalog, controller, chapters, source_receipt, models)
     camera = load(models / TUTORIAL_RECEIPT)
     camera_path = None
@@ -105,6 +106,8 @@ def stage(room, catalog, controller, chapters, source_receipt, models, output, c
         raise ValueError("Camera audio requires the original camera trace")
     if camera_trace:
         program, camera_path = camera_project(room, program, camera_trace, camera_audio_source)
+    if face_catalog:
+        program = face_program(program, load(face_catalog), models, chapters)
     with tempfile.TemporaryDirectory(prefix="tutorial-camera-room-", dir=output.parent) as workspace:
         target = Path(workspace) / "project"
         assets = target / "assets"
@@ -149,6 +152,10 @@ def stage(room, catalog, controller, chapters, source_receipt, models, output, c
             if load(morphology)["faceGlbSHA256"] != camera["parts"]["face"]["sha256"]:
                 raise ValueError("Face asset does not match its body binding receipt")
             shutil.copyfile(morphology, target / MORPH_RECEIPT)
+        if face_catalog:
+            write(target / "opening-face-layer-receipt.json", {
+                "schemaVersion": 1, "catalogSHA256": digest(face_catalog), "scriptSHA256": digest(script),
+                "faceGlbSHA256": camera["parts"]["face"]["sha256"]})
         if camera_path:
             write(target / "opening-camera-receipt.json", camera_path | {
                 "scriptSHA256": digest(script), "levelSHA256": digest(level)})
@@ -165,11 +172,11 @@ if __name__ == "__main__":
         action = steps.add_parser(step)
         for name in names:
             action.add_argument("--" + name, type=Path, required=True)
-    for name in ("camera-trace", "camera-audio-source"):
+    for name in ("camera-trace", "camera-audio-source", "face-catalog"):
         steps.choices["stage"].add_argument("--" + name, type=Path)
     args = vars(parser.parse_args())
     arguments = bake_args if args["step"] == "bake" else room_args
     handler = bake if args["step"] == "bake" else stage
-    options = {name: args[name].resolve(strict=True) for name in ("camera_trace", "camera_audio_source")
+    options = {name: args[name].resolve(strict=True) for name in ("camera_trace", "camera_audio_source", "face_catalog")
                if args.get(name)}
     print(json.dumps(handler(*(args[name.replace("-", "_")].resolve() for name in arguments), **options)))

@@ -18,7 +18,7 @@ import numpy as np
 
 
 @contextmanager
-def fixture(room, models, clip):
+def fixture(room, models, clip, program=None):
     assets = room / "assets"
     tag = "capture-opening-body-face"
     level = load(assets / "room.azurelevel")
@@ -36,6 +36,10 @@ def fixture(room, models, clip):
     project = load(room / "project.azureproject")
     project["startupScene"] = "assets:/" + tag + ".azurelevel"
     descriptor = room / (tag + ".azureproject")
+    script = assets / (tag + ".lua")
+    if program:
+        level["nodes"].append({"id": tag, "components": {"azure.script": {
+            "type": "azure.script", "version": 1, "data": {"asset": "assets:/" + script.name}}}})
     graph = {"schemaVersion": 1, "initial": "camera-start", "transitions": [], "states": [
         {"name": "camera-start", "clip": clip, "loop": False}]}
     created = []
@@ -48,6 +52,10 @@ def fixture(room, models, clip):
             with path.open("x", encoding="utf-8") as stream:
                 created.append(path)
                 json.dump(data, stream)
+        if program:
+            with script.open("x", encoding="utf-8") as stream:
+                created.append(script)
+                stream.write(program)
         yield descriptor
     finally:
         for path in reversed(created):

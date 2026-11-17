@@ -100,6 +100,20 @@ Recovery 的 19 个 `anim_face_*.anim` 直接绑定同一脸部网格。
 | 表情来源清单 | `7f6fb354a50e76cf7141c4d434893720a3388749dd6ee36c3adafb7a88e7dfce` |
 | Unity 表情采样 | `06f31e0be98472844e61a02758030aeb5c2aa69c38cb7bc4a66531936e048ac0` |
 
+## 开场表情与嘴型回放
+
+正常房间在剧情指令到达时切换表情。嘴型跟随原语音的播放状态。表情和嘴型按原控制器顺序叠加，混合期间按源默认权重补齐缺失目标。未参与混合的目标继续使用身体片段的权重。
+
+任务 1905 以固定帧步回放 631 帧。35,967 项权重与 Unity 对照，最大归一化误差为 0.000014。任务 1906 从常规房间入口跑完教学和第一章。两章均验证眉部表情、语音嘴型和收尾清理。
+
+本机 `story-motion-reference/opening-face/facial-layer/` 保存原生骨架检查、图层输入和回放报告。视线层、身体附加层及原版画面配对分别采证。
+
+| 记录 | SHA-256 |
+| --- | --- |
+| 图层输入 | `beca16548e75de5ab061036545de2289c238e64b03f2eeeb8d7bcf8be007ba3a` |
+| 原生固定帧步回放 | `bb38760605e88c814f0930446fc3e4a31da0fb5ca753ea6ff791ee86deb5ac7a` |
+| 常规房间回放 | `0339ab6f7221d5fe3ae33ec927bba074539b4ca14a25fc4637336886c06157a0` |
+
 ## 身体片段的脸部曲线
 
 装配读取 20 个开场身体片段。其中 18 段携带脸部曲线，共有 955 条有效绑定。六条无目标曲线经源哈希、目标表和零权重核对后登记在清单。装配按源目标顺序写入脸部 GLB，并使用该身体片段的现有时钟。
@@ -147,6 +161,9 @@ python -B -m tools.npr_room.story_face_probe --source $unitySource --project $tu
 & $unity -batchmode -nographics -quit -projectPath $tutorialProbe -executeMethod StoryFaceControllerProbe.RunBodyClips -logFile $bodyMorphLog
 python -B -m tools.npr_room.verify_story_body_morphs --models $bodyMorphModels --original $tutorialModels --samples $bodyMorphSamples --output $bodyMorphAudit
 python -B tools/npr_room/test_story_body_morph_player.py --player $player --room $deskRoom --resource-root $resources --original $tutorialModels --models $bodyMorphModels --output $bodyMorphRender
+& $expressionTest --inspect $bodyMorphFaceGlb $faceSkeleton
+python -B -m tools.npr_room.opening_face_layers --source $unitySource --source-receipt $faceSource --graph $animatorGraph --models $bodyMorphModels --skeleton $faceSkeleton --output $faceCatalog
+python -B tools/npr_room/test_story_face_player.py --player $player --room $deskRoom --resource-root $resources --models $bodyMorphModels --catalog $faceCatalog --source-trace $faceTrace --output $faceReplay
 ```
 
 转换支持单个渲染器的绑定层级。

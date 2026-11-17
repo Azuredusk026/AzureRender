@@ -2,6 +2,7 @@
 
 import math
 from pathlib import Path
+import re
 
 from tools.npr_room.build_purchase_room import system_sound
 from tools.npr_room.build_story_desk_room import euler_xyz
@@ -69,22 +70,23 @@ def source_program():
     return (EXAMPLE / ASSET).read_text(encoding="utf-8").rstrip()
 
 
+def use_presentation(script, prefix):
+    pattern = re.compile(r"^function new_story_room\(.*?^end(?=\n|$)", re.MULTILINE | re.DOTALL)
+    hits = list(pattern.finditer(script))
+    if len(hits) != 1:
+        raise ValueError("Expected one normal story presentation")
+    presentation = (EXAMPLE / "story-room.lua").read_text(encoding="utf-8").rstrip()
+    match, = hits
+    return script[:match.start()] + prefix + "\n\n" + presentation + script[match.end():]
+
+
 def bind(script, track):
-    program = {
-        "function new_story_room(": source_program() + "\n\nlocal story_camera_track = "
-        + lua_value(track) + "\n\nfunction new_story_room(",
-        "level, books, body, desk)": "level, books, body, desk, camera)",
-        "        noise:update(dt)": "        noise:update(dt)\n        camera:update(dt)",
-        "        noise:effect(row, delay)": "        camera:effect(row)\n        noise:effect(row, delay)",
-        "        noise:finish()": "        noise:finish()\n        camera:finish()",
-        "new_story_desk(self, story_desk_poses))":
-            "new_story_desk(self, story_desk_poses), new_story_camera(self, story_camera_track))",
-    }
-    for marker, replacement in program.items():
-        if script.count(marker) != 1:
-            raise ValueError(f"Expected one normal camera integration marker: {marker}")
-        script = script.replace(marker, replacement)
-    return script
+    factory = "new_story_desk(self, story_desk_poses))"
+    if script.count(factory) != 1:
+        raise ValueError("Expected one normal camera integration marker")
+    prefix = source_program() + "\n\nlocal story_camera_track = " + lua_value(track)
+    return use_presentation(script, prefix).replace(
+        factory, factory[:-1] + ", new_story_camera(self, story_camera_track))")
 
 
 def attach_audio(level, sound):
