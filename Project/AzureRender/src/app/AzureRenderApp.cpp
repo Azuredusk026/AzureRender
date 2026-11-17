@@ -279,6 +279,12 @@ void AzureRenderApp::initWindow() {
     config.scrollCallback = scrollCallback;
     config.dropCallback = fileDropCallback;
     frontend_ = std::make_unique<azurerender::GlfwFrontend>(config);
+    if (!fixedSimulation_) {
+        frontend_->applyWindowPresentation(
+            static_cast<azurerender::WindowMode>(engineSettings_->get("runtime.windowMode").get<int>()),
+            static_cast<azurerender::WindowResolution>(engineSettings_->get("runtime.windowResolution").get<int>()),
+            engineSettings_->get("runtime.alwaysOnTop").get<bool>());
+    }
     lastRotationTime_ = frontend_->timeSeconds();
     azurerender::RuntimeDiagnostics::instance().print(
         "input",

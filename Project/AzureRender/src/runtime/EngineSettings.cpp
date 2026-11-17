@@ -8,6 +8,9 @@ void registerEngineSettings(SettingRegistry& r) {
         r.add({"render.features."+descriptor.id,"可选渲染特性："+descriptor.id,false,{},{},false,true,false,false});
     r.add({"runtime.maxFrameRate","Maximum host frame rate (0 is unlimited)",60,0,1000,false,true,false});
     r.add({"runtime.vsync","Synchronized surface presentation",true,{},{},false,true,true});
+    r.add({"runtime.windowMode","Windowed (0) or borderless on the current display (1)",0,0,1,false,true,true});
+    r.add({"runtime.windowResolution","1280 x 720 (0), 1600 x 900 (1), 1920 x 1080 (2), or custom (3)",3,0,3,false,true,true});
+    r.add({"runtime.alwaysOnTop","Keep the application window above ordinary windows",false,{},{},false,true,true});
     r.add({"diagnostics.verbose","Verbose development diagnostics",false,{},{},false,true,false});
     r.add({"developer.maxViews","Maximum owned auxiliary render views",3,1,3,false,true,true});
 }

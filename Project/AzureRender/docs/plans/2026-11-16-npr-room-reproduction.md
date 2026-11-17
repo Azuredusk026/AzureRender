@@ -157,6 +157,7 @@ P3 按功能组实施与验收。完成一个功能组后更新矩阵，再继�
 ## P6 平台能力与独立打包
 
 [Windows 窗口回归](../acceptance/npr-room/platform-scenarios.md#windows-窗口回归)记录常规房间调整尺寸、最小化、恢复和计时存档重开。
+[Windows 启动显示设置](../acceptance/npr-room/platform-scenarios.md#windows-启动显示设置)登记三档客户区像素、无边框全屏、置顶和命令行覆盖回放。
 [成就统计夹具](../acceptance/npr-room/platform-scenarios.md#成就统计夹具)记录离线、提交失败、恢复和重开。
 [房间成就记录](../acceptance/npr-room/platform-scenarios.md#房间成就记录)登记教学、待办、便签和计时的本地事件回放。
 

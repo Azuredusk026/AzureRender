@@ -21,12 +21,34 @@
 
 任务 1858 从项目的启动关卡进入常规房间。测试进程使用按显示器感知的 DPI 上下文读取实际像素。客户区依次为 1280×720、960×540、恢复后的 960×540 及 1920×1080；各阶段的 Vulkan 截图尺寸与客户区一致。系统报告窗口进入最小化状态并成功恢复。房间关卡在每次操作后继续出帧，并保持相同修订号；加载、脚本和呈现错误均为空。
 
-玩家在紧凑窗口启动正计时，在 1920×1080 窗口结束，记录 3 秒。第二个 Player 读到同一模式和计时记录，并能打开笔记。两个进程退出后，GPU 缓冲区和图像计数均为零。本次使用房间验证构建；无边框全屏、窗口置顶、前后台帧率、休眠和独立安装包各自采证。
+玩家在紧凑窗口启动正计时，在 1920×1080 窗口结束，记录 3 秒。第二个 Player 读到同一计时模式和记录，并能打开笔记。两个进程退出后，GPU 缓冲区和图像计数均为零。前后台帧率、休眠和独立安装包各自采证。
 
 本机存档目录为 `room-opening-playable/validation/windows-lifecycle/`。回放报告 SHA-256 为 `49e09993f741c1e86ca48c9b4ed02107c5c0540508c9484fbd21cd05c312fec7`，Player SHA-256 为 `efbc5a1d27c9b3db0cb91695dff770c4dfaa1de5f66f4d529e14a89fa44898c6`。
 
 ```powershell
 python -B tools/npr_room/test_room_window_player.py --player $player --project $roomProject --resource-root $resources --output $windowReplay
+```
+
+## Windows 启动显示设置
+
+`runtime.windowMode` 采用窗口模式 0 或无边框全屏 1。`runtime.windowResolution` 使用 0、1、2 选择 1280×720、1600×900、1920×1080，或使用 3 保留自定义窗口尺寸。`runtime.alwaysOnTop` 接受布尔值。启动时通过 `--settings-file` 加载设置，命令行的同名 `--set` 优先。无边框窗口使用当前显示器范围，窗口模式恢复自定义位置、尺寸和边框。游戏内设置面板及系统菜单按交互场景验收。
+
+Win32 探针任务 1972 核对三档客户区像素、自定义窗口往返、窗口边框及置顶状态。任务 1974 核对设置类型、范围和加载顺序。任务 1976 使用三个独立 Player 进程进入常规房间，分别核对 2560×1440 无边框置顶、命令行覆盖为 1600×900 普通窗口、以及重开后的无边框置顶。两次截图尺寸与客户区一致，三个进程退出后的 GPU 缓冲区和图像计数均为零。
+
+任务 1977 使用相同构建通过普通窗口的尺寸调整、最小化、恢复和计时存档重开回归。
+
+证据位于本机 `platform-achievement-reference/window-preferences/`。
+
+| 记录 | SHA-256 |
+| --- | --- |
+| 原版 `SettingService.cs` | `8b3019e51eb2bf85462e4c7e39ceaac3679a9e64d4ccf28da4dc474c488d00bb` |
+| 原版 `ScreenSystem.cs` | `da6a4f88abc06e6dd249c5a474131dc19de231409961cb72c10f870a5819fe84` |
+| 常规房间回放 | `137034fc77488cbe62ef8aa2b354c61dd31e8761e0e4f03cc7dc9c947d74fe16` |
+| 普通窗口回归 | `142a4e4fcd541b50c6eacd1e8af1744e33985443f4cee59cd9193acb1166ee5e` |
+| 原生诊断构建清单 | `5ce8eaf6633e6fa34ec0bd08c4da0010c30d3f0e9f2ea6f6422dcba131814da6` |
+
+```powershell
+python -B tools/npr_room/test_room_window_player.py --player $player --project $roomProject --resource-root $resources --output $windowPreferencesReplay --preferences
 ```
 
 ## 成就统计夹具

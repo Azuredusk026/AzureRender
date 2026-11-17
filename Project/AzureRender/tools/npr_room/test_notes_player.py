@@ -17,7 +17,7 @@ from test_validation_protocol import exchange
 
 @contextlib.contextmanager
 def playing(player, project, resources, profile, output, expected_audio_starts=None,
-            level_reference="assets:/room.azurelevel", *, on_ready=None, on_state=None):
+            level_reference="assets:/room.azurelevel", *, on_ready=None, on_state=None, player_args=()):
     output.mkdir()
     endpoint = output / "endpoint.json"
     token = secrets.token_hex(32)
@@ -29,6 +29,7 @@ def playing(player, project, resources, profile, output, expected_audio_starts=N
         str(player), "--project", str(project), "--resource-root", str(resources), "--save-root", str(profile),
         "--width", "1280", "--height", "720", "--validation-token-env", "AZURE_NOTES_TEST_TOKEN",
         "--validation-endpoint", str(endpoint),
+        *player_args,
     ]
     with (output / "stdout.log").open("w", encoding="utf-8") as out, (output / "stderr.log").open("w", encoding="utf-8") as err:
         process = subprocess.Popen(command, cwd=output, env=env, stdout=out, stderr=err, startupinfo=startup)

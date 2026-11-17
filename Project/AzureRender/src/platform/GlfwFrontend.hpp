@@ -3,12 +3,16 @@
 #include <GLFW/glfw3.h>
 
 #include <cstdint>
+#include <optional>
 #include <string>
 #include <utility>
 #include <vector>
 #include "platform/FileDropEvent.hpp"
 
 namespace azurerender {
+
+enum class WindowMode { Windowed, Borderless };
+enum class WindowResolution { HD, HDPlus, FullHD, Custom };
 
 struct GlfwFrontendConfig {
     std::uint32_t width = 1280;
@@ -36,6 +40,7 @@ public:
     [[nodiscard]] double timeSeconds() const;
     [[nodiscard]] std::pair<int, int> framebufferSize() const;
     [[nodiscard]] std::vector<const char*> requiredVulkanExtensions() const;
+    void applyWindowPresentation(WindowMode mode, WindowResolution resolution, bool alwaysOnTop);
 
     void pollEvents() const;
     void recordFileDrop(int count,const char** paths);
@@ -48,6 +53,12 @@ public:
 private:
     GLFWwindow* window_ = nullptr;
     std::vector<FileDropEvent> fileDrops_;
+    struct WindowedPlacement {
+        int x = 0, y = 0, width = 0, height = 0;
+        int decorated = GLFW_TRUE, resizable = GLFW_TRUE;
+        bool maximized = false;
+    };
+    std::optional<WindowedPlacement> windowedPlacement_;
 };
 
 }  // namespace azurerender
