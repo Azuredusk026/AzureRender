@@ -164,6 +164,17 @@ public class CapturedEnvironment
     public bool fog;
     public Color fogColor;
     public float fogDensity;
+    public bool lightsUseLinearIntensity;
+    public bool lightsUseColorTemperature;
+    public float[] ambientProbe;
+    public CapturedProbeSample[] ambientProbeSamples;
+}
+
+[Serializable]
+public class CapturedProbeSample
+{
+    public Vector3 direction;
+    public Color value;
 }
 
 
@@ -463,6 +474,30 @@ public class RoomFrameCapture : MonoBehaviour
         return names.Select(name => new CapturedFloat { name = name, value = Shader.GetGlobalFloat(name) }).ToArray();
     }
 
+    private static float[] CaptureAmbientCoefficients()
+    {
+        var probe = RenderSettings.ambientProbe;
+        var coefficients = new float[27];
+        for (var channel = 0; channel < 3; channel++)
+            for (var coefficient = 0; coefficient < 9; coefficient++)
+                coefficients[channel * 9 + coefficient] = probe[channel, coefficient];
+        return coefficients;
+    }
+
+    private static CapturedProbeSample[] CaptureAmbientSamples()
+    {
+        var directions = new List<Vector3>();
+        for (var x = -1; x <= 1; x++)
+            for (var y = -1; y <= 1; y++)
+                for (var z = -1; z <= 1; z++)
+                    if (x != 0 || y != 0 || z != 0) directions.Add(new Vector3(x, y, z).normalized);
+        var colors = new Color[directions.Count];
+        RenderSettings.ambientProbe.Evaluate(directions.ToArray(), colors);
+        return directions.Select((direction, index) => new CapturedProbeSample {
+            direction = direction, value = colors[index]
+        }).ToArray();
+    }
+
     private IEnumerator Start()
     {
         output = OutputPath();
@@ -579,7 +614,10 @@ public class RoomFrameCapture : MonoBehaviour
                     ambientSky = RenderSettings.ambientSkyColor, ambientEquator = RenderSettings.ambientEquatorColor,
                     ambientGround = RenderSettings.ambientGroundColor, ambientIntensity = RenderSettings.ambientIntensity,
                     reflectionIntensity = RenderSettings.reflectionIntensity, fog = RenderSettings.fog,
-                    fogColor = RenderSettings.fogColor, fogDensity = RenderSettings.fogDensity
+                    fogColor = RenderSettings.fogColor, fogDensity = RenderSettings.fogDensity,
+                    lightsUseLinearIntensity = GraphicsSettings.lightsUseLinearIntensity,
+                    lightsUseColorTemperature = GraphicsSettings.lightsUseColorTemperature,
+                    ambientProbe = CaptureAmbientCoefficients(), ambientProbeSamples = CaptureAmbientSamples()
                 };
 
                 var capture = ScreenCapture.CaptureScreenshotAsTexture();

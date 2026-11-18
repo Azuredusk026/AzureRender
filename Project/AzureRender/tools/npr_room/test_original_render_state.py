@@ -1,4 +1,6 @@
 import unittest
+from itertools import product
+import math
 
 from tools.npr_room.original_room_frames import verify_render_state
 
@@ -26,6 +28,27 @@ class OriginalRenderStateTests(unittest.TestCase):
             mutate(row)
             with self.assertRaises(ValueError):
                 verify_render_state(row)
+
+    def test_requires_finite_ambient_coefficients_and_normalized_probe_directions(self):
+        row = state()
+        with self.assertRaises(ValueError):
+            verify_render_state(row, require_ambient_probe=True)
+        directions = [direction for direction in product((-1, 0, 1), repeat=3) if any(direction)]
+        row["environment"]["ambientProbeSamples"] = [
+            {"direction": dict(zip("xyz", (value / math.hypot(*direction) for value in direction))),
+             "value": {"r": 0, "g": 0, "b": 0, "a": 1}} for direction in directions]
+        row["environment"].update(ambientProbe=[0] * 27,
+                                  lightsUseLinearIntensity=True, lightsUseColorTemperature=True)
+        self.assertEqual(verify_render_state(row, require_ambient_probe=True)["ambientProbeDirections"], 26)
+        row["environment"]["ambientProbe"][0] = float("nan")
+        with self.assertRaises(ValueError):
+            verify_render_state(row, require_ambient_probe=True)
+        row["environment"].update(ambientProbe=[0] * 27,
+            lightsUseLinearIntensity=True, lightsUseColorTemperature=True,
+            ambientProbeSamples=[{"direction": {"x": 1, "y": 0, "z": 0},
+                                  "value": {"r": 0, "g": 0, "b": 0, "a": 1}}])
+        with self.assertRaises(ValueError):
+            verify_render_state(row, require_ambient_probe=True)
 
 
 if __name__ == "__main__":

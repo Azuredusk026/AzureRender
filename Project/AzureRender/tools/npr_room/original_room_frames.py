@@ -10,7 +10,7 @@ from PIL import Image
 from tools.npr_room.reference_inventory import digest
 
 
-def verify_render_state(record):
+def verify_render_state(record, require_ambient_probe=False):
     required = ("lights", "renderers", "weatherScalars", "environment")
     if any(not record.get(key) for key in required):
         raise ValueError("Original render state is incomplete")
@@ -36,11 +36,27 @@ def verify_render_state(record):
     values.extend(item["value"] for item in record["weatherScalars"])
     if not np.isfinite(values).all():
         raise ValueError("Original render state has nonfinite values")
-    return {"lights": len(record["lights"]), "renderers": len(record["renderers"]),
-            "materials": materials, "weatherScalars": len(record["weatherScalars"])}
+    result = {"lights": len(record["lights"]), "renderers": len(record["renderers"]),
+              "materials": materials, "weatherScalars": len(record["weatherScalars"])}
+    if require_ambient_probe:
+        environment = record["environment"]
+        coefficients = environment.get("ambientProbe", [])
+        samples = environment.get("ambientProbeSamples", [])
+        if len(coefficients) != 27 or len(samples) != 26:
+            raise ValueError("Original ambient probe requires 27 coefficients and 26 evaluated directions")
+        directions = np.array([[sample["direction"][axis] for axis in "xyz"] for sample in samples])
+        colors = np.array([[sample["value"][axis] for axis in "rgba"] for sample in samples])
+        if (not np.isfinite(coefficients).all() or not np.isfinite(directions).all() or not np.isfinite(colors).all()
+                or not np.allclose(np.linalg.norm(directions, axis=1), 1, atol=1e-6)
+                or len({tuple(direction) for direction in directions}) != 26
+                or any(type(environment.get(flag)) is not bool for flag in (
+                    "lightsUseLinearIntensity", "lightsUseColorTemperature"))):
+            raise ValueError("Original ambient probe state is invalid")
+        result.update(ambientProbeCoefficients=27, ambientProbeDirections=26)
+    return result
 
 
-def verify_frames(folder, require_render_state=False):
+def verify_frames(folder, require_render_state=False, require_ambient_probe=False):
     paths = sorted(folder.glob("*.json"))
     expected = {f"{mode}-{index:02d}.json" for mode in ("Night", "Cloudy") for index in range(12)}
     if {path.name for path in paths} != expected:
@@ -88,8 +104,8 @@ def verify_frames(folder, require_render_state=False):
                            "depthRange": [float(depth.min()), float(depth.max())],
                            "transforms": len(transforms), "skins": len(record["skins"]),
                            "shaderValues": len(record["shaderValues"])})
-            if require_render_state:
-                frames[-1]["renderState"] = verify_render_state(record)
+            if require_render_state or require_ambient_probe:
+                frames[-1]["renderState"] = verify_render_state(record, require_ambient_probe)
             colors.append(color)
             depths.append(depth)
             records.append(record)
@@ -120,8 +136,9 @@ def main():
     parser.add_argument("--frames", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--require-render-state", action="store_true")
+    parser.add_argument("--require-ambient-probe", action="store_true")
     args = parser.parse_args()
-    report = verify_frames(args.frames, args.require_render_state)
+    report = verify_frames(args.frames, args.require_render_state, args.require_ambient_probe)
     with args.output.open("x", encoding="utf-8", newline="\n") as output:
         json.dump(report, output, indent=2, sort_keys=True)
         output.write("\n")

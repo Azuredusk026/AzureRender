@@ -186,6 +186,34 @@ python -B -m tools.npr_room.original_room_frames --frames $originalRoomFrames --
 python -B -m tools.npr_room.original_room_frames --frames $originalRenderFrames --require-render-state --output $renderStateVerification
 ```
 
+## 原版环境光探针
+
+任务 2147 在两种天气各采集 12 个同步帧。
+每帧保存 RGB 三组共 27 个球谐系数。
+Unity 同时计算 26 个单位方向的原版探针响应。
+光色强度与色温策略也按当前图形设置保存。
+
+三色环境光的方向响应包含二阶分量。
+以下误差来自各天气 12 帧的 26 方向实算。
+误差为线性 RGB 分量的最大绝对差。
+
+| 天气 | 线性四项拟合误差 | 二阶九项拟合误差 |
+| --- | ---: | ---: |
+| 夜晚 | 0.0634984 | 0.0000000258 |
+| 多云 | 0.498717 | 0.0000000659 |
+
+候选继续接入二阶探针的方向响应。
+原版图像、深度、姿态、灯光与探针保持同帧关联。
+原输入和存档输入的摘要均通过核验。
+两次报告与目录移动后的校验结果一致。
+
+本机目录为 `original-room-dynamics/ambient-probe/`。
+报告 SHA-256 为 `9daa311f19ad7c88b8e34e95fe35e372ebeb4d4e8f3130a564a8ccd9f1f573da`。
+
+```powershell
+python -B -m tools.npr_room.original_room_frames --frames $originalProbeFrames --require-ambient-probe --output $ambientProbeVerification
+```
+
 ## 同步姿态配准
 
 `original_room_registration` 按完整父子路径绑定角色。
