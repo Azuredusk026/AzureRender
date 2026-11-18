@@ -28,6 +28,13 @@
 [五场景来源对账](startup-flow.md#五场景来源对账)登记加载顺序、候选挂载、直接启动引用与待验时序。
 [主数据加载对账](baseline.md#主数据加载对账)登记 20 个原版加载类型及候选已核对的资源摘要。
 
+[计时音效偏好](room-probe.md#计时音效偏好)登记七个原音效槽、两种计时模式的音效选择、音量、静音和重开。
+[计时存档保护](room-probe.md#偏好写入与模式恢复)与[正计时检查点](countup.md#检查点复测)登记写入失败、恢复及较新格式保护。
+
+[单日工时修订](work-calendar.md#单日工时修订)、[单日完成任务](work-calendar.md#单日完成任务)、[单日日记](work-calendar.md#单日日记)与[习惯记录](work-calendar.md#习惯与日历记录)分别登记日期输入、待办联动、持久化及对应的 Player 回放范围。
+[安装版天气身份](windows-atmosphere.md#本机安装版参照)登记 1.18.1 的五个着色器对象与 1.17.3 冻结参照的对应关系。
+[完整房间整合](work-calendar.md#完整房间整合)登记三档分辨率和七语界面的日历、日记、习惯与音效共同存档。
+
 ## 复验
 
 五份源目录和十四个源脚本的摘要写入报告。两次独立运行得到同一 SHA-256 `840b5319070dc2c6180b03aac4adad1f254973c72e8bcd6e5a1e508716d6f2f5`。本机报告位于 `assets_private/npr-room-dev/source-lock/feature-matrix.json`。

@@ -32,8 +32,7 @@ function new_habit_calendar_menu(host, habits, label, weekdayLabel)
 
     local function history(date)
         local names = habits:completed(date)
-        host:ui_visible("calendar-habit-history", #names > 0)
-        host:ui_text("calendar-habit-history-label", label("habitTitle", "Habit Tracker"))
+        host:ui_visible("calendar-habit-history", #names > 0 and not open)
         host:ui_text("calendar-habit-history-list", table.concat(names, "\n"))
     end
 
@@ -74,6 +73,7 @@ function new_habit_calendar_menu(host, habits, label, weekdayLabel)
             host:ui_visible("calendar-habit-editor", open)
             if open then redraw(date, today) end
             showArchive(false)
+            refresh = true
         end
         if open then
             if confirmArchive then

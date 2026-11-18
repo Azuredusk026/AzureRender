@@ -39,6 +39,25 @@
 
 任务 2122 使用两个 Player 复验星期规则、暂停恢复、完成撤销、重排、确认删除与重开。图像和缓冲在退出后归零。可控测试覆盖日期边界、暂停区间、写入失败和较新格式保护。本机 `calendar-habit-validation/calendar-habit-replay.json` 的 SHA-256 为 `6c9c139c6083f6c2bcb4b96fafd4fc0747158b558dbe9900467e9992a10be669`。
 
+## 完整房间整合
+
+候选 `room-tools-integrated` 集成工时修订、日记、习惯及计时音效偏好。装配从冻结房间保留角色、道具、剧情和音频。原素材通过共享文件引用，装配记录保存输入与输出摘要。
+
+任务 2125 在 1280×720 核对七语界面和共同存档。任务 2126、2127 将相同候选移至私有目录，以 1920×1080 和 1280×800 再验。六个 Player 进程均正常退出，图像与缓冲计数归零。每种尺寸记录七张语言画面和一张共同编辑画面。
+
+| 尺寸 | 回放报告 SHA-256 |
+| --- | --- |
+| 1280×720 | `0dd8aebf1cbeed7f684d5ff96e97b2e61e0390330f7883456c268e24b1747af0` |
+| 1920×1080 | `327f1129b605e2790d5c650915967957eed02efd79451508293ac887488c0199` |
+| 1280×800 | `4537be93efd6247b055ae59b2d055e3aa2310bf557fb32596f6141e2ea273924` |
+
+本机 `room-tools-integration-validation` 保存回放报告、画面与装配收据。以下命令生成新的整合候选。
+
+```powershell
+python -B -m tools.npr_room.build_work_calendar --room $frozenRoom --output $calendarRoom --refresh-integrated $storyInventory
+python -B -m tools.npr_room.build_timer_sound_room --room $calendarRoom --output $integratedRoom --source $unitySource --inventory $referenceInventory --story-inventory $storyInventory
+```
+
 ## 回放
 
 可控时钟覆盖跨午夜、暂停、休息、60 秒检查点、写入失败、较新版本和退出恢复。

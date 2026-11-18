@@ -4,6 +4,7 @@ import argparse
 import json
 import math
 import os
+import re
 from pathlib import Path
 import shutil
 import tempfile
@@ -11,7 +12,7 @@ import tempfile
 from tools.npr_room.catalog_storage import publish_directory
 from tools.npr_room.pbr_materials import write
 from tools.npr_room.reference_inventory import digest
-from tools.npr_room.room_geometry import ui_font_document
+from tools.npr_room.room_geometry import copy_room_asset, ui_font_document
 from tools.npr_room.skinned_mesh_export import UnityScene
 
 
@@ -143,13 +144,74 @@ def stage_calendar(room, output, source=None):
         publish_directory(project, output)
 
 
+def refresh_integrated_calendar(room, output, inventory):
+    room, output = room.resolve(strict=True), output.resolve()
+    if output.exists():
+        raise FileExistsError(output)
+    if output.is_relative_to(room):
+        raise ValueError("The calendar output must be outside its input room")
+    from tools.npr_room.room_language import calendar_config, calendar_strings
+
+    language = json.loads((room / "language-receipt.json").read_bytes())
+    if language["storySHA256"] != digest(inventory):
+        raise ValueError("The calendar must use the original room language inventory")
+    examples = Path(__file__).resolve().parents[2] / "examples/npr-room/assets"
+    labels = calendar_strings(json.loads(inventory.read_bytes())["localization"])
+    project_path = room / "project.azureproject"
+    descriptor = json.loads(project_path.read_bytes())
+    mount, = (row for row in descriptor["mounts"] if row["name"] == "assets")
+    if mount["path"] != "assets":
+        raise ValueError("The integrated calendar requires the room assets mount")
+    inputs = room / "assets"
+    program, document = integrate_calendar(
+        descriptor, (inputs / "timer.rml").read_text(encoding="utf-8"),
+        (inputs / "pomodoro.lua").read_text(encoding="utf-8"), examples, calendar_config(labels))
+    prefix, anchor, previous = program.rpartition('local slot = "pomodoro-settings"\n')
+    if not anchor or not previous.rstrip().endswith("\nend"):
+        raise ValueError("The room must end with its timer controller")
+    current = (examples / "pomodoro.lua").read_text(encoding="utf-8")
+    if "Points earned %d" in previous:
+        current = current.replace("Points %d", "Points earned %d")
+    program = prefix + current
+    for element in ("room-language-toggle", "room-language-panel"):
+        selector = re.compile(r"(#" + element + r"\s*\{[^}]*?left:)\s*42%;")
+        document, count = selector.subn(r"\g<1> 140dp;", document)
+        if count != 1:
+            raise ValueError(f"Expected the integrated room language position: {element}")
+    receipt = {"schemaVersion": 1, "inputProjectSHA256": digest(project_path),
+               "inputControllerSHA256": digest(inputs / "pomodoro.lua"), "inputDocumentSHA256": digest(inputs / "timer.rml"),
+               "sourceInventorySHA256": digest(inventory), "timerSourceSHA256": digest(examples / "pomodoro.lua"),
+               "startupSourceSHA256": digest(examples / "startup-flow.lua"),
+               "modules": {name: digest(examples / name) for name in CALENDAR_SCRIPTS}}
+    with tempfile.TemporaryDirectory(prefix="integrated-calendar-", dir=output.parent) as folder:
+        staged = Path(folder) / "room"
+        assets = staged / "assets"
+        shutil.copytree(inputs, assets, copy_function=copy_room_asset, ignore=shutil.ignore_patterns(".azure"))
+        for prior in room.glob("*-receipt.json"):
+            shutil.copyfile(prior, staged / prior.name)
+        shutil.copyfile(examples / "startup-flow.lua", assets / "startup-flow.lua")
+        (assets / "pomodoro.lua").write_text(program, encoding="utf-8", newline="\n")
+        (assets / "timer.rml").write_text(document, encoding="utf-8", newline="\n")
+        receipt.update(controllerSHA256=digest(assets / "pomodoro.lua"), documentSHA256=digest(assets / "timer.rml"))
+        write(staged / project_path.name, descriptor)
+        write(staged / "calendar-room-receipt.json", receipt)
+        publish_directory(staged, output)
+    return receipt
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--room", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--source", type=Path, help="Bind the original work reward parameters")
+    parser.add_argument("--refresh-integrated", type=Path, metavar="STORY_INVENTORY")
     args = parser.parse_args()
-    stage_calendar(args.room, args.output, args.source)
+    if args.refresh_integrated is not None:
+        if args.source is not None:
+            parser.error("--refresh-integrated uses the existing room reward receipt")
+        refresh_integrated_calendar(args.room, args.output, args.refresh_integrated)
+    else:
+        stage_calendar(args.room, args.output, args.source)
 
 
 if __name__ == "__main__":
