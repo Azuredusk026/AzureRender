@@ -36,6 +36,7 @@ COLOR_FIELDS = {"CZY_HorizonColor": "skyHorizonColor", "CZY_ZenithColor": "skyZe
                 "CZY_GalaxyColor3": "galaxy3Color", "CZY_LightColumnColor": "lightScatteringColor"}
 FACES = (((1, 0, 0), (0, 1, 0)), ((-1, 0, 0), (0, 1, 0)), ((0, 1, 0), (0, 0, -1)),
          ((0, -1, 0), (0, 0, 1)), ((0, 0, 1), (0, 1, 0)), ((0, 0, -1), (0, 1, 0)))
+COZY_RUNTIME_SHA256 = "0063cffd3e4a9714c5ebb5dc14f7e14fc858a547259ac2f912137ede21b0a18c"
 
 
 def capture_globals(path, values, day_fraction, mode):
@@ -55,6 +56,27 @@ def capture_globals(path, values, day_fraction, mode):
                          for key, expected in colors.items()):
             return float(stamp.group(1)), shader
     raise ValueError(f"Original desktop sky capture does not match the clock and colors for {mode}")
+
+
+def replay_globals(values, sun_day_fraction, seconds):
+    if seconds is None or not math.isfinite(seconds) or seconds < 0 or not 0 <= sun_day_fraction < 1:
+        raise ValueError("Invalid controlled sky clock")
+    yaw, pitch = map(math.radians, (values["sunDirection"], values["sunPitch"]))
+    if not all(map(math.isfinite, (yaw, pitch))):
+        raise ValueError("Invalid original solar orientation")
+    elevation = math.tau * sun_day_fraction - math.pi / 2
+    # CozyWeather sets the child X angle and the parent Y and Z angles,
+    # then publishes the negative world-space forward vector.
+    x = math.sin(elevation) * math.sin(pitch)
+    y = -math.sin(elevation) * math.cos(pitch)
+    z = math.cos(elevation)
+    sun = (-math.cos(yaw) * x - math.sin(yaw) * z, -y, math.sin(yaw) * x - math.cos(yaw) * z, 0)
+    globals_ = {binding: tuple(values[field][channel] for channel in "rgba")
+                for binding, field in COLOR_FIELDS.items()}
+    globals_["CZY_SunDirection"] = sun
+    # The original runtime registers this shader ID without a global setter.
+    globals_["CZY_EclipseDirection"] = (0, 0, 0, 0)
+    return seconds, globals_
 
 
 def stage_constants(stage, name, values):
@@ -96,7 +118,12 @@ def unity_rotation(scene, renderer):
         transform = scene.read(parent)
 
 
-def prepare(source, catalog, references, programs, original_log, output, mode="Sunset"):
+def prepare(source, catalog, references, programs, original_log, output, mode="Sunset", *,
+            replay_time=None, cozy_assembly=None):
+    captured = original_log is not None
+    replayed = replay_time is not None and cozy_assembly is not None
+    if captured == replayed or (replay_time is not None) != (cozy_assembly is not None):
+        raise ValueError("Choose one desktop log or a controlled time with its original assembly")
     recipe = json.loads(references.read_bytes())
     program_file = programs / "windows-atmosphere-programs.json"
     if recipe["d3d11ProgramSHA256"] != digest(program_file) or recipe["sceneSHA256"] != digest(source / ROOM_SCENE):
@@ -125,7 +152,15 @@ def prepare(source, catalog, references, programs, original_log, output, mode="S
 
     reference = recipe["windowsReference"][mode]
     snapshot = reference["data"]
-    seconds, globals_ = capture_globals(original_log, snapshot, recipe["modes"][mode]["dayFraction"], mode)
+    if captured:
+        seconds, globals_ = capture_globals(original_log, snapshot, recipe["modes"][mode]["dayFraction"], mode)
+        provenance = {"input": "captured-desktop-globals", "logSHA256": digest(original_log)}
+    else:
+        if digest(cozy_assembly) != COZY_RUNTIME_SHA256:
+            raise ValueError("Controlled sky replay requires the original Recovery Windows atmosphere assembly")
+        seconds, globals_ = replay_globals(snapshot, recipe["modes"][mode]["sunDayFraction"], replay_time)
+        provenance = {"input": "controlled-original-program-replay", "cozyAssemblySHA256": COZY_RUNTIME_SHA256,
+                      "sunDayFraction": recipe["modes"][mode]["sunDayFraction"]}
     fields = {name: (snapshot[key],) for name, key in SCALAR_FIELDS.items()}
     fields.update({name: globals_[name] for name in COLOR_FIELDS})
     fields.update({"CZY_SunDirection": globals_["CZY_SunDirection"][:3],
@@ -168,16 +203,24 @@ def prepare(source, catalog, references, programs, original_log, output, mode="S
     return {"mode": mode, "referenceSHA256": reference["sha256"], "vertexCount": len(vertices),
             "triangleCount": len(triangles), "sourceSeconds": seconds,
             "sunDirection": fields["CZY_SunDirection"], "meshSHA256": mesh_entry["sourceSHA256"],
-            "programSHA256": {key: value["sha256"] for key, value in sky.items()}, "logSHA256": digest(original_log),
+            "programSHA256": {key: value["sha256"] for key, value in sky.items()}, **provenance,
+            "worldConstantsSHA256": digest(output / "world.bin"),
             "textures": textures}
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
-    for option in ("source", "catalog", "references", "programs", "original-log", "output"):
+    for option in ("source", "catalog", "references", "programs", "output"):
         parser.add_argument("--" + option, type=Path, required=True)
+    inputs = parser.add_mutually_exclusive_group(required=True)
+    inputs.add_argument("--original-log", type=Path)
+    inputs.add_argument("--replay-time", type=float)
+    parser.add_argument("--cozy-assembly", type=Path)
     parser.add_argument("--mode", choices=MODES, default="Sunset")
     args = parser.parse_args()
-    result = prepare(args.source, args.catalog, args.references, args.programs, args.original_log, args.output, args.mode)
+    if (args.replay_time is not None) != (args.cozy_assembly is not None):
+        parser.error("--replay-time and --cozy-assembly are used together")
+    result = prepare(args.source, args.catalog, args.references, args.programs, args.original_log, args.output, args.mode,
+                     replay_time=args.replay_time, cozy_assembly=args.cozy_assembly)
     (args.output / "preparation.json").write_text(json.dumps(result) + "\n", encoding="utf-8")
     print(json.dumps(result))

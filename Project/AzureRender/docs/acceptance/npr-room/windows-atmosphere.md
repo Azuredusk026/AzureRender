@@ -1,6 +1,6 @@
 # Windows 窗景大气来源
 
-> 状态为 P5 局部验收。Windows 的原始着色器程序、资源绑定和四个时段的运行参数已核对。白天与傍晚的天空通道已通过原生采样和 Vulkan 房间对照。
+> 状态为 P5 局部验收。四个时段均有原 Direct3D 11 天空通道采样和 Vulkan 房间对照。云层、雾、室内光照和完整窗景按各自的画面条件验收。
 
 `RoomScene` 中的 `MyCozyWeatherService` 绑定 `BaseCozy Weather Sphere` 和四个时段的时间模块。Windows 实例使用天空、云层和雾三个网格渲染器。三个原材质分别引用 `Stylized Sky Desktop`、`Stylized Clouds (COZY Desktop)` 和 `Stylized Fog (Desktop)`，基准天气组件引用十张原图。移动端备用天空的四个场景对象按独立引用登记。
 
@@ -32,11 +32,11 @@
 
 六面浮点采样按 Unity 与 AzureRender 的坐标关系换算为 1024 × 512 线性 HDR 环境图。编码最大绝对误差为 0.00701。任务 1794 在同一环境光条件下，从同一机位各采两帧，分别选择纯色和原采样天空。两条路线均隐藏室外大气占位网格与城市景物。左侧可见天空区域的 11,204 个像素发生变化，椅背对照区的 7,000 个像素逐一相同。两次运行均确认 GPU 图像和缓冲区退出后归零。
 
-环境图 SHA-256 为 `5e0e2c4e448495ff00932d17fa8db7d0064abe65e09433781f4f36e9b90f4c83`。本机 `windows-atmosphere-reference/sunset-vulkan-transfer.json` 记录两张原生画面和实际 Player 的摘要。房间合成画面的原版对照、实时天空切换及其他时段仍按完整窗景矩阵验收。
+环境图 SHA-256 为 `5e0e2c4e448495ff00932d17fa8db7d0064abe65e09433781f4f36e9b90f4c83`。本机 `windows-atmosphere-reference/sunset-vulkan-transfer.json` 记录两张原生画面和实际 Player 的摘要。房间合成画面的原版对照和实时天空切换按完整窗景矩阵验收。
 
 ## 白天天空通道
 
-采样工具按时段的原始时钟和整组颜色绑定选择对应的桌面绘制记录。白天记录的时钟为 12:30，运行时间为 7.253 秒。夜晚和多云采样需要补齐对应的桌面绘制记录。
+采样工具按时段的原始时钟和整组颜色绑定选择对应的桌面绘制记录。白天记录的时钟为 12:30，运行时间为 7.253 秒。
 
 任务 1852 使用同一天空网格、原 Direct3D 11 程序和纹理，执行两个独立进程。六个方向的 393,216 个 RGBA32F 像素逐字节相同，线性 RGB 最大值为 10.95267。纹理输入使用无损压缩，解码内容逐一核对摘要。任务 1853 使用同一解码路径复验傍晚，输出摘要与傍晚记录相同。
 
@@ -50,6 +50,25 @@
 
 白天的采样输入、环境图、构建记录和对照画面位于本机 `windows-atmosphere-reference/day-validation/`。天空通道验证使用独立背景，云层、雾和不同天气的合成使用窗景矩阵。
 
+## 夜晚与多云天空通道
+
+夜晚和多云使用 Windows 1.17.3 原版顶点与片元程序、天空网格和贴图执行受控离屏采样。颜色、月亮方向与标量取自已有大气快照。太阳方向使用各时段时间模块的修正日比例和 `CozyWeather` 的父子旋转计算。原程序集登记遮挡方向的着色器标识，三份可匹配白天和傍晚的桌面日志均记录零向量。
+
+白天与傍晚先按各自实录重建输入。任务 2071 和 2072 的颜色及方向分量与桌面日志相差至多 0.000002，六面天空与实录输入对应采样的线性 RGB 最大误差分别为 0.00000191 和 0.00000132。
+
+夜晚的原场景时钟为 21:49，采样固定时间为 9.302 秒。多云的原场景时钟为 12:30，采样固定时间为 7.253 秒。任务 2073 和 2074 各启动两个独立进程，每种时段的 393,216 个 RGBA32F 像素均逐字节一致，所有分量有限且透明度均为 1。完整房间的动态实录对照仍使用对应天气与镜头的运行证据。
+
+任务 2075 至 2078 在 RTX 4060 和 Intel 核显的 1280×720 Vulkan 房间验证环境图。夜晚和多云在 RTX 4060 上分别改变左窗抽样区的 11,201 和 11,206 个像素，在 Intel 核显上分别改变 11,202 和 11,205 个像素。各组椅背对照区的 7,000 个像素逐一相同。八个进程通过 Vulkan 同步校验并正常释放图像和缓冲区。
+
+| 记录 | 夜晚 SHA-256 | 多云 SHA-256 |
+| --- | --- | --- |
+| 原程序浮点采样 | `fa84449c2f77b4279953d2bd9a0f14d79e916f92afcfea0d05743e64312454dc` | `228815e2439172f9ed69b17b62e5e55467bbec434331dfdc45007a697c5101f7` |
+| HDR 环境图 | `e9fdf63b3235cba045bebc7b0fa0c3d0adbf1640a177808442fed0ad7cf1248a` | `570793e72a6ec220a98c71584c9b0be942eff75f46d3816ba36ef39e660c70ad` |
+| RTX 4060 房间对照 | `8a7f8e063ad887f8aedd604de708a0100a8646fac4ed05b25484940a0e46ae30` | `8eee3b0cda74464a3edfabc623745a3dd39fd42bb2dc56dea0f219444df9f13c` |
+| Intel 核显房间对照 | `ecccf44228c9274df39f4f8045536f322626bf404c6f4605ac4d3f5562882bbd` | `08cbb19f60130195ff511dc02f2214b5df224d3d9ba36f202f14b23607dc0b7a` |
+
+四个时段的受控采样输入、浮点归档、环境图及房间对照位于本机 `windows-atmosphere-reference/night-cloudy-validation/`。
+
 ## 复验
 
 原 DXBC、反汇编和绑定清单写入本机私有目录。`PYTHONPATH` 指向本项目的 UnityPy 转换工具目录。
@@ -60,13 +79,17 @@ python -B -m tools.npr_room.windows_atmosphere --source $unitySource --catalog $
 python -B -m unittest tools.npr_room.test_unity_d3d11_programs
 ```
 
-在 Visual Studio x64 开发者命令行编译和运行天空采样工具。`$zlibRoot` 指向包含 `include/zlib.h`、`lib/z.lib` 和 `bin/z.dll` 的依赖目录。`$skyMode` 选择 `Day` 或 `Sunset`，源记录使用 Recovery `ReferenceProbe/reference-sky.log`。压缩纹理和浮点数据写入本机工作目录。
+在 Visual Studio x64 开发者命令行编译和运行天空采样工具。`$zlibRoot` 指向包含 `include/zlib.h`、`lib/z.lib` 和 `bin/z.dll` 的依赖目录。白天和傍晚读取 Recovery `ReferenceProbe/reference-sky.log`。夜晚和多云分别指定 `Night`、`Cloudy` 以及对应的固定采样时间。`$cozyAssembly` 指向 Recovery `UnityProject/AuxiliaryFiles/GameAssemblies/DistantLands.Cozy.Runtime.dll`。压缩纹理和浮点数据写入本机工作目录。
 
 ```powershell
 $env:PATH = "$zlibRoot/bin;" + $env:PATH
 cl.exe /nologo /EHsc /std:c++20 /O2 /W4 "/I$zlibRoot/include" tools/npr_room/WindowsSkyProbe.cpp d3d11.lib "$zlibRoot/lib/z.lib" "/Fe:$skyProbe"
 python -B -m tools.npr_room.windows_sky_probe --source $unitySource --catalog $assetCatalogRoot --references $atmosphereReceipt --programs $programFolder --original-log $originalSkyLog --mode $skyMode --output $preparedProbe
 & $skyProbe $preparedProbe $skyCube
+python -B -m tools.npr_room.windows_sky_probe --source $unitySource --catalog $assetCatalogRoot --references $atmosphereReceipt --programs $programFolder --replay-time $sampleSeconds --cozy-assembly $cozyAssembly --mode $skyMode --output $controlledProbe
+& $skyProbe $controlledProbe $firstSkyCube
+& $skyProbe $controlledProbe $secondSkyCube
+Get-FileHash -LiteralPath $firstSkyCube,$secondSkyCube
 python -B -m unittest tools.npr_room.test_windows_sky_probe
 ```
 
