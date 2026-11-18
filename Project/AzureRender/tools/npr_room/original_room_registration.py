@@ -21,6 +21,7 @@ from tools.npr_room.window_scene_inventory import ROOM_SCENE
 from tools.npr_room.build_city_window import CITY_RESOURCE
 from tools.npr_room.room_transparent_surfaces import install_lens
 from tools.npr_room.original_room_lights import apply_captured_lights
+from tools.npr_room.original_ambient_probe import install as install_ambient_probe
 
 
 def pose_rotation(value):
@@ -118,7 +119,7 @@ def apply_level_pose(level, record):
     return {"matched": sorted(matched), "unmatched": sorted(missing)}
 
 
-def stage(room, frame, output, source=None):
+def stage(room, frame, output, source=None, *, ambient_probe=False):
     if output.exists():
         raise FileExistsError(output)
     record = json.loads(frame.read_bytes())
@@ -162,6 +163,7 @@ def stage(room, frame, output, source=None):
                     raise ValueError("Original graphics light color policy is invalid")
                 lighting = {"graphicsSettingsSHA256": digest(graphics_path),
                             **apply_captured_lights(level, record, bool(linear))}
+        ambient = install_ambient_probe(frame, assets, level) if ambient_probe else None
         for node in level["nodes"]:
             ui = node["components"].get("azure.game-ui")
             if ui:
@@ -172,6 +174,7 @@ def stage(room, frame, output, source=None):
                    "activation": activation,
                    "transparency": transparency,
                    "lighting": lighting,
+                   "ambientProbe": ambient,
                    "levelSHA256": digest(level_path), "scope": "captured geometry pose with gameplay and UI disabled"}
         (project / "original-pose-receipt.json").write_text(json.dumps(receipt, indent=2) + "\n", encoding="utf-8")
         publish_directory(project, output)
@@ -183,8 +186,10 @@ if __name__ == "__main__":
     for name in ("room", "frame", "output"):
         parser.add_argument("--" + name, type=Path, required=True)
     parser.add_argument("--source", type=Path, help="Frozen Unity project used to trace drawable activation")
+    parser.add_argument("--ambient-probe", action="store_true", help="Bind the same frame's captured quadratic ambient probe")
     arguments = parser.parse_args()
-    result = stage(arguments.room.resolve(), arguments.frame.resolve(), arguments.output.resolve(), arguments.source)
+    result = stage(arguments.room.resolve(), arguments.frame.resolve(), arguments.output.resolve(), arguments.source,
+                   ambient_probe=arguments.ambient_probe)
     print(json.dumps({"weather": result["weather"], "parts": len(result["parts"]),
                       "matchedRoomTransforms": len(result["placement"]["matched"]),
                       "unmatchedRoomTransforms": len(result["placement"]["unmatched"])}))

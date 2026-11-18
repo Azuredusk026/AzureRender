@@ -80,3 +80,4 @@
 - 4.2 已采集每帧 27 个原版环境光系数和 26 个方向响应，核对二阶分量及来源摘要。候选的二阶环境光消费继续实现。 [原版环境光探针](../acceptance/npr-room/windows-atmosphere.md#原版环境光探针)
 - 4.2 的二阶资源通过 C++17 编解码、线性字节兼容及三层资源回归。624 个原版方向通过 CPU 与双设备 GPU 求值。匹配 Player 的房间画面等待构建配额。 [二阶环境光资源](../runtime/irradiance-volumes.md)
 - 4.1 的配准入口通过默认参数、原版工程身份及原输入保护检查。发布失败收尾与 113 项房间检查通过。 [同步姿态配准](../acceptance/npr-room/windows-atmosphere.md#同步姿态配准)
+- 4.2 的正常配准入口可绑定同帧二阶探针。24 帧的资源字节、元数据和目录移动通过独立小工程检查，116 项房间检查通过。 [原版环境光探针](../acceptance/npr-room/windows-atmosphere.md#原版环境光探针)

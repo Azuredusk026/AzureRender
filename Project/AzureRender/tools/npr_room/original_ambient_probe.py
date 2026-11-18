@@ -2,6 +2,8 @@
 
 import argparse
 import json
+import tempfile
+from uuid import NAMESPACE_URL, uuid5
 import math
 from pathlib import Path
 from struct import pack
@@ -10,6 +12,8 @@ import numpy as np
 
 from tools.npr_room.original_room_frames import verify_render_state
 from tools.npr_room.reference_inventory import digest
+from tools.npr_room.catalog_storage import publish_directory
+from tools.npr_room.pbr_materials import staging_metadata
 
 
 def fit_probe(samples):
@@ -58,6 +62,23 @@ def convert(frame, output, origin=(-2048., -2048., -2048.), spacing=4096.):
     return {"schemaVersion": 1, "sourceSHA256": digest(frame), "volumeSHA256": digest(output),
             "weather": record["weather"], "frame": record["frame"], "origin": list(origin), "spacing": spacing,
             "linear": probe["linear"], "quadratic": probe["quadratic"], "maximumFittingError": probe["maximumError"]}
+
+
+def install(frame, assets, level):
+    output = assets / "original-ambient"
+    if output.exists():
+        raise FileExistsError(output)
+    with tempfile.TemporaryDirectory(prefix="original-ambient-", dir=assets) as temporary:
+        staged = Path(temporary) / "original-ambient"
+        staged.mkdir()
+        grid = staged / "captured.aziv"
+        receipt = convert(frame, grid)
+        identity = uuid5(NAMESPACE_URL, "azurerender:original-room-ambient:" + receipt["sourceSHA256"])
+        staging_metadata(grid, identity.hex, [])
+        publish_directory(staged, output)
+    level["irradianceVolume"] = {"version": 2, "asset": "assets:/original-ambient/captured.aziv",
+                                "enabled": True, "intensity": 1}
+    return {**receipt, "assetId": str(identity)}
 
 
 if __name__ == "__main__":

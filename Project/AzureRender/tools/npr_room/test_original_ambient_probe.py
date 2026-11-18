@@ -1,8 +1,12 @@
 from itertools import product
+import json
 import math
+from pathlib import Path
+import tempfile
 import unittest
 
 from tools.npr_room.original_ambient_probe import encode, fit_probe
+from tools.npr_room import original_ambient_probe
 
 
 def samples():
@@ -41,6 +45,46 @@ class OriginalAmbientProbeTests(unittest.TestCase):
         self.assertEqual(len(payload), 36 + 128 * 8)
         with self.assertRaises(ValueError):
             encode(probe, (1e38, 1e38, 1e38), 3e38)
+
+    def test_installs_source_grid_metadata_and_scene_binding(self):
+        record = {"frame": 1, "weather": "Night", "transforms": [{"id": 1}],
+                  "lights": [{"id": 2, "transformId": 1, "intensity": 1, "color": {"r": 1}}],
+                  "renderers": [{"id": 3, "transformId": 1,
+                                 "materials": [{"shader": "fixture", "floats": [], "colors": []}]}],
+                  "weatherScalars": [{"value": 1}],
+                  "environment": {"ambientIntensity": 1, "reflectionIntensity": 1,
+                                  "lightsUseLinearIntensity": True, "lightsUseColorTemperature": True,
+                                  "ambientProbe": [0] * 27, "ambientProbeSamples": samples()}}
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            frame = root / "frame.json"
+            frame.write_text(json.dumps(record), encoding="utf-8")
+            assets = root / "assets"
+            assets.mkdir()
+            level = {}
+            proof = original_ambient_probe.install(frame, assets, level)
+            binding = level["irradianceVolume"]
+            self.assertEqual(binding, {"version": 2, "enabled": True, "intensity": 1,
+                                       "asset": "assets:/original-ambient/captured.aziv"})
+            grid = assets / "original-ambient/captured.aziv"
+            self.assertEqual(grid.read_bytes()[:8], b"AZIV0002")
+            metadata = json.loads(grid.with_name(grid.name + ".azmeta").read_bytes())
+            self.assertEqual(metadata["id"], proof["assetId"])
+            self.assertEqual(metadata["dependencies"], [])
+            self.assertEqual(json.loads(frame.read_bytes()), record)
+            with self.assertRaises(FileExistsError):
+                original_ambient_probe.install(frame, assets, {})
+
+    def test_failed_source_validation_leaves_binding_and_assets_untouched(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            frame = root / "frame.json"
+            frame.write_text("{}", encoding="utf-8")
+            level = {"irradianceVolume": {"enabled": False}}
+            with self.assertRaisesRegex(ValueError, "incomplete"):
+                original_ambient_probe.install(frame, root, level)
+            self.assertEqual(level, {"irradianceVolume": {"enabled": False}})
+            self.assertEqual(list(root.iterdir()), [frame])
 
 
 if __name__ == "__main__":

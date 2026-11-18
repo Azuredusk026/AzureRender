@@ -140,6 +140,13 @@ class RegistrationEntryTests(unittest.TestCase):
         self.assertFalse(self.output.exists())
         self.assert_inputs_preserved()
 
+    def test_optional_ambient_probe_uses_the_captured_frame(self):
+        with patch.object(registration, "install_ambient_probe", return_value={"assetId": "fixture"}) as install:
+            receipt = registration.stage(self.room, self.frame, self.output, ambient_probe=True)
+        self.assertEqual(install.call_args.args[0], self.frame)
+        self.assertEqual(receipt["ambientProbe"], {"assetId": "fixture"})
+        self.assert_inputs_preserved()
+
 
 if __name__ == "__main__":
     unittest.main()

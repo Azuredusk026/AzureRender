@@ -248,6 +248,23 @@ python -B -m tools.npr_room.original_room_frames --frames $originalProbeFrames -
 python -B -m tools.npr_room.original_ambient_probe --frame $originalProbeFrame --output $quadraticGrid
 ```
 
+配准命令的 `--ambient-probe` 使用同帧原版探针。
+候选生成二阶资源、稳定资产标识及关卡绑定。
+资源与元数据在暂存目录核验后共同发布。
+原版帧和输入工程保留各自摘要。
+
+独立小工程经正常命令入口转换 24 帧参照。
+全部资源与已验证的 CPU、GPU 输入逐字节一致。
+24 个相对资源路径通过目录移动检查。
+116 项房间检查通过，完整房间画面继续验收。
+
+本机绑定证据位于 `ambient-probe/binding/`。
+报告 SHA-256 为 `67bdef10918450d041fe487d93a778d46da31c2250c4a7997ce8d13af031de6d`。
+
+```powershell
+python -B -m tools.npr_room.original_room_registration --room $room --frame $originalProbeFrame --source $unitySource --ambient-probe --output $registeredRoom
+```
+
 ## 同步姿态配准
 
 `original_room_registration` 按完整父子路径绑定角色。
