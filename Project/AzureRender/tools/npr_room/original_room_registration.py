@@ -132,14 +132,14 @@ def stage(room, frame, output, source=None):
         (project / "project.azureproject").write_text(json.dumps(descriptor) + "\n", encoding="utf-8")
         parts = {}
         for part in HEROINE_PARTS:
-            source = room / "assets/heroine" / (part + ".glb")
-            document, binary = parse_glb(source)
+            model_source = room / "assets/heroine" / (part + ".glb")
+            document, binary = parse_glb(model_source)
             proof = freeze_model(document, record)
-            target = Path(temporary) / source.name
+            target = Path(temporary) / model_source.name
             write_glb(target, document, binary)
-            os.replace(target, assets / "heroine" / source.name)
-            parts[part] = {**proof, "sourceSHA256": digest(source),
-                           "outputSHA256": digest(assets / "heroine" / source.name)}
+            os.replace(target, assets / "heroine" / model_source.name)
+            parts[part] = {**proof, "sourceSHA256": digest(model_source),
+                           "outputSHA256": digest(assets / "heroine" / model_source.name)}
         level_path = assets / "room.azurelevel"
         level = json.loads(level_path.read_bytes())
         placement = apply_level_pose(level, record)

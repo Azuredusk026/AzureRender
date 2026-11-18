@@ -1,6 +1,12 @@
+import json
+from pathlib import Path
+import tempfile
 import unittest
+from unittest.mock import patch
 
 from tools.npr_room.original_room_registration import freeze_model, apply_level_pose
+from tools.npr_room import original_room_registration as registration
+from tools.build_face_sdf import write_glb
 
 
 def pose(path, identity, parent, position=None):
@@ -67,6 +73,72 @@ class OriginalRoomRegistrationTests(unittest.TestCase):
         self.assertEqual(lens["farPlane"], 1000)
         self.assertEqual(lens["nearPlane"], .05)
         self.assertAlmostEqual(lens["fieldOfView"], 53.13010235415598)
+
+
+class RegistrationEntryTests(unittest.TestCase):
+    def setUp(self):
+        self.temporary = tempfile.TemporaryDirectory()
+        self.addCleanup(self.temporary.cleanup)
+        self.root = Path(self.temporary.name)
+        self.room = self.root / "room"
+        self.assets = self.room / "assets"
+        (self.assets / "heroine").mkdir(parents=True)
+        self.model = self.assets / "heroine/Face.glb"
+        write_glb(self.model, {"asset": {"version": "2.0"},
+                               "nodes": [{"name": "Character"}],
+                               "scenes": [{"nodes": [0]}]}, b"")
+        (self.assets / "room.azurelevel").write_text(
+            json.dumps({"nodes": []}), encoding="utf-8")
+        (self.room / "project.azureproject").write_text(
+            json.dumps({"startupScene": "assets:/boot.azurelevel"}), encoding="utf-8")
+        self.frame = self.root / "frame.json"
+        self.frame.write_text(json.dumps({"frame": 1, "weather": "Night",
+                                         "transforms": [pose("Character", 10, 0)],
+                                         "skins": []}), encoding="utf-8")
+        self.output = self.root / "registered"
+        self.original = {p.relative_to(self.room): p.read_bytes()
+                         for p in self.room.rglob("*") if p.is_file()}
+        self.addCleanup(patch.stopall)
+        patch.object(registration, "HEROINE_PARTS", ["Face"]).start()
+        self.freeze = patch.object(registration, "freeze_model", wraps=registration.freeze_model).start()
+
+    def assert_inputs_preserved(self):
+        self.assertEqual(self.original, {p.relative_to(self.room): p.read_bytes()
+                                         for p in self.room.rglob("*") if p.is_file()})
+
+    def test_default_entry_publishes_without_original_project(self):
+        receipt = registration.stage(self.room, self.frame, self.output)
+        self.assertIsNone(receipt["activation"])
+        self.assertIsNone(receipt["transparency"])
+        descriptor = json.loads((self.output / "project.azureproject").read_bytes())
+        self.assertEqual(descriptor["startupScene"], "assets:/room.azurelevel")
+        self.assertEqual(json.loads((self.output / "original-pose-receipt.json").read_bytes()), receipt)
+        self.assert_inputs_preserved()
+        with self.assertRaises(FileExistsError):
+            registration.stage(self.room, self.frame, self.output)
+
+    def test_explicit_original_project_reaches_source_adapters(self):
+        source = self.root / "unity"
+        scene = source / registration.ROOM_SCENE
+        scene.parent.mkdir(parents=True)
+        scene.write_text("source scene", encoding="utf-8")
+        with patch.object(registration, "UnityScene") as scene_reader, \
+                patch.object(registration, "filter_visibility", return_value={"matched": 1}) as visibility, \
+                patch.object(registration, "install_lens", return_value={"installed": 1}) as lens:
+            receipt = registration.stage(self.room, self.frame, self.output, source)
+        scene_reader.assert_called_once_with(scene)
+        self.assertEqual(visibility.call_args.args[2], scene_reader.return_value)
+        self.assertEqual(lens.call_args.args[2], source)
+        self.assertEqual(receipt["activation"]["matched"], 1)
+        self.assertEqual(receipt["transparency"]["installed"], 1)
+        self.assert_inputs_preserved()
+
+    def test_failed_staging_keeps_inputs_and_output_unpublished(self):
+        self.freeze.side_effect = ValueError("Invalid captured palette")
+        with self.assertRaisesRegex(ValueError, "palette"):
+            registration.stage(self.room, self.frame, self.output)
+        self.assertFalse(self.output.exists())
+        self.assert_inputs_preserved()
 
 
 if __name__ == "__main__":
