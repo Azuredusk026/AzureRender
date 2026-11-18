@@ -66,11 +66,15 @@ def depth_stripes(size):
     return np.tile(reversed_z, (size, 1)).astype("<f4")
 
 
-def fog_camera(forward, up):
+def fog_camera(forward, up, *, position=(0, 0, 0), vertical_fov=math.pi / 2, aspect=1):
     orientation = np.eye(4)
     orientation[:3, :3] = np.stack((np.cross(up, forward), up, forward), axis=1)
+    if not np.allclose(orientation[:3, :3].T @ orientation[:3, :3], np.eye(3), atol=1e-6):
+        raise ValueError("Weather camera requires an orthonormal view basis")
+    orientation[:3, 3] = position
+    focal = 1 / math.tan(vertical_fov / 2)
     lens = np.array([
-        [1, 0, 0, 0], [0, 1, 0, 0],
+        [focal / aspect, 0, 0, 0], [0, focal, 0, 0],
         [0, 0, FAR / (FAR - NEAR), -NEAR * FAR / (FAR - NEAR)], [0, 0, 1, 0],
     ])
     # The original fragment converts reversed depth to OpenGL clip coordinates,
@@ -78,7 +82,7 @@ def fog_camera(forward, up):
     inverse_lens = lens.copy()
     inverse_lens[2, :] = 2 * lens[2, :] - lens[3, :]
     inverse_lens[:, 2] *= -1
-    return (lens @ orientation.T).T.ravel(), {
+    return (lens @ np.linalg.inv(orientation)).T.ravel(), {
         "unity_CameraInvProjection": np.linalg.inv(inverse_lens).T.ravel(),
         "unity_CameraToWorld": orientation.T.ravel(),
     }

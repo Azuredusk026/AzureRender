@@ -3,6 +3,7 @@ import unittest
 import numpy as np
 
 from tools.npr_room.windows_sky_probe import FACES
+from tools.npr_room.windows_room_fog import DEPTH_ENCODING, SLICES, depth_samples
 from tools.npr_room.windows_weather_probe import depth_stripes, fog_camera, FOG_DEPTHS
 
 
@@ -17,3 +18,8 @@ class WindowsWeatherProbeTests(unittest.TestCase):
             sample = float(depth[64, int((index + .5) * 128 / len(FOG_DEPTHS))])
             recovered = inverse @ [0, 0, 1 - 2 * sample, 1]
             self.assertAlmostEqual(-recovered[2] / recovered[3], distance, delta=2e-4)
+
+    def test_room_volume_slices_sample_the_engine_depth_texel_centres(self):
+        offset, multiplier, scale = DEPTH_ENCODING
+        centres = np.log2(depth_samples() * multiplier + offset) * scale
+        np.testing.assert_allclose(centres, (np.arange(SLICES) + .5) / SLICES, atol=1e-12)

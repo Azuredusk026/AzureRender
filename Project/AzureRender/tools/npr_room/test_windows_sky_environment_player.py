@@ -11,10 +11,12 @@ from PIL import Image
 from reference_inventory import digest
 
 
-def capture(player, room, resources, environment, atmosphere, output, name, mode):
+def capture(player, room, resources, environment, atmosphere, output, name, mode, *, level_setup=None):
     output.mkdir()
     descriptor = room / f"capture-sky-{name}.azureproject"
     level = room / "assets" / f"capture-sky-{name}.azurelevel"
+    metadata = level.with_name(level.name + ".azmeta")
+    had_metadata = metadata.exists()
     project = json.loads((room / "project.azureproject").read_bytes())
     project["startupScene"] = "assets:/" + level.name
     scene = json.loads((room / "assets/room.azurelevel").read_bytes())
@@ -32,6 +34,8 @@ def capture(player, room, resources, environment, atmosphere, output, name, mode
             visible["data"]["visible"] = False
             hidden.add(node["id"])
     assert hidden == atmosphere_nodes and len(hidden) == 6
+    if level_setup is not None:
+        level_setup(scene)
     with level.open("x", encoding="utf-8") as source:
         json.dump(scene, source)
     stats = output / "runtime.json"
@@ -48,10 +52,14 @@ def capture(player, room, resources, environment, atmosphere, output, name, mode
             descriptor.unlink()
     finally:
         level.unlink()
+        if not had_metadata:
+            metadata.unlink(missing_ok=True)
     (output / "stdout.log").write_text(process.stdout, encoding="utf-8")
     (output / "stderr.log").write_text(process.stderr, encoding="utf-8")
     assert process.returncode == 0, process.stderr[-3000:]
     assert "Allocator after unload: buffers=0 images=0" in process.stdout
+    diagnostics = process.stdout + process.stderr
+    assert not any(marker in diagnostics for marker in ("VUID-", "SYNC-HAZARD", "Validation Error")), diagnostics
     assert f"Environment: {environment}" in process.stdout
     report = json.loads(stats.read_bytes())
     assert not report["scriptErrors"] and not report["presentationErrors"]

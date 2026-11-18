@@ -144,6 +144,7 @@ P3 按功能组实施与验收。完成一个功能组后更新矩阵，再继�
 [房间底色与主纹理](../acceptance/npr-room/room-base-surfaces.md)登记静态房间和道具的 170 个原材质绑定及固定镜头回放。
 [Windows 窗景大气来源](../acceptance/npr-room/windows-atmosphere.md)登记原着色器、资源绑定和四个时段的运行参数。四个时段均有原程序天空采样及 Vulkan 房间对照。
 [原版云层与雾的受控采样](../acceptance/npr-room/windows-atmosphere.md#原版云层与雾的受控采样)登记夜晚、多云的原程序帧对照及雾的深度响应。
+[固定镜头房间合成](../acceptance/npr-room/windows-atmosphere.md#固定镜头房间合成)登记同天气时刻的天空、云层与雾体积回放。
 [开场全屏特效](../acceptance/npr-room/opening-effects.md)登记五个原版程序、全屏通道顺序和原材质。单色噪声通过原生组件合成，覆盖默认画面、游戏界面区域和开场两章的剧情时序。
 [色差硬件参照](../acceptance/npr-room/opening-effects.md#色差硬件参照)登记两种显卡的原版画面、材质比例与时间输入。
 [Vulkan 色差合成](../acceptance/npr-room/opening-effects.md#vulkan-色差合成)登记同设备的原程序、Vulkan 着色器和浮点画面对照。

@@ -16,7 +16,7 @@ namespace {
 using Microsoft::WRL::ComPtr;
 namespace fs = std::filesystem;
 constexpr UINT vertexSize = 8 * sizeof(float);
-enum class Pass { Sky, Cloud, Fog };
+enum class Pass { Sky, Cloud, Fog, FogVolume };
 
 void require(HRESULT status, const char* operation) {
     if (FAILED(status)) {
@@ -92,9 +92,27 @@ ComPtr<ID3D11ShaderResourceView> image(ID3D11Device& device, const fs::path& roo
     return view;
 }
 
+ComPtr<ID3D11ShaderResourceView> depthSlice(ID3D11Device& device, const std::byte* data) {
+    D3D11_TEXTURE2D_DESC description{};
+    description.Width = description.Height = description.MipLevels = description.ArraySize = 1;
+    description.Format = DXGI_FORMAT_R32_FLOAT;
+    description.SampleDesc.Count = 1;
+    description.Usage = D3D11_USAGE_IMMUTABLE;
+    description.BindFlags = D3D11_BIND_SHADER_RESOURCE;
+    const D3D11_SUBRESOURCE_DATA input{data, sizeof(float), 0};
+    ComPtr<ID3D11Texture2D> texture;
+    require(device.CreateTexture2D(&description, &input, &texture), "CreateTexture2D depth slice");
+    ComPtr<ID3D11ShaderResourceView> view;
+    require(device.CreateShaderResourceView(texture.Get(), nullptr, &view), "CreateShaderResourceView depth slice");
+    return view;
+}
+
 void run(const fs::path& source, const fs::path& output, Pass pass) {
     if (fs::exists(output)) throw std::runtime_error("Capture target already exists");
+    const bool volume = pass == Pass::FogVolume;
+    const bool fog = pass == Pass::Fog || volume;
     const UINT faceSize = pass == Pass::Sky ? 256 : 128;
+    const UINT height = volume ? 72 : faceSize;
     const UINT rowSize = faceSize * 4 * sizeof(float);
     const UINT globalBytes = pass == Pass::Cloud ? 2416 : 2448;
     const UINT textureCount = pass == Pass::Sky ? 6 : pass == Pass::Cloud ? 5 : 3;
@@ -115,7 +133,7 @@ void run(const fs::path& source, const fs::path& output, Pass pass) {
         {"TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 0, 6 * sizeof(float), D3D11_INPUT_PER_VERTEX_DATA, 0},
     };
     ComPtr<ID3D11InputLayout> layout;
-    const UINT attributeCount = pass == Pass::Fog ? 2 : static_cast<UINT>(std::size(attributes));
+    const UINT attributeCount = fog ? 2 : static_cast<UINT>(std::size(attributes));
     require(device->CreateInputLayout(attributes, attributeCount, vertexProgram.data(),
                                       vertexProgram.size(), &layout), "CreateInputLayout");
     const auto vertices = buffer(*device.Get(), source / "vertices.bin", D3D11_BIND_VERTEX_BUFFER);
@@ -127,7 +145,8 @@ void run(const fs::path& source, const fs::path& output, Pass pass) {
     std::array<ComPtr<ID3D11ShaderResourceView>, 6> texture;
     std::array<ID3D11ShaderResourceView*, 6> views{};
     for (UINT slot = 0; slot < textureCount; ++slot) {
-        texture[slot] = image(*device.Get(), source, slot, pass == Pass::Fog && slot == 2);
+        if (volume && slot == 2) continue;
+        texture[slot] = image(*device.Get(), source, slot, fog && slot == 2);
         views[slot] = texture[slot].Get();
     }
     D3D11_SAMPLER_DESC sampling{};
@@ -139,7 +158,7 @@ void run(const fs::path& source, const fs::path& output, Pass pass) {
     std::array<ID3D11SamplerState*, 6> samplers{};
     samplers.fill(sampler.Get());
     ComPtr<ID3D11SamplerState> depthSampler;
-    if (pass == Pass::Fog) {
+    if (fog) {
         sampling.Filter = D3D11_FILTER_MIN_MAG_MIP_POINT;
         sampling.AddressU = sampling.AddressV = sampling.AddressW = D3D11_TEXTURE_ADDRESS_CLAMP;
         require(device->CreateSamplerState(&sampling, &depthSampler), "CreateSamplerState depth");
@@ -147,7 +166,8 @@ void run(const fs::path& source, const fs::path& output, Pass pass) {
     }
 
     D3D11_TEXTURE2D_DESC image{};
-    image.Width = image.Height = faceSize;
+    image.Width = faceSize;
+    image.Height = height;
     image.MipLevels = image.ArraySize = image.SampleDesc.Count = 1;
     image.Format = DXGI_FORMAT_R32G32B32A32_FLOAT;
     image.Usage = D3D11_USAGE_DEFAULT;
@@ -167,7 +187,7 @@ void run(const fs::path& source, const fs::path& output, Pass pass) {
     raster.DepthClipEnable = TRUE;
     ComPtr<ID3D11RasterizerState> rasterizer;
     require(device->CreateRasterizerState(&raster, &rasterizer), "CreateRasterizerState");
-    D3D11_VIEWPORT viewport{0, 0, float(faceSize), float(faceSize), 0, 1};
+    D3D11_VIEWPORT viewport{0, 0, float(faceSize), float(height), 0, 1};
     context->RSSetState(rasterizer.Get());
     context->RSSetViewports(1, &viewport);
     context->IASetInputLayout(layout.Get());
@@ -185,15 +205,24 @@ void run(const fs::path& source, const fs::path& output, Pass pass) {
 
     std::ofstream stream(output, std::ios::binary);
     if (!stream) throw std::runtime_error("Could not create the original shader capture");
-    for (UINT face = 0; face < 6; ++face) {
-        const auto suffix = std::to_string(face) + ".bin";
+    const auto depths = volume ? read(source / "depth-slices.bin") : std::vector<std::byte>{};
+    if (volume && (depths.size() % sizeof(float) || depths.size() > 256 * sizeof(float)))
+        throw std::runtime_error("Invalid fog depth slice count");
+    const auto samples = volume ? depths.size() / sizeof(float) : 6;
+    for (std::size_t sample = 0; sample < samples; ++sample) {
+        const auto suffix = std::to_string(volume ? 0 : sample) + ".bin";
         const auto camera = buffer(*device.Get(), source / ("view-" + suffix), D3D11_BIND_CONSTANT_BUFFER, globalBytes);
-        const auto pixels = buffer(*device.Get(), source / (pass == Pass::Fog ? "world-" + suffix : "world.bin"),
+        const auto pixels = buffer(*device.Get(), source / (fog ? "world-" + suffix : "world.bin"),
                                    D3D11_BIND_CONSTANT_BUFFER, globalBytes);
         ID3D11Buffer* vertexConstants[] = {camera.Get(), model.Get()};
         ID3D11Buffer* fragmentConstants[] = {pixels.Get(), model.Get()};
         context->VSSetConstantBuffers(0, 2, vertexConstants);
         context->PSSetConstantBuffers(0, 2, fragmentConstants);
+        if (volume) {
+            texture[2] = depthSlice(*device.Get(), depths.data() + sample * sizeof(float));
+            views[2] = texture[2].Get();
+            context->PSSetShaderResources(2, 1, &views[2]);
+        }
         constexpr float clear[]{0, 0, 0, 0};
         context->ClearRenderTargetView(target.Get(), clear);
         context->DrawIndexed(indexed.ByteWidth / sizeof(std::uint32_t), 0, 0);
@@ -201,12 +230,12 @@ void run(const fs::path& source, const fs::path& output, Pass pass) {
         D3D11_MAPPED_SUBRESOURCE mapped{};
         require(context->Map(readback.Get(), 0, D3D11_MAP_READ, 0, &mapped), "Map original frame");
         const auto* data = static_cast<const char*>(mapped.pData);
-        for (UINT row = 0; row < faceSize; ++row) stream.write(data + row * mapped.RowPitch, rowSize);
+        for (UINT row = 0; row < height; ++row) stream.write(data + row * mapped.RowPitch, rowSize);
         context->Unmap(readback.Get(), 0);
         if (!stream) throw std::runtime_error("Incomplete original shader capture");
     }
-    std::cout << "Original Direct3D 11 " << name << " program rendered six " << faceSize << "x" << faceSize
-              << " RGBA32F directions\n";
+    std::cout << "Original Direct3D 11 " << name << " program rendered " << samples << " " << faceSize << "x" << height
+              << " RGBA32F " << (volume ? "depth slices" : "directions") << '\n';
 }
 }
 
@@ -217,7 +246,8 @@ int wmain(int argc, wchar_t** argv) try {
         const std::wstring mode = argv[3];
         if (mode == L"cozy-cloud") pass = Pass::Cloud;
         else if (mode == L"fog") pass = Pass::Fog;
-        else throw std::invalid_argument("Expected cozy-cloud or fog");
+        else if (mode == L"fog-volume") pass = Pass::FogVolume;
+        else throw std::invalid_argument("Expected cozy-cloud, fog or fog-volume");
     }
     run(argv[1], argv[2], pass);
     return 0;

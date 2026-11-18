@@ -82,11 +82,30 @@
 
 本机 `windows-atmosphere-reference/weather-pass-validation/` 保存浮点采样、常量缓冲区、命令和校验。完整房间的动态对照需要对应镜头、时间、窗景状态与逐帧深度。
 
+## 固定镜头房间合成
+
+天空与云层按相同天气和时刻配对。云层的线性 RGB 先乘透明混合系数，再插值并叠加到天空，输出 1024×512 HDR 环境图。雾的原程序按固定房间相机、16:9 视口和 24 档对数深度输出颜色与混合系数，再按原混合公式换算为透射与散射。体积为 128×72×24 的 RGBA16F 数据，四组数据的量化最大绝对误差均为 0.00024414。
+
+两种显卡在同一房间、相机与固定模拟帧分别加载两个天气时刻。启用雾效的场景均通过捕获相机匹配。重复载入同一时刻的资源时，整帧逐像素一致，计时器不透明区域在所有对照中保持原色。多云的天空与云层环境图保持一致。
+
+| 任务 | 显卡 | 天气 | 雾效开关变化像素 | 两时刻变化像素 |
+| --- | --- | --- | --- | --- |
+| 2092 | RTX 4060 | 夜晚 | 800,279 | 260,237 |
+| 2093 | RTX 4060 | 多云 | 806,356 | 110,260 |
+| 2094 | Intel Raptor Lake-S 核显 | 夜晚 | 801,013 | 268,716 |
+| 2095 | Intel Raptor Lake-S 核显 | 多云 | 806,362 | 112,202 |
+
+现有发行版截图和 Recovery 截图分别登记单帧及对应天气。角色服装、桌面道具和界面状态随采集环境变化。完整原版房间的逐帧对照需要同一镜头、角色与道具状态、天气时刻和相机深度。固定镜头合成使用原版天气通道和移植版房间画面，雾体积匹配该相机并作用于有几何深度的表面。
+
+本机 `windows-atmosphere-reference/weather-pass-validation/` 提供源通道、雾体积、房间帧和原版截图清单。采样、构建与回放记录的摘要登记在 `room-weather-verification.json`。
+
 ## 复验
 
 原 DXBC、反汇编和绑定清单写入本机私有目录。`PYTHONPATH` 指向本项目的 UnityPy 转换工具目录。
 
 云层和雾使用 `tools.npr_room.windows_weather_probe` 准备输入。两类采样分别使用 `--role cozy-cloud` 和 `--role fog`，采样时间由 `--time` 指定。云层另指定 `--wind 0.6 0 0.8`。运行采样程序时在输出路径之后传入对应的通道名称。
+
+固定镜头对照使用 `tools.npr_room.windows_weather_environment` 合成天空和云层。本机存档的 `capture-room-fog-volumes.py` 调用 `tools.npr_room.windows_room_fog` 准备固定相机的输入和体积，采样程序的通道参数为 `fog-volume`。使用 `tools.npr_room.test_windows_weather_room_player` 回放同一时刻的雾效开关、资源重载及两个时刻的合成。
 
 ```powershell
 python -B -m tools.npr_room.unity_d3d11_programs --source $resourcesAssets --manifest $originalShaderInventory --output $programFolder

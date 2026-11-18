@@ -13,8 +13,8 @@ from tools.npr_room.windows_sky_probe import FACES
 
 
 def sample_sky(cube, azure_directions):
-    if cube.ndim != 4 or cube.shape[0] != 6 or cube.shape[1] != cube.shape[2] or cube.shape[3] != 3:
-        raise ValueError("Expected six square RGB faces")
+    if cube.ndim != 4 or cube.shape[0] != 6 or cube.shape[1] != cube.shape[2] or cube.shape[3] not in (3, 4):
+        raise ValueError("Expected six square RGB or RGBA faces")
     directions = np.asarray(azure_directions) * [1, 1, -1]
     forward, up = np.asarray(FACES).transpose(1, 0, 2)
     right = np.cross(up, forward)
@@ -37,8 +37,9 @@ def sample_sky(cube, azure_directions):
     return first * (1 - y) + second * y
 
 
-def equirectangular(cube):
-    size = cube.shape[1]
+def equirectangular(cube, size=None):
+    if size is None:
+        size = cube.shape[1]
     width, height = size * 4, size * 2
     angle = ((np.arange(width) + .5) / width - .5) * 2 * np.pi
     elevation = (np.arange(height) + .5) / height * np.pi
