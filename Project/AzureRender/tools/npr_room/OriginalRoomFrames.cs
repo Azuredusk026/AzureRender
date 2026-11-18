@@ -74,6 +74,9 @@ public class RoomFrameRecord
     public CapturedRenderer[] renderers;
     public CapturedFloat[] weatherScalars;
     public CapturedShaderValue[] weatherVectors;
+    public bool metadataOnly;
+    public string programManifestSHA256;
+    public CapturedProgramGlobal[] programGlobals;
     public CapturedEnvironment environment;
 }
 
@@ -207,6 +210,22 @@ public class CapturedShaderValue
     public Vector4 value;
 }
 
+[Serializable]
+public class CapturedProgramGlobal
+{
+    public string name;
+    public int dimension;
+    public Vector4 value;
+}
+
+[Serializable]
+public class CaptureProgramBindings
+{
+    public int schemaVersion;
+    public string programSHA256;
+    public CapturedProgramGlobal[] globals;
+}
+
 public class CaptureFieldsResolver : DefaultContractResolver
 {
     protected override IList<JsonProperty> CreateProperties(Type type, MemberSerialization serialization)
@@ -272,6 +291,34 @@ public class RoomFrameCapture : MonoBehaviour
             return count;
         }
         return 12;
+    }
+
+    private static CaptureProgramBindings ProgramBindings()
+    {
+        var arguments = Environment.GetCommandLineArgs();
+        for (var index = 0; index + 1 < arguments.Length; index++)
+        {
+            if (arguments[index] != "-azure-frame-globals") continue;
+            var table = JsonConvert.DeserializeObject<CaptureProgramBindings>(File.ReadAllText(arguments[index + 1]));
+            if (table == null || table.schemaVersion != 1 || table.programSHA256 == null
+                || table.programSHA256.Length != 64 || table.globals == null
+                || table.globals.Length == 0 || table.globals.Length > 256
+                || table.globals.Any(row => string.IsNullOrEmpty(row.name) || row.dimension < 1 || row.dimension > 4)
+                || table.globals.GroupBy(row => row.name).Any(group => group.Count() != 1))
+                throw new ArgumentException("Invalid source program global bindings");
+            return table;
+        }
+        return null;
+    }
+
+    private static CapturedProgramGlobal[] CaptureProgramGlobals(CaptureProgramBindings table)
+    {
+        if (table == null) return null;
+        return table.globals.Select(binding => new CapturedProgramGlobal {
+            name = binding.name, dimension = binding.dimension,
+            value = binding.dimension == 1 ? new Vector4(Shader.GetGlobalFloat(binding.name), 0, 0, 0)
+                                            : Shader.GetGlobalVector(binding.name)
+        }).ToArray();
     }
 
     private void Log(string message)
@@ -579,12 +626,15 @@ public class RoomFrameCapture : MonoBehaviour
         windowType.GetMethod("ResetOtherThanTimeOfDay").Invoke(windows, new object[0]);
         var change = windowType.GetMethod("ChangeWeatherAndTime");
         var modeType = change.GetParameters()[0].ParameterType;
+        var sampleCount = SampleCount();
+        var programBindings = ProgramBindings();
+        var metadataOnly = Environment.GetCommandLineArgs().Contains("-azure-frame-metadata-only");
         foreach (var mode in new[] {"Night", "Cloudy"})
         {
             change.Invoke(windows, new[] {Enum.Parse(modeType, mode)});
             for (var settling = 0; settling < 90; settling++) yield return null;
             Log("Sampling " + mode);
-            for (var sample = 0; sample < SampleCount(); sample++)
+            for (var sample = 0; sample < sampleCount; sample++)
             {
                 for (var gap = 0; gap < 4; gap++) yield return new WaitForEndOfFrame();
                 if (renderedFrame != Time.frameCount || renderedCamera == null || depthTexture == null)
@@ -633,6 +683,9 @@ public class RoomFrameCapture : MonoBehaviour
                 record.renderers = CaptureRenderers();
                 record.weatherScalars = CaptureWeatherScalars();
                 record.weatherVectors = CaptureWeatherVectors();
+                record.metadataOnly = metadataOnly;
+                record.programManifestSHA256 = programBindings == null ? null : programBindings.programSHA256;
+                record.programGlobals = CaptureProgramGlobals(programBindings);
                 record.environment = new CapturedEnvironment {
                     colorSpace = QualitySettings.activeColorSpace.ToString(),
                     ambientMode = RenderSettings.ambientMode.ToString(), ambientLight = RenderSettings.ambientLight,
@@ -645,10 +698,14 @@ public class RoomFrameCapture : MonoBehaviour
                     ambientProbe = CaptureAmbientCoefficients(), ambientProbeSamples = CaptureAmbientSamples()
                 };
 
-                var capture = ScreenCapture.CaptureScreenshotAsTexture();
-                File.WriteAllBytes(Path.Combine(output, record.color), capture.EncodeToPNG());
-                UnityEngine.Object.Destroy(capture);
+                if (!metadataOnly)
+                {
+                    var capture = ScreenCapture.CaptureScreenshotAsTexture();
+                    File.WriteAllBytes(Path.Combine(output, record.color), capture.EncodeToPNG());
+                    UnityEngine.Object.Destroy(capture);
+                }
                 File.WriteAllText(Path.Combine(output, stem + ".json"), JsonConvert.SerializeObject(record, Formatting.Indented, new JsonSerializerSettings { ContractResolver = new CaptureFieldsResolver() }));
+                if (metadataOnly) continue;
                 outstanding++;
                 AsyncGPUReadback.Request(depthTexture, 0, TextureFormat.RFloat, request => {
                     if (request.hasError)
@@ -670,7 +727,7 @@ public class RoomFrameCapture : MonoBehaviour
         }
         while (outstanding > 0) yield return null;
         Time.captureFramerate = 0;
-        Log("Completed samples=24 depthFailures=" + readbackFailures);
+        Log("Completed samples=" + (2 * sampleCount) + " depthFailures=" + readbackFailures);
         Application.Quit(readbackFailures == 0 ? 0 : 5);
     }
 }

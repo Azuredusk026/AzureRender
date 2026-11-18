@@ -8,6 +8,7 @@
 房间雾体积按原版相机的投影与裁剪范围生成。
 [天气全局值](docs/acceptance/npr-room/windows-atmosphere.md#原版天气全局值)登记云层与雾的同帧参数诊断。
 原版云层与雾采样读取同帧天气参数及天气网格变换。
+[大气程序全局字段](docs/acceptance/npr-room/windows-atmosphere.md#大气程序全局字段)登记五个原程序的类型绑定与元数据采集。
 [房间计时回放](docs/acceptance/npr-room/room-probe.md)记录原音效、计时输入和本地存档。
 [房间曲库](docs/acceptance/npr-room/music-playlist.md)与[环境声](docs/acceptance/npr-room/ambient-sound.md)记录原资产、播放控制和独立 Player 恢复。
 [开场书本布置](docs/acceptance/npr-room/opening-book-layout.md)记录房间道具、剧情临时状态和读档。

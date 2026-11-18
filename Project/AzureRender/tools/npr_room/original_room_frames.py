@@ -97,6 +97,8 @@ def verify_frames(folder, require_render_state=False, require_ambient_probe=Fals
             stem = f"{mode}-{index:02d}"
             path = folder / (stem + ".json")
             record = json.loads(path.read_bytes())
+            if record.get("metadataOnly"):
+                raise ValueError("Paired room references require same-frame color and depth captures")
             if (record["weather"], record["index"], record["color"], record["depth"]) != (
                     mode, index, stem + ".png", stem + "-depth.f32"):
                 raise ValueError(f"Frame identity differs: {stem}")
