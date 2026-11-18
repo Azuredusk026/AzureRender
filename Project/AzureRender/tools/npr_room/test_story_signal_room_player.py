@@ -32,13 +32,14 @@ from tools.npr_room.tutorial_camera_body import project as tutorial_project
 
 @contextmanager
 def entry(room, graph, program, models=None, camera_sound=None, camera_source=None, room_scripts=None, blackout=None,
-          additional_room=None, chromatic=None, screen_move=None, glitch=None, *, tag="capture-main-conditional"):
+          additional_room=None, chromatic=None, screen_move=None, glitch=None, *, tag="capture-main-conditional",
+          startup_script=None):
     root = room / "assets"
     names = {kind: tag + suffix for kind, suffix in (
         ("boot", "-boot.azurelevel"), ("bootstrap", "-boot.lua"), ("level", ".azurelevel"),
         ("script", ".lua"), ("graph", ".json"))}
     paths = {key: "assets:/" + name for key, name in names.items()}
-    source_bootstrap = (root / "startup-flow.lua").read_text(encoding="utf-8")
+    source_bootstrap = (root / "startup-flow.lua").read_text(encoding="utf-8") if startup_script is None else startup_script
     startup = {}
     for stage in ("boot", "asset-load", "entry", "transition"):
         original = stage + ".azurelevel"

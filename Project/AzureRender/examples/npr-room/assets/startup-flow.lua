@@ -11,7 +11,7 @@ local reveal_seconds
 local function begin_load()
     state = "loading"
     loading_seconds = 0
-    reveal_seconds = 0
+    reveal_seconds = nil
     self:preload_level(room)
 end
 
@@ -45,6 +45,10 @@ function update(dt)
     if state == "committing" then return end
     loading_seconds = loading_seconds + dt
     if loading_seconds < 2 or not self:level_ready(room) then
+        reveal_seconds = nil
+        return
+    end
+    if reveal_seconds == nil then
         reveal_seconds = 0
         return
     end

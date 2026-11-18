@@ -7,13 +7,18 @@ from pathlib import Path
 import subprocess
 
 
-def replay(player, project, output, resource_root, expect_heroine=False, expect_music=False, exercise_timer=True):
+def scene_reference(level, levels):
+    return levels[level] if levels is not None else f"assets:/{level}.azurelevel"
+
+
+def replay(player, project, output, resource_root, expect_heroine=False, expect_music=False, exercise_timer=True, *,
+           levels=None, profile=None, frame_limit=850, level_timeout_frames=400):
     output.mkdir()
     events = []
 
     def wait(frame, level, revision):
-        events.append({"frame": frame, "action": "wait-level", "reference": f"assets:/{level}.azurelevel",
-                       "afterRevision": revision - 1, "timeoutFrames": 400})
+        events.append({"frame": frame, "action": "wait-level", "reference": scene_reference(level, levels),
+                       "afterRevision": revision - 1, "timeoutFrames": level_timeout_frames})
 
     def key(frame, code):
         events.extend([{"frame": frame, "action": "key", "key": code, "down": True},
@@ -30,16 +35,16 @@ def replay(player, project, output, resource_root, expect_heroine=False, expect_
     if exercise_timer:
         for frame, code in ((260, 84), (270, 84), (280, 84), (290, 75), (300, 82)):
             key(frame, code)
-    events.append({"frame": 320, "action": "load-level", "reference": "assets:/transition.azurelevel"})
+    events.append({"frame": 320, "action": "load-level", "reference": scene_reference("transition", levels)})
     wait(321, "transition", 6)
     wait(322, "room", 7)
 
     route = output / "input.json"
     route.write_text(json.dumps({"schemaVersion": 1, "actions": events}, indent=2), encoding="utf-8")
     runtime = output / "runtime.json"
-    command = [str(player), "--project", str(project), "--save-root", str(output / "profile"),
+    command = [str(player), "--project", str(project), "--save-root", str(profile or output / "profile"),
                "--runtime-report", str(runtime), "--game-actions",
-               str(route), "--fixed-frame-step", "--smoke-frames", "850", "--width", "640", "--height", "360"]
+               str(route), "--fixed-frame-step", "--smoke-frames", str(frame_limit), "--width", "640", "--height", "360"]
     if resource_root:
         command.extend(("--resource-root", str(resource_root)))
     result = subprocess.run(command, cwd=output, capture_output=True, encoding="utf-8", errors="replace", timeout=220)
@@ -47,16 +52,24 @@ def replay(player, project, output, resource_root, expect_heroine=False, expect_
     (output / "stderr.log").write_text(result.stderr, encoding="utf-8")
     if result.returncode:
         raise RuntimeError(result.stderr[-4000:] + result.stdout[-1000:])
-    assert "Allocator after unload: buffers=0 images=0" in result.stdout
-    report = json.loads(runtime.read_bytes())
-    assert report["scene"] == "room" and report["levelRevision"] == 7, report
+    return verify(project, output, expect_heroine, expect_music, exercise_timer, levels=levels)
+
+
+def verify(project, output, expect_heroine=False, expect_music=False, exercise_timer=True, *, levels=None):
+    stdout = (output / "stdout.log").read_text(encoding="utf-8")
+    stderr = (output / "stderr.log").read_text(encoding="utf-8")
+    assert "Allocator after unload: buffers=0 images=0" in stdout
+    report = json.loads((output / "runtime.json").read_bytes())
+    events = json.loads((output / "input.json").read_bytes())["actions"]
+    assert report["scene"] == "room" and report["levelRevision"] == 7, (
+        report["scene"], report["levelRevision"], report["replayedActions"])
     expected_starts = (2 if expect_music else 0) + (5 if exercise_timer else 0)
     assert (report["replayedActions"], report["audioStarts"]) == (len(events), expected_starts), (
         report["replayedActions"], report["audioStarts"])
     if expect_music:
         tracks = json.loads(project.with_name("music-receipt.json").read_bytes())["tracks"]
         first_track = next(track for track in tracks if not track["locked"])
-        music = [line for line in result.stderr.splitlines() if "Streaming source:" in line]
+        music = [line for line in stderr.splitlines() if "Streaming source:" in line]
         assert len(music) == 2 and all(line.endswith(Path(first_track["asset"]).name) for line in music), music
         cache = project.parent / ".azure/cache"
         assert all(not list((cache / track["uuid"]).glob("*.azcache")) for track in tracks)
@@ -66,8 +79,8 @@ def replay(player, project, output, resource_root, expect_heroine=False, expect_
     visits = [(reference, len(list(group))) for reference, group
               in groupby(frames, key=lambda frame: frame["levelReference"])]
     assert [reference for reference, _ in visits] == [
-        f"assets:/{level}.azurelevel" for level in ("boot", "asset-load", "entry", "transition", "room",
-                                                    "transition", "room")
+        scene_reference(level, levels) for level in
+        ("boot", "asset-load", "entry", "transition", "room", "transition", "room")
     ], visits
     assert visits[3][1] >= 240 and visits[5][1] >= 150, visits
     assert all(not item["loadError"] for item in frames), visits

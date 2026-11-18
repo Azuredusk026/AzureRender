@@ -6,7 +6,7 @@
 
 本地项目依次提交 `Boot`、`AssetLoad`、`Entry` 和 `Transition`。
 `Transition` 请求后台准备 `RoomScene`。Player 在转场期间保留当前关卡。
-转场至少运行 2 秒，目标就绪后再等待 0.5 秒并提交房间。
+转场至少运行 2 秒。首次观察到目标就绪时开始计时，连续就绪 0.5 秒后提交房间。就绪中断时重新计算揭幕延迟。
 Backspace 取消待处理请求，Enter 在取消或失败后重新准备房间。
 叠加场景、主数据、音频服务和账户入口按各自的功能验收项实现。
 
@@ -19,6 +19,14 @@ Recovery 中 `BootBehavior` 初始化 Addressables，叠加加载 `AssetLoad` �
 `AssetLoadHolder` 的文件 ID 为 6，通过序列化引用装入 `ProjectLifetimeScope`、`VContainerSettings` 和 `AudioManagerSetting`。房间中的 `RoomLifetimeScope` 文件 ID 为 20056。这两个组件和所属对象均启用。引用列表记录原资源 GUID、文件 ID 和路径。Resources 备用路径的故障可达性逐项登记。
 
 本机对账文件 `startup-chain-audit/startup-chain.json` 两次生成一致，SHA-256 为 `7598623f767595379443d5078b7116f91640c5fa4e51d903ebaa8f3f70cc5aba`。原运行与候选运行范围见本页各回放记录。
+
+## 就绪与揭幕复测
+
+可控时钟测试覆盖首次就绪所在的长帧、完整 0.5 秒延迟及中途失去就绪条件。首次观察到就绪的更新只建立计时起点。
+
+任务 2105 以完整房间候选的共享资源运行，依次进入五个关卡、取消并重试转场，随后经转场再次进入房间。Player 在 2,000 帧内消费 13 个动作，播放两次原音乐，退出后缓冲与图像计数均为零。队列记录发生索引锁定，任务 2106 对其原始帧记录和退出日志复核通过。
+
+本机 `startup-reveal-validation/startup-reveal-replay.json` 的 SHA-256 为 `8e7c36b34c3c3d9592e7f6ba9d0af721f63093ae72c750903a8fa5509154e77a`。同目录保存输入、帧记录、Player 日志和复验程序。
 
 ## 桌面启动画面
 

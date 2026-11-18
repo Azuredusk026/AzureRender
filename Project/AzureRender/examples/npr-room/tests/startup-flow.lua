@@ -54,3 +54,30 @@ for _ = 1, 8 do update(1 / 60) end
 assert(table.remove(events) == "load " .. room)
 update(1 / 60)
 assert(#events == 0)
+
+ready = false
+init()
+assert(table.remove(events) == "preload " .. room)
+update(1)
+ready = true
+-- The frame that first observes readiness precedes the reveal.
+update(2)
+assert(#events == 0)
+update(0.49)
+assert(#events == 0)
+update(0.01)
+assert(table.remove(events) == "load " .. room)
+
+init()
+assert(table.remove(events) == "preload " .. room)
+update(2.5)
+update(0.25)
+ready = false
+update(0.25)
+ready = true
+update(0.4)
+assert(#events == 0)
+update(0.25)
+assert(#events == 0)
+update(0.25)
+assert(table.remove(events) == "load " .. room)
