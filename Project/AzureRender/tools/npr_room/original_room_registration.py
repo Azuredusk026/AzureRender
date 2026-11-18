@@ -20,6 +20,7 @@ from tools.npr_room.skinned_mesh_export import UnityScene
 from tools.npr_room.window_scene_inventory import ROOM_SCENE
 from tools.npr_room.build_city_window import CITY_RESOURCE
 from tools.npr_room.room_transparent_surfaces import install_lens
+from tools.npr_room.original_room_lights import apply_captured_lights
 
 
 def pose_rotation(value):
@@ -144,6 +145,7 @@ def stage(room, frame, output, source=None):
         placement = apply_level_pose(level, record)
         activation = None
         transparency = None
+        lighting = None
         if source is not None:
             scene_path = source / ROOM_SCENE
             extra = {node["id"]: int(node["id"].removeprefix(CITY_RESOURCE + "-"))
@@ -151,6 +153,15 @@ def stage(room, frame, output, source=None):
             activation = {"roomSceneSHA256": digest(scene_path),
                           **filter_visibility(level, record, UnityScene(scene_path), extra)}
             transparency = install_lens(assets, level, source)
+            if record.get("lights"):
+                graphics_path = source / "ProjectSettings/GraphicsSettings.asset"
+                graphics = UnityScene(graphics_path)
+                graphics_id, = [identity for identity, row in graphics.documents.items() if row[0] == 30]
+                linear = graphics.read(graphics_id)["m_LightsUseLinearIntensity"]
+                if linear not in (0, 1):
+                    raise ValueError("Original graphics light color policy is invalid")
+                lighting = {"graphicsSettingsSHA256": digest(graphics_path),
+                            **apply_captured_lights(level, record, bool(linear))}
         for node in level["nodes"]:
             ui = node["components"].get("azure.game-ui")
             if ui:
@@ -160,6 +171,7 @@ def stage(room, frame, output, source=None):
                    "weather": record["weather"], "parts": parts, "placement": placement,
                    "activation": activation,
                    "transparency": transparency,
+                   "lighting": lighting,
                    "levelSHA256": digest(level_path), "scope": "captured geometry pose with gameplay and UI disabled"}
         (project / "original-pose-receipt.json").write_text(json.dumps(receipt, indent=2) + "\n", encoding="utf-8")
         publish_directory(project, output)
