@@ -501,6 +501,7 @@ def maintain(build, *, apply=False, cold=None, now=None, busy=None, tracked=None
             continue
         if now-max(record['closed'], marker.stat().st_mtime) >= record.get('retentionDays',POLICY['retentionDays'])*86400:
             candidates.append(name)
+    candidates.sort(key=lambda name: records[name]['reservedBytes'], reverse=True)
     expired = [n for n,r in records.items() if r['status']=='released' and r.get('archive')
                and r.get('recoveryDays',POLICY['recoveryDays']) is not None
                and now-r['released'] >= r.get('recoveryDays',POLICY['recoveryDays'])*86400
@@ -600,6 +601,8 @@ def maintain(build, *, apply=False, cold=None, now=None, busy=None, tracked=None
                         or lifecycle(latest[name]) != lifecycle(record) or (path/'.keep').exists()
                         or not marker.is_file() or now-marker.stat().st_mtime < record.get('retentionDays',POLICY['retentionDays'])*86400):
                         continue
+                    if time.monotonic() >= deadline:
+                        break
                     # Serializes lease acquisition and resume against removal.
                     remove_artifact(build, path, tracked, apply=True)
                     record.update(status='released', reservedBytes=0, released=time.time())

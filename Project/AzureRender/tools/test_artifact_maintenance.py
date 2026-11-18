@@ -258,6 +258,40 @@ class MaintenanceTests(unittest.TestCase):
         result=maintenance.maintain(self.build,apply=True,now=time.time()+40*86400,busy=[],tracked=set(),git=lambda:'same',deadline=time.monotonic()-1)
         self.assertTrue(evidence.exists());self.assertEqual(result['items'],[])
 
+    def test_maintenance_handles_the_largest_expired_task_first(self):
+        small = self.create('small', payload=b'small', recovery=False)
+        large = self.create('large', payload=b'large' * 1024, recovery=False)
+        current = self.create('current', payload=b'current' * 2048, recovery=False)
+        for path in (small, large, current):
+            self.close(path)
+        (current / '.keep').touch()
+        with patch.dict(maintenance.POLICY, maximumBatch=1):
+            result = self.apply()
+        self.assertEqual([item['path'] for item in result['items']], [str(large)])
+        self.assertTrue(small.exists())
+        self.assertTrue(current.exists())
+        self.assertFalse(large.exists())
+
+    def test_maintenance_leaves_a_task_ready_when_verification_consumes_the_deadline(self):
+        path = self.create(recovery=False)
+        self.close(path)
+        clock = [0]
+        inventory = maintenance.inventory
+
+        def slow_inventory(target):
+            result = inventory(target)
+            clock[0] = 5
+            return result
+
+        with patch.object(maintenance.time, 'monotonic', side_effect=lambda: clock[0]), patch.object(maintenance, 'inventory', side_effect=slow_inventory):
+            result = self.apply(deadline=4)
+        self.assertEqual(result['items'], [])
+        self.assertTrue(path.is_dir())
+        with maintenance.database(self.build) as db:
+            record = maintenance.rows(db)[path.name]
+        self.assertEqual(record['status'], 'closed')
+        self.assertIsNone(record['blocked'])
+
     def setUp(self):
         fixtures = Path(__file__).resolve().parents[1]/"build/maintenance/tests"
         fixtures.mkdir(parents=True, exist_ok=True)
@@ -266,6 +300,12 @@ class MaintenanceTests(unittest.TestCase):
         self.build = self.root/'build'
         (self.build/'runs').mkdir(parents=True)
         self.cold = self.root/'cold'
+        # The lifecycle tests control admission independently of the developer's disk.
+        disk_usage = type(maintenance.shutil.disk_usage(self.build))
+        available = disk_usage(1000 * maintenance.GIB, 500 * maintenance.GIB, 500 * maintenance.GIB)
+        disk = patch.object(maintenance.shutil, 'disk_usage', return_value=available)
+        disk.start()
+        self.addCleanup(disk.stop)
 
     def tearDown(self):
         self.temp.cleanup()
