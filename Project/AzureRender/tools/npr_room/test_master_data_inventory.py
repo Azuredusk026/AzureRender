@@ -2,10 +2,23 @@
 
 import unittest
 
-from tools.npr_room.master_data_inventory import master_locations
+from tools.npr_room.master_data_inventory import loader_exports, member_reads, master_locations
 
 
 class MasterDataTests(unittest.TestCase):
+    def test_groups_loader_fields_and_only_counts_typed_receivers(self):
+        loader = ('if (item is A a) { AData = a; Primary = a.Value; }\n'
+                  'if (item is B b) { BItems = b.Items.ToDictionary(x => x.Id); }')
+        self.assertEqual(loader_exports(loader), {"A": ["AData", "Primary"], "B": ["BItems"]})
+        consumer = ('private MasterDataLoader loader;\n'
+                    'var primary = loader.Primary;\n'
+                    'var list = unrelated.BItems;\n'
+                    'return loader.BItems;')
+        self.assertEqual(member_reads(consumer, {"AData", "Primary", "BItems"}),
+                         {"Primary": [2], "BItems": [4]})
+        with self.assertRaisesRegex(ValueError, "loader fields"):
+            loader_exports('if (item is A a) {}')
+
     def test_inventory_requires_a_branch_and_one_location_for_each_type(self):
         catalog = {
             "keys": [{"value": "MasterData", "locations": [0, 1]}],

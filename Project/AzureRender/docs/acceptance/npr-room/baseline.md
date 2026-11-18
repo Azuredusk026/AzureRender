@@ -58,8 +58,13 @@ Windows 构建的 `StreamingAssets` 有 18 个实际文件，涵盖 12 个 Addre
 
 本机 `master-data-audit/master-data.json` 两次生成一致，SHA-256 为 `dc4be3ab32a0c751273421dd61c3cd2a402b990daf3ed1b3d2e4a4dd70eab074`。
 
+消费清单记录加载器写入的字段及带 `MasterDataLoader` 类型声明的读取位置。20 个主表均有对应读取位置，共核对 103 组字段与源文件。候选装配可追溯工时参数、音乐和环境三份直接记录，以及剧情组、剧情命令、本地化、装饰解锁和环境解锁五张派生表。派生表通过源摘要、生成文件摘要及房间装配摘要核对。
+
+本机 `master-data-audit/master-consumers.json` 两次生成一致，SHA-256 为 `50a183798053b6e41c9588cd0a29c0cbe9e02a48c1b489dbd50e3039589f4346`。各消费者的实际运行范围按对应玩法验收。
+
 ```powershell
 python -B -m tools.npr_room.master_data_inventory --source $unitySource --inventory $referenceInventory --project $roomProject --output $masterDataReport
+python -B -m tools.npr_room.master_data_inventory --source $unitySource --inventory $referenceInventory --project $roomProject --locks $sourceLock --output $masterConsumerReport
 ```
 
 ## 功能验收矩阵
