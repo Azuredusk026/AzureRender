@@ -1,4 +1,5 @@
 import json
+import copy
 from pathlib import Path
 import tempfile
 import unittest
@@ -156,6 +157,29 @@ class RegistrationEntryTests(unittest.TestCase):
         with self.assertRaises(FileExistsError):
             registration.stage(self.room, self.frame, self.output, reference_models=True)
         self.assertFalse(self.output.exists())
+        self.assert_inputs_preserved()
+
+    def test_sequence_entry_installs_motion_graph_and_second_buffer(self):
+        level_path = self.assets / "room.azurelevel"
+        level_path.write_text(json.dumps({"nodes": [{"id": "heroine-Face", "resourceId": "heroine-Face", "components": {}}],
+                                         "resources": [{"id": "heroine-Face", "asset": "assets:/heroine/Face.glb"}]}), encoding="utf-8")
+        self.original[level_path.relative_to(self.room)] = level_path.read_bytes()
+        record = json.loads(self.frame.read_bytes())
+        record["simulationTime"] = 2
+        self.frame.write_text(json.dumps(record), encoding="utf-8")
+        other = copy.deepcopy(record)
+        other.update(frame=5, simulationTime=2 + 4 / 60)
+        other["transforms"][0]["position"]["x"] = 3
+        second = self.root / "second.json"
+        second.write_text(json.dumps(other), encoding="utf-8")
+        receipt = registration.stage(self.room, self.frame, self.output, reference_models=True,
+                                     sequence=[self.frame, second])
+        model = json.loads((self.output / "assets/heroine/Face.gltf").read_bytes())
+        self.assertEqual(model["buffers"][1]["uri"], "Face-captured.bin")
+        self.assertTrue((self.output / "assets/heroine/Face-captured.bin").is_file())
+        level = json.loads((self.output / "assets/room.azurelevel").read_bytes())
+        self.assertEqual(level["nodes"][0]["components"]["azure.animator"]["data"]["state"], "captured")
+        self.assertEqual(receipt["sequence"]["samples"], 2)
         self.assert_inputs_preserved()
 
     def test_failed_staging_keeps_inputs_and_output_unpublished(self):

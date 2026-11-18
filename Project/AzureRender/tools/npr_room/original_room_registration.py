@@ -121,10 +121,15 @@ def apply_level_pose(level, record):
     return {"matched": sorted(matched), "unmatched": sorted(missing)}
 
 
-def stage(room, frame, output, source=None, *, ambient_probe=False, reference_models=False):
+def stage(room, frame, output, source=None, *, ambient_probe=False, reference_models=False, sequence=None):
     if output.exists():
         raise FileExistsError(output)
     record = json.loads(frame.read_bytes())
+    records = None
+    if sequence is not None:
+        if not reference_models or not sequence or digest(sequence[0]) != digest(frame):
+            raise ValueError("Captured sequence requires referenced models and the same first frame")
+        records = [json.loads(path.read_bytes()) for path in sequence]
     with tempfile.TemporaryDirectory(prefix="original-room-pose-", dir=output.parent) as temporary:
         project = Path(temporary) / "project"
         assets = project / "assets"
@@ -143,6 +148,15 @@ def stage(room, frame, output, source=None, *, ambient_probe=False, reference_mo
             proof = freeze_model(document, record)
             destination = assets / "heroine" / model_source.name
             if reference_models:
+                if records is not None:
+                    from tools.npr_room.original_pose_sequence import append_sequence
+                    motion_name = part + "-captured.bin"
+                    motion_path = destination.with_name(motion_name)
+                    if motion_path.exists():
+                        raise FileExistsError(motion_path)
+                    motion, motion_proof = append_sequence(document, records, motion_name)
+                    motion_path.write_bytes(motion)
+                    proof["motion"] = {**motion_proof, "bufferSHA256": digest(motion_path)}
                 destination = destination.with_suffix(".gltf")
                 if destination.exists() or destination.with_suffix(".gltf.azmeta").exists():
                     raise FileExistsError(destination)
@@ -168,6 +182,12 @@ def stage(room, frame, output, source=None, *, ambient_probe=False, reference_mo
                     raise ValueError(f"Unexpected heroine resource: {part}")
                 resource["asset"] = f"assets:/heroine/{part}.gltf"
         placement = apply_level_pose(level, record)
+        sequence_proof = None
+        if records is not None:
+            from tools.npr_room.original_pose_sequence import install_graph
+            install_graph(assets, level, HEROINE_PARTS)
+            sequence_proof = {"samples": len(records), "frameSHA256": [digest(path) for path in sequence],
+                              "scope": "captured character transforms and morph weights"}
         activation = None
         transparency = None
         lighting = None
@@ -200,6 +220,8 @@ def stage(room, frame, output, source=None, *, ambient_probe=False, reference_mo
                    "lighting": lighting,
                    "ambientProbe": ambient,
                    "levelSHA256": digest(level_path), "scope": "captured geometry pose with gameplay and UI disabled"}
+        if sequence_proof is not None:
+            receipt["sequence"] = sequence_proof
         (project / "original-pose-receipt.json").write_text(json.dumps(receipt, indent=2) + "\n", encoding="utf-8")
         publish_directory(project, output)
     return receipt
@@ -212,9 +234,11 @@ if __name__ == "__main__":
     parser.add_argument("--source", type=Path, help="Frozen Unity project used to trace drawable activation")
     parser.add_argument("--ambient-probe", action="store_true", help="Bind the same frame's captured quadratic ambient probe")
     parser.add_argument("--reference-models", action="store_true", help="Reuse original GLB buffers through adjacent glTF pose files")
+    parser.add_argument("--sequence", type=Path, nargs="+", help="Ordered captured frames beginning with --frame")
     arguments = parser.parse_args()
     result = stage(arguments.room.resolve(), arguments.frame.resolve(), arguments.output.resolve(), arguments.source,
-                   ambient_probe=arguments.ambient_probe, reference_models=arguments.reference_models)
+                   ambient_probe=arguments.ambient_probe, reference_models=arguments.reference_models,
+                   sequence=arguments.sequence)
     print(json.dumps({"weather": result["weather"], "parts": len(result["parts"]),
                       "matchedRoomTransforms": len(result["placement"]["matched"]),
                       "unmatchedRoomTransforms": len(result["placement"]["unmatched"])}))

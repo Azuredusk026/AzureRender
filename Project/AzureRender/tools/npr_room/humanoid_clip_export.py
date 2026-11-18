@@ -62,7 +62,7 @@ def local_samples(frames, origin, field, axes, default):
     return output
 
 
-def append_humanoid_clip(document, binary, mapping, clip):
+def append_humanoid_clip(document, binary, mapping, clip, *, require_motion=True):
     if any(animation["name"] == clip["name"] for animation in document.get("animations", ())):
         raise ValueError(f"Motion name already exists: {clip['name']}")
     frames = clip["frames"]
@@ -86,7 +86,7 @@ def append_humanoid_clip(document, binary, mapping, clip):
             output = add_accessor(document, binary, data, len(times), f"VEC{width}", 5126)
             animation["channels"].append({"sampler": len(animation["samplers"]), "target": {"node": node, "path": path}})
             animation["samplers"].append({"input": time_access, "output": output, "interpolation": "LINEAR"})
-    if not animation["channels"]:
+    if not animation["channels"] and require_motion:
         raise ValueError(f"Motion does not animate the GLB hierarchy: {clip['name']}")
     document.setdefault("animations", []).append(animation)
     return len(animation["channels"])
