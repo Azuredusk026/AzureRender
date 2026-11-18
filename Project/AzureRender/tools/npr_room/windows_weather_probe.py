@@ -144,14 +144,16 @@ def payload(output, slot, width, height, srgb, data):
     return {"width": width, "height": height, "srgb": srgb, "rawSHA256": sha256(data).hexdigest()}
 
 
-def prepare(source, catalog, references, programs, cozy_assembly, output, mode, role, seconds, wind):
+def prepare(source, catalog, references, programs, cozy_assembly, output, mode, role, seconds, wind,
+            *, captured_frame=None):
     recipe = json.loads(references.read_bytes())
     program_path = programs / "windows-atmosphere-programs.json"
     scene_path = source / ROOM_SCENE
     if (digest(program_path) != recipe["d3d11ProgramSHA256"] or digest(scene_path) != recipe["sceneSHA256"]
             or digest(cozy_assembly) != COZY_RUNTIME_SHA256):
         raise ValueError("The weather probe requires the frozen scene, programs and Cozy runtime")
-    stages = json.loads(program_path.read_bytes())["programs"][role]["stages"]
+    program = json.loads(program_path.read_bytes())["programs"][role]
+    stages = program["stages"]
     cloud = role == "cozy-cloud"
     draw = recipe["base"]["drawables"]["cloudMesh" if cloud else "fogMesh"]
     scene = UnityScene(scene_path)
@@ -159,7 +161,26 @@ def prepare(source, catalog, references, programs, cozy_assembly, output, mode, 
     scale = tuple(transform["m_LocalScale"][axis] for axis in "xyz")
     model = unity_rotation(scene, draw) @ np.diag((*scale, 1))
     reference = recipe["windowsReference"][mode]
-    fields = weather_fields(reference["data"], recipe["modes"][mode], seconds, role, wind)
+    camera_position = (0, 0, 0)
+    near, far = NEAR, FAR
+    captured_proof = {}
+    if captured_frame is not None:
+        from tools.npr_room.original_weather_fields import captured_fields, captured_model
+        captured = json.loads(captured_frame.read_bytes())
+        if wind is not None or captured["weather"] != mode or not math.isclose(
+                seconds, captured["simulationTime"], rel_tol=0, abs_tol=1e-6):
+            raise ValueError("Captured weather requires its own mode, simulation time and wind")
+        fields = captured_fields(captured, role)
+        model = captured_model(captured, program["shader"])
+        scale = tuple(np.linalg.norm(model[:3, :3], axis=0))
+        camera_position = fields["_WorldSpaceCameraPos"]
+        near, far = captured["near"], captured["far"]
+        validate_clip_planes(near, far)
+        captured_proof = {"capturedFrameSHA256": digest(captured_frame),
+                          "capturedModelMatrix": model.T.ravel().tolist(),
+                          "capturedGlobals": {name: list(value) for name, value in fields.items()}}
+    else:
+        fields = weather_fields(reference["data"], recipe["modes"][mode], seconds, role, wind)
     image_catalog = catalog / "image-catalog"
 
     material_guid = draw["materials"][0]["guid"]
@@ -190,8 +211,8 @@ def prepare(source, catalog, references, programs, cozy_assembly, output, mode, 
     if cloud:
         (output / "world.bin").write_bytes(stage_constants(stages["fragment"], "$Globals", fields))
     for index, (forward, up) in enumerate(FACES):
-        view, matrices = fog_camera(forward, up)
-        per_view = {"_ProjectionParams": (1, NEAR, FAR, 1 / FAR), "unity_MatrixVP": view}
+        view, matrices = fog_camera(forward, up, position=camera_position, near=near, far=far)
+        per_view = {"_ProjectionParams": (1, near, far, 1 / far), "unity_MatrixVP": view}
         (output / f"view-{index}.bin").write_bytes(stage_constants(stages["vertex"], "$Globals", per_view))
         if not cloud:
             (output / f"world-{index}.bin").write_bytes(stage_constants(stages["fragment"], "$Globals", fields | matrices))
@@ -217,7 +238,8 @@ def prepare(source, catalog, references, programs, cozy_assembly, output, mode, 
             "programSHA256": {name: stage["sha256"] for name, stage in stages.items()},
             "cozyAssemblySHA256": COZY_RUNTIME_SHA256, "meshSHA256": mesh_digest,
             "vertexCount": len(vertices), "triangleCount": len(triangles), "meshScale": scale,
-            "textures": textures, **({"controlledWindDirection": wind} if cloud else {})}
+            "textures": textures, **({"controlledWindDirection": wind} if cloud and captured_frame is None else {}),
+            **captured_proof}
 
 
 if __name__ == "__main__":
@@ -228,12 +250,16 @@ if __name__ == "__main__":
     parser.add_argument("--role", choices=("cozy-cloud", "fog"), required=True)
     parser.add_argument("--time", type=float, required=True)
     parser.add_argument("--wind", type=float, nargs=3)
+    parser.add_argument("--frame", type=Path, help="Use the captured original frame's globals and renderer transform")
     args = parser.parse_args()
-    if args.role == "cozy-cloud":
+    if args.frame is not None:
+        if args.wind is not None:
+            parser.error("Captured wind is supplied by the original frame")
+    elif args.role == "cozy-cloud":
         if args.wind is None or not math.isclose(math.hypot(*args.wind), 1, abs_tol=1e-6):
             parser.error("Cloud replay requires a fixed unit wind direction")
     elif args.wind is not None:
         parser.error("Fog uses its original variation wind field")
     result = prepare(args.source, args.catalog, args.references, args.programs, args.cozy_assembly, args.output,
-                     args.mode, args.role, args.time, args.wind)
+                     args.mode, args.role, args.time, args.wind, captured_frame=args.frame)
     (args.output / "preparation.json").write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8")

@@ -84,11 +84,14 @@ def capture_original_view(record):
 
 
 def prepare_room(source, catalog, references, programs, assembly, previous_camera, output, mode, seconds,
-                 *, original_frame=False):
+                 *, original_frame=False, captured_weather=False):
+    if captured_weather and not original_frame:
+        raise ValueError("Captured weather requires the original camera frame")
     record = json.loads(previous_camera.read_bytes())
     view = capture_original_view(record) if original_frame else capture_view(record)
     near, far = view["nearPlane"], view["farPlane"]
-    receipt = prepare(source, catalog, references, programs, assembly, output, mode, "fog", seconds, None)
+    receipt = prepare(source, catalog, references, programs, assembly, output, mode, "fog", seconds, None,
+                      captured_frame=previous_camera if captured_weather else None)
     axes = np.array([1, 1, -1])
     position = np.array(view["position"]) * axes
     target = np.array(view["target"]) * axes
@@ -102,7 +105,11 @@ def prepare_room(source, catalog, references, programs, assembly, previous_camer
     original = json.loads(references.read_bytes())
     modes = original["modes"]
     values = original["windowsReference"][mode]["data"]
-    fields = weather_fields(values, modes[mode], seconds, "fog", None) | matrices
+    if captured_weather:
+        from tools.npr_room.original_weather_fields import captured_fields
+        fields = captured_fields(record, "fog") | matrices
+    else:
+        fields = weather_fields(values, modes[mode], seconds, "fog", None) | matrices
     fields["_WorldSpaceCameraPos"] = position
 
     stages = json.loads((programs / "windows-atmosphere-programs.json").read_bytes())["programs"]["fog"]["stages"]
@@ -111,9 +118,13 @@ def prepare_room(source, catalog, references, programs, assembly, previous_camer
     (output / "world-0.bin").write_bytes(stage_constants(stages["fragment"], "$Globals", fields))
     # MyCozyWeatherService anchors the room weather at its custom pivot.
     # This is the pivot translation in the settled original room log.
-    pivot = (15, 0, 0)
     model = bytearray((output / "object.bin").read_bytes())
-    model[48:60] = pack("<3f", *pivot)
+    if captured_weather:
+        from struct import unpack_from
+        pivot = unpack_from("<3f", model, 48)
+    else:
+        pivot = (15, 0, 0)
+        model[48:60] = pack("<3f", *pivot)
     (output / "object.bin").write_bytes(model)
     distances = depth_samples(near=near, far=far)
     reversed_z = near * (far / distances - 1) / (far - near)

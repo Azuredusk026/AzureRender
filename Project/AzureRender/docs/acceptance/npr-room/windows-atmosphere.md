@@ -232,6 +232,37 @@ python -B -m tools.npr_room.original_room_frames --frames $originalRenderFrames 
 python -B -m tools.npr_room.original_room_frames --frames $weatherDiagnosticFrames --samples-per-weather 3 --require-weather-globals --require-ambient-probe --output $weatherGlobalsVerification
 ```
 
+## 原版云雾参数消费
+
+天气准备命令通过 `--frame` 读取原版同步帧。
+模拟时间、风向、颜色、标量及月亮方向直接来自该帧。
+天气网格按原版活动渲染器的着色器身份定位。
+完整父级变换共同决定原始绘制矩阵。
+
+房间雾体积通过 `captured_weather=True` 装配上述输入。
+该选项与 `original_frame=True` 共同使用。
+相机、天气参数和天气网格保持同帧关联。
+缺失、歧义或非法输入在准备输出前报告。
+
+六帧诊断逐一覆盖云层与雾，共核对十二组输入。
+各组全局字段集合与原片元常量缓冲逐项一致。
+任务 2171 完成两种天气的原生采样与独立重复检查。
+125 项房间检查通过。
+
+| 天气 | 通道 | 相对天气回放参数的变化采样 |
+| --- | --- | ---: |
+| 夜晚 | 云层 | 194 |
+| 夜晚 | 雾体积 | 49,189 |
+| 多云 | 云层 | 0 |
+| 多云 | 雾体积 | 1 |
+
+准备命令的八份常量缓冲与原生受检输入逐字节一致。
+原始浮点采样的压缩归档通过解压摘要核验。
+完整房间的动态画面及匹配 Player 构建继续验收。
+本机证据位于 `original-room-dynamics/weather-inputs/`。
+
+报告 SHA-256 为 `b2c07027880dc0d370666860db267e36f879e6722bdc4888ceb9e1d1cb8a3704`。
+
 ## 原版环境光探针
 
 任务 2147 在两种天气各采集 12 个同步帧。
