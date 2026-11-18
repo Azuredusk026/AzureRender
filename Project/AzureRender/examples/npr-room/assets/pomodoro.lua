@@ -319,8 +319,7 @@ function update(dt)
     end
     updateDisplay()
     if workCalendar then
-        if self:pressed("timer-stats") then
-            if statsOpen then workCalendar:close_month_view() end
+        if self:pressed("timer-stats") and (not statsOpen or workCalendar:close_month_view()) then
             statsOpen = not statsOpen
             self:ui_visible("work-stats", statsOpen)
         end
@@ -349,5 +348,8 @@ function shutdown()
     else
         publishCountup()
     end
-    if workCalendar then workCalendar:flush() end
+    if workCalendar then
+        workCalendar:save_open_diary()
+        workCalendar:flush()
+    end
 end

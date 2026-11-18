@@ -132,6 +132,7 @@ function new_work_calendar(translate)
     local startDay, displayedMonth, displayedStart
     local browsedMonth, selectedDate, editingDate
     local displayedTodoDate, refreshTodo
+    local diaryDate, diaryText, diaryDraft
 
     local function today()
         return runtime:local_datetime():sub(1, 8)
@@ -262,15 +263,67 @@ function new_work_calendar(translate)
         if day then renderEditFields() end
     end
 
+    local function readDiary(day)
+        local document = runtime:read_save("calendar-diary-" .. day)
+        if type(document) ~= "table" then return "", true end
+        if type(document[1]) == "number" and document[1] > 1 then return "", false end
+        local value = document[1] == 1 and type(document[2]) == "string" and document[2] or ""
+        return value, true
+    end
+
+    local function showDiary(day)
+        diaryDate = day
+        runtime:ui_visible("calendar-diary-editor", day ~= nil)
+        runtime:ui_text("calendar-diary-status", "")
+        if day then
+            diaryText = readDiary(day)
+            diaryDraft = diaryText
+            runtime:ui_set_value("calendar-diary-text", diaryText)
+        end
+    end
+
+    local function storeDiary(value)
+        if value == diaryText then return true end
+        -- The original input field limits the UTF-16 length to 5,000.
+        local _, codePoints = value:gsub("[^\128-\191]", "")
+        local _, supplementary = value:gsub("[\240-\244]", "")
+        local _, writable = readDiary(diaryDate)
+        if not writable or codePoints + supplementary > 5000
+            or not runtime:try_write_save("calendar-diary-" .. diaryDate, {1, value}) then return false end
+        diaryText = value
+        return true
+    end
+
+    local function saveDiary()
+        if not diaryDate then return true end
+        local stored = storeDiary(runtime:ui_value("calendar-diary-text"))
+        runtime:ui_text("calendar-diary-status", stored and "" or calendarLabel("error", "Could not save the diary"))
+        return stored
+    end
+
+    function calendar:save_open_diary()
+        if diaryDate then return storeDiary(diaryDraft) end
+        return true
+    end
+
     function calendar:close_month_view()
+        if not saveDiary() then return false end
+        if diaryDate then showDiary(nil) end
         displayedTodoDate = nil
-        if not editingDate then return end
-        commitEditor()
-        showEditor(nil)
+        if editingDate then
+            commitEditor()
+            showEditor(nil)
+        end
+        return true
     end
 
     function calendar:update_month_view(languageChanged)
         commitEditor()
+        if diaryDate and runtime:pressed("calendar-diary-cancel") then
+            showDiary(nil)
+        elseif diaryDate and runtime:pressed("calendar-diary-save") then
+            saveDiary()
+        end
         if startDay == nil then startDay = readFirstDay(runtime) end
         for weekday = 0, 6 do
             if runtime:pressed("calendar-first-" .. weekday) then
@@ -303,6 +356,8 @@ function new_work_calendar(translate)
             runtime:ui_text("calendar-first-day-label", calendarLabel("firstDay", "Start day of the week"))
             runtime:ui_text("calendar-work-label", calendarLabel("workTime", "Work Time"))
             runtime:ui_text("calendar-edit-time", calendarLabel("editTime", "Edit Work Time"))
+            runtime:ui_text("calendar-diary-toggle", calendarLabel("diary", "Enter Diary"))
+            runtime:ui_text("calendar-diary-cancel", calendarLabel("cancel", "Cancel"))
             runtime:ui_text("calendar-first-day", weekdayLabel(startDay + 1))
             for column = 1, 7 do
                 runtime:ui_text("calendar-first-" .. (column - 1), weekdayLabel(column))
@@ -317,7 +372,11 @@ function new_work_calendar(translate)
         end
         for day = 1, days do
             if runtime:pressed("calendar-day-" .. (offset + day)) then
-                selectedDate = string.format("%04d%02d%02d", year, month, day)
+                local requested = string.format("%04d%02d%02d", year, month, day)
+                if saveDiary() then
+                    selectedDate = requested
+                    if diaryDate and diaryDate ~= requested then showDiary(requested) end
+                end
                 break
             end
         end
@@ -328,6 +387,15 @@ function new_work_calendar(translate)
         if runtime:pressed("calendar-edit-time") then
             showEditor(editingDate == nil and selected or nil)
         end
+        if runtime:pressed("calendar-diary-toggle") then
+            if not diaryDate then
+                selectedDate = selected
+                showDiary(selected)
+            elseif saveDiary() then
+                showDiary(nil)
+            end
+        end
+        if diaryDate then diaryDraft = runtime:ui_value("calendar-diary-text") end
         if displayedTodoDate ~= selected or refreshTodo or languageChanged then
             local tasks = completedTodoText(runtime, selected)
             runtime:ui_text("calendar-completed-tasks-label", calendarLabel("completedTasks", "Completed Tasks"))

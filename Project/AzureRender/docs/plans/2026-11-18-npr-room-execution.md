@@ -68,3 +68,4 @@
 - 2.4 的单日工时修订通过实际输入、关闭提交、上限、清零、重开和较新格式保护。修订与奖励进度共同保存。 [单日工时](../acceptance/npr-room/work-calendar.md#单日工时修订)
 - 4.2 的本机 1.18.1 安装版已核对五个大气着色器，全部匹配冻结版对象。完整房间的同步帧仍按 1.17.3 参照采集。 [本机安装版参照](../acceptance/npr-room/windows-atmosphere.md#本机安装版参照)
 - 2.4 的日历已完成任务列表通过当日完成、恢复、跨日期切换、重开和长标题换行。 [单日完成任务](../acceptance/npr-room/work-calendar.md#单日完成任务)
+- 2.4 的单日日记通过多行文字、日期切换、退出提交、重开及较新格式保护。 [单日日记](../acceptance/npr-room/work-calendar.md#单日日记)

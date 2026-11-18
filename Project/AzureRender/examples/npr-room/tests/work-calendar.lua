@@ -1,21 +1,29 @@
 local state, date, failWrite, todo, action
 local labels, visibility = {}, {}
+local diaries, fields = {}, {}
 
 self = {
     local_datetime = function() return date end,
     read_save = function(_, slot)
         if slot == "work-calendar" then return state end
         if slot == "todo" then return todo end
+        if slot:match("^calendar%-diary%-") then return diaries[slot] end
         assert(slot == "calendar-first-day")
     end,
     try_write_save = function(_, slot, proposed)
-        assert(slot == "work-calendar")
         if failWrite then return false end
-        state = proposed
+        if slot:match("^calendar%-diary%-") then
+            diaries[slot] = proposed
+        else
+            assert(slot == "work-calendar")
+            state = proposed
+        end
         return true
     end,
     ui_text = function(_, id, value) labels[id] = value end,
     ui_visible = function(_, id, value) visibility[id] = value end,
+    ui_value = function(_, id) return fields[id] end,
+    ui_set_value = function(_, id, value) fields[id] = value end,
     pressed = function(_, id) return id == action end,
 }
 
@@ -94,3 +102,41 @@ todo = {2, 1, {}}
 action = nil
 history:update_month_view(false)
 assert(not visibility["calendar-completions"] and labels["calendar-completed-tasks"] == "")
+
+local diary = new_work_calendar()
+action = "calendar-diary-toggle"
+assert(diary:update_month_view(false) == "2027-01-01")
+assert(visibility["calendar-diary-editor"])
+fields["calendar-diary-text"] = "日记\nSecond <line>"
+failWrite = true
+action = "calendar-day-7"
+assert(diary:update_month_view(false) == "2027-01-01")
+assert(fields["calendar-diary-text"] == "日记\nSecond <line>")
+assert(not diary:close_month_view())
+failWrite = false
+assert(diary:update_month_view(false) == "2027-01-02")
+assert(diaries["calendar-diary-20270101"][2] == "日记\nSecond <line>")
+assert(fields["calendar-diary-text"] == "")
+diaries["calendar-diary-20270102"] = {2, "Protected"}
+fields["calendar-diary-text"] = "Draft"
+assert(not diary:close_month_view() and diaries["calendar-diary-20270102"][2] == "Protected")
+action = "calendar-diary-cancel"
+diary:update_month_view(false)
+assert(diary:close_month_view() and not visibility["calendar-diary-editor"])
+action = "calendar-day-6"
+diary:update_month_view(false)
+action = "calendar-diary-toggle"
+diary:update_month_view(false)
+fields["calendar-diary-text"] = "Before closing"
+action = nil
+diary:update_month_view(false)
+assert(diary:save_open_diary())
+assert(diaries["calendar-diary-20270101"][2] == "Before closing")
+assert(diaries["calendar-diary-20270102"][2] == "Protected")
+fields["calendar-diary-text"] = string.rep("文", 4999) .. "🌙"
+diary:update_month_view(false)
+assert(not diary:save_open_diary())
+assert(diaries["calendar-diary-20270101"][2] == "Before closing")
+fields["calendar-diary-text"] = string.rep("文", 4998) .. "🌙"
+diary:update_month_view(false)
+assert(diary:save_open_diary())

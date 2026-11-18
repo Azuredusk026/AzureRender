@@ -23,6 +23,14 @@
 
 任务 2118 在 1280×720 的房间同时打开月历和待办，实测完成、恢复、跨日期切换和重开。回放记录了交给界面的文字和两张画面。两次 Player 正常释放图像和缓冲。本机 `calendar-todo-validation/calendar-completed-todo.json` 的 SHA-256 为 `f86cdcb356409710ac7d6a87a5f73dd37c83aa989808091ba6bd440bf077f449`。
 
+## 单日日记
+
+在选中日期打开日记，回车换行。焦点移出编辑框、切换日期、关闭月历或正常退出时保存文本。各日期使用单独的版本化存档槽。写入失败时保留编辑中的草稿，可以重试或取消。
+
+多行输入和 5,000 个 UTF-16 代码单元的上限来自 Recovery `RoomScene` 的输入框 24713。日期归属及编辑提交依据 `CalendarUI` 与 `FacilityCalendar`。
+
+任务 2120 用三个 Player 进程复验多行输入、按日期保存、关闭进程后恢复及较新格式保护。可控测试覆盖超出长度上限、写入失败、选择日期及取消。报告位于本机 `calendar-diary-validation/calendar-diary-replay.json`，SHA-256 为 `77f71b3f70ac3196d940839a87ec9799e5f19b951fd36f316d866afde1f2f9b8`。
+
 ## 回放
 
 可控时钟覆盖跨午夜、暂停、休息、60 秒检查点、写入失败、较新版本和退出恢复。
