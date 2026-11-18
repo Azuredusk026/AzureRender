@@ -65,6 +65,10 @@ def copy_tree(source, destination):
         if item.is_dir():
             copy_tree(item, target)
         else:
+            if item.suffix == ".azmeta":
+                asset = item.with_suffix("")
+                if not asset.is_file() or asset.suffix in {".tmp", ".azmeta"}:
+                    continue
             shutil.copy2(item, target)
 
 

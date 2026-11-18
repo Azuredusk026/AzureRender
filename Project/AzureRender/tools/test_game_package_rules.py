@@ -134,6 +134,26 @@ class GamePackageRules(unittest.TestCase):
         with self.assertRaises(ValueError):
             build_game.verify_package(self.output)
 
+    def test_package_includes_only_metadata_with_a_source_asset(self):
+        content = self.project.parent / "content"
+        live = content / "start.azurelevel.azmeta"
+        orphan = content / "capture-room.azurelevel.azmeta"
+        transient = content / "generated.tmp.azmeta"
+        (content / "generated.tmp").write_bytes(b"cache")
+        live.write_text('{"id":"startup"}', encoding="utf-8")
+        orphan.write_text('{"id":"old-capture"}', encoding="utf-8")
+        transient.write_text('{"id":"generated"}', encoding="utf-8")
+
+        manifest = self.build()
+
+        paths = {entry["path"] for entry in manifest["files"]}
+        self.assertIn("game/assets/start.azurelevel.azmeta", paths)
+        self.assertNotIn("game/assets/capture-room.azurelevel.azmeta", paths)
+        self.assertNotIn("game/assets/generated.tmp.azmeta", paths)
+        self.assertEqual((self.output / "game/assets" / live.name).read_bytes(), live.read_bytes())
+        self.assertTrue(orphan.is_file())
+        build_game.verify_package(self.output)
+
     def test_failure_retains_existing_package(self):
         self.build()
         original = (self.output / "game_manifest.json").read_bytes()
