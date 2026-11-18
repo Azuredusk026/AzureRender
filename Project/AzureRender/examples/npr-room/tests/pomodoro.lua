@@ -160,6 +160,7 @@ shutdown()
 assert(otherSaves["countup-session"][2] == 7)
 init()
 expect("idle", "00:00:00")
+step(0)
 assert(otherSaves["countup-session"][2] == 0 and otherSaves["countup-session"][3] == 7)
 init()
 assert(otherSaves["countup-session"][3] == 7)
@@ -173,3 +174,29 @@ assert(otherSaves["countup-session"][3] == 359999)
 step(0, "timer-mode")
 expect("idle", "25:00")
 assert(otherSaves["timer-mode"][2] == 0)
+
+step(0, "timer-mode")
+step(0, "timer-toggle")
+failedSlot = "countup-session"
+step(60)
+expect("work", "00:01:00")
+assert(otherSaves["countup-session"][2] == 0)
+step(2)
+step(0, "timer-reset")
+expect("idle", "00:00:00")
+assert(otherSaves["countup-session"][3] == 359999)
+failedSlot = nil
+step(0.5)
+assert(otherSaves["countup-session"][3] == 359999)
+step(0.5)
+assert(otherSaves["countup-session"][2] == 0 and otherSaves["countup-session"][3] == 62)
+
+otherSaves["countup-session"] = {1, 7, 62}
+failedSlot = "countup-session"
+init()
+step(0)
+expect("idle", "00:00:00")
+assert(otherSaves["countup-session"][2] == 7)
+failedSlot = nil
+shutdown()
+assert(otherSaves["countup-session"][2] == 0 and otherSaves["countup-session"][3] == 7)

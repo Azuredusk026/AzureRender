@@ -8,6 +8,8 @@ local countupMode = false
 local countupElapsed = 0
 local countupSinceSave = 0
 local lastCountup = 0
+local pendingCountup
+local countupSaveRetry = 0
 
 local phase = "idle"
 local round = 0
@@ -148,21 +150,33 @@ local function loadCountup()
     local mode = self:read_save("timer-mode")
     countupMode = type(mode) == "table" and #mode == 2 and mode[1] == 1 and mode[2] == 1
     lastCountup = 0
+    pendingCountup = nil
+    countupSaveRetry = 0
     local session = self:read_save("countup-session")
     if type(session) == "table" and #session == 3 and session[1] == 1 then
         local interrupted = completedSeconds(session[2])
         lastCountup = completedSeconds(session[3])
         if interrupted > 0 then
             lastCountup = interrupted
-            self:write_save("countup-session", {1, 0, lastCountup})
+            pendingCountup = {1, 0, lastCountup}
         end
+    end
+end
+
+local function publishCountup()
+    if not pendingCountup then return end
+    if self:try_write_save("countup-session", pendingCountup) then
+        pendingCountup = nil
+    else
+        countupSaveRetry = 1
     end
 end
 
 local function checkpointCountup(active)
     local seconds = math.min(maxCountupSeconds, math.floor(countupElapsed + 1e-7))
     if not active then lastCountup = seconds end
-    self:write_save("countup-session", {1, active and seconds or 0, lastCountup})
+    pendingCountup = {1, active and seconds or 0, lastCountup}
+    publishCountup()
 end
 
 local function finishCountup()
@@ -251,6 +265,10 @@ function init()
 end
 
 function update(dt)
+    if pendingCountup then
+        countupSaveRetry = countupSaveRetry - dt
+        if countupSaveRetry <= 0 then publishCountup() end
+    end
     local languageChanged = roomLanguage and roomLanguage:update()
     if workCalendar then workCalendar:recover() end
     if roomOpening and roomOpening:update(dt, phase == "idle" and not speaking and not choiceSpeaking and not timerVoiceActive,
@@ -327,6 +345,8 @@ end
 function shutdown()
     if countupMode and phase == "work" and countupElapsed >= 1 then
         checkpointCountup(true)
+    else
+        publishCountup()
     end
     if workCalendar then workCalendar:flush() end
 end
