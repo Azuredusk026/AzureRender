@@ -58,6 +58,19 @@ Release Player 处理 11 个动作，播放五次原音效。
 
 本机 `timer-preferences-validation/timer-preferences-replay.json` 的 SHA-256 为 `39b753505833edca9023de012dfbf23fe33ae6e15716823a9b4fc43691f9ff09`。同目录保存回放动作和执行记录。
 
+### 计时音效资源
+
+计时音效装配在已有房间候选上加入开始 B、开始 C、结束 B 和结束 C。四个槽保留原 `AudioClip` GUID 与文件 ID。原版开始 A、结束 A 和暂停沿用固定槽名。房间装配核验覆盖全部七个计时音效及三个系统音效。
+
+任务 2110 通过按键依次播放四个新增槽。Player 成功解码四个原 OGG 文件，记录四次播放和九个动作，退出后缓冲与图像计数均为零。该回放直接触发资源槽。偏好界面及两种计时模式的选项保存按音频设置验收。
+
+本机 `timer-sound-variant-validation/sound-cue-mounts.json` 与 `timer-sound-variant-validation/timer-sound-playback.json` 的 SHA-256 分别为 `17cae30dee2f3f24d9cf3b1ce59f70da168150cb473fcc21a060d8101b249978` 与 `fad337fc608306dda6eefec81a7c293ddce1cb6804d19a2c3b5ced037f04793c`。
+
+```powershell
+python -B -m tools.npr_room.build_timer_sound_room --room $roomDirectory --source $unitySource --inventory $referenceInventory --output $roomWithTimerSounds
+python -B -m tools.npr_room.sound_cue_inventory --source $unitySource --inventory $referenceInventory --room $roomWithTimerSounds --audio-repairs $audioRepairReport --output $soundCueReport --timer-variants
+```
+
 ## 托管存档
 
 通过固定版本的 CoreCLR 9.0.22，两个独立 Release Player 各运行 24 帧。

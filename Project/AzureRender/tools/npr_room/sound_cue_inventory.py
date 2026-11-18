@@ -18,6 +18,8 @@ BINDINGS = {
     "Timer": {"Start_A": "timer-start", "Finish_A": "timer-finish", "Pause": "timer-pause"},
     "System": {"Cancel": "settings-cancel", "Click": "settings-click", "TaskComplete": "todo-complete"},
 }
+TIMER_VARIANTS = {"Start_B": "timer-start-b", "Start_C": "timer-start-c",
+                  "Finish_B": "timer-finish-b", "Finish_C": "timer-finish-c"}
 
 
 def verify_media(source, target, repairs):
@@ -51,7 +53,7 @@ def read_table(source, assets, kind):
                           "sourceGuid": assets[master_path], "enumSHA256": digest(enum)}
 
 
-def build_report(source, inventory, room, audio_repairs, purchase=False):
+def build_report(source, inventory, room, audio_repairs, purchase=False, timer_variants=False):
     assets = json.loads(inventory.read_bytes())["assets"]
     by_guid = group_paths_by_guid(assets)
     repairs = json.loads(audio_repairs.read_bytes())["repairs"]
@@ -69,6 +71,8 @@ def build_report(source, inventory, room, audio_repairs, purchase=False):
               "projectSHA256": digest(project), "levelSHA256": digest(level), "tables": {}}
 
     for kind, bindings in BINDINGS.items():
+        if timer_variants and kind == "Timer":
+            bindings = bindings | TIMER_VARIANTS
         if purchase and kind == "System":
             bindings = dict(bindings, BuyItem="room-buy-item")
         names, clips, table = read_table(source, assets, kind)
@@ -95,10 +99,10 @@ def build_report(source, inventory, room, audio_repairs, purchase=False):
                     raise ValueError(f"Sound cue escapes the assets mount: {slot}")
                 row["roomBinding"] = {"node": slot, "asset": reference, "volume": data["volume"],
                                       **verify_media(raw, target, repairs)}
-                if slot == "room-buy-item":
+                if slot == "room-buy-item" or slot in TIMER_VARIANTS.values():
                     meta = target.with_name(target.name + ".azmeta")
                     if UUID(json.loads(meta.read_bytes())["id"]).hex != audio["guid"]:
-                        raise ValueError("Purchase sound metadata differs from the original GUID")
+                        raise ValueError(f"Sound metadata differs from the original GUID: {slot}")
                     row["roomBinding"]["metadataSHA256"] = digest(meta)
             table["clips"].append(row)
         report["tables"][kind] = table
@@ -110,8 +114,9 @@ def main():
     for name in ("source", "inventory", "room", "audio-repairs", "output"):
         parser.add_argument("--" + name, type=Path, required=True)
     parser.add_argument("--purchase", action="store_true")
+    parser.add_argument("--timer-variants", action="store_true")
     args = parser.parse_args()
-    report = build_report(args.source, args.inventory, args.room, args.audio_repairs, args.purchase)
+    report = build_report(args.source, args.inventory, args.room, args.audio_repairs, args.purchase, args.timer_variants)
     with args.output.open("x", encoding="utf-8", newline="\n") as output:
         json.dump(report, output, indent=2, sort_keys=True)
         output.write("\n")
