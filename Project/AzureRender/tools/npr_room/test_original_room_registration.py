@@ -196,6 +196,15 @@ class RegistrationEntryTests(unittest.TestCase):
         self.assertEqual(receipt["ambientProbe"], {"assetId": "fixture"})
         self.assert_inputs_preserved()
 
+    def test_optional_atmosphere_preserves_launch_environment_receipt(self):
+        bundle = self.root / "atmosphere-bundle"
+        proof = {"environmentPath": "assets/original-atmosphere/environment.hdr"}
+        with patch("tools.npr_room.original_room_atmosphere.install", return_value=proof) as install:
+            receipt = registration.stage(self.room, self.frame, self.output, atmosphere=bundle)
+        self.assertEqual(install.call_args.args[0:2], (self.frame, bundle))
+        self.assertEqual(receipt["atmosphere"], proof)
+        self.assert_inputs_preserved()
+
 
 if __name__ == "__main__":
     unittest.main()

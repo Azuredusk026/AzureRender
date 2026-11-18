@@ -121,7 +121,7 @@ def apply_level_pose(level, record):
     return {"matched": sorted(matched), "unmatched": sorted(missing)}
 
 
-def stage(room, frame, output, source=None, *, ambient_probe=False, reference_models=False, sequence=None):
+def stage(room, frame, output, source=None, *, ambient_probe=False, reference_models=False, sequence=None, atmosphere=None):
     if output.exists():
         raise FileExistsError(output)
     record = json.loads(frame.read_bytes())
@@ -207,6 +207,10 @@ def stage(room, frame, output, source=None, *, ambient_probe=False, reference_mo
                     raise ValueError("Original graphics light color policy is invalid")
                 lighting = {"graphicsSettingsSHA256": digest(graphics_path),
                             **apply_captured_lights(level, record, bool(linear))}
+        atmosphere_proof = None
+        if atmosphere is not None:
+            from tools.npr_room.original_room_atmosphere import install as install_atmosphere
+            atmosphere_proof = install_atmosphere(frame, atmosphere, assets, level)
         ambient = install_ambient_probe(frame, assets, level) if ambient_probe else None
         for node in level["nodes"]:
             ui = node["components"].get("azure.game-ui")
@@ -222,6 +226,8 @@ def stage(room, frame, output, source=None, *, ambient_probe=False, reference_mo
                    "levelSHA256": digest(level_path), "scope": "captured geometry pose with gameplay and UI disabled"}
         if sequence_proof is not None:
             receipt["sequence"] = sequence_proof
+        if atmosphere_proof is not None:
+            receipt["atmosphere"] = atmosphere_proof
         (project / "original-pose-receipt.json").write_text(json.dumps(receipt, indent=2) + "\n", encoding="utf-8")
         publish_directory(project, output)
     return receipt
@@ -235,10 +241,11 @@ if __name__ == "__main__":
     parser.add_argument("--ambient-probe", action="store_true", help="Bind the same frame's captured quadratic ambient probe")
     parser.add_argument("--reference-models", action="store_true", help="Reuse original GLB buffers through adjacent glTF pose files")
     parser.add_argument("--sequence", type=Path, nargs="+", help="Ordered captured frames beginning with --frame")
+    parser.add_argument("--atmosphere", type=Path, help="Same-frame atmosphere bundle with source recipe and native receipts")
     arguments = parser.parse_args()
     result = stage(arguments.room.resolve(), arguments.frame.resolve(), arguments.output.resolve(), arguments.source,
                    ambient_probe=arguments.ambient_probe, reference_models=arguments.reference_models,
-                   sequence=arguments.sequence)
+                   sequence=arguments.sequence, atmosphere=arguments.atmosphere)
     print(json.dumps({"weather": result["weather"], "parts": len(result["parts"]),
                       "matchedRoomTransforms": len(result["placement"]["matched"]),
                       "unmatchedRoomTransforms": len(result["placement"]["unmatched"])}))

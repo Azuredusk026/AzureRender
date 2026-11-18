@@ -21,19 +21,8 @@ def capture(player, room, resources, environment, atmosphere, output, name, mode
     project["startupScene"] = "assets:/" + level.name
     scene = json.loads((room / "assets/room.azurelevel").read_bytes())
     scene["renderSettings"]["skyMode"] = mode
-    mapping = scene["sceneImports"]["RoomScene"]["nodeMap"]
-    atmosphere_nodes = {mapping[f"unity-{info['transform']}"] for info in atmosphere["base"]["drawables"].values()}
-    atmosphere_nodes.update(mapping[f"unity-batch-{identity}"] for identity in (7292, 7866))
-    city, = [item["id"] for item in scene["resources"] if item["asset"] == "assets:/window-city.glb"]
-    city_node, = [node for node in scene["nodes"] if node.get("resourceId") == city]
-    atmosphere_nodes.add(city_node["id"])
-    hidden = set()
-    for node in scene["nodes"]:
-        if node["id"] in atmosphere_nodes:
-            visible = node["components"].setdefault("azure.renderable", {"type": "azure.renderable", "version": 1, "data": {}})
-            visible["data"]["visible"] = False
-            hidden.add(node["id"])
-    assert hidden == atmosphere_nodes and len(hidden) == 6
+    from tools.npr_room.original_room_atmosphere import hide_atmosphere_geometry
+    hide_atmosphere_geometry(scene, atmosphere)
     if level_setup is not None:
         level_setup(scene)
     with level.open("x", encoding="utf-8") as source:
