@@ -1,17 +1,22 @@
-local state, date, failWrite
+local state, date, failWrite, todo, action
+local labels, visibility = {}, {}
 
 self = {
     local_datetime = function() return date end,
-    read_save = function(_, slot) assert(slot == "work-calendar"); return state end,
+    read_save = function(_, slot)
+        if slot == "work-calendar" then return state end
+        if slot == "todo" then return todo end
+        assert(slot == "calendar-first-day")
+    end,
     try_write_save = function(_, slot, proposed)
         assert(slot == "work-calendar")
         if failWrite then return false end
         state = proposed
         return true
     end,
-    ui_text = function() end,
-    ui_visible = function() end,
-    pressed = function() return false end,
+    ui_text = function(_, id, value) labels[id] = value end,
+    ui_visible = function(_, id, value) visibility[id] = value end,
+    pressed = function(_, id) return id == action end,
 }
 
 date = "20261231235958"
@@ -66,3 +71,26 @@ assert(not editor:setTimeFor("20270102", 1.25))
 assert(new_work_calendar():totalTime() == 13)
 state = {2, {}}
 assert(not new_work_calendar():setTimeFor("20270101", 4) and state[1] == 2)
+
+todo = {1, 6, {
+    {1, "Daily", {{2, "Second", "20270101091200", ""}, {3, "Future", "20270102063700", "2027-01-01"}}},
+    {4, "Notes", {{5, "Earlier", "20270101084305", ""}}},
+}}
+local history = new_work_calendar()
+history:update_month_view(false)
+assert(visibility["calendar-completions"])
+assert(labels["calendar-completed-tasks"] == "08:43:05 Earlier\n09:12:00 Second")
+action = "todo-task-complete"
+history:update_month_view(false)
+todo[3][2][3][1][3] = ""
+action = nil
+history:update_month_view(false)
+assert(labels["calendar-completed-tasks"] == "09:12:00 Second")
+action = "calendar-day-7"
+history:update_month_view(false)
+assert(labels["calendar-completed-tasks"] == "06:37:00 Future")
+history:close_month_view()
+todo = {2, 1, {}}
+action = nil
+history:update_month_view(false)
+assert(not visibility["calendar-completions"] and labels["calendar-completed-tasks"] == "")

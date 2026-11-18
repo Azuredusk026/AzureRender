@@ -3,6 +3,12 @@ local weekdaySlot = "calendar-first-day"
 local weekdays = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"}
 local monthLengths = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31}
 local workTimeFields = {"calendar-edit-hours", "calendar-edit-minutes", "calendar-edit-seconds"}
+local todoActions = {
+    "todo-toggle", "todo-save",
+    "todo-list-new", "todo-list-delete", "todo-list-prev", "todo-list-next",
+    "todo-task-new", "todo-task-complete", "todo-task-delete", "todo-task-up", "todo-task-down",
+    "todo-task-prev", "todo-task-next",
+}
 
 local function readFirstDay(runtime)
     local value = runtime:read_save(weekdaySlot)
@@ -36,6 +42,34 @@ end
 local function workTimeParts(seconds)
     seconds = math.floor(math.min(86400, seconds) + 1e-7)
     return {seconds // 3600, seconds // 60 % 60, seconds % 60}
+end
+
+local function completedTodoText(runtime, date)
+    local document = runtime:read_save("todo")
+    if type(document) ~= "table" or document[1] ~= 1 or type(document[3]) ~= "table" then return "" end
+    local matches = {}
+    for _, list in ipairs(document[3]) do
+        if type(list) == "table" and type(list[3]) == "table" then
+            for _, task in ipairs(list[3]) do
+                if type(task) == "table" and type(task[1]) == "number" and type(task[2]) == "string"
+                    and type(task[3]) == "string" then
+                    local hour, minute, second = task[3]:match("^" .. date .. "(%d%d)(%d%d)(%d%d)$")
+                    if hour and tonumber(hour) < 24 and tonumber(minute) < 60 and tonumber(second) < 60 then
+                        matches[#matches + 1] = {task[1], hour .. ":" .. minute .. ":" .. second, task[2]}
+                    end
+                end
+            end
+        end
+    end
+    table.sort(matches, function(a, b)
+        if a[2] == b[2] then return a[1] < b[1] end
+        return a[2] < b[2]
+    end)
+    local rows = {}
+    for index, task in ipairs(matches) do
+        rows[index] = task[2] .. (task[3] == "" and "" or " " .. task[3])
+    end
+    return table.concat(rows, "\n")
 end
 
 local function readWorkDays(rewards)
@@ -97,6 +131,7 @@ function new_work_calendar(translate)
     local runtime = self
     local startDay, displayedMonth, displayedStart
     local browsedMonth, selectedDate, editingDate
+    local displayedTodoDate, refreshTodo
 
     local function today()
         return runtime:local_datetime():sub(1, 8)
@@ -228,6 +263,7 @@ function new_work_calendar(translate)
     end
 
     function calendar:close_month_view()
+        displayedTodoDate = nil
         if not editingDate then return end
         commitEditor()
         showEditor(nil)
@@ -291,6 +327,20 @@ function new_work_calendar(translate)
         end
         if runtime:pressed("calendar-edit-time") then
             showEditor(editingDate == nil and selected or nil)
+        end
+        if displayedTodoDate ~= selected or refreshTodo or languageChanged then
+            local tasks = completedTodoText(runtime, selected)
+            runtime:ui_text("calendar-completed-tasks-label", calendarLabel("completedTasks", "Completed Tasks"))
+            runtime:ui_text("calendar-completed-tasks", tasks)
+            runtime:ui_visible("calendar-completions", tasks ~= "")
+            displayedTodoDate = selected
+        end
+        refreshTodo = false
+        for _, action in ipairs(todoActions) do
+            if runtime:pressed(action) then
+                refreshTodo = true
+                break
+            end
         end
         local label = selected:sub(1, 4) .. "-" .. selected:sub(5, 6) .. "-" .. selected:sub(7, 8)
         return label, math.min(86400, self:timeFor(selected))
