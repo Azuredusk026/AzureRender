@@ -234,7 +234,7 @@ function init()
                                             translate or function(value) return value end)
     end
     if new_work_calendar then
-        workCalendar = new_work_calendar()
+        workCalendar = new_work_calendar(translate)
         syncTimerAchievement()
         statsOpen = false
         self:ui_visible("timer-stats", true)
@@ -306,7 +306,7 @@ function update(dt)
         if statsOpen then
             self:ui_text("work-today", durationText(workCalendar:today()))
             self:ui_text("work-total", durationText(workCalendar:totalTime()))
-            local date, time = workCalendar:update_month_view()
+            local date, time = workCalendar:update_month_view(languageChanged or self:pressed("timer-stats"))
             self:ui_text("calendar-selected-date", date)
             self:ui_text("calendar-selected-time", durationText(time))
             local growth = workCalendar:progress()

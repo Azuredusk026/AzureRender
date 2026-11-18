@@ -32,8 +32,7 @@ from tools.npr_room.tutorial_camera_body import project as tutorial_project
 
 @contextmanager
 def entry(room, graph, program, models=None, camera_sound=None, camera_source=None, room_scripts=None, blackout=None,
-          additional_room=None, chromatic=None, screen_move=None, glitch=None):
-    tag = "capture-main-conditional"
+          additional_room=None, chromatic=None, screen_move=None, glitch=None, *, tag="capture-main-conditional"):
     root = room / "assets"
     names = {kind: tag + suffix for kind, suffix in (
         ("boot", "-boot.azurelevel"), ("bootstrap", "-boot.lua"), ("level", ".azurelevel"),
@@ -105,18 +104,27 @@ def entry(room, graph, program, models=None, camera_sound=None, camera_source=No
         root / names["graph"]: json.dumps(graph),
     }
     created = []
+    owned_metadata = []
     try:
         for alias, original in links.items():
             os.link(original, alias)
             created.append(alias)
+            sidecar = alias.with_name(alias.name + ".azmeta")
+            if not sidecar.exists():
+                owned_metadata.append(sidecar)
         for path, text in fixture.items():
             with path.open("x", encoding="utf-8") as output:
                 created.append(path)
                 output.write(text)
+            sidecar = path.with_name(path.name + ".azmeta")
+            if not sidecar.exists():
+                owned_metadata.append(sidecar)
         yield descriptor, paths["level"]
     finally:
         for path in reversed(created):
             path.unlink()
+        for sidecar in owned_metadata:
+            sidecar.unlink(missing_ok=True)
 
 
 def camera_observer(track):

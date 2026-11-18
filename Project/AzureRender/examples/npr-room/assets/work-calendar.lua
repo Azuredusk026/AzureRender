@@ -73,7 +73,7 @@ local function encodeWorkDays(data)
     return entries
 end
 
-function new_work_calendar()
+function new_work_calendar(translate)
     local rewards = work_reward_config
     local saved, _, progression, interrupted, completedTimer = readWorkDays(rewards)
     local pending = {}
@@ -159,7 +159,11 @@ function new_work_calendar()
         return math.min(86400, self:timeFor(today()))
     end
 
-    function calendar:update_month_view()
+    local function weekdayLabel(index)
+        return translate and calendar_labels and translate(calendar_labels.weekdays[index]) or weekdays[index]
+    end
+
+    function calendar:update_month_view(languageChanged)
         if startDay == nil then startDay = readFirstDay(runtime) end
         for weekday = 0, 6 do
             if runtime:pressed("calendar-first-" .. weekday) then
@@ -186,12 +190,17 @@ function new_work_calendar()
         year, month = monthIndex // 12, monthIndex % 12 + 1
         local offset = (firstWeekday(year, month) - startDay) % 7
         local days = monthLength(year, month)
-        if displayedMonth ~= monthIndex or displayedStart ~= startDay then
+        if displayedMonth ~= monthIndex or displayedStart ~= startDay or languageChanged then
             displayedMonth, displayedStart = monthIndex, startDay
             runtime:ui_text("calendar-month", string.format("%04d-%02d", year, month))
-            runtime:ui_text("calendar-first-day", weekdays[startDay + 1])
+            runtime:ui_text("calendar-first-day-label", translate and calendar_labels and translate(calendar_labels.firstDay)
+                or "Start day of the week")
+            runtime:ui_text("calendar-work-label", translate and calendar_labels and translate(calendar_labels.workTime)
+                or "Work Time")
+            runtime:ui_text("calendar-first-day", weekdayLabel(startDay + 1))
             for column = 1, 7 do
-                runtime:ui_text("calendar-weekday-" .. column, weekdays[(startDay + column - 1) % 7 + 1])
+                runtime:ui_text("calendar-first-" .. (column - 1), weekdayLabel(column))
+                runtime:ui_text("calendar-weekday-" .. column, weekdayLabel((startDay + column - 1) % 7 + 1))
             end
             for cell = 1, 42 do
                 local day = cell - offset

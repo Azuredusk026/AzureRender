@@ -1,6 +1,7 @@
 """Exercise the normal room through native Windows resize, minimize, and restart."""
 
 import argparse
+from contextlib import contextmanager
 import ctypes
 from ctypes import wintypes
 import hashlib
@@ -385,8 +386,8 @@ def replay(player, project, resources, output):
     return report
 
 
-def run_in_physical_pixels(player, project, resources, output, preferences=False, panel=False, system_menu=False,
-                           display_inventory=None, pacing=False):
+@contextmanager
+def physical_client_pixels():
     user = ctypes.WinDLL("user32", use_last_error=True)
     set_context = user.SetThreadDpiAwarenessContext
     set_context.argtypes = [ctypes.c_void_p]
@@ -396,12 +397,18 @@ def run_in_physical_pixels(player, project, resources, output, preferences=False
     if not previous:
         raise ctypes.WinError(ctypes.get_last_error())
     try:
+        yield
+    finally:
+        assert set_context(previous)
+
+
+def run_in_physical_pixels(player, project, resources, output, preferences=False, panel=False, system_menu=False,
+                           display_inventory=None, pacing=False):
+    with physical_client_pixels():
         if panel or system_menu:
             return settings_panel(player, project, resources, output, system_menu, display_inventory)
         verify = frame_pacing if pacing else startup_preferences if preferences else replay
         return verify(player, project, resources, output)
-    finally:
-        assert set_context(previous)
 
 
 if __name__ == "__main__":

@@ -10,7 +10,7 @@ body { width: 100%; height: 100%; margin: 0; color: white; font-family: LatoLati
 #timer-controls { display: block; margin-top: 8dp; font-size: 13dp; }
 #timer-controls button { display: inline-block; padding: 4dp 7dp; margin-right: 3dp; color: white; background-color: #34434f; }
 #timer-controls button:hover { background-color: #506472; }
-#work-stats { display: block; margin-top: 8dp; font-size: 13dp; }
+#work-stats { position: absolute; right: 100%; top: 0; margin-right: 8dp; width: 246dp; padding: 10dp; background-color: #19232c; font-size: 13dp; }
 #work-calendar { margin-top: 8dp; }
 #calendar-month { display: inline-block; width: 76dp; text-align: center; font-size: 15dp; }
 .calendar-row { display: flex; height: 18dp; }
@@ -49,11 +49,12 @@ body { width: 100%; height: 100%; margin: 0; color: white; font-family: LatoLati
 </div>
 <div id="work-stats" style="display: none;">Today <span id="work-today"></span> · Total <span id="work-total"></span>
 <span id="work-progression" style="display: none;"></span>
+<!-- work-calendar-start -->
 <div id="work-calendar">
 <div id="calendar-navigation">
-<button id="calendar-prev-month" data-action="calendar-prev-month">Previous</button>
+<button id="calendar-prev-month" data-action="calendar-prev-month">‹</button>
 <span id="calendar-month"></span>
-<button id="calendar-next-month" data-action="calendar-next-month">Next</button>
+<button id="calendar-next-month" data-action="calendar-next-month">›</button>
 </div>
 <div class="calendar-row"><span id="calendar-weekday-1"></span><span id="calendar-weekday-2"></span><span id="calendar-weekday-3"></span><span id="calendar-weekday-4"></span><span id="calendar-weekday-5"></span><span id="calendar-weekday-6"></span><span id="calendar-weekday-7"></span></div>
 <div class="calendar-row">
@@ -110,8 +111,8 @@ body { width: 100%; height: 100%; margin: 0; color: white; font-family: LatoLati
 <span><button id="calendar-date-41" data-action="calendar-day-41" style="display: none;"></button></span>
 <span><button id="calendar-date-42" data-action="calendar-day-42" style="display: none;"></button></span>
 </div>
-<div id="calendar-selected"><span id="calendar-selected-date"></span> · <span id="calendar-selected-time"></span></div>
-<div>Start of week <span id="calendar-first-day"></span></div>
+<div id="calendar-selected"><span id="calendar-selected-date"></span> · <span id="calendar-work-label"></span> <span id="calendar-selected-time"></span></div>
+<div><span id="calendar-first-day-label"></span> · <span id="calendar-first-day"></span></div>
 <div id="calendar-picker">
 <button id="calendar-first-0" data-action="calendar-first-0">Sun</button>
 <button id="calendar-first-1" data-action="calendar-first-1">Mon</button>
@@ -123,6 +124,7 @@ body { width: 100%; height: 100%; margin: 0; color: white; font-family: LatoLati
 </div>
 <span id="calendar-status"></span>
 </div>
+<!-- work-calendar-end -->
 </div>
 </div>
 <button id="notes-toggle" data-action="notes-toggle" style="display: none;">Notes</button>

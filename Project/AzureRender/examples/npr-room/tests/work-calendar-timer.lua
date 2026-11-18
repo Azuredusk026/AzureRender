@@ -129,3 +129,19 @@ assert(labels["calendar-month"] == "2025-01" and labels["calendar-date-4"] == "1
 wall = "29981201120000"
 step(0, "calendar-next-month")
 assert(labels["calendar-month"] == "2998-12")
+
+calendar_labels = {
+    firstDay = {"Start day of the week", "一周起始日"},
+    workTime = {"Work Time", "工作时间"},
+    weekdays = {{"Sun", "日"}, {"Mon", "一"}, {"Tue", "二"}, {"Wed", "三"}, {"Thu", "四"}, {"Fri", "五"}, {"Sat", "六"}},
+}
+local language = 1
+saved[weekSlot] = {1, 1}
+local localized = new_work_calendar(function(text) return text[language] end)
+localized:update_month_view()
+assert(labels["calendar-first-day-label"] == "Start day of the week")
+assert(labels["calendar-first-1"] == "Mon" and labels["calendar-weekday-1"] == "Mon")
+language = 2
+localized:update_month_view(true)
+assert(labels["calendar-first-day-label"] == "一周起始日" and labels["calendar-work-label"] == "工作时间")
+assert(labels["calendar-first-1"] == "一" and labels["calendar-weekday-1"] == "一")

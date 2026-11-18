@@ -89,7 +89,8 @@ def stage_timer_voice(room, output, catalog_path, source, cue_replay=False):
                            encoding="utf-8", newline="\n")
         scripts = [program_text(catalog, motions, cue_replay),
                    *((example / file).read_bytes() for file in ("timer-voice-selector.lua", "timer-voice-action.lua")),
-                   *localized_scripts(example, language["ui"], language["default"], voice, work, rewards)]
+                   *localized_scripts(example, language["ui"], language["default"], voice, work, rewards,
+                                      language.get("calendar"))]
         (assets / "pomodoro.lua").write_bytes(b"\n".join(scripts))
         receipt = {"schemaVersion": 1, "catalogSHA256": digest(catalog_path), "cueReplay": cue_replay,
                    "motions": motions, "selectedVoices": {

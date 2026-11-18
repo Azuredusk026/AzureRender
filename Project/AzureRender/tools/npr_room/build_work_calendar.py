@@ -62,19 +62,50 @@ def calendar_script(examples, rewards=None):
     return b"\n".join(parts)
 
 
+def calendar_actions():
+    return ("timer-stats", "calendar-prev-month", "calendar-next-month",
+            *(f"calendar-first-{weekday}" for weekday in range(7)),
+            *(f"calendar-day-{cell}" for cell in range(1, 43)))
+
+
+def integrate_calendar(project, document, program, examples, localization=""):
+    """Refresh the calendar in a room assembled with the work statistics panel."""
+    legacy_style = "#work-stats { display: block; margin-top: 8dp; font-size: 13dp; }"
+    progression = '<span id="work-progression" style="display: none;"></span>'
+    legacy_update = "            local growth = workCalendar:progress()"
+    legacy_init = "workCalendar = new_work_calendar()"
+    module_start = 'local workSlot = "work-calendar"'
+    module_end = "\n    return calendar\nend\n"
+    if ('id="work-calendar"' in document or "workCalendar:update_month_view(" in program
+            or any(document.count(anchor) != 1 for anchor in (legacy_style, progression))
+            or any(program.count(anchor) != 1 for anchor in (module_start, module_end, legacy_init, legacy_update))):
+        raise ValueError("Expected one assembled room with the original work statistics panel")
+    template = (examples / "timer.rml").read_text(encoding="utf-8")
+    styles = template[template.index("#work-stats"):template.index("#notes-toggle")]
+    body = template.split("<!-- work-calendar-start -->", 1)[1].split("<!-- work-calendar-end -->", 1)[0]
+    document = document.replace(legacy_style, styles.rstrip(), 1).replace(progression, progression + body, 1)
+    start = program.index(module_start)
+    end = program.index(module_end, start) + len(module_end)
+    module = (examples / "work-calendar.lua").read_text(encoding="utf-8")
+    program = program[:start] + localization + module + program[end:]
+    program = program.replace(legacy_init, "workCalendar = new_work_calendar(translate)", 1)
+    sample = (examples / "pomodoro.lua").read_text(encoding="utf-8")
+    update = sample[sample.index("            local date, time = workCalendar:update_month_view("):
+                    sample.index(legacy_update)]
+    program = program.replace(legacy_update, update + legacy_update, 1)
+    actions = project["runtime"]["input"]
+    for name in calendar_actions():
+        actions.setdefault(name, [])
+    return program, document
+
+
 def stage_calendar(room, output, source=None):
     examples = Path(__file__).resolve().parents[2] / "examples/npr-room/assets"
     descriptor = json.loads((room / "project.azureproject").read_bytes())
     inputs = descriptor["runtime"]["input"]
     if "timer-stats" in inputs:
         raise ValueError("Room already has the work calendar")
-    inputs["timer-stats"] = []
-    inputs["calendar-prev-month"] = []
-    inputs["calendar-next-month"] = []
-    for weekday in range(7):
-        inputs[f"calendar-first-{weekday}"] = []
-    for cell in range(1, 43):
-        inputs[f"calendar-day-{cell}"] = []
+    inputs.update({name: [] for name in calendar_actions()})
 
     def copy_asset(path, destination):
         return os.link(path, destination) if Path(path).suffix.lower() == ".glb" else shutil.copyfile(path, destination)

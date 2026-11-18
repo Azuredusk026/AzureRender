@@ -27,7 +27,7 @@ Recovery 的 `AllPlatformSettingData.FirstDayInWeek` 默认采用星期日。`Se
 
 房间统计面板以七列显示当月日期。每周起始日写入版本为 1 的 `calendar-first-day` 存档。写入成功后更新列表，写入失败时保留当前排列。重开读取已保存的选项，较新版本的存档保留原字节。工时统计以日期为键。
 
-Lua 测试覆盖七种起始日、闰年二月、跨年月、写入失败及重开。共享队列任务 2097 使用 RTX 4060 上的两个独立 Player，通过原生界面分别选择星期一和星期六，核对两次存档与退出释放结果。诊断关卡通过正式计时脚本和界面运行。完整房间的布局和语言按房间场景继续验收。
+Lua 测试覆盖七种起始日、闰年二月、跨年月、写入失败及重开。共享队列任务 2097 使用 RTX 4060 上的两个独立 Player，通过原生界面分别选择星期一和星期六，核对两次存档与退出释放结果。诊断关卡通过正式计时脚本和界面运行。
 
 本机 `work-calendar-first-day/calendar-first-day-replay.json` 的 SHA-256 为 `63c0685761850ab4d5e5f5e0f1fd8070f938b0c4cd38df3651f87f3e7dc66eab`，同目录保存回放脚本和退出日志。
 
@@ -39,10 +39,19 @@ Lua 测试覆盖七种起始日、闰年二月、跨年月、写入失败及重�
 
 任务 2098 通过原生 Player 界面从当天的 18 秒切换到上月末的 61 秒，再返回当天。两次翻页和日期选择均由界面按钮触发。回放后工时存档字节一致，退出时 GPU 缓冲和图像计数归零。本机 `work-calendar-history/calendar-history-native.json` 的 SHA-256 为 `3d2cf588da6d51cc88988c9080fb49db3f5ea5f4905d979fca2d42c41b15fdd2`。
 
+## 完整房间日历
+
+统计面板位于计时器左侧，待办面板位于计时器下方。星期列、起始日设置和日工时标题使用 Recovery 的本地化条目。切换房间语言时刷新日历文本，保留所选日期和工时。
+
+任务 2101 从启动关卡进入完整房间。两个独立 Player 分别以 1280×720 和 960×540 客户区运行。两次均在日历与待办同时打开时翻页、选择日期并新增待办，逐项核对七种语言的工时标题。关闭日历后切换语言，重开时显示所选语言。工时数据保持一致，两次退出均释放全部 GPU 缓冲和图像。
+
+本机 `work-calendar-full-room/room-calendar-replay.json` 的 SHA-256 为 `cc6191c9e69a0c50fab69624490f1abd614ba16ef0ce03e8462d8976effaac15`。同目录保存运行命令和校验日志。
+
 ## 复验
 
 ```powershell
 python -B -m tools.npr_room.build_work_calendar --room $todoRoom --source $unitySource --output $progressionRoom
 python -B tools/npr_room/test_pomodoro_runtime.py --lua $luaDll
 python -B tools/npr_room/test_work_calendar_player.py --player $player --project $progressionProject --resource-root $resources --output $replay --expect-progression
+python -B tools/npr_room/test_room_calendar_player.py --player $player --project $roomProject --resource-root $resources --inventory $storyInventory --output $calendarReplay
 ```

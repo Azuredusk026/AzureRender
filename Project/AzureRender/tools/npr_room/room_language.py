@@ -30,6 +30,9 @@ LOCALES = (
     ("Russian", "Ru", "Русский"),
 )
 FIELDS = tuple(field for _, field, _ in LOCALES)
+CALENDAR_WEEKDAYS = tuple("ui_calendar_" + day for day in
+                          ("sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"))
+CALENDAR_LABELS = {"firstDay": "ui_setting_general_firstday_title", "workTime": "ui_calendar_group_work_title"}
 SOURCE_FONTS = (
     ("ed1ce6b1b31e42f4a9a27b428b87f28c", "IBMPlexSansJP-Medium.otf", "Japanese"),
     ("3751989ca05e0454cbf35553ae20d6b2", "IBMPlexSansTC-Medium.otf", "Traditional Chinese"),
@@ -113,12 +116,26 @@ def language_panel(base, template, ids, faces):
     return base.replace("</style>", faces + style + "</style>", 1).replace("</body>", body + "</body>", 1)
 
 
-def localized_scripts(examples, strings, default, voice, choices, rewards):
+def calendar_strings(rows):
+    return ui_strings(rows, (*CALENDAR_WEEKDAYS, *CALENDAR_LABELS.values()))
+
+
+def calendar_config(strings):
+    if strings is None:
+        return ""
+    weekdays = ", ".join(localized_text_config(strings[key], FIELDS) for key in CALENDAR_WEEKDAYS)
+    labels = ", ".join(f"{label} = {localized_text_config(strings[key], FIELDS)}"
+                       for label, key in CALENDAR_LABELS.items())
+    return f"local calendar_labels = {{ weekdays = {{{weekdays}}}, {labels} }}\n"
+
+
+def localized_scripts(examples, strings, default, voice, choices, rewards, calendar=None):
     return [
         language_config(strings, default).encode("utf-8"),
         voice_config(voice["responses"], FIELDS).encode("utf-8"),
         choice_config(choices["episodes"], choices["parameters"], FIELDS).encode("utf-8"),
         *((examples / file).read_bytes() for file in ("room-language.lua", "room-voice.lua", "work-choice.lua")),
+        calendar_config(calendar).encode("utf-8"),
         calendar_script(examples, rewards),
     ]
 
@@ -128,7 +145,9 @@ def stage_languages(room, source, inventory, images, output, language):
     ids = read_locale_ids(enum)
     default = FIELDS.index(language) + 1
     story_hash = digest(inventory)
-    strings = ui_strings(json.loads(inventory.read_bytes())["localization"])
+    rows = json.loads(inventory.read_bytes())["localization"]
+    strings = ui_strings(rows)
+    calendar = calendar_strings(rows)
     voice = json.loads((room / "voice-receipt.json").read_bytes())
     choices = json.loads((room / "choice-receipt.json").read_bytes())
     if voice["storySHA256"] != story_hash or choices["storySHA256"] != story_hash:
@@ -142,10 +161,11 @@ def stage_languages(room, source, inventory, images, output, language):
         raise ValueError("The room already has a language selector")
     descriptor["runtime"]["input"].update(actions)
     examples = Path(__file__).resolve().parents[2] / "examples/npr-room/assets"
-    scripts = localized_scripts(examples, strings, default, voice, choices, rewards)
+    scripts = localized_scripts(examples, strings, default, voice, choices, rewards, calendar)
     receipt = {"schemaVersion": 1, "storySHA256": story_hash, "enumSHA256": digest(enum),
                "default": default, "languages": dict(zip(FIELDS, ids.values())),
-               "ui": strings, "idleResponses": len(voice["responses"]), "workConversations": len(choices["episodes"])}
+               "ui": strings, "calendar": calendar, "idleResponses": len(voice["responses"]),
+               "workConversations": len(choices["episodes"])}
     with tempfile.TemporaryDirectory(prefix="room-language-", dir=output.parent) as holder:
         project = Path(holder) / "project"
         assets = project / "assets"
