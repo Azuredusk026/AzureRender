@@ -38,6 +38,7 @@ P0 已锁定 Recovery Windows 产物及静态目录。
 [房间语言设置](../acceptance/npr-room/room-language.md)通过七种语言切换、本地存档重开及原语音续播。
 [房间二阶环境光](../acceptance/npr-room/windows-atmosphere.md#原版环境光探针)通过原版方向的双设备求值。
 匹配 Player 的完整房间画面等待受管构建配额。
+[完整程序参数序列](../acceptance/npr-room/windows-atmosphere.md#完整程序参数序列)取得夜晚、多云各十二帧颜色、深度及同帧运行状态。
 
 [联合场景热点纹理分配](../acceptance/nr/joint-texture-hot-placement.md)完成 1440p 同驱动逐像素比较与 1080p60 配对计时。候选 GPU P95 高于首轮参考，保留隔离结果。
 

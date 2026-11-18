@@ -208,6 +208,35 @@ python -B -m tools.npr_room.original_room_frames --frames $originalRoomFrames --
 python -B -m tools.npr_room.original_room_frames --frames $originalRenderFrames --require-render-state --output $renderStateVerification
 ```
 
+## 完整程序参数序列
+
+任务 2178 完成夜晚、多云各十二帧原版采集。
+每帧包含颜色、深度、姿态、灯光及完整程序全局字段。
+86 项直接采样与两个相机字段按原程序类型定位。
+相邻样本间隔四帧，每组跨度为 0.7333 秒。
+
+流式采集在同一渲染帧完成深度读回。
+发布协议核对颜色、深度及描述文件的完整摘要。
+数据载荷先发布，描述文件作为提交入口。
+发布确认控制下一份采样，模拟帧间隔保持固定。
+
+| 天气 | 颜色变化像素最大值 | 深度变化像素最大值 |
+| --- | ---: | ---: |
+| 夜晚 | 327,907 | 258,932 |
+| 多云 | 366,866 | 249,607 |
+
+两种天气的相机位置及旋转保持稳定。
+169,751,408 字节参照按逐帧发布完成归档。
+临时峰值预算为 16 MiB，门禁检查通过。
+132 项房间检查及全部来源摘要核验通过。
+
+发布夹具覆盖载荷损坏、部分移动和提交后的重试。
+317 个原程序文件及 37 个原存档文件摘要一致。
+本机目录为 `original-room-dynamics/complete-program-frames/`。
+报告摘要为 `eb3583c9cae0adba0c83e7e102e1d4e6196dfa397a0c395a2f2097c58953f3a1`。
+
+匹配 Player 的候选动态画面继续验收。
+
 ## 原版天气全局值
 
 天气参数诊断按夜晚、多云各采集三帧。

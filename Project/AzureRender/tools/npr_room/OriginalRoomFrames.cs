@@ -10,6 +10,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
+using System.Security.Cryptography;
 
 public static class ReferenceSkyDiagnostic
 {
@@ -226,6 +227,15 @@ public class CaptureProgramBindings
     public CapturedProgramGlobal[] globals;
 }
 
+[Serializable]
+public class CaptureFrameReady
+{
+    public int frame;
+    public string metadataSHA256;
+    public string colorSHA256;
+    public string depthSHA256;
+}
+
 public class CaptureFieldsResolver : DefaultContractResolver
 {
     protected override IList<JsonProperty> CreateProperties(Type type, MemberSerialization serialization)
@@ -319,6 +329,36 @@ public class RoomFrameCapture : MonoBehaviour
             value = binding.dimension == 1 ? new Vector4(Shader.GetGlobalFloat(binding.name), 0, 0, 0)
                                             : Shader.GetGlobalVector(binding.name)
         }).ToArray();
+    }
+
+    private bool WriteDepth(AsyncGPUReadbackRequest request, RoomFrameRecord record, string stem)
+    {
+        if (request.hasError)
+        {
+            readbackFailures++;
+            Log("Depth readback failed for " + stem);
+            return false;
+        }
+        try
+        {
+            var floats = request.GetData<float>().ToArray();
+            var bytes = new byte[floats.Length * sizeof(float)];
+            Buffer.BlockCopy(floats, 0, bytes, 0, bytes.Length);
+            File.WriteAllBytes(Path.Combine(output, record.depth), bytes);
+            return true;
+        }
+        catch (Exception error)
+        {
+            readbackFailures++;
+            Log("Depth write failed for " + stem + ": " + error.Message);
+            return false;
+        }
+    }
+
+    private static string FileFingerprint(string path)
+    {
+        using (var algorithm = SHA256.Create())
+            return BitConverter.ToString(algorithm.ComputeHash(File.ReadAllBytes(path))).Replace("-", "").ToLowerInvariant();
     }
 
     private void Log(string message)
@@ -629,6 +669,7 @@ public class RoomFrameCapture : MonoBehaviour
         var sampleCount = SampleCount();
         var programBindings = ProgramBindings();
         var metadataOnly = Environment.GetCommandLineArgs().Contains("-azure-frame-metadata-only");
+        var streamFrames = Environment.GetCommandLineArgs().Contains("-azure-frame-stream");
         foreach (var mode in new[] {"Night", "Cloudy"})
         {
             change.Invoke(windows, new[] {Enum.Parse(modeType, mode)});
@@ -706,21 +747,40 @@ public class RoomFrameCapture : MonoBehaviour
                 }
                 File.WriteAllText(Path.Combine(output, stem + ".json"), JsonConvert.SerializeObject(record, Formatting.Indented, new JsonSerializerSettings { ContractResolver = new CaptureFieldsResolver() }));
                 if (metadataOnly) continue;
+                if (streamFrames)
+                {
+                    var request = AsyncGPUReadback.Request(depthTexture, 0, TextureFormat.RFloat);
+                    request.WaitForCompletion();
+                    if (!WriteDepth(request, record, stem))
+                    {
+                        Application.Quit(5);
+                        yield break;
+                    }
+                    var ready = new CaptureFrameReady {
+                        frame = record.frame,
+                        metadataSHA256 = FileFingerprint(Path.Combine(output, stem + ".json")),
+                        colorSHA256 = FileFingerprint(Path.Combine(output, record.color)),
+                        depthSHA256 = FileFingerprint(Path.Combine(output, record.depth))
+                    };
+                    var marker = Path.Combine(output, stem + ".ready");
+                    File.WriteAllText(marker + ".tmp", JsonConvert.SerializeObject(ready));
+                    File.Move(marker + ".tmp", marker);
+                    var waiting = System.Diagnostics.Stopwatch.StartNew();
+                    while (File.Exists(marker))
+                    {
+                        if (waiting.ElapsedMilliseconds > 30000)
+                        {
+                            Log("Frame publication acknowledgement timed out for " + stem);
+                            Application.Quit(7);
+                            yield break;
+                        }
+                        System.Threading.Thread.Sleep(2);
+                    }
+                    continue;
+                }
                 outstanding++;
                 AsyncGPUReadback.Request(depthTexture, 0, TextureFormat.RFloat, request => {
-                    if (request.hasError)
-                    {
-                        readbackFailures++;
-                        Log("Depth readback failed for " + stem);
-                    }
-                    else
-                    {
-                        var data = request.GetData<float>();
-                        var floats = data.ToArray();
-                        var bytes = new byte[floats.Length * sizeof(float)];
-                        Buffer.BlockCopy(floats, 0, bytes, 0, bytes.Length);
-                        File.WriteAllBytes(Path.Combine(output, record.depth), bytes);
-                    }
+                    WriteDepth(request, record, stem);
                     outstanding--;
                 });
             }
