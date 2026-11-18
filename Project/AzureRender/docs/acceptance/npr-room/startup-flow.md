@@ -10,6 +10,16 @@
 Backspace 取消待处理请求，Enter 在取消或失败后重新准备房间。
 叠加场景、主数据、音频服务和账户入口按各自的功能验收项实现。
 
+## 五场景来源对账
+
+Recovery 中 `BootBehavior` 初始化 Addressables，叠加加载 `AssetLoad` 与 `Entry`。`SceneLoadHandle` 加载 `Transition` 并准备 `RoomScene`。房间进度达到 0.9 后，`EntryBehavior` 继续满足从入口初始化起算的两秒最低时长，执行 0.5 秒揭幕延迟并等待揭幕完成，最后显式激活房间。
+
+候选的五个关卡、控制节点、界面和脚本均可从挂载解析。候选的两秒门槛使用转场本地时钟，揭幕使用就绪后的固定延迟。计时起点与揭幕条件应在真实服务初始化对照中验证。
+
+`AssetLoadHolder` 的文件 ID 为 6，通过序列化引用装入 `ProjectLifetimeScope`、`VContainerSettings` 和 `AudioManagerSetting`。房间中的 `RoomLifetimeScope` 文件 ID 为 20056。这两个组件和所属对象均启用。引用列表记录原资源 GUID、文件 ID 和路径。Resources 备用路径的故障可达性逐项登记。
+
+本机对账文件 `startup-chain-audit/startup-chain.json` 两次生成一致，SHA-256 为 `7598623f767595379443d5078b7116f91640c5fa4e51d903ebaa8f3f70cc5aba`。原运行与候选运行范围见本页各回放记录。
+
 ## 桌面启动画面
 
 从原 `Boot` 的 `LoadingCanvas` 提取桌面布局和七张图像，使用 `anim_ui_loading` 的十条已绑定曲线。
@@ -84,4 +94,5 @@ python -B tools/npr_room/test_pomodoro_runtime.py --lua $luaDll
 python -B tools/npr_room/test_room_startup_player.py --player $player --project $roomProject --output $startupReplay --resource-root $releaseBuild
 python -B -m tools.npr_room.startup_splash --source $unitySource --catalog $assetCatalog --room $cityRoom --output $splashRoom
 python -B -m tools.npr_room.verify_splash_capture --source $unitySource --capture $splashFrames --report $splashReport
+python -B -m tools.npr_room.startup_chain_inventory --source $unitySource --inventory $referenceInventory --project $roomProject --output $startupChainReport
 ```
