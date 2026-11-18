@@ -73,6 +73,7 @@ public class RoomFrameRecord
     public CapturedLight[] lights;
     public CapturedRenderer[] renderers;
     public CapturedFloat[] weatherScalars;
+    public CapturedShaderValue[] weatherVectors;
     public CapturedEnvironment environment;
 }
 
@@ -256,6 +257,21 @@ public class RoomFrameCapture : MonoBehaviour
                 return Path.GetFullPath(arguments[index + 1]);
         }
         return Path.Combine(Root(), "closed-frames");
+    }
+
+    private static int SampleCount()
+    {
+        var arguments = Environment.GetCommandLineArgs();
+        for (var index = 0; index + 1 < arguments.Length; index++)
+        {
+            if (arguments[index] != "-azure-frame-samples") continue;
+            int count;
+            if (!int.TryParse(arguments[index + 1], NumberStyles.Integer, CultureInfo.InvariantCulture, out count)
+                || count < 2 || count > 12)
+                throw new ArgumentOutOfRangeException("-azure-frame-samples", "Expected a count from 2 to 12");
+            return count;
+        }
+        return 12;
     }
 
     private void Log(string message)
@@ -466,12 +482,20 @@ public class RoomFrameCapture : MonoBehaviour
             "CZY_CirrostratusMoveSpeed", "CZY_CirrostratusMultiplier", "CZY_CirrusMoveSpeed", "CZY_CirrusMultiplier",
             "CZY_ClippingThreshold", "CZY_CloudMoonFalloff", "CZY_CumulusCoverageMultiplier", "CZY_DetailAmount",
             "CZY_DetailScale", "CZY_FilterSaturation", "CZY_FilterValue", "CZY_FogColorStart1", "CZY_FogColorStart2",
-            "CZY_FogColorStart3", "CZY_FogColorStart4", "CZY_FogIntensity", "CZY_FogOffset", "CZY_FogSmoothness",
+            "CZY_FogColorStart3", "CZY_FogColorStart4", "CZY_FogDepthMultiplier", "CZY_FogIntensity", "CZY_FogOffset", "CZY_FogSmoothness",
             "CZY_LightFalloff", "CZY_LightFlareSquish", "CZY_LightIntensity", "CZY_MainCloudScale",
             "CZY_NimbusHeight", "CZY_NimbusMultiplier", "CZY_NimbusVariation", "CZY_SunFlareFalloff",
-            "CZY_VariationAmount", "CZY_VariationDistance", "CZY_VariationScale", "CZY_WindSpeed"
+            "CZY_VariationAmount", "CZY_VariationDistance", "CZY_VariationScale", "CZY_WindSpeed",
+            "_UnderwaterRenderingEnabled", "_FullySubmerged"
         };
         return names.Select(name => new CapturedFloat { name = name, value = Shader.GetGlobalFloat(name) }).ToArray();
+    }
+
+    private static CapturedShaderValue[] CaptureWeatherVectors()
+    {
+        return new[] {"_TimeParameters", "CZY_AltocumulusWindSpeed",
+                      "CZY_StormDirection", "CZY_VariationWindDirection", "CZY_MoonDirection", "_GlobalMipBias"}
+            .Select(name => new CapturedShaderValue { name = name, value = Shader.GetGlobalVector(name) }).ToArray();
     }
 
     private static float[] CaptureAmbientCoefficients()
@@ -560,7 +584,7 @@ public class RoomFrameCapture : MonoBehaviour
             change.Invoke(windows, new[] {Enum.Parse(modeType, mode)});
             for (var settling = 0; settling < 90; settling++) yield return null;
             Log("Sampling " + mode);
-            for (var sample = 0; sample < 12; sample++)
+            for (var sample = 0; sample < SampleCount(); sample++)
             {
                 for (var gap = 0; gap < 4; gap++) yield return new WaitForEndOfFrame();
                 if (renderedFrame != Time.frameCount || renderedCamera == null || depthTexture == null)
@@ -608,6 +632,7 @@ public class RoomFrameCapture : MonoBehaviour
                 record.lights = CaptureLights();
                 record.renderers = CaptureRenderers();
                 record.weatherScalars = CaptureWeatherScalars();
+                record.weatherVectors = CaptureWeatherVectors();
                 record.environment = new CapturedEnvironment {
                     colorSpace = QualitySettings.activeColorSpace.ToString(),
                     ambientMode = RenderSettings.ambientMode.ToString(), ambientLight = RenderSettings.ambientLight,

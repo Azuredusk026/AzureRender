@@ -8,6 +8,26 @@ import numpy as np
 from PIL import Image
 
 from tools.npr_room.reference_inventory import digest
+from tools.npr_room.windows_weather_probe import COMMON_SCALARS, CLOUD_SCALARS, FOG_SCALARS
+
+
+def verify_weather_globals(record):
+    scalar_rows = record.get("weatherScalars", [])
+    vector_rows = record.get("weatherVectors", [])
+    scalars = {row["name"]: row["value"] for row in scalar_rows}
+    vectors = {row["name"]: row["value"] for row in vector_rows}
+    required_scalars = set(COMMON_SCALARS) | set(CLOUD_SCALARS) | set(FOG_SCALARS) | {
+        "CZY_FogDepthMultiplier", "_UnderwaterRenderingEnabled", "_FullySubmerged"}
+    required_vectors = {"_TimeParameters", "CZY_AltocumulusWindSpeed",
+                        "CZY_StormDirection", "CZY_VariationWindDirection", "CZY_MoonDirection", "_GlobalMipBias"}
+    if (len(scalars) != len(scalar_rows) or len(vectors) != len(vector_rows)
+            or not required_scalars <= scalars.keys() or not required_vectors <= vectors.keys()):
+        raise ValueError("Original weather globals are incomplete or duplicated")
+    values = [*scalars.values(), *(value[axis] for value in vectors.values() for axis in "xyzw")]
+    if (not np.isfinite(values).all() or not np.isfinite(record["simulationTime"])
+            or not np.isclose(vectors["_TimeParameters"]["x"], record["simulationTime"], rtol=0, atol=1e-4)):
+        raise ValueError("Original weather globals are nonfinite or from another simulation frame")
+    return {"weatherScalars": len(scalars), "weatherVectors": len(vectors)}
 
 
 def verify_render_state(record, require_ambient_probe=False):
@@ -56,18 +76,24 @@ def verify_render_state(record, require_ambient_probe=False):
     return result
 
 
-def verify_frames(folder, require_render_state=False, require_ambient_probe=False):
+def verify_frames(folder, require_render_state=False, require_ambient_probe=False, *,
+                  samples_per_weather=12, require_weather_globals=False):
+    if type(samples_per_weather) is not int or not 2 <= samples_per_weather <= 12:
+        raise ValueError("Original diagnostic sample count must be an integer from 2 to 12")
     paths = sorted(folder.glob("*.json"))
-    expected = {f"{mode}-{index:02d}.json" for mode in ("Night", "Cloudy") for index in range(12)}
+    expected = {f"{mode}-{index:02d}.json" for mode in ("Night", "Cloudy") for index in range(samples_per_weather)}
     if {path.name for path in paths} != expected:
-        raise ValueError("Expected twelve original frames for each weather mode")
+        count = "twelve" if samples_per_weather == 12 else str(samples_per_weather)
+        raise ValueError(f"Expected {count} original frames for each weather mode")
     report = {"schemaVersion": 1, "modes": {}}
+    if samples_per_weather != 12:
+        report["diagnosticSampling"] = {"framesPerWeather": samples_per_weather, "intervalFrames": 4}
     for mode in ("Night", "Cloudy"):
         frames = []
         colors = []
         depths = []
         records = []
-        for index in range(12):
+        for index in range(samples_per_weather):
             stem = f"{mode}-{index:02d}"
             path = folder / (stem + ".json")
             record = json.loads(path.read_bytes())
@@ -104,8 +130,10 @@ def verify_frames(folder, require_render_state=False, require_ambient_probe=Fals
                            "depthRange": [float(depth.min()), float(depth.max())],
                            "transforms": len(transforms), "skins": len(record["skins"]),
                            "shaderValues": len(record["shaderValues"])})
-            if require_render_state or require_ambient_probe:
+            if require_render_state or require_ambient_probe or require_weather_globals:
                 frames[-1]["renderState"] = verify_render_state(record, require_ambient_probe)
+            if require_weather_globals:
+                frames[-1]["weatherGlobals"] = verify_weather_globals(record)
             colors.append(color)
             depths.append(depth)
             records.append(record)
@@ -137,8 +165,12 @@ def main():
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--require-render-state", action="store_true")
     parser.add_argument("--require-ambient-probe", action="store_true")
+    parser.add_argument("--require-weather-globals", action="store_true")
+    parser.add_argument("--samples-per-weather", type=int, default=12, choices=range(2, 13))
     args = parser.parse_args()
-    report = verify_frames(args.frames, args.require_render_state, args.require_ambient_probe)
+    report = verify_frames(args.frames, args.require_render_state, args.require_ambient_probe,
+                           samples_per_weather=args.samples_per_weather,
+                           require_weather_globals=args.require_weather_globals)
     with args.output.open("x", encoding="utf-8", newline="\n") as output:
         json.dump(report, output, indent=2, sort_keys=True)
         output.write("\n")

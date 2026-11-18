@@ -208,6 +208,30 @@ python -B -m tools.npr_room.original_room_frames --frames $originalRoomFrames --
 python -B -m tools.npr_room.original_room_frames --frames $originalRenderFrames --require-render-state --output $renderStateVerification
 ```
 
+## 原版天气全局值
+
+天气参数诊断按夜晚、多云各采集三帧。
+采样间隔为四帧，每组跨度为 0.1333 秒。
+每帧保存同帧颜色、深度、40 个标量和六个向量。
+记录包含雾深度倍率、月亮方向、风向及原渲染时钟。
+
+任务 2167 使用隔离的冻结版程序完成采集。
+云层与雾片元程序的全局输入名通过覆盖核对。
+渲染时钟与记录的模拟时间逐帧一致。
+122 项房间检查及目录移动校验通过。
+
+317 个原程序文件及 37 个原存档文件摘要一致。
+完整动态参照的每种天气十二帧报告通过字节核对。
+三帧诊断用于参数接入，完整画面按十二帧口径验收。
+实际消费与同帧画面继续验证。
+
+本机证据位于 `original-room-dynamics/weather-globals/`。
+报告 SHA-256 为 `281624c7b080f5a3f4bbc7f3409c03cd286264aa3fe61e7c4b41e1b78f3ee2d2`。
+
+```powershell
+python -B -m tools.npr_room.original_room_frames --frames $weatherDiagnosticFrames --samples-per-weather 3 --require-weather-globals --require-ambient-probe --output $weatherGlobalsVerification
+```
+
 ## 原版环境光探针
 
 任务 2147 在两种天气各采集 12 个同步帧。
