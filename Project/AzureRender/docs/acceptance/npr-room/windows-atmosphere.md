@@ -157,6 +157,35 @@ python -B -m tools.npr_room.windows_weather_source_identity --reference $referen
 python -B -m tools.npr_room.original_room_frames --frames $originalRoomFrames --output $frameVerification
 ```
 
+## 同帧灯光与材质状态
+
+任务 2144 对夜晚和多云各采集 12 帧。
+每帧包含五盏灯光，以及颜色图、深度和姿态。
+夜晚记录 263 个渲染器和 266 个材质状态。
+多云记录 264 个渲染器和 267 个材质状态。
+
+灯光记录颜色、强度、范围、锥角、阴影和裁剪掩码。
+材质记录实际着色器、绘制队列及选定的颜色和标量。
+纹理记录名称、缩放和偏移，并消费属性块中的覆盖值。
+环境记录线性色彩空间、三色环境光及反射强度。
+
+37 个天气标量按当前着色器全局值保存。
+主相机、物件与渲染器的实例身份在同帧关联。
+候选的灯光、材质与天气输入继续按这些状态配准。
+完整画面的误差门槛保持在对应验收项中。
+
+原版 317 个输入文件和 37 个存档输入的摘要均一致。
+两次校验以及目录移动后的校验得到相同报告。
+既有原版帧的校验报告也通过兼容复验。
+采集期间的存档隔离与深度设置沿用上述诊断规则。
+
+本机目录为 `original-room-dynamics/lighting-materials/`。
+报告 SHA-256 为 `d1aa9c820799ccdeac889b20a668834c9ae355365bf28f570292aea35b1ba8e3`。
+
+```powershell
+python -B -m tools.npr_room.original_room_frames --frames $originalRenderFrames --require-render-state --output $renderStateVerification
+```
+
 ## 同步姿态配准
 
 `original_room_registration` 按完整父子路径绑定角色。

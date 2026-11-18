@@ -10,7 +10,37 @@ from PIL import Image
 from tools.npr_room.reference_inventory import digest
 
 
-def verify_frames(folder):
+def verify_render_state(record):
+    required = ("lights", "renderers", "weatherScalars", "environment")
+    if any(not record.get(key) for key in required):
+        raise ValueError("Original render state is incomplete")
+    transforms = {node["id"] for node in record["transforms"]}
+    values = [record["environment"][key] for key in ("ambientIntensity", "reflectionIntensity")]
+    materials = 0
+    for kind in ("lights", "renderers"):
+        rows = record[kind]
+        if len({row["id"] for row in rows}) != len(rows) or any(row["transformId"] not in transforms for row in rows):
+            raise ValueError("Original light or renderer transform is unbound")
+        for row in rows:
+            if kind == "lights":
+                values.extend([row["intensity"], *row["color"].values()])
+                if row["intensity"] < 0:
+                    raise ValueError("Original light intensity is negative")
+            else:
+                for material in row["materials"]:
+                    if not material["shader"]:
+                        raise ValueError("Original renderer has an unresolved shader")
+                    values.extend(item["value"] for item in material["floats"])
+                    values.extend(component for item in material["colors"] for component in item["value"].values())
+                    materials += 1
+    values.extend(item["value"] for item in record["weatherScalars"])
+    if not np.isfinite(values).all():
+        raise ValueError("Original render state has nonfinite values")
+    return {"lights": len(record["lights"]), "renderers": len(record["renderers"]),
+            "materials": materials, "weatherScalars": len(record["weatherScalars"])}
+
+
+def verify_frames(folder, require_render_state=False):
     paths = sorted(folder.glob("*.json"))
     expected = {f"{mode}-{index:02d}.json" for mode in ("Night", "Cloudy") for index in range(12)}
     if {path.name for path in paths} != expected:
@@ -58,6 +88,8 @@ def verify_frames(folder):
                            "depthRange": [float(depth.min()), float(depth.max())],
                            "transforms": len(transforms), "skins": len(record["skins"]),
                            "shaderValues": len(record["shaderValues"])})
+            if require_render_state:
+                frames[-1]["renderState"] = verify_render_state(record)
             colors.append(color)
             depths.append(depth)
             records.append(record)
@@ -87,8 +119,9 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--frames", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--require-render-state", action="store_true")
     args = parser.parse_args()
-    report = verify_frames(args.frames)
+    report = verify_frames(args.frames, args.require_render_state)
     with args.output.open("x", encoding="utf-8", newline="\n") as output:
         json.dump(report, output, indent=2, sort_keys=True)
         output.write("\n")

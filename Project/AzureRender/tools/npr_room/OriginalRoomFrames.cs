@@ -70,6 +70,100 @@ public class RoomFrameRecord
     public CapturedTransform[] transforms;
     public CapturedSkin[] skins;
     public string[] activeObjects;
+    public CapturedLight[] lights;
+    public CapturedRenderer[] renderers;
+    public CapturedFloat[] weatherScalars;
+    public CapturedEnvironment environment;
+}
+
+[Serializable]
+public class CapturedFloat
+{
+    public string name;
+    public float value;
+    public bool propertyBlock;
+}
+
+[Serializable]
+public class CapturedColor
+{
+    public string name;
+    public Color value;
+    public bool propertyBlock;
+}
+
+[Serializable]
+public class CapturedTexture
+{
+    public string name;
+    public string texture;
+    public Vector2 scale;
+    public Vector2 offset;
+}
+
+[Serializable]
+public class CapturedMaterial
+{
+    public int slot;
+    public string name;
+    public string shader;
+    public int renderQueue;
+    public CapturedFloat[] floats;
+    public CapturedColor[] colors;
+    public CapturedTexture[] textures;
+}
+
+[Serializable]
+public class CapturedRenderer
+{
+    public string path;
+    public int id;
+    public int transformId;
+    public string kind;
+    public string mesh;
+    public bool enabled;
+    public bool visible;
+    public bool receiveShadows;
+    public string shadowCasting;
+    public CapturedMaterial[] materials;
+    public int materialSlotCount;
+}
+
+[Serializable]
+public class CapturedLight
+{
+    public string path;
+    public int id;
+    public int transformId;
+    public bool enabled;
+    public string kind;
+    public Color color;
+    public float intensity;
+    public float range;
+    public float spotAngle;
+    public float innerSpotAngle;
+    public float bounceIntensity;
+    public bool useColorTemperature;
+    public float colorTemperature;
+    public string shadows;
+    public float shadowStrength;
+    public int cullingMask;
+}
+
+[Serializable]
+public class CapturedEnvironment
+{
+    public string colorSpace;
+    public string ambientMode;
+    public Color ambientLight;
+    public Color ambientSky;
+    public Color ambientEquator;
+    public Color ambientGround;
+    public float ambientIntensity;
+    public float reflectionIntensity;
+    public bool fog;
+    public Color fogColor;
+    public float fogDensity;
 }
 
 
@@ -257,6 +351,118 @@ public class RoomFrameCapture : MonoBehaviour
         return result.ToArray();
     }
 
+    private static readonly string[] MaterialFloats = {
+        "_Cull", "_ZWrite", "_ZTest", "_SrcBlend", "_DstBlend", "_UseReflection",
+        "_Smoothness", "_Metallic", "_AsUnlit", "_LightMinLimit", "_LightMaxLimit",
+        "_MonochromeLighting", "_MainLightStrength", "_UseShadow", "_ShadowStrength",
+        "_UseMain2ndTex", "_UseMain3rdTex", "_UseEmission", "_UseEmission2nd",
+        "_EmissionBlend", "_Emission2ndBlend", "_UseRim", "_UseMatCap", "_UseMatCap2nd", "_Invisible"
+    };
+
+    private static readonly string[] MaterialColors = {
+        "_Color", "_BaseColor", "_EmissionColor", "_Emission2ndColor", "_ReflectionColor",
+        "_ShadowColor", "_Shadow2ndColor", "_Shadow3rdColor", "_OutlineColor"
+    };
+
+    private static readonly string[] MaterialTextures = {
+        "_MainTex", "_BaseMap", "_Main2ndTex", "_Main3rdTex", "_EmissionMap", "_Emission2ndMap"
+    };
+
+    private static CapturedMaterial CaptureMaterial(Material material, MaterialPropertyBlock block, int slot)
+    {
+        var floats = new List<CapturedFloat>();
+        foreach (var name in MaterialFloats)
+        {
+            if (!material.HasProperty(name)) continue;
+            var id = Shader.PropertyToID(name);
+            var overridden = block.HasProperty(id);
+            floats.Add(new CapturedFloat { name = name, propertyBlock = overridden,
+                value = overridden ? block.GetFloat(id) : material.GetFloat(id) });
+        }
+        var colors = new List<CapturedColor>();
+        foreach (var name in MaterialColors)
+        {
+            if (!material.HasProperty(name)) continue;
+            var id = Shader.PropertyToID(name);
+            var overridden = block.HasProperty(id);
+            colors.Add(new CapturedColor { name = name, propertyBlock = overridden,
+                value = overridden ? block.GetColor(id) : material.GetColor(id) });
+        }
+        var textures = new List<CapturedTexture>();
+        foreach (var name in MaterialTextures)
+        {
+            if (!material.HasProperty(name)) continue;
+            var id = Shader.PropertyToID(name);
+            var texture = block.HasProperty(id) ? block.GetTexture(id) : material.GetTexture(id);
+            var transformId = Shader.PropertyToID(name + "_ST");
+            var overridden = block.HasProperty(transformId);
+            var transform = block.GetVector(transformId);
+            textures.Add(new CapturedTexture { name = name, texture = texture == null ? "" : texture.name,
+                scale = overridden ? new Vector2(transform.x, transform.y) : material.GetTextureScale(name),
+                offset = overridden ? new Vector2(transform.z, transform.w) : material.GetTextureOffset(name) });
+        }
+        return new CapturedMaterial { slot = slot, name = material.name, shader = material.shader.name,
+            renderQueue = material.renderQueue, floats = floats.ToArray(), colors = colors.ToArray(),
+            textures = textures.ToArray() };
+    }
+
+    private static CapturedRenderer[] CaptureRenderers()
+    {
+        var records = new List<CapturedRenderer>();
+        foreach (var renderer in UnityEngine.Object.FindObjectsOfType<Renderer>())
+        {
+            var whole = new MaterialPropertyBlock();
+            renderer.GetPropertyBlock(whole);
+            var materials = new List<CapturedMaterial>();
+            var source = renderer.sharedMaterials;
+            for (var index = 0; index < source.Length; index++)
+            {
+                if (source[index] == null) continue;
+                var local = new MaterialPropertyBlock();
+                renderer.GetPropertyBlock(local, index);
+                materials.Add(CaptureMaterial(source[index], local.isEmpty ? whole : local, index));
+            }
+            var skin = renderer as SkinnedMeshRenderer;
+            var filter = renderer.GetComponent<MeshFilter>();
+            var mesh = skin != null ? skin.sharedMesh : filter == null ? null : filter.sharedMesh;
+            records.Add(new CapturedRenderer { path = ObjectPath(renderer.transform), id = renderer.GetInstanceID(),
+                transformId = renderer.transform.GetInstanceID(), kind = renderer.GetType().Name,
+                mesh = mesh == null ? "" : mesh.name, enabled = renderer.enabled, visible = renderer.isVisible,
+                receiveShadows = renderer.receiveShadows, shadowCasting = renderer.shadowCastingMode.ToString(),
+                materials = materials.ToArray(), materialSlotCount = source.Length });
+        }
+        records.Sort((a, b) => a.id.CompareTo(b.id));
+        return records.ToArray();
+    }
+
+    private static CapturedLight[] CaptureLights()
+    {
+        return UnityEngine.Object.FindObjectsOfType<Light>().OrderBy(light => light.GetInstanceID())
+            .Select(light => new CapturedLight { path = ObjectPath(light.transform), id = light.GetInstanceID(),
+                transformId = light.transform.GetInstanceID(), enabled = light.enabled, kind = light.type.ToString(),
+                color = light.color, intensity = light.intensity, range = light.range,
+                spotAngle = light.spotAngle, innerSpotAngle = light.innerSpotAngle,
+                bounceIntensity = light.bounceIntensity, useColorTemperature = light.useColorTemperature,
+                colorTemperature = light.colorTemperature, shadows = light.shadows.ToString(),
+                shadowStrength = light.shadowStrength, cullingMask = light.cullingMask }).ToArray();
+    }
+
+    private static CapturedFloat[] CaptureWeatherScalars()
+    {
+        var names = new[] {
+            "CZY_AltocumulusMultiplier", "CZY_AltocumulusScale", "CZY_BorderEffect", "CZY_BorderHeight",
+            "CZY_BorderVariation", "CZY_ChemtrailsMoveSpeed", "CZY_ChemtrailsMultiplier",
+            "CZY_CirrostratusMoveSpeed", "CZY_CirrostratusMultiplier", "CZY_CirrusMoveSpeed", "CZY_CirrusMultiplier",
+            "CZY_ClippingThreshold", "CZY_CloudMoonFalloff", "CZY_CumulusCoverageMultiplier", "CZY_DetailAmount",
+            "CZY_DetailScale", "CZY_FilterSaturation", "CZY_FilterValue", "CZY_FogColorStart1", "CZY_FogColorStart2",
+            "CZY_FogColorStart3", "CZY_FogColorStart4", "CZY_FogIntensity", "CZY_FogOffset", "CZY_FogSmoothness",
+            "CZY_LightFalloff", "CZY_LightFlareSquish", "CZY_LightIntensity", "CZY_MainCloudScale",
+            "CZY_NimbusHeight", "CZY_NimbusMultiplier", "CZY_NimbusVariation", "CZY_SunFlareFalloff",
+            "CZY_VariationAmount", "CZY_VariationDistance", "CZY_VariationScale", "CZY_WindSpeed"
+        };
+        return names.Select(name => new CapturedFloat { name = name, value = Shader.GetGlobalFloat(name) }).ToArray();
+    }
+
     private IEnumerator Start()
     {
         output = OutputPath();
@@ -364,6 +570,17 @@ public class RoomFrameCapture : MonoBehaviour
                 record.shaderValues = CaptureShaderValues(sphere);
                 record.transforms = CaptureTransforms();
                 record.skins = CaptureSkins();
+                record.lights = CaptureLights();
+                record.renderers = CaptureRenderers();
+                record.weatherScalars = CaptureWeatherScalars();
+                record.environment = new CapturedEnvironment {
+                    colorSpace = QualitySettings.activeColorSpace.ToString(),
+                    ambientMode = RenderSettings.ambientMode.ToString(), ambientLight = RenderSettings.ambientLight,
+                    ambientSky = RenderSettings.ambientSkyColor, ambientEquator = RenderSettings.ambientEquatorColor,
+                    ambientGround = RenderSettings.ambientGroundColor, ambientIntensity = RenderSettings.ambientIntensity,
+                    reflectionIntensity = RenderSettings.reflectionIntensity, fog = RenderSettings.fog,
+                    fogColor = RenderSettings.fogColor, fogDensity = RenderSettings.fogDensity
+                };
 
                 var capture = ScreenCapture.CaptureScreenshotAsTexture();
                 File.WriteAllBytes(Path.Combine(output, record.color), capture.EncodeToPNG());
