@@ -38,7 +38,7 @@
 | 工作项 | 参考入口 | 实施、依赖和交付 | 验收与状态 |
 | --- | --- | --- | --- |
 | 4.1 角色与物件时序 | [角色资产](../acceptance/npr-room/character-assets.md)、[身体动作](../acceptance/npr-room/opening-body.md)、[桌面布置](../acceptance/npr-room/opening-desk.md) | 对账原控制器五图层、状态、转场、遮罩、视线、表情、语音和道具联动。按已实测动作的输入格式交付 Pose、轨迹及中断事件 | 姿态与原采样对齐；椅子角误差 ≤0.1°、位置误差 ≤0.0005 单位。教学与第一章有部分实测，后续状态待验 |
-| 4.2 窗景和天气 | [窗景目录](../acceptance/npr-room/window-references.md)、[窗景大气](../acceptance/npr-room/windows-atmosphere.md) | 从 29 个来源逐组接入选择、天气时间、灯光、云层、雾与粒子。固定镜头、曝光、原版角色和道具状态，交付逐组画面与动态记录 | 同步帧成组比对、轨迹和事件通过；严格配准静态区域 SSIM ≥0.95、关键区域亮度中位误差 ≤10%。夜晚和多云固定镜头已实测，完整原版同步序列待采 |
+| 4.2 窗景和天气 | [窗景目录](../acceptance/npr-room/window-references.md)、[窗景大气](../acceptance/npr-room/windows-atmosphere.md) | 从 29 个来源逐组接入选择、天气时间、灯光、云层、雾与粒子。固定镜头、曝光、原版角色和道具状态，交付逐组画面与动态记录 | 同步帧成组比对、轨迹和事件通过；严格配准静态区域 SSIM ≥0.95、关键区域亮度中位误差 ≤10%。夜晚和多云已有完整原版同步序列，候选配准待验 |
 | 4.3 材质和后处理 | [房间材质](../acceptance/npr-room/room-base-surfaces.md)、[开场效果](../acceptance/npr-room/opening-effects.md) | 对账色带、皮肤、头发、轮廓、阴影、透明、粒子、后处理与界面顺序。以原着色器绑定和受控输入复验 Vulkan，交付逐通道及整帧证据 | RTX 4060 与 Intel 核显覆盖受影响场景；冻结帧按项目门禁，静态与动态沿用 4.2。开场特效已有硬件及房间局部实测 |
 
 ## 五、独立发布与全量验收
@@ -71,3 +71,4 @@
 - 2.4 的单日日记通过多行文字、日期切换、退出提交、重开及较新格式保护。 [单日日记](../acceptance/npr-room/work-calendar.md#单日日记)
 - 2.4 的习惯面板通过星期规则、暂停恢复、完成撤销、排序、确认删除及重开，日历保留完成历史。 [习惯与日历记录](../acceptance/npr-room/work-calendar.md#习惯与日历记录)
 - 2.4 与 2.5 的共同候选已通过三档分辨率、七语界面及移动目录后的重开，包含日历、日记、习惯和音效偏好。 [完整房间整合](../acceptance/npr-room/work-calendar.md#完整房间整合)
+- 4.2 已采集夜晚和多云各 12 帧原版房间画面、同帧深度及运行状态，输入摘要与目录移动校验通过。候选按相同角色和道具状态继续配准。 [原版同步帧](../acceptance/npr-room/windows-atmosphere.md#原版房间同步帧)

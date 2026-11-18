@@ -1,0 +1,98 @@
+"""Verify paired original Windows room colors, depth and runtime state."""
+
+import argparse
+import json
+from pathlib import Path
+
+import numpy as np
+from PIL import Image
+
+from tools.npr_room.reference_inventory import digest
+
+
+def verify_frames(folder):
+    paths = sorted(folder.glob("*.json"))
+    expected = {f"{mode}-{index:02d}.json" for mode in ("Night", "Cloudy") for index in range(12)}
+    if {path.name for path in paths} != expected:
+        raise ValueError("Expected twelve original frames for each weather mode")
+    report = {"schemaVersion": 1, "modes": {}}
+    for mode in ("Night", "Cloudy"):
+        frames = []
+        colors = []
+        depths = []
+        records = []
+        for index in range(12):
+            stem = f"{mode}-{index:02d}"
+            path = folder / (stem + ".json")
+            record = json.loads(path.read_bytes())
+            if (record["weather"], record["index"], record["color"], record["depth"]) != (
+                    mode, index, stem + ".png", stem + "-depth.f32"):
+                raise ValueError(f"Frame identity differs: {stem}")
+            width, height = record["width"], record["height"]
+            if (width, height) != (1280, 720) or record["depthGraphicsFormat"] != "R32_SFloat":
+                raise ValueError(f"Unexpected source viewport or depth format: {stem}")
+            depth_path = folder / record["depth"]
+            if depth_path.stat().st_size != width * height * 4:
+                raise ValueError(f"Depth buffer size differs: {stem}")
+            depth = np.fromfile(depth_path, dtype="<f4").reshape(height, width)
+            if not np.isfinite(depth).all() or depth.min() < 0 or depth.max() > 1 or np.unique(depth).size < 100:
+                raise ValueError(f"Depth does not contain a finite geometry buffer: {stem}")
+            with Image.open(folder / record["color"]) as image:
+                if image.size != (width, height):
+                    raise ValueError(f"Color size differs from its paired depth: {stem}")
+                color = np.array(image.convert("RGB"))
+            transforms = record["transforms"]
+            identities = {node["id"] for node in transforms}
+            parents = {node["parentId"] for node in transforms} - {0}
+            if len(identities) != len(transforms) or not parents <= identities or not record["skins"]:
+                raise ValueError(f"Runtime transform and skin state is incomplete: {stem}")
+            pose = np.array([[*node["position"].values(), *node["rotation"].values(), *node["scale"].values()]
+                             for node in transforms])
+            if not np.isfinite(pose).all() or not record["shaderValues"]:
+                raise ValueError(f"Runtime pose or weather values are incomplete: {stem}")
+            if not 0 < record["near"] < record["far"] or not record["camera"]:
+                raise ValueError(f"Missing camera projection: {stem}")
+            frames.append({"metadata": path.name, "metadataSHA256": digest(path),
+                           "colorSHA256": digest(folder / record["color"]), "depthSHA256": digest(depth_path),
+                           "frame": record["frame"], "simulationTime": record["simulationTime"],
+                           "depthRange": [float(depth.min()), float(depth.max())],
+                           "transforms": len(transforms), "skins": len(record["skins"]),
+                           "shaderValues": len(record["shaderValues"])})
+            colors.append(color)
+            depths.append(depth)
+            records.append(record)
+        numbers = np.array([row["frame"] for row in frames])
+        timestamps = np.array([row["simulationTime"] for row in frames])
+        if not np.all(np.diff(numbers) == 4) or not np.allclose(np.diff(timestamps), 4 / 60, atol=0.00001):
+            raise ValueError(f"Source frame interval differs: {mode}")
+        changed = [int(np.count_nonzero(np.any(color != colors[0], axis=2))) for color in colors[1:]]
+        depth_changed = [int(np.count_nonzero(depth != depths[0])) for depth in depths[1:]]
+        if not max(changed) or not max(depth_changed):
+            raise ValueError(f"The room sequence has no observed color or depth dynamics: {mode}")
+        first = records[0]
+        report["modes"][mode] = {
+            "frames": frames, "intervalSeconds": 4 / 60, "colorChangesFromFirst": changed,
+            "depthChangesFromFirst": depth_changed, "firstWeatherClock": [
+                first["clockHours"], first["clockMinutes"], first["clockSeconds"], first["clockMilliseconds"]],
+            "firstCamera": {"position": first["position"], "rotation": first["rotation"],
+                            "projection": first["projection"], "worldToCamera": first["worldToCamera"]},
+            "cameraPositionStable": all(row["position"] == first["position"] for row in records),
+            "cameraRotationStable": all(row["rotation"] == first["rotation"] for row in records),
+            "atmosphereProfiles": sorted({row["atmosphereProfile"] for row in records}),
+        }
+    return report
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--frames", type=Path, required=True)
+    parser.add_argument("--output", type=Path, required=True)
+    args = parser.parse_args()
+    report = verify_frames(args.frames)
+    with args.output.open("x", encoding="utf-8", newline="\n") as output:
+        json.dump(report, output, indent=2, sort_keys=True)
+        output.write("\n")
+
+
+if __name__ == "__main__":
+    main()

@@ -34,6 +34,7 @@
 [单日工时修订](work-calendar.md#单日工时修订)、[单日完成任务](work-calendar.md#单日完成任务)、[单日日记](work-calendar.md#单日日记)与[习惯记录](work-calendar.md#习惯与日历记录)分别登记日期输入、待办联动、持久化及对应的 Player 回放范围。
 [安装版天气身份](windows-atmosphere.md#本机安装版参照)登记 1.18.1 的五个着色器对象与 1.17.3 冻结参照的对应关系。
 [完整房间整合](work-calendar.md#完整房间整合)登记三档分辨率和七语界面的日历、日记、习惯与音效共同存档。
+[原版同步帧](windows-atmosphere.md#原版房间同步帧)登记夜晚、多云的画面、同帧深度、天气与角色状态。
 
 ## 复验
 
