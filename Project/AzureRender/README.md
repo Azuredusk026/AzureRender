@@ -11,6 +11,7 @@
 [大气程序全局字段](docs/acceptance/npr-room/windows-atmosphere.md#大气程序全局字段)登记五个原程序的类型绑定与元数据采集。
 [原版天空参数消费](docs/acceptance/npr-room/windows-atmosphere.md#原版天空参数消费)记录夜晚、多云的重复采样与 HDR 资产。
 [完整程序参数序列](docs/acceptance/npr-room/windows-atmosphere.md#完整程序参数序列)登记逐帧发布的二十四帧原版参照。
+[引用模型姿态文件](docs/acceptance/npr-room/windows-atmosphere.md#引用模型姿态文件)登记七部件的外部缓冲配准和原生画面对照。
 [房间计时回放](docs/acceptance/npr-room/room-probe.md)记录原音效、计时输入和本地存档。
 [房间曲库](docs/acceptance/npr-room/music-playlist.md)与[环境声](docs/acceptance/npr-room/ambient-sound.md)记录原资产、播放控制和独立 Player 恢复。
 [开场书本布置](docs/acceptance/npr-room/opening-book-layout.md)记录房间道具、剧情临时状态和读档。

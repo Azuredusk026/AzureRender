@@ -117,6 +117,23 @@ class RegistrationEntryTests(unittest.TestCase):
         with self.assertRaises(FileExistsError):
             registration.stage(self.room, self.frame, self.output)
 
+    def test_referenced_models_bind_relative_wrapper_and_preserve_base(self):
+        level_path = self.assets / "room.azurelevel"
+        level_path.write_text(json.dumps({"nodes": [], "resources": [
+            {"id": "heroine-Face", "asset": "assets:/heroine/Face.glb"}]}), encoding="utf-8")
+        self.original[level_path.relative_to(self.room)] = level_path.read_bytes()
+        receipt = registration.stage(self.room, self.frame, self.output, reference_models=True)
+        wrapper = self.output / "assets/heroine/Face.gltf"
+        model = json.loads(wrapper.read_bytes())
+        self.assertEqual(model["buffers"][0]["uri"], "Face.glb")
+        self.assertEqual(model["nodes"][0]["translation"], [1, 2, -3])
+        self.assertEqual((self.output / "assets/heroine/Face.glb").read_bytes(), self.model.read_bytes())
+        level = json.loads((self.output / "assets/room.azurelevel").read_bytes())
+        self.assertEqual(level["resources"][0]["asset"], "assets:/heroine/Face.gltf")
+        self.assertFalse(json.loads(wrapper.with_suffix(".gltf.azmeta").read_bytes())["settings"]["retainSourceSnapshot"])
+        self.assertEqual(receipt["parts"]["Face"]["storage"], "referenced-glb")
+        self.assert_inputs_preserved()
+
     def test_explicit_original_project_reaches_source_adapters(self):
         source = self.root / "unity"
         scene = source / registration.ROOM_SCENE
@@ -131,6 +148,14 @@ class RegistrationEntryTests(unittest.TestCase):
         self.assertEqual(lens.call_args.args[2], source)
         self.assertEqual(receipt["activation"]["matched"], 1)
         self.assertEqual(receipt["transparency"]["installed"], 1)
+        self.assert_inputs_preserved()
+
+    def test_referenced_model_collision_keeps_inputs_and_output_unpublished(self):
+        (self.assets / "heroine/Face.gltf").write_text("existing asset", encoding="utf-8")
+        self.original[Path("assets/heroine/Face.gltf")] = b"existing asset"
+        with self.assertRaises(FileExistsError):
+            registration.stage(self.room, self.frame, self.output, reference_models=True)
+        self.assertFalse(self.output.exists())
         self.assert_inputs_preserved()
 
     def test_failed_staging_keeps_inputs_and_output_unpublished(self):

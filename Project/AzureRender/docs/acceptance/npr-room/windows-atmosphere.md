@@ -237,6 +237,25 @@ python -B -m tools.npr_room.original_room_frames --frames $originalRenderFrames 
 
 匹配 Player 的候选动态画面继续验收。
 
+## 引用模型姿态文件
+
+房间配准入口支持 `--reference-models`。
+七份相邻 glTF 文件复用原始 GLB 的缓冲载荷。
+姿态写入描述文件，源模型按完整摘要核对。
+引用文件名采用 URI 安全字符，相对路径支持目录移动。
+
+任务 2179 核验现有 Player 的正常房间加载。
+605,719 字节描述文件引用 15,534,520 字节模型。
+两组各两帧的 1280×720 画面逐像素一致。
+Vulkan 校验错误为零，退出后图像及缓冲均释放。
+
+138 项房间检查及七部件命令行配准通过。
+夹具覆盖越界视图、外部依赖、截断及目标冲突。
+本机目录为 `original-room-dynamics/referenced-models/`。
+报告摘要为 `47f7b00e77df92db8a43a6e58bf8203ad4feafd6e9d1c0690558c2a919e23a84`。
+
+角色逐帧动画、同帧大气合成及整帧画质继续验收。
+
 ## 原版天气全局值
 
 天气参数诊断按夜晚、多云各采集三帧。

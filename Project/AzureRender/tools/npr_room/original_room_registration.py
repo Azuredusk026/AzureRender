@@ -7,6 +7,7 @@ import os
 from pathlib import Path
 import shutil
 import tempfile
+from uuid import NAMESPACE_URL, uuid5
 
 from tools.build_face_sdf import parse_glb, write_glb
 from tools.npr_room.catalog_storage import publish_directory
@@ -22,6 +23,7 @@ from tools.npr_room.build_city_window import CITY_RESOURCE
 from tools.npr_room.room_transparent_surfaces import install_lens
 from tools.npr_room.original_room_lights import apply_captured_lights
 from tools.npr_room.original_ambient_probe import install as install_ambient_probe
+from tools.npr_room.glb_reference import reference_document
 
 
 def pose_rotation(value):
@@ -119,7 +121,7 @@ def apply_level_pose(level, record):
     return {"matched": sorted(matched), "unmatched": sorted(missing)}
 
 
-def stage(room, frame, output, source=None, *, ambient_probe=False):
+def stage(room, frame, output, source=None, *, ambient_probe=False, reference_models=False):
     if output.exists():
         raise FileExistsError(output)
     record = json.loads(frame.read_bytes())
@@ -134,15 +136,37 @@ def stage(room, frame, output, source=None, *, ambient_probe=False):
         parts = {}
         for part in HEROINE_PARTS:
             model_source = room / "assets/heroine" / (part + ".glb")
-            document, binary = parse_glb(model_source)
+            if reference_models:
+                document = reference_document(model_source)
+            else:
+                document, binary = parse_glb(model_source)
             proof = freeze_model(document, record)
-            target = Path(temporary) / model_source.name
-            write_glb(target, document, binary)
-            os.replace(target, assets / "heroine" / model_source.name)
+            destination = assets / "heroine" / model_source.name
+            if reference_models:
+                destination = destination.with_suffix(".gltf")
+                if destination.exists() or destination.with_suffix(".gltf.azmeta").exists():
+                    raise FileExistsError(destination)
+                destination.write_text(json.dumps(document) + "\n", encoding="utf-8")
+                metadata = {"schemaVersion": 1, "id": str(uuid5(NAMESPACE_URL,
+                            "original-pose-reference-v1:" + digest(frame) + ":" + part)),
+                            "settings": {"retainSourceSnapshot": False}}
+                destination.with_suffix(".gltf.azmeta").write_text(json.dumps(metadata) + "\n", encoding="utf-8")
+            else:
+                target = Path(temporary) / model_source.name
+                write_glb(target, document, binary)
+                os.replace(target, destination)
             parts[part] = {**proof, "sourceSHA256": digest(model_source),
-                           "outputSHA256": digest(assets / "heroine" / model_source.name)}
+                           "outputSHA256": digest(destination)}
+            if reference_models:
+                parts[part]["storage"] = "referenced-glb"
         level_path = assets / "room.azurelevel"
         level = json.loads(level_path.read_bytes())
+        if reference_models:
+            for part in HEROINE_PARTS:
+                resource, = [item for item in level["resources"] if item["id"] == "heroine-" + part]
+                if resource["asset"] != f"assets:/heroine/{part}.glb":
+                    raise ValueError(f"Unexpected heroine resource: {part}")
+                resource["asset"] = f"assets:/heroine/{part}.gltf"
         placement = apply_level_pose(level, record)
         activation = None
         transparency = None
@@ -187,9 +211,10 @@ if __name__ == "__main__":
         parser.add_argument("--" + name, type=Path, required=True)
     parser.add_argument("--source", type=Path, help="Frozen Unity project used to trace drawable activation")
     parser.add_argument("--ambient-probe", action="store_true", help="Bind the same frame's captured quadratic ambient probe")
+    parser.add_argument("--reference-models", action="store_true", help="Reuse original GLB buffers through adjacent glTF pose files")
     arguments = parser.parse_args()
     result = stage(arguments.room.resolve(), arguments.frame.resolve(), arguments.output.resolve(), arguments.source,
-                   ambient_probe=arguments.ambient_probe)
+                   ambient_probe=arguments.ambient_probe, reference_models=arguments.reference_models)
     print(json.dumps({"weather": result["weather"], "parts": len(result["parts"]),
                       "matchedRoomTransforms": len(result["placement"]["matched"]),
                       "unmatchedRoomTransforms": len(result["placement"]["unmatched"])}))
