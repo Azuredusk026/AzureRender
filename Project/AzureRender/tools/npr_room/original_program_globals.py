@@ -50,3 +50,31 @@ def verify_metadata(record, definition):
         if name in fields and not math.isclose(fields[name]["value"][axis], time, rel_tol=0, abs_tol=1e-4):
             raise ValueError("Program globals differ from the recorded simulation frame")
     return {"globals": len(fields), "programSHA256": definition["programSHA256"]}
+
+
+def captured_program_fields(record, programs, role):
+    document = json.loads(programs.read_bytes())
+    if role not in document["programs"]:
+        raise ValueError("Unknown captured atmosphere program: " + role)
+    verify_metadata(record, make_bindings(programs))
+    captured = {row["name"]: row for row in record["programGlobals"]}
+    fields = {}
+    stage = document["programs"][role]["stages"]["fragment"]
+    for buffer in stage["constantBuffers"]:
+        if buffer["name"] != "$Globals":
+            continue
+        for field in buffer["vectors"]:
+            name, width = field["name"], field["dimension"]
+            if name == "_WorldSpaceCameraPos":
+                values = tuple(record["position"][axis] for axis in "xyz")
+            elif name == "_ProjectionParams":
+                near, far = record["near"], record["far"]
+                if not 0 < near < far:
+                    raise ValueError("Captured projection requires ordered clip planes")
+                values = (1, near, far, 1 / far)
+            else:
+                values = tuple(captured[name]["value"][axis] for axis in "xyzw"[:width])
+            if len(values) != width or not all(math.isfinite(value) for value in values):
+                raise ValueError("Captured program camera or field width is invalid")
+            fields[name] = values
+    return fields

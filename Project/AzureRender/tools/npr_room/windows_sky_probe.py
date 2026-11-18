@@ -119,16 +119,17 @@ def unity_rotation(scene, renderer):
 
 
 def prepare(source, catalog, references, programs, original_log, output, mode="Sunset", *,
-            replay_time=None, cozy_assembly=None):
+            replay_time=None, cozy_assembly=None, captured_frame=None):
     captured = original_log is not None
     replayed = replay_time is not None and cozy_assembly is not None
-    if captured == replayed or (replay_time is not None) != (cozy_assembly is not None):
-        raise ValueError("Choose one desktop log or a controlled time with its original assembly")
+    if sum((captured, replayed, captured_frame is not None)) != 1 or (replay_time is not None) != (cozy_assembly is not None):
+        raise ValueError("Choose one desktop log, controlled replay or captured room frame")
     recipe = json.loads(references.read_bytes())
     program_file = programs / "windows-atmosphere-programs.json"
     if recipe["d3d11ProgramSHA256"] != digest(program_file) or recipe["sceneSHA256"] != digest(source / ROOM_SCENE):
         raise ValueError("The sky requires the source-locked Windows scene and Direct3D programs")
-    sky = json.loads(program_file.read_bytes())["programs"]["sky"]["stages"]
+    program = json.loads(program_file.read_bytes())["programs"]["sky"]
+    sky = program["stages"]
     draw = recipe["base"]["drawables"]["skyMesh"]
     mesh_entry = json.loads((catalog / "static-mesh-catalog/mesh-catalog.json").read_bytes())["slots"][draw["mesh"]["guid"]]
     mesh_path = source / mesh_entry["source"]
@@ -145,6 +146,18 @@ def prepare(source, catalog, references, programs, original_log, output, mode="S
     triangles, = indices(mesh, len(vertices), mesh["m_SubMeshes"])
     triangles = np.asarray(triangles, dtype="<u4").reshape(-1, 3)[:, [0, 2, 1]]
     world = unity_rotation(UnityScene(source / ROOM_SCENE), draw)
+    if captured_frame is not None:
+        from tools.npr_room.original_program_globals import captured_program_fields
+        from tools.npr_room.original_weather_fields import captured_model
+        from tools.npr_room.windows_weather_probe import fog_camera, validate_clip_planes
+        record = json.loads(captured_frame.read_bytes())
+        if record["weather"] != mode:
+            raise ValueError("Captured sky requires its recorded weather mode")
+        validate_clip_planes(record["near"], record["far"])
+        fields = captured_program_fields(record, program_file, "sky")
+        if fields["_UnderwaterRenderingEnabled"] != (0,) or fields["_FullySubmerged"] != (0,):
+            raise ValueError("Captured underwater sky requires its source mask texture")
+        world = captured_model(record, program["shader"])
     object_to_world = stage_constants(sky["vertex"], "UnityPerDraw", {"unity_ObjectToWorld": world.T.flatten()})
     world_to_object = stage_constants(sky["fragment"], "UnityPerDraw",
                                       {"unity_WorldToObject": np.linalg.inv(world).T.flatten()})
@@ -152,7 +165,12 @@ def prepare(source, catalog, references, programs, original_log, output, mode="S
 
     reference = recipe["windowsReference"][mode]
     snapshot = reference["data"]
-    if captured:
+    if captured_frame is not None:
+        seconds = record["simulationTime"]
+        provenance = {"input": "captured-room-program-globals", "frameSHA256": digest(captured_frame),
+                      "metadataOnly": record.get("metadataOnly", False),
+                      "capturedModelMatrix": world.T.ravel().tolist()}
+    elif captured:
         seconds, globals_ = capture_globals(original_log, snapshot, recipe["modes"][mode]["dayFraction"], mode)
         provenance = {"input": "captured-desktop-globals", "logSHA256": digest(original_log)}
     else:
@@ -161,14 +179,15 @@ def prepare(source, catalog, references, programs, original_log, output, mode="S
         seconds, globals_ = replay_globals(snapshot, recipe["modes"][mode]["sunDayFraction"], replay_time)
         provenance = {"input": "controlled-original-program-replay", "cozyAssemblySHA256": COZY_RUNTIME_SHA256,
                       "sunDayFraction": recipe["modes"][mode]["sunDayFraction"]}
-    fields = {name: (snapshot[key],) for name, key in SCALAR_FIELDS.items()}
-    fields.update({name: globals_[name] for name in COLOR_FIELDS})
-    fields.update({"CZY_SunDirection": globals_["CZY_SunDirection"][:3],
+    if captured_frame is None:
+        fields = {name: (snapshot[key],) for name, key in SCALAR_FIELDS.items()}
+        fields.update({name: globals_[name] for name in COLOR_FIELDS})
+        fields.update({"CZY_SunDirection": globals_["CZY_SunDirection"][:3],
                    "CZY_MoonDirection": tuple(snapshot["moonDirection"][axis] for axis in "xyz"),
                    "CZY_EclipseDirection": globals_["CZY_EclipseDirection"][:3],
                    "_Time": (seconds / 20, seconds, 2 * seconds, 3 * seconds),
                    "_TimeParameters": (seconds, np.sin(seconds), np.cos(seconds), 0),
-                   "_WorldSpaceCameraPos": (0, 0, 0), "_UnderwaterRenderingEnabled": (0,), "_FullySubmerged": (0,)})
+                       "_WorldSpaceCameraPos": (0, 0, 0), "_UnderwaterRenderingEnabled": (0,), "_FullySubmerged": (0,)})
     output.mkdir()
     vertices.tofile(output / "vertices.bin")
     triangles.tofile(output / "indices.bin")
@@ -180,8 +199,14 @@ def prepare(source, catalog, references, programs, original_log, output, mode="S
             raise ValueError("Original Windows sky program differs")
         (output / shader.name).write_bytes(shader.read_bytes())
     for i, (forward, up) in enumerate(FACES):
-        constants = stage_constants(sky["vertex"], "$Globals", {"_ProjectionParams": (1, .05, 1500, 1 / 1500),
-                                    "unity_MatrixVP": view_projection(forward, up)})
+        if captured_frame is not None:
+            near, far = record["near"], record["far"]
+            projection, _ = fog_camera(forward, up, position=fields["_WorldSpaceCameraPos"], near=near, far=far)
+            view_fields = {"_ProjectionParams": (1, near, far, 1 / far), "unity_MatrixVP": projection}
+        else:
+            view_fields = {"_ProjectionParams": (1, .05, 1500, 1 / 1500),
+                           "unity_MatrixVP": view_projection(forward, up)}
+        constants = stage_constants(sky["vertex"], "$Globals", view_fields)
         (output / f"view-{i}.bin").write_bytes(constants)
     textures = {}
     for texture in sky["fragment"]["textures"]:
@@ -215,12 +240,13 @@ if __name__ == "__main__":
     inputs = parser.add_mutually_exclusive_group(required=True)
     inputs.add_argument("--original-log", type=Path)
     inputs.add_argument("--replay-time", type=float)
+    inputs.add_argument("--frame", type=Path)
     parser.add_argument("--cozy-assembly", type=Path)
     parser.add_argument("--mode", choices=MODES, default="Sunset")
     args = parser.parse_args()
     if (args.replay_time is not None) != (args.cozy_assembly is not None):
         parser.error("--replay-time and --cozy-assembly are used together")
     result = prepare(args.source, args.catalog, args.references, args.programs, args.original_log, args.output, args.mode,
-                     replay_time=args.replay_time, cozy_assembly=args.cozy_assembly)
+                     replay_time=args.replay_time, cozy_assembly=args.cozy_assembly, captured_frame=args.frame)
     (args.output / "preparation.json").write_text(json.dumps(result) + "\n", encoding="utf-8")
     print(json.dumps(result))

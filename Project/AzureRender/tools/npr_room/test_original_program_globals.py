@@ -59,3 +59,17 @@ class OriginalProgramGlobalsTests(unittest.TestCase):
                 (folder / f"{mode}-{index:02d}.json").write_text('{"metadataOnly":true}', encoding="utf-8")
         with self.assertRaisesRegex(ValueError, "same-frame color and depth"):
             verify_frames(folder)
+
+    def test_projects_program_fields_with_the_captured_camera_position(self):
+        definition = self.bindings()
+        record = {"programManifestSHA256": definition["programSHA256"], "simulationTime": 2,
+                  "position": {"x": 1, "y": 2, "z": 3},
+                  "programGlobals": [{"name": "CZY_SunSize", "dimension": 1,
+                                      "value": {"x": .2, "y": 0, "z": 0, "w": 0}},
+                                     {"name": "_TimeParameters", "dimension": 4,
+                                      "value": {"x": 2, "y": .3, "z": .4, "w": 0}}]}
+        fields = original_program_globals.captured_program_fields(record, self.path, "sky")
+        self.assertEqual(fields, {"CZY_SunSize": (.2,), "_TimeParameters": (2, .3, .4, 0),
+                                  "_WorldSpaceCameraPos": (1, 2, 3)})
+        with self.assertRaises(ValueError):
+            original_program_globals.captured_program_fields(record, self.path, "unknown")
