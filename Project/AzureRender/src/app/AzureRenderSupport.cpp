@@ -257,8 +257,15 @@ void AzureRenderApp::recreateEditorViewportResources() {
             + std::to_string(renderExtent_.height));
 }
 
+void AzureRenderApp::clearRoomGlitch() {
+    roomGlitchViews_.reset();
+    roomGlitchView_ = 0;
+    screenGlitch_.reset();
+}
+
 void AzureRenderApp::cleanupEditorViewportResources(
     const bool destroySampler) {
+    screenGlitch_.reset();
     screenChromatic_.reset();
     screenMove_.reset();
     if (postProcessDescriptorPool_ != VK_NULL_HANDLE) {

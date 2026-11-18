@@ -152,6 +152,7 @@ P3 按功能组实施与验收。完成一个功能组后更新矩阵，再继�
 [房间画面偏移时序与合成](../acceptance/npr-room/opening-effects.md#房间画面偏移时序与合成)登记教学触发、色差叠加及原生回放。
 [故障硬件参照](../acceptance/npr-room/opening-effects.md#故障硬件参照)登记独立相机、原渲染目标和两种显卡的固定图案采样。
 [Vulkan 故障合成](../acceptance/npr-room/opening-effects.md#vulkan-故障合成)登记点采样、浮点运算顺序与同设备四帧对照。
+[房间故障相机与时序](../acceptance/npr-room/opening-effects.md#房间故障相机与时序)登记独立场景视图、缓存画面、原节点层级及教学双触发。
 [黑屏硬件参照](../acceptance/npr-room/opening-effects.md#黑屏特效硬件参照)登记比率、时间和百叶窗的五组原版画面。
 [Vulkan 黑屏合成](../acceptance/npr-room/opening-effects.md#vulkan-黑屏合成)登记 Intel 核显和 RTX 4060 上的同设备画面对照。
 [房间黑屏时序与合成](../acceptance/npr-room/opening-effects.md#房间黑屏时序与合成)登记正常入口的全黑、半黑、画面恢复和界面叠加。

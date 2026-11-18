@@ -20,7 +20,7 @@ def component(type_name, data):
     return {"type": type_name, "version": 1, "data": data}
 
 
-def capture(player, resources, root, opacity, scripted=False, configure=None):
+def stage(root, opacity, scripted=False, configure=None):
     assets = root / "assets"
     assets.mkdir(parents=True)
     project = root / "project.azureproject"
@@ -44,6 +44,11 @@ def capture(player, resources, root, opacity, scripted=False, configure=None):
         configure(assets, nodes)
     write(assets / "screen.azurelevel", {"schemaVersion": 1, "id": "screen-noise", "sceneType": "sample",
                                        "nodes": nodes, "resources": []})
+    return project
+
+
+def capture(player, resources, root, opacity, scripted=False, configure=None):
+    project = stage(root, opacity, scripted, configure)
     capture_dir = root / "frames"
     report_path = root / "runtime.json"
     command = [str(player), "--project", str(project), "--resource-root", str(resources),

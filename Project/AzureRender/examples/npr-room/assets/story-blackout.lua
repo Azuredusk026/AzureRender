@@ -1,4 +1,4 @@
-function new_story_hold(command, apply, readsBlind)
+function new_story_hold(command, apply, readsBlind, playback)
     local effect = {}
     local time, pending, prepared = 0, {}, {}
     local ratio, blind = 0, false
@@ -19,16 +19,17 @@ function new_story_hold(command, apply, readsBlind)
         apply(ratio, blind, time)
     end
 
-    local function queue(at, amount, useBlind)
+    local function queue(at, amount, useBlind, started)
         local index = #pending + 1
         while index > 1 and pending[index - 1].at > at do index = index - 1 end
-        table.insert(pending, index, {at = at, ratio = amount, blind = useBlind})
+        table.insert(pending, index, {at = at, ratio = amount, blind = useBlind, started = started})
     end
 
     function effect:update(dt)
         time = time + dt
         while pending[1] and pending[1].at <= time + 1e-9 do
             local next = table.remove(pending, 1)
+            if playback then playback(next.started, time) end
             publish(next.ratio, next.blind)
         end
     end
@@ -56,8 +57,8 @@ function new_story_hold(command, apply, readsBlind)
         if row.command ~= command or prepared[row.row] then return end
         local amount, hold, useBlind = values(row)
         local start = time + delay
-        queue(start, amount, useBlind)
-        if hold >= 0 then queue(start + hold, 0, false) end
+        queue(start, amount, useBlind, true)
+        if hold >= 0 then queue(start + hold, 0, false, false) end
     end
 
     return effect

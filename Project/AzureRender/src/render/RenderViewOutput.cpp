@@ -62,7 +62,8 @@ void RenderViewOutput::destroy() noexcept{
     if(view_)rhi.destroyImageView(view_);
     if(image_.image)context_.allocator->destroyImage(image_);
 }
-void RenderViewOutput::schedule(RenderGraph& graph,RenderGraph::ResourceId hdr,const std::string& name,bool temporalReady,RenderGraph::ResourceId displayMask,unsigned displayHistorySelector){
+RenderGraph::ResourceId RenderViewOutput::schedule(RenderGraph& graph,RenderGraph::ResourceId hdr,
+        const std::string& name,bool temporalReady,RenderGraph::ResourceId displayMask,unsigned displayHistorySelector){
     if(displayMaskEnabled_&&(displayMask==UINT32_MAX||displayMask>=graph.resources().size()))
         throw std::invalid_argument("View display transform requires its imported mask");
     if(displayHistorySelector>2||(!temporalReady&&displayHistorySelector))throw std::invalid_argument("Invalid temporal display selector");
@@ -92,5 +93,6 @@ void RenderViewOutput::schedule(RenderGraph& graph,RenderGraph::ResourceId hdr,c
     });
     graph.use(resolvePass,linear,RenderGraphUsage::Sampled,false);
     graph.attachment(resolvePass,output,RenderGraphUsage::ColorAttachment,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
+    return output;
 }
 }

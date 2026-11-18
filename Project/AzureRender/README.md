@@ -11,6 +11,7 @@
 [开场全屏特效](docs/acceptance/npr-room/opening-effects.md)记录色差、黑屏和单色噪声的原程序、Vulkan 实现及常规房间回放。
 [画面偏移](docs/acceptance/npr-room/opening-effects.md#画面偏移硬件参照)记录两种显卡的四帧对照和教学房间的组合回放。
 [故障特效](docs/acceptance/npr-room/opening-effects.md#故障硬件参照)记录原相机、输出目标及 Direct3D 11 与 Vulkan 同设备对照。
+[房间故障相机与时序](docs/acceptance/npr-room/opening-effects.md#房间故障相机与时序)记录独立视图、暂停画面和开场两章的回放。
 [房间成就记录](docs/acceptance/npr-room/platform-scenarios.md#房间成就记录)记录四种房间操作的本地成就与存档恢复。
 [房间显示面板](docs/acceptance/npr-room/platform-scenarios.md#房间显示面板)与[系统菜单置顶](docs/acceptance/npr-room/platform-scenarios.md#windows-系统菜单置顶)记录窗口选项和存档恢复。
 [显示设置语言](docs/acceptance/npr-room/platform-scenarios.md#显示设置语言)记录面板和系统菜单的原文本与语言恢复。

@@ -18,6 +18,7 @@ from tools.npr_room.opening_camera import attach_audio, project as camera_projec
 from tools.npr_room.opening_blackout import bind_room as bind_blackout, room_inputs as blackout_inputs
 from tools.npr_room.opening_chromatic import bind as bind_chromatic, room_inputs as chromatic_inputs
 from tools.npr_room.opening_screen_move import bind as bind_screen_move, room_inputs as screen_move_inputs
+from tools.npr_room.opening_glitch_room import bind as bind_glitch, room_inputs as glitch_inputs
 from tools.npr_room.opening_face_layers import bind as face_program
 from tools.npr_room.pbr_materials import write
 from tools.npr_room.reference_inventory import digest
@@ -106,7 +107,8 @@ def project(room, catalog, controller, chapters, source_receipt, models):
 
 def stage(room, catalog, controller, chapters, source_receipt, models, output, camera_trace=None,
           camera_audio_source=None, face_catalog=None, achievements=False, blackout_source_lock=None, image_catalog=None,
-          window_settings=False, window_settings_inventory=None, chromatic_source_lock=None, screen_move_source_lock=None):
+          window_settings=False, window_settings_inventory=None, chromatic_source_lock=None, screen_move_source_lock=None,
+          glitch_source_lock=None, glitch_camera=None):
     body, program, route, states = project(room, catalog, controller, chapters, source_receipt, models)
     display_rows = None
     if window_settings_inventory:
@@ -121,8 +123,10 @@ def stage(room, catalog, controller, chapters, source_receipt, models, output, c
         program, camera_path = camera_project(room, program, camera_trace, camera_audio_source)
     if face_catalog:
         program = face_program(program, load(face_catalog), models, chapters)
-    if bool(blackout_source_lock or chromatic_source_lock or screen_move_source_lock) != bool(image_catalog):
+    if bool(blackout_source_lock or chromatic_source_lock or screen_move_source_lock or glitch_source_lock) != bool(image_catalog):
         raise ValueError("Opening effects require a source lock and the room image catalog")
+    if bool(glitch_source_lock) != bool(glitch_camera):
+        raise ValueError("Opening glitch requires the original camera receipt")
     effects = {}
     if blackout_source_lock:
         program = bind_blackout(program)
@@ -133,6 +137,9 @@ def stage(room, catalog, controller, chapters, source_receipt, models, output, c
     if screen_move_source_lock:
         program = bind_screen_move(program)
         effects["screen-move"] = screen_move_inputs(screen_move_source_lock, image_catalog)
+    if glitch_source_lock:
+        program = bind_glitch(program)
+        effects["glitch"] = glitch_inputs(glitch_source_lock, image_catalog, glitch_camera)
     scripts = achievement_programs(program) if achievements else {"pomodoro.lua": program}
     with tempfile.TemporaryDirectory(prefix="tutorial-camera-room-", dir=output.parent) as workspace:
         target = Path(workspace) / "project"
@@ -232,7 +239,8 @@ if __name__ == "__main__":
         for name in names:
             action.add_argument("--" + name, type=Path, required=True)
     stage_options = ("camera-trace", "camera-audio-source", "face-catalog", "blackout-source-lock",
-                     "chromatic-source-lock", "screen-move-source-lock", "image-catalog", "window-settings-inventory")
+                     "chromatic-source-lock", "screen-move-source-lock", "glitch-source-lock", "glitch-camera",
+                     "image-catalog", "window-settings-inventory")
     for name in stage_options:
         steps.choices["stage"].add_argument("--" + name, type=Path)
     steps.choices["stage"].add_argument("--achievements", action="store_true")

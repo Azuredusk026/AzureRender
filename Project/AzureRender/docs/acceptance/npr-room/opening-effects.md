@@ -138,6 +138,31 @@ Lua 回归覆盖教学行 14 的 0.7 秒延迟、1 秒持续、历史回放、�
 | NVIDIA Vulkan 对照 | `604b661dba0dd57a2c4f6a857b53755a760d767d32eb88882a5036f9ca31da46` |
 | Vulkan 故障程序 | `81ed64db433a4c773ccc345f72d5dc98eeac4f995f617bb3a8cc22b7279f3927` |
 
+## 房间故障相机与时序
+
+`azure.screen-glitch` 使用 512×288 线性 RGBA8 视图，跟随主相机的位置和朝向。视场角为 35°，近裁剪面与远裁剪面分别为 0.05 和 1000。该视图使用独立投影和快速近似抗锯齿。场景加载期间分步准备视图并借用关卡的网格缓存。相机活动时采样当帧画面，暂停时采样最后一次提交的画面。故障合成位于色差和画面偏移之后、黑屏与单色噪声及界面之前。
+
+当前房间的 219 个绘制节点都能追溯到原场景。216 个节点属于第 0 层，3 个节点属于第 1 层，均在原相机的剔除掩码内。检查覆盖原场景导入的静态批次、人物的七个部件、城市、书本和课本。
+
+任务 2057 使用 640×360 的四个 Player 进程验证默认值、相机活动和暂停采样。相机暂停后的三个采样帧分别有 44,884、57,599 和 83,218 个背景像素与控制组不同，不透明界面抽样区全部一致。进程通过 Vulkan 同步校验，退出后的图像和缓冲区分配均为零。
+
+任务 2069 通过常规入口完成教学与第一章。教学第 12 行延迟 0.7 秒后启动，强度 0.5 持续 1.0 秒。后续分支第 28 行的强度 0.3 持续 0.7 秒。两次都记录到相机启动、暂停及强度归零，第一章无故障事件。回放同时覆盖相机与角色动作、语音、背景音乐以及本地成就和存档恢复。两次退出后的图像和缓冲区分配均为零。任务 2070 核对编辑器构建路径上四个受影响源文件的编译语法。
+
+窗口尺寸变化只重建呈现资源，固定尺寸的故障相机保留已提交画面。测试将客户区从 1280×720 缩至 800×450，再恢复至 1280×720。三张画面分别有 415,742、146,039 和 415,742 个像素与无故障组不同，恢复后的完整画面与初始画面逐像素一致。退出进程时，在销毁 Vulkan 设备前释放活动和预载的相机资源。尚未进入预载场景的退出用例通过 Vulkan 校验，分配计数归零。
+
+完整房间的原版逐帧对照、真实暂停下的相机计时和性能仍按 P5、P7 验收。
+
+| 记录 | SHA-256 |
+| --- | --- |
+| 房间绘制节点的原层级 | `174aba21dcb0eef88c66e502c74385c69e789ee77e284554669ef26fed30e33a` |
+| 四进程同步报告 | `5d104a379ad8667b9b0e0a0bdd3b264de7154154b2edbb474926b5d117e8f126` |
+| 教学与第一章报告 | `beacfa5dde46a55e3e02ac158c41c1e9d3b028db02fb9e7327e2d8a28c6c8d69` |
+| 窗口尺寸回放 | `04a94a7d1d7ad76c39861bc9d759d6be19797e6a4a43fbeb255cc44440c23c12` |
+| 预载退出回放 | `d54f55ef7fbfe5d399983ef8aef6da1d617ff7bb125e42433122b3eac295b3a1` |
+| 房间、窗口和退出回放的构建清单 | `50eaf43fd229dafe4b408c68d16e3282b83451ba9d2f03376bbfe340f2cc7ecb` |
+
+本机证据位于 `windows-opening-reference/glitch-validation/room-runtime/`。
+
 ## 单色噪声实机参照
 
 任务 1816 使用原生 D3D11 顶点和片元程序，以及原材质的 64×1 sRGB 时间纹理，在固定底色上捕获三个 320×180 RGBA32F 帧。比率为 0 时控制帧逐像素一致。比率为 0.05 时，每个像素按原混合系数与黑色或白色合成，透明度保持为 1。时间从 9.302 秒移到 9.802 秒时，18,319 个像素变化。两次硬件回放的摘要一致，均为 `5a17e42cb1f1dfda269de9d61619865df57ffc4b8500f2e57809b53a96e86389`。
@@ -236,7 +261,7 @@ python -B -m tools.npr_room.windows_noise_probe verify-screen-move --first $scre
 & $vulkanNoiseProbe $fullscreenVertex $screenMoveFragment $vulkanScreenMove $screenMoveInputs screen-move
 & $vulkanNoiseProbe $fullscreenVertex $screenMoveFragment $vulkanScreenMoveRepeat $screenMoveInputs screen-move
 python -B -m tools.npr_room.windows_noise_probe compare-screen-move --reference $screenMoveCapture --candidate $vulkanScreenMove --repeat $vulkanScreenMoveRepeat --output $vulkanScreenMoveReport
-python -B -m tools.npr_room.opening_glitch_camera --source $unitySource --effects $effectsReceipt --output $glitchCameraReceipt
+python -B -m tools.npr_room.opening_glitch_camera --source $unitySource --effects $effectsReceipt --output $glitchCameraReceipt --room $deskRoom --layer-output $roomLayerCoverage
 python -B -m tools.npr_room.windows_noise_probe prepare-glitch --effects $programDirectory --catalog $imageCatalog --source $unitySource --output $glitchInputs
 & $noiseProbe $glitchInputs $glitchCapture glitch $dxgiAdapterIndex
 & $noiseProbe $glitchInputs $glitchRepeat glitch $dxgiAdapterIndex
@@ -255,9 +280,12 @@ python -B -m tools.npr_room.windows_noise_probe verify-blackout --first $blackou
 & $vulkanNoiseProbe $fullscreenVertex $blackoutFragment $vulkanBlackout $blackoutInputs
 & $vulkanNoiseProbe $fullscreenVertex $blackoutFragment $vulkanBlackoutRepeat $blackoutInputs
 python -B -m tools.npr_room.windows_noise_probe compare-blackout --reference $blackoutAdapterCapture --candidate $vulkanBlackout --repeat $vulkanBlackoutRepeat --output $vulkanBlackoutReport
-python -B tools/npr_room/test_story_signal_room_player.py --player $player --room $deskRoom --resource-root $runtimeResources --catalog $bodyCatalog --graph $animatorGraph --chapters $openingChapters --source-receipt $tutorialSource --models $bodyMorphModels --camera-trace $cameraTrace --camera-audio-source $unitySource --face-catalog $plankCatalog --blackout-source-lock $effectsReceipt --chromatic-source-lock $effectsReceipt --screen-move-source-lock $effectsReceipt --image-catalog $imageCatalog --achievements --output $openingRoomReplay
+python -B tools/npr_room/test_story_signal_room_player.py --player $player --room $deskRoom --resource-root $runtimeResources --catalog $bodyCatalog --graph $animatorGraph --chapters $openingChapters --source-receipt $tutorialSource --models $bodyMorphModels --camera-trace $cameraTrace --camera-audio-source $unitySource --face-catalog $plankCatalog --blackout-source-lock $effectsReceipt --chromatic-source-lock $effectsReceipt --screen-move-source-lock $effectsReceipt --glitch-source-lock $effectsReceipt --glitch-camera $glitchCameraReceipt --image-catalog $imageCatalog --achievements --output $openingRoomReplay
 python -B -m tools.npr_room.test_screen_chromatic_player --player $player --resource-root $runtimeResources --source-lock $effectsReceipt --image-catalog $imageCatalog --output $chromaticRoomReplay
 python -B -m tools.npr_room.test_screen_move_player --player $player --resource-root $runtimeResources --source-lock $effectsReceipt --image-catalog $imageCatalog --output $screenMoveRoomReplay
+python -B -m tools.npr_room.test_glitch_player --player $player --resource-root $runtimeResources --source-lock $effectsReceipt --image-catalog $imageCatalog --camera $glitchCameraReceipt --output $glitchRoomReplay
+python -B -m tools.npr_room.test_glitch_player --player $player --resource-root $runtimeResources --source-lock $effectsReceipt --image-catalog $imageCatalog --camera $glitchCameraReceipt --output $glitchResizeReplay --resize
+python -B -m tools.npr_room.test_glitch_player --player $player --resource-root $runtimeResources --source-lock $effectsReceipt --image-catalog $imageCatalog --camera $glitchCameraReceipt --output $glitchExitReplay --preload-exit
 & $glslc --target-env=vulkan1.3 shaders/monochrome_screen_noise.frag -o $noiseFragment
 & $vulkanNoiseProbe $fullscreenVertex $noiseFragment $vulkanCapture
 & $vulkanNoiseProbe $fullscreenVertex $noiseFragment $vulkanRepeatCapture
@@ -265,4 +293,4 @@ python -B -m tools.npr_room.windows_noise_probe compare --reference $originalCap
 python -B tools/test_screen_noise_player.py --player $player --resource-root $runtimeResources --output $playerNoiseReplay
 ```
 
-Lua 5.4 载入 `assets/story-noise.lua`，分别运行 `tests/story-noise.lua` 和 `tests/story-chromatic.lua`。
+使用 `test_pomodoro_runtime.py` 运行 Lua 5.4 夹具，验证单色噪声、色差、画面偏移、黑屏及故障的剧情时序。

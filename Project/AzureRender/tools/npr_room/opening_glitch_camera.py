@@ -4,6 +4,7 @@ import argparse
 import json
 from pathlib import Path
 
+from tools.build_face_sdf import parse_glb
 from tools.npr_room.reference_inventory import META_GUID, digest, text
 from tools.npr_room.skinned_mesh_export import UnityScene
 from tools.npr_room.window_scene_inventory import ROOM_SCENE
@@ -90,12 +91,77 @@ def camera_source(source, effects):
     }
 
 
+def layer_rows(bindings, read, mask):
+    rows = []
+    for node, (identity, kind) in sorted(bindings.items()):
+        obj = read(read(identity)["m_GameObject"]["fileID"])
+        layer = obj["m_Layer"]
+        rows.append({"node": node, "sourceId": identity, "sourceKind": kind, "name": obj["m_Name"],
+                     "layer": layer, "included": bool(mask & (1 << layer))})
+    return rows
+
+
+def room_layers(source, room, camera):
+    scene_path = source / ROOM_SCENE
+    if digest(scene_path) != camera["sceneSHA256"]:
+        raise ValueError("The room drawables require the source-locked Unity scene")
+    scene = UnityScene(scene_path)
+    level_path = room / "assets/room.azurelevel"
+    level = json.loads(level_path.read_bytes())
+    original = {node: int(key.removeprefix("unity-").removeprefix("batch-"))
+                for key, node in level["sceneImports"]["RoomScene"]["nodeMap"].items()
+                if key.startswith("unity-")}
+    resources = {entry["id"]: entry["asset"] for entry in level["resources"]}
+    desk = json.loads((room / "opening-desk-receipt.json").read_bytes())
+    if desk["sceneSHA256"] != camera["sceneSHA256"]:
+        raise ValueError("The staged textbook has a different source scene")
+    skin_renderers = {}
+    for identity, (kind, *_) in scene.documents.items():
+        if kind == 137:
+            name = scene.read(scene.read(identity)["m_GameObject"]["fileID"])["m_Name"]
+            skin_renderers.setdefault(name, []).append(identity)
+    bindings = {}
+    for node in level["nodes"]:
+        if not node.get("resourceId"):
+            continue
+        name = node["id"]
+        if name in original:
+            bindings[name] = (original[name], "transform")
+        elif name.startswith(("story-books-", "window-city-")):
+            bindings[name] = (int(name.rsplit("-", 1)[-1]), "transform")
+        elif name == "desk-textbook":
+            bindings[name] = (desk["textbook"]["renderer"], "renderer")
+        elif name.startswith("heroine-"):
+            relative = resources[node["resourceId"]]
+            if not relative.startswith("assets:/heroine/"):
+                raise ValueError(f"The heroine drawable has a different asset binding: {name}")
+            model, _ = parse_glb(room / "assets" / relative.removeprefix("assets:/"))
+            mesh, = model["meshes"]
+            identity, = skin_renderers[mesh["name"]]
+            bindings[name] = (identity, "renderer")
+        else:
+            raise ValueError(f"No source layer for staged room drawable: {name}")
+    return {"schemaVersion": 1, "sceneSHA256": camera["sceneSHA256"], "levelSHA256": digest(level_path),
+            "cullingMask": camera["camera"]["cullingMask"],
+            "drawables": layer_rows(bindings, scene.read, camera["camera"]["cullingMask"])}
+
+
+def write_receipt(path, receipt):
+    with path.open("x", encoding="utf-8", newline="\n") as output:
+        output.write(json.dumps(receipt, sort_keys=True, separators=(",", ":")) + "\n")
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     for name in ("source", "effects", "output"):
         parser.add_argument("--" + name, type=Path, required=True)
+    parser.add_argument("--room", type=Path)
+    parser.add_argument("--layer-output", type=Path)
     args = parser.parse_args()
+    if bool(args.room) != bool(args.layer_output):
+        parser.error("--room and --layer-output must be supplied together")
     receipt = camera_source(args.source, args.effects)
-    with args.output.open("x", encoding="utf-8", newline="\n") as output:
-        output.write(json.dumps(receipt, sort_keys=True, separators=(",", ":")) + "\n")
+    if args.room:
+        write_receipt(args.layer_output, room_layers(args.source, args.room, receipt))
+    write_receipt(args.output, receipt)
     print(json.dumps(receipt))

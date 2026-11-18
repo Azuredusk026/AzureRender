@@ -273,6 +273,30 @@ struct ScreenMove {
     AZURE_FIELD("Instability", 0, 1)
     float unstable = 0;
 };
+AZURE_TYPE("azure.screen-glitch", 1)
+struct ScreenGlitch {
+    AZURE_FIELD("Ratio", 0, 1)
+    float ratio = 0;
+    AZURE_FIELD("Camera active", 0, 1)
+    bool cameraActive = false;
+    AZURE_FIELD("Timeline texture", 0, 0)
+    AZURE_FIELD_REFERENCE("asset", "texture", "")
+    std::string timeline;
+    AZURE_FIELD("Length", -1, 1)
+    float length = -.2F;
+    AZURE_FIELD("Dot scale", 1, 128)
+    float dotScale = 18.27F;
+    AZURE_FIELD("Speed", 0, 128)
+    float speed = 12.F;
+    AZURE_FIELD("Instability", 0, 1)
+    float unstable = 0;
+    AZURE_FIELD("Field of view", 1, 179)
+    float fieldOfView = 35.F;
+    AZURE_FIELD("Near plane", 0.001, 100)
+    float nearPlane = .05F;
+    AZURE_FIELD("Far plane", 1, 10000)
+    float farPlane = 1000.F;
+};
 AZURE_TYPE("azure.window-presentation", 1)
 struct WindowPresentation {
     AZURE_FIELD("Window mode", 0, 1)

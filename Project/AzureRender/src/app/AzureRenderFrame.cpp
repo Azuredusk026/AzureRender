@@ -25,6 +25,7 @@
 #include "render/RenderFrameSnapshot.hpp"
 #include "render/FrameTaskScheduler.hpp"
 #include "runtime/AssetDatabase.hpp"
+#include "scenes/BuiltinRendererCatalog.hpp"
 
 #include <stb_easy_font.h>
 
@@ -249,6 +250,7 @@ void AzureRenderApp::drawFrame() {
     vkCheck(vkResetFences(device_, 1, &inFlightFences_[currentFrame_]), "vkResetFences");
     vkCheck(vkResetCommandBuffer(commandBuffers_[currentFrame_], 0), "vkResetCommandBuffer");
     const auto abandonRecording=[this]{
+        if(roomGlitchViews_)roomGlitchViews_->cancel(graphicsSubmission_+1);
 #if AZURE_WITH_EDITOR
         if(renderViews_)renderViews_->cancel(graphicsSubmission_+1);
 #endif
@@ -285,6 +287,7 @@ void AzureRenderApp::drawFrame() {
     if(submitResult!=VK_SUCCESS)abandonRecording();
     vkCheck(submitResult,"vkQueueSubmit");
     graphicsFrameSubmissions_[currentFrame_]=++graphicsSubmission_;
+    if(roomGlitchViews_)roomGlitchViews_->submitted(graphicsSubmission_);
     if(sceneRenderer_)sceneRenderer_->onFrameSubmitted(graphicsSubmission_);
     if(temporalReconstruction_)temporalReconstruction_->commit(graphicsSubmission_);
 #if AZURE_WITH_EDITOR
@@ -1059,6 +1062,7 @@ void AzureRenderApp::recordCommandBuffer(
     const azurerender::game::ScreenBlackout* blackout = nullptr;
     const azurerender::game::ScreenChromatic* chromatic = nullptr;
     const azurerender::game::ScreenMove* screenMove = nullptr;
+    const azurerender::game::ScreenGlitch* glitch = nullptr;
     std::optional<azurerender::RenderGraph::ResourceId> opaqueColor;
     if (effectiveRenderSettings_.diagnosticView == 0) {
         if (const auto* runtime = activeRuntime()) {
@@ -1073,6 +1077,11 @@ void AzureRenderApp::recordCommandBuffer(
             if (const auto* effects = runtime->world().findComponentArray<azurerender::game::ScreenMove>()) {
                 for (const auto& effect : effects->dense())
                     if (effect.ratio > 0 && (!screenMove || effect.ratio > screenMove->ratio)) screenMove = &effect;
+            }
+            if (const auto* effects = runtime->world().findComponentArray<azurerender::game::ScreenGlitch>()) {
+                for (const auto& effect : effects->dense())
+                    if ((effect.ratio > 0 || effect.cameraActive) && (!glitch || effect.ratio > glitch->ratio))
+                        glitch = &effect;
             }
         }
     }
@@ -1118,6 +1127,47 @@ void AzureRenderApp::recordCommandBuffer(
     // All views consume the same snapshot after the host advances simulation.
     if(renderViews_)renderViews_->schedule(graph,frame,sceneContext,graphicsSubmission_+1);
 #endif
+    std::optional<azurerender::RenderViewSample> glitchInput;
+    if (glitch && glitch->cameraActive) {
+        if (!sceneRenderer_ || !frame.sceneSnapshot)
+            throw std::logic_error("Screen glitch requires an active scene view");
+        auto camera = frame.camera.view;
+        camera.referenceCalibration.reset();
+        camera.projection = azurerender::CameraProjectionKind::Perspective;
+        camera.projectionOffsetX = camera.projectionOffsetY = 0.F;
+        camera.fov = glitch->fieldOfView * .017453292519943295F;
+        camera.nearPlane = glitch->nearPlane;
+        camera.farPlane = glitch->farPlane;
+        if (!(camera.fov > 0.F && camera.fov < 3.141592654F && camera.nearPlane > 0.F
+              && std::isfinite(camera.farPlane) && camera.farPlane > camera.nearPlane))
+            throw std::invalid_argument("Screen glitch camera projection is invalid");
+        if (!roomGlitchViews_) {
+            auto context=sceneContext;
+            context.scene=*frame.sceneSnapshot;
+            roomGlitchViews_=createRoomGlitchView(context,std::string(sceneRenderer_->name()),roomGlitchView_,false);
+        }
+        roomGlitchViews_->setCamera(roomGlitchView_, camera);
+    }
+    if (roomGlitchViews_) {
+        roomGlitchViews_->complete(graphicsCompleted_);
+        roomGlitchViews_->schedule(graph, frame, sceneContext, graphicsSubmission_ + 1);
+        if (glitch && glitch->ratio > 0)
+            glitchInput = roomGlitchViews_->sampleForGraph(roomGlitchView_, graph, graphicsSubmission_ + 1);
+    }
+    if (glitchInput) {
+        auto* assets = activeAssets();
+        if (!assets) throw std::logic_error("Screen glitch requires the active room asset database");
+        const auto timeline = assets->resolveReference(glitch->timeline);
+        const std::initializer_list<azurerender::ScreenEffectTexture> textures{{timeline, {64, 1}, VK_FILTER_LINEAR}};
+        if (!screenGlitch_ || !screenGlitch_->matches(textures)) {
+            auto effect = std::make_unique<azurerender::ScreenEffectGpu>(*rhi_, postProcessRenderPass_,
+                swapchainFormat_, renderExtent_, static_cast<std::uint32_t>(kMaxFramesInFlight), screenAttachmentSampler_,
+                resourceLocator_.shaderDirectory() / "opening_glitch.frag.spv", textures, true);
+            if (screenGlitch_) vkCheck(vkDeviceWaitIdle(device_), "vkDeviceWaitIdle(replace screen glitch)");
+            screenGlitch_ = std::move(effect);
+        }
+        screenGlitch_->bindInput(sceneContext.currentFrame, glitchInput->view);
+    }
     const auto scenePassCount = graph.passes().size();
     const bool showcaseDisplay=runOptions_.qaShowcasePresentation;
     const bool encodeSrgb=swapchainFormat_!=VK_FORMAT_B8G8R8A8_SRGB && swapchainFormat_!=VK_FORMAT_R8G8B8A8_SRGB;
@@ -1333,6 +1383,18 @@ void AzureRenderApp::recordCommandBuffer(
     } else {
         drawDisplay();
     }
+    if (glitchInput) {
+        std::array<float,12> values{seconds,glitch->ratio,glitch->length,glitch->dotScale,glitch->speed,glitch->unstable};
+        if (glitchVendorId_ == 0x8086) {
+            const float step = std::floor(seconds * glitch->speed);
+            values[6] = step * 12.9898F + step * 78.233002F;
+            values[7] = 1.F;
+        }
+        const std::array<std::uint32_t,4> sampling{renderExtent_.width,renderExtent_.height,0,
+            glitchVendorId_ == 0x10DE ? 1u : 0u};
+        std::memcpy(values.data()+8,sampling.data(),sizeof(sampling));
+        screenGlitch_->record(commandRecorder,sceneContext.currentFrame,values);
+    }
     if (opaqueColor) {
         const azurerender::ScreenBlackoutParameters values{
             blackout->ratio, blackout->blind, blackout->unstable, blackout->length, blackout->dotScale,
@@ -1382,6 +1444,7 @@ void AzureRenderApp::recordCommandBuffer(
         graph.write(composite, output);
     }
     if (opaqueColor) graph.use(composite,*opaqueColor,azurerender::RenderGraphUsage::Sampled,false);
+    if (glitchInput) graph.use(composite,glitchInput->resource,azurerender::RenderGraphUsage::Sampled,false);
     const auto editor = graph.addPass("editor-ui", [&] {
 #if AZURE_WITH_EDITOR
     if (editorUiEnabled_ && editorLayer_ != nullptr) {

@@ -2,7 +2,15 @@
 #include "rhi/NullRhi.hpp"
 #include <iostream>
 using namespace azurerender;
-struct Probe {unsigned recordings=0,commits=0,cancels=0;std::uint64_t serial=0;bool fail=false;};
+struct Probe {
+    unsigned recordings=0,commits=0,cancels=0;
+    std::uint64_t serial=0;
+    bool fail=false;
+    unsigned preparationSlices=0;
+    decltype(RenderContext::preparedMeshes) expectedMeshes=nullptr;
+    std::shared_ptr<const scene::SceneDescription> scene;
+    CameraViewDescriptor camera;
+};
 class ProbeRenderer final:public ISceneRenderer {
 public:
     explicit ProbeRenderer(std::shared_ptr<Probe> p):p_(std::move(p)){}
@@ -15,9 +23,16 @@ public:
         source_=context.scenePassDescription;depth_=context.sceneDepthImage;
     }
     void onUnload(const RenderContext&)override{}
+    bool prepareLoad(const RenderContext& context,double budgetMs)override{
+        if(context.preparedMeshes!=p_->expectedMeshes||budgetMs!=4.0)
+            throw std::logic_error("Deferred view must borrow the caller's prepared meshes for each slice");
+        if(++p_->preparationSlices<2)return false;
+        onLoad(context);return true;
+    }
     void onSwapchainRecreate(const RenderContext&)override{}
-    void updateFrame(const SceneFrameData&)override{}
+    void updateFrame(const SceneFrameData& frame)override{p_->scene=frame.sceneSnapshot;p_->camera=frame.camera.view;}
     void recordScene(const RenderContext& context)override{
+        if(context.preparedMeshes)throw std::logic_error("Recording retained a borrowed mesh cache");
         if(context.scenePassDescription!=source_||context.sceneDepthImage!=depth_)throw std::logic_error("Borrowed view target identity changed during recording");
         ++p_->recordings;if(p_->fail)throw std::runtime_error("Injected recording failure");
     }
@@ -35,19 +50,47 @@ int main(int argc,char** argv)try{
     std::vector<std::shared_ptr<Probe>> probes;
     RenderViewService service(base,[&](const std::string&){auto p=std::make_shared<Probe>();probes.push_back(p);return std::make_unique<ProbeRenderer>(p);},[]{});
     RenderViewDescriptor descriptor;descriptor.rendererId="probe";
-    const auto a=service.create(descriptor),b=service.create(descriptor);
+    const auto a=service.create(descriptor);
+    descriptor.useFrameScene=true;
+    const auto b=service.createDeferred(descriptor);
+    std::map<std::string,std::shared_ptr<const LoadedAsset>> meshes;
+    probes[1]->expectedMeshes=&meshes;
+    service.request(b);
+    SceneFrameData loadingFrame;
+    RenderGraph loading;
+    checkSubmission(!service.prepare(b,&meshes,4.0),"View can yield while the level loads");
+    service.schedule(loading,loadingFrame,base,1);
+    checkSubmission(!service.sampleForGraph(b,loading,1)&&probes[1]->recordings==0,
+        "Unprepared view cannot participate in the frame graph");
+    checkSubmission(service.prepare(b,&meshes,4.0)&&service.prepare(b,&meshes,4.0)&&probes[1]->preparationSlices==2,
+        "View preparation resumes and completes exactly once");
     SceneFrameData frame;std::string error;service.request(a);service.request(b);
-    RenderGraph first;service.schedule(first,frame,base,1);
-    checkSubmission(!service.submitted(1)&&probes[0]->commits==0,"Scheduling cannot publish history");
+    frame.sceneSnapshot=std::make_shared<const scene::SceneDescription>();
+    CameraViewDescriptor camera;
+    camera.position={1,2,3};camera.target={1,2,2};camera.fov=.61F;
+    service.setCamera(b,camera);
+    RenderGraph first;service.schedule(first,frame,base,2);
+    const auto resolved=service.sampleForGraph(b,first,2);
+    checkSubmission(resolved&&resolved->view&&first.resources().at(resolved->resource).name=="view-1-ldr",
+        "A rendered view supplies its resolved image to the same graph");
+    const auto composite=first.addPass("game-composite");
+    first.use(composite,resolved->resource,RenderGraphUsage::Sampled,false);
+    checkSubmission(probes[0]->scene!=frame.sceneSnapshot&&probes[1]->scene==frame.sceneSnapshot&&
+        probes[1]->camera.fov==camera.fov&&probes[1]->camera.position==camera.position,
+        "A live view follows the frame scene and uses its dedicated projection");
+    checkSubmission(!service.submitted(2)&&probes[0]->commits==0,"Scheduling cannot publish history");
     checkSubmission(first.compile(error),"Submission graph compiles");first.execute(&commands);
     checkSubmission(probes[0]->commits==0,"Recording cannot publish history");
-    bool otherThreadResult=true;std::thread otherThread([&]{otherThreadResult=service.submitted(1);});otherThread.join();
+    bool otherThreadResult=true;std::thread otherThread([&]{otherThreadResult=service.submitted(2);});otherThread.join();
     checkSubmission(!otherThreadResult&&probes[0]->commits==0,"Commit notifications require the owner thread");
-    checkSubmission(service.submitted(1)&&probes[0]->serial==1&&probes[1]->serial==1,"Successful submit publishes both rendered views");
-    checkSubmission(!service.submitted(1),"Duplicate submit is rejected");service.complete(1);
-    checkSubmission(service.describe(a).at("lastRenderSubmission")==1&&service.describe(a).at("submittedRenderCount")==1,
+    checkSubmission(service.submitted(2)&&probes[0]->serial==2&&probes[1]->serial==2,"Successful submit publishes both rendered views");
+    checkSubmission(!service.submitted(2),"Duplicate submit is rejected");service.complete(2);
+    checkSubmission(service.describe(a).at("lastRenderSubmission")==2&&service.describe(a).at("submittedRenderCount")==1,
         "Diagnostics report accepted submissions separately from scheduling");
     service.request(b);RenderGraph skipped;service.schedule(skipped,frame,base,9);
+    const auto frozen=service.sampleForGraph(a,skipped,9);
+    checkSubmission(frozen&&frozen->view&&skipped.resources().at(frozen->resource).initial.newLayout==
+        VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,"A skipped view exposes its last submitted output");
     checkSubmission(skipped.compile(error),"Skipped view graph compiles");skipped.execute(&commands);service.submitted(9);service.complete(9);
     checkSubmission(probes[0]->commits==1&&probes[1]->commits==2&&probes[1]->serial==9,"Static views keep their own previous submission");
     service.request(a);probes[0]->fail=true;RenderGraph failed;service.schedule(failed,frame,base,10);checkSubmission(failed.compile(error),"Failure graph compiles");

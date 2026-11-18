@@ -21,6 +21,7 @@ from tools.npr_room.opening_blackout import bind as blackout_program, bind_room 
 from tools.npr_room.opening_blackout import room_inputs as blackout_inputs
 from tools.npr_room.opening_chromatic import bind as rendered_chromatic, room_inputs as chromatic_inputs
 from tools.npr_room.opening_screen_move import bind as rendered_screen_move, room_inputs as screen_move_inputs
+from tools.npr_room.opening_glitch_room import bind as rendered_glitch, room_inputs as glitch_inputs
 from tools.npr_room.opening_face_layers import bind as face_program
 from tools.npr_room.pbr_materials import write
 from tools.npr_room.reference_inventory import digest
@@ -31,7 +32,7 @@ from tools.npr_room.tutorial_camera_body import project as tutorial_project
 
 @contextmanager
 def entry(room, graph, program, models=None, camera_sound=None, camera_source=None, room_scripts=None, blackout=None,
-          additional_room=None, chromatic=None, screen_move=None):
+          additional_room=None, chromatic=None, screen_move=None, glitch=None):
     tag = "capture-main-conditional"
     root = room / "assets"
     names = {kind: tag + suffix for kind, suffix in (
@@ -65,7 +66,7 @@ def entry(room, graph, program, models=None, camera_sound=None, camera_source=No
         audio_file = (camera_source / camera_sound["source"]).resolve(strict=True)
         assert audio_file.is_relative_to(camera_source / "Assets") and digest(audio_file) == camera_sound["sha256"]
         links[root / camera_sound["asset"]] = audio_file
-    for effect in (blackout, chromatic, screen_move):
+    for effect in (blackout, chromatic, screen_move, glitch):
         if effect is None:
             continue
         node, media, _ = effect
@@ -327,9 +328,34 @@ def screen_move_observer(program):
     end)()""")
 
 
+def glitch_observer(program):
+    return rendered_glitch(program, """(function()
+        local events = {}
+        return function(kind, value, seconds)
+            events[#events + 1] = {kind, value, seconds}
+            self:write_save("opening-glitch-timing", {1, events})
+        end
+    end)()""")
+
+
+def glitch_timing(profile):
+    schema, events = slot(profile, "opening-glitch-timing")
+    assert schema == 1
+    ratios = [(value, seconds) for kind, value, seconds in events if kind == "ratio"]
+    cameras = [(value, seconds) for kind, value, seconds in events if kind == "camera"]
+    assert [row[0] for row in ratios] == [.5, 0, .3, 0], events
+    holds = [ratios[1][1] - ratios[0][1], ratios[3][1] - ratios[2][1]]
+    assert abs(holds[0] - 1) <= 2 / 60 and abs(holds[1] - .7) <= 2 / 60, events
+    assert cameras[0][0] is True and cameras[-1][0] is False and len(cameras) >= 4, events
+    assert all(a[0] != b[0] for a, b in zip(cameras, cameras[1:])), events
+    assert all((True, start[1]) in cameras for start in ratios[::2]), events
+    return events, holds
+
+
 def replay(player, room, resources, catalog, graph, chapters, output, source_receipt=None, models=None,
            camera_trace=None, camera_audio_source=None, face_catalog=None, achievements=False, blackout_timing=False,
-           blackout_source_lock=None, image_catalog=None, chromatic_source_lock=None, screen_move_source_lock=None):
+           blackout_source_lock=None, image_catalog=None, chromatic_source_lock=None, screen_move_source_lock=None,
+           glitch_source_lock=None, glitch_camera=None):
     if bool(source_receipt) != bool(models):
         raise ValueError("The tutorial replay needs both source receipt and sampled models")
     original_script = room / "assets/pomodoro.lua"
@@ -364,8 +390,10 @@ def replay(player, room, resources, catalog, graph, chapters, output, source_rec
             raise ValueError("Achievement replay needs the normal tutorial body route")
         scripts = achievement_programs(program)
         program = scripts.pop("pomodoro.lua")
-    if bool(blackout_source_lock or chromatic_source_lock or screen_move_source_lock) != bool(image_catalog):
+    if bool(blackout_source_lock or chromatic_source_lock or screen_move_source_lock or glitch_source_lock) != bool(image_catalog):
         raise ValueError("Rendered opening effects need a source lock and the image catalog")
+    if bool(glitch_source_lock) != bool(glitch_camera):
+        raise ValueError("Glitch replay requires the original camera receipt")
     rendered = blackout_inputs(blackout_source_lock, image_catalog) if blackout_source_lock else None
     if blackout_timing or rendered:
         program = blackout_observer(program, bool(rendered))
@@ -381,6 +409,12 @@ def replay(player, room, resources, catalog, graph, chapters, output, source_rec
             raise ValueError("Screen move replay requires the normal tutorial body route")
         screen_move = screen_move_inputs(screen_move_source_lock, image_catalog)
         program = screen_move_observer(program)
+    glitch = None
+    if glitch_source_lock:
+        if not models:
+            raise ValueError("Glitch replay requires the normal tutorial body route")
+        glitch = glitch_inputs(glitch_source_lock, image_catalog, glitch_camera)
+        program = glitch_observer(program)
     face_results = {}
     trace = MotionTrace(room, chapters)
     output.mkdir()
@@ -389,7 +423,7 @@ def replay(player, room, resources, catalog, graph, chapters, output, source_rec
     tracks = json.loads((room / "music-receipt.json").read_bytes())["tracks"]
     tutorial = None
     with entry(room, compiled, program, models, sound, camera_audio_source, scripts, rendered,
-               chromatic=chromatic, screen_move=screen_move) as (project, level):
+               chromatic=chromatic, screen_move=screen_move, glitch=glitch) as (project, level):
         if models:
             startup = output / "tutorial"
             save(profile, project, "room-book-layout", [1, "Book_5"])
@@ -429,6 +463,8 @@ def replay(player, room, resources, catalog, graph, chapters, output, source_rec
                     assert schema == 1 and [event[0] for event in screen_move_events] == [.5, 0], screen_move_events
                     movement_hold = screen_move_events[1][1] - screen_move_events[0][1]
                     assert abs(movement_hold - 1) <= 2 / 60, screen_move_events
+                if glitch:
+                    glitch_events, glitch_holds = glitch_timing(profile)
                 if achievements:
                     tutorial_key = "COMPLETE_TUTORIAL_COUNT"
                     assert slot(profile, "room-achievements") == [1, [tutorial_key]]
@@ -555,6 +591,10 @@ def replay(player, room, resources, catalog, graph, chapters, output, source_rec
         assert slot(profile, "opening-screen-move-timing") == [1, screen_move_events]
         proof["screenMoveTiming"] = {"tutorial": screen_move_events, "firstChapter": [], "holdSeconds": movement_hold,
                                      "material": screen_move[2]}
+    if glitch:
+        assert slot(profile, "opening-glitch-timing") == [1, glitch_events]
+        proof["glitchTiming"] = {"tutorial": glitch_events, "firstChapter": [], "holdSeconds": glitch_holds,
+                                 "material": glitch[2]}
     write(output / "first-chapter-room-replay.json", proof)
     return proof
 
@@ -574,6 +614,8 @@ if __name__ == "__main__":
     parser.add_argument("--blackout-source-lock", type=Path)
     parser.add_argument("--chromatic-source-lock", type=Path)
     parser.add_argument("--screen-move-source-lock", type=Path)
+    parser.add_argument("--glitch-source-lock", type=Path)
+    parser.add_argument("--glitch-camera", type=Path)
     parser.add_argument("--image-catalog", type=Path)
     args = vars(parser.parse_args())
     print(json.dumps(replay(*(args[name.replace("-", "_")].resolve() for name in parameters),
@@ -583,4 +625,5 @@ if __name__ == "__main__":
                             achievements=args["achievements"], blackout_timing=args["blackout_timing"],
                             blackout_source_lock=args["blackout_source_lock"], image_catalog=args["image_catalog"],
                             chromatic_source_lock=args["chromatic_source_lock"],
-                            screen_move_source_lock=args["screen_move_source_lock"])))
+                            screen_move_source_lock=args["screen_move_source_lock"],
+                            glitch_source_lock=args["glitch_source_lock"], glitch_camera=args["glitch_camera"])))

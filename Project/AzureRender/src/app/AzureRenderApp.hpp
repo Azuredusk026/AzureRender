@@ -24,6 +24,7 @@
 #include "render/ColorGradingLutGpu.hpp"
 #include "render/ScreenBlackoutGpu.hpp"
 #include "render/ScreenEffectGpu.hpp"
+#include "render/RenderViewService.hpp"
 #include "render/SpatialAntiAliasing.hpp"
 #include "render/TemporalReconstruction.hpp"
 #include "render/SceneMultisampling.hpp"
@@ -37,7 +38,6 @@
 #include "render/RecordingWorkerPool.hpp"
 #if AZURE_WITH_EDITOR
 #include "devtools/ShaderHotReloader.hpp"
-#include "render/RenderViewService.hpp"
 #include "editor/preview/AssetThumbnailService.hpp"
 #include "editor/EditorRenderResourceState.hpp"
 #endif
@@ -583,4 +583,17 @@ private:
     std::unique_ptr<azurerender::ScreenEffectGpu> screenChromatic_;
     std::unique_ptr<azurerender::ScreenEffectGpu> screenMove_;
     bool screenMovePrecedingBand_ = false;
+    std::unique_ptr<azurerender::RenderViewService> roomGlitchViews_;
+    azurerender::RenderViewHandle roomGlitchView_ = 0;
+    std::unique_ptr<azurerender::RenderViewService> preparedGlitchViews_;
+    azurerender::RenderViewHandle preparedGlitchView_ = 0;
+    std::pair<std::string,std::string> preparedGlitchKey_;
+    std::unique_ptr<azurerender::ScreenEffectGpu> screenGlitch_;
+    std::uint32_t glitchVendorId_ = 0;
+    std::unique_ptr<azurerender::RenderViewService> createRoomGlitchView(
+        const azurerender::RenderContext&, const std::string& rendererId, azurerender::RenderViewHandle&,
+        bool deferLoad);
+    bool preloadRoomGlitchView(const azurerender::Level&, double budgetMs);
+    void releasePreparedGlitchView();
+    void clearRoomGlitch();
 };

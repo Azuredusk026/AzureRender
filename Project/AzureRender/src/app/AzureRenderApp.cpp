@@ -561,6 +561,7 @@ void AzureRenderApp::createMultisampleResources(){
     }
 }
 void AzureRenderApp::createSceneRenderer() {
+    clearRoomGlitch();
     sceneResourcePaths_.reset();
     playerSceneSnapshots_.clear();playerRenderSceneCache_.clear();
     azurerender::RenderContext context;
@@ -1247,6 +1248,8 @@ void AzureRenderApp::cleanup() {
     runtimeModules_.stop();
     if (device_ != VK_NULL_HANDLE) {
         vkDeviceWaitIdle(device_);
+        clearRoomGlitch();
+        releasePreparedGlitchView();
 #if AZURE_WITH_EDITOR
         shaderReloader_.reset();
         if(runOptions_.editorSession)runOptions_.editorSession->setDeveloperServices({});
