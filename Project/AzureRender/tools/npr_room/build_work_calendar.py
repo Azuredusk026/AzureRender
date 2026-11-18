@@ -63,7 +63,7 @@ def calendar_script(examples, rewards=None):
 
 
 def calendar_actions():
-    return ("timer-stats", "calendar-prev-month", "calendar-next-month",
+    return ("timer-stats", "calendar-prev-month", "calendar-next-month", "calendar-edit-time", "calendar-submit-time",
             *(f"calendar-first-{weekday}" for weekday in range(7)),
             *(f"calendar-day-{cell}" for cell in range(1, 43)))
 
@@ -74,11 +74,13 @@ def integrate_calendar(project, document, program, examples, localization=""):
     progression = '<span id="work-progression" style="display: none;"></span>'
     legacy_update = "            local growth = workCalendar:progress()"
     legacy_init = "workCalendar = new_work_calendar()"
+    legacy_toggle = "            statsOpen = not statsOpen"
     module_start = 'local workSlot = "work-calendar"'
     module_end = "\n    return calendar\nend\n"
     if ('id="work-calendar"' in document or "workCalendar:update_month_view(" in program
             or any(document.count(anchor) != 1 for anchor in (legacy_style, progression))
-            or any(program.count(anchor) != 1 for anchor in (module_start, module_end, legacy_init, legacy_update))):
+            or any(program.count(anchor) != 1 for anchor in
+                   (module_start, module_end, legacy_init, legacy_update, legacy_toggle))):
         raise ValueError("Expected one assembled room with the original work statistics panel")
     template = (examples / "timer.rml").read_text(encoding="utf-8")
     styles = template[template.index("#work-stats"):template.index("#notes-toggle")]
@@ -89,6 +91,8 @@ def integrate_calendar(project, document, program, examples, localization=""):
     module = (examples / "work-calendar.lua").read_text(encoding="utf-8")
     program = program[:start] + localization + module + program[end:]
     program = program.replace(legacy_init, "workCalendar = new_work_calendar(translate)", 1)
+    program = program.replace(legacy_toggle, "            if statsOpen then workCalendar:close_month_view() end\n"
+                              + legacy_toggle, 1)
     sample = (examples / "pomodoro.lua").read_text(encoding="utf-8")
     update = sample[sample.index("            local date, time = workCalendar:update_month_view("):
                     sample.index(legacy_update)]

@@ -32,7 +32,8 @@ LOCALES = (
 FIELDS = tuple(field for _, field, _ in LOCALES)
 CALENDAR_WEEKDAYS = tuple("ui_calendar_" + day for day in
                           ("sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"))
-CALENDAR_LABELS = {"firstDay": "ui_setting_general_firstday_title", "workTime": "ui_calendar_group_work_title"}
+CALENDAR_LABELS = {"firstDay": "ui_setting_general_firstday_title", "workTime": "ui_calendar_group_work_title",
+                   "editTime": "ui_calendar_worktime_edit_title", "error": "ui_common_error_body"}
 SOURCE_FONTS = (
     ("ed1ce6b1b31e42f4a9a27b428b87f28c", "IBMPlexSansJP-Medium.otf", "Japanese"),
     ("3751989ca05e0454cbf35553ae20d6b2", "IBMPlexSansTC-Medium.otf", "Traditional Chinese"),

@@ -11,6 +11,7 @@ body { width: 100%; height: 100%; margin: 0; color: white; font-family: LatoLati
 #timer-controls button { display: inline-block; padding: 4dp 7dp; margin-right: 3dp; color: white; background-color: #34434f; }
 #timer-controls button:hover { background-color: #506472; }
 #work-stats { position: absolute; right: 100%; top: 0; margin-right: 8dp; width: 246dp; padding: 10dp; background-color: #19232c; font-size: 13dp; }
+#work-calendar, #calendar-navigation, #calendar-picker { display: block; }
 #work-calendar { margin-top: 8dp; }
 #calendar-month { display: inline-block; width: 76dp; text-align: center; font-size: 15dp; }
 .calendar-row { display: flex; height: 18dp; }
@@ -20,6 +21,10 @@ body { width: 100%; height: 100%; margin: 0; color: white; font-family: LatoLati
 #calendar-picker button, #calendar-navigation button { display: inline-block; padding: 3dp; margin-right: 2dp; color: white; background-color: #34434f; }
 #calendar-picker button:hover, #calendar-navigation button:hover { background-color: #506472; }
 #calendar-selected { display: block; margin: 4dp 0; }
+#calendar-selected-time { margin-left: 3dp; }
+#calendar-edit-time { display: inline-block; padding: 3dp 6dp; color: white; background-color: #34434f; }
+#calendar-work-time-editor { display: block; margin: 4dp 0; }
+#calendar-work-time-editor input { width: 28dp; padding: 3dp; color: white; background-color: #273541; }
 #calendar-status { display: block; color: #f0c58e; }
 #notes-toggle { position: absolute; left: 16dp; top: 16dp; padding: 6dp 10dp; color: white; background-color: #34434f; }
 #notes-panel { position: absolute; left: 16dp; top: 52dp; width: 310dp; padding: 14dp; background-color: #19232c; }
@@ -112,6 +117,12 @@ body { width: 100%; height: 100%; margin: 0; color: white; font-family: LatoLati
 <span><button id="calendar-date-42" data-action="calendar-day-42" style="display: none;"></button></span>
 </div>
 <div id="calendar-selected"><span id="calendar-selected-date"></span> · <span id="calendar-work-label"></span> <span id="calendar-selected-time"></span></div>
+<button id="calendar-edit-time" data-action="calendar-edit-time">Edit Work Time</button>
+<div id="calendar-work-time-editor" style="display: none;">
+<input id="calendar-edit-hours" data-action-on-blur="calendar-submit-time" type="text" maxlength="3" placeholder="hh" /> :
+<input id="calendar-edit-minutes" data-action-on-blur="calendar-submit-time" type="text" maxlength="3" placeholder="mm" /> :
+<input id="calendar-edit-seconds" data-action-on-blur="calendar-submit-time" type="text" maxlength="3" placeholder="ss" />
+</div>
 <div><span id="calendar-first-day-label"></span> · <span id="calendar-first-day"></span></div>
 <div id="calendar-picker">
 <button id="calendar-first-0" data-action="calendar-first-0">Sun</button>

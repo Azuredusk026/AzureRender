@@ -13,6 +13,7 @@ class IntegratedCalendarTests(unittest.TestCase):
             'local workSlot = "work-calendar"\nfunction new_work_calendar()\n'
             '    local calendar = {}\n    return calendar\nend\n\n'
             'local extraRoomModule = true\nworkCalendar = new_work_calendar()\n'
+            '            statsOpen = not statsOpen\n'
             '            local growth = workCalendar:progress()\n'
         )
         document = ('<style>\n#work-stats { display: block; margin-top: 8dp; font-size: 13dp; }\n'
@@ -22,8 +23,10 @@ class IntegratedCalendarTests(unittest.TestCase):
         script, markup = integrate_calendar(project, document, controller, examples)
         self.assertIn("local extraRoomModule = true", script)
         self.assertIn("workCalendar:update_month_view(languageChanged or ", script)
+        self.assertIn("workCalendar:close_month_view()", script)
         self.assertIn('id="room-language-toggle"', markup)
         self.assertIn('id="calendar-next-month"', markup)
         self.assertIn('data-action="calendar-day-42"', markup)
         self.assertIn("calendar-day-42", project["runtime"]["input"])
+        self.assertIn("calendar-submit-time", project["runtime"]["input"])
         self.assertIn("room-language-toggle", project["runtime"]["input"])

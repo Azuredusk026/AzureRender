@@ -2,6 +2,7 @@ local workSlot = "work-calendar"
 local weekdaySlot = "calendar-first-day"
 local weekdays = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"}
 local monthLengths = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31}
+local workTimeFields = {"calendar-edit-hours", "calendar-edit-minutes", "calendar-edit-seconds"}
 
 local function readFirstDay(runtime)
     local value = runtime:read_save(weekdaySlot)
@@ -24,6 +25,17 @@ local function firstWeekday(year, month)
     local days = 365 * previousYear + previousYear // 4 - previousYear // 100 + previousYear // 400 + 1
     for preceding = 1, month - 1 do days = days + monthLength(year, preceding) end
     return days % 7
+end
+
+local function validDate(date)
+    if type(date) ~= "string" or not date:match("^%d%d%d%d%d%d%d%d$") then return false end
+    local year, month, day = tonumber(date:sub(1, 4)), tonumber(date:sub(5, 6)), tonumber(date:sub(7, 8))
+    return year >= 1 and month >= 1 and month <= 12 and day >= 1 and day <= monthLength(year, month)
+end
+
+local function workTimeParts(seconds)
+    seconds = math.floor(math.min(86400, seconds) + 1e-7)
+    return {seconds // 3600, seconds // 60 % 60, seconds % 60}
 end
 
 local function readWorkDays(rewards)
@@ -84,17 +96,20 @@ function new_work_calendar(translate)
     local calendar = {}
     local runtime = self
     local startDay, displayedMonth, displayedStart
-    local browsedMonth, selectedDate
+    local browsedMonth, selectedDate, editingDate
 
     local function today()
         return runtime:local_datetime():sub(1, 8)
     end
 
-    function calendar:flush()
-        if next(pending) == nil and #pendingSettlements == 0 and not pendingCompletion then return true end
+    local function publish(editedDate, seconds)
+        if not editedDate and next(pending) == nil and #pendingSettlements == 0 and not pendingCompletion then
+            return true
+        end
         local current, writable, earned, active, completed = readWorkDays(rewards)
         if not writable then return false end
         for day, delta in pairs(pending) do current[day] = (current[day] or 0) + delta end
+        if editedDate then current[editedDate] = seconds > 0 and seconds or nil end
         local days = encodeWorkDays(current)
         local document = {1, days}
         if rewards then
@@ -111,6 +126,16 @@ function new_work_calendar(translate)
         progression, pendingSettlements, pendingActive = earned, {}, 0
         completedTimer, pendingCompletion = completed, false
         return true
+    end
+
+    function calendar:flush()
+        return publish()
+    end
+
+    function calendar:setTimeFor(day, seconds)
+        if not validDate(day) or type(seconds) ~= "number" or not math.tointeger(seconds)
+            or seconds < 0 or seconds > 86400 then return false end
+        return publish(day, seconds)
     end
 
     function calendar:settle(recordCompletion)
@@ -163,7 +188,53 @@ function new_work_calendar(translate)
         return translate and calendar_labels and translate(calendar_labels.weekdays[index]) or weekdays[index]
     end
 
+    local function calendarLabel(key, fallback)
+        local labels = calendar_labels
+        return translate and labels and labels[key] and translate(labels[key]) or fallback
+    end
+
+    local function renderEditFields()
+        local values = workTimeParts(calendar:timeFor(editingDate))
+        for index, field in ipairs(workTimeFields) do runtime:ui_set_value(field, string.format("%02d", values[index])) end
+    end
+
+    local function submitEdit()
+        local values = workTimeParts(calendar:timeFor(editingDate))
+        for index, field in ipairs(workTimeFields) do
+            local input = runtime:ui_value(field)
+            if input ~= "" then
+                local value = math.tointeger(tonumber(input))
+                if not value then return false end
+                values[index] = math.max(0, math.min(index == 1 and 24 or 59, value))
+            end
+        end
+        local hours, minutes, seconds = table.unpack(values)
+        return calendar:setTimeFor(editingDate, math.min(86400, hours * 3600 + minutes * 60 + seconds))
+    end
+
+    local function commitEditor()
+        if editingDate and runtime:pressed("calendar-submit-time") then
+            local stored = submitEdit()
+            runtime:ui_text("calendar-status", stored and "" or calendarLabel("error", "Could not save work time"))
+            if stored then renderEditFields() end
+        end
+    end
+
+    local function showEditor(day)
+        editingDate = day
+        runtime:ui_visible("calendar-work-time-editor", day ~= nil)
+        runtime:ui_visible("calendar-selected-time", day == nil)
+        if day then renderEditFields() end
+    end
+
+    function calendar:close_month_view()
+        if not editingDate then return end
+        commitEditor()
+        showEditor(nil)
+    end
+
     function calendar:update_month_view(languageChanged)
+        commitEditor()
         if startDay == nil then startDay = readFirstDay(runtime) end
         for weekday = 0, 6 do
             if runtime:pressed("calendar-first-" .. weekday) then
@@ -193,10 +264,9 @@ function new_work_calendar(translate)
         if displayedMonth ~= monthIndex or displayedStart ~= startDay or languageChanged then
             displayedMonth, displayedStart = monthIndex, startDay
             runtime:ui_text("calendar-month", string.format("%04d-%02d", year, month))
-            runtime:ui_text("calendar-first-day-label", translate and calendar_labels and translate(calendar_labels.firstDay)
-                or "Start day of the week")
-            runtime:ui_text("calendar-work-label", translate and calendar_labels and translate(calendar_labels.workTime)
-                or "Work Time")
+            runtime:ui_text("calendar-first-day-label", calendarLabel("firstDay", "Start day of the week"))
+            runtime:ui_text("calendar-work-label", calendarLabel("workTime", "Work Time"))
+            runtime:ui_text("calendar-edit-time", calendarLabel("editTime", "Edit Work Time"))
             runtime:ui_text("calendar-first-day", weekdayLabel(startDay + 1))
             for column = 1, 7 do
                 runtime:ui_text("calendar-first-" .. (column - 1), weekdayLabel(column))
@@ -216,6 +286,12 @@ function new_work_calendar(translate)
             end
         end
         local selected = selectedDate or date
+        if editingDate and editingDate ~= selected then
+            showEditor(nil)
+        end
+        if runtime:pressed("calendar-edit-time") then
+            showEditor(editingDate == nil and selected or nil)
+        end
         local label = selected:sub(1, 4) .. "-" .. selected:sub(5, 6) .. "-" .. selected:sub(7, 8)
         return label, math.min(86400, self:timeFor(selected))
     end

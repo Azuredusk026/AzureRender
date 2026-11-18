@@ -49,3 +49,20 @@ state = {2, {}}
 local future = new_work_calendar()
 future:advance(1, true)
 assert(not future:flush() and state[1] == 2 and future:timeFor("20270101") == 1)
+
+state = {1, {{"2027", {{"0101", 10}, {"0102", 40}}}}}
+local editor = new_work_calendar()
+editor:advance(3, true)
+failWrite = true
+assert(not editor:setTimeFor("20270102", 3661))
+assert(editor:timeFor("20270101") == 13 and editor:timeFor("20270102") == 40)
+failWrite = false
+assert(editor:setTimeFor("20270102", 3661))
+assert(editor:timeFor("20270101") == 13 and editor:timeFor("20270102") == 3661)
+assert(editor:setTimeFor("20270102", 0))
+assert(not editor:setTimeFor("20270229", 24))
+assert(not editor:setTimeFor("20270102", 86401))
+assert(not editor:setTimeFor("20270102", 1.25))
+assert(new_work_calendar():totalTime() == 13)
+state = {2, {}}
+assert(not new_work_calendar():setTimeFor("20270101", 4) and state[1] == 2)

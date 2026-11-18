@@ -37,3 +37,8 @@ assert(reopened:totalTime() == 73)
 local again = new_work_calendar()
 again:recover()
 assert(persisted[3][3] == 10 and again:totalTime() == 73)
+
+again:advance(3, true)
+assert(again:setTimeFor("20261116", 86400))
+assert(persisted[4] == 3 and persisted[3][3] == 10)
+assert(again:timeFor("20261117") == 76 and again:timeFor("20261116") == 86400)

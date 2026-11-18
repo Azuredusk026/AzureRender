@@ -320,6 +320,7 @@ function update(dt)
     updateDisplay()
     if workCalendar then
         if self:pressed("timer-stats") then
+            if statsOpen then workCalendar:close_month_view() end
             statsOpen = not statsOpen
             self:ui_visible("work-stats", statsOpen)
         end
