@@ -206,7 +206,7 @@ local function adjustSettings()
             if nextValue ~= settings[index] then
                 local updated = {settings[1], settings[2], settings[3]}
                 updated[index] = nextValue
-                self:write_save(slot, {1, updated[1], updated[2], updated[3]})
+                if not self:try_write_save(slot, {1, updated[1], updated[2], updated[3]}) then return end
                 settings = updated
                 remaining = settings[1] * 60
             end
@@ -267,9 +267,11 @@ function update(dt)
     end
     if timerVoice then timerVoice:advanceClock(dt, voicedWork) end
     if phase == "idle" and self:pressed("timer-mode") then
-        countupMode = not countupMode
-        self:write_save("timer-mode", {1, countupMode and 1 or 0})
-        playCue("settings-click")
+        local nextMode = not countupMode
+        if self:try_write_save("timer-mode", {1, nextMode and 1 or 0}) then
+            countupMode = nextMode
+            playCue("settings-click")
+        end
     elseif countupMode then
         updateCountup(dt)
     elseif self:pressed("timer-reset") and phase ~= "idle" then

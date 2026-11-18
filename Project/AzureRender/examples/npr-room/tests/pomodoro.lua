@@ -4,6 +4,7 @@ local sounds = {}
 local saved
 local saves = 0
 local otherSaves = {}
+local failedSlot
 local bodyState
 
 self = {}
@@ -32,12 +33,18 @@ function self:read_save(slot)
 end
 
 function self:write_save(slot, value)
+    assert(self:try_write_save(slot, value), "save failure")
+end
+
+function self:try_write_save(slot, value)
+    if slot == failedSlot then return false end
     if slot == "pomodoro-settings" then
         saved = value
         saves = saves + 1
     else
         otherSaves[slot] = value
     end
+    return true
 end
 
 local function step(seconds, input)
@@ -83,6 +90,13 @@ step(0, "timer-reset")
 expect("idle", "25:00")
 assert(sounds[8] == "timer-finish")
 
+failedSlot = "pomodoro-settings"
+local soundsBeforeFailure = #sounds
+step(0, "timer-work-up")
+expect("idle", "25:00")
+assert(saves == 0 and #sounds == soundsBeforeFailure and saved == nil)
+failedSlot = nil
+
 step(0, "timer-work-up")
 step(0, "timer-break-up")
 step(0, "timer-rounds-up")
@@ -109,6 +123,13 @@ assert(saves == 3)
 saved = {2, 26, 0, 3}
 init()
 expect("idle", "25:00")
+
+failedSlot = "timer-mode"
+soundsBeforeFailure = #sounds
+step(0, "timer-mode")
+expect("idle", "25:00")
+assert(otherSaves["timer-mode"] == nil and #sounds == soundsBeforeFailure)
+failedSlot = nil
 
 step(0, "timer-mode")
 expect("idle", "00:00:00")
