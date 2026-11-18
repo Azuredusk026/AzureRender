@@ -5,6 +5,7 @@ import gzip
 from hashlib import sha256
 import json
 from pathlib import Path
+import re
 
 import numpy as np
 
@@ -42,6 +43,16 @@ def convert(sky_file, sky_report, cloud_file, cloud_report, frame, output):
             or sky["preparation"]["referenceSHA256"] != snapshot["referenceSHA256"]
             or cloud["program"] != "cozy-cloud"):
         raise ValueError("Sky and cloud samples must use the same weather and clock")
+    captured = (sky["preparation"].get("input") == "captured-room-program-globals"
+                or "frameSHA256" in sky["preparation"] or "capturedFrameSHA256" in snapshot)
+    identity = None
+    if captured:
+        sky_frame = sky["preparation"].get("frameSHA256")
+        cloud_frame_hash = snapshot.get("capturedFrameSHA256")
+        if (not isinstance(sky_frame, str) or not re.fullmatch("[0-9a-f]{64}", sky_frame)
+                or sky_frame != cloud_frame_hash):
+            raise ValueError("Sky and cloud samples must use the same captured frame")
+        identity = sky_frame
     sky_cube = load_cube(sky_file, sky["rawSHA256"], sky["resolution"][0])
     cloud_cube = load_cube(cloud_file, cloud_frame["rawSHA256"], snapshot["resolution"][0])
     linear = compose(sky_cube, cloud_cube)
@@ -50,7 +61,8 @@ def convert(sky_file, sky_report, cloud_file, cloud_report, frame, output):
         write_hdr(stream, encoded)
     return {"mode": sky["mode"], "seconds": snapshot["seconds"], "environmentSHA256": digest(output),
             "skySHA256": sky["rawSHA256"], "cloudSHA256": cloud_frame["rawSHA256"],
-            "width": linear.shape[1], "height": linear.shape[0]}
+            "width": linear.shape[1], "height": linear.shape[0],
+            **({"capturedFrameSHA256": identity} if identity is not None else {})}
 
 
 if __name__ == "__main__":

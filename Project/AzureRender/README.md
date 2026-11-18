@@ -13,6 +13,7 @@
 [完整程序参数序列](docs/acceptance/npr-room/windows-atmosphere.md#完整程序参数序列)登记逐帧发布的二十四帧原版参照。
 [引用模型姿态文件](docs/acceptance/npr-room/windows-atmosphere.md#引用模型姿态文件)登记七部件的外部缓冲配准和原生画面对照。
 [角色姿态序列](docs/acceptance/npr-room/windows-atmosphere.md#角色姿态序列)登记夜晚、多云十二帧骨骼及表情的原生回放。
+[同帧大气合成](docs/acceptance/npr-room/windows-atmosphere.md#同帧大气合成)登记天空、云层和原相机雾体积的配对核验。
 [房间计时回放](docs/acceptance/npr-room/room-probe.md)记录原音效、计时输入和本地存档。
 [房间曲库](docs/acceptance/npr-room/music-playlist.md)与[环境声](docs/acceptance/npr-room/ambient-sound.md)记录原资产、播放控制和独立 Player 恢复。
 [开场书本布置](docs/acceptance/npr-room/opening-book-layout.md)记录房间道具、剧情临时状态和读档。

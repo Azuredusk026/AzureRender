@@ -41,6 +41,7 @@ P0 已锁定 Recovery Windows 产物及静态目录。
 [完整程序参数序列](../acceptance/npr-room/windows-atmosphere.md#完整程序参数序列)取得夜晚、多云各十二帧颜色、深度及同帧运行状态。
 [引用模型姿态文件](../acceptance/npr-room/windows-atmosphere.md#引用模型姿态文件)通过七部件加载及同设备逐像素对照。
 [角色姿态序列](../acceptance/npr-room/windows-atmosphere.md#角色姿态序列)通过夜晚、多云十二帧骨骼与表情的原生重复回放。
+[同帧大气合成](../acceptance/npr-room/windows-atmosphere.md#同帧大气合成)取得两种天气首帧的配对天空、云层及原相机雾体积。
 
 [联合场景热点纹理分配](../acceptance/nr/joint-texture-hot-placement.md)完成 1440p 同驱动逐像素比较与 1080p60 配对计时。候选 GPU P95 高于首轮参考，保留隔离结果。
 
