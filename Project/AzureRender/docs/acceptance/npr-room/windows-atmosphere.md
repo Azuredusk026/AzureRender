@@ -111,6 +111,28 @@ python -B -m tools.npr_room.windows_weather_source_identity --reference $referen
 
 本机 `windows-atmosphere-reference/weather-pass-validation/` 提供源通道、雾体积、房间帧和原版截图清单。采样、构建与回放记录的摘要登记在 `room-weather-verification.json`。
 
+## 雾效相机配准
+
+`prepare_room` 可通过 `original_frame=True` 读取原版同步帧。
+相机位置、朝向、视场角与裁剪范围来自同一份记录。
+转换按世界 Z 轴镜像，核对视图与投影矩阵。
+深度切片和体积绑定使用该相机的远裁剪面。
+
+24 帧相机矩阵的最大转换误差为 0.000000125。
+原版近裁剪面为 0.05，远裁剪面为 1000。
+默认六面投影和默认深度切片与基线逐字节一致。
+119 项房间检查通过。
+
+任务 2162 使用原版 Direct3D 雾程序生成两份体积。
+夜晚和多云均通过独立重复采样的字节一致检查。
+半精度体积最大编码误差为 0.000244141。
+两份体积各有 221,184 个非零雾效采样。
+
+此批验证原版相机与受控天气回放的组合。
+逐帧天气全局值和匹配 Player 的整帧画面继续验收。
+本机证据位于 `original-room-dynamics/fog-camera/`。
+报告 SHA-256 为 `3f253453eb0bdc6a04945df761ea74fb98090a89e6dca9b09cc3e1908f0fdbb1`。
+
 ## 原版房间同步帧
 
 任务 2134 使用冻结的 Windows 1.17.3 参照程序。

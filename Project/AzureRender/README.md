@@ -5,6 +5,7 @@
 [功能矩阵](docs/acceptance/npr-room/feature-matrix.md)登记源条目与对应的运行证据。
 [二阶环境光资源](docs/runtime/irradiance-volumes.md)提供版本化网格与共享 GPU 求值。
 原版夜晚和多云的方向响应通过双设备契约检查。
+房间雾体积按原版相机的投影与裁剪范围生成。
 [房间计时回放](docs/acceptance/npr-room/room-probe.md)记录原音效、计时输入和本地存档。
 [房间曲库](docs/acceptance/npr-room/music-playlist.md)与[环境声](docs/acceptance/npr-room/ambient-sound.md)记录原资产、播放控制和独立 Player 恢复。
 [开场书本布置](docs/acceptance/npr-room/opening-book-layout.md)记录房间道具、剧情临时状态和读档。

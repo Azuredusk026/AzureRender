@@ -66,7 +66,14 @@ def depth_stripes(size):
     return np.tile(reversed_z, (size, 1)).astype("<f4")
 
 
-def fog_camera(forward, up, *, position=(0, 0, 0), vertical_fov=math.pi / 2, aspect=1):
+def validate_clip_planes(near, far):
+    if not math.isfinite(near) or not math.isfinite(far) or not 0 < near < far:
+        raise ValueError("Weather camera requires finite ordered clip planes")
+
+
+def fog_camera(forward, up, *, position=(0, 0, 0), vertical_fov=math.pi / 2, aspect=1,
+               near=NEAR, far=FAR):
+    validate_clip_planes(near, far)
     orientation = np.eye(4)
     orientation[:3, :3] = np.stack((np.cross(up, forward), up, forward), axis=1)
     if not np.allclose(orientation[:3, :3].T @ orientation[:3, :3], np.eye(3), atol=1e-6):
@@ -75,7 +82,7 @@ def fog_camera(forward, up, *, position=(0, 0, 0), vertical_fov=math.pi / 2, asp
     focal = 1 / math.tan(vertical_fov / 2)
     lens = np.array([
         [focal / aspect, 0, 0, 0], [0, focal, 0, 0],
-        [0, 0, FAR / (FAR - NEAR), -NEAR * FAR / (FAR - NEAR)], [0, 0, 1, 0],
+        [0, 0, far / (far - near), -near * far / (far - near)], [0, 0, 1, 0],
     ])
     # The original fragment converts reversed depth to OpenGL clip coordinates,
     # unprojects it in right-handed camera space, then flips the view-space Z.
