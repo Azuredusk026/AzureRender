@@ -157,6 +157,33 @@ python -B -m tools.npr_room.windows_weather_source_identity --reference $referen
 python -B -m tools.npr_room.original_room_frames --frames $originalRoomFrames --output $frameVerification
 ```
 
+## 同步姿态配准
+
+`original_room_registration` 按完整父子路径绑定角色。
+七个部件均校验原蒙皮的骨骼顺序与表情数量。
+本机工具在隔离项目冻结采样姿态，保存来源摘要。
+角色轨迹、房间脚本与界面在该诊断项目中关闭。
+
+24 帧共核验 6,864 个角色局部变换。
+位移最大误差为零，旋转最大误差为 0.0000000024°。
+房间与椅子的 2,760 个匹配变换也通过旋转复核。
+直角旋转使用保持同一旋转矩阵的欧拉角分解。
+
+夜晚与多云首帧分别绑定 112 和 118 个房间变换。
+其余节点的路径差异登记于配准收据。
+后续对照继续补齐物件显隐、合批身份和材质状态。
+整帧画质误差以这些状态配齐后的候选计算。
+
+任务 2137 在 RTX 4060 上分别载入两种首帧姿态。
+两个独立 Player 的相机位置、视角和裁剪范围均匹配。
+两次运行通过 Vulkan 同步校验，图像和缓冲归零。
+本机证据位于 `original-room-dynamics/registration/`。
+
+```powershell
+python -B -m tools.npr_room.original_room_registration --room $room --frame $originalFrame --output $registeredRoom
+python -B -m unittest tools.npr_room.test_original_room_registration
+```
+
 ## 复验
 
 原 DXBC、反汇编和绑定清单写入本机私有目录。`PYTHONPATH` 指向本项目的 UnityPy 转换工具目录。
