@@ -22,6 +22,18 @@
 | Direct3D 程序和绑定 | `dc42aaa993c5d494d88e7b4ac7e026b4ca41e6b4e874962a9fbdc7d42b1bca49` |
 | 实机大气来源及资源绑定 | `44811daf277a26a5e6def1c1bb26ef5b9ed0f5a49514a54ced7609966badc011` |
 
+### 本机安装版参照
+
+本机安装版的游戏版本为 1.18.1。两份 Windows 构建使用 Unity `2022.3.62f2)，`BuildSettings` 的五场景顺序一致。五个大气着色器的对象编号与原始字节均匹配 1.17.3 的 Direct3D 归档，可用于对应着色通道的身份核验。
+
+两份构建的 `RoomScene` 均对应 `level3`，场景字节和应用程序集摘要各自登记。完整房间对照采用冻结版 1.17.3 的相机、帧色和深度，按同一帧配对。
+
+本机 `windows-atmosphere-reference/installed-weather/installed-weather.json` 两次生成一致，SHA-256 为 `1752f6f2ce5a055f73eca0427c1fb0535414e5011a15bcbc921ba8585f1179e7`。
+
+```powershell
+python -B -m tools.npr_room.windows_weather_source_identity --reference $referencePlayerData --installed $installedPlayerData --program-receipt $atmospherePrograms --output $installedWeatherReport
+```
+
 ## 傍晚天空离屏采样
 
 任务 1790 和 1791 使用 Direct3D 11 硬件设备执行原傍晚天空顶点和片元程序。采样使用原天空网格的 675 个顶点和 672 个三角形、五张原贴图及傍晚实机记录的颜色和太阳方向。照相机置于天空球中心，以固定时刻从六个轴向各取 256 × 256 像素。两个进程的 393,216 个 RGBA32F 像素逐字节一致，全部具有有限分量和完整覆盖。线性 RGB 范围为 0.02131 至 1.05969。
