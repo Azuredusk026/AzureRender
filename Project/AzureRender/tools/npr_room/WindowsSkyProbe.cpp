@@ -9,14 +9,14 @@
 #include <fstream>
 #include <iostream>
 #include <stdexcept>
+#include <string>
 #include <vector>
 
 namespace {
 using Microsoft::WRL::ComPtr;
 namespace fs = std::filesystem;
-constexpr UINT faceSize = 256;
 constexpr UINT vertexSize = 8 * sizeof(float);
-constexpr UINT rowSize = faceSize * 4 * sizeof(float);
+enum class Pass { Sky, Cloud, Fog };
 
 void require(HRESULT status, const char* operation) {
     if (FAILED(status)) {
@@ -64,7 +64,7 @@ std::vector<std::byte> texturePixels(fs::path raw, std::size_t expected) {
     return pixels;
 }
 
-ComPtr<ID3D11ShaderResourceView> image(ID3D11Device& device, const fs::path& root, UINT slot) {
+ComPtr<ID3D11ShaderResourceView> image(ID3D11Device& device, const fs::path& root, UINT slot, bool depth) {
     const auto key = std::to_wstring(slot);
     std::ifstream source(root / (L"texture-" + key + L".txt"));
     UINT width = 0, height = 0, srgb = 0;
@@ -79,7 +79,8 @@ ComPtr<ID3D11ShaderResourceView> image(ID3D11Device& device, const fs::path& roo
     description.Height = height;
     description.MipLevels = 1;
     description.ArraySize = 1;
-    description.Format = srgb ? DXGI_FORMAT_R8G8B8A8_UNORM_SRGB : DXGI_FORMAT_R8G8B8A8_UNORM;
+    description.Format = depth ? DXGI_FORMAT_R32_FLOAT :
+        srgb ? DXGI_FORMAT_R8G8B8A8_UNORM_SRGB : DXGI_FORMAT_R8G8B8A8_UNORM;
     description.SampleDesc.Count = 1;
     description.Usage = D3D11_USAGE_IMMUTABLE;
     description.BindFlags = D3D11_BIND_SHADER_RESOURCE;
@@ -91,14 +92,19 @@ ComPtr<ID3D11ShaderResourceView> image(ID3D11Device& device, const fs::path& roo
     return view;
 }
 
-void run(const fs::path& source, const fs::path& output) {
+void run(const fs::path& source, const fs::path& output, Pass pass) {
     if (fs::exists(output)) throw std::runtime_error("Capture target already exists");
+    const UINT faceSize = pass == Pass::Sky ? 256 : 128;
+    const UINT rowSize = faceSize * 4 * sizeof(float);
+    const UINT globalBytes = pass == Pass::Cloud ? 2416 : 2448;
+    const UINT textureCount = pass == Pass::Sky ? 6 : pass == Pass::Cloud ? 5 : 3;
+    const std::string name = pass == Pass::Sky ? "sky" : pass == Pass::Cloud ? "cozy-cloud" : "fog";
     ComPtr<ID3D11Device> device;
     ComPtr<ID3D11DeviceContext> context;
     require(D3D11CreateDevice(nullptr, D3D_DRIVER_TYPE_HARDWARE, nullptr, 0, nullptr, 0, D3D11_SDK_VERSION,
                               &device, nullptr, &context), "D3D11CreateDevice");
-    const auto vertexProgram = read(source / "sky-vertex.dxbc");
-    const auto fragmentProgram = read(source / "sky-fragment.dxbc");
+    const auto vertexProgram = read(source / (name + "-vertex.dxbc"));
+    const auto fragmentProgram = read(source / (name + "-fragment.dxbc"));
     ComPtr<ID3D11VertexShader> vertex;
     ComPtr<ID3D11PixelShader> fragment;
     require(device->CreateVertexShader(vertexProgram.data(), vertexProgram.size(), nullptr, &vertex), "CreateVertexShader");
@@ -109,7 +115,8 @@ void run(const fs::path& source, const fs::path& output) {
         {"TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 0, 6 * sizeof(float), D3D11_INPUT_PER_VERTEX_DATA, 0},
     };
     ComPtr<ID3D11InputLayout> layout;
-    require(device->CreateInputLayout(attributes, static_cast<UINT>(std::size(attributes)), vertexProgram.data(),
+    const UINT attributeCount = pass == Pass::Fog ? 2 : static_cast<UINT>(std::size(attributes));
+    require(device->CreateInputLayout(attributes, attributeCount, vertexProgram.data(),
                                       vertexProgram.size(), &layout), "CreateInputLayout");
     const auto vertices = buffer(*device.Get(), source / "vertices.bin", D3D11_BIND_VERTEX_BUFFER);
     const auto indices = buffer(*device.Get(), source / "indices.bin", D3D11_BIND_INDEX_BUFFER);
@@ -117,12 +124,10 @@ void run(const fs::path& source, const fs::path& output) {
     indices->GetDesc(&indexed);
     if (indexed.ByteWidth % (3 * sizeof(std::uint32_t))) throw std::runtime_error("Invalid original triangle list");
     const auto model = buffer(*device.Get(), source / "object.bin", D3D11_BIND_CONSTANT_BUFFER, 688);
-    const auto pixels = buffer(*device.Get(), source / "world.bin", D3D11_BIND_CONSTANT_BUFFER, 2448);
-
     std::array<ComPtr<ID3D11ShaderResourceView>, 6> texture;
     std::array<ID3D11ShaderResourceView*, 6> views{};
-    for (UINT slot = 0; slot < views.size(); ++slot) {
-        texture[slot] = image(*device.Get(), source, slot);
+    for (UINT slot = 0; slot < textureCount; ++slot) {
+        texture[slot] = image(*device.Get(), source, slot, pass == Pass::Fog && slot == 2);
         views[slot] = texture[slot].Get();
     }
     D3D11_SAMPLER_DESC sampling{};
@@ -133,6 +138,13 @@ void run(const fs::path& source, const fs::path& output) {
     require(device->CreateSamplerState(&sampling, &sampler), "CreateSamplerState");
     std::array<ID3D11SamplerState*, 6> samplers{};
     samplers.fill(sampler.Get());
+    ComPtr<ID3D11SamplerState> depthSampler;
+    if (pass == Pass::Fog) {
+        sampling.Filter = D3D11_FILTER_MIN_MAG_MIP_POINT;
+        sampling.AddressU = sampling.AddressV = sampling.AddressW = D3D11_TEXTURE_ADDRESS_CLAMP;
+        require(device->CreateSamplerState(&sampling, &depthSampler), "CreateSamplerState depth");
+        samplers[0] = depthSampler.Get();
+    }
 
     D3D11_TEXTURE2D_DESC image{};
     image.Width = image.Height = faceSize;
@@ -166,20 +178,22 @@ void run(const fs::path& source, const fs::path& output) {
     context->IASetIndexBuffer(indices.Get(), DXGI_FORMAT_R32_UINT, 0);
     context->VSSetShader(vertex.Get(), nullptr, 0);
     context->PSSetShader(fragment.Get(), nullptr, 0);
-    ID3D11Buffer* fragmentConstants[] = {pixels.Get(), model.Get()};
-    context->PSSetConstantBuffers(0, 2, fragmentConstants);
-    context->PSSetShaderResources(0, static_cast<UINT>(views.size()), views.data());
-    context->PSSetSamplers(0, static_cast<UINT>(samplers.size()), samplers.data());
+    context->PSSetShaderResources(0, textureCount, views.data());
+    context->PSSetSamplers(0, textureCount, samplers.data());
     ID3D11RenderTargetView* selected = target.Get();
     context->OMSetRenderTargets(1, &selected, nullptr);
 
     std::ofstream stream(output, std::ios::binary);
     if (!stream) throw std::runtime_error("Could not create the original shader capture");
     for (UINT face = 0; face < 6; ++face) {
-        const auto camera = buffer(*device.Get(), source / (L"view-" + std::to_wstring(face) + L".bin"),
-                                   D3D11_BIND_CONSTANT_BUFFER, 2448);
+        const auto suffix = std::to_string(face) + ".bin";
+        const auto camera = buffer(*device.Get(), source / ("view-" + suffix), D3D11_BIND_CONSTANT_BUFFER, globalBytes);
+        const auto pixels = buffer(*device.Get(), source / (pass == Pass::Fog ? "world-" + suffix : "world.bin"),
+                                   D3D11_BIND_CONSTANT_BUFFER, globalBytes);
         ID3D11Buffer* vertexConstants[] = {camera.Get(), model.Get()};
+        ID3D11Buffer* fragmentConstants[] = {pixels.Get(), model.Get()};
         context->VSSetConstantBuffers(0, 2, vertexConstants);
+        context->PSSetConstantBuffers(0, 2, fragmentConstants);
         constexpr float clear[]{0, 0, 0, 0};
         context->ClearRenderTargetView(target.Get(), clear);
         context->DrawIndexed(indexed.ByteWidth / sizeof(std::uint32_t), 0, 0);
@@ -191,13 +205,21 @@ void run(const fs::path& source, const fs::path& output) {
         context->Unmap(readback.Get(), 0);
         if (!stream) throw std::runtime_error("Incomplete original shader capture");
     }
-    std::cout << "Original Direct3D 11 programs rendered six 256x256 RGBA32F directions\n";
+    std::cout << "Original Direct3D 11 " << name << " program rendered six " << faceSize << "x" << faceSize
+              << " RGBA32F directions\n";
 }
 }
 
 int wmain(int argc, wchar_t** argv) try {
-    if (argc != 3) throw std::invalid_argument("Expected prepared source data and an unused capture output path");
-    run(argv[1], argv[2]);
+    if (argc < 3 || argc > 4) throw std::invalid_argument("Expected source data, unused output, and optional pass name");
+    Pass pass = Pass::Sky;
+    if (argc == 4) {
+        const std::wstring mode = argv[3];
+        if (mode == L"cozy-cloud") pass = Pass::Cloud;
+        else if (mode == L"fog") pass = Pass::Fog;
+        else throw std::invalid_argument("Expected cozy-cloud or fog");
+    }
+    run(argv[1], argv[2], pass);
     return 0;
 } catch (const std::exception& error) {
     std::cerr << error.what() << '\n';

@@ -69,9 +69,24 @@
 
 四个时段的受控采样输入、浮点归档、环境图及房间对照位于本机 `windows-atmosphere-reference/night-cloudy-validation/`。
 
+## 原版云层与雾的受控采样
+
+任务 2080 至 2083 在同一 Direct3D 11 硬件设备执行桌面云层和雾的原版首通道。每个时段和通道按两个相隔 0.5 秒的时刻采样。每个样本包含六个方向共 98,304 个 RGBA32F 像素，两次独立进程的结果逐字节一致。云层使用原网格、四张原贴图及固定单位风向，雾使用原网格、原噪声贴图及六档反向深度。受控输入的视点位于天空球中心。
+
+夜晚云层的合成贡献在两个时刻之间改变 3,638 个像素。多云的云层在这组时间与风向下保持全覆盖，两帧相同。雾的合成贡献分别改变 57,555 和 52,954 个像素。首个时刻的中央采样在深度 1 至 150 米的范围内，夜晚透明混合系数从 0.0221 升至 0.3797，多云从 0.0581 升至 0.6897。原版白天天空回归的浮点输出摘要与归档完全一致。
+
+| 通道 | 夜晚报告 SHA-256 | 多云报告 SHA-256 |
+| --- | --- | --- |
+| 云层 | `e287089c87bb939c40a80b86deb25af54fa079b03186f8dba24d4e53da9eb9ae` | `b036568921d6dd86f4bc9a146d428a59f5400126a28c4f224301fee9644c11ab` |
+| 雾 | `ccf6bcdd8010ca7fa8f6af0a541e1f122d3a27780b1bc5b66eba47499ee60bd8` | `b4fc4129e25e861827898292ac05e5f55cea27a1155f7ca34e647a2f89680a08` |
+
+本机 `windows-atmosphere-reference/weather-pass-validation/` 保存浮点采样、常量缓冲区、命令和校验。完整房间的动态对照需要对应镜头、时间、窗景状态与逐帧深度。
+
 ## 复验
 
 原 DXBC、反汇编和绑定清单写入本机私有目录。`PYTHONPATH` 指向本项目的 UnityPy 转换工具目录。
+
+云层和雾使用 `tools.npr_room.windows_weather_probe` 准备输入。两类采样分别使用 `--role cozy-cloud` 和 `--role fog`，采样时间由 `--time` 指定。云层另指定 `--wind 0.6 0 0.8`。运行采样程序时在输出路径之后传入对应的通道名称。
 
 ```powershell
 python -B -m tools.npr_room.unity_d3d11_programs --source $resourcesAssets --manifest $originalShaderInventory --output $programFolder
