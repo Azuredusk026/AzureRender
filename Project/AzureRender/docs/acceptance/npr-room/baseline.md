@@ -67,6 +67,17 @@ python -B -m tools.npr_room.master_data_inventory --source $unitySource --invent
 python -B -m tools.npr_room.master_data_inventory --source $unitySource --inventory $referenceInventory --project $roomProject --locks $sourceLock --output $masterConsumerReport
 ```
 
+### 音效主表与候选挂载
+
+`TimerSeMaster` 的 7 个条目和 `SystemSeMaster` 的 12 个条目均有原枚举、GUID、文件 ID 和源摘要。完整房间验证 6 个挂载，购买候选验证 7 个挂载。计时默认三条音效和购买音效的 OGG 字节与源文件一致。确认、取消和完成待办所用的 WAV 副本通过长度字段和原 PCM 样本核验。其余音效的界面入口与播放状态按对应玩法验收。
+
+本机 `sound-cue-audit/playable.json` 与 `sound-cue-audit/purchase.json` 各复验两次。SHA-256 分别为 `b9844e319d8ef38a1ab5179a92c98ee46aa0fe8970974a6a6060268ed9ed6ac2` 与 `98982d1e48c10b097cf78d7db4d9bb02310116de94981e42633ec4db0615e79b`。
+
+```powershell
+python -B -m tools.npr_room.sound_cue_inventory --source $unitySource --inventory $referenceInventory --room $roomDirectory --audio-repairs $audioRepairReport --output $soundCueReport
+python -B -m tools.npr_room.sound_cue_inventory --source $unitySource --inventory $referenceInventory --room $purchaseRoomDirectory --audio-repairs $audioRepairReport --output $purchaseCueReport --purchase
+```
+
 ## 功能验收矩阵
 
 表内的静态来源位于 Recovery 导出工程。
