@@ -52,6 +52,16 @@ Recovery 应用显式调用 Unity `Resources` 或 Addressables 初始化和加�
 Windows 构建的 `StreamingAssets` 有 18 个实际文件，涵盖 12 个 Addressables 资源包、来源着色器包和启动配置。清单登记相对路径、大小和摘要。
 本机私有清单 `source-lock/dynamic-loads.json` 的 SHA-256 为 `7d6da7d097057dc5491893881c8932dfac46c9ca6f50a7b952664ddb44e253ce`。
 
+### 主数据加载对账
+
+`MasterData` 标签的 20 个位置逐一对应 `MasterDataLoader` 的类型分支。清单记录每项的源 GUID、路径和摘要，并核对 `EntryBehavior` 等待 `IsLoaded` 的入口。候选的 `work-progression-receipt.json`、`music-receipt.json` 和 `ambient-receipt.json` 分别匹配工时参数、音乐和环境主表的源摘要。其他主表的消费者与运行覆盖按玩法继续对账。
+
+本机 `master-data-audit/master-data.json` 两次生成一致，SHA-256 为 `dc4be3ab32a0c751273421dd61c3cd2a402b990daf3ed1b3d2e4a4dd70eab074`。
+
+```powershell
+python -B -m tools.npr_room.master_data_inventory --source $unitySource --inventory $referenceInventory --project $roomProject --output $masterDataReport
+```
+
 ## 功能验收矩阵
 
 表内的静态来源位于 Recovery 导出工程。

@@ -58,4 +58,4 @@
 ## 当前执行记录
 
 - 1.1 的原程序加载方式与候选五关卡绑定已对账，两次清单摘要一致。原版与候选的两秒计时起点及揭幕条件均已登记。下一次运行对照结合主数据和音频就绪路径。 [对账证据](../acceptance/npr-room/startup-flow.md#五场景来源对账)
-- 1.2 已核验 `AssetLoadHolder` 的三项直接资源引用与 `RoomLifetimeScope` 场景组件。继续对账主数据标签、项目作用域回退和候选消费路径。
+- 1.2 已核验 `AssetLoadHolder` 的三项直接资源引用与 `RoomLifetimeScope` 场景组件。20 个原版主表都与加载类型对应，三份候选装配记录匹配源摘要。继续对账其他主表消费者、项目作用域回退和候选启用条件。 [主数据证据](../acceptance/npr-room/baseline.md#主数据加载对账)
