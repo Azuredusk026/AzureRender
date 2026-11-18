@@ -45,3 +45,48 @@ init()
 step(0, "timer-stats")
 assert(labels["work-today"] == "00:00:04" and labels["work-total"] == "00:00:07")
 assert(new_work_calendar():totalTime() == 7)
+
+local weekSlot = "calendar-first-day"
+local rejectWeek = false
+self.try_write_save = function(_, slot, value)
+    if slot == weekSlot and rejectWeek then return false end
+    saved[slot] = value
+    return true
+end
+
+wall = "20240229120000"
+init()
+step(0, "timer-stats")
+assert(labels["calendar-month"] == "2024-02")
+assert(labels["calendar-weekday-1"] == "Sun" and labels["calendar-weekday-7"] == "Sat")
+assert(labels["calendar-date-4"] == "" and labels["calendar-date-5"] == "1")
+assert(labels["calendar-date-33"] == "29" and labels["calendar-date-34"] == "")
+
+local weekdays = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"}
+for first = 0, 6 do
+    step(0, "calendar-first-" .. first)
+    assert(saved[weekSlot][1] == 1 and saved[weekSlot][2] == first)
+    assert(labels["calendar-weekday-1"] == weekdays[first + 1])
+    assert(labels["calendar-weekday-7"] == weekdays[(first + 6) % 7 + 1])
+    assert(labels["calendar-date-" .. ((4 - first) % 7 + 1)] == "1")
+end
+
+rejectWeek = true
+step(0, "calendar-first-1")
+assert(saved[weekSlot][2] == 6 and labels["calendar-weekday-1"] == "Sat")
+rejectWeek = false
+step(0, "calendar-first-1")
+assert(saved[weekSlot][2] == 1 and labels["calendar-weekday-1"] == "Mon")
+init()
+step(0, "timer-stats")
+assert(labels["calendar-weekday-1"] == "Mon")
+
+wall = "20250101120000"
+step(0)
+assert(labels["calendar-month"] == "2025-01" and labels["calendar-date-3"] == "1")
+
+saved[weekSlot] = {2, 6}
+init()
+step(0, "timer-stats")
+step(0, "calendar-first-1")
+assert(saved[weekSlot][1] == 2 and saved[weekSlot][2] == 6 and labels["calendar-weekday-1"] == "Sun")

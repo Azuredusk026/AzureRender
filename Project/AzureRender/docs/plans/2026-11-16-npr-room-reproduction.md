@@ -100,7 +100,7 @@
 [房间笔记](../acceptance/npr-room/notes.md)登记中文输入、页面编辑和独立 Player 重开。
 [房间待办](../acceptance/npr-room/todo.md)登记多列表、任务顺序、完成时间和音效。
 [工时统计](../acceptance/npr-room/work-calendar.md)登记按日累计、跨日分配和重开对账。
-[工时奖励与等级](../acceptance/npr-room/work-progression.md)登记原参数结算、存档升级和退出恢复。
+[工时奖励与等级](../acceptance/npr-room/work-progression.md)登记原参数结算、存档升级、退出恢复和日历每周起始日。
 [音源播放控制](../acceptance/npr-room/audio-transport.md)登记原版音乐的流式读取、暂停、音量调整和切曲回放。
 [房间曲库](../acceptance/npr-room/music-playlist.md)登记原曲与默认曲目范围、播放控制及本地设置恢复。
 [房间环境声](../acceptance/npr-room/ambient-sound.md)登记原音频编号、独立混音和本地设置恢复。

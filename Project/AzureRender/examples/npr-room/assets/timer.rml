@@ -11,6 +11,13 @@ body { width: 100%; height: 100%; margin: 0; color: white; font-family: LatoLati
 #timer-controls button { display: inline-block; padding: 4dp 7dp; margin-right: 3dp; color: white; background-color: #34434f; }
 #timer-controls button:hover { background-color: #506472; }
 #work-stats { display: block; margin-top: 8dp; font-size: 13dp; }
+#work-calendar { margin-top: 8dp; }
+#calendar-month { display: block; font-size: 15dp; }
+.calendar-row { display: block; height: 18dp; }
+.calendar-row span { display: inline-block; width: 32dp; height: 18dp; text-align: center; }
+#calendar-picker button { display: inline-block; padding: 3dp; margin-right: 2dp; color: white; background-color: #34434f; }
+#calendar-picker button:hover { background-color: #506472; }
+#calendar-status { display: block; color: #f0c58e; }
 #notes-toggle { position: absolute; left: 16dp; top: 16dp; padding: 6dp 10dp; color: white; background-color: #34434f; }
 #notes-panel { position: absolute; left: 16dp; top: 52dp; width: 310dp; padding: 14dp; background-color: #19232c; }
 #notes-panel button { display: inline-block; padding: 4dp 6dp; margin-right: 4dp; margin-bottom: 7dp; color: white; background-color: #34434f; }
@@ -38,7 +45,29 @@ body { width: 100%; height: 100%; margin: 0; color: white; font-family: LatoLati
 <button id="timer-stats" data-action="timer-stats" style="display: none;">Statistics</button>
 </div>
 <div id="work-stats" style="display: none;">Today <span id="work-today"></span> · Total <span id="work-total"></span>
-<span id="work-progression" style="display: none;"></span></div>
+<span id="work-progression" style="display: none;"></span>
+<div id="work-calendar">
+<span id="calendar-month"></span>
+<div class="calendar-row"><span id="calendar-weekday-1"></span><span id="calendar-weekday-2"></span><span id="calendar-weekday-3"></span><span id="calendar-weekday-4"></span><span id="calendar-weekday-5"></span><span id="calendar-weekday-6"></span><span id="calendar-weekday-7"></span></div>
+<div class="calendar-row"><span id="calendar-date-1"></span><span id="calendar-date-2"></span><span id="calendar-date-3"></span><span id="calendar-date-4"></span><span id="calendar-date-5"></span><span id="calendar-date-6"></span><span id="calendar-date-7"></span></div>
+<div class="calendar-row"><span id="calendar-date-8"></span><span id="calendar-date-9"></span><span id="calendar-date-10"></span><span id="calendar-date-11"></span><span id="calendar-date-12"></span><span id="calendar-date-13"></span><span id="calendar-date-14"></span></div>
+<div class="calendar-row"><span id="calendar-date-15"></span><span id="calendar-date-16"></span><span id="calendar-date-17"></span><span id="calendar-date-18"></span><span id="calendar-date-19"></span><span id="calendar-date-20"></span><span id="calendar-date-21"></span></div>
+<div class="calendar-row"><span id="calendar-date-22"></span><span id="calendar-date-23"></span><span id="calendar-date-24"></span><span id="calendar-date-25"></span><span id="calendar-date-26"></span><span id="calendar-date-27"></span><span id="calendar-date-28"></span></div>
+<div class="calendar-row"><span id="calendar-date-29"></span><span id="calendar-date-30"></span><span id="calendar-date-31"></span><span id="calendar-date-32"></span><span id="calendar-date-33"></span><span id="calendar-date-34"></span><span id="calendar-date-35"></span></div>
+<div class="calendar-row"><span id="calendar-date-36"></span><span id="calendar-date-37"></span><span id="calendar-date-38"></span><span id="calendar-date-39"></span><span id="calendar-date-40"></span><span id="calendar-date-41"></span><span id="calendar-date-42"></span></div>
+<div>Start of week <span id="calendar-first-day"></span></div>
+<div id="calendar-picker">
+<button id="calendar-first-0" data-action="calendar-first-0">Sun</button>
+<button id="calendar-first-1" data-action="calendar-first-1">Mon</button>
+<button id="calendar-first-2" data-action="calendar-first-2">Tue</button>
+<button id="calendar-first-3" data-action="calendar-first-3">Wed</button>
+<button id="calendar-first-4" data-action="calendar-first-4">Thu</button>
+<button id="calendar-first-5" data-action="calendar-first-5">Fri</button>
+<button id="calendar-first-6" data-action="calendar-first-6">Sat</button>
+</div>
+<span id="calendar-status"></span>
+</div>
+</div>
 </div>
 <button id="notes-toggle" data-action="notes-toggle" style="display: none;">Notes</button>
 <div id="notes-panel" style="display: none;">

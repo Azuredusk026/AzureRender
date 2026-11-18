@@ -22,6 +22,8 @@
 
 城市环境声的扣点、写入失败和重开见[环境声购买](ambient-access.md#环境声购买)。画面与声音的联动及分别恢复见[城市窗景回放](city-window.md#窗景开关与恢复)。
 
+[日历每周起始日](work-progression.md#日历每周起始日)登记七种星期顺序、日期布局和独立 Player 存档。
+
 ## 复验
 
 五份源目录和十四个源脚本的摘要写入报告。两次独立运行得到同一 SHA-256 `840b5319070dc2c6180b03aac4adad1f254973c72e8bcd6e5a1e508716d6f2f5`。本机报告位于 `assets_private/npr-room-dev/source-lock/feature-matrix.json`。

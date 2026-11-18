@@ -21,6 +21,16 @@
 
 本机工程位于 `assets_private/npr-room-dev/room-work-progression`，画面位于 `reference-preview/work-progression.png`。
 
+## 日历每周起始日
+
+Recovery 的 `AllPlatformSettingData.FirstDayInWeek` 默认采用星期日。`SettingUI` 提供七天选项，`CalenderCoreUI` 按所选星期排列列标题，并按当月一日所在星期填充日期。
+
+房间统计面板显示当前月份及七列日期格。每周起始日写入版本为 1 的 `calendar-first-day` 存档。写入成功后更新列表，写入失败时保留当前排列。重开读取已保存的选项，较新版本的存档保留原字节。工时统计继续以日期为键。
+
+Lua 测试覆盖七种起始日、闰年二月、跨年月、写入失败及重开。共享队列任务 2097 使用 RTX 4060 上的两个独立 Player，通过原生界面分别选择星期一和星期六，核对两次存档与退出释放结果。诊断关卡通过正式计时脚本和界面运行。完整房间的布局和语言按房间场景继续验收。
+
+本机 `work-calendar-first-day/calendar-first-day-replay.json` 的 SHA-256 为 `63c0685761850ab4d5e5f5e0f1fd8070f938b0c4cd38df3651f87f3e7dc66eab`，同目录保存回放脚本和退出日志。
+
 ## 复验
 
 ```powershell

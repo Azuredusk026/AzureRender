@@ -1,4 +1,30 @@
 local workSlot = "work-calendar"
+local weekdaySlot = "calendar-first-day"
+local weekdays = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"}
+local monthLengths = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31}
+
+local function readFirstDay(runtime)
+    local value = runtime:read_save(weekdaySlot)
+    if type(value) ~= "table" then return 0, true end
+    if type(value[1]) == "number" and value[1] > 1 then return 0, false end
+    local day = value[2]
+    if value[1] == 1 and type(day) == "number" and math.tointeger(day) and day >= 0 and day <= 6 then
+        return day, true
+    end
+    return 0, true
+end
+
+local function monthLength(year, month)
+    if month == 2 and year % 4 == 0 and (year % 100 ~= 0 or year % 400 == 0) then return 29 end
+    return monthLengths[month]
+end
+
+local function firstWeekday(year, month)
+    local previousYear = year - 1
+    local days = 365 * previousYear + previousYear // 4 - previousYear // 100 + previousYear // 400 + 1
+    for preceding = 1, month - 1 do days = days + monthLength(year, preceding) end
+    return days % 7
+end
 
 local function readWorkDays(rewards)
     local value = self:read_save(workSlot)
@@ -57,6 +83,7 @@ function new_work_calendar()
     local lastDate, elapsed = nil, 0
     local calendar = {}
     local runtime = self
+    local startDay, displayedMonth, displayedStart
 
     local function today()
         return runtime:local_datetime():sub(1, 8)
@@ -129,6 +156,38 @@ function new_work_calendar()
 
     function calendar:today()
         return math.min(86400, self:timeFor(today()))
+    end
+
+    function calendar:update_month_view()
+        if startDay == nil then startDay = readFirstDay(runtime) end
+        for weekday = 0, 6 do
+            if runtime:pressed("calendar-first-" .. weekday) then
+                local _, writable = readFirstDay(runtime)
+                if writable and runtime:try_write_save(weekdaySlot, {1, weekday}) then
+                    startDay = weekday
+                    runtime:ui_text("calendar-status", "")
+                else
+                    runtime:ui_text("calendar-status", "Could not save the start of week")
+                end
+                break
+            end
+        end
+        local date = today()
+        local monthKey = date:sub(1, 6)
+        if displayedMonth == monthKey and displayedStart == startDay then return end
+        displayedMonth, displayedStart = monthKey, startDay
+        local year, month = tonumber(date:sub(1, 4)), tonumber(date:sub(5, 6))
+        local offset = (firstWeekday(year, month) - startDay) % 7
+        local days = monthLength(year, month)
+        runtime:ui_text("calendar-month", string.format("%04d-%02d", year, month))
+        runtime:ui_text("calendar-first-day", weekdays[startDay + 1])
+        for column = 1, 7 do
+            runtime:ui_text("calendar-weekday-" .. column, weekdays[(startDay + column - 1) % 7 + 1])
+        end
+        for cell = 1, 42 do
+            local day = cell - offset
+            runtime:ui_text("calendar-date-" .. cell, day >= 1 and day <= days and tostring(day) or "")
+        end
     end
 
     function calendar:totalTime()
