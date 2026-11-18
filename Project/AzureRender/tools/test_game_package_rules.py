@@ -53,6 +53,14 @@ class GamePackageRules(unittest.TestCase):
         self.assertTrue((self.output/'Game.exe').is_file())
         self.assertEqual(json.loads((self.output/'game-launch.json').read_text())['project'], 'game/project.azureproject')
 
+    def test_missing_native_launcher_fails_before_project_validation(self):
+        (self.install / "bin/AzureGameLauncher.exe").unlink()
+        with patch.object(build_game, "validate_project") as validate:
+            with self.assertRaisesRegex(ValueError, "native game launcher"):
+                build_game.build_game(self.project, self.install, self.output)
+        validate.assert_not_called()
+        self.assertFalse(self.output.exists())
+
     @unittest.skipUnless(os.name == "nt", "Windows directory enumeration sharing")
     def test_publish_retries_after_a_directory_scan_releases_its_handle(self):
         rename = pathlib.Path.rename

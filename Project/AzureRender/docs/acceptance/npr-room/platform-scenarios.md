@@ -212,3 +212,11 @@ python -B tools/npr_room/test_achievement_store_player.py --player $player --res
 python -B -m tools.npr_room.tutorial_camera_body stage --room $deskRoom --catalog $bodyCatalog --controller $animatorGraph --chapters $openingChapters --source-receipt $tutorialSource --models $bodyMorphModels --camera-trace $cameraTrace --camera-audio-source $unitySource --face-catalog $plankCatalog --achievements --output $roomCandidate
 python -B tools/npr_room/test_story_signal_room_player.py --player $player --room $deskRoom --resource-root $resources --catalog $bodyCatalog --graph $animatorGraph --chapters $openingChapters --source-receipt $tutorialSource --models $bodyMorphModels --camera-trace $cameraTrace --camera-audio-source $unitySource --face-catalog $plankCatalog --achievements --output $roomAchievementReplay
 ```
+
+## Windows 独立包预检
+
+本机房间候选的 `assets` 挂载包含 1,270 个可打包文件，总大小为 493,910,236 字节。启动关卡为 `assets:/boot.azurelevel`。按发布器的目录规则核对导出范围，文件路径均通过链接和私有目录检查。
+
+空间预约使用同一候选的资源挂载与 Release x64 安装树。已盘点的房间挂载与一份历史安装树的着色器、公开资源及许可证合计 928,468,556 字节。正式出包还需按当前安装树计入 Player、启动器、动态库和验证临时文件。
+
+发布器在运行项目校验前核对原生启动器。包含已验证房间 Player 的 Release x64 安装树齐备后，执行整包生成及移动后启动验收。预检的输入与程序摘要见本机 `full-acceptance-next-gates/windows-package-inputs-20261118.json`。

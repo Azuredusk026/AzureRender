@@ -149,6 +149,9 @@ def build_game(project, install, output, replace=False, validator=None, *, valid
             raise ValueError("Output exists; replacement requires a recognized game package and --replace")
     share = install / "share/AzureRender"
     player = install / "bin/AzurePlayer.exe"
+    launcher = install / "bin/AzureGameLauncher.exe"
+    if not launcher.is_file():
+        raise ValueError("Installed native game launcher is missing")
     for file in [player, share / "assets_public/fonts/LatoLatin-Regular.ttf", share / "shaders/game-ui.vert.spv", share / "shaders/game-ui.frag.spv"]:
         if not file.is_file():
             raise ValueError(f"Required engine resource is missing: {file}")
@@ -184,9 +187,6 @@ def build_game(project, install, output, replace=False, validator=None, *, valid
             if dll.name.lower() == "rmlui_debugger.dll":
                 continue
             shutil.copy2(dll, candidate / "bin" / dll.name)
-        launcher=install / "bin/AzureGameLauncher.exe"
-        if not launcher.is_file():
-            raise ValueError("Installed native game launcher is missing")
         title=config["name"]
         if not isinstance(title,str) or not title or any(c in '<>:"/\\|?*' or ord(c)<32 for c in title) or title.rstrip(' .')!=title:
             raise ValueError("Project name cannot be used as a Windows executable name")
