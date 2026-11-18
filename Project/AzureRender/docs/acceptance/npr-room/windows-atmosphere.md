@@ -214,6 +214,22 @@ Unity 同时计算 26 个单位方向的原版探针响应。
 python -B -m tools.npr_room.original_room_frames --frames $originalProbeFrames --require-ambient-probe --output $ambientProbeVerification
 ```
 
+`original_ambient_probe` 将方向实算写为二阶辐照网格。
+转换按世界 Z 轴镜像，并保存原帧与资源摘要。
+任务 2153 使用项目的 C++17 配置加载 24 份原版网格。
+624 个方向的 CPU 求值最大误差为 0.000000239。
+
+通用二阶场、边界、有效权重及非法输入通过契约检查。
+线性示例的编码与基线逐字节一致。
+三层辐照资源的 CPU 回归通过。
+场景图形消费继续按二阶资源格式接入。
+
+本机 CPU 证据位于 `ambient-probe/quadratic-cpu/`。
+
+```powershell
+python -B -m tools.npr_room.original_ambient_probe --frame $originalProbeFrame --output $quadraticGrid
+```
+
 ## 同步姿态配准
 
 `original_room_registration` 按完整父子路径绑定角色。

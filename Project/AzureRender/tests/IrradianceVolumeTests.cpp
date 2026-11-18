@@ -38,6 +38,35 @@ int main(int argc,char** argv) {
     field.cells[0].weight=2;assert(rejects([&]{field.validate();}));field.cells[0].weight=0;
     field.cells[0].coefficients[0][0]=std::numeric_limits<float>::infinity();
     assert(rejects([&]{field.validate();}));
+    IrradianceVolume quadratic;
+    quadratic.basis=IrradianceBasis::Quadratic;
+    quadratic.origin={-1,-1,-1};quadratic.spacing=2;quadratic.dimensions={2,2,2};quadratic.cells.resize(8);
+    quadratic.quadraticCells.resize(8);
+    for(unsigned index=0;index<quadratic.cells.size();++index){
+        auto& cell=quadratic.cells[index];
+        cell.weight=1;
+        cell.coefficients={{{0,0,0,.2F},{0,.2F,0,.6F},{0,0,0,.3F}}};
+        quadratic.quadraticCells[index]={{{.5F,.25F,.1F,-.2F,.3F},{-.2F,.1F,.4F,.2F,-.1F},{0,0,-.8F,0,0}}};
+    }
+    quadratic.validate();
+    auto quadraticSample=quadratic.query({0,0,0});
+    auto quadraticX=quadraticSample.evaluate({1,0,0});
+    auto quadraticZ=quadraticSample.evaluate({0,0,1});
+    assert(std::abs(quadraticX[0]-.5F)<1e-6F&&std::abs(quadraticX[1]-.5F)<1e-6F);
+    assert(std::abs(quadraticZ[0]-.3F)<1e-6F&&quadraticZ[2]==0);
+    auto quadraticBytes=quadratic.encode();
+    assert(quadraticBytes.size()==IrradianceVolume::headerBytes+8*IrradianceVolume::quadraticCellBytes);
+    auto quadraticLoaded=IrradianceVolume::decode(quadraticBytes);
+    assert(quadraticLoaded.basis==IrradianceBasis::Quadratic);
+    assert(quadraticLoaded.query({0,0,0}).evaluate({1,0,0})==quadraticX);
+    auto badQuadratic=quadraticBytes;badQuadratic[IrradianceVolume::headerBytes+112]=std::byte{1};
+    assert(rejects([&]{(void)IrradianceVolume::decode(badQuadratic);}));
+    quadratic.cells[0].weight=0;
+    assert(std::abs(quadratic.query({0,0,0}).evaluate({1,0,0})[0]-.4375F)<1e-6F);
+    quadratic.quadraticCells[0][0][0]=std::numeric_limits<float>::infinity();
+    assert(rejects([&]{quadratic.validate();}));quadratic.quadraticCells[0][0][0]=.5F;
+    quadratic.basis=IrradianceBasis::Linear;
+    assert(rejects([&]{quadratic.validate();}));
     if(argc==2){
         const auto native=IrradianceVolume::load(argv[1]);
         const auto contribution=native.query({0,2,8});
