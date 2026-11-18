@@ -77,9 +77,10 @@
 
 ## 场景绑定与 GPU 消费
 
-当前场景图形入口消费 `AZIV0001`。
-二阶文件通过 `IrradianceVolume` 进行 CPU 编码与求值。
-二阶场景图形消费按[房间环境光](../acceptance/npr-room/windows-atmosphere.md#原版环境光探针)继续实施。
+场景图形入口按文件头消费两种网格格式。
+公共上传入口为 `packIrradianceGridCells`。
+共享求值程序位于 `irradiance_grid.glsl`。
+二阶房间画面按[房间环境光](../acceptance/npr-room/windows-atmosphere.md#原版环境光探针)继续验收。
 
 关卡通过 `irradianceVolume` 绑定资源。
 绑定版本为 2，默认强度为 1，默认关闭。
@@ -103,9 +104,13 @@
 版本 6 及更早的文档默认关闭该能力。
 
 渲染器持有加载后的 CPU 网格与 GPU 缓冲。
-每格按四组 `vec4` 上传，步长为 64 字节。
+线性格点按四组 `vec4` 上传，步长为 64 字节。
+二阶格点按八组 `vec4` 上传，步长为 128 字节。
+上传字节与对应版本文件的格点载荷一致。
 存储缓冲绑定为 24，两种纹理路径共用。
 三个相机参数保存原点、间距、尺寸和强度。
+查询标志的位三表示二阶系数布局。
+网格关闭时，完整查询标志为零。
 
 片元按世界位置插值系数与有效权重。
 着色法线参与方向求值，最终结果乘配置强度。
@@ -123,6 +128,11 @@ CPU 夹具使用独立的彩色方向场。
 夹具覆盖边界、缺失格点及插值后钳位。
 文件测试覆盖版本、尺寸、有限值和保留字段。
 原生数据导出是该公共契约的另一种使用方式。
+
+`AzureRender.IrradianceGridGpuData` 核对上传布局与加载分派。
+`AzureRender.IrradianceGridGpu` 使用生产求值程序。
+通用夹具覆盖两种格式、有效权重、边界及最终钳位。
+原版方向的双设备证据见[环境光探针](../acceptance/npr-room/windows-atmosphere.md#原版环境光探针)。
 
 GPU 夹具入口为 `python -m native_render.irradiance_lab`。
 运行目录位于 `build/runs/20261017-175206-nr-playable-integration-d4e789/`。

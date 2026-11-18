@@ -103,6 +103,7 @@ layout(std430,binding=33) readonly buffer ReflectionField {vec4 probeFieldRows[]
 layout(binding=23) uniform samplerCube reflectionProbeTexture;
 #endif
 layout(std430,binding=24) readonly buffer IrradianceCells { vec4 irradianceCells[]; };
+#include "irradiance_grid.glsl"
 #if defined(AZURE_IRRADIANCE_CLIPMAP)
 #include "irradiance_clipmap.glsl"
 layout(binding=32) uniform sampler3D irradianceClipmapTextures[6];
@@ -799,8 +800,8 @@ vec3 hsvToRgb(vec3 hsv){
 }
 vec4 evaluateIrradianceVolume(vec3 position,vec3 normal,bool surfaceReceiver) {
     if(camera.irradianceDimensionsEnabled.w<.5)return vec4(0);
+    uint queryFlags=uint(camera.irradianceDimensionsEnabled.w+.5);
     if(surfaceReceiver){
-        uint queryFlags=uint(camera.irradianceDimensionsEnabled.w+.5);
         vec2 pixel=irradianceQueryPixel(gl_FragCoord.xy,camera.clusterDepth.w,queryFlags);
         vec3 direction=vec3(1);
 #if defined(AZURE_IRRADIANCE_CLIPMAP)
@@ -815,23 +816,8 @@ vec4 evaluateIrradianceVolume(vec3 position,vec3 normal,bool surfaceReceiver) {
     return vec4(max(vec3(dot(result.coefficients[0],basis),dot(result.coefficients[1],basis),
         dot(result.coefficients[2],basis)),vec3(0))*camera.irradianceParameters.x,1);
 #else
-    vec3 q=(position-camera.irradianceOriginSpacing.xyz)/camera.irradianceOriginSpacing.w;
-    ivec3 dims=ivec3(camera.irradianceDimensionsEnabled.xyz);
-    if(any(lessThan(q,vec3(0)))||any(greaterThan(q,vec3(dims-ivec3(1)))))return vec4(0);
-    ivec3 lo=ivec3(floor(q)),hi=min(lo+ivec3(1),dims-ivec3(1));
-    vec3 f=q-vec3(lo);
-    vec4 red=vec4(0),green=vec4(0),blue=vec4(0);
-    float weight=0;
-    for(int z=0;z<2;++z)for(int y=0;y<2;++y)for(int x=0;x<2;++x){
-        ivec3 p=ivec3(x!=0?hi.x:lo.x,y!=0?hi.y:lo.y,z!=0?hi.z:lo.z);
-        int base=4*(p.x+dims.x*(p.y+dims.y*p.z));
-        float w=(x!=0?f.x:1-f.x)*(y!=0?f.y:1-f.y)*(z!=0?f.z:1-f.z)*irradianceCells[base+3].x;
-        red+=irradianceCells[base]*w;green+=irradianceCells[base+1]*w;blue+=irradianceCells[base+2]*w;
-        weight+=w;
-    }
-    vec4 basis=vec4(normal,1);
-    return vec4(max(vec3(dot(red,basis),dot(green,basis),dot(blue,basis)),vec3(0))*camera.irradianceParameters.x,
-        clamp(weight,0,1));
+    return evaluateIrradianceGrid(position,normal,camera.irradianceOriginSpacing,
+        ivec3(camera.irradianceDimensionsEnabled.xyz),camera.irradianceParameters.x,(queryFlags&8u)!=0u);
 #endif
 }
 

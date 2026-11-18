@@ -222,9 +222,27 @@ python -B -m tools.npr_room.original_room_frames --frames $originalProbeFrames -
 通用二阶场、边界、有效权重及非法输入通过契约检查。
 线性示例的编码与基线逐字节一致。
 三层辐照资源的 CPU 回归通过。
-场景图形消费继续按二阶资源格式接入。
+场景图形入口按文件版本上传对应系数布局。
 
 本机 CPU 证据位于 `ambient-probe/quadratic-cpu/`。
+
+任务 2157 在 RTX 4060 与 Intel 核显上运行生产求值程序。
+每台设备覆盖 26 份网格，共 672 次查询。
+其中 24 份原版网格包含 624 个方向响应。
+原版响应的最大误差为 0.000000239。
+
+两种格式、边界、权重和最终钳位通过 GPU 对照。
+同步验证、全部缓冲与图像释放检查通过。
+任务 2158 通过场景入口的 C++17 严格编译。
+任务 2159 编译通过 644 个受影响的生产片元分支。
+
+任务 2160 核对两版上传字节与资源加载分派。
+110 项房间 Python 检查及 Lua 运行夹具通过。
+匹配 Player 的完整房间画面等待受管构建配额。
+正式回归与 Steam 实机验收按当前安排延后。
+
+本机 GPU 证据位于 `ambient-probe/quadratic-gpu/`。
+报告 SHA-256 为 `d61cddf63a1d24186c3b6badc738bafcd57a89a3f64587d3dcd0e627579298b7`。
 
 ```powershell
 python -B -m tools.npr_room.original_ambient_probe --frame $originalProbeFrame --output $quadraticGrid

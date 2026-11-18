@@ -36,6 +36,8 @@ P0 已锁定 Recovery Windows 产物及静态目录。
 [移植计划](2026-11-16-npr-room-reproduction.md) · [验收基线](../acceptance/npr-room/baseline.md)
 [房间底色与主纹理](../acceptance/npr-room/room-base-surfaces.md)通过 170 个槽位核对及原生对照。
 [房间语言设置](../acceptance/npr-room/room-language.md)通过七种语言切换、本地存档重开及原语音续播。
+[房间二阶环境光](../acceptance/npr-room/windows-atmosphere.md#原版环境光探针)通过原版方向的双设备求值。
+匹配 Player 的完整房间画面等待受管构建配额。
 
 [联合场景热点纹理分配](../acceptance/nr/joint-texture-hot-placement.md)完成 1440p 同驱动逐像素比较与 1080p60 配对计时。候选 GPU P95 高于首轮参考，保留隔离结果。
 

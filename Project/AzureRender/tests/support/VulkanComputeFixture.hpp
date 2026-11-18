@@ -31,7 +31,7 @@ public:
     rhi::GpuAllocator allocator;
     std::unique_ptr<rhi::VulkanRhi> backend;
 
-    explicit VulkanComputeFixture(bool graphics=false,bool sampleShading=false,bool exactDepthBias=false,bool primitiveIdentity=false,bool quadControl=false,bool fragmentAtomics=false,bool captureWarnings=false,bool anisotropy=false,bool bindless=false) {
+    explicit VulkanComputeFixture(bool graphics=false,bool sampleShading=false,bool exactDepthBias=false,bool primitiveIdentity=false,bool quadControl=false,bool fragmentAtomics=false,bool captureWarnings=false,bool anisotropy=false,bool bindless=false,const std::string& requestedDevice={}) {
         try {
             VkApplicationInfo application{VK_STRUCTURE_TYPE_APPLICATION_INFO};
             application.pApplicationName="AzureRender Compute Contract";application.apiVersion=VK_API_VERSION_1_3;
@@ -59,6 +59,7 @@ public:
             std::vector<VkPhysicalDevice> devices(count);vkRequire(vkEnumeratePhysicalDevices(instance,&count,devices.data()),"vkEnumeratePhysicalDevices");
             for(auto candidate:devices) {
                 VkPhysicalDeviceProperties value{};vkGetPhysicalDeviceProperties(candidate,&value);
+                if(!requestedDevice.empty()&&std::string(value.deviceName).find(requestedDevice)==std::string::npos)continue;
                 if(physical==VK_NULL_HANDLE || value.deviceType==VK_PHYSICAL_DEVICE_TYPE_DISCRETE_GPU) physical=candidate;
                 if(value.deviceType==VK_PHYSICAL_DEVICE_TYPE_DISCRETE_GPU) break;
             }

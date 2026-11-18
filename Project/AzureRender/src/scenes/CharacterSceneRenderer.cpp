@@ -28,6 +28,7 @@ static constexpr bool kSurfaceRadianceFrameSelection=false;
 #include "render/MaterialPipelinePolicy.hpp"
 #include "render/IrradianceClipmapGpu.hpp"
 #include "render/IrradianceResource.hpp"
+#include "render/IrradianceGridGpuData.hpp"
 #include "render/ViewFogGpu.hpp"
 #include "render/ViewFogBindingJson.hpp"
 #include "render/FogVolumeData.hpp"
@@ -2655,12 +2656,7 @@ void CharacterSceneRenderer::createTexture(bool uploadMaterials) {
         RuntimeDiagnostics::instance().info("render","Irradiance clipmap: 3 layers, 6 volume textures");
     }else if(!scene_.irradianceVolume.asset.empty()){
         irradianceVolume_=IrradianceVolume::load(std::filesystem::u8path(scene_.irradianceVolume.asset));
-        irradianceWords.resize(irradianceVolume_.cells.size()*4);
-        for(std::size_t i=0;i<irradianceVolume_.cells.size();++i){
-            const auto& cell=irradianceVolume_.cells[i];
-            for(unsigned c=0;c<3;++c)irradianceWords[4*i+c]=cell.coefficients[c];
-            irradianceWords[4*i+3]={cell.weight,0,0,0};
-        }
+        irradianceWords=packIrradianceGridCells(irradianceVolume_);
         RuntimeDiagnostics::instance().info("render","Irradiance volume: "+std::to_string(irradianceVolume_.cells.size())+" samples");
     }
     if(!irradianceClipmapActive_){
@@ -4941,7 +4937,8 @@ void CharacterSceneRenderer::updateUniformBuffer(
     uniform.irradianceOriginSpacing={irradianceVolume_.origin[0],irradianceVolume_.origin[1],irradianceVolume_.origin[2],irradianceVolume_.spacing};
     const auto& irradianceDimensions=irradianceClipmapActive_?irradianceClipmapDimensions_:irradianceVolume_.dimensions;
     uniform.irradianceDimensionsEnabled={float(irradianceDimensions[0]),float(irradianceDimensions[1]),float(irradianceDimensions[2]),
-        float(gi.sampling.enabledFlags(gi.enabled&&(irradianceClipmap_||!irradianceVolume_.cells.empty())))};
+        float(irradianceGridQueryFlags(gi.sampling.enabledFlags(gi.enabled&&(irradianceClipmap_||!irradianceVolume_.cells.empty())),
+                                      irradianceVolume_.basis))};
     uniform.irradianceParameters={gi.intensity,gi.sampling.normalOffset,gi.sampling.jitterAmplitude,gi.sampling.phase};
     auto viewCapabilities=computedMaterialViewCapabilities_;
     const auto& depthSource=overlaySceneDepth_.at(currentFrame_);
