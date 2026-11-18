@@ -180,9 +180,31 @@ python -B -m tools.npr_room.original_room_frames --frames $originalRoomFrames --
 本机证据位于 `original-room-dynamics/registration/`。
 
 ```powershell
-python -B -m tools.npr_room.original_room_registration --room $room --frame $originalFrame --output $registeredRoom
+python -B -m tools.npr_room.original_room_registration --room $room --frame $originalFrame --source $unitySource --output $registeredRoom
 python -B -m unittest tools.npr_room.test_original_room_registration
 ```
+
+## 原版物件显隐
+
+配准工具从原场景文件编号恢复合批网格的完整路径。
+路径与原版同步帧的活动物件记录共同决定显隐。
+同名物件按完整世界变换核验身份。
+身份存在歧义时，工具保留失败诊断。
+
+夜晚与多云分别核对 202 个房间绘制节点。
+原版活动节点分别为 177 和 180 个。
+隔离候选隐藏对应的 25 和 22 个非活动节点。
+七个角色部件继续使用已核验的姿态配准。
+
+任务 2138 在两种天气各启动一个独立 Player。
+相对同姿态的显隐对照，变化像素分别为 212,092 和 168,753。
+椅背控制区的 1,200 个像素逐一相同。
+两次运行通过同步校验，并释放全部图像与缓冲。
+
+玻璃与转场节点按当前材质覆盖条件保存显隐。
+天气背景、角色附件和材质细节继续按原版补齐。
+显隐结果属于配准步骤，整帧画质门槛继续验收。
+本机报告位于 `original-room-dynamics/activation/`。
 
 ## 复验
 
