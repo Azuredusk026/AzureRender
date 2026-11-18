@@ -90,3 +90,42 @@ init()
 step(0, "timer-stats")
 step(0, "calendar-first-1")
 assert(saved[weekSlot][1] == 2 and saved[weekSlot][2] == 6 and labels["calendar-weekday-1"] == "Sun")
+
+saved[weekSlot] = {1, 1}
+saved["work-calendar"] = {1, {
+    {"2025", {{"1231", 61}}},
+    {"2026", {{"0101", 18}}},
+}}
+wall = "20260101120000"
+init()
+step(0, "timer-stats")
+assert(labels["calendar-selected-date"] == "2026-01-01" and labels["calendar-selected-time"] == "00:00:18")
+
+step(0, "calendar-prev-month")
+assert(labels["calendar-month"] == "2025-12" and labels["calendar-date-1"] == "1")
+step(0, "calendar-day-42")
+assert(labels["calendar-selected-date"] == "2026-01-01")
+step(0, "calendar-day-31")
+assert(labels["calendar-selected-date"] == "2025-12-31" and labels["calendar-selected-time"] == "00:01:01")
+
+step(0, "calendar-first-0")
+assert(labels["calendar-month"] == "2025-12" and labels["calendar-date-32"] == "31")
+assert(labels["calendar-selected-date"] == "2025-12-31")
+step(0, "calendar-next-month")
+assert(labels["calendar-month"] == "2026-01")
+step(0, "calendar-day-5")
+step(0, "timer-toggle")
+step(2)
+assert(labels["calendar-selected-time"] == "00:00:20")
+step(0, "calendar-day-6")
+assert(labels["calendar-selected-date"] == "2026-01-02" and labels["calendar-selected-time"] == "00:00:00")
+assert(saved["work-calendar"][2][1][2][1][2] == 61)
+
+wall = "20250101120000"
+init()
+step(0, "timer-stats")
+step(0, "calendar-prev-month")
+assert(labels["calendar-month"] == "2025-01" and labels["calendar-date-4"] == "1")
+wall = "29981201120000"
+step(0, "calendar-next-month")
+assert(labels["calendar-month"] == "2998-12")

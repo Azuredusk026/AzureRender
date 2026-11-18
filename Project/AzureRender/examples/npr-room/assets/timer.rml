@@ -12,11 +12,14 @@ body { width: 100%; height: 100%; margin: 0; color: white; font-family: LatoLati
 #timer-controls button:hover { background-color: #506472; }
 #work-stats { display: block; margin-top: 8dp; font-size: 13dp; }
 #work-calendar { margin-top: 8dp; }
-#calendar-month { display: block; font-size: 15dp; }
-.calendar-row { display: block; height: 18dp; }
-.calendar-row span { display: inline-block; width: 32dp; height: 18dp; text-align: center; }
-#calendar-picker button { display: inline-block; padding: 3dp; margin-right: 2dp; color: white; background-color: #34434f; }
-#calendar-picker button:hover { background-color: #506472; }
+#calendar-month { display: inline-block; width: 76dp; text-align: center; font-size: 15dp; }
+.calendar-row { display: flex; height: 18dp; }
+.calendar-row span { display: block; width: 32dp; height: 18dp; text-align: center; }
+.calendar-row button { display: inline-block; width: 28dp; height: 18dp; text-align: center; color: white; }
+.calendar-row button:hover { background-color: #506472; }
+#calendar-picker button, #calendar-navigation button { display: inline-block; padding: 3dp; margin-right: 2dp; color: white; background-color: #34434f; }
+#calendar-picker button:hover, #calendar-navigation button:hover { background-color: #506472; }
+#calendar-selected { display: block; margin: 4dp 0; }
 #calendar-status { display: block; color: #f0c58e; }
 #notes-toggle { position: absolute; left: 16dp; top: 16dp; padding: 6dp 10dp; color: white; background-color: #34434f; }
 #notes-panel { position: absolute; left: 16dp; top: 52dp; width: 310dp; padding: 14dp; background-color: #19232c; }
@@ -47,14 +50,67 @@ body { width: 100%; height: 100%; margin: 0; color: white; font-family: LatoLati
 <div id="work-stats" style="display: none;">Today <span id="work-today"></span> · Total <span id="work-total"></span>
 <span id="work-progression" style="display: none;"></span>
 <div id="work-calendar">
+<div id="calendar-navigation">
+<button id="calendar-prev-month" data-action="calendar-prev-month">Previous</button>
 <span id="calendar-month"></span>
+<button id="calendar-next-month" data-action="calendar-next-month">Next</button>
+</div>
 <div class="calendar-row"><span id="calendar-weekday-1"></span><span id="calendar-weekday-2"></span><span id="calendar-weekday-3"></span><span id="calendar-weekday-4"></span><span id="calendar-weekday-5"></span><span id="calendar-weekday-6"></span><span id="calendar-weekday-7"></span></div>
-<div class="calendar-row"><span id="calendar-date-1"></span><span id="calendar-date-2"></span><span id="calendar-date-3"></span><span id="calendar-date-4"></span><span id="calendar-date-5"></span><span id="calendar-date-6"></span><span id="calendar-date-7"></span></div>
-<div class="calendar-row"><span id="calendar-date-8"></span><span id="calendar-date-9"></span><span id="calendar-date-10"></span><span id="calendar-date-11"></span><span id="calendar-date-12"></span><span id="calendar-date-13"></span><span id="calendar-date-14"></span></div>
-<div class="calendar-row"><span id="calendar-date-15"></span><span id="calendar-date-16"></span><span id="calendar-date-17"></span><span id="calendar-date-18"></span><span id="calendar-date-19"></span><span id="calendar-date-20"></span><span id="calendar-date-21"></span></div>
-<div class="calendar-row"><span id="calendar-date-22"></span><span id="calendar-date-23"></span><span id="calendar-date-24"></span><span id="calendar-date-25"></span><span id="calendar-date-26"></span><span id="calendar-date-27"></span><span id="calendar-date-28"></span></div>
-<div class="calendar-row"><span id="calendar-date-29"></span><span id="calendar-date-30"></span><span id="calendar-date-31"></span><span id="calendar-date-32"></span><span id="calendar-date-33"></span><span id="calendar-date-34"></span><span id="calendar-date-35"></span></div>
-<div class="calendar-row"><span id="calendar-date-36"></span><span id="calendar-date-37"></span><span id="calendar-date-38"></span><span id="calendar-date-39"></span><span id="calendar-date-40"></span><span id="calendar-date-41"></span><span id="calendar-date-42"></span></div>
+<div class="calendar-row">
+<span><button id="calendar-date-1" data-action="calendar-day-1" style="display: none;"></button></span>
+<span><button id="calendar-date-2" data-action="calendar-day-2" style="display: none;"></button></span>
+<span><button id="calendar-date-3" data-action="calendar-day-3" style="display: none;"></button></span>
+<span><button id="calendar-date-4" data-action="calendar-day-4" style="display: none;"></button></span>
+<span><button id="calendar-date-5" data-action="calendar-day-5" style="display: none;"></button></span>
+<span><button id="calendar-date-6" data-action="calendar-day-6" style="display: none;"></button></span>
+<span><button id="calendar-date-7" data-action="calendar-day-7" style="display: none;"></button></span>
+</div>
+<div class="calendar-row">
+<span><button id="calendar-date-8" data-action="calendar-day-8" style="display: none;"></button></span>
+<span><button id="calendar-date-9" data-action="calendar-day-9" style="display: none;"></button></span>
+<span><button id="calendar-date-10" data-action="calendar-day-10" style="display: none;"></button></span>
+<span><button id="calendar-date-11" data-action="calendar-day-11" style="display: none;"></button></span>
+<span><button id="calendar-date-12" data-action="calendar-day-12" style="display: none;"></button></span>
+<span><button id="calendar-date-13" data-action="calendar-day-13" style="display: none;"></button></span>
+<span><button id="calendar-date-14" data-action="calendar-day-14" style="display: none;"></button></span>
+</div>
+<div class="calendar-row">
+<span><button id="calendar-date-15" data-action="calendar-day-15" style="display: none;"></button></span>
+<span><button id="calendar-date-16" data-action="calendar-day-16" style="display: none;"></button></span>
+<span><button id="calendar-date-17" data-action="calendar-day-17" style="display: none;"></button></span>
+<span><button id="calendar-date-18" data-action="calendar-day-18" style="display: none;"></button></span>
+<span><button id="calendar-date-19" data-action="calendar-day-19" style="display: none;"></button></span>
+<span><button id="calendar-date-20" data-action="calendar-day-20" style="display: none;"></button></span>
+<span><button id="calendar-date-21" data-action="calendar-day-21" style="display: none;"></button></span>
+</div>
+<div class="calendar-row">
+<span><button id="calendar-date-22" data-action="calendar-day-22" style="display: none;"></button></span>
+<span><button id="calendar-date-23" data-action="calendar-day-23" style="display: none;"></button></span>
+<span><button id="calendar-date-24" data-action="calendar-day-24" style="display: none;"></button></span>
+<span><button id="calendar-date-25" data-action="calendar-day-25" style="display: none;"></button></span>
+<span><button id="calendar-date-26" data-action="calendar-day-26" style="display: none;"></button></span>
+<span><button id="calendar-date-27" data-action="calendar-day-27" style="display: none;"></button></span>
+<span><button id="calendar-date-28" data-action="calendar-day-28" style="display: none;"></button></span>
+</div>
+<div class="calendar-row">
+<span><button id="calendar-date-29" data-action="calendar-day-29" style="display: none;"></button></span>
+<span><button id="calendar-date-30" data-action="calendar-day-30" style="display: none;"></button></span>
+<span><button id="calendar-date-31" data-action="calendar-day-31" style="display: none;"></button></span>
+<span><button id="calendar-date-32" data-action="calendar-day-32" style="display: none;"></button></span>
+<span><button id="calendar-date-33" data-action="calendar-day-33" style="display: none;"></button></span>
+<span><button id="calendar-date-34" data-action="calendar-day-34" style="display: none;"></button></span>
+<span><button id="calendar-date-35" data-action="calendar-day-35" style="display: none;"></button></span>
+</div>
+<div class="calendar-row">
+<span><button id="calendar-date-36" data-action="calendar-day-36" style="display: none;"></button></span>
+<span><button id="calendar-date-37" data-action="calendar-day-37" style="display: none;"></button></span>
+<span><button id="calendar-date-38" data-action="calendar-day-38" style="display: none;"></button></span>
+<span><button id="calendar-date-39" data-action="calendar-day-39" style="display: none;"></button></span>
+<span><button id="calendar-date-40" data-action="calendar-day-40" style="display: none;"></button></span>
+<span><button id="calendar-date-41" data-action="calendar-day-41" style="display: none;"></button></span>
+<span><button id="calendar-date-42" data-action="calendar-day-42" style="display: none;"></button></span>
+</div>
+<div id="calendar-selected"><span id="calendar-selected-date"></span> · <span id="calendar-selected-time"></span></div>
 <div>Start of week <span id="calendar-first-day"></span></div>
 <div id="calendar-picker">
 <button id="calendar-first-0" data-action="calendar-first-0">Sun</button>

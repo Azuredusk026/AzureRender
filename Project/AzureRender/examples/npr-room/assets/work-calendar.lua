@@ -84,6 +84,7 @@ function new_work_calendar()
     local calendar = {}
     local runtime = self
     local startDay, displayedMonth, displayedStart
+    local browsedMonth, selectedDate
 
     local function today()
         return runtime:local_datetime():sub(1, 8)
@@ -173,21 +174,41 @@ function new_work_calendar()
             end
         end
         local date = today()
-        local monthKey = date:sub(1, 6)
-        if displayedMonth == monthKey and displayedStart == startDay then return end
-        displayedMonth, displayedStart = monthKey, startDay
-        local year, month = tonumber(date:sub(1, 4)), tonumber(date:sub(5, 6))
+        local monthIndex = browsedMonth or tonumber(date:sub(1, 4)) * 12 + tonumber(date:sub(5, 6)) - 1
+        local year, month = monthIndex // 12, monthIndex % 12 + 1
+        if runtime:pressed("calendar-prev-month") and (month > 1 or year > 2025) then
+            monthIndex = monthIndex - 1
+            browsedMonth = monthIndex
+        elseif runtime:pressed("calendar-next-month") and (month < 12 or year < 2998) then
+            monthIndex = monthIndex + 1
+            browsedMonth = monthIndex
+        end
+        year, month = monthIndex // 12, monthIndex % 12 + 1
         local offset = (firstWeekday(year, month) - startDay) % 7
         local days = monthLength(year, month)
-        runtime:ui_text("calendar-month", string.format("%04d-%02d", year, month))
-        runtime:ui_text("calendar-first-day", weekdays[startDay + 1])
-        for column = 1, 7 do
-            runtime:ui_text("calendar-weekday-" .. column, weekdays[(startDay + column - 1) % 7 + 1])
+        if displayedMonth ~= monthIndex or displayedStart ~= startDay then
+            displayedMonth, displayedStart = monthIndex, startDay
+            runtime:ui_text("calendar-month", string.format("%04d-%02d", year, month))
+            runtime:ui_text("calendar-first-day", weekdays[startDay + 1])
+            for column = 1, 7 do
+                runtime:ui_text("calendar-weekday-" .. column, weekdays[(startDay + column - 1) % 7 + 1])
+            end
+            for cell = 1, 42 do
+                local day = cell - offset
+                local valid = day >= 1 and day <= days
+                runtime:ui_text("calendar-date-" .. cell, valid and tostring(day) or "")
+                runtime:ui_visible("calendar-date-" .. cell, valid)
+            end
         end
-        for cell = 1, 42 do
-            local day = cell - offset
-            runtime:ui_text("calendar-date-" .. cell, day >= 1 and day <= days and tostring(day) or "")
+        for day = 1, days do
+            if runtime:pressed("calendar-day-" .. (offset + day)) then
+                selectedDate = string.format("%04d%02d%02d", year, month, day)
+                break
+            end
         end
+        local selected = selectedDate or date
+        local label = selected:sub(1, 4) .. "-" .. selected:sub(5, 6) .. "-" .. selected:sub(7, 8)
+        return label, math.min(86400, self:timeFor(selected))
     end
 
     function calendar:totalTime()

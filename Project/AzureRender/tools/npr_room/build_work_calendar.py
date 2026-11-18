@@ -69,8 +69,12 @@ def stage_calendar(room, output, source=None):
     if "timer-stats" in inputs:
         raise ValueError("Room already has the work calendar")
     inputs["timer-stats"] = []
+    inputs["calendar-prev-month"] = []
+    inputs["calendar-next-month"] = []
     for weekday in range(7):
         inputs[f"calendar-first-{weekday}"] = []
+    for cell in range(1, 43):
+        inputs[f"calendar-day-{cell}"] = []
 
     def copy_asset(path, destination):
         return os.link(path, destination) if Path(path).suffix.lower() == ".glb" else shutil.copyfile(path, destination)

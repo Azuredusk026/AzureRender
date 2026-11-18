@@ -306,7 +306,9 @@ function update(dt)
         if statsOpen then
             self:ui_text("work-today", durationText(workCalendar:today()))
             self:ui_text("work-total", durationText(workCalendar:totalTime()))
-            workCalendar:update_month_view()
+            local date, time = workCalendar:update_month_view()
+            self:ui_text("calendar-selected-date", date)
+            self:ui_text("calendar-selected-time", durationText(time))
             local growth = workCalendar:progress()
             if growth then
                 self:ui_text("work-progression", string.format(" · Level %d · Points %d", growth[1], growth[3]))
