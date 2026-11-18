@@ -19,6 +19,7 @@ from tools.npr_room.original_room_visibility import filter_visibility
 from tools.npr_room.skinned_mesh_export import UnityScene
 from tools.npr_room.window_scene_inventory import ROOM_SCENE
 from tools.npr_room.build_city_window import CITY_RESOURCE
+from tools.npr_room.room_transparent_surfaces import install_lens
 
 
 def pose_rotation(value):
@@ -142,12 +143,14 @@ def stage(room, frame, output, source=None):
         level = json.loads(level_path.read_bytes())
         placement = apply_level_pose(level, record)
         activation = None
+        transparency = None
         if source is not None:
             scene_path = source / ROOM_SCENE
             extra = {node["id"]: int(node["id"].removeprefix(CITY_RESOURCE + "-"))
                      for node in level["nodes"] if node.get("resourceId") == CITY_RESOURCE}
             activation = {"roomSceneSHA256": digest(scene_path),
                           **filter_visibility(level, record, UnityScene(scene_path), extra)}
+            transparency = install_lens(assets, level, source)
         for node in level["nodes"]:
             ui = node["components"].get("azure.game-ui")
             if ui:
@@ -156,6 +159,7 @@ def stage(room, frame, output, source=None):
         receipt = {"schemaVersion": 1, "frameSHA256": digest(frame), "frame": record["frame"],
                    "weather": record["weather"], "parts": parts, "placement": placement,
                    "activation": activation,
+                   "transparency": transparency,
                    "levelSHA256": digest(level_path), "scope": "captured geometry pose with gameplay and UI disabled"}
         (project / "original-pose-receipt.json").write_text(json.dumps(receipt, indent=2) + "\n", encoding="utf-8")
         publish_directory(project, output)

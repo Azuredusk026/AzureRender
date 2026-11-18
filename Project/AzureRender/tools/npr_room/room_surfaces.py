@@ -11,6 +11,7 @@ from uuid import UUID
 
 from tools.build_face_sdf import parse_glb
 from tools.npr_room.catalog_storage import publish_directory
+from tools.npr_room.room_transparent_surfaces import install_lens
 from tools.npr_room.pbr_materials import pbr_document, staging_metadata, write
 from tools.npr_room.reference_inventory import digest
 from tools.npr_room.room_geometry import copy_room_asset
@@ -171,9 +172,13 @@ def stage_surfaces(source, room, output, catalog, images):
         if not applied:
             raise ValueError("The imported room requires mapped source material assignments")
         image_receipt = stage_textures(assets, folder, images.resolve().parent, image_slots, textures, mounted)
+        transparency = None
+        if "unity-8186" in level["sceneImports"]["RoomScene"]["nodeMap"]:
+            transparency = install_lens(assets, level, source)
         write(level_path, level)
         report = {"schemaVersion": 1, "sourceSHA256": digest(scene_path), "catalogSHA256": digest(catalog),
-                  "assignments": applied, "materials": selected, "textures": image_receipt, "pending": pending}
+                  "assignments": applied, "materials": selected, "textures": image_receipt, "pending": pending,
+                  "transparency": transparency}
         write(project / "room-surface-receipt.json", report)
         publish_directory(project, output)
     return {name: len(report[name]) for name in ("assignments", "materials", "textures", "pending")}
