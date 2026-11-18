@@ -43,6 +43,7 @@ def main():
     run(args.lua, [example / "assets/pomodoro.lua", example / "tests/pomodoro.lua"])
     run(args.lua, [example / "assets/timer-sound-settings.lua", example / "assets/timer-sound-menu.lua",
                    example / "tests/timer-sound-settings.lua"])
+    run(args.lua, [example / "assets/habit-tracker.lua", example / "tests/habit-tracker.lua"])
     run(args.lua, [example / "assets/startup-flow.lua", example / "tests/startup-flow.lua"])
     run(args.lua, [example / "assets/notes.lua", example / "tests/notes.lua"])
     run(args.lua, [example / "assets/todo.lua", example / "tests/todo.lua"])

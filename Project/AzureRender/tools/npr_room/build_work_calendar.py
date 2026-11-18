@@ -16,6 +16,7 @@ from tools.npr_room.skinned_mesh_export import UnityScene
 
 
 PARAMETER_ASSET = "Assets/App/BulbulAssets/MasterData/ScriptableObjects/GameParameterMaster.asset"
+CALENDAR_SCRIPTS = ("habit-tracker.lua", "habit-calendar-menu.lua", "work-calendar.lua")
 
 
 def work_rewards(source):
@@ -58,13 +59,18 @@ def calendar_script(examples, rewards=None):
     parts = []
     if rewards is not None:
         parts.extend((reward_config(rewards), (examples / "work-progression.lua").read_bytes()))
-    parts.extend((examples / name).read_bytes() for name in ("work-calendar.lua", "pomodoro.lua"))
+    parts.extend((examples / name).read_bytes() for name in (*CALENDAR_SCRIPTS, "pomodoro.lua"))
     return b"\n".join(parts)
 
 
 def calendar_actions():
     return ("timer-stats", "calendar-prev-month", "calendar-next-month", "calendar-edit-time", "calendar-submit-time",
             "calendar-diary-toggle", "calendar-diary-save", "calendar-diary-cancel",
+            "calendar-habits-toggle",
+            *(f"calendar-habit-{action}" for action in ("new", "save", "prev", "next", "complete", "pause",
+                                                       "move-up", "move-down", "archive", "archive-confirm",
+                                                       "archive-cancel")),
+            *(f"calendar-habit-day-{weekday}" for weekday in range(7)),
             *(f"calendar-first-{weekday}" for weekday in range(7)),
             *(f"calendar-day-{cell}" for cell in range(1, 43)))
 
@@ -90,7 +96,7 @@ def integrate_calendar(project, document, program, examples, localization=""):
     document = document.replace(legacy_style, styles.rstrip(), 1).replace(progression, progression + body, 1)
     start = program.index(module_start)
     end = program.index(module_end, start) + len(module_end)
-    module = (examples / "work-calendar.lua").read_text(encoding="utf-8")
+    module = "\n".join((examples / name).read_text(encoding="utf-8") for name in CALENDAR_SCRIPTS)
     program = program[:start] + localization + module + program[end:]
     program = program.replace(legacy_init, "workCalendar = new_work_calendar(translate)", 1)
     program = program.replace(legacy_toggle,

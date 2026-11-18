@@ -33,6 +33,12 @@ body { width: 100%; height: 100%; margin: 0; color: white; font-family: LatoLati
 #calendar-diary-editor { display: block; margin-top: 4dp; }
 #calendar-diary-text { display: block; width: 226dp; height: 56dp; padding: 4dp; color: white; background-color: #273541; }
 #calendar-diary-status { display: block; color: #f0c58e; }
+#calendar-habit, #calendar-habit-current, #calendar-habit-actions, #calendar-habit-confirm, #calendar-habit-history { display: block; margin-top: 4dp; }
+#calendar-habit-editor { display: block; position: absolute; left: 100%; top: 122dp; width: 244dp; padding: 10dp; margin-left: 8dp; background-color: #19232c; }
+#calendar-habits-toggle, #calendar-habit-editor button { display: inline-block; padding: 3dp; margin-right: 2dp; margin-bottom: 3dp; color: white; background-color: #34434f; }
+#calendar-habit-title { display: block; width: 224dp; padding: 4dp; margin: 4dp 0; color: white; background-color: #273541; }
+#calendar-habit-history-list { display: block; max-height: 72dp; overflow-y: auto; white-space: pre-wrap; word-break: break-word; }
+#calendar-habit-status { display: block; color: #f0c58e; }
 #calendar-status { display: block; color: #f0c58e; }
 #notes-toggle { position: absolute; left: 16dp; top: 16dp; padding: 6dp 10dp; color: white; background-color: #34434f; }
 #notes-panel { position: absolute; left: 16dp; top: 52dp; width: 310dp; padding: 14dp; background-color: #19232c; }
@@ -152,6 +158,41 @@ body { width: 100%; height: 100%; margin: 0; color: white; font-family: LatoLati
 <textarea id="calendar-diary-text" maxlength="5000"></textarea>
 <button id="calendar-diary-cancel" data-action="calendar-diary-cancel">Cancel</button>
 <span id="calendar-diary-status"></span>
+</div>
+</div>
+<div id="calendar-habit">
+<button id="calendar-habits-toggle" data-action="calendar-habits-toggle">Habit Tracker</button>
+<div id="calendar-habit-editor" style="display: none;">
+<button id="calendar-habit-new" data-action="calendar-habit-new">New Habit</button>
+<span id="calendar-habit-position"></span>
+<div id="calendar-habit-current" style="display: none;">
+<button id="calendar-habit-prev" data-action="calendar-habit-prev">‹</button>
+<button id="calendar-habit-next" data-action="calendar-habit-next">›</button>
+<button id="calendar-habit-move-up" data-action="calendar-habit-move-up">^</button>
+<button id="calendar-habit-move-down" data-action="calendar-habit-move-down">v</button>
+<input id="calendar-habit-title" data-action-on-blur="calendar-habit-save" type="text" />
+<button id="calendar-habit-day-0" data-action="calendar-habit-day-0">Sun</button>
+<button id="calendar-habit-day-1" data-action="calendar-habit-day-1">Mon</button>
+<button id="calendar-habit-day-2" data-action="calendar-habit-day-2">Tue</button>
+<button id="calendar-habit-day-3" data-action="calendar-habit-day-3">Wed</button>
+<button id="calendar-habit-day-4" data-action="calendar-habit-day-4">Thu</button>
+<button id="calendar-habit-day-5" data-action="calendar-habit-day-5">Fri</button>
+<button id="calendar-habit-day-6" data-action="calendar-habit-day-6">Sat</button>
+<div id="calendar-habit-actions">
+<button id="calendar-habit-complete" data-action="calendar-habit-complete">Completed · Off</button>
+<button id="calendar-habit-pause" data-action="calendar-habit-pause">Pause</button>
+<button id="calendar-habit-archive" data-action="calendar-habit-archive">Delete</button>
+</div>
+<div id="calendar-habit-confirm" style="display: none;">
+<button id="calendar-habit-archive-confirm" data-action="calendar-habit-archive-confirm">Delete</button>
+<button id="calendar-habit-archive-cancel" data-action="calendar-habit-archive-cancel">Cancel</button>
+</div>
+</div>
+<span id="calendar-habit-status"></span>
+</div>
+<div id="calendar-habit-history" style="display: none;">
+<span id="calendar-habit-history-label">Habit Tracker</span>
+<div id="calendar-habit-history-list"></div>
 </div>
 </div>
 </div>

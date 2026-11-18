@@ -39,6 +39,11 @@ local function validDate(date)
     return year >= 1 and month >= 1 and month <= 12 and day >= 1 and day <= monthLength(year, month)
 end
 
+local function dateWeekday(date)
+    local year, month, day = tonumber(date:sub(1, 4)), tonumber(date:sub(5, 6)), tonumber(date:sub(7, 8))
+    return (firstWeekday(year, month) + day - 1) % 7
+end
+
 local function workTimeParts(seconds)
     seconds = math.floor(math.min(86400, seconds) + 1e-7)
     return {seconds // 3600, seconds // 60 % 60, seconds % 60}
@@ -133,6 +138,7 @@ function new_work_calendar(translate)
     local browsedMonth, selectedDate, editingDate
     local displayedTodoDate, refreshTodo
     local diaryDate, diaryText, diaryDraft
+    local habitMenu
 
     local function today()
         return runtime:local_datetime():sub(1, 8)
@@ -308,6 +314,7 @@ function new_work_calendar(translate)
 
     function calendar:close_month_view()
         if not saveDiary() then return false end
+        if habitMenu and not habitMenu:close() then return false end
         if diaryDate then showDiary(nil) end
         displayedTodoDate = nil
         if editingDate then
@@ -396,6 +403,11 @@ function new_work_calendar(translate)
             end
         end
         if diaryDate then diaryDraft = runtime:ui_value("calendar-diary-text") end
+        if new_room_habits and new_habit_calendar_menu then
+            habitMenu = habitMenu or new_habit_calendar_menu(runtime,
+                new_room_habits(runtime, validDate, dateWeekday), calendarLabel, weekdayLabel)
+            habitMenu:update(selected, date, languageChanged)
+        end
         if displayedTodoDate ~= selected or refreshTodo or languageChanged then
             local tasks = completedTodoText(runtime, selected)
             runtime:ui_text("calendar-completed-tasks-label", calendarLabel("completedTasks", "Completed Tasks"))

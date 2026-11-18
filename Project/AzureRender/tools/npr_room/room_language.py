@@ -35,7 +35,10 @@ CALENDAR_WEEKDAYS = tuple("ui_calendar_" + day for day in
 CALENDAR_LABELS = {"firstDay": "ui_setting_general_firstday_title", "workTime": "ui_calendar_group_work_title",
                    "editTime": "ui_calendar_worktime_edit_title", "error": "ui_common_error_body",
                    "completedTasks": "ui_calendar_group_todo_title", "diary": "ui_calendar_group_diary_placeholder",
-                   "cancel": "ui_common_confirm_cancel"}
+                   "cancel": "ui_common_confirm_cancel", "habitTitle": "ui_habittracker_title",
+                   "habitNew": "ui_habittracker_new_title", "habitCompleted": "ui_common_complete",
+                   "habitOn": "ui_global_on", "habitOff": "ui_global_off", "habitPause": "ui_pomodoro_pause_title",
+                   "habitResume": "ui_pomodoro_using_unpause", "habitArchive": "ui_todo_list_remove_confirm_ok"}
 SOURCE_FONTS = (
     ("ed1ce6b1b31e42f4a9a27b428b87f28c", "IBMPlexSansJP-Medium.otf", "Japanese"),
     ("3751989ca05e0454cbf35553ae20d6b2", "IBMPlexSansTC-Medium.otf", "Traditional Chinese"),

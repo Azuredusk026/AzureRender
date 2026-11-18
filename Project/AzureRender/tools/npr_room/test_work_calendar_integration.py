@@ -33,4 +33,6 @@ class IntegratedCalendarTests(unittest.TestCase):
         self.assertIn("calendar-day-42", project["runtime"]["input"])
         self.assertIn("calendar-submit-time", project["runtime"]["input"])
         self.assertIn("calendar-diary-save", project["runtime"]["input"])
+        self.assertIn("function new_room_habits", script)
+        self.assertIn('data-action="calendar-habit-archive-confirm"', markup)
         self.assertIn("room-language-toggle", project["runtime"]["input"])

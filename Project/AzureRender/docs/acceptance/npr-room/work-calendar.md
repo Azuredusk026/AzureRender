@@ -31,6 +31,14 @@
 
 任务 2120 用三个 Player 进程复验多行输入、按日期保存、关闭进程后恢复及较新格式保护。可控测试覆盖超出长度上限、写入失败、选择日期及取消。报告位于本机 `calendar-diary-validation/calendar-diary-replay.json`，SHA-256 为 `77f71b3f70ac3196d940839a87ec9799e5f19b951fd36f316d866afde1f2f9b8`。
 
+## 习惯与日历记录
+
+月历的习惯面板支持新增、命名、排序、每周启用日、当日暂停或恢复，以及选中日期的完成与撤销。日历保留已删除习惯的完成历史。删除经过面板内确认。
+
+日期启用条件采用 Recovery 的创建日期、星期位标记和暂停区间。已完成日期可撤销，未启用的日期保持未完成。历史记录依据 `HabitDataService.GetCompletedHabitsForCalendar` 与 `CalendarUI` 核对。日期隐藏、周视图和拖动排序分别按原入口继续验收。
+
+任务 2122 使用两个 Player 复验星期规则、暂停恢复、完成撤销、重排、确认删除与重开。图像和缓冲在退出后归零。可控测试覆盖日期边界、暂停区间、写入失败和较新格式保护。本机 `calendar-habit-validation/calendar-habit-replay.json` 的 SHA-256 为 `6c9c139c6083f6c2bcb4b96fafd4fc0747158b558dbe9900467e9992a10be669`。
+
 ## 回放
 
 可控时钟覆盖跨午夜、暂停、休息、60 秒检查点、写入失败、较新版本和退出恢复。
