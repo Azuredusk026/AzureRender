@@ -62,13 +62,25 @@ Release Player 处理 11 个动作，播放五次原音效。
 
 计时音效装配在已有房间候选上加入开始 B、开始 C、结束 B 和结束 C。四个槽保留原 `AudioClip` GUID 与文件 ID。原版开始 A、结束 A 和暂停沿用固定槽名。房间装配核验覆盖全部七个计时音效及三个系统音效。
 
-任务 2110 通过按键依次播放四个新增槽。Player 成功解码四个原 OGG 文件，记录四次播放和九个动作，退出后缓冲与图像计数均为零。该回放直接触发资源槽。偏好界面及两种计时模式的选项保存按音频设置验收。
+任务 2110 通过按键依次播放四个新增槽。Player 成功解码四个原 OGG 文件，记录四次播放和九个动作，退出后缓冲与图像计数均为零。该回放直接触发资源槽。
 
 本机 `timer-sound-variant-validation/sound-cue-mounts.json` 与 `timer-sound-variant-validation/timer-sound-playback.json` 的 SHA-256 分别为 `17cae30dee2f3f24d9cf3b1ce59f70da168150cb473fcc21a060d8101b249978` 与 `fad337fc608306dda6eefec81a7c293ddce1cb6804d19a2c3b5ced037f04793c`。
 
 ```powershell
 python -B -m tools.npr_room.build_timer_sound_room --room $roomDirectory --source $unitySource --inventory $referenceInventory --output $roomWithTimerSounds
 python -B -m tools.npr_room.sound_cue_inventory --source $unitySource --inventory $referenceInventory --room $roomWithTimerSounds --audio-repairs $audioRepairReport --output $soundCueReport --timer-variants
+```
+
+### 计时音效偏好
+
+番茄钟与正计时各自保存开始和结束的 A、B、C 音效、百分比音量和静音。选择音效或提交音量时试听。字段可通过回车或失去焦点提交。选项写入成功后生效，较新格式及写入失败时保留当前选项。
+
+任务 2112 覆盖两种模式独立保存、切换标签页时提交音量、静音及重开。任务 2114 从完整房间打开七种语言的音效面板，在 1280×720 下逐一记录画面，并通过面板及计时按钮播放原音效。各进程均正常释放缓冲与图像。主音量及原版滑杆交互按设置专项复验。
+
+本机 `timer-sound-settings-validation/timer-sound-settings-replay.json` 与 `timer-sound-settings-validation/full-room-timer-settings.json` 的 SHA-256 分别为 `9e00f59e10007817f6f56e44ccb0b1d73c85a7c1ec39efb0eacac71fd169eff0` 与 `71c413cf31d5505f1aaf7ddb7869a0137b2daf3937d52ef97ea809b485974378`。
+
+```powershell
+python -B -m tools.npr_room.build_timer_sound_room --room $roomDirectory --source $unitySource --inventory $referenceInventory --story-inventory $storyInventory --output $timerSettingsRoom
 ```
 
 ## 托管存档

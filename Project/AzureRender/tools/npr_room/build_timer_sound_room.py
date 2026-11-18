@@ -12,6 +12,7 @@ from tools.npr_room.pbr_materials import write
 from tools.npr_room.reference_inventory import digest, group_paths_by_guid
 from tools.npr_room.room_geometry import copy_room_asset, stage_live_audio_media
 from tools.npr_room.sound_cue_inventory import BINDINGS, TIMER_VARIANTS, read_table
+from tools.npr_room.timer_sound_room_settings import install
 
 
 def timer_plan(source, inventory):
@@ -45,6 +46,9 @@ def attach_variants(level, sounds):
     by_id = {node["id"]: node for node in nodes}
     if any(sound["node"] in by_id for sound in sounds):
         raise ValueError("Room already contains timer variants")
+    if any("azure.audio-source" not in by_id.get(default, {}).get("components", {})
+           for default in BINDINGS["Timer"].values()):
+        raise ValueError("Room must have its default start, finish and pause cues")
     for sound in sounds:
         default = "timer-" + sound["cue"].split("_")[0].lower()
         volume = by_id[default]["components"]["azure.audio-source"]["data"]["volume"]
@@ -53,7 +57,7 @@ def attach_variants(level, sounds):
         nodes.append({"id": sound["node"], "components": {"azure.audio-source": component}})
 
 
-def build(room, output, source, inventory):
+def build(room, output, source, inventory, story_inventory=None):
     room = room.resolve(strict=True)
     output = output.resolve()
     if output.is_relative_to(room):
@@ -73,9 +77,13 @@ def build(room, output, source, inventory):
         staged = Path(folder) / "room"
         assets = staged / "assets"
         shutil.copytree(room / "assets", assets, copy_function=copy_room_asset, ignore=shutil.ignore_patterns(".azure"))
-        shutil.copyfile(project, staged / project.name)
         for prior in room.glob("*-receipt.json"):
             shutil.copyfile(prior, staged / prior.name)
+        if story_inventory is not None:
+            receipt["settings"] = install(room, descriptor, assets, story_inventory)
+            write(staged / project.name, descriptor)
+        else:
+            shutil.copyfile(project, staged / project.name)
         stage_live_audio_media(source, receipt["sounds"], assets)
         level_path = assets / base_level.name
         write(level_path, level)
@@ -89,8 +97,9 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     for name in ("room", "output", "source", "inventory"):
         parser.add_argument("--" + name, type=Path, required=True)
+    parser.add_argument("--story-inventory", type=Path)
     args = parser.parse_args()
-    build(args.room, args.output, args.source, args.inventory)
+    build(args.room, args.output, args.source, args.inventory, args.story_inventory)
 
 
 if __name__ == "__main__":

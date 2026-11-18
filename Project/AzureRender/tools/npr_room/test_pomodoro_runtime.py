@@ -41,6 +41,8 @@ def main():
     args = parser.parse_args()
     example = Path(__file__).resolve().parents[2] / "examples/npr-room"
     run(args.lua, [example / "assets/pomodoro.lua", example / "tests/pomodoro.lua"])
+    run(args.lua, [example / "assets/timer-sound-settings.lua", example / "assets/timer-sound-menu.lua",
+                   example / "tests/timer-sound-settings.lua"])
     run(args.lua, [example / "assets/startup-flow.lua", example / "tests/startup-flow.lua"])
     run(args.lua, [example / "assets/notes.lua", example / "tests/notes.lua"])
     run(args.lua, [example / "assets/todo.lua", example / "tests/todo.lua"])
