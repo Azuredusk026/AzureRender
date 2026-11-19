@@ -18,8 +18,10 @@ from test_unlit_texture_layers_gpu import profile, png_uri, linear
 from render_capture_layout import CAMERA_UNIFORM_BYTES, MATERIAL_SURFACE_PROFILE_LAYOUT_VERSION
 
 
+BAKED_HEIGHT_CASES = ('baked-height-base', 'baked-height-moved')
+BAKED_HEIGHT_DIMS = (16, 16, 24)
 CASES = ('analytic-only', 'combined', 'camera-mismatch', 'orthographic', 'offset',
-         'height-only', 'additive', 'msaa', 'camera-reentry')
+         'height-only', 'additive', 'msaa', 'camera-reentry', *BAKED_HEIGHT_CASES)
 CAMERA_REENTRY_OFFSETS = [(0., 0.), (.125, .0625), (.25, .125), (.25, .125), (.125, .0625), (0., 0.)]
 CAMERA_REENTRY_FRAMES = 10
 
@@ -57,9 +59,42 @@ def transport(settings,origin,point):
         b=h['transmittanceBias'];adjusted=np.clip(max(height_t,h['minimumTransmittance'])+np.clip(b[0]+distance*b[1],0,1)+np.clip(b[2]+distance*b[3],0,1),0,1)
         height_s*=(1-adjusted)/(1-height_t);height_t=adjusted
     return height_t*air_t,height_s+height_t*air_s
+def fixture_ray(view, camera, u, v):
+    offset_x, offset_y = view['projectionOffset']
+    ortho = view['projection'] == 'orthographic'
+    half_height = view['orthographicHeight'] * .5 if ortho else math.tan(view['fieldOfViewRadians'] * .5)
+    x = (2*u - 1 - offset_x) * half_height
+    y = (1 - 2*v + offset_y) * half_height
+    if ortho:
+        return camera + np.array([x, y, 0]), np.array([0, 0, -1])
+    return camera, np.array([x, y, -1])
+
+
+def bake_height_volume(view, projection):
+    width, height, depth_count = BAKED_HEIGHT_DIMS
+    depth_scale, depth_bias, log_scale = projection['depthEncoding']
+    settings = analytic_settings('height-only')
+    camera = np.array(view['position'])
+    rays = []
+    for y in range(height):
+        v = (y + .5) / height
+        if projection['pixelOrigin'] == 'lower-left':
+            v = 1 - v
+        for x in range(width):
+            rays.append(fixture_ray(view, camera, (x + .5) / width, v))
+    payload = bytearray(b'AZFOG001' + struct.pack('<3I', *BAKED_HEIGHT_DIMS))
+    for z in range(depth_count):
+        coordinate = (z + .5) / depth_count
+        depth = (2**(coordinate / log_scale) - depth_bias) / depth_scale
+        for origin, direction in rays:
+            transmittance, scatter = transport(settings, origin, origin + direction * depth)
+            payload.extend(struct.pack('<4e', *scatter, transmittance[0]))
+    return payload
+
+
 def frame_errors(pixels, kind, view, camera, volume_enabled):
     size = pixels.shape[0]
-    settings = analytic_settings(kind)
+    settings = analytic_settings('height-only' if kind in BAKED_HEIGHT_CASES else kind)
     errors = []
     for x, y, covered in [(size//2, size//2, True), (size//2+4, size//2-4, True), (size//10, size//10, False)]:
         scatter = np.array([.03125, .0625, .125])
@@ -69,14 +104,7 @@ def frame_errors(pixels, kind, view, camera, volume_enabled):
             scatter = np.array([xy[0]*.125, xy[1]*.0625, .03125]).astype(np.float16).astype(float)
 
         def fog(color, depth, additive=False):
-            ndc = np.array([2*(x+.5)/size-1, 1-2*(y+.5)/size])
-            offset = np.array(view['projectionOffset'])
-            offset[0] *= -1
-            ortho = kind == 'orthographic'
-            half_height = 1 if ortho else math.tan(math.radians(55)/2)
-            xy = (ndc + offset) * half_height
-            origin = camera + np.array([*xy, 0]) if ortho else camera
-            direction = np.array([0, 0, -1]) if ortho else np.array([*xy, -1])
+            origin, direction = fixture_ray(view, camera, (x + .5) / size, (y + .5) / size)
             t, s = transport(settings, origin, origin + direction * depth)
             if volume_enabled:
                 t = .5 * t
@@ -138,7 +166,10 @@ def run(player, output, validation, selected):
                 surface=dict(schemaVersion=1,lighting='unlit'))))]
             (assets/'rear.gltf').write_text(json.dumps(rear))
             size=256 if kind=='resize' else 128
-            camera=dict(id='camera',components={'azure.transform':component('azure.transform',dict(translation=[0,0,3])),
+            baked = kind in BAKED_HEIGHT_CASES
+            moved = kind == 'baked-height-moved'
+            camera_position = [.25, .125, 3.] if moved else [0., 0., 3.]
+            camera=dict(id='camera',components={'azure.transform':component('azure.transform',dict(translation=camera_position)),
                 'azure.camera':dict(type='azure.camera',version=2,data=dict(enabled=True,priority=1,fieldOfView=55,nearPlane=.1,farPlane=20))})
             moving = kind == 'camera-reentry'
             if moving:
@@ -153,21 +184,30 @@ def run(player, output, validation, selected):
                     "end\n", encoding='utf-8')
             if kind=='offset':camera['components']['azure.camera']['data'].update(projectionOffsetX=.23,projectionOffsetY=-.17)
             if kind=='orthographic':camera['components']['azure.camera']['data'].update(orthographic=True,orthographicHeight=2)
-            view=dict(projection='orthographic' if kind=='orthographic' else 'perspective',position=[0,0,3],target=[0,0,2],up=[0,1,0],
+            view=dict(projection='orthographic' if kind=='orthographic' else 'perspective',position=camera_position.copy(),
+                target=[camera_position[0],camera_position[1],2],up=[0,1,0],
                 fieldOfViewRadians=math.radians(55),orthographicHeight=2 if kind=='orthographic' else 5,
                 nearPlane=.1,farPlane=20,projectionOffset=[0,0])
             if kind=='offset':view['projectionOffset']=[.23,-.17]
+            if moved:
+                view['projectionOffset'] = [.11, -.09]
+                camera['components']['azure.camera']['data'].update(projectionOffsetX=.11, projectionOffsetY=-.09)
             if kind=='camera-mismatch':view['position'][0]=.25
             projection=dict(schemaVersion=1,extent=[128,64 if kind=='aspect-mismatch' else 128],pixelOrigin='upper-left',
                 framePhase=0,pixelCenterOffset=.5,jitterRadius=0,depthEncoding=[0,1,1],minimumViewDepth=4 if kind=='near' else 0,
                 nearFadeWidth=2 if kind=='near' else .000001)
+            if baked:
+                projection['depthEncoding'] = [1., 1., 1/math.log2(9.)]
+                if moved:
+                    projection['pixelOrigin'] = 'lower-left'
             gradient=kind in ('gradient','resize')
             dims=(2,2,2) if gradient else (1,1,1)
             payload=bytearray()
             for z in range(dims[2]):
                 for y in range(dims[1]):
                     for x in range(dims[0]):payload.extend(struct.pack('<4e',*(x*.125,y*.0625,.03125,.5) if gradient else (.03125,.0625,.125,.5)))
-            (assets/'view.azfog').write_bytes(b'AZFOG001'+struct.pack('<3I',*dims)+payload)
+            volume = bake_height_volume(view, projection) if baked else b'AZFOG001'+struct.pack('<3I',*dims)+payload
+            (assets/'view.azfog').write_bytes(volume)
             settings=dict(schemaVersion=20,sceneLighting=True,skyIntensity=0,platform=False,background=False,stylized=False,
                 silhouetteOutline=False,innerOutline=False,bloomEnabled=False,antiAliasing=4 if kind=='msaa' else 0,
                 exposure=0,toneMapping=False,contrast=1,saturation=1)
@@ -176,6 +216,9 @@ def run(player, output, validation, selected):
                 lights=[],renderSettings=settings)
             independent=kind in ('analytic-only','height-only')
             scene['viewFog']=dict(schemaVersion=2,asset='' if independent else 'assets:/view.azfog',enabled=True,projection=projection,captureView=None if independent else view,analytic=analytic_settings(kind))
+            if baked:
+                scene['viewFog']['schemaVersion'] = 1
+                del scene['viewFog']['analytic']
             (assets/'scene.azurelevel').write_text(json.dumps(scene))
             project=root/'project.azureproject';project.write_text(json.dumps(dict(schemaVersion=1,id='view-fog',name='View fog GPU fixture',
                 mounts=[dict(name='assets',path='assets')],startupScene='assets:/scene.azurelevel')))
@@ -200,12 +243,13 @@ def run(player, output, validation, selected):
             if kind=='msaa':assert manifest['rasterizationSamples']==4 and manifest['snapshotRasterizationSamples']==4
             assert manifest['materialSurfaceProfileLayoutVersion']==MATERIAL_SURFACE_PROFILE_LAYOUT_VERSION and manifest['cameraUniformBytes']==CAMERA_UNIFORM_BYTES,name
             expected_state='analytic-only' if independent else 'camera-mismatch' if kind=='camera-mismatch' else 'matched'
-            assert manifest['viewFogAnalyticEnabled'] and manifest['viewFogFrameBytes']==336 and manifest['viewFogFrameLayoutVersion']==2,name
+            assert manifest['viewFogAnalyticEnabled'] == (not baked), name
+            assert manifest['viewFogFrameBytes']==336 and manifest['viewFogFrameLayoutVersion']==2,name
             assert manifest['viewFogMatch']==expected_state,(name,manifest['viewFogMatch'])
             pixels = np.stack([np.asarray(Image.open(root/'frames'/f'frame_{index:06}.png').convert('RGB'))
                                for index in range(frame_count)])
-            cameras = [np.array([0., 0., 3.])]
-            matched = [expected_state == 'matched']
+            cameras = [np.array(camera_position)]
+            matched = [expected_state == 'matched' and not baked]
             if moving:
                 runtime = json.loads((root/'runtime.json').read_text())
                 assert runtime['activeScripts'] == 1, name
@@ -228,6 +272,9 @@ def run(player, output, validation, selected):
             if fixed:assert np.array_equal(pixels,images[kind]),name
             else:images[kind]=pixels
             record = dict(case=name, maximumLinearError=max(errors), viewMatch=expected_state)
+            if baked:
+                record.update(volumeDimensions=BAKED_HEIGHT_DIMS, volumeSHA256=hashlib.sha256(volume).hexdigest(),
+                              position=camera_position, pixelOrigin=projection['pixelOrigin'])
             if moving:
                 record.update(frameCount=frame_count, matchedFrames=[index for index, active in enumerate(matched) if active],
                               cameraPositions=[position.tolist() for position in cameras], frameLinearErrors=errors)

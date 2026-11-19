@@ -148,6 +148,16 @@ RGB 表示预积分散射颜色，A 表示标量透射率。
 
 实际来源及检查见[数据验收](../acceptance/nr/fog-transport-data.md)。
 
+### 合成高度雾体积验证
+
+`test_scene_fog_gpu.py` 提供两个离线体积用例。
+用例按镜头射线和深度层生成 RGBA16F 载荷。
+测试覆盖镜头偏移及上下两种像素原点。
+Player 通过关卡的 `viewFog` 引用加载载荷。
+
+独立解析值用于核对采样后的线性颜色。
+双机位切换结果见[体积验证任务](../plans/2026-10-28-view-fog-composition.md#双机位高度雾体积验证任务)。
+
 ## GPU 资源
 
 `FogVolumeGpu` 持有一个不可复制的三维图像。
