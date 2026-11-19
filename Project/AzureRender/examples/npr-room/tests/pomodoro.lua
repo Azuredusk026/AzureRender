@@ -220,3 +220,31 @@ step(0, "timer-toggle")
 step(1)
 step(0, "timer-reset")
 assert(otherSaves["countup-session"][2] == 0 and otherSaves["countup-session"][3] == 3)
+
+local futureSettings = {2, 90, 45, 3, "keep"}
+local futureMode = {2, 1, "keep"}
+saved = futureSettings
+otherSaves["timer-mode"] = futureMode
+init()
+step(0, "timer-work-up")
+assert(saved == futureSettings, "newer timer settings payload must remain intact")
+step(0, "timer-mode")
+assert(otherSaves["timer-mode"] == futureMode, "newer timer mode payload must remain intact")
+expect("idle", "25:00")
+
+otherSaves["timer-mode"] = {1, 1}
+local futureSession = {2, 40, 8, "keep"}
+otherSaves["countup-session"] = futureSession
+init()
+step(0, "timer-toggle")
+step(2)
+step(0, "timer-toggle")
+expect("paused", "00:00:02")
+assert(otherSaves["countup-session"] == futureSession, "pause must preserve the newer session payload")
+step(1)
+shutdown()
+assert(otherSaves["countup-session"] == futureSession)
+
+otherSaves["countup-session"] = {1, 0, 0}
+step(1)
+assert(otherSaves["countup-session"][2] == 2, "checkpoint retry must accept a compatible payload")

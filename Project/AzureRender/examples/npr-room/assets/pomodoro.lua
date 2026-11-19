@@ -146,6 +146,14 @@ local function completedSeconds(value)
     return 0
 end
 
+local function tryWriteTimerRecord(name, value)
+    local stored = self:read_save(name)
+    if type(stored) == "table" and type(stored[1]) == "number" and stored[1] > value[1] then
+        return false
+    end
+    return self:try_write_save(name, value)
+end
+
 local function loadCountup()
     local mode = self:read_save("timer-mode")
     countupMode = type(mode) == "table" and #mode == 2 and mode[1] == 1 and mode[2] == 1
@@ -165,7 +173,7 @@ end
 
 local function publishCountup()
     if not pendingCountup then return end
-    if self:try_write_save("countup-session", pendingCountup) then
+    if tryWriteTimerRecord("countup-session", pendingCountup) then
         pendingCountup = nil
     else
         countupSaveRetry = 1
@@ -221,7 +229,7 @@ local function adjustSettings()
             if nextValue ~= settings[index] then
                 local updated = {settings[1], settings[2], settings[3]}
                 updated[index] = nextValue
-                if not self:try_write_save(slot, {1, updated[1], updated[2], updated[3]}) then return end
+                if not tryWriteTimerRecord(slot, {1, updated[1], updated[2], updated[3]}) then return end
                 settings = updated
                 remaining = settings[1] * 60
             end
@@ -287,7 +295,7 @@ function update(dt)
     if timerVoice then timerVoice:advanceClock(dt, voicedWork) end
     if phase == "idle" and self:pressed("timer-mode") then
         local nextMode = not countupMode
-        if self:try_write_save("timer-mode", {1, nextMode and 1 or 0}) then
+        if tryWriteTimerRecord("timer-mode", {1, nextMode and 1 or 0}) then
             countupMode = nextMode
             playCue("settings-click")
         end
