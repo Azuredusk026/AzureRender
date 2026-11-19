@@ -1,5 +1,7 @@
 # 地面反射同帧消费诊断
 
+Player 的同帧阶段链见[运行绑定与输入归因](../player-reflection-same-frame-lineage/README.md)。
+
 本单元沿用 `fe5ba3b` 的运行来源。
 锚点沿用 `4676be7` 的显示坐标。
 原生参考侧取得同帧数据并完成独立复算。
