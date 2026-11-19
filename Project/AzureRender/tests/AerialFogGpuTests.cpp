@@ -55,6 +55,24 @@ int main(int argc,char** argv)try{
  appendBoundarySample({0,0,-.25F},{12,0,16});
  boundary.startDistance=1e38F;
  appendBoundarySample({-3e38F,-3e38F,-3e38F},{3e38F,3e38F,3e38F});
+ // Keep the optical depth appreciable when the unscaled ray is near the
+ // smallest normal float. The shared helper also feeds height fog.
+ const float shortStep=std::ldexp(1.F,-126);
+ boundary.density=std::ldexp(1.F,125);
+ boundary.startDistance=0;
+ const ExponentialHeightFog shortHeight{boundary.density,0,0,{.2F,.4F,.6F}};
+ const std::array<float,3> shortStart{3e38F,0,shortStep};
+ const std::array<float,3> shortEnd{3e38F,0,2*shortStep};
+ const Row clearVolume{0,0,0,1};
+ inputs.push_back(input(boundary,shortStart,shortEnd,shortHeight,shortStart,clearVolume));
+ expected.push_back(reference(boundary,shortStart,shortEnd,shortHeight,shortStart,clearVolume));
+ appendBoundarySample(shortEnd,shortStart);
+ boundary.startDistance=2*shortStep;
+ for(float length:{shortStep,2*shortStep,3*shortStep,4*shortStep}){
+  appendBoundarySample({0,0,0},{0,0,length});
+ }
+ boundary.startDistance=1e38F;
+ appendBoundarySample({0,0,0},{0,0,4*shortStep});
  if(argc==3){
   std::ifstream file(std::filesystem::u8path(argv[2]));std::string magic;file>>magic;if(magic!="AZAERIAL1")throw std::invalid_argument("Invalid native aerial fixture");
   std::array<Row,6> packed{};for(auto& row:packed)for(auto& v:row)if(!(file>>v))throw std::invalid_argument("Truncated aerial parameters");
