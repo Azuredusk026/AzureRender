@@ -196,6 +196,7 @@ local function updateCountup(dt)
         else
             paused = not paused
             countupSinceSave = 0
+            if paused and countupElapsed >= 1 then checkpointCountup(true) end
             playCue(paused and "timer-finish" or "timer-start")
             announceTimer(paused and "break" or "work")
         end
