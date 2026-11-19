@@ -1,5 +1,7 @@
 # AzureRender 工程
 
+[联合场景主导成本归因](docs/acceptance/nr/mainline-joint-consumer-attribution.md)记录当前 GPU 阶段成本及材质组合候选的准入条件。
+
 [层级搜索与节点引用集成](docs/acceptance/p0/2026-11-19-editor-hierarchy-integration.md)记录两项目回放及关联检查。
 
 [编辑器场景管线准备验收](docs/acceptance/p0/2026-11-16-editor-background-preparation.md)记录驱动首次编译、预览缓存及两条原生工作流。
