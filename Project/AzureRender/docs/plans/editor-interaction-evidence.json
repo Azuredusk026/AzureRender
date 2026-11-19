@@ -231,6 +231,23 @@
     "archiveSha256": "ff997945b8ffc7fa949a7647dade9b5aef6562f98721c349cdb044848fc4667d",
     "physicalInput": false
   },
+  "propertyDragCancel20261119": {
+    "productionBaseline": "5fccef9",
+    "fixtureBaseline": "32e56f9",
+    "configuration": "Release",
+    "dispatch": [2236, 2237],
+    "baselineExpectedFailure": true,
+    "candidateExecutableSha256": "096c283872c08d3f497098598c1eeb554f1b554a191f03bcbf8d0688bbe7c215",
+    "cpuCasesPassed": 5,
+    "workflowsPassed": ["exploration", "inspector"],
+    "results": "editor-property-drag-cancel-2026-11-19/results.json",
+    "resultsSha256": "9e1e3a5d94b47b7f1089df99203c7920b14a04569a3888274ae9022c3eec91a4",
+    "archive": "editor-property-drag-cancel-2026-11-19/verification.zip",
+    "archiveSha256": "ce1856e1f46ecfae74f85599c493cf35444041fa2573581c2d9b0123c115dde7",
+    "sharedInterface": "EditService continuous-edit checkpoint and cancellation",
+    "isolatedIndexApplyExitCode": 0,
+    "physicalInput": false
+  },
   "nodeReferenceReveal": {
     "baseCommit": "e729305",
     "configuration": "Release",

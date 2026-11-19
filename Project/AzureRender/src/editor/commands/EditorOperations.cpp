@@ -310,7 +310,8 @@ EditRegistry editorOperations(EditorSession& session) {
             return nullptr;
         });
     }
-    registry.add({"history.end-edit",1,schema(),false,false,false},[](EditorContext& c,const Json&)->Json{c.closeEditMerge();return nullptr;});
+    registry.add({"history.end-edit",1,schema(),false,false,false},[&session](EditorContext&,const Json&)->Json{session.edits().endContinuousEdit();return nullptr;});
+    registry.add({"history.cancel-edit",1,schema(),true,false,true},[&session](EditorContext&,const Json&)->Json{session.edits().cancelContinuousEdit();return nullptr;});
     registry.add({"project.build",1,schema({{"install",text},{"output",text},{"replace",boolean}},{"install","output"}),true,false,true},
         [&session](EditorContext&,const Json& a)->Json {
             if(!session.startBuildInternal(std::filesystem::u8path(a.at("install").get<std::string>()),std::filesystem::u8path(a.at("output").get<std::string>()),a.value("replace",false)))

@@ -1,6 +1,7 @@
 #include "ui/localization/Localization.hpp"
 #include "PropertyWidgets.hpp"
 #include "ui/Widgets.hpp"
+#include <imgui_internal.h>
 #include <algorithm>
 namespace azurerender::ui {
 PropertyEditEvent propertyEditor(const reflection::Property& field,const nlohmann::json& state,const nlohmann::json& defaults,float scale,const std::function<void(const std::string&)>& observe) {
@@ -9,7 +10,12 @@ PropertyEditEvent propertyEditor(const reflection::Property& field,const nlohman
     ImGui::TextUnformatted(label.c_str());
     if(state.at("mixed").get<bool>()) {ui::nextToolbarItem(ImGui::CalcTextSize(ui::tr("多个值")).x);ui::statusText(ui::tr("多个值"),StatusKind::Neutral);}
     ImGui::SetNextItemWidth(-1);
-    const auto sample=[&]{result.began=result.began||ImGui::IsItemActivated();result.ended=result.ended||ImGui::IsItemDeactivatedAfterEdit();};
+    const auto sample=[&]{
+        result.began=result.began||ImGui::IsItemActivated();result.ended=result.ended||ImGui::IsItemDeactivatedAfterEdit();
+        if((ImGui::IsItemActive()||ImGui::IsItemDeactivated())&&ImGui::IsKeyPressed(ImGuiKey_Escape,false)) {
+            result.cancelled=true;ImGui::ClearActiveID();
+        }
+    };
     const auto format="%."+std::to_string(field.precision)+"f";
     if(field.kind==reflection::Kind::Vector3) {
         auto values=result.value.get<std::array<float,3>>();
@@ -35,7 +41,6 @@ PropertyEditEvent propertyEditor(const reflection::Property& field,const nlohman
     else if(result.value.is_number_integer()){auto value=result.value.get<std::int64_t>();const auto low=static_cast<std::int64_t>(field.minimum),high=static_cast<std::int64_t>(field.maximum);result.changed=ImGui::DragScalar("##value",ImGuiDataType_S64,&value,1,&low,&high,state.at("mixed").get<bool>()?"---":nullptr);result.value=value;sample();}
     else if(result.value.is_number()){float value=result.value.get<float>();result.changed=ImGui::DragFloat("##value",&value,.01F,static_cast<float>(field.minimum),static_cast<float>(field.maximum),state.at("mixed").get<bool>()?"---":format.c_str());result.value=value;sample();}
     else if(result.value.is_string()){auto value=result.value.get<std::string>();result.changed=inputText("##value",value,ImGuiInputTextFlags_EnterReturnsTrue);result.value=value;sample();}
-    result.cancelled=ImGui::IsItemActive()&&ImGui::IsKeyPressed(ImGuiKey_Escape,false);
     return result;
 }
 

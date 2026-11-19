@@ -158,12 +158,13 @@ void InspectorPanel::draw(PanelContext& panelContext) {
                     if(ImGui::MenuItem(ui::tr("Reset field"),nullptr,false,state.at("editable").get<bool>()))services_.session.edit("component.batch-field",{{"nodes",owners},{"type",type},{"field",field.name},{"reset",true}});
                     services_.observe("field.reset."+type+"."+field.name);ImGui::EndPopup();
                 }
-                if(event.changed) {
+                if(event.cancelled)services_.session.edit("history.cancel-edit");
+                else if(event.changed) {
                     nlohmann::json args={{"nodes",owners},{"type",type},{"field",field.name},{"value",event.value}};
                     if(event.axis)args["axis"]=*event.axis;
                     services_.session.edit("component.batch-field",args,"property:"+type+":"+field.name);
                 }
-                if(event.ended||event.cancelled)services_.session.edit("history.end-edit");
+                if(event.ended&&!event.cancelled)services_.session.edit("history.end-edit");
                 for(const auto& error:services_.session.feedback().report())if(error.at("source")=="component.batch-field"&&error.at("message").get<std::string>().find(field.name)!=std::string::npos)ui::resultMessage(error.at("message").get<std::string>(),true);
                 ImGui::PopID();
             }ImGui::PopID();

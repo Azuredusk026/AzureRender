@@ -21,6 +21,55 @@ def key(host, value):
     host.frames()
 
 
+def check_drag_cancel(host, workflow):
+    target = "axis.value.azure.transform.translation.0"
+    before = host.query("document.contentHash")
+    initial = host.workspace()
+    def drag():
+        host.call("input", event={"action": "mouse", "target": target,
+                                  "down": True})
+        host.frames()
+        for offset in (25, 50):
+            host.call("input", event={"action": "mouse", "target": target,
+                                      "down": True, "offset": [offset, 0]})
+            host.frames()
+
+    def release():
+        host.call("input", event={"action": "mouse", "target": target,
+                                  "down": False, "offset": [50, 0]})
+        host.frames()
+
+    drag()
+    assert host.query("document.contentHash") != before, "Numeric drag must actually edit"
+    host.screenshot("drag-active-" + workflow)
+    key(host, "Escape")
+    release()
+    host.screenshot("drag-cancelled-" + workflow)
+    after = host.workspace()
+    assert host.query("document.contentHash") == before, "Escape must restore original mixed values"
+    assert after["selection"] == initial["selection"]
+    assert after["undoCount"] == initial["undoCount"], "Cancelled drag must discard its undo entry"
+    assert after["dirty"] == initial["dirty"]
+    drag()
+    release()
+    committed = host.query("document.contentHash")
+    assert committed != before
+    assert host.workspace()["undoCount"] == initial["undoCount"] + 1
+    host.edit("history.undo")
+    assert host.query("document.contentHash") == before
+    # This cancellation must retain the redo entry created by the normal drag.
+    drag()
+    key(host, "Escape")
+    release()
+    assert host.query("document.contentHash") == before
+    assert host.workspace()["selection"] == initial["selection"]
+    assert host.workspace()["undoCount"] == initial["undoCount"]
+    host.edit("history.redo")
+    assert host.query("document.contentHash") == committed
+    host.edit("history.undo")
+    assert host.query("document.contentHash") == before
+
+
 def run_case(executable, output, workflow):
     project = output / "project"
     if workflow == "exploration":
@@ -66,6 +115,9 @@ def run_case(executable, output, workflow):
         choose(host)
         original_hash = host.query("document.contentHash")
         initial_undo = host.workspace()["undoCount"]
+        check_drag_cancel(host, workflow)
+        host.click("save")
+        assert saved_positions() == dict(zip([*ids, "multi-c"], positions))
         for target in ("name", "component.add"):
             host.click(target)
         assert host.query("document.contentHash") == original_hash

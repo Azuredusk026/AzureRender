@@ -72,6 +72,31 @@ void mergeAndStale(EditorSession& session) {
     require(edits.execute(selectedProposal).status==EditStatus::Stale,
             "A target selection change must invalidate an implicit-target proposal");
 }
+void cancelContinuousEdit(EditorSession& session) {
+    auto& edits=session.edits();auto& context=session.context();
+    require(edits.current("node.rename",{{"value","redo after cancellation"}}).status==EditStatus::Applied,"Prepare redo history");
+    require(edits.undo().status==EditStatus::Applied,"Prepare redo checkpoint");
+    const auto before=context.documentContent();const auto selected=context.selectedNodes();
+    const auto undo=context.undoCount(),redo=context.redoCount();const auto dirty=context.dirty();
+    for(int value=8;value<=9;++value)
+        require(edits.current("node.transform",{{"translation",{value,0,0}}},"cancel-drag").status==EditStatus::Applied,"Drag updates apply");
+    require(context.undoCount()==undo+1,"Drag updates form one history entry");
+    const auto proposal=request(edits,"node.rename",{{"value","stale after cancellation"}});
+    require(edits.current("history.cancel-edit").status==EditStatus::Applied,"Cancel the active continuous edit");
+    require(context.documentContent()==before&&context.selectedNodes()==selected&&context.dirty()==dirty,"Cancel restores document, selection and dirty state");
+    require(context.undoCount()==undo&&context.redoCount()==redo,"Cancel restores both history stacks");
+    require(edits.execute(proposal).status==EditStatus::Stale,"Cancel invalidates proposals based on the temporary value");
+    require(edits.redo().status==EditStatus::Applied&&context.selectedNode()->name=="redo after cancellation","Preserved redo remains executable");
+    require(edits.current("node.transform",{{"translation",{12,0,0}}},"finished-drag").status==EditStatus::Applied,"Start a committed drag");
+    require(edits.current("history.end-edit").status==EditStatus::Applied,"Finish a drag");
+    const auto committed=context.documentContent();
+    require(edits.current("history.cancel-edit").status==EditStatus::Applied&&context.documentContent()==committed,"Cancel without an active drag preserves committed edits");
+    require(edits.current("node.transform",{{"translation",{13,0,0}}},"stale-drag").status==EditStatus::Applied,"Start a stale drag");
+    context.selectNode(context.selectedNodeIndex()==0?1:0);
+    const auto staleContent=context.documentContent();const auto staleSelection=context.selectedNodes();
+    require(edits.current("history.cancel-edit").status==EditStatus::Rejected,"Reject cancellation after an external selection change");
+    require(context.documentContent()==staleContent&&context.selectedNodes()==staleSelection,"Stale cancellation preserves current state");
+}
 }
 int main(int argc,char** argv) {
     if(argc!=2)return 2;
@@ -80,7 +105,7 @@ int main(int argc,char** argv) {
     try {
         auto document=SceneDocument::fromAsset("test.gltf");
         auto context=std::make_shared<EditorContext>(document,path);EditorSession session(context);
-        rollbackAndHistory(session);mergeAndStale(session);
+        rollbackAndHistory(session);mergeAndStale(session);cancelContinuousEdit(session);
         std::filesystem::remove_all(projectPath);
         std::filesystem::copy(argv[1],projectPath,std::filesystem::copy_options::recursive);
         {
