@@ -1,0 +1,28 @@
+{
+  "label": "流程核对示例，已接受 90/120 次运行",
+  "dataScope": "paused-checkpoint",
+  "figureReady": false,
+  "condition": {
+    "device": "pixel6",
+    "width": "2560",
+    "height": "1440",
+    "complexity": "high",
+    "path": "drlr"
+  },
+  "block": 1,
+  "repeat": 1,
+  "H1": {
+    "logicalMiBPerFrame": 281.25,
+    "localScenarioMiBPerFrame": 225.0,
+    "scenarioChangePct": -19.999999999999996,
+    "hardwareMeasured": false
+  },
+  "H2": {
+    "pairedGpuMeanVsSubpassesPct": 6.166096557439693
+  },
+  "H3": {
+    "gpuVarianceMs2": 0.3275802053128069,
+    "modelMiBPerFrame": 225.0,
+    "measuredFramesInRun": 1000
+  }
+}
