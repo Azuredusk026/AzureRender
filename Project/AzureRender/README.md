@@ -1,5 +1,7 @@
 # AzureRender 工程
 
+[层级搜索与节点引用集成](docs/acceptance/p0/2026-11-19-editor-hierarchy-integration.md)记录两项目回放及关联检查。
+
 [编辑器场景管线准备验收](docs/acceptance/p0/2026-11-16-editor-background-preparation.md)记录驱动首次编译、预览缓存及两条原生工作流。
 [编辑器与渲染组合验收](docs/acceptance/p0/2026-11-16-editor-and-transparency-integration.md)记录画面、原生交互和托管工作流。
 

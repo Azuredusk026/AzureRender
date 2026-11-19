@@ -5,7 +5,52 @@ import shutil
 import time
 from pathlib import Path
 from create_playable_project import create
+from editor_test_host import EditorHost
 from test_editor_workspace import launch
+
+
+def reveal_during_search(executable, project_file, output):
+    def visible_nodes(workspace):
+        return {widget.removeprefix('node.') for widget in workspace['widgets']
+                if widget.startswith('node.')}
+
+    with EditorHost(executable, project_file, output) as host:
+        host.click('outliner.search')
+        host.call('input', event={'action': 'text', 'text': 'Range'})
+        host.frames()
+        before = host.workspace()
+        assert visible_nodes(before) == {'range-a', 'range-b', 'range-c'}
+        host.click('node.range-a')
+        host.click('outliner.create')
+        host.click('preset.empty')
+        created = host.workspace()
+        assert created['nodeCount'] == before['nodeCount'] + 1
+        created_id, = created['selection']
+        assert created_id in visible_nodes(created)
+        assert 'outliner.return-to-search' in created['widgets'], 'Creation must offer to return to the search'
+        host.screenshot('outliner-return-' + output.parent.name)
+        host.click('outliner.return-to-search')
+        restored = host.workspace()
+        assert visible_nodes(restored) == visible_nodes(before)
+        assert restored['selection'] == [created_id]
+        assert restored['undoCount'] == created['undoCount']
+        assert 'outliner.return-to-search' not in restored['widgets']
+        host.screenshot('outliner-search-restored-' + output.parent.name)
+
+        host.click('menu.Edit')
+        host.click('menu.Undo')
+        assert host.workspace()['nodeCount'] == before['nodeCount']
+        host.click('menu.Edit')
+        host.click('menu.Redo')
+        replayed = host.workspace()
+        assert replayed['selection'] == [created_id]
+        assert 'outliner.return-to-search' in replayed['widgets']
+        host.click('outliner.search')
+        host.call('input', event={'action': 'text', 'text': 'range-b'})
+        host.frames()
+        replaced = host.workspace()
+        assert visible_nodes(replaced) == {'range-b'}
+        assert 'outliner.return-to-search' not in replaced['widgets']
 
 
 def run(executable, output, workflow):
@@ -25,6 +70,8 @@ def run(executable, output, workflow):
                 translation=[10 + index, 0, 0], rotation=[0, 0, 0], scale=[1, 1, 1]))}))
     level.write_text(json.dumps(document), encoding='utf-8')
     saved = level.read_bytes()
+    reveal_during_search(executable, project / 'project.azureproject', output / 'reveal-search')
+    assert level.read_bytes() == saved, 'Returning to search must preserve the saved scene'
     events = [dict(frame=25, action='click', target='outliner.search'),
               dict(frame=29, action='text', text='Range'),
               dict(frame=34, action='click', target='node.range-a'),
@@ -54,7 +101,7 @@ def run(executable, output, workflow):
                      capture=False, close_policy='discard')
     assert cleared['selection'] == [], 'Blank viewport click clears selection'
     assert level.read_bytes() == saved and not cleared['dirty'], 'Selection preserves authored scene bytes'
-    summary = dict(workflow=workflow, passed=True, filteredCtrl=True, filteredRange=True,
+    summary = dict(workflow=workflow, passed=True, restoredSearchAfterCreate=True, filteredCtrl=True, filteredRange=True,
                    activeEndpoint=True, blankClear=True, ctrlBlankPreserves=True, sceneBytes=True)
     (output / 'summary.json').write_text(json.dumps(summary, indent=2), encoding='utf-8')
     return summary

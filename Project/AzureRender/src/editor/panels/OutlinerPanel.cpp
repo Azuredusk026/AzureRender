@@ -32,7 +32,11 @@ void OutlinerPanel::draw(PanelContext& panelContext) {
 #endif
     if(!ImGui::Begin(ui::tr("场景层级###outliner"),services_.workspace.open("outliner"))){ImGui::End();return;}
     {const auto p=ImGui::GetWindowPos(),s=ImGui::GetWindowSize();services_.widgets["outliner.drop-region"]={p.x,p.y,s.x,s.y};}
-    ui::searchField("##Search objects",ui::tr("搜索对象名称或标识"),presentation.outlinerFilter_);services_.observe("outliner.search");
+    auto& filter=presentation.outlinerFilter_;
+    auto& beforeReveal=presentation.beforeReveal_;
+    if(beforeReveal && beforeReveal->document!=view.documentId())beforeReveal.reset();
+    if(ui::searchField("##Search objects",ui::tr("搜索对象名称或标识"),filter))beforeReveal.reset();
+    services_.observe("outliner.search");
     const auto& nodes = view.scene().nodes;
     std::function<void()> pending;
     const bool writable=!services_.session.playing()&&!services_.session.building();
@@ -67,7 +71,19 @@ void OutlinerPanel::draw(PanelContext& panelContext) {
             parent=it->parentId;if(!parent.empty())presentation.openNodeIds_.insert(parent);
         }
         const auto active=std::find_if(nodes.begin(),nodes.end(),[&](const auto& node){return node.id==reveal;});
-        if(active!=nodes.end() && presentation.outlinerFilter_.IsActive() && !presentation.outlinerFilter_.PassFilter(active->name.c_str()) && !presentation.outlinerFilter_.PassFilter(active->id.c_str()))presentation.outlinerFilter_.Clear();
+        if(active!=nodes.end() && filter.IsActive() && !filter.PassFilter(active->name.c_str()) && !filter.PassFilter(active->id.c_str())){
+            beforeReveal=OutlinerPanelState::SearchLocation{view.documentId(),filter.InputBuf};
+            filter.Clear();
+        }
+    }
+    if(beforeReveal){
+        const bool restore=ui::button(ui::tr("返回搜索结果"));
+        services_.observe("outliner.return-to-search");
+        if(restore){
+            ImStrncpy(filter.InputBuf,beforeReveal->text.c_str(),sizeof(filter.InputBuf));
+            filter.Build();
+            beforeReveal.reset();
+        }
     }
     std::vector<std::string> visible;
     std::optional<nlohmann::json> drop;
@@ -86,6 +102,7 @@ void OutlinerPanel::draw(PanelContext& panelContext) {
     };
     ImGui::Separator();ImGui::BeginChild("hierarchy-list",{0,0});
     const auto sceneLabel=view.scene().sceneId+(services_.session.context().dirty()?" *":"")+"###scene-container";
+    if(!reveal.empty())ImGui::SetNextItemOpen(true,ImGuiCond_Always);
     const bool sceneOpen=ImGui::TreeNodeEx(sceneLabel.c_str(),ImGuiTreeNodeFlags_DefaultOpen|ImGuiTreeNodeFlags_SpanAvailWidth|ImGuiTreeNodeFlags_OpenOnArrow);
     services_.observe("hierarchy.root");acceptDrop("");
     if(ImGui::IsItemClicked()&&!ImGui::IsItemToggledOpen()&&!ImGui::GetDragDropPayload())panelContext.selection().set({});
@@ -127,12 +144,12 @@ void OutlinerPanel::draw(PanelContext& panelContext) {
     const auto collect=[&](const auto& self,const std::string& parent)->void {
         for(const auto& node:nodes)if(node.parentId==parent){visible.push_back(node.id);if(presentation.openNodeIds_.count(node.id))self(self,node.id);}
     };
-    if(presentation.outlinerFilter_.IsActive()) {
-        for(const auto& node:nodes)if(presentation.outlinerFilter_.PassFilter(node.name.c_str())||presentation.outlinerFilter_.PassFilter(node.id.c_str()))visible.push_back(node.id);
+    if(filter.IsActive()) {
+        for(const auto& node:nodes)if(filter.PassFilter(node.name.c_str())||filter.PassFilter(node.id.c_str()))visible.push_back(node.id);
     }else collect(collect,"");
     if(visible.empty()){
         ui::emptyState(ui::tr("没有匹配的对象"),ui::tr("清除搜索后查看场景层级。"));
-        if(ui::button(ui::tr("清除搜索")))presentation.outlinerFilter_.Clear();services_.observe("outliner.clear-search");
+        if(ui::button(ui::tr("清除搜索")))filter.Clear();services_.observe("outliner.clear-search");
     }
     std::string referenceCandidate;
     const auto selectionClick=[&](const SceneNode& node) {
@@ -169,7 +186,7 @@ void OutlinerPanel::draw(PanelContext& panelContext) {
         }
     };
     if(sceneOpen) {
-    if(presentation.outlinerFilter_.IsActive()) {
+    if(filter.IsActive()) {
         for(std::size_t index=0;index<nodes.size();++index)if(std::find(visible.begin(),visible.end(),nodes[index].id)!=visible.end()) {
             ImGui::PushID(nodes[index].id.c_str());ImGui::Selectable(label(nodes[index]).c_str(),selected(index),0,{ImGui::GetContentRegionAvail().x,0});
             services_.observe("node."+nodes[index].id);selectionClick(nodes[index]);dragItem(nodes[index]);

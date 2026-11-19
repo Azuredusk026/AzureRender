@@ -1,0 +1,15 @@
+{
+  "status": "exited",
+  "exitCode": 0,
+  "reason": null,
+  "seconds": 205.51600000000326,
+  "logTruncated": false,
+  "samplingSeconds": 1,
+  "command": [
+    "cmd.exe",
+    "/d",
+    "/c",
+    "D:/Projects/FYP/Project/AzureRender/build/runs/20261116-171608-editor-node-reference-reveal-802daf/verify.cmd"
+  ],
+  "temporaryDirectory": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261116-171608-editor-node-reference-reveal-802daf\\tmp"
+}

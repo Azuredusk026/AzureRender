@@ -324,6 +324,8 @@ void ImGuiEditorLayer::drawPanels() {
     widgets_=nlohmann::json::object();
     EditorToolbar::draw(*session_,workspace_,dpi_,[this](const std::string& id){observeWidget(id);});
     drawWorkspace();
+    const bool focusHierarchy=session_->selection().consumeHierarchyFocus();
+    if(focusHierarchy)workspace_.setVisible("outliner",true);
     const ImGuiIO& io = ImGui::GetIO();
     viewportFocused_=false;viewportAcceptsShortcuts_=false;
     gameCaptureRequested_=false;gameInputAllowed_=false;
@@ -335,6 +337,7 @@ void ImGuiEditorLayer::drawPanels() {
     }
     for (const std::unique_ptr<IEditorPanel>& panel : panels_) {
         if(!workspace_.visible(std::string(panel->id())))continue;
+        if(focusHierarchy && panel->id()=="outliner")ImGui::SetNextWindowFocus();
         const bool editable=std::string(panel->id())=="viewport" || std::string(panel->id())=="console" || std::string(panel->id())=="capture";
         ImGui::BeginDisabled((session_->playing() || session_->building()) && !editable && panel->id()!="build" && panel->id()!="settings");auto panelContext=session_->panelContext();panel->draw(panelContext);ImGui::EndDisabled();
     }

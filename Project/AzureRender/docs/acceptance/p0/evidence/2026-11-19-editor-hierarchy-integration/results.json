@@ -1,0 +1,218 @@
+{
+  "passed": true,
+  "base": "dbe4ab3f84f55ff6776634842c4ac794cf887345",
+  "editor": "5d4cf7dbf92b9a05181a7e11a2ff81b4cca7f3b3",
+  "testedComposition": "6566405fde76bb70ca8efb55f2930c6691dded99",
+  "testedTree": "271036aaffed05620a57eebf11cd25295d5385a9",
+  "evidenceCommit": "51f6f891fe7e8cb7d2f927954b9b618a96512f9f",
+  "evidenceReceiptSha256": "16a9dc7769ac7f7b59f59a03fc2523a80941fb4b9e00176d19eb401b1c83ceb2",
+  "candidatePatch": "0ac3ed02e3b2d42dace61d7b0931e309dff34808d8ec561b372bde58a6b63614",
+  "configuration": "Release",
+  "driver": "595.79",
+  "executable": "75778c34da23ceb5387e6baf195cbdcc63a9fac8ae05c304156cc1d1fb2ea9ee",
+  "cpu": [
+    "AzureEditor.Creation",
+    "AzureEditor.NodeAddition",
+    "AzureEditor.PropertyEditing",
+    "AzureEditor.SelectionService",
+    "AzureRender.EditorSession"
+  ],
+  "replaySummaries": {
+    "selection/run-1795069536687592800/summary.json": [
+      {
+        "workflow": "exploration",
+        "passed": true,
+        "restoredSearchAfterCreate": true,
+        "filteredCtrl": true,
+        "filteredRange": true,
+        "activeEndpoint": true,
+        "blankClear": true,
+        "ctrlBlankPreserves": true,
+        "sceneBytes": true
+      },
+      {
+        "workflow": "inspector",
+        "passed": true,
+        "restoredSearchAfterCreate": true,
+        "filteredCtrl": true,
+        "filteredRange": true,
+        "activeEndpoint": true,
+        "blankClear": true,
+        "ctrlBlankPreserves": true,
+        "sceneBytes": true
+      }
+    ],
+    "selection/run-1795069536687592800/exploration/summary.json": {
+      "workflow": "exploration",
+      "passed": true,
+      "restoredSearchAfterCreate": true,
+      "filteredCtrl": true,
+      "filteredRange": true,
+      "activeEndpoint": true,
+      "blankClear": true,
+      "ctrlBlankPreserves": true,
+      "sceneBytes": true
+    },
+    "selection/run-1795069536687592800/inspector/summary.json": {
+      "workflow": "inspector",
+      "passed": true,
+      "restoredSearchAfterCreate": true,
+      "filteredCtrl": true,
+      "filteredRange": true,
+      "activeEndpoint": true,
+      "blankClear": true,
+      "ctrlBlankPreserves": true,
+      "sceneBytes": true
+    },
+    "properties-after-restart/summary.json": {
+      "passed": true,
+      "stage": "U9",
+      "axisReset": true,
+      "referencePick": true,
+      "referenceSaveReopen": true,
+      "nodeReferenceLocatesInBothProjects": true,
+      "escapeCancel": true,
+      "focusCancel": true,
+      "mixedReset": true,
+      "secondProject": true,
+      "input": "production Dear ImGui replay",
+      "physicalKeyboardMouse": "not performed"
+    },
+    "creation/run-81057896/summary.json": {
+      "passed": true,
+      "input": "production ImGui replay",
+      "physicalInput": false,
+      "cases": [
+        {
+          "workflow": "exploration",
+          "dpi": 1,
+          "window": [
+            1280,
+            720
+          ],
+          "passed": true,
+          "rootIgnoresSelection": true,
+          "rootAndChild": true,
+          "disabledActions": true,
+          "twoUndoRedo": true
+        },
+        {
+          "workflow": "exploration",
+          "dpi": 1.5,
+          "window": [
+            1280,
+            720
+          ],
+          "passed": true,
+          "rootIgnoresSelection": true,
+          "rootAndChild": true,
+          "disabledActions": true,
+          "twoUndoRedo": true
+        },
+        {
+          "workflow": "scene_inspector",
+          "dpi": 1,
+          "window": [
+            1280,
+            720
+          ],
+          "passed": true,
+          "rootIgnoresSelection": true,
+          "rootAndChild": true,
+          "disabledActions": true,
+          "twoUndoRedo": true
+        },
+        {
+          "workflow": "scene_inspector",
+          "dpi": 1.5,
+          "window": [
+            1280,
+            720
+          ],
+          "passed": true,
+          "rootIgnoresSelection": true,
+          "rootAndChild": true,
+          "disabledActions": true,
+          "twoUndoRedo": true
+        }
+      ]
+    }
+  },
+  "physicalInput": false,
+  "protectedLocalPaths": {
+    "AGENT.md": " M",
+    "Project/AzureRender/docs/acceptance/p5/closure/source-evidence/interruption.json": " M",
+    "Project/AzureRender/docs/acceptance/p5/closure/source-evidence/manifest.json": " M",
+    "Project/AzureRender/docs/acceptance/p5/closure/source-evidence/performance-provenance-green.log": " M",
+    "Project/AzureRender/docs/acceptance/p5/closure/source-evidence/performance-provenance-red.log": " M",
+    "Project/AzureRender/docs/development/artifact-manifest.json": " M",
+    "Project/AzureRender/docs/development/artifact-retention.md": " M",
+    "Project/AzureRender/docs/plans/2026-10-14-editor-generalization.md": " M",
+    "Project/AzureRender/docs/plans/azure-engine-plan.md": " M",
+    "Project/AzureRender/src/app/AzureRenderApp.cpp": " M",
+    "Project/AzureRender/src/app/ProjectCenterHost.cpp": " M",
+    "Project/AzureRender/src/editor/EditorContext.hpp": " M",
+    "Project/AzureRender/src/editor/commands/EditService.cpp": " M",
+    "Project/AzureRender/src/editor/commands/EditTransaction.cpp": " M",
+    "Project/AzureRender/src/platform/GlfwFrontend.hpp": " M",
+    "Project/AzureRender/src/rhi/GpuAllocator.hpp": " M",
+    "Project/AzureRender/tests/DepthPrefillRecordingTests.cpp": " M",
+    "Project/AzureRender/tests/MaterialPipelinePolicyTests.cpp": " M",
+    "Project/AzureRender/tests/MotionRecordingTests.cpp": " M",
+    "Project/AzureRender/tests/ObjectShadowAtlasTests.cpp": " M",
+    "Project/AzureRender/tests/ShadowTileBoundsGpuTests.cpp": " M",
+    "Project/AzureRender/tools/artifact_budget.py": " M",
+    "Project/AzureRender/tools/artifact_maintenance.py": " M",
+    "Project/AzureRender/tools/endfield_native/character_surfaces.py": " M",
+    "Project/AzureRender/tools/skills/azurerender-artifact-maintenance/SKILL.md": " M",
+    "Project/AzureRender/tools/test_artifact_budget.py": " M",
+    "Project/AzureRender/tools/test_artifact_maintenance.py": " M",
+    "Project/AzureRender/tools/test_native_character_surfaces.py": " M",
+    ".workbuddy/": "??",
+    "Project/AzureRender/docs/plans/2026-11-16-npr-room-reproduction.md": "??"
+  },
+  "externallyUpdatedPaths": [
+    "Project/AzureRender/tools/artifact_maintenance.py",
+    "Project/AzureRender/tools/test_artifact_maintenance.py"
+  ],
+  "archive": {
+    "sha256": "ad7a9dbd69f546622dbcfcbfc092fd5b16f5fc52c32e792643b109099552a591",
+    "files": {
+      "prepare.py": "5a877a3681930554ab7e4bef4c7c926427c889d8690e08004a44ea832f92a370",
+      "qualify.py": "41ca77bed2d32c18502f5704767456729b2aad798b57967ce5bbd5e6d5ba1528",
+      "deliver.py": "f14be986be7fd1e277d71dd1ba35e193f3005eac98ba993aa3bc77b6e40049a3",
+      "composition.json": "d5f26b3af04fdaba69bc39a150b5bd4a15e69f74ebf3c2ce99e5cfaa3805075e",
+      "historical-evidence.json": "99af21e077e63965f7a532596d6dc08a7e8bad10fe60c4d9191f2b95e22a0079",
+      "protected-workspace.json": "1f2a48b6ab9dbc3fe97c6f178253939ef707e50b090b79165885b8f67b7f8267",
+      "protected-workspace-pre-resume.json": "9b07cae0a1f6c19c6072cb4e3b5174c8ed270395a74f5ff0392debee2e62698c",
+      "protected-workspace-pre-integration.json": "9b07cae0a1f6c19c6072cb4e3b5174c8ed270395a74f5ff0392debee2e62698c",
+      "execution-inputs.json": "9544c9f99ab10c467dbee4d6c4c32a2e866468c7708122bc56e7bb591fcc1112",
+      "editor.patch": "0ac3ed02e3b2d42dace61d7b0931e309dff34808d8ec561b372bde58a6b63614",
+      "cpu.log": "c24ad6ed40017d9305c19c2d4b89412e5492c333d6b25b0ab23524abaf848178",
+      "cpu.xml": "fd9f1011b54d0cc7ada4fb13100a925c937084e1819ce6bbdd63ee069cea5429",
+      "selection.log": "46aaa50b0a0806408044d352e7289e99121e415338219762f35ade55e446d50c",
+      "properties-after-restart.log": "cdcd0322ec8eced0dc21f06e96c674eeee1a83988edca99341c42911810f09e2",
+      "creation.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "qualification.json": "e9c68b6042c292ccec4840169b99a0a2a129d9a2482d78ae4ae69306f7465e3a",
+      "reboot-continuation.json": "d472bdb3b322f18478e13b3d6188027952e75aae21bab48e9d8a414e741db2ce",
+      "ctest-path-failure.log": "3fa11108f20f436aea29ec936c5a78190f5aee9837d7ba71a7673062ac5ac0b6",
+      "ctest-path-failure-dispatch.json": "ebe0a97454aa2e3c13b51511d51d08f9c6a8c4dfcfcc95bb133de6dee926fe4b",
+      "reboot-interrupted-process.log": "3248a6040b6fff77ae3e52270e9cc2febd25b19405f588aa829a1d984ecf2cb6",
+      "post-reboot.stdout.log": "85589783de5ad86e514b4be429cb7d9f965d60ff0eb7ebdf36f1785c14a1d794",
+      "selection/run-1795069536687592800/summary.json": "15ab5232b9a8acb06ec909b01c73828744d4ef8d8cf9540185c6191937f460cf",
+      "selection/run-1795069536687592800/exploration/summary.json": "a5cb1ce549ecd99819bd1903b10502bb57027670b023c7e1e589144b70eb0ea9",
+      "selection/run-1795069536687592800/inspector/summary.json": "001e4e76a262d187311d1ca6cc79b4aaa238d58235d5dd5821776c0b7fc2d888",
+      "properties-after-restart/summary.json": "7f81605aff56fdd29155c75e59400e1b19fe9046375cf38cec5f5e2a0429f727",
+      "creation/run-81057896/summary.json": "88ea03bdeebc5a847048a56d362db70b24395126bd77218521e24573c92c7fb9",
+      "properties-after-restart/locate-node-exploration/reference-hierarchy-locate-node-exploration.png": "2d9e2882133f6daf09f27385677e2f20cae6065d4e9529247e847ee454b27ee4",
+      "properties-after-restart/locate-node-inspector/reference-hierarchy-locate-node-inspector.png": "bdc29a1cd0c2dff34e7eafc15a4f45c39efda8cf0d1851143add826f4514750e",
+      "selection/run-1795069536687592800/exploration/reveal-search/outliner-return-exploration.png": "5793e58eede1c987b17416dd7883cd80339576877b2eef2c25c494d01ab0001d",
+      "selection/run-1795069536687592800/exploration/reveal-search/outliner-search-restored-exploration.png": "ed15ee9f5d306740dcd8876c1d7d83603b9e3a154b0d4ac6bd2d8a529247c039",
+      "selection/run-1795069536687592800/inspector/reveal-search/outliner-return-inspector.png": "08104a5f61cadc68183b0d71925e2761ca5ac3ccf7ef6bfade0a4036fc00e432",
+      "selection/run-1795069536687592800/inspector/reveal-search/outliner-search-restored-inspector.png": "bb5851d7752b2e82cf51870049aa1bd7e90fa2aa2b9590a6e520a4d98b929731"
+    }
+  },
+  "limitations": [
+    "实体键鼠、输入法和多屏由现场复核。"
+  ]
+}
