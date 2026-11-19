@@ -134,13 +134,13 @@ z = (t * (n - 1) + 0.5) / n
 主 Release 的 `AzurePlayer.exe` 图有 940378356 字节现存产物。
 统计范围为目标图中的对象、库、程序和着色器。
 候选还需配置、链接临时量及验证输出。
-独立候选保留 1.5 GiB 预约，实际峰值在构建时登记。
+独立候选预计新增 1.5 GiB，实际峰值在构建时登记。
 
-## 当前配额复核
+## 实盘空间检查
 
-独立 Player 构建预留 1.5 GiB。
-按实时 `artifact_budget.py` 结果创建受管任务。
-回收资格按保留期、活动引用、保护标记和证据摘要核定。
+以预计新增 1.5 GiB 执行 `artifact_budget.py` 实盘检查。
+通过 D 卷储备门槛后创建受管任务并进入共享队列。
+受管任务登记活动输入、记录实测占用并封存必要证据。
 
 ## 最小命令
 
@@ -159,20 +159,21 @@ $ninja = "$toolsDir/Ninja/ninja.exe"
 $referenceRun = '20261119-025202-npr-original-room-registration-04ae4a'
 $generatorRun = '20261119-142326-realtime-height-fog-647ebb'
 $replayRun = '20261119-191404-realtime-fog-replay-inputs-226eaa'
+$integrationRun = '20261119-230258-realtime-fog-player-integration-8b65e6'
 python -B "$main/tools/artifact_budget.py" --build "$main/build" --planned-bytes 1610612736
-if ($LASTEXITCODE -ne 0) { throw 'Player reservation is unavailable' }
-$task = python -B "$main/tools/artifact_cleanup.py" --new-run realtime-height-fog-player --planned-bytes 1610612736 --input-run $referenceRun --input-run $generatorRun --input-run $replayRun
-if ($LASTEXITCODE -ne 0) { throw 'Player reservation is unavailable' }
+if ($LASTEXITCODE -ne 0) { throw 'Player disk budget check failed' }
+$task = python -B "$main/tools/artifact_cleanup.py" --new-run realtime-height-fog-player --planned-bytes 1610612736 --input-run $referenceRun --input-run $generatorRun --input-run $replayRun --input-run $integrationRun
+if ($LASTEXITCODE -ne 0) { throw 'Could not create managed Player task' }
 $runName = Split-Path $task -Leaf
 $build = Join-Path $task 'player-release'
 $deps = Join-Path $main 'build/ninja-msvc-debug/vcpkg_installed'
 $toolchain = 'D:/Tools/vcpkg/scripts/buildsystems/vcpkg.cmake'
 
 python -B "$main/tools/artifact_budget.py" --build "$main/build" --run "$task" --planned-bytes 1610612736
-if ($LASTEXITCODE -ne 0) { throw 'Player reservation is unavailable' }
+if ($LASTEXITCODE -ne 0) { throw 'Player disk budget check failed' }
 python -B $queue run --build "$main/build" --owner npr-room --task realtime-height-fog-configure --run $runName --kind build --priority P1 --estimate 60 --timeout 240 --command $cmake -S $engine -B $build -G Ninja -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=ON "-DCMAKE_MAKE_PROGRAM=$ninja" "-DCMAKE_TOOLCHAIN_FILE=$toolchain" "-DVCPKG_INSTALLED_DIR=$deps" -DVCPKG_MANIFEST_INSTALL=OFF
 if ($LASTEXITCODE -ne 0) { throw 'Player configuration failed' }
-python -B $queue run --build "$main/build" --owner npr-room --task realtime-height-fog-player-build --run $runName --kind build --priority P1 --estimate 900 --timeout 1800 --command $cmake --build $build --target AzurePlayer AzureViewFogBindingTests AzureViewFogGpuTests AzureGeneratedHeightFogGpuTests
+python -B $queue run --build "$main/build" --owner npr-room --task realtime-height-fog-player-build --run $runName --kind build --priority P1 --estimate 900 --timeout 1800 --command $cmake --build $build --parallel 2 --target AzurePlayer AzureViewFogBindingTests AzureViewFogGpuTests AzureGeneratedHeightFogGpuTests
 if ($LASTEXITCODE -ne 0) { throw 'Player build failed' }
 ```
 
@@ -187,7 +188,7 @@ $env:VK_LAYER_PATH = 'D:/Tools/VulkanSDK/1.4.350.0/Bin'
 $env:VK_INSTANCE_LAYERS = 'VK_LAYER_KHRONOS_validation'
 $env:VK_LAYER_VALIDATE_SYNC = '1'
 python -B "$main/tools/artifact_budget.py" --build "$main/build" --run "$task" --planned-bytes 8388608
-if ($LASTEXITCODE -ne 0) { throw 'Fog capture reservation is unavailable' }
+if ($LASTEXITCODE -ne 0) { throw 'Fog capture disk budget check failed' }
 python -B $queue run --build "$main/build" --owner npr-room --task realtime-height-fog-targeted-tests --run $runName --kind gpu --priority P1 --estimate 80 --timeout 240 --command $ctest --test-dir $build -R '^AzureRender\.(ViewFogBinding|ViewFogGpu|GeneratedHeightFogGpu)$' --output-on-failure
 if ($LASTEXITCODE -ne 0) { throw 'Targeted fog tests failed' }
 python -B $queue run --build "$main/build" --owner npr-room --task realtime-height-fog-replay --run $runName --kind gpu --priority P1 --estimate 280 --timeout 420 --command python -B "$engine/tools/verify_generated_height_fog_replay.py" --player "$build/AzurePlayer.exe" --frozen-run "$main/build/runs/$referenceRun" --prepared "$main/build/runs/$replayRun/prepared" --output "$task/replay"
@@ -227,7 +228,7 @@ if ($LASTEXITCODE -ne 0) { throw 'Height fog replay failed' }
 两段回放退出后的 GPU 活动分配均为零。
 
 队列 2242 记录两种绑定的现有 Player 验证。
-生成绑定的画面验收等待版本三接入。
+该报告确认解析画面及版本三绑定的兼容边界。
 报告位于受管任务 `20261119-191404-realtime-fog-replay-inputs-226eaa/verification.json`。
 
 ## Player 接入任务
@@ -237,8 +238,7 @@ if ($LASTEXITCODE -ne 0) { throw 'Height fog replay failed' }
 旧版绑定、解析回退及四倍采样保留各自校验。
 定向目标先验证绑定、GPU 同步及渲染器编译。
 
-完整构建按 1.5 GiB 门禁执行。
-隔离检查预留六十四 MiB。
+隔离检查按六十四 MiB 执行实盘检查。
 使用受管目录 `20261119-230258-realtime-fog-player-integration-8b65e6`。
 
 版本三绑定通过 53 项检查，所有权短检覆盖两组在途资源和片元读取屏障。
@@ -254,40 +254,29 @@ if ($LASTEXITCODE -ne 0) { throw 'Height fog replay failed' }
 队列 2279 使用现有 Player 复跑十帧解析对照、四倍采样及七十二帧解析关卡往返。
 每帧按已提交关卡核对独立画面，两条描述符路径均通过。
 着色器摘要、切换帧号与帧像素摘要见 `replay-control-verified/verification.json`。
-完整构建等待主受管池开放预约。
 
-## 构建预约检查点
+## 历史构建记录
 
 11 月 19 日 23:44 核对候选提交 `cce2ce2`，共享队列为空。
 以候选配置的 Ninja 目标图核对主 Release 实际文件。
 四个目标对应的现存程序、对象、库和着色器共 928560895 字节。
 另有 14 个目标产物需编译或链接后实测。
 
-主受管池实测余 86406083 字节，D 卷余 221392764928 字节。
-构建预约为 1610612736 字节，池缺口为 1524206653 字节。
-空间维护最早于 11 月 20 日 01:18:08 复核已登记的计时设置目录。
-回收后重新核对可用预约并记录构建峰值。
+11 月 19 日的固定容量检查记录剩余 86406083 字节。
+当时的构建预计增量为 1610612736 字节。
+同次测得 D 卷可用 221392764928 字节。
 
-计时设置目录封存后占用预约 1033570663 字节。
-按本次池余量计算，单目录回收后仍缺预约。
-另一项交互整合目录预约 1528470473 字节，02:20:00 到期。
-是否可回收以届时的活动引用、保留标记和封存校验为准。
+## 构建与输入路径
 
-空间维护按以下完整路径核对预约和回收候选。
-
-- 受管池为 `D:/Projects/FYP/Project/AzureRender/build`。
+- 受管构建根为 `D:/Projects/FYP/Project/AzureRender/build`。
 - 候选从 `D:/Projects/FYP-worktrees/npr-room-reproduction/Project/AzureRender` 构建。
 - 构建由受管入口分配 `D:/Projects/FYP/Project/AzureRender/build/runs/<任务标识>/player-release`。
-- 回收候选为 `D:/Projects/FYP/Project/AzureRender/build/runs/20261119-011226-npr-full-room-timer-settings-53e822`。
-- 后续候选为 `D:/Projects/FYP/Project/AzureRender/build/runs/20261119-020648-npr-room-interaction-integration-454703`。
-
-预约申请来自原创房间工作线。
-以 11 月 20 日 01:18:08 为首个复核时间。
-该批次使用以下封存输入目录。
+- 受管任务在构建期间登记以下封存输入。
 
 - `D:/Projects/FYP/Project/AzureRender/build/runs/20261119-025202-npr-original-room-registration-04ae4a`
 - `D:/Projects/FYP/Project/AzureRender/build/runs/20261119-142326-realtime-height-fog-647ebb`
 - `D:/Projects/FYP/Project/AzureRender/build/runs/20261119-191404-realtime-fog-replay-inputs-226eaa`
+- `D:/Projects/FYP/Project/AzureRender/build/runs/20261119-230258-realtime-fog-player-integration-8b65e6`
 
 已复核 20 项冻结输入和 40 项派生输入。
 夹具清单 SHA-256 为 `0792d2b389b442bb14fc5ef432bf71b067acb82d454f0a166522e504d679ebf5`。
@@ -318,9 +307,9 @@ if ($LASTEXITCODE -ne 0) { throw 'Height fog replay failed' }
 报告 SHA-256 为 `c29f42be61b73a4559e1819b87a586dc9058fea815e0be2978e1738d11958ff2`。
 
 `c8090b1` 的引擎源码、着色器和构建定义与 `cce2ce2` 一致。
-同源码 Player 在主受管池准入后构建。
+同源码 Player 使用指定工作树的 Release 构建。
 
-## 独立构建试跑
+## 独立构建
 
 主 Release 收据所列 Player 与当前文件的 SHA-256 不同。
 该收据仅覆盖最终产物，缺少对象和静态库摘要。
@@ -332,7 +321,47 @@ if ($LASTEXITCODE -ne 0) { throw 'Height fog replay failed' }
 候选已有配置实占 9778500 字节，解析预检实占 1638652 字节。
 剩余 14 项、运行依赖及链接临时量在实际构建中测量。
 
-试跑预约 1 GiB，仍由主受管池门禁判定。
+独立构建以 1.5 GiB 估计增量执行实盘检查。
 用 `--parallel 2` 限制同时生成的对象及临时量。
 采样记录全任务峰值，构建及验收沿用四个原目标和原门槛。
-1 GiB 是试跑预约，实测峰值由候选构建收据给出。
+11 月 20 日 00:26，实盘检查通过并创建同源码构建任务。
+
+## 同源码 Player 验收
+
+11 月 20 日使用 `d43ab3e` 构建 Release Player。
+引擎源码、着色器、测试和构建定义与 `cce2ce2` 一致。
+队列 2297 完成配置，2299 完成四个构建目标。
+受管任务的采样峰值为 994978912 字节。
+
+队列 2302 的绑定、所有权和生成测试全部通过。
+RTX 4060 的 188 个生成样本最大误差为 0.000484407。
+生成和采样计算着色器与队列 2273 的相应文件摘要一致。
+队列 2273 提供 NVIDIA 与 Intel 的双设备证据。
+
+队列 2303 在同一程序通过解析及实时生成回放。
+实时生成使用 48 × 32 × 48 体积，最远深度为 8。
+十帧相机序列通过固定与索引路径的单倍及四倍采样。
+两种描述符路径的七十二帧往返在第 14、33 帧提交关卡。
+
+运动和关卡往返最大线性误差分别为 0.001948 和 0.002088。
+全部二十个回放进程通过 Vulkan 校验并释放图像与缓冲。
+首尾画面逐像素一致，关卡帧与独立机位匹配。
+
+队列 2304 使用同一 Player 通过八项捕获兼容检查。
+检查覆盖组合雾、机位不匹配、离线体积及正交机位。
+二十八个进程退出后的活动图像与缓冲均为零。
+
+| 证据 | SHA-256 |
+| --- | --- |
+| Release `AzurePlayer.exe` | `48c806114b1e90f82f90003691d0ea7053c3d0ac3aa3a9c5c07b86c5444c8436` |
+| `replay/verification.json` | `971abc718a1db5331d1a3c5955ef9d1df0dd2b2347b299f85d2058c5f11db0d0` |
+| `view_fog_generate.comp.spv` | `f0aaab41487dceb2c19b226595b0797457d9f5259bd8f2fe01a8a3d7f987fee0` |
+| `evidence/verification-summary.json` | `0d4f83a14d5316cc387db1ccbb1b2558263b58e555c25d73860345ab3b923a7e` |
+
+受管任务为 `20261120-002631-realtime-fog-same-source-player-e8d3cf`。
+回放报告保存实际着色器及逐帧像素摘要。
+同一任务的 `evidence/` 核对六张关键画面的摘要。
+精简档案保存三张代表画面、程序身份、兼容和释放报告。
+
+档案文件为 `20261120-005009-fog-player-keyframe-evidence-362ed5-e0ec56370ae17e18.zip`。
+档案 SHA-256 为 `04d7b511905498c7f2a005682732fcbf3f794e3c7a362413053be26df9e3e33e`。
