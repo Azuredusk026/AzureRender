@@ -180,9 +180,8 @@ if ($LASTEXITCODE -ne 0) { throw 'Player build failed' }
 ```
 
 绑定、所有权及生成短检沿用已有注册用例。
-随后运行场景雾的移动用例和新生成用例。
-下列命令用于接入后已登记的生成用例。
-当前工具提供 `camera-reentry` 对照。
+随后生成配对的解析对照及生成绑定夹具。
+在接入后的 Player 中运行两条描述符路径。
 
 ```powershell
 $env:PATH = "$deps/x64-windows/bin;$env:PATH"
@@ -193,16 +192,29 @@ python -B "$main/tools/artifact_budget.py" --build "$main/build" --run "$task" -
 if ($LASTEXITCODE -ne 0) { throw 'Fog capture reservation is unavailable' }
 python -B $queue run --build "$main/build" --owner npr-room --task realtime-height-fog-targeted-tests --run $runName --kind gpu --priority P1 --estimate 80 --timeout 240 --command $ctest --test-dir $build -R '^AzureRender\.(ViewFogBinding|ViewFogGpu|GeneratedHeightFogGpu)$' --output-on-failure
 if ($LASTEXITCODE -ne 0) { throw 'Targeted fog tests failed' }
-python -B $queue run --build "$main/build" --owner npr-room --task realtime-height-fog-camera-reentry --run $runName --kind gpu --priority P1 --estimate 70 --timeout 180 --command python -B "$engine/tools/test_scene_fog_gpu.py" --executable "$build/AzurePlayer.exe" --output "$task/camera-reentry" --expected-validation disabled --case camera-reentry --case generated-height-reentry
-if ($LASTEXITCODE -ne 0) { throw 'Camera replay failed' }
+$env:TEMP = Join-Path $task 'tmp'
+$env:TMP = $env:TEMP
+$replay = Join-Path $task 'replay-inputs'
+python -B "$engine/tools/prepare_generated_height_fog_replay.py" --frozen-run "$main/build/runs/$referenceRun" --output $replay
+if ($LASTEXITCODE -ne 0) { throw 'Replay preparation failed' }
+foreach ($mode in 'analytic','generated') {
+    foreach ($binding in 'indexed','fixed') {
+        $fixture = Join-Path $replay "motion/$mode"
+        $capture = "$task/motion-$mode-$binding"
+        $flags = @()
+        if ($binding -eq 'fixed') { $flags = @('--disable-bindless','--disable-compute-skinning','--disable-parallel-recording') }
+        python -B $queue run --build "$main/build" --owner npr-room --task "motion-$mode-$binding" --run $runName --kind gpu --priority P1 --estimate 30 --timeout 90 --command "$build/AzurePlayer.exe" --project "$fixture/project.azureproject" --game-actions "$fixture/route.json" --runtime-report "$capture-runtime.json" --capture-dir $capture --capture-frames 10 --capture-fps 60 --fixed-frame-step --qa-camera scene --qa-light scene --width 128 --height 128 @flags
+        if ($LASTEXITCODE -ne 0) { throw 'Camera replay failed' }
+    }
+}
 ```
 
 关卡往返的参数沿用冻结的 `command.json`。
-将 `$fixture` 设为受管目录中生成模式的双关卡工程路径。
 复用动作表及固定步参数，采集到空的输出目录。
 将回放的关卡名、机位和像素对齐到独立结果。
 
 ```powershell
+$fixture = Join-Path $replay 'roundtrip/generated'
 python -B $queue run --build "$main/build" --owner npr-room --task realtime-height-fog-roundtrip --run $runName --kind gpu --priority P1 --estimate 45 --timeout 120 --command "$build/AzurePlayer.exe" --project "$fixture/route.azureproject" --game-actions "$fixture/actions.json" --runtime-report "$task/route-runtime.json" --capture-dir "$task/route-frames" --capture-frames 72 --capture-fps 60 --fixed-frame-step --qa-camera scene --qa-light scene --width 128 --height 128
 if ($LASTEXITCODE -ne 0) { throw 'Level roundtrip failed' }
 ```
@@ -218,3 +230,27 @@ if ($LASTEXITCODE -ne 0) { throw 'Level roundtrip failed' }
 - 冻结捕获与解析路径沿用既有画面兼容要求。
 - 留存命令、程序和着色器摘要、运行报告及最小画面。
 - 使用 `artifact_cleanup.py --finish` 封存受管任务。
+
+## 回放夹具准备任务
+
+交付物为可搬移的解析对照和生成绑定夹具。
+基线为 `c2ee7e7` 和冻结的两个原创回放目录。
+使用同一组几何、相机脚本及固定步动作表。
+差异限定于高度雾绑定的生成配置。
+
+检查覆盖两次生成的字节一致及源摘要复核。
+现有 Player 核对解析对照的十帧和七十二帧。
+待接入绑定由现有 Player 的版本检查拒绝。
+连续帧沿用 0.008 线性误差与资源释放门槛。
+
+任务开始于 2026-11-19，定位十分钟，实施二十分钟。
+受管目录预算六十四 MiB，原生短检预算一百八十秒。
+
+三次准备所得四十一份文件逐字节一致。
+现有 Release Player 在迁移目录验证两个解析对照。
+十帧与七十二帧的最大线性误差均低于 0.008。
+两段回放退出后的 GPU 活动分配均为零。
+
+队列 2242 记录两种绑定的现有 Player 验证。
+生成绑定的画面验收等待版本三接入。
+报告位于受管任务 `20261119-191404-realtime-fog-replay-inputs-226eaa/verification.json`。
