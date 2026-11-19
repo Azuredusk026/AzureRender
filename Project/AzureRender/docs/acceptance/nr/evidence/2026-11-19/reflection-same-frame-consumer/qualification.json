@@ -1,0 +1,1272 @@
+{
+  "status": "partial-same-frame-reference-qualified-player-stage-capture-blocked",
+  "accepted": false,
+  "baseCommit": "fe5ba3b982cdd739b6396c09256aca7f96a6ccde",
+  "coordinateEvidenceCommit": "4676be7",
+  "productionChanged": false,
+  "binaryAnd895ShadersRestoredExact": true,
+  "source": {
+    "playerSha256": "1a30d925a674ddb1d95876cb80181106a0217e12a7228a35b5980b134954cb69",
+    "traceShader": "9b77643b12d533f69e7a159ba975dfaf75e56253429371d6f7470ea6a567e20a",
+    "filterShader": "7e305dcfc3227ad7f98d8a8832c976b378a4f62007b2044943e29fc98e1d76bc",
+    "projectSha256": "b5339a45d2f7ae9c4011af3463ab9e5996462a7825166d1034c96654630a88a8",
+    "levelSha256": "d99683193ef5aa3fd002bb4075b2a01639c1bd1a463df9fa484a4ea22944ce7e",
+    "nativeCapture": {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261022-201845-endfield-capture-954719\\Endfield-games-child_frame3534.rdc",
+      "bytes": 944717392,
+      "sha256": "5bf129d05acb43d41ab54042f6648c3d728decb253c94d0250037f01f0b778b3"
+    }
+  },
+  "native": {
+    "status": "native-consumer-measured-with-interpolation-residual",
+    "frame": 3534,
+    "records": {
+      "filtered": {
+        "bounds": [
+          498,
+          478,
+          793,
+          703
+        ],
+        "resource": "ResourceId::15925",
+        "event": 8811,
+        "sourceFile": "actual-filter-output.zlib",
+        "sha256": "e8e205829c56ae9c6139667bbd8f8496729fe1ffbc0790a8801dbfe824a756e6",
+        "fullSha256": "5273b1514da46c6ff8a0d6c457d9ffc5cfde855dbc4e80af7d3a9dd43c0aab98",
+        "inputRecord": {
+          "event": 8811,
+          "resource": "ResourceId::15925",
+          "format": "R11G11B10_FLOAT",
+          "width": 1280,
+          "height": 720,
+          "mip": 0,
+          "rect": [
+            498,
+            17,
+            793,
+            242
+          ],
+          "nativeStorageFlip": true,
+          "bytesPerPixel": 4,
+          "fullSha256": "5273b1514da46c6ff8a0d6c457d9ffc5cfde855dbc4e80af7d3a9dd43c0aab98",
+          "file": "actual-filter-output.zlib",
+          "sha256": "e8e205829c56ae9c6139667bbd8f8496729fe1ffbc0790a8801dbfe824a756e6",
+          "bytes": 265500,
+          "encodedSha256": "d67830a88496a3e6804d563f46e67722e90dc8960f8bfb92251124486722f666",
+          "encodedBytes": 160558
+        }
+      },
+      "confidence": {
+        "bounds": [
+          498,
+          478,
+          793,
+          703
+        ],
+        "resource": "ResourceId::15777",
+        "event": 8912,
+        "sourceFile": "consumer-confidence.zlib",
+        "sha256": "f7b87d4f661fe8ceb6a610cb1e2fa6f4d7d75fd37810bdda50ee2bfa84d3a2c5",
+        "fullSha256": "636d7d54d6a475b35c50e52629ca2289f7fa5ab04878f3ff2e3404a8c9d09713",
+        "inputRecord": {
+          "event": 8912,
+          "resource": "ResourceId::15777",
+          "format": "R8_UNORM",
+          "width": 1280,
+          "height": 720,
+          "mip": 0,
+          "rect": [
+            498,
+            17,
+            793,
+            242
+          ],
+          "nativeStorageFlip": true,
+          "bytesPerPixel": 1,
+          "fullSha256": "636d7d54d6a475b35c50e52629ca2289f7fa5ab04878f3ff2e3404a8c9d09713",
+          "file": "consumer-confidence.zlib",
+          "sha256": "f7b87d4f661fe8ceb6a610cb1e2fa6f4d7d75fd37810bdda50ee2bfa84d3a2c5",
+          "bytes": 66375,
+          "encodedSha256": "719533ceff733266a2e3a629866dd8951e3d6c175bfb4b825e638f69124dfc67",
+          "encodedBytes": 21859
+        }
+      },
+      "filterInput0": {
+        "bounds": [
+          498,
+          478,
+          793,
+          703
+        ],
+        "resource": "ResourceId::16552",
+        "event": 8811,
+        "sourceFile": "filter-2-0.zlib",
+        "sha256": "803b681d4b9ca92de06ed081a96f79c7b33e9bd2dc102b3a6c24c4e376e7df67",
+        "fullSha256": "ca852b98375964d60a01c2271840d06e64260921b0805da0316592bc8a2ee272",
+        "inputRecord": {
+          "event": 8811,
+          "resource": "ResourceId::16552",
+          "format": "R11G11B10_FLOAT",
+          "width": 1280,
+          "height": 720,
+          "mip": 0,
+          "rect": [
+            498,
+            17,
+            793,
+            242
+          ],
+          "nativeStorageFlip": true,
+          "bytesPerPixel": 4,
+          "fullSha256": "ca852b98375964d60a01c2271840d06e64260921b0805da0316592bc8a2ee272",
+          "file": "filter-2-0.zlib",
+          "sha256": "803b681d4b9ca92de06ed081a96f79c7b33e9bd2dc102b3a6c24c4e376e7df67",
+          "bytes": 265500,
+          "encodedSha256": "d02fde0e0a4343ab575841d37a99ec5c9835f7c4b13841fa74ecfe9b6c2f6722",
+          "encodedBytes": 163117
+        }
+      },
+      "traceOutput0": {
+        "bounds": [
+          498,
+          478,
+          793,
+          703
+        ],
+        "resource": "ResourceId::15861",
+        "event": 8702,
+        "sourceFile": "trace-6-0.zlib",
+        "sha256": "b398778d2a3183277cdaf3bfe2929767de735adc676331b0319525cb69e83d31",
+        "fullSha256": "171466668545a4639d9f0a49809e00a262836a09979e6243ed395cf93f2bf853",
+        "inputRecord": {
+          "event": 8702,
+          "resource": "ResourceId::15861",
+          "format": "R11G11B10_FLOAT",
+          "width": 1280,
+          "height": 720,
+          "mip": 0,
+          "rect": [
+            498,
+            17,
+            793,
+            242
+          ],
+          "nativeStorageFlip": true,
+          "bytesPerPixel": 4,
+          "fullSha256": "171466668545a4639d9f0a49809e00a262836a09979e6243ed395cf93f2bf853",
+          "file": "trace-6-0.zlib",
+          "sha256": "b398778d2a3183277cdaf3bfe2929767de735adc676331b0319525cb69e83d31",
+          "bytes": 265500,
+          "encodedSha256": "acc875f67b971a5f30dd4890842352944d26f81985ac1baaa65f0dd4a0b85aa1",
+          "encodedBytes": 149317
+        }
+      },
+      "depth": {
+        "bounds": [
+          498,
+          478,
+          793,
+          703
+        ],
+        "resource": "ResourceId::16447",
+        "event": 8811,
+        "sourceFile": "filter-0-0.zlib",
+        "sha256": "2033945f8c4ba6650b00c8d3aa2c28692f5c0710f15b9cbb7358105da1558db1",
+        "fullSha256": "2b1858f3d80354c90a194a7a45c76297349e7794bed35dc59d62b694f6703777",
+        "inputRecord": {
+          "event": 8811,
+          "resource": "ResourceId::16447",
+          "format": "R32_FLOAT",
+          "width": 1280,
+          "height": 720,
+          "mip": 0,
+          "rect": [
+            498,
+            17,
+            793,
+            242
+          ],
+          "nativeStorageFlip": true,
+          "bytesPerPixel": 4,
+          "fullSha256": "2b1858f3d80354c90a194a7a45c76297349e7794bed35dc59d62b694f6703777",
+          "file": "filter-0-0.zlib",
+          "sha256": "2033945f8c4ba6650b00c8d3aa2c28692f5c0710f15b9cbb7358105da1558db1",
+          "bytes": 265500,
+          "encodedSha256": "8cfe7208e4b9e1f3c746ba122742d8ca5271e5d2e8dfcfab1c3cc4cf6b148b1a",
+          "encodedBytes": 26044
+        }
+      },
+      "consumerHdr": {
+        "bounds": [
+          996,
+          956,
+          1585,
+          1405
+        ],
+        "resource": "ResourceId::15858",
+        "event": 8912,
+        "sourceFile": "consumer-hdr-8912.zlib",
+        "sha256": "6d18fff982ac7e4d3dd8cbf8b1315af0db952a0ffe53d2d34c4097bc4ba68cac",
+        "fullSha256": "6646f67d78e106bec86691d16d62186ded0d1570d516cb973857754070590e9e",
+        "inputRecord": {
+          "event": 8912,
+          "resource": "ResourceId::15858",
+          "format": "R11G11B10_FLOAT",
+          "width": 2560,
+          "height": 1440,
+          "mip": 0,
+          "rect": [
+            996,
+            35,
+            1585,
+            484
+          ],
+          "nativeStorageFlip": true,
+          "bytesPerPixel": 4,
+          "fullSha256": "6646f67d78e106bec86691d16d62186ded0d1570d516cb973857754070590e9e",
+          "file": "consumer-hdr-8912.zlib",
+          "sha256": "6d18fff982ac7e4d3dd8cbf8b1315af0db952a0ffe53d2d34c4097bc4ba68cac",
+          "bytes": 1057844,
+          "encodedSha256": "ffbac27c69ec61ce42f0850fe0704c531b863ba396679d82704f876a1417f02c",
+          "encodedBytes": 480510
+        }
+      },
+      "consumedFiltered": {
+        "bounds": [
+          498,
+          478,
+          793,
+          703
+        ],
+        "resource": "ResourceId::15925",
+        "event": 8912,
+        "sourceFile": "consumer-filter-8912.zlib",
+        "sha256": "e8e205829c56ae9c6139667bbd8f8496729fe1ffbc0790a8801dbfe824a756e6",
+        "fullSha256": "5273b1514da46c6ff8a0d6c457d9ffc5cfde855dbc4e80af7d3a9dd43c0aab98",
+        "inputRecord": {
+          "event": 8912,
+          "resource": "ResourceId::15925",
+          "format": "R11G11B10_FLOAT",
+          "width": 1280,
+          "height": 720,
+          "mip": 0,
+          "rect": [
+            498,
+            17,
+            793,
+            242
+          ],
+          "nativeStorageFlip": true,
+          "bytesPerPixel": 4,
+          "fullSha256": "5273b1514da46c6ff8a0d6c457d9ffc5cfde855dbc4e80af7d3a9dd43c0aab98",
+          "file": "consumer-filter-8912.zlib",
+          "sha256": "e8e205829c56ae9c6139667bbd8f8496729fe1ffbc0790a8801dbfe824a756e6",
+          "bytes": 265500,
+          "encodedSha256": "d67830a88496a3e6804d563f46e67722e90dc8960f8bfb92251124486722f666",
+          "encodedBytes": 160558
+        }
+      }
+    },
+    "filterEvent": 8811,
+    "consumerEvent": 8912,
+    "witnesses": [
+      {
+        "displayXY": [
+          1265,
+          1137
+        ],
+        "filterXY": [
+          [
+            632,
+            568
+          ],
+          [
+            633,
+            568
+          ],
+          [
+            632,
+            569
+          ],
+          [
+            633,
+            569
+          ]
+        ],
+        "weights": [
+          0.5625,
+          0.1875,
+          0.1875,
+          0.0625
+        ],
+        "colorTaps": [
+          [
+            2.1875,
+            1.625,
+            0.5625
+          ],
+          [
+            2.28125,
+            1.65625,
+            0.546875
+          ],
+          [
+            0.7109375,
+            0.5859375,
+            0.3203125
+          ],
+          [
+            0.71875,
+            0.5859375,
+            0.3203125
+          ]
+        ],
+        "confidenceTaps": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "reconstructedColor": [
+          1.83642578125,
+          1.37109375,
+          0.4990234375
+        ],
+        "reconstructedConfidence": 1.0,
+        "actualHdr": [
+          0.5703125,
+          0.43359375,
+          0.19140625
+        ],
+        "actualShaderOutput": [
+          0.5731353163719177,
+          0.436149001121521,
+          0.1940343827009201,
+          0.9975341558456421
+        ],
+        "actualQuantizedHdr": [
+          0.5703125,
+          0.43359375,
+          0.19140625,
+          1.0
+        ]
+      },
+      {
+        "displayXY": [
+          1231,
+          1137
+        ],
+        "filterXY": [
+          [
+            615,
+            568
+          ],
+          [
+            616,
+            568
+          ],
+          [
+            615,
+            569
+          ],
+          [
+            616,
+            569
+          ]
+        ],
+        "weights": [
+          0.5625,
+          0.1875,
+          0.1875,
+          0.0625
+        ],
+        "colorTaps": [
+          [
+            0.14453125,
+            0.150390625,
+            0.12890625
+          ],
+          [
+            0.138671875,
+            0.146484375,
+            0.12890625
+          ],
+          [
+            0.12109375,
+            0.123046875,
+            0.111328125
+          ],
+          [
+            0.1240234375,
+            0.126953125,
+            0.1171875
+          ]
+        ],
+        "confidenceTaps": [
+          0.9921568627450981,
+          0.9921568627450981,
+          1.0,
+          1.0
+        ],
+        "reconstructedColor": [
+          0.13775634765625,
+          0.14306640625,
+          0.1248779296875
+        ],
+        "reconstructedConfidence": 0.9941176470588236,
+        "actualHdr": [
+          0.0986328125,
+          0.0927734375,
+          0.087890625
+        ],
+        "actualShaderOutput": [
+          0.09910663217306137,
+          0.09307979792356491,
+          0.08814980834722519,
+          0.9975341558456421
+        ],
+        "actualQuantizedHdr": [
+          0.0986328125,
+          0.0927734375,
+          0.087890625,
+          1.0
+        ]
+      },
+      {
+        "displayXY": [
+          1537,
+          1137
+        ],
+        "filterXY": [
+          [
+            768,
+            568
+          ],
+          [
+            769,
+            568
+          ],
+          [
+            768,
+            569
+          ],
+          [
+            769,
+            569
+          ]
+        ],
+        "weights": [
+          0.5625,
+          0.1875,
+          0.1875,
+          0.0625
+        ],
+        "colorTaps": [
+          [
+            0.3125,
+            0.26171875,
+            0.15625
+          ],
+          [
+            0.328125,
+            0.27734375,
+            0.1796875
+          ],
+          [
+            0.33984375,
+            0.2890625,
+            0.19921875
+          ],
+          [
+            0.33203125,
+            0.28515625,
+            0.19921875
+          ]
+        ],
+        "confidenceTaps": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "reconstructedColor": [
+          0.32177734375,
+          0.271240234375,
+          0.17138671875
+        ],
+        "reconstructedConfidence": 1.0,
+        "actualHdr": [
+          0.150390625,
+          0.12890625,
+          0.099609375
+        ],
+        "actualShaderOutput": [
+          0.15064609050750732,
+          0.12917612493038177,
+          0.10096859931945801,
+          0.9975337386131287
+        ],
+        "actualQuantizedHdr": [
+          0.150390625,
+          0.12890625,
+          0.099609375,
+          1.0
+        ]
+      },
+      {
+        "displayXY": [
+          1231,
+          1071
+        ],
+        "filterXY": [
+          [
+            615,
+            535
+          ],
+          [
+            616,
+            535
+          ],
+          [
+            615,
+            536
+          ],
+          [
+            616,
+            536
+          ]
+        ],
+        "weights": [
+          0.5625,
+          0.1875,
+          0.1875,
+          0.0625
+        ],
+        "colorTaps": [
+          [
+            0.140625,
+            0.35546875,
+            0.2734375
+          ],
+          [
+            0.1328125,
+            0.6796875,
+            0.5
+          ],
+          [
+            0.1064453125,
+            0.296875,
+            0.23046875
+          ],
+          [
+            0.14453125,
+            0.38671875,
+            0.296875
+          ]
+        ],
+        "confidenceTaps": [
+          0.996078431372549,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "reconstructedColor": [
+          0.13299560546875,
+          0.4072265625,
+          0.309326171875
+        ],
+        "reconstructedConfidence": 0.9977941176470588,
+        "actualHdr": [
+          0.109375,
+          0.201171875,
+          0.1640625
+        ],
+        "actualShaderOutput": [
+          0.10978920012712479,
+          0.20190252363681793,
+          0.16658179461956024,
+          0.9970402717590332
+        ],
+        "actualQuantizedHdr": [
+          0.109375,
+          0.201171875,
+          0.1640625,
+          1.0
+        ]
+      }
+    ],
+    "traceInputs": {
+      "read:1:texture1": {
+        "event": 8702,
+        "resource": "ResourceId::14664",
+        "format": "R16G16B16A16_FLOAT",
+        "width": 2560,
+        "height": 1440,
+        "mip": 0,
+        "rect": [
+          996,
+          35,
+          1585,
+          484
+        ],
+        "nativeStorageFlip": true,
+        "bytesPerPixel": 8,
+        "fullSha256": "9667b36a4cf8716ca807be9a5ea270b47c8981fd38427dc22304e649ffa679a8",
+        "file": "trace-0-0.zlib",
+        "sha256": "3888df0a77a2d93e7a12b1e7d865efe644893677801e814a834ff57668c5bf8b",
+        "bytes": 2115688,
+        "encodedSha256": "96368d0bbf84388dc2f569b98e2f8caa508b1dc61932e697efb98064ae5f9aa3",
+        "encodedBytes": 1293239
+      },
+      "read:2:texture2": {
+        "event": 8702,
+        "resource": "ResourceId::14677",
+        "format": "R32_FLOAT",
+        "width": 1280,
+        "height": 720,
+        "mip": 0,
+        "rect": [
+          498,
+          17,
+          793,
+          242
+        ],
+        "nativeStorageFlip": true,
+        "bytesPerPixel": 4,
+        "fullSha256": "5e9bc968dffc4968aa9042b4fdcd5f0a25837e286a0af6f185a678fcb87879f9",
+        "file": "trace-1-0.zlib",
+        "sha256": "091e1d965d48444794f878d438c6b48d5214c40da1b737b612e3c1712d52d50b",
+        "bytes": 265500,
+        "encodedSha256": "05295bfb44333db1e3118b577ba3dda2f13c26e736f68526133c2010b86d1587",
+        "encodedBytes": 18426
+      },
+      "read:3:texture3": {
+        "event": 8702,
+        "resource": "ResourceId::16447",
+        "format": "R32_FLOAT",
+        "width": 1280,
+        "height": 720,
+        "mip": 0,
+        "rect": [
+          498,
+          17,
+          793,
+          242
+        ],
+        "nativeStorageFlip": true,
+        "bytesPerPixel": 4,
+        "fullSha256": "2b1858f3d80354c90a194a7a45c76297349e7794bed35dc59d62b694f6703777",
+        "file": "trace-2-0.zlib",
+        "sha256": "2033945f8c4ba6650b00c8d3aa2c28692f5c0710f15b9cbb7358105da1558db1",
+        "bytes": 265500,
+        "encodedSha256": "8cfe7208e4b9e1f3c746ba122742d8ca5271e5d2e8dfcfab1c3cc4cf6b148b1a",
+        "encodedBytes": 26044
+      },
+      "read:4:texture4": {
+        "event": 8702,
+        "resource": "ResourceId::16508",
+        "format": "R10G10B10A2_UNORM",
+        "width": 2560,
+        "height": 1440,
+        "mip": 0,
+        "rect": [
+          996,
+          35,
+          1585,
+          484
+        ],
+        "nativeStorageFlip": true,
+        "bytesPerPixel": 4,
+        "fullSha256": "5c114bb08d77d97949439fae4b43a9c62ff21636ca8a71768da408706ffb9549",
+        "file": "trace-3-0.zlib",
+        "sha256": "386e66b3548bb8dc91e2ed5d5d8459957c8cf269fc6d616341e65a2f67507df7",
+        "bytes": 1057844,
+        "encodedSha256": "443447a34385ff18c123db48f47a36303be540335108877e30b9cbf795d519aa",
+        "encodedBytes": 171267
+      },
+      "read:5:texture5": {
+        "event": 8702,
+        "resource": "ResourceId::15777",
+        "format": "R8_UNORM",
+        "width": 1280,
+        "height": 720,
+        "mip": 0,
+        "rect": [
+          498,
+          17,
+          793,
+          242
+        ],
+        "nativeStorageFlip": true,
+        "bytesPerPixel": 1,
+        "fullSha256": "24ce48985d5e5a4d07e86ea4fd5fa549a3c7b0c74be637ed0d90feeab17eaf13",
+        "file": "trace-4-0.zlib",
+        "sha256": "bf2f7134b3046d35bf7834c9d8f2dcaa43ee8220eeaf8830f1bee128f8508118",
+        "bytes": 66375,
+        "encodedSha256": "5aea26245bae34c1a813538f62a385d1724b35af884011157f25a753c979fe94",
+        "encodedBytes": 1106
+      },
+      "read:6:texture6": {
+        "event": 8702,
+        "resource": "ResourceId::16497",
+        "format": "R10G10B10A2_UNORM",
+        "width": 1280,
+        "height": 720,
+        "mip": 0,
+        "rect": [
+          498,
+          17,
+          793,
+          242
+        ],
+        "nativeStorageFlip": true,
+        "bytesPerPixel": 4,
+        "fullSha256": "34b0f713815e3e3b25115d6f1dfef91fdcdfa76297762da8565c8fadc5cb1aae",
+        "file": "trace-5-0.zlib",
+        "sha256": "53b4bb6bbc49c9424b8576f1b02deb8ba9250a4d0d7f5a2ff7b0c206b1fcfa33",
+        "bytes": 265500,
+        "encodedSha256": "1779d285bf3f2f9d9d2819ff491206b715bd5e4674bfaad616d6f7a2f7feeb3e",
+        "encodedBytes": 76015
+      }
+    },
+    "debug": {
+      "event": 8912,
+      "instructions": 1406,
+      "confidenceSample": 1.0,
+      "colorSample": [
+        1.8369140625,
+        1.37109375,
+        0.4990234375
+      ],
+      "probeBeforeMix": [
+        0.4469109773635864,
+        0.34773433208465576,
+        0.16893912851810455
+      ],
+      "incidentAfterMix": [
+        1.8369140625,
+        1.37109375,
+        0.4990234375
+      ],
+      "textureInstructions": [
+        2194,
+        2195
+      ],
+      "mixInstructions": [
+        2196,
+        2197,
+        2198
+      ],
+      "actualMinusIdealInterpolation": [
+        0.00048828125,
+        0.0,
+        0.0
+      ],
+      "interpolationWithinOneEMinusSix": false
+    },
+    "conclusion": "At the traced native anchor confidence is one; the sampled reflection color is preserved by the incident-light blend. Material response and postprocessing are subsequent stages.",
+    "limitation": "Current Player same-frame stage inputs are unavailable; this does not prove parity or root cause in the Player."
+  },
+  "frames": {
+    "status": "qualified-frozen-frame-images",
+    "rows": [
+      {
+        "frameIndex": 0,
+        "pngSha256": "72fadcc6e73e6fbefcf60357a5e42b28ddfb5667a9e032e38f7f0ed63e80268b",
+        "bgraRawSha256": "bc18247e599cae36a2f0db767a0b82aa29a208190ca6ac7d69ff5c18f3909210",
+        "rgbSha256": "d358d0984775cee7a16a3fff17f61eb2e2268f5d765b5f773f5357865ab981ac",
+        "expectedFe5Control": {
+          "png": "72fadcc6e73e6fbefcf60357a5e42b28ddfb5667a9e032e38f7f0ed63e80268b",
+          "raw": "bc18247e599cae36a2f0db767a0b82aa29a208190ca6ac7d69ff5c18f3909210",
+          "archive": "f39f4f7671a5c7140e161ed057a39f8c03a0363d83f7c8bb3551517e7efff4c7",
+          "donor": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-150229-face-native-geometry-mask-sampling-d5d93e\\projected-reflection-32-step-candidate\\baseline-nvidia\\frames\\frame_000000.png",
+          "donorSha256": "72fadcc6e73e6fbefcf60357a5e42b28ddfb5667a9e032e38f7f0ed63e80268b",
+          "archivedControlPixelDifferences": 0
+        },
+        "fullFrameMatchesFe5Control": true,
+        "regions": {
+          "complete": {
+            "pixels": 3686400,
+            "ssim": 0.8277961015701294,
+            "medianReference": 0.40663331747055054,
+            "medianCandidate": 0.41095688939094543,
+            "medianLumaRelativeError": 0.010632606170319582,
+            "meanAbsByte": 11.990855848524305,
+            "diagnosticMedianMatchedLumaSsim": 0.8285591006278992,
+            "medianSignedRgbBytes": [
+              2.0,
+              1.0,
+              1.0
+            ],
+            "exactPixels": 22080,
+            "peak": 242
+          },
+          "ceiling": {
+            "pixels": 537600,
+            "ssim": 0.8411242365837097,
+            "medianReference": 0.8463764786720276,
+            "medianCandidate": 0.8992117643356323,
+            "medianLumaRelativeError": 0.062425276452039144,
+            "meanAbsByte": 14.291892361111111,
+            "diagnosticMedianMatchedLumaSsim": 0.8463874459266663,
+            "medianSignedRgbBytes": [
+              11.0,
+              11.0,
+              11.0
+            ],
+            "exactPixels": 9085,
+            "peak": 195
+          },
+          "leftDoor": {
+            "pixels": 253500,
+            "ssim": 0.8868878483772278,
+            "medianReference": 0.5621686577796936,
+            "medianCandidate": 0.5502784848213196,
+            "medianLumaRelativeError": 0.021150544047287716,
+            "meanAbsByte": 8.083737015121631,
+            "diagnosticMedianMatchedLumaSsim": 0.8851497769355774,
+            "medianSignedRgbBytes": [
+              2.0,
+              1.0,
+              1.0
+            ],
+            "exactPixels": 1193,
+            "peak": 165
+          },
+          "rightWall": {
+            "pixels": 128800,
+            "ssim": 0.8834997415542603,
+            "medianReference": 0.32994508743286133,
+            "medianCandidate": 0.30750200152397156,
+            "medianLumaRelativeError": 0.06802066999544762,
+            "meanAbsByte": 11.896048136645963,
+            "diagnosticMedianMatchedLumaSsim": 0.8830279111862183,
+            "medianSignedRgbBytes": [
+              -8.0,
+              -8.0,
+              -7.0
+            ],
+            "exactPixels": 350,
+            "peak": 118
+          },
+          "centerFloor": {
+            "pixels": 97200,
+            "ssim": 0.8292058706283569,
+            "medianReference": 0.29490983486175537,
+            "medianCandidate": 0.2475568801164627,
+            "medianLumaRelativeError": 0.1605675672616692,
+            "meanAbsByte": 16.100836762688616,
+            "diagnosticMedianMatchedLumaSsim": 0.8159244060516357,
+            "medianSignedRgbBytes": [
+              -11.0,
+              -14.0,
+              -9.0
+            ],
+            "exactPixels": 64,
+            "peak": 183,
+            "changedVsFe5Control": 0
+          },
+          "cyanRing": {
+            "pixels": 27600,
+            "ssim": 0.7528694868087769,
+            "medianReference": 0.298764705657959,
+            "medianCandidate": 0.2749764919281006,
+            "medianLumaRelativeError": 0.07962190071103095,
+            "meanAbsByte": 15.350857487922704,
+            "diagnosticMedianMatchedLumaSsim": 0.7384704947471619,
+            "medianSignedRgbBytes": [
+              -7.0,
+              -6.0,
+              -5.0
+            ],
+            "exactPixels": 5,
+            "peak": 94,
+            "changedVsFe5Control": 0
+          },
+          "leftFloor": {
+            "pixels": 67900,
+            "ssim": 0.8553433418273926,
+            "medianReference": 0.368437260389328,
+            "medianCandidate": 0.37314900755882263,
+            "medianLumaRelativeError": 0.012788465435107517,
+            "meanAbsByte": 6.873784977908689,
+            "diagnosticMedianMatchedLumaSsim": 0.8570441603660583,
+            "medianSignedRgbBytes": [
+              -1.0,
+              -2.0,
+              -1.0
+            ],
+            "exactPixels": 350,
+            "peak": 122
+          }
+        }
+      },
+      {
+        "frameIndex": 1,
+        "pngSha256": "3988d0d78687c0288a2b73b4df6a226e3180e77ec3e682ce8dacd09ba34f5974",
+        "bgraRawSha256": "5d807c93335c7dde65582c891b9a994e4674229a1b7a44ae89a7ed5e0c650764",
+        "rgbSha256": "3c4eb3f7852f2aae48c0465936133f1ca2306c87d76388df3fe1274f7565eab9",
+        "expectedFe5Control": {
+          "png": "3988d0d78687c0288a2b73b4df6a226e3180e77ec3e682ce8dacd09ba34f5974",
+          "raw": "5d807c93335c7dde65582c891b9a994e4674229a1b7a44ae89a7ed5e0c650764",
+          "archive": "1ddcfe3184207fe56e963c3e97d8d52cbbbfc31ed3cf35b61853e17f784a1d07",
+          "donor": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-150229-face-native-geometry-mask-sampling-d5d93e\\projected-reflection-32-step-candidate\\baseline-nvidia\\frames\\frame_000001.png",
+          "donorSha256": "3988d0d78687c0288a2b73b4df6a226e3180e77ec3e682ce8dacd09ba34f5974",
+          "archivedControlPixelDifferences": 0
+        },
+        "fullFrameMatchesFe5Control": true,
+        "regions": {
+          "complete": {
+            "pixels": 3686400,
+            "ssim": 0.8278223872184753,
+            "medianReference": 0.40663331747055054,
+            "medianCandidate": 0.41083139181137085,
+            "medianLumaRelativeError": 0.010323980255563659,
+            "meanAbsByte": 11.987490776909722,
+            "diagnosticMedianMatchedLumaSsim": 0.8285658955574036,
+            "medianSignedRgbBytes": [
+              2.0,
+              1.0,
+              1.0
+            ],
+            "exactPixels": 22107,
+            "peak": 242
+          },
+          "ceiling": {
+            "pixels": 537600,
+            "ssim": 0.8410954475402832,
+            "medianReference": 0.8463764786720276,
+            "medianCandidate": 0.8992117643356323,
+            "medianLumaRelativeError": 0.062425276452039144,
+            "meanAbsByte": 14.292847222222223,
+            "diagnosticMedianMatchedLumaSsim": 0.8463585376739502,
+            "medianSignedRgbBytes": [
+              11.0,
+              11.0,
+              11.0
+            ],
+            "exactPixels": 9087,
+            "peak": 195
+          },
+          "leftDoor": {
+            "pixels": 253500,
+            "ssim": 0.8868863582611084,
+            "medianReference": 0.5621686577796936,
+            "medianCandidate": 0.5502784848213196,
+            "medianLumaRelativeError": 0.021150544047287716,
+            "meanAbsByte": 8.083591058514136,
+            "diagnosticMedianMatchedLumaSsim": 0.8851481676101685,
+            "medianSignedRgbBytes": [
+              2.0,
+              1.0,
+              1.0
+            ],
+            "exactPixels": 1191,
+            "peak": 165
+          },
+          "rightWall": {
+            "pixels": 128800,
+            "ssim": 0.8834869861602783,
+            "medianReference": 0.32994508743286133,
+            "medianCandidate": 0.30750200152397156,
+            "medianLumaRelativeError": 0.06802066999544762,
+            "meanAbsByte": 11.893925983436853,
+            "diagnosticMedianMatchedLumaSsim": 0.8830145001411438,
+            "medianSignedRgbBytes": [
+              -8.0,
+              -8.0,
+              -7.0
+            ],
+            "exactPixels": 341,
+            "peak": 118
+          },
+          "centerFloor": {
+            "pixels": 97200,
+            "ssim": 0.8296183943748474,
+            "medianReference": 0.29490983486175537,
+            "medianCandidate": 0.24845099449157715,
+            "medianLumaRelativeError": 0.15753574441475204,
+            "meanAbsByte": 16.021971879286696,
+            "diagnosticMedianMatchedLumaSsim": 0.8166679739952087,
+            "medianSignedRgbBytes": [
+              -10.0,
+              -14.0,
+              -9.0
+            ],
+            "exactPixels": 63,
+            "peak": 183,
+            "changedVsFe5Control": 0
+          },
+          "cyanRing": {
+            "pixels": 27600,
+            "ssim": 0.75460284948349,
+            "medianReference": 0.298764705657959,
+            "medianCandidate": 0.27490001916885376,
+            "medianLumaRelativeError": 0.0798778638746798,
+            "meanAbsByte": 15.259106280193237,
+            "diagnosticMedianMatchedLumaSsim": 0.7402628660202026,
+            "medianSignedRgbBytes": [
+              -6.0,
+              -6.0,
+              -5.0
+            ],
+            "exactPixels": 3,
+            "peak": 94,
+            "changedVsFe5Control": 0
+          },
+          "leftFloor": {
+            "pixels": 67900,
+            "ssim": 0.8553996086120605,
+            "medianReference": 0.368437260389328,
+            "medianCandidate": 0.37314900755882263,
+            "medianLumaRelativeError": 0.012788465435107517,
+            "meanAbsByte": 6.869558173784978,
+            "diagnosticMedianMatchedLumaSsim": 0.8571003079414368,
+            "medianSignedRgbBytes": [
+              -1.0,
+              -2.0,
+              -1.0
+            ],
+            "exactPixels": 346,
+            "peak": 122
+          }
+        }
+      }
+    ],
+    "camera": {
+      "qaCameraPosition": [
+        -0.266043,
+        2.26206,
+        -24.9053
+      ],
+      "qaCameraTarget": [
+        -0.261116,
+        2.32175,
+        -23.9071
+      ],
+      "cameraLens": {
+        "farPlane": 10000.0,
+        "nearPlane": 0.10000000149011612,
+        "offsetNdc": [
+          -0.0002929684706032276,
+          7.717559492448345e-05
+        ],
+        "projection": "perspective",
+        "schemaVersion": 1,
+        "verticalFovRadians": 0.9986935257911682
+      },
+      "cameraUp": [
+        -0.0002945943851955235,
+        0.9982167482376099,
+        -0.05969396233558655
+      ],
+      "gradeSettings": {
+        "schemaVersion": 2,
+        "exposureEv": 0,
+        "saturation": 1,
+        "contrast": 1,
+        "tint": [
+          1,
+          1,
+          1
+        ],
+        "toneMappingEnabled": true,
+        "lut": {
+          "schemaVersion": 1,
+          "asset": "gi:/captured-3534.azlut",
+          "exposureMultiplier": 1,
+          "dimension": 32,
+          "inputDomain": "logc3-full-log",
+          "outputDomain": "linear",
+          "fingerprintAlgorithm": "FNV-1a-64",
+          "fingerprint": "b963486c619e8333"
+        }
+      },
+      "bloomSettings": {
+        "schemaVersion": 1,
+        "enabled": true,
+        "threshold": 1.05,
+        "strength": 0.16
+      },
+      "nprLighting": {
+        "ambientColor": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "ambientDirection": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "ambientWeight": 1.0,
+        "directionBias": 0.0,
+        "directionFloor": 1.0,
+        "directionGain": 0.0,
+        "enabled": true,
+        "indoorMix": 0.0,
+        "litAmbientMix": 0.0,
+        "mainColorMix": 0.0,
+        "outdoorGain": 1.0,
+        "schemaVersion": 1,
+        "shadowAmbientGain": 1.0,
+        "shadowOverride": 0.0,
+        "specularFloor": 0.550000011920929,
+        "useSceneIrradiance": true
+      },
+      "screenReflectionProducer": "projected-history",
+      "screenReflectionLevels": 7,
+      "sceneTriangles": 547653,
+      "skinnedVertices": 77802,
+      "transparentTriangles": 10735,
+      "width": 2560,
+      "height": 1440,
+      "fps": 60
+    },
+    "baseline": "fe5ba3b",
+    "referenceSha256": "af67600fcbb25060f1770a4bedb5e13b64a981229c9b24d9db29492db1fb5e18",
+    "originalGates": {
+      "ssim": 0.95,
+      "lumaRelative": 0.1,
+      "newOverOne": 0
+    },
+    "sourceFingerprint": "1a30d925a674ddb1d95876cb80181106a0217e12a7228a35b5980b134954cb69",
+    "frozenFourFrames": {
+      "scope": "reused unchanged host/shader evidence; two diagnostic frames checked here",
+      "evidence": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\docs\\acceptance\\nr\\evidence\\2026-11-16\\projected-history-layer-frozen\\qualification.json"
+    }
+  },
+  "queue": [
+    {
+      "id": 2238,
+      "task": "nr-same-frame-reflection-lineage",
+      "state": "failed",
+      "wait_seconds": 0.016000000000531145,
+      "run_seconds": 84.89099999999962,
+      "exit_code": 1,
+      "reason": null
+    },
+    {
+      "id": 2240,
+      "task": "nr-same-frame-reflection-lineage-entry-fixed",
+      "state": "budget-stopped",
+      "wait_seconds": 226.17199999999957,
+      "run_seconds": 96.42199999999957,
+      "exit_code": 1,
+      "reason": "managed-pool-limit"
+    },
+    {
+      "id": 2243,
+      "task": "nr-same-frame-reflection-compressed-replay",
+      "state": "failed",
+      "wait_seconds": 0.01599999999962165,
+      "run_seconds": 23.389999999999418,
+      "exit_code": 1,
+      "reason": null
+    },
+    {
+      "id": 2244,
+      "task": "nr-same-frame-native-reference-readback",
+      "state": "succeeded",
+      "wait_seconds": 0.0,
+      "run_seconds": 18.860000000000582,
+      "exit_code": 0,
+      "reason": null
+    }
+  ],
+  "budget": {
+    "capturePlannedBytes": 1850000000,
+    "stoppedCaptureBytes": 2063455666,
+    "managedPoolLimit": 17179869184,
+    "runLimit": 2147483648,
+    "archivePreflight": {
+      "allowed": true,
+      "reasons": [],
+      "totalBytes": 1024208138240,
+      "freeBytes": 222725308416,
+      "usedBytes": 30640673,
+      "plannedBytes": 20000000,
+      "quotaBytes": 2147483648,
+      "reserveBytes": 214748364800,
+      "diagnostic": false,
+      "managedPool": {
+        "allowed": true,
+        "reasons": [],
+        "reservedBytes": 17079473041,
+        "projectedBytes": 17079473041,
+        "limitBytes": 17179869184
+      }
+    },
+    "invalidCaptureRemovedAfterVerifiedCompression": true
+  },
+  "gates": {
+    "ssimMinimum": 0.95,
+    "luminanceRelativeMaximum": 0.1,
+    "newOverOneMaximum": 0,
+    "frozenFourFrames": "pixel-identical"
+  },
+  "limitations": [
+    "Player same-frame trace, bound filter inputs, four neighbouring outputs and consumer invocation were not acquired.",
+    "The new Player file was stopped by managed-pool-limit before a valid RenderDoc capture completed.",
+    "Native ideal interpolation has a measured red residual of 0.00048828125; exact sampler-coordinate or precision cause is open.",
+    "Native final RGB candidates do not hash-match the archived reference PNG; resource 15929 matches the four retained anchors.",
+    "Native final RGB candidates do not hash-match the archived reference PNG; resource 15929 matches the four retained display anchors.",
+    "Native prior-color data is a same-position crop, not a new per-ray hit-address trace.",
+    "Four-frame compatibility reuses unchanged-binary evidence; original cross-driver image differences remain open."
+  ],
+  "nextRequiredEvidence": "A valid bounded Player capture of this exact source, followed by the existing readback worker; coordinate shared-pool headroom before retry.",
+  "verification": {
+    "local": "PASS: two frame identities, 12 regional scores, four native tap neighbourhoods, raw input hashes and witnessed native blend.\nOPEN: Player same-frame stage readbacks; native ideal-interpolation residual is retained.",
+    "isolated": "PASS: two frame identities, 12 regional scores, four native tap neighbourhoods, raw input hashes and witnessed native blend.\nOPEN: Player same-frame stage readbacks; native ideal-interpolation residual is retained."
+  },
+  "validation": {
+    "archiveSha256": "43788d985d4ad27c54c9e5142fe6eb7cca7130339dc2a3dc5a9d3ca65b65c811",
+    "files": {
+      "worker.py": "f5ccf7ee6fb8ba64c4bd6bb3bd542146a7ad4499039e6edefd0da54ad92b9832",
+      "batch.py": "55bee23e389220d7e7f9721cedd5c6c1b6cf77e067d6fc7ee9e2a9c070c57d89",
+      "score_frames.py": "0faa4310b825a7ae617d38a16f66760ca42e1405319e9ba2ac2363791b5c5382",
+      "score_native.py": "8ae313a8fd5f6c33a8b23a1909e979394ef2e837876b50c21f3e691ca081630a",
+      "archive.py": "ffcd4f665458f66708bc2dfab910841ee2733c0441b23b46888fc870467d1e3b",
+      "verify.py": "859d4361c9b0490d9eafdd6e32e05c55abc0aecc2f564e5febf9b661bc0370b1",
+      "measure_reference.py": "4d754687181bc271ce8d48ed9b02c500fea93451e0ba5836cdffb6c2d2d7b728",
+      "native-stage-values.npz": "a2a8123dafcf258f64b951bc2ac3fd8404c8549528fa43292a32f97fa416d82b",
+      "target-crops.npz": "e86e22d1d424defb97bce7d859a5c9c79c13bf2ed3a93940d9bd79297074966c",
+      "native-sampling.json": "f95bf8aa9b49901e073d91a86dbc6b0d49c6f60a6a4d09865b8b6396baba0d4b",
+      "native-result.json": "166ad39f5d3b4e62861684a8373f3c1e3d0ad3cee1915740d962b6b30e532eef",
+      "native-consumer.asm": "052cf218faf38ad6b5a9004a563936ec3e2826778c6fc2662852f941a323f80d",
+      "frame-identity.json": "353b0aff3a8098a42a0daed95a6fefaa383e25c5c09a1a51d9ce5be6363c34a3",
+      "request.json": "d53526c47bb17156fda5e048a0b9f67c0c527a5084808d997d2345f6e966f4ef",
+      "queue-receipts.json": "befca6fa48077c347d96af61e06ac609e8d6f8dced1b87c61e670fe68bf5ecf2",
+      "player-incomplete-result.json": "abfb15c16a17bf31fcc0b9c303f0b32b00ad1b20af502c67bd6b75e17f776c72",
+      "invalid-capture-identity.json": "f34eb8d26e5f4cda14109678fef630c9a81b2beeb5a4162c3e3a87c0cd3bbdad",
+      "startup-failure.log": "57930608846bcfee339fdf0237900dadc56110a852ab404d1cbae7a5346ef967",
+      "batch.json": "f7b97a9f9bee2cfb419ec667aeffde06f13032c69f5c8953c4303eecb61d244b",
+      "manifest.json": "95b9459c1045258e75512424b5ed2de65149d1227e8caafc78f109acf96ad9f5",
+      "verification.log": "856ddb84ce5479f6af600a8ec26cc145e26376d4661db7926b6d5beb241d2c5a"
+    }
+  },
+  "nextBatchAdmissionAfterSeal": {
+    "allowed": false,
+    "reasons": [
+      "managed-pool-limit"
+    ],
+    "totalBytes": 1024208138240,
+    "freeBytes": 222724923392,
+    "usedBytes": 0,
+    "plannedBytes": 2130000000,
+    "quotaBytes": 2147483648,
+    "reserveBytes": 214748364800,
+    "diagnostic": false,
+    "managedPool": {
+      "allowed": false,
+      "reasons": [
+        "managed-pool-limit"
+      ],
+      "reservedBytes": 15248217366,
+      "projectedBytes": 17378217366,
+      "limitBytes": 17179869184
+    },
+    "observedAtUtc": "2026-11-19T13:10:35.625841+00:00",
+    "additionalManagedBudgetRequiredBytes": 198348182
+  }
+}
