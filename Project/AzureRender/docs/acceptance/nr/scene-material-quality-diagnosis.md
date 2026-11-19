@@ -463,3 +463,17 @@ NVIDIA 和 Intel 分别采集两帧。两块设备的首帧均与各自实际对
 实际场景在 NVIDIA 上对粗糙反射增大过滤足迹，并在相邻层级之间插值置信度。第 2 帧中央地面和青色环带的中位亮度误差分别为 8.12% 和 1.37%，SSIM 分别为 0.85667 和 0.78668。两区的颗粒幅度略有上升，候选未达到减少画面颗粒的目的，生产画面沿用当前过滤设置。
 
 渲染进程完成两帧并正常卸载。调度在差量写入期间触及产物池上限。两帧经重新读回计分，并可按留存对照及差量逐字节重建。[画面对照](evidence/2026-11-16/projected-reflection-roughness-footprint/comparison.png)、[区域结果](evidence/2026-11-16/projected-reflection-roughness-footprint/qualification.json)和[验证归档](evidence/2026-11-16/projected-reflection-roughness-footprint/validation.zip)保存实际采集、过滤程序和复原凭据。
+
+### 反射置信度层级插值
+
+固定机位配对仅调整投影反射置信度的跨层级插值。
+NVIDIA 与 Intel 各输出控制和候选两帧。
+第二帧中央地面的 SSIM 分别从 0.82962、0.82912 升至 0.83132、0.83092。
+新增超差分别为 180 和 173，两端的亮度误差仍高于 15%。
+
+青色环带的候选 SSIM 分别为 0.75469 和 0.75433。
+全图新增超差分别为 9,334 和 9,462。
+该候选予以淘汰，留存播放器和 895 个着色器的恢复指纹核对一致。
+原始冻结图的跨驱动门禁继续保留为开放项。
+
+[单变量归因证据](evidence/2026-11-19/reflection-confidence-lod/README.md)保存输入摘要、双设备同址配对与独立复算入口。
