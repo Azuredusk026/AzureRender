@@ -4,6 +4,8 @@
 
 房间界面的 Notes 按钮打开笔记。每页有独立的标题、正文和稳定标识。初始页标题为 New Page。可以新建、前后切换、移动及删除笔记，至少保留一页。
 保存按钮即时写入。切换页面、添加页面、移动页面或关闭面板时，先保存当前输入。写入失败时保留输入并显示状态。
+Player 正常关闭时，开放的笔记面板提交当前页面。
+提交沿用存档版本校验及原子写入。
 行为依据 Recovery 的 `NoteService`、`NoteList` 和 `NoteUIContentsView`。
 
 笔记的版本、下一页标识和有序页面共同写入项目存档槽 `notes`。排序、删除和编辑使用同一原子提交流程。
@@ -31,4 +33,30 @@
 ```powershell
 python -B tools/npr_room/test_pomodoro_runtime.py --lua $luaDll
 python -B tools/npr_room/test_notes_player.py --player $player --project $roomProject --resource-root $releaseBuild --output $notesReplay
+```
+
+## 便笺退出恢复
+
+原创便笺夹具以固定界面输入两行正文，再触发窗口关闭。
+第二个 Player 打开同一档，显示正文并追加文字。
+测试随后写入较新存档，正常关闭时核对原字节。
+Lua 回归覆盖写入失败时保留已提交页面及输入。
+
+队列 2287 复现关闭后缺少存档。
+队列 2288 验证保存、重开、画面变化及原字节保护。
+两次退出后活动图像与缓冲均为零。
+Vulkan 验证层已加载，两轮均无同步错误。
+
+| 证据 | SHA-256 |
+| --- | --- |
+| 受检 Release Player | `a3089e8b690a7ebf67fae2eaa64485bb6b2421db4b4f8ad1b6c34346c1020c19` |
+| 回放报告 | `577c75f01c493de4365880d4e694d02e80dd8c317f7a5af496acf2070471b7b9` |
+| 重开画面 | `984341adba05efc5d5ed2c60eaa54dc26edd2a6eff048bae177e46ce07886c79` |
+
+报告位于 `20261119-235001-original-notes-exit-e13d1b/verified/verification.json`。
+其中记录原创夹具、实际着色器及三张画面的摘要。
+将 `$resources` 指向受管目录内的着色器资源根。
+
+```powershell
+python -B tools/npr_room/test_notes_exit_player.py --player $player --resource-root $resources --output $notesReplay
 ```

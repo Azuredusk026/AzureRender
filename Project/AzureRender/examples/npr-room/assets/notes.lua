@@ -129,3 +129,7 @@ function update()
         end
     end
 end
+
+function shutdown()
+    if open then savePage() end
+end

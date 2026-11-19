@@ -68,3 +68,29 @@ stored = {1, 3, {{2, "first", ""}, {2, "invalid duplicate", ""}}}
 init()
 press("notes-toggle")
 assert(values["note-title"] == "New Page" and values["note-text"] == "")
+
+stored = {1, 2, {{1, "Notebook", "saved text"}}}
+init()
+press("notes-toggle")
+values["note-text"] = "saved on Player exit"
+assert(type(shutdown) == "function", "notes must publish an open draft on Player exit")
+shutdown()
+assert(stored[3][1][3] == "saved on Player exit")
+
+init()
+press("notes-toggle")
+values["note-text"] = "unsaved replacement"
+failWrite = true
+shutdown()
+assert(stored[3][1][3] == "saved on Player exit")
+assert(values["note-text"] == "unsaved replacement")
+assert(labels["note-status"] == "Could not save this note.")
+failWrite = false
+
+local future = {2, "preserve"}
+stored = future
+init()
+press("notes-toggle")
+values["note-text"] = "future version replacement"
+shutdown()
+assert(stored == future)
