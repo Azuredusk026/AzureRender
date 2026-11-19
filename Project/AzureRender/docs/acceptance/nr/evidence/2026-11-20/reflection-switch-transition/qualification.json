@@ -1,0 +1,95 @@
+{
+  "baseline": "a91d233",
+  "sourceHostSha256": "1a30d925a674ddb1d95876cb80181106a0217e12a7228a35b5980b134954cb69",
+  "capture": {
+    "path": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261120-001407-nr-reflection-switch-transition-6707ab\\capture\\capture_frame4.rdc",
+    "bytes": 37503493,
+    "sha256": "dcc8019fbf142cc42317dafeef5af77edfceb5877a67195d87145ad51b032401"
+  },
+  "rayProgram": "9b77643b12d533f69e7a159ba975dfaf75e56253429371d6f7470ea6a567e20a",
+  "filterProgram": "7e305dcfc3227ad7f98d8a8832c976b378a4f62007b2044943e29fc98e1d76bc",
+  "displayRgb": "db97108923090c5123497cb1865ced8ca6871d514d642537f31441bdaed8eb4b",
+  "events": {
+    "rayProgram": [
+      270
+    ],
+    "filterProgram": [
+      331
+    ]
+  },
+  "queue": {
+    "id": 2295,
+    "task": "nr-reflection-switch-frame-lineage",
+    "state": "succeeded",
+    "exit_code": 0,
+    "wait_seconds": 0.046999999998661224,
+    "run_seconds": 16.704000000001543
+  },
+  "findings": {
+    "frame": 4,
+    "leftReceiverPixels": 92,
+    "rightReceiverPixels": 97,
+    "rightGeometryHits": 97,
+    "rightMotionClassOne": 97,
+    "rightAcceptedRays": 0,
+    "rightFilteredPixels": 0,
+    "rightUnambiguousRoutePixels": 97,
+    "previousSampleRed": [
+      0.80322265625,
+      0.81005859375
+    ],
+    "maxCompressedChannelError": 0.0022191967898570475,
+    "originalWorldErrorM": [
+      1.4000244355702578,
+      1.4026241860848585
+    ],
+    "thresholdM": [
+      0.25,
+      0.26672537347858843
+    ],
+    "trackedPreviousWorldErrorM": [
+      3.81167099429225e-06,
+      0.009439771088569924
+    ],
+    "currentSurfaceErrorM": [
+      0.0007143119333535119,
+      0.01061794712791996
+    ],
+    "horizontalUvDisplacement": [
+      0.1953704059123993,
+      0.2027701586484909
+    ],
+    "maximumUvResidual": 1.22526660703004e-05
+  },
+  "qualification": "Moved-input rejection verified on original switch frame",
+  "validation": {
+    "archiveSha256": "2ac7f4127b69d498aa2bb9bb14f94671b879379ae6ebe9fef79e2aca9e03e4fa",
+    "bytes": 130624,
+    "files": {
+      "verify_transition.py": "501bfc56551485c668565a79b9f7c5a10b10ec59fc792163a1798b984c84287f",
+      "test_screen_space_reflections_gpu.py": "870e5e72810d78bcb90f9e4316fa0b9a9c34c1c91213a4df30f7e5732f502471",
+      "transition.py": "88460e8ec5b59f100651e6ecd2a60a58db340d5453b90282736e2f9071d4d1b7",
+      "transition_replay.py": "2176d8aea0f7da0ec883249d608d98f743a5ec5ca5d010165d04f7244e24682e",
+      "transition.png": "0ac604ae3331cb64496970a44f62c7a9297d0a5f89c9cd6224ff2d0b89e213d8",
+      "request.json": "29655dfbd88ffb3932c2f0037eb0ffeecda4ec88a6e6aa3c19630ed05ff6ebd7",
+      "replay.json": "0b714be3389f12a9e988a8a0da5a33644eda57746068eee586e2924e8d689322",
+      "computed.json": "4901a6b0e2a0a5af14a5a1e774c13079e67cae8769276704ea46b78ca5619b6a",
+      "capture-receipt.json": "1982307b75305a0b934442164bff535e4a5c48130fd22bfd9059b16dbdbc56df",
+      "budget.json": "e9e8372c44c3fc061a37e0bc2e850e578ea9be2be308350400d0b0e44061b092",
+      "previousColor.zlib": "987410f459eb743ed4d4313306dce999219ab1ecfbe970224e95a7f1b403f3b3",
+      "previousDepth.zlib": "ba99794b2e7cdeb91a8ca4e64f490c01fb3749e60fb3c87149790b2eb752584d",
+      "currentDepth.zlib": "9d836479b5f3b7ecf28398fa8852421e343248e293fd984f3da755e2fe4b0ebe",
+      "motionInput.zlib": "7b0f4f1a73fcf6c4966d25d12869cf33e275a36e8e2d4193f7377e1f46196aa1",
+      "surfaceMask.zlib": "7f33bf829811576a7bab716215980cd60d38778cd77d81d93cf087b6885e397a",
+      "normalRoughness.zlib": "25f0c95d84aa77fc7d6022bf9f79e72a7fef88233b27d5b0824983a071681983",
+      "outputColor.zlib": "81693cb1da160356c4a422478801dfcb94b97fa30fc69931268a43e11dc365c8",
+      "outputFootprint.zlib": "7e6782e3a0ddaeeba0172310477d88b53150096c8b36c64f044591dc8a27ebfa",
+      "outputConfidence.zlib": "3739b2bf73f706952b9ea58e3c86c4ae2dfbff963107a2a00bc855510694cbf9",
+      "eligibility.zlib": "52004fa76223d8d587648a0460ab94553de641b6886857c2eafaa2457214ac8f",
+      "hitUv.zlib": "29debdfeb379b168f268fbf6b3bef1ce6278c5f5cfe3d450ebf0e1fadcdef61d",
+      "historyUv.zlib": "b6b112ac96350c2890eb13c34c8ae335eb376758141d4c95c466a19bbd18c9e8",
+      "rayDepth.zlib": "926791cade5724afb8df504e1c9a59e3ba42f0de96552017c43ddb909f92e340",
+      "filtered.zlib": "6f3cb2913285392c52f42d8125cd0e92b7122c2ae7c300fab9de73fc087902d9"
+    }
+  }
+}

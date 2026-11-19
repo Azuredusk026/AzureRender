@@ -537,5 +537,6 @@ Player 同帧捕获及补充读回均在共享队列执行成功。
 右侧反射在帧 5 达到门槛。
 静止对照的反射在十二帧保持左侧。
 
-切换帧的反射暂时缺席，后续可定位其接收与回退。
+切换帧的世界位置检查拒绝了已追踪的导光板位移。
+[反射过渡归因](evidence/2026-11-20/reflection-switch-transition/README.md)保存历史深度和置信度证据。
 [原创检修站验收](evidence/2026-11-20/original-reflection-switch/README.md)保存项目、输入及逐帧量化结果。
