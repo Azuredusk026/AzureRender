@@ -1,0 +1,1093 @@
+{
+  "status": "diagnosed-archived-input-deficit-with-current-baseline-evidence-gap",
+  "accepted": false,
+  "baseCommit": "fe5ba3b982cdd739b6396c09256aca7f96a6ccde",
+  "newGpuJobs": 0,
+  "productionChanged": false,
+  "source": {
+    "baseline": "fe5ba3b",
+    "unit": "archived-reflection-stage-lineage",
+    "baselineScope": "The stage readbacks belong to the older archived component capture, not a fe5ba3b GPU capture. Current baseline display crops are compared separately.",
+    "currentBaselineTraceShader": "9b77643b12d533f69e7a159ba975dfaf75e56253429371d6f7470ea6a567e20a",
+    "sources": {
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-122504-projected-footprint-quality-5daf40\\capture-inputs-v2\\summary.json": {
+        "fileSha256": "424f58910613b4d08905f3e8e26aa23a37a6e1af117d64ae28390ca65fa5c726",
+        "bytes": 18374
+      },
+      "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-150229-face-native-geometry-mask-sampling-d5d93e\\projected-history-filter-input-replay\\results.json": {
+        "fileSha256": "c58d1780f4c5e10a6dec64b5b578b157853609edcd73196987c2892d9c30f2cf",
+        "bytes": 8547
+      },
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261028-155222-native-floor-reflection-source-9dcd8c\\native-reflection-filter.json": {
+        "fileSha256": "144fed29fc46e644fe4272142de4aeae99f6d3c3f1c89e20daf86de67e7ba489",
+        "bytes": 28434
+      },
+      "D:\\Projects\\FYP\\Project\\AzureRender\\docs\\acceptance\\nr\\evidence\\2026-10-28\\reflection-filter-source.json": {
+        "fileSha256": "f3c6262b85f55b6335fb25ae769dc5cad7e4d83db86b28c94aabcf4370727e93",
+        "bytes": 7730
+      },
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261028-155222-native-floor-reflection-source-9dcd8c\\texture-16552-mip-0.bin": {
+        "fileSha256": "ca852b98375964d60a01c2271840d06e64260921b0805da0316592bc8a2ee272",
+        "bytes": 3686400,
+        "decodedSha256": "ca852b98375964d60a01c2271840d06e64260921b0805da0316592bc8a2ee272"
+      },
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261028-155222-native-floor-reflection-source-9dcd8c\\texture-15925-mip-0.bin": {
+        "fileSha256": "5273b1514da46c6ff8a0d6c457d9ffc5cfde855dbc4e80af7d3a9dd43c0aab98",
+        "bytes": 3686400,
+        "decodedSha256": "5273b1514da46c6ff8a0d6c457d9ffc5cfde855dbc4e80af7d3a9dd43c0aab98"
+      },
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261028-155222-native-floor-reflection-source-9dcd8c\\texture-16501-mip-0.bin": {
+        "fileSha256": "c2daded777b834dd8c3707dbbd4d2fd01724499262b096c2ac152d9b0e818bda",
+        "bytes": 3686400,
+        "decodedSha256": "c2daded777b834dd8c3707dbbd4d2fd01724499262b096c2ac152d9b0e818bda"
+      },
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-122504-projected-footprint-quality-5daf40\\capture-inputs-v2\\output-outputColor.bin": {
+        "fileSha256": "6eaa98569e8811f8db33de96b5fc997c7ace19908325ea1395c06d8910d27ae3",
+        "bytes": 3686400,
+        "decodedSha256": "6eaa98569e8811f8db33de96b5fc997c7ace19908325ea1395c06d8910d27ae3"
+      },
+      "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-150229-face-native-geometry-mask-sampling-d5d93e\\projected-history-filter-input-replay\\color-0.zlib": {
+        "fileSha256": "9829ab5a484c40d8128be84786b292f9095eeffc849eba192e1d8164bbcfac52",
+        "bytes": 1861302,
+        "decodedSha256": "9446c4cc3d7d331ede6c4c4419f596e1626baec8efa147459c4b9e8186b60d1c"
+      },
+      "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-150229-face-native-geometry-mask-sampling-d5d93e\\projected-history-filter-input-replay\\footprint-0.zlib": {
+        "fileSha256": "229e158e65600133b52e78cf1df6dc91303a73b12369d3901caa1ff47305caf1",
+        "bytes": 1759616,
+        "decodedSha256": "02d817650c3166634553db58b924cbd39defba615c04ae5366766cf7cc13f50e"
+      },
+      "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-150229-face-native-geometry-mask-sampling-d5d93e\\projected-history-player-lineage\\results.json": {
+        "fileSha256": "1a2e66df7030ffec80c0139cf85c160f917982ed7ac10bb337a23b6abaaf5d34",
+        "bytes": 63437
+      },
+      "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-150229-face-native-geometry-mask-sampling-d5d93e\\projected-history-player-lineage\\filter-samples.bin": {
+        "fileSha256": "8e439f4cc066f4c32936fdf799642f054cc5422e1d8e35d30d3eb827fcd88092",
+        "bytes": 98800,
+        "decodedSha256": "8e439f4cc066f4c32936fdf799642f054cc5422e1d8e35d30d3eb827fcd88092"
+      },
+      "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-150229-face-native-geometry-mask-sampling-d5d93e\\projected-history-coordinates\\native\\results.json": {
+        "fileSha256": "e5b9a651952e49774867365d1ebf6d51a5f1f61faa77da03b1d5630367c4afbe",
+        "bytes": 842
+      },
+      "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-150229-face-native-geometry-mask-sampling-d5d93e\\projected-history-coordinates\\native\\trace-color.bin": {
+        "fileSha256": "593fbb22eedb5dfe6897b0edff7e913015e341d2551a26909f4e0cda2c87a8ee",
+        "bytes": 255200,
+        "decodedSha256": "593fbb22eedb5dfe6897b0edff7e913015e341d2551a26909f4e0cda2c87a8ee"
+      },
+      "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-150229-face-native-geometry-mask-sampling-d5d93e\\native-floor-reflection-inputs\\results.json": {
+        "fileSha256": "77fb315a5acd024b0fa682d357818bfb0461f1be8b463733872a0b251c10f237",
+        "bytes": 2196
+      },
+      "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-150229-face-native-geometry-mask-sampling-d5d93e\\native-floor-reflection-inputs\\current-depth.bin": {
+        "fileSha256": "4129948d0c15327bf6f6223df5f85c58b5728736ce552719afa668352e50f7b7",
+        "bytes": 255200,
+        "decodedSha256": "4129948d0c15327bf6f6223df5f85c58b5728736ce552719afa668352e50f7b7"
+      },
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261029-052336-native-hierarchical-reflection-52b603\\event-8702.json": {
+        "fileSha256": "85f50cec46fa7bff88eb02f0ad63b8bbcefb3ececb09349a0f8ff70d36a79639",
+        "bytes": 38444
+      },
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-122504-projected-footprint-quality-5daf40\\capture-inputs-v2\\input-currentDepth.bin": {
+        "fileSha256": "b6c9b61c16c5f22020951ff80dafda2018aaab1710408da33346e93a1a2d119a",
+        "bytes": 3686400,
+        "decodedSha256": "b6c9b61c16c5f22020951ff80dafda2018aaab1710408da33346e93a1a2d119a"
+      },
+      "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-150229-face-native-geometry-mask-sampling-d5d93e\\native-floor-reflection-inputs\\trace-confidence.bin": {
+        "fileSha256": "a1230c9801b2c12015a781fe07e39fd3e14150d6e9a3e6a9d472f0397a1466a9",
+        "bytes": 63800,
+        "decodedSha256": "a1230c9801b2c12015a781fe07e39fd3e14150d6e9a3e6a9d472f0397a1466a9"
+      },
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-122504-projected-footprint-quality-5daf40\\capture-inputs-v2\\output-outputConfidence.bin": {
+        "fileSha256": "a2c0f82a7ca1eb5a6bef9422e7e5ce99b44f7ce094897eb75f598bd52ce7d955",
+        "bytes": 921600,
+        "decodedSha256": "a2c0f82a7ca1eb5a6bef9422e7e5ce99b44f7ce094897eb75f598bd52ce7d955"
+      },
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261022-201845-endfield-capture-954719\\Endfield-games-child_frame3534-replayed.png": {
+        "fileSha256": "af67600fcbb25060f1770a4bedb5e13b64a981229c9b24d9db29492db1fb5e18",
+        "bytes": 6939843
+      },
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-122504-projected-footprint-quality-5daf40\\capture-indexed\\frames\\frame_000001.png": {
+        "fileSha256": "77c30284317b49d75bb833ae01c9906d8f3863f592f0a3ad2014a480102cc5d9",
+        "bytes": 5741386
+      },
+      "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\docs\\acceptance\\nr\\evidence\\2026-11-19\\reflection-confidence-lod\\qualification.json": {
+        "fileSha256": "f16f4c41c82a61134b9e458dfa30d060e015c8c6a5594bb92a57f4d9d5a77459",
+        "bytes": 125834
+      },
+      "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\docs\\acceptance\\nr\\evidence\\2026-11-19\\reflection-confidence-lod\\validation.zip": {
+        "fileSha256": "6b895fc99efc9d48bb3d0aeef11fbedb7df9426749a715c262775af15fd8b521",
+        "bytes": 1782351
+      },
+      "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-150229-face-native-geometry-mask-sampling-d5d93e\\score-native-floor-reflection-inputs.py": {
+        "fileSha256": "80ea2f2026ddec0f4473bbf1b887436b08e8c2e4fd681f892389a10f7578180e"
+      }
+    },
+    "regions": {
+      "centerFloor": {
+        "halfResolutionBounds": [
+          505,
+          495,
+          775,
+          585
+        ],
+        "denseMatchedPoints": 19043,
+        "denseRawToActualFilterInputChanged": [
+          18109,
+          0
+        ]
+      },
+      "cyanRing": {
+        "halfResolutionBounds": [
+          520,
+          530,
+          635,
+          590
+        ],
+        "denseMatchedPoints": 6477,
+        "denseRawToActualFilterInputChanged": [
+          6379,
+          0
+        ]
+      }
+    },
+    "coordinateContract": {
+      "nativeStorageRows": "y_storage=719-y_display",
+      "playerStorageRows": "y_storage=y_display",
+      "filterResolution": [
+        1280,
+        720
+      ],
+      "displayResolution": [
+        2560,
+        1440
+      ],
+      "displayAnchor": "[2*x+1,2*y+1]",
+      "matchedMask": "finite forward depths; abs(native-player)<=0.02 metres; both trace confidence>0",
+      "finalConsumerLimit": "Display anchors do not reconstruct four neighbouring filter taps or the material blend.",
+      "nativeInverseProjection": [
+        [
+          0.9696970582008362,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          -0.5454546213150024,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          9.99990177154541
+        ],
+        [
+          0.000284090667264536,
+          4.2095784010598436e-05,
+          -1.0,
+          9.894273534882814e-05
+        ]
+      ],
+      "playerInverseProjection": [
+        [
+          0.9696970582008362,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          -0.5454546213150024,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          9.999900817871094
+        ],
+        [
+          0.000284090667264536,
+          4.2095784010598436e-05,
+          -1.0,
+          0.00010013480641646311
+        ]
+      ]
+    },
+    "bindings": {
+      "native": {
+        "traceEvent": 8702,
+        "filterEvent": 8811,
+        "inputColor": 16552,
+        "outputColor": 15925,
+        "consumerEvent": 8912,
+        "consumerConfidence": 15777,
+        "confidenceBytesArchived": false
+      },
+      "player": {
+        "traceEvent": 21668,
+        "filterEvent": 21729,
+        "inputColor": 9454,
+        "outputColor": 9490,
+        "outputSamples": 4940,
+        "outputSamplesSha256": "8e439f4cc066f4c32936fdf799642f054cc5422e1d8e35d30d3eb827fcd88092",
+        "fullOutputSha256": "1f293d7659ce381add7ab6f7bb6fd97d712ece2d26445c07de28d2abc776d1de",
+        "fullOutputBytesArchived": false
+      }
+    },
+    "stages": [
+      "firstTrace",
+      "actualFilterInput0",
+      "actualFilterOutput",
+      "finalDisplay"
+    ],
+    "colorContract": {
+      "firstTrace": "R11G11B10 decoded compressed RGB",
+      "actualFilterInput0": "actual bound mip zero; R11G11B10 decoded compressed RGB",
+      "actualFilterOutput": "HDR mapped to c/(1+max(c)); native packed output; Player float samples",
+      "finalDisplay": "PNG sRGB bytes/255; display anchor only"
+    },
+    "scope": "Archive diagnosis; sparse-grid metrics are not regional SSIM or acceptance results.",
+    "missingEvidence": [
+      "Current fe5ba3b same-frame trace/filter/consumer readbacks; the older final archive is not pixel-identical to baseline.",
+      "Native resource 15777 bytes at actual final consumer 8912.",
+      "Four adjacent Player filter outputs and confidence values per final display anchor.",
+      "Same-position consumer material/probe/BRDF factors and postprocessing contribution."
+    ]
+  },
+  "metrics": {
+    "centerFloor": {
+      "archivedGridPoints": 128,
+      "matchedPoints": 100,
+      "rawToActualFilterInputChangedNativePlayer": [
+        97,
+        0
+      ],
+      "filteredToFinalResidualCorrelation": 0.8739099564935819,
+      "stages": {
+        "firstTrace": {
+          "lumaCorrelation": 0.6833454944468211,
+          "meanAbsoluteLumaDifference": 0.07867189404296875,
+          "medianLumaNativePlayer": [
+            0.1769033203125,
+            0.10941074218749999
+          ],
+          "lumaP10P90NativePlayer": [
+            [
+              0.03693368164062501,
+              0.38264548828125017
+            ],
+            [
+              0.0190581494140625,
+              0.3855622851562501
+            ]
+          ]
+        },
+        "actualFilterInput0": {
+          "lumaCorrelation": 0.7175648446207947,
+          "meanAbsoluteLumaDifference": 0.07887396081542969,
+          "medianLumaNativePlayer": [
+            0.15794975585937499,
+            0.10941074218749999
+          ],
+          "lumaP10P90NativePlayer": [
+            [
+              0.06498603515625,
+              0.3747753125
+            ],
+            [
+              0.0190581494140625,
+              0.3855622851562501
+            ]
+          ]
+        },
+        "actualFilterOutput": {
+          "lumaCorrelation": 0.701359794607675,
+          "meanAbsoluteLumaDifference": 0.07220786486434648,
+          "medianLumaNativePlayer": [
+            0.18151588582677164,
+            0.11554826479703187
+          ],
+          "lumaP10P90NativePlayer": [
+            [
+              0.11146977899185713,
+              0.3158400578885401
+            ],
+            [
+              0.04273784757509828,
+              0.2825526234078407
+            ]
+          ]
+        },
+        "finalDisplay": {
+          "lumaCorrelation": 0.7055036733188415,
+          "meanAbsoluteLumaDifference": 0.06207281568627451,
+          "medianLumaNativePlayer": [
+            0.30244078431372545,
+            0.2463094117647059
+          ],
+          "lumaP10P90NativePlayer": [
+            [
+              0.24646964705882354,
+              0.440324705882353
+            ],
+            [
+              0.1846075294117647,
+              0.39336439215686275
+            ]
+          ]
+        }
+      },
+      "witnesses": [
+        {
+          "filterXY": [
+            632,
+            568
+          ],
+          "displayXY": [
+            1265,
+            1137
+          ],
+          "forwardMetersNativePlayer": [
+            4.8035807156777555,
+            4.803569569504484
+          ],
+          "traceConfidenceNativePlayer": [
+            1.0,
+            1.0
+          ],
+          "filterLodNativePlayer": [
+            0.0,
+            0.0
+          ],
+          "stages": {
+            "firstTrace": {
+              "rgbNativePlayer": [
+                [
+                  0.75,
+                  0.5234375,
+                  0.12109375
+                ],
+                [
+                  0.080078125,
+                  0.072265625,
+                  0.068359375
+                ]
+              ],
+              "lumaNativePlayer": [
+                0.54255546875,
+                0.07364453125
+              ]
+            },
+            "actualFilterInput0": {
+              "rgbNativePlayer": [
+                [
+                  0.6875,
+                  0.5078125,
+                  0.17578125
+                ],
+                [
+                  0.080078125,
+                  0.072265625,
+                  0.068359375
+                ]
+              ],
+              "lumaNativePlayer": [
+                0.52204140625,
+                0.07364453125
+              ]
+            },
+            "actualFilterOutput": {
+              "rgbNativePlayer": [
+                [
+                  0.6862745098039216,
+                  0.5098039215686274,
+                  0.17647058823529413
+                ],
+                [
+                  0.080078125,
+                  0.072265625,
+                  0.068359375
+                ]
+              ],
+              "lumaNativePlayer": [
+                0.5232549019607843,
+                0.07364453125
+              ]
+            },
+            "finalDisplay": {
+              "rgbNativePlayer": [
+                [
+                  0.5882352941176471,
+                  0.5215686274509804,
+                  0.3607843137254902
+                ],
+                [
+                  0.2627450980392157,
+                  0.24705882352941178,
+                  0.20392156862745098
+                ]
+              ],
+              "lumaNativePlayer": [
+                0.5241333333333333,
+                0.2472792156862745
+              ]
+            }
+          }
+        },
+        {
+          "filterXY": [
+            615,
+            568
+          ],
+          "displayXY": [
+            1231,
+            1137
+          ],
+          "forwardMetersNativePlayer": [
+            4.803582005047326,
+            4.803569999292228
+          ],
+          "traceConfidenceNativePlayer": [
+            1.0,
+            1.0
+          ],
+          "filterLodNativePlayer": [
+            2.2468299382009613,
+            2.2489356832227054
+          ],
+          "stages": {
+            "firstTrace": {
+              "rgbNativePlayer": [
+                [
+                  0.044921875,
+                  0.044921875,
+                  0.044921875
+                ],
+                [
+                  0.197265625,
+                  0.4921875,
+                  0.4296875
+                ]
+              ],
+              "lumaNativePlayer": [
+                0.044921875,
+                0.4249746093749999
+              ]
+            },
+            "actualFilterInput0": {
+              "rgbNativePlayer": [
+                [
+                  0.0439453125,
+                  0.04345703125,
+                  0.0439453125
+                ],
+                [
+                  0.197265625,
+                  0.4921875,
+                  0.4296875
+                ]
+              ],
+              "lumaNativePlayer": [
+                0.04359609375,
+                0.4249746093749999
+              ]
+            },
+            "actualFilterOutput": {
+              "rgbNativePlayer": [
+                [
+                  0.12563667232597622,
+                  0.1307300509337861,
+                  0.11205432937181664
+                ],
+                [
+                  0.11144674569368362,
+                  0.37600433826446533,
+                  0.29618704319000244
+                ]
+              ],
+              "lumaNativePlayer": [
+                0.1282988115449915,
+                0.31399658537954095
+              ]
+            },
+            "finalDisplay": {
+              "rgbNativePlayer": [
+                [
+                  0.2235294117647059,
+                  0.22745098039215686,
+                  0.21176470588235294
+                ],
+                [
+                  0.3215686274509804,
+                  0.47058823529411764,
+                  0.43137254901960786
+                ]
+              ],
+              "lumaNativePlayer": [
+                0.22548470588235295,
+                0.43607529411764706
+              ]
+            }
+          }
+        },
+        {
+          "filterXY": [
+            768,
+            568
+          ],
+          "displayXY": [
+            1537,
+            1137
+          ],
+          "forwardMetersNativePlayer": [
+            4.8035716901101475,
+            4.803572578020308
+          ],
+          "traceConfidenceNativePlayer": [
+            1.0,
+            1.0
+          ],
+          "filterLodNativePlayer": [
+            0.0,
+            0.0
+          ],
+          "stages": {
+            "firstTrace": {
+              "rgbNativePlayer": [
+                [
+                  0.21484375,
+                  0.189453125,
+                  0.171875
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.0
+                ]
+              ],
+              "lumaNativePlayer": [
+                0.19358203124999998,
+                0.0
+              ]
+            },
+            "actualFilterInput0": {
+              "rgbNativePlayer": [
+                [
+                  0.240234375,
+                  0.201171875,
+                  0.12109375
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.0
+                ]
+              ],
+              "lumaNativePlayer": [
+                0.203694921875,
+                0.0
+              ]
+            },
+            "actualFilterOutput": {
+              "rgbNativePlayer": [
+                [
+                  0.23809523809523808,
+                  0.19940476190476192,
+                  0.11904761904761904
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.0
+                ]
+              ],
+              "lumaNativePlayer": [
+                0.20182857142857144,
+                0.0
+              ]
+            },
+            "finalDisplay": {
+              "rgbNativePlayer": [
+                [
+                  0.3254901960784314,
+                  0.30196078431372547,
+                  0.23921568627450981
+                ],
+                [
+                  0.19607843137254902,
+                  0.1843137254901961,
+                  0.1568627450980392
+                ]
+              ],
+              "lumaNativePlayer": [
+                0.30243294117647057,
+                0.1848329411764706
+              ]
+            }
+          }
+        }
+      ],
+      "baselineDisplayComparison": {
+        "nvidia_frame_0": {
+          "changedPixels": 32245,
+          "maxChannelDifference": 101,
+          "meanAbsoluteRgbDifference": 2.410528120713306
+        },
+        "nvidia_frame_1": {
+          "changedPixels": 23531,
+          "maxChannelDifference": 101,
+          "meanAbsoluteRgbDifference": 2.2618621399176955
+        },
+        "intel_frame_0": {
+          "changedPixels": 59332,
+          "maxChannelDifference": 165,
+          "meanAbsoluteRgbDifference": 2.7008984910836764
+        },
+        "intel_frame_1": {
+          "changedPixels": 55184,
+          "maxChannelDifference": 165,
+          "meanAbsoluteRgbDifference": 2.552599451303155
+        }
+      }
+    },
+    "cyanRing": {
+      "archivedGridPoints": 35,
+      "matchedPoints": 32,
+      "rawToActualFilterInputChangedNativePlayer": [
+        32,
+        0
+      ],
+      "filteredToFinalResidualCorrelation": 0.8880657039291017,
+      "stages": {
+        "firstTrace": {
+          "lumaCorrelation": 0.5850797690963794,
+          "meanAbsoluteLumaDifference": 0.10024094543457032,
+          "medianLumaNativePlayer": [
+            0.1535541015625,
+            0.12154414062499999
+          ],
+          "lumaP10P90NativePlayer": [
+            [
+              0.04404296875,
+              0.49872099609375026
+            ],
+            [
+              0.032390224609375,
+              0.42193896484375
+            ]
+          ]
+        },
+        "actualFilterInput0": {
+          "lumaCorrelation": 0.5916437617343548,
+          "meanAbsoluteLumaDifference": 0.09651212768554686,
+          "medianLumaNativePlayer": [
+            0.15673173828125,
+            0.12154414062499999
+          ],
+          "lumaP10P90NativePlayer": [
+            [
+              0.0487784765625,
+              0.46017027343750017
+            ],
+            [
+              0.032390224609375,
+              0.42193896484375
+            ]
+          ]
+        },
+        "actualFilterOutput": {
+          "lumaCorrelation": 0.5198138230267285,
+          "meanAbsoluteLumaDifference": 0.0838134919954706,
+          "medianLumaNativePlayer": [
+            0.19270450790893634,
+            0.1202719442680478
+          ],
+          "lumaP10P90NativePlayer": [
+            [
+              0.10665605436121738,
+              0.35706437175907463
+            ],
+            [
+              0.06012390377178788,
+              0.309698428542614
+            ]
+          ]
+        },
+        "finalDisplay": {
+          "lumaCorrelation": 0.5136083193770864,
+          "meanAbsoluteLumaDifference": 0.06810987745098039,
+          "medianLumaNativePlayer": [
+            0.3041756862745098,
+            0.26285764705882353
+          ],
+          "lumaP10P90NativePlayer": [
+            [
+              0.22640745098039217,
+              0.47213670588235307
+            ],
+            [
+              0.19515388235294118,
+              0.4013119215686275
+            ]
+          ]
+        }
+      },
+      "witnesses": [
+        {
+          "filterXY": [
+            632,
+            568
+          ],
+          "displayXY": [
+            1265,
+            1137
+          ],
+          "forwardMetersNativePlayer": [
+            4.8035807156777555,
+            4.803569569504484
+          ],
+          "traceConfidenceNativePlayer": [
+            1.0,
+            1.0
+          ],
+          "filterLodNativePlayer": [
+            0.0,
+            0.0
+          ],
+          "stages": {
+            "firstTrace": {
+              "rgbNativePlayer": [
+                [
+                  0.75,
+                  0.5234375,
+                  0.12109375
+                ],
+                [
+                  0.080078125,
+                  0.072265625,
+                  0.068359375
+                ]
+              ],
+              "lumaNativePlayer": [
+                0.54255546875,
+                0.07364453125
+              ]
+            },
+            "actualFilterInput0": {
+              "rgbNativePlayer": [
+                [
+                  0.6875,
+                  0.5078125,
+                  0.17578125
+                ],
+                [
+                  0.080078125,
+                  0.072265625,
+                  0.068359375
+                ]
+              ],
+              "lumaNativePlayer": [
+                0.52204140625,
+                0.07364453125
+              ]
+            },
+            "actualFilterOutput": {
+              "rgbNativePlayer": [
+                [
+                  0.6862745098039216,
+                  0.5098039215686274,
+                  0.17647058823529413
+                ],
+                [
+                  0.080078125,
+                  0.072265625,
+                  0.068359375
+                ]
+              ],
+              "lumaNativePlayer": [
+                0.5232549019607843,
+                0.07364453125
+              ]
+            },
+            "finalDisplay": {
+              "rgbNativePlayer": [
+                [
+                  0.5882352941176471,
+                  0.5215686274509804,
+                  0.3607843137254902
+                ],
+                [
+                  0.2627450980392157,
+                  0.24705882352941178,
+                  0.20392156862745098
+                ]
+              ],
+              "lumaNativePlayer": [
+                0.5241333333333333,
+                0.2472792156862745
+              ]
+            }
+          }
+        },
+        {
+          "filterXY": [
+            615,
+            568
+          ],
+          "displayXY": [
+            1231,
+            1137
+          ],
+          "forwardMetersNativePlayer": [
+            4.803582005047326,
+            4.803569999292228
+          ],
+          "traceConfidenceNativePlayer": [
+            1.0,
+            1.0
+          ],
+          "filterLodNativePlayer": [
+            2.2468299382009613,
+            2.2489356832227054
+          ],
+          "stages": {
+            "firstTrace": {
+              "rgbNativePlayer": [
+                [
+                  0.044921875,
+                  0.044921875,
+                  0.044921875
+                ],
+                [
+                  0.197265625,
+                  0.4921875,
+                  0.4296875
+                ]
+              ],
+              "lumaNativePlayer": [
+                0.044921875,
+                0.4249746093749999
+              ]
+            },
+            "actualFilterInput0": {
+              "rgbNativePlayer": [
+                [
+                  0.0439453125,
+                  0.04345703125,
+                  0.0439453125
+                ],
+                [
+                  0.197265625,
+                  0.4921875,
+                  0.4296875
+                ]
+              ],
+              "lumaNativePlayer": [
+                0.04359609375,
+                0.4249746093749999
+              ]
+            },
+            "actualFilterOutput": {
+              "rgbNativePlayer": [
+                [
+                  0.12563667232597622,
+                  0.1307300509337861,
+                  0.11205432937181664
+                ],
+                [
+                  0.11144674569368362,
+                  0.37600433826446533,
+                  0.29618704319000244
+                ]
+              ],
+              "lumaNativePlayer": [
+                0.1282988115449915,
+                0.31399658537954095
+              ]
+            },
+            "finalDisplay": {
+              "rgbNativePlayer": [
+                [
+                  0.2235294117647059,
+                  0.22745098039215686,
+                  0.21176470588235294
+                ],
+                [
+                  0.3215686274509804,
+                  0.47058823529411764,
+                  0.43137254901960786
+                ]
+              ],
+              "lumaNativePlayer": [
+                0.22548470588235295,
+                0.43607529411764706
+              ]
+            }
+          }
+        },
+        {
+          "filterXY": [
+            615,
+            535
+          ],
+          "displayXY": [
+            1231,
+            1071
+          ],
+          "forwardMetersNativePlayer": [
+            5.9669988394637805,
+            5.966977523365406
+          ],
+          "traceConfidenceNativePlayer": [
+            1.0,
+            1.0
+          ],
+          "filterLodNativePlayer": [
+            1.8968184939345387,
+            0.0
+          ],
+          "stages": {
+            "firstTrace": {
+              "rgbNativePlayer": [
+                [
+                  0.03125,
+                  0.03271484375,
+                  0.0341796875
+                ],
+                [
+                  0.023193359375,
+                  0.020751953125,
+                  0.01904296875
+                ]
+              ],
+              "lumaNativePlayer": [
+                0.0325091796875,
+                0.021147607421875
+              ]
+            },
+            "actualFilterInput0": {
+              "rgbNativePlayer": [
+                [
+                  0.04931640625,
+                  0.05078125,
+                  0.0517578125
+                ],
+                [
+                  0.023193359375,
+                  0.020751953125,
+                  0.01904296875
+                ]
+              ],
+              "lumaNativePlayer": [
+                0.050540332031249996,
+                0.021147607421875
+              ]
+            },
+            "actualFilterOutput": {
+              "rgbNativePlayer": [
+                [
+                  0.1037463976945245,
+                  0.2622478386167147,
+                  0.2017291066282421
+                ],
+                [
+                  0.023193359375,
+                  0.020751953125,
+                  0.01904296875
+                ]
+              ],
+              "lumaNativePlayer": [
+                0.22418097982708934,
+                0.021147607421875
+              ]
+            },
+            "finalDisplay": {
+              "rgbNativePlayer": [
+                [
+                  0.27450980392156865,
+                  0.42745098039215684,
+                  0.36470588235294116
+                ],
+                [
+                  0.22745098039215686,
+                  0.2196078431372549,
+                  0.18823529411764706
+                ]
+              ],
+              "lumaNativePlayer": [
+                0.3904054901960784,
+                0.21901019607843134
+              ]
+            }
+          }
+        }
+      ],
+      "baselineDisplayComparison": {
+        "nvidia_frame_0": {
+          "changedPixels": 4773,
+          "maxChannelDifference": 43,
+          "meanAbsoluteRgbDifference": 0.23669082125603866
+        },
+        "nvidia_frame_1": {
+          "changedPixels": 451,
+          "maxChannelDifference": 5,
+          "meanAbsoluteRgbDifference": 0.008128019323671498
+        },
+        "intel_frame_0": {
+          "changedPixels": 14385,
+          "maxChannelDifference": 55,
+          "meanAbsoluteRgbDifference": 0.44373188405797104
+        },
+        "intel_frame_1": {
+          "changedPixels": 12645,
+          "maxChannelDifference": 55,
+          "meanAbsoluteRgbDifference": 0.26713768115942027
+        }
+      }
+    }
+  },
+  "regionalGates": {
+    "ssimMinimum": 0.95,
+    "luminanceRelativeErrorMaximum": 0.1,
+    "newOutOfTolerancePixelsMaximum": 0,
+    "frozenFourFrames": "pixel-identical"
+  },
+  "conclusion": {
+    "earliestObservedDeficit": "first archived ray color; retained in actual bound filter input",
+    "consumerExclusiveCauseProven": false,
+    "currentBaselineEndToEndProven": false,
+    "repairCandidateQualified": false,
+    "nextRequiredEvidence": [
+      "Current fe5ba3b same-frame trace/filter/consumer readbacks; the older final archive is not pixel-identical to baseline.",
+      "Native resource 15777 bytes at actual final consumer 8912.",
+      "Four adjacent Player filter outputs and confidence values per final display anchor.",
+      "Same-position consumer material/probe/BRDF factors and postprocessing contribution."
+    ]
+  },
+  "verification": {
+    "sourceArchive": "PASS: archive hashes, two geometry masks, all stage statistics and six witness chains.",
+    "isolatedExtract": "PASS: archive hashes, two geometry masks, all stage statistics and six witness chains.",
+    "originalSourceFilesRehashed": 25
+  },
+  "validation": {
+    "archiveSha256": "faab77fb4b83efff79339902db5aae26ce54e2e935a2561ed9f1338c22c7eb32",
+    "files": {
+      "analyze_stage_lineage.py": "a8d73de2483e7783b05d8d5f64fe0ed04d51e7e401173f8478819637e93e11ff",
+      "archive.py": "49aa7ccbdd811aaf627bffbea09addfcd6b78718a5bf3c2845a3ff7745c0105b",
+      "verify.py": "153a53e0cc6394093e263376ae7954144b8d3517be6fd349c172adecdc292dcf",
+      "stage-points.npz": "f4998a47908d7fb974bb1bcb17560e5d5d4430721c1b32bc9f01bce262f38e6d",
+      "sources.json": "b6001924663f2770e4a3a014c87789e53fdbf3be018788be782a49356d56b6c7",
+      "metrics.json": "6a25231e6ceb103424fd6fde44069b18d2164e5b8943e989f426b3d5332cc3c9",
+      "manifest.json": "6cb3996978ff697a5c4fec7b952f4ef4fcc2b6e5fba94618f540f3ec0c531400",
+      "verification.log": "e3d1d66afcfc045b68b6382fa4ea049a3b00d8b424740793246a75cde755d857"
+    }
+  },
+  "images": {
+    "centerFloor-stages.png": "ccdba64c57536bd4d16562e7aec41765e97e104aca9298d6193e6488d8c0ae8a",
+    "cyanRing-stages.png": "0ee80ae40d831561b4ef41ce7d66cdfef3da1d4172142dc6a5b85bd19a3992ed"
+  }
+}
