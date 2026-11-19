@@ -207,23 +207,63 @@ void InspectorPanel::draw(PanelContext& panelContext) {
             ImGui::Separator();ImGui::BeginDisabled(owners.size()!=1);
             if(ui::button(ui::tr("添加组件")))ImGui::OpenPopup(ui::tr("Add component"));services_.observe("component.add");
             if(ImGui::BeginPopup(ui::tr("Add component"))){
-                ui::searchField("##Component search",ui::tr("搜索名称、类型或分类"),this->presentation.componentFilter_);
-                std::map<std::string,std::vector<nlohmann::json>> groups;
-                for(const auto& entry:runtimeComponentRegistry().metadata().types()){
-                    const auto info=runtimeComponentRegistry().describe(entry.first);
-                    if(!info.at("removable").get<bool>()||!services_.session.context().componentData(owners.front(),entry.first).is_null())continue;
-                    const auto search=std::string(ui::tr(info.at("label").get<std::string>().c_str()))+" "+info.at("label").get<std::string>()+" "+entry.first+" "+info.at("category").get<std::string>();
-                    if(this->presentation.componentFilter_.PassFilter(search.c_str()))groups[info.at("category").get<std::string>()].push_back(info);
-                }
+                auto& componentFilter=presentation.componentFilter_;
+                const bool opening=ImGui::IsWindowAppearing();
+                if(opening)componentFilter.Clear();
                 std::string add;
-                for(const auto& group:groups){ImGui::TextDisabled("%s",ui::tr(group.first.c_str()));for(const auto& info:group.second){
-                    bool compatible=true;for(const auto& conflict:info.at("conflicts"))if(!services_.session.context().componentData(owners.front(),conflict.get<std::string>()).is_null())compatible=false;
-                    ImGui::BeginDisabled(!compatible);
-                    if(ImGui::Selectable((std::string(ui::tr(info.at("label").get<std::string>().c_str()))+"##"+info.at("type").get<std::string>()).c_str()))add=info.at("type");
-                    services_.observe("component.add."+info.at("type").get<std::string>());ImGui::EndDisabled();
-                    if(!compatible&&ImGui::IsItemHovered(ImGuiHoveredFlags_AllowWhenDisabled))ImGui::SetTooltip(ui::tr("与现有组件冲突；请使用单独的对象。"));
-                }}
-                ImGui::EndPopup();if(!add.empty())services_.session.edit("component.add",{{"type",add}});
+                if(ImGui::IsKeyPressed(ImGuiKey_Escape,false)){
+                    ImGui::CloseCurrentPopup();
+                }else{
+                    if(opening||presentation.focusComponentSearch_)ImGui::SetKeyboardFocusHere();
+                    presentation.focusComponentSearch_=false;
+                    const auto* clearLabel=ui::tr("清除搜索");
+                    const float clearWidth=ui::buttonWidth(clearLabel)+ImGui::GetStyle().ItemSpacing.x;
+                    const float rowWidth=280.F*services_.dpi;
+                    const bool showClear=componentFilter.IsActive();
+                    const auto filterWidth=showClear?rowWidth-clearWidth:rowWidth;
+                    ui::searchField("##Component search",ui::tr("搜索名称、类型或分类"),componentFilter,filterWidth);
+                    services_.observe("component.add.search");
+                    if(showClear&&componentFilter.IsActive()){
+                        ImGui::SameLine();
+                        if(ui::button(clearLabel)){
+                            componentFilter.Clear();
+                            presentation.focusComponentSearch_=true;
+                        }
+                        services_.observe("component.add.clear-search");
+                    }
+                    std::map<std::string,std::vector<nlohmann::json>> groups;
+                    for(const auto& [type,descriptor]:runtimeComponentRegistry().metadata().types()){
+                        (void)descriptor;
+                        const auto info=runtimeComponentRegistry().describe(type);
+                        if(!info.at("removable").get<bool>()||!view.componentData(owners.front(),type).is_null())continue;
+                        const auto& label=info.at("label").get_ref<const std::string&>();
+                        const auto& category=info.at("category").get_ref<const std::string&>();
+                        const auto terms=label+" "+ui::tr(label.c_str())+" "+type+" "+category+" "+ui::tr(category.c_str());
+                        if(componentFilter.PassFilter(terms.c_str()))groups[category].push_back(info);
+                    }
+                    if(groups.empty()){
+                        ui::statusText(ui::tr(componentFilter.IsActive()?"没有匹配的组件":"没有可添加的组件"),ui::StatusKind::Neutral);
+                        services_.observe("component.add.no-matches");
+                    }
+                    for(const auto& [category,options]:groups){
+                        ImGui::TextDisabled("%s",ui::tr(category.c_str()));
+                        for(const auto& info:options){
+                            bool compatible=true;
+                            for(const auto& conflict:info.at("conflicts"))
+                                if(!view.componentData(owners.front(),conflict.get<std::string>()).is_null())compatible=false;
+                            const auto& type=info.at("type").get_ref<const std::string&>();
+                            const auto& label=info.at("label").get_ref<const std::string&>();
+                            ImGui::BeginDisabled(!compatible);
+                            if(ImGui::Selectable((std::string(ui::tr(label.c_str()))+"##"+type).c_str()))add=type;
+                            services_.observe("component.add."+type);
+                            ImGui::EndDisabled();
+                            if(!compatible&&ImGui::IsItemHovered(ImGuiHoveredFlags_AllowWhenDisabled))
+                                ImGui::SetTooltip(ui::tr("与现有组件冲突；请使用单独的对象。"));
+                        }
+                    }
+                }
+                ImGui::EndPopup();
+                if(!add.empty())services_.session.edit("component.add",{{"type",add}});
             }
             ImGui::EndDisabled();
         }

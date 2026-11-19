@@ -109,6 +109,61 @@ def check_inspector_search(host, workflow):
     assert host.query("document.contentHash") == before
 
 
+def check_add_component(host, workflow):
+    audio = "component.add.azure.audio-source"
+    clear = "component.add.clear-search"
+    empty = "component.add.no-matches"
+    host.click("node.multi-a")
+    state = host.workspace()
+    before = host.query("document.contentHash")
+    assert state["selection"] == ["multi-a"]
+
+    def type_query(query):
+        host.call("input", event={"action": "text", "text": query})
+        host.frames()
+        return host.workspace()["widgets"]
+
+    host.click("component.add")
+    assert audio in host.workspace()["widgets"], "The open picker must offer audio"
+    widgets = type_query("no-component-matches-this")
+    host.screenshot("add-component-empty-" + workflow)
+    assert audio not in widgets, "Typing immediately after opening must filter the component picker"
+    assert empty in widgets and clear in widgets
+
+    host.click(clear)
+    assert audio in host.workspace()["widgets"]
+    widgets = type_query("音频源")
+    choices = {name for name in widgets if name.startswith("component.add.azure.")}
+    assert choices == {audio}, choices
+    host.screenshot("add-component-filtered-" + workflow)
+    key(host, "Escape")
+    assert audio not in host.workspace()["widgets"]
+    assert host.query("document.contentHash") == before
+    assert host.workspace()["undoCount"] == state["undoCount"]
+
+    host.click("component.add")
+    widgets = host.workspace()["widgets"]
+    assert audio in widgets and clear not in widgets
+    assert "component.add.azure.camera" in widgets, "Reopening must offer other component types"
+    widgets = type_query("azure.audio-source")
+    assert {name for name in widgets if name.startswith("component.add.azure.")} == {audio}
+    host.click(audio)
+    added = host.query("document.contentHash")
+    assert added != before
+    assert host.workspace()["undoCount"] == state["undoCount"] + 1
+    assert "component.azure.audio-source" in host.workspace()["widgets"]
+    host.click("menu.Edit")
+    host.click("menu.Undo")
+    assert host.query("document.contentHash") == before
+    host.click("menu.Edit")
+    host.click("menu.Redo")
+    assert host.query("document.contentHash") == added
+    assert host.workspace()["selection"] == state["selection"]
+    host.click("save")
+    assert not host.workspace()["dirty"]
+    host.click("node.multi-b", ctrl=True)
+
+
 def run_case(executable, output, workflow):
     project = output / "project"
     if workflow == "exploration":
@@ -152,6 +207,7 @@ def run_case(executable, output, workflow):
         original_unselected = {node["id"]: node for node in json.loads(level.read_bytes())["nodes"]
                                if node["id"] not in ids}
         choose(host)
+        check_add_component(host, workflow)
         original_hash = host.query("document.contentHash")
         initial_undo = host.workspace()["undoCount"]
         check_inspector_search(host, workflow)
@@ -227,10 +283,13 @@ def run_case(executable, output, workflow):
         assert saved_positions() == expected
         choose(host)
         assert host.workspace()["selection"] == ids
+        host.click("node.multi-a")
+        assert "component.azure.audio-source" in host.workspace()["widgets"]
     return {"workflow": workflow, "passed": True, "targets": ids, "untouched": "multi-c",
             "axisPreservesMixedYZ": True, "singleObjectControlsDisabled": True,
             "referenceEscapeAndFocusCancel": True, "referenceCapturedOwners": True,
-            "inspectorSearchAndClear": True, "undoRedo": True, "saveReopen": True, "physicalInput": False}
+            "addComponentSearchAndSave": True, "inspectorSearchAndClear": True,
+            "undoRedo": True, "saveReopen": True, "physicalInput": False}
 
 
 if __name__ == "__main__":

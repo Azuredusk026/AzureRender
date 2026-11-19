@@ -29,7 +29,11 @@ struct OutlinerPanelState {
     std::optional<SearchLocation> beforeReveal_;
     std::set<std::string> openNodeIds_;
 };
-struct InspectorPanelState { ImGuiTextFilter referenceFilter_,componentFilter_,propertyFilter_;bool focusObjectName_=false; };
+struct InspectorPanelState {
+    ImGuiTextFilter referenceFilter_,componentFilter_,propertyFilter_;
+    bool focusObjectName_=false;
+    bool focusComponentSearch_=false;
+};
 struct AssetPanelState {
     struct BrowseLocation {
         std::string mount, directory, type, search;
