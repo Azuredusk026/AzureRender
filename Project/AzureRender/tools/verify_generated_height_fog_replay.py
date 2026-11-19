@@ -82,6 +82,8 @@ def verify_binding(report, binding, samples):
         assert report["viewFogGeneratedHeightDimensions"] == generated["dimensions"]
         assert report["viewFogGeneratedHeightFarViewDepth"] == generated["farViewDepth"]
     assert report["snapshotRasterizationSamples"] == report["rasterizationSamples"] == samples
+    if samples == 4:
+        assert report["snapshotMultisampleBytes"] > 0, "Four-sample fog requires multisample snapshot storage"
 
 
 def run_case(player, frozen, prepared, output, case, recipe, mode, fixed, environment, samples=1):
@@ -140,6 +142,8 @@ def run_case(player, frozen, prepared, output, case, recipe, mode, fixed, enviro
     expected = list(levels) if case == "motion" else [levels[0], levels[1], levels[0]]
     assert [row["level"] for row in transitions] == expected and len(set(frame_hashes)) > 1, root
     return {"frames": len(trace), "maximumLinearError": max(errors),
+            "fogBinding": report["viewFogMatch"], "rasterizationSamples": report["rasterizationSamples"],
+            "snapshotMultisampleBytes": report["snapshotMultisampleBytes"],
             "frameSHA256": frame_hashes, "transitions": transitions,
             "levelSnapshotSHA256": {level: sha256(image.tobytes()).hexdigest()
                                     for level, image in references.items()}}

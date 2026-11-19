@@ -254,4 +254,68 @@ if ($LASTEXITCODE -ne 0) { throw 'Height fog replay failed' }
 队列 2279 使用现有 Player 复跑十帧解析对照、四倍采样及七十二帧解析关卡往返。
 每帧按已提交关卡核对独立画面，两条描述符路径均通过。
 着色器摘要、切换帧号与帧像素摘要见 `replay-control-verified/verification.json`。
-完整构建的剩余门禁为受管池容量。
+完整构建等待主受管池开放预约。
+
+## 构建预约检查点
+
+11 月 19 日 23:44 核对候选提交 `cce2ce2`，共享队列为空。
+以候选配置的 Ninja 目标图核对主 Release 实际文件。
+四个目标对应的现存程序、对象、库和着色器共 928560895 字节。
+另有 14 个目标产物需编译或链接后实测。
+
+主受管池实测余 86406083 字节，D 卷余 221392764928 字节。
+构建预约为 1610612736 字节，池缺口为 1524206653 字节。
+空间维护最早于 11 月 20 日 01:18:08 复核已登记的计时设置目录。
+回收后重新核对可用预约并记录构建峰值。
+
+计时设置目录封存后占用预约 1033570663 字节。
+按本次池余量计算，单目录回收后仍缺预约。
+另一项交互整合目录预约 1528470473 字节，02:20:00 到期。
+是否可回收以届时的活动引用、保留标记和封存校验为准。
+
+空间维护按以下完整路径核对预约和回收候选。
+
+- 受管池为 `D:/Projects/FYP/Project/AzureRender/build`。
+- 候选从 `D:/Projects/FYP-worktrees/npr-room-reproduction/Project/AzureRender` 构建。
+- 构建由受管入口分配 `D:/Projects/FYP/Project/AzureRender/build/runs/<任务标识>/player-release`。
+- 回收候选为 `D:/Projects/FYP/Project/AzureRender/build/runs/20261119-011226-npr-full-room-timer-settings-53e822`。
+- 后续候选为 `D:/Projects/FYP/Project/AzureRender/build/runs/20261119-020648-npr-room-interaction-integration-454703`。
+
+预约申请来自原创房间工作线。
+以 11 月 20 日 01:18:08 为首个复核时间。
+该批次使用以下封存输入目录。
+
+- `D:/Projects/FYP/Project/AzureRender/build/runs/20261119-025202-npr-original-room-registration-04ae4a`
+- `D:/Projects/FYP/Project/AzureRender/build/runs/20261119-142326-realtime-height-fog-647ebb`
+- `D:/Projects/FYP/Project/AzureRender/build/runs/20261119-191404-realtime-fog-replay-inputs-226eaa`
+
+已复核 20 项冻结输入和 40 项派生输入。
+夹具清单 SHA-256 为 `0792d2b389b442bb14fc5ef432bf71b067acb82d454f0a166522e504d679ebf5`。
+队列 2273 的生成程序及两个计算着色器与记录相符。
+队列 2279 的现有 Player 和六个片元着色器与记录相符。
+
+解析运动通过两种描述符路径和两档采样，最大线性误差为 0.001948。
+解析往返通过两个 72 帧序列，最大线性误差为 0.002088。
+该 Player 仅用于解析对照和独立的玩法回放。
+实时生成画面仍以同源码 Player 的运行结果判定。
+
+## 四倍采样复核
+
+本单元以队列 2279 的解析回放及固定夹具为基线。
+回放报告记录雾绑定、实际采样数和多重采样快照大小。
+四倍采样的捕获清单须具有实际快照存储。
+将归档清单的快照字节设为零，可复现门禁拒绝。
+
+归档的单倍和四倍片元程序均已反汇编核对。
+单倍从绑定 18 读取线性深度。
+四倍按 `SampleId` 从绑定 36 的多重采样图像取深度。
+两条描述符路径均沿用同一快照深度槽。
+
+队列 2290 通过单倍和四倍的十帧回放及七十二帧关卡往返。
+固定和索引路径的四倍快照大小均为 2097152 字节。
+最大线性误差为 0.002088，十个进程退出后活动分配均为零。
+报告位于 `20261120-000427-fog-msaa-replay-preflight-5bb904/replay/verification.json`。
+报告 SHA-256 为 `c29f42be61b73a4559e1819b87a586dc9058fea815e0be2978e1738d11958ff2`。
+
+`c8090b1` 的引擎源码、着色器和构建定义与 `cce2ce2` 一致。
+同源码 Player 在主受管池准入后构建。
