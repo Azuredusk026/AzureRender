@@ -273,7 +273,14 @@ std::vector<std::string> AssetDatabase::refresh(bool verifyAll,std::function<voi
         if (!candidate.emplace(id, AssetRecord{id, virtualPath, path, hash(source + meta.value("settings", Json::object()).dump() + "importer-v1"), hash(source), {}}).second)
             throw std::runtime_error("Duplicate asset UUID: " + id);
         const auto extension=assetExtension(path);Json document;
-        if(extension==".gltf" || extension==".azurelevel" || extension==".azureprefab" || extension==".azscript" || extension==".azurematerial" || extension==".azure2d")document=Json::parse(source);
+        if (extension == ".gltf" || extension == ".azurelevel" || extension == ".azureprefab" ||
+            extension == ".azscript" || extension == ".azurematerial" || extension == ".azure2d") {
+            try {
+                document = Json::parse(source);
+            } catch (const Json::parse_error& error) {
+                throw std::runtime_error("Cannot parse asset " + virtualPath + ": " + error.what());
+            }
+        }
         if(extension==".azure2d")document=Scene2D::parse(document).encode();
         if(extension==".azscene") {
             document={{"resources",Json::array()}};

@@ -38,6 +38,17 @@ int main() {
   const auto keptRecords=db.records().size();bool cancelledRefresh=false;
   try{db.refresh(true,[]{throw std::runtime_error("cancelled scan");});}catch(const std::exception&){cancelledRefresh=true;}
   check(cancelledRefresh && db.records().size()==keptRecords && db.readSource(id)=="first");
+  for (const std::string filename : {"broken.gltf", "broken.azurelevel"}) {
+      const auto path = root / "assets" / filename;
+      write(path, "{ broken");
+      std::string failure;
+      try { db.refresh(true); } catch (const std::exception& error) { failure = error.what(); }
+      check(failure.find("assets:/" + filename) != std::string::npos &&
+            failure.find("parse error") != std::string::npos);
+      check(db.records().size() == keptRecords && db.readSource(id) == "first");
+      std::filesystem::remove(path);
+      std::filesystem::remove(path.string() + ".azmeta");
+  }
   std::filesystem::rename(root/"assets/data.txt",root/"assets/moved.txt");
   std::filesystem::rename(root/"assets/data.txt.azmeta",root/"assets/moved.txt.azmeta");
   db.refresh();check(db.idForPath("assets:/moved.txt")==id && db.resolve(id).filename()=="moved.txt");
