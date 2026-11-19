@@ -1,0 +1,281 @@
+{
+  "baseline": "9b0b705",
+  "scope": "CPU alpha coverage mip generation, not end-to-end load or frame timing",
+  "sourceSha256": "ccca591d3405b70d7f171c4bc7469e412729ec02c81c92d7a90b1e89dae02184",
+  "referenceSha256": "4a8519b700e9bec68b935e6d3ebca548d0fc8fea4efcaaa18c81390e1efd3f17",
+  "releaseProducts": {
+    "AzurePlayer": "44e5d05704d9e1960509fc2ad57bfc8c508d6ee2f6354cb6ed8a95395b20aa4d",
+    "AzureTextureMipCoverageTests": "d1162d8a21451c78cf0076f5bed78e13ff489f9b41ec563b9b474b234fd4475d",
+    "AzureSampledTextureCacheTests": "a5de4ba4e4a831a72fdc2a07e5552101f98560846cec6e580dec44c86bab56e5"
+  },
+  "probe": {
+    "stage": "final",
+    "fullChainBytesEqual": true,
+    "cases": {
+      "0": {
+        "width": 512,
+        "height": 512,
+        "bilinear": true,
+        "pairs": [
+          [
+            32.0714,
+            13.1307
+          ],
+          [
+            30.9285,
+            12.3928
+          ],
+          [
+            31.8298,
+            14.3977
+          ],
+          [
+            31.9199,
+            13.7914
+          ],
+          [
+            32.2357,
+            13.369
+          ],
+          [
+            30.1837,
+            13.2878
+          ],
+          [
+            32.3787,
+            12.8844
+          ]
+        ],
+        "referenceMedianMs": 31.9199,
+        "candidateMedianMs": 13.2878,
+        "reduction": 0.5837142346937176
+      },
+      "1": {
+        "width": 2048,
+        "height": 2048,
+        "bilinear": true,
+        "pairs": [
+          [
+            563.9711,
+            267.8661
+          ],
+          [
+            555.6718,
+            262.4843
+          ],
+          [
+            557.9787,
+            266.2451
+          ],
+          [
+            561.6267,
+            264.3979
+          ],
+          [
+            559.99,
+            261.8574
+          ],
+          [
+            557.316,
+            262.4615
+          ],
+          [
+            550.3439,
+            263.025
+          ]
+        ],
+        "referenceMedianMs": 557.9787,
+        "candidateMedianMs": 263.025,
+        "reduction": 0.5286110383783467
+      },
+      "2": {
+        "width": 1001,
+        "height": 513,
+        "bilinear": true,
+        "pairs": [
+          [
+            71.1411,
+            26.2649
+          ],
+          [
+            70.7428,
+            28.9746
+          ],
+          [
+            70.0948,
+            26.956
+          ],
+          [
+            71.5466,
+            26.3641
+          ],
+          [
+            71.4719,
+            25.9456
+          ],
+          [
+            71.879,
+            28.0637
+          ],
+          [
+            72.0078,
+            26.6883
+          ]
+        ],
+        "referenceMedianMs": 71.4719,
+        "candidateMedianMs": 26.6883,
+        "reduction": 0.6265903103177612
+      },
+      "3": {
+        "width": 1,
+        "height": 513,
+        "bilinear": true,
+        "pairs": [
+          [
+            0.1868,
+            0.1452
+          ],
+          [
+            0.2268,
+            0.1434
+          ],
+          [
+            0.1956,
+            0.1498
+          ],
+          [
+            0.1907,
+            0.1463
+          ],
+          [
+            0.1915,
+            0.1433
+          ],
+          [
+            0.1888,
+            0.1422
+          ],
+          [
+            0.197,
+            0.1421
+          ]
+        ],
+        "referenceMedianMs": 0.1915,
+        "candidateMedianMs": 0.1434,
+        "reduction": 0.2511749347258486
+      },
+      "4": {
+        "width": 512,
+        "height": 512,
+        "bilinear": false,
+        "pairs": [
+          [
+            10.7261,
+            10.9915
+          ],
+          [
+            10.4564,
+            10.8035
+          ],
+          [
+            10.3206,
+            10.3986
+          ],
+          [
+            10.6632,
+            10.5603
+          ],
+          [
+            10.8699,
+            10.9792
+          ],
+          [
+            10.7089,
+            10.975
+          ],
+          [
+            10.6207,
+            10.6896
+          ]
+        ],
+        "referenceMedianMs": 10.6632,
+        "candidateMedianMs": 10.8035,
+        "reduction": -0.013157401155375448
+      }
+    },
+    "passes": true
+  },
+  "cpuChecks": 2,
+  "gpuCaptures": 13,
+  "alphaMaximumRelativeError": 0.010401188707280795,
+  "gpu": {
+    "device": "595.79, NVIDIA GeForce RTX 4060 Laptop GPU"
+  },
+  "localWorkspaceBuild": true,
+  "protectedFiles": 29,
+  "dispatch": [
+    {
+      "id": 2247,
+      "task": "alpha-mip-lookup-red",
+      "kind": "build",
+      "state": "failed",
+      "exit_code": 1,
+      "run_seconds": 17.188000000000102
+    },
+    {
+      "id": 2248,
+      "task": "alpha-mip-lookup-green",
+      "kind": "build",
+      "state": "succeeded",
+      "exit_code": 0,
+      "run_seconds": 14.015999999999622
+    },
+    {
+      "id": 2249,
+      "task": "alpha-mip-lookup-small-levels",
+      "kind": "build",
+      "state": "succeeded",
+      "exit_code": 0,
+      "run_seconds": 15.125
+    },
+    {
+      "id": 2250,
+      "task": "alpha-mip-lookup-release-build",
+      "kind": "build",
+      "state": "failed",
+      "exit_code": 1,
+      "run_seconds": 128.75
+    },
+    {
+      "id": 2251,
+      "task": "alpha-mip-lookup-release-sdk-fixed",
+      "kind": "build",
+      "state": "failed",
+      "exit_code": 1,
+      "run_seconds": 167.6869999999999
+    },
+    {
+      "id": 2252,
+      "task": "alpha-mip-lookup-gpu-coverage",
+      "kind": "gpu",
+      "state": "succeeded",
+      "exit_code": 0,
+      "run_seconds": 150.84399999999914
+    }
+  ],
+  "recovered": [
+    {
+      "stage": "managed build",
+      "fix": "select existing SDK 9.0.319 in child PATH"
+    },
+    {
+      "stage": "CTest launch",
+      "fix": "call ctest.exe directly to preserve regex alternation"
+    }
+  ],
+  "archive": {
+    "sha256": "d28cf10d0717893b960817339e36f1b557084ff6a1f10c9f56b53c2d5a73c7f3",
+    "members": 27,
+    "bytes": 66967
+  }
+}

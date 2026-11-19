@@ -20,19 +20,36 @@ inline TextureMipChain buildTextureMipChain(const std::vector<std::uint8_t>& pix
     // Preserve sampled cutout area over bilinear texel cells. Counting texel
     // centres alone loses thin coverage as the minification footprint grows.
     const auto filteredCoverage=[&](const auto& data,unsigned width,unsigned height,float scale){
-        std::size_t count=0;
-        for(unsigned y=0;y<height;++y)for(unsigned x=0;x<width;++x){
-            const unsigned nx=x+1==width?0:x+1,ny=y+1==height?0:y+1;
-            const auto alpha=[&](unsigned sx,unsigned sy){return byte(data[(std::size_t(sy)*width+sx)*4+3]/255.F*scale)/255.F;};
-            const float a=alpha(x,y),b=alpha(nx,y),c=alpha(x,ny),d=alpha(nx,ny);
-            if(std::min(std::min(a,b),std::min(c,d))>=alphaCutoff){count+=16;continue;}
-            if(std::max(std::max(a,b),std::max(c,d))<alphaCutoff)continue;
-            for(unsigned sy=0;sy<4;++sy){const float v=(sy+.5F)*.25F;
-                const float left=a+(c-a)*v,right=b+(d-b)*v;
-                for(unsigned sx=0;sx<4;++sx)count+=left+(right-left)*((sx+.5F)*.25F)>=alphaCutoff;
+        const auto measure = [&](const auto& scaleAlpha) {
+            const auto alpha = [&](unsigned x, unsigned y) {
+                return scaleAlpha(data[(std::size_t(y) * width + x) * 4 + 3]);
+            };
+            std::size_t count=0;
+            for(unsigned y=0;y<height;++y)for(unsigned x=0;x<width;++x){
+                const unsigned nx=x+1==width?0:x+1,ny=y+1==height?0:y+1;
+                const float a=alpha(x,y),b=alpha(nx,y),c=alpha(x,ny),d=alpha(nx,ny);
+                if(std::min(std::min(a,b),std::min(c,d))>=alphaCutoff){count+=16;continue;}
+                if(std::max(std::max(a,b),std::max(c,d))<alphaCutoff)continue;
+                for(unsigned sy=0;sy<4;++sy){const float v=(sy+.5F)*.25F;
+                    const float left=a+(c-a)*v,right=b+(d-b)*v;
+                    for(unsigned sx=0;sx<4;++sx)count+=left+(right-left)*((sx+.5F)*.25F)>=alphaCutoff;
+                }
             }
+            return float(count)/(float(width)*float(height)*16);
+        };
+        const auto quantizeAlpha = [&](unsigned alpha) {
+            return byte(alpha / 255.F * scale) / 255.F;
+        };
+        // A search step uses one scale for every cell. There are four alpha
+        // reads per cell, so small levels cost less to quantize directly.
+        std::array<float, 256> scaledAlpha;
+        if (std::size_t(width) * height <= scaledAlpha.size() / 4) {
+            return measure(quantizeAlpha);
         }
-        return float(count)/(float(width)*float(height)*16);
+        for (unsigned i = 0; i < scaledAlpha.size(); ++i) {
+            scaledAlpha[i] = quantizeAlpha(i);
+        }
+        return measure([&](std::uint8_t alpha) { return scaledAlpha[alpha]; });
     };
     const float targetCoverage=alphaCutoff>0?coverage(pixels,1):0;
     while(width>1||height>1){
