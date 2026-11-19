@@ -561,3 +561,10 @@ Player 同帧捕获及补充读回均在共享队列执行成功。
 同帧候选的中央地面和青色环带 SSIM 均下降。
 全图新增超差为 5,400，候选按原门槛淘汰。
 [最近深度对照](evidence/2026-11-20/reflection-nearest-depth-candidate/README.md)保存配对和搜索预算。
+
+### 反射搜索输入敏感度
+
+同帧数值复算核对中心深度、最近深度及实际步数。
+法线替代使两个区域的命中中位差降至一像素以内。
+中央地面仍有长尾偏差，继续核对接收法线和遮挡。
+[搜索敏感度证据](evidence/2026-11-20/reflection-search-input-sensitivity/README.md)保存输入与复算。

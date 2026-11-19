@@ -1,0 +1,238 @@
+{
+  "baseline": "272adc0",
+  "scope": "numerical one-input sensitivity, not a rendered candidate",
+  "results": {
+    "centerFloor": {
+      "all": 19281,
+      "shared": 19017,
+      "cases": {
+        "centerDepth-128": {
+          "medianAndP90Pixels": {
+            "native": [
+              8.33529062166196,
+              196.25376968293605
+            ],
+            "player": [
+              0.011905527841535708,
+              0.018804735332293883
+            ]
+          },
+          "tracked": 19281
+        },
+        "centerDepth-32": {
+          "medianAndP90Pixels": {
+            "native": [
+              8.056698772722438,
+              215.401552782935
+            ],
+            "player": [
+              0.7111171929431533,
+              80.17646246255134
+            ]
+          },
+          "tracked": 19213
+        },
+        "centerDepth-32-phase42": {
+          "medianAndP90Pixels": {
+            "native": [
+              7.725014619383765,
+              213.04785610105608
+            ],
+            "player": [
+              0.713024413312637,
+              83.02094626397428
+            ]
+          },
+          "tracked": 19224
+        },
+        "closestDepth-128": {
+          "medianAndP90Pixels": {
+            "native": [
+              8.41235225345489,
+              199.72347713042006
+            ],
+            "player": [
+              0.019080620347114302,
+              0.2855532465337925
+            ]
+          },
+          "tracked": 19217
+        },
+        "closestDepth-32": {
+          "medianAndP90Pixels": {
+            "native": [
+              8.162703383218725,
+              220.71328607884953
+            ],
+            "player": [
+              0.70679691611434,
+              76.82540407167471
+            ]
+          },
+          "tracked": 19214
+        },
+        "closestDepth-32-phase42": {
+          "medianAndP90Pixels": {
+            "native": [
+              7.813811660195602,
+              222.59706169356588
+            ],
+            "player": [
+              0.7144626376783894,
+              79.93496290649917
+            ]
+          },
+          "tracked": 19229
+        },
+        "closestDepth-128-measuredNormals": {
+          "medianAndP90Pixels": {
+            "native": [
+              0.581170062623994,
+              193.5326474113381
+            ],
+            "player": [
+              7.0631714550477795,
+              23.38898596170017
+            ]
+          },
+          "tracked": 19114
+        },
+        "closestDepth-32-phase42-measuredNormals": {
+          "medianAndP90Pixels": {
+            "native": [
+              0.08394657216294409,
+              210.59116324722535
+            ],
+            "player": [
+              7.86633751502467,
+              98.02284064787622
+            ]
+          },
+          "tracked": 19281
+        }
+      }
+    },
+    "cyanRing": {
+      "all": 6478,
+      "shared": 6415,
+      "cases": {
+        "centerDepth-128": {
+          "medianAndP90Pixels": {
+            "native": [
+              7.984699396245076,
+              111.68453124290161
+            ],
+            "player": [
+              0.011905527841535708,
+              0.018760628270563618
+            ]
+          },
+          "tracked": 6478
+        },
+        "centerDepth-32": {
+          "medianAndP90Pixels": {
+            "native": [
+              7.420625420083037,
+              71.818534822315
+            ],
+            "player": [
+              1.496284293456733,
+              92.72466520884473
+            ]
+          },
+          "tracked": 6473
+        },
+        "centerDepth-32-phase42": {
+          "medianAndP90Pixels": {
+            "native": [
+              7.034079210671748,
+              18.21273838514988
+            ],
+            "player": [
+              1.4802848341255483,
+              92.56854096429619
+            ]
+          },
+          "tracked": 6473
+        },
+        "closestDepth-128": {
+          "medianAndP90Pixels": {
+            "native": [
+              8.145850726193968,
+              112.54239919522466
+            ],
+            "player": [
+              0.03233625913925032,
+              0.3687129078095034
+            ]
+          },
+          "tracked": 6468
+        },
+        "closestDepth-32": {
+          "medianAndP90Pixels": {
+            "native": [
+              7.51548115941812,
+              71.24108965903548
+            ],
+            "player": [
+              1.5621014999360896,
+              92.65699617616212
+            ]
+          },
+          "tracked": 6472
+        },
+        "closestDepth-32-phase42": {
+          "medianAndP90Pixels": {
+            "native": [
+              7.149292975339832,
+              19.5663785349284
+            ],
+            "player": [
+              1.5407035646109084,
+              92.43704925371239
+            ]
+          },
+          "tracked": 6473
+        },
+        "closestDepth-128-measuredNormals": {
+          "medianAndP90Pixels": {
+            "native": [
+              1.3719898777740207,
+              98.53739271025381
+            ],
+            "player": [
+              7.201357194370307,
+              99.11795931747285
+            ]
+          },
+          "tracked": 6433
+        },
+        "closestDepth-32-phase42-measuredNormals": {
+          "medianAndP90Pixels": {
+            "native": [
+              0.07409329058631235,
+              0.10224426421404134
+            ],
+            "player": [
+              7.907351551787654,
+              111.59103611587898
+            ]
+          },
+          "tracked": 6478
+        }
+      }
+    }
+  },
+  "validation": {
+    "archiveSha256": "9ff1df074a0920f123800086c6d7d54d407564e0faa26180895b3842d8387819",
+    "bytes": 5354388,
+    "files": {
+      "step_sensitivity.py": "9ac7a232cfc7cd052d7cd816ee0f064ef972aaf068351473ff30c40bc65182d9",
+      "trace_functions.py": "0286278e0c9171c3f30ec452a5760ca92096102851b47daf5e10dcb097172c9d",
+      "inputs.npz": "265c5be83666576e1ebd116b2611409f2e0024f47127a228efdc069ab694757a",
+      "inputs.json": "fff95e7250a58f7e8451dddb6c9696f264a4262be6fcd4a52b4ba2531c15ac9f",
+      "results.json": "9789024e895672e27842bb40a58e2d0c82a9815728eb222de3e6bec1b85cc0f7",
+      "budget.json": "b15bd604e5daff78232cb0b1be18c26e5b0833ce3181de2675d4b9d9a33ccfbc"
+    }
+  }
+}
