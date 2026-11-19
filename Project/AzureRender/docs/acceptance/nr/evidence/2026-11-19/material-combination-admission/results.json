@@ -1,0 +1,393 @@
+{
+  "schemaVersion": 1,
+  "baseline": "e1fea0ae8f2a362311949abc8bf219e0ee2009a1",
+  "decision": "RejectCurrentAdoptionBatch",
+  "productionConfiguration": "unchanged; AZURE_ENABLE_COMPUTED_MATERIAL_VIEW=OFF",
+  "sourceSha256": {
+    "shaders/mesh.frag": "48e063f1ff146f382ed4b2e712f62805e306c266d7cd5751a46983f96e7b2bd4",
+    "src/render/ComputedMaterialView.hpp": "01eb40365e8184793573fe4ff893247d771d3ae55023d113124c3e3becf20d98",
+    "src/scenes/CharacterComputedMaterialView.inc": "9b860bfb77a35faf2a205b1fe88478c4b1547b06232a7dc68057ee4037478291",
+    "src/scenes/CharacterMaterialSampling.inc": "c3d2f7897115085f163388e7631b6b0ac4e26532a37b558000f782819245d055",
+    "CMakeLists.txt": "622e476f1473d8be3b4a75ffdf3f326bbb74de7f823d091a8df4cbd8fd828120"
+  },
+  "historicalCounterScope": {
+    "source": "73300ab",
+    "dimensions": [
+      1280,
+      720
+    ],
+    "captureSha256": "35077c571bcb70bc99688bfb97eec1b291bd6567df7482746fd3f5db49f339b3",
+    "frame": 320,
+    "inputCount": 1729,
+    "inputsMatchCurrent": true,
+    "structuralInputsMatch": [
+      "sceneTriangles",
+      "uniqueMeshes",
+      "snapshotRasterizationSamples",
+      "objectShadowPrepared",
+      "conservativeOcclusionPrepared",
+      "irradianceResourceKind",
+      "irradianceQueryScope",
+      "materialClassFeatureSpecializations"
+    ],
+    "guard": "Descriptor eligibility assumes supported device, current-view eligibility, loaded-material policy and optional programs. Per-pixel counts remain historical."
+  },
+  "observedMaterialTotals": {
+    "main-color/ordinary": {
+      "draws": 521,
+      "invocations": 891457,
+      "passedSamples": 891457,
+      "zeroInvocationDraws": 398,
+      "recordedReplayEventMs": 3.618208000000007
+    },
+    "snapshot-color/ordinary": {
+      "draws": 304,
+      "invocations": 892191,
+      "passedSamples": 892191,
+      "zeroInvocationDraws": 203,
+      "recordedReplayEventMs": 1.780735999999989
+    },
+    "main-color/fixed": {
+      "draws": 83,
+      "invocations": 132190,
+      "passedSamples": 50136,
+      "zeroInvocationDraws": 25,
+      "recordedReplayEventMs": 2.4496960000000003
+    },
+    "main-color/dynamic": {
+      "draws": 48,
+      "invocations": 465969,
+      "passedSamples": 459077,
+      "zeroInvocationDraws": 4,
+      "recordedReplayEventMs": 1.0741759999999996
+    },
+    "snapshot-color/fixed": {
+      "draws": 46,
+      "invocations": 113412,
+      "passedSamples": 48982,
+      "zeroInvocationDraws": 13,
+      "recordedReplayEventMs": 1.014784
+    },
+    "snapshot-color/dynamic": {
+      "draws": 4,
+      "invocations": 26124,
+      "passedSamples": 26124,
+      "zeroInvocationDraws": 0,
+      "recordedReplayEventMs": 0.004096000000000001
+    }
+  },
+  "descriptorEligible": {
+    "main-color/ordinary": {
+      "draws": 521,
+      "invocations": 891457,
+      "passedSamples": 891457,
+      "zeroInvocationDraws": 398,
+      "recordedReplayEventMs": 3.618208000000007
+    },
+    "snapshot-color/ordinary": {
+      "draws": 304,
+      "invocations": 892191,
+      "passedSamples": 892191,
+      "zeroInvocationDraws": 203,
+      "recordedReplayEventMs": 1.780735999999989
+    },
+    "main-color/fixed": {
+      "draws": 83,
+      "invocations": 132190,
+      "passedSamples": 50136,
+      "zeroInvocationDraws": 25,
+      "recordedReplayEventMs": 2.4496960000000003
+    },
+    "snapshot-color/fixed": {
+      "draws": 46,
+      "invocations": 113412,
+      "passedSamples": 48982,
+      "zeroInvocationDraws": 13,
+      "recordedReplayEventMs": 1.014784
+    }
+  },
+  "fallbackReasons": {
+    "eligible-material-descriptor": {
+      "draws": 954,
+      "invocations": 2029250,
+      "passedSamples": 1882766,
+      "zeroInvocationDraws": 639,
+      "recordedReplayEventMs": 8.863423999999936
+    },
+    "dynamic-material-fallback": {
+      "draws": 52,
+      "invocations": 492093,
+      "passedSamples": 485201,
+      "zeroInvocationDraws": 4,
+      "recordedReplayEventMs": 1.0782719999999992
+    }
+  },
+  "eligiblePrograms": [
+    "character_snapshot_object_bindless_clipmap_field.frag.spv",
+    "character_snapshot_object_bindless_clipmap_field_coverage.frag.spv",
+    "character_snapshot_object_bindless_clipmap_field_early.frag.spv",
+    "character_snapshot_object_bindless_clipmap_field_early_lighting.frag.spv",
+    "mesh_object_bindless_clipmap_field.frag.spv",
+    "mesh_object_bindless_clipmap_field_coverage.frag.spv",
+    "mesh_object_bindless_clipmap_field_early.frag.spv",
+    "mesh_object_bindless_clipmap_field_early_lighting.frag.spv",
+    "mesh_object_bindless_clipmap_field_lighting.frag.spv",
+    "mesh_object_bindless_clipmap_field_lighting_coverage.frag.spv"
+  ],
+  "eligibleInvocations": 2029250,
+  "quadDepthSkipInvocationUpperBound": {
+    "mechanism": "Only non-ordinary main-color alpha-mask draws can discard complete hidden quads",
+    "upperBoundIncludesAllFixedMainInvocations": true,
+    "invocations": 132190,
+    "fractionOfEligibleMainInvocations": 0.12913631359247865,
+    "fractionOfEligibleCombinedInvocations": 0.0651422939509671,
+    "warning": "Loose upper bound for this mechanism in the recorded frame, not an instruction-time or whole-candidate savings bound. Retains even passed samples in the bound."
+  },
+  "repeatedOperations": {
+    "cascadesPerSurvivingInvocation": 4,
+    "sourceDerivativeCallsPerCascade": 4,
+    "scalarDerivativeResultsPerCascade": 6,
+    "sourceDerivativeCallsPerSurvivingInvocation": 16,
+    "scalarDerivativeResultsPerSurvivingInvocation": 24,
+    "sourceDerivativeResultUpperBound": 48702000,
+    "guaranteedCrossPassDerivativeEliminations": 0,
+    "reusedPixelIdentityMeasured": false,
+    "overlapUpperBound": 1005603,
+    "warning": "Invocation sums across passes are work counts, not unique pixels. No guaranteed redundant-pixel overlap or hardware instruction-time saving is inferred."
+  },
+  "catalog": {
+    "active": 897,
+    "fullAdditional": 128,
+    "fullTotal": 1025,
+    "limit": 1024,
+    "observedDescriptorSubsetAdditional": 10,
+    "observedDescriptorSubsetTotal": 907,
+    "subsetScope": "Canonical program names observed in this material/descriptor domain; excludes other projects, view modes and device fallback paths. Enumeration only, no build or coverage claim."
+  },
+  "nativeScope": {
+    "baseline": "5fccef930dcff848238a0d919cb5a139bde1372d",
+    "sampleCount": 240,
+    "gpu": {
+      "samples": 240,
+      "mean": 20.0914152,
+      "p95": 20.8937808,
+      "min": 19.30256,
+      "max": 21.38384
+    },
+    "passes": {
+      "character-main": {
+        "samples": 240,
+        "mean": 8.969935466666666,
+        "p95": 9.3736784,
+        "min": 8.559135999999999,
+        "max": 9.613311999999999,
+        "frameShare": 0.44645612951479224
+      },
+      "character-opaque-depth": {
+        "samples": 240,
+        "mean": 5.7137788,
+        "p95": 5.9800816,
+        "min": 5.4435839999999995,
+        "max": 6.164479999999999,
+        "frameShare": 0.2843890658334511
+      },
+      "character-shadow": {
+        "samples": 240,
+        "mean": 1.8360108,
+        "p95": 1.9322384,
+        "min": 1.6463679999999998,
+        "max": 1.9609599999999998,
+        "frameShare": 0.0913828509203274
+      },
+      "character-compute-reflection": {
+        "samples": 240,
+        "mean": 1.7870606666666666,
+        "p95": 1.8517472,
+        "min": 1.7269439999999998,
+        "max": 1.897408,
+        "frameShare": 0.08894648031895068
+      },
+      "character-reflection-motion": {
+        "samples": 240,
+        "mean": 0.5469054666666666,
+        "p95": 0.5560512,
+        "min": 0.534848,
+        "max": 0.564224,
+        "frameShare": 0.027220853345694962
+      },
+      "character-main-depth": {
+        "samples": 240,
+        "mean": 0.2723754666666667,
+        "p95": 0.273408,
+        "min": 0.27136,
+        "max": 0.274432,
+        "frameShare": 0.013556808415699192
+      },
+      "character-skinning": {
+        "samples": 240,
+        "mean": 0.23125706666666665,
+        "p95": 0.397328,
+        "min": 0.172288,
+        "max": 0.408576,
+        "frameShare": 0.011510242776062218
+      },
+      "post-process-grade": {
+        "samples": 240,
+        "mean": 0.17215146666666667,
+        "p95": 0.17925119999999997,
+        "min": 0.16486399999999998,
+        "max": 0.183296,
+        "frameShare": 0.008568409191337934
+      },
+      "post-process-hud": {
+        "samples": 240,
+        "mean": 0.12760746666666667,
+        "p95": 0.13516799999999998,
+        "min": 0.120832,
+        "max": 0.13824,
+        "frameShare": 0.006351342869399597
+      },
+      "shadow-tile-bounds": {
+        "samples": 240,
+        "mean": 0.12654773333333333,
+        "p95": 0.132096,
+        "min": 0.120832,
+        "max": 0.13516799999999998,
+        "frameShare": 0.006298597290116892
+      },
+      "character-depth-hierarchy": {
+        "samples": 240,
+        "mean": 0.08559786666666666,
+        "p95": 0.0891216,
+        "min": 0.08191999999999999,
+        "max": 0.091264,
+        "frameShare": 0.004260419976123268
+      },
+      "character-transparent-prepare": {
+        "samples": 240,
+        "mean": 0.07984333333333334,
+        "p95": 0.08173119999999999,
+        "min": 0.07564799999999999,
+        "max": 0.29142399999999996,
+        "frameShare": 0.003974002455204516
+      },
+      "object-shadow-atlas": {
+        "samples": 240,
+        "mean": 0.07846399999999999,
+        "p95": 0.08197119999999998,
+        "min": 0.073728,
+        "max": 0.083968,
+        "frameShare": 0.0039053495843339096
+      },
+      "character-outline-mask": {
+        "samples": 240,
+        "mean": 0.04500906666666667,
+        "p95": 0.047104,
+        "min": 0.041984,
+        "max": 0.048128,
+        "frameShare": 0.0022402138534604902
+      },
+      "character-gpu-culling": {
+        "samples": 240,
+        "mean": 0.0090124,
+        "p95": 0.005859199999999999,
+        "min": 0.004096,
+        "max": 0.236448,
+        "frameShare": 0.00044856969557823884
+      },
+      "character-occlusion": {
+        "samples": 240,
+        "mean": 0.008754133333333332,
+        "p95": 0.009539199999999998,
+        "min": 0.007871999999999999,
+        "max": 0.010528,
+        "frameShare": 0.0004357151174364926
+      },
+      "character-main-depth-resume": {
+        "samples": 240,
+        "mean": 0.0006485333333333333,
+        "p95": 0.001024,
+        "min": 0.0,
+        "max": 0.001024,
+        "frameShare": 3.227912652630529e-05
+      },
+      "capture": {
+        "samples": 240,
+        "mean": 1.28e-05,
+        "p95": 0.0,
+        "min": 0.0,
+        "max": 0.001024,
+        "frameShare": 6.370880235454991e-07
+      },
+      "editor-ui": {
+        "samples": 240,
+        "mean": 4.266666666666667e-06,
+        "p95": 0.0,
+        "min": 0.0,
+        "max": 0.001024,
+        "frameShare": 2.123626745151664e-07
+      }
+    },
+    "mainAndSnapshot": {
+      "mean": 14.683714266666666,
+      "frameShare": 0.7308451953482433
+    },
+    "perMaterialInvocationCounts": null,
+    "scopeWarning": "Native timings are current 1080p evidence. Per-material counters are historical 720p evidence; no rescaling or per-class native timing inference."
+  },
+  "nativeTimeUpperBounds": {
+    "fullTargetPassesMs": 14.683714266666666,
+    "quadDepthSkipOnlyMs": 8.969935466666666,
+    "meaning": "Deliberately loose zero-to-entire-pass ceilings; no expected gain or per-material cost is established."
+  },
+  "admission": {
+    "currentHotspotLocated": true,
+    "currentScopedWorkReductionProven": false,
+    "currentExpectedWholeFrameSavingProven": false,
+    "fullCatalogFits": false,
+    "subsetCatalogEnumerationFits": true,
+    "qualifiedForImplementation": false,
+    "reason": "Full family violates capacity. Descriptor-scoped subset can fit by enumeration but lacks current matching material cost and expected >=20% workload or >=3 ms GPU benefit. Historical gains are directional evidence only."
+  },
+  "retryConditions": [
+    "Source-matched current per-material cost or auditable operation evidence meets the AGENT.md gate",
+    "Scoped shader family fits 1024 while preserving documented material/view/device fallback",
+    "One associated implementation and concentrated compatibility, appearance and same-source paired timing batch"
+  ],
+  "diagnosticScope": "One descriptor-inspection hypothesis; initial embedded-script bootstrap failure repaired before effective capture replay; no new candidate frame timing",
+  "run": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261119-182752-material-combination-admission-b54fae",
+  "dispatchIds": [
+    2239,
+    2241
+  ],
+  "successfulDiagnostic": 2241,
+  "inspectionPipelineCount": 34,
+  "protectedFiles": 29,
+  "runtimeChanges": false,
+  "executionBudget": {
+    "defaultExplorationSeconds": 1800,
+    "elapsedSinceReservationSeconds": 3213.397362470627,
+    "defaultWallBudgetExceeded": true,
+    "includesQueueAndDiagnosticSetup": true,
+    "disposition": "Exploration closed; no additional candidate measurements; retain explicit retry conditions",
+    "guardedDiagnosticTimeoutSeconds": 270,
+    "effectiveInspectionCount": 1
+  },
+  "checks": {
+    "leafCountersJoined": true,
+    "uniqueMaterialEvents": 1006,
+    "sourceInputsMatched": true,
+    "nativePerMaterialInvocationCounts": false,
+    "currentCandidateFrameTiming": false,
+    "localLinks": true,
+    "chineseSentenceLength": true,
+    "archiveManifestVerified": true
+  },
+  "archive": {
+    "path": "validation.zip",
+    "sha256": "3e7ed7c293cb87483ffd4961465563b0d5d927faf1f96a2e93c531b2454711af",
+    "members": 32,
+    "bytes": 340788
+  },
+  "currentNativeArchiveSha256": "b92571bd53dea3dac657dc1f9a8d155bae76fe52fdc83dce23542afb3f5e6c44"
+}
