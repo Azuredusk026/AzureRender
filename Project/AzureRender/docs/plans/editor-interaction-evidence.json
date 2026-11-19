@@ -208,6 +208,18 @@
     "inspectorSearchRestored": "candidate-selection/run-1794816865490986100/inspector/reveal-search/outliner-search-restored-inspector.png",
     "physicalInput": false
   },
+  "integrationRecovery20261119": {
+    "baseCommit": "dbe4ab3f84f55ff6776634842c4ac794cf887345",
+    "candidateCommit": "5d4cf7dbf92b9a05181a7e11a2ff81b4cca7f3b3",
+    "targetTree": "271036aaffed05620a57eebf11cd25295d5385a9",
+    "receipt": "editor-integration-2026-11-19/integration-receipt.json",
+    "receiptSha256": "16a9dc7769ac7f7b59f59a03fc2523a80941fb4b9e00176d19eb401b1c83ceb2",
+    "patchSha256": "eff0b3168fb28177fb5451c24bc25911e863993fe57d0cfc86311d648b4f7770",
+    "verification": "Git tree, isolated index application and retained evidence hashes",
+    "historicalDispatches": [1475, 1497],
+    "currentQueueRowsPresent": false,
+    "physicalInput": false
+  },
   "nodeReferenceReveal": {
     "baseCommit": "e729305",
     "configuration": "Release",

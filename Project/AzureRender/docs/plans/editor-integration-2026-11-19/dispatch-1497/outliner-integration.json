@@ -1,0 +1,8 @@
+{
+  "main": "783889f91ff7eb21dec78a1f067809b80bdc62b9",
+  "candidate": "e729305d0732c649f972a03cf8e3afbe5ef43734",
+  "mergeTree": "8fc160b933ceb3c274c4b46013405ae4afbdef06",
+  "patch": "editor-e729305-on-783889f.patch",
+  "patchSha256": "cf2888b7f85bd33d968c9a784d18a97bb50a673308227def602101a86677a9fb",
+  "acceptanceDispatch": 1475
+}

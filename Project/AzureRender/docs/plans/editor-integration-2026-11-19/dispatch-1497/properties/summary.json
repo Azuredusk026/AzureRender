@@ -1,0 +1,14 @@
+{
+  "passed": true,
+  "stage": "U9",
+  "axisReset": true,
+  "referencePick": true,
+  "referenceSaveReopen": true,
+  "nodeReferenceLocatesInBothProjects": true,
+  "escapeCancel": true,
+  "focusCancel": true,
+  "mixedReset": true,
+  "secondProject": true,
+  "input": "production Dear ImGui replay",
+  "physicalKeyboardMouse": "not performed"
+}

@@ -1,0 +1,18 @@
+[OUTPUT] 
+Internal ctest changing into directory: D:/Projects/FYP-worktrees/editor-interaction/Project/AzureRender/build/ninja-msvc-release
+
+[HANDLER_OUTPUT] 
+Test project D:/Projects/FYP-worktrees/editor-interaction/Project/AzureRender/build/ninja-msvc-release
+
+    Start 383: AzureEditor.NodeAddition
+1/4 Test #383: AzureEditor.NodeAddition .........   Passed    2.62 sec
+    Start 384: AzureEditor.SelectionService
+2/4 Test #384: AzureEditor.SelectionService .....   Passed    2.92 sec
+    Start 398: AzureRender.EditorSession
+3/4 Test #398: AzureRender.EditorSession ........   Passed    1.78 sec
+    Start 520: AzureEditor.Creation
+4/4 Test #520: AzureEditor.Creation .............   Passed    2.73 sec
+
+100% tests passed, 0 tests failed out of 4
+
+Total Test time (real) =  10.09 sec
