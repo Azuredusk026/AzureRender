@@ -136,6 +136,7 @@ function new_work_calendar(translate)
     local runtime = self
     local startDay, displayedMonth, displayedStart
     local browsedMonth, selectedDate, editingDate
+    local displayedWorkTime
     local displayedTodoDate, refreshTodo
     local diaryDate, diaryText, diaryDraft
     local habitMenu
@@ -236,20 +237,25 @@ function new_work_calendar(translate)
     end
 
     local function renderEditFields()
-        local values = workTimeParts(calendar:timeFor(editingDate))
-        for index, field in ipairs(workTimeFields) do runtime:ui_set_value(field, string.format("%02d", values[index])) end
+        displayedWorkTime = workTimeParts(calendar:timeFor(editingDate))
+        for index, field in ipairs(workTimeFields) do
+            runtime:ui_set_value(field, string.format("%02d", displayedWorkTime[index]))
+        end
     end
 
     local function submitEdit()
         local values = workTimeParts(calendar:timeFor(editingDate))
+        local changed = false
         for index, field in ipairs(workTimeFields) do
             local input = runtime:ui_value(field)
             if input ~= "" then
                 local value = math.tointeger(tonumber(input))
                 if not value then return false end
                 values[index] = math.max(0, math.min(index == 1 and 24 or 59, value))
+                changed = changed or values[index] ~= displayedWorkTime[index]
             end
         end
+        if not changed then return true end
         local hours, minutes, seconds = table.unpack(values)
         return calendar:setTimeFor(editingDate, math.min(86400, hours * 3600 + minutes * 60 + seconds))
     end

@@ -80,6 +80,24 @@ assert(new_work_calendar():totalTime() == 13)
 state = {2, {}}
 assert(not new_work_calendar():setTimeFor("20270101", 4) and state[1] == 2)
 
+state = {1, {{"2027", {{"0101", 10.25}}}}}
+local liveEditor = new_work_calendar()
+local savedBeforeBlur = state
+action = "calendar-edit-time"
+liveEditor:update_month_view(false)
+assert(fields["calendar-edit-seconds"] == "10")
+liveEditor:advance(2, true)
+action = "calendar-submit-time"
+liveEditor:update_month_view(false)
+assert(state == savedBeforeBlur and liveEditor:timeFor("20270101") == 12.25,
+    "Leaving unchanged work time fields must preserve the running timer's work")
+assert(fields["calendar-edit-seconds"] == "12")
+assert(liveEditor:flush() and new_work_calendar():timeFor("20270101") == 12.25)
+fields["calendar-edit-seconds"] = "20"
+liveEditor:update_month_view(false)
+assert(new_work_calendar():timeFor("20270101") == 20)
+action = nil
+
 todo = {1, 6, {
     {1, "Daily", {{2, "Second", "20270101091200", ""}, {3, "Future", "20270102063700", "2027-01-01"}}},
     {4, "Notes", {{5, "Earlier", "20270101084305", ""}}},
