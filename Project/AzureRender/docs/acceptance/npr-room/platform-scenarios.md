@@ -226,6 +226,22 @@ python -B tools/npr_room/test_story_signal_room_player.py --player $player --roo
 报告位于 `20261120-010903-original-room-relocation-b3787b/verified/verification.json`。
 报告 SHA-256 为 `65e9b6efffd553db8402d3b901a86ee42f29d6f034ce8e019735fcc77b4d1918`。
 
+### 原创独立启动包
+
+队列 2320 至 2323 从 Release x64 Player、同工作树原生启动器及运行依赖生成原创工作间和露台目录包。
+发布器在装配前后校验项目，并核对包清单中的 1,025 个文件。
+运行依赖清单记录着色器、动态库、公开资源及许可的来源和摘要。
+
+包移入中文目录，验收用的源项目副本移出原路径。
+系统搜索路径仅含 Windows 目录和系统目录。
+两次使用包内启动器运行，依次进入工作间、露台并返回工作间。
+第一进程保存一条档案，重开后同一档案累计三条。
+两个进程启用 Vulkan 验证，退出时活动图像与缓冲均为零。
+
+报告位于 `20261120-012040-original-room-native-package-0a1cfb/verification/verification.json`。
+报告 SHA-256 为 `2ad456ea4c971274b127ab3d84dc8373330d0a2c000a2a581a0088e02edff99c`。
+包清单 SHA-256 为 `9681f0dc31a8e9c231309bb0bfd33488000a4f132acfc130bdd78b59431ef220`。
+
 ### 完整房间预检
 
 本机房间候选的 `assets` 挂载导出 1,248 个文件，总大小为 493,907,772 字节。启动关卡为 `assets:/boot.azurelevel`。发布器随源资源复制 `.azmeta` 旁车，诊断临时文件的旁车留在源目录。静态检查覆盖 325 条显式挂载引用、202 个模型和 7 个界面资源引用。各引用可从挂载内解析，模型使用内嵌资源。
