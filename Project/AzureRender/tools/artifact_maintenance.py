@@ -422,12 +422,10 @@ def status(build):
             except FileNotFoundError:
                 continue
             raise
-        if linked:
-            continue
         if path.is_dir():
             if path.name not in records:
                 historical += 1
-            if (path/'.keep').is_file():
+            if not linked and (path/'.keep').is_file():
                 keep_markers += 1
     usage = shutil.disk_usage(build)
     return dict(managedTasks=len(records), residentReservationBytes=reservation(records), poolLimitBytes=POLICY['poolBytes'],

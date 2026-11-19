@@ -311,6 +311,16 @@ class MaintenanceTests(unittest.TestCase):
         self.assertEqual(result['rootKeepMarkers'],1)
         self.assertTrue(survivor.exists())
 
+    def test_status_keeps_historical_count_for_linked_directory(self):
+        linked=self.build/'runs'/'linked';linked.mkdir();(linked/'.keep').touch()
+        original_is_link=maintenance.is_link
+        def is_link(path):
+            return True if path==linked else original_is_link(path)
+        with patch.object(maintenance,'is_link',side_effect=is_link):
+            result=maintenance.status(self.build)
+        self.assertEqual(result['historicalTasks'],1)
+        self.assertEqual(result['rootKeepMarkers'],0)
+
     def test_status_preserves_real_lstat_errors(self):
         path=self.build/'runs'/'permission-error';path.mkdir();(path/'.keep').touch()
         with patch.object(Path,'is_symlink',side_effect=PermissionError('access denied')):
