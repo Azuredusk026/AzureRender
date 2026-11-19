@@ -1,0 +1,80 @@
+{
+  "verifiedDate": "2026-11-19",
+  "dataScope": "paused-checkpoint",
+  "sourceCommit": "2a4051927fcd588cd68e06d13c0ad6ee60256444",
+  "benchmarkCommit": "37f3c65",
+  "manuscriptSha256": "c63b5aab796ca2734b16b35ceb1bde042804bc049b5c5865c8a37ba19fd8f714",
+  "completedBlocks": 30,
+  "plannedBlocks": 40,
+  "acceptedRuns": 90,
+  "plannedRuns": 120,
+  "measuredFrames": 90000,
+  "nextBlock": {
+    "block": 31,
+    "repeat": 4,
+    "device": "pixel6",
+    "width": 2560,
+    "height": 1440,
+    "complexity": "high",
+    "paths": [
+      "subpasses",
+      "traditional",
+      "drlr"
+    ]
+  },
+  "deviceRuns": {
+    "pixel6": 42,
+    "rtx4060": 48
+  },
+  "conditionCount": 24,
+  "independentRunsPerCondition": [
+    3,
+    4
+  ],
+  "rejectedBlocks": 0,
+  "pilotCases": 24,
+  "hardwareTransactionsMeasured": false,
+  "scope": "methods manuscript and checkpoint audit; formal results pending full matrix",
+  "sources": [
+    {
+      "path": "D:/Projects/FYP/Project/AzureRender/build/runs/20261112-215615-thesis-pixel6-experiment-b05cd7/formal-plan.json",
+      "sha256": "140dfd0ced619d03b4d00ceccb9b9b67afe2961c21d8e8083e9ff98d2fa1c827"
+    },
+    {
+      "path": "D:/Projects/FYP/Project/AzureRender/build/runs/20261112-215615-thesis-pixel6-experiment-b05cd7/formal-index.json",
+      "sha256": "189e9c8f827e9d9ebc27df52512107b32d48fb9e7b0195ffb32eea17ba934d27"
+    },
+    {
+      "path": "D:/Projects/FYP/Project/AzureRender/build/runs/20261112-215615-thesis-pixel6-experiment-b05cd7/pause-checkpoint.json",
+      "sha256": "89b948d67aa9d872b4be50c65e90dba6ecc23e559b92538eec58c50027c9e33b"
+    },
+    {
+      "path": "D:/Projects/FYP/Project/AzureRender/build/runs/20261112-215615-thesis-pixel6-experiment-b05cd7/experiment.py",
+      "sha256": "a41dac7c50aeea97a5059ac9c0a1a7f1407d8ae434f1a497edea7d6d0be3487c"
+    },
+    {
+      "path": "D:/Projects/FYP/Project/AzureRender/build/runs/20261112-215615-thesis-pixel6-experiment-b05cd7/analysis-methods-2026-11-19/checkpoint-run-summary.json",
+      "sha256": "f2e9b414ac66524cc71cdacc320a56bf4ee10a1b25bdfc0792b5078bad7a01ce"
+    },
+    {
+      "path": "D:/Projects/FYP-worktrees/thesis-paths/Project/AzureRender/experiments/thesis/evidence/pixel6-qualification/pixel6-capabilities.json",
+      "sha256": "1db1579043632959a7b81eb1b3e705d8bbaa7d9b2f7ecde7c41faf240109fc34"
+    },
+    {
+      "path": "D:/Projects/FYP-worktrees/thesis-paths/Project/AzureRender/experiments/thesis/evidence/android-build/manifest.json",
+      "sha256": "8d6b21fbe80c11c52f60359ab552fc107a6db0657188e03b27eb50ef4dcd777a"
+    },
+    {
+      "path": "D:/Projects/FYP-worktrees/thesis-paths/Project/AzureRender/experiments/thesis/evidence/swapchain/manifest.json",
+      "sha256": "cb254d201ce008afe8b716731cfe40f88eede598be9a330d58fc140aea0b9d16"
+    },
+    {
+      "path": "D:/Projects/FYP-worktrees/thesis-paths/Project/AzureRender/experiments/thesis/tools/analysis.py",
+      "sha256": "78c05a30cae765b0457a94169bb9a57673dc3c5a4fc6ddcc51775b453e82b20e"
+    },
+    {
+      "path": "D:/Projects/FYP-worktrees/thesis-paths/Project/AzureRender/experiments/thesis/tools/audit_experiment.py",
+      "sha256": "abcc7a2465f8e08b7fa53b388751ad82759d11083342dc0ec69a1b9fac253a6a"
+    }
+  ]
+}
