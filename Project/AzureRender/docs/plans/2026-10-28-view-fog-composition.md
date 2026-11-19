@@ -299,3 +299,4 @@ GPU 与 CPU 参考值的误差上限沿用三万分之一。
 队列 2224、2226、2230 和 2231 保存过程记录。
 双设备结果见受管目录的 `verification.json`。
 场景绑定及 Player 连续画面等待完整构建配额。
+[Player 接入清单](2026-11-19-realtime-height-fog-player.md)登记生产调用点和最小定向验收。
