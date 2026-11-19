@@ -229,6 +229,16 @@ class RegistrationEntryTests(unittest.TestCase):
         self.assertEqual(receipt["capturedMaterials"], proof)
         self.assert_inputs_preserved()
 
+    def test_captured_props_entry_reuses_catalog_and_records_scene_resources(self):
+        catalog = self.root / "catalog"
+        proof = {"count": 2, "props": []}
+        with patch("tools.npr_room.captured_props.install", return_value=proof) as install:
+            receipt = registration.stage(self.room, self.frame, self.output, prop_catalog=catalog)
+        self.assertEqual(install.call_args.args[0:2], (self.frame, catalog))
+        self.assertEqual(install.call_args.kwargs["represented_meshes"], set())
+        self.assertEqual(receipt["capturedProps"], proof)
+        self.assert_inputs_preserved()
+
 
 if __name__ == "__main__":
     unittest.main()

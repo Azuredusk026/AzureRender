@@ -12,6 +12,11 @@ from tools.npr_room.original_room_registration import freeze_model, source_rig
 from tools.npr_room.skinned_mesh_export import add_accessor
 
 
+def captured_graph():
+    return {"schemaVersion": 1, "initial": "captured",
+            "states": [{"name": "captured", "clip": 0, "loop": False}], "transitions": []}
+
+
 def install_graph(assets, level, parts):
     path = assets / "heroine/original-captured-motion.json"
     if path.exists() or path.with_suffix(".json.azmeta").exists():
@@ -20,9 +25,7 @@ def install_graph(assets, level, parts):
     for part in parts:
         node, = [node for node in level["nodes"] if node.get("resourceId") == "heroine-" + part]
         nodes.append(node)
-    graph = {"schemaVersion": 1, "initial": "captured",
-             "states": [{"name": "captured", "clip": 0, "loop": False}], "transitions": []}
-    path.write_text(json.dumps(graph) + "\n", encoding="utf-8")
+    path.write_text(json.dumps(captured_graph()) + "\n", encoding="utf-8")
     path.with_suffix(".json.azmeta").write_text(json.dumps({
         "schemaVersion": 1, "id": str(uuid5(NAMESPACE_URL, "original-captured-motion-graph-v1")),
         "settings": {"retainSourceSnapshot": False}}) + "\n", encoding="utf-8")

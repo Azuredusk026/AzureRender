@@ -126,7 +126,7 @@ def apply_level_pose(level, record):
 
 
 def stage(room, frame, output, source=None, *, ambient_probe=False, reference_models=False, sequence=None,
-          atmosphere=None, accessory_catalog=None, captured_materials=None):
+          atmosphere=None, accessory_catalog=None, captured_materials=None, prop_catalog=None):
     if output.exists():
         raise FileExistsError(output)
     record = json.loads(frame.read_bytes())
@@ -144,6 +144,7 @@ def stage(room, frame, output, source=None, *, ambient_probe=False, reference_mo
         descriptor["startupScene"] = "assets:/room.azurelevel"
         (project / "project.azureproject").write_text(json.dumps(descriptor) + "\n", encoding="utf-8")
         parts = {}
+        represented_meshes = set()
         for part in HEROINE_PARTS:
             model_source = room / "assets/heroine" / (part + ".glb")
             if reference_models:
@@ -151,6 +152,7 @@ def stage(room, frame, output, source=None, *, ambient_probe=False, reference_mo
             else:
                 document, binary = parse_glb(model_source)
             proof = freeze_model(document, record)
+            represented_meshes.update(mesh["name"] for mesh in document.get("meshes", []))
             destination = assets / "heroine" / model_source.name
             if records is not None:
                 from tools.npr_room.original_pose_sequence import append_sequence
@@ -226,6 +228,10 @@ def stage(room, frame, output, source=None, *, ambient_probe=False, reference_mo
             from tools.npr_room.captured_room_materials import install as install_materials
             material_proof = install_materials(frame, captured_materials / "image-catalog/image-catalog.json", assets, level)
         ambient = install_ambient_probe(frame, assets, level) if ambient_probe else None
+        prop_proof = None
+        if prop_catalog is not None:
+            from tools.npr_room.captured_props import install as install_props
+            prop_proof = install_props(frame, prop_catalog, assets, level, represented_meshes=represented_meshes, sequence=sequence)
         for node in level["nodes"]:
             ui = node["components"].get("azure.game-ui")
             if ui:
@@ -244,6 +250,8 @@ def stage(room, frame, output, source=None, *, ambient_probe=False, reference_mo
             receipt["atmosphere"] = atmosphere_proof
         if material_proof is not None:
             receipt["capturedMaterials"] = material_proof
+        if prop_proof is not None:
+            receipt["capturedProps"] = prop_proof
         (project / "original-pose-receipt.json").write_text(json.dumps(receipt, indent=2) + "\n", encoding="utf-8")
         publish_directory(project, output)
     return receipt
@@ -260,11 +268,12 @@ if __name__ == "__main__":
     parser.add_argument("--atmosphere", type=Path, help="Same-frame atmosphere bundle with source recipe and native receipts")
     parser.add_argument("--accessories", type=Path, help="Catalog root for visible rigid attachments on the captured hair hierarchy")
     parser.add_argument("--captured-materials", type=Path, help="Catalog root for captured rigid-renderer main textures and colors")
+    parser.add_argument("--captured-props", type=Path, help="Catalog root for visible source-posed skinned props")
     arguments = parser.parse_args()
     result = stage(arguments.room.resolve(), arguments.frame.resolve(), arguments.output.resolve(), arguments.source,
                    ambient_probe=arguments.ambient_probe, reference_models=arguments.reference_models,
                    sequence=arguments.sequence, atmosphere=arguments.atmosphere, accessory_catalog=arguments.accessories,
-                   captured_materials=arguments.captured_materials)
+                   captured_materials=arguments.captured_materials, prop_catalog=arguments.captured_props)
     print(json.dumps({"weather": result["weather"], "parts": len(result["parts"]),
                       "matchedRoomTransforms": len(result["placement"]["matched"]),
                       "unmatchedRoomTransforms": len(result["placement"]["unmatched"])}))
