@@ -228,6 +228,9 @@ function(compile_shader source_file)
     if(shader_source_base STREQUAL "view_fog_surface.frag" OR "AZURE_VIEW_FOG=1" IN_LIST SHADER_DEFINES)
         list(APPEND shader_lut_dependency "${SHADER_SOURCE_DIR}/view_fog.glsl" "${SHADER_SOURCE_DIR}/view_fog_material.glsl" "${SHADER_SOURCE_DIR}/fog_transport.glsl" "${SHADER_SOURCE_DIR}/fog_view_projection.glsl" "${SHADER_SOURCE_DIR}/fog_analytic.glsl")
     endif()
+    if(shader_source_base STREQUAL "view_fog_generate.comp")
+        list(APPEND shader_lut_dependency "${SHADER_SOURCE_DIR}/view_fog_medium.glsl" "${SHADER_SOURCE_DIR}/fog_analytic.glsl" "${SHADER_SOURCE_DIR}/fog_transport.glsl")
+    endif()
     if(shader_source_base STREQUAL "mesh.frag")
         list(APPEND shader_lut_dependency "${SHADER_SOURCE_DIR}/unlit_surface_sample.glsl" "${SHADER_SOURCE_DIR}/unlit_opaque.glsl" "${SHADER_SOURCE_DIR}/unlit_blend.glsl" "${SHADER_SOURCE_DIR}/surface_radiance.glsl" "${SHADER_SOURCE_DIR}/surface_radiance_identity.glsl" "${SHADER_SOURCE_DIR}/surface_radiance_statistics.glsl")
     endif()
@@ -471,6 +474,7 @@ compile_shader("${SHADER_SOURCE_DIR}/background.frag" DEFINES AZURE_GEOMETRY_SAM
 compile_shader("${SHADER_SOURCE_DIR}/background.frag" DEFINES AZURE_GEOMETRY_SAMPLES=1 AZURE_BINDLESS=1 OUTPUT_NAME background_bindless_samples.frag)
 compile_shader("${SHADER_SOURCE_DIR}/mesh.frag")
 compile_shader("${SHADER_SOURCE_DIR}/view_fog_surface.frag")
+compile_shader("${SHADER_SOURCE_DIR}/view_fog_generate.comp")
 compile_shader("${SHADER_SOURCE_DIR}/view_fog_surface.frag" DEFINES AZURE_FOG_SAMPLES=1 OUTPUT_NAME view_fog_surface_samples.frag)
 compile_shader("${SHADER_SOURCE_DIR}/mesh.frag" DEFINES AZURE_VIEW_FOG=1 OUTPUT_NAME mesh_fog.frag)
 compile_shader("${SHADER_SOURCE_DIR}/mesh.frag" DEFINES AZURE_VIEW_FOG=1 AZURE_BINDLESS=1 OUTPUT_NAME mesh_fog_bindless.frag)
@@ -1027,6 +1031,7 @@ add_library(AzureRenderCore STATIC
     src/render/AerialFog.cpp
     src/render/AnalyticFog.cpp
     src/render/FogVolumeData.cpp
+    src/render/GeneratedHeightFogGpu.cpp
     src/render/FogViewProjection.cpp
     src/render/ViewFogBinding.cpp
     src/render/ViewFogBindingJson.cpp
@@ -1809,6 +1814,13 @@ if(BUILD_TESTING)
     add_dependencies(AzureFogVolumeGpuTests AzureFogVolumeTestShader)
     add_test(NAME AzureRender.FogVolumeGpu COMMAND AzureFogVolumeGpuTests "${AZURE_FOG_TEST_SHADER}")
     set_tests_properties(AzureRender.FogVolumeGpu PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 120)
+    add_custom_target(AzureGeneratedHeightFogShader DEPENDS "${SHADER_BINARY_DIR}/view_fog_generate.comp.spv")
+    add_executable(AzureGeneratedHeightFogGpuTests tests/GeneratedHeightFogGpuTests.cpp)
+    target_link_libraries(AzureGeneratedHeightFogGpuTests PRIVATE AzureRenderCore)
+    add_dependencies(AzureGeneratedHeightFogGpuTests AzureFogVolumeTestShader AzureGeneratedHeightFogShader)
+    add_test(NAME AzureRender.GeneratedHeightFogGpu COMMAND AzureGeneratedHeightFogGpuTests
+        "${SHADER_BINARY_DIR}/view_fog_generate.comp.spv" "${AZURE_FOG_TEST_SHADER}")
+    set_tests_properties(AzureRender.GeneratedHeightFogGpu PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 120)
     target_link_libraries(AzureUnlitTextureLayersTests PRIVATE AzureRenderCore)
     add_test(NAME AzureRender.UnlitTextureLayers COMMAND AzureUnlitTextureLayersTests)
     add_executable(AzureUnlitTextureMaterialTests tests/UnlitTextureMaterialTests.cpp)
