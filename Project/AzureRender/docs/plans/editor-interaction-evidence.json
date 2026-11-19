@@ -231,6 +231,20 @@
     "archiveSha256": "ff997945b8ffc7fa949a7647dade9b5aef6562f98721c349cdb044848fc4667d",
     "physicalInput": false
   },
+  "referenceSearch20261119": {
+    "productionBaseline": "4e07fef",
+    "configuration": "Release",
+    "dispatch": [2256, 2257],
+    "baselineDefectsReproduced": true,
+    "candidateExecutableSha256": "bbf7798b38abbf7fc14a881e3336ebba67752bb2cd96ef2bc52386be8a6b5277",
+    "cpuCasesPassed": 4,
+    "workflowsPassed": ["exploration", "inspector"],
+    "results": "editor-reference-search-2026-11-19/results.json",
+    "resultsSha256": "9fca27879bb0734e42363e7fe4a85df5c4c5ad99a40fa84698f0cc4a66362bc8",
+    "archive": "editor-reference-search-2026-11-19/verification.zip",
+    "archiveSha256": "6cd6c59119602141cd6f195fb0960fab1f91a90f2f680f27f178ef0e3dec508c",
+    "physicalInput": false
+  },
   "addComponentSearch20261119": {
     "productionBaseline": "c547e76",
     "configuration": "Release",

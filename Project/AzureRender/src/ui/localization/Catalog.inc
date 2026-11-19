@@ -69,6 +69,8 @@
 {"捕获","Capture"},
 {"控件目录","Widget catalog"},
 {"搜索兼容引用","Search compatible references"},
+{"没有匹配的引用","No matching references"},
+{"没有兼容的引用","No compatible references"},
 {"搜索名称、类型或分类","Search name, type or category"},
 {"没有匹配的组件","No matching components"},
 {"没有可添加的组件","No components available to add"},

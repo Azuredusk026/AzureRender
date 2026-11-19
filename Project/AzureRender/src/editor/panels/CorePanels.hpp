@@ -33,6 +33,7 @@ struct InspectorPanelState {
     ImGuiTextFilter referenceFilter_,componentFilter_,propertyFilter_;
     bool focusObjectName_=false;
     bool focusComponentSearch_=false;
+    bool focusReferenceSearch_=false;
 };
 struct AssetPanelState {
     struct BrowseLocation {

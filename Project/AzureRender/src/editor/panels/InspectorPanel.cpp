@@ -154,14 +154,64 @@ void InspectorPanel::draw(PanelContext& panelContext) {
                     }
                     if(caption.empty())caption=ui::tr(reference.empty()?"Choose reference":"缺失引用");
                     const bool mixed=state.at("mixed").get<bool>();
-                    if(ImGui::BeginCombo("##value",mixed?ui::tr("Mixed"):caption.c_str())) {
-                        ui::searchField("##Reference search",ui::tr("搜索兼容引用"),this->presentation.referenceFilter_);
-                        if(field.reference=="node")for(const auto& node:view.scene().nodes) {
-                            if((this->presentation.referenceFilter_.PassFilter(node.name.c_str())||this->presentation.referenceFilter_.PassFilter(node.id.c_str()))&&ImGui::Selectable((node.name+"##"+node.id).c_str(),reference==node.id)){event.value=node.id;event.changed=true;}
+                    const auto fieldId=type+"."+field.name;
+                    const bool dropdownOpen=ImGui::BeginCombo("##value",mixed?ui::tr("Mixed"):caption.c_str());
+                    services_.observe("reference.combo."+fieldId);
+                    if(dropdownOpen){
+                        auto& referenceFilter=presentation.referenceFilter_;
+                        const bool opening=ImGui::IsWindowAppearing();
+                        if(opening)referenceFilter.Clear();
+                        if(ImGui::IsKeyPressed(ImGuiKey_Escape,false)){
+                            ImGui::CloseCurrentPopup();
+                        }else{
+                            if(opening||presentation.focusReferenceSearch_)ImGui::SetKeyboardFocusHere();
+                            presentation.focusReferenceSearch_=false;
+                            const auto* clearLabel=ui::tr("清除搜索");
+                            const auto clearWidth=ui::buttonWidth(clearLabel);
+                            const bool showClear=referenceFilter.IsActive();
+                            const auto searchWidth=showClear
+                                ?std::max(1.F,ImGui::GetContentRegionAvail().x-clearWidth-ImGui::GetStyle().ItemSpacing.x)
+                                :-1.F;
+                            ui::searchField("##Reference search",ui::tr("搜索兼容引用"),referenceFilter,searchWidth);
+                            services_.observe("reference.search."+fieldId);
+                            if(showClear&&referenceFilter.IsActive()){
+                                ui::nextToolbarItem(clearWidth);
+                                if(ui::button(clearLabel)){
+                                    referenceFilter.Clear();
+                                    presentation.focusReferenceSearch_=true;
+                                }
+                                services_.observe("reference.clear-search."+fieldId);
+                            }
+                            bool hasMatches=false;
+                            const auto choice=[&](const std::string& label,const std::string& id,const std::string& observed){
+                                hasMatches=true;
+                                ImGui::PushID(id.c_str());
+                                if(ImGui::Selectable(label.c_str(),!mixed&&reference==id)){
+                                    event.value=id;
+                                    event.changed=true;
+                                    event.ended=true;
+                                }
+                                services_.observe("reference.option."+fieldId+"."+observed);
+                                ImGui::PopID();
+                            };
+                            if(field.reference=="node"){
+                                for(const auto& node:view.scene().nodes){
+                                    const auto terms=node.name+" "+node.id;
+                                    if(referenceFilter.PassFilter(terms.c_str()))choice(node.name,node.id,node.id);
+                                }
+                            }else if(field.reference=="asset"&&view.isProject()){
+                                for(const auto& [id,record]:view.assets().records()){
+                                    if(!assetTypeRegistry().matches(record.path,field.assetTypes))continue;
+                                    if(referenceFilter.PassFilter(record.virtualPath.c_str()))choice(record.virtualPath,id,record.virtualPath);
+                                }
+                            }
+                            if(!hasMatches){
+                                const auto* message=referenceFilter.IsActive()?"没有匹配的引用":"没有兼容的引用";
+                                ui::statusText(ui::tr(message),ui::StatusKind::Neutral);
+                                services_.observe("reference.no-matches."+fieldId);
+                            }
                         }
-                        if(field.reference=="asset")for(const auto& [id,record]:view.assets().records()) {
-                            if(assetTypeRegistry().matches(record.path,field.assetTypes)&&this->presentation.referenceFilter_.PassFilter(record.virtualPath.c_str())&&ImGui::Selectable(record.virtualPath.c_str(),reference==id)){event.value=id;event.changed=true;}
-                        }ImGui::EndCombo();
+                        ImGui::EndCombo();
                     }
                     services_.observe("field."+type+"."+field.name);
                     if(!mixed&&!reference.empty()&&ImGui::IsItemHovered())ImGui::SetTooltip("%s",reference.c_str());
