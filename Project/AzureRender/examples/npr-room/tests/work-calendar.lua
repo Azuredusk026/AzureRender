@@ -96,6 +96,27 @@ assert(liveEditor:flush() and new_work_calendar():timeFor("20270101") == 12.25)
 fields["calendar-edit-seconds"] = "20"
 liveEditor:update_month_view(false)
 assert(new_work_calendar():timeFor("20270101") == 20)
+
+fields["calendar-edit-seconds"] = "32"
+failWrite = true
+assert(not liveEditor:close_month_view(), "A rejected work edit must keep the calendar open")
+assert(visibility["calendar-work-time-editor"] and fields["calendar-edit-seconds"] == "32")
+assert(labels["calendar-status"] == "Could not save work time" and liveEditor:timeFor("20270101") == 20)
+action = "calendar-edit-time"
+liveEditor:update_month_view(false)
+assert(visibility["calendar-work-time-editor"] and fields["calendar-edit-seconds"] == "32")
+date = "20270102000000"
+action = nil
+assert(liveEditor:update_month_view(false) == "2027-01-01")
+action = "calendar-day-7"
+local selected = liveEditor:update_month_view(false)
+assert(selected == "2027-01-01" and fields["calendar-edit-seconds"] == "32",
+    "A rejected work edit must keep its original date and draft")
+failWrite = false
+selected = liveEditor:update_month_view(false)
+assert(selected == "2027-01-02" and not visibility["calendar-work-time-editor"])
+assert(new_work_calendar():timeFor("20270101") == 32)
+date = "20270101000000"
 action = nil
 
 todo = {1, 6, {

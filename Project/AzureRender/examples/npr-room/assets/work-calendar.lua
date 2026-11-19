@@ -261,11 +261,11 @@ function new_work_calendar(translate)
     end
 
     local function commitEditor()
-        if editingDate and runtime:pressed("calendar-submit-time") then
-            local stored = submitEdit()
-            runtime:ui_text("calendar-status", stored and "" or calendarLabel("error", "Could not save work time"))
-            if stored then renderEditFields() end
-        end
+        if not editingDate then return true end
+        local stored = submitEdit()
+        runtime:ui_text("calendar-status", stored and "" or calendarLabel("error", "Could not save work time"))
+        if stored then renderEditFields() end
+        return stored
     end
 
     local function showEditor(day)
@@ -320,18 +320,15 @@ function new_work_calendar(translate)
 
     function calendar:close_month_view()
         if not saveDiary() then return false end
+        if not commitEditor() then return false end
         if habitMenu and not habitMenu:close() then return false end
         if diaryDate then showDiary(nil) end
         displayedTodoDate = nil
-        if editingDate then
-            commitEditor()
-            showEditor(nil)
-        end
+        if editingDate then showEditor(nil) end
         return true
     end
 
     function calendar:update_month_view(languageChanged)
-        commitEditor()
         if diaryDate and runtime:pressed("calendar-diary-cancel") then
             showDiary(nil)
         elseif diaryDate and runtime:pressed("calendar-diary-save") then
@@ -383,22 +380,33 @@ function new_work_calendar(translate)
                 runtime:ui_visible("calendar-date-" .. cell, valid)
             end
         end
+        local requested
         for day = 1, days do
             if runtime:pressed("calendar-day-" .. (offset + day)) then
-                local requested = string.format("%04d%02d%02d", year, month, day)
-                if saveDiary() then
-                    selectedDate = requested
-                    if diaryDate and diaryDate ~= requested then showDiary(requested) end
-                end
+                requested = string.format("%04d%02d%02d", year, month, day)
                 break
             end
         end
-        local selected = selectedDate or date
+        local toggleEditor = runtime:pressed("calendar-edit-time")
+        local changingDate = editingDate and requested and requested ~= editingDate
+        local editSaved = true
+        if changingDate or toggleEditor or runtime:pressed("calendar-submit-time") then
+            editSaved = commitEditor()
+        end
+        if requested and (not changingDate or editSaved) and saveDiary() then
+            selectedDate = requested
+            if diaryDate and diaryDate ~= requested then showDiary(requested) end
+        end
+        local selected = selectedDate or editingDate or date
         if editingDate and editingDate ~= selected then
             showEditor(nil)
         end
-        if runtime:pressed("calendar-edit-time") then
-            showEditor(editingDate == nil and selected or nil)
+        if toggleEditor and editSaved then
+            if editingDate then
+                showEditor(nil)
+            else
+                showEditor(selected)
+            end
         end
         if runtime:pressed("calendar-diary-toggle") then
             if not diaryDate then
