@@ -205,6 +205,20 @@ class RegistrationEntryTests(unittest.TestCase):
         self.assertEqual(receipt["atmosphere"], proof)
         self.assert_inputs_preserved()
 
+    def test_accessory_catalog_uses_hair_hierarchy_before_model_publication(self):
+        original_name = self.model.relative_to(self.room)
+        self.model = self.model.rename(self.model.with_name("hair.glb"))
+        self.original[self.model.relative_to(self.room)] = self.original.pop(original_name)
+        catalog = self.root / "catalog"
+        with patch.object(registration, "HEROINE_PARTS", ["hair"]), \
+                patch("tools.npr_room.captured_accessories.install", return_value={"count": 1}) as install:
+            receipt = registration.stage(self.room, self.frame, self.output, accessory_catalog=catalog)
+        self.assertEqual(install.call_args.args[0], self.frame)
+        self.assertEqual(install.call_args.args[2], catalog / "static-mesh-catalog/mesh-catalog.json")
+        self.assertEqual(install.call_args.args[3], catalog / "image-catalog/image-catalog.json")
+        self.assertEqual(receipt["parts"]["hair"]["accessories"]["count"], 1)
+        self.assert_inputs_preserved()
+
 
 if __name__ == "__main__":
     unittest.main()

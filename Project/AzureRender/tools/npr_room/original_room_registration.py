@@ -121,7 +121,8 @@ def apply_level_pose(level, record):
     return {"matched": sorted(matched), "unmatched": sorted(missing)}
 
 
-def stage(room, frame, output, source=None, *, ambient_probe=False, reference_models=False, sequence=None, atmosphere=None):
+def stage(room, frame, output, source=None, *, ambient_probe=False, reference_models=False, sequence=None,
+          atmosphere=None, accessory_catalog=None):
     if output.exists():
         raise FileExistsError(output)
     record = json.loads(frame.read_bytes())
@@ -147,16 +148,21 @@ def stage(room, frame, output, source=None, *, ambient_probe=False, reference_mo
                 document, binary = parse_glb(model_source)
             proof = freeze_model(document, record)
             destination = assets / "heroine" / model_source.name
+            if records is not None:
+                from tools.npr_room.original_pose_sequence import append_sequence
+                motion_name = part + "-captured.bin"
+                motion_path = destination.with_name(motion_name)
+                if motion_path.exists():
+                    raise FileExistsError(motion_path)
+                motion, motion_proof = append_sequence(document, records, motion_name)
+                motion_path.write_bytes(motion)
+                proof["motion"] = {**motion_proof, "bufferSHA256": digest(motion_path)}
+            if accessory_catalog is not None and part == "hair":
+                from tools.npr_room.captured_accessories import install as install_accessories
+                proof["accessories"] = install_accessories(frame, document,
+                    accessory_catalog / "static-mesh-catalog/mesh-catalog.json",
+                    accessory_catalog / "image-catalog/image-catalog.json", assets / "heroine")
             if reference_models:
-                if records is not None:
-                    from tools.npr_room.original_pose_sequence import append_sequence
-                    motion_name = part + "-captured.bin"
-                    motion_path = destination.with_name(motion_name)
-                    if motion_path.exists():
-                        raise FileExistsError(motion_path)
-                    motion, motion_proof = append_sequence(document, records, motion_name)
-                    motion_path.write_bytes(motion)
-                    proof["motion"] = {**motion_proof, "bufferSHA256": digest(motion_path)}
                 destination = destination.with_suffix(".gltf")
                 if destination.exists() or destination.with_suffix(".gltf.azmeta").exists():
                     raise FileExistsError(destination)
@@ -242,10 +248,11 @@ if __name__ == "__main__":
     parser.add_argument("--reference-models", action="store_true", help="Reuse original GLB buffers through adjacent glTF pose files")
     parser.add_argument("--sequence", type=Path, nargs="+", help="Ordered captured frames beginning with --frame")
     parser.add_argument("--atmosphere", type=Path, help="Same-frame atmosphere bundle with source recipe and native receipts")
+    parser.add_argument("--accessories", type=Path, help="Catalog root for visible rigid attachments on the captured hair hierarchy")
     arguments = parser.parse_args()
     result = stage(arguments.room.resolve(), arguments.frame.resolve(), arguments.output.resolve(), arguments.source,
                    ambient_probe=arguments.ambient_probe, reference_models=arguments.reference_models,
-                   sequence=arguments.sequence, atmosphere=arguments.atmosphere)
+                   sequence=arguments.sequence, atmosphere=arguments.atmosphere, accessory_catalog=arguments.accessories)
     print(json.dumps({"weather": result["weather"], "parts": len(result["parts"]),
                       "matchedRoomTransforms": len(result["placement"]["matched"]),
                       "unmatchedRoomTransforms": len(result["placement"]["unmatched"])}))
