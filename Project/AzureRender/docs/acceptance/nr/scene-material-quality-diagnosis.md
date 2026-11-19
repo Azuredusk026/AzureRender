@@ -540,3 +540,10 @@ Player 同帧捕获及补充读回均在共享队列执行成功。
 切换帧的世界位置检查拒绝了已追踪的导光板位移。
 [反射过渡归因](evidence/2026-11-20/reflection-switch-transition/README.md)保存历史深度和置信度证据。
 [原创检修站验收](evidence/2026-11-20/original-reflection-switch/README.md)保存项目、输入及逐帧量化结果。
+
+### 运动深度候选
+
+切换帧恢复了全部 97 个右侧反射采样。
+错误深度控制维持拒绝，五组镜面回归逐字节一致。
+封存大厅与基线逐像素一致，SSIM 仍低于门槛。
+[运动深度候选证据](evidence/2026-11-20/tracked-reflection-history-candidate/README.md)保存回放、回归和采用判定。
