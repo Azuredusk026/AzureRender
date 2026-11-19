@@ -4,7 +4,51 @@ import json
 import shutil
 import uuid
 from pathlib import Path
+from editor_test_host import EditorHost
 from test_editor_workspace import launch
+
+
+def reveal_node_reference(executable, project, output):
+    project_file = project / 'project.azureproject'
+    descriptor = json.loads(project_file.read_bytes())
+    level = project / 'assets' / descriptor['startupScene'].removeprefix('assets:/')
+    scene = json.loads(level.read_bytes())
+    owner, group, target = 'reference-owner', 'reference-group', 'reference-target'
+    camera = {'type': 'azure.third-person-camera', 'version': 1, 'data': {'target': target}}
+    scene['nodes'].extend([
+        {'id': owner, 'components': {'azure.third-person-camera': camera}},
+        {'id': group},
+        {'id': target, 'parentId': group},
+    ])
+    level.write_text(json.dumps(scene), encoding='utf-8')
+    saved = level.read_bytes()
+    with EditorHost(executable, project_file, output) as host:
+        original = host.query('document.contentHash')
+        host.click('outliner.search')
+        host.call('input', event={'action': 'text', 'text': owner})
+        host.frames()
+        host.click('node.' + owner)
+        host.click('component.azure.third-person-camera')
+        _, _, width, _ = host.workspace()['widgets']['hierarchy.root']
+        host.click('hierarchy.root', offset=[8 - width / 2, 0])
+        assert 'node.' + owner not in host.workspace()['widgets'], 'Fixture must collapse the scene'
+        host.click('menu.View')
+        host.click('panel.outliner')
+        assert not host.workspace()['panels']['outliner']['open']
+        host.click('reference.reveal.azure.third-person-camera.target')
+        revealed = host.workspace()
+        assert revealed['selection'] == [target]
+        assert revealed['panels']['outliner']['open'], 'Node reference must reopen the hierarchy'
+        assert 'node.' + target in revealed['widgets'], 'Reference target must appear under its parent'
+        host.screenshot('reference-hierarchy-' + output.name)
+        host.click('outliner.return-to-search')
+        restored = host.workspace()
+        visible = {key for key in restored['widgets'] if key.startswith('node.')}
+        assert visible == {'node.' + owner}
+        assert restored['selection'] == [target]
+        assert restored['undoCount'] == 0 and not restored['dirty']
+        assert host.query('document.contentHash') == original
+    assert level.read_bytes() == saved
 
 
 def run(executable, root):
@@ -67,7 +111,11 @@ def run(executable, root):
     playable=launch(executable,second,'properties',(1920,1080),1,[dict(frame=25,action='click',target='node.hero:body')],capture=False)
     assert 'field.azure.transform.translation' in playable['widgets']
     assert playable['feedback']==[]
-    summary=dict(passed=True,stage='U9',axisReset=True,referencePick=True,referenceSaveReopen=True,escapeCancel=True,focusCancel=True,mixedReset=True,secondProject=True,input='production Dear ImGui replay',physicalKeyboardMouse='not performed')
+    reveal_node_reference(executable, root/'game', root/'locate-node-inspector')
+    reveal_node_reference(executable, second/'game', root/'locate-node-exploration')
+    summary=dict(passed=True,stage='U9',axisReset=True,referencePick=True,referenceSaveReopen=True,
+        nodeReferenceLocatesInBothProjects=True,escapeCancel=True,focusCancel=True,mixedReset=True,
+        secondProject=True,input='production Dear ImGui replay',physicalKeyboardMouse='not performed')
     (root/'summary.json').write_text(json.dumps(summary,indent=2)+'\n',encoding='utf-8')
     print(json.dumps(summary))
 

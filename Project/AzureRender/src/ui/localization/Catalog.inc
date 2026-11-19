@@ -107,6 +107,7 @@
 {"清空","Clear"},
 {"清除","Clear"},
 {"清除搜索","Clear search"},
+{"返回搜索结果","Return to search results"},
 {"清除筛选","Clear filters"},
 {"清除搜索和类型筛选","Clear search and type filters"},
 {"渲染诊断","Render diagnostics"},

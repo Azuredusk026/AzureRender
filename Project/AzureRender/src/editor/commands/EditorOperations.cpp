@@ -236,7 +236,7 @@ EditRegistry editorOperations(EditorSession& session) {
     registry.add({"reference.cancel",1,schema(),false,false,false},[&session](EditorContext&,const Json&)->Json {session.references().cancel();return nullptr;});
     registry.add({"reference.reveal",1,schema({{"kind",text},{"id",text}},{"kind","id"}),false,false,false},[&session](EditorContext& c,const Json& a)->Json {
         const auto kind=a.at("kind").get<std::string>(),id=a.at("id").get<std::string>();
-        if(kind=="node")session.selection().set({id});
+        if(kind=="node")session.selection().revealInHierarchy(id);
         else if(kind=="asset"){if(!c.isProject())throw EditRejection("Asset reveal requires a project");c.assets().resolveReference(id);session.assetReveal_=id;}
         else throw EditRejection("Unknown reference kind");return nullptr;
     });

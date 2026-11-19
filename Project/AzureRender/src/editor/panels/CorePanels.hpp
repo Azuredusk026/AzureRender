@@ -23,7 +23,12 @@ struct CorePanelServices {
     std::function<VkDescriptorSet(std::uint64_t)> previewTexture;
     std::function<void(const char*,std::string&,const std::string&,bool,const std::vector<std::string>&)> pathInput;
 };
-struct OutlinerPanelState { ImGuiTextFilter outlinerFilter_;std::set<std::string> openNodeIds_; };
+struct OutlinerPanelState {
+    struct SearchLocation { std::string document, text; };
+    ImGuiTextFilter outlinerFilter_;
+    std::optional<SearchLocation> beforeReveal_;
+    std::set<std::string> openNodeIds_;
+};
 struct InspectorPanelState { ImGuiTextFilter referenceFilter_,componentFilter_,propertyFilter_;bool focusObjectName_=false; };
 struct AssetPanelState {
     struct BrowseLocation {
