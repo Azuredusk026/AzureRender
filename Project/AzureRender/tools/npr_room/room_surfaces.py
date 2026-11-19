@@ -73,7 +73,10 @@ def mounted_assets(assets):
     mounted = {}
     for sidecar in assets.rglob("*.azmeta"):
         item = json.loads(sidecar.read_bytes())
-        path = sidecar.with_suffix("").resolve(strict=True)
+        source = sidecar.with_suffix("")
+        if not source.exists():
+            continue
+        path = source.resolve(strict=True)
         if not path.is_relative_to(assets) or item["id"] in mounted:
             raise ValueError(f"Duplicate or external mounted asset: {sidecar}")
         mounted[item["id"]] = path

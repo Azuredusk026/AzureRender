@@ -219,6 +219,16 @@ class RegistrationEntryTests(unittest.TestCase):
         self.assertEqual(receipt["parts"]["hair"]["accessories"]["count"], 1)
         self.assert_inputs_preserved()
 
+    def test_captured_materials_entry_keeps_source_receipt(self):
+        catalog = self.root / "catalog"
+        proof = {"changedSlots": 1, "pending": []}
+        with patch("tools.npr_room.captured_room_materials.install", return_value=proof) as install:
+            receipt = registration.stage(self.room, self.frame, self.output, captured_materials=catalog)
+        self.assertEqual(install.call_args.args[0], self.frame)
+        self.assertEqual(install.call_args.args[1], catalog / "image-catalog/image-catalog.json")
+        self.assertEqual(receipt["capturedMaterials"], proof)
+        self.assert_inputs_preserved()
+
 
 if __name__ == "__main__":
     unittest.main()

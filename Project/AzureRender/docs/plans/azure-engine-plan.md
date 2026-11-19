@@ -44,6 +44,7 @@ P0 已锁定 Recovery Windows 产物及静态目录。
 [同帧大气合成](../acceptance/npr-room/windows-atmosphere.md#同帧大气合成)取得两种天气首帧的配对天空、云层及原相机雾体积。
 [同帧大气房间装配](../acceptance/npr-room/windows-atmosphere.md#同帧大气房间装配)通过原机位、静态角色、五盏灯及原生雾开关复验。
 [原版刚性附件](../acceptance/npr-room/character-assets.md#原版刚性附件)通过猫耳耳机装配、静态对照及十二帧角色回放。
+[运行时主贴图与底色](../acceptance/npr-room/room-base-surfaces.md#运行时主贴图与底色)通过杯子图案、两种天气的材质变体及原生重复回放。
 
 [联合场景热点纹理分配](../acceptance/nr/joint-texture-hot-placement.md)完成 1440p 同驱动逐像素比较与 1080p60 配对计时。候选 GPU P95 高于首轮参考，保留隔离结果。
 

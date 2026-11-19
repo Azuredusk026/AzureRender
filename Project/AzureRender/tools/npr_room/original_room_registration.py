@@ -79,6 +79,16 @@ def freeze_model(document, record):
     return {"transforms": len(mapping), "renderers": sum("mesh" in node for node in document["nodes"])}
 
 
+def node_path(node, nodes):
+    ancestry = [node]
+    while ancestry[-1].get("parentId"):
+        parent = nodes[ancestry[-1]["parentId"]]
+        if parent in ancestry:
+            raise ValueError("Cyclic imported room hierarchy")
+        ancestry.append(parent)
+    return "/".join(parent.get("name", "") for parent in reversed(ancestry))
+
+
 def apply_level_pose(level, record):
     nodes = {node["id"]: node for node in level["nodes"]}
     source = {}
@@ -94,13 +104,7 @@ def apply_level_pose(level, record):
         transform = components.get("azure.transform")
         if transform is None or not node.get("name"):
             continue
-        ancestry = [node]
-        while ancestry[-1].get("parentId"):
-            parent = nodes[ancestry[-1]["parentId"]]
-            if parent in ancestry:
-                raise ValueError("Cyclic imported room hierarchy")
-            ancestry.append(parent)
-        path = "/".join(parent.get("name", "") for parent in reversed(ancestry))
+        path = node_path(node, nodes)
         candidates = source.get(path, [])
         if len(candidates) != 1:
             missing.append(path)
@@ -122,7 +126,7 @@ def apply_level_pose(level, record):
 
 
 def stage(room, frame, output, source=None, *, ambient_probe=False, reference_models=False, sequence=None,
-          atmosphere=None, accessory_catalog=None):
+          atmosphere=None, accessory_catalog=None, captured_materials=None):
     if output.exists():
         raise FileExistsError(output)
     record = json.loads(frame.read_bytes())
@@ -217,6 +221,10 @@ def stage(room, frame, output, source=None, *, ambient_probe=False, reference_mo
         if atmosphere is not None:
             from tools.npr_room.original_room_atmosphere import install as install_atmosphere
             atmosphere_proof = install_atmosphere(frame, atmosphere, assets, level)
+        material_proof = None
+        if captured_materials is not None:
+            from tools.npr_room.captured_room_materials import install as install_materials
+            material_proof = install_materials(frame, captured_materials / "image-catalog/image-catalog.json", assets, level)
         ambient = install_ambient_probe(frame, assets, level) if ambient_probe else None
         for node in level["nodes"]:
             ui = node["components"].get("azure.game-ui")
@@ -234,6 +242,8 @@ def stage(room, frame, output, source=None, *, ambient_probe=False, reference_mo
             receipt["sequence"] = sequence_proof
         if atmosphere_proof is not None:
             receipt["atmosphere"] = atmosphere_proof
+        if material_proof is not None:
+            receipt["capturedMaterials"] = material_proof
         (project / "original-pose-receipt.json").write_text(json.dumps(receipt, indent=2) + "\n", encoding="utf-8")
         publish_directory(project, output)
     return receipt
@@ -249,10 +259,12 @@ if __name__ == "__main__":
     parser.add_argument("--sequence", type=Path, nargs="+", help="Ordered captured frames beginning with --frame")
     parser.add_argument("--atmosphere", type=Path, help="Same-frame atmosphere bundle with source recipe and native receipts")
     parser.add_argument("--accessories", type=Path, help="Catalog root for visible rigid attachments on the captured hair hierarchy")
+    parser.add_argument("--captured-materials", type=Path, help="Catalog root for captured rigid-renderer main textures and colors")
     arguments = parser.parse_args()
     result = stage(arguments.room.resolve(), arguments.frame.resolve(), arguments.output.resolve(), arguments.source,
                    ambient_probe=arguments.ambient_probe, reference_models=arguments.reference_models,
-                   sequence=arguments.sequence, atmosphere=arguments.atmosphere, accessory_catalog=arguments.accessories)
+                   sequence=arguments.sequence, atmosphere=arguments.atmosphere, accessory_catalog=arguments.accessories,
+                   captured_materials=arguments.captured_materials)
     print(json.dumps({"weather": result["weather"], "parts": len(result["parts"]),
                       "matchedRoomTransforms": len(result["placement"]["matched"]),
                       "unmatchedRoomTransforms": len(result["placement"]["unmatched"])}))

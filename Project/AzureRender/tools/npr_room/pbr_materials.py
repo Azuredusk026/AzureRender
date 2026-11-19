@@ -81,9 +81,10 @@ def write(path, data):
                     encoding="utf-8", newline="\n")
 
 
-def staging_metadata(path, guid, dependencies):
+def staging_metadata(path, guid, dependencies, *, retain_source_snapshot=True):
     write(path.with_name(path.name + ".azmeta"), {
-        "schemaVersion": 1, "id": str(UUID(hex=guid)), "dependencies": dependencies, "settings": {},
+        "schemaVersion": 1, "id": str(UUID(hex=guid)), "dependencies": dependencies,
+        "settings": {} if retain_source_snapshot else {"retainSourceSnapshot": False},
     })
 
 

@@ -10,6 +10,16 @@ from tools.npr_room.room_surfaces import TOON_SHADER, base_surface, material_bin
 
 
 class RoomSurfaceTests(unittest.TestCase):
+    def test_indexes_live_assets_with_retained_orphan_sidecars(self):
+        with TemporaryDirectory() as holder:
+            root = Path(holder)
+            mesh = root / "mesh.glb"
+            write_glb(mesh, {"materials": [{"name": "unity-slot-0"}]}, b"")
+            staging_metadata(mesh, "068548c359f6476b8acddc7329582fe8", [])
+            staging_metadata(root / "removed.azurelevel", "12345678123412341234123456789abc", [])
+            mounted = mounted_assets(root)
+            self.assertEqual(mounted, {"068548c3-59f6-476b-8acd-dc7329582fe8": mesh.resolve()})
+
     def test_reads_mesh_slots_from_a_uuid_mounted_by_scene_import(self):
         with TemporaryDirectory() as holder:
             root = Path(holder)
