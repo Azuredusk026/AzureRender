@@ -568,3 +568,10 @@ Player 同帧捕获及补充读回均在共享队列执行成功。
 法线替代使两个区域的命中中位差降至一像素以内。
 中央地面仍有长尾偏差，继续核对接收法线和遮挡。
 [搜索敏感度证据](evidence/2026-11-20/reflection-search-input-sensitivity/README.md)保存输入与复算。
+
+### 接收法线与前景深度
+
+两区的法线差在准备阶段的源附件中已出现。
+解析准备回归在 Debug 与 Release 各通过 3,380 点。
+中央地面长尾中，2,763 点存在至少半米的前景深度差。
+[法线与前景证据](evidence/2026-11-20/reflection-surface-normal-lineage/README.md)记录合规配对输入及冻结环境的恢复条件。

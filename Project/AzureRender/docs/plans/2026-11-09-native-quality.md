@@ -228,6 +228,7 @@ Intel 头发颜色继续核对纹理梯度与层级选择。
 [原始反射颜色](../acceptance/nr/evidence/2026-11-16/projected-reflection-shared-hits/results.json)按深度配准区分命中覆盖与共同命中处的颜色误差，用于选择地面反射的后续修复。
 [区域历史取样](../acceptance/nr/evidence/2026-11-20/reflection-regional-cross-address/README.md)复算两区的历史地址和时间增量。最近深度对照记录单帧采用判定。
 [半分辨率深度对照](../acceptance/nr/evidence/2026-11-20/reflection-nearest-depth-candidate/README.md)核对搜索预算及同址深度。
+[接收法线与前景深度](../acceptance/nr/evidence/2026-11-20/reflection-surface-normal-lineage/README.md)定位大厅命中长尾及参考输入条件。
 
 角色固定姿态按[脸部与体表区域验收](../acceptance/nr/face-skin-color-sources.md)记录纹理、照明、描边和透明衣料的来源。
 [固定姿态网格与轮廓](../acceptance/nr/evidence/2026-11-15/fixed-pose-face-and-body-geometry/results.json)核对身体顶点、脸部索引和同机位的覆盖复算。固定姿态的剩余色差及六视图按各自门槛验收。

@@ -1,0 +1,464 @@
+{
+  "baseline": "8f60988",
+  "status": "source-lineage-qualified",
+  "results": {
+    "centerFloor": {
+      "points": 19281,
+      "observedNormalDegrees": [
+        0.2629906482887535,
+        0.2942925665630676,
+        0.9865418035281227
+      ],
+      "nativeReencode": {
+        "x0y0": {
+          "exactTwo": 18117,
+          "withinOneUnit": 18211
+        },
+        "x1y0": {
+          "exactTwo": 17999,
+          "withinOneUnit": 18121
+        },
+        "x0y1": {
+          "exactTwo": 19040,
+          "withinOneUnit": 19083
+        },
+        "x1y1": {
+          "exactTwo": 18503,
+          "withinOneUnit": 18707
+        }
+      },
+      "playerNormalControls": {
+        "x0y0": {
+          "floatDegrees": [
+            0.2630548696733681,
+            0.2949731525760385,
+            1.0638204569045284
+          ],
+          "nativeEncodingRoundTripDegrees": [
+            0.3193207421479169,
+            0.3193207421479169,
+            1.0497501388293706
+          ],
+          "fullSourceAngleDegrees": [
+            0.26307600670884745,
+            0.29501677096366,
+            1.0468261924820357
+          ]
+        },
+        "x1y0": {
+          "floatDegrees": [
+            0.2629906482887535,
+            0.29512035730413716,
+            1.0411150448919149
+          ],
+          "nativeEncodingRoundTripDegrees": [
+            0.3193207421479169,
+            0.3193207421479169,
+            1.0472734564193862
+          ],
+          "fullSourceAngleDegrees": [
+            0.26301178103862166,
+            0.2951656584266168,
+            1.0400099915418974
+          ]
+        },
+        "x0y1": {
+          "floatDegrees": [
+            0.26295895143607656,
+            0.2941003497242765,
+            0.986369419976474
+          ],
+          "nativeEncodingRoundTripDegrees": [
+            0.3193207421479169,
+            0.3193207421479169,
+            1.0472734564193862
+          ],
+          "fullSourceAngleDegrees": [
+            0.26297033364223393,
+            0.29406643565998425,
+            0.9689828524885097
+          ]
+        },
+        "x1y1": {
+          "floatDegrees": [
+            0.2629906482887535,
+            0.2942925665630676,
+            0.9865418035281227
+          ],
+          "nativeEncodingRoundTripDegrees": [
+            0.3193207421479169,
+            0.3193207421479169,
+            1.0472734564193862
+          ],
+          "fullSourceAngleDegrees": [
+            0.26306543803977617,
+            0.29433780322244646,
+            0.9815340692566172
+          ]
+        }
+      }
+    },
+    "cyanRing": {
+      "points": 6478,
+      "observedNormalDegrees": [
+        0.25041188299094974,
+        0.27211559867673557,
+        16.949182734453395
+      ],
+      "nativeReencode": {
+        "x0y0": {
+          "exactTwo": 6031,
+          "withinOneUnit": 6074
+        },
+        "x1y0": {
+          "exactTwo": 5984,
+          "withinOneUnit": 6045
+        },
+        "x0y1": {
+          "exactTwo": 6382,
+          "withinOneUnit": 6401
+        },
+        "x1y1": {
+          "exactTwo": 6143,
+          "withinOneUnit": 6235
+        }
+      },
+      "playerNormalControls": {
+        "x0y0": {
+          "floatDegrees": [
+            0.25060259628539083,
+            0.2730770000843476,
+            28.40576233959124
+          ],
+          "nativeEncodingRoundTripDegrees": [
+            0.3193207421479169,
+            0.3193207421479169,
+            28.363721336090574
+          ],
+          "fullSourceAngleDegrees": [
+            0.25063312180061514,
+            0.2730770000843476,
+            32.329752302748915
+          ]
+        },
+        "x1y0": {
+          "floatDegrees": [
+            0.25041188299094974,
+            0.2725202375269684,
+            19.603262193005634
+          ],
+          "nativeEncodingRoundTripDegrees": [
+            0.3193207421479169,
+            0.3193207421479169,
+            19.603794913901343
+          ],
+          "fullSourceAngleDegrees": [
+            0.2504169670832646,
+            0.27257544482066015,
+            21.367418945974357
+          ]
+        },
+        "x0y1": {
+          "floatDegrees": [
+            0.25047544041742525,
+            0.27217075345976033,
+            26.945014130498876
+          ],
+          "nativeEncodingRoundTripDegrees": [
+            0.3193207421479169,
+            0.3193207421479169,
+            26.98170961773193
+          ],
+          "fullSourceAngleDegrees": [
+            0.25047544041742525,
+            0.2720393651119827,
+            28.600508348915323
+          ]
+        },
+        "x1y1": {
+          "floatDegrees": [
+            0.25041188299094974,
+            0.27211559867673557,
+            16.949182759635534
+          ],
+          "nativeEncodingRoundTripDegrees": [
+            0.3193207421479169,
+            0.3193207421479169,
+            16.950157954876705
+          ],
+          "fullSourceAngleDegrees": [
+            0.2504551005515004,
+            0.2721610193487214,
+            18.40220287129128
+          ]
+        }
+      }
+    }
+  },
+  "tail": {
+    "centerFloor": {
+      "samples": 18725,
+      "outside50px": 3063,
+      "foregroundOver50cm": 2763,
+      "otherDepthOver50cm": 8,
+      "sameDepthWithin2cm": 283,
+      "nativeEndpointsWithDepthGapOver50cm": 0,
+      "examples": [
+        {
+          "receiver": [
+            1467,
+            1115
+          ],
+          "addresses": [
+            [
+              732,
+              433
+            ],
+            [
+              731,
+              338
+            ]
+          ],
+          "displayDistance": 190.2549281157121,
+          "playerNativeDepthAtPredicted": [
+            8.586217880249023,
+            21.739912033081055
+          ]
+        },
+        {
+          "receiver": [
+            1419,
+            1053
+          ],
+          "addresses": [
+            [
+              708,
+              433
+            ],
+            [
+              707,
+              306
+            ]
+          ],
+          "displayDistance": 254.14306565521903,
+          "playerNativeDepthAtPredicted": [
+            8.573197364807129,
+            21.7921085357666
+          ]
+        },
+        {
+          "receiver": [
+            1437,
+            1155
+          ],
+          "addresses": [
+            [
+              717,
+              409
+            ],
+            [
+              715,
+              257
+            ]
+          ],
+          "displayDistance": 303.55023737869163,
+          "playerNativeDepthAtPredicted": [
+            8.806146621704102,
+            22.300617218017578
+          ]
+        }
+      ]
+    },
+    "cyanRing": {
+      "samples": 6307,
+      "outside50px": 10,
+      "foregroundOver50cm": 0,
+      "otherDepthOver50cm": 0,
+      "sameDepthWithin2cm": 10,
+      "nativeEndpointsWithDepthGapOver50cm": 0,
+      "examples": []
+    }
+  },
+  "geometryOwners": {
+    "frame": 1,
+    "capture": "1d61e0a2e9d19de837d96fd6115807c1c19334159f911b38677de634168fa2d6",
+    "resource": "ResourceId::9847",
+    "rows": [
+      {
+        "receiver": [
+          1467,
+          1115
+        ],
+        "source": [
+          1465,
+          867
+        ],
+        "tapDepths": [
+          8.590234756469727,
+          8.590113639831543,
+          8.586653709411621,
+          8.586217880249023
+        ],
+        "draw": {
+          "id": 18593,
+          "firstIndex": 120264,
+          "indices": 61923,
+          "instance": 861,
+          "indexResource": "ResourceId::8536",
+          "indexBufferOffset": 0,
+          "pixelProgram": "e99e2258c6a04aaa479024336460ede13b8a45f3b8a592c85e8fbe8905495cd6",
+          "before": "0050c347000000000000000000000000",
+          "after": "2661094130893a3e084f7f3f44b9eb3e"
+        }
+      },
+      {
+        "receiver": [
+          1419,
+          1053
+        ],
+        "source": [
+          1417,
+          867
+        ],
+        "tapDepths": [
+          8.57761001586914,
+          8.575547218322754,
+          8.575820922851562,
+          8.573197364807129
+        ],
+        "draw": {
+          "id": 18593,
+          "firstIndex": 120264,
+          "indices": 61923,
+          "instance": 861,
+          "indexResource": "ResourceId::8536",
+          "indexBufferOffset": 0,
+          "pixelProgram": "e99e2258c6a04aaa479024336460ede13b8a45f3b8a592c85e8fbe8905495cd6",
+          "before": "0050c347000000000000000000000000",
+          "after": "d12b0941f044783fe04c603f8d9c793f"
+        }
+      },
+      {
+        "receiver": [
+          1437,
+          1155
+        ],
+        "source": [
+          1435,
+          819
+        ],
+        "tapDepths": [
+          8.810758590698242,
+          8.809676170349121,
+          8.80713176727295,
+          8.806146621704102
+        ],
+        "draw": {
+          "id": 18593,
+          "firstIndex": 120264,
+          "indices": 61923,
+          "instance": 861,
+          "indexResource": "ResourceId::8536",
+          "indexBufferOffset": 0,
+          "pixelProgram": "e99e2258c6a04aaa479024336460ede13b8a45f3b8a592c85e8fbe8905495cd6",
+          "before": "0050c347000000000000000000000000",
+          "after": "fae50c41c49e5b3f92ea623f31b92e3f"
+        }
+      }
+    ]
+  },
+  "fixture": [
+    {
+      "config": "debug",
+      "exitCode": 0,
+      "programSha256": "7df185c8630c180a7d8d4bd8ace2a15572dc07e13e401140df595335d666e4da",
+      "executableSha256": "612ab60480abded90b8758b71c030d28912c87be4ac8df6438ec69d12a2da4e4",
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureProjectedReflectionPreparationGpuTests.exe",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-125923-body-lit-outline-depth-order-a29b63\\msaa-release\\shaders\\projected_reflection_prepare.comp.spv"
+      ]
+    },
+    {
+      "config": "release",
+      "exitCode": 0,
+      "programSha256": "7df185c8630c180a7d8d4bd8ace2a15572dc07e13e401140df595335d666e4da",
+      "executableSha256": "f3db983dec0c6d6712fdae84850aab1a0b9213e265d57944d571a95142656a35",
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureProjectedReflectionPreparationGpuTests.exe",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-125923-body-lit-outline-depth-order-a29b63\\msaa-release\\shaders\\projected_reflection_prepare.comp.spv"
+      ]
+    }
+  ],
+  "queue": [
+    {
+      "id": 2315,
+      "task": "nr-reflection-surface-normal-source",
+      "state": "failed",
+      "exit_code": 1,
+      "wait_seconds": 0.01599999999962165,
+      "run_seconds": 143.06199999999808
+    },
+    {
+      "id": 2317,
+      "task": "nr-reflection-surface-normal-python38",
+      "state": "failed",
+      "exit_code": 1,
+      "wait_seconds": 40.23500000000058,
+      "run_seconds": 87.64099999999962
+    },
+    {
+      "id": 2318,
+      "task": "nr-reflection-surface-normal-isolated-worker",
+      "state": "succeeded",
+      "exit_code": 0,
+      "wait_seconds": 1.014999999999418,
+      "run_seconds": 11.765999999999622
+    },
+    {
+      "id": 2319,
+      "task": "nr-reflection-surface-preparation-normal-regression",
+      "state": "succeeded",
+      "exit_code": 0,
+      "wait_seconds": 0.01599999999962165,
+      "run_seconds": 3.313000000001921
+    },
+    {
+      "id": 2324,
+      "task": "nr-reflection-foreground-owner",
+      "state": "succeeded",
+      "exit_code": 0,
+      "wait_seconds": 0.01599999999962165,
+      "run_seconds": 10.625
+    }
+  ],
+  "validation": {
+    "archiveSha256": "dcbcd2e9cf79ee2309fe2eefeda066b6b592367874e590f64efda9066e76351c",
+    "bytes": 3566228,
+    "files": {
+      "normal_run.py": "af6997137c6b0eb91bcb49acaa2a6715ebd314cab982ebc075b922ba92d1fb97",
+      "normal_worker.py": "d8accfeab14e0dba23b47cee5aad42e8e00cdbb80a2383bf6f8d83f9275c9017",
+      "normal_score.py": "5477c6d21b4587c32396ce9855bde58ed28f944b1027deb3d0cd6b5d7cc89aad",
+      "occurrence.py": "9b019eced27ccd60dc70c7d9750c8d2085f28d7a5c653857365d5c6f734ff4d8",
+      "owners_run.py": "3583b8caedeffca4580326b9c02d2e23f8f303ec3ef6f6b0ddcb72292c9d853f",
+      "owners_worker.py": "0bf1bc353f352548997c725dba74f6a717b13f030d1a63299ac9e13af4af9979",
+      "check_fixture.py": "9666035d73c8d2cb7104ca9096505c935c6a8795e188407641a59c5c6380c846",
+      "verify.py": "8a3be6af5b958994281c74ed7e4e20527bdc726f7e308c70e817709bddcbf470",
+      "request.json": "a3eb0fee906f9f068488419b72902ad095b859bab701b7d43bc0dc5a15a6b7ca",
+      "direct.json": "5739dc574fdf887753245e09497d783b29c4483fc99d51adb97170b7f5ac9672",
+      "results.json": "fd6d83e44ae4d939f5d013e73929766a0c07c878c3243ed5a82fb0df4ce98cba",
+      "pairmask.npy": "89598281313a9e587fa33c87cfd719ef95b645ee75dc2aadaf168915bb1c584a",
+      "tail-inputs.json": "71e0fcb93c5c461947f10697bddc15b09b990d4a9e3976dcaa8594d4ebb9a379",
+      "tail-samples.npz": "d8c44d8afd6a8523190d15d1329e96ae08ca345db43bd2bb74a608497fb9c0d7",
+      "tail-results.json": "296a31e46485a11703af0a7a7de126221976e90827dc85afa382b4594c403878",
+      "fixture.json": "fb5a834ebd9cb81a80a563ef714ab1757d52171f3d8024b20cd4518ddaa561b5",
+      "fixture-debug.log": "a55a084be69a469fa5eadd5eae43e610008df576d51f362e2a6cfdeab5e4f50e",
+      "fixture-release.log": "a55a084be69a469fa5eadd5eae43e610008df576d51f362e2a6cfdeab5e4f50e",
+      "foreground-owners.json": "46335269e4b5ac886c150cafc5139329713d40a760ad2bbfc36b896652285552",
+      "native-prepared.zlib": "ed07ea5ea8deef50b8d5d518aa954a0e316f996f595867b0379da2bd19ca4577",
+      "native-primary.zlib": "f26e2967a8e62d0d3a1b7f73504ccc4b1801f9132c3aaf031199383c88a21453",
+      "native-secondary.zlib": "f26e2967a8e62d0d3a1b7f73504ccc4b1801f9132c3aaf031199383c88a21453",
+      "player-prepared.zlib": "d4f6eac8507bf95b4faa0604f00ab2ac9a11086908c33752cdea10fa4e6df864",
+      "player-primary.zlib": "e73b5f5ed162ca2d8b13e0e2d0f4e896868214b519833f5298ae3953467ca586"
+    }
+  }
+}
