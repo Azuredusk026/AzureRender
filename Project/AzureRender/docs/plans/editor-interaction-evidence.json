@@ -220,6 +220,17 @@
     "currentQueueRowsPresent": false,
     "physicalInput": false
   },
+  "multiSelectionProperties20261119": {
+    "productionBaseline": "5fccef9",
+    "configuration": "Release",
+    "executableSha256": "75778c34da23ceb5387e6baf195cbdcc63a9fac8ae05c304156cc1d1fb2ea9ee",
+    "dispatch": [2232, 2233],
+    "results": "editor-multi-properties-2026-11-19/results.json",
+    "resultsSha256": "a3b27dd482769bdbf948d8f273d6f91747bca15de0da9b426ddb2e864e3ee3f2",
+    "archive": "editor-multi-properties-2026-11-19/verification.zip",
+    "archiveSha256": "ff997945b8ffc7fa949a7647dade9b5aef6562f98721c349cdb044848fc4667d",
+    "physicalInput": false
+  },
   "nodeReferenceReveal": {
     "baseCommit": "e729305",
     "configuration": "Release",
