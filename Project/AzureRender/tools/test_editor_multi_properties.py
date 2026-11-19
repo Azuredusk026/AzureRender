@@ -70,6 +70,45 @@ def check_drag_cancel(host, workflow):
     assert host.query("document.contentHash") == before
 
 
+def check_inspector_search(host, workflow):
+    camera = "component.azure.third-person-camera"
+    target = "field.azure.third-person-camera.target"
+    transform = "component.azure.transform"
+    clear = "inspector.clear-search"
+    before = host.query("document.contentHash")
+    initial = host.workspace()
+    assert camera in initial["widgets"] and target not in initial["widgets"]
+
+    def search(query):
+        host.click("inspector.search")
+        host.call("input", event={"action": "text", "text": query})
+        host.frames()
+        return host.workspace()["widgets"]
+
+    widgets = search("target")
+    host.screenshot("inspector-field-search-" + workflow)
+    assert target in widgets, "Field search must reveal a match inside a collapsed component"
+    assert transform not in widgets
+    host.click(clear)
+    assert target not in host.workspace()["widgets"], "Clear must restore the original collapsed component"
+
+    for query in ("第三人称相机", "azure.third-person-camera"):
+        widgets = search(query)
+        assert target in widgets and transform not in widgets, query
+        host.click(clear)
+
+    widgets = search("no-component-matches-this")
+    assert "inspector.no-matches" in widgets and clear in widgets
+    assert not any(name.startswith("component.azure.") for name in widgets)
+    host.screenshot("inspector-empty-search-" + workflow)
+    host.click(clear)
+    after = host.workspace()
+    assert target not in after["widgets"] and transform in after["widgets"]
+    assert after["selection"] == initial["selection"]
+    assert after["undoCount"] == initial["undoCount"] and after["dirty"] == initial["dirty"]
+    assert host.query("document.contentHash") == before
+
+
 def run_case(executable, output, workflow):
     project = output / "project"
     if workflow == "exploration":
@@ -115,6 +154,7 @@ def run_case(executable, output, workflow):
         choose(host)
         original_hash = host.query("document.contentHash")
         initial_undo = host.workspace()["undoCount"]
+        check_inspector_search(host, workflow)
         check_drag_cancel(host, workflow)
         host.click("save")
         assert saved_positions() == dict(zip([*ids, "multi-c"], positions))
@@ -190,7 +230,7 @@ def run_case(executable, output, workflow):
     return {"workflow": workflow, "passed": True, "targets": ids, "untouched": "multi-c",
             "axisPreservesMixedYZ": True, "singleObjectControlsDisabled": True,
             "referenceEscapeAndFocusCancel": True, "referenceCapturedOwners": True,
-            "undoRedo": True, "saveReopen": True, "physicalInput": False}
+            "inspectorSearchAndClear": True, "undoRedo": True, "saveReopen": True, "physicalInput": False}
 
 
 if __name__ == "__main__":

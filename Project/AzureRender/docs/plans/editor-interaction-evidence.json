@@ -231,6 +231,20 @@
     "archiveSha256": "ff997945b8ffc7fa949a7647dade9b5aef6562f98721c349cdb044848fc4667d",
     "physicalInput": false
   },
+  "inspectorSearch20261119": {
+    "productionBaseline": "f0de6d0",
+    "configuration": "Release",
+    "dispatch": [2245, 2246],
+    "baselineExpectedFailure": true,
+    "candidateExecutableSha256": "dfc86035cd88d2a660b920c372454a714cad14475028151eea72314d3547d569",
+    "cpuCasesPassed": 4,
+    "workflowsPassed": ["exploration", "inspector"],
+    "results": "editor-inspector-search-2026-11-19/results.json",
+    "resultsSha256": "61527395392765136ee0f195ed7548abeb9a4ae9769f0d14bc47bb4316026c38",
+    "archive": "editor-inspector-search-2026-11-19/verification.zip",
+    "archiveSha256": "7166a040b6c5c2d488c6ed91f8f4274871d185db8ea62ecc17aeff56b41126f4",
+    "physicalInput": false
+  },
   "propertyDragCancel20261119": {
     "productionBaseline": "5fccef9",
     "fixtureBaseline": "32e56f9",

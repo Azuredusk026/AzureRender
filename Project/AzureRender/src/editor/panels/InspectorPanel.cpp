@@ -32,7 +32,20 @@ void InspectorPanel::draw(PanelContext& panelContext) {
     setFallbackPanelRect(0.76F, 0.0F, 0.24F, 0.72F);
 #endif
     if(!ImGui::Begin(ui::tr("属性###inspector"),services_.workspace.open("inspector"))){ImGui::End();return;}
-    ui::searchField("##Property filter",ui::tr("搜索组件或属性"),this->presentation.propertyFilter_);services_.observe("inspector.search");
+    auto& filter=presentation.propertyFilter_;
+    const auto* clearSearch=ui::tr("清除搜索");
+    const auto clearWidth=ui::buttonWidth(clearSearch);
+    const auto searchWidth=filter.IsActive()
+        ?std::max(1.F,ImGui::GetContentRegionAvail().x-clearWidth-ImGui::GetStyle().ItemSpacing.x)
+        :-1.F;
+    ui::searchField("##Property filter",ui::tr("搜索组件或属性"),filter,searchWidth);
+    services_.observe("inspector.search");
+    if(filter.IsActive()){
+        ui::nextToolbarItem(clearWidth);
+        if(ui::button(clearSearch))filter.Clear();
+        services_.observe("inspector.clear-search");
+    }
+    const bool searching=filter.IsActive();
     ImGui::BeginDisabled(services_.session.playing() || services_.session.building());
     if(services_.session.playing()||services_.session.building())ui::statusText(ui::tr("当前会话保护文档写入"),ui::StatusKind::Warning);
     const auto selected=view.selectedNode()?std::optional<SceneNode>(*view.selectedNode()):std::nullopt;
@@ -89,19 +102,36 @@ void InspectorPanel::draw(PanelContext& panelContext) {
                 (void)descriptor;if(type!="azure.transform"&&type!="azure.renderable")types.push_back(type);
             }
         }
+        bool hasMatches=false;
         for(const auto& type:types) {
             const auto fields=PropertyEditorRegistry::selection(view,owners,type);if(fields.empty())continue;
-            ImGui::PushID(type.c_str());
             const auto description=runtimeComponentRegistry().describe(type);
-            const bool open=ImGui::CollapsingHeader(ui::tr(description.at("label").get<std::string>().c_str()),type=="azure.transform"?ImGuiTreeNodeFlags_DefaultOpen:0);
+            const auto& label=description.at("label").get_ref<const std::string&>();
+            const auto* translated=ui::tr(label.c_str());
+            std::vector<const reflection::Property*> visibleFields;
+            const auto componentTerms=type+" "+label+" "+translated;
+            for(const auto& field:runtimeComponentRegistry().metadata().type(type).properties){
+                if(!field.toolVisible)continue;
+                if(searching){
+                    const auto terms=componentTerms+" "+field.name+" "+field.label+" "+ui::tr(field.label.c_str());
+                    if(!filter.PassFilter(terms.c_str()))continue;
+                }
+                visibleFields.push_back(&field);
+            }
+            if(visibleFields.empty())continue;
+            hasMatches=true;
+            ImGui::PushID(type.c_str());
+            const auto headerFlags=searching?ImGuiTreeNodeFlags_Leaf:
+                type=="azure.transform"?ImGuiTreeNodeFlags_DefaultOpen:ImGuiTreeNodeFlags_None;
+            const bool open=ImGui::CollapsingHeader(translated,headerFlags);
             services_.observe("component."+type);
             if(ImGui::BeginPopupContextItem(ui::tr("Component actions"))) {
                 if(description.at("removable").get<bool>()&&ImGui::MenuItem(ui::tr("移除组件"),nullptr,false,owners.size()==1))services_.session.edit("component.remove",{{"type",type}});
                 services_.observe("component.remove."+type);ImGui::EndPopup();
             }
-            if(open)for(const auto& field:runtimeComponentRegistry().metadata().type(type).properties) {
-                if(!field.toolVisible)continue;
-                if(this->presentation.propertyFilter_.IsActive()&&!this->presentation.propertyFilter_.PassFilter(field.label.c_str())&&!this->presentation.propertyFilter_.PassFilter(ui::tr(field.label.c_str()))&&!this->presentation.propertyFilter_.PassFilter(field.name.c_str())&&!this->presentation.propertyFilter_.PassFilter(description.at("label").get_ref<const std::string&>().c_str()))continue;ImGui::PushID(field.name.c_str());
+            if(open)for(const auto* property:visibleFields) {
+                const auto& field=*property;
+                ImGui::PushID(field.name.c_str());
                 const auto& state=fields.at(field.name);ImGui::BeginDisabled(!state.at("editable").get<bool>());
                 PropertyEditEvent event;event.value=state.at("value");
                 if(field.reference.empty()) {
@@ -168,6 +198,10 @@ void InspectorPanel::draw(PanelContext& panelContext) {
                 for(const auto& error:services_.session.feedback().report())if(error.at("source")=="component.batch-field"&&error.at("message").get<std::string>().find(field.name)!=std::string::npos)ui::resultMessage(error.at("message").get<std::string>(),true);
                 ImGui::PopID();
             }ImGui::PopID();
+        }
+        if(searching&&!hasMatches){
+            ui::statusText(ui::tr("没有匹配的组件或属性"),ui::StatusKind::Neutral);
+            services_.observe("inspector.no-matches");
         }
         if(view.isProject()){
             ImGui::Separator();ImGui::BeginDisabled(owners.size()!=1);

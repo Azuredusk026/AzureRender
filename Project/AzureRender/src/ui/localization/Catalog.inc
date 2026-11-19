@@ -75,6 +75,7 @@
 {"搜索对象名称或标识","Search object name or ID"},
 {"搜索日志","Search logs"},
 {"搜索组件或属性","Search components or properties"},
+{"没有匹配的组件或属性","No matching components or properties"},
 {"搜索问题","Search problems"},
 {"搜索项目","Search projects"},
 {"撤销","Undo"},

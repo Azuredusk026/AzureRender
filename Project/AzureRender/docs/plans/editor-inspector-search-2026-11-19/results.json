@@ -1,0 +1,190 @@
+{
+  "baselineCommit": "f0de6d01be9d275d4b94d176acc0f631573592f6",
+  "configuration": "Release",
+  "baselineExecutableSha256": "096c283872c08d3f497098598c1eeb554f1b554a191f03bcbf8d0688bbe7c215",
+  "candidateExecutableSha256": "dfc86035cd88d2a660b920c372454a714cad14475028151eea72314d3547d569",
+  "dispatch": [
+    {
+      "id": 2245,
+      "exitCode": 1,
+      "expectedFailure": true
+    },
+    {
+      "id": 2246,
+      "exitCode": 0
+    }
+  ],
+  "cases": [
+    {
+      "workflow": "exploration",
+      "passed": true,
+      "targets": [
+        "multi-a",
+        "multi-b"
+      ],
+      "untouched": "multi-c",
+      "axisPreservesMixedYZ": true,
+      "singleObjectControlsDisabled": true,
+      "referenceEscapeAndFocusCancel": true,
+      "referenceCapturedOwners": true,
+      "inspectorSearchAndClear": true,
+      "undoRedo": true,
+      "saveReopen": true,
+      "physicalInput": false
+    },
+    {
+      "workflow": "inspector",
+      "passed": true,
+      "targets": [
+        "multi-a",
+        "multi-b"
+      ],
+      "untouched": "multi-c",
+      "axisPreservesMixedYZ": true,
+      "singleObjectControlsDisabled": true,
+      "referenceEscapeAndFocusCancel": true,
+      "referenceCapturedOwners": true,
+      "inspectorSearchAndClear": true,
+      "undoRedo": true,
+      "saveReopen": true,
+      "physicalInput": false
+    }
+  ],
+  "cpuPassed": 4,
+  "physicalInput": false,
+  "archiveSha256": "7166a040b6c5c2d488c6ed91f8f4274871d185db8ea62ecc17aeff56b41126f4",
+  "files": [
+    {
+      "path": "baseline/exploration/evidence.json",
+      "sha256": "ff8751e32c958d87e64fe625581d6d92b3b9f2ef8c8b6fcfaeb0b88bdc275b65"
+    },
+    {
+      "path": "baseline/exploration/inspector-field-search-exploration.png",
+      "sha256": "a8cecb372264776767604d94a9e28bdb24c786388cd7789d7216deb37b4c53c4"
+    },
+    {
+      "path": "baseline/exploration/runtime.json",
+      "sha256": "bba200b84db8ffa3fa865dbd5a81bae16539b54408889f1243b0f27905a7aab2"
+    },
+    {
+      "path": "baseline/exploration/stderr.log",
+      "sha256": "8be832a9fe2dc3e406c576da16559866ababf4e63080e3a1d35aaad5df432876"
+    },
+    {
+      "path": "baseline/exploration/stdout.log",
+      "sha256": "3a0dc81db5f6dcea0f10e3d5644f532935f9003e7eea72eca7c1e59fdae0c1ad"
+    },
+    {
+      "path": "candidate/exploration/evidence.json",
+      "sha256": "b99354a812d1259e0138c7c11da4c7153b5348a35d97c25ebb2bf4830372b105"
+    },
+    {
+      "path": "candidate/exploration/inspector-empty-search-exploration.png",
+      "sha256": "85c66063108f474ac39b8136f97d94dd1c603d74b7bfafe04de38c95165e522b"
+    },
+    {
+      "path": "candidate/exploration/inspector-field-search-exploration.png",
+      "sha256": "51994771772fb0eda0c438c9053966f5c4aecaaab3d1c028e6642f9e9c3be2b5"
+    },
+    {
+      "path": "candidate/exploration/reopen/evidence.json",
+      "sha256": "81b2f8724e2b9be0962949d17ba09d327db9ecb0df7d378c885d701bdb1216ce"
+    },
+    {
+      "path": "candidate/exploration/reopen/runtime.json",
+      "sha256": "8ec5019d0305eb1624a7d838f89868e956feb47d549d2c9647ff1f03fbd17f5a"
+    },
+    {
+      "path": "candidate/exploration/runtime.json",
+      "sha256": "21daeeb9e909e05dc2cece50e8bcfefbb6ffc65bc92c34e943faf3c90a511747"
+    },
+    {
+      "path": "candidate/exploration/stderr.log",
+      "sha256": "864a498229d6607500727c43f36dcbf6f522746d698c5a74d0618a8f27e41b73"
+    },
+    {
+      "path": "candidate/exploration/stdout.log",
+      "sha256": "05893fc7ed87f980d70bd33adf915951ef5ae8fcfd808134efff6aa2ae28b7c2"
+    },
+    {
+      "path": "candidate/inspector/evidence.json",
+      "sha256": "58feb76848c4c4dece425a0755446dfee1f20e2aee284b6828d5ed28daa57a8b"
+    },
+    {
+      "path": "candidate/inspector/inspector-empty-search-inspector.png",
+      "sha256": "3609c36a2acd8b4c78b9d723ce72d8d7f3641526c063016f97aff3229f5012f3"
+    },
+    {
+      "path": "candidate/inspector/inspector-field-search-inspector.png",
+      "sha256": "b5278045003bdd649fada4cd4ff3396d325355bef2771ad1eebc7f9013a6aca4"
+    },
+    {
+      "path": "candidate/inspector/reopen/evidence.json",
+      "sha256": "3ae26133ade99c7f2d97f1e68e3d6e2f3535ca2ded39b94b10bd9c136224a181"
+    },
+    {
+      "path": "candidate/inspector/reopen/runtime.json",
+      "sha256": "0424025441bd2f44c873d7a193d642435f2c1d79d242db522d340668afc1cb71"
+    },
+    {
+      "path": "candidate/inspector/runtime.json",
+      "sha256": "2f91e1fa6138db8dcc19eb1a0dde2312c09054fbdec08e3c854b62ebee0234ba"
+    },
+    {
+      "path": "candidate/inspector/stderr.log",
+      "sha256": "a5f28a0fc973c85f4a23d0b5437e5b63fc517846be30180d1e38343fa50d1b12"
+    },
+    {
+      "path": "candidate/inspector/stdout.log",
+      "sha256": "57d96d5baa5b0b41d915a70595b6f0e128943254b98a68f83b1d3196fedc5d12"
+    },
+    {
+      "path": "candidate/summary.json",
+      "sha256": "efe0a85013970a8edf8bbc9bb7afb6109437aa6e31c936fe8c00710d27ea96df"
+    },
+    {
+      "path": "source/src/editor/panels/InspectorPanel.cpp",
+      "sha256": "9846c36c2315b6cee3139a875c0040ea7616d8d5bac53c5fb64c165a7c03ecde"
+    },
+    {
+      "path": "source/src/ui/localization/Catalog.inc",
+      "sha256": "e1d857f8a114685e0407fea273262068fe30b9931ab21ab0a540f6e30b16f583"
+    },
+    {
+      "path": "source/tools/test_editor_multi_properties.py",
+      "sha256": "ce5cdd53a8db6bc8369c4b00b6c6bec7c08e325f74cb4889a3ab13dde3b5579d"
+    },
+    {
+      "path": "verification/archive.py",
+      "sha256": "30d88b581110661f9ac17defef461440a0eb6cbcdf2aa4bc4c8287ea6448a042"
+    },
+    {
+      "path": "verification/baseline.log",
+      "sha256": "e5ebd5687fafde6984252e65d2af9f2062427787e6d12422678e9466d8d97fbb"
+    },
+    {
+      "path": "verification/build.log",
+      "sha256": "34970d035e66c8df5ada3619142d02d2f668d2808eb7e6592169c961d594dbf6"
+    },
+    {
+      "path": "verification/candidate-steps.json",
+      "sha256": "18750b9dcb9e57256ad2f68b6d1662d08d6f94f910bf31a4e6a8f89cbd85f8fa"
+    },
+    {
+      "path": "verification/cpu.log",
+      "sha256": "44b04bb94671ed9887c97f951bdb1b73ef2646d6e6100c330648e7c9a657a5cf"
+    },
+    {
+      "path": "verification/gpu.log",
+      "sha256": "d16735b596e70f56dcb392d0a09083950dece2a0450ed9a47c0685545d170bf3"
+    },
+    {
+      "path": "verification/production.patch",
+      "sha256": "15d8fb6396f147ef40749cd6c4c6de795d91cb8ab6a8df3a8adb5780b3bed6c2"
+    },
+    {
+      "path": "verification/verify_candidate.py",
+      "sha256": "cd7f141bb41e97a36aebc955d49e374a6a4b8868cb9fd34191162d2aa2c272d1"
+    }
+  ]
+}
