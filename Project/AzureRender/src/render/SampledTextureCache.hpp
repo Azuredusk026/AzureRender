@@ -70,7 +70,7 @@ public:
     const SampledTextureCacheStatistics& statistics() const noexcept { return statistics_; }
 
 private:
-    SampledTextureBinding acquireImpl(const std::vector<std::uint8_t>& pixels,
+    SampledTextureBinding acquireImpl(const std::vector<std::uint8_t>* pixels,
                                      const SampledTextureUpload& upload,
                                      std::vector<std::uint8_t>* consumed,
                                      std::shared_ptr<const ImmutableBytes> prepared={});

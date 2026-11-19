@@ -114,13 +114,13 @@ SampledTextureCache::~SampledTextureCache() { clear(); }
 
 SampledTextureBinding SampledTextureCache::acquire(const std::vector<std::uint8_t>& pixels,
                                                  const SampledTextureUpload& request) {
-    return acquireImpl(pixels,request,nullptr);
+    return acquireImpl(&pixels,request,nullptr);
 }
 SampledTextureBinding SampledTextureCache::acquire(std::vector<std::uint8_t>&& pixels,
                                                  const SampledTextureUpload& request) {
-    return acquireImpl(pixels,request,&pixels);
+    return acquireImpl(&pixels,request,&pixels);
 }
-SampledTextureBinding SampledTextureCache::acquireImpl(const std::vector<std::uint8_t>& pixels,
+SampledTextureBinding SampledTextureCache::acquireImpl(const std::vector<std::uint8_t>* rawPixels,
                                                      const SampledTextureUpload& request,
                                                      std::vector<std::uint8_t>* consumed,
                                                      std::shared_ptr<const ImmutableBytes> prepared) {
@@ -151,25 +151,38 @@ SampledTextureBinding SampledTextureCache::acquireImpl(const std::vector<std::ui
     if(levels>fullLevels)throw std::invalid_argument("Texture mip count exceeds its extent");
     const auto baseBytes=byteCount(request.width,request.height,1);
     const auto residentBytes=byteCount(request.width,request.height,levels);
-    if((!request.mipLevels&&pixels.size()!=baseBytes)
-        ||(request.mipLevels==1&&pixels.size()<baseBytes)
-        ||(request.mipLevels>1&&pixels.size()!=baseBytes&&pixels.size()!=residentBytes))
+    const auto inputBytes=prepared?prepared->size():rawPixels->size();
+    if((!request.mipLevels&&inputBytes!=baseBytes)
+        ||(request.mipLevels==1&&inputBytes<baseBytes)
+        ||(request.mipLevels>1&&inputBytes!=baseBytes&&inputBytes!=residentBytes))
         throw std::invalid_argument("Texture pixel storage does not match its mip policy");
     if(!rhi_.supportsSampledImage(request.format,request.sampler.filter==VK_FILTER_LINEAR||request.sampler.effectiveMagFilter()==VK_FILTER_LINEAR))
         throw std::runtime_error("Device does not support the decoded texture sampling format");
     auto effective=request;
     effective.sampler.maxLod=std::min(effective.sampler.maxLod,float(levels-1));
     std::uint32_t bucket;
-    {TimedSection timer{statistics_.hashMs};bucket=prepared?prepared->bucket():contentBucket(pixels);}
-    if(!prepared)statistics_.hashedPixelBytes+=pixels.size();
+    {TimedSection timer{statistics_.hashMs};bucket=prepared?prepared->bucket():contentBucket(*rawPixels);}
+    if(!prepared)statistics_.hashedPixelBytes+=inputBytes;
+
+    // Prepared hits can compare immutable payloads before restoring bytes.
+    // Keep one restoration for raw comparisons and an eventual upload miss.
+    std::vector<std::uint8_t> decoded;
+    const auto readPixels = [&]() -> const std::vector<std::uint8_t>& {
+        if (!rawPixels) {
+            decoded = prepared->read();
+            rawPixels = &decoded;
+        }
+        return *rawPixels;
+    };
     {
     TimedSection timer{statistics_.matchMs};
     const auto matches=entries_.equal_range(bucket);
     for(auto at=matches.first;at!=matches.second;++at) {
         const auto& found=*at->second;
         if(!sameUpload(found.upload,effective))continue;
-        const bool sameIdentity=found.prepared?(prepared?found.prepared->equals(*prepared):found.prepared->equals(pixels))
-            :found.pixels==pixels;
+        const bool sameIdentity=found.prepared
+            ? (prepared ? found.prepared->equals(*prepared) : found.prepared->equals(*rawPixels))
+            : found.pixels==readPixels();
         if(sameIdentity) {
             ++statistics_.requests;++statistics_.hits;statistics_.requestedBytes+=residentBytes;
             if(consumed) {
@@ -183,6 +196,7 @@ SampledTextureBinding SampledTextureCache::acquireImpl(const std::vector<std::ui
 
     auto entry=std::make_unique<Entry>(allocator_,rhi_);
     entry->upload=effective;
+    const auto& pixels=readPixels();
     std::vector<std::uint8_t> filtered;
     const std::vector<std::uint8_t>* storage=&pixels;
     {
@@ -230,7 +244,6 @@ SampledTextureBinding SampledTextureCache::acquireImpl(const std::vector<std::ui
     entry->sampler=rhi_.createSampler(effective.sampler);
     }
     const SampledTextureBinding result{entry->view,entry->sampler};
-    const auto inputBytes=pixels.size();
     if(prepared)entry->prepared=std::move(prepared);
     else if(!consumed)entry->pixels=pixels;
     const auto inserted=entries_.emplace(bucket,std::move(entry));
@@ -262,8 +275,7 @@ SampledTextureBinding SampledTextureCache::acquirePrepared(std::shared_ptr<const
                                                  const SampledTextureUpload& request) {
     if(sealed_)throw std::logic_error("Sampled texture cache acquisition has finished");
     if(!prepared)throw std::invalid_argument("Immutable texture payload is required");
-    auto pixels=prepared->read();
-    return acquireImpl(pixels,request,nullptr,std::move(prepared));
+    return acquireImpl(nullptr,request,nullptr,std::move(prepared));
 }
 void SampledTextureCache::clear() noexcept { entries_.clear(); statistics_ = {}; sealed_=false; }
 }

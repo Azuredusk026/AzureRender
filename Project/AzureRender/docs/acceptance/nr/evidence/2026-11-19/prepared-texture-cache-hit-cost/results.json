@@ -1,0 +1,207 @@
+{
+  "baseline": "63523adb05b1244410d439f2573cee47edc18da7",
+  "perfScope": "One instrumented material-load comparison of the joint scene, not startup or FPS acceptance",
+  "pair": {
+    "reference": {
+      "elapsed": 112.84409360000063,
+      "before": "595.79, NVIDIA GeForce RTX 4060 Laptop GPU, 59",
+      "after": "595.79, NVIDIA GeForce RTX 4060 Laptop GPU, 57",
+      "sceneLoad": {
+        "cpuPrepareMs": 55521.1334,
+        "meshUploadMs": 580.9068,
+        "materialUploadMs": 17577.3555,
+        "sharedTexturesMs": 345.4377,
+        "buffersMs": 110.7638,
+        "skinningMs": 4.1618,
+        "descriptorsMs": 69.2435,
+        "pipelinesMs": 967.8358,
+        "decodedMaterialPixelBytes": 6365826224,
+        "remainingMaterialPixelBytes": 8
+      },
+      "cache": {
+        "requests": 6169,
+        "hits": 5784,
+        "uniqueTextures": 385,
+        "requestedBytes": 8394487848,
+        "residentBytes": 1852081920,
+        "retainedPixelBytes": 0,
+        "releasedIdentityBytes": 1664821444,
+        "referencedPixelBytes": 1663587808,
+        "retainedIdentityStorageBytes": 0,
+        "releasedIdentityStorageBytes": 349767343,
+        "channelSavedBytes": 303475480,
+        "compactedTextures": 107,
+        "sealed": true,
+        "hashedPixelBytes": 3743632,
+        "copiedPixelBytes": 1048576,
+        "transferredPixelBytes": 185060,
+        "discardedPixelBytes": 412836,
+        "hashMs": 1.4547,
+        "matchMs": 2.0839,
+        "mipMs": 7978.8947,
+        "uploadMs": 1989.2401
+      },
+      "data": [
+        "Prepared read profile: requests=1443 hits=1094 bytes=6362082588 hitBytes=4698494780 readMs=5786.630000 hitReadMs=3971.915200"
+      ],
+      "preparedReads": {
+        "requests": 1443,
+        "hits": 1094,
+        "bytes": 6362082588,
+        "hitBytes": 4698494780,
+        "readMs": 5786.63,
+        "hitReadMs": 3971.9152
+      }
+    },
+    "candidate": {
+      "elapsed": 104.83286249999946,
+      "before": "595.79, NVIDIA GeForce RTX 4060 Laptop GPU, 57",
+      "after": "595.79, NVIDIA GeForce RTX 4060 Laptop GPU, 54",
+      "sceneLoad": {
+        "cpuPrepareMs": 48429.8897,
+        "meshUploadMs": 259.3957,
+        "materialUploadMs": 13316.8246,
+        "sharedTexturesMs": 361.0332,
+        "buffersMs": 97.54,
+        "skinningMs": 4.1411,
+        "descriptorsMs": 65.2097,
+        "pipelinesMs": 109.9351,
+        "decodedMaterialPixelBytes": 6365826224,
+        "remainingMaterialPixelBytes": 8
+      },
+      "cache": {
+        "requests": 6169,
+        "hits": 5784,
+        "uniqueTextures": 385,
+        "requestedBytes": 8394487848,
+        "residentBytes": 1852081920,
+        "retainedPixelBytes": 0,
+        "releasedIdentityBytes": 1664821444,
+        "referencedPixelBytes": 1663587808,
+        "retainedIdentityStorageBytes": 0,
+        "releasedIdentityStorageBytes": 349767343,
+        "channelSavedBytes": 303475480,
+        "compactedTextures": 107,
+        "sealed": true,
+        "hashedPixelBytes": 3743632,
+        "copiedPixelBytes": 1048576,
+        "transferredPixelBytes": 185060,
+        "discardedPixelBytes": 412836,
+        "hashMs": 1.125,
+        "matchMs": 1.2852,
+        "mipMs": 7930.1442,
+        "uploadMs": 1978.7388
+      },
+      "data": [
+        "Prepared read profile: requests=349 hits=0 bytes=1663587808 hitBytes=0 readMs=1786.128900 hitReadMs=0.000000"
+      ],
+      "preparedReads": {
+        "requests": 349,
+        "hits": 0,
+        "bytes": 1663587808,
+        "hitBytes": 0,
+        "readMs": 1786.1289,
+        "hitReadMs": 0.0
+      }
+    },
+    "identity": [
+      "requests",
+      "hits",
+      "uniqueTextures",
+      "requestedBytes",
+      "residentBytes",
+      "referencedPixelBytes",
+      "releasedIdentityBytes",
+      "releasedIdentityStorageBytes",
+      "channelSavedBytes",
+      "compactedTextures"
+    ],
+    "readsRemoved": 1094,
+    "bytesAvoided": 4698494780,
+    "readMsSaved": 4000.5011000000004,
+    "uploadStageMsSaved": 4260.530900000002
+  },
+  "release": {
+    "player": "93a39a49eeece58c369f93296a4327deb1d87d2c26ed838ddd4960e34e74ff60",
+    "cacheSource": "267150dd68f6dd6e30f49dd651d05da2526a9901871685321f9c6d03af2d37b9",
+    "cacheHeader": "2d5dea54e2b5c1ae58c4cf1bb4f23252e66b807dcbfc5e711eb2b48edb30e070"
+  },
+  "cpuChecks": 2,
+  "gpuCaptures": 4,
+  "jobs": [
+    {
+      "id": 2255,
+      "task": "prepared-cache-baseline-build",
+      "kind": "build",
+      "state": "budget-stopped",
+      "exit_code": 1,
+      "reason": "managed-pool-limit",
+      "run_seconds": 7.0
+    },
+    {
+      "id": 2258,
+      "task": "prepared-cache-baseline-build-budget-fixed",
+      "kind": "build",
+      "state": "succeeded",
+      "exit_code": 0,
+      "reason": null,
+      "run_seconds": 5.3290000000015425
+    },
+    {
+      "id": 2259,
+      "task": "prepared-cache-baseline-scene",
+      "kind": "gpu",
+      "state": "succeeded",
+      "exit_code": 0,
+      "reason": null,
+      "run_seconds": 115.03099999999904
+    },
+    {
+      "id": 2260,
+      "task": "prepared-cache-candidate-profile-build",
+      "kind": "build",
+      "state": "succeeded",
+      "exit_code": 0,
+      "reason": null,
+      "run_seconds": 18.01599999999962
+    },
+    {
+      "id": 2261,
+      "task": "prepared-cache-candidate-scene",
+      "kind": "gpu",
+      "state": "succeeded",
+      "exit_code": 0,
+      "reason": null,
+      "run_seconds": 109.28199999999924
+    },
+    {
+      "id": 2262,
+      "task": "prepared-cache-release-build",
+      "kind": "build",
+      "state": "succeeded",
+      "exit_code": 0,
+      "reason": null,
+      "run_seconds": 7.764999999999418
+    },
+    {
+      "id": 2263,
+      "task": "prepared-cache-release-regression",
+      "kind": "gpu",
+      "state": "succeeded",
+      "exit_code": 0,
+      "reason": null,
+      "run_seconds": 30.09400000000096
+    }
+  ],
+  "protectedFiles": 29,
+  "budgetRecovery": "Cleared verified prior-run NuGet HTTP cache using the SDK cache command; resumed guarded Release build and verified final Player",
+  "inputProof": {
+    "candidatePreAndPostHashes": 1729,
+    "sameSceneCommands": true
+  },
+  "archive": {
+    "sha256": "76176095bd8165935b82629ea4c9063219cbebf536e5007182cf4bfdff60dbef",
+    "members": 29,
+    "bytes": 35638
+  }
+}
