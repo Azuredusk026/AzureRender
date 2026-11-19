@@ -1,0 +1,439 @@
+{
+  "baseline": "f7f9e072f4975a580fba87c65e0579e15710dc6b",
+  "frozenPlayer": {
+    "raySource": "6738365",
+    "playerSha256": "1a30d925a674ddb1d95876cb80181106a0217e12a7228a35b5980b134954cb69",
+    "projectSha256": "b5339a45d2f7ae9c4011af3463ab9e5996462a7825166d1034c96654630a88a8",
+    "levelSha256": "d99683193ef5aa3fd002bb4075b2a01639c1bd1a463df9fa484a4ea22944ce7e",
+    "baseCommit": "fe5ba3b982cdd739b6396c09256aca7f96a6ccde"
+  },
+  "bindings": {
+    "native": {
+      "frame": 3534,
+      "event": 8702,
+      "captureSha256": "5bf129d05acb43d41ab54042f6648c3d728decb253c94d0250037f01f0b778b3",
+      "programSha256": "9874977ebc47e87ed0a006b7bebd51f525126c4f584bc4a6abc95282ba291faa",
+      "historySha256": "9667b36a4cf8716ca807be9a5ea270b47c8981fd38427dc22304e649ffa679a8"
+    },
+    "player": {
+      "frame": 1,
+      "event": 21062,
+      "captureSha256": "1d61e0a2e9d19de837d96fd6115807c1c19334159f911b38677de634168fa2d6",
+      "programSha256": "9b77643b12d533f69e7a159ba975dfaf75e56253429371d6f7470ea6a567e20a",
+      "historySha256": "5cc5b9c15a1d7da9fe48439cc530cb309bf88d7ddd42ccbf7849077efde8034d"
+    }
+  },
+  "queue": [
+    {
+      "id": 2281,
+      "task": "nr-reflection-history-address-readback",
+      "state": "succeeded",
+      "exit_code": 0,
+      "wait_seconds": 0.030999999999039574,
+      "run_seconds": 45.18800000000192
+    },
+    {
+      "id": 2284,
+      "task": "nr-reflection-hit-owner-and-mirror-control",
+      "state": "succeeded",
+      "exit_code": 0,
+      "wait_seconds": 5.15599999999904,
+      "run_seconds": 53.84400000000096
+    }
+  ],
+  "priorGates": {
+    "ssimMinimum": 0.95,
+    "luminanceMedianRelativeErrorMaximum": 0.1,
+    "newOutsideTolerancePixelsMaximum": 0,
+    "frozenFrames": 4,
+    "frozenRgbPixelTolerance": 0
+  },
+  "formalQuality": "open-on-reused-production-capture",
+  "results": {
+    "native": [
+      {
+        "anchor": [
+          1265,
+          1137
+        ],
+        "receiverDepthM": 4.803557235900213,
+        "hitSurfaceDepthM": 21.90502514913466,
+        "rayDepthM": 21.797601412948897,
+        "previousDepthM": 21.908656587311558,
+        "worldReprojectionErrorM": 0.11151786372991758,
+        "worldReprojectionThresholdM": 4.751354273577918,
+        "confidence": 255,
+        "hitDraw": 5868,
+        "hitFullResStorage": [
+          1265,
+          824
+        ],
+        "historyStorage": [
+          1264,
+          824
+        ],
+        "historyDisplay": [
+          1264,
+          615
+        ],
+        "historyRgb": [
+          3.03515625,
+          2.11328125,
+          0.494873046875
+        ],
+        "rayRgb": [
+          0.75,
+          0.5234375,
+          0.12109375
+        ],
+        "rayLuma": 0.54255546875
+      },
+      {
+        "anchor": [
+          1231,
+          1137
+        ],
+        "receiverDepthM": 4.803558525256932,
+        "hitSurfaceDepthM": 21.554540245787468,
+        "rayDepthM": 21.58224936060017,
+        "previousDepthM": 21.537870920467764,
+        "worldReprojectionErrorM": 0.04573280438401573,
+        "worldReprojectionThresholdM": 4.657934874631264,
+        "confidence": 255,
+        "hitDraw": 6383,
+        "hitFullResStorage": [
+          1230,
+          822
+        ],
+        "historyStorage": [
+          1231,
+          822
+        ],
+        "historyDisplay": [
+          1231,
+          617
+        ],
+        "historyRgb": [
+          0.047576904296875,
+          0.047393798828125,
+          0.048095703125
+        ],
+        "rayRgb": [
+          0.044921875,
+          0.044921875,
+          0.044921875
+        ],
+        "rayLuma": 0.044921875
+      },
+      {
+        "anchor": [
+          1537,
+          1137
+        ],
+        "receiverDepthM": 4.803548210422559,
+        "hitSurfaceDepthM": 15.846609790228198,
+        "rayDepthM": 17.26188110258702,
+        "previousDepthM": 15.847838855399585,
+        "worldReprojectionErrorM": 1.4413717175844807,
+        "worldReprojectionThresholdM": 2.979725391998508,
+        "confidence": 255,
+        "hitDraw": 6613,
+        "hitFullResStorage": [
+          1531,
+          786
+        ],
+        "historyStorage": [
+          1531,
+          788
+        ],
+        "historyDisplay": [
+          1531,
+          651
+        ],
+        "historyRgb": [
+          0.275390625,
+          0.24365234375,
+          0.2237548828125
+        ],
+        "rayRgb": [
+          0.21484375,
+          0.189453125,
+          0.171875
+        ],
+        "rayLuma": 0.19358203125
+      },
+      {
+        "anchor": [
+          1231,
+          1071
+        ],
+        "receiverDepthM": 5.966962333243663,
+        "hitSurfaceDepthM": 21.489376230796708,
+        "rayDepthM": 20.374495531587357,
+        "previousDepthM": 21.472807504301525,
+        "worldReprojectionErrorM": 1.0996095685327965,
+        "worldReprojectionThresholdM": 4.151200681666731,
+        "confidence": 255,
+        "hitDraw": 6383,
+        "hitFullResStorage": [
+          1230,
+          750
+        ],
+        "historyStorage": [
+          1231,
+          751
+        ],
+        "historyDisplay": [
+          1231,
+          688
+        ],
+        "historyRgb": [
+          0.03265380859375,
+          0.034088134765625,
+          0.035888671875
+        ],
+        "rayRgb": [
+          0.03125,
+          0.03271484375,
+          0.0341796875
+        ],
+        "rayLuma": 0.0325091796875
+      }
+    ],
+    "player": [
+      {
+        "anchor": [
+          1265,
+          1137
+        ],
+        "receiverDepthM": 4.803569569504484,
+        "hitSurfaceDepthM": 21.59830452020536,
+        "rayDepthM": 21.653493747438272,
+        "previousDepthM": 21.59830452020536,
+        "worldReprojectionErrorM": 0.05534177187910413,
+        "worldReprojectionThresholdM": 4.688737914703483,
+        "confidence": 255,
+        "hitDraw": 17129,
+        "hitFullResStorage": [
+          1263,
+          623
+        ],
+        "historyStorage": [
+          1263,
+          623
+        ],
+        "historyDisplay": [
+          1263,
+          623
+        ],
+        "historyRgb": [
+          0.08758544921875,
+          0.07879638671875,
+          0.07464599609375
+        ],
+        "rayRgb": [
+          0.080078125,
+          0.072265625,
+          0.068359375
+        ],
+        "rayLuma": 0.07364453125
+      },
+      {
+        "anchor": [
+          1231,
+          1137
+        ],
+        "receiverDepthM": 4.803569999292228,
+        "hitSurfaceDepthM": 17.735073606371703,
+        "rayDepthM": 17.728809340040648,
+        "previousDepthM": 17.735073606371703,
+        "worldReprojectionErrorM": 0.006277855579165509,
+        "worldReprojectionThresholdM": 3.1431068061551253,
+        "confidence": 255,
+        "hitDraw": 18575,
+        "hitFullResStorage": [
+          1231,
+          649
+        ],
+        "historyStorage": [
+          1230,
+          648
+        ],
+        "historyDisplay": [
+          1230,
+          648
+        ],
+        "historyRgb": [
+          0.39404296875,
+          0.982421875,
+          0.8583984375
+        ],
+        "rayRgb": [
+          0.197265625,
+          0.4921875,
+          0.4296875
+        ],
+        "rayLuma": 0.424974609375
+      },
+      {
+        "anchor": [
+          1537,
+          1137
+        ],
+        "receiverDepthM": 4.803572578020308,
+        "hitSurfaceDepthM": 9.14879215126494,
+        "rayDepthM": 8.87228002024985,
+        "previousDepthM": 9.150052017692548,
+        "worldReprojectionErrorM": 0.2838056028521718,
+        "worldReprojectionThresholdM": 0.7871735275772467,
+        "confidence": 255,
+        "hitDraw": 18599,
+        "hitFullResStorage": [
+          1533,
+          835
+        ],
+        "historyStorage": [
+          1532,
+          834
+        ],
+        "historyDisplay": [
+          1532,
+          834
+        ],
+        "historyRgb": [
+          0.0345458984375,
+          0.03118896484375,
+          0.037567138671875
+        ],
+        "rayRgb": [
+          0.033203125,
+          0.030029296875,
+          0.0361328125
+        ],
+        "rayLuma": 0.031144726562500002
+      },
+      {
+        "anchor": [
+          1231,
+          1071
+        ],
+        "receiverDepthM": 5.966977523365406,
+        "hitSurfaceDepthM": 21.50555295209992,
+        "rayDepthM": 21.51134340940418,
+        "previousDepthM": 21.50555295209992,
+        "worldReprojectionErrorM": 0.005796334313923347,
+        "worldReprojectionThresholdM": 4.627378952773166,
+        "confidence": 255,
+        "hitDraw": 17139,
+        "hitFullResStorage": [
+          1231,
+          687
+        ],
+        "historyStorage": [
+          1230,
+          686
+        ],
+        "historyDisplay": [
+          1230,
+          686
+        ],
+        "historyRgb": [
+          0.023834228515625,
+          0.0213470458984375,
+          0.01995849609375
+        ],
+        "rayRgb": [
+          0.023193359375,
+          0.020751953125,
+          0.01904296875
+        ],
+        "rayLuma": 0.021147607421875003
+      }
+    ],
+    "crossSource": [
+      {
+        "anchor": [
+          1265,
+          1137
+        ],
+        "nativeAtNative": 0.5433303363988382,
+        "nativeAtPlayer": 0.1081074528097201,
+        "playerAtNative": 0.5266703859475507,
+        "playerAtPlayer": 0.07389330489926482,
+        "addressContribution": 0.44399998231870197,
+        "sourceContribution": 0.02543704918087141
+      },
+      {
+        "anchor": [
+          1231,
+          1137
+        ],
+        "nativeAtNative": 0.045304454926624736,
+        "nativeAtPlayer": 0.39059353664658636,
+        "playerAtNative": 0.0386860752829692,
+        "playerAtPlayer": 0.42795029556650244,
+        "addressContribution": -0.36727665100174745,
+        "sourceContribution": -0.01536918963813027
+      },
+      {
+        "anchor": [
+          1537,
+          1137
+        ],
+        "nativeAtNative": 0.19520553215926492,
+        "nativeAtPlayer": 0.05609523014959723,
+        "playerAtNative": 0.19149736892644514,
+        "playerAtPlayer": 0.031191382099473513,
+        "addressContribution": 0.14970814441831964,
+        "sourceContribution": 0.014306005641471749
+      },
+      {
+        "anchor": [
+          1231,
+          1071
+        ],
+        "nativeAtNative": 0.032738263021447084,
+        "nativeAtPlayer": 0.030859609822324538,
+        "playerAtNative": 0.024470272358508786,
+        "playerAtPlayer": 0.021268645861277535,
+        "addressContribution": 0.002540139848176899,
+        "sourceContribution": 0.00892947731199265
+      }
+    ]
+  },
+  "validation": {
+    "archiveSha256": "73083bc6e1983eea463b9a9b65c0f3d4b07bf0b76f6a0605edba89f3944c1d55",
+    "bytes": 117300,
+    "files": {
+      "verify.py": "2f7dca814ec518ef597ccff47ab7f6494dcb01f829744a8a5fe5b2ef8cfa6048",
+      "prepare.py": "7a7aef5e24e48884259886a082db9f94532b67be63f3f78fcb10b45f171e0633",
+      "replay.py": "f6ee562d03a0abffd481981cabb3fec7893376681bd05d8219208902be6233fb",
+      "owners.py": "d455042390c4b83dbe4d549c540faccc5cfd40cd6fc1e2ae5f5e428780653927",
+      "supplement.py": "3cf3a70fc15bd90a544bb5fffc5122f351c3bec24bf9a13727ebd1c9dba29ac0",
+      "collect_cross_source.py": "b60dafdce5055001126f2e9ee0524351b1477a5b78126bef9ede7db0e1a60083",
+      "ProjectedReflectionCameraGpuTests.cpp": "4d50aa33d90556bd1b534f30c7ab2990ac0ac0fb72c38470eaac1e8fa186a9c8",
+      "request.json": "8111232e002ef259717e68455f4cdd1ced3b0c3f4e2e8b4b345ca2cf25d04fb5",
+      "task-card.json": "0f2ca3a599f2dc274b8964fa9118852f5de405fea1cd95fd4c09ced9cd2704ef",
+      "budget.json": "37c2b6330846235419f129d0f2a1fdc9bebb253890d1bb9ed7d72d35e496a571",
+      "native.json": "6255c69270a3ae43aabffd3687349fb23e6ded887af42316f6e7e7fe207af0bf",
+      "player.json": "35922ca0ef6d36d03ac6287d533e1012bfca4ce2ab084ac3c8cc192235dabf47",
+      "native-owners.json": "a04ed80670a796a8f7ec3f1b097d0cdd3235b13baa1b30edad85b610dcb8fcd1",
+      "player-owners.json": "3fa01fd2719e70dd3d9617c6de44d236de40a9ed089f1c3d285c3bfd2a95ebc6",
+      "replay-status.json": "40856fa0455b8c247b3bee47720e1996f63abae0c39b88cf26a615c823bbe2a5",
+      "owners-status.json": "80d0a416e0bcd0887ae19659632bb0b67d5d42357842fb9cc61cf862c61bbed8",
+      "supplement.json": "80d0a416e0bcd0887ae19659632bb0b67d5d42357842fb9cc61cf862c61bbed8",
+      "queue-receipt.json": "a999551ee516c9de25ccb9bd0af21d5f1a3868d11b8977a4962cffafbc136059",
+      "fixture.json": "47cf1d6e3f91ffc48c32b73b2ad83c15800f8d07d7e3b7ef851c7f5c6c88da9a",
+      "cross-source.json": "c163b3ecd9f9d6c838942aaa20b9a84ae52a0b36987747b0d836387ae92de675",
+      "computed.json": "e5b4cd0beb8c08f14e4600e15b2e56998ec698f87141f2d720c1bb9f23317469",
+      "history-response-tracked.log": "4e46ac7b6a1af8c5f0da53d8f5d59b96a9a3db19a848f1ac34dc5bbdb33cf2cd",
+      "history-response-background.log": "75506bbfa722f1bbfa99f45e4e48d55af6c16e26a3f7e3e317f2816a053ddfe4",
+      "fixture/history-response-background/0.bin": "b6413db8a31300e24a269c7768253e884dca954c48c079aac8e1389f76de8e6b",
+      "fixture/history-response-background/1.bin": "f2f387be1f4d796b6b76b5c19b2af31b0d00a56b3173865b69d1547d121ab383",
+      "fixture/history-response-background/2.bin": "e2cc2a1fa6131cf4d86faa3baf78851f35a36853e2467c257b3df9d89e85cce5",
+      "fixture/history-response-tracked/0.bin": "b6413db8a31300e24a269c7768253e884dca954c48c079aac8e1389f76de8e6b",
+      "fixture/history-response-tracked/1.bin": "f2f387be1f4d796b6b76b5c19b2af31b0d00a56b3173865b69d1547d121ab383",
+      "fixture/history-response-tracked/2.bin": "ff4a934c42957a76a2096c2445a7953dffe12ac5b4950b208d0ff6ee5baa569b"
+    }
+  }
+}
