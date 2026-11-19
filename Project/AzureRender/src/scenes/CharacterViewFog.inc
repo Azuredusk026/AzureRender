@@ -11,8 +11,9 @@ struct CharacterSceneRenderer::ViewFogState {
     FogViewMatch match=FogViewMatch::Disabled;
     std::array<VkPipeline,2> surface{};
     std::array<std::array<std::array<VkPipeline,4>,2>,2> materials{};
-    ViewFogState(rhi::IRhi& rhi,const ViewFogBinding& binding,unsigned frames)
-        :backend(rhi),gpu(rhi,binding,sceneFogVolume(binding),frames){}
+    ViewFogState(rhi::IRhi& rhi,const ViewFogBinding& binding,unsigned frames,const std::string& shaderDirectory)
+        :backend(rhi),gpu(rhi,binding,sceneFogVolume(binding),frames,binding.generatedHeightVolume
+            ?readBinaryFile(shaderDirectory+"/view_fog_generate.comp.spv"):std::vector<char>{}){}
     ~ViewFogState(){releasePipelines();}
     void releasePipelines() noexcept {
         for(auto& pipeline:surface){if(pipeline)backend.destroyPipeline(pipeline);pipeline=VK_NULL_HANDLE;}

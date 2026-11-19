@@ -2,25 +2,20 @@
 #define AZURE_VIEW_FOG_GLSL
 #include "fog_transport.glsl"
 #include "fog_view_projection.glsl"
-#include "fog_analytic.glsl"
-layout(std430,binding=34) readonly buffer ViewFogFrame {vec4 viewFogRows[21];};
+#include "view_fog_medium.glsl"
 layout(binding=35) uniform sampler3D viewFogVolume;
-void azureFogWorldRay(vec2 fragmentPixel,float depth,out vec3 origin,out vec3 position){
-    vec2 screen=vec2(2*fragmentPixel.x/viewFogRows[3].x-1,1-2*fragmentPixel.y/viewFogRows[3].y);
-    vec3 offset=viewFogRows[6].xyz*(screen.x-viewFogRows[8].x)+viewFogRows[7].xyz*(screen.y+viewFogRows[8].y);
-    bool ortho=viewFogRows[4].w>.5;origin=viewFogRows[4].xyz+(ortho?offset:vec3(0));
-    position=origin+(viewFogRows[5].xyz+(ortho?vec3(0):offset))*depth;
-}
 AzureFogTransport azureViewAnalyticFog(vec2 pixel,float depth){
-    vec3 origin,position;azureFogWorldRay(pixel,depth,origin,position);AzureFogTransport height=azureIdentityFog();
-    if(viewFogRows[8].w>.5&&depth>viewFogRows[8].z){
-        vec3 begin=mix(origin,position,viewFogRows[8].z/depth);
-        for(int i=0;i<2;++i)if(float(i)<viewFogRows[8].w)
-            height=azureComposeFogTransport(height,azureEvaluateHeightFog(viewFogRows[9+2*i].xyz,viewFogRows[10+2*i].xyz,begin,position));
-        float distance=length(position-origin);vec4 bias=viewFogRows[14];
-        float original=height.transmittance.x;
-        float adjusted=clamp(max(original,viewFogRows[13].x)+clamp(bias.x+distance*bias.y,0,1)+clamp(bias.z+distance*bias.w,0,1),0,1);
-        if(adjusted!=original){height.scattering*=original<1?(1-adjusted)/(1-original):0;height.transmittance=vec3(adjusted);}
+    vec2 unitPixel=pixel/viewFogRows[3].xy;
+    vec3 origin,position;
+    azureFogWorldRay(unitPixel,depth,origin,position);
+    AzureFogTransport height;
+    if(viewFogRows[13].z>.5&&depth>viewFogRows[8].z&&depth<=viewFogRows[13].w){
+        float slices=float(textureSize(viewFogVolume,0).z);
+        float fraction=log2(1+(depth-viewFogRows[8].z))/azureHeightFogLogDepthRange();
+        float slice=(clamp(fraction,0,1)*(slices-1)+.5)/slices;
+        height=azureFogVolumeTransport(textureLod(viewFogVolume,vec3(unitPixel,slice),0));
+    }else{
+        height=azureViewHeightFog(origin,position,depth);
     }
     AzureFogTransport air=azureIdentityFog();
     if(viewFogRows[13].y>.5){AzureAerialFog p;for(int i=0;i<6;++i)p.rows[i]=viewFogRows[15+i];air=azureEvaluateAerialFog(p,origin,position);}

@@ -12,7 +12,7 @@ GeneratedHeightFogGpu::GeneratedHeightFogGpu(rhi::IRhi& backend, std::array<unsi
     const std::vector<rhi::GpuBuffer>& frameParameters, const std::vector<char>& program)
     : backend_(backend), extent_(extent)
 {
-    if(extent[0]==0||extent[0]>64||extent[1]==0||extent[1]>64||extent[2]<2||extent[2]>128
+    if(!GeneratedHeightFogSettings::validDimensions(extent)
         ||frameParameters.empty()||frameParameters.size()>8)
         throw std::invalid_argument("Generated height fog requires bounded dimensions and frame slots");
     for(const auto& parameters:frameParameters)

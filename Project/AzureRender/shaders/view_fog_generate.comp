@@ -12,7 +12,7 @@ void main(){
     if(any(greaterThanEqual(voxel,size)))return;
     vec2 unitPixel=(vec2(voxel.xy)+.5)/vec2(size.xy);
     float depthFraction=float(voxel.z)/float(size.z-1);
-    float depth=viewFogRows[8].z+exp2(depthFraction*azureHeightFogLogDepthRange())-1;
+    float depth=viewFogRows[8].z+(exp2(depthFraction*azureHeightFogLogDepthRange())-1);
     vec3 origin,position;
     azureFogWorldRay(unitPixel,depth,origin,position);
     AzureFogTransport fog=azureViewHeightFog(origin,position,depth);

@@ -21,11 +21,25 @@ void ViewFogBinding::validate() const {
     if(enabled&&asset.empty()&&!analytic)throw std::invalid_argument("Enabled fog requires a volume or analytic medium");
     if(enabled&&!asset.empty()&&!captureView)throw std::invalid_argument("A captured fog volume requires its source view");
     if(captureView)(void)basis(*captureView);
+    if(generatedHeightVolume){
+        const auto& volume=*generatedHeightVolume;
+        if(!asset.empty()||captureView||!analytic||!analytic->height)
+            throw std::invalid_argument("Generated height fog requires height layers and an empty capture binding");
+        if(!GeneratedHeightFogSettings::validDimensions(volume.dimensions))
+            throw std::invalid_argument("Generated height fog dimensions are outside their domain");
+        const float range=volume.farViewDepth-analytic->height->startViewDepth;
+        if(!std::isfinite(volume.farViewDepth)||volume.farViewDepth>GeneratedHeightFogSettings::maximumViewDepth
+            ||1.F+range<=1.F)
+            throw std::invalid_argument("Generated height fog requires a representable positive view depth range");
+        for(const auto& layer:analytic->height->layers)
+            for(float color:layer.scatteringColor)
+                if(color>65504.F)throw std::invalid_argument("Generated height fog scattering exceeds RGBA16F");
+    }
 }
 FogViewMatch ViewFogBinding::match(const CameraViewDescriptor& current,float aspect) const {
     validate();if(!enabled)return FogViewMatch::Disabled;
     if(!std::isfinite(aspect)||aspect<=0)throw std::invalid_argument("Fog view aspect must be finite and positive");
-    if(asset.empty()){(void)basis(current);return FogViewMatch::AnalyticOnly;}
+    if(asset.empty()){(void)basis(current);return generatedHeightVolume?FogViewMatch::GeneratedHeight:FogViewMatch::AnalyticOnly;}
     const auto a=basis(*captureView),b=basis(current);const auto& reference=*captureView;
     if(current.projection!=reference.projection)return FogViewMatch::CameraMismatch;
     for(unsigned i=0;i<3;++i)if(std::abs(double(current.position[i])-reference.position[i])>1e-4||std::abs(a[0][i]-b[0][i])>1e-5||std::abs(a[1][i]-b[1][i])>1e-5)return FogViewMatch::CameraMismatch;
@@ -36,7 +50,7 @@ FogViewMatch ViewFogBinding::match(const CameraViewDescriptor& current,float asp
     return std::abs(aspect-expected)>1e-5*std::max(1.,expected)?FogViewMatch::AspectMismatch:FogViewMatch::Matched;
 }
 std::string_view fogViewMatchName(FogViewMatch state) noexcept {
-    switch(state){case FogViewMatch::Disabled:return "disabled";case FogViewMatch::Matched:return "matched";case FogViewMatch::CameraMismatch:return "camera-mismatch";case FogViewMatch::AspectMismatch:return "aspect-mismatch";case FogViewMatch::AnalyticOnly:return "analytic-only";}
+    switch(state){case FogViewMatch::Disabled:return "disabled";case FogViewMatch::Matched:return "matched";case FogViewMatch::CameraMismatch:return "camera-mismatch";case FogViewMatch::AspectMismatch:return "aspect-mismatch";case FogViewMatch::AnalyticOnly:return "analytic-only";case FogViewMatch::GeneratedHeight:return "generated-height";}
     return "unknown";
 }
 }

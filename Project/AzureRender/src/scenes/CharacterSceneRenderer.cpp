@@ -616,7 +616,7 @@ void CharacterSceneRenderer::initializeLoad(const RenderContext& context) {
         loadedAnimations_.emplace_back(asset_);
         for(const auto& resource:additionalResources_)loadedAnimations_.emplace_back(resource->asset);
         createUniformBuffers(referenceObjectRaster,maximumSamplerLodBias);createJointBuffers();
-        if(scene_.viewFog.enabled)viewFog_=std::make_unique<ViewFogState>(*rhi_,scene_.viewFog,static_cast<unsigned>(kMaxFramesInFlight));
+        if(scene_.viewFog.enabled)viewFog_=std::make_unique<ViewFogState>(*rhi_,scene_.viewFog,static_cast<unsigned>(kMaxFramesInFlight),shaderDirectory_);
     },true);
     enqueue("skinning",loadTimings_.skinningMs,[this]{createComputeSkinningResources();createOitIndexBuffers();},true);
     enqueue("descriptors",loadTimings_.descriptorsMs,[this,context]{createOverlayDepth(context);if(objectShadowPrepared_){objectShadowAtlas_=std::make_unique<ObjectShadowAtlas>(*rhi_);objectShadowAtlas_->initialize();}for(auto& bounds:shadowBounds_){bounds=std::make_unique<ShadowTileBounds>(*rhi_);bounds->initialize(readBinaryFile(shaderDirectory_+(kShadowBoundsTilesPerGroup==8?"/shadow_bounds_batch.comp.spv":"/shadow_bounds.comp.spv")),shadowImageView_,shadowSampler_,context.shadowMapSize,objectShadowPrepared_?kObjectShadowCapacity:0,kShadowBoundsTilesPerGroup);}createDescriptorSetLayout();createDescriptorPool();createDescriptorSets();},true);
@@ -1303,7 +1303,11 @@ void CharacterSceneRenderer::registerPasses(
     const auto morphWeightResource=importHostStorage("character-morph-weights",morphWeightBuffers_[context.currentFrame]);
     const auto instanceResource=importHostStorage("character-instances-v2",instanceBuffers_[context.currentFrame]);
     std::optional<RenderGraph::ResourceId> fogResource;
-    if(viewFog_)fogResource=importHostStorage("character-view-fog-v1",viewFog_->gpu.parameters(context.currentFrame));
+    std::optional<RenderGraph::ResourceId> generatedFog;
+    if(viewFog_){
+        fogResource=importHostStorage("character-view-fog-v1",viewFog_->gpu.parameters(context.currentFrame));
+        generatedFog=viewFog_->gpu.addGenerationPass(graph,context.currentFrame,*fogResource);
+    }
     const auto clusterHeaderResource = importHostStorage(
         "character-cluster-headers",
         clusterHeaderBuffers_[context.currentFrame]);
@@ -1769,6 +1773,7 @@ void CharacterSceneRenderer::registerPasses(
     if(reflectionResource)graph.read(main,*reflectionResource);
     if(fogResource){
         graph.use(main,*fogResource,RenderGraphUsage::FragmentStorage,false);
+        if(generatedFog)graph.use(main,*generatedFog,RenderGraphUsage::Sampled,false);
         if(snapshotMultisampling_)graph.use(main,snapshotSources[2],RenderGraphUsage::Sampled,false);
     }
     if(outlineMaskResource)graph.use(main,*outlineMaskResource,RenderGraphUsage::Sampled,false);
@@ -1829,6 +1834,19 @@ void CharacterSceneRenderer::registerPasses(
 void CharacterSceneRenderer::recordScene(const RenderContext& context) {
     if (!instanceSnapshot_) throw std::logic_error("Direct recording requires a prepared snapshot");
     instanceSnapshot_->validateForRecording();
+    if(viewFog_){
+        const auto& buffer=viewFog_->gpu.parameters(context.currentFrame);
+        const rhi::BufferBarrierDesc before{buffer.buffer,0,buffer.size,0,VK_PIPELINE_STAGE_HOST_BIT,0,VK_ACCESS_HOST_WRITE_BIT};
+        RenderGraph fogGraph;
+        const auto parameters=fogGraph.importBuffer("character-view-fog-v1",before);
+        const auto generated=viewFog_->gpu.addGenerationPass(fogGraph,context.currentFrame,parameters);
+        const auto surface=fogGraph.addPass("character-view-fog-ready");
+        fogGraph.use(surface,parameters,RenderGraphUsage::FragmentStorage,false);
+        if(generated)fogGraph.use(surface,*generated,RenderGraphUsage::Sampled,false);
+        std::string error;
+        if(!fogGraph.compile(error))throw std::logic_error(error);
+        fogGraph.execute(context.commands);
+    }
     if(surfaceRadiance_&&surfaceRadiance_->statisticsEnabled()){const auto& buffer=surfaceRadiance_->statisticsBuffer(context.currentFrame);
         context.commands->bufferBarrier({buffer.buffer,0,buffer.size,VK_PIPELINE_STAGE_HOST_BIT,VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT,
             VK_ACCESS_HOST_WRITE_BIT,VK_ACCESS_SHADER_READ_BIT|VK_ACCESS_SHADER_WRITE_BIT});}
@@ -2236,6 +2254,11 @@ void CharacterSceneRenderer::appendCaptureManifestFields(
          << "  \"unlitFrameLayoutVersion\": 1,\n"
          << "  \"viewFogEnabled\": " << (viewFog_?"true":"false") << ",\n"
          << "  \"viewFogAnalyticEnabled\": " << (viewFog_&&scene_.viewFog.analytic?"true":"false") << ",\n"
+         << "  \"viewFogGeneratedHeightEnabled\": " << (viewFog_&&scene_.viewFog.generatedHeightVolume?"true":"false") << ",\n"
+         << "  \"viewFogGeneratedHeightDimensions\": " << (viewFog_&&scene_.viewFog.generatedHeightVolume
+             ?nlohmann::json(scene_.viewFog.generatedHeightVolume->dimensions).dump():"null") << ",\n"
+         << "  \"viewFogGeneratedHeightFarViewDepth\": " << (viewFog_&&scene_.viewFog.generatedHeightVolume
+             ?nlohmann::json(scene_.viewFog.generatedHeightVolume->farViewDepth).dump():"null") << ",\n"
          << "  \"viewFogFrameBytes\": " << sizeof(PackedViewFogFrame) << ",\n"
          << "  \"viewFogMatch\": \"" << fogViewMatchName(viewFog_?viewFog_->match:FogViewMatch::Disabled) << "\",\n"
          << "  \"viewFogFrameLayoutVersion\": " << PackedViewFogFrame::layoutVersion << ",\n"

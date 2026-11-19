@@ -1081,6 +1081,7 @@ Windows 安装路径及隔离 Python 通过实测。
 [短射线雾效](2026-10-28-view-fog-composition.md#短射线雾效数值任务)通过双设备数值及四项场景对照。
 [双机位高度雾体积](2026-10-28-view-fog-composition.md#双机位高度雾体积验证任务)通过原生加载及 72 帧往返。
 [实时高度雾生成](2026-10-28-view-fog-composition.md#实时高度雾体积生成任务)通过双设备体素、同步和槽位复验。
+[实时高度雾 Player 接入](2026-11-19-realtime-height-fog-player.md#player-接入任务)覆盖版本三绑定、画面采样和槽位发布。十帧相机及七十二帧关卡回放使用接入后的 Player 验收。
 
 双配置、真实片元与完整候选见[合成验收](../acceptance/nr/scene-fog.md)。
 阶段截图、机位和待验差异见[画面记录](../acceptance/nr/visual-history.md)。

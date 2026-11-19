@@ -1,7 +1,8 @@
 # 实时高度雾 Player 接入清单
 
 生成器基线为 `f3b364e`，双设备证据来自队列 2231。
-当前交付为接入清单，场景绑定及 Player 定向验收待执行。
+版本三场景绑定、生成及片元采样已接入渲染器。
+连续画面验收使用同源码构建的 Player。
 正式回归和 Steam 实机验收维持暂缓。
 
 ## 接入顺序
@@ -137,14 +138,9 @@ z = (t * (n - 1) + 0.5) / n
 
 ## 当前配额复核
 
-2026-11-19 的只读检查显示主池余 642915483 字节。
-1.5 GiB 预约还差 967697253 字节。
-房间计时设置任务于 11 月 20 日 01:18:08 达到保留期。
-该任务的登记占用为 1033570663 字节。
-
-维护按到期时的引用、标记和证据摘要判定回收资格。
-按快照推算，合格释放后主池余 1676486146 字节。
-开跑以实时 `artifact_budget.py` 结果和任务原子预约为准。
+独立 Player 构建预留 1.5 GiB。
+按实时 `artifact_budget.py` 结果创建受管任务。
+回收资格按保留期、活动引用、保护标记和证据摘要核定。
 
 ## 最小命令
 
@@ -162,9 +158,10 @@ $ctest = "$toolsDir/CMake/bin/ctest.exe"
 $ninja = "$toolsDir/Ninja/ninja.exe"
 $referenceRun = '20261119-025202-npr-original-room-registration-04ae4a'
 $generatorRun = '20261119-142326-realtime-height-fog-647ebb'
+$replayRun = '20261119-191404-realtime-fog-replay-inputs-226eaa'
 python -B "$main/tools/artifact_budget.py" --build "$main/build" --planned-bytes 1610612736
 if ($LASTEXITCODE -ne 0) { throw 'Player reservation is unavailable' }
-$task = python -B "$main/tools/artifact_cleanup.py" --new-run realtime-height-fog-player --planned-bytes 1610612736 --input-run $referenceRun --input-run $generatorRun
+$task = python -B "$main/tools/artifact_cleanup.py" --new-run realtime-height-fog-player --planned-bytes 1610612736 --input-run $referenceRun --input-run $generatorRun --input-run $replayRun
 if ($LASTEXITCODE -ne 0) { throw 'Player reservation is unavailable' }
 $runName = Split-Path $task -Leaf
 $build = Join-Path $task 'player-release'
@@ -180,8 +177,9 @@ if ($LASTEXITCODE -ne 0) { throw 'Player build failed' }
 ```
 
 绑定、所有权及生成短检沿用已有注册用例。
-随后生成配对的解析对照及生成绑定夹具。
-在接入后的 Player 中运行两条描述符路径。
+回放复用封存的解析对照及生成绑定。
+验证工具覆盖两条描述符路径、相机运动、四倍采样、关卡往返和独立机位对照。
+逐帧报告记录关卡切换、像素摘要和线性误差。
 
 ```powershell
 $env:PATH = "$deps/x64-windows/bin;$env:PATH"
@@ -192,38 +190,15 @@ python -B "$main/tools/artifact_budget.py" --build "$main/build" --run "$task" -
 if ($LASTEXITCODE -ne 0) { throw 'Fog capture reservation is unavailable' }
 python -B $queue run --build "$main/build" --owner npr-room --task realtime-height-fog-targeted-tests --run $runName --kind gpu --priority P1 --estimate 80 --timeout 240 --command $ctest --test-dir $build -R '^AzureRender\.(ViewFogBinding|ViewFogGpu|GeneratedHeightFogGpu)$' --output-on-failure
 if ($LASTEXITCODE -ne 0) { throw 'Targeted fog tests failed' }
-$env:TEMP = Join-Path $task 'tmp'
-$env:TMP = $env:TEMP
-$replay = Join-Path $task 'replay-inputs'
-python -B "$engine/tools/prepare_generated_height_fog_replay.py" --frozen-run "$main/build/runs/$referenceRun" --output $replay
-if ($LASTEXITCODE -ne 0) { throw 'Replay preparation failed' }
-foreach ($mode in 'analytic','generated') {
-    foreach ($binding in 'indexed','fixed') {
-        $fixture = Join-Path $replay "motion/$mode"
-        $capture = "$task/motion-$mode-$binding"
-        $flags = @()
-        if ($binding -eq 'fixed') { $flags = @('--disable-bindless','--disable-compute-skinning','--disable-parallel-recording') }
-        python -B $queue run --build "$main/build" --owner npr-room --task "motion-$mode-$binding" --run $runName --kind gpu --priority P1 --estimate 30 --timeout 90 --command "$build/AzurePlayer.exe" --project "$fixture/project.azureproject" --game-actions "$fixture/route.json" --runtime-report "$capture-runtime.json" --capture-dir $capture --capture-frames 10 --capture-fps 60 --fixed-frame-step --qa-camera scene --qa-light scene --width 128 --height 128 @flags
-        if ($LASTEXITCODE -ne 0) { throw 'Camera replay failed' }
-    }
-}
-```
-
-关卡往返的参数沿用冻结的 `command.json`。
-复用动作表及固定步参数，采集到空的输出目录。
-将回放的关卡名、机位和像素对齐到独立结果。
-
-```powershell
-$fixture = Join-Path $replay 'roundtrip/generated'
-python -B $queue run --build "$main/build" --owner npr-room --task realtime-height-fog-roundtrip --run $runName --kind gpu --priority P1 --estimate 45 --timeout 120 --command "$build/AzurePlayer.exe" --project "$fixture/route.azureproject" --game-actions "$fixture/actions.json" --runtime-report "$task/route-runtime.json" --capture-dir "$task/route-frames" --capture-frames 72 --capture-fps 60 --fixed-frame-step --qa-camera scene --qa-light scene --width 128 --height 128
-if ($LASTEXITCODE -ne 0) { throw 'Level roundtrip failed' }
+python -B $queue run --build "$main/build" --owner npr-room --task realtime-height-fog-replay --run $runName --kind gpu --priority P1 --estimate 280 --timeout 420 --command python -B "$engine/tools/verify_generated_height_fog_replay.py" --player "$build/AzurePlayer.exe" --frozen-run "$main/build/runs/$referenceRun" --prepared "$main/build/runs/$replayRun/prepared" --output "$task/replay"
+if ($LASTEXITCODE -ne 0) { throw 'Height fog replay failed' }
 ```
 
 ## 验收与收尾
 
 - 生成数值沿用 0.0006 门槛。
 - 连续场景按独立解析像素参考核对 0.008 门槛。
-- 比较固定与索引描述符的完整序列。
+- 固定与索引描述符的相机运动逐帧比较。关卡往返逐帧核对已提交关卡的独立画面，并比较两条路径的独立画面。
 - 检查连续机位、真实生成标志、首尾复现及零活动分配。
 - 核对体积区间两端及区间外的解析采样。
 - 四倍采样检查实际采样数、深度源及 Vulkan 同步结果。
@@ -254,3 +229,29 @@ if ($LASTEXITCODE -ne 0) { throw 'Level roundtrip failed' }
 队列 2242 记录两种绑定的现有 Player 验证。
 生成绑定的画面验收等待版本三接入。
 报告位于受管任务 `20261119-191404-realtime-fog-replay-inputs-226eaa/verification.json`。
+
+## Player 接入任务
+
+接入基线为 `8b46311` 和封存的双设备生成程序。
+交付版本三绑定、逐帧图像发布及正常 Player 回放入口。
+旧版绑定、解析回退及四倍采样保留各自校验。
+定向目标先验证绑定、GPU 同步及渲染器编译。
+
+完整构建按 1.5 GiB 门禁执行。
+隔离检查预留六十四 MiB。
+使用受管目录 `20261119-230258-realtime-fog-player-integration-8b65e6`。
+
+版本三绑定通过 53 项检查，所有权短检覆盖两组在途资源和片元读取屏障。
+队列 2273 在 NVIDIA 和 Intel 上各验证 188 个样本。
+检查包含透视及正交机位、槽位交换、近远端边界和体积外解析采样。
+两块设备的最大线性误差均为 0.000484407，退出后的活动图像及缓冲为零。
+常量体积触发相机依赖检查，验证报告见该任务的 `verification.json`。
+
+队列 2275 完成当前源码的独立 Release 配置。
+队列 2276 使用现有 Player 和本阶段片元程序验证八项兼容场景。
+八项均通过，最大线性误差为 0.002088。
+队列 2278 编译当前场景渲染器及两个高度雾计算程序。
+队列 2279 使用现有 Player 复跑十帧解析对照、四倍采样及七十二帧解析关卡往返。
+每帧按已提交关卡核对独立画面，两条描述符路径均通过。
+着色器摘要、切换帧号与帧像素摘要见 `replay-control-verified/verification.json`。
+完整构建的剩余门禁为受管池容量。

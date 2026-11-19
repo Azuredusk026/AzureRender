@@ -1,0 +1,14 @@
+#version 450
+#extension GL_GOOGLE_include_directive : require
+#include "view_fog.glsl"
+
+layout(local_size_x=1) in;
+layout(std430,binding=1) readonly buffer Inputs { vec4 positions[]; };
+layout(std430,binding=2) writeonly buffer Outputs { vec4 results[]; };
+
+void main(){
+    uint index=gl_GlobalInvocationID.x;
+    vec4 position=positions[index];
+    AzureFogTransport fog=azureSampleViewFog(position.xy*viewFogRows[3].xy,position.z);
+    results[index]=vec4(fog.scattering,fog.transmittance.x);
+}

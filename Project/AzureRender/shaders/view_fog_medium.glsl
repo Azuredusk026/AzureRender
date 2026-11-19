@@ -30,6 +30,6 @@ AzureFogTransport azureViewHeightFog(vec3 origin,vec3 position,float depth){
 }
 
 float azureHeightFogLogDepthRange(){
-    return log2(1+viewFogRows[13].w-viewFogRows[8].z);
+    return log2(1+(viewFogRows[13].w-viewFogRows[8].z));
 }
 #endif

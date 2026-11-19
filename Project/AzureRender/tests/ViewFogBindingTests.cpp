@@ -58,5 +58,27 @@ int main()try{
  check(std::abs(transport.transmittance[0]-.7F)<2e-6F&&std::abs(transport.scattering[2]-.18F)<2e-6F,"Height opacity control preserves source radiance");
  analytic.analytic=heightOnly;const auto heightJson=nlohmann::json(analytic);check(heightJson.get<ViewFogBinding>().analytic->height->layers.size()==1,"Height controls roundtrip through the same binding");
  v2=heightJson;v2["analytic"]["height"]["layers"].push_back(v2["analytic"]["height"]["layers"][0]);v2["analytic"]["height"]["layers"].push_back(v2["analytic"]["height"]["layers"][0]);reject([&]{(void)v2.get<ViewFogBinding>();});
+ auto generated=heightJson;
+ generated["schemaVersion"]=3;
+ generated["generatedHeightVolume"]={{"dimensions",{48,32,48}},{"farViewDepth",8}};
+ const auto live=generated.get<ViewFogBinding>();
+ check(nlohmann::json(live)==generated,"Generated height fog roundtrips through binding version three");
+ check(fogViewMatchName(live.match(moved,1))=="generated-height","The generated height field accepts the current camera");
+ for(const auto& dimensions:{nlohmann::json{0,32,48},nlohmann::json{48,65,48},nlohmann::json{48,32,1},nlohmann::json{48,32,129}}){
+  auto invalid=generated;invalid["generatedHeightVolume"]["dimensions"]=dimensions;
+  reject([&]{(void)invalid.get<ViewFogBinding>();});
+ }
+ auto invalid=generated;invalid["generatedHeightVolume"]["farViewDepth"]=2;
+ reject([&]{(void)invalid.get<ViewFogBinding>();});
+ invalid=generated;invalid["asset"]="fog:/capture.azfog";
+ reject([&]{(void)invalid.get<ViewFogBinding>();});
+ invalid=generated;invalid["analytic"]["height"]=nullptr;
+ reject([&]{(void)invalid.get<ViewFogBinding>();});
+ invalid=generated;invalid["captureView"]=encoded["captureView"];
+ reject([&]{(void)invalid.get<ViewFogBinding>();});
+ invalid=generated;invalid["analytic"]["height"]["layers"][0]["scatteringColor"][0]=65505;
+ reject([&]{(void)invalid.get<ViewFogBinding>();});
+ invalid=generated;invalid["enabled"]=false;
+ check(invalid.get<ViewFogBinding>().match(moved,1)==FogViewMatch::Disabled,"A disabled generator remains serializable");
  std::cout<<"View fog binding checks: "<<checks<<'\n';return 0;
 }catch(const std::exception& e){std::cerr<<e.what()<<'\n';return 1;}
