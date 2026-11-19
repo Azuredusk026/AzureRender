@@ -547,3 +547,10 @@ Player 同帧捕获及补充读回均在共享队列执行成功。
 错误深度控制维持拒绝，五组镜面回归逐字节一致。
 封存大厅与基线逐像素一致，SSIM 仍低于门槛。
 [运动深度候选证据](evidence/2026-11-20/tracked-reflection-history-candidate/README.md)保存回放、回归和采用判定。
+
+### 区域历史取样归因
+
+中央地面及青色环带的地址贡献占 60.56% 和 65.27%。
+命中位置差的中位数均约八像素。
+本轮复核确认参考驱动仍无法枚举设备。
+[区域历史取样证据](evidence/2026-11-20/reflection-regional-cross-address/README.md)保存复算及驱动恢复条件。

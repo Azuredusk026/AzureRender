@@ -1,0 +1,196 @@
+{
+  "base": "560ecd2",
+  "status": "verified-diagnostic-region",
+  "results": {
+    "centerFloor": {
+      "bounds": [
+        505,
+        495,
+        775,
+        585
+      ],
+      "matched": 19281,
+      "uniquelyReproduced": 16996,
+      "medianAddressDifferencePixels": 8.06225774829855,
+      "uniqueHitAndHistoryAddresses": 16644,
+      "medianHitDifferencePixels": 8.246211251235321,
+      "medianReprojectionDifferencePixels": 0.0,
+      "hitDistanceExceedsReprojectionDifference": 16378,
+      "addressAbsoluteContributionFraction": 0.6056434572188706,
+      "distanceBins": [
+        {
+          "rangePx": [
+            0,
+            2
+          ],
+          "pixels": 502,
+          "currentMeanAbs": 0.048037784958660415,
+          "nativeRouteOnBothMeanAbs": 0.047623634177555586,
+          "playerRouteOnBothMeanAbs": 0.04949681963691737,
+          "addressMeanAbs": 0.019901364865220796,
+          "sourceMeanAbs": 0.04629807925276817
+        },
+        {
+          "rangePx": [
+            2,
+            8
+          ],
+          "pixels": 6748,
+          "currentMeanAbs": 0.07166513414357455,
+          "nativeRouteOnBothMeanAbs": 0.0545463207118055,
+          "playerRouteOnBothMeanAbs": 0.05205568147492294,
+          "addressMeanAbs": 0.04820222891947428,
+          "sourceMeanAbs": 0.050540805031057484
+        },
+        {
+          "rangePx": [
+            8,
+            null
+          ],
+          "pixels": 9746,
+          "currentMeanAbs": 0.12127133482781512,
+          "nativeRouteOnBothMeanAbs": 0.05735563246351582,
+          "playerRouteOnBothMeanAbs": 0.051521850042495106,
+          "addressMeanAbs": 0.09802315333180191,
+          "sourceMeanAbs": 0.04884681281120897
+        }
+      ],
+      "nativeChangedBetweenPrimaryAndTemporalInput": 0,
+      "nativeTemporalChanged": 18352,
+      "nativeTemporalMeanAbsoluteDelta": 0.047589317510128154,
+      "actualRawVsPlayerMeanAbsoluteResidual": 0.09873687347349591,
+      "actualTemporalVsPlayerMeanAbsoluteResidual": 0.09596598629502116,
+      "nativeTemporalDeltaInSameDirection": 5717
+    },
+    "cyanRing": {
+      "bounds": [
+        520,
+        530,
+        635,
+        590
+      ],
+      "matched": 6478,
+      "uniquelyReproduced": 5715,
+      "medianAddressDifferencePixels": 6.324555320336759,
+      "uniqueHitAndHistoryAddresses": 5571,
+      "medianHitDifferencePixels": 8.06225774829855,
+      "medianReprojectionDifferencePixels": 2.0,
+      "hitDistanceExceedsReprojectionDifference": 5394,
+      "addressAbsoluteContributionFraction": 0.6527442068041811,
+      "distanceBins": [
+        {
+          "rangePx": [
+            0,
+            2
+          ],
+          "pixels": 341,
+          "currentMeanAbs": 0.05022953095154673,
+          "nativeRouteOnBothMeanAbs": 0.050437895986138646,
+          "playerRouteOnBothMeanAbs": 0.04675919163329739,
+          "addressMeanAbs": 0.019866653379083825,
+          "sourceMeanAbs": 0.04543821310697561
+        },
+        {
+          "rangePx": [
+            2,
+            8
+          ],
+          "pixels": 3033,
+          "currentMeanAbs": 0.05999417551463917,
+          "nativeRouteOnBothMeanAbs": 0.048348153353881096,
+          "playerRouteOnBothMeanAbs": 0.046081093869255234,
+          "addressMeanAbs": 0.038425394150525864,
+          "sourceMeanAbs": 0.042742291973389634
+        },
+        {
+          "rangePx": [
+            8,
+            null
+          ],
+          "pixels": 2341,
+          "currentMeanAbs": 0.16669079794020786,
+          "nativeRouteOnBothMeanAbs": 0.06363580483235833,
+          "playerRouteOnBothMeanAbs": 0.05016263397224315,
+          "addressMeanAbs": 0.152669368799842,
+          "sourceMeanAbs": 0.047247756755278314
+        }
+      ],
+      "nativeChangedBetweenPrimaryAndTemporalInput": 0,
+      "nativeTemporalChanged": 6380,
+      "nativeTemporalMeanAbsoluteDelta": 0.06678691216115783,
+      "actualRawVsPlayerMeanAbsoluteResidual": 0.10247133167169094,
+      "actualTemporalVsPlayerMeanAbsoluteResidual": 0.10993789860488971,
+      "nativeTemporalDeltaInSameDirection": 2248
+    }
+  },
+  "driver": [
+    {
+      "label": "reference",
+      "exitCode": 1,
+      "manifest": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-231945-projected-hair-reference-grid-4b775d\\nv-vk64-absolute.json",
+      "manifestSha256": "08c7d270a9236b6b24603013f9354a8813aa2a95006657fbe4df92db78318cc7",
+      "library": "C:\\Windows\\System32\\DriverStore\\FileRepository\\nvhm.inf_amd64_f0c4c3905d48bee7\\nvoglv64.dll",
+      "librarySha256": "a911f4e89d33c8f4289d73d05ecea0020d1acc77f204c290a469903324b42fa3",
+      "sdkSha256": "8cc59b6fdd305a4a197fdfc56e588d5bdbba901eac9ac402241903050cf7d628"
+    },
+    {
+      "label": "active",
+      "exitCode": 0,
+      "manifest": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-231945-projected-hair-reference-grid-4b775d\\nv-vk64-active-absolute.json",
+      "manifestSha256": "1fe2b6468995fd4fba1d688113234f1765649fbeb67ee7639eda13a6bf9f29bd",
+      "library": "C:\\Windows\\System32\\DriverStore\\FileRepository\\nvhmi.inf_amd64_2c07e8aaaffbaaf9\\nvoglv64.dll",
+      "librarySha256": "ca92775bcfa44eaa8ccb8c530e8df45bf88e19573cea4a6e0232342114355238",
+      "sdkSha256": "8cc59b6fdd305a4a197fdfc56e588d5bdbba901eac9ac402241903050cf7d628"
+    }
+  ],
+  "temporalSources": {
+    "temporalFixtureSha256": "011b3347ee208cc8e9406357ebf4e4a4a42fad262542d70e0591ea975931b298",
+    "input": {
+      "event": 8741,
+      "resource": "ResourceId::15861",
+      "path": "current-color.bin",
+      "width": 1280,
+      "height": 720,
+      "format": "R11G11B10_FLOAT",
+      "bytes": 3686400,
+      "sha256": "d16077bceb536d0f622b05c8c6875b9e5f81ad4e2c62ebda2e2eaffbd25a5d69"
+    },
+    "output": {
+      "event": 8741,
+      "resource": "ResourceId::16552",
+      "path": "temporal-color.bin",
+      "width": 1280,
+      "height": 720,
+      "format": "R11G11B10_FLOAT",
+      "bytes": 3686400,
+      "sha256": "ca852b98375964d60a01c2271840d06e64260921b0805da0316592bc8a2ee272"
+    },
+    "filterFull": "ca852b98375964d60a01c2271840d06e64260921b0805da0316592bc8a2ee272"
+  },
+  "queue": {
+    "id": 2306,
+    "task": "nr-reflection-regional-cross-address",
+    "state": "succeeded",
+    "exit_code": 0,
+    "wait_seconds": 2.063000000001921,
+    "run_seconds": 20.95300000000134
+  },
+  "validation": {
+    "archiveSha256": "00ed66efef407f23cbb69948e4a4b38e8558b978ab74baa7729f90c843610a09",
+    "bytes": 2805846,
+    "files": {
+      "regional.py": "1bb35f2905d26e9af1f527ca2b31e0ab1342b85858b33ad7021285072aa1b079",
+      "regional_replay.py": "1622175eb14188fce30f637585ffffd737b452be6d990bce681cee8de434f04f",
+      "run_regional.py": "5954b3b749184774edde8570b2a17d5def0063b0c965db5907136b403bb062d0",
+      "request.json": "b4c9a26ff02315926df5c1e453720196878cb69bc2914ef1959d257127806762",
+      "replay.json": "45dc35d0b823e66834b4dca08a4f0b0238567cd45b704dbfb3a111b9f2ed3f9e",
+      "samples.npz": "e3760925afc9df5ff1661daae0fd7ba1bdf8fbf95092439d27f39e718558f53c",
+      "sources.json": "00ad7f243e300e83ce95dabda86a96419e33d0303447fc78f4e13d64e91e2094",
+      "results.json": "9c6b0cb6bb7042047c2c01022fb0a28a4f569f622a18620ca24ffacddc36bbd8",
+      "driver.json": "f04a4f2ba06d9785be54c6705023495af27ca29e3671cce19e921190250eb24d",
+      "driver-reference.log": "45d0f51c6c6baa5959b43a5abf9c454c015fa2aebe8e80c805705295971a9d67",
+      "driver-active.log": "a54c4630a98abf3586973ee70ad85d27e83b2f7291c8ef2c7aee83ac4d23f5ed",
+      "volume-check.json": "327d4d72ab66ab5032384fcac0919586d36b3c19c7e668234cab4eb6fa5864b3"
+    }
+  }
+}
