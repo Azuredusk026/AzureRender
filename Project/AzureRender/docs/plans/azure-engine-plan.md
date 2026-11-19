@@ -1076,6 +1076,7 @@ Windows 安装路径及隔离 Python 通过实测。
 普通无光照表面、附件一致性及 GPU 成本见[预算验收](../acceptance/nr/unlit-opaque-budget.md)。
 光谱大气、远端片元与公共数值见[解析雾验收](../acceptance/nr/analytic-fog.md)。
 场景支持[解析雾配置](../runtime/scene-fog.md)及独立解析介质。
+[大气起始距离](2026-10-28-view-fog-composition.md#大气起始距离数值任务)覆盖相邻浮点边界及极端坐标测试。
 
 双配置、真实片元与完整候选见[合成验收](../acceptance/nr/scene-fog.md)。
 阶段截图、机位和待验差异见[画面记录](../acceptance/nr/visual-history.md)。

@@ -518,6 +518,7 @@ Lit 法线阈值、重建下限及实际材质见[解码验收](docs/acceptance/
 光谱大气、远端片元与公共数值见[解析雾验收](docs/acceptance/nr/analytic-fog.md)。
 
 场景支持[解析雾配置](docs/runtime/scene-fog.md)及独立解析介质。
+光谱大气在[起始距离](docs/runtime/aerial-fog.md#高度积分)附近连续评价有效路径。
 双配置、真实片元与完整候选见[合成验收](docs/acceptance/nr/scene-fog.md)。
 阶段截图、机位和待验差异见[画面记录](docs/acceptance/nr/visual-history.md)。
 物流彩色环带的源实例及采样见[还原验收](docs/acceptance/nr/opaque-logistics-rings.md)。

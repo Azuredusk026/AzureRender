@@ -38,6 +38,23 @@ int main(int argc,char** argv)try{
  }
  for(float y:{-1e30F,1e30F}){ExponentialAerialFog p;p.density=1;p.heightFalloff=1;p.extinction={1,2,.5F};p.ambientColor={.1F,.2F,.3F};inputs.push_back(input(p,{0,y,0},{0,y,10},{},{0,y,0},{0,0,0,1}));expected.push_back(reference(p,{0,y,0},{0,y,10},{},{0,y,0},{0,0,0,1}));}
  for(bool reverse:{false,true}){ExponentialAerialFog p;p.density=.25F;p.heightFalloff=2;p.extinction={1,2,.5F};p.ambientColor={.1F,.2F,.3F};const std::array<float,3> start{0,reverse?0:1e30F,0},end{0,reverse?1e30F:0,0};const ExponentialHeightFog h{.25F,2,0,{.1F,.2F,.3F}};inputs.push_back(input(p,start,end,h,start,{0,0,0,1}));expected.push_back(reference(p,start,end,h,start,{0,0,0,1}));}
+ ExponentialAerialFog boundary;
+ boundary.startDistance=16777216.F;
+ boundary.density=.5F;
+ boundary.extinction={1,2,.5F};
+ boundary.ambientColor={.2F,.4F,.6F};
+ const auto appendBoundarySample=[&](std::array<float,3> start,std::array<float,3> end){
+  inputs.push_back(input(boundary,start,end,{},start,{0,0,0,1}));
+  expected.push_back(reference(boundary,start,end,{},start,{0,0,0,1}));
+ };
+ for(float excess:{-1.F,0.F,2.F,4.F,32.F}){
+  appendBoundarySample({0,0,0},{0,0,boundary.startDistance+excess});
+ }
+ boundary.startDistance=20;
+ appendBoundarySample({0,0,0},{12,0,16});
+ appendBoundarySample({0,0,-.25F},{12,0,16});
+ boundary.startDistance=1e38F;
+ appendBoundarySample({-3e38F,-3e38F,-3e38F},{3e38F,3e38F,3e38F});
  if(argc==3){
   std::ifstream file(std::filesystem::u8path(argv[2]));std::string magic;file>>magic;if(magic!="AZAERIAL1")throw std::invalid_argument("Invalid native aerial fixture");
   std::array<Row,6> packed{};for(auto& row:packed)for(auto& v:row)if(!(file>>v))throw std::invalid_argument("Truncated aerial parameters");

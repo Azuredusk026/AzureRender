@@ -17,11 +17,18 @@ float azureFogTransmission(float logarithm){
     if(logarithm< -20)return 1;
     return exp(-exp(logarithm));
 }
-bool azureFogRay(vec3 start,vec3 end,out vec3 direction,out float logLength){
-    vec3 halfDelta=end*.5-start*.5;
-    float scale=max(max(abs(halfDelta.x),abs(halfDelta.y)),abs(halfDelta.z));
-    direction=vec3(0);logLength=0;if(scale==0)return false;
-    vec3 scaled=halfDelta/scale;float n=length(scaled);direction=scaled/n;logLength=log(scale)+log(n)+.6931471805599453;return true;
+bool azureFogRay(vec3 start,vec3 end,out vec3 direction,out float logLength,out vec2 lengthFactors){
+    // Keep both the difference and its dominant component's reciprocal finite
+    // when the endpoints span the float coordinate range.
+    precise vec3 eighthDelta=end*.125-start*.125;
+    float scale=max(max(abs(eighthDelta.x),abs(eighthDelta.y)),abs(eighthDelta.z));
+    direction=vec3(0);logLength=0;lengthFactors=vec2(0);if(scale==0)return false;
+    vec3 scaled=eighthDelta/scale;
+    float n=length(scaled);
+    direction=scaled/n;
+    logLength=log(scale)+log(n)+2.0794415416798357;
+    lengthFactors=vec2(scale,n);
+    return true;
 }
 float azureFogHeightAverage(float falloff,float reference,float start,float end){
     if(falloff==0)return 0;
@@ -31,15 +38,20 @@ float azureFogHeightAverage(float falloff,float reference,float start,float end)
     return height+(logQ>3.912023005428146?-logQ:azureFogLogExprel(-exp(logQ)));
 }
 AzureFogTransport azureEvaluateHeightFog(vec3 parameters,vec3 color,vec3 start,vec3 end){
-    vec3 direction;float logLength;
-    if(parameters.x==0||!azureFogRay(start,end,direction,logLength))return azureIdentityFog();
+    vec3 direction;float logLength;vec2 lengthFactors;
+    if(parameters.x==0||!azureFogRay(start,end,direction,logLength,lengthFactors))return azureIdentityFog();
     float optical=log(parameters.x)+logLength+azureFogHeightAverage(parameters.y,parameters.z,start.y,end.y);
     float t=azureFogTransmission(optical);return AzureFogTransport(color*(1-t),vec3(t));
 }
 AzureFogTransport azureEvaluateAerialFog(AzureAerialFog p,vec3 start,vec3 end){
-    vec3 direction;float logLength;
-    if(p.rows[0].w==0||!azureFogRay(start,end,direction,logLength))return azureIdentityFog();
-    if(p.rows[3].w>0){float difference=log(p.rows[3].w)-logLength;if(difference>=0)return azureIdentityFog();logLength+=log(1-exp(difference));}
+    vec3 direction;float logLength;vec2 lengthFactors;
+    if(p.rows[0].w==0||!azureFogRay(start,end,direction,logLength,lengthFactors))return azureIdentityFog();
+    if(p.rows[3].w>0){
+        // Subtract in linear space before taking the logarithm.
+        precise float eighthRemaining=fma(lengthFactors.x,lengthFactors.y,-p.rows[3].w*.125);
+        if(eighthRemaining<=0)return azureIdentityFog();
+        logLength=log(eighthRemaining)+2.0794415416798357;
+    }
     float average=azureFogHeightAverage(p.rows[1].w,p.rows[2].w,start.y,end.y);
     if(p.rows[5].w>.5){
         float signedQ=-(p.rows[1].w*(end.y*.5-start.y*.5))*2;
