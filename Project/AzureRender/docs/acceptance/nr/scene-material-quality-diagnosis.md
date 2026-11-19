@@ -554,3 +554,10 @@ Player 同帧捕获及补充读回均在共享队列执行成功。
 命中位置差的中位数均约八像素。
 本轮复核确认参考驱动仍无法枚举设备。
 [区域历史取样证据](evidence/2026-11-20/reflection-regional-cross-address/README.md)保存复算及驱动恢复条件。
+
+### 半分辨率深度对照
+
+最近深度改善了原生命中地址处的深度对应。
+同帧候选的中央地面和青色环带 SSIM 均下降。
+全图新增超差为 5,400，候选按原门槛淘汰。
+[最近深度对照](evidence/2026-11-20/reflection-nearest-depth-candidate/README.md)保存配对和搜索预算。

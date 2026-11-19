@@ -226,7 +226,8 @@ Intel 头发颜色继续核对纹理梯度与层级选择。
 [原生地面画面对照](../acceptance/nr/evidence/2026-11-16/joint-scene-native-floor/results.json)核对原生第 3534 帧、辐照体开关和两种屏幕反射路径。中央地面与青色环带继续按 0.95 的门槛验收。
 [投影反射射线步数](../acceptance/nr/scene-material-quality-diagnosis.md#联合场景步数对照)登记 32 步候选的双设备实际帧。中央地面中位亮度及邻区新增超差未通过，反射按历史取样坐标、深度和颜色继续验收。
 [原始反射颜色](../acceptance/nr/evidence/2026-11-16/projected-reflection-shared-hits/results.json)按深度配准区分命中覆盖与共同命中处的颜色误差，用于选择地面反射的后续修复。
-[区域历史取样](../acceptance/nr/evidence/2026-11-20/reflection-regional-cross-address/README.md)复算两区的历史地址和时间增量。下一项核对半分辨率深度与射线命中。
+[区域历史取样](../acceptance/nr/evidence/2026-11-20/reflection-regional-cross-address/README.md)复算两区的历史地址和时间增量。最近深度对照记录单帧采用判定。
+[半分辨率深度对照](../acceptance/nr/evidence/2026-11-20/reflection-nearest-depth-candidate/README.md)核对搜索预算及同址深度。
 
 角色固定姿态按[脸部与体表区域验收](../acceptance/nr/face-skin-color-sources.md)记录纹理、照明、描边和透明衣料的来源。
 [固定姿态网格与轮廓](../acceptance/nr/evidence/2026-11-15/fixed-pose-face-and-body-geometry/results.json)核对身体顶点、脸部索引和同机位的覆盖复算。固定姿态的剩余色差及六视图按各自门槛验收。
