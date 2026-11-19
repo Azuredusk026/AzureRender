@@ -293,6 +293,30 @@ class MaintenanceTests(unittest.TestCase):
         self.assertFalse(result['recursiveScan'])
         self.assertFalse((self.build/'maintenance').exists())
 
+    def test_status_skips_directory_removed_after_runs_enumeration(self):
+        disappearing=self.build/'runs'/'disappearing';disappearing.mkdir();(disappearing/'.keep').touch()
+        survivor=self.build/'runs'/'survivor';survivor.mkdir();(survivor/'.keep').touch()
+        original_is_link=maintenance.is_link
+        removed=False
+        def race_is_link(path):
+            nonlocal removed
+            if path==disappearing and not removed:
+                removed=True
+                (disappearing/'.keep').unlink()
+                disappearing.rmdir()
+            return original_is_link(path)
+        with patch.object(maintenance,'is_link',side_effect=race_is_link):
+            result=maintenance.status(self.build)
+        self.assertTrue(removed)
+        self.assertEqual(result['rootKeepMarkers'],1)
+        self.assertTrue(survivor.exists())
+
+    def test_status_preserves_real_lstat_errors(self):
+        path=self.build/'runs'/'permission-error';path.mkdir();(path/'.keep').touch()
+        with patch.object(Path,'is_symlink',side_effect=PermissionError('access denied')):
+            with self.assertRaises(PermissionError):
+                maintenance.status(self.build)
+
     def test_pool_cap_blocks_creation_before_directory_exists(self):
         self.create('first')
         with patch.dict(maintenance.POLICY,poolBytes=64*2**20):

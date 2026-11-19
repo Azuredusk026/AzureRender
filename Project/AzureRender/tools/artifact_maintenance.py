@@ -410,10 +410,29 @@ def status(build):
         records = rows(db)
     root = real_path(real_path(build)/'runs')
     children = list(root.iterdir()) if root.exists() else []
+    keep_markers = 0
+    historical = 0
+    for path in children:
+        try:
+            linked = is_link(path)
+        except FileNotFoundError:
+            # A concurrent maintenance batch may remove this enumerated child.
+            try:
+                path.lstat()
+            except FileNotFoundError:
+                continue
+            raise
+        if linked:
+            continue
+        if path.is_dir():
+            if path.name not in records:
+                historical += 1
+            if (path/'.keep').is_file():
+                keep_markers += 1
     usage = shutil.disk_usage(build)
     return dict(managedTasks=len(records), residentReservationBytes=reservation(records), poolLimitBytes=POLICY['poolBytes'],
-                historicalTasks=sum(p.is_dir() and p.name not in records for p in children),
-                rootKeepMarkers=sum((p/'.keep').is_file() for p in children if not is_link(p)),
+                historicalTasks=historical,
+                rootKeepMarkers=keep_markers,
                 activeInputTasks=sorted(protected_names(records)),
                 coldStoreBytes=cold_usage(),coldStoreLimitBytes=POLICY['coldBytes'],
                 blocked={n:r['blocked'] for n,r in records.items() if r.get('blocked')},
