@@ -100,7 +100,7 @@ A 为零时，置信度全为零，预期失败控制成立。
 原画质 SSIM 门槛为 0.95，亮度中位误差至多 10%。
 邻区新增超差为零，冻结四帧须逐像素一致。
 两批使用冻结捕获与夹具，沿用[同帧画质结果](../player-reflection-same-frame-lineage/README.md)。
-下一单元在原创交互回放中验证几何与渲染反馈。
+交互反馈见[原创检修站回放](../../2026-11-20/original-reflection-switch/README.md)。
 
 解压[验证归档](validation.zip)后运行 `python verify.py`。
 脚本使用 Python 标准库复算八个锚点及交叉取色。
