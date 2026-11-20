@@ -37,7 +37,7 @@ end
 local function playCue(id)
     local cue = self:find(id)
     if cue then
-        cue:audio_play()
+        cue:try_audio_play()
     end
 end
 

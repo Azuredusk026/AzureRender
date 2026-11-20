@@ -6,6 +6,7 @@ local saves = 0
 local otherSaves = {}
 local failedSlot
 local bodyState
+local soundAvailable = true
 
 self = {}
 function self:pressed(name)
@@ -24,7 +25,17 @@ function self:find(id)
         end }
     end
     if id:sub(1, 8) == "heroine-" then return nil end
-    return { audio_play = function() sounds[#sounds + 1] = id end }
+    return {
+        audio_play = function()
+            if not soundAvailable then error("Cue unavailable") end
+            sounds[#sounds + 1] = id
+        end,
+        try_audio_play = function()
+            if not soundAvailable then return false end
+            sounds[#sounds + 1] = id
+            return true
+        end,
+    }
 end
 
 function self:read_save(slot)
@@ -248,3 +259,19 @@ assert(otherSaves["countup-session"] == futureSession)
 otherSaves["countup-session"] = {1, 0, 0}
 step(1)
 assert(otherSaves["countup-session"][2] == 2, "checkpoint retry must accept a compatible payload")
+
+soundAvailable = false
+saved = {1, 25, 5, 2}
+otherSaves["timer-mode"] = {1, 1}
+otherSaves["countup-session"] = {1, 0, 0}
+init()
+step(0, "timer-toggle")
+step(2)
+step(0, "timer-toggle")
+expect("paused", "00:00:02")
+assert(otherSaves["countup-session"][2] == 2, "Unavailable cues must preserve timer checkpoints")
+soundAvailable = true
+step(0, "timer-toggle")
+step(1)
+step(0, "timer-reset")
+assert(otherSaves["countup-session"][3] == 3, "Recovered cues must preserve accumulated time")

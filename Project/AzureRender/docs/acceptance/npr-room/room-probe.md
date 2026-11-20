@@ -136,3 +136,15 @@ python -B tools/npr_room/test_room_startup_player.py --player $player --project 
 真实 Player 回放通过共享 GPU 队列运行。
 夹具的 Player 使用 Release 构建与 vcpkg 的 DLL 搜索路径。
 交互启动通过 `--save-root` 选择 D 盘独立存档目录。
+
+## 提示音失败隔离
+
+计时状态与提示音播放分别处理结果。
+提示音不可用时，计时继续处理暂停、继续和结算。
+提示音文件恢复后，后续操作重新尝试播放。
+
+队列 2369 使用生产计时脚本和截断的原创测试音。
+暂停时保存两秒检查点，恢复声音后结算四秒。
+第二个 Player 读回相同记录。
+两个进程无脚本错误，通过 Vulkan 校验及退出释放。
+[提示音失败证据](evidence/2026-11-21/timer-cue-failure/verification.json)记录计时与播放结果。
