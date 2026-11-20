@@ -51,7 +51,7 @@ def playing(player, project, resources, profile, output, expected_audio_starts=N
                     process.poll(), "normal room did not become ready", level_reference)
                 try:
                     query = exchange(address, token, {"op": "query", "name": "game.state"})
-                except TimeoutError:
+                except (TimeoutError, ConnectionError):
                     # The main thread can be preparing the room while the listener is already open.
                     continue
                 if query.get("code") == "Timeout" and not query["passed"]:

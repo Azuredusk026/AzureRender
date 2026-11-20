@@ -29,33 +29,33 @@ def replay(player, project, resources, output):
     with playing(player, project, resources, profile, output / "write", 4) as (click, _, _, screenshot):
         click("music-toggle")
         click("music-play")
-        assert preferences(profile) == [1, False, 50, False, False]
+        assert preferences(profile) == [1, False, 50, False, False, False]
         click("music-quiet")
         click("music-quiet")
         click("music-play")
         click("music-next")
         click("music-previous")
         click("music-shuffle")
-        assert preferences(profile) == [1, True, 40, False, True]
+        assert preferences(profile) == [1, True, 40, False, True, False]
         click("music-list")
         click("music-page-next")
         click("music-page-prev")
         click("music-select-3")
         click("music-mute")
         click("music-repeat")
-        assert preferences(profile) == [1, True, 40, True, False]
+        assert preferences(profile) == [1, True, 40, True, False, True]
         screenshot()
         click("music-play")
-        assert preferences(profile) == [1, False, 40, True, False]
+        assert preferences(profile) == [1, False, 40, True, False, True]
     assert opened_tracks(output / "write") == [tracks[index] for index in (0, 1, 0, 2)]
 
     with playing(player, project, resources, profile, output / "reopen", 2) as (click, _, _, _):
         click("music-toggle")
         click("music-mute")
-        assert preferences(profile) == [1, False, 40, False, False]
+        assert preferences(profile) == [1, False, 40, False, False, True]
         click("music-play")
         click("music-previous")
-        assert preferences(profile) == [1, True, 40, False, False]
+        assert preferences(profile) == [1, True, 40, False, False, True]
     assert opened_tracks(output / "reopen") == [tracks[0], tracks[-1]]
     report = {"independentPlayers": 2, "originalTracks": len(tracks), "audioStarts": [4, 2],
               "manualTracks": opened_tracks(output / "write"), "reopenedTracks": opened_tracks(output / "reopen"),

@@ -51,3 +51,5 @@
 python -B -m tools.npr_room.feature_matrix --source $unitySource --locks $sourceLock --output $featureMatrix
 python -B -m unittest tools.npr_room.test_feature_matrix
 ```
+
+[原创曲库设置恢复](music-playlist.md#原创曲库设置恢复)记录循环、音量及静音重开和保存失败重试。

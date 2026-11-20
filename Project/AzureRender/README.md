@@ -1166,3 +1166,5 @@ Intel 实际 Player 的完整可见量附件逐字节匹配固定输入的 `Prof
 [体表接收法线纹理](docs/acceptance/nr/native-body-normal-source.md)记录原生和夹具的法线层级内容。
 
 [投影头发主纹理层级](docs/acceptance/nr/projected-hair-point-mip.md)记录可选材质路径及双设备生产回归。
+
+[原创曲库设置恢复](docs/acceptance/npr-room/music-playlist.md#原创曲库设置恢复)记录循环、音量及静音重开和保存失败重试。

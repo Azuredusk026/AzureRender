@@ -4,7 +4,7 @@
 
 曲库按 Recovery `MusicMaster` 的顺序登记 43 首曲目，保留标题、署名、分类、UUID、原音频 GUID 和采样长度。普通房间状态可播放 42 首。手动解锁曲目 Without You 保留来源和解锁标志。
 
-音乐面板可翻页选曲、暂停和继续、前进或回退、单曲循环、随机和静音。回退在当前曲目播放满五秒时从该曲开头开始。播放到末尾后按模式续播。音乐音量初始为 50%，停播时保留同一进程内的采样位置。存档保存启动播放、音量、静音和随机标志。
+音乐面板可翻页选曲、暂停和继续、前进或回退、单曲循环、随机和静音。回退在当前曲目播放满五秒时从该曲开头开始。播放到末尾后按模式续播。音乐音量初始为 50%，停播时保留同一进程内的采样位置。存档保存启动播放、音量、静音、随机及单曲循环标志。
 
 曲目通过[实时源文件](../../development/asset-source-cache.md#实时源文件)登记并流式读取，音频容器保持原样。首次教学的音乐时序、曲目解锁、收藏、外部文件、环境声与语音按对应功能验收。
 
@@ -30,4 +30,28 @@
 python -B -m tools.npr_room.build_music_room --room $progressionRoom --output $musicRoom --source $unitySource --audio-catalog $audioCatalog --audio-probe $nativeAudioReport
 python -B tools/npr_room/test_music_room_player.py --player $player --project $musicProject --resource-root $resources --output $musicReplay
 python -B tools/npr_room/test_room_startup_player.py --player $player --project $musicProject --resource-root $resources --output $roomReplay --expect-heroine --expect-music
+```
+
+## 原创曲库设置恢复
+
+队列 2352 使用生产曲库脚本和两段原创测试音。
+三个独立 Player 验证音量、静音和循环模式重开。
+循环启用时，曲末重新播放同曲。
+循环关闭后，曲末切换到下一首。
+
+存档版本为 1，第六字段记录单曲循环。
+五字段档案使用默认关闭状态。
+非法循环字段使用默认值，其他合法偏好仍可读取。
+较新容器写入被拒后保留原字节，并显示保存失败提示。
+恢复兼容容器后，可通过循环按钮重新保存。
+
+三个进程均加载 Vulkan 校验层，退出分配计数归零。
+检查覆盖当前默认音频设备，听感由现场复核。
+物理无设备及资源不可用恢复各自登记验收。
+[结构化结果](evidence/2026-11-21/music-preferences/verification.json)记录程序、着色器和输入摘要。
+[循环恢复画面](evidence/2026-11-21/music-preferences/repeat-restored.png)与[保存失败画面](evidence/2026-11-21/music-preferences/write-failed.png)保留可见状态。
+
+```powershell
+python -B tools/npr_room/test_music_preferences_runtime.py --lua $luaDll
+python -B tools/npr_room/test_original_music_player.py --player $player --resources $resources --source examples/npr-room/assets/music.lua --output $replay
 ```

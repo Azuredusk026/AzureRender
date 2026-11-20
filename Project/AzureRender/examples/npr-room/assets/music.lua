@@ -12,7 +12,7 @@ end
 
 local function applyPreferences()
     gain()
-    if not self:try_write_save(slot, {1, playing, volume, muted, shuffle}) then
+    if not self:try_write_save(slot, {1, playing, volume, muted, shuffle, repeatOne}) then
         self:ui_text("music-status", "Music settings could not be saved")
     else
         self:ui_text("music-status", "")
@@ -73,6 +73,7 @@ function init()
         and type(saved[3]) == "number" and saved[3] >= 0 and saved[3] <= 100 and saved[3] % 1 == 0
         and type(saved[4]) == "boolean" and type(saved[5]) == "boolean" then
         autoplay, volume, muted, shuffle = saved[2], saved[3], saved[4], saved[5]
+        repeatOne = saved[6] == true
     end
     setOrder()
     gain()
@@ -106,8 +107,6 @@ local function processControls()
         if started then move(1) else start(current) end
     elseif self:pressed("music-repeat") then
         repeatOne = not repeatOne
-        updateDisplay()
-        return false
     elseif self:pressed("music-shuffle") then
         shuffle = not shuffle
         setOrder()
