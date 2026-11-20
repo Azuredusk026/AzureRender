@@ -113,3 +113,8 @@ ScriptRuntime 覆盖错误、死循环、反射、初始化事务、重载和句
 适配使用 sol2 的 `state`、`environment`、`protected_function` 和 Lua 指令钩子。参考安装头 `sol/environment.hpp` 与 `sol/protected_function.hpp` 的公开接口。绑定代码由项目实现。
 
 MSVC 对 sol2 表情符号字面量产生 C5321。包含 sol2 头时局部关闭此警告，项目代码继续使用严格警告。对应验证为 Debug、Release 构建和真实 Player 测试。
+
+
+已装配呈现服务时，停止和暂停可用于尚未加载的音源。
+这两种操作保持无活动音源状态。
+加载失败诊断继续保留，显式播放可重试资源。

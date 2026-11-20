@@ -56,7 +56,7 @@ function new_timer_sound_menu(host, settings, translate)
             host:ui_visible("timer-sound-panel", open)
             host:ui_text("timer-sound-status", "")
             local cue = host:find(open and "settings-click" or "settings-cancel")
-            if cue then cue:audio_play() end
+            if cue then cue:try_audio_play() end
             if open then
                 countup = activeMode
                 redraw()
@@ -70,7 +70,7 @@ function new_timer_sound_menu(host, settings, translate)
             countup = countupTab and not pomodoroTab
             host:ui_text("timer-sound-status", "")
             local cue = host:find("settings-click")
-            if cue then cue:audio_play() end
+            if cue then cue:try_audio_play() end
             redraw()
             return
         end

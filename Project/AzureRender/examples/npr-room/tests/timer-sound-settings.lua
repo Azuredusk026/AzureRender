@@ -1,6 +1,7 @@
 local payload, blocked
 local played, stopped = {}, {}
 local gain = {}
+local audioAvailable = true
 
 local host = {
     read_save = function(_, slot)
@@ -19,7 +20,15 @@ local host = {
                 assert(component == "azure.audio-source" and key == "volume")
                 gain[node] = value
             end,
-            audio_play = function() played[#played + 1] = {node, gain[node]} end,
+            audio_play = function()
+                if not audioAvailable then error("Preview audio unavailable") end
+                played[#played + 1] = {node, gain[node]}
+            end,
+            try_audio_play = function()
+                if not audioAvailable then return false end
+                played[#played + 1] = {node, gain[node]}
+                return true
+            end,
             audio_stop = function() stopped[node] = true end,
         }
     end,
@@ -83,3 +92,14 @@ actions = {["timer-sound-start-volume"] = true, ["timer-sound-countup"] = true}
 menu:update(false)
 assert(payload and payload[2][2] == 27 and payload[3][2] == 50)
 assert(inputs["timer-sound-start-volume"] == "50")
+
+audioAvailable = false
+assert(not options:change(false, 1, 2, 31, true), "Unavailable preview must report a recoverable failure")
+assert(payload[2][2] == 31, "Preview failure must preserve the saved preference")
+assert(options:play("timer-start", false), "An unavailable cue remains handled")
+actions = {["timer-sound-toggle"] = true}
+menu:update(false)
+assert(not visible["timer-sound-panel"], "Unavailable menu cues must leave controls operable")
+audioAvailable = true
+assert(options:change(false, 1, 2, 31, true), "The same saved selection can be previewed after recovery")
+assert(played[#played][2] == .31)

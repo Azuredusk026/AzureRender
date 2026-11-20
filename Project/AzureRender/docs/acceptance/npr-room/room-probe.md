@@ -148,3 +148,17 @@ python -B tools/npr_room/test_room_startup_player.py --player $player --project 
 第二个 Player 读回相同记录。
 两个进程无脚本错误，通过 Vulkan 校验及退出释放。
 [提示音失败证据](evidence/2026-11-21/timer-cue-failure/verification.json)记录计时与播放结果。
+
+## 音效试听失败恢复
+
+停止和暂停操作保持未加载音源的无声状态。
+加载诊断继续保留，显式播放承担资源重试。
+设置试听失败时显示错误，已保存的选项保持有效。
+资源恢复后，可点击同一选项重新试听。
+
+队列 2370 的公共测试复现未加载音源停止时抛出异常。
+队列 2371 构建通过，两个公共呈现测试通过。
+队列 2372 以两个原生 Player 核对设置面板和重开。
+损坏音频期间选项 B 成功写档，恢复后同选项播放一次。
+两个进程无脚本错误，通过 Vulkan 校验和退出释放。
+[公共传输结果](evidence/2026-11-21/timer-preview-recovery/verification.json)与[试听结果](evidence/2026-11-21/timer-preview-recovery/player-verification.json)保留来源。

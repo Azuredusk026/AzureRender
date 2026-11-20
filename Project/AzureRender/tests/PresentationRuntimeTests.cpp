@@ -69,7 +69,13 @@ int main(int argc,char** argv){
    const auto path=levels.assets().resolveReference("assets:/portal.wav");
    const auto unavailable=std::filesystem::path(path.string()+".unavailable");
    std::filesystem::rename(path,unavailable);
-   try { recovery.update(0); }
+   try {
+    recovery.update(0);
+    recovery.stop(entity);
+    recovery.pause(entity,true);
+    recovery.pause(entity,false);
+    check(recovery.soundCount()==0,"Silent transport commands must preserve an unavailable source");
+   }
    catch (...) { std::filesystem::rename(unavailable,path);throw; }
    std::filesystem::rename(unavailable,path);
    check(!recovery.errors().empty() && recovery.soundCount()==0,"Unavailable audio must retain a diagnostic");

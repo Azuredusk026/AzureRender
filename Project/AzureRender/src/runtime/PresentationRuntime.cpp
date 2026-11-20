@@ -61,10 +61,12 @@ void PresentationRuntime::play(ecs::Entity entity) {
     ++starts_;
 }
 void PresentationRuntime::stop(ecs::Entity entity) {
-    audio_.stop(requireAudioSource(entity));
+    synchronize();
+    if (const auto* source=activeAudioSource(entity)) audio_.stop(source->handle);
 }
 void PresentationRuntime::pause(ecs::Entity entity, bool paused) {
-    audio_.setPaused(requireAudioSource(entity), paused);
+    synchronize();
+    if (const auto* source=activeAudioSource(entity)) audio_.setPaused(source->handle, paused);
 }
 const PresentationRuntime::Sound* PresentationRuntime::activeAudioSource(ecs::Entity entity) const {
     if (revision_ != runtime_.sceneRevision()) return nullptr;

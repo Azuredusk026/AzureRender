@@ -34,14 +34,15 @@ function new_timer_sound_settings(host)
     end
 
     local function playNode(name, gain)
-        local cue = assert(host:find(name), "Missing timer sound: " .. name)
+        local cue = host:find(name)
+        if not cue then return false end
         cue:set("azure.audio-source", "volume", gain)
-        cue:audio_play()
+        return cue:try_audio_play()
     end
 
     local function playGroup(countup, group)
         local choice, volume, mute = settings:values(countup, group)
-        playNode(cueNodes[group][choice], mute == 1 and 0 or volume / 100)
+        return playNode(cueNodes[group][choice], mute == 1 and 0 or volume / 100)
     end
 
     function settings:play(id, countup)
@@ -75,7 +76,7 @@ function new_timer_sound_settings(host)
             for _, nodes in ipairs(cueNodes) do
                 for _, name in ipairs(nodes) do host:find(name):audio_stop() end
             end
-            playGroup(countup, group)
+            return playGroup(countup, group)
         end
         return true
     end
