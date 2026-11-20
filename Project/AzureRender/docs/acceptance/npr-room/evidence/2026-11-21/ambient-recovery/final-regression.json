@@ -1,0 +1,89 @@
+[
+  {
+    "command": [
+      "python",
+      "-B",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tools/npr_room",
+      "-p",
+      "test_*.py"
+    ],
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "python",
+      "-B",
+      "tools/test_script_bindings.py"
+    ],
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "python",
+      "-B",
+      "tools/generate_script_bindings.py",
+      "--check"
+    ],
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "python",
+      "-B",
+      "tools/npr_room/test_pomodoro_runtime.py",
+      "--lua",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261120-010632-asset-parse-source-diagnostic-d884c7\\player-release\\lua.dll"
+    ],
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "python",
+      "-B",
+      "tools/npr_room/test_music_preferences_runtime.py",
+      "--lua",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261120-010632-asset-parse-source-diagnostic-d884c7\\player-release\\lua.dll"
+    ],
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "python",
+      "-B",
+      "tools/npr_room/test_ambient_recovery_runtime.py",
+      "--lua",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261120-010632-asset-parse-source-diagnostic-d884c7\\player-release\\lua.dll"
+    ],
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261120-010632-asset-parse-source-diagnostic-d884c7\\player-release\\AzurePresentationRuntimeTests.exe",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261121-025326-original-offline-audio-0d53db\\fixture\\project.azureproject"
+    ],
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261120-010632-asset-parse-source-diagnostic-d884c7\\player-release\\AzureGameplayPresentationTests.exe",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261121-025326-original-offline-audio-0d53db\\fixture\\assets\\portal.wav"
+    ],
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261120-010632-asset-parse-source-diagnostic-d884c7\\player-release\\AzureScriptBackendContractTests.exe"
+    ],
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261120-010632-asset-parse-source-diagnostic-d884c7\\player-release\\AzureScriptInteropTests.exe"
+    ],
+    "exitCode": 0
+  }
+]
