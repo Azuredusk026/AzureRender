@@ -30,3 +30,16 @@ python -B -m tools.npr_room.build_todo_room --room $splashRoom --source $unitySo
 python -B tools/npr_room/test_pomodoro_runtime.py --lua $luaDll
 python -B tools/npr_room/test_todo_player.py --player $player --project $todoRoomProject --resource-root $resources --output $todoReplay
 ```
+
+## 完成提示音失败隔离
+
+完成和恢复待办各自提交存档并刷新界面。
+可选提示音使用公共可恢复播放入口。
+提示音损坏时，完成时间和进度仍保持一致。
+修复音频后，后续完成操作可继续播放。
+
+队列 2376 使用原创任务和测试音验证两个 Player。
+损坏音频期间可完成和恢复同一任务。
+声音修复后可再次完成，重开可恢复为未完成。
+两个进程无脚本错误，通过 Vulkan 校验及退出释放。
+[待办声音隔离结果](evidence/2026-11-21/todo-cue-failure/verification.json)记录输入和状态。

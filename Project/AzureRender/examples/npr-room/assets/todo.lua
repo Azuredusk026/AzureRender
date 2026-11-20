@@ -57,7 +57,7 @@ end
 
 local function cue(id)
     local sound = self:find(id)
-    if sound then sound:audio_play() end
+    if sound then sound:try_audio_play() end
 end
 
 local function publish(proposed, id, completedNow)

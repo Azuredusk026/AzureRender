@@ -1,12 +1,23 @@
 local action, stored, failed
 local values, labels, visible = {}, {}, {}
 local sounds = {}
+local audioAvailable = true
 local when = "20261117024018"
 
 self = {
     pressed = function(_, name) return name == action end,
     find = function(_, id)
-        return {audio_play = function() sounds[#sounds + 1] = id end}
+        return {
+            audio_play = function()
+                if not audioAvailable then error("Task cue unavailable") end
+                sounds[#sounds + 1] = id
+            end,
+            try_audio_play = function()
+                if not audioAvailable then return false end
+                sounds[#sounds + 1] = id
+                return true
+            end,
+        }
     end,
     local_datetime = function() return when end,
     read_save = function(_, slot) assert(slot == "todo"); return stored end,
@@ -77,3 +88,12 @@ press("save")
 assert(stored[3][1][3][2][2] == "改进")
 press("task-delete")
 assert(#stored[3][1][3] == 1)
+
+audioAvailable = false
+press("task-complete")
+assert(stored[3][1][3][1][3] == when and labels["todo-progress"] == "1 / 1")
+press("task-complete")
+assert(stored[3][1][3][1][3] == "" and labels["todo-progress"] == "0 / 1")
+audioAvailable = true
+press("task-complete")
+assert(stored[3][1][3][1][3] == when and sounds[#sounds] == "todo-complete")
