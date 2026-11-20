@@ -127,3 +127,31 @@ init()
 press("display-toggle")
 press("display-vsync")
 assert(preferences.vsync and sync[1] == 2)
+
+sync = nil
+press("display-vsync")
+assert(sync and sync[1] == 1 and not preferences.vsync, "Vsync writes must recover without restarting")
+local futureSync = {3, true}
+sync = futureSync
+press("display-vsync")
+assert(sync == futureSync and not preferences.vsync, "Runtime future vsync data must stay intact")
+preferences.pending = false
+local futureWindow = {3, 0, 3, false}
+saved = futureWindow
+local topmost = preferences.alwaysOnTop
+press("display-topmost")
+assert(saved == futureWindow and preferences.alwaysOnTop == topmost)
+saved = nil
+press("display-topmost")
+assert(saved[1] == 1 and preferences.alwaysOnTop ~= topmost)
+preferences.pending = false
+local futureRates = {3, 60, 24}
+frameRates = futureRates
+local rate = preferences.activeFrameRate
+fields["display-frame-active"] = "120"
+press("display-frame-active")
+assert(frameRates == futureRates and preferences.activeFrameRate == rate)
+frameRates = nil
+fields["display-frame-active"] = "120"
+press("display-frame-active")
+assert(frameRates[1] == 1 and preferences.activeFrameRate == 120)

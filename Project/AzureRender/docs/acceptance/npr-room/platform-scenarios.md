@@ -249,3 +249,17 @@ python -B tools/npr_room/test_story_signal_room_player.py --player $player --roo
 空间预约使用同一候选的资源挂载与 Release x64 安装树。已盘点的房间挂载与一份历史安装树的着色器、公开资源及许可证合计 928,466,092 字节。正式出包还需按当前安装树计入 Player、启动器、动态库和验证临时文件。
 
 发布器在运行项目校验前核对原生启动器。包含已验证房间 Player 的 Release x64 安装树齐备后，执行整包生成及移动后启动验收。预检的输入与程序摘要见本机 `full-acceptance-next-gates/windows-package-inputs-20261118.json`。
+
+## 显示内容版本保护
+
+窗口、帧率和垂直同步偏好在保存前读取当前内容版本。
+较新内容保留原字节及当前窗口状态。
+兼容内容恢复后，可在原面板继续应用设置。
+
+队列 2378 使用两个原创 Player 验证三个存档槽。
+内容版本 2 和 3 均得到保护。
+恢复后，活动帧率为 90，非活动帧率为 24。
+重开恢复垂直同步开启及普通非置顶窗口。
+Win32 窗口样式核对置顶的应用和拒绝结果。
+两个进程通过 Vulkan 校验，退出分配归零。
+[显示版本报告](evidence/2026-11-21/display-payload/verification.json)保留来源与结果。

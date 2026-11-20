@@ -7,9 +7,8 @@ local resolutions = {"1280 × 720", "1600 × 900", "1920 × 1080", "Custom"}
 local frameRateFields = {"display-frame-active", "display-frame-inactive"}
 local frameRateProperties = {"activeFrameRate", "inactiveFrameRate"}
 local frameRateDefaults = {60, 24}
-local window, open, saved, displayed, writable, displayedLocale, menuCaption
-local frameRates, frameRatesWritable
-local vsyncWritable, displayedVsync
+local window, open, saved, displayed, displayedLocale, menuCaption
+local frameRates, displayedVsync
 
 local function current()
     return {1, window:get(component, "mode"), window:get(component, "resolution"),
@@ -59,8 +58,9 @@ local function show(value)
     displayed = value
 end
 
-local function persist(key, value, allowed)
-    if not allowed then
+local function persist(key, value)
+    local current = self:read_save(key)
+    if type(current) == "table" and type(current[1]) == "number" and current[1] > 1 then
         self:ui_text("display-status", "Display settings require a newer version.")
         return false
     end
@@ -73,7 +73,7 @@ local function persist(key, value, allowed)
 end
 
 local function store(value)
-    if not persist(slot, value, writable) then return false end
+    if not persist(slot, value) then return false end
     saved = value
     return true
 end
@@ -108,7 +108,6 @@ local function loadFrameRates()
         frameRates[index] = validFrameRate(rate) and rate or frameRateDefaults[index]
     end
     local value = self:read_save(frameRateSlot)
-    frameRatesWritable = type(value) ~= "table" or type(value[1]) ~= "number" or value[1] <= 1
     if type(value) == "table" and #value == 3 and value[1] == 1
         and validFrameRate(value[2]) and validFrameRate(value[3]) then
         frameRates = {value[2], value[3]}
@@ -126,7 +125,7 @@ local function editFrameRates()
                 if changed ~= frameRates[index] then
                     local values = {frameRates[1], frameRates[2]}
                     values[index] = changed
-                    if persist(frameRateSlot, {1, values[1], values[2]}, frameRatesWritable) then
+                    if persist(frameRateSlot, {1, values[1], values[2]}) then
                         frameRates = values
                         applyFrameRates()
                     end
@@ -145,12 +144,10 @@ function init()
     self:ui_visible("display-panel", false)
     loadFrameRates()
     local vsync = self:read_save(vsyncSlot)
-    vsyncWritable = type(vsync) ~= "table" or type(vsync[1]) ~= "number" or vsync[1] <= 1
     if type(vsync) == "table" and #vsync == 2 and vsync[1] == 1 and type(vsync[2]) == "boolean" then
         window:set(component, "vsync", vsync[2])
     end
     local value = self:read_save(slot)
-    writable = type(value) ~= "table" or type(value[1]) ~= "number" or value[1] <= 1
     if type(value) == "table" and #value == 4 and value[1] == 1 and modes[(tonumber(value[2]) or -1) + 1]
         and resolutions[(tonumber(value[3]) or -1) + 1] and type(value[4]) == "boolean" then
         saved = {1, tonumber(value[2]), tonumber(value[3]), value[4]}
@@ -178,7 +175,7 @@ function update()
             proposed = {1, value[2], (value[3] + 1) % #resolutions, value[4]}
         elseif self:pressed("display-vsync") then
             local vsync = not window:get(component, "vsync")
-            if persist(vsyncSlot, {1, vsync}, vsyncWritable) then window:set(component, "vsync", vsync) end
+            if persist(vsyncSlot, {1, vsync}) then window:set(component, "vsync", vsync) end
         end
     end
     if proposed and store(proposed) then
