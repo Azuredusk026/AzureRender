@@ -2,11 +2,20 @@ utf8 = nil
 local language = "ZhHans"
 local source, text, visible = {}, {}, {}
 local starts, stops, position, playing = 0, 0, 0, false
+local available = true
 source.set = function(_, component, property, asset)
     assert(component == "azure.audio-source" and property == "asset" and asset == "assets:/voice/native.ogg")
     position = 0
 end
-source.audio_play = function() starts, playing = starts + 1, true end
+source.audio_play = function()
+    if not available then error("Voice unavailable") end
+    starts, playing = starts + 1, true
+end
+source.try_audio_play = function()
+    if not available then return false end
+    source.audio_play()
+    return true
+end
 source.audio_stop = function() stops, playing = stops + 1, false end
 source.audio_playing = function() return playing end
 source.audio_position = function() return position end
@@ -38,3 +47,16 @@ assert(not visible["opening-story-caption"] and stops == 0)
 dialogue:show(line)
 dialogue:clear()
 assert(stops == 1 and not dialogue:ready())
+
+available = false
+playing, position = false, 0
+dialogue:show(line)
+dialogue:fastForward()
+dialogue:update(.5)
+assert(not dialogue:ready(), "Unavailable voice must retain the declared presentation duration")
+dialogue:update(.5)
+assert(dialogue:ready() and visible["opening-story-caption"], "Unavailable voice must leave text dialogue advanceable")
+dialogue:clear()
+available = true
+dialogue:show(line)
+assert(playing, "The next line must retry a recovered voice")

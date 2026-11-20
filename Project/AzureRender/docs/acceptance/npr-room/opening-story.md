@@ -65,3 +65,15 @@ python -B tools/npr_room/test_story_player.py --normal-room --player $player --r
 Lua 5.4 按顺序加载 `story-progress.lua`、`story-reader.lua`、编译后的剧情程序与 `story-opening-routes.lua`，以同一个程序块执行。
 音乐测试按顺序加载 `assets/story-music.lua` 与 `tests/story-music.lua`。
 房间输入与教学提示测试按顺序加载 `assets/story-room.lua` 与 `tests/story-room.lua`。
+
+## 原创剧情语音恢复
+
+可选语音失败时，字幕保持逐字显示。
+声明的音频时长结束且文字完整显示后，可继续对话。
+下一条对话重新尝试当前音源。
+
+队列 2379 使用原创文本和测试音验证两个 Player。
+损坏语音期间，提前继续被拒，字幕完成后可保存进度。
+修复语音后可继续播放，重开后进度累计至三次。
+两个进程无脚本错误，通过 Vulkan 校验及退出释放。
+[剧情恢复报告](evidence/2026-11-21/dialogue-voice-failure/verification.json)保留时间线和输入结果。

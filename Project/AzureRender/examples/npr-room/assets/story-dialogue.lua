@@ -1,7 +1,7 @@
 function new_story_dialogue(host, speeds, currentLanguage)
     local audio = assert(host:find("opening-story-voice"))
     local dialogue = {}
-    local line, caption, starts, length, shown, elapsed, speed, fast, voiceRemaining, pending
+    local line, caption, starts, length, shown, elapsed, speed, fast, voiceRemaining, pending, voiceFallback
 
     local function publish()
         local boundary = starts[shown + 1]
@@ -10,7 +10,7 @@ function new_story_dialogue(host, speeds, currentLanguage)
 
     function dialogue:clear()
         if voiceRemaining then audio:audio_stop() end
-        line, voiceRemaining, pending = nil, nil, false
+        line, voiceRemaining, pending, voiceFallback = nil, nil, false, nil
         host:ui_visible("opening-story-caption", false)
     end
 
@@ -38,7 +38,9 @@ function new_story_dialogue(host, speeds, currentLanguage)
         if line.asset then
             voiceRemaining, pending = line.frames / line.sampleRate, true
             audio:set("azure.audio-source", "asset", "assets:/" .. line.asset)
-            audio:audio_play()
+            if not audio:try_audio_play() then
+                pending, voiceFallback = false, voiceRemaining
+            end
         end
     end
 
@@ -52,7 +54,10 @@ function new_story_dialogue(host, speeds, currentLanguage)
 
     function dialogue:update(dt)
         if not line then return end
-        if pending then pending = false
+        if voiceFallback then
+            voiceFallback = math.max(0, voiceFallback - dt)
+            if voiceFallback == 0 then voiceRemaining, voiceFallback = nil, nil end
+        elseif pending then pending = false
         elseif voiceRemaining and not audio:audio_playing() and audio:audio_position() >= voiceRemaining then
             voiceRemaining = nil
         end
