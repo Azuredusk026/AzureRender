@@ -8,7 +8,6 @@ function new_timer_sound_settings(host)
     local lower = {1, 0, 0}
     local upper = {3, 100, 1}
     local data = host:read_save(slot)
-    local writable = type(data) ~= "table" or type(data[1]) ~= "number" or data[1] <= 1
 
     local function valid(field, value)
         return type(value) == "number" and value >= lower[field] and value <= upper[field] and value % 1 == 0
@@ -60,7 +59,9 @@ function new_timer_sound_settings(host)
     end
 
     function settings:change(countup, group, field, value, preview)
-        if not writable or not valid(field, value) then return false end
+        local saved = host:read_save(slot)
+        local future = type(saved) == "table" and type(saved[1]) == "number" and saved[1] > 1
+        if future or not valid(field, value) then return false end
         local mode = countup and 3 or 2
         local updatedMode = {table.unpack(data[mode])}
         local index = (group - 1) * 3 + field

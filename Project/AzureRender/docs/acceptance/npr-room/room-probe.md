@@ -162,3 +162,14 @@ python -B tools/npr_room/test_room_startup_player.py --player $player --project 
 损坏音频期间选项 B 成功写档，恢复后同选项播放一次。
 两个进程无脚本错误，通过 Vulkan 校验和退出释放。
 [公共传输结果](evidence/2026-11-21/timer-preview-recovery/verification.json)与[试听结果](evidence/2026-11-21/timer-preview-recovery/player-verification.json)保留来源。
+
+## 计时音效内容版本保护
+
+计时音效修改前重新读取当前存档内容版本。
+启动及运行中遇到较新内容时保留原字节。
+兼容内容恢复后，同一面板可重新保存和试听。
+
+队列 2373 使用两个原生 Player 验证内容版本 2 和 3。
+两次恢复均在同一进程完成，选项 C 在重开后保留。
+两个进程通过 Vulkan 校验，退出分配归零。
+[音效内容版本报告](evidence/2026-11-21/timer-sound-payload/verification.json)记录版本与结果。

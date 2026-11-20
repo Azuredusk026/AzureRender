@@ -103,3 +103,12 @@ assert(not visible["timer-sound-panel"], "Unavailable menu cues must leave contr
 audioAvailable = true
 assert(options:change(false, 1, 2, 31, true), "The same saved selection can be previewed after recovery")
 assert(played[#played][2] == .31)
+
+payload = {2, {"future sound preferences"}}
+local protected = payload
+assert(not options:change(false, 1, 1, 3, true) and payload == protected,
+       "A future payload installed during the session must remain intact")
+options = new_timer_sound_settings(host)
+payload = nil
+assert(options:change(false, 1, 1, 3, true), "Compatible payload recovery must work in the same session")
+assert(payload[1] == 1 and payload[2][1] == 3)
