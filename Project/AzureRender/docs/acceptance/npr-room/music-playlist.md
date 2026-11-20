@@ -55,3 +55,16 @@ python -B tools/npr_room/test_room_startup_player.py --player $player --project 
 python -B tools/npr_room/test_music_preferences_runtime.py --lua $luaDll
 python -B tools/npr_room/test_original_music_player.py --player $player --resources $resources --source examples/npr-room/assets/music.lua --output $replay
 ```
+
+## 无设备音频契约
+
+队列 2353 增量构建本工作树的公共呈现测试。
+测试显式使用 `AudioRuntime(false)` 和离线呈现。
+离线混音、暂停位置、音量、继续和循环均通过。
+单次音频在最后采样帧停止。
+
+项目呈现同时覆盖混音能量和静音调节。
+实体销毁与关卡替换释放所属音源。
+[测试证据](evidence/2026-11-21/offline-audio/verification.json)记录程序、源码及原创夹具身份。
+此证据适用于显式无设备模式。
+物理无设备的初始化回退和听感留待现场复核。
