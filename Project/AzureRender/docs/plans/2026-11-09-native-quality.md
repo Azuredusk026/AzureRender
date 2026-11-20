@@ -438,3 +438,7 @@ NVIDIA 头发区域与图集单项对照在一字节内一致。
 [检修站反射法线对照](../acceptance/nr/evidence/2026-11-21/original-normal-contract/README.md)通过冻结输入与实际绑定核对。
 几何法线保留右侧 97 个命中，历史接收仍为零。
 统一几何法线候选淘汰，匹配输入及冻结环境继续待验。
+
+[检修站法线与历史交叉对照](../acceptance/nr/evidence/2026-11-21/original-normal-history-cross/README.md)通过六条实际 GPU 路径。
+三种法线均恢复运动反射，错误深度控制均与原路径一致。
+生产采用继续等待匹配输入及 592.82 冻结环境。
