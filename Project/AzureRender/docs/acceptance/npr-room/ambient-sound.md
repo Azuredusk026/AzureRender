@@ -28,3 +28,21 @@ python -B -m tools.npr_room.build_ambient_room --room $musicRoom --output $ambie
 python -B tools/npr_room/test_ambient_room_player.py --player $player --project $ambientProject --resource-root $resources --output $ambientReplay
 python -B tools/npr_room/test_room_startup_player.py --player $player --project $ambientProject --resource-root $resources --output $roomReplay --expect-heroine --expect-music
 ```
+
+## 原创环境声恢复
+
+环境声在首帧按存档逐条尝试播放。
+失败音源保留偏好和重试提示，其他音源继续运行。
+玩家恢复资源后，可调节音量或重新启用以重试。
+调节活动音源的音量保持播放位置。
+
+队列 2367 使用两段原创测试音和生产脚本。
+第一段音频截断时，第二段正常播放。
+恢复第一段后，音量从 45% 调至 50%并成功播放。
+较新容器被拒后保留原字节，恢复兼容容器可重试。
+第二个 Player 恢复两条音源，单独静音第一条。
+
+两次退出通过 Vulkan 校验，活动图像和缓冲归零。
+[结构化结果](evidence/2026-11-21/ambient-recovery/verification.json)记录程序与输入身份。
+[失败画面](evidence/2026-11-21/ambient-recovery/unavailable.png)及[恢复画面](evidence/2026-11-21/ambient-recovery/recovered.png)登记界面反馈。
+物理设备断开及听感留待现场复核。

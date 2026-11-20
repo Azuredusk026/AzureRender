@@ -10,6 +10,7 @@ function self:find(id)
         local source = {starts = 0}
         function source:set(component, key, value) assert(component == "azure.audio-source"); self[key] = value end
         function source:audio_play() self.starts = self.starts + 1 end
+        function source:try_audio_play() self:audio_play(); return true end
         sources[id] = source
     end
     return sources[id]

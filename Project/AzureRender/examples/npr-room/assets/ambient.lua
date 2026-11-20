@@ -2,6 +2,7 @@ local slot = "ambient"
 local open = false
 local selected, page, pageSize = 1, 1, 7
 local state, indexes = {}, {}
+local restorePending, saveFailed = false, false
 local access, wallet, confirmPurchase, cityWindow
 
 local function accessFor(index)
@@ -14,12 +15,13 @@ local function apply(index)
     local row = state[index]
     local effectiveVolume = row.muted and 0 or row.volume / 100
     if effectiveVolume == 0 and not row.started then return end
-    local source = assert(self:find(sounds[index][2]))
+    local source = self:find(sounds[index][2])
+    if not source then row.failed = true; return end
     source:set("azure.audio-source", "volume", effectiveVolume)
     if not row.started then
         source:set("azure.audio-source", "asset", sounds[index][3])
-        source:audio_play()
-        row.started = true
+        row.started = source:try_audio_play()
+        row.failed = not row.started
     end
 end
 
@@ -31,8 +33,10 @@ local function save()
             rows[#rows + 1] = {source[1], row.volume, row.muted}
         end
     end
-    self:ui_text("ambient-status",
-        self:try_write_save(slot, {1, rows}) and "" or "Ambient sound settings could not be saved")
+    saveFailed = not self:try_write_save(slot, {1, rows})
+    self:ui_text("ambient-status", saveFailed and "Ambient sound settings could not be saved"
+        or (state[selected].failed and not state[selected].muted)
+        and "Ambient sound is unavailable. Adjust volume or enable it to retry." or "")
 end
 
 local function displaySelection(showAccess)
@@ -67,6 +71,9 @@ local function displaySelection(showAccess)
             self:ui_text("ambient-city-combined",
                 (cityWindow:active() or not row.muted) and "Turn off environment" or "Turn on environment")
         end
+    end
+    if row.failed and not row.muted and not saveFailed then
+        self:ui_text("ambient-status", "Ambient sound is unavailable. Adjust volume or enable it to retry.")
     end
 end
 
@@ -109,7 +116,7 @@ function init()
             end
         end
     end
-    for index = 1, #sounds do apply(index) end
+    restorePending = true
     self:ui_visible("ambient-panel", false)
     displaySelection(true)
 end
@@ -124,6 +131,11 @@ local function changeVolume(row, difference)
 end
 
 function update()
+    if restorePending then
+        restorePending = false
+        for index = 1, #sounds do apply(index) end
+        displaySelection(true)
+    end
     if self:pressed("ambient-toggle") then
         open = not open
         confirmPurchase = false
