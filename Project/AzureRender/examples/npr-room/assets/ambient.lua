@@ -33,7 +33,9 @@ local function save()
             rows[#rows + 1] = {source[1], row.volume, row.muted}
         end
     end
-    saveFailed = not self:try_write_save(slot, {1, rows})
+    local saved = self:read_save(slot)
+    local future = type(saved) == "table" and type(saved[1]) == "number" and saved[1] > 1
+    saveFailed = future or not self:try_write_save(slot, {1, rows})
     self:ui_text("ambient-status", saveFailed and "Ambient sound settings could not be saved"
         or (state[selected].failed and not state[selected].muted)
         and "Ambient sound is unavailable. Adjust volume or enable it to retry." or "")

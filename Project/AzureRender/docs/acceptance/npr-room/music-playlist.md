@@ -103,3 +103,16 @@ python -B tools/npr_room/test_original_music_player.py --player $player --resour
 托管构建当前为关闭配置，生成一致性通过三项检查。
 [失败恢复报告](evidence/2026-11-21/music-recovery/recovery.json)记录测试音及程序身份。
 [失败画面](evidence/2026-11-21/music-recovery/unavailable.png)与[恢复画面](evidence/2026-11-21/music-recovery/recovered.png)保留可见反馈。
+
+## 偏好内容版本保护
+
+偏好容器和偏好内容各自持有版本。
+保存前重新读取内容版本，较新版本保持原字节。
+恢复兼容内容后，可在同一进程沿当前控件重试。
+控件显示的临时设置遵守当前会话状态。
+
+队列 2368 验证曲库与环境声的四个原生进程。
+启动版本 2 和运行中版本 3 均保持原字节。
+恢复兼容内容后可保存，并在重开后继续操作。
+四次退出均通过 Vulkan 校验，图像和缓冲归零。
+[版本保护报告](evidence/2026-11-21/audio-payload-version/verification.json)记录来源与结果。

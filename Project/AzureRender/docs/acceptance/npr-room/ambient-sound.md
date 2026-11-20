@@ -46,3 +46,16 @@ python -B tools/npr_room/test_room_startup_player.py --player $player --project 
 [结构化结果](evidence/2026-11-21/ambient-recovery/verification.json)记录程序与输入身份。
 [失败画面](evidence/2026-11-21/ambient-recovery/unavailable.png)及[恢复画面](evidence/2026-11-21/ambient-recovery/recovered.png)登记界面反馈。
 物理设备断开及听感留待现场复核。
+
+## 偏好内容版本保护
+
+偏好容器和偏好内容各自持有版本。
+保存前重新读取内容版本，较新版本保持原字节。
+恢复兼容内容后，可在同一进程沿当前控件重试。
+控件显示的临时设置遵守当前会话状态。
+
+队列 2368 验证曲库与环境声的四个原生进程。
+启动版本 2 和运行中版本 3 均保持原字节。
+恢复兼容内容后可保存，并在重开后继续操作。
+四次退出均通过 Vulkan 校验，图像和缓冲归零。
+[版本保护报告](evidence/2026-11-21/audio-payload-version/verification.json)记录来源与结果。

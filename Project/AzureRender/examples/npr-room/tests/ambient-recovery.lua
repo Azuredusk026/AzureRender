@@ -55,3 +55,12 @@ writable = true
 click("loud")
 assert(display["ambient-status"] == "" and sources.first.starts == 1)
 print("Ambient restored failure, independent source, explicit recovery and failed-write retry passed")
+
+saved = {2, {"future ambient preferences"}}
+local protected = saved
+click("loud")
+assert(saved == protected and display["ambient-status"] ~= "", "Future ambient payload must remain intact")
+saved = {1, {{1, 45, false}}}
+click("quiet")
+assert(saved[1] == 1 and saved[2][1][2] == 50 and display["ambient-status"] == "")
+print("Ambient payload version protection and same-session recovery passed")

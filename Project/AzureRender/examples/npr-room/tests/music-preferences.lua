@@ -85,3 +85,17 @@ click("play")
 assert(display["music-play"] == "Pause" and display["music-status"] == "")
 assert(finish() == "assets:/one.wav", "Recovered playback must preserve the repeat preference")
 print("Music unavailable autoplay and explicit recovery passed")
+
+saved = {2, {"future preferences"}}
+local protected = saved
+click, finish, display = boot()
+click("quiet")
+assert(saved == protected and display["music-status"] ~= "", "Future music payload must remain intact")
+saved = {1, false, 30, false, false}
+click("loud")
+assert(saved[1] == 1 and saved[3] == 50 and display["music-status"] == "")
+saved = {2, {"newer external update"}}
+protected = saved
+click("mute")
+assert(saved == protected, "A future payload installed after startup must remain intact")
+print("Music payload version protection and same-session recovery passed")

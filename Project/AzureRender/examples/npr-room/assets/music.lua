@@ -13,7 +13,9 @@ end
 
 local function applyPreferences()
     gain()
-    if not self:try_write_save(slot, {1, playing, volume, muted, shuffle, repeatOne}) then
+    local saved = self:read_save(slot)
+    local future = type(saved) == "table" and type(saved[1]) == "number" and saved[1] > 1
+    if future or not self:try_write_save(slot, {1, playing, volume, muted, shuffle, repeatOne}) then
         self:ui_text("music-status", "Music settings could not be saved")
     else
         self:ui_text("music-status", playbackFailed and "Music is unavailable. Press Play to retry." or "")
