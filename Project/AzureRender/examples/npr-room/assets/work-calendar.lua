@@ -137,6 +137,7 @@ function new_work_calendar(translate)
     local startDay, displayedMonth, displayedStart
     local browsedMonth, selectedDate, editingDate
     local displayedWorkTime
+    local workDraft
     local displayedTodoDate, refreshTodo
     local diaryDate, diaryText, diaryDraft
     local habitMenu
@@ -238,16 +239,18 @@ function new_work_calendar(translate)
 
     local function renderEditFields()
         displayedWorkTime = workTimeParts(calendar:timeFor(editingDate))
+        workDraft = {}
         for index, field in ipairs(workTimeFields) do
-            runtime:ui_set_value(field, string.format("%02d", displayedWorkTime[index]))
+            workDraft[index] = string.format("%02d", displayedWorkTime[index])
+            runtime:ui_set_value(field, workDraft[index])
         end
     end
 
-    local function submitEdit()
+    local function submitEdit(inputs)
         local values = workTimeParts(calendar:timeFor(editingDate))
         local changed = false
         for index, field in ipairs(workTimeFields) do
-            local input = runtime:ui_value(field)
+            local input = inputs and inputs[index] or runtime:ui_value(field)
             if input ~= "" then
                 local value = math.tointeger(tonumber(input))
                 if not value then return false end
@@ -315,6 +318,11 @@ function new_work_calendar(translate)
 
     function calendar:save_open_diary()
         if diaryDate then return storeDiary(diaryDraft) end
+        return true
+    end
+
+    function calendar:save_open_work_time()
+        if editingDate then return submitEdit(workDraft) end
         return true
     end
 
@@ -415,6 +423,9 @@ function new_work_calendar(translate)
             elseif saveDiary() then
                 showDiary(nil)
             end
+        end
+        if editingDate then
+            for index, field in ipairs(workTimeFields) do workDraft[index] = runtime:ui_value(field) end
         end
         if diaryDate then diaryDraft = runtime:ui_value("calendar-diary-text") end
         if new_room_habits and new_habit_calendar_menu then

@@ -359,6 +359,7 @@ function shutdown()
     end
     if workCalendar then
         workCalendar:save_open_diary()
+        workCalendar:save_open_work_time()
         workCalendar:flush()
     end
 end

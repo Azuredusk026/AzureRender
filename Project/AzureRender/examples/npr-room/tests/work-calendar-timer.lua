@@ -145,3 +145,49 @@ language = 2
 localized:update_month_view(true)
 assert(labels["calendar-first-day-label"] == "一周起始日" and labels["calendar-work-label"] == "工作时间")
 assert(labels["calendar-first-1"] == "一" and labels["calendar-weekday-1"] == "一")
+
+local fields = {}
+self.ui_value = function(_, id) return fields[id] end
+self.ui_set_value = function(_, id, value) fields[id] = value end
+saved["work-calendar"] = {1, {{"2026", {{"0101", 10.25}, {"0102", 4}}}}}
+wall = "20260101120000"
+init()
+step(0, "timer-stats")
+step(0, "calendar-edit-time")
+fields["calendar-edit-seconds"] = "32"
+step(0)
+local readField = self.ui_value
+self.ui_value = function() error("UI has been released before script shutdown") end
+shutdown()
+self.ui_value = readField
+assert(new_work_calendar():timeFor("20260101") == 32,
+    "Closing the window must save work edits that have not lost focus")
+assert(new_work_calendar():timeFor("20260102") == 4)
+
+for _, input in ipairs({"abc", "10"}) do
+    saved["work-calendar"] = {1, {{"2026", {{"0101", 10.25}}}}}
+    init()
+    step(0, "timer-stats")
+    step(0, "calendar-edit-time")
+    fields["calendar-edit-seconds"] = input
+    step(0)
+    local previous = saved["work-calendar"]
+    self.ui_value = function() error("UI has been released before script shutdown") end
+    shutdown()
+    self.ui_value = readField
+    assert(saved["work-calendar"] == previous,
+        "Invalid or unchanged work edits must preserve the existing save on exit")
+end
+
+init()
+step(0, "timer-stats")
+step(0, "calendar-edit-time")
+fields["calendar-edit-seconds"] = "32"
+step(0)
+local protected = {3, {}, "preserve"}
+saved["work-calendar"] = protected
+self.ui_value = function() error("UI has been released before script shutdown") end
+shutdown()
+self.ui_value = readField
+assert(saved["work-calendar"] == protected,
+    "Closing a work edit must preserve a newer calendar payload")
