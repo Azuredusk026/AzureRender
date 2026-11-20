@@ -1456,3 +1456,7 @@ Intel 头发颜色继续按冻结区域核对纹理选级。
 [反射几何法线候选](../acceptance/nr/evidence/2026-11-21/reflection-geometric-normal-candidate/README.md)完成控制、成片及恢复核验。
 中央地面 SSIM 为 0.83670，环带为 0.75535。
 两区与邻区门槛未通过，匹配输入及冻结环境继续待验。
+
+[检修站反射法线对照](../acceptance/nr/evidence/2026-11-21/original-normal-contract/README.md)通过冻结输入与实际绑定核对。
+几何法线保留右侧 97 个命中，历史接收仍为零。
+统一几何法线候选淘汰，匹配输入及冻结环境继续待验。
