@@ -1,0 +1,93 @@
+{
+  "baseline": "912dead",
+  "status": "candidate-rejected-quality-open",
+  "jobs": [
+    2336,
+    2337
+  ],
+  "results": {
+    "regions": {
+      "complete": {
+        "changedPixels": 1663161,
+        "newOverOne": 42561
+      },
+      "ceiling": {
+        "changedPixels": 110454,
+        "newOverOne": 249
+      },
+      "leftDoor": {
+        "changedPixels": 13557,
+        "newOverOne": 92
+      },
+      "rightWall": {
+        "changedPixels": 85594,
+        "newOverOne": 2981
+      },
+      "centerFloor": {
+        "changedPixels": 85856,
+        "newOverOne": 550,
+        "control": {
+          "ssim": 0.8296183943748474,
+          "medianLumaRelativeError": 0.15753574441475204
+        },
+        "candidate": {
+          "ssim": 0.8367003202438354,
+          "medianLumaRelativeError": 0.1394644572924427
+        }
+      },
+      "cyanRing": {
+        "changedPixels": 27352,
+        "newOverOne": 134,
+        "control": {
+          "ssim": 0.75460284948349,
+          "medianLumaRelativeError": 0.0798778638746798
+        },
+        "candidate": {
+          "ssim": 0.7553476095199585,
+          "medianLumaRelativeError": 0.022117172474882492
+        }
+      },
+      "leftFloor": {
+        "changedPixels": 33505,
+        "newOverOne": 1193
+      }
+    },
+    "hallOneFramePassed": false
+  },
+  "replay": {
+    "candidateDisplay": {
+      "sha256": "5ca888ce3bda1dfe1f1689378feeeebc0bc85af02e35ec154482a7f3fef94dd7",
+      "encodedSha256": "51bb3943971c1fa27a8b9e2ae7e00461a6815f7091804023915dcab61593ad5e"
+    },
+    "controlDisplay": {
+      "sha256": "3c4eb3f7852f2aae48c0465936133f1ca2306c87d76388df3fe1274f7565eab9",
+      "encodedSha256": "b77bdebb7db85a24e5ff36a56efe3b0fbc2788c5001f26de620a39f0787330f8"
+    },
+    "surface": {
+      "controlSha256": "7d36e3d09697fadae7aa5c2cacf300c1973a9dc68d4bb398b1cdd85fd467c113",
+      "candidateSha256": "fe8891267c394994e6a5277ea7f6326757776da9df02a1464140b5ef6f501dd9",
+      "changedBytes": 20888572,
+      "depthAndRoughnessExact": true
+    },
+    "restored": true,
+    "status": "verified"
+  },
+  "source": {
+    "sourceCommit": "c60689c1998aecef57d5c7dc9e8993e68c81d02b",
+    "programs": {
+      "control": "e99e2258c6a04aaa479024336460ede13b8a45f3b8a592c85e8fbe8905495cd6",
+      "candidate": "ec90dc278bc926a72a7f8c21bcc73a57debc8e607c017dab549a276e2c8b31b8"
+    },
+    "defines": [
+      "AZURE_ORDINARY_EARLY_DEPTH=1",
+      "AZURE_PROBE_FIELD=1",
+      "AZURE_IRRADIANCE_CLIPMAP=1",
+      "AZURE_OBJECT_SHADOW=1",
+      "AZURE_BINDLESS=1",
+      "AZURE_OPAQUE_SNAPSHOT=1"
+    ]
+  },
+  "hallSha256": "afdcba75ffe3464792052c5d34a22757711f04193f7fe4764c02dc031100ba50",
+  "archiveSha256": "c1a6fb59a17a2b97c46c46302936551ec95c5ce3e0aef5508dc76a3f1ec851aa",
+  "archiveBytes": 8040820
+}

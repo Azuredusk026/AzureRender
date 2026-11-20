@@ -1452,3 +1452,7 @@ Intel 头发颜色继续按冻结区域核对纹理选级。
 原生身体权重和投影重建已确认固定捕获帧的几何覆盖。原始量化权重导入通过动画、形变和蒙皮回归。[独立动态轮廓](../acceptance/nr/evidence/2026-11-16/dynamic-body-geometry-player/qualification.json)通过双设备掩码核对；完整衣料遮挡与着色按联合场景成片验收。
 [完整场景后视机位](../acceptance/nr/full-body-native-comparison.md#完整场景后视机位)确认双设备原模型对照精确。身体候选的腰侧变化可复现，Intel 地面差异继续定位。
 近景泛光的双设备线性读回已完成。原生泛光外观按同机位同姿态的完整画面验收，全身虹膜按已知覆盖区域核对采样与遮挡。
+
+[反射几何法线候选](../acceptance/nr/evidence/2026-11-21/reflection-geometric-normal-candidate/README.md)完成控制、成片及恢复核验。
+中央地面 SSIM 为 0.83670，环带为 0.75535。
+两区与邻区门槛未通过，匹配输入及冻结环境继续待验。

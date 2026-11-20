@@ -430,3 +430,7 @@ NVIDIA 头发区域与图集单项对照在一字节内一致。
 
 [反射法线存储域](../acceptance/nr/evidence/2026-11-21/reflection-normal-storage-domain/README.md)核对量化范围和实际材质绑定。
 两区方向差异继续核对几何基底与材质法线的贡献。
+
+[反射几何法线候选](../acceptance/nr/evidence/2026-11-21/reflection-geometric-normal-candidate/README.md)完成控制、成片及恢复核验。
+中央地面 SSIM 为 0.83670，环带为 0.75535。
+两区与邻区门槛未通过，匹配输入及冻结环境继续待验。
