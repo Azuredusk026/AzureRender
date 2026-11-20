@@ -442,3 +442,7 @@ NVIDIA 头发区域与图集单项对照在一字节内一致。
 [检修站法线与历史交叉对照](../acceptance/nr/evidence/2026-11-21/original-normal-history-cross/README.md)通过六条实际 GPU 路径。
 三种法线均恢复运动反射，错误深度控制均与原路径一致。
 生产采用继续等待匹配输入及 592.82 冻结环境。
+
+[检修站边缘历史拒绝](../acceptance/nr/evidence/2026-11-21/original-history-edge-rejection/README.md)闭合倾斜路径的单点差异。
+87 个命中包含 86 个有效历史接收和一次背景拒绝。
+世界位置误差约 4.092 米，原拒绝门槛保持有效。

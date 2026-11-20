@@ -1,0 +1,79 @@
+{
+  "base": "f061332",
+  "status": "edge-history-rejection-verified",
+  "sourceEvidence": [
+    "../original-normal-contract/qualification.json",
+    "../original-normal-history-cross/qualification.json"
+  ],
+  "results": {
+    "rayPixel": [
+      97,
+      78
+    ],
+    "geometryHits": 87,
+    "acceptedRays": 86,
+    "rejectedHits": 1,
+    "acceptedHistoryRedRange": [
+      0.80224609375,
+      0.80712890625
+    ],
+    "hitUv": [
+      0.6553139543755245,
+      0.3308613717860685
+    ],
+    "historyUv": [
+      0.45641260395208666,
+      0.3308613717860685
+    ],
+    "motion": [
+      0.19889409840106964,
+      0.0,
+      0.9835569858551025,
+      1.0
+    ],
+    "colorSourcePixel": [
+      146,
+      79
+    ],
+    "depthSourcePixel": [
+      147,
+      79
+    ],
+    "historyDepthPixel": [
+      73,
+      39
+    ],
+    "expectedPreviousDepth": 0.01644301414489746,
+    "actualPreviousDepth": 0.007689177058637142,
+    "historyWorldErrorM": 4.092003562546267,
+    "oneTracePixelSpanM": 0.04399299663601419,
+    "historyColor": [
+      0.0154571533203125,
+      0.0231781005859375,
+      0.038604736328125
+    ],
+    "depthSourceColor": [
+      0.0154571533203125,
+      0.0231781005859375,
+      0.038604736328125
+    ],
+    "depthRejectVerified": true,
+    "pointCellUnambiguous": true
+  },
+  "validation": {
+    "archiveSha256": "ad3c8977d389c5a5dc127e9b35dd78052eb3e3921710955db13759540445063c",
+    "bytes": 92441,
+    "files": {
+      "confidence.zlib": "f32793768bbb25bfe304a900b917d12cbce55e82c4ecc60abe9b89bf32716aa2",
+      "historyUv.zlib": "43aa409fcf0ef2d6678e7bd3f3c09a0bc1e0c55b3b58c40b95d8c22dc31a53f3",
+      "hitUv.zlib": "2d29d75ae84c9ba73bdda091b68b249de2b7f8711175900552cedf31bd482fba",
+      "motionInput.zlib": "7b0f4f1a73fcf6c4966d25d12869cf33e275a36e8e2d4193f7377e1f46196aa1",
+      "previousColor.zlib": "987410f459eb743ed4d4313306dce999219ab1ecfbe970224e95a7f1b403f3b3",
+      "previousDepth.zlib": "ba99794b2e7cdeb91a8ca4e64f490c01fb3749e60fb3c87149790b2eb752584d",
+      "input.json": "3d46483261e259583cdd74f1da69a9a444f70ff5db1c2f3b4d4c5d7756f6ddc0",
+      "verify.py": "fea9458cf2831c069328e247f092322eb0f13b5f5afaaecc53b3a06e22a402ff",
+      "results.json": "feebef66caf756bf3177399ae5f294fbdfe02f9e819bf5a6f636e693b8c4e5cf",
+      "test_screen_space_reflections_gpu.py": "870e5e72810d78bcb90f9e4316fa0b9a9c34c1c91213a4df30f7e5732f502471"
+    }
+  }
+}
