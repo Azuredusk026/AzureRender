@@ -575,3 +575,6 @@ Player 同帧捕获及补充读回均在共享队列执行成功。
 解析准备回归在 Debug 与 Release 各通过 3,380 点。
 中央地面长尾中，2,763 点存在至少半米的前景深度差。
 [法线与前景证据](evidence/2026-11-20/reflection-surface-normal-lineage/README.md)记录合规配对输入及冻结环境的恢复条件。
+
+[反射法线存储域](evidence/2026-11-21/reflection-normal-storage-domain/README.md)核对量化范围和实际材质绑定。
+两区方向差异继续核对几何基底与材质法线的贡献。

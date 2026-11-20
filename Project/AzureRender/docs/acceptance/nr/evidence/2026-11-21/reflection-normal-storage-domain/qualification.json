@@ -1,0 +1,558 @@
+{
+  "baseline": "0d3e942",
+  "status": "source-qualified-quality-open",
+  "jobs": [
+    2332,
+    2334,
+    2335
+  ],
+  "results": {
+    "centerFloor": {
+      "count": 19281,
+      "controls": {
+        "x0y0": {
+          "nearestCellContains": 2,
+          "oneUnitContains": 7,
+          "distanceUnits": [
+            1.7852426767349243,
+            2.1401203870773315,
+            9.20237661600115
+          ],
+          "signedUnitsMedian": [
+            -1.5026200413703918,
+            1.7712792754173279
+          ]
+        },
+        "x1y0": {
+          "nearestCellContains": 1,
+          "oneUnitContains": 3,
+          "distanceUnits": [
+            1.784328043460846,
+            2.1419496536254883,
+            9.034266829490665
+          ],
+          "signedUnitsMedian": [
+            -1.5026200413703918,
+            1.7708524465560913
+          ]
+        },
+        "x0y1": {
+          "nearestCellContains": 1,
+          "oneUnitContains": 2,
+          "distanceUnits": [
+            1.7839621901512146,
+            2.1306082010269165,
+            8.518401467800144
+          ],
+          "signedUnitsMedian": [
+            -1.5026200413703918,
+            1.7738402485847473
+          ]
+        },
+        "x1y1": {
+          "nearestCellContains": 2,
+          "oneUnitContains": 4,
+          "distanceUnits": [
+            1.7845109701156616,
+            2.1327423453330994,
+            8.511560010910042
+          ],
+          "signedUnitsMedian": [
+            -1.5026200413703918,
+            1.77457195520401
+          ]
+        }
+      },
+      "anyTapNearestCellContains": 5,
+      "anyTapOneUnitContains": 8,
+      "bestTapDistanceUnits": [
+        1.7557914853096008,
+        2.1110350489616394,
+        7.518231689929976
+      ],
+      "dominantNativeCodes": [
+        {
+          "code": [
+            511,
+            511
+          ],
+          "count": 18468
+        },
+        {
+          "code": [
+            511,
+            504
+          ],
+          "count": 315
+        },
+        {
+          "code": [
+            511,
+            505
+          ],
+          "count": 245
+        },
+        {
+          "code": [
+            511,
+            510
+          ],
+          "count": 61
+        },
+        {
+          "code": [
+            511,
+            503
+          ],
+          "count": 46
+        }
+      ]
+    },
+    "cyanRing": {
+      "count": 6478,
+      "controls": {
+        "x0y0": {
+          "nearestCellContains": 0,
+          "oneUnitContains": 0,
+          "distanceUnits": [
+            1.6382306218147278,
+            1.8988584220409392,
+            196.99895818710203
+          ],
+          "signedUnitsMedian": [
+            -1.503229796886444,
+            1.613444060087204
+          ]
+        },
+        "x1y0": {
+          "nearestCellContains": 0,
+          "oneUnitContains": 0,
+          "distanceUnits": [
+            1.6357915997505188,
+            1.8929498910903932,
+            130.2994419777335
+          ],
+          "signedUnitsMedian": [
+            -1.5032907724380493,
+            1.611797720193863
+          ]
+        },
+        "x0y1": {
+          "nearestCellContains": 0,
+          "oneUnitContains": 0,
+          "distanceUnits": [
+            1.6369806230068207,
+            1.8892547726631166,
+            196.8205318647618
+          ],
+          "signedUnitsMedian": [
+            -1.503229796886444,
+            1.6164623498916626
+          ]
+        },
+        "x1y1": {
+          "nearestCellContains": 0,
+          "oneUnitContains": 0,
+          "distanceUnits": [
+            1.636005014181137,
+            1.8887791633605957,
+            112.34349515557183
+          ],
+          "signedUnitsMedian": [
+            -1.5032907724380493,
+            1.6148769855499268
+          ]
+        }
+      },
+      "anyTapNearestCellContains": 0,
+      "anyTapOneUnitContains": 0,
+      "bestTapDistanceUnits": [
+        1.6079257726669312,
+        1.8568828523159027,
+        76.05993287145532
+      ],
+      "dominantNativeCodes": [
+        {
+          "code": [
+            511,
+            511
+          ],
+          "count": 6126
+        },
+        {
+          "code": [
+            511,
+            504
+          ],
+          "count": 127
+        },
+        {
+          "code": [
+            511,
+            505
+          ],
+          "count": 49
+        },
+        {
+          "code": [
+            511,
+            510
+          ],
+          "count": 46
+        },
+        {
+          "code": [
+            511,
+            503
+          ],
+          "count": 26
+        }
+      ]
+    }
+  },
+  "producer": {
+    "frame": 1,
+    "captureSha256": "1d61e0a2e9d19de837d96fd6115807c1c19334159f911b38677de634168fa2d6",
+    "rows": [
+      {
+        "pixel": [
+          1201,
+          1021
+        ],
+        "event": 17241,
+        "indexResource": "ResourceId::1469",
+        "instance": 77,
+        "before": "0050c347000000000000000000000000",
+        "after": "ced9e9405980003fdd397f3ff718f73d",
+        "surface": [
+          7.30783748626709,
+          0.501958429813385,
+          0.9969766736030579,
+          0.12065308541059494
+        ],
+        "textureBindings": [
+          {
+            "resource": "ResourceId::146",
+            "name": "mainShadowDepth",
+            "width": 4096,
+            "height": 4096,
+            "arrayElement": 0,
+            "format": "D32"
+          },
+          {
+            "resource": "ResourceId::534",
+            "name": "reflectionProbeTexture",
+            "width": 576,
+            "height": 576,
+            "arrayElement": 0,
+            "format": "R11G11B10_FLOAT"
+          },
+          {
+            "resource": "ResourceId::11756",
+            "name": "objectShadowDepth",
+            "width": 4096,
+            "height": 2048,
+            "arrayElement": 0,
+            "format": "D16"
+          },
+          {
+            "resource": "ResourceId::317",
+            "name": "referenceObjectVisibility",
+            "width": 1024,
+            "height": 1024,
+            "arrayElement": 0,
+            "format": "R8G8B8A8_SRGB"
+          },
+          {
+            "resource": "ResourceId::10061",
+            "name": "referenceObjectIds",
+            "width": 1,
+            "height": 1,
+            "arrayElement": 0,
+            "format": "R32_UINT",
+            "sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+            "firstBytes": "00000000"
+          },
+          {
+            "resource": "ResourceId::499",
+            "name": "textureArray",
+            "width": 512,
+            "height": 256,
+            "arrayElement": 0,
+            "format": "R16G16B16A16_FLOAT"
+          },
+          {
+            "resource": "ResourceId::626",
+            "name": "textureArray",
+            "width": 64,
+            "height": 10,
+            "arrayElement": 1,
+            "format": "R8G8B8A8_UNORM"
+          },
+          {
+            "resource": "ResourceId::1474",
+            "name": "textureArray",
+            "width": 1024,
+            "height": 1024,
+            "arrayElement": 407,
+            "format": "R8G8B8A8_SRGB"
+          },
+          {
+            "resource": "ResourceId::1487",
+            "name": "textureArray",
+            "width": 1024,
+            "height": 1024,
+            "arrayElement": 408,
+            "format": "R8G8B8A8_UNORM"
+          },
+          {
+            "resource": "ResourceId::1500",
+            "name": "textureArray",
+            "width": 1024,
+            "height": 1024,
+            "arrayElement": 409,
+            "format": "R8G8B8A8_UNORM"
+          },
+          {
+            "resource": "ResourceId::356",
+            "name": "textureArray",
+            "width": 1024,
+            "height": 1024,
+            "arrayElement": 410,
+            "format": "R8G8B8A8_SRGB"
+          },
+          {
+            "resource": "ResourceId::1500",
+            "name": "textureArray",
+            "width": 1024,
+            "height": 1024,
+            "arrayElement": 411,
+            "format": "R8G8B8A8_UNORM"
+          },
+          {
+            "resource": "ResourceId::395",
+            "name": "textureArray",
+            "width": 2,
+            "height": 2,
+            "arrayElement": 413,
+            "format": "R8G8B8A8_UNORM",
+            "sha256": "4e972baaee2ad54f78153134ef6484cd1a8e383d21582a21a481d4d214161916",
+            "firstBytes": "80808080808080808080808080808080"
+          },
+          {
+            "resource": "ResourceId::551",
+            "name": "irradianceClipmapTextures",
+            "width": 128,
+            "height": 64,
+            "arrayElement": 0,
+            "format": "R11G11B10_FLOAT"
+          },
+          {
+            "resource": "ResourceId::563",
+            "name": "irradianceClipmapTextures",
+            "width": 128,
+            "height": 192,
+            "arrayElement": 1,
+            "format": "R8G8B8A8_UNORM"
+          },
+          {
+            "resource": "ResourceId::577",
+            "name": "irradianceClipmapTextures",
+            "width": 128,
+            "height": 64,
+            "arrayElement": 2,
+            "format": "R11G11B10_FLOAT"
+          },
+          {
+            "resource": "ResourceId::589",
+            "name": "irradianceClipmapTextures",
+            "width": 128,
+            "height": 192,
+            "arrayElement": 3,
+            "format": "R8G8B8A8_UNORM"
+          }
+        ],
+        "pixelProgram": "e99e2258c6a04aaa479024336460ede13b8a45f3b8a592c85e8fbe8905495cd6"
+      },
+      {
+        "pixel": [
+          1101,
+          1121
+        ],
+        "event": 17241,
+        "indexResource": "ResourceId::1469",
+        "instance": 77,
+        "before": "0050c347000000000000000000000000",
+        "after": "1357a1405080003fca307f3f8764073e",
+        "surface": [
+          5.041879177093506,
+          0.501957893371582,
+          0.9968382120132446,
+          0.13221941888332367
+        ],
+        "textureBindings": [
+          {
+            "resource": "ResourceId::146",
+            "name": "mainShadowDepth",
+            "width": 4096,
+            "height": 4096,
+            "arrayElement": 0,
+            "format": "D32"
+          },
+          {
+            "resource": "ResourceId::534",
+            "name": "reflectionProbeTexture",
+            "width": 576,
+            "height": 576,
+            "arrayElement": 0,
+            "format": "R11G11B10_FLOAT"
+          },
+          {
+            "resource": "ResourceId::11756",
+            "name": "objectShadowDepth",
+            "width": 4096,
+            "height": 2048,
+            "arrayElement": 0,
+            "format": "D16"
+          },
+          {
+            "resource": "ResourceId::317",
+            "name": "referenceObjectVisibility",
+            "width": 1024,
+            "height": 1024,
+            "arrayElement": 0,
+            "format": "R8G8B8A8_SRGB"
+          },
+          {
+            "resource": "ResourceId::10061",
+            "name": "referenceObjectIds",
+            "width": 1,
+            "height": 1,
+            "arrayElement": 0,
+            "format": "R32_UINT",
+            "sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+            "firstBytes": "00000000"
+          },
+          {
+            "resource": "ResourceId::499",
+            "name": "textureArray",
+            "width": 512,
+            "height": 256,
+            "arrayElement": 0,
+            "format": "R16G16B16A16_FLOAT"
+          },
+          {
+            "resource": "ResourceId::626",
+            "name": "textureArray",
+            "width": 64,
+            "height": 10,
+            "arrayElement": 1,
+            "format": "R8G8B8A8_UNORM"
+          },
+          {
+            "resource": "ResourceId::1474",
+            "name": "textureArray",
+            "width": 1024,
+            "height": 1024,
+            "arrayElement": 407,
+            "format": "R8G8B8A8_SRGB"
+          },
+          {
+            "resource": "ResourceId::1487",
+            "name": "textureArray",
+            "width": 1024,
+            "height": 1024,
+            "arrayElement": 408,
+            "format": "R8G8B8A8_UNORM"
+          },
+          {
+            "resource": "ResourceId::1500",
+            "name": "textureArray",
+            "width": 1024,
+            "height": 1024,
+            "arrayElement": 409,
+            "format": "R8G8B8A8_UNORM"
+          },
+          {
+            "resource": "ResourceId::356",
+            "name": "textureArray",
+            "width": 1024,
+            "height": 1024,
+            "arrayElement": 410,
+            "format": "R8G8B8A8_SRGB"
+          },
+          {
+            "resource": "ResourceId::1500",
+            "name": "textureArray",
+            "width": 1024,
+            "height": 1024,
+            "arrayElement": 411,
+            "format": "R8G8B8A8_UNORM"
+          },
+          {
+            "resource": "ResourceId::395",
+            "name": "textureArray",
+            "width": 2,
+            "height": 2,
+            "arrayElement": 413,
+            "format": "R8G8B8A8_UNORM",
+            "sha256": "4e972baaee2ad54f78153134ef6484cd1a8e383d21582a21a481d4d214161916",
+            "firstBytes": "80808080808080808080808080808080"
+          },
+          {
+            "resource": "ResourceId::551",
+            "name": "irradianceClipmapTextures",
+            "width": 128,
+            "height": 64,
+            "arrayElement": 0,
+            "format": "R11G11B10_FLOAT"
+          },
+          {
+            "resource": "ResourceId::563",
+            "name": "irradianceClipmapTextures",
+            "width": 128,
+            "height": 192,
+            "arrayElement": 1,
+            "format": "R8G8B8A8_UNORM"
+          },
+          {
+            "resource": "ResourceId::577",
+            "name": "irradianceClipmapTextures",
+            "width": 128,
+            "height": 64,
+            "arrayElement": 2,
+            "format": "R11G11B10_FLOAT"
+          },
+          {
+            "resource": "ResourceId::589",
+            "name": "irradianceClipmapTextures",
+            "width": 128,
+            "height": 192,
+            "arrayElement": 3,
+            "format": "R8G8B8A8_UNORM"
+          }
+        ],
+        "pixelProgram": "e99e2258c6a04aaa479024336460ede13b8a45f3b8a592c85e8fbe8905495cd6"
+      }
+    ]
+  },
+  "normalBinding": {
+    "event": 17241,
+    "captureSha256": "1d61e0a2e9d19de837d96fd6115807c1c19334159f911b38677de634168fa2d6",
+    "textureBase": 407,
+    "pushConstants": "0000003f000000000000803f000000000000803f0000803f0000803f000000000000803f0000803f0000803f000000000000803f0000803f0000803f00000000000080429a99193e00008040000000000000803f0000803f0000803f0000803f0000803f0000803f0000803f0000803f0000000028000000010000005a0000000000000000000000970100000000803f0000803f000000000000000000000000000000000000803f000000000000000000000000000000000000803f000000000000000000000000000000000000803f",
+    "normal": {
+      "resource": "ResourceId::1487",
+      "width": 1024,
+      "height": 1024,
+      "format": "R8G8B8A8_UNORM",
+      "slot": 408,
+      "file": "bound-normal.zlib",
+      "sha256": "3ea650c4acfe7c3047cdbee8d46a8594066136c184de03102b12022e01b95561",
+      "encodedSha256": "73173607ee4981db545b05a6d5da3cb4861ce5378ed79f3c59a0e9ee411acc81",
+      "bytes": 4194304
+    }
+  },
+  "archiveSha256": "3f5a75bd99958a71e49d069e10d16f0cce391bfc8c80b07560e498c1caee9468",
+  "archiveBytes": 2222159
+}

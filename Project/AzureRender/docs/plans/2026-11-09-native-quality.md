@@ -427,3 +427,6 @@ NVIDIA 头发区域有 277 处超差，Intel 有 428 处。
 [原生对象记录标定](../acceptance/nr/native-object-record-calibration.md)使用原生投影和灯向。
 NVIDIA 头发区域与图集单项对照在一字节内一致。
 当前图集和完整颜色继续按原门槛验收。
+
+[反射法线存储域](../acceptance/nr/evidence/2026-11-21/reflection-normal-storage-domain/README.md)核对量化范围和实际材质绑定。
+两区方向差异继续核对几何基底与材质法线的贡献。
