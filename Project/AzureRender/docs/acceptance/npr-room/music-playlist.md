@@ -68,3 +68,18 @@ python -B tools/npr_room/test_original_music_player.py --player $player --resour
 [测试证据](evidence/2026-11-21/offline-audio/verification.json)记录程序、源码及原创夹具身份。
 此证据适用于显式无设备模式。
 物理无设备的初始化回退和听感留待现场复核。
+
+## 公共音频资源重试
+
+`PresentationRuntime::play` 显式重试当前资源。
+被动帧同步保留失败缓存，诊断记录供调用方查询。
+资源恢复后，显式播放可加载并产生有效混音。
+
+队列 2355 的测试复现恢复后仍无法播放。
+队列 2356 构建 Player 与两种公共呈现测试。
+两种测试通过音频播放、暂停、循环及释放检查。
+队列 2357 通过三个 Player 的曲库设置回归。
+
+[资源重试证据](evidence/2026-11-21/audio-resource-retry/retry-green.json)记录受检程序。
+[原生回归](evidence/2026-11-21/audio-resource-retry/player-regression.json)记录输入、着色器与退出结果。
+脚本初始化期间的失败反馈与项目重试另列单元。

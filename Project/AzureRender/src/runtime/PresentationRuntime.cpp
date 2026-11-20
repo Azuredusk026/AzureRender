@@ -54,6 +54,9 @@ AudioRuntime::Handle PresentationRuntime::requireAudioSource(ecs::Entity entity)
     return found->second.handle;
 }
 void PresentationRuntime::play(ecs::Entity entity) {
+    // Explicit playback retries the current source; frame synchronization stays bounded.
+    if (const auto* source=runtime_.world().tryGet<game::AudioSource>(entity))
+        failed_.erase(source->asset+std::to_string(source->volume)+std::to_string(source->loop));
     audio_.play(requireAudioSource(entity));
     ++starts_;
 }

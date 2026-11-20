@@ -1,0 +1,11 @@
+{
+  "AzurePresentationRuntimeTests": {
+    "exitCode": 0,
+    "binarySHA256": "e2310385d040a79c903ebf7e65108a1d09a00e0876a0892cf65c87b0e957a7ac"
+  },
+  "AzureGameplayPresentationTests": {
+    "exitCode": 0,
+    "binarySHA256": "52d68ac36cfc5992bbbbcb0dd7bdaef30185e650472720233c7105b27a4df985"
+  },
+  "playerSHA256": "b09eafc8de1efc19761970b6348656470dbd413f0e17120a8682d746323a8238"
+}

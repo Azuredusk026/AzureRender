@@ -62,6 +62,24 @@ int main(int argc,char** argv){
   runtime.world().tryGet<game::AudioSource>(entity)->volume=0;
   presentation.update(.05);
   check(presentation.audioStarts()==1 && presentation.mixedEnergy()==energy,"A volume change must not replay the source");
+  {
+   PresentationRuntime recovery(runtime,levels.assets(),false);
+   auto* audio=runtime.world().tryGet<game::AudioSource>(entity);
+   audio->volume=.5F;
+   const auto path=levels.assets().resolveReference("assets:/portal.wav");
+   const auto unavailable=std::filesystem::path(path.string()+".unavailable");
+   std::filesystem::rename(path,unavailable);
+   try { recovery.update(0); }
+   catch (...) { std::filesystem::rename(unavailable,path);throw; }
+   std::filesystem::rename(unavailable,path);
+   check(!recovery.errors().empty() && recovery.soundCount()==0,"Unavailable audio must retain a diagnostic");
+   recovery.update(0);
+   check(recovery.soundCount()==0,"Passive synchronization must keep failed sources bounded");
+   recovery.play(entity);
+   recovery.update(.1);
+   check(recovery.audioStarts()==1 && recovery.mixedEnergy()>.01,
+         "Explicit play must retry a source after its file becomes available");
+  }
   runtime.pause();auto time=presentation.animations().at(0).time;presentation.update(0);
   check(presentation.animations().at(0).time==time,"Paused animation must stay frozen");
   const auto sounds=presentation.soundCount();runtime.resume();runtime.world().destroyEntity(entity);presentation.update(0.1);
