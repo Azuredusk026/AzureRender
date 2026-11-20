@@ -3,12 +3,10 @@ local pages
 local nextId
 local selected
 local open
-local writable
 local achievements, edited
 
 local function load()
     local saved = self:read_save(slot)
-    writable = type(saved) ~= "table" or type(saved[1]) ~= "number" or saved[1] <= 1
     if type(saved) ~= "table" or saved[1] ~= 1 or type(saved[2]) ~= "number"
         or saved[2] % 1 ~= 0 or saved[2] < 2 or type(saved[3]) ~= "table" then
         return {{1, "New Page", ""}}, 2
@@ -30,7 +28,8 @@ local function load()
 end
 
 local function publish(proposed, id, changedText)
-    if not writable then
+    local saved = self:read_save(slot)
+    if type(saved) == "table" and type(saved[1]) == "number" and saved[1] > 1 then
         self:ui_text("note-status", "This notebook requires a newer version.")
         return false
     end

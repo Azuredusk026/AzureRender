@@ -1,5 +1,5 @@
 local slot = "todo"
-local lists, nextId, listIndex, taskIndex, ordered, open, writable
+local lists, nextId, listIndex, taskIndex, ordered, open
 local achievements, completed
 
 local function dateValid(date)
@@ -21,7 +21,6 @@ end
 
 local function load()
     local document = self:read_save(slot)
-    writable = type(document) ~= "table" or type(document[1]) ~= "number" or document[1] <= 1
     local fallback = {{1, "", {}}}
     if type(document) ~= "table" or document[1] ~= 1 or type(document[2]) ~= "number"
         or document[2] % 1 ~= 0 or document[2] < 2 or type(document[3]) ~= "table" then
@@ -61,7 +60,8 @@ local function cue(id)
 end
 
 local function publish(proposed, id, completedNow)
-    if not writable then
+    local saved = self:read_save(slot)
+    if type(saved) == "table" and type(saved[1]) == "number" and saved[1] > 1 then
         status("This task list requires a newer version.")
         return false
     end

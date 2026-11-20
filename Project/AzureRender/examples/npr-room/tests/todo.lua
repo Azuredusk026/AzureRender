@@ -97,3 +97,20 @@ assert(stored[3][1][3][1][3] == "" and labels["todo-progress"] == "0 / 1")
 audioAvailable = true
 press("task-complete")
 assert(stored[3][1][3][1][3] == when and sounds[#sounds] == "todo-complete")
+
+local future = {2, "future tasks"}
+stored = future
+press("task-complete")
+assert(stored == future, "Future task payload installed during the session must remain intact")
+stored = nil
+press("task-complete")
+assert(stored[1] == 1 and stored[3][1][3][1][3] == "")
+future = {3, "future tasks at startup"}
+stored = future
+init()
+press("toggle")
+press("task-new")
+assert(stored == future)
+stored = nil
+press("task-new")
+assert(stored[1] == 1 and #stored[3][1][3] == 1, "Task writes must recover in the same session")

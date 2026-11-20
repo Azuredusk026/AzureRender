@@ -43,3 +43,15 @@ python -B tools/npr_room/test_todo_player.py --player $player --project $todoRoo
 声音修复后可再次完成，重开可恢复为未完成。
 两个进程无脚本错误，通过 Vulkan 校验及退出释放。
 [待办声音隔离结果](evidence/2026-11-21/todo-cue-failure/verification.json)记录输入和状态。
+
+## 运行中内容版本保护
+
+每次文档提交前读取当前内容版本。
+较新内容保留原字节，兼容后可沿原面板保存输入。
+保护覆盖启动时和运行中安装的较新文档。
+
+队列 2377 使用笔记与待办的四个原生 Player。
+内容版本 2 和 3 均得到保护。
+同进程恢复后保存草稿，重开后可继续操作。
+四次退出通过 Vulkan 校验，活动图像和缓冲归零。
+[工具版本报告](evidence/2026-11-21/room-tool-payload/verification.json)记录输入、版本和结果。

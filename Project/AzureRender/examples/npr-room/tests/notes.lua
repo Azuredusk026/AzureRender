@@ -94,3 +94,13 @@ press("notes-toggle")
 values["note-text"] = "future version replacement"
 shutdown()
 assert(stored == future)
+
+stored = nil
+press("notes-save")
+assert(stored and stored[1] == 1 and stored[3][1][3] == "future version replacement",
+       "A notebook must recover writes after compatible data is restored")
+future = {3, "external preserve"}
+stored = future
+values["note-text"] = "another edit"
+press("notes-save")
+assert(stored == future, "A future notebook payload installed during the session must remain intact")
