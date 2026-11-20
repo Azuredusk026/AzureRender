@@ -145,6 +145,15 @@ Json ScriptBindingHost::invoke(const ScriptObject& object,const std::string& met
     if(method=="pressed")return game_.input().pressed(args[0].get<std::string>());
     if(method=="audio_playing")return transport_ && transport_->playing(entity);
     if(method=="audio_position")return transport_ ? transport_->audioPosition(entity) : 0.0;
+    if(method=="try_audio_play") {
+        if(staging_)throw std::logic_error("Audio retry requires a running callback");
+        try {
+            if(audio_)audio_(entity);
+            else if(transport_)transport_->play(entity);
+            else return false;
+            return true;
+        } catch(const std::exception&) { return false; }
+    }
     if(method=="local_datetime") {
         const auto now = std::time(nullptr);
         std::tm local{};

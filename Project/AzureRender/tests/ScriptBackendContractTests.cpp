@@ -43,6 +43,17 @@ void bindings() {
     host.beginCallback(true);host.invoke(target,"set",{"azure.transform","translation",{2,3,4}});
     host.endCallback(true);host.commitInitialization();
     check(runtime.world().tryGet<ecs::TransformComponent>(runtime.entity("target"))->translation[0]==2,"Successful initialization must commit staged properties");
+    rejects([&]{host.invoke(hero,"try_audio_play",Json::array());},"Audio retry requires a callback");
+    host.beginCallback(true);
+    rejects([&]{host.invoke(hero,"try_audio_play",Json::array());},"Synchronous audio retry rejects staged initialization");
+    host.endCallback(false);
+    host.beginCallback();
+    check(host.invoke(hero,"try_audio_play",Json::array())==false,"Unavailable audio returns a recoverable result");
+    host.setAudioHandler([](ecs::Entity){throw std::runtime_error("Audio unavailable");});
+    check(host.invoke(hero,"try_audio_play",Json::array())==false,"Playback errors remain recoverable");
+    host.setAudioHandler([](ecs::Entity){});
+    check(host.invoke(hero,"try_audio_play",Json::array())==true,"Available playback reports success");
+    host.endCallback(true);
     unsigned deliveries=0;host.setUiHandler([&](std::string,std::string){++deliveries;throw std::runtime_error("Host delivery failed");});
     host.beginCallback(true);host.invoke(hero,"ui_text",{"status","初始化消息"});host.endCallback(true);
     host.commitInitialization();

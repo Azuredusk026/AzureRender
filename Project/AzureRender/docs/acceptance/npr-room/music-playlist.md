@@ -83,3 +83,23 @@ python -B tools/npr_room/test_original_music_player.py --player $player --resour
 [资源重试证据](evidence/2026-11-21/audio-resource-retry/retry-green.json)记录受检程序。
 [原生回归](evidence/2026-11-21/audio-resource-retry/player-regression.json)记录输入、着色器与退出结果。
 脚本初始化期间的失败反馈与项目重试另列单元。
+
+## 曲库播放失败恢复
+
+曲库首次播放在运行回调中尝试。
+解码失败后，面板显示播放重试提示。
+玩家可调整音量，恢复音频文件后再按播放。
+成功播放后清除提示，保留音量和循环偏好。
+
+队列 2364 使用截断的原创测试音启动。
+界面保持可用，播放次数为零且脚本错误为空。
+恢复完整测试音后，播放按钮成功启动同曲。
+第二个 Player 读回 45% 音量并正常暂停。
+两次退出均释放图像和缓冲，通过 Vulkan 校验。
+
+`try_audio_play` 为 Lua 与托管生成绑定提供共同契约。
+它在运行回调中返回播放结果，初始化事务拒绝该调用。
+后端契约与本机互操作测试均通过。
+托管构建当前为关闭配置，生成一致性通过三项检查。
+[失败恢复报告](evidence/2026-11-21/music-recovery/recovery.json)记录测试音及程序身份。
+[失败画面](evidence/2026-11-21/music-recovery/unavailable.png)与[恢复画面](evidence/2026-11-21/music-recovery/recovered.png)保留可见反馈。

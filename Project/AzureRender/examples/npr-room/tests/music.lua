@@ -24,6 +24,7 @@ function self:audio_play()
     cursor, output, paused = 0, true, false
     starts[#starts + 1] = asset
 end
+function self:try_audio_play() self:audio_play();return true end
 function self:audio_playing() return output and not paused end
 function self:audio_position() return cursor end
 function self:audio_pause(mode) paused = mode end
@@ -44,6 +45,7 @@ local function finish()
 end
 
 init()
+update()
 assert(#starts == 1 and display["music-title"] == "Aqua Room")
 output = false
 update()

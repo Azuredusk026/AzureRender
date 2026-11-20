@@ -19,6 +19,7 @@
     {"name":"cancel_level_load","managed":"CancelLevelLoad","parameters":[],"result":"void","mutating":true},
     {"name":"level_load_error","managed":"LevelLoadError","parameters":[],"result":"string","mutating":false},
     {"name":"audio_play","managed":"AudioPlay","parameters":[],"result":"void","mutating":true},
+    {"name":"try_audio_play","managed":"TryAudioPlay","parameters":[],"result":"boolean","mutating":true},
     {"name":"audio_stop","managed":"AudioStop","parameters":[],"result":"void","mutating":true},
     {"name":"audio_pause","managed":"AudioPause","parameters":[{"name":"paused","type":"boolean"}],"result":"void","mutating":true},
     {"name":"audio_playing","managed":"AudioPlaying","parameters":[],"result":"boolean","mutating":false},

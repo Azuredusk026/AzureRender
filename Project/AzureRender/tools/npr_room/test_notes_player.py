@@ -17,7 +17,8 @@ from test_validation_protocol import exchange
 
 @contextlib.contextmanager
 def playing(player, project, resources, profile, output, expected_audio_starts=None,
-            level_reference="assets:/room.azurelevel", *, on_ready=None, on_state=None, player_args=()):
+            level_reference="assets:/room.azurelevel", *, on_ready=None, on_state=None, player_args=(),
+            expected_presentation_errors=()):
     output.mkdir()
     endpoint = output / "endpoint.json"
     token = secrets.token_hex(32)
@@ -58,7 +59,8 @@ def playing(player, project, resources, profile, output, expected_audio_starts=N
                     continue
                 assert query["passed"], query
                 state = json.loads(query["value"])
-                assert not state["scriptErrors"] and not state["presentationErrors"], state
+                assert not state["scriptErrors"] and all(
+                    error in expected_presentation_errors for error in state["presentationErrors"]), state
                 if state["levelReference"] == level_reference and not state["loading"]:
                     break
                 time.sleep(.05)
@@ -85,7 +87,8 @@ def playing(player, project, resources, profile, output, expected_audio_starts=N
 
             def check_state():
                 state = json.loads(call("query", name="game.state"))
-                assert not state["scriptErrors"] and not state["presentationErrors"] and not state["loadError"], state
+                assert not state["scriptErrors"] and not state["loadError"] and all(
+                    error in expected_presentation_errors for error in state["presentationErrors"]), state
                 if on_state is not None:
                     on_state(state)
                 return state

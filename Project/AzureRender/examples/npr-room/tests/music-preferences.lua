@@ -8,6 +8,7 @@ local config = [[local tracks = {
 }
 ]]
 local saved, writable = {1, true, 40, true, false}, true
+local available = true
 local function boot()
     local display, action, asset = {}, nil, nil
     local cursor, output = 0, false
@@ -19,7 +20,15 @@ local function boot()
         return true
     end
     function host:set(_, field, value) if field == "asset" then asset = value end end
-    function host:audio_play() cursor, output = 0, true end
+    function host:audio_play()
+        if not available then error("Fixture audio unavailable") end
+        cursor, output = 0, true
+    end
+    function host:try_audio_play()
+        if not available then return false end
+        self:audio_play()
+        return true
+    end
     function host:audio_stop() output = false end
     function host:audio_pause(value) output = not value end
     function host:audio_position() return cursor end
@@ -30,6 +39,7 @@ local function boot()
     local env = setmetatable({self = host}, {__index = _G})
     assert(load(config .. source, "@production-music", "t", env))()
     env.init()
+    env.update()
     local function click(name)
         action = "music-" .. name
         env.update()
@@ -65,3 +75,13 @@ click, finish, display = boot()
 assert(display["music-play"] == "Play" and display["music-repeat"] == "Repeat off")
 assert(display["music-volume"] == "30%" and display["music-shuffle"] == "Shuffle on")
 print("Music repeat persistence, legacy preferences and failed-write recovery passed")
+
+saved, available = {1, true, 45, true, false, true}, false
+click, finish, display = boot()
+assert(display["music-play"] == "Play" and display["music-status"] ~= "",
+       "Unavailable autoplay must leave a visible, operable retry")
+available = true
+click("play")
+assert(display["music-play"] == "Pause" and display["music-status"] == "")
+assert(finish() == "assets:/one.wav", "Recovered playback must preserve the repeat preference")
+print("Music unavailable autoplay and explicit recovery passed")

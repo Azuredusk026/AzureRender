@@ -5,6 +5,7 @@ local playing, started = false, false
 local open, listOpen, repeatOne = false, false, false
 local volume, muted, shuffle = 50, false, false
 local page, pageSize = 1, 6
+local pendingStart, playbackFailed = false, false
 
 local function gain()
     self:set("azure.audio-source", "volume", muted and 0 or volume / 100)
@@ -15,7 +16,7 @@ local function applyPreferences()
     if not self:try_write_save(slot, {1, playing, volume, muted, shuffle, repeatOne}) then
         self:ui_text("music-status", "Music settings could not be saved")
     else
-        self:ui_text("music-status", "")
+        self:ui_text("music-status", playbackFailed and "Music is unavailable. Press Play to retry." or "")
     end
 end
 
@@ -41,11 +42,12 @@ local function updateDisplay()
 end
 
 local function start(index)
-    if started then self:audio_stop() end
     current = index
+    if started then self:audio_stop() end
     self:set("azure.audio-source", "asset", tracks[current][2])
-    self:audio_play()
-    playing, started = true, true
+    local ok = self:try_audio_play()
+    playing, started, playbackFailed = ok, ok, not ok
+    self:ui_text("music-status", playbackFailed and "Music is unavailable. Press Play to retry." or "")
 end
 
 local function move(direction)
@@ -77,7 +79,7 @@ function init()
     end
     setOrder()
     gain()
-    if autoplay then start(current) end
+    pendingStart = autoplay
     self:ui_visible("music-panel", false)
     self:ui_visible("music-list-box", false)
     updateDisplay()
@@ -138,6 +140,11 @@ local function processControls()
 end
 
 function update()
+    if pendingStart then
+        pendingStart = false
+        start(current)
+        updateDisplay()
+    end
     if processControls() then
         applyPreferences()
         updateDisplay()
