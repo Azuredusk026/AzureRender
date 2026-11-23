@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "D:\Projects\FYP-worktrees\npr-room-reproduction\Project\AzureRender\tools\npr_room\test_habit_exit_player.py", line 94, in <module>
+    verify(args.player, args.resources, args.source, args.output)
+  File "D:\Projects\FYP-worktrees\npr-room-reproduction\Project\AzureRender\tools\npr_room\test_habit_exit_player.py", line 49, in verify
+    assert first[2][0][1] == "Original habit", ("Window close lost the unblurred habit name", first)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ('Window close lost the unblurred habit name', [1, 2, [[1, '', '20261124', 255, False, [], []]]])

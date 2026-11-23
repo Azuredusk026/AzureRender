@@ -115,6 +115,8 @@ python -B -m tools.npr_room.build_timer_sound_room --room $calendarRoom --output
 独立脚本和日历装配入口均挂接退出保存。
 
 生产 Lua 复现未失焦名称在退出时缺失。
+队列 2430 在冻结基线 `86cd3d1` 复现同一失败。
+[基线诊断](evidence/2026-11-24/habit-exit/baseline-failure.log)与[原存档](evidence/2026-11-24/habit-exit/baseline-save.json)保留实际结果。
 队列 2425 使用四个原创 Player 进程验证恢复。
 重开显示原名称，关闭月历可保存继续编辑的名称。
 较新内容和较新外层版本均保留原字节。
@@ -125,6 +127,27 @@ python -B -m tools.npr_room.build_timer_sound_room --room $calendarRoom --output
 
 ```powershell
 python -B tools/npr_room/test_habit_exit_player.py --player $player --resources $resources --source examples/npr-room/assets --output $habitReplay
+```
+
+## 整合日历工时退出恢复
+
+日历装配入口将开放工时编辑交给退出提交。
+生成宿主与独立计时宿主共用日历保存方法。
+未失焦输入按现行数值、日期和存档版本规则提交。
+无效输入及较新存档保留原字节。
+
+队列 2435 在原创装配项目复现退出后工时档案缺失。
+队列 2437 通过五个真实 Player 进程。
+首次退出保存 3,600 秒，重开编辑后保存 3,720 秒。
+非法输入、较新内容和较新外层版本均得到保护。
+五次退出通过 Vulkan 校验，活动图像和缓冲归零。
+生产 Lua 全套与 170 项 Python 检查通过。
+[生成回放报告](evidence/2026-11-24/integrated-calendar-exit/verification.json)记录装配器及项目摘要。
+[基线诊断](evidence/2026-11-24/integrated-calendar-exit/baseline-failure.log)记录首个功能失败。
+[草稿](evidence/2026-11-24/integrated-calendar-exit/draft.png)和[重开画面](evidence/2026-11-24/integrated-calendar-exit/restored.png)记录真实输入。
+
+```powershell
+python -B tools/npr_room/test_integrated_calendar_exit_player.py --player $player --resources $resources --source examples/npr-room/assets --output $calendarReplay
 ```
 
 ## 回放

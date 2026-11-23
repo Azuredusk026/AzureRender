@@ -104,6 +104,7 @@ def integrate_calendar(project, document, program, examples, localization=""):
                               '        if self:pressed("timer-stats") and (not statsOpen or workCalendar:close_month_view()) then',
                               1)
     program = program.replace(legacy_shutdown, "    if workCalendar then\n        workCalendar:save_open_diary()\n"
+                              "        workCalendar:save_open_work_time()\n"
                               "        workCalendar:save_open_habit()\n"
                               "        workCalendar:flush()\n    end", 1)
     sample = (examples / "pomodoro.lua").read_text(encoding="utf-8")

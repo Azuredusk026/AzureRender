@@ -28,6 +28,8 @@ class IntegratedCalendarTests(unittest.TestCase):
         self.assertIn("workCalendar:close_month_view()", script)
         self.assertIn("workCalendar:save_open_diary()", script)
         self.assertIn("workCalendar:save_open_habit()", script)
+        self.assertTrue("workCalendar:save_open_work_time()" in script,
+                        "The assembled host must commit open work-time edits at shutdown")
         self.assertIn('id="room-language-toggle"', markup)
         self.assertIn('id="calendar-next-month"', markup)
         self.assertIn('data-action="calendar-day-42"', markup)
