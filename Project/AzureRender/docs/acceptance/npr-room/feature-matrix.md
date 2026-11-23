@@ -64,3 +64,7 @@ python -B -m unittest tools.npr_room.test_feature_matrix
 
 [活动媒体导入](platform-scenarios.md#活动媒体导入的取消与退出)通过取消、正常退出及重开。
 未提交暂存、源文件字节、句柄和退出资源均通过检查。
+
+[原创媒体目录包](platform-scenarios.md#原创媒体独立目录包)通过源工程与运行输入原路径不可用检查。
+中文目录内的 Player、命名入口及命令脚本共用档案。
+选择、播放、图片像素、重开和文件清单验证通过。

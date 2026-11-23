@@ -104,6 +104,10 @@ def verify_package(directory):
         "share/AzureRender/shaders/game-ui.vert.spv", "share/AzureRender/shaders/game-ui.frag.spv"]
     if manifest["entry"].endswith(".exe"):
         required_files += [manifest["entry"], "game-launch.json"]
+    if "launcher" in manifest:
+        if manifest["launcher"] != "AzureGameLauncher.exe":
+            raise ValueError("Unsupported command entry launcher")
+        required_files.append(manifest["launcher"])
     required_files += ["share/AzureRender/licenses/" + name for name in REQUIRED_LICENSES]
     for required in required_files:
         if required not in paths:
@@ -195,7 +199,12 @@ def build_game(project, install, output, replace=False, validator=None, *, valid
         if not isinstance(title,str) or not title or any(c in '<>:"/\\|?*' or ord(c)<32 for c in title) or title.rstrip(' .')!=title:
             raise ValueError("Project name cannot be used as a Windows executable name")
         entry=title+".exe"
+        command_launcher = "AzureGameLauncher.exe"
+        if entry.casefold() == command_launcher.casefold():
+            entry = command_launcher
         shutil.copy2(launcher,candidate/entry)
+        if entry != command_launcher:
+            shutil.copy2(launcher, candidate / command_launcher)
         game = candidate / "game"
         game.mkdir()
         for mount, source in zip(mounts, roots):
@@ -238,7 +247,7 @@ def build_game(project, install, output, replace=False, validator=None, *, valid
             if any(type(value) is not int or not 1 <= value <= 8192 for value in (width, height)):
                 raise ValueError("Delivery resolution must contain integer width and height from 1 to 8192")
             resolution = f" --width {width} --height {height}"
-        (candidate / "start-game.cmd").write_bytes(('@echo off\r\ncd /d "%~dp0"\r\n"bin\\AzurePlayer.exe" --project "game\\project.azureproject" --resource-root "share\\AzureRender"'+resolution+' %*\r\n').encode('ascii'))
+        (candidate / "start-game.cmd").write_bytes(b'@echo off\r\ncd /d "%~dp0"\r\n"AzureGameLauncher.exe" %*\r\n')
         launch={"schemaVersion":1,"player":"bin/AzurePlayer.exe","project":"game/project.azureproject","resources":"share/AzureRender"}
         if resolution:
             launch.update(width=width,height=height)
@@ -250,7 +259,8 @@ def build_game(project, install, output, replace=False, validator=None, *, valid
         files = [{"path": file.relative_to(candidate).as_posix(), "size": file.stat().st_size, "sha256": digest(file)}
                  for file in sorted(candidate.rglob("*")) if file.is_file()]
         manifest = {"format": "AzureGame v1", "schemaVersion": 1, "projectId": config["id"], "name": config["name"],
-                    "engine": metadata, "entry": entry, "project": "game/project.azureproject", "files": files}
+                    "engine": metadata, "entry": entry, "launcher": command_launcher,
+                    "project": "game/project.azureproject", "files": files}
         (candidate / "game_manifest.json").write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
         print("[stage] Checking hashes and committing package",flush=True)
         verify_package(candidate)

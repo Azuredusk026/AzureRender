@@ -83,18 +83,22 @@ def verify(output, case, label):
     if case == "invalid": env["AZURERENDER_SAVE_ROOT"] = "relative-profile"
     default_project = Path(os.environ["LOCALAPPDATA"]) / "AzureRender/GameSaves" / ("project-" + setup["projectId"].encode().hex())
     if case == "readonly": assert not default_project.exists(), "The read-only default-root probe needs a fresh project identity"
+    startup_log = runtime / "captures/game-startup.log"
+    previous_log = startup_log.read_bytes() if startup_log.exists() else None
     result = subprocess.run(command, cwd=stage, env=env, capture_output=True, timeout=100)
-    log = (runtime / "captures/game-startup.log").read_text(encoding="utf-8", errors="replace")
-    (stage / "startup.log").write_text(log, encoding="utf-8")
+    current_log = startup_log.read_bytes() if startup_log.exists() else None
+    log_changed = current_log != previous_log
+    log = current_log.decode("utf-8", errors="replace") if current_log is not None and case != "invalid" else ""
+    if case != "invalid": (stage / "startup.log").write_text(log, encoding="utf-8")
     state = json.loads(report.read_bytes()) if report.is_file() else {}
     summary = dict(case=case, command=command, exitCode=result.returncode, audioStarts=state.get("audioStarts"),
                    uiDrawCalls=state.get("uiDrawCalls"), scriptErrors=state.get("scriptErrors"),
                    presentationErrors=state.get("presentationErrors"), systemOnlyPath=env["PATH"],
-                   launcherSHA256=digest(runtime / "Probe.exe"), playerSHA256=setup["playerSHA256"])
+                   launcherSHA256=digest(runtime / "Probe.exe"), playerSHA256=setup["playerSHA256"], startupLogChanged=log_changed)
     write(stage / "verification.json", summary)
     print(json.dumps(summary), flush=True)
     if case == "invalid":
-        assert result.returncode != 0 and not report.exists() and not (stage / "relative-profile").exists()
+        assert result.returncode != 0 and not report.exists() and not (stage / "relative-profile").exists() and not log_changed
         return
     assert result.returncode == 0, log[-3000:]
     assert not state["scriptErrors"] and not state["presentationErrors"] and state["uiDrawCalls"] > 0, state

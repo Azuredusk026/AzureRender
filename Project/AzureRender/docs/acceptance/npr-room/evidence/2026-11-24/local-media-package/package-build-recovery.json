@@ -1,0 +1,9 @@
+{
+  "queue": 2511,
+  "builderStatus": "passed",
+  "orchestrationStatus": "failed",
+  "failure": "GBK console encoding while printing decoded wrapper output after successful package commit",
+  "manifestVerification": "passed",
+  "files": 1022,
+  "manifestSHA256": "efc8277a6499c890ba60762475c4c72315255a44e5d36bfe6289ec8f408339b2"
+}

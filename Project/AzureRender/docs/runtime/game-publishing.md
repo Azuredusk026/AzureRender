@@ -85,8 +85,9 @@ Windows 目录提交遇到共享冲突时，每次重命名最多重试两秒。
 | 路径 | 内容 |
 | --- | --- |
 | `<项目名称>.exe` | 原生游戏入口，读取包内启动描述 |
+| `AzureGameLauncher.exe` | 命令脚本使用的固定名称原生入口 |
 | `game-launch.json` | 包内项目、Player 与运行参数 |
-| `start-game.cmd` | 使用包内相对路径启动 Player |
+| `start-game.cmd` | 转交参数给固定名称原生入口 |
 | `bin/` | Player 和 Release DLL |
 | `game/project.azureproject` | 独立项目配置 |
 | `game/<挂载名>/` | 关卡、脚本、模型、侧车及其他项目资源 |
@@ -99,6 +100,11 @@ Windows 目录提交遇到共享冲突时，每次重命名最多重试两秒。
 Monica 项目的入口为 `Monica.exe`。
 入口依据自身位置加载包内 Runtime 与项目。
 目录支持移动，以及中文和空格路径。
+
+命名入口和命令脚本共用启动描述及档案规则。
+命令脚本以 ASCII 保存，并转交全部调用参数。
+清单的 `launcher` 字段登记固定名称入口。
+项目名称与固定入口相同时，共用同一文件。
 
 运行时在可写目录生成缓存和诊断记录。
 启动失败的日志为 `captures/game-startup.log`。

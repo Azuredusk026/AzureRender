@@ -30,6 +30,7 @@
 [运行时媒体任务](docs/runtime/local-media-service.md)提供后台导入、取消、状态及受控资产引用。
 [本地媒体工作间](examples/local-media/README.md)验证原生选择、音乐播放、图片浏览与项目档案恢复。
 [原生入口档案](docs/runtime/game-publishing.md#原生入口的档案)提供系统默认目录、环境配置及启动参数覆盖。
+[原创媒体目录包](docs/acceptance/npr-room/platform-scenarios.md#原创媒体独立目录包)通过搬移、两种启动入口及媒体档案恢复。
 [房间曲库](docs/acceptance/npr-room/music-playlist.md)与[环境声](docs/acceptance/npr-room/ambient-sound.md)记录原资产、播放控制和独立 Player 恢复。
 [开场书本布置](docs/acceptance/npr-room/opening-book-layout.md)记录房间道具、剧情临时状态和读档。
 [开场身体动作](docs/acceptance/npr-room/opening-body.md)记录原角色动作、转场和剧情入口。

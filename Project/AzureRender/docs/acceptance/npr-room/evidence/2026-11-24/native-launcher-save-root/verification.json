@@ -28,5 +28,12 @@
     "Movable directory package verification follows independently",
     "Physical input and listening pending manual retest",
     "Formal source-room and Steam runs paused"
-  ]
+  ],
+  "invalidLogCorrection": {
+    "toolSHA256": "6462c9b71a4b25ceca1b07af7658b92b791a0c5fcc71a9c30f484ef9d1caa106",
+    "report": "invalid-green-verification.json",
+    "startupLogChanged": false,
+    "staleStartupLogRemoved": true,
+    "positiveCases": "Unchanged existing queue 2510 evidence"
+  }
 }

@@ -43,3 +43,14 @@ python -B tools/artifact_cleanup.py --finish $mediaRun
 
 [活动导入检查](../../docs/acceptance/npr-room/platform-scenarios.md#活动媒体导入的取消与退出)覆盖取消与正常退出。
 自动回放确认暂存释放、源文件完整及重开后的导入能力。
+
+## 独立目录包
+
+使用 [Windows 发布工具](../../docs/runtime/game-publishing.md)生成目录包。
+将整个目录移动至目标位置，运行命名入口或命令脚本。
+两个入口共用项目身份、启动参数及档案定位规则。
+开发验收通过环境变量或参数指定 D 盘档案。
+
+[目录包证据](../../docs/acceptance/npr-room/platform-scenarios.md#原创媒体独立目录包)记录搬移后的三个实际进程。
+自动检查覆盖选择、播放、图片、重开及退出释放。
+实体操作和听感保持待人工复验。

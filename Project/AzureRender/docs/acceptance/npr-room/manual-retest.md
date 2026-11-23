@@ -22,6 +22,9 @@
 复验对象为原创本地媒体工作间。
 Player SHA-256 为 `818c745b88e9d049d206bac5318cf85b2f27bf39006df86ce9ac9ee621803147`。
 源码、项目和自动输入身份见[媒体报告](evidence/2026-11-24/local-media-player/verification.json)。
+
+目录包身份见[发布报告](evidence/2026-11-24/local-media-package/verification.json)。
+命名入口与命令脚本的自动恢复结果使用相同 Player。
 以下两项状态均为待人工复验，仅在用户主动提出后安排。
 
 | 对象 | 复验步骤 | 通过条件 | 已有自动证据 |

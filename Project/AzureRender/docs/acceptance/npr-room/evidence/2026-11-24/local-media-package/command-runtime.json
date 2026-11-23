@@ -1,0 +1,929 @@
+{
+  "activeScripts": 1,
+  "animationFrames": 0,
+  "animations": [],
+  "audioStarts": 1,
+  "fixedSteps": 29,
+  "levelRevision": 1,
+  "nodes": [
+    {
+      "id": "media-controller",
+      "translation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "visible": false
+    }
+  ],
+  "presentationErrors": [],
+  "renderer": "sample",
+  "replayDelayedFrames": 0,
+  "replayedActions": 2,
+  "routeFrames": [
+    {
+      "animations": [],
+      "audioStarts": 0,
+      "camera": [
+        0.0,
+        1.1799999475479126,
+        3.549999952316284
+      ],
+      "cameraObstructed": false,
+      "characters": [],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 1,
+      "interactionTarget": "",
+      "levelReference": "assets:/room.azurelevel",
+      "levelRevision": 2,
+      "loadError": "",
+      "loading": true,
+      "presentationErrors": [],
+      "rigidBodies": [],
+      "scriptErrors": [],
+      "target": [
+        0.0,
+        1.1799999475479126,
+        0.0
+      ],
+      "tasks": []
+    },
+    {
+      "animations": [],
+      "audioStarts": 1,
+      "camera": [
+        0.0,
+        1.1799999475479126,
+        3.549999952316284
+      ],
+      "cameraObstructed": false,
+      "characters": [],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 2,
+      "interactionTarget": "",
+      "levelReference": "assets:/room.azurelevel",
+      "levelRevision": 2,
+      "loadError": "",
+      "loading": false,
+      "presentationErrors": [],
+      "rigidBodies": [],
+      "scriptErrors": [],
+      "target": [
+        0.0,
+        1.1799999475479126,
+        0.0
+      ],
+      "tasks": []
+    },
+    {
+      "animations": [],
+      "audioStarts": 1,
+      "camera": [
+        0.0,
+        1.1799999475479126,
+        3.549999952316284
+      ],
+      "cameraObstructed": false,
+      "characters": [],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 3,
+      "interactionTarget": "",
+      "levelReference": "assets:/room.azurelevel",
+      "levelRevision": 2,
+      "loadError": "",
+      "loading": false,
+      "presentationErrors": [],
+      "rigidBodies": [],
+      "scriptErrors": [],
+      "target": [
+        0.0,
+        1.1799999475479126,
+        0.0
+      ],
+      "tasks": []
+    },
+    {
+      "animations": [],
+      "audioStarts": 1,
+      "camera": [
+        0.0,
+        1.1799999475479126,
+        3.549999952316284
+      ],
+      "cameraObstructed": false,
+      "characters": [],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 4,
+      "interactionTarget": "",
+      "levelReference": "assets:/room.azurelevel",
+      "levelRevision": 2,
+      "loadError": "",
+      "loading": false,
+      "presentationErrors": [],
+      "rigidBodies": [],
+      "scriptErrors": [],
+      "target": [
+        0.0,
+        1.1799999475479126,
+        0.0
+      ],
+      "tasks": []
+    },
+    {
+      "animations": [],
+      "audioStarts": 1,
+      "camera": [
+        0.0,
+        1.1799999475479126,
+        3.549999952316284
+      ],
+      "cameraObstructed": false,
+      "characters": [],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 5,
+      "interactionTarget": "",
+      "levelReference": "assets:/room.azurelevel",
+      "levelRevision": 2,
+      "loadError": "",
+      "loading": false,
+      "presentationErrors": [],
+      "rigidBodies": [],
+      "scriptErrors": [],
+      "target": [
+        0.0,
+        1.1799999475479126,
+        0.0
+      ],
+      "tasks": []
+    },
+    {
+      "animations": [],
+      "audioStarts": 1,
+      "camera": [
+        0.0,
+        1.1799999475479126,
+        3.549999952316284
+      ],
+      "cameraObstructed": false,
+      "characters": [],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 6,
+      "interactionTarget": "",
+      "levelReference": "assets:/room.azurelevel",
+      "levelRevision": 2,
+      "loadError": "",
+      "loading": false,
+      "presentationErrors": [],
+      "rigidBodies": [],
+      "scriptErrors": [],
+      "target": [
+        0.0,
+        1.1799999475479126,
+        0.0
+      ],
+      "tasks": []
+    },
+    {
+      "animations": [],
+      "audioStarts": 1,
+      "camera": [
+        0.0,
+        1.1799999475479126,
+        3.549999952316284
+      ],
+      "cameraObstructed": false,
+      "characters": [],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 7,
+      "interactionTarget": "",
+      "levelReference": "assets:/room.azurelevel",
+      "levelRevision": 2,
+      "loadError": "",
+      "loading": false,
+      "presentationErrors": [],
+      "rigidBodies": [],
+      "scriptErrors": [],
+      "target": [
+        0.0,
+        1.1799999475479126,
+        0.0
+      ],
+      "tasks": []
+    },
+    {
+      "animations": [],
+      "audioStarts": 1,
+      "camera": [
+        0.0,
+        1.1799999475479126,
+        3.549999952316284
+      ],
+      "cameraObstructed": false,
+      "characters": [],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 8,
+      "interactionTarget": "",
+      "levelReference": "assets:/room.azurelevel",
+      "levelRevision": 2,
+      "loadError": "",
+      "loading": false,
+      "presentationErrors": [],
+      "rigidBodies": [],
+      "scriptErrors": [],
+      "target": [
+        0.0,
+        1.1799999475479126,
+        0.0
+      ],
+      "tasks": []
+    },
+    {
+      "animations": [],
+      "audioStarts": 1,
+      "camera": [
+        0.0,
+        1.1799999475479126,
+        3.549999952316284
+      ],
+      "cameraObstructed": false,
+      "characters": [],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 9,
+      "interactionTarget": "",
+      "levelReference": "assets:/room.azurelevel",
+      "levelRevision": 2,
+      "loadError": "",
+      "loading": false,
+      "presentationErrors": [],
+      "rigidBodies": [],
+      "scriptErrors": [],
+      "target": [
+        0.0,
+        1.1799999475479126,
+        0.0
+      ],
+      "tasks": []
+    },
+    {
+      "animations": [],
+      "audioStarts": 1,
+      "camera": [
+        0.0,
+        1.1799999475479126,
+        3.549999952316284
+      ],
+      "cameraObstructed": false,
+      "characters": [],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 10,
+      "interactionTarget": "",
+      "levelReference": "assets:/room.azurelevel",
+      "levelRevision": 2,
+      "loadError": "",
+      "loading": false,
+      "presentationErrors": [],
+      "rigidBodies": [],
+      "scriptErrors": [],
+      "target": [
+        0.0,
+        1.1799999475479126,
+        0.0
+      ],
+      "tasks": []
+    },
+    {
+      "animations": [],
+      "audioStarts": 1,
+      "camera": [
+        0.0,
+        1.1799999475479126,
+        3.549999952316284
+      ],
+      "cameraObstructed": false,
+      "characters": [],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 11,
+      "interactionTarget": "",
+      "levelReference": "assets:/room.azurelevel",
+      "levelRevision": 2,
+      "loadError": "",
+      "loading": false,
+      "presentationErrors": [],
+      "rigidBodies": [],
+      "scriptErrors": [],
+      "target": [
+        0.0,
+        1.1799999475479126,
+        0.0
+      ],
+      "tasks": []
+    },
+    {
+      "animations": [],
+      "audioStarts": 1,
+      "camera": [
+        0.0,
+        1.1799999475479126,
+        3.549999952316284
+      ],
+      "cameraObstructed": false,
+      "characters": [],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 12,
+      "interactionTarget": "",
+      "levelReference": "assets:/room.azurelevel",
+      "levelRevision": 2,
+      "loadError": "",
+      "loading": false,
+      "presentationErrors": [],
+      "rigidBodies": [],
+      "scriptErrors": [],
+      "target": [
+        0.0,
+        1.1799999475479126,
+        0.0
+      ],
+      "tasks": []
+    },
+    {
+      "animations": [],
+      "audioStarts": 1,
+      "camera": [
+        0.0,
+        1.1799999475479126,
+        3.549999952316284
+      ],
+      "cameraObstructed": false,
+      "characters": [],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 13,
+      "interactionTarget": "",
+      "levelReference": "assets:/room.azurelevel",
+      "levelRevision": 2,
+      "loadError": "",
+      "loading": false,
+      "presentationErrors": [],
+      "rigidBodies": [],
+      "scriptErrors": [],
+      "target": [
+        0.0,
+        1.1799999475479126,
+        0.0
+      ],
+      "tasks": []
+    },
+    {
+      "animations": [],
+      "audioStarts": 1,
+      "camera": [
+        0.0,
+        1.1799999475479126,
+        3.549999952316284
+      ],
+      "cameraObstructed": false,
+      "characters": [],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 14,
+      "interactionTarget": "",
+      "levelReference": "assets:/room.azurelevel",
+      "levelRevision": 2,
+      "loadError": "",
+      "loading": false,
+      "presentationErrors": [],
+      "rigidBodies": [],
+      "scriptErrors": [],
+      "target": [
+        0.0,
+        1.1799999475479126,
+        0.0
+      ],
+      "tasks": []
+    },
+    {
+      "animations": [],
+      "audioStarts": 1,
+      "camera": [
+        0.0,
+        1.1799999475479126,
+        3.549999952316284
+      ],
+      "cameraObstructed": false,
+      "characters": [],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 15,
+      "interactionTarget": "",
+      "levelReference": "assets:/room.azurelevel",
+      "levelRevision": 2,
+      "loadError": "",
+      "loading": false,
+      "presentationErrors": [],
+      "rigidBodies": [],
+      "scriptErrors": [],
+      "target": [
+        0.0,
+        1.1799999475479126,
+        0.0
+      ],
+      "tasks": []
+    },
+    {
+      "animations": [],
+      "audioStarts": 1,
+      "camera": [
+        0.0,
+        1.1799999475479126,
+        3.549999952316284
+      ],
+      "cameraObstructed": false,
+      "characters": [],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 16,
+      "interactionTarget": "",
+      "levelReference": "assets:/room.azurelevel",
+      "levelRevision": 2,
+      "loadError": "",
+      "loading": false,
+      "presentationErrors": [],
+      "rigidBodies": [],
+      "scriptErrors": [],
+      "target": [
+        0.0,
+        1.1799999475479126,
+        0.0
+      ],
+      "tasks": []
+    },
+    {
+      "animations": [],
+      "audioStarts": 1,
+      "camera": [
+        0.0,
+        1.1799999475479126,
+        3.549999952316284
+      ],
+      "cameraObstructed": false,
+      "characters": [],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 17,
+      "interactionTarget": "",
+      "levelReference": "assets:/room.azurelevel",
+      "levelRevision": 2,
+      "loadError": "",
+      "loading": false,
+      "presentationErrors": [],
+      "rigidBodies": [],
+      "scriptErrors": [],
+      "target": [
+        0.0,
+        1.1799999475479126,
+        0.0
+      ],
+      "tasks": []
+    },
+    {
+      "animations": [],
+      "audioStarts": 1,
+      "camera": [
+        0.0,
+        1.1799999475479126,
+        3.549999952316284
+      ],
+      "cameraObstructed": false,
+      "characters": [],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 18,
+      "interactionTarget": "",
+      "levelReference": "assets:/room.azurelevel",
+      "levelRevision": 2,
+      "loadError": "",
+      "loading": false,
+      "presentationErrors": [],
+      "rigidBodies": [],
+      "scriptErrors": [],
+      "target": [
+        0.0,
+        1.1799999475479126,
+        0.0
+      ],
+      "tasks": []
+    },
+    {
+      "animations": [],
+      "audioStarts": 1,
+      "camera": [
+        0.0,
+        1.1799999475479126,
+        3.549999952316284
+      ],
+      "cameraObstructed": false,
+      "characters": [],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 19,
+      "interactionTarget": "",
+      "levelReference": "assets:/room.azurelevel",
+      "levelRevision": 2,
+      "loadError": "",
+      "loading": false,
+      "presentationErrors": [],
+      "rigidBodies": [],
+      "scriptErrors": [],
+      "target": [
+        0.0,
+        1.1799999475479126,
+        0.0
+      ],
+      "tasks": []
+    },
+    {
+      "animations": [],
+      "audioStarts": 1,
+      "camera": [
+        0.0,
+        1.1799999475479126,
+        3.549999952316284
+      ],
+      "cameraObstructed": false,
+      "characters": [],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 20,
+      "interactionTarget": "",
+      "levelReference": "assets:/room.azurelevel",
+      "levelRevision": 2,
+      "loadError": "",
+      "loading": false,
+      "presentationErrors": [],
+      "rigidBodies": [],
+      "scriptErrors": [],
+      "target": [
+        0.0,
+        1.1799999475479126,
+        0.0
+      ],
+      "tasks": []
+    },
+    {
+      "animations": [],
+      "audioStarts": 1,
+      "camera": [
+        0.0,
+        1.1799999475479126,
+        3.549999952316284
+      ],
+      "cameraObstructed": false,
+      "characters": [],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 21,
+      "interactionTarget": "",
+      "levelReference": "assets:/room.azurelevel",
+      "levelRevision": 2,
+      "loadError": "",
+      "loading": false,
+      "presentationErrors": [],
+      "rigidBodies": [],
+      "scriptErrors": [],
+      "target": [
+        0.0,
+        1.1799999475479126,
+        0.0
+      ],
+      "tasks": []
+    },
+    {
+      "animations": [],
+      "audioStarts": 1,
+      "camera": [
+        0.0,
+        1.1799999475479126,
+        3.549999952316284
+      ],
+      "cameraObstructed": false,
+      "characters": [],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 22,
+      "interactionTarget": "",
+      "levelReference": "assets:/room.azurelevel",
+      "levelRevision": 2,
+      "loadError": "",
+      "loading": false,
+      "presentationErrors": [],
+      "rigidBodies": [],
+      "scriptErrors": [],
+      "target": [
+        0.0,
+        1.1799999475479126,
+        0.0
+      ],
+      "tasks": []
+    },
+    {
+      "animations": [],
+      "audioStarts": 1,
+      "camera": [
+        0.0,
+        1.1799999475479126,
+        3.549999952316284
+      ],
+      "cameraObstructed": false,
+      "characters": [],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 23,
+      "interactionTarget": "",
+      "levelReference": "assets:/room.azurelevel",
+      "levelRevision": 2,
+      "loadError": "",
+      "loading": false,
+      "presentationErrors": [],
+      "rigidBodies": [],
+      "scriptErrors": [],
+      "target": [
+        0.0,
+        1.1799999475479126,
+        0.0
+      ],
+      "tasks": []
+    },
+    {
+      "animations": [],
+      "audioStarts": 1,
+      "camera": [
+        0.0,
+        1.1799999475479126,
+        3.549999952316284
+      ],
+      "cameraObstructed": false,
+      "characters": [],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 24,
+      "interactionTarget": "",
+      "levelReference": "assets:/room.azurelevel",
+      "levelRevision": 2,
+      "loadError": "",
+      "loading": false,
+      "presentationErrors": [],
+      "rigidBodies": [],
+      "scriptErrors": [],
+      "target": [
+        0.0,
+        1.1799999475479126,
+        0.0
+      ],
+      "tasks": []
+    },
+    {
+      "animations": [],
+      "audioStarts": 1,
+      "camera": [
+        0.0,
+        1.1799999475479126,
+        3.549999952316284
+      ],
+      "cameraObstructed": false,
+      "characters": [],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 25,
+      "interactionTarget": "",
+      "levelReference": "assets:/room.azurelevel",
+      "levelRevision": 2,
+      "loadError": "",
+      "loading": false,
+      "presentationErrors": [],
+      "rigidBodies": [],
+      "scriptErrors": [],
+      "target": [
+        0.0,
+        1.1799999475479126,
+        0.0
+      ],
+      "tasks": []
+    },
+    {
+      "animations": [],
+      "audioStarts": 1,
+      "camera": [
+        0.0,
+        1.1799999475479126,
+        3.549999952316284
+      ],
+      "cameraObstructed": false,
+      "characters": [],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 26,
+      "interactionTarget": "",
+      "levelReference": "assets:/room.azurelevel",
+      "levelRevision": 2,
+      "loadError": "",
+      "loading": false,
+      "presentationErrors": [],
+      "rigidBodies": [],
+      "scriptErrors": [],
+      "target": [
+        0.0,
+        1.1799999475479126,
+        0.0
+      ],
+      "tasks": []
+    },
+    {
+      "animations": [],
+      "audioStarts": 1,
+      "camera": [
+        0.0,
+        1.1799999475479126,
+        3.549999952316284
+      ],
+      "cameraObstructed": false,
+      "characters": [],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 27,
+      "interactionTarget": "",
+      "levelReference": "assets:/room.azurelevel",
+      "levelRevision": 2,
+      "loadError": "",
+      "loading": false,
+      "presentationErrors": [],
+      "rigidBodies": [],
+      "scriptErrors": [],
+      "target": [
+        0.0,
+        1.1799999475479126,
+        0.0
+      ],
+      "tasks": []
+    },
+    {
+      "animations": [],
+      "audioStarts": 1,
+      "camera": [
+        0.0,
+        1.1799999475479126,
+        3.549999952316284
+      ],
+      "cameraObstructed": false,
+      "characters": [],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 28,
+      "interactionTarget": "",
+      "levelReference": "assets:/room.azurelevel",
+      "levelRevision": 2,
+      "loadError": "",
+      "loading": false,
+      "presentationErrors": [],
+      "rigidBodies": [],
+      "scriptErrors": [],
+      "target": [
+        0.0,
+        1.1799999475479126,
+        0.0
+      ],
+      "tasks": []
+    },
+    {
+      "animations": [],
+      "audioStarts": 1,
+      "camera": [
+        0.0,
+        1.1799999475479126,
+        3.549999952316284
+      ],
+      "cameraObstructed": false,
+      "characters": [],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 29,
+      "interactionTarget": "",
+      "levelReference": "assets:/room.azurelevel",
+      "levelRevision": 2,
+      "loadError": "",
+      "loading": false,
+      "presentationErrors": [],
+      "rigidBodies": [],
+      "scriptErrors": [],
+      "target": [
+        0.0,
+        1.1799999475479126,
+        0.0
+      ],
+      "tasks": []
+    },
+    {
+      "animations": [],
+      "audioStarts": 1,
+      "camera": [
+        0.0,
+        1.1799999475479126,
+        3.549999952316284
+      ],
+      "cameraObstructed": false,
+      "characters": [],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 30,
+      "interactionTarget": "",
+      "levelReference": "assets:/room.azurelevel",
+      "levelRevision": 2,
+      "loadError": "",
+      "loading": false,
+      "presentationErrors": [],
+      "rigidBodies": [],
+      "scriptErrors": [],
+      "target": [
+        0.0,
+        1.1799999475479126,
+        0.0
+      ],
+      "tasks": []
+    }
+  ],
+  "scene": "media-workspace",
+  "scriptErrors": [],
+  "simulationMilliseconds": 17.341,
+  "uiDrawCalls": 1109
+}

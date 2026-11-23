@@ -39,7 +39,7 @@ class GamePackageRules(unittest.TestCase):
         self.temp.cleanup()
 
     def validate(self, player, project):
-        config = json.loads(project.read_text())
+        config = json.loads(project.read_text(encoding='utf-8'))
         root = project.parent / config["mounts"][0]["path"]
         if not (root / "start.azurelevel").is_file():
             raise ValueError("Startup missing")
@@ -52,6 +52,31 @@ class GamePackageRules(unittest.TestCase):
         self.assertEqual(manifest['entry'], 'Game.exe')
         self.assertTrue((self.output/'Game.exe').is_file())
         self.assertEqual(json.loads((self.output/'game-launch.json').read_text())['project'], 'game/project.azureproject')
+
+    def test_command_entry_shares_native_launcher_and_unicode_project_descriptor(self):
+        config = json.loads(self.project.read_text())
+        config['name'] = '本地媒体工作间'
+        self.project.write_text(json.dumps(config), encoding='utf-8')
+        manifest = self.build()
+        self.assertEqual(manifest['launcher'], 'AzureGameLauncher.exe')
+        self.assertEqual((self.output / manifest['entry']).read_bytes(),
+                         (self.output / manifest['launcher']).read_bytes())
+        command = (self.output / 'start-game.cmd').read_bytes().decode('ascii')
+        self.assertIn('"AzureGameLauncher.exe" %*', command)
+        self.assertNotIn('AzurePlayer.exe', command)
+        manifest['files'] = [entry for entry in manifest['files'] if entry['path'] != manifest['launcher']]
+        (self.output / 'game_manifest.json').write_text(json.dumps(manifest), encoding='utf-8')
+        with self.assertRaisesRegex(ValueError, 'missing AzureGameLauncher.exe'):
+            build_game.verify_package(self.output)
+
+    def test_project_title_can_match_the_launcher_alias(self):
+        config = json.loads(self.project.read_text())
+        config['name'] = 'azuregamelauncher'
+        self.project.write_text(json.dumps(config), encoding='utf-8')
+        manifest = self.build()
+        build_game.verify_package(self.output)
+        names = [entry['path'].casefold() for entry in manifest['files']]
+        self.assertEqual(names.count('azuregamelauncher.exe'), 1)
 
     def test_missing_native_launcher_fails_before_project_validation(self):
         (self.install / "bin/AzureGameLauncher.exe").unlink()
@@ -217,7 +242,8 @@ class GamePackageRules(unittest.TestCase):
         self.build()
         self.assertEqual((self.output / "GAME-GUIDE.md").read_text(), "Controls and quest")
         self.assertEqual(json.loads((self.output / "QUALITY.json").read_text())["width"], 1920)
-        self.assertIn("--width 1920 --height 1080", (self.output / "start-game.cmd").read_text())
+        launch = json.loads((self.output / 'game-launch.json').read_text())
+        self.assertEqual((launch['width'], launch['height']), (1920, 1080))
         (self.output / "GAME-GUIDE.md").write_text("tamper")
         with self.assertRaises(ValueError):
             build_game.verify_package(self.output)
