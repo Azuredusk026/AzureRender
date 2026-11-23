@@ -4,7 +4,7 @@ local function read(name)
     local value = file:read("*a"); file:close(); return value
 end
 local function context(config, names)
-    local available, action = false, nil
+    local available, action, writable = false, nil, true
     local visible, text, saved = {}, {}, {}
     local source = {starts=0, playing=false, cursor=0}
     function source:set() end
@@ -25,12 +25,41 @@ local function context(config, names)
     function host:ui_text(id, value) text[id] = value end
     function host:ui_visible(id, value) visible[id] = value end
     function host:read_save(slot) return saved[slot] end
-    function host:try_write_save(slot, value) saved[slot] = value; return true end
+    function host:try_write_save(slot, value)
+        if not writable then return false end
+        saved[slot] = value; return true
+    end
     local env = setmetatable({self=host}, {__index=_G})
     local script = config
     for _, name in ipairs(names) do script = script .. "\n" .. read(name) end
     assert(load(script, "@production-voice", "t", env))()
-    return env, source, visible, saved, function(value) available=value end, function(value) action=value end
+    return env, source, visible, saved, function(value) available=value end, function(value) action=value end,
+        function(value) writable=value end
+end
+
+if selection == "all" or selection == "checkpoint" then
+    local env, source, _, saved, available, action, writable = context([[
+local work_choice_parameters={fullProbabilitySeconds=1,probability=1,availableSeconds=100}
+local work_conversations={{{"assets:/voice.wav","Original question",1,0,.25},
+    {{"Original option",{"assets:/voice.wav","Original response",1,0,.25}}}}}
+]], {"work-choice.lua"})
+    local story=env.new_work_choice(function(limit) return limit and 1 or 0 end)
+    available(true); writable(false)
+    story:recordWork(1); story:complete(); action("room-voice-talk")
+    story:step(.01,true,false); action(nil)
+    assert(saved["work-conversation"]==nil)
+    writable(true); story:step(1.1,true,false)
+    assert(saved["work-conversation"] and saved["work-conversation"][3]==1,
+           "A failed conversation checkpoint must retry while the line is active")
+    local future={3,{"future conversation"}}
+    saved["work-conversation"]=future
+    source.playing,source.cursor=false,1
+    story:step(0,true,false); story:step(.25,true,false)
+    assert(saved["work-conversation"]==future, "A newer conversation payload must stay intact")
+    saved["work-conversation"]={1,1,1,0}
+    story:step(1.1,true,false)
+    assert(saved["work-conversation"][3]==2, "Retry must commit the latest conversation stage")
+    print("Conversation checkpoints retry and preserve newer payloads")
 end
 
 if selection == "all" or selection == "room" then

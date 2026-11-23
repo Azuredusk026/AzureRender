@@ -10,10 +10,19 @@ function new_work_choice(random, translate)
     local lineup, last = {}, nil
     local line, delay, hold, fallback
     local controller = {}
+    local pendingCheckpoint, checkpointRetry
+
+    local function writeCheckpoint(value)
+        local saved = timer:read_save(slot)
+        local future = type(saved) == "table" and type(saved[1]) == "number" and saved[1] > 1
+        local ok = not future and timer:try_write_save(slot, value)
+        pendingCheckpoint = not ok and value or nil
+        checkpointRetry = 1
+        timer:ui_text("room-choice-status", ok and "" or "Conversation progress could not be saved")
+    end
 
     local function checkpoint()
-        local ok = timer:try_write_save(slot, {1, episode, stage, selected})
-        timer:ui_text("room-choice-status", ok and "" or "Conversation progress could not be saved")
+        writeCheckpoint({1, episode, stage, selected})
     end
 
     local function playLine(value)
@@ -66,6 +75,10 @@ function new_work_choice(random, translate)
     end
 
     function controller:step(dt, mayStart, languageChanged)
+        if pendingCheckpoint then
+            checkpointRetry = checkpointRetry - dt
+            if checkpointRetry <= 0 then writeCheckpoint(pendingCheckpoint) end
+        end
         available = math.max(0, available - dt)
         if episode == 0 then
             if not mayStart or not timer:pressed("room-voice-talk") or available <= 0 or probability <= 0

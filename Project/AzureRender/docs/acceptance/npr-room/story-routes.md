@@ -26,3 +26,15 @@ python -B -m unittest tools.npr_room.test_story_routes
 ```
 
 本机报告位于 `assets_private/npr-room-dev/source-lock/story-routes.json`。
+
+## 原创交谈检查点恢复
+
+交谈控制器持有失败检查点，并在更新时按一秒间隔重试。
+提交前核对内容版本，较新内容保持原字节。
+重试使用最新阶段，选项和字幕保持可操作。
+
+队列 2381 验证容器版本 2 和内容版本 3 的拒绝写入。
+恢复兼容存档后，分别保存选项阶段和结束阶段。
+第二个 Player 读回结束状态，并能再次进入选项。
+两个进程通过 Vulkan 校验，退出分配归零。
+[交谈检查点报告](evidence/2026-11-24/conversation-checkpoint/verification.json)记录结果与来源。
