@@ -35,6 +35,11 @@
     {"name":"read_save","managed":"ReadSave","parameters":[{"name":"slot","type":"string"}],"result":"value","mutating":false},
     {"name":"write_save","managed":"WriteSave","parameters":[{"name":"slot","type":"string"},{"name":"payload","type":"value"}],"result":"void","mutating":true},
     {"name":"try_write_save","managed":"TryWriteSave","parameters":[{"name":"slot","type":"string"},{"name":"payload","type":"value"}],"result":"boolean","mutating":true},
+    {"name":"media_entries","managed":"MediaEntries","parameters":[{"name":"kind","type":"string"}],"result":"value","mutating":false},
+    {"name":"media_status","managed":"MediaStatus","parameters":[],"result":"value","mutating":false},
+    {"name":"media_import","managed":"MediaImport","parameters":[{"name":"kind","type":"string"},{"name":"directory","type":"boolean"}],"result":"boolean","mutating":true},
+    {"name":"media_cancel","managed":"MediaCancel","parameters":[],"result":"void","mutating":true},
+    {"name":"ui_image","managed":"UiImage","parameters":[{"name":"id","type":"string"},{"name":"reference","type":"string"}],"result":"void","mutating":true},
     {"name":"local_datetime","managed":"LocalDateTime","parameters":[],"result":"string","mutating":false}
   ]
 }

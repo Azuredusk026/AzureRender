@@ -1,4 +1,5 @@
 #include "runtime/GameUi.hpp"
+#include "foundation/NativeFilePath.hpp"
 #include <RmlUi/Core/RenderInterface.h>
 #include <iostream>
 #include <stdexcept>
@@ -8,7 +9,7 @@ struct TestRenderer: Rml::RenderInterface {
     Rml::CompiledGeometryHandle CompileGeometry(Rml::Span<const Rml::Vertex>,Rml::Span<const int>)override{return ++next;}
     void RenderGeometry(Rml::CompiledGeometryHandle,Rml::Vector2f,Rml::TextureHandle)override{}
     void ReleaseGeometry(Rml::CompiledGeometryHandle)override{}
-    Rml::TextureHandle LoadTexture(Rml::Vector2i& size,const Rml::String& source)override{if(!std::filesystem::is_regular_file(std::filesystem::u8path(source)))return 0;lastImage=source;size={16,16};++imageLoads;return ++next;}
+    Rml::TextureHandle LoadTexture(Rml::Vector2i& size,const Rml::String& source)override{if(!std::filesystem::is_regular_file(azurerender::nativeFilePath(std::filesystem::u8path(source))))return 0;lastImage=source;size={16,16};++imageLoads;return ++next;}
     Rml::TextureHandle GenerateTexture(Rml::Span<const Rml::byte>,Rml::Vector2i)override{return ++next;}
     void ReleaseTexture(Rml::TextureHandle)override{}
     void EnableScissorRegion(bool)override{}
@@ -36,10 +37,20 @@ int main(int argc,char** argv){
   const auto image=folder/std::filesystem::u8path(u8"精灵.svg");std::ofstream(image)<<"<svg width='16' height='16'/>";
   std::ofstream(folder/"scene.azure2d")<<u8R"({"schemaVersion":1,"size":[640,360],"items":[{"id":"tile","kind":"sprite","rect":[0,0,16,16],"image":"精灵.svg"}]})";
   {azurerender::GameUi sprites(folder/"scene.azure2d",font,renderer);sprites.update(.016);sprites.render();}
+  if(renderer.imageLoads!=1||std::filesystem::u8path(renderer.lastImage)!=image)throw std::runtime_error("Windows 2D documents must resolve relative Unicode textures against their own directory");
   const auto form=folder/"notes.rml";
-  std::ofstream(form)<<"<rml><head></head><body><div id='note'><textarea id='body'></textarea></div></body></rml>";
+  std::ofstream(form)<<"<rml><head></head><body><div id='note'><textarea id='body'></textarea></div><img id='preview' width='16' height='16'/></body></rml>";
   {
    azurerender::GameUi notes(form,font,renderer);notes.resize(640,360,1);notes.update(.016);
+   const auto replacement=azurerender::nativeFilePath(folder/std::string(80,'p')/std::filesystem::u8path(u8"本机 图片.svg"));
+   std::filesystem::create_directories(replacement.parent_path());std::ofstream(replacement)<<"<svg width='16' height='16'/>";
+   const auto before=renderer.imageLoads;
+   notes.setImage("preview",azurerender::nativeFilePath(replacement));notes.update(.016);notes.render();
+   if(renderer.imageLoads!=before+1||azurerender::nativeFilePath(std::filesystem::weakly_canonical(std::filesystem::u8path(renderer.lastImage)))!=azurerender::nativeFilePath(std::filesystem::weakly_canonical(replacement)))
+       throw std::runtime_error("Dynamic images must resolve native Unicode paths");
+   bool wrongImage=false;try{notes.setImage("note",replacement);}catch(const std::invalid_argument&){wrongImage=true;}
+   if(!wrongImage)throw std::runtime_error("Image binding must reject ordinary elements");
+   notes.setImage("preview",{});notes.update(.016);notes.render();
    notes.setFormValue("body",u8"笔记\n<&>");
    if(notes.formValue("body")!=u8"笔记\n<&>")throw std::runtime_error("UI UTF-8 form text changed");
    notes.setFormValue("body","");
@@ -57,7 +68,7 @@ int main(int argc,char** argv){
    if(!wrongElement)throw std::runtime_error("UI form binding must reject ordinary elements");
   }
   std::filesystem::remove_all(folder);
-  if(renderer.imageLoads!=1||std::filesystem::u8path(renderer.lastImage)!=image)throw std::runtime_error("Windows 2D documents must resolve relative Unicode textures against their own directory");
+  if(renderer.imageLoads!=2)throw std::runtime_error("Relative and dynamic Unicode images must both reach the renderer");
   std::cout<<"RmlUi document, text binding, button action, DPI resize and invalid element handling passed\n";
  }catch(const std::exception& error){std::cerr<<error.what()<<'\n';return 1;}
 }

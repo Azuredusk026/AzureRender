@@ -1,0 +1,41 @@
+[
+  {
+    "command": [
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261120-010632-asset-parse-source-diagnostic-d884c7\\player-release\\AzureGameUiTests.exe",
+      "D:/Projects/FYP/Project/AzureRender/assets_public/gameplay/assets/hud.rml",
+      "D:/Projects/FYP/Project/AzureRender/assets_public/fonts/LatoLatin-Regular.ttf"
+    ],
+    "exitCode": 0,
+    "stdout": "button: 28,61.6,90,37\r\nRmlUi document, text binding, button action, DPI resize and invalid element handling passed\r\n",
+    "stderr": "",
+    "exeSHA256": "9a567c3470cb8680adbdb3c2776ed554913b79c06704b9e0d9c9e037859e8e63"
+  },
+  {
+    "command": [
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261120-010632-asset-parse-source-diagnostic-d884c7\\player-release\\AzureLocalMediaServiceTests.exe",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261124-042102-runtime-media-service-903258\\self-contained-service"
+    ],
+    "exitCode": 0,
+    "stdout": "Runtime media selection, worker import, partial failures, cancellation, reopening and audio/image references passed\r\n",
+    "stderr": "[1795466136274][info][audio][code=0] Decoded source: \\\\?\\D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261124-042102-runtime-media-service-903258\\self-contained-service\\case-270157362750500\\saves\\project-6d656469612d73657276696365\\content-local-media-music\\m1616705243-270157389285900-0\\a.wav\r\n",
+    "exeSHA256": "d4862eb84c04423d2813d96a77917c0f02580ffece64d0024c3b7ea9ded66948"
+  },
+  {
+    "command": [
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261120-010632-asset-parse-source-diagnostic-d884c7\\player-release\\AzureScriptBackendContractTests.exe"
+    ],
+    "exitCode": 0,
+    "stdout": "Script entity identities, binding permissions and shared initialization transactions passed\r\n",
+    "stderr": "",
+    "exeSHA256": "967e01c4c63dd7a29c255b184490a22ca8d18326e0b06e8f165319b178bd1a35"
+  },
+  {
+    "command": [
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261120-010632-asset-parse-source-diagnostic-d884c7\\player-release\\AzureScriptInteropTests.exe"
+    ],
+    "exitCode": 0,
+    "stdout": "Real script interop, output ownership, version, owner thread and expired session passed\r\n",
+    "stderr": "",
+    "exeSHA256": "47e60515a3e89ded9cd324b544eca61699dc2dd47d864cbded60cb669bcc4636"
+  }
+]

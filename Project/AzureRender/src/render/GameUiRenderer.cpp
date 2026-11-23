@@ -1,5 +1,6 @@
 #include "render/GameUiRenderer.hpp"
 #include "assets/image/ImageCodec.hpp"
+#include "foundation/NativeFilePath.hpp"
 #include <RmlUi/Core/Matrix4.h>
 #include <stb_image.h>
 #include <algorithm>
@@ -152,7 +153,7 @@ Rml::TextureHandle GameUiRenderer::GenerateTexture(Rml::Span<const Rml::byte> so
 }
 Rml::TextureHandle GameUiRenderer::LoadTexture(Rml::Vector2i& dimensions,const Rml::String& source){
     DecodedImage image;ImageRgba8 converted;
-    try{image=decodeImageFile(std::filesystem::u8path(source));converted=convertImageToRgba8(image);}catch(const std::exception&){return 0;}
+    try{image=decodeImageFile(nativeFilePath(std::filesystem::u8path(source)));converted=convertImageToRgba8(image);}catch(const std::exception&){return 0;}
     auto& bytes=converted.pixels;
     for(std::size_t i=0;i<bytes.size();i+=4)for(unsigned c=0;c<3;++c)bytes[i+c]=static_cast<unsigned char>(static_cast<unsigned>(bytes[i+c])*bytes[i+3]/255);
     dimensions={static_cast<int>(image.width),static_cast<int>(image.height)};

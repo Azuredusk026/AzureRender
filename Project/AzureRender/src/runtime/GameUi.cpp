@@ -82,6 +82,20 @@ struct GameUi::Impl: Rml::EventListener {
 };
 GameUi::GameUi(const std::filesystem::path& document,const std::filesystem::path& font,Rml::RenderInterface& renderer):impl_(std::make_unique<Impl>(document,font,renderer)){}
 GameUi::~GameUi()=default;
+void GameUi::setImage(const std::string& id,const std::filesystem::path& image){
+    auto* element=impl_->element(id);
+    if(element->GetTagName()!="img")throw std::invalid_argument("Expected a game UI image: "+id);
+    if(image.empty()){element->RemoveAttribute("src");return;}
+    if(!std::filesystem::is_regular_file(image))throw std::invalid_argument("Game UI image is unavailable");
+    auto source=image.generic_u8string();
+#ifdef _WIN32
+    // RmlUi normalizes URLs. Keep the Win32 namespace prefix at the native
+    // decoder boundary, where it cannot be collapsed into a relative URL.
+    if(source.rfind("//?/UNC/",0)==0)source="//"+source.substr(8);
+    else if(source.rfind("//?/",0)==0)source=source.substr(4);
+#endif
+    if(element->GetAttribute<Rml::String>("src","")!=source)element->SetAttribute("src",source);
+}
 void GameUi::resize(int width,int height,float density){if(width<=0||height<=0||!std::isfinite(density)||density<=0)throw std::invalid_argument("Invalid game UI dimensions");impl_->context->SetDimensions({width,height});impl_->context->SetDensityIndependentPixelRatio(density);}
 void GameUi::setText(const std::string& id,const std::string& text){auto* element=impl_->element(id);const auto encoded=Rml::StringUtilities::EncodeRml(text);if(element->GetInnerRML()!=encoded)element->SetInnerRML(encoded);}
 std::string GameUi::text(const std::string& id)const{return impl_->element(id)->GetInnerRML();}

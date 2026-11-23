@@ -1,0 +1,10 @@
+{
+  "command": [
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261120-010632-asset-parse-source-diagnostic-d884c7\\player-release\\AzureLocalMediaServiceTests.exe",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261124-042102-runtime-media-service-903258\\service-close-final"
+  ],
+  "exitCode": 0,
+  "stdout": "Runtime media selection, worker import, partial failures, cancellation, reopening and audio/image references passed\r\n",
+  "stderr": "[1795466323242][info][audio][code=0] Decoded source: \\\\?\\D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261124-042102-runtime-media-service-903258\\service-close-final\\case-270344336078000\\saves\\project-6d656469612d73657276696365\\content-local-media-music\\m3708549836-270344372140900-0\\a.wav\r\n",
+  "exeSHA256": "54035ed3e25e19e82b230badbd0c5b34891b769683a7d6bcb18ac198e16648c5"
+}

@@ -1,0 +1,29 @@
+[
+  {
+    "command": [
+      "D:\\Tools\\Python311\\python.exe",
+      "-B",
+      "tools/generate_script_bindings.py",
+      "--check"
+    ],
+    "exitCode": 0,
+    "stdout": "Script binding artifacts verified\r\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "D:\\Tools\\Python311\\python.exe",
+      "-B",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tools",
+      "-p",
+      "test_script_bindings.py"
+    ],
+    "exitCode": 0,
+    "stdout": "",
+    "stderr": "...\r\n----------------------------------------------------------------------\r\nRan 3 tests in 0.710s\r\n\r\nOK\r\n"
+  }
+]

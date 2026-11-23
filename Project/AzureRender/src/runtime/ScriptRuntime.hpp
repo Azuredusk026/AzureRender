@@ -24,6 +24,7 @@ public:
     const std::vector<StructuredDiagnostic>& diagnostics() const override;
     ScriptRuntimeCapabilities capabilities() const override {return {"lua",true,false};}
     void setSaveStore(std::shared_ptr<ProjectSaveStore>) override;
+    void setMediaService(std::shared_ptr<IMediaLibraryService>) override;
     void setLevelSession(LevelSession&) override;
     void setUiProvider(std::function<GameUi*()>) override;
 private:

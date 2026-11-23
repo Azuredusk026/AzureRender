@@ -163,6 +163,7 @@ void ManagedScriptRuntime::setAudioTransport(PresentationRuntime& presentation){
 void ManagedScriptRuntime::setUiHandler(std::function<void(std::string,std::string)> handler){impl_->host->setUiHandler(std::move(handler));}
 void ManagedScriptRuntime::setUiProvider(std::function<GameUi*()> provider){impl_->host->setUiProvider(std::move(provider));}
 void ManagedScriptRuntime::setSaveStore(std::shared_ptr<ProjectSaveStore> store){impl_->host->setSaveStore(std::move(store));}
+void ManagedScriptRuntime::setMediaService(std::shared_ptr<IMediaLibraryService> service){impl_->host->setMediaService(std::move(service));}
 std::size_t ManagedScriptRuntime::activeCount() const {std::size_t count=0;for(const auto& entry:impl_->entries)if(entry.second.active)++count;return count;}
 const std::vector<std::string>& ManagedScriptRuntime::errors() const{return impl_->errors;}
 const std::vector<StructuredDiagnostic>& ManagedScriptRuntime::diagnostics() const{return impl_->diagnostics;}

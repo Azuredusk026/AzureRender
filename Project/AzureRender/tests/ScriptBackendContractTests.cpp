@@ -1,6 +1,7 @@
 #include "scripting/ScriptBindingHost.hpp"
 #include "app/ProjectRuntimeAssembly.hpp"
 #include "runtime/ComponentCodec.hpp"
+#include "runtime/IMediaLibraryService.hpp"
 #include <iostream>
 #include <stdexcept>
 using namespace azurerender;
@@ -30,8 +31,25 @@ void bindings() {
     runtime.loadScene(scene);runtime.start();
     GameRuntime game(runtime,application::systems(),application::explorationConfiguration());
     ScriptBindingHost host(runtime,game);
+    struct Media final : IMediaLibraryService {
+        bool selected=false, cancelled=false;
+        bool select(const std::string& kind,bool directory) override { selected=kind=="music"&&!directory;return selected; }
+        Json entries(const std::string&) const override {return Json::array({Json::array({"id","title","media:/music/id",true})});}
+        Json status() override {return Json::array({"idle",0,0,0,""});}
+        void cancel() override {cancelled=true;}
+    };
+    auto media=std::make_shared<Media>();host.setMediaService(media);
     const auto hero=host.object("hero"),target=host.object("target");
     check(host.invoke(hero,"id",Json::array())=="hero","Object identity must be readable");
+    check(host.invoke(hero,"media_entries",{"music"})[0][2]=="media:/music/id","Media queries must use the injected shared service");
+    rejects([&]{host.invoke(hero,"media_import",{"music",false});},"Media import requires an active runtime callback");
+    host.beginCallback(true);
+    rejects([&]{host.invoke(hero,"media_import",{"music",false});},"Media selection cannot escape a staged initialization");
+    host.endCallback(false);host.beginCallback();
+    check(host.invoke(hero,"media_import",{"music",false})==true&&media->selected,"Media selection must use the injected production operation");
+    host.invoke(hero,"media_cancel",Json::array());
+    check(media->cancelled&&host.invoke(hero,"media_status",Json::array())[0]=="idle","Media cancellation and status must share one service");
+    host.endCallback(true);
     rejects([&]{host.invoke(hero,"set",{"azure.transform","translation",{1,2,3}});},"Mutation outside a callback must fail");
     rejects([&]{host.invoke(hero,"find",{true});},"Wrong binding parameter type must fail");
     rejects([&]{host.invoke(hero,"id",{"other"});},"Object identity must be read only");

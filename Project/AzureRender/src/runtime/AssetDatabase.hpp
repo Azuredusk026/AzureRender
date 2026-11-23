@@ -29,6 +29,8 @@ public:
     std::string idForPath(const std::string& virtualPath) const;
     std::filesystem::path resolve(const std::string& id) const;
     std::filesystem::path resolveReference(const std::string& reference) const;
+    using ReferenceResolver = std::function<std::optional<std::filesystem::path>(const std::string&)>;
+    void setReferenceResolver(ReferenceResolver resolver) { referenceResolver_ = std::move(resolver); }
     std::filesystem::path cacheFile(const std::string& id) const;
     std::string readSource(const std::string& id) const;
     std::string generateAsset(const GeneratorRegistry& generators,const std::string& generator,const std::string& output,
@@ -39,6 +41,7 @@ public:
     static std::filesystem::path resolvePack(const std::filesystem::path& directory, const std::string& id);
 private:
     Project project_;
+    ReferenceResolver referenceResolver_;
     std::map<std::string, AssetRecord> records_;
     RefreshStatistics statistics_;
     std::uint64_t version_=0;

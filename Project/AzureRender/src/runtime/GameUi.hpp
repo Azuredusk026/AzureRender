@@ -12,6 +12,7 @@ public:
     ~GameUi();
     void resize(int width, int height, float density);
     void setText(const std::string& id, const std::string& text);
+    void setImage(const std::string& id, const std::filesystem::path& image);
     std::string text(const std::string& id) const;
     std::string formValue(const std::string& id) const;
     void setFormValue(const std::string& id, const std::string& value);

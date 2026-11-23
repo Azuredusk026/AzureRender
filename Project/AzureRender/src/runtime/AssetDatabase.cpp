@@ -475,6 +475,10 @@ std::filesystem::path AssetDatabase::resolve(const std::string& id) const {
     return found->second.path;
 }
 std::filesystem::path AssetDatabase::resolveReference(const std::string& reference) const {
+    if (referenceResolver_) if (const auto resolved = referenceResolver_(reference)) {
+        if (!std::filesystem::is_regular_file(*resolved)) throw std::runtime_error("Runtime asset reference missing: " + reference);
+        return *resolved;
+    }
     const auto result = reference.find(":/") == std::string::npos ? resolve(reference) : project_.resolve(reference);
     if (!std::filesystem::is_regular_file(result)) throw std::runtime_error("Asset reference missing: " + reference);
     return result;

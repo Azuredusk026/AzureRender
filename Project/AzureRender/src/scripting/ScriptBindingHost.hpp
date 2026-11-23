@@ -8,6 +8,7 @@
 #include <thread>
 namespace azurerender {
 class ProjectSaveStore;
+class IMediaLibraryService;
 class LevelSession;
 class GameUi;
 class PresentationRuntime;
@@ -36,6 +37,7 @@ public:
     void setUiHandler(std::function<void(std::string,std::string)> handler);
     void setUiProvider(std::function<GameUi*()> provider);
     void setSaveStore(std::shared_ptr<ProjectSaveStore>);
+    void setMediaService(std::shared_ptr<IMediaLibraryService>);
     static nlohmann::json encode(const ScriptObject&);
     static ScriptObject decode(const nlohmann::json&);
 private:
@@ -58,5 +60,6 @@ private:
     std::function<void(std::string,std::string)> ui_;
     std::function<GameUi*()> uiDocument_;
     std::shared_ptr<ProjectSaveStore> saveStore_;
+    std::shared_ptr<IMediaLibraryService> media_;
 };
 }

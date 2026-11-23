@@ -4,6 +4,7 @@
 #include "runtime/LevelSession.hpp"
 #include "runtime/PresentationRuntime.hpp"
 #include "runtime/ProjectSaveStore.hpp"
+#include "runtime/IMediaLibraryService.hpp"
 #include <cmath>
 #include <ctime>
 #include <stdexcept>
@@ -86,6 +87,7 @@ void ScriptBindingHost::commitInitialization(const std::function<void()>& retire
     }
 }
 void ScriptBindingHost::close() noexcept {
+    media_.reset();
     cancelInitialization();callback_=false;closed_=true;levels_=nullptr;level_={};audio_={};transport_=nullptr;ui_={};uiDocument_={};saveStore_.reset();
 }
 void ScriptBindingHost::effect(std::function<void()> action,bool structural) {
@@ -104,6 +106,9 @@ void ScriptBindingHost::setSaveStore(std::shared_ptr<ProjectSaveStore> store) {
     checkThread();
     if(!store)throw std::invalid_argument("Project save store must be available");
     saveStore_=std::move(store);
+}
+void ScriptBindingHost::setMediaService(std::shared_ptr<IMediaLibraryService> service) {
+    checkThread(); media_ = std::move(service);
 }
 Json ScriptBindingHost::encode(const ScriptObject& object) {
     return {{"entity",object.identity.entity},{"generation",object.identity.generation},
@@ -128,6 +133,14 @@ Json ScriptBindingHost::invoke(const ScriptObject& object,const std::string& met
     if(method=="alive")return valid(object);
     guard(object,binding.mutating);
     const auto entity=object.identity.entity;
+    if(method=="media_entries") return media_ ? media_->entries(args[0]) : Json::array();
+    if(method=="media_status") return media_ ? media_->status() : Json::array({"unavailable",0,0,0,"Media service unavailable"});
+    if(method=="media_import" || method=="media_cancel") {
+        if(staging_)throw std::logic_error("Media tasks require a running callback");
+        if(!media_)return method=="media_import"?Json(false):Json(nullptr);
+        if(method=="media_import")return media_->select(args[0],args[1]);
+        media_->cancel();return nullptr;
+    }
     auto& components=runtimeComponentRegistry();
     if(method=="find") {
         const auto node=args[0].get<std::string>();
@@ -244,6 +257,11 @@ Json ScriptBindingHost::invoke(const ScriptObject& object,const std::string& met
             else if(method=="audio_stop")transport->stop(entity);
             else transport->pause(entity,paused);
         });
+    } else if(method=="ui_image") {
+        if(!levels_ || !uiDocument_)throw std::runtime_error("Image UI services unavailable");
+        const auto id=args[0].get<std::string>(),reference=args[1].get<std::string>();
+        const auto path=reference.empty()?std::filesystem::path{}:levels_->assets().resolveReference(reference);
+        effect([provider=uiDocument_,id,path]{if(auto* document=provider())document->setImage(id,path);});
     } else if(method=="ui_text") {
         if(!ui_)throw std::runtime_error("UI handler unavailable");
         const auto id=args[0].get<std::string>(),text=args[1].get<std::string>();effect([handler=ui_,id,text]{handler(id,text);});

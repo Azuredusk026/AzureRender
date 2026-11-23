@@ -1686,3 +1686,7 @@ Intel 头发颜色继续按冻结区域核对纹理选级。
 [本地媒体持久库](../acceptance/npr-room/platform-scenarios.md#本地媒体持久库)通过音频、图片及多进程导入。
 去重、重开、版本保护、存储预算及提交回滚通过。
 接续 M4A 验证和 Player 的媒体选择与使用入口。
+
+[运行时媒体任务](../acceptance/npr-room/platform-scenarios.md#运行时媒体任务与定位)通过后台导入、取消及受控资产解析。
+M4A、AAC 与中文深目录图片路径通过定向修复及复测。
+接续 Player 的媒体选择、播放、图片展示与重开回放。
