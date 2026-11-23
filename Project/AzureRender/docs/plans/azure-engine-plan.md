@@ -1670,3 +1670,7 @@ Intel 头发颜色继续按冻结区域核对纹理选级。
 
 [房间人工复验](../acceptance/npr-room/manual-retest.md)登记设备、实体输入及屏幕待机。
 接续计划 2.5 的本地媒体目录与导入契约。
+
+[本地媒体多文件选择](../acceptance/npr-room/platform-scenarios.md#本地媒体多文件选择)通过四个真实 Windows 对话框。
+平台、编辑器库和 Player 构建通过，当前 Player 的原生启动与退出释放通过。
+继续目录递归筛选及媒体导入。

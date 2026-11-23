@@ -7,9 +7,10 @@
 
 ## 音频设备与听感
 
-复验版本为 `ebce234` 的原创房间音频单元。
-Player SHA-256 为 `63c470d2752275f7ed72aa7fc1abb0d4fcfc2aeb550ed3dd3aa2e5bf61b70f58`。
-生产音频实现及其自动证据沿用当前工作树。
+复验对象为 `ebce234` 已验证的原创音频流程。
+当前 Player SHA-256 为 `15fe5c0ced1254b6d13c62200a78cba0227baeb026925607ccc96a0195cfdf22`。
+源码基线为 `0821890`，平台增量及程序见[身份记录](evidence/2026-11-24/local-media-path-selection/verification.json)。
+音频及解码自动证据按其来源版本引用。
 
 | 对象 | 复验步骤 | 通过条件 | 已有自动证据 |
 | --- | --- | --- | --- |

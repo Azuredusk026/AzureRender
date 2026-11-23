@@ -31,23 +31,41 @@ PathSelectionResult choosePath(const PathSelectionRequest& request) {
     if(FAILED(initialized)&&initialized!=RPC_E_CHANGED_MODE){result.diagnostic="Cannot initialize Windows path selection";return result;}
     IFileOpenDialog* dialog=nullptr;auto status=CoCreateInstance(CLSID_FileOpenDialog,nullptr,CLSCTX_INPROC_SERVER,IID_PPV_ARGS(&dialog));
     if(SUCCEEDED(status)){
-        DWORD flags=0;dialog->GetOptions(&flags);dialog->SetOptions(flags|FOS_FORCEFILESYSTEM|FOS_PATHMUSTEXIST|(request.directory?FOS_PICKFOLDERS:FOS_FILEMUSTEXIST));
+        DWORD flags=0;status=dialog->GetOptions(&flags);
+        if(SUCCEEDED(status))status=dialog->SetOptions(flags|FOS_FORCEFILESYSTEM|FOS_PATHMUSTEXIST
+            |(request.directory?FOS_PICKFOLDERS:FOS_FILEMUSTEXIST)|(request.multiple?FOS_ALLOWMULTISELECT:0));
         const auto title=std::filesystem::u8path(request.title).wstring();dialog->SetTitle(title.c_str());
         if(!request.initialDirectory.empty()){
             IShellItem* folder=nullptr;if(SUCCEEDED(SHCreateItemFromParsingName(request.initialDirectory.c_str(),nullptr,IID_PPV_ARGS(&folder)))){dialog->SetFolder(folder);folder->Release();}
         }
         std::wstring extensions;for(const auto& extension:request.extensions){if(!extensions.empty())extensions+=L";";extensions+=L"*"+std::filesystem::u8path(extension).wstring();}
         const COMDLG_FILTERSPEC filter{L"Supported files",extensions.c_str()};if(!request.directory&&!extensions.empty())dialog->SetFileTypes(1,&filter);
-        status=dialog->Show(static_cast<HWND>(request.owner));
+        if(SUCCEEDED(status))status=dialog->Show(static_cast<HWND>(request.owner));
         if(status==HRESULT_FROM_WIN32(ERROR_CANCELLED))result.cancelled=true;
         else if(SUCCEEDED(status)){
-            IShellItem* item=nullptr;status=dialog->GetResult(&item);
-            if(SUCCEEDED(status)){PWSTR path=nullptr;status=item->GetDisplayName(SIGDN_FILESYSPATH,&path);if(SUCCEEDED(status)){result.path=path;CoTaskMemFree(path);}item->Release();}
+            IShellItemArray* items=nullptr;status=dialog->GetResults(&items);
+            if(SUCCEEDED(status)){
+                DWORD count=0;status=items->GetCount(&count);
+                if(SUCCEEDED(status)&&count==0)status=E_UNEXPECTED;
+                for(DWORD index=0;SUCCEEDED(status)&&index<count;++index){
+                    IShellItem* item=nullptr;status=items->GetItemAt(index,&item);
+                    if(SUCCEEDED(status)){
+                        PWSTR path=nullptr;status=item->GetDisplayName(SIGDN_FILESYSPATH,&path);
+                        if(SUCCEEDED(status)){result.paths.emplace_back(path);CoTaskMemFree(path);}
+                        item->Release();
+                    }
+                }
+                items->Release();
+                if(SUCCEEDED(status))result.path=result.paths.front();
+            }
         }
         dialog->Release();
     }
     if(SUCCEEDED(initialized))CoUninitialize();
-    if(FAILED(status)&&!result.cancelled)result.diagnostic="Windows path selection failed: "+std::to_string(static_cast<unsigned long>(status));
+    if(FAILED(status)&&!result.cancelled){
+        result.path.clear();result.paths.clear();
+        result.diagnostic="Windows path selection failed: "+std::to_string(static_cast<unsigned long>(status));
+    }
 #else
     (void)request;result.diagnostic="Native path selection requires the Windows editor";
 #endif

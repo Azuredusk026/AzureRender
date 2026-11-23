@@ -1,0 +1,11 @@
+Filename control: id=1148
+Filename value: "第一段 空格.wav"
+Azure single path contract: selected=1 cancelled=0 diagnostic=
+Filename control: id=1148
+Filename value: "第一段 空格.wav" "second image.png"
+Azure multiple path contract: selected=2 cancelled=0 diagnostic=
+Filename control: id=1152
+Filename value: "Child folder"
+Azure folder path contract: selected=1 cancelled=0 diagnostic=
+Azure cancelled path contract: selected=0 cancelled=1 diagnostic=
+Native single, multiple, Unicode, spaces and cancellation contracts passed
