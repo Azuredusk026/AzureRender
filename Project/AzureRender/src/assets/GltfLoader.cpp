@@ -1984,6 +1984,7 @@ AssetMaterial loadMaterial(
             result.baseColorPixels[i] = static_cast<std::uint8_t>(std::round(std::clamp(encoded, 0.0, 1.0) * 255.0));
         }
     }
+    result.normalTexturePresent = normalImage >= 0;
     if (normalImage >= 0) {
         constexpr std::array<double, 4> kNoFactor{1.0, 1.0, 1.0, 1.0};
         result.normalPixels = decodeImageRgba(

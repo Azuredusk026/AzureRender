@@ -295,7 +295,7 @@ struct ProjectedHairProfile {
     vec4 secondaryColor;
     vec4 objectX,objectY,objectZ;
 };
-struct PackedMaterialSurfaceProfile { vec4 rows[22]; };
+struct PackedMaterialSurfaceProfile { vec4 rows[23]; };
 #include "unlit_texture_layers.glsl"
 layout(std430,binding=27) readonly buffer MaterialSurfaceProfiles {
     PackedMaterialSurfaceProfile profiles[];
@@ -930,7 +930,8 @@ void main()
     mat3 tangentToWorld = mat3(tangent, bitangent, geometricNormal);
     vec4 normalSample=azureSamplePrimaryUv(AZ_TEX_NORMAL,textureCoordinate);
     vec3 sampledNormal = normalSample.xyz * 2.0 - 1.0;
-    vec3 shadedNormal = normalize(tangentToWorld * sampledNormal);
+    bool normalTexturePresent=materialSurfaceProfiles.profiles[material.materialPadding>>1U].rows[22].x<.5;
+    vec3 shadedNormal = normalTexturePresent?normalize(tangentToWorld * sampledNormal):geometricNormal;
     vec4 hairData =
 #if defined(AZURE_GEOMETRY_SAMPLES)
         true

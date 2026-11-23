@@ -13,7 +13,7 @@ layout(location=2) out vec4 outputDisplayMask;
 #endif
 #if defined(AZURE_VIEW_SCALED_OUTLINE)
 #include "outline_surface_fragment.glsl"
-struct PackedDisplayProfile { vec4 rows[22]; };
+struct PackedDisplayProfile { vec4 rows[23]; };
 layout(std430,binding=27) readonly buffer MaterialDisplayProfiles { PackedDisplayProfile profiles[]; } displayProfiles;
 layout(binding=0) uniform Camera { vec4 position; vec4 forward; vec4 grid; vec4 depth; } camera;
 layout(binding=26) uniform AZURE_MASK_TYPE outlineMask;

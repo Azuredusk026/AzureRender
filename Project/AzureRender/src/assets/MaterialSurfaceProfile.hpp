@@ -11,14 +11,14 @@
 namespace azurerender {
 // Binding 27 is a versioned union, indexed by the stable material order.
 struct alignas(16) PackedMaterialSurfaceProfile {
-    static constexpr unsigned kLayoutVersion=22;
+    static constexpr unsigned kLayoutVersion=23;
     using Row=std::array<float,4>;
-    std::array<Row,22> rows=[] {
-        std::array<Row,22> value{};value[19][3]=1;return value;
+    std::array<Row,23> rows=[] {
+        std::array<Row,23> value{};value[19][3]=1;return value;
     }();
 };
 static_assert(std::is_standard_layout_v<PackedMaterialSurfaceProfile>);
-static_assert(sizeof(PackedMaterialSurfaceProfile)==352);
+static_assert(sizeof(PackedMaterialSurfaceProfile)==368);
 static_assert(alignof(PackedMaterialSurfaceProfile)==16);
 static_assert(offsetof(PackedMaterialSurfaceProfile,rows)==0);
 static_assert(sizeof(PackedMaterialSurfaceProfile::Row)==16);
@@ -142,6 +142,7 @@ inline PackedMaterialSurfaceProfile packMaterialSurfaceProfile(const AssetMateri
         if(p.attenuateColorBlend)r[15][3]=2.F;
         r[19][3]=material.radianceScale;
         r[21][0]=static_cast<float>(material.displayTransform);
+        r[22][0]=material.normalTexturePresent?0.F:1.F;
         return result;
     }
     if(material.nprDiffuse.present) {
@@ -213,6 +214,7 @@ inline PackedMaterialSurfaceProfile packMaterialSurfaceProfile(const AssetMateri
     result.rows[21][1]=static_cast<float>(environmentFlags);
     result.rows[21][2]=environmentFlags?material.environmentLighting.globalIntensity.value_or(-1.F):0.F;
     result.rows[21][3]=static_cast<float>(material.mainLightShadow);
+    result.rows[22][0]=material.normalTexturePresent?0.F:1.F;
     return result;
 }
 }

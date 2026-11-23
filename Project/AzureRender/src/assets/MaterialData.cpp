@@ -153,6 +153,7 @@ AssetMaterial MaterialData::interpret(const std::function<std::filesystem::path(
     const auto color=parameters.at("baseColor").get<std::array<float,4>>();
     for(std::size_t i=0;i<result.baseColorPixels.size();++i){const auto channel=i%4;double value=result.baseColorPixels[i]/255.;const bool srgb=channel!=3&&result.textureSettings[0].colorSpace=="srgb";if(srgb)value=value<=.04045?value/12.92:std::pow((value+.055)/1.055,2.4);value*=color[channel];if(srgb)value=value<=.0031308?value*12.92:1.055*std::pow(value,1/2.4)-.055;result.baseColorPixels[i]=static_cast<std::uint8_t>(std::lround(std::clamp(value,0.,1.)*255));}
     }
+    if(!parameterOverride||textures.contains("normal"))result.normalTexturePresent=textures.contains("normal");
     image("normal",result.normalPixels,result.normalWidth,result.normalHeight,{128,128,255,255});
     image("metallicRoughness",result.metallicRoughnessPixels,result.metallicRoughnessWidth,result.metallicRoughnessHeight,{255,255,255,255});
     for(std::size_t i=0;i<result.metallicRoughnessPixels.size();i+=4){result.metallicRoughnessPixels[i+1]=static_cast<std::uint8_t>(std::lround(result.metallicRoughnessPixels[i+1]*parameters.value("roughness",1.)));result.metallicRoughnessPixels[i+2]=static_cast<std::uint8_t>(std::lround(result.metallicRoughnessPixels[i+2]*parameters.value("metallic",1.)));}

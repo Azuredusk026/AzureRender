@@ -179,6 +179,7 @@ void appendShowcasePlatform(LoadedAsset& asset, const Vector3& footPivot) {
         38, 50, 66, 255, 38, 50, 66, 255,
         38, 50, 66, 255, 38, 50, 66, 255,
     };
+    platformMaterial.normalTexturePresent = false;
     platformMaterial.normalWidth = 2;
     platformMaterial.normalHeight = 2;
     platformMaterial.normalPixels = {

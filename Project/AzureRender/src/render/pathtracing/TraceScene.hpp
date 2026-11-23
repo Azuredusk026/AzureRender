@@ -15,5 +15,6 @@ std::vector<float> environmentDistribution(unsigned width,unsigned height,const 
 void buildBvh(Geometry& geometry);
 Geometry buildGeometry(const scene::SceneDescription&,const Meshes&,const std::vector<NodeAnimationFrame>&);
 std::uint64_t sceneFingerprint(const scene::SceneDescription&,const std::vector<NodeAnimationFrame>&);
+std::array<std::uint32_t,4> appendNormalTexture(std::vector<std::uint32_t>& pixels,const AssetMaterial& material);
 std::array<std::uint32_t,4> appendTexture(std::vector<std::uint32_t>& pixels,const std::vector<std::uint8_t>& rgba,unsigned width,unsigned height,bool srgb);
 }

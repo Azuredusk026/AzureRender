@@ -110,6 +110,12 @@ int main(){try{
   }
  }
  std::vector<unsigned> pixels;auto texture=tracing::appendTexture(pixels,{255,128,0,255},1,1,true);require(pixels[0]==0xff0080ff&&texture[3]==1,"Texture channel order and color space");
+ AssetMaterial absentNormal;absentNormal.normalTexturePresent=false;const auto oldPixelCount=pixels.size();
+ const auto skippedNormal=tracing::appendNormalTexture(pixels,absentNormal);
+ require(skippedNormal[1]==0&&pixels.size()==oldPixelCount,"Missing normal map must preserve geometric normal without texture allocation");
+ absentNormal.normalTexturePresent=true;absentNormal.normalWidth=absentNormal.normalHeight=1;absentNormal.normalPixels={128,128,255,255};
+ const auto authoredNormal=tracing::appendNormalTexture(pixels,absentNormal);
+ require(authoredNormal[1]==1&&pixels.back()==0xffff8080U,"Authored neutral normal bytes remain present and linear");
  bool rejected=false;try{tracing::appendTexture(pixels,{},1,1,false);}catch(const std::invalid_argument&){rejected=true;}require(rejected,"Malformed texture rejected");
  auto distribution=tracing::environmentDistribution(1,1,{0x3c00,0x3c00,0x3c00,0x3c00},8,4);
  require(distribution.size()==64,"Environment stores probability and cumulative arrays");

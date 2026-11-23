@@ -1476,3 +1476,7 @@ Intel 头发颜色继续按冻结区域核对纹理选级。
 
 [动态反射与项目重开](../acceptance/nr/evidence/2026-11-24/reflection-dynamic-and-reopen/README.md)通过五项组合及旋转回放。
 独立启动的十二帧精确一致，默认法线及双配置回归接续。
+
+[默认法线来源契约](../acceptance/nr/evidence/2026-11-24/normal-texture-provenance/README.md)通过实际附件与双配置资产检查。
+无贴图的 97 个接收点方向误差为零，显式贴图保留解码。
+光栅化和路径追踪共享来源语义，材质表为版本 23。

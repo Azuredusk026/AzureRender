@@ -167,6 +167,8 @@ struct AssetMaterial {
     std::vector<std::uint8_t> baseColorPixels;
     std::uint32_t baseColorWidth = 0;
     std::uint32_t baseColorHeight = 0;
+    // Explicit provenance keeps authored neutral maps distinct from fallback pixels.
+    bool normalTexturePresent = true;
     std::vector<std::uint8_t> normalPixels;
     std::uint32_t normalWidth = 0;
     std::uint32_t normalHeight = 0;
