@@ -1,0 +1,30 @@
+[
+  {
+    "command": [
+      "D:\\Tools\\Python311\\python.exe",
+      "-B",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tools/npr_room",
+      "-p",
+      "test_*.py"
+    ],
+    "exitCode": 0,
+    "stdout": "",
+    "stderr": "..........................................................................................................................................................................\n----------------------------------------------------------------------\nRan 170 tests in 3.126s\n\nOK\n"
+  },
+  {
+    "command": [
+      "D:\\Tools\\Python311\\python.exe",
+      "-B",
+      "tools/npr_room/test_pomodoro_runtime.py",
+      "--lua",
+      "D:/Projects/FYP/Project/AzureRender/build/runs/20261120-010632-asset-parse-source-diagnostic-d884c7/player-release/lua.dll"
+    ],
+    "exitCode": 0,
+    "stdout": "Optional purchase cue failure preserves purchase, ambient activation and recovery\nTimer, room startup, tools, progression, story and platform fixture checks passed\n",
+    "stderr": ""
+  }
+]

@@ -942,7 +942,9 @@ if(MSVC)
 else()
     target_compile_options(AzureBuildOptions INTERFACE -Wall -Wextra -Wpedantic -Werror -Wno-missing-field-initializers)
 endif()
+find_package(Threads REQUIRED)
 add_library(AzureFoundation STATIC
+    src/foundation/FileLock.cpp
     src/foundation/ImmutableBytes.cpp
     src/foundation/SettingRegistry.cpp
     src/diagnostics/RuntimeDiagnostics.cpp
@@ -1261,6 +1263,7 @@ set(AZURE_HOST_SOURCES
 )
 
 target_link_libraries(AzureFoundation PUBLIC AzureBuildOptions nlohmann_json::nlohmann_json)
+target_link_libraries(AzureFoundation PUBLIC Threads::Threads)
 target_link_libraries(AzureFoundation PRIVATE zstd::libzstd)
 target_compile_definitions(AzureFoundation PRIVATE AZURERENDER_DEVELOPMENT_ROOT="${CMAKE_CURRENT_SOURCE_DIR}")
 target_link_libraries(AzurePlatform PUBLIC AzureFoundation Vulkan::Vulkan glfw)
@@ -2544,7 +2547,11 @@ if(BUILD_TESTING)
     target_link_libraries(AzureProjectTests PRIVATE AzureRuntime)
     add_test(NAME AzureEngine.Project COMMAND AzureProjectTests)
     add_executable(AzureProjectSaveStoreTests tests/ProjectSaveStoreTests.cpp)
-    target_link_libraries(AzureProjectSaveStoreTests PRIVATE AzureRuntime)
+    target_link_libraries(AzureProjectSaveStoreTests PRIVATE AzureRuntime AzurePlatform)
+    add_executable(AzureFileLockTests tests/FileLockTests.cpp)
+    target_link_libraries(AzureFileLockTests PRIVATE AzureFoundation)
+    add_test(NAME AzureFoundation.FileLock COMMAND AzureFileLockTests "${CMAKE_CURRENT_BINARY_DIR}/file-lock-tests")
+    set_tests_properties(AzureFoundation.FileLock PROPERTIES TIMEOUT 30)
     add_test(NAME AzureEngine.ProjectSaveStore COMMAND AzureProjectSaveStoreTests "${CMAKE_CURRENT_BINARY_DIR}/project-save-tests")
     add_executable(AzureRuntimeLifecycleTests tests/RuntimeLifecycleTests.cpp)
     target_link_libraries(AzureRuntimeLifecycleTests PRIVATE AzureRuntime)
