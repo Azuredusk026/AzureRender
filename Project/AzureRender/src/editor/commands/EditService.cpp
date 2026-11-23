@@ -2,8 +2,25 @@
 #include "editor/commands/EditTransaction.hpp"
 #include <set>
 namespace azurerender {
+struct EditService::ContinuousEdit {
+    EditorContext::Snapshot initial;
+    std::vector<EditorContext::Snapshot> undo,redo;
+    DocumentVersion expected;
+    std::string mergeKey;
+};
 EditService::EditService(EditorContext& context,EditRegistry registry,Enabled enabled)
     :context_(context),registry_(std::move(registry)),enabled_(std::move(enabled)) {}
+EditService::~EditService()=default;
+void EditService::endContinuousEdit() { continuous_.reset();context_.closeEditMerge(); }
+void EditService::cancelContinuousEdit() {
+    if(!continuous_)return;
+    if(context_.documentVersion()!=continuous_->expected) {
+        continuous_.reset();throw EditRejection("Continuous edit became stale");
+    }
+    context_.restore(continuous_->initial);
+    context_.undoStack_=std::move(continuous_->undo);context_.redoStack_=std::move(continuous_->redo);
+    ++context_.revision_;endContinuousEdit();
+}
 DocumentVersion EditService::version() const { return context_.documentVersion(); }
 EditResult EditService::current(const std::string& command,nlohmann::json parameters,std::string mergeKey) {
     return run({{"frontend-"+std::to_string(++sequence_),command,std::move(parameters),{},std::move(mergeKey)}},false,true);
@@ -36,9 +53,19 @@ EditResult EditService::run(const std::vector<EditRequest>& requests,bool batch,
                 if(!entries[index]->descriptor.modifiesDocument&&transaction.candidate().documentContent()!=previous)
                     throw EditRejection("Read-only operation modified the document");
             }
-            transaction.commit(batch?std::string():requests.front().mergeKey);
+            const auto mergeKey=batch?std::string():requests.front().mergeKey;
+            const bool continuing=continuous_&&continuous_->mergeKey==mergeKey&&continuous_->expected==result.version
+                &&context_.mergeKey_==mergeKey&&context_.mergeRevision_==context_.revision_
+                &&context_.mergeSelection_==context_.selectedNodes_;
+            std::unique_ptr<ContinuousEdit> checkpoint;
+            if(!mergeKey.empty()&&!continuing&&transaction.candidate().documentContent()!=before)
+                checkpoint=std::make_unique<ContinuousEdit>(ContinuousEdit{context_.snapshot(),context_.undoStack_,context_.redoStack_,result.version,mergeKey});
+            transaction.commit(mergeKey);
             result.value=batch?values:values.front();
             after=context_.documentContent();
+            if(checkpoint&&after!=before)continuous_=std::move(checkpoint);
+            if(continuous_&&!mergeKey.empty()&&continuous_->mergeKey==mergeKey&&after!=before)
+                continuous_->expected=context_.documentVersion();
         }else {
             auto state=context_.snapshot();auto undo=context_.undoStack_,redo=context_.redoStack_;
             const auto dirty=context_.dirty_;const auto revision=context_.revision_;

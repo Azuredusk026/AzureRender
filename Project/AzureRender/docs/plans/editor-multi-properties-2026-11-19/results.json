@@ -1,0 +1,228 @@
+{
+  "date": "2026-11-19",
+  "passed": true,
+  "productionBaseline": "5fccef930dcff848238a0d919cb5a139bde1372d",
+  "sourceEquivalentToImplementation": "5d4cf7dbf92b9a05181a7e11a2ff81b4cca7f3b3",
+  "checkedRuntimeInputs": [
+    "Project/AzureRender/src",
+    "Project/AzureRender/tests",
+    "Project/AzureRender/tools",
+    "Project/AzureRender/shaders",
+    "Project/AzureRender/assets_public",
+    "Project/AzureRender/third_party",
+    "Project/AzureRender/managed",
+    "Project/AzureRender/cmake",
+    "Project/AzureRender/schemas",
+    "Project/AzureRender/CMakeLists.txt",
+    "Project/AzureRender/CMakePresets.json",
+    "Project/AzureRender/vcpkg.json"
+  ],
+  "configuration": "Release",
+  "executable": "D:\\Projects\\FYP-worktrees\\editor-interaction\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureRender.exe",
+  "executableSha256": "75778c34da23ceb5387e6baf195cbdcc63a9fac8ae05c304156cc1d1fb2ea9ee",
+  "sourceSha256": "84ac2e2c50e1da2770fb08e7f9734de167983d360672895f2ed0983a40324724",
+  "source": "tools/test_editor_multi_properties.py",
+  "baselineIntegrationProof": "docs/acceptance/p0/evidence/2026-11-19-editor-hierarchy-integration/results.json",
+  "dispatch": [
+    {
+      "id": 2232,
+      "owner": "01a1d9f2-aadf-7b10-be6b-d4f22c775cf5",
+      "task": "editor-multi-properties-baseline",
+      "kind": "gpu",
+      "priority": 0,
+      "estimate_seconds": 55.0,
+      "pid": 9776,
+      "state": "succeeded",
+      "submitted": 1795082799.267286,
+      "started": 1795082799.294464,
+      "ended": 1795082825.1607294,
+      "wait_seconds": 0.016000000000531145,
+      "run_seconds": 25.84400000000005,
+      "lock_attempts": 1,
+      "exit_code": 0,
+      "reason": null,
+      "output": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261119-180435-editor-multiselect-properties-44f22b",
+      "log_path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261119-180435-editor-multiselect-properties-44f22b\\process.log"
+    },
+    {
+      "id": 2233,
+      "owner": "01a1d9f2-aadf-7b10-be6b-d4f22c775cf5",
+      "task": "editor-multi-properties-scope",
+      "kind": "gpu",
+      "priority": 0,
+      "estimate_seconds": 55.0,
+      "pid": 21752,
+      "state": "succeeded",
+      "submitted": 1795082904.2690506,
+      "started": 1795082904.3150175,
+      "ended": 1795082935.4694986,
+      "wait_seconds": 0.014999999999417923,
+      "run_seconds": 31.125,
+      "lock_attempts": 1,
+      "exit_code": 0,
+      "reason": null,
+      "output": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261119-180435-editor-multiselect-properties-44f22b",
+      "log_path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261119-180435-editor-multiselect-properties-44f22b\\process.log"
+    }
+  ],
+  "results": [
+    {
+      "workflow": "exploration",
+      "passed": true,
+      "targets": [
+        "multi-a",
+        "multi-b"
+      ],
+      "untouched": "multi-c",
+      "axisPreservesMixedYZ": true,
+      "singleObjectControlsDisabled": true,
+      "referenceEscapeAndFocusCancel": true,
+      "referenceCapturedOwners": true,
+      "undoRedo": true,
+      "saveReopen": true,
+      "physicalInput": false
+    },
+    {
+      "workflow": "inspector",
+      "passed": true,
+      "targets": [
+        "multi-a",
+        "multi-b"
+      ],
+      "untouched": "multi-c",
+      "axisPreservesMixedYZ": true,
+      "singleObjectControlsDisabled": true,
+      "referenceEscapeAndFocusCancel": true,
+      "referenceCapturedOwners": true,
+      "undoRedo": true,
+      "saveReopen": true,
+      "physicalInput": false
+    }
+  ],
+  "archiveSha256": "ff997945b8ffc7fa949a7647dade9b5aef6562f98721c349cdb044848fc4667d",
+  "files": {
+    "process.log": {
+      "bytes": 771,
+      "sha256": "5aa7fe28a0a3c63e9bb739937e36da9b2077fa4657c3aabeb43600ac09c4744b"
+    },
+    "first-replay.log": {
+      "bytes": 765,
+      "sha256": "5bf38c0298debfae4c9bad7a7b9bf6c8c43d5a541cffe1a303c5322a7e8e6a0a"
+    },
+    "replay-scope/run-7669181f/summary.json": {
+      "bytes": 957,
+      "sha256": "f926d6c50b25396ba0bcb5c8477ff3c163a9af6536fdeec5663f7d53b85bbff2"
+    },
+    "test_editor_multi_properties.py": {
+      "bytes": 7317,
+      "sha256": "84ac2e2c50e1da2770fb08e7f9734de167983d360672895f2ed0983a40324724"
+    },
+    "replay-scope/run-7669181f/exploration/edit/evidence.json": {
+      "bytes": 519883,
+      "sha256": "80b934098ea0e94942783e2e209da233d2fc4961e6d1f73eb0d475bc4bd32894"
+    },
+    "replay-scope/run-7669181f/exploration/edit/runtime.json": {
+      "bytes": 351298,
+      "sha256": "6b68afaefdaf20d2a2155c1912ca166209c6e7d349654a1aa1ce1ae0befc5c9d"
+    },
+    "replay-scope/run-7669181f/exploration/edit/stdout.log": {
+      "bytes": 1601,
+      "sha256": "c5c6dac2d30ee8c3dd6c9e6c9433e39af73cb07ba4a40d335a86109453804615"
+    },
+    "replay-scope/run-7669181f/exploration/edit/stderr.log": {
+      "bytes": 4262,
+      "sha256": "f8307c0df4565691dee132109450be955e9dab50132048cfe6ca1976cffaa1da"
+    },
+    "replay-scope/run-7669181f/exploration/edit/mixed-edited-exploration.png": {
+      "bytes": 317098,
+      "sha256": "4e9087d7ec179f296339a096eea312990a629eb8ebafcd56b04c7bf8d3339a16"
+    },
+    "replay-scope/run-7669181f/exploration/edit/mixed-values-exploration.png": {
+      "bytes": 292045,
+      "sha256": "8621566ae2d7239bb7685bfdd628fd4db18da5014535878afab05d10a44b551c"
+    },
+    "replay-scope/run-7669181f/exploration/reopen/evidence.json": {
+      "bytes": 96011,
+      "sha256": "c91ce85e90bb699d34a5c67643ec209bd5812570b69bc8fe024a6311dbb88b25"
+    },
+    "replay-scope/run-7669181f/exploration/reopen/runtime.json": {
+      "bytes": 87428,
+      "sha256": "befa33db57b2b0aea6bdb6b06e57c4ac51b29221825155bcb858911e2354e6f4"
+    },
+    "replay-scope/run-7669181f/exploration/reopen/stdout.log": {
+      "bytes": 1600,
+      "sha256": "7b24f68566cc7e9f513f23b2016042b27909e276505532e8af5197523c5499e5"
+    },
+    "replay-scope/run-7669181f/exploration/reopen/stderr.log": {
+      "bytes": 2569,
+      "sha256": "6eae7f9fb4eca6e269f254fe767b1a59e34441a231b296af6e2f20bc0b7cc8e6"
+    },
+    "replay-scope/run-7669181f/exploration/project/project.azureproject": {
+      "bytes": 1701,
+      "sha256": "9a08677c134a508812554d85477364925a75a76048856c8de8afceffd796f259"
+    },
+    "replay-scope/run-7669181f/exploration/project/assets/exploration.azurelevel": {
+      "bytes": 22146,
+      "sha256": "e4a2f4c788fc75885b9e027fc1e06ccc6e400dbf9d927bfaa792d92e0934f1df"
+    },
+    "replay-scope/run-7669181f/inspector/edit/evidence.json": {
+      "bytes": 494154,
+      "sha256": "ec0a474966100e276ab0e05b1b540d60d1f182b05c86ef456a682f74eb663203"
+    },
+    "replay-scope/run-7669181f/inspector/edit/runtime.json": {
+      "bytes": 341394,
+      "sha256": "41353e285ec42d5295a6e1251144085f639c60be43367297cdacefc719162a2b"
+    },
+    "replay-scope/run-7669181f/inspector/edit/stdout.log": {
+      "bytes": 1565,
+      "sha256": "880134ee27d35678c43618d5978ce64b65b571a9867752d097b2680296082314"
+    },
+    "replay-scope/run-7669181f/inspector/edit/stderr.log": {
+      "bytes": 3925,
+      "sha256": "d14a948f84c4040b8831d54a958562d23072f864c264de03ccc7e384022016c5"
+    },
+    "replay-scope/run-7669181f/inspector/edit/mixed-edited-inspector.png": {
+      "bytes": 360313,
+      "sha256": "bc59b73d61c6528791e549f56f5d0238501928dff4e33d6c49e609b44c642510"
+    },
+    "replay-scope/run-7669181f/inspector/edit/mixed-values-inspector.png": {
+      "bytes": 340186,
+      "sha256": "460b82bc2b77873f74500e8db10de2f4f04913009244a4c453066c02897b0a49"
+    },
+    "replay-scope/run-7669181f/inspector/reopen/evidence.json": {
+      "bytes": 89918,
+      "sha256": "36058d2aa29220e82e3c086c7ef8fe8e747f219c24efb2f28a7a45145107a90e"
+    },
+    "replay-scope/run-7669181f/inspector/reopen/runtime.json": {
+      "bytes": 83817,
+      "sha256": "fb868a6d371ed962cb765d50cd73d73cf1e2468ad77cab2d76b79d1154ccba94"
+    },
+    "replay-scope/run-7669181f/inspector/reopen/stdout.log": {
+      "bytes": 1564,
+      "sha256": "dd24c9f858e5bbd8b26402c691bfabd8b7bb44089c9a1f80ecd527af14e9947e"
+    },
+    "replay-scope/run-7669181f/inspector/reopen/stderr.log": {
+      "bytes": 2249,
+      "sha256": "85301e66b45bb210f65e474a7a3c2c762ca64449cdf9e16fbb81d944a9ea27b6"
+    },
+    "replay-scope/run-7669181f/inspector/project/project.azureproject": {
+      "bytes": 721,
+      "sha256": "d04fe53ea867533b30bb1607dd0871a101bb1121efb72699bed7276a8bf13f51"
+    },
+    "replay-scope/run-7669181f/inspector/project/assets/inspection.azurelevel": {
+      "bytes": 8799,
+      "sha256": "26f3cd62c04aab129d93a581ac9c866f3e3c0a00b6160001633a6b097d39dd49"
+    }
+  },
+  "scope": "混合轴值、两目标写入范围、取消、撤销重做及保存重开",
+  "nextInvestigation": {
+    "status": "source-only hypothesis",
+    "source": [
+      "src/editor/properties/PropertyWidgets.cpp",
+      "src/editor/panels/InspectorPanel.cpp"
+    ],
+    "action": "持续拖动位置轴时按 Esc，检查数据与历史是否回到拖动开始状态",
+    "reason": "控件上报 cancelled 后面板调用 history.end-edit，需与引用拾取取消分开复现"
+  },
+  "physicalKeyboardMouse": false
+}

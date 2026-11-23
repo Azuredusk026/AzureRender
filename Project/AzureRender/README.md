@@ -1,5 +1,9 @@
 # AzureRender 工程
 
+[属性编辑与搜索集成](docs/acceptance/p0/2026-11-24-editor-property-search-integration.md)记录组合构建、双项目回放与待人工复验范围。
+
+[不可变像素载荷准备成本](docs/acceptance/nr/prepared-pixel-intern-cost.md)记录联合场景的配对计时。
+
 [材质组合候选准入决定](docs/acceptance/nr/material-combination-admission.md)记录材质工作量、程序容量及本轮淘汰依据。
 
 [联合场景主导成本归因](docs/acceptance/nr/mainline-joint-consumer-attribution.md)记录当前 GPU 阶段成本及材质组合候选的准入条件。
