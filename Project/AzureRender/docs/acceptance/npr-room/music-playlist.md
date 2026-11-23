@@ -46,7 +46,7 @@ python -B tools/npr_room/test_room_startup_player.py --player $player --project 
 恢复兼容容器后，可通过循环按钮重新保存。
 
 三个进程均加载 Vulkan 校验层，退出分配计数归零。
-检查覆盖当前默认音频设备，听感由现场复核。
+检查覆盖当前默认音频设备，听感为[待人工复验](manual-retest.md#音频设备与听感)。
 物理无设备及资源不可用恢复各自登记验收。
 [结构化结果](evidence/2026-11-21/music-preferences/verification.json)记录程序、着色器和输入摘要。
 [循环恢复画面](evidence/2026-11-21/music-preferences/repeat-restored.png)与[保存失败画面](evidence/2026-11-21/music-preferences/write-failed.png)保留可见状态。
@@ -67,7 +67,7 @@ python -B tools/npr_room/test_original_music_player.py --player $player --resour
 实体销毁与关卡替换释放所属音源。
 [测试证据](evidence/2026-11-21/offline-audio/verification.json)记录程序、源码及原创夹具身份。
 此证据适用于显式无设备模式。
-物理无设备的初始化回退和听感留待现场复核。
+物理无设备的初始化回退和听感为[待人工复验](manual-retest.md#音频设备与听感)。
 
 ## 公共音频资源重试
 

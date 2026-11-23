@@ -45,7 +45,7 @@ python -B tools/npr_room/test_room_startup_player.py --player $player --project 
 两次退出通过 Vulkan 校验，活动图像和缓冲归零。
 [结构化结果](evidence/2026-11-21/ambient-recovery/verification.json)记录程序与输入身份。
 [失败画面](evidence/2026-11-21/ambient-recovery/unavailable.png)及[恢复画面](evidence/2026-11-21/ambient-recovery/recovered.png)登记界面反馈。
-物理设备断开及听感留待现场复核。
+物理设备断开及听感为[待人工复验](manual-retest.md#音频设备与听感)。
 
 ## 偏好内容版本保护
 

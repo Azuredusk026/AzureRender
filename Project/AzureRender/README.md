@@ -22,6 +22,7 @@
 [待办退出恢复](docs/acceptance/npr-room/todo.md#待办退出恢复)覆盖草稿提交、重开及版本保护。
 [习惯名称退出恢复](docs/acceptance/npr-room/work-calendar.md#习惯名称退出恢复)覆盖未失焦输入和日历装配。
 [整合日历工时退出恢复](docs/acceptance/npr-room/work-calendar.md#整合日历工时退出恢复)验证生成宿主的保存生命周期。
+[房间人工复验](docs/acceptance/npr-room/manual-retest.md)登记设备、实体输入及屏幕待机的版本与步骤。
 [房间曲库](docs/acceptance/npr-room/music-playlist.md)与[环境声](docs/acceptance/npr-room/ambient-sound.md)记录原资产、播放控制和独立 Player 恢复。
 [开场书本布置](docs/acceptance/npr-room/opening-book-layout.md)记录房间道具、剧情临时状态和读档。
 [开场身体动作](docs/acceptance/npr-room/opening-body.md)记录原角色动作、转场和剧情入口。

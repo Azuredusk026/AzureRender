@@ -1,0 +1,54 @@
+{
+  "sourceCommit": "cf312cb",
+  "commands": [
+    {
+      "command": [
+        "python",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tools/npr_room",
+        "-p",
+        "test_*.py"
+      ],
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": "..........................................................................................................................................................................\n----------------------------------------------------------------------\nRan 170 tests in 1.625s\n\nOK\n"
+    },
+    {
+      "command": [
+        "python",
+        "-B",
+        "tools/npr_room/test_pomodoro_runtime.py",
+        "--lua",
+        "D:/Projects/FYP/Project/AzureRender/build/runs/20261120-010632-asset-parse-source-diagnostic-d884c7/player-release/lua.dll"
+      ],
+      "exitCode": 0,
+      "stdout": "Optional purchase cue failure preserves purchase, ambient activation and recovery\nTimer, room startup, tools, progression, story and platform fixture checks passed\n",
+      "stderr": ""
+    }
+  ],
+  "playerSHA256": "63c470d2752275f7ed72aa7fc1abb0d4fcfc2aeb550ed3dd3aa2e5bf61b70f58",
+  "native": {
+    "todo-exit": {
+      "reportSHA256": "f05056b5b4f1c7d1dbd702f387bba1d1a2b690d492f55656ab697110459cb947",
+      "independentPlayers": 5
+    },
+    "habit-exit": {
+      "reportSHA256": "6f5ff89879e6852d3816822557b91bb4095530e47d26006f1daf437f99e617d7",
+      "independentPlayers": 4
+    },
+    "integrated-calendar-exit": {
+      "reportSHA256": "9553d019d1442fb612c049db3daadfe33999db2cda4052cb436a4e8be5ffcfef",
+      "independentPlayers": 5
+    }
+  },
+  "independentPlayers": 14,
+  "reusedCoreEvidence": {
+    "path": "docs/acceptance/npr-room/evidence/2026-11-24/feedback-cue-failure/final-regression.json",
+    "sha256": "ff9206bf249b1ea947de448b508c5db5a1034c6df64e118e06b81cb1e2e164a9",
+    "coreSourceUnchangedSince": "ebce234"
+  }
+}

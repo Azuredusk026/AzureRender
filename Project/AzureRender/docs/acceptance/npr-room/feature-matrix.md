@@ -55,3 +55,5 @@ python -B -m unittest tools.npr_room.test_feature_matrix
 [原创曲库设置恢复](music-playlist.md#原创曲库设置恢复)记录循环、音量及静音重开和保存失败重试。
 
 [待办退出恢复](todo.md#待办退出恢复)、[习惯名称退出恢复](work-calendar.md#习惯名称退出恢复)及[整合工时退出恢复](work-calendar.md#整合日历工时退出恢复)记录原创项目的输入、保存和版本保护。
+
+[人工复验登记](manual-retest.md)保存版本、步骤、通过条件及已有自动证据。

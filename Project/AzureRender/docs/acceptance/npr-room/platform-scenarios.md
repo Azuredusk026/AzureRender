@@ -147,6 +147,9 @@ python -B tools/npr_room/test_room_window_player.py --player $player --project $
 
 本机证据位于 `platform-achievement-reference/window-preferences/display-sleep/`。
 
+实际屏幕待机为[待人工复验](manual-retest.md#屏幕待机)。
+该登记保存版本、步骤、通过条件及已有自动证据。
+
 | 记录 | SHA-256 |
 | --- | --- |
 | 原版 `ScreenSleepModeExtensions.cs` | `226dca8842d1375dc625c58ac08df66d18762d629b572783ffae348f9f22ead4` |
