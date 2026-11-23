@@ -40,3 +40,14 @@ python -B tools/npr_room/test_room_language_player.py --player $player --project
 python -B tools/npr_room/test_pomodoro_runtime.py --lua $luaLibrary
 ctest --test-dir $buildDir -R '^AzureEngine\.ProjectSaveStore$' --output-on-failure
 ```
+
+## 语言内容版本保护
+
+语言切换前核对当前存档内容版本。
+较新内容保持原字节和当前显示语言。
+恢复兼容内容后，可在原面板继续切换。
+
+队列 2390 用原创双语言文本验证两个 Player。
+内容版本 2 和 3 均得到保护，重开后可继续切换。
+两个进程通过 Vulkan 校验，退出图像和缓冲归零。
+[语言版本报告](evidence/2026-11-24/language-payload/verification.json)保留输入和结果。

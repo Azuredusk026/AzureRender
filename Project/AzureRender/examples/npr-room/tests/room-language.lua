@@ -57,6 +57,18 @@ assert(not language:update() and saved[2] == 7 and language:text(transcript) == 
 local reopened = new_room_language(config)
 assert(reopened:text(transcript) == transcript[7] and not visible["room-language-panel"])
 
+local future = {2, "future locale"}
+reset(future)
+language = new_room_language(config)
+actions = {["room-language-toggle"] = true}; language:update()
+actions = {["room-language-2"] = true}
+assert(not language:update() and saved == future, "Future language payload must remain intact")
+saved = {1,3}
+assert(language:update() and saved[1] == 1 and saved[2] == 2)
+future = {3, "external future locale"}; saved = future
+actions = {["room-language-1"] = true}
+assert(not language:update() and saved == future and language:text(transcript) == transcript[2])
+
 local locale, starts, asset = 2, 0, nil
 local function translate(value) return value[locale] end
 local audio = {}

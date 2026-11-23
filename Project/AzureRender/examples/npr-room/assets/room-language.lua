@@ -34,7 +34,10 @@ function new_room_language(config)
         if not open then return false end
         for index in ipairs(config.strings.language) do
             if host:pressed("room-language-" .. index) then
-                if index == selected or not host:try_write_save(slot, {1, index}) then return false end
+                if index == selected then return false end
+                local current = host:read_save(slot)
+                local future = type(current) == "table" and type(current[1]) == "number" and current[1] > 1
+                if future or not host:try_write_save(slot, {1, index}) then return false end
                 selected = index
                 updateButtons()
                 return true
