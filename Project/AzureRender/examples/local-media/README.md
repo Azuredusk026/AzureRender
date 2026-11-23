@@ -40,3 +40,6 @@ python -B tools/artifact_cleanup.py --finish $mediaRun
 损坏文件记录失败，其余合法文件继续处理。
 列表、失败状态和重开使用[运行时媒体契约](../../docs/runtime/local-media-service.md)。
 实体操作和听感按[人工复验登记](../../docs/acceptance/npr-room/manual-retest.md)记录。
+
+[活动导入检查](../../docs/acceptance/npr-room/platform-scenarios.md#活动媒体导入的取消与退出)覆盖取消与正常退出。
+自动回放确认暂存释放、源文件完整及重开后的导入能力。

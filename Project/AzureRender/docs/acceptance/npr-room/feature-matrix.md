@@ -61,3 +61,6 @@ python -B -m unittest tools.npr_room.test_feature_matrix
 [原创本地媒体](platform-scenarios.md#player-本地媒体入口)记录五种音乐与三种图片扩展名。
 原生选择、播放、图片像素、搬移、重开与版本保护通过。
 正式房间装配按用户恢复该范围后接续。
+
+[活动媒体导入](platform-scenarios.md#活动媒体导入的取消与退出)通过取消、正常退出及重开。
+未提交暂存、源文件字节、句柄和退出资源均通过检查。

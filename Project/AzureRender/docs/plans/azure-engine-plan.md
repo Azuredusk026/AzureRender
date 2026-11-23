@@ -1694,3 +1694,7 @@ M4A、AAC 与中文深目录图片路径通过定向修复及复测。
 [Player 本地媒体](../acceptance/npr-room/platform-scenarios.md#player-本地媒体入口)通过九个原生对话框及三个独立进程。
 五种音乐实际播放，图片像素、缓存修复、工程搬移与重开通过。
 继续导入过程中的取消和退出自动检查。
+
+[活动导入取消与退出](../acceptance/npr-room/platform-scenarios.md#活动媒体导入的取消与退出)通过三个独立 Player。
+96 MiB 输入保持未发布准备，取消与正常关闭均释放暂存。
+源字节、句柄及重开通过，接续原创媒体独立发布。
