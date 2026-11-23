@@ -231,3 +231,7 @@ function update()
         if taskDirection ~= 0 and target and saveEdits() then showTask(target[2][1]) end
     end
 end
+
+function shutdown()
+    if open then saveEdits() end
+end

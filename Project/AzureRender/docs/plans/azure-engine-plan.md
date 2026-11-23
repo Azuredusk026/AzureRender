@@ -1656,3 +1656,8 @@ Intel 头发颜色继续按冻结区域核对纹理选级。
 [投影头发主纹理层级](../acceptance/nr/projected-hair-point-mip.md)完成两配置、双设备和原始四帧专项回归。Intel 冻结 RGB 仍有 32 处超差，按原门槛继续验收。
 
 [原创曲库设置恢复](../acceptance/npr-room/music-playlist.md#原创曲库设置恢复)记录循环、音量及静音重开和保存失败重试。
+
+[待办退出恢复](../acceptance/npr-room/todo.md#待办退出恢复)通过五进程原创回放。
+标题、正文及日期沿公共退出生命周期提交，保留版本校验。
+人工音频复验仅在用户主动提出后安排。
+正式房间回归及 Steam 实机维持暂停。

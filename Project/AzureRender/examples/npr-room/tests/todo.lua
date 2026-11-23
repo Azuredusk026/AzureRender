@@ -114,3 +114,33 @@ assert(stored == future)
 stored = nil
 press("task-new")
 assert(stored[1] == 1 and #stored[3][1][3] == 1, "Task writes must recover in the same session")
+
+values["todo-list-title"] = "Exit list"
+values["todo-task-text"] = "Unsubmitted draft"
+values["todo-task-due"] = "2028-02-29"
+assert(type(shutdown) == "function", "An open task draft needs a shutdown handler")
+shutdown()
+assert(stored[3][1][2] == "Exit list" and stored[3][1][3][1][2] == "Unsubmitted draft")
+assert(stored[3][1][3][1][4] == "2028-02-29")
+
+values["todo-task-text"] = "Invalid date draft"
+values["todo-task-due"] = "2027-02-29"
+local committed = stored
+shutdown()
+assert(stored == committed and labels["todo-status"] ~= "", "Exit must validate the draft")
+values["todo-task-due"] = ""
+failed = true
+shutdown()
+assert(stored == committed and values["todo-task-text"] == "Invalid date draft")
+failed = false
+stored = {2, "future tasks on exit"}
+local protected = stored
+shutdown()
+assert(stored == protected, "Exit must preserve a newer task payload")
+stored = committed
+shutdown()
+assert(stored[3][1][3][1][2] == "Invalid date draft", "Exit retries the retained draft")
+press("toggle")
+committed = stored
+shutdown()
+assert(stored == committed, "A closed panel has no pending draft")

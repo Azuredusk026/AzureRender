@@ -55,3 +55,23 @@ python -B tools/npr_room/test_todo_player.py --player $player --project $todoRoo
 同进程恢复后保存草稿，重开后可继续操作。
 四次退出通过 Vulkan 校验，活动图像和缓冲归零。
 [工具版本报告](evidence/2026-11-21/room-tool-payload/verification.json)记录输入、版本和结果。
+
+## 待办退出恢复
+
+Player 正常关闭时，开放的待办面板提交当前草稿。
+标题、正文及到期日共用面板保存的校验和原子写入。
+无效日期、较新内容及较新外层版本保留已有档案。
+Lua 检查同时覆盖写入失败、保留输入及恢复后重试。
+
+队列 2410 在 `ebce234` 复现关窗后草稿缺失。
+队列 2413 通过五个原创 Player 进程。
+退出重开显示多行正文，并可继续编辑后退出保存。
+五次退出通过 Vulkan 校验，活动图像和缓冲归零。
+生产 Lua 全套及 170 项 Python 检查通过。
+[退出恢复报告](evidence/2026-11-24/todo-exit/verification.json)保存候选与夹具摘要。
+[基线存档](evidence/2026-11-24/todo-exit/baseline-save.json)保留首个失败结果。
+[草稿](evidence/2026-11-24/todo-exit/draft.png)及[重开画面](evidence/2026-11-24/todo-exit/restored.png)记录实际输入。
+
+```powershell
+python -B tools/npr_room/test_todo_exit_player.py --player $player --resources $resources --source examples/npr-room/assets/todo.lua --output $todoReplay
+```

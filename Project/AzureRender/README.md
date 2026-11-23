@@ -19,6 +19,7 @@
 [运行时主贴图与底色](docs/acceptance/npr-room/room-base-surfaces.md#运行时主贴图与底色)登记杯子图案、逐物件材质变体及原生重复回放。
 [原版变形道具](docs/acceptance/npr-room/character-assets.md#原版变形道具)登记漫画书、课本的骨骼装配及原生回放。
 [房间计时回放](docs/acceptance/npr-room/room-probe.md)记录原音效、计时输入和本地存档。
+[待办退出恢复](docs/acceptance/npr-room/todo.md#待办退出恢复)覆盖草稿提交、重开及版本保护。
 [房间曲库](docs/acceptance/npr-room/music-playlist.md)与[环境声](docs/acceptance/npr-room/ambient-sound.md)记录原资产、播放控制和独立 Player 恢复。
 [开场书本布置](docs/acceptance/npr-room/opening-book-layout.md)记录房间道具、剧情临时状态和读档。
 [开场身体动作](docs/acceptance/npr-room/opening-body.md)记录原角色动作、转场和剧情入口。
