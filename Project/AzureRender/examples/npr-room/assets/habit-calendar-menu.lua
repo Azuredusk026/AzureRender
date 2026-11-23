@@ -36,9 +36,13 @@ function new_habit_calendar_menu(host, habits, label, weekdayLabel)
         host:ui_text("calendar-habit-history-list", table.concat(names, "\n"))
     end
 
-    local function finishTitle()
-        if not open or not selectedId or not host:pressed("calendar-habit-save") then return nil end
-        local renamed = habits:rename(selectedId, host:ui_value("calendar-habit-title"))
+    local function finishTitle(force)
+        if not open or not selectedId or (not force and not host:pressed("calendar-habit-save")) then return nil end
+        local title = host:ui_value("calendar-habit-title")
+        local row = rows[activeIndex()]
+        if row and row[2] == title then return nil end
+        local renamed = habits:rename(selectedId, title)
+        if renamed and row then row[2] = title end
         host:ui_text("calendar-habit-status", renamed and "" or label("error", "Could not update the habit"))
         return renamed
     end
@@ -48,8 +52,12 @@ function new_habit_calendar_menu(host, habits, label, weekdayLabel)
         host:ui_visible("calendar-habit-confirm", value)
     end
 
+    function menu:save_open_title()
+        return finishTitle(true) ~= false
+    end
+
     function menu:close()
-        if finishTitle() == false then return false end
+        if not self:save_open_title() then return false end
         open = false
         displayedDate, displayedToday = nil, nil
         host:ui_visible("calendar-habit-editor", false)
@@ -69,6 +77,7 @@ function new_habit_calendar_menu(host, habits, label, weekdayLabel)
         local changed = finishTitle()
         if changed == false then return end
         if host:pressed("calendar-habits-toggle") then
+            if open and not self:save_open_title() then return end
             open = not open
             host:ui_visible("calendar-habit-editor", open)
             if open then redraw(date, today) end

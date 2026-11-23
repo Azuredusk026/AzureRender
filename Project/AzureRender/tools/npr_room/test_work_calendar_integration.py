@@ -27,6 +27,7 @@ class IntegratedCalendarTests(unittest.TestCase):
         self.assertIn("workCalendar:update_month_view(languageChanged or ", script)
         self.assertIn("workCalendar:close_month_view()", script)
         self.assertIn("workCalendar:save_open_diary()", script)
+        self.assertIn("workCalendar:save_open_habit()", script)
         self.assertIn('id="room-language-toggle"', markup)
         self.assertIn('id="calendar-next-month"', markup)
         self.assertIn('data-action="calendar-day-42"', markup)

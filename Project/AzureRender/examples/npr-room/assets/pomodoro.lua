@@ -360,6 +360,7 @@ function shutdown()
     if workCalendar then
         workCalendar:save_open_diary()
         workCalendar:save_open_work_time()
+        workCalendar:save_open_habit()
         workCalendar:flush()
     end
 end

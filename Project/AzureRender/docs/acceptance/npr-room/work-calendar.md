@@ -87,6 +87,8 @@ Lua 回归同时模拟界面先于关闭回调释放。
 
 ## 完整房间整合
 
+习惯名称的退出恢复见[专项验收](#习惯名称退出恢复)。
+
 候选 `room-tools-integrated` 集成工时修订、日记、习惯及计时音效偏好。装配从冻结房间保留角色、道具、剧情和音频。原素材通过共享文件引用，装配记录保存输入与输出摘要。
 
 任务 2125 在 1280×720 核对七语界面和共同存档。任务 2126、2127 将相同候选移至私有目录，以 1920×1080 和 1280×800 再验。六个 Player 进程均正常退出，图像与缓冲计数归零。每种尺寸记录七张语言画面和一张共同编辑画面。
@@ -102,6 +104,27 @@ Lua 回归同时模拟界面先于关闭回调释放。
 ```powershell
 python -B -m tools.npr_room.build_work_calendar --room $frozenRoom --output $calendarRoom --refresh-integrated $storyInventory
 python -B -m tools.npr_room.build_timer_sound_room --room $calendarRoom --output $integratedRoom --source $unitySource --inventory $referenceInventory --story-inventory $storyInventory
+```
+
+## 习惯名称退出恢复
+
+习惯名称在失焦、关闭习惯面板、关闭月历及正常退出时提交。
+菜单、日历和计时宿主共用习惯服务的保存校验。
+同名内容保持已有提交，失败时保留当前输入。
+关闭面板时写入失败，编辑器保持开放以便重试。
+独立脚本和日历装配入口均挂接退出保存。
+
+生产 Lua 复现未失焦名称在退出时缺失。
+队列 2425 使用四个原创 Player 进程验证恢复。
+重开显示原名称，关闭月历可保存继续编辑的名称。
+较新内容和较新外层版本均保留原字节。
+四次退出通过 Vulkan 校验，活动图像和缓冲归零。
+生产 Lua 全套及 170 项 Python 检查通过。
+[回放报告](evidence/2026-11-24/habit-exit/verification.json)记录模块及夹具摘要。
+[草稿](evidence/2026-11-24/habit-exit/draft.png)与[重开画面](evidence/2026-11-24/habit-exit/restored.png)记录真实界面。
+
+```powershell
+python -B tools/npr_room/test_habit_exit_player.py --player $player --resources $resources --source examples/npr-room/assets --output $habitReplay
 ```
 
 ## 回放

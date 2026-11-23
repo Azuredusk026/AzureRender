@@ -326,6 +326,10 @@ function new_work_calendar(translate)
         return true
     end
 
+    function calendar:save_open_habit()
+        return not habitMenu or habitMenu:save_open_title()
+    end
+
     function calendar:close_month_view()
         if not saveDiary() then return false end
         if not commitEditor() then return false end
