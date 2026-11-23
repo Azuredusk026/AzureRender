@@ -1168,3 +1168,5 @@ Intel 实际 Player 的完整可见量附件逐字节匹配固定输入的 `Prof
 [投影头发主纹理层级](docs/acceptance/nr/projected-hair-point-mip.md)记录可选材质路径及双设备生产回归。
 
 [原创曲库设置恢复](docs/acceptance/npr-room/music-playlist.md#原创曲库设置恢复)记录循环、音量及静音重开和保存失败重试。
+
+[原创交互恢复检查点](docs/plans/2026-11-18-npr-room-execution.md#2026-年-11-月-24-日检查点)记录可选语音、交谈、音乐及设置恢复。
