@@ -4116,7 +4116,7 @@ target_sources(AzureRenderHost PRIVATE src/app/ProjectCenterHost.cpp)
 if(WIN32)
     add_executable(AzureGameLauncher WIN32 src/launcher/main.cpp)
     set_property(TARGET AzureGameLauncher PROPERTY MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
-    target_link_libraries(AzureGameLauncher PRIVATE nlohmann_json::nlohmann_json shell32)
+    target_link_libraries(AzureGameLauncher PRIVATE nlohmann_json::nlohmann_json shell32 ole32 uuid)
     install(TARGETS AzureGameLauncher RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}")
 endif()
 

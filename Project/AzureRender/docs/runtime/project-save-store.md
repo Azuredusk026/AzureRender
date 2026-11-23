@@ -53,6 +53,10 @@ Windows 使用候选文件及带备份的替换操作。
 
 ## 验证
 
+原生游戏入口按[发布档案规则](game-publishing.md#原生入口的档案)选择存档根目录。
+直接 Player 和独立工具可显式传入根目录。
+项目身份与槽校验在各类宿主中保持一致。
+
 [媒体存档证据](../acceptance/npr-room/platform-scenarios.md#媒体存档前置契约)覆盖并发与兼容。
 本批实际执行范围为 Windows Release。
 探索工程与原创待办均通过真实 Player 重开检查。

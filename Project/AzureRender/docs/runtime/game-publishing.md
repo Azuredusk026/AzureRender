@@ -2,7 +2,7 @@
 
 > 文档类型：使用说明
 > 适用范围：Windows x64、Release、项目 Schema v1
-> 更新日期：2026-10-12
+> 更新日期：2026-11-24
 
 ## 创建与编辑
 
@@ -113,6 +113,35 @@ Monica 项目的入口为 `Monica.exe`。
 项目根目录可提供 `GAME-GUIDE.md` 与 `QUALITY.json`。构建复制这两份普通文件，并登记 SHA-256。质量说明的 `width` 与 `height` 为 1 至 8192 的整数。启动脚本使用该分辨率，命令行参数可覆盖它。
 
 探索项目的操作说明包含移动、相机、交互、任务和重开。质量说明包含四级 2048 阴影、完整材质与目标帧率。公开标准项目使用 100 实体、四角色与八灯。
+
+## 原生入口的档案
+
+原生游戏入口为 Player 选择持久档案根目录。
+根目录按以下优先级确定。
+项目存档再按项目身份隔离槽与媒体副本。
+包的目录移动保持档案身份。
+
+1. 启动参数 `--save-root` 指定的目录。
+2. 环境变量 `AZURERENDER_SAVE_ROOT` 指定的绝对目录。
+3. Windows 本地应用数据目录下的 `AzureRender/GameSaves`。
+
+环境变量为空时使用系统默认目录。
+相对环境路径在启动 Player 前返回失败。
+默认目录查询与只读启动保持存档目录原状。
+首次业务写入由项目存档服务创建所属目录。
+
+本机开发和自动回放显式指定 D 盘任务档案。
+发布入口接受中文、空格及显式目录覆盖。
+直接启动 `AzurePlayer.exe` 时，通过 `--save-root` 选择持久档案。
+契约与版本见[项目存档](project-save-store.md)。
+
+```powershell
+$env:AZURERENDER_SAVE_ROOT = "D:/Games/Profiles"
+& "D:/Delivery/MyGame/MyGame.exe"
+& "D:/Delivery/MyGame/MyGame.exe" --save-root "D:/Games/AlternativeProfile"
+```
+
+[原生档案证据](../acceptance/npr-room/platform-scenarios.md#原生启动器项目档案)记录真实入口与恢复结果。
 
 ## 验收与能力边界
 
