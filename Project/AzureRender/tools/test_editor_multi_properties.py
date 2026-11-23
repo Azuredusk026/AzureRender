@@ -51,6 +51,18 @@ def check_drag_cancel(host, workflow):
     assert after["undoCount"] == initial["undoCount"], "Cancelled drag must discard its undo entry"
     assert after["dirty"] == initial["dirty"]
     drag()
+    assert host.query("document.contentHash") != before
+    host.call("input", event={"action": "focus", "focused": False})
+    host.frames()
+    assert host.query("document.contentHash") == before, "Focus loss must cancel the active numeric drag"
+    lost = host.workspace()
+    for field in ("selection", "undoCount", "dirty"):
+        assert lost[field] == initial[field]
+    host.call("input", event={"action": "focus", "focused": True})
+    host.frames()
+    release()
+    assert host.query("document.contentHash") == before
+    drag()
     release()
     committed = host.query("document.contentHash")
     assert committed != before
@@ -289,6 +301,7 @@ def run_case(executable, output, workflow):
             "axisPreservesMixedYZ": True, "singleObjectControlsDisabled": True,
             "referenceEscapeAndFocusCancel": True, "referenceCapturedOwners": True,
             "addComponentSearchAndSave": True, "inspectorSearchAndClear": True,
+            "dragFocusLossCancels": True,
             "undoRedo": True, "saveReopen": True, "physicalInput": False}
 
 

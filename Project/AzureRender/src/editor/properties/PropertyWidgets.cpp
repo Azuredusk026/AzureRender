@@ -12,7 +12,9 @@ PropertyEditEvent propertyEditor(const reflection::Property& field,const nlohman
     ImGui::SetNextItemWidth(-1);
     const auto sample=[&]{
         result.began=result.began||ImGui::IsItemActivated();result.ended=result.ended||ImGui::IsItemDeactivatedAfterEdit();
-        if((ImGui::IsItemActive()||ImGui::IsItemDeactivated())&&ImGui::IsKeyPressed(ImGuiKey_Escape,false)) {
+        // Losing window focus clears mouse state, which also deactivates a drag.
+        const bool interrupted=ImGui::GetIO().AppFocusLost||ImGui::IsKeyPressed(ImGuiKey_Escape,false);
+        if(interrupted&&(ImGui::IsItemActive()||ImGui::IsItemDeactivated())) {
             result.cancelled=true;ImGui::ClearActiveID();
         }
     };

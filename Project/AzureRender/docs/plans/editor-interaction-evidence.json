@@ -231,6 +231,20 @@
     "archiveSha256": "ff997945b8ffc7fa949a7647dade9b5aef6562f98721c349cdb044848fc4667d",
     "physicalInput": false
   },
+  "propertyDragFocus20261124": {
+    "productionBaseline": "191d7a1",
+    "configuration": "Release",
+    "dispatch": [2405, 2411],
+    "baselineExpectedFailure": true,
+    "candidateExecutableSha256": "e2cdfbab6e3a150e8659fe4ccd738184a4f1d8641ae8412a1167023775f917c4",
+    "cpuCasesPassed": 5,
+    "workflowsPassed": ["exploration", "inspector"],
+    "results": "editor-property-focus-2026-11-24/results.json",
+    "resultsSha256": "274f043793696fd1714cb0c435bce0fb38ff6d285fdcea01079ab430f794da54",
+    "archive": "editor-property-focus-2026-11-24/verification.zip",
+    "archiveSha256": "32629de997712e00535d08659fae063bcf26c6dbc3b19e2ad14149ef2e6829f2",
+    "physicalInput": false
+  },
   "referenceSearch20261119": {
     "productionBaseline": "4e07fef",
     "configuration": "Release",
