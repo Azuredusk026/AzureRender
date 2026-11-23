@@ -1,0 +1,114 @@
+{
+  "sourceCommit": "2b2b007",
+  "status": "actual-player-input-and-reopen-passed",
+  "programs": {
+    "release": {
+      "AzurePlayer.exe": "1627ae067d943e5930620f89641d008ed8dc34483863f4cc0a4c727e0f6b3661",
+      "AzureProjectedReflectionCameraGpuTests.exe": "79f40a29ef42f12a1cfc054e8f9939027f939a77a2e4669238e094a85b884f8d",
+      "AzureMaterialDisplayViewGpuTests.exe": "cb5b697619ba450f9582614dd2a07475addf00d5391ca3ab93ba60272ed2e7c5",
+      "projected_reflection_trace.comp.spv": "01e00f4b63d38c2d0f217c530d809086ac205369752b5b2df0551052e28d2109"
+    },
+    "debug": {
+      "AzurePlayer.exe": "8c21db30330e085a17604dde1d8f0939b21498816c8a5d70c67ffa8653eee29d",
+      "AzureProjectedReflectionCameraGpuTests.exe": "f917730996a5d4cc45b28fd824f005a8ed522633cd5b1460149e058accec6f08",
+      "AzureMaterialDisplayViewGpuTests.exe": "c6468e0dfcfad99dd6c51540cadd7e13edcf712835f66e7e036023d48a59704d",
+      "projected_reflection_trace.comp.spv": "01e00f4b63d38c2d0f217c530d809086ac205369752b5b2df0551052e28d2109"
+    }
+  },
+  "sameProject": [
+    {
+      "config": "release",
+      "device": "nvidia",
+      "project": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261124-022300-nr-final-regression-c3902c\\release-nvidia-first\\project.azureproject",
+      "exactFrames": 12,
+      "initialState": false,
+      "finalState": true
+    },
+    {
+      "config": "release",
+      "device": "intel",
+      "project": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261124-022300-nr-final-regression-c3902c\\release-intel-first\\project.azureproject",
+      "exactFrames": 12,
+      "initialState": false,
+      "finalState": true
+    },
+    {
+      "config": "debug",
+      "device": "nvidia",
+      "project": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261124-022300-nr-final-regression-c3902c\\debug-nvidia-first\\project.azureproject",
+      "exactFrames": 12,
+      "initialState": false,
+      "finalState": true
+    },
+    {
+      "config": "debug",
+      "device": "intel",
+      "project": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261124-022300-nr-final-regression-c3902c\\debug-intel-first\\project.azureproject",
+      "exactFrames": 12,
+      "initialState": false,
+      "finalState": true
+    }
+  ],
+  "launches": [
+    {
+      "config": "release",
+      "device": "nvidia",
+      "attempt": "first",
+      "minSignal": 0.5455616425167494,
+      "exactFramesOnReopen": 0
+    },
+    {
+      "config": "release",
+      "device": "nvidia",
+      "attempt": "reopen",
+      "minSignal": 0.5455616425167494,
+      "exactFramesOnReopen": 12
+    },
+    {
+      "config": "release",
+      "device": "intel",
+      "attempt": "first",
+      "minSignal": 0.5456301616509569,
+      "exactFramesOnReopen": 0
+    },
+    {
+      "config": "release",
+      "device": "intel",
+      "attempt": "reopen",
+      "minSignal": 0.5456301616509569,
+      "exactFramesOnReopen": 12
+    },
+    {
+      "config": "debug",
+      "device": "nvidia",
+      "attempt": "first",
+      "minSignal": 0.5455616425167494,
+      "exactFramesOnReopen": 0
+    },
+    {
+      "config": "debug",
+      "device": "nvidia",
+      "attempt": "reopen",
+      "minSignal": 0.5455616425167494,
+      "exactFramesOnReopen": 12
+    },
+    {
+      "config": "debug",
+      "device": "intel",
+      "attempt": "first",
+      "minSignal": 0.5456301616509569,
+      "exactFramesOnReopen": 0
+    },
+    {
+      "config": "debug",
+      "device": "intel",
+      "attempt": "reopen",
+      "minSignal": 0.5456301616509569,
+      "exactFramesOnReopen": 12
+    }
+  ],
+  "sourceArchive": {
+    "path": "../final-original-reflection/validation.zip",
+    "sha256": "1df559da04c9d631a12f77dd354642c01e3adc986f41430c8f5ae974b2bd9f61"
+  }
+}
