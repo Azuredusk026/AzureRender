@@ -37,6 +37,13 @@ float trackedMotionAcceptance(float4 motion,float2 previousUv,float depth){
     if(motion.w>-1&&motion.w<0)return 1+motion.w;
     return 0;
 }
+float3 reflectionHistoryWorld(float2 uv,float depth,float4 columns[4]){
+    float2 clip=mad(uv,2,-1);
+    if(footprintConfig.w<=.5)clip.y=-clip.y;
+    float4 world=mad(columns[0],clip.x,columns[1]*clip.y);
+    world=mad(columns[2],depth,world)+columns[3];
+    return world.xyz/world.w;
+}
 [numthreads(8,8,1)] void main(uint3 group:SV_GroupID,uint3 thread:SV_GroupThreadID){
 uint4 r0,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12,r13;
 uint packedTile=worklist[group.x];uint2 outputPixel=uint2(packedTile>>16,packedTile&65535u)*8+thread.xy;
@@ -250,7 +257,27 @@ float4 v190=max(asfloat(r1.yyyy),asfloat(uint4(0x3e800000u,0x3e800000u,0x3e80000
 uint4 v191=uint4((asfloat(r1.yyyy))<(asfloat(r1.wwww)))*0xffffffffu;r1.y=v191.y;
 uint4 v192=((r1.yyyy)!=uint4(0,0,0,0)?uint4(0x00000000u,0x00000000u,0x00000000u,0x00000000u):r0.wwww);r1.y=v192.y;
 uint4 v193=((r1.zzzz)!=uint4(0,0,0,0)?r1.yyyy:r0.wwww);r1.x=v193.x;
-if(historyConfig.w>.5&&historyConfig.z<1){float acceptance=trackedMotionAcceptance(v154.yzxw,asfloat(r2.xy),v167.y);r1.x=asuint(asfloat(r1.x)*acceptance);}
+if(historyConfig.w>.5&&historyConfig.z<1){
+    float4 trackedMotion=v154.yzxw;
+    float2 priorUv=asfloat(r2.xy);
+    float acceptance=trackedMotionAcceptance(trackedMotion,priorUv,v167.y);
+    // A fully tracked moving surface supplies its previous device depth.
+    if(historyConfig.z==0&&acceptance==1&&trackedMotion.w==1&&r1.x==0u&&asfloat(r0.w)>0
+        &&any(abs(trackedMotion.xy)>sourceSize.zw)){
+        float2 hitUv=asfloat(r8.xy);
+        float hitDepth=currentDepth.SampleLevel(pointSampler,hitUv,0).x;
+        float3 surface=reflectionHistoryWorld(hitUv,hitDepth,clipToWorld);
+        float maxError=max(.25,.01*v182.y*v182.y);
+        float expectedDepth=1-trackedMotion.z;
+        float3 expected=reflectionHistoryWorld(priorUv,expectedDepth,previousClipToWorld);
+        float3 spanX=reflectionHistoryWorld(priorUv+float2(traceSize.z,0),expectedDepth,previousClipToWorld)-expected;
+        float3 spanY=reflectionHistoryWorld(priorUv+float2(0,traceSize.w),expectedDepth,previousClipToWorld)-expected;
+        float priorTolerance=min(maxError,max(length(spanX),length(spanY)));
+        if(hitDepth>0&&expectedDepth>0&&length(surface-v184.xyz)<=maxError
+            &&length(expected-v183.xyz)<=priorTolerance)r1.x=r0.w;
+    }
+    r1.x=asuint(asfloat(r1.x)*acceptance);
+}
 }else{
 uint4 v195=uint4(0x00000000u,0x00000000u,0x00000000u,0x00000000u);r2.zw=v195.zw;
 uint4 v196=uint4(0x00000000u,0x00000000u,0x00000000u,0x00000000u);r1.x=v196.x;

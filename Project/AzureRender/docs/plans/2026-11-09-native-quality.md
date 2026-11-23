@@ -446,3 +446,8 @@ NVIDIA 头发区域与图集单项对照在一字节内一致。
 [检修站边缘历史拒绝](../acceptance/nr/evidence/2026-11-21/original-history-edge-rejection/README.md)闭合倾斜路径的单点差异。
 87 个命中包含 86 个有效历史接收和一次背景拒绝。
 世界位置误差约 4.092 米，原拒绝门槛保持有效。
+
+[运动反射生产接入](../acceptance/nr/evidence/2026-11-24/motion-history-production/README.md)通过主配置与实际 Player 配对。
+按 F 的第 4 帧恢复反射，无输入十二帧精确一致。
+动态、法线及双配置回归见[接入计划](../plans/2026-11-24-original-reflection-production.md)。
+匹配参考输入及 592.82 四帧按用户授权延期。

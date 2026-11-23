@@ -24,8 +24,8 @@ def main():
     try:
         cases=[('positive',True),('wide-edge',True),('history-static',True),('nonfinite-motion',True)]
         if args.motion_contract:
-            cases=[('history-response-tracked',True),('history-response-assumed',True),('history-response-cutout',True),('history-response-partial',True),('response-current',True),('history-offset',True),('history-wrong-offset',False)]
-            cases.extend((name,False) for name in ('history-response-background','history-response-missing','history-response-reactive','history-response-nonfinite','history-response-depth','history-response-zero-depth','history-response-outside'))
+            cases=[('history-response-tracked',True),('history-response-moving',True),('history-response-assumed',True),('history-response-cutout',True),('history-response-partial',True),('response-current',True),('history-offset',True),('history-wrong-offset',False)]
+            cases.extend((name,False) for name in ('history-response-moving-depth','history-response-background','history-response-missing','history-response-reactive','history-response-nonfinite','history-response-depth','history-response-zero-depth','history-response-outside'))
         elif args.composition:cases.extend([('history-tinted',True),('history-shifted',True),('history-wrong-pose',False),('history-disoccluded',False)])
         else:cases.extend([('wrong-convention',False),('wrong-motion',False)])
         for mode,success in cases:
@@ -74,7 +74,7 @@ def main():
                 assert all((run/mode/name).read_bytes()==(run/'history-response-tracked'/name).read_bytes() for name in ('0.bin','1.bin'))
                 ratios.append(dict(mode=mode,expectedAcceptance=.25,maximumUnormByteError=maximum,colorExact=True,footprintExact=True))
             assert all((run/'history-response-assumed'/name).read_bytes()==(run/'history-response-tracked'/name).read_bytes() for name in ('0.bin','1.bin','2.bin'))
-            for mode in ('history-response-background','history-response-missing','history-response-reactive','history-response-nonfinite','history-response-depth','history-response-zero-depth','history-response-outside'):
+            for mode in ('history-response-moving-depth','history-response-background','history-response-missing','history-response-reactive','history-response-nonfinite','history-response-depth','history-response-zero-depth','history-response-outside'):
                 assert not any((run/mode/'2.bin').read_bytes()),mode
             report['motionResponse']=dict(ratios=ratios,defaultPolicyControlExact=True,invalidConfidenceAllZero=True,partialBlendRejected=True)
         else:

@@ -30,7 +30,7 @@ int main(int argc,char** argv)try{
     const auto output=std::filesystem::absolute(std::filesystem::u8path(args[2]));
     if(!std::filesystem::create_directory(output))throw std::runtime_error("Expected a new output directory");
     const auto& mode=args[3];const std::set<std::string> modes{"positive","wide-edge","history-static","nonfinite-motion","wrong-convention","wrong-motion","history-tinted","history-shifted","history-wrong-pose","history-disoccluded",
-        "history-response-tracked","history-response-assumed","history-response-cutout","history-response-partial","history-response-background","history-response-missing","history-response-reactive","history-response-nonfinite","history-response-depth","history-response-zero-depth","history-response-outside","history-response-mixed","response-current","history-offset","history-wrong-offset",
+        "history-response-tracked","history-response-moving","history-response-moving-depth","history-response-assumed","history-response-cutout","history-response-partial","history-response-background","history-response-missing","history-response-reactive","history-response-nonfinite","history-response-depth","history-response-zero-depth","history-response-outside","history-response-mixed","response-current","history-offset","history-wrong-offset",
         "history-alpha-layer","history-alpha-layer-empty","history-alpha-layer-reference"};
     if(!modes.count(mode))throw std::runtime_error("Unknown physical mirror mode");
     const bool response=mode.rfind("history-response-",0)==0,offset=mode=="history-offset"||mode=="history-wrong-offset";
@@ -44,7 +44,8 @@ int main(int argc,char** argv)try{
     constexpr unsigned width=640,height=480,traceWidth=320,traceHeight=240;
     ReflectionTraceView camera;camera.projection=internal::perspective(3.14159265358979323846F/3,float(width)/height,.1F,1000.F);
     camera.worldToClip=camera.projection;camera.right={1,0,0};camera.up={0,1,0};camera.forward={0,0,-1};
-    auto previousCamera=camera;if(shifted)previousCamera.position[0]=5;
+    const bool moving=mode=="history-response-moving"||mode=="history-response-moving-depth";
+    auto previousCamera=camera;if(shifted||moving)previousCamera.position[0]=5;
     auto declaredPrevious=previousCamera;if(mode=="history-wrong-pose")declaredPrevious.position[0]=0;
     auto view=projectedReflectionView(camera,historyUsed?&declaredPrevious:nullptr);
     ProjectedReflectionSettings settings;settings.maxSteps=64;settings.motionBlend=1;settings.motionEncoding=ProjectedReflectionMotionEncoding::LinearUv;
@@ -66,7 +67,7 @@ int main(int argc,char** argv)try{
         const bool lowerWall=(y+.5F)/height>.5F;
         scene[i]=value[1]>0?0.F:lowerWall?1.F:0.F;scene[i+1]=value[1]>0||lowerWall?0.F:1.F;scene[i+2]=value[1]>0?1.F:0.F;scene[i+3]=1;
         snapshot[i]=value[0];snapshot[i+1]=value[1]>0?.5F+.04F/1.08F:.5F;snapshot[i+2]=value[1]>0?1.F:.5F;snapshot[i+3]=value[1]>0?.15F:1.F;
-        if(shifted)motion[i]=5*camera.projection[0]/(2*value[0]);
+        if(shifted||moving)motion[i]=(moving?.5F:5.F)*camera.projection[0]/(2*value[0]);
         if(offset)motion[i]-=.125F;
         if(response){motion[i+2]=1.F-(1.F/value[0]-view.depthReciprocal[1])/view.depthReciprocal[0];motion[i+3]=1;
             if(mode=="history-response-assumed"||mode=="history-response-background"||mode=="history-response-mixed")motion[i+3]=0;
@@ -76,6 +77,7 @@ int main(int argc,char** argv)try{
             if(mode=="history-response-reactive")motion[i+3]=-2;
             if(mode=="history-response-nonfinite")motion[i+3]=std::numeric_limits<float>::quiet_NaN();
             if(mode=="history-response-depth")motion[i+2]=-.1F;
+            if(mode=="history-response-moving-depth")motion[i+2]=1.F-(1.F-view.depthReciprocal[1])/view.depthReciprocal[0];
             if(mode=="history-response-outside")motion[i]=1;
         }}
     for(unsigned y=0;y<traceHeight;++y)for(unsigned x=0;x<traceWidth;++x){const auto value=surface((y+.5F)/traceHeight);const auto i=y*traceWidth+x;
