@@ -7,6 +7,7 @@ function source:set(_, key, value)
     selected = value
 end
 function source:audio_play() starts, cursor, playing = starts + 1, 0, true end
+function source:try_audio_play() self:audio_play(); return true end
 function source:audio_playing() return playing end
 function source:audio_position() return cursor end
 self = {}

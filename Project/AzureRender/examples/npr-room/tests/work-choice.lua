@@ -4,6 +4,7 @@ local starts = 0
 local source = {}
 function source:set(_, key, value) assert(key == "asset"); asset = value end
 function source:audio_play() starts, position, playing = starts + 1, 0, true end
+function source:try_audio_play() self:audio_play(); return true end
 function source:audio_playing() return playing end
 function source:audio_position() return position end
 self = {}

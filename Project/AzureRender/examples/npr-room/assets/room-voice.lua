@@ -3,7 +3,7 @@ function new_room_voice(translate)
     local timer = self
     local source = assert(timer:find("room-voice"))
     local remaining = {}
-    local current, last, delay, hold
+    local current, last, delay, hold, fallback
     local visible = true
 
     local function selectResponse()
@@ -20,11 +20,12 @@ function new_room_voice(translate)
         last = table.remove(remaining)
         current = responses[last]
         delay = current[4]
+        fallback = nil
     end
 
     local function start()
         source:set("azure.audio-source", "asset", current[1])
-        source:audio_play()
+        if not source:try_audio_play() then fallback = current[3] end
         timer:ui_text("room-voice-line", translate(current[2]))
         timer:ui_visible("room-voice-caption", true)
     end
@@ -46,6 +47,9 @@ function new_room_voice(translate)
                 current, hold = nil, nil
                 timer:ui_visible("room-voice-caption", false)
             end
+        elseif fallback then
+            fallback = math.max(0, fallback - dt)
+            if fallback == 0 then fallback, hold = nil, current[5] end
         elseif not source:audio_playing() and source:audio_position() >= current[3] then
             hold = current[5]
         end

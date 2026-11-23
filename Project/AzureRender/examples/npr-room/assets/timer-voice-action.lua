@@ -12,7 +12,7 @@ function new_timer_voice_action(program, setMotion, translate)
 
     local function startVoice()
         audio:set("azure.audio-source", "asset", action.line.asset)
-        audio:audio_play()
+        action.voiceFailed = not audio:try_audio_play()
         action.voice = "starting"
         action.voiceElapsed = 0
         showLine()
@@ -67,7 +67,8 @@ function new_timer_voice_action(program, setMotion, translate)
         elseif action.voice == "playing" then
             if languageChanged then showLine() end
             action.voiceElapsed = action.voiceElapsed + dt
-            local complete = not audio:audio_playing() and audio:audio_position() >= action.line.seconds
+            local complete = action.voiceFailed and action.voiceElapsed >= action.line.seconds
+                or not action.voiceFailed and not audio:audio_playing() and audio:audio_position() >= action.line.seconds
             if complete or action.voiceElapsed >= 30 then
                 if not complete then audio:audio_stop() end
                 action.voice = "finished"

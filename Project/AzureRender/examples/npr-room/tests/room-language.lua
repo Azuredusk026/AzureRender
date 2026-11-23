@@ -62,6 +62,7 @@ local function translate(value) return value[locale] end
 local audio = {}
 function audio:set(_, property, value) assert(property == "asset"); asset = value end
 function audio:audio_play() starts = starts + 1 end
+function audio:try_audio_play() self:audio_play(); return true end
 function audio:audio_playing() return true end
 function self:find(id)
     assert(id == "room-voice" or id == "room-choice-voice")

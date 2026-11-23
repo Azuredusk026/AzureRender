@@ -67,6 +67,7 @@ local source = {
         assert(component == "azure.audio-source" and key == "asset" and value == voice.asset)
     end,
     audio_play = function() starts = starts + 1 end,
+    try_audio_play = function() starts = starts + 1; return true end,
     audio_stop = function() stops = stops + 1 end,
     audio_playing = function() return false end,
     audio_position = function() return 0 end,

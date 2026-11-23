@@ -173,3 +173,17 @@ python -B tools/npr_room/test_room_startup_player.py --player $player --project 
 两次恢复均在同一进程完成，选项 C 在重开后保留。
 两个进程通过 Vulkan 校验，退出分配归零。
 [音效内容版本报告](evidence/2026-11-21/timer-sound-payload/verification.json)记录版本与结果。
+
+## 可选语音时间线恢复
+
+房间交谈和工后选择在语音失败时按声明时长显示字幕。
+计时语音同时遵守现行三十秒上限。
+失败后的下一次播放重新尝试当前音源。
+字幕、选项和动作顺序继续由所属控制器维护。
+
+队列 2380 使用原创文本、选项和测试音验证两个 Player。
+损坏语音期间，交谈和计时字幕完成，工后选项可保存。
+重开后可继续响应选项，修复音频后四次播放成功。
+三个时间线各完成两次，工后检查点回到空闲状态。
+两个进程通过 Vulkan 校验，退出图像和缓冲归零。
+[可选语音报告](evidence/2026-11-24/optional-voice-recovery/verification.json)记录脚本和结果。

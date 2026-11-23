@@ -8,7 +8,7 @@ function new_work_choice(random, translate)
     local worked, available, probability = 0, 0, 0
     local episode, stage, selected = 0, 0, 0
     local lineup, last = {}, nil
-    local line, delay, hold
+    local line, delay, hold, fallback
     local controller = {}
 
     local function checkpoint()
@@ -17,7 +17,7 @@ function new_work_choice(random, translate)
     end
 
     local function playLine(value)
-        line, delay, hold = value, value[4], nil
+        line, delay, hold, fallback = value, value[4], nil, nil
         timer:ui_visible("room-choice-options", false)
         timer:ui_visible("room-choice-caption", false)
     end
@@ -90,7 +90,7 @@ function new_work_choice(random, translate)
             if delay <= 0 then
                 delay = nil
                 voice:set("azure.audio-source", "asset", line[1])
-                voice:audio_play()
+                if not voice:try_audio_play() then fallback = line[3] end
                 timer:ui_text("room-choice-line", translate(line[2]))
                 timer:ui_visible("room-choice-caption", true)
             end
@@ -107,6 +107,9 @@ function new_work_choice(random, translate)
                     timer:ui_visible("room-choice-caption", false)
                 end
             end
+        elseif fallback then
+            fallback = math.max(0, fallback - dt)
+            if fallback == 0 then fallback, hold = nil, line[5] end
         elseif not voice:audio_playing() and voice:audio_position() >= line[3] then
             hold = line[5]
         end
