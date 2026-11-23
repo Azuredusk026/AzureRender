@@ -1,0 +1,197 @@
+{
+  "source": "9baa14fb128f65b57d90da356c89f3c01c651b8d",
+  "executableSha256": "e2cdfbab6e3a150e8659fe4ccd738184a4f1d8641ae8412a1167023775f917c4",
+  "configuration": "Release",
+  "physicalInput": false,
+  "checks": [
+    {
+      "name": "reference-search",
+      "exitCode": 0,
+      "seconds": 28.266,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-B",
+        "D:\\Projects\\FYP-worktrees\\editor-interaction\\Project\\AzureRender\\tools\\test_editor_reference_search.py",
+        "--executable",
+        "D:\\Projects\\FYP-worktrees\\editor-interaction\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureRender.exe",
+        "--output",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261124-021505-editor-interaction-regression-db041f\\reference-search"
+      ]
+    },
+    {
+      "name": "viewport-workflow",
+      "exitCode": 0,
+      "seconds": 58.828,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-B",
+        "D:\\Projects\\FYP-worktrees\\editor-interaction\\Project\\AzureRender\\tools\\test_editor_usability.py",
+        "--executable",
+        "D:\\Projects\\FYP-worktrees\\editor-interaction\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureRender.exe",
+        "--output",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261124-021505-editor-interaction-regression-db041f\\viewport-workflow"
+      ]
+    },
+    {
+      "name": "document-recovery",
+      "exitCode": 0,
+      "seconds": 56.672,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-B",
+        "D:\\Projects\\FYP-worktrees\\editor-interaction\\Project\\AzureRender\\tools\\test_editor_document_guard.py",
+        "--executable",
+        "D:\\Projects\\FYP-worktrees\\editor-interaction\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureRender.exe",
+        "--output",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261124-021505-editor-interaction-regression-db041f\\document-recovery"
+      ]
+    },
+    {
+      "name": "view-modes",
+      "exitCode": 0,
+      "seconds": 24.609,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-B",
+        "D:\\Projects\\FYP-worktrees\\editor-interaction\\Project\\AzureRender\\tools\\test_editor_view_modes.py",
+        "--executable",
+        "D:\\Projects\\FYP-worktrees\\editor-interaction\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureRender.exe",
+        "--output",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261124-021505-editor-interaction-regression-db041f\\view-modes"
+      ]
+    }
+  ],
+  "dispatch": 2418,
+  "reusedBuildDispatch": 2411,
+  "cpuCasesPassed": 5,
+  "viewportProjects": 2,
+  "documentRecoveryCases": 6,
+  "referenceProjects": 2,
+  "viewModes": {
+    "modeSwitch": true,
+    "keyRoute": true,
+    "restored": true,
+    "savedSceneUnchanged": true,
+    "playUsesSceneMode": true,
+    "stopRestoresSelectionAndCamera": true,
+    "auxiliaryPreservesSceneMode": true,
+    "namedProjectModeSaveAndReset": true
+  },
+  "integration": {
+    "mainline": "72c8129f50f435ceea1dc32a3a9c1b3a110d058a",
+    "implementation": "9baa14fb128f65b57d90da356c89f3c01c651b8d",
+    "sourceAnchor": "5d4cf7d",
+    "productionPaths": [
+      "Project/AzureRender/src/editor/commands/EditService.cpp",
+      "Project/AzureRender/src/editor/commands/EditService.hpp",
+      "Project/AzureRender/src/editor/commands/EditorOperations.cpp",
+      "Project/AzureRender/src/editor/panels/CorePanels.hpp",
+      "Project/AzureRender/src/editor/panels/InspectorPanel.cpp",
+      "Project/AzureRender/src/editor/properties/PropertyWidgets.cpp",
+      "Project/AzureRender/src/ui/localization/Catalog.inc"
+    ],
+    "mainlineLocalMatches": [],
+    "patchSha256": "1b7f1daa7d81dd066713d8fc71ded91dbad5c3a2514859f2466eac29989eb066",
+    "applyExitCode": 0,
+    "applyOutput": ""
+  },
+  "archiveSha256": "550b7dc847a3601e05226c9cc0024ebe386b7d1beba9258b2c5a6d5d9737dada",
+  "files": [
+    {
+      "path": "check_integration.py",
+      "sha256": "e14308e98228e1b90a682d7c4d049dbaf5a89cf988b64f5d49ff5fe444a9f037"
+    },
+    {
+      "path": "checks.json",
+      "sha256": "aac3b98776e0c16944b75ee0fea9ce60b63df84dfa8cf6720ee2bd562b908c08"
+    },
+    {
+      "path": "document-recovery/run-1795458095556432600/exploration-discard/control-results.json",
+      "sha256": "5e59528f94ef5fb8c5b6e60fd204fdf9e782d4eec6c5a54d3d19ec1d5d9c5309"
+    },
+    {
+      "path": "document-recovery/run-1795458095556432600/exploration-failure/control-results.json",
+      "sha256": "5b7557836efff4f0f5c6d1a52b9d602546db8e46291eb93c6b8b152f5d9870af"
+    },
+    {
+      "path": "document-recovery/run-1795458095556432600/exploration-save/control-results.json",
+      "sha256": "d877f12dbe1304a8d70b3e848e0dd9b934507b4150b3c8184be43309911c89c3"
+    },
+    {
+      "path": "document-recovery/run-1795458095556432600/inspector-discard/control-results.json",
+      "sha256": "d2b3b35ed12a154f1a285f94200a68ba37a162d52615ec0c34a8a09bcbe62dde"
+    },
+    {
+      "path": "document-recovery/run-1795458095556432600/inspector-failure/control-results.json",
+      "sha256": "66340a889296e3cb4542f88efdc39e7e90d4b12c711e4d49bf716c935dea0f67"
+    },
+    {
+      "path": "document-recovery/run-1795458095556432600/inspector-save/control-results.json",
+      "sha256": "ead2c4dd55a0cd5f77bc63a2c1192a09a48fa9bb3192544526e70525b98f91eb"
+    },
+    {
+      "path": "document-recovery/run-1795458095556432600/summary.json",
+      "sha256": "822ad8e0eb0920ba2dea55edc96367d8ad1efdf2921260548c2a1b40c0b93353"
+    },
+    {
+      "path": "document-recovery.log",
+      "sha256": "70a445ab94dd1b62cefa44aaa48ecf1aab35893f23a54b95c7a59ac21debc232"
+    },
+    {
+      "path": "editor-implementation.patch",
+      "sha256": "1b7f1daa7d81dd066713d8fc71ded91dbad5c3a2514859f2466eac29989eb066"
+    },
+    {
+      "path": "integration.json",
+      "sha256": "239a1865fdd9c87ef5a5732184ff95571488efa729b39e2182bd1d36cb134420"
+    },
+    {
+      "path": "reference-search/exploration/edit/evidence.json",
+      "sha256": "1417fe9362074de8a9e6a439c1e95d661fe34411495c4fe3beeeb503a3e43794"
+    },
+    {
+      "path": "reference-search/exploration/edit/reference-empty-exploration.png",
+      "sha256": "ad8fd274894c7cf8f41a129cd2cc392f217b63b9364cec91664c14ccb7562c03"
+    },
+    {
+      "path": "reference-search/exploration/edit/reference-switched-exploration.png",
+      "sha256": "9be3546037b95b54fbd31c90416966b30c8514fc6362446f176971f3387193d8"
+    },
+    {
+      "path": "reference-search/inspector/edit/evidence.json",
+      "sha256": "8d7e133ced0590e2f0b3d8850d0b0b16ab58ddfa6acd758d30531fbde798c772"
+    },
+    {
+      "path": "reference-search/inspector/edit/reference-empty-inspector.png",
+      "sha256": "4c9d864a3bdfd625d0ebf393d0b2fcbed620b5a6c445c46221d5d2c92da193c3"
+    },
+    {
+      "path": "reference-search/inspector/edit/reference-switched-inspector.png",
+      "sha256": "4306231ba6f72429ed60a78076d18bdb6c8ea5e06163b9935094710304397508"
+    },
+    {
+      "path": "reference-search/summary.json",
+      "sha256": "5f5d5edfda6f7b57fda6ca59f550e709d890d4933d53ba8c7e80f496c5b5d510"
+    },
+    {
+      "path": "reference-search.log",
+      "sha256": "b77cacd8be3287245dc4354316bfaee58a011a7fb2ea36ca928e191f22bdf7a2"
+    },
+    {
+      "path": "verify.py",
+      "sha256": "f4ad00e0709bad86afddee1310f89f6736a7a3bcb4ad9771f5d8cee9bade5677"
+    },
+    {
+      "path": "view-modes.log",
+      "sha256": "90663e6515d144db43d2eba035bc1db66574f89a5de8752b05627d2eab2a0c34"
+    },
+    {
+      "path": "viewport-workflow/run-1795458036636241100/summary.json",
+      "sha256": "d019c9dacdd625686fa1c3d91ae1fdd9fdecfc46fe832bca44080f50d0c1829c"
+    },
+    {
+      "path": "viewport-workflow.log",
+      "sha256": "b5cbdefc584c33c7612ba1f4fc81384f3e5a929b8d85ebe061bb6de788400e51"
+    }
+  ]
+}
