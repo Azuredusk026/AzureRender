@@ -1674,3 +1674,7 @@ Intel 头发颜色继续按冻结区域核对纹理选级。
 [本地媒体多文件选择](../acceptance/npr-room/platform-scenarios.md#本地媒体多文件选择)通过四个真实 Windows 对话框。
 平台、编辑器库和 Player 构建通过，当前 Player 的原生启动与退出释放通过。
 继续目录递归筛选及媒体导入。
+
+[本地媒体目录筛选](../acceptance/npr-room/platform-scenarios.md#本地媒体目录筛选)覆盖八种扩展名及十六类输入和状态。
+平台服务共享递归、物理文件去重、取消和预算规则。
+继续媒体解码、导入与重开恢复。

@@ -65,3 +65,41 @@ for (const auto& file : selected.paths) {
 cmake --build $build --target AzurePathSelectionTests -j 2
 & "$build/AzurePathSelectionTests.exe" $fixture
 ```
+
+## 目录收集
+
+`platform/PathCollection.hpp` 提供 `collectPaths`。
+该服务返回只读路径集合，供媒体与资产导入消费。
+音乐与图片各自传入扩展名，共用递归和诊断规则。
+
+| 请求字段 | 默认值与范围 | 含义 |
+| --- | --- | --- |
+| `inputs` | 路径数组 | 显式选中的文件或目录。 |
+| `extensions` | 空数组 | 点号开头的扩展名；大小写不敏感。空数组收集全部普通文件。 |
+| `recursive` | `false` | 是否递归所选目录。 |
+| `maxFiles` | 4,096；1–100,000 | 去重后的文件数预算。 |
+| `maxEntries` | 16,384；1–1,000,000 | 已检查的输入和目录条目预算。 |
+| `maxDepth` | 32；1–128 | 目录深度预算，所选目录为零层。 |
+| `cancelled` | 空回调 | 合作式取消查询。 |
+
+`files` 返回规范路径，并按路径稳定排序。
+同一物理文件、硬链接和重复目录各处理一次。
+递归跳过符号链接和 Windows 重解析子目录。
+显式输入可选择链接目标。
+
+`issues` 保存对应路径和诊断，可与可用文件并存。
+
+取消及预算耗尽时，文件列表为空。
+对应的 `cancelled` 或 `budgetExceeded` 状态为真。
+空选择也检查预先取消状态。
+无效预算或扩展名配置抛出 `std::invalid_argument`。
+
+`AzurePathCollectionTests` 使用八种媒体扩展名。
+检查覆盖中文目录、硬链接、循环目录链接及三类预算。
+循环链接在测试退出时释放，目标目录及文件保留。
+链接释放采用[Windows 非递归接口](https://learn.microsoft.com/en-us/windows/win32/api/fileapi/nf-fileapi-removedirectoryw)。
+
+```powershell
+cmake --build $build --target AzurePathCollectionTests -j 2
+& "$build/AzurePathCollectionTests.exe" $fixture
+```

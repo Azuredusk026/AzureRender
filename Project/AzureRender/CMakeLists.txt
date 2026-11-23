@@ -953,6 +953,7 @@ add_library(AzurePlatform STATIC
     src/platform/GlfwFrontend.cpp
     src/platform/ProcessRunner.cpp
     src/platform/PathSelection.cpp
+    src/platform/PathCollection.cpp
 )
 add_library(AzureDevtools STATIC src/devtools/ShaderHotReloader.cpp src/devtools/ShaderCompileJob.cpp src/devtools/GeometryProcessCompiler.cpp)
 target_link_libraries(AzureDevtools PUBLIC AzureRenderCore AzurePlatform AzureProcedural)
@@ -2035,6 +2036,10 @@ if(BUILD_TESTING)
             --config "${CMAKE_CURRENT_BINARY_DIR}/shader-reload.json")
         set_tests_properties(AzureRender.ShaderCatalogCompilation PROPERTIES TIMEOUT 120 RUN_SERIAL TRUE)
     endif()
+    add_executable(AzurePathCollectionTests tests/PathCollectionTests.cpp)
+    target_link_libraries(AzurePathCollectionTests PRIVATE AzurePlatform)
+    add_test(NAME AzurePlatform.PathCollection COMMAND AzurePathCollectionTests "${CMAKE_CURRENT_BINARY_DIR}/path-collection-tests")
+    set_tests_properties(AzurePlatform.PathCollection PROPERTIES TIMEOUT 30)
     if(WIN32)
         add_test(NAME AzureRender.HotReload COMMAND AzureHotReloadTests
             "$<TARGET_FILE:Vulkan::glslc>" "${CMAKE_CURRENT_BINARY_DIR}/hot-reload-tests")
