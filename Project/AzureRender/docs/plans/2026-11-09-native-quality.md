@@ -459,3 +459,7 @@ NVIDIA 头发区域与图集单项对照在一字节内一致。
 [原创反射集中回归](../acceptance/nr/evidence/2026-11-24/final-original-reflection/README.md)通过双配置和双设备检查。
 14 项 CPU、20 条反射路径及 24 项材质视图检查通过。
 十二次 Player 启动和同一路径重开通过，双设备短测满足预算。
+
+[原创反射交付](../acceptance/nr/2026-11-24-original-reflection-delivery.md)完成本轮可执行自动验收。
+运动历史、默认法线、双配置双设备及短测均通过。
+人工项登记为待人工复验，参考输入与 592.82 专项延期。
