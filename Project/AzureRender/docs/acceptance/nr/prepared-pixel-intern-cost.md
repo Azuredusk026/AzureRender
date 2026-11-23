@@ -33,6 +33,9 @@
 正式 Release 构建通过两项 CPU 回归。
 实际 Player 的四组覆盖采集通过。
 
+主线 `0d56968` 的 Debug 定向检查通过。
+[组合回归收据](../p0/evidence/2026-11-24-composed-debug-regression/results.json)记录纹理层级及缓存检查。
+
 [结果清单](evidence/2026-11-24/prepared-pixel-intern-cost/results.json)和
 [验证包](evidence/2026-11-24/prepared-pixel-intern-cost/validation.zip)
 保存程序指纹、计时、计数与回归记录。

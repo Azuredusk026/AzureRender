@@ -1,0 +1,25 @@
+{
+  "source": "0d56968e0defae85f88aff5990adb0c124b9a47b",
+  "configuration": "Debug",
+  "tests": [
+    "AzureRender.TextureMipCoverage",
+    "AzureRender.SampledTextureCache",
+    "AzureEditor.EditTransaction",
+    "AzureEditor.PropertyEditing"
+  ],
+  "inputCount": 856,
+  "artifacts": {
+    "AzureTextureMipCoverageTests": "a720e777857738088ffe1e7c0eafc24e9b71edd5f3fd1f2193d593799e08ec5d",
+    "AzureSampledTextureCacheTests": "d8366dd02dca4c67c4de576ea0185fc7bd27e5568f80c3ab536eeac63c9b345c",
+    "AzureEditTransactionTests": "e61b7c536740c87507b6badfb5f1e206d207aa6c91cdd882e4c62cf2f42a4264",
+    "AzurePropertyEditingTests": "1c9995c37d9a81c0361faa7eb7f75fea594de399f302ccd3c4b75d7459ded267"
+  },
+  "dispatch": 2438,
+  "passed": true,
+  "sourceScope": "受保护本地状态下的主线组合",
+  "archive": {
+    "sha256": "5b9777ab6e3056b9445a0ba094eb00d06b67f5f146e85523938e95f44727a5c4",
+    "bytes": 48293,
+    "members": 10
+  }
+}
