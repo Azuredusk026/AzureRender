@@ -41,3 +41,16 @@ python -B tools/npr_room/test_unlock_room_player.py --player $player --project $
 python -B -m tools.npr_room.build_purchase_room --room $openingRoom --output $purchaseRoom --source $unitySource --unlock-catalog $unlockCatalog
 python -B tools/npr_room/test_purchase_room_player.py --player $player --project $purchaseProject --resource-root $resources --output $purchaseReplay
 ```
+
+## 原创购买提示音失败隔离
+
+环境购买提交后，可选提示音失败仍继续启用环境。
+相机轨迹的可选提示音同样使用可恢复播放。
+
+队列 2394 验证两个原创零价条目和独立相机轨迹。
+提示音损坏时，首项购买与环境存档成功。
+相机轨迹节点到达位置 `[1,2,3]` 和旋转 `[0,45,0]`。
+修复音频后，第二项购买及相机提示音可播放。
+两个 Player 重开保持购买记录及独立环境声。
+Vulkan 校验和退出释放均通过。
+[反馈隔离报告](evidence/2026-11-24/feedback-cue-failure/verification.json)记录来源与状态。

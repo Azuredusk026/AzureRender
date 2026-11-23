@@ -58,6 +58,7 @@ def main():
     run(args.lua, [example / "assets/timer-voice-selector.lua", example / "assets/timer-voice-action.lua",
                    example / "tests/timer-voice-selector.lua"])
     run(args.lua, [example / "assets/room-wallet.lua", example / "tests/room-wallet.lua"])
+    run(args.lua, [example / "tests/purchase-cue-recovery.lua"])
     run(args.lua, [example / "assets/room-window.lua", example / "tests/room-window.lua"])
     run(args.lua, [example / "assets/story-book-layout.lua", example / "tests/story-book-layout.lua"])
     run(args.lua, [example / "assets/story-body.lua", example / "tests/story-body.lua"])

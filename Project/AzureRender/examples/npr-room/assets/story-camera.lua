@@ -11,7 +11,7 @@ function new_story_camera(host, track)
         elapsed = 0
         actor:set(component, "translation", track.translation)
         actor:set(component, "rotation", track.rotations[1])
-        if cue then cue:audio_play() end
+        if cue then cue:try_audio_play() end
     end
 
     function camera:update(dt)

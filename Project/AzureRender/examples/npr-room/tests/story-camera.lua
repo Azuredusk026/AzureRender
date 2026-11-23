@@ -31,8 +31,16 @@ assert(#calls == 6)
 camera:effect({command = "DirectionGameStartCamera"})
 assert(#calls == 8 and calls[8][2][1] == 179)
 local starts, stops = 0, 0
+local available = true
 local cue = {
-    audio_play = function() starts = starts + 1 end,
+    audio_play = function()
+        if not available then error("Camera cue unavailable") end
+        starts = starts + 1
+    end,
+    try_audio_play = function()
+        if not available then return false end
+        starts = starts + 1; return true
+    end,
     audio_stop = function() stops = stops + 1 end,
 }
 local findCamera = host.find
@@ -53,3 +61,11 @@ withSound:finish()
 assert(starts == 1 and stops == 1)
 withSound:finish()
 assert(stops == 1)
+
+available = false
+withSound:effect({command = "DirectionGameStartCamera"})
+withSound:update(3); withSound:finish()
+assert(calls[#calls][1] == "rotation" and calls[#calls][2][1] == 178)
+available = true
+withSound:effect({command = "DirectionGameStartCamera"})
+assert(starts == 2, "A recovered optional camera cue must retry")

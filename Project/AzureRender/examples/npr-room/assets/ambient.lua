@@ -175,7 +175,8 @@ function update()
             local purchased, reason = wallet:purchase(name)
             if purchased then
                 confirmPurchase = false
-                self:find("room-buy-item"):audio_play()
+                local cue = self:find("room-buy-item")
+                if cue then cue:try_audio_play() end
                 if cityWindow and sounds[selected][1] == city_sound_id then cityWindow:restore() end
                 local row = state[selected]
                 if row.volume == 0 then row.volume = 50 end
