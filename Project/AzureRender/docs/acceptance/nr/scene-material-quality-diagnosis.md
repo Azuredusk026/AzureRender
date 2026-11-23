@@ -599,3 +599,6 @@ Player 同帧捕获及补充读回均在共享队列执行成功。
 按 F 的第 4 帧恢复反射，无输入十二帧精确一致。
 动态、法线及双配置回归见[接入计划](../../plans/2026-11-24-original-reflection-production.md)。
 匹配参考输入及 592.82 四帧按用户授权延期。
+
+[动态反射与项目重开](evidence/2026-11-24/reflection-dynamic-and-reopen/README.md)通过五项组合及旋转回放。
+独立启动的十二帧精确一致，默认法线及双配置回归接续。

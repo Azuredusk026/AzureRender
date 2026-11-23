@@ -26,7 +26,7 @@ def main():
         if args.motion_contract:
             cases=[('history-response-tracked',True),('history-response-moving',True),('history-response-assumed',True),('history-response-cutout',True),('history-response-partial',True),('response-current',True),('history-offset',True),('history-wrong-offset',False)]
             cases.extend((name,False) for name in ('history-response-moving-depth','history-response-background','history-response-missing','history-response-reactive','history-response-nonfinite','history-response-depth','history-response-zero-depth','history-response-outside'))
-        elif args.composition:cases.extend([('history-tinted',True),('history-shifted',True),('history-wrong-pose',False),('history-disoccluded',False)])
+        elif args.composition:cases.extend([('history-reset',False),('history-tinted',True),('history-shifted',True),('history-wrong-pose',False),('history-disoccluded',False)])
         else:cases.extend([('wrong-convention',False),('wrong-motion',False)])
         for mode,success in cases:
             output=run/mode

@@ -31,7 +31,7 @@ int main(int argc,char** argv)try{
     if(!std::filesystem::create_directory(output))throw std::runtime_error("Expected a new output directory");
     const auto& mode=args[3];const std::set<std::string> modes{"positive","wide-edge","history-static","nonfinite-motion","wrong-convention","wrong-motion","history-tinted","history-shifted","history-wrong-pose","history-disoccluded",
         "history-response-tracked","history-response-moving","history-response-moving-depth","history-response-assumed","history-response-cutout","history-response-partial","history-response-background","history-response-missing","history-response-reactive","history-response-nonfinite","history-response-depth","history-response-zero-depth","history-response-outside","history-response-mixed","response-current","history-offset","history-wrong-offset",
-        "history-alpha-layer","history-alpha-layer-empty","history-alpha-layer-reference"};
+        "history-reset","history-alpha-layer","history-alpha-layer-empty","history-alpha-layer-reference"};
     if(!modes.count(mode))throw std::runtime_error("Unknown physical mirror mode");
     const bool response=mode.rfind("history-response-",0)==0,offset=mode=="history-offset"||mode=="history-wrong-offset";
     const bool historyUsed=mode.rfind("history-",0)==0,shifted=mode=="history-shifted"||mode=="history-wrong-pose"||offset;
@@ -108,7 +108,7 @@ int main(int argc,char** argv)try{
         auto pastSnapshot=snapshot,currentColor=scene;
         if(mode=="history-disoccluded")for(std::size_t i=0;i<pastSnapshot.size();i+=4)pastSnapshot[i]=1;
         if(mode=="history-response-zero-depth")for(std::size_t i=0;i<pastSnapshot.size();i+=4)pastSnapshot[i]=100000;
-        if(mode=="history-tinted"||alphaLayer||emptyLayer||mode=="history-alpha-layer-reference")
+        if(mode=="history-reset"||mode=="history-tinted"||alphaLayer||emptyLayer||mode=="history-alpha-layer-reference")
             for(std::size_t i=0;i<currentColor.size();i+=4){currentColor[i]=currentColor[i+1]=0;currentColor[i+2]=1;}
         test::ComputeTexture previousSurface(backend,width,height,1,VK_FORMAT_R32G32B32A32_SFLOAT,bytes(pastSnapshot),16);
         test::ComputeTexture changedColor(backend,width,height,1,VK_FORMAT_R32G32B32A32_SFLOAT,bytes(currentColor),16);
@@ -120,6 +120,7 @@ int main(int argc,char** argv)try{
         for(unsigned i=0;i<3;++i)buffers.values[1+i]=backend.allocator().createBuffer(traceWidth*traceHeight*(i==2?1:4),VK_BUFFER_USAGE_TRANSFER_DST_BIT,true);
         ProjectedReflectionRayGpu kernel(backend,1,readBinaryFile(args[1]));ProjectedReflectionInputs inputs;
         inputs.previousColor=color.view;inputs.previousDepth=inputs.currentDepth=deviceDepth.view;inputs.motion=delta.view;inputs.surfaceMask=surfaceMask.view;inputs.normalRoughness=normalRoughness.view;
+        if(mode=="history-reset"){inputs.previousColor=changedColor.view;settings.motionBlend=1;}
         inputs.sourceExtent={width,height};inputs.traceExtent={traceWidth,traceHeight};inputs.tiles=buffers.values[0].buffer;inputs.tileBytes=tileData.size();inputs.tileCount=static_cast<unsigned>(tiles.size());
         ProjectedReflectionOutputs outputs{outputColor.view,outputFootprint.view,outputConfidence.view,{traceWidth,traceHeight}};
         std::unique_ptr<ProjectedReflectionPreparationGpu> preparation;
@@ -159,7 +160,7 @@ int main(int argc,char** argv)try{
                 if(historyUsed){
                     composition->record(commands,0,{previousSurface.view,color.view,VK_NULL_HANDLE,{width,height}},previousCamera,parameters);
                     const ProjectedScreenReflectionHistory history{0,color.view,declaredPrevious,layer?layer->view:VK_NULL_HANDLE};
-                    composition->record(commands,1,snapshot,camera,parameters,&history);
+                    composition->record(commands,1,snapshot,camera,parameters,mode=="history-reset"?nullptr:&history);
                 }else composition->record(commands,0,snapshot,camera,parameters);
             }else{
             if(control)controlSignal->beginBaseWrite(commands,0);
