@@ -1,0 +1,54 @@
+{
+  "sourceCommit": "811fc45",
+  "scope": "Original-room and reusable engine units listed in the current execution plan",
+  "completedCommits": [
+    "811fc45 feat(p5): 验证原创媒体目录包与统一启动档案",
+    "252479e feat(p5): 为原生启动器配置持久项目档案",
+    "b1a0154 feat(p3): 验证活动媒体导入的取消与退出",
+    "f677549 feat(p3): 验证本地媒体选择播放与图片恢复",
+    "573d231 feat(p3): 接通后台媒体任务与运行时资产引用",
+    "92ffea5 feat(p3): 实现项目隔离的本地媒体持久库",
+    "278d28e feat(p3): 补齐媒体存档的并发提交契约",
+    "5da3bc0 feat(p3): 实现本地媒体目录筛选与预算控制",
+    "7fe7932 feat(p3): 补齐本地媒体多文件选择契约",
+    "0821890 feat(p3): 登记工具退出回归与人工复验条件",
+    "cf312cb feat(p3): 补齐整合日历的工时退出提交",
+    "15254bc feat(p3): 保存未失焦的习惯名称草稿",
+    "86cd3d1 feat(p3): 保存正常退出时的待办草稿"
+  ],
+  "automatedIndependentUnits": "handled",
+  "packageManifestAfterCommit": "passed",
+  "packageFiles": 1022,
+  "runFinished": true,
+  "scopedRegression": "198 Python tests and two production Lua suites passed",
+  "evidence": {
+    "package": "local-media-package/verification.json",
+    "mediaNative": "local-media-player/verification.json",
+    "activeImport": "local-media-import-lifecycle/verification.json",
+    "toolExits": "tool-exit-regression.json",
+    "audioRecovery": "feedback-cue-failure/final-regression.json"
+  },
+  "remaining": [
+    {
+      "scope": "Physical audio devices, subjective listening, physical input, IME and actual display sleep",
+      "status": "pending-manual-retest",
+      "trigger": "User explicitly names the manual retest"
+    },
+    {
+      "scope": "Formal source-room regression and Steam real-service runs",
+      "status": "user-paused",
+      "trigger": "User explicitly resumes the relevant scope"
+    },
+    {
+      "scope": "Source full catalog, remaining source settings, screens, character, environment and full-source package",
+      "status": "retained-under-source-room-scope",
+      "trigger": "Resume formal source-room scope and its required inputs"
+    },
+    {
+      "scope": "Real account and cloud-service acceptance",
+      "status": "external-test-identity-required",
+      "trigger": "Authorized test identity and service context"
+    }
+  ],
+  "noLingeringAzurePlayer": true
+}
