@@ -231,6 +231,23 @@
     "archiveSha256": "ff997945b8ffc7fa949a7647dade9b5aef6562f98721c349cdb044848fc4667d",
     "physicalInput": false
   },
+  "worklineRegression20261124": {
+    "implementation": "9baa14fb128f65b57d90da356c89f3c01c651b8d",
+    "configuration": "Release",
+    "dispatch": 2418,
+    "reusedBuildDispatch": 2411,
+    "candidateExecutableSha256": "e2cdfbab6e3a150e8659fe4ccd738184a4f1d8641ae8412a1167023775f917c4",
+    "cpuCasesPassed": 5,
+    "regressionGroupsPassed": 4,
+    "documentRecoveryCasesPassed": 6,
+    "mainlineForApplyCheck": "72c8129f50f435ceea1dc32a3a9c1b3a110d058a",
+    "results": "editor-interaction-regression-2026-11-24/results.json",
+    "resultsSha256": "7df8d22b3101494b815493abde596271f6f34ecdf8e8fa51197ee3c019b2bd17",
+    "archive": "editor-interaction-regression-2026-11-24/verification.zip",
+    "archiveSha256": "550b7dc847a3601e05226c9cc0024ebe386b7d1beba9258b2c5a6d5d9737dada",
+    "physicalReview": "editor-interaction-physical-review.md",
+    "physicalInput": false
+  },
   "propertyDragFocus20261124": {
     "productionBaseline": "191d7a1",
     "configuration": "Release",

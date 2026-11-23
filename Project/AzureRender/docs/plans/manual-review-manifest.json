@@ -115,11 +115,12 @@
   "editorInteractionReview": {
     "status": "PendingPhysicalReview",
     "statusLabel": "待人工复验",
-    "candidateCommit": "191d7a1971a5e289732e4952f6fff535eaae39a0",
+    "candidateCommit": "9baa14fb128f65b57d90da356c89f3c01c651b8d",
+    "candidateExecutableSha256": "e2cdfbab6e3a150e8659fe4ccd738184a4f1d8641ae8412a1167023775f917c4",
     "configuration": "Release",
     "scheduleTrigger": "用户主动点名",
     "runbook": "docs/plans/editor-interaction-physical-review.md",
-    "items": ["实体键鼠", "输入法", "多屏与缩放"],
+    "items": ["实体键鼠", "输入法", "多屏与缩放", "实体制作与效率", "反馈与错误恢复"],
     "result": "notExecuted"
   },
   "complete": false,
