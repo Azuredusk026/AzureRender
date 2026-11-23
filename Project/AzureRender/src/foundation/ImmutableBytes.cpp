@@ -19,6 +19,23 @@ namespace {
 void checked(std::size_t code) {
     if(ZSTD_isError(code))throw std::runtime_error(std::string("Immutable byte compression: ")+ZSTD_getErrorName(code));
 }
+
+template<class Match>
+std::shared_ptr<const ImmutableBytes> findPayload(
+    std::unordered_multimap<std::uint32_t, std::weak_ptr<const ImmutableBytes>>& entries,
+    std::uint32_t bucket, Match match) {
+    const auto range = entries.equal_range(bucket);
+    for (auto at = range.first; at != range.second;) {
+        const auto existing = at->second.lock();
+        if (!existing) {
+            at = entries.erase(at);
+            continue;
+        }
+        if (match(*existing)) return existing;
+        ++at;
+    }
+    return {};
+}
 }
 ImmutableBytes::ImmutableBytes(const std::vector<std::uint8_t>& source,std::uint32_t bucket)
     :decodedBytes_(source.size()),bucket_(bucket) {
@@ -58,20 +75,21 @@ bool ImmutableBytes::equals(const ImmutableBytes& other) const {
     return read()==other.read();
 }
 std::shared_ptr<const ImmutableBytes> ImmutableBytePool::intern(const std::vector<std::uint8_t>& bytes) {
-    const auto bucket=immutableBytesBucket(bytes);
-    auto candidate=std::shared_ptr<const ImmutableBytes>(new ImmutableBytes(bytes,bucket));
-    return adopt(std::move(candidate));
+    const auto bucket = immutableBytesBucket(bytes);
+    if (auto existing = findPayload(entries_, bucket,
+            [&](const ImmutableBytes& value) { return value.equals(bytes); }))
+        return existing;
+
+    auto payload = std::shared_ptr<const ImmutableBytes>(new ImmutableBytes(bytes, bucket));
+    entries_.emplace(bucket, payload);
+    return payload;
 }
 std::shared_ptr<const ImmutableBytes> ImmutableBytePool::adopt(std::shared_ptr<const ImmutableBytes> candidate) {
     if(!candidate)throw std::invalid_argument("An immutable byte payload is required");
     const auto bucket=candidate->bucket();
-    auto range=entries_.equal_range(bucket);
-    for(auto at=range.first;at!=range.second;) {
-        const auto existing=at->second.lock();
-        if(!existing){at=entries_.erase(at);continue;}
-        if(existing->equals(*candidate))return existing;
-        ++at;
-    }
+    if (auto existing = findPayload(entries_, bucket,
+            [&](const ImmutableBytes& value) { return value.equals(*candidate); }))
+        return existing;
     entries_.emplace(bucket,candidate);return candidate;
 }
 ImmutableBytePoolStatistics ImmutableBytePool::statistics() const noexcept {

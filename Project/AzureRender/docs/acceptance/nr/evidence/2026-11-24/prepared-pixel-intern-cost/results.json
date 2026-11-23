@@ -1,0 +1,180 @@
+{
+  "baseline": "587b48428f3f0998fa03f7126ce8adf6756cb194",
+  "pair": {
+    "reference": {
+      "driver": "595.79, NVIDIA GeForce RTX 4060 Laptop GPU",
+      "elapsed": 94.03512630000478,
+      "sceneLoad": {
+        "cpuPrepareMs": 52658.0129,
+        "meshUploadMs": 248.3469,
+        "materialUploadMs": 13065.2723,
+        "sharedTexturesMs": 341.9268,
+        "buffersMs": 101.338,
+        "skinningMs": 3.9732,
+        "descriptorsMs": 65.0765,
+        "pipelinesMs": 105.9298,
+        "decodedMaterialPixelBytes": 6365826224,
+        "remainingMaterialPixelBytes": 8
+      },
+      "texture": {
+        "requests": 6169,
+        "hits": 5784,
+        "uniqueTextures": 385,
+        "requestedBytes": 8394487848,
+        "residentBytes": 1852081920,
+        "retainedPixelBytes": 0,
+        "releasedIdentityBytes": 1664821444,
+        "referencedPixelBytes": 1663587808,
+        "retainedIdentityStorageBytes": 0,
+        "releasedIdentityStorageBytes": 349767343,
+        "channelSavedBytes": 303475480,
+        "compactedTextures": 107,
+        "sealed": true,
+        "hashedPixelBytes": 3743632,
+        "copiedPixelBytes": 1048576,
+        "transferredPixelBytes": 185060,
+        "discardedPixelBytes": 412836,
+        "hashMs": 1.1672,
+        "matchMs": 1.1937,
+        "mipMs": 7704.8789,
+        "uploadMs": 1981.9004
+      },
+      "intern": {
+        "calls": 1446,
+        "constructed": 1446,
+        "hits": 1096,
+        "bytes": 6365228316,
+        "duplicateBytes": 4700591932,
+        "hashMs": 1680.8535,
+        "constructMs": 11370.554,
+        "matchMs": 50.2347,
+        "duplicateConstructMs": 7519.2246
+      },
+      "inputsVerified": 1729
+    },
+    "candidate": {
+      "driver": "595.79, NVIDIA GeForce RTX 4060 Laptop GPU",
+      "elapsed": 89.78857260002405,
+      "sceneLoad": {
+        "cpuPrepareMs": 47593.7142,
+        "meshUploadMs": 293.0231,
+        "materialUploadMs": 15990.6321,
+        "sharedTexturesMs": 401.47,
+        "buffersMs": 95.9354,
+        "skinningMs": 4.2646,
+        "descriptorsMs": 67.4343,
+        "pipelinesMs": 120.0392,
+        "decodedMaterialPixelBytes": 6365826224,
+        "remainingMaterialPixelBytes": 8
+      },
+      "texture": {
+        "requests": 6169,
+        "hits": 5784,
+        "uniqueTextures": 385,
+        "requestedBytes": 8394487848,
+        "residentBytes": 1852081920,
+        "retainedPixelBytes": 0,
+        "releasedIdentityBytes": 1664821444,
+        "referencedPixelBytes": 1663587808,
+        "retainedIdentityStorageBytes": 0,
+        "releasedIdentityStorageBytes": 349767343,
+        "channelSavedBytes": 303475480,
+        "compactedTextures": 107,
+        "sealed": true,
+        "hashedPixelBytes": 3743632,
+        "copiedPixelBytes": 1048576,
+        "transferredPixelBytes": 185060,
+        "discardedPixelBytes": 412836,
+        "hashMs": 1.3176,
+        "matchMs": 1.4635,
+        "mipMs": 9931.2822,
+        "uploadMs": 2018.3458
+      },
+      "intern": {
+        "calls": 1446,
+        "constructed": 350,
+        "hits": 1096,
+        "bytes": 6365228316,
+        "duplicateBytes": 4700591932,
+        "hashMs": 1579.2133,
+        "constructMs": 3732.4495,
+        "matchMs": 4471.9566,
+        "duplicateConstructMs": 0.0
+      },
+      "inputsVerified": 1729
+    },
+    "referencePoolMs": 13101.6422,
+    "candidatePoolMs": 9783.6194,
+    "netPoolSavedMs": 3318.0228000000006,
+    "cpuPreparationSavedMs": 5064.298699999999,
+    "poolReduction": 0.2532524357900722,
+    "exactTextureFields": [
+      "requests",
+      "hits",
+      "uniqueTextures",
+      "residentBytes",
+      "releasedIdentityBytes",
+      "releasedIdentityStorageBytes",
+      "channelSavedBytes",
+      "compactedTextures"
+    ]
+  },
+  "release": {
+    "player": "c852fbc73b841b6163a957dcc92d34ec4faea6bcbf8e80cd17ee93fcc3a67df4",
+    "source": "8f807d38c4b3345c8213f5ed240ae7c2a225fb5ea24ea8be4e295729e1d9ac68",
+    "test": "0110d1dfc054f29cecc8dd984505de5012f1da721fb4ed47433e9c2c14e23072"
+  },
+  "jobs": [
+    {
+      "id": 2406,
+      "task": "prepared-intern-reference-build",
+      "state": "succeeded",
+      "exit_code": 0,
+      "run_seconds": 6.48499999998603
+    },
+    {
+      "id": 2407,
+      "task": "prepared-intern-reference-scene",
+      "state": "succeeded",
+      "exit_code": 0,
+      "run_seconds": 123.43799999999464
+    },
+    {
+      "id": 2414,
+      "task": "prepared-intern-candidate-build",
+      "state": "succeeded",
+      "exit_code": 0,
+      "run_seconds": 5.5
+    },
+    {
+      "id": 2416,
+      "task": "prepared-intern-candidate-scene",
+      "state": "succeeded",
+      "exit_code": 0,
+      "run_seconds": 93.45299999997951
+    },
+    {
+      "id": 2420,
+      "task": "prepared-intern-release-build",
+      "state": "succeeded",
+      "exit_code": 0,
+      "run_seconds": 6.782000000006519
+    },
+    {
+      "id": 2422,
+      "task": "prepared-intern-release-tests",
+      "state": "succeeded",
+      "exit_code": 0,
+      "run_seconds": 24.17200000002049
+    }
+  ],
+  "cpuChecks": 2,
+  "gpuCaptures": 4,
+  "protectedFiles": 32,
+  "scope": "Joint scene data preparation and immutable pool operations",
+  "archive": {
+    "sha256": "e1da9c35821050a63b841ce55e56c893e2a81f1c4205b942ace872235a45c8a2",
+    "members": 29,
+    "bytes": 34785
+  }
+}
