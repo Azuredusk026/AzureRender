@@ -116,3 +116,15 @@ python -B tools/npr_room/test_original_music_player.py --player $player --resour
 恢复兼容内容后可保存，并在重开后继续操作。
 四次退出均通过 Vulkan 校验，图像和缓冲归零。
 [版本保护报告](evidence/2026-11-21/audio-payload-version/verification.json)记录来源与结果。
+
+## 剧情音轨失败恢复
+
+剧情音轨失败后，曲库恢复进入剧情前的播放状态。
+失败会话结束保持曲库状态，修复音轨后可重新播放。
+正常剧情播放期间，曲库保持暂停位置。
+
+队列 2385 验证原创双音源的失败、恢复和淡出。
+失败期间曲库继续播放，修复后剧情音轨成功接管。
+曲库暂停时采样位置保持一致，淡出结束后恢复。
+音源启动共两次，Vulkan 校验和退出释放通过。
+[原生结果](evidence/2026-11-24/story-music-failure/verification.json)与[本机回归](evidence/2026-11-24/story-music-failure/cpu-regression.json)记录来源和命令。

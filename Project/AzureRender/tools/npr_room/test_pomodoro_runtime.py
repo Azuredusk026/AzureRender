@@ -63,6 +63,7 @@ def main():
     run(args.lua, [example / "assets/story-body.lua", example / "tests/story-body.lua"])
     run(args.lua, [example / "assets/story-desk.lua", example / "tests/story-desk.lua"])
     run(args.lua, [example / "assets/story-dialogue.lua", example / "tests/story-dialogue.lua"])
+    run(args.lua, [example / "assets/story-music.lua", example / "tests/story-music.lua"])
     run(args.lua, [example / "assets/story-camera.lua", example / "tests/story-camera.lua"])
     run(args.lua, [example / "assets/story-face.lua", example / "tests/story-face.lua"])
     run(args.lua, [example / "assets/story-face.lua", example / "tests/story-gaze.lua"])

@@ -1,6 +1,7 @@
 local playlistPlaying, playlistPosition, gain = true, 37, nil
 local musicPlaying, currentAsset = false, nil
 local transitions = {}
+local available = true
 local playlist = {
     audio_playing = function() return playlistPlaying end,
     audio_pause = function(_, paused) playlistPlaying = not paused; transitions[#transitions + 1] = paused end,
@@ -13,7 +14,14 @@ local source = {
         elseif property == "volume" then gain = value
         else error(property) end
     end,
-    audio_play = function() assert(currentAsset and gain == 0); musicPlaying = true end,
+    audio_play = function()
+        if not available then error("Story music unavailable") end
+        assert(currentAsset and gain == 0); musicPlaying = true
+    end,
+    try_audio_play = function()
+        if not available then return false end
+        assert(currentAsset and gain == 0); musicPlaying = true; return true
+    end,
     audio_stop = function() musicPlaying = false end,
 }
 local host = {
@@ -42,3 +50,15 @@ assert(gain == 1 and #transitions == 2 and currentAsset == "assets:/music/tutori
 music:finish()
 music:update(1.5)
 assert(not playlistPlaying and #transitions == 2)
+
+available, playlistPlaying = false, true
+music:play({"NEWings", "0.6", "0", "0"})
+assert(playlistPlaying and not musicPlaying and playlistPosition == 37,
+       "A failed story track must resume the original playlist")
+music:finish(); music:update(1.5)
+assert(playlistPlaying)
+available = true
+music:play({"NEWings", "0.6", "0", "0"})
+assert(not playlistPlaying and musicPlaying)
+music:finish(); music:update(1.5)
+assert(playlistPlaying and not musicPlaying and playlistPosition == 37)

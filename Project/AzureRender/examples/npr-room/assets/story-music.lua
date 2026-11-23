@@ -26,8 +26,13 @@ function new_story_music(host, tracks)
         active = true
         source:set("azure.audio-source", "asset", asset)
         volume(0)
-        source:audio_play()
+        if not source:try_audio_play() then
+            if resumePlaylist then playlist:audio_pause(false) end
+            active, resumePlaylist, fade = false, false, nil
+            return false
+        end
         transition(ratio == 0 and 1 or math.max(0, math.min(1, ratio)), seconds == 0 and 1.5 or seconds)
+        return true
     end
 
     function music:finish()
