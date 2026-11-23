@@ -26,6 +26,7 @@
 [本机路径选择](docs/runtime/path-selection.md)提供单文件、多文件、目录和取消契约。
 [本地媒体目录筛选](docs/acceptance/npr-room/platform-scenarios.md#本地媒体目录筛选)验证递归、去重、取消及预算。
 [项目存档与内容目录](docs/runtime/project-save-store.md)提供条件提交、并发协调及项目内容定位。
+[本地媒体库](docs/runtime/media-library.md)共享音频与图片的导入、清单及重开契约。
 [房间曲库](docs/acceptance/npr-room/music-playlist.md)与[环境声](docs/acceptance/npr-room/ambient-sound.md)记录原资产、播放控制和独立 Player 恢复。
 [开场书本布置](docs/acceptance/npr-room/opening-book-layout.md)记录房间道具、剧情临时状态和读档。
 [开场身体动作](docs/acceptance/npr-room/opening-body.md)记录原角色动作、转场和剧情入口。

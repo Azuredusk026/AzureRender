@@ -1,0 +1,91 @@
+{
+  "exeSHA256": "168f14331e547f6bdf40281cd61c918535acd31ab0232b70dba4bafc2e2d41b4",
+  "commands": [
+    {
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261120-010632-asset-parse-source-diagnostic-d884c7\\player-release\\AzureMediaLibraryTests.exe",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261124-033508-local-media-library-3b96aa\\library-complete"
+      ],
+      "exitCode": 0,
+      "stdout": "Media library audio/image decode, persistence, deduplication, budgets, versions, rollback and concurrency passed\r\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261120-010632-asset-parse-source-diagnostic-d884c7\\player-release\\AzureMediaLibraryTests.exe",
+        "--import",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261124-033508-local-media-library-3b96aa\\format-profile",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261124-033508-local-media-library-3b96aa\\audio-codecs-captured\\tone.wav"
+      ],
+      "exitCode": 0,
+      "stdout": "wav: 1 committed entries\r\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261120-010632-asset-parse-source-diagnostic-d884c7\\player-release\\AzureMediaLibraryTests.exe",
+        "--import",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261124-033508-local-media-library-3b96aa\\format-profile",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261124-033508-local-media-library-3b96aa\\audio-codecs-captured\\tone.mp3"
+      ],
+      "exitCode": 0,
+      "stdout": "mp3: 2 committed entries\r\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261120-010632-asset-parse-source-diagnostic-d884c7\\player-release\\AzureMediaLibraryTests.exe",
+        "--import",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261124-033508-local-media-library-3b96aa\\format-profile",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261124-033508-local-media-library-3b96aa\\audio-codecs-captured\\tone.flac"
+      ],
+      "exitCode": 0,
+      "stdout": "flac: 3 committed entries\r\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261120-010632-asset-parse-source-diagnostic-d884c7\\player-release\\AzureMediaLibraryTests.exe",
+        "--import",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261124-033508-local-media-library-3b96aa\\format-profile",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261124-033508-local-media-library-3b96aa\\audio-codecs-captured\\tone.ogg"
+      ],
+      "exitCode": 0,
+      "stdout": "vorbis: 4 committed entries\r\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261120-010632-asset-parse-source-diagnostic-d884c7\\player-release\\AzureMediaLibraryTests.exe",
+        "--import-image",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261124-033508-local-media-library-3b96aa\\format-profile",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261124-033508-local-media-library-3b96aa\\image-codecs\\alpha.png"
+      ],
+      "exitCode": 0,
+      "stdout": "png: 1 committed entries\r\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261120-010632-asset-parse-source-diagnostic-d884c7\\player-release\\AzureMediaLibraryTests.exe",
+        "--import-image",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261124-033508-local-media-library-3b96aa\\format-profile",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261124-033508-local-media-library-3b96aa\\image-codecs\\color.jpg"
+      ],
+      "exitCode": 0,
+      "stdout": "jpeg: 2 committed entries\r\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261120-010632-asset-parse-source-diagnostic-d884c7\\player-release\\AzureMediaLibraryTests.exe",
+        "--import-image",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261124-033508-local-media-library-3b96aa\\format-profile",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261124-033508-local-media-library-3b96aa\\image-codecs\\color.jpeg"
+      ],
+      "exitCode": 0,
+      "stdout": "jpeg: 2 committed entries\r\n",
+      "stderr": ""
+    }
+  ]
+}

@@ -1099,6 +1099,7 @@ add_library(AzureRuntime STATIC
     src/runtime/RuntimeRenderSnapshotCache.cpp
     src/runtime/Project.cpp
     src/runtime/ProjectSaveStore.cpp
+    src/runtime/MediaLibrary.cpp
     src/runtime/ProjectReferenceViews.cpp
     src/runtime/AssetDatabase.cpp
     src/runtime/AssetSourceCache.cpp
@@ -2547,6 +2548,10 @@ if(BUILD_TESTING)
     target_link_libraries(AzureProjectTests PRIVATE AzureRuntime)
     add_test(NAME AzureEngine.Project COMMAND AzureProjectTests)
     add_executable(AzureProjectSaveStoreTests tests/ProjectSaveStoreTests.cpp)
+    add_executable(AzureMediaLibraryTests tests/MediaLibraryTests.cpp)
+    target_link_libraries(AzureMediaLibraryTests PRIVATE AzureRuntime AzurePlatform)
+    add_test(NAME AzureEngine.MediaLibrary COMMAND AzureMediaLibraryTests "${CMAKE_CURRENT_BINARY_DIR}/media-library-tests")
+    set_tests_properties(AzureEngine.MediaLibrary PROPERTIES TIMEOUT 45)
     target_link_libraries(AzureProjectSaveStoreTests PRIVATE AzureRuntime AzurePlatform)
     add_executable(AzureFileLockTests tests/FileLockTests.cpp)
     target_link_libraries(AzureFileLockTests PRIVATE AzureFoundation)
