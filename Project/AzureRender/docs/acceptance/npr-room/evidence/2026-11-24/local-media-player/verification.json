@@ -1,0 +1,72 @@
+{
+  "baseCommit": "573d231",
+  "run": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261124-043955-local-media-player-2a34ae",
+  "configuration": "MSVC Release; Lua enabled; managed prototype disabled; 1280x720 media canvas",
+  "buildQueues": [
+    2487,
+    2491,
+    2498,
+    2501
+  ],
+  "hostQueues": {
+    "missing": 2486,
+    "injected": 2488
+  },
+  "mediaReplayQueue": 2503,
+  "crossProcessFolderQueue": 2502,
+  "finalPlatformDialogQueue": 2504,
+  "sourceSHA256": {
+    "src/app/AzureRenderApp.cpp": "cf6daa86aee48aa28fbe353b22f9ecb2250e9be7b7dd6bae28cb309b52089396",
+    "src/runtime/GameUi.cpp": "fa3c7f96869e921f4a3f1d6c9c92caed382359f409b94e14d7aa61e72deb3c52",
+    "src/scripting/ScriptBindingHost.cpp": "6a54677cf40148238690d13ad9ebcee8d241bc0a8645cb42d3327e5de48b29c8",
+    "schemas/script_bindings.json": "45affe3a36a027f086873ded9959ad593583c02d0565f26fadda90cd4feae8cd",
+    "src/scripting/GeneratedBindings.hpp": "cc49cce98dc7805be6bf1ebb21af0a11dd6242d1e7b4ac124a076b78301b45ce",
+    "managed/EngineBindings/AzureObject.g.cs": "999ca20eb85f660fbe9c63ad3e3aa1c75ca62a67543503a64de7c1f6050f3c4d",
+    "managed/EngineBindings/BindingContract.g.cs": "75a371142c1504db6731e8eec5b1b92f1ab5cf8cecd24221e371a40226e74ec7",
+    "tests/ScriptBackendContractTests.cpp": "f732bddaf0b7c0848e5e465c545b9857f84d3b49b74e173a0216dac7bd5d72cc",
+    "tests/PathSelectionTests.cpp": "83c9699e805ae054ec603cb6ae235f9a5a20f2f5b065d65b0e7d6de300bbbfaa",
+    "examples/local-media/assets/media.lua": "8404ca4ba01ed7360335f1474f08ded951a0e8d511b0dd522f5e745bf19aaf6c",
+    "examples/local-media/assets/media.rml": "f674661160ae6a51f9ab5420cd773ca63f5bd0a9851c6654b6405c761e87d37e",
+    "examples/local-media/tests/controller.lua": "f7f03888bc035a00eab026126adde35949ce0abce98853cc1fdad23f6f2dec50",
+    "tools/build_local_media_example.py": "fd242774bf202792b9961fea740058b1e59e10194aca659b00f954dd1589bd4a",
+    "tools/test_local_media_controller.py": "cea6f13711d09b419ffedda195d0d14deb1abca4b0ae1f0425648f3bd0aab16c",
+    "tools/test_local_media_host_player.py": "cb91d3400b28b27374ebd358940d6fe0cb06e3220b11dcd01a419c3fd58b228f",
+    "tools/test_local_media_player.py": "b393fe8f330090fd705abf21c682cdc53bd0ef7f6e8a81e7994301bd7293576d"
+  },
+  "playerSHA256": "818c745b88e9d049d206bac5318cf85b2f27bf39006df86ce9ac9ee621803147",
+  "nativeMediaProcesses": 3,
+  "nativeMediaDialogs": 9,
+  "checks": [
+    "five audio formats reach actual Player playback",
+    "PNG/JPG/JPEG import with byte deduplication",
+    "red and green image pixels each count 38720",
+    "native cancellation and empty directory",
+    "corrupt sample preserves remaining legal imports",
+    "project and source directory relocation",
+    "view preferences and entries reopen unchanged",
+    "missing cached image repair preserves identity",
+    "future payload and outer version preserve exact bytes",
+    "three Player Vulkan sessions release all buffers and images",
+    "strict and recoverable script APIs preserve VM budget guards",
+    "170 room Python tests and production Lua suite",
+    "script binding drift, permission and interop regression",
+    "two exploration and five original todo Player processes preserve saves, versions and native release"
+  ],
+  "faultEvidence": [
+    "host-missing.json",
+    "lua-environment-error.log",
+    "layout-error.log",
+    "raw-save-read-error.log",
+    "native-folder-contract.log",
+    "cross-process-folders.json"
+  ],
+  "pending": [
+    "Active import cancellation and Player shutdown follow as an independent unit",
+    "Manual listening and physical input remain pending manual retest",
+    "Formal source room and Steam physical tests remain paused"
+  ],
+  "existingPlayerRegressionQueue": 2505,
+  "existingRegressionPlayerProcesses": 7,
+  "totalSuccessfulPlayerProcesses": 11,
+  "currentCandidateSuccessfulPlayerProcesses": 10
+}

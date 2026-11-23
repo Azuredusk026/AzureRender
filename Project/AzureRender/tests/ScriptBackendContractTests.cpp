@@ -32,9 +32,9 @@ void bindings() {
     GameRuntime game(runtime,application::systems(),application::explorationConfiguration());
     ScriptBindingHost host(runtime,game);
     struct Media final : IMediaLibraryService {
-        bool selected=false, cancelled=false;
+        bool selected=false, cancelled=false, unavailable=false;
         bool select(const std::string& kind,bool directory) override { selected=kind=="music"&&!directory;return selected; }
-        Json entries(const std::string&) const override {return Json::array({Json::array({"id","title","media:/music/id",true})});}
+        Json entries(const std::string&) const override {if(unavailable)throw std::runtime_error("Newer media version");return Json::array({Json::array({"id","title","media:/music/id",true})});}
         Json status() override {return Json::array({"idle",0,0,0,""});}
         void cancel() override {cancelled=true;}
     };
@@ -42,8 +42,16 @@ void bindings() {
     const auto hero=host.object("hero"),target=host.object("target");
     check(host.invoke(hero,"id",Json::array())=="hero","Object identity must be readable");
     check(host.invoke(hero,"media_entries",{"music"})[0][2]=="media:/music/id","Media queries must use the injected shared service");
+    check(host.invoke(hero,"try_media_entries",{"music"})[0]==true,"Recoverable media queries must retain the shared snapshot");
+    media->unavailable=true;
+    check(host.invoke(hero,"try_media_entries",{"music"})==Json::array({false,Json::array(),"Newer media version"}),"Media query failures must preserve a typed result and diagnostic");
+    media->unavailable=false;
+    host.beginCallback();
+    check(host.invoke(hero,"try_ui_image",{"preview","media:/images/missing"})==false,"Unavailable image services must return a recoverable result");
+    host.endCallback(true);
     rejects([&]{host.invoke(hero,"media_import",{"music",false});},"Media import requires an active runtime callback");
     host.beginCallback(true);
+    rejects([&]{host.invoke(hero,"try_ui_image",{"preview","media:/images/missing"});},"Image retry cannot escape a staged initialization");
     rejects([&]{host.invoke(hero,"media_import",{"music",false});},"Media selection cannot escape a staged initialization");
     host.endCallback(false);host.beginCallback();
     check(host.invoke(hero,"media_import",{"music",false})==true&&media->selected,"Media selection must use the injected production operation");

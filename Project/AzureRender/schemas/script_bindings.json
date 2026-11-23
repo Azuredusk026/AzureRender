@@ -40,6 +40,8 @@
     {"name":"media_import","managed":"MediaImport","parameters":[{"name":"kind","type":"string"},{"name":"directory","type":"boolean"}],"result":"boolean","mutating":true},
     {"name":"media_cancel","managed":"MediaCancel","parameters":[],"result":"void","mutating":true},
     {"name":"ui_image","managed":"UiImage","parameters":[{"name":"id","type":"string"},{"name":"reference","type":"string"}],"result":"void","mutating":true},
+    {"name":"try_media_entries","managed":"TryMediaEntries","parameters":[{"name":"kind","type":"string"}],"result":"value","mutating":false},
+    {"name":"try_ui_image","managed":"TryUiImage","parameters":[{"name":"id","type":"string"},{"name":"reference","type":"string"}],"result":"boolean","mutating":true},
     {"name":"local_datetime","managed":"LocalDateTime","parameters":[],"result":"string","mutating":false}
   ]
 }

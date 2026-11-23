@@ -1,0 +1,8 @@
+{
+  "command": [
+    "D:/Projects/FYP/Project/AzureRender/build/runs/20261120-010632-asset-parse-source-diagnostic-d884c7/player-release/AzureScriptBackendContractTests.exe"
+  ],
+  "exitCode": 1,
+  "stdout": "",
+  "stderr": "Unknown script binding: try_media_entries\r\n"
+}

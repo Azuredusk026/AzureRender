@@ -134,6 +134,21 @@ Json ScriptBindingHost::invoke(const ScriptObject& object,const std::string& met
     guard(object,binding.mutating);
     const auto entity=object.identity.entity;
     if(method=="media_entries") return media_ ? media_->entries(args[0]) : Json::array();
+    if(method=="try_media_entries") {
+        if(!media_)return Json::array({false,Json::array(),"Media service unavailable"});
+        try{return Json::array({true,media_->entries(args[0]),""});}
+        catch(const std::exception& error){return Json::array({false,Json::array(),error.what()});}
+    }
+    if(method=="try_ui_image") {
+        if(staging_)throw std::logic_error("Image retry requires a running callback");
+        if(!levels_ || !uiDocument_)return false;
+        try {
+            auto* document=uiDocument_();if(!document)return false;
+            const auto reference=args[1].get<std::string>();
+            document->setImage(args[0],reference.empty()?std::filesystem::path{}:levels_->assets().resolveReference(reference));
+            return true;
+        }catch(const std::exception&){return false;}
+    }
     if(method=="media_status") return media_ ? media_->status() : Json::array({"unavailable",0,0,0,"Media service unavailable"});
     if(method=="media_import" || method=="media_cancel") {
         if(staging_)throw std::logic_error("Media tasks require a running callback");

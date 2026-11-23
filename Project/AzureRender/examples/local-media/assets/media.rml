@@ -1,0 +1,41 @@
+<rml><head><title>本地媒体工作间</title><style>
+body { font-family: LatoLatin; font-size: 16px; margin: 0; width: 100%; height: 100%; color: #e8ebdb; background-color: #152326; }
+div, h1, h2 { display: block; }
+#workspace { position: absolute; left: 4%; top: 3%; width: 92%; }
+h1 { font-size: 26px; margin: 0 0 10px; color: #fff3d1; }
+.intro { color: #a9b9b4; margin-bottom: 16px; }
+.panel { display: inline-block; vertical-align: top; min-height: 414px; padding: 16px; background-color: #20363a; border: 1px #405354; }
+#music-panel { width: 36%; margin-right: 2%; }
+#image-panel { width: 51%; }
+h2 { font-size: 20px; margin: 0 0 10px; color: #e8c88c; }
+button { display: inline-block; padding: 8px 10px; margin: 0 6px 8px 0; color: #ecf0e8; background-color: #355158; border: 1px #567174; }
+button:hover { background-color: #476b6e; }
+#media-play { background-color: #b8cfb3; color: #162b26; }
+.title { margin: 8px 0 6px; font-size: 19px; }
+.counter { margin-bottom: 10px; color: #a9b9b4; }
+.preview-box { height: 220px; margin: 0 0 10px; background-color: #112023; text-align: center; overflow: hidden; }
+#media-preview { max-width: 100%; max-height: 220px; }
+#media-status { margin: 12px 0 8px; color: #e8c88c; }
+.footer { margin-top: 10px; color: #a9b9b4; font-size: 14px; }
+</style></head><body><div id="workspace">
+<h1>本地媒体工作间</h1><div class="intro">导入音乐和图片，在同一项目中继续使用。</div>
+<div class="panel" id="music-panel"><h2>本地音乐</h2>
+<button id="media-import-music" data-action="media-import-music">选择文件</button>
+<button id="media-folder-music" data-action="media-folder-music">选择文件夹</button>
+<div class="title" id="media-music-title">尚未导入音乐</div><div class="counter" id="media-music-count">0 / 0</div>
+<button id="media-music-prev" data-action="media-music-prev">上一首</button>
+<button id="media-play" data-action="media-play">播放</button>
+<button id="media-music-next" data-action="media-music-next">下一首</button>
+<div class="footer">支持 WAV、MP3、FLAC、OGG、M4A。</div></div>
+<div class="panel" id="image-panel"><h2>本地图片</h2>
+<button id="media-import-images" data-action="media-import-images">选择文件</button>
+<button id="media-folder-images" data-action="media-folder-images">选择文件夹</button>
+<div class="preview-box"><img id="media-preview" style="display: none"/></div>
+<div class="title" id="media-image-title">尚未导入图片</div><div class="counter" id="media-image-count">0 / 0</div>
+<button id="media-image-prev" data-action="media-image-prev">上一张</button>
+<button id="media-image-next" data-action="media-image-next">下一张</button></div>
+<div id="media-status"></div>
+<button id="media-refresh" data-action="media-refresh">刷新列表</button>
+<button id="media-cancel" data-action="media-cancel">取消导入</button>
+<div class="footer">已导入的媒体保存在项目档案中，重开后可继续使用。</div>
+</div></body></rml>

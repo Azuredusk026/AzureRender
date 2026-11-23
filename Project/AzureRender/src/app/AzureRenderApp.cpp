@@ -3,6 +3,7 @@
 #include "runtime/InputPreferences.hpp"
 #include "runtime/ProjectReferenceViews.hpp"
 #include "runtime/ProjectSaveStore.hpp"
+#include "app/LocalMediaService.hpp"
 #include "foundation/FramePacing.hpp"
 #include "assets/AssetDeformation.hpp"
 #include "AzureRenderApp.hpp"
@@ -140,8 +141,13 @@ void AzureRenderApp::run(const AzureRenderOptions& options, const std::filesyste
         gameRuntime_->physics().setMeshResolver(azurerender::collisionMeshAssets(levelSession_->assets()));
         gameRuntime_->physics().validateScene(runtime_);
         scriptRuntime_ = azurerender::application::scripts(levelSession_->project(),runtime_,*gameRuntime_,levelSession_->assets());
-        if (!saveRoot.empty()) scriptRuntime_->setSaveStore(
-            std::make_shared<azurerender::ProjectSaveStore>(saveRoot, levelSession_->project().id));
+        if (!saveRoot.empty()) {
+            auto store=std::make_shared<azurerender::ProjectSaveStore>(saveRoot, levelSession_->project().id);
+            auto media=std::make_shared<azurerender::LocalMediaService>(store);
+            scriptRuntime_->setSaveStore(std::move(store));
+            scriptRuntime_->setMediaService(media);
+            levelSession_->assets().setReferenceResolver([media](const std::string& reference){return media->resolve(reference);});
+        }
         scriptRuntime_->setLevelSession(*levelSession_);
         gameRuntime_->setBeforeStep([this](double delta) { scriptRuntime_->fixedStep(delta); });
         gameRuntime_->setEventHandler([this](const auto& event) { scriptRuntime_->dispatch(event); });

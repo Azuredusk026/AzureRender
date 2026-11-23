@@ -57,3 +57,7 @@ python -B -m unittest tools.npr_room.test_feature_matrix
 [待办退出恢复](todo.md#待办退出恢复)、[习惯名称退出恢复](work-calendar.md#习惯名称退出恢复)及[整合工时退出恢复](work-calendar.md#整合日历工时退出恢复)记录原创项目的输入、保存和版本保护。
 
 [人工复验登记](manual-retest.md)保存版本、步骤、通过条件及已有自动证据。
+
+[原创本地媒体](platform-scenarios.md#player-本地媒体入口)记录五种音乐与三种图片扩展名。
+原生选择、播放、图片像素、搬移、重开与版本保护通过。
+正式房间装配按用户恢复该范围后接续。

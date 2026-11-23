@@ -98,6 +98,13 @@ azurerender::PathSelectionResult select(azurerender::PathSelectionRequest reques
 
 int main(int argc, char** argv) {
     try {
+        if(argc==2 && std::string(argv[1])=="--external-folder") {
+            azurerender::PathSelectionRequest external;
+            external.title="Azure external folder";external.directory=true;external.multiple=true;
+            const auto selected=azurerender::choosePath(external);
+            std::cout<<nlohmann::json{{"path",selected.path.u8string()},{"cancelled",selected.cancelled},{"diagnostic",selected.diagnostic}}.dump()<<'\n';
+            return selected.cancelled||!selected.diagnostic.empty()?1:0;
+        }
         require(argc == 2, "Expected a managed fixture directory");
         const auto root = std::filesystem::absolute(argv[1]) / std::filesystem::u8path(u8"中文 选择");
         std::filesystem::create_directories(root);
@@ -128,6 +135,13 @@ int main(int argc, char** argv) {
         require(!folder.cancelled && folder.diagnostic.empty() && folder.path == child
             && folder.paths.size() == 1 && folder.paths.front() == child,
             "Legacy folder selection must retain its path and complete result");
+        folderRequest.title = "Azure multiple folder path contract";
+        folderRequest.multiple = true;
+        folderRequest.initialDirectory.clear();
+        const auto distinct=root/"Distinct empty folder";std::filesystem::create_directories(distinct);
+        const auto multipleFolders = select(folderRequest, distinct.wstring());
+        require(!multipleFolders.cancelled && multipleFolders.diagnostic.empty() && multipleFolders.paths.size() == 1
+            && multipleFolders.path == distinct, "Multiple folder selection must honor an explicit directory path");
         request.title = "Azure cancelled path contract";
         const auto cancelled = select(request, L"", true);
         require(cancelled.cancelled && cancelled.diagnostic.empty() && cancelled.path.empty() && cancelled.paths.empty(),

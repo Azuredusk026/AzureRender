@@ -58,9 +58,9 @@ struct GameUi::Impl: Rml::EventListener {
             if(!Rml::LoadFontFace(font.generic_u8string()))throw std::runtime_error("Game UI font failed to load");
             if(path.extension()==".azure2d"){
                 if(!Rml::LoadFontFace(font.generic_u8string(),"AzureGame",Rml::Style::FontStyle::Normal))throw std::runtime_error("2D font failed to load");
-                const auto cjk=font.parent_path()/"NotoSansCJKsc-Regular.otf";
-                if(std::filesystem::is_regular_file(cjk)&&!Rml::LoadFontFace(cjk.generic_u8string(),true))throw std::runtime_error("2D Chinese fallback font failed to load");
             }
+            const auto cjk=font.parent_path()/"NotoSansCJKsc-Regular.otf";
+            if(std::filesystem::is_regular_file(cjk)&&!Rml::LoadFontFace(cjk.generic_u8string(),true))throw std::runtime_error("Chinese fallback font failed to load");
             context=Rml::CreateContext("azure-ui-"+std::to_string(++contextCounter),{640,360},&renderer);
             if(!context)throw std::runtime_error("Game UI context failed to initialize");
             const DocumentDirectoryScope documentDirectory(path.parent_path());
