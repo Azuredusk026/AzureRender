@@ -1,0 +1,476 @@
+{
+  "status": "measured-captured-rim-origin",
+  "strictVisualAcceptance": "failed-user-review",
+  "originalOwnerReceipt": "b108ca8838f961316202bcf02dbf6c78c6839522584323a5fb429e6c1388a9a2",
+  "devices": {
+    "nvidia": {
+      "player": "1a30d925a674ddb1d95876cb80181106a0217e12a7228a35b5980b134954cb69",
+      "frame": "9677c040c5498bd3d1f60a7f73413a6b998fc178bdfae62e2cb60dc09e264b8b",
+      "rim": "cb1836113b841422ebdb1a842a3701c8bca8e23219f55e54b9e7c1d2f3b2d48e",
+      "material": "81317810a5d3256974e6de3ed2087f1c6ebc3f0406c43ff9e66f65848776d55a",
+      "changedOutside": 0,
+      "regions": {
+        "all": {
+          "count": 1184,
+          "overOne": [
+            1125,
+            1122
+          ],
+          "overEight": [
+            242,
+            113
+          ],
+          "peak": [
+            77,
+            75
+          ]
+        },
+        "outline": {
+          "count": 1112,
+          "overOne": [
+            1055,
+            1052
+          ],
+          "overEight": [
+            177,
+            48
+          ],
+          "peak": [
+            59,
+            20
+          ]
+        },
+        "laterCloth": {
+          "count": 57,
+          "overOne": [
+            57,
+            57
+          ],
+          "overEight": [
+            56,
+            56
+          ],
+          "peak": [
+            77,
+            75
+          ]
+        }
+      },
+      "probes": [
+        {
+          "point": [
+            1258,
+            971
+          ],
+          "reference": [
+            95,
+            88,
+            90
+          ],
+          "previous": [
+            69,
+            38,
+            31
+          ],
+          "actual": [
+            99,
+            88,
+            89
+          ],
+          "rim": [
+            126,
+            135,
+            143
+          ]
+        },
+        {
+          "point": [
+            1255,
+            920
+          ],
+          "reference": [
+            86,
+            77,
+            79
+          ],
+          "previous": [
+            67,
+            39,
+            34
+          ],
+          "actual": [
+            90,
+            77,
+            78
+          ],
+          "rim": [
+            108,
+            116,
+            123
+          ]
+        },
+        {
+          "point": [
+            1255,
+            921
+          ],
+          "reference": [
+            87,
+            77,
+            79
+          ],
+          "previous": [
+            67,
+            40,
+            34
+          ],
+          "actual": [
+            90,
+            77,
+            79
+          ],
+          "rim": [
+            108,
+            116,
+            123
+          ]
+        },
+        {
+          "point": [
+            1252,
+            839
+          ],
+          "reference": [
+            139,
+            83,
+            109
+          ],
+          "previous": [
+            65,
+            39,
+            32
+          ],
+          "actual": [
+            82,
+            67,
+            67
+          ],
+          "rim": [
+            90,
+            97,
+            103
+          ]
+        },
+        {
+          "point": [
+            1255,
+            837
+          ],
+          "reference": [
+            131,
+            70,
+            99
+          ],
+          "previous": [
+            69,
+            35,
+            24
+          ],
+          "actual": [
+            69,
+            35,
+            24
+          ],
+          "rim": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "point": [
+            1325,
+            1120
+          ],
+          "reference": [
+            125,
+            121,
+            126
+          ],
+          "previous": [
+            128,
+            121,
+            126
+          ],
+          "actual": [
+            128,
+            121,
+            126
+          ],
+          "rim": [
+            174,
+            187,
+            198
+          ]
+        }
+      ]
+    },
+    "intel": {
+      "player": "1a30d925a674ddb1d95876cb80181106a0217e12a7228a35b5980b134954cb69",
+      "frame": "d9e4765f29878ee57f4330a5403ce44bd6d726fdb22f9a8aed08b115c78cb8b9",
+      "rim": "4d7bd03e70109c09d0b495a636bea2246495e2fc6bedeeab942ba8427884d2d0",
+      "material": "81317810a5d3256974e6de3ed2087f1c6ebc3f0406c43ff9e66f65848776d55a",
+      "changedOutside": 0,
+      "regions": {
+        "all": {
+          "count": 1184,
+          "overOne": [
+            1125,
+            1122
+          ],
+          "overEight": [
+            243,
+            114
+          ],
+          "peak": [
+            77,
+            75
+          ]
+        },
+        "outline": {
+          "count": 1112,
+          "overOne": [
+            1055,
+            1052
+          ],
+          "overEight": [
+            178,
+            49
+          ],
+          "peak": [
+            59,
+            21
+          ]
+        },
+        "laterCloth": {
+          "count": 57,
+          "overOne": [
+            57,
+            57
+          ],
+          "overEight": [
+            56,
+            56
+          ],
+          "peak": [
+            77,
+            75
+          ]
+        }
+      },
+      "probes": [
+        {
+          "point": [
+            1258,
+            971
+          ],
+          "reference": [
+            95,
+            88,
+            90
+          ],
+          "previous": [
+            69,
+            38,
+            31
+          ],
+          "actual": [
+            99,
+            87,
+            89
+          ],
+          "rim": [
+            126,
+            135,
+            143
+          ]
+        },
+        {
+          "point": [
+            1255,
+            920
+          ],
+          "reference": [
+            86,
+            77,
+            79
+          ],
+          "previous": [
+            67,
+            39,
+            34
+          ],
+          "actual": [
+            90,
+            77,
+            79
+          ],
+          "rim": [
+            108,
+            116,
+            123
+          ]
+        },
+        {
+          "point": [
+            1255,
+            921
+          ],
+          "reference": [
+            87,
+            77,
+            79
+          ],
+          "previous": [
+            68,
+            40,
+            34
+          ],
+          "actual": [
+            90,
+            77,
+            79
+          ],
+          "rim": [
+            108,
+            116,
+            123
+          ]
+        },
+        {
+          "point": [
+            1252,
+            839
+          ],
+          "reference": [
+            139,
+            83,
+            109
+          ],
+          "previous": [
+            66,
+            39,
+            32
+          ],
+          "actual": [
+            82,
+            67,
+            67
+          ],
+          "rim": [
+            90,
+            97,
+            103
+          ]
+        },
+        {
+          "point": [
+            1255,
+            837
+          ],
+          "reference": [
+            131,
+            70,
+            99
+          ],
+          "previous": [
+            70,
+            34,
+            24
+          ],
+          "actual": [
+            70,
+            34,
+            24
+          ],
+          "rim": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "point": [
+            1325,
+            1120
+          ],
+          "reference": [
+            125,
+            121,
+            126
+          ],
+          "previous": [
+            128,
+            121,
+            126
+          ],
+          "actual": [
+            128,
+            121,
+            126
+          ],
+          "rim": [
+            174,
+            187,
+            198
+          ]
+        }
+      ]
+    }
+  },
+  "geometrySource": {
+    "sha256": "0fa4c4e28ee6eeb16aec32a4470e546f5881889dfaf2708d63e10a93c2082516",
+    "node": "CapturedBodyOrigin",
+    "translation": [
+      -0.0489501953125,
+      1.008819580078125,
+      0.0535888671875
+    ]
+  },
+  "archive": {
+    "sha256": "da8313419640896f06f07065b7e656bc1f10d737610814aca5d5876057d2cdf0",
+    "members": {
+      "body-outline-native-rim-origin-batch.py": "415eed70281913aeec7b330620b92ee93f5f2a472b7a97f62a42e2d919f977c5",
+      "body-outline-player-isolation.py": "b58dc75583d506c11ac164c5e050980a17282939698144f7668a2d094c8a7896",
+      "trace-body-outline-source.py": "957d26702838cc48766c5e31b7d4eefe8c6ff106cbecc1819cba00fefbc1ca49",
+      "trace-body-outline-residuals-source.json": "6bb186959f57af783c6ce62e8c62864d300b87cc2e070f417bd247f7ffbf129b",
+      "body-outline-residual-light-trace.json": "affc82d15a980a4291d7fa1c5781b803520e3fb7026cbd35947f7350c122a9c1",
+      "native/body-outline-residual-trace-1258-971.json": "5fdf95743562cf6062c31a75153bd567b7e4892fd72089d543431eb2e3eed523",
+      "native/body-outline-residual-trace-1255-920.json": "2ecd3c8089732a968d8919135a7d00320280cfa9a2cd6e490a1b03b20df1c53a",
+      "native/body-outline-residual-trace-1255-921.json": "a13322ccb5ce7aee8cc968a1b3189803050799aacd2096b9546ee23140feaa74",
+      "native/body-outline-residual-trace-1252-839.json": "27cef8ac89fd211ba7eebcb12aedccbb80f97850e2a4d96e74fc117c747853cb",
+      "native/body-outline-residual-trace-1255-837.json": "53260fd9181fca0bbc5cc4dee184bb8893fa1fa6a64c568d3378e771f1c622ef",
+      "native/body-outline-residual-trace-1325-1120.json": "0796992129d5abf6037af041ac7911ac1e96b5f4de8d4461f39c73a3a327e513",
+      "nvidia/beauty/results.json": "5bfa57bf1f7349bf34e5c1ade99068836958f02cfefbb20c17a2eb28fa6b917e",
+      "nvidia/beauty/command.json": "5bc69d0598f11a7bf564f06fd2d85850272dbbb35ce16a74de0d73fbbd29821d",
+      "nvidia/beauty/frames/gpu_capabilities.json": "93c9fb29461fae11a7e57d4e49112071a71940dee571f1f6696ffbf03c392879",
+      "nvidia/beauty/frames/capture_manifest.json": "12886f394da9f9f51bd2242ff8198c3120790bb32f2c9ba15fc6d0bd5b0e6cf5",
+      "nvidia/beauty/body-native-lit-outline-blend-depth.azurematerial": "81317810a5d3256974e6de3ed2087f1c6ebc3f0406c43ff9e66f65848776d55a",
+      "nvidia/rim/results.json": "e65e40c8217153a2efbd72b2505005e5ddc50b7adc2678a50036badcca28d94d",
+      "nvidia/rim/command.json": "e34e7cf74be91a9319678fcf1cb90d0f8358cebbf8341576ae13460795c8d37d",
+      "nvidia/rim/frames/gpu_capabilities.json": "93c9fb29461fae11a7e57d4e49112071a71940dee571f1f6696ffbf03c392879",
+      "nvidia/rim/frames/capture_manifest.json": "4bf39819f5a49f21f06e90ec83a404d9c0bd9a2094185c4254ca9e97a81e5c07",
+      "nvidia/rim/body-native-lit-outline-blend-depth.azurematerial": "81317810a5d3256974e6de3ed2087f1c6ebc3f0406c43ff9e66f65848776d55a",
+      "intel/beauty/results.json": "6c766a118a04a52b54bc125a4f06f70fe676dc269b4e44aa80d6bd1fdb04321c",
+      "intel/beauty/command.json": "cd79810033df65022c68648242c0b83a8cd429a25f56365bd1d655ce80cd1c19",
+      "intel/beauty/frames/gpu_capabilities.json": "a38eaca3509b417cfe23614fe415bd9ccc5622fc682d8623142cdeb7dc3d85cc",
+      "intel/beauty/frames/capture_manifest.json": "eb5823ce1e4b3c1af03fbafe3c7cf7a19f75d735c0c6672ec030755dce977515",
+      "intel/beauty/body-native-lit-outline-blend-depth.azurematerial": "81317810a5d3256974e6de3ed2087f1c6ebc3f0406c43ff9e66f65848776d55a",
+      "intel/rim/results.json": "679f8174fea829a01ffbe11a07e57161f9ab9c8ffdeffaed8c1cbaf73f68141c",
+      "intel/rim/command.json": "4041eed825fa1436ee7f32e6ab9bf9304072d9f0fb1a28daf81a21f324431d9e",
+      "intel/rim/frames/gpu_capabilities.json": "a38eaca3509b417cfe23614fe415bd9ccc5622fc682d8623142cdeb7dc3d85cc",
+      "intel/rim/frames/capture_manifest.json": "b6984e3f7d963c56834b605bb77fe29739a6283189667818f37972d46c3124a5",
+      "intel/rim/body-native-lit-outline-blend-depth.azurematerial": "81317810a5d3256974e6de3ed2087f1c6ebc3f0406c43ff9e66f65848776d55a"
+    }
+  }
+}

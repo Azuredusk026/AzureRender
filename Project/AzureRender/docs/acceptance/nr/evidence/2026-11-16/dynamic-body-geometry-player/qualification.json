@@ -1,0 +1,672 @@
+{
+  "status": "verified-dual-device-silhouette-control",
+  "jointSceneAcceptance": "pending",
+  "pairedDevices": [
+    {
+      "status": "rendered-control",
+      "productionAppearanceScope": false,
+      "sourceClip": 9,
+      "fixtureClip": 0,
+      "variants": [
+        {
+          "source": "b1f9d78053c0e36c966502847c0a90688307a3d98808db93ff8465a620e6e883",
+          "slim": "f3b177f4b8e2aa9a63d007b110cac3dd1571857ba719cdf92c4dd1b22d10ed1d",
+          "bytes": 991216,
+          "attributes": {
+            "POSITION": "eb3216d2aeaf20c9f1dfbd62abd2a9c3da17ffa0e4d954295ca1fffe9d4ffa54",
+            "NORMAL": "10ff9ffee1814cefc72369a1e389c3f7aba3cff66fd4ad360e7104d28db6563f",
+            "TEXCOORD_0": "2fae78ee079b7df257e9ebc61a1877262a9d599dd2ddcf8efa2d5264557460dc",
+            "TEXCOORD_1": "c201f0f87be7c9715a52eb4e0a9086929729e2c64a8e09109f91acf10e0e8455",
+            "JOINTS_0": "e679261e942e78eec3fdf94fddff2b9923e41eb5dfce59ef8c192d16ba21f1ce",
+            "WEIGHTS_0": "449471eed5d481f6175d311d7181b5b3d9e5f4440623ee9b62a2d3a9a15532e4",
+            "TANGENT": "a1ae0686d7a8e0cd6939edff934eca095c6bed9c366d9d7e070a366dc368ea96",
+            "INDICES": "1ef107b79310a3c62ca0ebc50d977e355f79361fb31ecafa93f0a639f32e0694"
+          },
+          "triangles": 5779,
+          "exactWeightOptIn": false
+        },
+        {
+          "source": "7775d3c775a5446211850f9193460b58b478e419a6ee3d76fd78b3b2ab5de24b",
+          "slim": "88c5d2b05ccd247c9ec2e55ac2348ae7c1a8e752d52d087349fd875986156a75",
+          "bytes": 959928,
+          "attributes": {
+            "POSITION": "ba3a8b490929f76e5033d9884fe9070b5fe25c9058dee0ee4c159f6bb7df38a8",
+            "NORMAL": "b0b98dd8b2e2285353ace6c7d5acd99e2659611b91ed2c7ed3de7e3c76121c22",
+            "TEXCOORD_0": "6b25b0c94baaaa9fd2d0ca21701874124fd39f6de08eafa3408ab1f1a12ca8d9",
+            "TEXCOORD_1": "74a98a2a7f54f99b675e7e1c9a27838d6455f14e3d8b594aa245305d4bcd247f",
+            "JOINTS_0": "3f9e8cebef06037328ea0473529ddea3e7fdc9a0e4a5d7939fc7b4649aa10523",
+            "WEIGHTS_0": "e6d5ccd67a260e2a900df0668e995c8fb806df49807a64658bbd4d648d10dcd4",
+            "TANGENT": "19f49cfa4fee7a8cceba9738d5d361a08a59bd5b3b556311abd5aaecd862c8eb",
+            "INDICES": "87c327a77ccb0d50f38bb087d8682aab02dd603ec88e75d3cc7f2db813e073c4"
+          },
+          "triangles": 5679,
+          "exactWeightOptIn": true
+        }
+      ],
+      "frozenEvidence": {
+        "skin": "ec14f1eb34e26a3ef2b7a0c48696a2f51adf795f646d738275548102752e306f",
+        "nodeTransforms": "3d65fd3336675eb6737cd09efa6f262fc6ec241a205cc8b3aa5477195e8d5939",
+        "clipChannels": "e762c894b2e278aa68a5eca5a0dba57a395046c58f3d7b38ed04d15169c034a5",
+        "clipPayload": "ee6a201d998580acbe7c173ea03288daafcbf3bcaf19c9d4cacc5178dd885b99"
+      },
+      "scope": "dynamic geometry only",
+      "strictJointSceneAcceptance": "pending",
+      "camera": {
+        "position": [
+          -1.1136856370383286,
+          2.2649155253910838,
+          -22.003247939428014
+        ],
+        "target": [
+          -0.7904747977852821,
+          2.2649155253910838,
+          -21.120561838150024
+        ],
+        "facing": [
+          0.3438413183543047,
+          -0.0,
+          0.9390277673170127
+        ],
+        "fov": 49.0,
+        "args": [
+          "--qa-camera-pose",
+          "-1.11368564",
+          "2.26491553",
+          "-22.0032479",
+          "-0.790474798",
+          "2.26491553",
+          "-21.1205618",
+          "49"
+        ]
+      },
+      "device": "nvidia",
+      "records": {
+        "original": {
+          "device": "nvidia",
+          "mode": "original",
+          "driver": 2496905216,
+          "asset": "f3b177f4b8e2aa9a63d007b110cac3dd1571857ba719cdf92c4dd1b22d10ed1d",
+          "player": "98d1bede6d5f5ae4f3750b7f1403e54025007e1d633dd6b588768efa14da5d3e",
+          "frames": {
+            "frame_000000.png": "5356cbd6f754ae66591b62f07266b178b81d8fd96c9221adaf006430438fb4db",
+            "frame_000001.png": "14406bef7eb3c0d33e9f3d4a74001a95496d43889e93a4b58f9a5f8bbaa20a0f"
+          },
+          "command": [
+            "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-150229-face-native-geometry-mask-sampling-d5d93e\\qa-camera-pose-native-weights-release\\AzurePlayer.exe",
+            "--project",
+            "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-150229-face-native-geometry-mask-sampling-d5d93e\\compact-dynamic-geometry-probe\\project-original\\body-topology.azureproject",
+            "--resource-root",
+            "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-125923-body-lit-outline-depth-order-a29b63\\msaa-release",
+            "--capture-dir",
+            "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-150229-face-native-geometry-mask-sampling-d5d93e\\compact-dynamic-geometry-probe\\original-nvidia\\frames",
+            "--runtime-report",
+            "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-150229-face-native-geometry-mask-sampling-d5d93e\\compact-dynamic-geometry-probe\\original-nvidia\\runtime.json",
+            "--width",
+            "1280",
+            "--height",
+            "720",
+            "--capture-frames",
+            "2",
+            "--capture-fps",
+            "24",
+            "--fixed-frame-step",
+            "--qa-camera",
+            "scene",
+            "--qa-light",
+            "scene",
+            "--qa-animation",
+            "--qa-camera-pose",
+            "-1.11368564",
+            "2.26491553",
+            "-22.0032479",
+            "-0.790474798",
+            "2.26491553",
+            "-21.1205618",
+            "49"
+          ],
+          "runtime": "a77a2959c5dfb009e60879e4956e45067b12c19ca55221310fc8536b9fae19e0",
+          "animation": {
+            "blend": 1.0,
+            "clip": 0,
+            "morph": [
+              0.0,
+              0.0
+            ],
+            "node": "hero",
+            "previousClip": 0,
+            "samples": [],
+            "time": 0.03333333333333333
+          },
+          "animationFrames": 2,
+          "fixedSteps": 2,
+          "captureManifest": "f7c0124bdb26bce250141648d2305ebe0d3337bc559edf54259c494132f45975"
+        },
+        "candidate": {
+          "device": "nvidia",
+          "mode": "candidate",
+          "driver": 2496905216,
+          "asset": "88c5d2b05ccd247c9ec2e55ac2348ae7c1a8e752d52d087349fd875986156a75",
+          "player": "98d1bede6d5f5ae4f3750b7f1403e54025007e1d633dd6b588768efa14da5d3e",
+          "frames": {
+            "frame_000000.png": "4e5980274b713a19dad11fab31b26fc3fc0167b3e1ab7b8333fdd5975b5c37da",
+            "frame_000001.png": "54fc44e368a066084ce33e6098e37017a2b58ae3062bb8a8ff68336af0c7af97"
+          },
+          "command": [
+            "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-150229-face-native-geometry-mask-sampling-d5d93e\\qa-camera-pose-native-weights-release\\AzurePlayer.exe",
+            "--project",
+            "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-150229-face-native-geometry-mask-sampling-d5d93e\\compact-dynamic-geometry-probe\\project-candidate\\body-topology.azureproject",
+            "--resource-root",
+            "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-125923-body-lit-outline-depth-order-a29b63\\msaa-release",
+            "--capture-dir",
+            "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-150229-face-native-geometry-mask-sampling-d5d93e\\compact-dynamic-geometry-probe\\candidate-nvidia\\frames",
+            "--runtime-report",
+            "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-150229-face-native-geometry-mask-sampling-d5d93e\\compact-dynamic-geometry-probe\\candidate-nvidia\\runtime.json",
+            "--width",
+            "1280",
+            "--height",
+            "720",
+            "--capture-frames",
+            "2",
+            "--capture-fps",
+            "24",
+            "--fixed-frame-step",
+            "--qa-camera",
+            "scene",
+            "--qa-light",
+            "scene",
+            "--qa-animation",
+            "--qa-camera-pose",
+            "-1.11368564",
+            "2.26491553",
+            "-22.0032479",
+            "-0.790474798",
+            "2.26491553",
+            "-21.1205618",
+            "49"
+          ],
+          "runtime": "fd91f9903c2bc14e27ae4ac497880b671f59d544ce728e34f59cd8be56a4fae8",
+          "animation": {
+            "blend": 1.0,
+            "clip": 0,
+            "morph": [
+              0.0,
+              0.0
+            ],
+            "node": "hero",
+            "previousClip": 0,
+            "samples": [],
+            "time": 0.03333333333333333
+          },
+          "animationFrames": 2,
+          "fixedSteps": 2,
+          "captureManifest": "63001fc425f9022f99cfa0e736f47331d7212e210a1ba362cc8280861084a8ab"
+        }
+      },
+      "scores": {
+        "frame_000000.png": {
+          "maxRgbDelta": 168,
+          "changedOverOne": 4701,
+          "changeBounds": [
+            206,
+            479,
+            432,
+            612
+          ],
+          "formerVisible": 80787,
+          "candidateVisible": 76090,
+          "appearingPixels": 2,
+          "disappearingPixels": 4699,
+          "edgeChangeGroups": [
+            4691,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "frame_000001.png": {
+          "maxRgbDelta": 168,
+          "changedOverOne": 4699,
+          "changeBounds": [
+            306,
+            479,
+            434,
+            604
+          ],
+          "formerVisible": 80781,
+          "candidateVisible": 76084,
+          "appearingPixels": 1,
+          "disappearingPixels": 4698,
+          "edgeChangeGroups": [
+            4695,
+            1,
+            1,
+            1,
+            1
+          ]
+        }
+      }
+    },
+    {
+      "status": "rendered-control",
+      "productionAppearanceScope": false,
+      "sourceClip": 9,
+      "fixtureClip": 0,
+      "variants": [
+        {
+          "source": "b1f9d78053c0e36c966502847c0a90688307a3d98808db93ff8465a620e6e883",
+          "slim": "f3b177f4b8e2aa9a63d007b110cac3dd1571857ba719cdf92c4dd1b22d10ed1d",
+          "bytes": 991216,
+          "attributes": {
+            "POSITION": "eb3216d2aeaf20c9f1dfbd62abd2a9c3da17ffa0e4d954295ca1fffe9d4ffa54",
+            "NORMAL": "10ff9ffee1814cefc72369a1e389c3f7aba3cff66fd4ad360e7104d28db6563f",
+            "TEXCOORD_0": "2fae78ee079b7df257e9ebc61a1877262a9d599dd2ddcf8efa2d5264557460dc",
+            "TEXCOORD_1": "c201f0f87be7c9715a52eb4e0a9086929729e2c64a8e09109f91acf10e0e8455",
+            "JOINTS_0": "e679261e942e78eec3fdf94fddff2b9923e41eb5dfce59ef8c192d16ba21f1ce",
+            "WEIGHTS_0": "449471eed5d481f6175d311d7181b5b3d9e5f4440623ee9b62a2d3a9a15532e4",
+            "TANGENT": "a1ae0686d7a8e0cd6939edff934eca095c6bed9c366d9d7e070a366dc368ea96",
+            "INDICES": "1ef107b79310a3c62ca0ebc50d977e355f79361fb31ecafa93f0a639f32e0694"
+          },
+          "triangles": 5779,
+          "exactWeightOptIn": false
+        },
+        {
+          "source": "7775d3c775a5446211850f9193460b58b478e419a6ee3d76fd78b3b2ab5de24b",
+          "slim": "88c5d2b05ccd247c9ec2e55ac2348ae7c1a8e752d52d087349fd875986156a75",
+          "bytes": 959928,
+          "attributes": {
+            "POSITION": "ba3a8b490929f76e5033d9884fe9070b5fe25c9058dee0ee4c159f6bb7df38a8",
+            "NORMAL": "b0b98dd8b2e2285353ace6c7d5acd99e2659611b91ed2c7ed3de7e3c76121c22",
+            "TEXCOORD_0": "6b25b0c94baaaa9fd2d0ca21701874124fd39f6de08eafa3408ab1f1a12ca8d9",
+            "TEXCOORD_1": "74a98a2a7f54f99b675e7e1c9a27838d6455f14e3d8b594aa245305d4bcd247f",
+            "JOINTS_0": "3f9e8cebef06037328ea0473529ddea3e7fdc9a0e4a5d7939fc7b4649aa10523",
+            "WEIGHTS_0": "e6d5ccd67a260e2a900df0668e995c8fb806df49807a64658bbd4d648d10dcd4",
+            "TANGENT": "19f49cfa4fee7a8cceba9738d5d361a08a59bd5b3b556311abd5aaecd862c8eb",
+            "INDICES": "87c327a77ccb0d50f38bb087d8682aab02dd603ec88e75d3cc7f2db813e073c4"
+          },
+          "triangles": 5679,
+          "exactWeightOptIn": true
+        }
+      ],
+      "frozenEvidence": {
+        "skin": "ec14f1eb34e26a3ef2b7a0c48696a2f51adf795f646d738275548102752e306f",
+        "nodeTransforms": "3d65fd3336675eb6737cd09efa6f262fc6ec241a205cc8b3aa5477195e8d5939",
+        "clipChannels": "e762c894b2e278aa68a5eca5a0dba57a395046c58f3d7b38ed04d15169c034a5",
+        "clipPayload": "ee6a201d998580acbe7c173ea03288daafcbf3bcaf19c9d4cacc5178dd885b99"
+      },
+      "scope": "dynamic geometry only",
+      "strictJointSceneAcceptance": "pending",
+      "camera": {
+        "position": [
+          -1.1136856370383286,
+          2.2649155253910838,
+          -22.003247939428014
+        ],
+        "target": [
+          -0.7904747977852821,
+          2.2649155253910838,
+          -21.120561838150024
+        ],
+        "facing": [
+          0.3438413183543047,
+          -0.0,
+          0.9390277673170127
+        ],
+        "fov": 49.0,
+        "args": [
+          "--qa-camera-pose",
+          "-1.11368564",
+          "2.26491553",
+          "-22.0032479",
+          "-0.790474798",
+          "2.26491553",
+          "-21.1205618",
+          "49"
+        ]
+      },
+      "device": "intel",
+      "records": {
+        "original": {
+          "device": "intel",
+          "mode": "original",
+          "driver": 1661340,
+          "asset": "f3b177f4b8e2aa9a63d007b110cac3dd1571857ba719cdf92c4dd1b22d10ed1d",
+          "player": "98d1bede6d5f5ae4f3750b7f1403e54025007e1d633dd6b588768efa14da5d3e",
+          "frames": {
+            "frame_000000.png": "94bd57dcee9df581c963d6e1aa416eec78ec285582bb900d7899a0d318001eb5",
+            "frame_000001.png": "e3333f48b4e3e2b67817065923f30c349e83b40279ba350e0ecae63f44d0d075"
+          },
+          "command": [
+            "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-150229-face-native-geometry-mask-sampling-d5d93e\\qa-camera-pose-native-weights-release\\AzurePlayer.exe",
+            "--project",
+            "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-150229-face-native-geometry-mask-sampling-d5d93e\\compact-dynamic-geometry-probe\\project-original\\body-topology.azureproject",
+            "--resource-root",
+            "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-125923-body-lit-outline-depth-order-a29b63\\msaa-release",
+            "--capture-dir",
+            "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-150229-face-native-geometry-mask-sampling-d5d93e\\compact-dynamic-geometry-probe\\original-intel\\frames",
+            "--runtime-report",
+            "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-150229-face-native-geometry-mask-sampling-d5d93e\\compact-dynamic-geometry-probe\\original-intel\\runtime.json",
+            "--width",
+            "1280",
+            "--height",
+            "720",
+            "--capture-frames",
+            "2",
+            "--capture-fps",
+            "24",
+            "--fixed-frame-step",
+            "--qa-camera",
+            "scene",
+            "--qa-light",
+            "scene",
+            "--qa-animation",
+            "--qa-camera-pose",
+            "-1.11368564",
+            "2.26491553",
+            "-22.0032479",
+            "-0.790474798",
+            "2.26491553",
+            "-21.1205618",
+            "49"
+          ],
+          "runtime": "e6d98e2888bc0aa9b74cfecf55169f0e9d39dddeb4a679cb68f859575fc45b79",
+          "animation": {
+            "blend": 1.0,
+            "clip": 0,
+            "morph": [
+              0.0,
+              0.0
+            ],
+            "node": "hero",
+            "previousClip": 0,
+            "samples": [],
+            "time": 0.03333333333333333
+          },
+          "animationFrames": 2,
+          "fixedSteps": 2,
+          "captureManifest": "0073337814671458b2d7711a592908699a6f0be5e452567a32b35f9c7fdfc0aa"
+        },
+        "candidate": {
+          "device": "intel",
+          "mode": "candidate",
+          "driver": 1661340,
+          "asset": "88c5d2b05ccd247c9ec2e55ac2348ae7c1a8e752d52d087349fd875986156a75",
+          "player": "98d1bede6d5f5ae4f3750b7f1403e54025007e1d633dd6b588768efa14da5d3e",
+          "frames": {
+            "frame_000000.png": "b94b923ce2b91eb827b98501451f6f3fde0430ff17068ad3f577635e867e61b6",
+            "frame_000001.png": "580ef31ee90b8ecde9a0645ee42472ef0ee9521a0d491add68bbeb55069b1aff"
+          },
+          "command": [
+            "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-150229-face-native-geometry-mask-sampling-d5d93e\\qa-camera-pose-native-weights-release\\AzurePlayer.exe",
+            "--project",
+            "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-150229-face-native-geometry-mask-sampling-d5d93e\\compact-dynamic-geometry-probe\\project-candidate\\body-topology.azureproject",
+            "--resource-root",
+            "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-125923-body-lit-outline-depth-order-a29b63\\msaa-release",
+            "--capture-dir",
+            "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-150229-face-native-geometry-mask-sampling-d5d93e\\compact-dynamic-geometry-probe\\candidate-intel\\frames",
+            "--runtime-report",
+            "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-150229-face-native-geometry-mask-sampling-d5d93e\\compact-dynamic-geometry-probe\\candidate-intel\\runtime.json",
+            "--width",
+            "1280",
+            "--height",
+            "720",
+            "--capture-frames",
+            "2",
+            "--capture-fps",
+            "24",
+            "--fixed-frame-step",
+            "--qa-camera",
+            "scene",
+            "--qa-light",
+            "scene",
+            "--qa-animation",
+            "--qa-camera-pose",
+            "-1.11368564",
+            "2.26491553",
+            "-22.0032479",
+            "-0.790474798",
+            "2.26491553",
+            "-21.1205618",
+            "49"
+          ],
+          "runtime": "8771001e678681fac02d792d62e7f16e73306b0ef0e8890ad8dc4b112b55490b",
+          "animation": {
+            "blend": 1.0,
+            "clip": 0,
+            "morph": [
+              0.0,
+              0.0
+            ],
+            "node": "hero",
+            "previousClip": 0,
+            "samples": [],
+            "time": 0.03333333333333333
+          },
+          "animationFrames": 2,
+          "fixedSteps": 2,
+          "captureManifest": "ad388e45a2a97bb5cdc471a5598f0b66b74f643e42a5893ef8cdb88a229bb9a5"
+        }
+      },
+      "scores": {
+        "frame_000000.png": {
+          "maxRgbDelta": 168,
+          "changedOverOne": 4701,
+          "changeBounds": [
+            206,
+            479,
+            432,
+            612
+          ],
+          "formerVisible": 80787,
+          "candidateVisible": 76090,
+          "appearingPixels": 2,
+          "disappearingPixels": 4699,
+          "edgeChangeGroups": [
+            4691,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "frame_000001.png": {
+          "maxRgbDelta": 168,
+          "changedOverOne": 4699,
+          "changeBounds": [
+            306,
+            479,
+            434,
+            604
+          ],
+          "formerVisible": 80781,
+          "candidateVisible": 76084,
+          "appearingPixels": 1,
+          "disappearingPixels": 4698,
+          "edgeChangeGroups": [
+            4695,
+            1,
+            1,
+            1,
+            1
+          ]
+        }
+      }
+    }
+  ],
+  "attribution": {
+    "status": "measured-player-triangle-attribution",
+    "uniqueUvTriangles": {
+      "original": 169,
+      "candidate": 69
+    },
+    "frames": {
+      "frame_000000.png": {
+        "bestStep": 0,
+        "poseScores": {
+          "0": {
+            "original": {
+              "winding": "CCW",
+              "maskPixels": 80790,
+              "maskMismatch": 25,
+              "observedChange": 4699,
+              "observedChangeOnOnlyUniqueTriangles": 4694,
+              "observedChangeOnUniqueTriangles": 4695
+            },
+            "candidate": {
+              "winding": "CCW",
+              "maskPixels": 76097,
+              "maskMismatch": 21,
+              "observedChange": 2,
+              "observedChangeOnOnlyUniqueTriangles": 0,
+              "observedChangeOnUniqueTriangles": 0
+            }
+          },
+          "1": {
+            "original": {
+              "winding": "CCW",
+              "maskPixels": 80790,
+              "maskMismatch": 25,
+              "observedChange": 4699,
+              "observedChangeOnOnlyUniqueTriangles": 4694,
+              "observedChangeOnUniqueTriangles": 4695
+            },
+            "candidate": {
+              "winding": "CCW",
+              "maskPixels": 76097,
+              "maskMismatch": 21,
+              "observedChange": 2,
+              "observedChangeOnOnlyUniqueTriangles": 0,
+              "observedChangeOnUniqueTriangles": 0
+            }
+          },
+          "2": {
+            "original": {
+              "winding": "CCW",
+              "maskPixels": 80766,
+              "maskMismatch": 195,
+              "observedChange": 4699,
+              "observedChangeOnOnlyUniqueTriangles": 4691,
+              "observedChangeOnUniqueTriangles": 4695
+            },
+            "candidate": {
+              "winding": "CCW",
+              "maskPixels": 76068,
+              "maskMismatch": 192,
+              "observedChange": 2,
+              "observedChangeOnOnlyUniqueTriangles": 0,
+              "observedChangeOnUniqueTriangles": 0
+            }
+          },
+          "3": {
+            "original": {
+              "winding": "CCW",
+              "maskPixels": 80786,
+              "maskMismatch": 365,
+              "observedChange": 4699,
+              "observedChangeOnOnlyUniqueTriangles": 4684,
+              "observedChangeOnUniqueTriangles": 4691
+            },
+            "candidate": {
+              "winding": "CCW",
+              "maskPixels": 76087,
+              "maskMismatch": 371,
+              "observedChange": 2,
+              "observedChangeOnOnlyUniqueTriangles": 0,
+              "observedChangeOnUniqueTriangles": 0
+            }
+          }
+        }
+      },
+      "frame_000001.png": {
+        "bestStep": 3,
+        "poseScores": {
+          "0": {
+            "original": {
+              "winding": "CCW",
+              "maskPixels": 80790,
+              "maskMismatch": 371,
+              "observedChange": 4698,
+              "observedChangeOnOnlyUniqueTriangles": 4674,
+              "observedChangeOnUniqueTriangles": 4681
+            },
+            "candidate": {
+              "winding": "CCW",
+              "maskPixels": 76097,
+              "maskMismatch": 377,
+              "observedChange": 1,
+              "observedChangeOnOnlyUniqueTriangles": 0,
+              "observedChangeOnUniqueTriangles": 0
+            }
+          },
+          "1": {
+            "original": {
+              "winding": "CCW",
+              "maskPixels": 80790,
+              "maskMismatch": 371,
+              "observedChange": 4698,
+              "observedChangeOnOnlyUniqueTriangles": 4674,
+              "observedChangeOnUniqueTriangles": 4681
+            },
+            "candidate": {
+              "winding": "CCW",
+              "maskPixels": 76097,
+              "maskMismatch": 377,
+              "observedChange": 1,
+              "observedChangeOnOnlyUniqueTriangles": 0,
+              "observedChangeOnUniqueTriangles": 0
+            }
+          },
+          "2": {
+            "original": {
+              "winding": "CCW",
+              "maskPixels": 80766,
+              "maskMismatch": 193,
+              "observedChange": 4698,
+              "observedChangeOnOnlyUniqueTriangles": 4682,
+              "observedChangeOnUniqueTriangles": 4687
+            },
+            "candidate": {
+              "winding": "CCW",
+              "maskPixels": 76068,
+              "maskMismatch": 198,
+              "observedChange": 1,
+              "observedChangeOnOnlyUniqueTriangles": 0,
+              "observedChangeOnUniqueTriangles": 0
+            }
+          },
+          "3": {
+            "original": {
+              "winding": "CCW",
+              "maskPixels": 80786,
+              "maskMismatch": 23,
+              "observedChange": 4698,
+              "observedChangeOnOnlyUniqueTriangles": 4698,
+              "observedChangeOnUniqueTriangles": 4698
+            },
+            "candidate": {
+              "winding": "CCW",
+              "maskPixels": 76087,
+              "maskMismatch": 27,
+              "observedChange": 1,
+              "observedChangeOnOnlyUniqueTriangles": 0,
+              "observedChangeOnUniqueTriangles": 0
+            }
+          }
+        }
+      }
+    }
+  },
+  "archive": "2faffb43cdb54e3288947ad509c59cb579fa5fa0a143441ead2f467ef2e88982"
+}

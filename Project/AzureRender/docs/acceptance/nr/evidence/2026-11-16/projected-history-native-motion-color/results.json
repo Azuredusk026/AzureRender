@@ -1,0 +1,217 @@
+{
+  "status": "native-rendered-history-source-motion-control",
+  "previousColor": "9667b36a4cf8716ca807be9a5ea270b47c8981fd38427dc22304e649ffa679a8",
+  "motion": "5c114bb08d77d97949439fae4b43a9c62ff21636ca8a71768da408706ffb9549",
+  "coordinate": "06b62ec48bd53ccf1a29bc73202bbafcb55ddc78bff2db3cf485bebc699396d6",
+  "nativeTrace": "593fbb22eedb5dfe6897b0edff7e913015e341d2551a26909f4e0cda2c87a8ee",
+  "playerTrace": "6eaa98569e8811f8db33de96b5fc997c7ace19908325ea1395c06d8910d27ae3",
+  "playerConfidence": "a2c0f82a7ca1eb5a6bef9422e7e5ce99b44f7ce094897eb75f598bd52ce7d955",
+  "scope": "Fixed native prior HDR image, original native output and retained Player trace at the same receiving coordinate. The control samples the inferred pre-motion UV. Only unique native motion cells, stable source texels, reproduced native packed colors, and receiving surfaces within 2 cm are counted.",
+  "packedNativeControl": {
+    "centerFloor": {
+      "stable": 19867,
+      "exact": 19867,
+      "excludedControls": []
+    },
+    "cyanRing": {
+      "stable": 6214,
+      "exact": 6214,
+      "excludedControls": []
+    },
+    "archivedFloor": {
+      "stable": 22190,
+      "exact": 22182,
+      "excludedControls": [
+        [
+          44,
+          72
+        ],
+        [
+          67,
+          191
+        ],
+        [
+          88,
+          152
+        ],
+        [
+          88,
+          185
+        ],
+        [
+          96,
+          28
+        ],
+        [
+          97,
+          154
+        ],
+        [
+          107,
+          86
+        ],
+        [
+          108,
+          89
+        ]
+      ]
+    }
+  },
+  "regions": {
+    "centerFloor": {
+      "samples": 17159,
+      "samplesChanged": 6860,
+      "absoluteLumaMotionEffect": [
+        0.0,
+        0.025448242187499998,
+        0.16286654296874992,
+        0.4486258911132812
+      ],
+      "weightedRawAbsoluteError": 1573.3987849419193,
+      "weightedAbsoluteErrorWithoutNativeMotion": 1580.7641795802501,
+      "weightedNativeMotionAbsoluteChange": 168.35763801164813,
+      "observedErrorFractionBoundFromOnlyNativeMotion": 0.10700252194351537,
+      "observedWeightedErrorRelativeChange": 0.004681200156515075
+    },
+    "cyanRing": {
+      "samples": 5741,
+      "samplesChanged": 3649,
+      "absoluteLumaMotionEffect": [
+        0.0009765624999999861,
+        0.035504980468749975,
+        0.19499212890625078,
+        0.36014599609375
+      ],
+      "weightedRawAbsoluteError": 579.5767191082764,
+      "weightedAbsoluteErrorWithoutNativeMotion": 595.8748289306282,
+      "weightedNativeMotionAbsoluteChange": 75.18449283495136,
+      "observedErrorFractionBoundFromOnlyNativeMotion": 0.1297231071507298,
+      "observedWeightedErrorRelativeChange": 0.028120711693574663
+    },
+    "archivedFloor": {
+      "samples": 21050,
+      "samplesChanged": 3591,
+      "absoluteLumaMotionEffect": [
+        0.0,
+        0.003906250000000028,
+        0.09593315234374991,
+        0.36014599609375
+      ],
+      "weightedRawAbsoluteError": 1951.9501123587274,
+      "weightedAbsoluteErrorWithoutNativeMotion": 1965.6717108856499,
+      "weightedNativeMotionAbsoluteChange": 87.03597559685201,
+      "observedErrorFractionBoundFromOnlyNativeMotion": 0.04458924182835705,
+      "observedWeightedErrorRelativeChange": 0.007029687101142823
+    }
+  },
+  "archive": {
+    "sha256": "6d728973d68342c6d2045710599f601a0ce2043cba7d92f0975f2f8f7db6914a",
+    "members": {
+      "source/native-motion-record.json": "5bdb9f9f5c85262270b4b54746156df390b2c88c93003ed1ae6de40a329c394b",
+      "analysis/projected-native-motion-inverse.py": "6513d5cdcd17cbba66de9428ce842d4bff7922101067634d169217f57395b4bf",
+      "analysis/preview-native-history-color-support.py": "13636aed24035c46bacb89e3f93c10ebca8b9f03c92c900a63fc5747587230ff",
+      "analysis/score-projected-native-history-color-motion.py": "bf093c9ce68db340249a2dc41ec059e6e9769438f516bbe9f0d80861eb784aa8",
+      "analysis/native-history-color-motion-control.json": "3e5c339e3a432c67c4a859395f363dde4d1ef6a5c53ca0744ebfa1ed2fd0525f",
+      "analysis/score-projected-native-camera-motion-control.py": "b1f457ca72033ecae0d3e90cacbad849420c634a2c1e4d725f325f9fd7f93ca1",
+      "analysis/native-camera-motion-control.json": "d02eb41d22db2f9b9f363789daf43750751b879b73570abbd6aca95abbf23c05",
+      "analysis/score-projected-same-cell-motion.py": "93d94b3d26d4dd1b3f1d3ffdefc782657d289df21e03a140c66bdbe388610d97",
+      "analysis/same-source-cell-motion-comparison.json": "afa5d39cad98ddca36f9cd5a13a1761f423b46a99a9f4571743b78df10a31e1b"
+    }
+  },
+  "cameraControl": {
+    "centerFloor": {
+      "usable": 19394,
+      "nativeObservedMotionPixels": [
+        8.432761922669174e-07,
+        6.439066168319452e-06,
+        2.232909202805861,
+        2.7065078650448733,
+        2.7065078650448733
+      ],
+      "stationaryPointCameraMotionPixels": [
+        0.6009304218467874,
+        0.6009354746834938,
+        0.6009402699190038,
+        0.6009417814274229,
+        0.6009428606313681
+      ],
+      "residualAfterStationaryCameraPixels": [
+        0.6009338697567409,
+        0.6009417049959704,
+        2.431946870809424,
+        2.6192130167371794,
+        2.7067618394883945
+      ],
+      "residualOverHalfPixel": 19394,
+      "residualOverOnePixel": 8429
+    },
+    "cyanRing": {
+      "usable": 6053,
+      "nativeObservedMotionPixels": [
+        1.6761417052137142e-06,
+        1.6776978214458833,
+        2.232875320055471,
+        2.232909202805861,
+        2.232909202805861
+      ],
+      "stationaryPointCameraMotionPixels": [
+        0.6009303729113089,
+        0.6009327792130807,
+        0.6009355723029972,
+        0.600937250857132,
+        0.600941683962127
+      ],
+      "residualAfterStationaryCameraPixels": [
+        0.6009338029937583,
+        2.0745807579093163,
+        2.6185560702651043,
+        2.6192126255270582,
+        2.619213721473276
+      ],
+      "residualOverHalfPixel": 6053,
+      "residualOverOnePixel": 4141
+    },
+    "archivedFloor": {
+      "usable": 21974,
+      "nativeObservedMotionPixels": [
+        1.6761417052137142e-06,
+        8.628452587271713e-06,
+        1.607817728368076,
+        2.232875320055471,
+        2.706426836845692
+      ],
+      "stationaryPointCameraMotionPixels": [
+        0.6009334190798336,
+        0.6009375182173926,
+        0.60094174223883,
+        0.6009434492951036,
+        0.6009457722904595
+      ],
+      "residualAfterStationaryCameraPixels": [
+        0.60093252670133,
+        0.6009395789838943,
+        2.007366906692621,
+        2.6185560991177135,
+        2.618557953166303
+      ],
+      "residualOverHalfPixel": 21974,
+      "residualOverOnePixel": 4494
+    }
+  },
+  "sampledPlayerMotionRoi": [
+    1060,
+    1100,
+    1460,
+    1360
+  ],
+  "sampledPlayerMotionCoverage": {
+    "centerFloor": 8,
+    "cyanRing": 9,
+    "archivedFloor": 51
+  },
+  "event": {
+    "native": 8702,
+    "player": 21668
+  },
+  "frozenRgbGateChanged": false
+}

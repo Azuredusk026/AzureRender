@@ -1,0 +1,265 @@
+{
+  "status": "verified-pixel-comparison",
+  "overallVisualAcceptance": "failed-user-review",
+  "nativeDepthReadback": {
+    "status": "qualified",
+    "positions": 14,
+    "overlaps": 12,
+    "nearestPassed": 12,
+    "screenDepthSuppressionEnabled": false,
+    "depthUnchangedInColorPass": 14
+  },
+  "nativeDepthPipeline": {
+    "1339": {
+      "id": "ResourceId::19970",
+      "reference": 4,
+      "descriptor": {
+        "DepthEnable": true,
+        "DepthWriteMask": "D3D11_DEPTH_WRITE_MASK_ALL",
+        "DepthFunc": "D3D11_COMPARISON_GREATER_EQUAL",
+        "StencilEnable": true,
+        "StencilReadMask": 20,
+        "StencilWriteMask": 255,
+        "FrontFace": {
+          "StencilFailOp": "D3D11_STENCIL_OP_KEEP",
+          "StencilDepthFailOp": "D3D11_STENCIL_OP_KEEP",
+          "StencilPassOp": "D3D11_STENCIL_OP_KEEP",
+          "StencilFunc": "D3D11_COMPARISON_EQUAL"
+        },
+        "BackFace": {
+          "StencilFailOp": "D3D11_STENCIL_OP_KEEP",
+          "StencilDepthFailOp": "D3D11_STENCIL_OP_KEEP",
+          "StencilPassOp": "D3D11_STENCIL_OP_KEEP",
+          "StencilFunc": "D3D11_COMPARISON_EQUAL"
+        }
+      },
+      "definitionChunk": 471,
+      "bindingChunk": 2152,
+      "rasterizer": {
+        "id": "ResourceId::2270",
+        "bindingChunk": 2151,
+        "definition": {
+          "Descriptor": {
+            "FillMode": "D3D11_FILL_SOLID",
+            "CullMode": "D3D11_CULL_BACK",
+            "FrontCounterClockwise": true,
+            "DepthBias": 0,
+            "DepthBiasClamp": 0.0,
+            "SlopeScaledDepthBias": 0.0,
+            "DepthClipEnable": true,
+            "ScissorEnable": true,
+            "MultisampleEnable": false,
+            "AntialiasedLineEnable": false
+          },
+          "pState": "ResourceId::2270"
+        }
+      }
+    },
+    "1358": {
+      "id": "ResourceId::16260",
+      "reference": 4,
+      "descriptor": {
+        "DepthEnable": true,
+        "DepthWriteMask": "D3D11_DEPTH_WRITE_MASK_ZERO",
+        "DepthFunc": "D3D11_COMPARISON_GREATER_EQUAL",
+        "StencilEnable": true,
+        "StencilReadMask": 20,
+        "StencilWriteMask": 255,
+        "FrontFace": {
+          "StencilFailOp": "D3D11_STENCIL_OP_KEEP",
+          "StencilDepthFailOp": "D3D11_STENCIL_OP_KEEP",
+          "StencilPassOp": "D3D11_STENCIL_OP_KEEP",
+          "StencilFunc": "D3D11_COMPARISON_EQUAL"
+        },
+        "BackFace": {
+          "StencilFailOp": "D3D11_STENCIL_OP_KEEP",
+          "StencilDepthFailOp": "D3D11_STENCIL_OP_KEEP",
+          "StencilPassOp": "D3D11_STENCIL_OP_KEEP",
+          "StencilFunc": "D3D11_COMPARISON_EQUAL"
+        }
+      },
+      "definitionChunk": 358,
+      "bindingChunk": 2174,
+      "rasterizer": {
+        "id": "ResourceId::2270",
+        "bindingChunk": 2151,
+        "definition": {
+          "Descriptor": {
+            "FillMode": "D3D11_FILL_SOLID",
+            "CullMode": "D3D11_CULL_BACK",
+            "FrontCounterClockwise": true,
+            "DepthBias": 0,
+            "DepthBiasClamp": 0.0,
+            "SlopeScaledDepthBias": 0.0,
+            "DepthClipEnable": true,
+            "ScissorEnable": true,
+            "MultisampleEnable": false,
+            "AntialiasedLineEnable": false
+          },
+          "pState": "ResourceId::2270"
+        }
+      }
+    }
+  },
+  "nativeCaptureSha256": "fa2ca267f7168f5603e83ad5f817a3074d8dbee23a216e6ab8ef2c340ec06a90",
+  "nativeLaterDraw": {
+    "event": 1383,
+    "target": "ResourceId::141925",
+    "changedPixels": 27832,
+    "beforeSha256": "f296f8072c0a7b81f1527571e7a9ec8ca5f393f78d29b691af34541f6c602930",
+    "afterSha256": "b742829a6c1b20917dc88a25670090509ec89d7a5885add5931acd40d87ff484",
+    "sharedWithNativeHairShadow": 0,
+    "sharedWithFaceHairShadow": 0,
+    "sharedWithKnownOverlaps": []
+  },
+  "referenceSha256": "48afd6546c23cfa85099a765cc94ada4813a684538c695faf6d70d6daf2261b5",
+  "coveredFaceHairShadow": 264,
+  "depthPrepassGeometryPrediction": [
+    {
+      "point": [
+        1256,
+        224
+      ],
+      "winner": 27,
+      "depthGap": 2.865653925002154e-05
+    },
+    {
+      "point": [
+        1256,
+        225
+      ],
+      "winner": 27,
+      "depthGap": 2.93936243713315e-05
+    },
+    {
+      "point": [
+        1256,
+        226
+      ],
+      "winner": 27,
+      "depthGap": 3.0133922459152362e-05
+    },
+    {
+      "point": [
+        1256,
+        227
+      ],
+      "winner": 27,
+      "depthGap": 3.1204062056228166e-05
+    },
+    {
+      "point": [
+        1256,
+        228
+      ],
+      "winner": 27,
+      "depthGap": 3.227420165330397e-05
+    },
+    {
+      "point": [
+        1302,
+        229
+      ],
+      "winner": 62,
+      "depthGap": 7.876872171595772e-06
+    },
+    {
+      "point": [
+        1302,
+        230
+      ],
+      "winner": 62,
+      "depthGap": 7.008216028218939e-06
+    },
+    {
+      "point": [
+        1302,
+        231
+      ],
+      "winner": 62,
+      "depthGap": 6.139559884855983e-06
+    },
+    {
+      "point": [
+        1302,
+        232
+      ],
+      "winner": 62,
+      "depthGap": 5.270903741493027e-06
+    },
+    {
+      "point": [
+        1302,
+        233
+      ],
+      "winner": 62,
+      "depthGap": 4.402247598130071e-06
+    },
+    {
+      "point": [
+        1320,
+        264
+      ],
+      "winner": 83,
+      "depthGap": 0.00012154799454035942
+    },
+    {
+      "point": [
+        1320,
+        265
+      ],
+      "winner": 83,
+      "depthGap": 0.0001225054505332203
+    }
+  ],
+  "devices": {
+    "nvidia": {
+      "residuals": 20,
+      "withinTwoApplyingTwice": 12,
+      "knownDoubleAppliesWithMultipleTriangles": 12,
+      "withinTwoApplyingZero": 0,
+      "fullFace": {
+        "pixels": 3663,
+        "overOne": 366,
+        "overEight": 64,
+        "peak": 41
+      },
+      "frameSha256": "42f35ac0299c854bdc2ab72359e67cef1ab257aaa20bb0a3c5b2037b9b2b213b"
+    },
+    "intel": {
+      "residuals": 29,
+      "withinTwoApplyingTwice": 12,
+      "knownDoubleAppliesWithMultipleTriangles": 12,
+      "withinTwoApplyingZero": 1,
+      "fullFace": {
+        "pixels": 3663,
+        "overOne": 376,
+        "overEight": 66,
+        "peak": 41
+      },
+      "frameSha256": "5f10a90f9ad4b5ba510202bdd54be2ac5e317659aa2affd25999a103e181bba9"
+    }
+  },
+  "archive": {
+    "sha256": "1c9f17b06dbee40b93a3f556b9d7bb37deb910bef5807601910641e316289ead",
+    "members": {
+      "archive-face-multiply-overlap.py": "d69610a7dcc9813abc6e024c0fa355fa3096e38cdc748aa64f6459ce531d4ba7",
+      "face-multiply-overlap-audit.py": "2ba4c88a20c70d46323fb2e32314b779b673de8c1d626549de3403e87f036ca9",
+      "face-multiply-overlap-audit.json": "869dab169cf0169314d81feb69e94685b0d99fe847d3324c8c974fb89bff0cd9",
+      "score-final-face-ownership.py": "f76a36eb1603794dbe34749825c336ced9958cbdab8dfea1420fff95af297feb",
+      "face-pair-native-ownership.json": "b42a47c6c208ff5ab4cc867c16790c1559dff5016e963be8e7ae118f1cf333e0",
+      "native-1339.asm": "ba3c26e42b9b22fcf090ff4cd3f0adfe9dfd86268060580cfed9399e620068d4",
+      "native-1358.asm": "565667a84671cc9469b526cd35d6e5fd7c4244dfac4fff49f30b2d59bd54c661",
+      "face-shadow-structured-capture.py": "f854ec690fecf6e40122f44b31c3b403d9c0a2cbaad25ebf4e12334358c33cc9",
+      "face-shadow-structured-capture/results.json": "663083b5a73f68c696436c5abc5555febb3e17edd2db35238630c1eef3e9e82a",
+      "face-shadow-structured-capture/request.json": "47d46d3fa5d39fda2c7f3affcfce7c8394bbfb76f1fadd5eddade79f99c5fa12",
+      "quality-legacy-material-cpu-retest.xml": "bdfa9f87928eee834eff68c9a61119c01a2433dde62c9d53bfe4aa9433abfa66",
+      "face-shadow-native-depth-control.py": "8b09d250a25fb61c5861c737712f2b149ca0fab5e97b070af8c939fee3c171e6",
+      "face-shadow-native-depth/request.json": "a6026dc8d05f0d810585a722e14b55ca21ff3c84c92b2ec28387a04370b5e6ab",
+      "face-shadow-native-depth/results.json": "8a6dd16c3e4b008065114eec8189592290e74d62fad4d6bd4a56d495c10247cb",
+      "face-shadow-native-depth/comparison.json": "1c16d05e9790cf9f44bf380c2532e721b9cd11994a80a6f6fde0a9a8f86e8647",
+      "face-shadow-later-draws.py": "3f27b8022f0484e268f8753ded8bddd7374256166d62c69de97a13640f145e7b",
+      "face-shadow-later-draws.json": "1897ece4e1143c1df52e813b6f998ffd93104c7b5cace52d6e8d31bfa0dd7478"
+    }
+  }
+}

@@ -1,0 +1,1780 @@
+{
+  "status": "same-frame-input-deficit-attributed-with-consumer-witness",
+  "diagnosticUnitComplete": true,
+  "visualAcceptancePassed": false,
+  "productionChanged": false,
+  "baseCommit": "fe5ba3b982cdd739b6396c09256aca7f96a6ccde",
+  "previousEvidenceCommit": "8f3db21",
+  "source": {
+    "playerSha256": "1a30d925a674ddb1d95876cb80181106a0217e12a7228a35b5980b134954cb69",
+    "traceShader": "9b77643b12d533f69e7a159ba975dfaf75e56253429371d6f7470ea6a567e20a",
+    "filterShader": "7e305dcfc3227ad7f98d8a8832c976b378a4f62007b2044943e29fc98e1d76bc",
+    "projectSha256": "b5339a45d2f7ae9c4011af3463ab9e5996462a7825166d1034c96654630a88a8",
+    "levelSha256": "d99683193ef5aa3fd002bb4075b2a01639c1bd1a463df9fa484a4ea22944ce7e",
+    "capture": {
+      "path": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261119-220148-nr-player-same-frame-capture-31bfb3\\capture\\capture_frame1.rdc",
+      "bytes": 2063466199,
+      "sha256": "1d61e0a2e9d19de837d96fd6115807c1c19334159f911b38677de634168fa2d6"
+    },
+    "binaryAnd895ShadersExact": true
+  },
+  "maintenance": {
+    "ownerThread": "01a1ee9d-e751-7e81-b0b9-59d870445ec0",
+    "removedGeneratedCaptureBytes": 427388446,
+    "onlyNamedOldFile": true,
+    "otherInputsPreserved": true
+  },
+  "analysis": {
+    "status": "same-frame-stage-lineage-captured",
+    "acceptedVisualChange": false,
+    "frameIdentity": {
+      "native": 3534,
+      "player": 1,
+      "playerDisplayResource": "ResourceId::154",
+      "playerDisplayRgbSha256": "3c4eb3f7852f2aae48c0465936133f1ca2306c87d76388df3fe1274f7565eab9",
+      "fe5ControlFramesExact": true
+    },
+    "bindings": {
+      "native": {
+        "trace": 8702,
+        "filter": 8811,
+        "consumer": 8912
+      },
+      "player": {
+        "trace": 21062,
+        "filter": 21123,
+        "consumer": 21372,
+        "traceShader": "9b77643b12d533f69e7a159ba975dfaf75e56253429371d6f7470ea6a567e20a",
+        "filterShader": "7e305dcfc3227ad7f98d8a8832c976b378a4f62007b2044943e29fc98e1d76bc",
+        "consumerShader": "cd37e326d57b9e0e7ec2ed8a20322a3dfcbe4d542eeed2df976e1b62381f0425",
+        "filteredResource": "ResourceId::10034"
+      }
+    },
+    "regions": {
+      "centerFloor": {
+        "bounds": [
+          505,
+          495,
+          775,
+          585
+        ],
+        "pixels": 24300,
+        "matchedDepthAndBothHit": 19281,
+        "stages": {
+          "trace": {
+            "lumaCorrelation": 0.5400435594201828,
+            "medianNativePlayer": [
+              0.17697265624999997,
+              0.07817910156249999
+            ],
+            "meanAbsoluteLumaDifference": 0.09873687347349591
+          },
+          "filterInput": {
+            "lumaCorrelation": 0.5653894370818212,
+            "medianNativePlayer": [
+              0.16944726562499998,
+              0.07817910156249999
+            ],
+            "meanAbsoluteLumaDifference": 0.09596598629502116
+          },
+          "filtered": {
+            "lumaCorrelation": 0.701029655089972,
+            "medianNativePlayer": [
+              0.17829056,
+              0.10596678607661271
+            ],
+            "meanAbsoluteLumaDifference": 0.07417302449742837
+          },
+          "hdr": {
+            "lumaCorrelation": 0.6597408966011522,
+            "medianNativePlayer": [
+              0.10965354058721934,
+              0.07766391672233357
+            ],
+            "meanAbsoluteLumaDifference": 0.03363709192057438
+          },
+          "display": {
+            "lumaCorrelation": 0.6885888935653169,
+            "medianNativePlayer": [
+              0.29916078431372545,
+              0.23549882352941176
+            ],
+            "meanAbsoluteLumaDifference": 0.06928256422303375
+          }
+        },
+        "rawToFilterChangedNativePlayer": [
+          18352,
+          0
+        ]
+      },
+      "cyanRing": {
+        "bounds": [
+          520,
+          530,
+          635,
+          590
+        ],
+        "pixels": 6900,
+        "matchedDepthAndBothHit": 6478,
+        "stages": {
+          "trace": {
+            "lumaCorrelation": 0.5257739374812861,
+            "medianNativePlayer": [
+              0.18357216796874998,
+              0.13541914062500002
+            ],
+            "meanAbsoluteLumaDifference": 0.10247133167169094
+          },
+          "filterInput": {
+            "lumaCorrelation": 0.4794191207903303,
+            "medianNativePlayer": [
+              0.1859447265625,
+              0.13541914062500002
+            ],
+            "meanAbsoluteLumaDifference": 0.10993789860488971
+          },
+          "filtered": {
+            "lumaCorrelation": 0.6449844216454929,
+            "medianNativePlayer": [
+              0.20230636472338598,
+              0.1664695237508944
+            ],
+            "meanAbsoluteLumaDifference": 0.06593237314931245
+          },
+          "hdr": {
+            "lumaCorrelation": 0.5870325235668024,
+            "medianNativePlayer": [
+              0.11201759991526619,
+              0.09376762499918097
+            ],
+            "meanAbsoluteLumaDifference": 0.02872163897391412
+          },
+          "display": {
+            "lumaCorrelation": 0.5814853716263028,
+            "medianNativePlayer": [
+              0.30226588235294116,
+              0.2763921568627451
+            ],
+            "meanAbsoluteLumaDifference": 0.059853225093680566
+          }
+        },
+        "rawToFilterChangedNativePlayer": [
+          6380,
+          0
+        ]
+      }
+    },
+    "witnesses": [
+      {
+        "displayXY": [
+          1265,
+          1137
+        ],
+        "filterXY": [
+          [
+            632,
+            568
+          ],
+          [
+            633,
+            568
+          ],
+          [
+            632,
+            569
+          ],
+          [
+            633,
+            569
+          ]
+        ],
+        "weights": [
+          0.5625,
+          0.1875,
+          0.1875,
+          0.0625
+        ],
+        "native": {
+          "taps": [
+            [
+              2.1875,
+              1.625,
+              0.5625
+            ],
+            [
+              2.28125,
+              1.65625,
+              0.546875
+            ],
+            [
+              0.7109375,
+              0.5859375,
+              0.3203125
+            ],
+            [
+              0.71875,
+              0.5859375,
+              0.3203125
+            ]
+          ],
+          "bilinear": [
+            1.83642578125,
+            1.37109375,
+            0.4990234375
+          ],
+          "pixelHistoryShaderOutput": [
+            0.5731353163719177,
+            0.436149001121521,
+            0.1940343827009201,
+            0.9975341558456421
+          ],
+          "pixelHistoryColorUsable": true,
+          "quantizedHdr": [
+            0.5703125,
+            0.43359375,
+            0.19140625
+          ],
+          "depth": 4.8035807156777555,
+          "confidenceTaps": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "bilinearConfidence": 1.0
+        },
+        "player": {
+          "taps": [
+            [
+              0.08704883605241776,
+              0.07855626940727234,
+              0.07430998235940933,
+              1.0
+            ],
+            [
+              0.07789473980665207,
+              0.07052631676197052,
+              0.06631579250097275,
+              1.0
+            ],
+            [
+              0.36247867345809937,
+              0.30912747979164124,
+              0.1400584876537323,
+              1.0
+            ],
+            [
+              0.370420902967453,
+              0.30511173605918884,
+              0.1323961317539215,
+              1.0
+            ]
+          ],
+          "bilinear": [
+            0.1546862917020917,
+            0.1344424718990922,
+            0.08876930084079504,
+            1.0
+          ],
+          "pixelHistoryShaderOutput": [
+            -6.259853398707798e+18,
+            -6.266766028311626e+18,
+            0.0,
+            0.0
+          ],
+          "pixelHistoryColorUsable": false,
+          "quantizedHdr": [
+            0.09649658203125,
+            0.08319091796875,
+            0.069580078125,
+            1.0
+          ],
+          "depth": 4.803569569504484
+        },
+        "depthMatched": true
+      },
+      {
+        "displayXY": [
+          1231,
+          1137
+        ],
+        "filterXY": [
+          [
+            615,
+            568
+          ],
+          [
+            616,
+            568
+          ],
+          [
+            615,
+            569
+          ],
+          [
+            616,
+            569
+          ]
+        ],
+        "weights": [
+          0.5625,
+          0.1875,
+          0.1875,
+          0.0625
+        ],
+        "native": {
+          "taps": [
+            [
+              0.14453125,
+              0.150390625,
+              0.12890625
+            ],
+            [
+              0.138671875,
+              0.146484375,
+              0.12890625
+            ],
+            [
+              0.12109375,
+              0.123046875,
+              0.111328125
+            ],
+            [
+              0.1240234375,
+              0.126953125,
+              0.1171875
+            ]
+          ],
+          "bilinear": [
+            0.13775634765625,
+            0.14306640625,
+            0.1248779296875
+          ],
+          "pixelHistoryShaderOutput": [
+            0.09910663217306137,
+            0.09307979792356491,
+            0.08814980834722519,
+            0.9975341558456421
+          ],
+          "pixelHistoryColorUsable": true,
+          "quantizedHdr": [
+            0.0986328125,
+            0.0927734375,
+            0.087890625
+          ],
+          "depth": 4.803582005047326,
+          "confidenceTaps": [
+            0.9921568627450981,
+            0.9921568627450981,
+            1.0,
+            1.0
+          ],
+          "bilinearConfidence": 0.9941176470588236
+        },
+        "player": {
+          "taps": [
+            [
+              0.17860180139541626,
+              0.6025752425193787,
+              0.47466203570365906,
+              1.0
+            ],
+            [
+              0.17824164032936096,
+              0.6619318723678589,
+              0.5230878591537476,
+              1.0
+            ],
+            [
+              0.828125,
+              1.0,
+              0.984375,
+              1.0
+            ],
+            [
+              0.15717147290706635,
+              0.5601863861083984,
+              0.4429902732372284,
+              1.0
+            ]
+          ],
+          "bilinear": [
+            0.2989804754033685,
+            0.6855724491178989,
+            0.5773335732519627,
+            1.0
+          ],
+          "pixelHistoryShaderOutput": [
+            -6.259853398707798e+18,
+            -6.266766028311626e+18,
+            0.0,
+            0.0
+          ],
+          "pixelHistoryColorUsable": false,
+          "quantizedHdr": [
+            0.1290283203125,
+            0.2271728515625,
+            0.1971435546875,
+            1.0
+          ],
+          "depth": 4.803569999292228
+        },
+        "depthMatched": true
+      },
+      {
+        "displayXY": [
+          1537,
+          1137
+        ],
+        "filterXY": [
+          [
+            768,
+            568
+          ],
+          [
+            769,
+            568
+          ],
+          [
+            768,
+            569
+          ],
+          [
+            769,
+            569
+          ]
+        ],
+        "weights": [
+          0.5625,
+          0.1875,
+          0.1875,
+          0.0625
+        ],
+        "native": {
+          "taps": [
+            [
+              0.3125,
+              0.26171875,
+              0.15625
+            ],
+            [
+              0.328125,
+              0.27734375,
+              0.1796875
+            ],
+            [
+              0.33984375,
+              0.2890625,
+              0.19921875
+            ],
+            [
+              0.33203125,
+              0.28515625,
+              0.19921875
+            ]
+          ],
+          "bilinear": [
+            0.32177734375,
+            0.271240234375,
+            0.17138671875
+          ],
+          "pixelHistoryShaderOutput": [
+            0.15064609050750732,
+            0.12917612493038177,
+            0.10096859931945801,
+            0.9975337386131287
+          ],
+          "pixelHistoryColorUsable": true,
+          "quantizedHdr": [
+            0.150390625,
+            0.12890625,
+            0.099609375
+          ],
+          "depth": 4.8035716901101475,
+          "confidenceTaps": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "bilinearConfidence": 1.0
+        },
+        "player": {
+          "taps": [
+            [
+              0.034447818994522095,
+              0.031155012547969818,
+              0.03748733177781105,
+              1.0
+            ],
+            [
+              0.0644611269235611,
+              0.05492519214749336,
+              0.04856814444065094,
+              1.0
+            ],
+            [
+              0.08706281334161758,
+              0.07370079308748245,
+              0.06194431707262993,
+              1.0
+            ],
+            [
+              0.09460365027189255,
+              0.079816535115242,
+              0.06466153264045715,
+              1.0
+            ]
+          ],
+          "bilinear": [
+            0.053700365126132965,
+            0.04663060023449361,
+            0.04584905644878745,
+            1.0
+          ],
+          "pixelHistoryShaderOutput": [
+            -6.259853398707798e+18,
+            -6.266766028311626e+18,
+            0.0,
+            0.0
+          ],
+          "pixelHistoryColorUsable": false,
+          "quantizedHdr": [
+            0.0689697265625,
+            0.059234619140625,
+            0.058349609375,
+            1.0
+          ],
+          "depth": 4.803572578020308
+        },
+        "depthMatched": true
+      },
+      {
+        "displayXY": [
+          1231,
+          1071
+        ],
+        "filterXY": [
+          [
+            615,
+            535
+          ],
+          [
+            616,
+            535
+          ],
+          [
+            615,
+            536
+          ],
+          [
+            616,
+            536
+          ]
+        ],
+        "weights": [
+          0.5625,
+          0.1875,
+          0.1875,
+          0.0625
+        ],
+        "native": {
+          "taps": [
+            [
+              0.140625,
+              0.35546875,
+              0.2734375
+            ],
+            [
+              0.1328125,
+              0.6796875,
+              0.5
+            ],
+            [
+              0.1064453125,
+              0.296875,
+              0.23046875
+            ],
+            [
+              0.14453125,
+              0.38671875,
+              0.296875
+            ]
+          ],
+          "bilinear": [
+            0.13299560546875,
+            0.4072265625,
+            0.309326171875
+          ],
+          "pixelHistoryShaderOutput": [
+            0.10978920012712479,
+            0.20190252363681793,
+            0.16658179461956024,
+            0.9970402717590332
+          ],
+          "pixelHistoryColorUsable": true,
+          "quantizedHdr": [
+            0.109375,
+            0.201171875,
+            0.1640625
+          ],
+          "depth": 5.9669988394637805,
+          "confidenceTaps": [
+            0.996078431372549,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "bilinearConfidence": 0.9977941176470588
+        },
+        "player": {
+          "taps": [
+            [
+              0.023744065314531326,
+              0.02124468982219696,
+              0.019495127722620964,
+              1.0
+            ],
+            [
+              0.02888721227645874,
+              0.026626473292708397,
+              0.024114541709423065,
+              1.0
+            ],
+            [
+              0.15575620532035828,
+              0.1309255063533783,
+              0.09029345214366913,
+              0.0
+            ],
+            [
+              0.07479523867368698,
+              0.09494128823280334,
+              0.07869520038366318,
+              0.6431372761726379
+            ]
+          ],
+          "bilinear": [
+            0.0526513799559325,
+            0.047424964723177254,
+            0.03733595821540803,
+            0.7901960797607899
+          ],
+          "pixelHistoryShaderOutput": [
+            -6.259853398707798e+18,
+            -6.266766028311626e+18,
+            0.0,
+            0.0
+          ],
+          "pixelHistoryColorUsable": false,
+          "quantizedHdr": [
+            0.08984375,
+            0.07684326171875,
+            0.06463623046875,
+            1.0
+          ],
+          "depth": 5.966977523365406
+        },
+        "depthMatched": true
+      }
+    ],
+    "inputRecords": {
+      "native_trace": {
+        "event": 8702,
+        "resource": "ResourceId::15861",
+        "format": "R11G11B10_FLOAT",
+        "width": 1280,
+        "height": 720,
+        "mip": 0,
+        "rect": [
+          498,
+          17,
+          793,
+          242
+        ],
+        "nativeStorageFlip": true,
+        "bytesPerPixel": 4,
+        "fullSha256": "171466668545a4639d9f0a49809e00a262836a09979e6243ed395cf93f2bf853",
+        "file": "trace-6-0.zlib",
+        "sha256": "b398778d2a3183277cdaf3bfe2929767de735adc676331b0319525cb69e83d31",
+        "bytes": 265500,
+        "encodedSha256": "acc875f67b971a5f30dd4890842352944d26f81985ac1baaa65f0dd4a0b85aa1",
+        "encodedBytes": 149317
+      },
+      "native_traceConfidence": {
+        "event": 8702,
+        "resource": "ResourceId::15781",
+        "format": "R8_UNORM",
+        "width": 1280,
+        "height": 720,
+        "mip": 0,
+        "rect": [
+          498,
+          17,
+          793,
+          242
+        ],
+        "nativeStorageFlip": true,
+        "bytesPerPixel": 1,
+        "fullSha256": "2fea6f7dd90000166dd40134eb7b991ba590a4e5dc6ef8824f0998eb6caec609",
+        "file": "trace-8-0.zlib",
+        "sha256": "fc593b51e32b33639f50b56770e483186be2c022b64a08cf3fa13a0947f763be",
+        "bytes": 66375,
+        "encodedSha256": "d02fe7b502b9d893b7721f1d77801a71e4d12d69ad70da965db8cc9fd3649203",
+        "encodedBytes": 5129
+      },
+      "native_filterInput": {
+        "event": 8811,
+        "resource": "ResourceId::16552",
+        "format": "R11G11B10_FLOAT",
+        "width": 1280,
+        "height": 720,
+        "mip": 0,
+        "rect": [
+          498,
+          17,
+          793,
+          242
+        ],
+        "nativeStorageFlip": true,
+        "bytesPerPixel": 4,
+        "fullSha256": "ca852b98375964d60a01c2271840d06e64260921b0805da0316592bc8a2ee272",
+        "file": "filter-2-0.zlib",
+        "sha256": "803b681d4b9ca92de06ed081a96f79c7b33e9bd2dc102b3a6c24c4e376e7df67",
+        "bytes": 265500,
+        "encodedSha256": "d02fde0e0a4343ab575841d37a99ec5c9835f7c4b13841fa74ecfe9b6c2f6722",
+        "encodedBytes": 163117
+      },
+      "native_depth": {
+        "event": 8811,
+        "resource": "ResourceId::16447",
+        "format": "R32_FLOAT",
+        "width": 1280,
+        "height": 720,
+        "mip": 0,
+        "rect": [
+          498,
+          17,
+          793,
+          242
+        ],
+        "nativeStorageFlip": true,
+        "bytesPerPixel": 4,
+        "fullSha256": "2b1858f3d80354c90a194a7a45c76297349e7794bed35dc59d62b694f6703777",
+        "file": "filter-0-0.zlib",
+        "sha256": "2033945f8c4ba6650b00c8d3aa2c28692f5c0710f15b9cbb7358105da1558db1",
+        "bytes": 265500,
+        "encodedSha256": "8cfe7208e4b9e1f3c746ba122742d8ca5271e5d2e8dfcfab1c3cc4cf6b148b1a",
+        "encodedBytes": 26044
+      },
+      "native_filtered": {
+        "event": 8811,
+        "resource": "ResourceId::15925",
+        "format": "R11G11B10_FLOAT",
+        "width": 1280,
+        "height": 720,
+        "mip": 0,
+        "rect": [
+          498,
+          17,
+          793,
+          242
+        ],
+        "nativeStorageFlip": true,
+        "bytesPerPixel": 4,
+        "fullSha256": "5273b1514da46c6ff8a0d6c457d9ffc5cfde855dbc4e80af7d3a9dd43c0aab98",
+        "file": "actual-filter-output.zlib",
+        "sha256": "e8e205829c56ae9c6139667bbd8f8496729fe1ffbc0790a8801dbfe824a756e6",
+        "bytes": 265500,
+        "encodedSha256": "d67830a88496a3e6804d563f46e67722e90dc8960f8bfb92251124486722f666",
+        "encodedBytes": 160558
+      },
+      "native_consumedFiltered": {
+        "event": 8912,
+        "resource": "ResourceId::15925",
+        "format": "R11G11B10_FLOAT",
+        "width": 1280,
+        "height": 720,
+        "mip": 0,
+        "rect": [
+          498,
+          17,
+          793,
+          242
+        ],
+        "nativeStorageFlip": true,
+        "bytesPerPixel": 4,
+        "fullSha256": "5273b1514da46c6ff8a0d6c457d9ffc5cfde855dbc4e80af7d3a9dd43c0aab98",
+        "file": "consumer-filter-8912.zlib",
+        "sha256": "e8e205829c56ae9c6139667bbd8f8496729fe1ffbc0790a8801dbfe824a756e6",
+        "bytes": 265500,
+        "encodedSha256": "d67830a88496a3e6804d563f46e67722e90dc8960f8bfb92251124486722f666",
+        "encodedBytes": 160558
+      },
+      "native_hdr": {
+        "event": 8912,
+        "resource": "ResourceId::15858",
+        "format": "R11G11B10_FLOAT",
+        "width": 2560,
+        "height": 1440,
+        "mip": 0,
+        "rect": [
+          996,
+          35,
+          1585,
+          484
+        ],
+        "nativeStorageFlip": true,
+        "bytesPerPixel": 4,
+        "fullSha256": "6646f67d78e106bec86691d16d62186ded0d1570d516cb973857754070590e9e",
+        "file": "consumer-hdr-8912.zlib",
+        "sha256": "6d18fff982ac7e4d3dd8cbf8b1315af0db952a0ffe53d2d34c4097bc4ba68cac",
+        "bytes": 1057844,
+        "encodedSha256": "ffbac27c69ec61ce42f0850fe0704c531b863ba396679d82704f876a1417f02c",
+        "encodedBytes": 480510
+      },
+      "player_trace": {
+        "event": 21062,
+        "resource": "ResourceId::9998",
+        "format": "R11G11B10_FLOAT",
+        "width": 1280,
+        "height": 720,
+        "mip": 0,
+        "rect": [
+          498,
+          478,
+          793,
+          703
+        ],
+        "nativeStorageFlip": false,
+        "bytesPerPixel": 4,
+        "fullSha256": "cebc8657fc29c680b0ccafbb7a46d023282f53c1dbabd039b15e082ff6b02ff8",
+        "file": "trace-6-0.zlib",
+        "sha256": "466a02e1f66ba2cfc890560e025bd3e6fdb6614a9a7f2821c9d38ee66305908e",
+        "bytes": 265500,
+        "encodedSha256": "ba3c1bb60f1e91074245fa6b7647491dec4bb722e1cd2146049dcb54e7ce0bf0",
+        "encodedBytes": 136258
+      },
+      "player_traceConfidence": {
+        "event": 21062,
+        "resource": "ResourceId::9999",
+        "format": "R8_UNORM",
+        "width": 1280,
+        "height": 720,
+        "mip": 0,
+        "rect": [
+          498,
+          478,
+          793,
+          703
+        ],
+        "nativeStorageFlip": false,
+        "bytesPerPixel": 1,
+        "fullSha256": "38df710587bfbe0000dfffec4c539f877b89adbc98b3fd6a2429b87467996c50",
+        "file": "trace-8-0.zlib",
+        "sha256": "3e619e0831ade98a77277f48558caae9d44f4201e091b66446706e8414142bbd",
+        "bytes": 66375,
+        "encodedSha256": "1616b40a3e146afa79848c30c5818aa2760d1d0e19c38eae64fe4e579b9b5a0f",
+        "encodedBytes": 2837
+      },
+      "player_filterInput": {
+        "event": 21123,
+        "resource": "ResourceId::9998",
+        "format": "R11G11B10_FLOAT",
+        "width": 1280,
+        "height": 720,
+        "mip": 0,
+        "rect": [
+          498,
+          478,
+          793,
+          703
+        ],
+        "nativeStorageFlip": false,
+        "bytesPerPixel": 4,
+        "fullSha256": "cebc8657fc29c680b0ccafbb7a46d023282f53c1dbabd039b15e082ff6b02ff8",
+        "file": "filter-2-0.zlib",
+        "sha256": "466a02e1f66ba2cfc890560e025bd3e6fdb6614a9a7f2821c9d38ee66305908e",
+        "bytes": 265500,
+        "encodedSha256": "ba3c1bb60f1e91074245fa6b7647491dec4bb722e1cd2146049dcb54e7ce0bf0",
+        "encodedBytes": 136258
+      },
+      "player_depth": {
+        "event": 21123,
+        "resource": "ResourceId::9940",
+        "format": "R32_FLOAT",
+        "width": 1280,
+        "height": 720,
+        "mip": 0,
+        "rect": [
+          498,
+          478,
+          793,
+          703
+        ],
+        "nativeStorageFlip": false,
+        "bytesPerPixel": 4,
+        "fullSha256": "9af9b81e81cdbfe9bcfa81f7709763ea912f0cdd4dceec1d384ebf37e7bbff0e",
+        "file": "filter-0-0.zlib",
+        "sha256": "a2815be8490a3bcd9ee441cdc7b868e0e643158966b87d73441b51348d69148e",
+        "bytes": 265500,
+        "encodedSha256": "bbed93396cb67824b9bf00516e2f2d4aa6caf7c91c2b3a8eb70dc13827d9cfae",
+        "encodedBytes": 47927
+      },
+      "player_filtered": {
+        "event": 21123,
+        "resource": "ResourceId::10034",
+        "format": "R32G32B32A32_FLOAT",
+        "width": 1280,
+        "height": 720,
+        "mip": 0,
+        "rect": [
+          498,
+          478,
+          793,
+          703
+        ],
+        "nativeStorageFlip": false,
+        "bytesPerPixel": 16,
+        "fullSha256": "5320d8d32a0932f647434f7bd228fca1403310b40dd51116ac97289eb64ed4f2",
+        "file": "actual-filter-output.zlib",
+        "sha256": "1250ed4d6b10bb32007d0ef0eae0dab2932fb0f05dacfb4c6e14272264ac8206",
+        "bytes": 1062000,
+        "encodedSha256": "33b592705b74343be3b95d06bf52a89c0e320a41cd97622f87d2e4e770a2c4e1",
+        "encodedBytes": 759862
+      },
+      "player_consumedFiltered": {
+        "event": 21372,
+        "resource": "ResourceId::10034",
+        "format": "R32G32B32A32_FLOAT",
+        "width": 1280,
+        "height": 720,
+        "mip": 0,
+        "rect": [
+          498,
+          478,
+          793,
+          703
+        ],
+        "nativeStorageFlip": false,
+        "bytesPerPixel": 16,
+        "fullSha256": "5320d8d32a0932f647434f7bd228fca1403310b40dd51116ac97289eb64ed4f2",
+        "file": "consumer-filter-21372.zlib",
+        "sha256": "1250ed4d6b10bb32007d0ef0eae0dab2932fb0f05dacfb4c6e14272264ac8206",
+        "bytes": 1062000,
+        "encodedSha256": "33b592705b74343be3b95d06bf52a89c0e320a41cd97622f87d2e4e770a2c4e1",
+        "encodedBytes": 759862
+      },
+      "player_hdr": {
+        "event": 21372,
+        "resource": "ResourceId::175",
+        "format": "R16G16B16A16_FLOAT",
+        "width": 2560,
+        "height": 1440,
+        "mip": 0,
+        "rect": [
+          996,
+          956,
+          1585,
+          1405
+        ],
+        "nativeStorageFlip": false,
+        "bytesPerPixel": 8,
+        "fullSha256": "48a2f2bc127c2ceaeba14268f431d842a3ea05693217cb193c6f72e4a579d4d8",
+        "file": "consumer-hdr-21372.zlib",
+        "sha256": "8e5d8d19972955328fe4b1c48667827e5284deea6b442dc026ef6436ebd4f595",
+        "bytes": 2115688,
+        "encodedSha256": "e76cbf08081de76c2a0be5f348a20d938494b014f95dff5e75d64fe56549232f",
+        "encodedBytes": 1277852
+      },
+      "native_consumerConfidence": {
+        "event": 8912,
+        "resource": "ResourceId::15777",
+        "format": "R8_UNORM",
+        "width": 1280,
+        "height": 720,
+        "mip": 0,
+        "rect": [
+          498,
+          17,
+          793,
+          242
+        ],
+        "nativeStorageFlip": true,
+        "bytesPerPixel": 1,
+        "fullSha256": "636d7d54d6a475b35c50e52629ca2289f7fa5ab04878f3ff2e3404a8c9d09713",
+        "file": "consumer-confidence.zlib",
+        "sha256": "f7b87d4f661fe8ceb6a610cb1e2fa6f4d7d75fd37810bdda50ee2bfa84d3a2c5",
+        "bytes": 66375,
+        "encodedSha256": "719533ceff733266a2e3a629866dd8951e3d6c175bfb4b825e638f69124dfc67",
+        "encodedBytes": 21859
+      }
+    },
+    "playerConsumerWitness": {
+      "sampledReflection": [
+        0.15468630194664001,
+        0.13444247841835022,
+        0.08876930177211761,
+        1.0
+      ],
+      "probeIncident": [
+        0.4189847409725189,
+        0.3265616297721863,
+        0.16078686714172363
+      ],
+      "mixedIncident": [
+        0.15468630194664001,
+        0.13444247841835022,
+        0.08876930177211761
+      ],
+      "materialResponse": [
+        0.2834436297416687,
+        0.2834436297416687,
+        0.2834436297416687
+      ],
+      "reflectedContribution": [
+        0.04384484514594078,
+        0.03810686245560646,
+        0.02516109310090542
+      ],
+      "previousAmbientSpecular": [
+        0.11875855922698975,
+        0.09256181120872498,
+        0.04557401314377785
+      ],
+      "beautyBeforeMix": [
+        0.17141535878181458,
+        0.13766515254974365,
+        0.09001439809799194
+      ],
+      "beautyAfterMix": [
+        0.09650164842605591,
+        0.08321020007133484,
+        0.06960147619247437
+      ],
+      "shaderOutput": [
+        0.09650164842605591,
+        0.08321020007133484,
+        0.06960147619247437,
+        1.0
+      ],
+      "tap00": [
+        0.08704883605241776,
+        0.07855626940727234,
+        0.07430998235940933,
+        1.0
+      ],
+      "tap10": [
+        0.07789473980665207,
+        0.07052631676197052,
+        0.06631579250097275,
+        1.0
+      ],
+      "tap01": [
+        0.36247867345809937,
+        0.30912747979164124,
+        0.1400584876537323,
+        1.0
+      ],
+      "tap11": [
+        0.370420902967453,
+        0.30511173605918884,
+        0.1323961317539215,
+        1.0
+      ],
+      "nativeIncidentSubstitutionAtMix": [
+        0.5733183889533393,
+        0.43373113055713475,
+        0.18588539940537885
+      ],
+      "nativeIncidentSubstitutionScope": "Diagnostic substitution at one mix node, not an implemented or rendered repair.",
+      "absoluteRgbResidualBeforeAfter": [
+        [
+          0.4766336679458618,
+          0.35293880105018616,
+          0.12443290650844574
+        ],
+        [
+          0.0001830725814215839,
+          0.0024178705643862486,
+          0.008148983295541257
+        ]
+      ],
+      "meanAbsoluteRgbResidualReduction": 0.9887317967829433
+    },
+    "inverseProjectionNativePlayer": [
+      [
+        [
+          0.9696970582008362,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          -0.5454546213150024,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          9.99990177154541
+        ],
+        [
+          0.000284090667264536,
+          4.2095784010598436e-05,
+          -1.0,
+          9.894273534882814e-05
+        ]
+      ],
+      [
+        [
+          0.9696970582008362,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          -0.5454546213150024,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          9.999900817871094
+        ],
+        [
+          0.000284090667264536,
+          4.2095784010598436e-05,
+          -1.0,
+          0.00010013480641646311
+        ]
+      ]
+    ],
+    "scope": "Same-depth both-hit diagnostic metrics; they do not replace original regional SSIM, brightness or frozen-frame gates."
+  },
+  "frames": {
+    "status": "qualified-frozen-frame-images",
+    "rows": [
+      {
+        "frameIndex": 0,
+        "pngSha256": "72fadcc6e73e6fbefcf60357a5e42b28ddfb5667a9e032e38f7f0ed63e80268b",
+        "bgraRawSha256": "bc18247e599cae36a2f0db767a0b82aa29a208190ca6ac7d69ff5c18f3909210",
+        "rgbSha256": "d358d0984775cee7a16a3fff17f61eb2e2268f5d765b5f773f5357865ab981ac",
+        "expectedFe5Control": {
+          "png": "72fadcc6e73e6fbefcf60357a5e42b28ddfb5667a9e032e38f7f0ed63e80268b",
+          "raw": "bc18247e599cae36a2f0db767a0b82aa29a208190ca6ac7d69ff5c18f3909210",
+          "archive": "f39f4f7671a5c7140e161ed057a39f8c03a0363d83f7c8bb3551517e7efff4c7",
+          "donor": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-150229-face-native-geometry-mask-sampling-d5d93e\\projected-reflection-32-step-candidate\\baseline-nvidia\\frames\\frame_000000.png",
+          "donorSha256": "72fadcc6e73e6fbefcf60357a5e42b28ddfb5667a9e032e38f7f0ed63e80268b",
+          "archivedControlPixelDifferences": 0
+        },
+        "fullFrameMatchesFe5Control": true,
+        "regions": {
+          "complete": {
+            "pixels": 3686400,
+            "ssim": 0.8277961015701294,
+            "medianReference": 0.40663331747055054,
+            "medianCandidate": 0.41095688939094543,
+            "medianLumaRelativeError": 0.010632606170319582,
+            "meanAbsByte": 11.990855848524305,
+            "diagnosticMedianMatchedLumaSsim": 0.8285591006278992,
+            "medianSignedRgbBytes": [
+              2.0,
+              1.0,
+              1.0
+            ],
+            "exactPixels": 22080,
+            "peak": 242
+          },
+          "ceiling": {
+            "pixels": 537600,
+            "ssim": 0.8411242365837097,
+            "medianReference": 0.8463764786720276,
+            "medianCandidate": 0.8992117643356323,
+            "medianLumaRelativeError": 0.062425276452039144,
+            "meanAbsByte": 14.291892361111111,
+            "diagnosticMedianMatchedLumaSsim": 0.8463874459266663,
+            "medianSignedRgbBytes": [
+              11.0,
+              11.0,
+              11.0
+            ],
+            "exactPixels": 9085,
+            "peak": 195
+          },
+          "leftDoor": {
+            "pixels": 253500,
+            "ssim": 0.8868878483772278,
+            "medianReference": 0.5621686577796936,
+            "medianCandidate": 0.5502784848213196,
+            "medianLumaRelativeError": 0.021150544047287716,
+            "meanAbsByte": 8.083737015121631,
+            "diagnosticMedianMatchedLumaSsim": 0.8851497769355774,
+            "medianSignedRgbBytes": [
+              2.0,
+              1.0,
+              1.0
+            ],
+            "exactPixels": 1193,
+            "peak": 165
+          },
+          "rightWall": {
+            "pixels": 128800,
+            "ssim": 0.8834997415542603,
+            "medianReference": 0.32994508743286133,
+            "medianCandidate": 0.30750200152397156,
+            "medianLumaRelativeError": 0.06802066999544762,
+            "meanAbsByte": 11.896048136645963,
+            "diagnosticMedianMatchedLumaSsim": 0.8830279111862183,
+            "medianSignedRgbBytes": [
+              -8.0,
+              -8.0,
+              -7.0
+            ],
+            "exactPixels": 350,
+            "peak": 118
+          },
+          "centerFloor": {
+            "pixels": 97200,
+            "ssim": 0.8292058706283569,
+            "medianReference": 0.29490983486175537,
+            "medianCandidate": 0.2475568801164627,
+            "medianLumaRelativeError": 0.1605675672616692,
+            "meanAbsByte": 16.100836762688616,
+            "diagnosticMedianMatchedLumaSsim": 0.8159244060516357,
+            "medianSignedRgbBytes": [
+              -11.0,
+              -14.0,
+              -9.0
+            ],
+            "exactPixels": 64,
+            "peak": 183,
+            "changedVsFe5Control": 0
+          },
+          "cyanRing": {
+            "pixels": 27600,
+            "ssim": 0.7528694868087769,
+            "medianReference": 0.298764705657959,
+            "medianCandidate": 0.2749764919281006,
+            "medianLumaRelativeError": 0.07962190071103095,
+            "meanAbsByte": 15.350857487922704,
+            "diagnosticMedianMatchedLumaSsim": 0.7384704947471619,
+            "medianSignedRgbBytes": [
+              -7.0,
+              -6.0,
+              -5.0
+            ],
+            "exactPixels": 5,
+            "peak": 94,
+            "changedVsFe5Control": 0
+          },
+          "leftFloor": {
+            "pixels": 67900,
+            "ssim": 0.8553433418273926,
+            "medianReference": 0.368437260389328,
+            "medianCandidate": 0.37314900755882263,
+            "medianLumaRelativeError": 0.012788465435107517,
+            "meanAbsByte": 6.873784977908689,
+            "diagnosticMedianMatchedLumaSsim": 0.8570441603660583,
+            "medianSignedRgbBytes": [
+              -1.0,
+              -2.0,
+              -1.0
+            ],
+            "exactPixels": 350,
+            "peak": 122
+          }
+        }
+      },
+      {
+        "frameIndex": 1,
+        "pngSha256": "3988d0d78687c0288a2b73b4df6a226e3180e77ec3e682ce8dacd09ba34f5974",
+        "bgraRawSha256": "5d807c93335c7dde65582c891b9a994e4674229a1b7a44ae89a7ed5e0c650764",
+        "rgbSha256": "3c4eb3f7852f2aae48c0465936133f1ca2306c87d76388df3fe1274f7565eab9",
+        "expectedFe5Control": {
+          "png": "3988d0d78687c0288a2b73b4df6a226e3180e77ec3e682ce8dacd09ba34f5974",
+          "raw": "5d807c93335c7dde65582c891b9a994e4674229a1b7a44ae89a7ed5e0c650764",
+          "archive": "1ddcfe3184207fe56e963c3e97d8d52cbbbfc31ed3cf35b61853e17f784a1d07",
+          "donor": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-150229-face-native-geometry-mask-sampling-d5d93e\\projected-reflection-32-step-candidate\\baseline-nvidia\\frames\\frame_000001.png",
+          "donorSha256": "3988d0d78687c0288a2b73b4df6a226e3180e77ec3e682ce8dacd09ba34f5974",
+          "archivedControlPixelDifferences": 0
+        },
+        "fullFrameMatchesFe5Control": true,
+        "regions": {
+          "complete": {
+            "pixels": 3686400,
+            "ssim": 0.8278223872184753,
+            "medianReference": 0.40663331747055054,
+            "medianCandidate": 0.41083139181137085,
+            "medianLumaRelativeError": 0.010323980255563659,
+            "meanAbsByte": 11.987490776909722,
+            "diagnosticMedianMatchedLumaSsim": 0.8285658955574036,
+            "medianSignedRgbBytes": [
+              2.0,
+              1.0,
+              1.0
+            ],
+            "exactPixels": 22107,
+            "peak": 242
+          },
+          "ceiling": {
+            "pixels": 537600,
+            "ssim": 0.8410954475402832,
+            "medianReference": 0.8463764786720276,
+            "medianCandidate": 0.8992117643356323,
+            "medianLumaRelativeError": 0.062425276452039144,
+            "meanAbsByte": 14.292847222222223,
+            "diagnosticMedianMatchedLumaSsim": 0.8463585376739502,
+            "medianSignedRgbBytes": [
+              11.0,
+              11.0,
+              11.0
+            ],
+            "exactPixels": 9087,
+            "peak": 195
+          },
+          "leftDoor": {
+            "pixels": 253500,
+            "ssim": 0.8868863582611084,
+            "medianReference": 0.5621686577796936,
+            "medianCandidate": 0.5502784848213196,
+            "medianLumaRelativeError": 0.021150544047287716,
+            "meanAbsByte": 8.083591058514136,
+            "diagnosticMedianMatchedLumaSsim": 0.8851481676101685,
+            "medianSignedRgbBytes": [
+              2.0,
+              1.0,
+              1.0
+            ],
+            "exactPixels": 1191,
+            "peak": 165
+          },
+          "rightWall": {
+            "pixels": 128800,
+            "ssim": 0.8834869861602783,
+            "medianReference": 0.32994508743286133,
+            "medianCandidate": 0.30750200152397156,
+            "medianLumaRelativeError": 0.06802066999544762,
+            "meanAbsByte": 11.893925983436853,
+            "diagnosticMedianMatchedLumaSsim": 0.8830145001411438,
+            "medianSignedRgbBytes": [
+              -8.0,
+              -8.0,
+              -7.0
+            ],
+            "exactPixels": 341,
+            "peak": 118
+          },
+          "centerFloor": {
+            "pixels": 97200,
+            "ssim": 0.8296183943748474,
+            "medianReference": 0.29490983486175537,
+            "medianCandidate": 0.24845099449157715,
+            "medianLumaRelativeError": 0.15753574441475204,
+            "meanAbsByte": 16.021971879286696,
+            "diagnosticMedianMatchedLumaSsim": 0.8166679739952087,
+            "medianSignedRgbBytes": [
+              -10.0,
+              -14.0,
+              -9.0
+            ],
+            "exactPixels": 63,
+            "peak": 183,
+            "changedVsFe5Control": 0
+          },
+          "cyanRing": {
+            "pixels": 27600,
+            "ssim": 0.75460284948349,
+            "medianReference": 0.298764705657959,
+            "medianCandidate": 0.27490001916885376,
+            "medianLumaRelativeError": 0.0798778638746798,
+            "meanAbsByte": 15.259106280193237,
+            "diagnosticMedianMatchedLumaSsim": 0.7402628660202026,
+            "medianSignedRgbBytes": [
+              -6.0,
+              -6.0,
+              -5.0
+            ],
+            "exactPixels": 3,
+            "peak": 94,
+            "changedVsFe5Control": 0
+          },
+          "leftFloor": {
+            "pixels": 67900,
+            "ssim": 0.8553996086120605,
+            "medianReference": 0.368437260389328,
+            "medianCandidate": 0.37314900755882263,
+            "medianLumaRelativeError": 0.012788465435107517,
+            "meanAbsByte": 6.869558173784978,
+            "diagnosticMedianMatchedLumaSsim": 0.8571003079414368,
+            "medianSignedRgbBytes": [
+              -1.0,
+              -2.0,
+              -1.0
+            ],
+            "exactPixels": 346,
+            "peak": 122
+          }
+        }
+      }
+    ],
+    "camera": {
+      "qaCameraPosition": [
+        -0.266043,
+        2.26206,
+        -24.9053
+      ],
+      "qaCameraTarget": [
+        -0.261116,
+        2.32175,
+        -23.9071
+      ],
+      "cameraLens": {
+        "farPlane": 10000.0,
+        "nearPlane": 0.10000000149011612,
+        "offsetNdc": [
+          -0.0002929684706032276,
+          7.717559492448345e-05
+        ],
+        "projection": "perspective",
+        "schemaVersion": 1,
+        "verticalFovRadians": 0.9986935257911682
+      },
+      "cameraUp": [
+        -0.0002945943851955235,
+        0.9982167482376099,
+        -0.05969396233558655
+      ],
+      "gradeSettings": {
+        "schemaVersion": 2,
+        "exposureEv": 0,
+        "saturation": 1,
+        "contrast": 1,
+        "tint": [
+          1,
+          1,
+          1
+        ],
+        "toneMappingEnabled": true,
+        "lut": {
+          "schemaVersion": 1,
+          "asset": "gi:/captured-3534.azlut",
+          "exposureMultiplier": 1,
+          "dimension": 32,
+          "inputDomain": "logc3-full-log",
+          "outputDomain": "linear",
+          "fingerprintAlgorithm": "FNV-1a-64",
+          "fingerprint": "b963486c619e8333"
+        }
+      },
+      "bloomSettings": {
+        "schemaVersion": 1,
+        "enabled": true,
+        "threshold": 1.05,
+        "strength": 0.16
+      },
+      "nprLighting": {
+        "ambientColor": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "ambientDirection": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "ambientWeight": 1.0,
+        "directionBias": 0.0,
+        "directionFloor": 1.0,
+        "directionGain": 0.0,
+        "enabled": true,
+        "indoorMix": 0.0,
+        "litAmbientMix": 0.0,
+        "mainColorMix": 0.0,
+        "outdoorGain": 1.0,
+        "schemaVersion": 1,
+        "shadowAmbientGain": 1.0,
+        "shadowOverride": 0.0,
+        "specularFloor": 0.550000011920929,
+        "useSceneIrradiance": true
+      },
+      "screenReflectionProducer": "projected-history",
+      "screenReflectionLevels": 7,
+      "sceneTriangles": 547653,
+      "skinnedVertices": 77802,
+      "transparentTriangles": 10735,
+      "width": 2560,
+      "height": 1440,
+      "fps": 60
+    },
+    "baseline": "fe5ba3b",
+    "referenceSha256": "af67600fcbb25060f1770a4bedb5e13b64a981229c9b24d9db29492db1fb5e18",
+    "originalGates": {
+      "ssim": 0.95,
+      "lumaRelative": 0.1,
+      "newOverOne": 0
+    },
+    "sourceFingerprint": "1a30d925a674ddb1d95876cb80181106a0217e12a7228a35b5980b134954cb69",
+    "frozenFourFrames": {
+      "scope": "reused unchanged host/shader evidence; two diagnostic frames checked here",
+      "evidence": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\docs\\acceptance\\nr\\evidence\\2026-11-16\\projected-history-layer-frozen\\qualification.json"
+    }
+  },
+  "queue": [
+    {
+      "id": 2264,
+      "task": "nr-player-same-frame-capture-budget-restored",
+      "state": "succeeded",
+      "exit_code": 0,
+      "reason": null,
+      "wait_seconds": 0.01599999999962165,
+      "run_seconds": 165.31300000000192
+    },
+    {
+      "id": 2265,
+      "task": "nr-player-same-frame-storage-buffer-completion",
+      "state": "succeeded",
+      "exit_code": 0,
+      "reason": null,
+      "wait_seconds": 0.030999999999039574,
+      "run_seconds": 7.625
+    }
+  ],
+  "conclusion": {
+    "earliestObservedDeficit": "ray color; retained in actual filter input",
+    "consumerMixVerifiedAt": [
+      1265,
+      1137
+    ],
+    "globalConsumerParityProven": false,
+    "nextHypothesis": "Qualify the projected producer history, sampling positions and missing reflection-specific temporal composition before grouped candidate validation."
+  },
+  "limitations": [
+    "Vulkan pixel-history colours contain unavailable-value sentinels; actual texture readback and a complete read-only shader trace qualify the traced anchor instead.",
+    "Only one Player consumer invocation was traced. Four neighbourhoods were read from the actual bound texture.",
+    "The joint Player scene contains an actor absent from the native reference. Receiving-depth alignment does not prove reflected-object equivalence.",
+    "Native ideal interpolation and full-display reference differences retain their prior scope.",
+    "Native-incident substitution at the mix node is diagnostic and is not an implemented repair.",
+    "Full history colour and mip readbacks remain in the managed task; the compact archive retains source hashes and aligned stage data."
+  ],
+  "gates": {
+    "ssimMinimum": 0.95,
+    "luminanceRelativeMaximum": 0.1,
+    "newOverOneMaximum": 0,
+    "frozenFourFrames": "pixel-identical"
+  },
+  "worklist": {
+    "status": "qualified-same-capture-worklist-and-consumer-before",
+    "frameNumber": 1,
+    "traceEvent": 21062,
+    "traceShader": "9b77643b12d533f69e7a159ba975dfaf75e56253429371d6f7470ea6a567e20a",
+    "resource": "ResourceId::9875",
+    "binding": 1,
+    "apiCategory": "readWriteResources",
+    "declaredSourceType": "StructuredBuffer<uint>",
+    "offset": 0,
+    "bytes": 57600,
+    "sha256": "01869e0438535301d3f75bd1bdf454f9b487e6cdec961565db787c43216dc414",
+    "beforeSha256": "01869e0438535301d3f75bd1bdf454f9b487e6cdec961565db787c43216dc414",
+    "file": "worklist.zlib",
+    "dispatch": [
+      14400,
+      1,
+      1
+    ],
+    "activeTiles": 14400,
+    "uniqueTiles": 14400,
+    "fullTraceCoverage": true,
+    "localSize": [
+      8,
+      8,
+      1
+    ],
+    "traceExtent": [
+      1280,
+      720
+    ],
+    "anchors": [
+      {
+        "displayXY": [
+          1265,
+          1137
+        ],
+        "tile": [
+          79,
+          71
+        ],
+        "covered": true
+      },
+      {
+        "displayXY": [
+          1231,
+          1137
+        ],
+        "tile": [
+          76,
+          71
+        ],
+        "covered": true
+      },
+      {
+        "displayXY": [
+          1537,
+          1137
+        ],
+        "tile": [
+          96,
+          71
+        ],
+        "covered": true
+      },
+      {
+        "displayXY": [
+          1231,
+          1071
+        ],
+        "tile": [
+          76,
+          66
+        ],
+        "covered": true
+      }
+    ],
+    "consumerBefore": {
+      "event": 21371,
+      "resource": "ResourceId::175",
+      "format": "R16G16B16A16_FLOAT",
+      "width": 2560,
+      "height": 1440,
+      "rect": [
+        996,
+        956,
+        1585,
+        1405
+      ],
+      "file": "hdr-before.zlib",
+      "sha256": "8e5d8d19972955328fe4b1c48667827e5284deea6b442dc026ef6436ebd4f595",
+      "fullSha256": "48a2f2bc127c2ceaeba14268f431d842a3ea05693217cb193c6f72e4a579d4d8",
+      "pixels": [
+        [
+          0.09649658203125,
+          0.08319091796875,
+          0.069580078125,
+          1.0
+        ],
+        [
+          0.1290283203125,
+          0.2271728515625,
+          0.1971435546875,
+          1.0
+        ],
+        [
+          0.0689697265625,
+          0.059234619140625,
+          0.058349609375,
+          1.0
+        ],
+        [
+          0.08984375,
+          0.07684326171875,
+          0.06463623046875,
+          1.0
+        ]
+      ]
+    }
+  },
+  "contentControl": {
+    "filterXY": [
+      632,
+      568
+    ],
+    "displayXY": [
+      1265,
+      1137
+    ],
+    "previousComponentColour": [
+      0.080078125,
+      0.072265625,
+      0.068359375
+    ],
+    "currentJointColour": [
+      0.080078125,
+      0.072265625,
+      0.068359375
+    ],
+    "exact": true,
+    "previousEvidenceSha256": "faab77fb4b83efff79339902db5aae26ce54e2e935a2561ed9f1338c22c7eb32",
+    "scope": "The same ray-colour discrepancy existed in the prior environment component. Receiving-surface depth alignment does not establish identical reflected objects across the whole region."
+  },
+  "budget": {
+    "allowed": true,
+    "reasons": [],
+    "totalBytes": 1024208138240,
+    "freeBytes": 221432881152,
+    "usedBytes": 2113975007,
+    "plannedBytes": 16000000,
+    "quotaBytes": 2147483648,
+    "reserveBytes": 214748364800,
+    "diagnostic": false,
+    "managedPool": {
+      "allowed": true,
+      "reasons": [],
+      "reservedBytes": 16950982940,
+      "projectedBytes": 16950982940,
+      "limitBytes": 17179869184
+    }
+  },
+  "images": {
+    "centerFloor-stages.png": "b9a85253e14bf024a7e1e9c0d84ba2945297e1e7a9d6646bafb692723af4f37e",
+    "cyanRing-stages.png": "a77904a9b7f7dfa5037b5bfd22f86bbd9955e481f07ca3e4b6d9cc55acef72a0"
+  },
+  "verification": [
+    "PASS: captured frame identity and bindings; two depth masks and ten stage metrics; four tap neighbourhoods; traced mix, response and half-float output; four regional image scores.\nOPEN: original visual and frozen-frame gates; native full-display equivalence; root repair candidate validation.",
+    "PASS: captured frame identity and bindings; two depth masks and ten stage metrics; four tap neighbourhoods; traced mix, response and half-float output; four regional image scores.\nOPEN: original visual and frozen-frame gates; native full-display equivalence; root repair candidate validation."
+  ],
+  "validation": {
+    "archiveSha256": "06ae51eb95558d1e54f6a20d92fbf4eacce8dbbabc50f0d05be3805de6743625",
+    "files": {
+      "worker.py": "536e5c288ff6ad78e8734dffc7cc5f97516e56ee87266d7171eacb43eb6df545",
+      "batch.py": "0c71f474a90801393c7b771ad6df20c9ff00c45181d8fe65fffe3b67e895ab71",
+      "score_frames.py": "08205fe661eb05a2f4ef3638d5acb2df3af6b851412095e2c2a9523aeade404c",
+      "analyze.py": "3614f3cccb4451baea251241941c14f53f1ade5c055ca5a9c62bbb5ae7af1b59",
+      "archive.py": "4134d01c5dbdcaccbef855489b4255353ccd4b3bf927bf1e4fa928e3f4947649",
+      "verify.py": "7dd7e8421c59050084cb05bbe9825b4c7e0e9756c6d0bc916aecd6416de76a2a",
+      "measure_reference.py": "4d754687181bc271ce8d48ed9b02c500fea93451e0ba5836cdffb6c2d2d7b728",
+      "stage-regions.npz": "9048789aa87daa7032cdeb4541bef45d04471847844bdb034bdcf427816f596f",
+      "target-crops.npz": "fc0f546d6692ee28420209de9af2836a607a060977d6c81352c992b098712f6a",
+      "stage-analysis.json": "756b6ca7c41608e7888b0ba2e6b9cab05f9cda6f28d175fc867cf9523392da36",
+      "frame-identity.json": "353b0aff3a8098a42a0daed95a6fefaa383e25c5c09a1a51d9ce5be6363c34a3",
+      "request.json": "02502336f7a0277e3bc2e7fec58ed43bf5fbfcb94072ab83c1d720f8b614c2b2",
+      "player-result.json": "b5d75920141b59c5aa9ffe2e80704a7d1ede5c9cf4e7e5389c536a34295a1db7",
+      "player-consumer.asm": "eb0cc90ae9ba05180a126ccdef0e9c7dd648546b421b966948bb6b5e51f721fb",
+      "capture-receipt.json": "367a8394c6085eb628fb2aec2c34e3e3c5b87c35e9f0bd6ba7a1d74e39e5125b",
+      "native-sampling.json": "f95bf8aa9b49901e073d91a86dbc6b0d49c6f60a6a4d09865b8b6396baba0d4b",
+      "task-card.json": "c1566f6ef8e5602ff35a8c1f0d569b88c6837835d6b2ad60ab029922b70a10b9",
+      "queue.json": "2b27d1e0962ce70d28401312fa3a849dca6711f392a1306cbba25b1ac6bfd529",
+      "runtime-summary.json": "508eca571485347644ac9343867b98233e905dec23206b106a049abcf5c41a2c",
+      "content-control.json": "0c56c83995d6b5d7c69de6d5966d91975c8acfc64bdc39dc97a9b293d07d9c49",
+      "read_worklist.py": "f8e5d184a76fe89c6c4a19a4adaae69501058e12943e5334959101262fc982d2",
+      "worklist.json": "db1f9a3930b272939ccf73e509190c42ac1a05ad63aff4625a71472f5bf08fa3",
+      "worklist.zlib": "99cb3793fdbf166aa61efee28aa41061185a9769a41cc5586188894781459ccb",
+      "hdr-before.zlib": "e76cbf08081de76c2a0be5f348a20d938494b014f95dff5e75d64fe56549232f",
+      "tap-source-records.json": "6fed89be86dc196b8bc0a3480bde996fbf28793b8971a6e5a124afd9e1b4cecc",
+      "nativeOutput.zlib": "d67830a88496a3e6804d563f46e67722e90dc8960f8bfb92251124486722f666",
+      "nativeConfidence.zlib": "719533ceff733266a2e3a629866dd8951e3d6c175bfb4b825e638f69124dfc67",
+      "playerOutput.zlib": "33b592705b74343be3b95d06bf52a89c0e320a41cd97622f87d2e4e770a2c4e1",
+      "ProjectedScreenReflectionGpu.cpp": "4069275ca48efa21ce379ae77906f006477ce81187ac1802cd4123929b6de6c0",
+      "native-reflection-temporal.md": "4c2c3b3cdb3d34079fb737e84e9c9a022c77e36eeb3a7f6c1c18382f8378673a",
+      "native-reflection-bindings.md": "ba2d8188daeb8d6328ffd9e9ccc9b26149278126cb39da16dded3723398fd436",
+      "manifest.json": "4d8ec128e848b461cbf4a8601e9d287b5379e2f3f97e5f6136d93bec912f1f00",
+      "verification.log": "554cde39e0d04bfd7001d8fc4a5551a42f3d1bfe6148a561bfb4e7265a594742"
+    }
+  }
+}

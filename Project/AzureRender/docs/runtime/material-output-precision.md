@@ -16,7 +16,7 @@
 ```
 
 特性占 `materialFeatures` 的第二十六位。
-现行材质表仍为二十二行、352 字节。
+现行材质表为二十三行、368 字节。
 完整材质文档将声明保存在 `surface.materials` 中。
 保存与重开沿用 `azure.profile` 解释入口。
 

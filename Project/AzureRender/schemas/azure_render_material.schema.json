@@ -38,6 +38,44 @@
       ],
       "default": "scene"
     },
+    "colorAdjustment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schemaVersion"],
+      "properties": {
+        "schemaVersion": {"type": "integer", "const": 1},
+        "brightness": {"type": "number", "minimum": 0, "maximum": 16, "default": 1},
+        "contrast": {"type": "number", "minimum": 0, "maximum": 16, "default": 1},
+        "saturation": {"type": "number", "minimum": 0, "maximum": 16, "default": 1},
+        "tint": {
+          "type": "array",
+          "minItems": 4,
+          "items": false,
+          "prefixItems": [
+            {"type": "number", "minimum": 0, "maximum": 16},
+            {"type": "number", "minimum": 0, "maximum": 16},
+            {"type": "number", "minimum": 0, "maximum": 16},
+            {"type": "number", "minimum": 0, "maximum": 1}
+          ],
+          "default": [1, 1, 1, 0]
+        },
+        "rim": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["color", "intensity", "width"],
+          "properties": {
+            "color": {
+              "type": "array",
+              "minItems": 3,
+              "maxItems": 3,
+              "items": {"type": "number", "minimum": 0, "maximum": 16}
+            },
+            "intensity": {"type": "number", "minimum": 0, "maximum": 16},
+            "width": {"type": "number", "minimum": 0, "exclusiveMaximum": 1}
+          }
+        }
+      }
+    },
     "environmentLighting": {
       "type": "object",
       "additionalProperties": false,
@@ -212,6 +250,21 @@
         "headNode": {
           "type": "string",
           "minLength": 1
+        },
+        "highlight": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["schemaVersion", "texture", "viewOffset"],
+          "properties": {
+            "schemaVersion": {"type": "integer", "const": 1},
+            "texture": {"type": "integer", "minimum": 0},
+            "viewOffset": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {"type": "number", "minimum": -1, "maximum": 1}
+            }
+          }
         }
       }
     },
@@ -225,6 +278,11 @@
               "type": "string",
               "const": "axis-diagonal",
               "description": "使用轴向与对角足迹选择头发基色 RGB、参数和双法线的纹理层级。"
+            },
+            "referenceRasterGrid": {
+              "type": "string",
+              "const": "nearest-8",
+              "description": "按最近八位子像素网格放置参考相机的投影头发颜色顶点。"
             },
             "snapshotNormal": {
               "type": "string",
@@ -277,6 +335,51 @@
           "minimum": 0,
           "maximum": 4,
           "default": 1
+        },
+        "mainBrightnessSaturation": {
+          "type": "boolean",
+          "default": false
+        },
+        "localDiffuseNormal": {
+          "enum": ["surface", "indirect"],
+          "default": "surface"
+        },
+        "viewTint": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["schemaVersion", "scale", "color"],
+          "dependentRequired": {
+            "mode": ["geometryScale"],
+            "geometryScale": ["mode"]
+          },
+          "properties": {
+            "schemaVersion": {
+              "const": 1
+            },
+            "scale": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 64
+            },
+            "color": {
+              "type": "array",
+              "minItems": 3,
+              "maxItems": 3,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 64
+              }
+            },
+            "mode": {
+              "const": "face-mask"
+            },
+            "geometryScale": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            }
+          }
         },
         "lightingNormal": {
           "type": "string",
@@ -335,7 +438,14 @@
     },
     "composite": {
       "type": "object",
-      "description": "Typed fields and ownership are validated by the production material interpreter."
+      "additionalProperties": false,
+      "required": ["schemaVersion", "mode"],
+      "properties": {
+        "schemaVersion": {"const": 1},
+        "mode": {"const": "multiply"},
+        "receiver": {"enum": ["eye", "face"]},
+        "coverageScale": {"type": "number", "minimum": 0, "maximum": 1}
+      }
     },
     "sceneRefraction": {
       "type": "object",
@@ -435,6 +545,16 @@
     }
   },
   "allOf": [
+    {
+      "if": {"required": ["colorAdjustment"]},
+      "then": {
+        "properties": {
+          "schemaVersion": {"const": 2},
+          "class": {"enum": ["generic", "skin", "face", "fabric", "metal"]},
+          "features": {"not": {"contains": {"enum": ["unlit-surface", "unlit-texture-layers", "overlay", "multiply-composite", "scene-refraction"]}}}
+        }
+      }
+    },
     {
       "if": {
         "anyOf": [

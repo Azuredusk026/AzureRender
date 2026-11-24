@@ -1,0 +1,85 @@
+{
+  "status": "failed-user-review",
+  "devices": {
+    "nvidia": {
+      "baseline": {
+        "overEight": 30,
+        "peak": 39,
+        "newFrameOverOne": 0,
+        "changedPixels": 0
+      },
+      "rim": {
+        "overEight": 28,
+        "peak": 39,
+        "newFrameOverOne": 5,
+        "changedPixels": 0
+      },
+      "both-both": {
+        "overEight": 28,
+        "peak": 39,
+        "newFrameOverOne": 126,
+        "changedPixels": 3227
+      },
+      "reconstruct-rg-material": {
+        "overEight": 29,
+        "peak": 39,
+        "newFrameOverOne": 25,
+        "changedPixels": 893
+      },
+      "reconstruct-rg-both": {
+        "overEight": 29,
+        "peak": 39,
+        "newFrameOverOne": 135,
+        "changedPixels": 3684
+      },
+      "interpolated-frame-both": {
+        "overEight": 29,
+        "peak": 38,
+        "newFrameOverOne": 404,
+        "changedPixels": 18392
+      }
+    },
+    "intel": {
+      "baseline": {
+        "overEight": 30,
+        "peak": 39,
+        "newFrameOverOne": 0,
+        "changedPixels": 0
+      },
+      "rim": {
+        "overEight": 28,
+        "peak": 39,
+        "newFrameOverOne": 6,
+        "changedPixels": 0
+      },
+      "both-both": {
+        "overEight": 28,
+        "peak": 39,
+        "newFrameOverOne": 132,
+        "changedPixels": 3115
+      },
+      "reconstruct-rg-material": {
+        "overEight": 29,
+        "peak": 39,
+        "newFrameOverOne": 27,
+        "changedPixels": 843
+      },
+      "reconstruct-rg-both": {
+        "overEight": 29,
+        "peak": 39,
+        "newFrameOverOne": 142,
+        "changedPixels": 3595
+      },
+      "interpolated-frame-both": {
+        "overEight": 29,
+        "peak": 38,
+        "newFrameOverOne": 444,
+        "changedPixels": 18426
+      }
+    }
+  },
+  "archive": {
+    "members": 30,
+    "sha256": "566d5a06755b31a202173d26c07bb2f51c383ee74f83ab9514aa329f59f5b443"
+  }
+}

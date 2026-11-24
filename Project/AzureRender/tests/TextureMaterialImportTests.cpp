@@ -16,6 +16,22 @@ int main(){const auto root=std::filesystem::temp_directory_path()/("azure-textur
  source["images"][image]["uri"]="normal.png";
  const unsigned char pixels[]={128,128,255,255,128,128,255,255,128,128,255,255,128,128,255,255};
  if(!stbi_write_png((root/"normal.png").string().c_str(),2,2,4,pixels,8))throw std::runtime_error("Cannot create image fixture");
+ // Authored neutral textures retain their direction; missing textures use geometry.
+ auto withoutNormal=source;withoutNormal["materials"][0].erase("normalTexture");
+ std::ofstream(root/"without-normal.gltf")<<withoutNormal.dump();
+ std::ofstream(root/"with-normal.gltf")<<source.dump();
+ const auto noNormal=loadGltfAsset((root/"without-normal.gltf").string());
+ const auto withNormal=loadGltfAsset((root/"with-normal.gltf").string());
+ if(noNormal.materials[0].normalTexturePresent||!withNormal.materials[0].normalTexturePresent)
+  throw std::runtime_error("Normal texture presence must distinguish fallback from authored neutral pixels");
+ if(packMaterialSurfaceProfile(noNormal.materials[0]).rows[22][0]!=1.F||packMaterialSurfaceProfile(withNormal.materials[0]).rows[22][0]!=0.F)
+  throw std::runtime_error("Normal provenance must reach the versioned GPU table");
+ auto normalOverride=MaterialData::defaults("azure.pbr");normalOverride.parameterOverride=true;
+ const auto unusedImage=[](const std::string&){return std::filesystem::path{};};
+ if(!normalOverride.interpret(unusedImage,&withNormal.materials[0]).normalTexturePresent
+     ||normalOverride.interpret(unusedImage,&noNormal.materials[0]).normalTexturePresent
+     ||MaterialData::defaults("azure.pbr").interpret(unusedImage).normalTexturePresent)
+  throw std::runtime_error("Parameter overrides preserve normal provenance and complete replacements declare absence");
  // Independent profile images exercise all GLB alignment remainders.
  for(unsigned padding=0;padding<4;++padding){
   auto document=MaterialData::defaults("azure.profile");

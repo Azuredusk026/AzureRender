@@ -109,6 +109,7 @@ python tools/artifact_maintenance.py run --run task-directory-name --timeout 600
 监控按采样时仍存在的文件统计规模。
 任务根目录、链接及权限异常按失败处理。
 超限只停止本次启动的子进程树，结果保持可检查。
+Windows 使用作业对象管理前台命令及其派生进程，超限时回收整棵进程树后释放任务占用。
 采样监控可能有一个周期的超量，文件系统硬配额独立配置。
 
 ## 封存与重建

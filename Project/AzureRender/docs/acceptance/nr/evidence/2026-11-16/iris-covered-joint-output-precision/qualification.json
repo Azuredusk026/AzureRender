@@ -1,0 +1,2869 @@
+{
+  "status": "paired-full-frame-iris-captures",
+  "productionIrisAcceptance": false,
+  "executable": "a3171469e009750d51821709047c99162bb5570f0233113b8dbae6a8679cb631",
+  "inputs": {
+    "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-125923-body-lit-outline-depth-order-a29b63\\face-candidate\\late-face-overlay-1230.azurematerial": "24a48584b252de8e93b74a5c13e78465452faa3076158a4a51c8212b87646387",
+    "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-125923-body-lit-outline-depth-order-a29b63\\face-candidate\\late-face-overlay-1230.azurematerial.azmeta": "4cddaca59b9ceff7e85ee56c4c674f9a12b9613d59a6c01108122b2b35577963",
+    "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-125923-body-lit-outline-depth-order-a29b63\\face-candidate\\late-face-overlay-1230.bin": "c769c00280e189656cdbd2ad4a698501bbea28c1c05d1e8de127b676ad95d95e",
+    "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-125923-body-lit-outline-depth-order-a29b63\\face-candidate\\late-face-overlay-1230.dds": "0ea41ca2831851e697b6869c7248867547950eea8d7095d38e649717a2624497",
+    "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-125923-body-lit-outline-depth-order-a29b63\\face-candidate\\late-face-overlay-1230.dds.azmeta": "a3eff6fc542fed3d8104c8cb34d174a99593d9f34221d5d50ca2133b26d8e31f",
+    "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-125923-body-lit-outline-depth-order-a29b63\\face-candidate\\late-face-overlay-1230.gltf": "fd4994cdb8cae5e238588d05388d10a450fca4ab6a5f967b47d7946f41dd7def",
+    "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-125923-body-lit-outline-depth-order-a29b63\\face-candidate\\late-face-overlay-1230.gltf.azmeta": "4659c30424586935da642ec96bc5e8b73fb191aa7d53f01973757902890fcc94",
+    "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-125923-body-lit-outline-depth-order-a29b63\\face-candidate\\late-face-overlay-1358.bin": "fdd6ab7d9a5857a7732cfb292e81fae9260fd87312cae4c9c985a67e93e637bf",
+    "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-125923-body-lit-outline-depth-order-a29b63\\face-candidate\\late-face-overlay-1358.dds": "30baf01840c98ae87338d826a9effb0bad4f01f9f868e3979b60381956a814e4",
+    "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-125923-body-lit-outline-depth-order-a29b63\\face-candidate\\late-face-overlay-1358.dds.azmeta": "aafa66ed5397d0d966c702c5c5d357d69f44d3a8cf3b6464bce9e765daaef77d",
+    "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-125923-body-lit-outline-depth-order-a29b63\\face-candidate\\late-face-overlay-1358.gltf": "63f77bd66aad6b824863e201ceddf23fcaf61c3de2a84b4cef0dc39429436e95",
+    "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-125923-body-lit-outline-depth-order-a29b63\\face-candidate\\late-face-overlay-1358.gltf.azmeta": "7b4c04bda6ab81406c9169626c20e0c0c1de83ee7eb2365173d381ad415bc3f1",
+    "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-125923-body-lit-outline-depth-order-a29b63\\face-quality-release-isolated-mask\\public-combined-nvidia\\recipe\\nearest\\inputs\\face-quality-public-nearest.azurematerial": "94d87cc0cdfe85547760a2fc0f5cf13c6e12afc2327ca9688667519302e302f9",
+    "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-125923-body-lit-outline-depth-order-a29b63\\face-quality-release-isolated-mask\\public-combined-nvidia\\recipe\\nearest\\inputs\\face-quality-public-nearest.azurematerial.azmeta": "9a91ee05c0b478474f1cea7293f8846b0279acb259b481ed293c056de50789d6",
+    "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-125923-body-lit-outline-depth-order-a29b63\\face-quality-release-isolated-mask\\public-combined-nvidia\\face-quality-native-production-combined.azurelevel": "df056aa9dc0e4f4edc1b27b4b762f5ccd4b4fa4f33ebe7974e130162ff039008",
+    "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-150229-face-native-geometry-mask-sampling-d5d93e\\assets-sdf\\face-native-geometry-mask-sampling-sdf.dds": "e4d7865a20fad774cc896c4b821442bf1649d91207ca2715b1b01255f8ed55ab",
+    "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-125923-body-lit-outline-depth-order-a29b63\\face-quality-release-isolated-mask\\public-combined-nvidia\\recipe\\mask\\inputs\\face-quality-public-mask.dds.azmeta": "1d5187a1ab37b25ffe1b622206ad7942fbac42a4cf6f4ffc77517a48e6a69a45",
+    "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-125923-body-lit-outline-depth-order-a29b63\\face-quality-release-isolated-mask\\public-combined-nvidia\\recipe\\mask\\inputs\\face-quality-public-mask.azurematerial": "1e9d6dff9e0a8a0d834675a452ea5dadbd48107456d977060dea32d43061216f",
+    "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-125923-body-lit-outline-depth-order-a29b63\\face-quality-release-isolated-mask\\public-combined-nvidia\\recipe\\mask\\inputs\\face-quality-public-mask.azurematerial.azmeta": "aa7e3b59e4dc05666a04ee6b4eab444440cbeea45cc2f5ff5a9919fe78426cf9",
+    "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-125923-body-lit-outline-depth-order-a29b63\\face-quality-release-isolated-mask\\public-combined-nvidia\\face-quality-native-production-combined.azurelevel.azmeta": "2dd87d2cd8acd0e04644ef76768b87922e5b7f294261b9587d1c5c7e1390d91f",
+    "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-231945-projected-hair-reference-grid-4b775d\\iris-overlay-geometry-project\\character\\late-face-overlay-1230.bin.azmeta": "f78f2b7b9fd21e762629cee155f3b5da11bdda0f9864465ad5caf54044b1c194",
+    "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-231945-projected-hair-reference-grid-4b775d\\iris-overlay-geometry-project\\character\\late-face-overlay-1358.bin.azmeta": "88bdc3e12851c8e7885578297962b0253ddfc048885ba8a5825d7f7fd8bb2776"
+  },
+  "pathRewrites": {
+    "character:/late-face-overlay-1230.gltf": "qa_character:/late-face-overlay-1230.gltf",
+    "character:/late-face-overlay-1358.gltf": "qa_character:/late-face-overlay-1358.gltf"
+  },
+  "source": "4b6fcfc9a8ed7bd9efefc26378bfd3780f789f39d47af4fed198256bdcbc6ed4",
+  "diagnosticSource": "ea85ec09e8f15aa20e1f0472905226d3f6bcd7861c462170822d9ab748c871c2",
+  "changedPrograms": {
+    "mesh.frag.spv": "538c51122a2ea35cc7b4f58148f7e27b1357fcaeb52d2003df5a02bd72b74c38",
+    "mesh_early.frag.spv": "936c167c9c3f532d4c0db520f9ec83358e423e8328817f9ab85527d2f2643450",
+    "mesh_lighting.frag.spv": "c69e47fc822fe70e813aa645fe6f9ce646858623fd474da0df7b60b202791da3",
+    "mesh_early_lighting.frag.spv": "354f3da6045b42e1e257b393afdc977a8bb2eeffc76c0a981438bfddc111f2d5",
+    "mesh_uvquad.frag.spv": "4453747f455f811c9d124af31078de9e5d24803a0031e62f72e2c3ea8f2bd002",
+    "mesh_coverage_uvquad.frag.spv": "fba949752420c885459c0812e889eac5fbc72c169011d8bbce02b4b8e21a65d4",
+    "mesh_object.frag.spv": "884f4b2b9d1747799d50f73db1c88493ee92840b38889ae806b817e8cff4f6c6",
+    "mesh_object_early.frag.spv": "9b4ec44fc09c12d34a8591c0d2536ca6ba870bb0891ada362967d994da1db7f6",
+    "mesh_object_lighting.frag.spv": "c95587708d744c49de1d594b37f64594c668c8f3302de868cef7c86c9e5a146c",
+    "mesh_object_early_lighting.frag.spv": "d12bd8e7161b355991a6c304ec4d6e4411d5801d36b36efd813280deb4530fc6",
+    "mesh_object_uvquad.frag.spv": "3292f3a17a9e8c975446a94ea18f8030bd1ccdf7df9e4011e5a235b318616ca1",
+    "mesh_object_coverage_uvquad.frag.spv": "3bfb01a52bbce28d80b3468b898c41bcf072f1d3f357264d5e65293cafd9e797"
+  },
+  "tintConsumer": "covered-iris-and-unsigned-output",
+  "samples": {
+    "nvidia-control": {
+      "raw": "dc774a20b9508fe0433ce355180c7ecdd68117e10adb045ea91f92494bf3a504",
+      "png": "f1ab2e655871812f15c47b67a541251d43b96a5a4d85e0c5b705295c26767ba3",
+      "control": "f1ab2e655871812f15c47b67a541251d43b96a5a4d85e0c5b705295c26767ba3",
+      "deltaArchive": "4d67db0a9e201362753f49ebb2936a1f435d1161db4659076a569ca49527cf1c",
+      "changed": 0,
+      "outsideFace": 0,
+      "irisChanged": 0,
+      "face": {
+        "overOne": 355,
+        "overEight": 50,
+        "peak": 25,
+        "newOverOne": 0
+      },
+      "trackedFaceEdge": {
+        "improved": 0,
+        "worsened": 0,
+        "peak": 25
+      }
+    },
+    "intel-control": {
+      "raw": "138896eaf72e33edc1e62cd00e2d29199a2642ed9b799f6cc1005126d4912be7",
+      "png": "b9a77ffe07580069d021a14902edec44508de1202bb75e0a4e356518576fb2f9",
+      "control": "b9a77ffe07580069d021a14902edec44508de1202bb75e0a4e356518576fb2f9",
+      "deltaArchive": "f554b24ffa9794c7af7c4c206440caa25f5ba9f29c4c1b6e885f7e34f13cf816",
+      "changed": 0,
+      "outsideFace": 0,
+      "irisChanged": 0,
+      "face": {
+        "overOne": 366,
+        "overEight": 52,
+        "peak": 38,
+        "newOverOne": 0
+      },
+      "trackedFaceEdge": {
+        "improved": 0,
+        "worsened": 0,
+        "peak": 25
+      }
+    },
+    "nvidia-native-tint": {
+      "raw": "c80fb9c9d6e7850fb59476ada76f10928ea9cd7b779f07d2a2f1088ff5cd5b67",
+      "png": "a87c189c5c58582f9d166e4d1f0d264917882fd5cebd9bf6838b21a3138a42ad",
+      "control": "f1ab2e655871812f15c47b67a541251d43b96a5a4d85e0c5b705295c26767ba3",
+      "deltaArchive": "b12023c3008fe6220a3d8a6c70d172aa483dd30d2023eb1fbdd17e767b00143c",
+      "changed": 156,
+      "outsideFace": 156,
+      "irisChanged": 156,
+      "face": {
+        "overOne": 355,
+        "overEight": 50,
+        "peak": 25,
+        "newOverOne": 0
+      },
+      "iris": {
+        "overOne": 39,
+        "controlOverOne": 52,
+        "peak": 20,
+        "controlPeak": 20,
+        "newOverOne": 1,
+        "outsideIris": 0
+      }
+    },
+    "intel-native-tint": {
+      "raw": "48cc2451d7cce7077ade8d10b39730a8ac701e5af151792b664c1e72cd95ee77",
+      "png": "11f3dcf828a4e7b29b0f9ecc8f8e1781c326585db6a7d6beb85c5b41e00a1d9c",
+      "control": "b9a77ffe07580069d021a14902edec44508de1202bb75e0a4e356518576fb2f9",
+      "deltaArchive": "48131784c4a0f82ca9dd9880a26860f66c49d24c618bda7166184c3b965ba04d",
+      "changed": 151,
+      "outsideFace": 151,
+      "irisChanged": 151,
+      "face": {
+        "overOne": 366,
+        "overEight": 52,
+        "peak": 38,
+        "newOverOne": 0
+      },
+      "iris": {
+        "overOne": 52,
+        "controlOverOne": 56,
+        "peak": 28,
+        "controlPeak": 27,
+        "newOverOne": 4,
+        "outsideIris": 0
+      }
+    }
+  },
+  "nativeReference": "48afd6546c23cfa85099a765cc94ada4813a684538c695faf6d70d6daf2261b5",
+  "nativeOverlayCoverage": 94,
+  "perPoint": {
+    "nvidia": {
+      "coveredOverOne": 5,
+      "uncoveredOverOne": 34,
+      "lateOverlayOverOne": 0,
+      "remaining": [
+        {
+          "point": [
+            1255,
+            257
+          ],
+          "before": [
+            255,
+            188,
+            204
+          ],
+          "after": [
+            255,
+            188,
+            204
+          ],
+          "native": [
+            255,
+            188,
+            202
+          ],
+          "beforePeak": 2,
+          "afterPeak": 2,
+          "nativeOverlay": true
+        },
+        {
+          "point": [
+            1262,
+            257
+          ],
+          "before": [
+            67,
+            20,
+            48
+          ],
+          "after": [
+            67,
+            20,
+            48
+          ],
+          "native": [
+            82,
+            26,
+            56
+          ],
+          "beforePeak": 15,
+          "afterPeak": 15,
+          "nativeOverlay": true
+        },
+        {
+          "point": [
+            1303,
+            257
+          ],
+          "before": [
+            220,
+            70,
+            85
+          ],
+          "after": [
+            219,
+            69,
+            84
+          ],
+          "native": [
+            218,
+            70,
+            84
+          ],
+          "beforePeak": 2,
+          "afterPeak": 1,
+          "nativeOverlay": true
+        },
+        {
+          "point": [
+            1253,
+            258
+          ],
+          "before": [
+            88,
+            76,
+            147
+          ],
+          "after": [
+            88,
+            76,
+            146
+          ],
+          "native": [
+            88,
+            76,
+            145
+          ],
+          "beforePeak": 2,
+          "afterPeak": 1,
+          "nativeOverlay": true
+        },
+        {
+          "point": [
+            1255,
+            258
+          ],
+          "before": [
+            204,
+            54,
+            54
+          ],
+          "after": [
+            203,
+            53,
+            54
+          ],
+          "native": [
+            202,
+            53,
+            53
+          ],
+          "beforePeak": 2,
+          "afterPeak": 1,
+          "nativeOverlay": true
+        },
+        {
+          "point": [
+            1302,
+            258
+          ],
+          "before": [
+            255,
+            132,
+            148
+          ],
+          "after": [
+            255,
+            132,
+            147
+          ],
+          "native": [
+            254,
+            131,
+            146
+          ],
+          "beforePeak": 2,
+          "afterPeak": 1,
+          "nativeOverlay": true
+        },
+        {
+          "point": [
+            1303,
+            258
+          ],
+          "before": [
+            255,
+            166,
+            192
+          ],
+          "after": [
+            254,
+            166,
+            192
+          ],
+          "native": [
+            253,
+            166,
+            190
+          ],
+          "beforePeak": 2,
+          "afterPeak": 2,
+          "nativeOverlay": true
+        },
+        {
+          "point": [
+            1253,
+            259
+          ],
+          "before": [
+            83,
+            78,
+            202
+          ],
+          "after": [
+            83,
+            78,
+            200
+          ],
+          "native": [
+            83,
+            77,
+            200
+          ],
+          "beforePeak": 2,
+          "afterPeak": 1,
+          "nativeOverlay": false
+        },
+        {
+          "point": [
+            1254,
+            259
+          ],
+          "before": [
+            86,
+            90,
+            248
+          ],
+          "after": [
+            86,
+            90,
+            246
+          ],
+          "native": [
+            86,
+            90,
+            246
+          ],
+          "beforePeak": 2,
+          "afterPeak": 0,
+          "nativeOverlay": false
+        },
+        {
+          "point": [
+            1260,
+            259
+          ],
+          "before": [
+            89,
+            79,
+            201
+          ],
+          "after": [
+            88,
+            78,
+            200
+          ],
+          "native": [
+            88,
+            78,
+            198
+          ],
+          "beforePeak": 3,
+          "afterPeak": 2,
+          "nativeOverlay": true
+        },
+        {
+          "point": [
+            1301,
+            259
+          ],
+          "before": [
+            115,
+            43,
+            93
+          ],
+          "after": [
+            115,
+            43,
+            92
+          ],
+          "native": [
+            115,
+            43,
+            91
+          ],
+          "beforePeak": 2,
+          "afterPeak": 1,
+          "nativeOverlay": true
+        },
+        {
+          "point": [
+            1303,
+            259
+          ],
+          "before": [
+            234,
+            133,
+            140
+          ],
+          "after": [
+            234,
+            133,
+            139
+          ],
+          "native": [
+            234,
+            132,
+            137
+          ],
+          "beforePeak": 3,
+          "afterPeak": 2,
+          "nativeOverlay": true
+        },
+        {
+          "point": [
+            1309,
+            259
+          ],
+          "before": [
+            99,
+            61,
+            101
+          ],
+          "after": [
+            99,
+            61,
+            100
+          ],
+          "native": [
+            99,
+            60,
+            99
+          ],
+          "beforePeak": 2,
+          "afterPeak": 1,
+          "nativeOverlay": true
+        },
+        {
+          "point": [
+            1300,
+            260
+          ],
+          "before": [
+            91,
+            42,
+            94
+          ],
+          "after": [
+            91,
+            42,
+            93
+          ],
+          "native": [
+            91,
+            42,
+            92
+          ],
+          "beforePeak": 2,
+          "afterPeak": 1,
+          "nativeOverlay": true
+        },
+        {
+          "point": [
+            1301,
+            260
+          ],
+          "before": [
+            84,
+            63,
+            160
+          ],
+          "after": [
+            84,
+            63,
+            159
+          ],
+          "native": [
+            84,
+            63,
+            158
+          ],
+          "beforePeak": 2,
+          "afterPeak": 1,
+          "nativeOverlay": true
+        },
+        {
+          "point": [
+            1310,
+            260
+          ],
+          "before": [
+            104,
+            67,
+            97
+          ],
+          "after": [
+            104,
+            67,
+            95
+          ],
+          "native": [
+            103,
+            67,
+            95
+          ],
+          "beforePeak": 2,
+          "afterPeak": 1,
+          "nativeOverlay": true
+        },
+        {
+          "point": [
+            1312,
+            260
+          ],
+          "before": [
+            97,
+            46,
+            75
+          ],
+          "after": [
+            97,
+            46,
+            74
+          ],
+          "native": [
+            96,
+            46,
+            73
+          ],
+          "beforePeak": 2,
+          "afterPeak": 1,
+          "nativeOverlay": true
+        },
+        {
+          "point": [
+            1261,
+            261
+          ],
+          "before": [
+            100,
+            59,
+            123
+          ],
+          "after": [
+            100,
+            59,
+            122
+          ],
+          "native": [
+            89,
+            58,
+            135
+          ],
+          "beforePeak": 12,
+          "afterPeak": 13,
+          "nativeOverlay": false
+        },
+        {
+          "point": [
+            1250,
+            262
+          ],
+          "before": [
+            113,
+            78,
+            97
+          ],
+          "after": [
+            113,
+            78,
+            97
+          ],
+          "native": [
+            116,
+            79,
+            99
+          ],
+          "beforePeak": 3,
+          "afterPeak": 3,
+          "nativeOverlay": false
+        },
+        {
+          "point": [
+            1251,
+            262
+          ],
+          "before": [
+            95,
+            54,
+            139
+          ],
+          "after": [
+            95,
+            54,
+            137
+          ],
+          "native": [
+            95,
+            54,
+            137
+          ],
+          "beforePeak": 2,
+          "afterPeak": 0,
+          "nativeOverlay": false
+        },
+        {
+          "point": [
+            1262,
+            262
+          ],
+          "before": [
+            112,
+            85,
+            100
+          ],
+          "after": [
+            112,
+            85,
+            99
+          ],
+          "native": [
+            116,
+            90,
+            105
+          ],
+          "beforePeak": 5,
+          "afterPeak": 6,
+          "nativeOverlay": false
+        },
+        {
+          "point": [
+            1301,
+            262
+          ],
+          "before": [
+            89,
+            66,
+            204
+          ],
+          "after": [
+            89,
+            66,
+            203
+          ],
+          "native": [
+            89,
+            66,
+            202
+          ],
+          "beforePeak": 2,
+          "afterPeak": 1,
+          "nativeOverlay": false
+        },
+        {
+          "point": [
+            1261,
+            263
+          ],
+          "before": [
+            106,
+            61,
+            93
+          ],
+          "after": [
+            106,
+            61,
+            93
+          ],
+          "native": [
+            109,
+            63,
+            95
+          ],
+          "beforePeak": 3,
+          "afterPeak": 3,
+          "nativeOverlay": false
+        },
+        {
+          "point": [
+            1299,
+            263
+          ],
+          "before": [
+            122,
+            98,
+            105
+          ],
+          "after": [
+            122,
+            98,
+            105
+          ],
+          "native": [
+            128,
+            105,
+            114
+          ],
+          "beforePeak": 9,
+          "afterPeak": 9,
+          "nativeOverlay": false
+        },
+        {
+          "point": [
+            1312,
+            263
+          ],
+          "before": [
+            132,
+            92,
+            103
+          ],
+          "after": [
+            132,
+            92,
+            102
+          ],
+          "native": [
+            138,
+            97,
+            109
+          ],
+          "beforePeak": 6,
+          "afterPeak": 7,
+          "nativeOverlay": false
+        },
+        {
+          "point": [
+            1251,
+            264
+          ],
+          "before": [
+            121,
+            91,
+            88
+          ],
+          "after": [
+            121,
+            91,
+            88
+          ],
+          "native": [
+            132,
+            106,
+            107
+          ],
+          "beforePeak": 19,
+          "afterPeak": 19,
+          "nativeOverlay": false
+        },
+        {
+          "point": [
+            1252,
+            264
+          ],
+          "before": [
+            101,
+            54,
+            117
+          ],
+          "after": [
+            101,
+            54,
+            116
+          ],
+          "native": [
+            103,
+            54,
+            119
+          ],
+          "beforePeak": 2,
+          "afterPeak": 3,
+          "nativeOverlay": false
+        },
+        {
+          "point": [
+            1260,
+            264
+          ],
+          "before": [
+            100,
+            50,
+            106
+          ],
+          "after": [
+            100,
+            50,
+            105
+          ],
+          "native": [
+            103,
+            51,
+            109
+          ],
+          "beforePeak": 3,
+          "afterPeak": 4,
+          "nativeOverlay": false
+        },
+        {
+          "point": [
+            1300,
+            264
+          ],
+          "before": [
+            113,
+            67,
+            90
+          ],
+          "after": [
+            113,
+            67,
+            90
+          ],
+          "native": [
+            115,
+            68,
+            91
+          ],
+          "beforePeak": 2,
+          "afterPeak": 2,
+          "nativeOverlay": false
+        },
+        {
+          "point": [
+            1311,
+            264
+          ],
+          "before": [
+            102,
+            52,
+            103
+          ],
+          "after": [
+            102,
+            52,
+            102
+          ],
+          "native": [
+            103,
+            53,
+            105
+          ],
+          "beforePeak": 2,
+          "afterPeak": 3,
+          "nativeOverlay": false
+        },
+        {
+          "point": [
+            1253,
+            265
+          ],
+          "before": [
+            95,
+            63,
+            99
+          ],
+          "after": [
+            95,
+            63,
+            98
+          ],
+          "native": [
+            98,
+            66,
+            102
+          ],
+          "beforePeak": 3,
+          "afterPeak": 4,
+          "nativeOverlay": false
+        },
+        {
+          "point": [
+            1254,
+            265
+          ],
+          "before": [
+            90,
+            87,
+            155
+          ],
+          "after": [
+            90,
+            87,
+            153
+          ],
+          "native": [
+            92,
+            88,
+            157
+          ],
+          "beforePeak": 2,
+          "afterPeak": 4,
+          "nativeOverlay": false
+        },
+        {
+          "point": [
+            1255,
+            265
+          ],
+          "before": [
+            87,
+            85,
+            183
+          ],
+          "after": [
+            87,
+            85,
+            182
+          ],
+          "native": [
+            88,
+            86,
+            185
+          ],
+          "beforePeak": 2,
+          "afterPeak": 3,
+          "nativeOverlay": false
+        },
+        {
+          "point": [
+            1257,
+            265
+          ],
+          "before": [
+            86,
+            93,
+            217
+          ],
+          "after": [
+            86,
+            93,
+            216
+          ],
+          "native": [
+            87,
+            94,
+            218
+          ],
+          "beforePeak": 1,
+          "afterPeak": 2,
+          "nativeOverlay": false
+        },
+        {
+          "point": [
+            1258,
+            265
+          ],
+          "before": [
+            92,
+            84,
+            148
+          ],
+          "after": [
+            92,
+            84,
+            148
+          ],
+          "native": [
+            94,
+            86,
+            152
+          ],
+          "beforePeak": 4,
+          "afterPeak": 4,
+          "nativeOverlay": false
+        },
+        {
+          "point": [
+            1259,
+            265
+          ],
+          "before": [
+            99,
+            68,
+            100
+          ],
+          "after": [
+            98,
+            68,
+            99
+          ],
+          "native": [
+            103,
+            72,
+            106
+          ],
+          "beforePeak": 6,
+          "afterPeak": 7,
+          "nativeOverlay": false
+        },
+        {
+          "point": [
+            1301,
+            265
+          ],
+          "before": [
+            105,
+            59,
+            113
+          ],
+          "after": [
+            104,
+            59,
+            113
+          ],
+          "native": [
+            105,
+            60,
+            115
+          ],
+          "beforePeak": 2,
+          "afterPeak": 2,
+          "nativeOverlay": false
+        },
+        {
+          "point": [
+            1311,
+            265
+          ],
+          "before": [
+            144,
+            98,
+            89
+          ],
+          "after": [
+            144,
+            98,
+            88
+          ],
+          "native": [
+            156,
+            115,
+            106
+          ],
+          "beforePeak": 17,
+          "afterPeak": 18,
+          "nativeOverlay": false
+        },
+        {
+          "point": [
+            1254,
+            266
+          ],
+          "before": [
+            108,
+            85,
+            91
+          ],
+          "after": [
+            108,
+            85,
+            91
+          ],
+          "native": [
+            119,
+            101,
+            111
+          ],
+          "beforePeak": 20,
+          "afterPeak": 20,
+          "nativeOverlay": false
+        },
+        {
+          "point": [
+            1255,
+            266
+          ],
+          "before": [
+            103,
+            81,
+            99
+          ],
+          "after": [
+            103,
+            81,
+            98
+          ],
+          "native": [
+            108,
+            87,
+            107
+          ],
+          "beforePeak": 8,
+          "afterPeak": 9,
+          "nativeOverlay": false
+        },
+        {
+          "point": [
+            1256,
+            266
+          ],
+          "before": [
+            97,
+            74,
+            102
+          ],
+          "after": [
+            97,
+            74,
+            101
+          ],
+          "native": [
+            102,
+            79,
+            110
+          ],
+          "beforePeak": 8,
+          "afterPeak": 9,
+          "nativeOverlay": false
+        },
+        {
+          "point": [
+            1257,
+            266
+          ],
+          "before": [
+            105,
+            81,
+            95
+          ],
+          "after": [
+            105,
+            81,
+            95
+          ],
+          "native": [
+            111,
+            89,
+            105
+          ],
+          "beforePeak": 10,
+          "afterPeak": 10,
+          "nativeOverlay": false
+        },
+        {
+          "point": [
+            1302,
+            266
+          ],
+          "before": [
+            99,
+            73,
+            114
+          ],
+          "after": [
+            99,
+            73,
+            113
+          ],
+          "native": [
+            101,
+            75,
+            118
+          ],
+          "beforePeak": 4,
+          "afterPeak": 5,
+          "nativeOverlay": false
+        },
+        {
+          "point": [
+            1307,
+            266
+          ],
+          "before": [
+            93,
+            92,
+            221
+          ],
+          "after": [
+            93,
+            92,
+            220
+          ],
+          "native": [
+            94,
+            93,
+            223
+          ],
+          "beforePeak": 2,
+          "afterPeak": 3,
+          "nativeOverlay": false
+        },
+        {
+          "point": [
+            1308,
+            266
+          ],
+          "before": [
+            91,
+            83,
+            165
+          ],
+          "after": [
+            91,
+            83,
+            165
+          ],
+          "native": [
+            93,
+            84,
+            168
+          ],
+          "beforePeak": 3,
+          "afterPeak": 3,
+          "nativeOverlay": false
+        },
+        {
+          "point": [
+            1309,
+            266
+          ],
+          "before": [
+            97,
+            57,
+            111
+          ],
+          "after": [
+            97,
+            57,
+            110
+          ],
+          "native": [
+            99,
+            59,
+            115
+          ],
+          "beforePeak": 4,
+          "afterPeak": 5,
+          "nativeOverlay": false
+        },
+        {
+          "point": [
+            1310,
+            266
+          ],
+          "before": [
+            130,
+            89,
+            92
+          ],
+          "after": [
+            130,
+            89,
+            92
+          ],
+          "native": [
+            140,
+            103,
+            111
+          ],
+          "beforePeak": 19,
+          "afterPeak": 19,
+          "nativeOverlay": false
+        },
+        {
+          "point": [
+            1303,
+            267
+          ],
+          "before": [
+            109,
+            84,
+            95
+          ],
+          "after": [
+            108,
+            83,
+            95
+          ],
+          "native": [
+            115,
+            92,
+            106
+          ],
+          "beforePeak": 11,
+          "afterPeak": 11,
+          "nativeOverlay": false
+        },
+        {
+          "point": [
+            1304,
+            267
+          ],
+          "before": [
+            93,
+            67,
+            101
+          ],
+          "after": [
+            93,
+            67,
+            101
+          ],
+          "native": [
+            96,
+            70,
+            105
+          ],
+          "beforePeak": 4,
+          "afterPeak": 4,
+          "nativeOverlay": false
+        },
+        {
+          "point": [
+            1305,
+            267
+          ],
+          "before": [
+            89,
+            68,
+            132
+          ],
+          "after": [
+            89,
+            68,
+            131
+          ],
+          "native": [
+            92,
+            71,
+            137
+          ],
+          "beforePeak": 5,
+          "afterPeak": 6,
+          "nativeOverlay": false
+        },
+        {
+          "point": [
+            1306,
+            267
+          ],
+          "before": [
+            89,
+            67,
+            124
+          ],
+          "after": [
+            89,
+            67,
+            123
+          ],
+          "native": [
+            91,
+            69,
+            129
+          ],
+          "beforePeak": 5,
+          "afterPeak": 6,
+          "nativeOverlay": false
+        },
+        {
+          "point": [
+            1307,
+            267
+          ],
+          "before": [
+            87,
+            54,
+            94
+          ],
+          "after": [
+            87,
+            54,
+            94
+          ],
+          "native": [
+            90,
+            56,
+            98
+          ],
+          "beforePeak": 4,
+          "afterPeak": 4,
+          "nativeOverlay": false
+        },
+        {
+          "point": [
+            1308,
+            267
+          ],
+          "before": [
+            114,
+            85,
+            97
+          ],
+          "after": [
+            113,
+            85,
+            97
+          ],
+          "native": [
+            120,
+            92,
+            106
+          ],
+          "beforePeak": 9,
+          "afterPeak": 9,
+          "nativeOverlay": false
+        }
+      ]
+    },
+    "intel": {
+      "coveredOverOne": 10,
+      "uncoveredOverOne": 42,
+      "lateOverlayOverOne": 0,
+      "remaining": [
+        {
+          "point": [
+            1254,
+            257
+          ],
+          "before": [
+            228,
+            85,
+            88
+          ],
+          "after": [
+            227,
+            85,
+            87
+          ],
+          "native": [
+            227,
+            84,
+            86
+          ],
+          "beforePeak": 2,
+          "afterPeak": 1,
+          "nativeOverlay": true
+        },
+        {
+          "point": [
+            1255,
+            257
+          ],
+          "before": [
+            255,
+            187,
+            204
+          ],
+          "after": [
+            255,
+            187,
+            204
+          ],
+          "native": [
+            255,
+            188,
+            202
+          ],
+          "beforePeak": 2,
+          "afterPeak": 2,
+          "nativeOverlay": true
+        },
+        {
+          "point": [
+            1262,
+            257
+          ],
+          "before": [
+            67,
+            20,
+            48
+          ],
+          "after": [
+            67,
+            20,
+            48
+          ],
+          "native": [
+            82,
+            26,
+            56
+          ],
+          "beforePeak": 15,
+          "afterPeak": 15,
+          "nativeOverlay": true
+        },
+        {
+          "point": [
+            1303,
+            257
+          ],
+          "before": [
+            221,
+            70,
+            85
+          ],
+          "after": [
+            219,
+            70,
+            85
+          ],
+          "native": [
+            218,
+            70,
+            84
+          ],
+          "beforePeak": 3,
+          "afterPeak": 1,
+          "nativeOverlay": true
+        },
+        {
+          "point": [
+            1307,
+            257
+          ],
+          "before": [
+            136,
+            38,
+            77
+          ],
+          "after": [
+            135,
+            37,
+            76
+          ],
+          "native": [
+            135,
+            37,
+            75
+          ],
+          "beforePeak": 2,
+          "afterPeak": 1,
+          "nativeOverlay": true
+        },
+        {
+          "point": [
+            1253,
+            258
+          ],
+          "before": [
+            88,
+            77,
+            147
+          ],
+          "after": [
+            87,
+            76,
+            146
+          ],
+          "native": [
+            88,
+            76,
+            145
+          ],
+          "beforePeak": 2,
+          "afterPeak": 1,
+          "nativeOverlay": true
+        },
+        {
+          "point": [
+            1255,
+            258
+          ],
+          "before": [
+            205,
+            57,
+            57
+          ],
+          "after": [
+            204,
+            56,
+            56
+          ],
+          "native": [
+            202,
+            53,
+            53
+          ],
+          "beforePeak": 4,
+          "afterPeak": 3,
+          "nativeOverlay": true
+        },
+        {
+          "point": [
+            1302,
+            258
+          ],
+          "before": [
+            255,
+            132,
+            148
+          ],
+          "after": [
+            255,
+            132,
+            148
+          ],
+          "native": [
+            254,
+            131,
+            146
+          ],
+          "beforePeak": 2,
+          "afterPeak": 2,
+          "nativeOverlay": true
+        },
+        {
+          "point": [
+            1303,
+            258
+          ],
+          "before": [
+            255,
+            166,
+            192
+          ],
+          "after": [
+            255,
+            166,
+            192
+          ],
+          "native": [
+            253,
+            166,
+            190
+          ],
+          "beforePeak": 2,
+          "afterPeak": 2,
+          "nativeOverlay": true
+        },
+        {
+          "point": [
+            1253,
+            259
+          ],
+          "before": [
+            83,
+            78,
+            202
+          ],
+          "after": [
+            82,
+            78,
+            202
+          ],
+          "native": [
+            83,
+            77,
+            200
+          ],
+          "beforePeak": 2,
+          "afterPeak": 2,
+          "nativeOverlay": false
+        },
+        {
+          "point": [
+            1254,
+            259
+          ],
+          "before": [
+            86,
+            90,
+            248
+          ],
+          "after": [
+            86,
+            90,
+            248
+          ],
+          "native": [
+            86,
+            90,
+            246
+          ],
+          "beforePeak": 2,
+          "afterPeak": 2,
+          "nativeOverlay": false
+        },
+        {
+          "point": [
+            1260,
+            259
+          ],
+          "before": [
+            88,
+            79,
+            201
+          ],
+          "after": [
+            88,
+            79,
+            200
+          ],
+          "native": [
+            88,
+            78,
+            198
+          ],
+          "beforePeak": 3,
+          "afterPeak": 2,
+          "nativeOverlay": true
+        },
+        {
+          "point": [
+            1301,
+            259
+          ],
+          "before": [
+            115,
+            43,
+            93
+          ],
+          "after": [
+            115,
+            43,
+            92
+          ],
+          "native": [
+            115,
+            43,
+            91
+          ],
+          "beforePeak": 2,
+          "afterPeak": 1,
+          "nativeOverlay": true
+        },
+        {
+          "point": [
+            1303,
+            259
+          ],
+          "before": [
+            235,
+            133,
+            140
+          ],
+          "after": [
+            234,
+            133,
+            140
+          ],
+          "native": [
+            234,
+            132,
+            137
+          ],
+          "beforePeak": 3,
+          "afterPeak": 3,
+          "nativeOverlay": true
+        },
+        {
+          "point": [
+            1309,
+            259
+          ],
+          "before": [
+            99,
+            61,
+            101
+          ],
+          "after": [
+            99,
+            61,
+            100
+          ],
+          "native": [
+            99,
+            60,
+            99
+          ],
+          "beforePeak": 2,
+          "afterPeak": 1,
+          "nativeOverlay": true
+        },
+        {
+          "point": [
+            1300,
+            260
+          ],
+          "before": [
+            91,
+            42,
+            94
+          ],
+          "after": [
+            91,
+            42,
+            94
+          ],
+          "native": [
+            91,
+            42,
+            92
+          ],
+          "beforePeak": 2,
+          "afterPeak": 2,
+          "nativeOverlay": true
+        },
+        {
+          "point": [
+            1301,
+            260
+          ],
+          "before": [
+            84,
+            63,
+            160
+          ],
+          "after": [
+            84,
+            63,
+            159
+          ],
+          "native": [
+            84,
+            63,
+            158
+          ],
+          "beforePeak": 2,
+          "afterPeak": 1,
+          "nativeOverlay": true
+        },
+        {
+          "point": [
+            1310,
+            260
+          ],
+          "before": [
+            104,
+            67,
+            97
+          ],
+          "after": [
+            104,
+            67,
+            97
+          ],
+          "native": [
+            103,
+            67,
+            95
+          ],
+          "beforePeak": 2,
+          "afterPeak": 2,
+          "nativeOverlay": true
+        },
+        {
+          "point": [
+            1312,
+            260
+          ],
+          "before": [
+            97,
+            46,
+            75
+          ],
+          "after": [
+            96,
+            46,
+            75
+          ],
+          "native": [
+            96,
+            46,
+            73
+          ],
+          "beforePeak": 2,
+          "afterPeak": 2,
+          "nativeOverlay": true
+        },
+        {
+          "point": [
+            1261,
+            261
+          ],
+          "before": [
+            100,
+            59,
+            123
+          ],
+          "after": [
+            100,
+            59,
+            122
+          ],
+          "native": [
+            89,
+            58,
+            135
+          ],
+          "beforePeak": 12,
+          "afterPeak": 13,
+          "nativeOverlay": false
+        },
+        {
+          "point": [
+            1250,
+            262
+          ],
+          "before": [
+            114,
+            78,
+            98
+          ],
+          "after": [
+            113,
+            78,
+            98
+          ],
+          "native": [
+            116,
+            79,
+            99
+          ],
+          "beforePeak": 2,
+          "afterPeak": 3,
+          "nativeOverlay": false
+        },
+        {
+          "point": [
+            1251,
+            262
+          ],
+          "before": [
+            95,
+            54,
+            139
+          ],
+          "after": [
+            94,
+            54,
+            139
+          ],
+          "native": [
+            95,
+            54,
+            137
+          ],
+          "beforePeak": 2,
+          "afterPeak": 2,
+          "nativeOverlay": false
+        },
+        {
+          "point": [
+            1260,
+            262
+          ],
+          "before": [
+            87,
+            76,
+            254
+          ],
+          "after": [
+            87,
+            76,
+            253
+          ],
+          "native": [
+            84,
+            89,
+            244
+          ],
+          "beforePeak": 13,
+          "afterPeak": 13,
+          "nativeOverlay": false
+        },
+        {
+          "point": [
+            1261,
+            262
+          ],
+          "before": [
+            97,
+            54,
+            116
+          ],
+          "after": [
+            97,
+            53,
+            115
+          ],
+          "native": [
+            89,
+            53,
+            115
+          ],
+          "beforePeak": 8,
+          "afterPeak": 8,
+          "nativeOverlay": false
+        },
+        {
+          "point": [
+            1262,
+            262
+          ],
+          "before": [
+            112,
+            85,
+            100
+          ],
+          "after": [
+            111,
+            85,
+            99
+          ],
+          "native": [
+            116,
+            90,
+            105
+          ],
+          "beforePeak": 5,
+          "afterPeak": 6,
+          "nativeOverlay": false
+        },
+        {
+          "point": [
+            1301,
+            262
+          ],
+          "before": [
+            89,
+            66,
+            204
+          ],
+          "after": [
+            89,
+            66,
+            202
+          ],
+          "native": [
+            89,
+            66,
+            202
+          ],
+          "beforePeak": 2,
+          "afterPeak": 0,
+          "nativeOverlay": false
+        },
+        {
+          "point": [
+            1312,
+            262
+          ],
+          "before": [
+            99,
+            53,
+            91
+          ],
+          "after": [
+            98,
+            53,
+            90
+          ],
+          "native": [
+            100,
+            53,
+            91
+          ],
+          "beforePeak": 1,
+          "afterPeak": 2,
+          "nativeOverlay": false
+        },
+        {
+          "point": [
+            1261,
+            263
+          ],
+          "before": [
+            106,
+            61,
+            93
+          ],
+          "after": [
+            106,
+            61,
+            93
+          ],
+          "native": [
+            109,
+            63,
+            95
+          ],
+          "beforePeak": 3,
+          "afterPeak": 3,
+          "nativeOverlay": false
+        },
+        {
+          "point": [
+            1299,
+            263
+          ],
+          "before": [
+            122,
+            98,
+            105
+          ],
+          "after": [
+            122,
+            98,
+            105
+          ],
+          "native": [
+            128,
+            105,
+            114
+          ],
+          "beforePeak": 9,
+          "afterPeak": 9,
+          "nativeOverlay": false
+        },
+        {
+          "point": [
+            1312,
+            263
+          ],
+          "before": [
+            132,
+            92,
+            103
+          ],
+          "after": [
+            132,
+            92,
+            102
+          ],
+          "native": [
+            138,
+            97,
+            109
+          ],
+          "beforePeak": 6,
+          "afterPeak": 7,
+          "nativeOverlay": false
+        },
+        {
+          "point": [
+            1251,
+            264
+          ],
+          "before": [
+            121,
+            90,
+            88
+          ],
+          "after": [
+            121,
+            90,
+            88
+          ],
+          "native": [
+            132,
+            106,
+            107
+          ],
+          "beforePeak": 19,
+          "afterPeak": 19,
+          "nativeOverlay": false
+        },
+        {
+          "point": [
+            1252,
+            264
+          ],
+          "before": [
+            101,
+            54,
+            117
+          ],
+          "after": [
+            101,
+            53,
+            116
+          ],
+          "native": [
+            103,
+            54,
+            119
+          ],
+          "beforePeak": 2,
+          "afterPeak": 3,
+          "nativeOverlay": false
+        },
+        {
+          "point": [
+            1260,
+            264
+          ],
+          "before": [
+            100,
+            50,
+            106
+          ],
+          "after": [
+            100,
+            50,
+            105
+          ],
+          "native": [
+            103,
+            51,
+            109
+          ],
+          "beforePeak": 3,
+          "afterPeak": 4,
+          "nativeOverlay": false
+        },
+        {
+          "point": [
+            1300,
+            264
+          ],
+          "before": [
+            114,
+            67,
+            90
+          ],
+          "after": [
+            113,
+            67,
+            90
+          ],
+          "native": [
+            115,
+            68,
+            91
+          ],
+          "beforePeak": 1,
+          "afterPeak": 2,
+          "nativeOverlay": false
+        },
+        {
+          "point": [
+            1311,
+            264
+          ],
+          "before": [
+            102,
+            52,
+            103
+          ],
+          "after": [
+            102,
+            51,
+            102
+          ],
+          "native": [
+            103,
+            53,
+            105
+          ],
+          "beforePeak": 2,
+          "afterPeak": 3,
+          "nativeOverlay": false
+        },
+        {
+          "point": [
+            1253,
+            265
+          ],
+          "before": [
+            95,
+            63,
+            98
+          ],
+          "after": [
+            95,
+            63,
+            98
+          ],
+          "native": [
+            98,
+            66,
+            102
+          ],
+          "beforePeak": 4,
+          "afterPeak": 4,
+          "nativeOverlay": false
+        },
+        {
+          "point": [
+            1254,
+            265
+          ],
+          "before": [
+            90,
+            87,
+            155
+          ],
+          "after": [
+            90,
+            87,
+            154
+          ],
+          "native": [
+            92,
+            88,
+            157
+          ],
+          "beforePeak": 2,
+          "afterPeak": 3,
+          "nativeOverlay": false
+        },
+        {
+          "point": [
+            1255,
+            265
+          ],
+          "before": [
+            87,
+            85,
+            183
+          ],
+          "after": [
+            86,
+            85,
+            182
+          ],
+          "native": [
+            88,
+            86,
+            185
+          ],
+          "beforePeak": 2,
+          "afterPeak": 3,
+          "nativeOverlay": false
+        },
+        {
+          "point": [
+            1257,
+            265
+          ],
+          "before": [
+            86,
+            93,
+            217
+          ],
+          "after": [
+            86,
+            93,
+            216
+          ],
+          "native": [
+            87,
+            94,
+            218
+          ],
+          "beforePeak": 1,
+          "afterPeak": 2,
+          "nativeOverlay": false
+        },
+        {
+          "point": [
+            1258,
+            265
+          ],
+          "before": [
+            92,
+            84,
+            148
+          ],
+          "after": [
+            92,
+            84,
+            148
+          ],
+          "native": [
+            94,
+            86,
+            152
+          ],
+          "beforePeak": 4,
+          "afterPeak": 4,
+          "nativeOverlay": false
+        },
+        {
+          "point": [
+            1259,
+            265
+          ],
+          "before": [
+            99,
+            68,
+            101
+          ],
+          "after": [
+            98,
+            68,
+            101
+          ],
+          "native": [
+            103,
+            72,
+            106
+          ],
+          "beforePeak": 5,
+          "afterPeak": 5,
+          "nativeOverlay": false
+        },
+        {
+          "point": [
+            1301,
+            265
+          ],
+          "before": [
+            104,
+            59,
+            113
+          ],
+          "after": [
+            104,
+            59,
+            113
+          ],
+          "native": [
+            105,
+            60,
+            115
+          ],
+          "beforePeak": 2,
+          "afterPeak": 2,
+          "nativeOverlay": false
+        },
+        {
+          "point": [
+            1302,
+            265
+          ],
+          "before": [
+            108,
+            66,
+            147
+          ],
+          "after": [
+            108,
+            66,
+            146
+          ],
+          "native": [
+            103,
+            82,
+            174
+          ],
+          "beforePeak": 27,
+          "afterPeak": 28,
+          "nativeOverlay": false
+        },
+        {
+          "point": [
+            1311,
+            265
+          ],
+          "before": [
+            144,
+            98,
+            89
+          ],
+          "after": [
+            144,
+            98,
+            88
+          ],
+          "native": [
+            156,
+            115,
+            106
+          ],
+          "beforePeak": 17,
+          "afterPeak": 18,
+          "nativeOverlay": false
+        },
+        {
+          "point": [
+            1254,
+            266
+          ],
+          "before": [
+            108,
+            85,
+            91
+          ],
+          "after": [
+            107,
+            85,
+            90
+          ],
+          "native": [
+            119,
+            101,
+            111
+          ],
+          "beforePeak": 20,
+          "afterPeak": 21,
+          "nativeOverlay": false
+        },
+        {
+          "point": [
+            1255,
+            266
+          ],
+          "before": [
+            103,
+            81,
+            99
+          ],
+          "after": [
+            103,
+            81,
+            99
+          ],
+          "native": [
+            108,
+            87,
+            107
+          ],
+          "beforePeak": 8,
+          "afterPeak": 8,
+          "nativeOverlay": false
+        },
+        {
+          "point": [
+            1256,
+            266
+          ],
+          "before": [
+            97,
+            74,
+            101
+          ],
+          "after": [
+            97,
+            74,
+            101
+          ],
+          "native": [
+            102,
+            79,
+            110
+          ],
+          "beforePeak": 9,
+          "afterPeak": 9,
+          "nativeOverlay": false
+        },
+        {
+          "point": [
+            1257,
+            266
+          ],
+          "before": [
+            105,
+            82,
+            95
+          ],
+          "after": [
+            105,
+            81,
+            94
+          ],
+          "native": [
+            111,
+            89,
+            105
+          ],
+          "beforePeak": 10,
+          "afterPeak": 11,
+          "nativeOverlay": false
+        },
+        {
+          "point": [
+            1302,
+            266
+          ],
+          "before": [
+            99,
+            73,
+            114
+          ],
+          "after": [
+            99,
+            73,
+            114
+          ],
+          "native": [
+            101,
+            75,
+            118
+          ],
+          "beforePeak": 4,
+          "afterPeak": 4,
+          "nativeOverlay": false
+        },
+        {
+          "point": [
+            1303,
+            266
+          ],
+          "before": [
+            93,
+            91,
+            185
+          ],
+          "after": [
+            92,
+            90,
+            185
+          ],
+          "native": [
+            93,
+            92,
+            186
+          ],
+          "beforePeak": 1,
+          "afterPeak": 2,
+          "nativeOverlay": false
+        },
+        {
+          "point": [
+            1307,
+            266
+          ],
+          "before": [
+            93,
+            92,
+            221
+          ],
+          "after": [
+            93,
+            92,
+            220
+          ],
+          "native": [
+            94,
+            93,
+            223
+          ],
+          "beforePeak": 2,
+          "afterPeak": 3,
+          "nativeOverlay": false
+        },
+        {
+          "point": [
+            1308,
+            266
+          ],
+          "before": [
+            91,
+            83,
+            165
+          ],
+          "after": [
+            91,
+            82,
+            165
+          ],
+          "native": [
+            93,
+            84,
+            168
+          ],
+          "beforePeak": 3,
+          "afterPeak": 3,
+          "nativeOverlay": false
+        },
+        {
+          "point": [
+            1309,
+            266
+          ],
+          "before": [
+            97,
+            57,
+            111
+          ],
+          "after": [
+            97,
+            57,
+            110
+          ],
+          "native": [
+            99,
+            59,
+            115
+          ],
+          "beforePeak": 4,
+          "afterPeak": 5,
+          "nativeOverlay": false
+        },
+        {
+          "point": [
+            1310,
+            266
+          ],
+          "before": [
+            130,
+            89,
+            92
+          ],
+          "after": [
+            130,
+            89,
+            92
+          ],
+          "native": [
+            140,
+            103,
+            111
+          ],
+          "beforePeak": 19,
+          "afterPeak": 19,
+          "nativeOverlay": false
+        },
+        {
+          "point": [
+            1303,
+            267
+          ],
+          "before": [
+            109,
+            84,
+            95
+          ],
+          "after": [
+            108,
+            83,
+            94
+          ],
+          "native": [
+            115,
+            92,
+            106
+          ],
+          "beforePeak": 11,
+          "afterPeak": 12,
+          "nativeOverlay": false
+        },
+        {
+          "point": [
+            1304,
+            267
+          ],
+          "before": [
+            93,
+            67,
+            102
+          ],
+          "after": [
+            92,
+            67,
+            101
+          ],
+          "native": [
+            96,
+            70,
+            105
+          ],
+          "beforePeak": 3,
+          "afterPeak": 4,
+          "nativeOverlay": false
+        },
+        {
+          "point": [
+            1305,
+            267
+          ],
+          "before": [
+            89,
+            68,
+            131
+          ],
+          "after": [
+            89,
+            68,
+            131
+          ],
+          "native": [
+            92,
+            71,
+            137
+          ],
+          "beforePeak": 6,
+          "afterPeak": 6,
+          "nativeOverlay": false
+        },
+        {
+          "point": [
+            1306,
+            267
+          ],
+          "before": [
+            89,
+            67,
+            124
+          ],
+          "after": [
+            89,
+            67,
+            123
+          ],
+          "native": [
+            91,
+            69,
+            129
+          ],
+          "beforePeak": 5,
+          "afterPeak": 6,
+          "nativeOverlay": false
+        },
+        {
+          "point": [
+            1307,
+            267
+          ],
+          "before": [
+            87,
+            54,
+            94
+          ],
+          "after": [
+            87,
+            54,
+            94
+          ],
+          "native": [
+            90,
+            56,
+            98
+          ],
+          "beforePeak": 4,
+          "afterPeak": 4,
+          "nativeOverlay": false
+        },
+        {
+          "point": [
+            1308,
+            267
+          ],
+          "before": [
+            114,
+            85,
+            97
+          ],
+          "after": [
+            113,
+            84,
+            97
+          ],
+          "native": [
+            120,
+            92,
+            106
+          ],
+          "beforePeak": 9,
+          "afterPeak": 9,
+          "nativeOverlay": false
+        }
+      ]
+    }
+  },
+  "archiveSha256": "8e236f8169ea2ca438dd552aeb56f0ecae40e7844b8b742825f6f29322b67c28"
+}

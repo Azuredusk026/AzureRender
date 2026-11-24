@@ -1,0 +1,171 @@
+{
+  "status": "measured-live-intel-shaded-normal",
+  "playerSha256": "1a30d925a674ddb1d95876cb80181106a0217e12a7228a35b5980b134954cb69",
+  "inputSha256": "df1c5da6d6302606dc7e6961b893f3873f2b663d5f5e47285b63258c8312b1d8",
+  "counts": {
+    "points": 1118,
+    "outputWithinFive": 1088,
+    "nativeAddressWithinFive": 1060
+  },
+  "controls": [
+    {
+      "point": [
+        1270,
+        1037
+      ],
+      "sourceAddress": [
+        1271,
+        1037
+      ],
+      "angularError": 0.38898116353983986
+    },
+    {
+      "point": [
+        1270,
+        1047
+      ],
+      "sourceAddress": [
+        1271,
+        1047
+      ],
+      "angularError": 0.3422529993346802
+    },
+    {
+      "point": [
+        1270,
+        1053
+      ],
+      "sourceAddress": [
+        1271,
+        1053
+      ],
+      "angularError": 0.29869501527715286
+    },
+    {
+      "point": [
+        1270,
+        1054
+      ],
+      "sourceAddress": [
+        1271,
+        1054
+      ],
+      "angularError": 0.42537831119383834
+    }
+  ],
+  "largeNvidiaColorResidualControls": [
+    {
+      "point": [
+        1325,
+        1120
+      ],
+      "nvidiaDisplayError": 88,
+      "intelNormalDegrees": 0.5412698444620371
+    },
+    {
+      "point": [
+        1325,
+        1119
+      ],
+      "nvidiaDisplayError": 86,
+      "intelNormalDegrees": 0.3340493947712865
+    },
+    {
+      "point": [
+        1319,
+        935
+      ],
+      "nvidiaDisplayError": 85,
+      "intelNormalDegrees": 0.5961656101289758
+    },
+    {
+      "point": [
+        1319,
+        936
+      ],
+      "nvidiaDisplayError": 85,
+      "intelNormalDegrees": 0.1434149640533042
+    },
+    {
+      "point": [
+        1319,
+        937
+      ],
+      "nvidiaDisplayError": 85,
+      "intelNormalDegrees": 0.3704668259341967
+    },
+    {
+      "point": [
+        1319,
+        938
+      ],
+      "nvidiaDisplayError": 85,
+      "intelNormalDegrees": 0.3011650406658216
+    },
+    {
+      "point": [
+        1327,
+        1100
+      ],
+      "nvidiaDisplayError": 85,
+      "intelNormalDegrees": 0.9012404601788271
+    },
+    {
+      "point": [
+        1327,
+        1101
+      ],
+      "nvidiaDisplayError": 85,
+      "intelNormalDegrees": 1.3198340595258118
+    },
+    {
+      "point": [
+        1327,
+        1102
+      ],
+      "nvidiaDisplayError": 85,
+      "intelNormalDegrees": 1.024295538514207
+    },
+    {
+      "point": [
+        1326,
+        1110
+      ],
+      "nvidiaDisplayError": 85,
+      "intelNormalDegrees": 1.3887258832225926
+    },
+    {
+      "point": [
+        1326,
+        1111
+      ],
+      "nvidiaDisplayError": 85,
+      "intelNormalDegrees": 1.069654353918636
+    },
+    {
+      "point": [
+        1325,
+        1117
+      ],
+      "nvidiaDisplayError": 85,
+      "intelNormalDegrees": 0.24335258664852166
+    }
+  ],
+  "frameSha256": "8e192259768a6b1a141d2698e06422933e3531dc220077e4fe7493430044e2fb",
+  "overallVisualAcceptance": "failed-user-review",
+  "archive": {
+    "sha256": "b8b4fb28d359042d4757126cd6b63e2c12c5f127859d5c3cefc706cb8848fe16",
+    "members": {
+      "score-body-outline-intel-normal.py": "c7a8ac8d3ac77e4a7e96e51e6c529537e640e0fe671740d9ee8df7314363cd13",
+      "archive-body-outline-intel-normal.py": "6e6f122c7374ffcca98a5dfef5b840ee9ea64389478b1dd54792a9410083bc75",
+      "body-outline-source-footprint.json": "071b6179c37539254f82f8180cd1356516ef3d4c330fc896111f5cbfbeb02e65",
+      "body-outline-screen-normal-states.json": "1d1ca4755d014922b5bbd42c26b1babe7fe9c4719d67cf6fad5c30b1b8317ca4",
+      "body-outline-local-rim-radial-model.json": "0bca587ea63a995d0e46ce6abc32016a24fd381b018600991aac3c5ea4d3074f",
+      "body-outline-intel-normal-comparison.json": "6f885dfb765d535062cabbd5da3cd9d930945a014e0a9789c356de525b8e76f9",
+      "body-outline-normal-intel/results.json": "df1c5da6d6302606dc7e6961b893f3873f2b663d5f5e47285b63258c8312b1d8",
+      "body-outline-normal-intel/command.json": "716b2a9497098ba1d564f09934e85dc329a1476c184efd118a67ab80b7387c13",
+      "body-outline-normal-intel/frames/capture_manifest.json": "c777e83ab127fceb5f4df98192c0c027fcc66d5f5940d03e470dbeee75b0b4fe",
+      "body-outline-normal-intel/frames/gpu_capabilities.json": "a38eaca3509b417cfe23614fe415bd9ccc5622fc682d8623142cdeb7dc3d85cc"
+    }
+  }
+}

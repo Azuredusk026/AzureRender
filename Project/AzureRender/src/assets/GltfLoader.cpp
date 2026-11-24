@@ -1,5 +1,6 @@
 #include "GltfLoader.hpp"
 #include "assets/MaterialBlendDepth.hpp"
+#include "assets/MaterialColorAdjustment.hpp"
 #include "assets/MaterialOutputPrecision.hpp"
 #include "assets/MaterialUvPolicy.hpp"
 #include "assets/MaterialRimResponse.hpp"
@@ -208,7 +209,7 @@ void loadMaterialProfile(
                 ||(profile.at("schemaVersion")!=1&&profile.at("schemaVersion")!=2))
                 throw std::invalid_argument(context+": unsupported schemaVersion");
             const std::set<std::string> fields{"schemaVersion","class","features","styleParameters","featureParameters",
-                "faceSdf","hair","diffuseRamp","shadowColorLut","eyeSurface","outlineSurface","specularInput","specularRamp","nprDiffuse","surface","composite","sceneRefraction","radianceScale","displayTransform","environmentLighting","mainLightShadow","coverageTexture","blendDepth","referenceNormal","referenceDepthStencil"};
+                "faceSdf","hair","diffuseRamp","shadowColorLut","eyeSurface","outlineSurface","specularInput","specularRamp","nprDiffuse","surface","composite","sceneRefraction","radianceScale","displayTransform","colorAdjustment","environmentLighting","mainLightShadow","coverageTexture","blendDepth","referenceNormal","referenceDepthStencil"};
             for(const auto& field:profile.items())if(!fields.count(field.key()))throw std::invalid_argument(context+": unknown field "+field.key());
             if (profile.contains("referenceDepthStencil")) {
                 const auto& value = profile.at("referenceDepthStencil");
@@ -249,6 +250,41 @@ void loadMaterialProfile(
                 result.blendDepth.present=true;result.blendDepth.write=value.value("write",false);
                 result.blendDepth.compare=value.value("compare",std::string("less"))=="less"
                     ?AssetMaterial::BlendDepth::Compare::Less:AssetMaterial::BlendDepth::Compare::LessOrEqual;
+            }
+            if(profile.contains("colorAdjustment")) {
+                const auto& value=profile.at("colorAdjustment");
+                if(profile.at("schemaVersion")!=2||!value.is_object()||!value.contains("schemaVersion")
+                    ||!value.at("schemaVersion").is_number_integer()||value.at("schemaVersion")!=1)
+                    throw std::invalid_argument(context+": colorAdjustment requires schemaVersion one and profile version two");
+                for(const auto& field:value.items())if(field.key()!="schemaVersion"&&field.key()!="brightness"
+                    &&field.key()!="contrast"&&field.key()!="saturation"&&field.key()!="tint"&&field.key()!="rim")
+                    throw std::invalid_argument(context+": unknown colorAdjustment field "+field.key());
+                const auto number=[&](const nlohmann::json& entry,const char* name,double limit,bool exclusive=false) {
+                    if(!entry.is_number())throw std::invalid_argument(context+": invalid colorAdjustment."+name);
+                    const double v=entry.get<double>();
+                    if(!std::isfinite(v)||v<0.0||v>limit||(exclusive&&v==limit))
+                        throw std::invalid_argument(context+": invalid colorAdjustment."+name);
+                    return static_cast<float>(v);
+                };
+                const auto readColor=[&](const auto& entry,auto& color,const char* name) {
+                    if(!entry.is_array()||entry.size()!=color.size())
+                        throw std::invalid_argument(context+": invalid colorAdjustment."+name);
+                    for(std::size_t i=0;i<color.size();++i)color[i]=number(entry.at(i),name,i==3?1.0:16.0);
+                };
+                auto& adjustment=result.colorAdjustment;
+                adjustment.present=true;
+                if(value.contains("brightness"))adjustment.brightness=number(value.at("brightness"),"brightness",16.0);
+                if(value.contains("contrast"))adjustment.contrast=number(value.at("contrast"),"contrast",16.0);
+                if(value.contains("saturation"))adjustment.saturation=number(value.at("saturation"),"saturation",16.0);
+                if(value.contains("tint"))readColor(value.at("tint"),adjustment.tint,"tint");
+                if(value.contains("rim")) {
+                    const auto& rim=value.at("rim");
+                    if(!rim.is_object()||rim.size()!=3||!rim.contains("color")||!rim.contains("intensity")||!rim.contains("width"))
+                        throw std::invalid_argument(context+": colorAdjustment.rim requires color, intensity and width");
+                    readColor(rim.at("color"),adjustment.rimColor,"rim.color");
+                    adjustment.rimIntensity=number(rim.at("intensity"),"rim.intensity",16.0);
+                    adjustment.rimWidth=number(rim.at("width"),"rim.width",1.0,true);
+                }
             }
             if(profile.contains("environmentLighting")) {
                 const auto& value=profile.at("environmentLighting");
@@ -722,7 +758,16 @@ void copySkinAttributes(
     std::vector<AssetVertex>& vertices) {
     const auto jointsAttribute = primitive.attributes.find("JOINTS_0");
     const auto weightsAttribute = primitive.attributes.find("WEIGHTS_0");
-    if (jointsAttribute == primitive.attributes.end()
+    bool preserveWeightCodes = false;
+    if (primitive.extras.IsObject()
+        && primitive.extras.Has("azurePreserveSkinWeightCodes")) {
+        const auto& setting = primitive.extras.Get("azurePreserveSkinWeightCodes");
+        if (!setting.IsBool()) {
+            throw std::runtime_error("azurePreserveSkinWeightCodes requires a boolean");
+        }
+        preserveWeightCodes = setting.Get<bool>();
+    }
+    if (!preserveWeightCodes && jointsAttribute == primitive.attributes.end()
         && weightsAttribute == primitive.attributes.end()) {
         return;
     }
@@ -742,6 +787,16 @@ void copySkinAttributes(
         || weightsAccessor.count != vertices.size()) {
         throw std::runtime_error("Unsupported glTF skin attribute layout");
     }
+    if (preserveWeightCodes
+        && (weightsAccessor.componentType != TINYGLTF_COMPONENT_TYPE_UNSIGNED_SHORT
+            || !weightsAccessor.normalized
+            || jointsAccessor.normalized
+            || (jointsAccessor.componentType != TINYGLTF_COMPONENT_TYPE_UNSIGNED_BYTE
+                && jointsAccessor.componentType != TINYGLTF_COMPONENT_TYPE_UNSIGNED_SHORT))) {
+        throw std::runtime_error(
+            "azurePreserveSkinWeightCodes requires normalized UNSIGNED_SHORT weights "
+            "and unsigned byte or unsigned short joints");
+    }
 
     const unsigned char* jointsSource = accessorData(model, jointsAccessor);
     const unsigned char* weightsSource = accessorData(model, weightsAccessor);
@@ -755,19 +810,32 @@ void copySkinAttributes(
          vertexIndex < vertices.size();
          ++vertexIndex) {
         float weightSum = 0.0F;
+        std::uint32_t weightCodeSum = 0;
         for (std::size_t component = 0; component < 4; ++component) {
             vertices[vertexIndex].joints[component] =
                 readUnsignedComponent(
                     jointsSource + vertexIndex * jointsStride
                         + component * jointComponentSize,
                     jointsAccessor.componentType);
-            const float weight = readWeightComponent(
-                weightsSource + vertexIndex * weightsStride
-                    + component * weightComponentSize,
-                weightsAccessor.componentType,
-                weightsAccessor.normalized);
-            vertices[vertexIndex].weights[component] = weight;
-            weightSum += weight;
+            const auto* source = weightsSource + vertexIndex * weightsStride
+                + component * weightComponentSize;
+            if (preserveWeightCodes) {
+                const auto code = readUnsignedComponent(source, weightsAccessor.componentType);
+                weightCodeSum += code;
+                vertices[vertexIndex].weights[component] = static_cast<float>(code) / 65535.0F;
+            } else {
+                const float weight = readWeightComponent(
+                    source, weightsAccessor.componentType, weightsAccessor.normalized);
+                vertices[vertexIndex].weights[component] = weight;
+                weightSum += weight;
+            }
+        }
+        if (preserveWeightCodes) {
+            if (weightCodeSum < 65534 || weightCodeSum > 65536) {
+                throw std::runtime_error(
+                    "azurePreserveSkinWeightCodes requires a weight sum within one UNORM16 code");
+            }
+            continue;
         }
         if (weightSum <= 1.0e-8F) {
             vertices[vertexIndex].joints = {};
@@ -1053,7 +1121,7 @@ void loadUnlitSurface(const tinygltf::Material& material,const tinygltf::Model& 
             throw std::invalid_argument("Invalid unlit surface field: "+field.key());
 }
 
-void loadMaterialComposite(const tinygltf::Material& material, const AssetMaterial& result) {
+void loadMaterialComposite(const tinygltf::Material& material, AssetMaterial& result) {
     if(!material.extras.IsObject() || !material.extras.Has("azureRenderMaterial"))return;
     const auto& profile=material.extras.Get("azureRenderMaterial");
     const bool enabled=(result.materialFeatures&MaterialFeatureMultiplyComposite)!=0;
@@ -1072,9 +1140,32 @@ void loadMaterialComposite(const tinygltf::Material& material, const AssetMateri
         ||!composite.Has("mode")||!composite.Get("mode").IsString()
         ||composite.Get("mode").Get<std::string>()!="multiply")
         throw std::invalid_argument("Invalid composite schemaVersion or mode");
-    for(const auto& field:composite.Get<tinygltf::Value::Object>())
-        if(field.first!="schemaVersion"&&field.first!="mode")
-            throw std::invalid_argument("Unknown composite field: "+field.first);
+    const auto authored=nlohmann::json::parse(material.extras_json_string);
+    const auto& raw=authored.at("azureRenderMaterial").at("composite");
+    if(raw.contains("receiver")) {
+        const auto& receiver=raw.at("receiver");
+        if(!receiver.is_string()||(receiver!="eye"&&receiver!="face"))
+            throw std::invalid_argument("Invalid multiply composite receiver");
+        result.multiplyReceiver=receiver=="eye"?AssetMaterial::MultiplyReceiver::Eye:AssetMaterial::MultiplyReceiver::Face;
+    }
+    if(raw.contains("coverageScale")) {
+        const auto& scale=raw.at("coverageScale");
+        const double value=scale.is_number()?scale.get<double>():-1.;
+        if(!std::isfinite(value)||value<0.||value>1.)
+            throw std::invalid_argument("Invalid multiply composite coverageScale");
+        result.multiplyCoverageScale=static_cast<float>(value);
+    }
+    if(raw.contains("depthPrepass")) {
+        const auto& prepass=raw.at("depthPrepass");
+        if(!prepass.is_boolean()||(prepass.get<bool>()
+            &&(result.multiplyReceiver==AssetMaterial::MultiplyReceiver::Unrestricted||result.blendDepth.present)))
+            throw std::invalid_argument("Invalid multiply composite depthPrepass");
+        result.multiplyDepthPrepass=prepass.get<bool>();
+    }
+    for(const auto& field:raw.items())
+        if(field.key()!="schemaVersion"&&field.key()!="mode"&&field.key()!="receiver"&&field.key()!="coverageScale"
+            &&field.key()!="depthPrepass")
+            throw std::invalid_argument("Unknown composite field: "+field.key());
 }
 
 int loadSceneRefraction(const tinygltf::Material& material,
@@ -1161,7 +1252,7 @@ int loadProjectedHairRamp(const tinygltf::Material& material,const tinygltf::Mod
     const std::vector<std::string> fields={"schemaVersion","parameterTexture","rampTexture","primaryShift",
         "secondaryShift","intensity","secondaryRange","edgeFade","specularNormalScale","surfaceNormalScale",
         "directionX","secondaryColor","objectBasis","surfaceResponse","diffuseScale","frame","virtualLight","line","tangentSign",
-        "lighting","snapshotNormal","primaryTextureFootprint"};
+        "lighting","snapshotNormal","primaryTextureFootprint","referenceRasterGrid"};
     // TinyGLTF omits null extras. Retain the authored object so optional typed
     // fields cannot silently turn invalid null values into their defaults.
     if(!material.extras_json_string.empty()) {
@@ -1189,6 +1280,12 @@ int loadProjectedHairRamp(const tinygltf::Material& material,const tinygltf::Mod
         if (!footprint.IsString() || footprint.Get<std::string>() != "axis-diagonal")
             throw std::invalid_argument("Invalid projectedRamp.primaryTextureFootprint");
         target.axisDiagonalPrimaryTextureFootprint = true;
+    }
+    if (source.Has("referenceRasterGrid")) {
+        const auto& grid = source.Get("referenceRasterGrid");
+        if (!grid.IsString() || grid.Get<std::string>() != "nearest-8")
+            throw std::invalid_argument("Invalid projectedRamp.referenceRasterGrid");
+        result.materialFeatures |= MaterialFeatureHairReferenceRasterGrid;
     }
     if(source.Has("snapshotNormal")) {
         const auto& mode=source.Get("snapshotNormal");
@@ -1631,6 +1728,14 @@ AssetMaterial loadMaterial(
                     return faceSdf.Get(key).Get<std::string>();
                 };
                 const int sdfVersion=requireNumber("schemaVersion");
+                if(faceSdf.Has("maskSampling")) {
+                    const auto& value=faceSdf.Get("maskSampling");
+                    if(sdfVersion!=2||!value.IsString()||value.Get<std::string>()!="authored-mip")
+                        throw std::invalid_argument(result.name+" invalid faceSdf.maskSampling");
+                    result.faceSdf.authoredMaskMip=true;
+                }
+                if(sdfVersion!=2&&faceSdf.Has("highlight"))
+                    throw std::invalid_argument(result.name+" faceSdf.highlight requires faceSdf version two");
                 if (sdfVersion!=1 && sdfVersion!=2) {
                     throw std::runtime_error(
                         "Unsupported faceSdf schemaVersion for "
@@ -1669,6 +1774,37 @@ AssetMaterial loadMaterial(
                             throw std::runtime_error(std::string("Missing faceSdf.")+key+" image for "+result.name);
                         return image;};
                     styleMaskImage=imageFor("maskTexture");matcapImage=imageFor("rampTexture");
+                    if(faceSdf.Has("highlight")) {
+                        const auto& source=faceSdf.Get("highlight");
+                        const auto fail=[&](){throw std::invalid_argument(result.name+" invalid faceSdf.highlight");};
+                        if(!source.IsObject()||source.Keys().size()!=3||!source.Has("schemaVersion")
+                            ||!source.Get("schemaVersion").IsInt()||source.Get("schemaVersion").GetNumberAsInt()!=1
+                            ||!source.Has("texture")||!source.Get("texture").IsInt()||!source.Has("viewOffset")
+                            ||!source.Get("viewOffset").IsArray()||source.Get("viewOffset").ArrayLen()!=2)
+                            fail();
+                        const int index=source.Get("texture").GetNumberAsInt();
+                        if(index<0||static_cast<std::size_t>(index)>=model.textures.size()
+                            ||emissiveTexture>=0||result.emissiveStrength!=0.F
+                            ||(result.materialFeatures&MaterialFeatureEmissiveMask))
+                            fail();
+                        specularEmissiveImage=model.textures[static_cast<std::size_t>(index)].source;
+                        if(specularEmissiveImage<0||static_cast<std::size_t>(specularEmissiveImage)>=model.images.size())
+                            fail();
+                        auto& highlight=result.faceSdf.highlight;
+                        for(int axis=0;axis<2;++axis) {
+                            const auto& value=source.Get("viewOffset").Get(axis);
+                            if(!value.IsNumber()||!std::isfinite(value.GetNumberAsDouble())
+                                ||std::abs(value.GetNumberAsDouble())>1.0)fail();
+                            highlight.viewOffset[static_cast<std::size_t>(axis)]=static_cast<float>(value.GetNumberAsDouble());
+                        }
+                        highlight.present=true;
+                        auto& settings=result.textureSettings[3];
+                        settings.usage="linear";
+                        settings.colorSpace="linear";
+                        settings.anisotropy=1;
+                        settings.mipBias=-1.F;
+                        settings.mipFilter=azurerender::TextureImportSettings::MipFilter::Nearest;
+                    }
                     if(!faceSdf.Has("headBasis")||!faceSdf.Get("headBasis").IsArray()||faceSdf.Get("headBasis").ArrayLen()!=9)
                         throw std::runtime_error("faceSdf.headBasis requires nine numbers for "+result.name);
                     for(std::size_t i=0;i<9;++i){const auto& v=faceSdf.Get("headBasis").Get(static_cast<int>(i));
@@ -1692,6 +1828,16 @@ AssetMaterial loadMaterial(
                     for(const unsigned slot:{4U,5U,7U}) {
                         result.textureSettings[slot].wrapU="clamp";result.textureSettings[slot].wrapV="clamp";
                         result.textureSettings[slot].mipPolicy="none";
+                    }
+                    if(result.faceSdf.authoredMaskMip) {
+                        auto& settings=result.textureSettings[4];
+                        settings.filter="linear";
+                        settings.magFilter=azurerender::TextureImportSettings::MagFilter::Linear;
+                        settings.colorSpace="linear";
+                        settings.anisotropy=1;
+                        settings.mipPolicy="generate";
+                        settings.mipBias=-1.F;
+                        settings.mipFilter=azurerender::TextureImportSettings::MipFilter::Nearest;
                     }
                 } else {
                 const std::string channel = requireString("channel");
@@ -1838,6 +1984,7 @@ AssetMaterial loadMaterial(
             result.baseColorPixels[i] = static_cast<std::uint8_t>(std::round(std::clamp(encoded, 0.0, 1.0) * 255.0));
         }
     }
+    result.normalTexturePresent = normalImage >= 0;
     if (normalImage >= 0) {
         constexpr std::array<double, 4> kNoFactor{1.0, 1.0, 1.0, 1.0};
         result.normalPixels = decodeImageRgba(
@@ -1926,6 +2073,8 @@ AssetMaterial loadMaterial(
             kNoFactor,
             result.styleMaskWidth,
             result.styleMaskHeight,false,authored,&result.authoredMipLevels[4]);
+        if(result.faceSdf.authoredMaskMip&&result.authoredMipLevels[4]<2)
+            throw std::invalid_argument(result.name+" faceSdf.maskSampling requires authored mip levels");
         if((result.materialFeatures&MaterialFeatureDiffuseRamp)
             &&(result.styleMaskWidth<2||result.styleMaskHeight!=1))
             throw std::runtime_error("diffuseRamp requires a horizontal single-row image");
@@ -2089,9 +2238,11 @@ AssetMaterial loadMaterial(
             for(const auto& field:fields)if(!npr.contains(field))throw std::invalid_argument("nprDiffuse requires all versioned fields");
             for(const auto& field:npr.items())if(!fields.count(field.key())&&field.key()!="indirectNormal"&&field.key()!="lighting"
                 &&field.key()!="rimResponse"&&field.key()!="viewTint"&&field.key()!="mainRamp"
-                &&field.key()!="characterVisibility"&&field.key()!="localDiffuseFloorScale"
+                &&field.key()!="characterVisibility"&&field.key()!="localDiffuseFloorScale"&&field.key()!="localDiffuseNormal"
                 &&field.key()!="lightingNormal"&&field.key()!="transparentHighlights"
-                &&field.key()!="rimOrigin"&&field.key()!="shadowAlbedo"&&field.key()!="rampComposition"&&field.key()!="shadowSaturation")throw std::invalid_argument("Unknown nprDiffuse field");
+                &&field.key()!="rimOrigin"&&field.key()!="shadowAlbedo"&&field.key()!="rampComposition"
+                &&field.key()!="shadowSaturation"&&field.key()!="mainBrightnessSaturation")
+                throw std::invalid_argument("Unknown nprDiffuse field");
             if(!npr["schemaVersion"].is_number_integer()||npr["schemaVersion"]!=1
                 ||!npr["shadowScale"].is_number()||!std::isfinite(npr["shadowScale"].get<double>())
                 ||npr["shadowScale"].get<double>()<0||npr["shadowScale"].get<double>()>64
@@ -2147,6 +2298,11 @@ AssetMaterial loadMaterial(
                     throw std::invalid_argument("Invalid nprDiffuse.shadowSaturation");
                 result.nprDiffuse.shadowSaturation=value.get<float>();
             }
+            if(npr.contains("mainBrightnessSaturation")) {
+                const auto& value=npr.at("mainBrightnessSaturation");
+                if(!value.is_boolean())throw std::invalid_argument("Invalid nprDiffuse.mainBrightnessSaturation");
+                result.nprDiffuse.mainBrightnessSaturation=value.get<bool>();
+            }
             if(npr.contains("characterVisibility")) {
                 result.nprDiffuse.characterVisibility=parseCharacterVisibility(
                     npr.at("characterVisibility"),"nprDiffuse.characterVisibility");
@@ -2156,6 +2312,12 @@ AssetMaterial loadMaterial(
                 if(!value.is_number()||!std::isfinite(value.get<double>())||value.get<double>()<0||value.get<double>()>4)
                     throw std::invalid_argument("Invalid nprDiffuse.localDiffuseFloorScale");
                 result.nprDiffuse.localDiffuseFloorScale=value.get<float>();
+            }
+            if(npr.contains("localDiffuseNormal")) {
+                const auto& value=npr.at("localDiffuseNormal");
+                if(value!="surface"&&value!="indirect")
+                    throw std::invalid_argument("Invalid nprDiffuse.localDiffuseNormal");
+                result.nprDiffuse.localDiffuseIndirectNormal=value=="indirect";
             }
             if(npr.contains("lightingNormal")) {
                 const auto& mode=npr.at("lightingNormal");
@@ -2220,12 +2382,23 @@ AssetMaterial loadMaterial(
             }
             if(npr.contains("viewTint")) {
                 const auto& raw=npr.at("viewTint");
-                if(!raw.is_object()||raw.size()!=3||!raw.contains("schemaVersion")||!raw.at("schemaVersion").is_number_integer()
+                const bool masked=raw.is_object()&&raw.contains("mode")&&raw.at("mode")=="face-mask";
+                if(!raw.is_object()||raw.size()!=(masked?5:3)||!raw.contains("schemaVersion")||!raw.at("schemaVersion").is_number_integer()
                     ||raw.at("schemaVersion")!=1||!raw.contains("scale")||!raw.at("scale").is_number()
                     ||!std::isfinite(raw.at("scale").get<double>())||raw.at("scale").get<double>()<0||raw.at("scale").get<double>()>64
                     ||!raw.contains("color")||!raw.at("color").is_array()||raw.at("color").size()!=3)
                     throw std::invalid_argument("Invalid nprDiffuse.viewTint fields or scale");
-                auto& tint=result.nprDiffuse.viewTint;tint.scale=raw.at("scale").get<float>();
+                auto& tint=result.nprDiffuse.viewTint;
+                tint.scale=raw.at("scale").get<float>();
+                if(masked) {
+                    if(!raw.contains("geometryScale")||!raw.at("geometryScale").is_number())
+                        throw std::invalid_argument("Invalid nprDiffuse.viewTint.geometryScale");
+                    const double value=raw.at("geometryScale").get<double>();
+                    if(!std::isfinite(value)||value<0||value>1)
+                        throw std::invalid_argument("Invalid nprDiffuse.viewTint.geometryScale");
+                    tint.faceMask=true;
+                    tint.geometryScale=static_cast<float>(value);
+                }
                 for(unsigned i=0;i<3;++i) {
                     const auto& value=raw.at("color").at(i);
                     if(!value.is_number()||!std::isfinite(value.get<double>())||value.get<double>()<0||value.get<double>()>64)
@@ -2318,14 +2491,18 @@ AssetMaterial loadMaterial(
                     ||(result.materialFeatures&MaterialFeatureDualFaceSdf)||(result.eyeSurface.present&&!result.eyeSurface.nprLighting)))
                 ||(slot==8&&shadowColorLutImage>=0);
             const bool typed=lookup||slot==6||slot==7||(slot==8&&!result.unlitTextureLayers.coverageLayer.present)
+                ||(slot==3&&result.faceSdf.highlight.present)
                 ||(slot==2&&result.coverageTexture.present);
             if(typed&&settings.colorSpace!=defaults.colorSpace)
                 throw std::invalid_argument(result.name+" typed texture color space violated at slot "+std::to_string(slot));
             if(lookup&&(settings.filter!=defaults.filter||magChanged||settings.wrapU!=defaults.wrapU
                 ||settings.wrapV!=defaults.wrapV||settings.mipPolicy!=defaults.mipPolicy
                 ||settings.anisotropy!=defaults.anisotropy||settings.mipBias!=defaults.mipBias
+                ||(slot==4&&result.faceSdf.authoredMaskMip&&settings.mipFilter!=defaults.mipFilter)
                 ||(slot==5&&result.specularRamp.present&&settings.mipFilter!=defaults.mipFilter)))
-                throw std::invalid_argument(result.name+" fixed lookup sampler violated at slot "+std::to_string(slot));
+                throw std::invalid_argument(result.name+
+                    (slot==4&&result.faceSdf.authoredMaskMip?" invalid faceSdf.maskSampling sampler settings":
+                        " fixed lookup sampler violated at slot "+std::to_string(slot)));
             result.textureSettings[slot]=std::move(settings);
         }
     }
@@ -2340,6 +2517,7 @@ AssetMaterial loadMaterial(
         ||result.materialClass==AssetMaterialClass::Metal);
     const bool ordinary=microfacetClass&&!result.nprDiffuse.present&&!result.projectedHairRamp.present&&!result.eyeSurface.present;
     azurerender::validateMaterialLighting(result.environmentLighting,result.mainLightShadow,result.materialProfileVersion,lit,ordinary,microfacetClass);
+    azurerender::validateMaterialColorAdjustment(result);
     validateMaterialCoverage(result);
     validateHairPointMipReferenceNormal(result);
     if (result.referenceDepthStencil != AssetMaterial::ReferenceDepthStencil::Ordinary
@@ -2349,6 +2527,7 @@ AssetMaterial loadMaterial(
     azurerender::validateMaterialOutputPrecision(result);
     azurerender::validateMaterialUvPolicy(result);
     validateProjectedHairPrimaryTextureFootprint(result);
+    validateProjectedHairReferenceRasterGrid(result);
     azurerender::validateMaterialRimResponse(result);
     return result;
 }

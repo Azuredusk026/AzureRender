@@ -463,6 +463,8 @@ compile_shader("${SHADER_SOURCE_DIR}/color_grading_lut_test.comp")
 compile_shader("${SHADER_SOURCE_DIR}/character_depth.frag" DEFINES AZURE_BINDLESS=1 OUTPUT_NAME character_depth_bindless.frag)
 compile_shader("${SHADER_SOURCE_DIR}/mesh.frag" DEFINES AZURE_OPAQUE_SNAPSHOT=1 OUTPUT_NAME character_snapshot.frag)
 compile_shader("${SHADER_SOURCE_DIR}/mesh.frag" DEFINES AZURE_OPAQUE_SNAPSHOT=1 AZURE_BINDLESS=1 OUTPUT_NAME character_snapshot_bindless.frag)
+compile_shader("${SHADER_SOURCE_DIR}/mesh.frag" DEFINES AZURE_PROJECTED_HISTORY_LAYER=1 OUTPUT_NAME character_projected_history.frag)
+compile_shader("${SHADER_SOURCE_DIR}/mesh.frag" DEFINES AZURE_PROJECTED_HISTORY_LAYER=1 AZURE_BINDLESS=1 OUTPUT_NAME character_projected_history_bindless.frag)
 compile_shader("${SHADER_SOURCE_DIR}/mesh.frag" DEFINES AZURE_GEOMETRY_SAMPLES=1 OUTPUT_NAME mesh_samples.frag)
 compile_shader("${SHADER_SOURCE_DIR}/mesh.frag" DEFINES AZURE_GEOMETRY_SAMPLES=1 AZURE_BINDLESS=1 OUTPUT_NAME mesh_bindless_samples.frag)
 compile_shader("${SHADER_SOURCE_DIR}/mesh.frag" DEFINES AZURE_GEOMETRY_SAMPLES=1 AZURE_OBJECT_SHADOW=1 OUTPUT_NAME mesh_object_samples.frag)
@@ -2487,7 +2489,12 @@ if(BUILD_TESTING)
     set_tests_properties(AzureEngine.ProjectedHairGpu AzureEngine.ProjectedHairSurfaceGpu PROPERTIES TIMEOUT 600 LABELS "gpu" RUN_SERIAL TRUE)
     add_test(NAME AzureEngine.MaterialCompositeGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_material_composite_gpu.py"
         --executable $<TARGET_FILE:AzurePlayer> --expected-validation "$<IF:$<CONFIG:Debug>,enabled,disabled>")
-    set_tests_properties(AzureEngine.MaterialCompositeGpu PROPERTIES TIMEOUT 600 LABELS "gpu" RUN_SERIAL TRUE)
+    add_test(NAME AzureEngine.MaterialCompositeMsaaGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_material_composite_gpu.py"
+        --executable $<TARGET_FILE:AzurePlayer> --expected-validation "$<IF:$<CONFIG:Debug>,enabled,disabled>" --receiver-msaa-only)
+    add_test(NAME AzureEngine.MaterialCompositeNearestDepthGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_material_composite_gpu.py"
+        --executable $<TARGET_FILE:AzurePlayer> --expected-validation "$<IF:$<CONFIG:Debug>,enabled,disabled>" --nearest-depth-only)
+    set_tests_properties(AzureEngine.MaterialCompositeGpu AzureEngine.MaterialCompositeMsaaGpu
+        AzureEngine.MaterialCompositeNearestDepthGpu PROPERTIES TIMEOUT 600 LABELS "gpu" RUN_SERIAL TRUE)
     add_test(NAME AzureEngine.ThirdPersonPlayer COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_third_person_player.py" --executable $<TARGET_FILE:AzurePlayer>)
     set_tests_properties(AzureEngine.IndependentAnimationGpu AzureEngine.ThirdPersonPlayer PROPERTIES TIMEOUT 300 LABELS "gpu" RUN_SERIAL TRUE)
     add_test(NAME AzureEngine.PlayablePlayer COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_playable_player.py" --executable $<TARGET_FILE:AzurePlayer>)

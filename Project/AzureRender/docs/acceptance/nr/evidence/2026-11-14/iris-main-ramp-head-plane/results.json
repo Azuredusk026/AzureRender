@@ -1,0 +1,376 @@
+{
+  "overallStatus": "failed-user-review",
+  "sourceReplay": {
+    "status": "qualified-source-comparison",
+    "cases": {
+      "baseline": {
+        "sourceShader": "dcff9322a2edef5a3570d36152e0635f535d96294f35dfb3fc31df1eef462028",
+        "groups": {
+          "all": {
+            "pixels": 255,
+            "changed": 0,
+            "aboveOne": 42,
+            "aboveEight": 10,
+            "newAboveOne": 0,
+            "peak": 20,
+            "changedDisplay": 0
+          },
+          "bare": {
+            "pixels": 161,
+            "changed": 0,
+            "aboveOne": 37,
+            "aboveEight": 9,
+            "newAboveOne": 0,
+            "peak": 20,
+            "changedDisplay": 0
+          },
+          "covered": {
+            "pixels": 94,
+            "changed": 0,
+            "aboveOne": 5,
+            "aboveEight": 1,
+            "newAboveOne": 0,
+            "peak": 19,
+            "changedDisplay": 0
+          }
+        },
+        "focus": {
+          "[1254, 266]": 20,
+          "[1251, 264]": 19,
+          "[1310, 266]": 19,
+          "[1311, 265]": 17,
+          "[1261, 261]": 12
+        }
+      },
+      "native-vulkan-fixed": {
+        "sourceShader": "6358cf86339b097d320d2c360f5bffb502795d60ee55d19f2e7b13e14e7551c9",
+        "groups": {
+          "all": {
+            "pixels": 255,
+            "changed": 47,
+            "aboveOne": 12,
+            "aboveEight": 2,
+            "newAboveOne": 2,
+            "peak": 19,
+            "changedDisplay": 41
+          },
+          "bare": {
+            "pixels": 161,
+            "changed": 47,
+            "aboveOne": 7,
+            "aboveEight": 1,
+            "newAboveOne": 2,
+            "peak": 12,
+            "changedDisplay": 41
+          },
+          "covered": {
+            "pixels": 94,
+            "changed": 0,
+            "aboveOne": 5,
+            "aboveEight": 1,
+            "newAboveOne": 0,
+            "peak": 19,
+            "changedDisplay": 0
+          }
+        },
+        "focus": {
+          "[1254, 266]": 1,
+          "[1251, 264]": 1,
+          "[1310, 266]": 1,
+          "[1311, 265]": 1,
+          "[1261, 261]": 12
+        }
+      },
+      "key-world": {
+        "sourceShader": "b2ed1cb779154e6a89cd0a209000500bf8607d37485dd55e18c558d1812ec52a",
+        "groups": {
+          "all": {
+            "pixels": 255,
+            "changed": 0,
+            "aboveOne": 42,
+            "aboveEight": 10,
+            "newAboveOne": 0,
+            "peak": 20,
+            "changedDisplay": 0
+          },
+          "bare": {
+            "pixels": 161,
+            "changed": 0,
+            "aboveOne": 37,
+            "aboveEight": 9,
+            "newAboveOne": 0,
+            "peak": 20,
+            "changedDisplay": 0
+          },
+          "covered": {
+            "pixels": 94,
+            "changed": 0,
+            "aboveOne": 5,
+            "aboveEight": 1,
+            "newAboveOne": 0,
+            "peak": 19,
+            "changedDisplay": 0
+          }
+        },
+        "focus": {
+          "[1254, 266]": 20,
+          "[1251, 264]": 19,
+          "[1310, 266]": 19,
+          "[1311, 265]": 17,
+          "[1261, 261]": 12
+        }
+      },
+      "key-head-frame": {
+        "sourceShader": "908475b2d428c03462ec82c16d9d8841a678f60faa9c5eb7c8e321bf2566da62",
+        "groups": {
+          "all": {
+            "pixels": 255,
+            "changed": 47,
+            "aboveOne": 12,
+            "aboveEight": 2,
+            "newAboveOne": 2,
+            "peak": 19,
+            "changedDisplay": 41
+          },
+          "bare": {
+            "pixels": 161,
+            "changed": 47,
+            "aboveOne": 7,
+            "aboveEight": 1,
+            "newAboveOne": 2,
+            "peak": 12,
+            "changedDisplay": 41
+          },
+          "covered": {
+            "pixels": 94,
+            "changed": 0,
+            "aboveOne": 5,
+            "aboveEight": 1,
+            "newAboveOne": 0,
+            "peak": 19,
+            "changedDisplay": 0
+          }
+        },
+        "focus": {
+          "[1254, 266]": 1,
+          "[1251, 264]": 1,
+          "[1310, 266]": 1,
+          "[1311, 265]": 1,
+          "[1261, 261]": 12
+        }
+      },
+      "scene-head-frame": {
+        "sourceShader": "81c51f5f24f640ee118fe2339f73cd257b1176f5de4c2b0fcf8a990b8fdbccae",
+        "groups": {
+          "all": {
+            "pixels": 255,
+            "changed": 47,
+            "aboveOne": 12,
+            "aboveEight": 2,
+            "newAboveOne": 2,
+            "peak": 19,
+            "changedDisplay": 41
+          },
+          "bare": {
+            "pixels": 161,
+            "changed": 47,
+            "aboveOne": 7,
+            "aboveEight": 1,
+            "newAboveOne": 2,
+            "peak": 12,
+            "changedDisplay": 41
+          },
+          "covered": {
+            "pixels": 94,
+            "changed": 0,
+            "aboveOne": 5,
+            "aboveEight": 1,
+            "newAboveOne": 0,
+            "peak": 19,
+            "changedDisplay": 0
+          }
+        },
+        "focus": {
+          "[1254, 266]": 1,
+          "[1251, 264]": 1,
+          "[1310, 266]": 1,
+          "[1311, 265]": 1,
+          "[1261, 261]": 12
+        }
+      }
+    },
+    "traceSha256": "62c747134a1503d97ef0196c6adf6f85934b45563c2b80b74a6210a71b02ebd0"
+  },
+  "player": {
+    "nvidia": {
+      "device": "nvidia",
+      "mode": "scene-head-frame",
+      "groups": {
+        "iris": {
+          "pixels": 255,
+          "overOne": [
+            52,
+            22
+          ],
+          "overEight": [
+            10,
+            2
+          ],
+          "peak": [
+            20,
+            15
+          ],
+          "newOverOne": 2,
+          "changed": 41
+        },
+        "bare": {
+          "pixels": 161,
+          "overOne": [
+            37,
+            7
+          ],
+          "overEight": [
+            9,
+            1
+          ],
+          "peak": [
+            20,
+            12
+          ],
+          "newOverOne": 2,
+          "changed": 41
+        },
+        "covered": {
+          "pixels": 94,
+          "overOne": [
+            15,
+            15
+          ],
+          "overEight": [
+            1,
+            1
+          ],
+          "peak": [
+            15,
+            15
+          ],
+          "newOverOne": 0,
+          "changed": 0
+        },
+        "outside": {
+          "pixels": 3686145,
+          "overOne": [
+            179663,
+            179663
+          ],
+          "overEight": [
+            30292,
+            30292
+          ],
+          "peak": [
+            228,
+            228
+          ],
+          "newOverOne": 0,
+          "changed": 0
+        }
+      },
+      "frameSha256": "8f732d547598e91901563aff64ab6b9d88a87a5280518973fe050e020c9f74c1",
+      "player": "a81b21b464231741b3331ae4839fb3f716e0f0b69137c33490e6dd7c129851be",
+      "fragmentSource": "abaf801d2b0e0e44c77946e1b3709d06555a1cec641742955e8df00f85965b85",
+      "shaders": {
+        "mesh_object_early_lighting.frag.spv": "2df2edf50c5f25debf6ec4687763d0683f4f667e794dc1bb9efd6f7c6c724487",
+        "mesh_object_lighting.frag.spv": "b4566428c2517c09c98cc89729a8570eddce9a4a150b599067f2f7d093f17e7d",
+        "mesh_object_early.frag.spv": "81c51f5f24f640ee118fe2339f73cd257b1176f5de4c2b0fcf8a990b8fdbccae",
+        "mesh_object.frag.spv": "28dc178a85593b4f92dd2dfe377ef21348d686230eb2f30f1ac88e4a3a6c9f4d"
+      }
+    },
+    "intel": {
+      "device": "intel",
+      "mode": "scene-head-frame",
+      "groups": {
+        "iris": {
+          "pixels": 255,
+          "overOne": [
+            56,
+            30
+          ],
+          "overEight": [
+            13,
+            5
+          ],
+          "peak": [
+            27,
+            27
+          ],
+          "newOverOne": 4,
+          "changed": 43
+        },
+        "bare": {
+          "pixels": 161,
+          "overOne": [
+            39,
+            13
+          ],
+          "overEight": [
+            12,
+            4
+          ],
+          "peak": [
+            27,
+            27
+          ],
+          "newOverOne": 4,
+          "changed": 43
+        },
+        "covered": {
+          "pixels": 94,
+          "overOne": [
+            17,
+            17
+          ],
+          "overEight": [
+            1,
+            1
+          ],
+          "peak": [
+            15,
+            15
+          ],
+          "newOverOne": 0,
+          "changed": 0
+        },
+        "outside": {
+          "pixels": 3686145,
+          "overOne": [
+            183221,
+            183221
+          ],
+          "overEight": [
+            31043,
+            31043
+          ],
+          "peak": [
+            228,
+            228
+          ],
+          "newOverOne": 0,
+          "changed": 0
+        }
+      },
+      "frameSha256": "6afeae40383c5dd2ba1d410ef9ee201aead8d101dd231463348b5235bbd17af7",
+      "player": "a81b21b464231741b3331ae4839fb3f716e0f0b69137c33490e6dd7c129851be",
+      "fragmentSource": "abaf801d2b0e0e44c77946e1b3709d06555a1cec641742955e8df00f85965b85",
+      "shaders": {
+        "mesh_object_early_lighting.frag.spv": "2df2edf50c5f25debf6ec4687763d0683f4f667e794dc1bb9efd6f7c6c724487",
+        "mesh_object_lighting.frag.spv": "b4566428c2517c09c98cc89729a8570eddce9a4a150b599067f2f7d093f17e7d",
+        "mesh_object_early.frag.spv": "81c51f5f24f640ee118fe2339f73cd257b1176f5de4c2b0fcf8a990b8fdbccae",
+        "mesh_object.frag.spv": "28dc178a85593b4f92dd2dfe377ef21348d686230eb2f30f1ac88e4a3a6c9f4d"
+      }
+    }
+  },
+  "archive": {
+    "members": 25,
+    "sha256": "ee7c2750e799bed49f6cca76456b0c4baabbe1e4920422aa9a05ad126a1d77f6"
+  }
+}

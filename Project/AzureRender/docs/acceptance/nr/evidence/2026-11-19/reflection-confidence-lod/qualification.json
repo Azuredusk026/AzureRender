@@ -1,0 +1,3105 @@
+{
+  "status": "measured-confidence-lod-interpolation",
+  "accepted": false,
+  "baseCommit": "ba471af147a1151c0287c58e1293f72df0ae7175",
+  "source": {
+    "project": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-105539-full-scene-character-composition-b37668\\project\\history-actor.azureproject",
+    "projectSha256": "b5339a45d2f7ae9c4011af3463ab9e5996462a7825166d1034c96654630a88a8",
+    "level": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-105539-full-scene-character-composition-b37668\\project\\scene\\history-actor.azurelevel",
+    "levelSha256": "d99683193ef5aa3fd002bb4075b2a01639c1bd1a463df9fa484a4ea22944ce7e",
+    "nativeEvent": 8702,
+    "nativeEventConstants": "85f50cec46fa7bff88eb02f0ad63b8bbcefb3ececb09349a0f8ff70d36a79639",
+    "playerShaderConstants": "424f58910613b4d08905f3e8e26aa23a37a6e1af117d64ae28390ca65fa5c726",
+    "baselineSteps": 128,
+    "candidateMaximumSteps": 32,
+    "settings": {
+      "schemaVersion": 2,
+      "enabled": true,
+      "maxDistance": 32,
+      "thickness": 0.15,
+      "normalBias": 0.03,
+      "maxSteps": 128,
+      "maxRoughness": 0.7,
+      "edgeFade": 0.08,
+      "strength": 1,
+      "algorithm": "projected"
+    },
+    "player": "1a30d925a674ddb1d95876cb80181106a0217e12a7228a35b5980b134954cb69",
+    "baselineShader": "9b77643b12d533f69e7a159ba975dfaf75e56253429371d6f7470ea6a567e20a",
+    "source": "5d0c8281a576eb8a9ef659cccaafacee6b846ecc0605e8e0c011b2495055b259"
+  },
+  "reference": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261022-201845-endfield-capture-954719\\Endfield-games-child_frame3534-replayed.png",
+  "referenceSha256": "af67600fcbb25060f1770a4bedb5e13b64a981229c9b24d9db29492db1fb5e18",
+  "build": {
+    "sourceCommit": "ba471af147a1151c0287c58e1293f72df0ae7175",
+    "worktreeSource": "7b363f9e326a7afff4d1737c869839208b52cf9d4debbf18a0fbaedb1108b30b",
+    "budget": {
+      "allowed": true,
+      "reasons": [],
+      "totalBytes": 1024208138240,
+      "freeBytes": 224081305600,
+      "usedBytes": 33230,
+      "plannedBytes": 18000000,
+      "quotaBytes": 2147483648,
+      "reserveBytes": 214748364800,
+      "diagnostic": false,
+      "managedPool": {
+        "allowed": true,
+        "reasons": [],
+        "reservedBytes": 15274071087,
+        "projectedBytes": 15274071087,
+        "limitBytes": 17179869184
+      }
+    },
+    "outputs": {
+      "control": {
+        "source": "7b363f9e326a7afff4d1737c869839208b52cf9d4debbf18a0fbaedb1108b30b",
+        "program": "7e305dcfc3227ad7f98d8a8832c976b378a4f62007b2044943e29fc98e1d76bc",
+        "command": [
+          "D:\\Tools\\VulkanSDK\\1.4.350.0\\Bin\\glslc.exe",
+          "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261119-143002-nr-reflection-confidence-lod-1e8769\\control.comp",
+          "-o",
+          "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261119-143002-nr-reflection-confidence-lod-1e8769\\control.spv"
+        ]
+      },
+      "candidate": {
+        "source": "4b5ad61775405fd52feea0b2fc3a27fe7a5c3695d9d6fd91f2250ae010c4593b",
+        "program": "5995fe4b61f7cac612c269bfe8bb95c49a54b5641ccb4d896d5826cf9001df33",
+        "command": [
+          "D:\\Tools\\VulkanSDK\\1.4.350.0\\Bin\\glslc.exe",
+          "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261119-143002-nr-reflection-confidence-lod-1e8769\\candidate.comp",
+          "-o",
+          "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261119-143002-nr-reflection-confidence-lod-1e8769\\candidate.spv"
+        ]
+      }
+    },
+    "compiler": "93898530ea4f2e809733ea8a839d09d4b947bd6e853c84670923ac4414f41eb3",
+    "variable": "confidence LOD fractional interpolation only; color LOD and all ray/history inputs fixed"
+  },
+  "reports": {
+    "nvidia": {
+      "control": {
+        "camera": {
+          "qaCameraPosition": [
+            -0.266043,
+            2.26206,
+            -24.9053
+          ],
+          "qaCameraTarget": [
+            -0.261116,
+            2.32175,
+            -23.9071
+          ],
+          "cameraLens": {
+            "farPlane": 10000.0,
+            "nearPlane": 0.10000000149011612,
+            "offsetNdc": [
+              -0.0002929684706032276,
+              7.717559492448345e-05
+            ],
+            "projection": "perspective",
+            "schemaVersion": 1,
+            "verticalFovRadians": 0.9986935257911682
+          },
+          "cameraUp": [
+            -0.0002945943851955235,
+            0.9982167482376099,
+            -0.05969396233558655
+          ],
+          "gradeSettings": {
+            "schemaVersion": 2,
+            "exposureEv": 0,
+            "saturation": 1,
+            "contrast": 1,
+            "tint": [
+              1,
+              1,
+              1
+            ],
+            "toneMappingEnabled": true,
+            "lut": {
+              "schemaVersion": 1,
+              "asset": "gi:/captured-3534.azlut",
+              "exposureMultiplier": 1,
+              "dimension": 32,
+              "inputDomain": "logc3-full-log",
+              "outputDomain": "linear",
+              "fingerprintAlgorithm": "FNV-1a-64",
+              "fingerprint": "b963486c619e8333"
+            }
+          },
+          "bloomSettings": {
+            "schemaVersion": 1,
+            "enabled": true,
+            "threshold": 1.05,
+            "strength": 0.16
+          },
+          "nprLighting": {
+            "ambientColor": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "ambientDirection": [
+              0.0,
+              1.0,
+              0.0
+            ],
+            "ambientWeight": 1.0,
+            "directionBias": 0.0,
+            "directionFloor": 1.0,
+            "directionGain": 0.0,
+            "enabled": true,
+            "indoorMix": 0.0,
+            "litAmbientMix": 0.0,
+            "mainColorMix": 0.0,
+            "outdoorGain": 1.0,
+            "schemaVersion": 1,
+            "shadowAmbientGain": 1.0,
+            "shadowOverride": 0.0,
+            "specularFloor": 0.550000011920929,
+            "useSceneIrradiance": true
+          },
+          "screenReflectionProducer": "projected-history",
+          "screenReflectionLevels": 7,
+          "sceneTriangles": 547653,
+          "skinnedVertices": 77802,
+          "transparentTriangles": 10735,
+          "width": 2560,
+          "height": 1440,
+          "fps": 60
+        },
+        "gpu": {
+          "api_version": 4211017,
+          "compute": {
+            "shader": true,
+            "storage_image_write_without_format": true
+          },
+          "descriptor_indexing": {
+            "descriptor_binding_partially_bound": true,
+            "descriptor_binding_variable_descriptor_count": true,
+            "runtime_descriptor_array": true,
+            "shader_sampled_image_array_non_uniform_indexing": true
+          },
+          "device_id": 10464,
+          "device_name": "NVIDIA GeForce RTX 4060 Laptop GPU",
+          "driver_version": 2496905216,
+          "extensions": [
+            "VK_KHR_16bit_storage",
+            "VK_KHR_8bit_storage",
+            "VK_KHR_acceleration_structure",
+            "VK_KHR_bind_memory2",
+            "VK_KHR_buffer_device_address",
+            "VK_KHR_calibrated_timestamps",
+            "VK_KHR_compute_shader_derivatives",
+            "VK_KHR_cooperative_matrix",
+            "VK_KHR_copy_commands2",
+            "VK_KHR_copy_memory_indirect",
+            "VK_KHR_create_renderpass2",
+            "VK_KHR_dedicated_allocation",
+            "VK_KHR_deferred_host_operations",
+            "VK_KHR_depth_clamp_zero_one",
+            "VK_KHR_depth_stencil_resolve",
+            "VK_KHR_descriptor_update_template",
+            "VK_KHR_device_group",
+            "VK_KHR_draw_indirect_count",
+            "VK_KHR_driver_properties",
+            "VK_KHR_dynamic_rendering",
+            "VK_KHR_dynamic_rendering_local_read",
+            "VK_KHR_external_fence",
+            "VK_KHR_external_fence_win32",
+            "VK_KHR_external_memory",
+            "VK_KHR_external_memory_win32",
+            "VK_KHR_external_semaphore",
+            "VK_KHR_external_semaphore_win32",
+            "VK_KHR_format_feature_flags2",
+            "VK_KHR_fragment_shader_barycentric",
+            "VK_KHR_fragment_shading_rate",
+            "VK_KHR_get_memory_requirements2",
+            "VK_KHR_global_priority",
+            "VK_KHR_image_format_list",
+            "VK_KHR_imageless_framebuffer",
+            "VK_KHR_index_type_uint8",
+            "VK_KHR_line_rasterization",
+            "VK_KHR_load_store_op_none",
+            "VK_KHR_maintenance1",
+            "VK_KHR_maintenance10",
+            "VK_KHR_maintenance2",
+            "VK_KHR_maintenance3",
+            "VK_KHR_maintenance4",
+            "VK_KHR_maintenance5",
+            "VK_KHR_maintenance6",
+            "VK_KHR_maintenance7",
+            "VK_KHR_maintenance8",
+            "VK_KHR_maintenance9",
+            "VK_KHR_map_memory2",
+            "VK_KHR_multiview",
+            "VK_KHR_pipeline_binary",
+            "VK_KHR_pipeline_executable_properties",
+            "VK_KHR_pipeline_library",
+            "VK_KHR_present_id",
+            "VK_KHR_present_id2",
+            "VK_KHR_present_mode_fifo_latest_ready",
+            "VK_KHR_present_wait",
+            "VK_KHR_present_wait2",
+            "VK_KHR_push_descriptor",
+            "VK_KHR_ray_query",
+            "VK_KHR_ray_tracing_maintenance1",
+            "VK_KHR_ray_tracing_pipeline",
+            "VK_KHR_ray_tracing_position_fetch",
+            "VK_KHR_relaxed_block_layout",
+            "VK_KHR_robustness2",
+            "VK_KHR_sampler_mirror_clamp_to_edge",
+            "VK_KHR_sampler_ycbcr_conversion",
+            "VK_KHR_separate_depth_stencil_layouts",
+            "VK_KHR_shader_atomic_int64",
+            "VK_KHR_shader_bfloat16",
+            "VK_KHR_shader_clock",
+            "VK_KHR_shader_draw_parameters",
+            "VK_KHR_shader_expect_assume",
+            "VK_KHR_shader_float16_int8",
+            "VK_KHR_shader_float_controls",
+            "VK_KHR_shader_float_controls2",
+            "VK_KHR_shader_fma",
+            "VK_KHR_shader_integer_dot_product",
+            "VK_KHR_shader_maximal_reconvergence",
+            "VK_KHR_shader_non_semantic_info",
+            "VK_KHR_shader_quad_control",
+            "VK_KHR_shader_relaxed_extended_instruction",
+            "VK_KHR_shader_subgroup_extended_types",
+            "VK_KHR_shader_subgroup_rotate",
+            "VK_KHR_shader_subgroup_uniform_control_flow",
+            "VK_KHR_shader_terminate_invocation",
+            "VK_KHR_shader_untyped_pointers",
+            "VK_KHR_spirv_1_4",
+            "VK_KHR_storage_buffer_storage_class",
+            "VK_KHR_swapchain",
+            "VK_KHR_swapchain_maintenance1",
+            "VK_KHR_swapchain_mutable_format",
+            "VK_KHR_synchronization2",
+            "VK_KHR_timeline_semaphore",
+            "VK_KHR_unified_image_layouts",
+            "VK_KHR_uniform_buffer_standard_layout",
+            "VK_KHR_variable_pointers",
+            "VK_KHR_vertex_attribute_divisor",
+            "VK_KHR_video_decode_av1",
+            "VK_KHR_video_decode_h264",
+            "VK_KHR_video_decode_h265",
+            "VK_KHR_video_decode_queue",
+            "VK_KHR_video_decode_vp9",
+            "VK_KHR_video_encode_av1",
+            "VK_KHR_video_encode_h264",
+            "VK_KHR_video_encode_h265",
+            "VK_KHR_video_encode_intra_refresh",
+            "VK_KHR_video_encode_quantization_map",
+            "VK_KHR_video_encode_queue",
+            "VK_KHR_video_maintenance1",
+            "VK_KHR_video_maintenance2",
+            "VK_KHR_video_queue",
+            "VK_KHR_vulkan_memory_model",
+            "VK_KHR_win32_keyed_mutex",
+            "VK_KHR_workgroup_memory_explicit_layout",
+            "VK_KHR_zero_initialize_workgroup_memory",
+            "VK_EXT_4444_formats",
+            "VK_EXT_attachment_feedback_loop_dynamic_state",
+            "VK_EXT_attachment_feedback_loop_layout",
+            "VK_EXT_blend_operation_advanced",
+            "VK_EXT_border_color_swizzle",
+            "VK_EXT_buffer_device_address",
+            "VK_EXT_calibrated_timestamps",
+            "VK_EXT_color_write_enable",
+            "VK_EXT_conditional_rendering",
+            "VK_EXT_conservative_rasterization",
+            "VK_EXT_custom_border_color",
+            "VK_EXT_custom_resolve",
+            "VK_EXT_depth_bias_control",
+            "VK_EXT_depth_clamp_control",
+            "VK_EXT_depth_clamp_zero_one",
+            "VK_EXT_depth_clip_control",
+            "VK_EXT_depth_clip_enable",
+            "VK_EXT_depth_range_unrestricted",
+            "VK_EXT_descriptor_buffer",
+            "VK_EXT_descriptor_heap",
+            "VK_EXT_descriptor_indexing",
+            "VK_EXT_device_address_binding_report",
+            "VK_EXT_device_fault",
+            "VK_EXT_device_generated_commands",
+            "VK_EXT_discard_rectangles",
+            "VK_EXT_dynamic_rendering_unused_attachments",
+            "VK_EXT_extended_dynamic_state",
+            "VK_EXT_extended_dynamic_state2",
+            "VK_EXT_extended_dynamic_state3",
+            "VK_EXT_external_memory_host",
+            "VK_EXT_fragment_shader_interlock",
+            "VK_EXT_full_screen_exclusive",
+            "VK_EXT_global_priority",
+            "VK_EXT_global_priority_query",
+            "VK_EXT_graphics_pipeline_library",
+            "VK_EXT_hdr_metadata",
+            "VK_EXT_host_image_copy",
+            "VK_EXT_host_query_reset",
+            "VK_EXT_image_2d_view_of_3d",
+            "VK_EXT_image_robustness",
+            "VK_EXT_image_sliced_view_of_3d",
+            "VK_EXT_image_view_min_lod",
+            "VK_EXT_index_type_uint8",
+            "VK_EXT_inline_uniform_block",
+            "VK_EXT_legacy_vertex_attributes",
+            "VK_EXT_line_rasterization",
+            "VK_EXT_load_store_op_none",
+            "VK_EXT_memory_budget",
+            "VK_EXT_memory_decompression",
+            "VK_EXT_memory_priority",
+            "VK_EXT_mesh_shader",
+            "VK_EXT_multi_draw",
+            "VK_EXT_mutable_descriptor_type",
+            "VK_EXT_nested_command_buffer",
+            "VK_EXT_non_seamless_cube_map",
+            "VK_EXT_opacity_micromap",
+            "VK_EXT_pageable_device_local_memory",
+            "VK_EXT_pci_bus_info",
+            "VK_EXT_pipeline_creation_cache_control",
+            "VK_EXT_pipeline_creation_feedback",
+            "VK_EXT_pipeline_library_group_handles",
+            "VK_EXT_pipeline_robustness",
+            "VK_EXT_post_depth_coverage",
+            "VK_EXT_present_mode_fifo_latest_ready",
+            "VK_EXT_present_timing",
+            "VK_EXT_primitive_topology_list_restart",
+            "VK_EXT_primitives_generated_query",
+            "VK_EXT_private_data",
+            "VK_EXT_provoking_vertex",
+            "VK_EXT_queue_family_foreign",
+            "VK_EXT_ray_tracing_invocation_reorder",
+            "VK_EXT_robustness2",
+            "VK_EXT_sample_locations",
+            "VK_EXT_sampler_filter_minmax",
+            "VK_EXT_scalar_block_layout",
+            "VK_EXT_separate_stencil_usage",
+            "VK_EXT_shader_64bit_indexing",
+            "VK_EXT_shader_atomic_float",
+            "VK_EXT_shader_demote_to_helper_invocation",
+            "VK_EXT_shader_float8",
+            "VK_EXT_shader_image_atomic_int64",
+            "VK_EXT_shader_module_identifier",
+            "VK_EXT_shader_object",
+            "VK_EXT_shader_replicated_composites",
+            "VK_EXT_shader_subgroup_ballot",
+            "VK_EXT_shader_subgroup_vote",
+            "VK_EXT_shader_uniform_buffer_unsized_array",
+            "VK_EXT_shader_viewport_index_layer",
+            "VK_EXT_subgroup_size_control",
+            "VK_EXT_swapchain_maintenance1",
+            "VK_EXT_texel_buffer_alignment",
+            "VK_EXT_tooling_info",
+            "VK_EXT_transform_feedback",
+            "VK_EXT_vertex_attribute_divisor",
+            "VK_EXT_vertex_attribute_robustness",
+            "VK_EXT_vertex_input_dynamic_state",
+            "VK_EXT_ycbcr_2plane_444_formats",
+            "VK_EXT_ycbcr_image_arrays",
+            "VK_EXT_zero_initialize_device_memory",
+            "VK_NV_acquire_winrt_display",
+            "VK_NV_clip_space_w_scaling",
+            "VK_NV_cluster_acceleration_structure",
+            "VK_NV_compute_occupancy_priority",
+            "VK_NV_compute_shader_derivatives",
+            "VK_NV_cooperative_matrix",
+            "VK_NV_cooperative_matrix2",
+            "VK_NV_cooperative_vector",
+            "VK_NV_copy_memory_indirect",
+            "VK_NV_corner_sampled_image",
+            "VK_NV_coverage_reduction_mode",
+            "VK_NV_cuda_kernel_launch",
+            "VK_NV_dedicated_allocation",
+            "VK_NV_dedicated_allocation_image_aliasing",
+            "VK_NV_descriptor_pool_overallocation",
+            "VK_NV_device_diagnostic_checkpoints",
+            "VK_NV_device_diagnostics_config",
+            "VK_NV_device_generated_commands",
+            "VK_NV_device_generated_commands_compute",
+            "VK_NV_disk_cache_utils",
+            "VK_NV_external_compute_queue",
+            "VK_NV_external_memory",
+            "VK_NV_external_memory_win32",
+            "VK_NV_fill_rectangle",
+            "VK_NV_fragment_coverage_to_color",
+            "VK_NV_fragment_shader_barycentric",
+            "VK_NV_fragment_shading_rate_enums",
+            "VK_NV_framebuffer_mixed_samples",
+            "VK_NV_geometry_shader_passthrough",
+            "VK_NV_inherited_viewport_scissor",
+            "VK_NV_internal_nvpresent",
+            "VK_NV_linear_color_attachment",
+            "VK_NV_low_latency",
+            "VK_NV_low_latency2",
+            "VK_NV_memory_decompression",
+            "VK_NV_mesh_shader",
+            "VK_NV_optical_flow",
+            "VK_NV_partitioned_acceleration_structure",
+            "VK_NV_present_metering",
+            "VK_NV_raw_access_chains",
+            "VK_NV_ray_tracing",
+            "VK_NV_ray_tracing_invocation_reorder",
+            "VK_NV_ray_tracing_motion_blur",
+            "VK_NV_representative_fragment_test",
+            "VK_NV_sample_mask_override_coverage",
+            "VK_NV_scissor_exclusive",
+            "VK_NV_shader_atomic_float16_vector",
+            "VK_NV_shader_image_footprint",
+            "VK_NV_shader_sm_builtins",
+            "VK_NV_shader_subgroup_partitioned",
+            "VK_NV_shading_rate_image",
+            "VK_NV_viewport_array2",
+            "VK_NV_viewport_swizzle",
+            "VK_NV_win32_keyed_mutex",
+            "VK_NVX_binary_import",
+            "VK_NVX_image_view_handle",
+            "VK_NVX_multiview_per_view_attributes",
+            "VK_AMD_buffer_marker",
+            "VK_GOOGLE_hlsl_functionality1",
+            "VK_GOOGLE_user_type"
+          ],
+          "features": {
+            "sampler_anisotropy": true,
+            "shader_int64": true
+          },
+          "resource_access": {
+            "enabled": {
+              "allocator_device_address": false,
+              "descriptor_indexing": true,
+              "device_address": false,
+              "update_after_bind": false
+            },
+            "limits": {
+              "max_descriptor_set_sampled_images": 1048576,
+              "max_descriptor_set_samplers": 1048576,
+              "max_per_stage_descriptor_sampled_images": 1048576,
+              "max_per_stage_descriptor_samplers": 1048576,
+              "max_per_stage_resources": 4294967295,
+              "max_per_stage_update_after_bind_resources": 4294967295,
+              "max_per_stage_update_after_bind_sampled_images": 1048576,
+              "max_per_stage_update_after_bind_samplers": 1048576,
+              "max_sampler_lod_bias": 15.0,
+              "max_set_update_after_bind_sampled_images": 1048576,
+              "max_set_update_after_bind_samplers": 1048576,
+              "max_update_after_bind_descriptors_all_pools": 4294967295
+            },
+            "supported": {
+              "device_address": true,
+              "sampled_image_update_after_bind": true
+            }
+          },
+          "schema_version": 3,
+          "vendor_id": 4318
+        },
+        "manifest": "5adff19f1d2dede279e5da0175876202c88fecf868b937ffbd68f7ce4102fb89",
+        "command": [
+          "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-125923-body-lit-outline-depth-order-a29b63\\msaa-release\\AzurePlayer.exe",
+          "--project",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-105539-full-scene-character-composition-b37668\\project\\history-actor.azureproject",
+          "--width",
+          "2560",
+          "--height",
+          "1440",
+          "--capture-fps",
+          "60",
+          "--capture-frames",
+          "2",
+          "--fixed-frame-step",
+          "--qa-camera",
+          "scene",
+          "--qa-light",
+          "scene",
+          "--capture-dir",
+          "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261119-143002-nr-reflection-confidence-lod-1e8769\\nvidia-control\\frames",
+          "--runtime-report",
+          "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261119-143002-nr-reflection-confidence-lod-1e8769\\nvidia-control\\runtime.json",
+          "--resource-root",
+          "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-125923-body-lit-outline-depth-order-a29b63\\msaa-release"
+        ]
+      },
+      "candidate": {
+        "camera": {
+          "qaCameraPosition": [
+            -0.266043,
+            2.26206,
+            -24.9053
+          ],
+          "qaCameraTarget": [
+            -0.261116,
+            2.32175,
+            -23.9071
+          ],
+          "cameraLens": {
+            "farPlane": 10000.0,
+            "nearPlane": 0.10000000149011612,
+            "offsetNdc": [
+              -0.0002929684706032276,
+              7.717559492448345e-05
+            ],
+            "projection": "perspective",
+            "schemaVersion": 1,
+            "verticalFovRadians": 0.9986935257911682
+          },
+          "cameraUp": [
+            -0.0002945943851955235,
+            0.9982167482376099,
+            -0.05969396233558655
+          ],
+          "gradeSettings": {
+            "schemaVersion": 2,
+            "exposureEv": 0,
+            "saturation": 1,
+            "contrast": 1,
+            "tint": [
+              1,
+              1,
+              1
+            ],
+            "toneMappingEnabled": true,
+            "lut": {
+              "schemaVersion": 1,
+              "asset": "gi:/captured-3534.azlut",
+              "exposureMultiplier": 1,
+              "dimension": 32,
+              "inputDomain": "logc3-full-log",
+              "outputDomain": "linear",
+              "fingerprintAlgorithm": "FNV-1a-64",
+              "fingerprint": "b963486c619e8333"
+            }
+          },
+          "bloomSettings": {
+            "schemaVersion": 1,
+            "enabled": true,
+            "threshold": 1.05,
+            "strength": 0.16
+          },
+          "nprLighting": {
+            "ambientColor": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "ambientDirection": [
+              0.0,
+              1.0,
+              0.0
+            ],
+            "ambientWeight": 1.0,
+            "directionBias": 0.0,
+            "directionFloor": 1.0,
+            "directionGain": 0.0,
+            "enabled": true,
+            "indoorMix": 0.0,
+            "litAmbientMix": 0.0,
+            "mainColorMix": 0.0,
+            "outdoorGain": 1.0,
+            "schemaVersion": 1,
+            "shadowAmbientGain": 1.0,
+            "shadowOverride": 0.0,
+            "specularFloor": 0.550000011920929,
+            "useSceneIrradiance": true
+          },
+          "screenReflectionProducer": "projected-history",
+          "screenReflectionLevels": 7,
+          "sceneTriangles": 547653,
+          "skinnedVertices": 77802,
+          "transparentTriangles": 10735,
+          "width": 2560,
+          "height": 1440,
+          "fps": 60
+        },
+        "gpu": {
+          "api_version": 4211017,
+          "compute": {
+            "shader": true,
+            "storage_image_write_without_format": true
+          },
+          "descriptor_indexing": {
+            "descriptor_binding_partially_bound": true,
+            "descriptor_binding_variable_descriptor_count": true,
+            "runtime_descriptor_array": true,
+            "shader_sampled_image_array_non_uniform_indexing": true
+          },
+          "device_id": 10464,
+          "device_name": "NVIDIA GeForce RTX 4060 Laptop GPU",
+          "driver_version": 2496905216,
+          "extensions": [
+            "VK_KHR_16bit_storage",
+            "VK_KHR_8bit_storage",
+            "VK_KHR_acceleration_structure",
+            "VK_KHR_bind_memory2",
+            "VK_KHR_buffer_device_address",
+            "VK_KHR_calibrated_timestamps",
+            "VK_KHR_compute_shader_derivatives",
+            "VK_KHR_cooperative_matrix",
+            "VK_KHR_copy_commands2",
+            "VK_KHR_copy_memory_indirect",
+            "VK_KHR_create_renderpass2",
+            "VK_KHR_dedicated_allocation",
+            "VK_KHR_deferred_host_operations",
+            "VK_KHR_depth_clamp_zero_one",
+            "VK_KHR_depth_stencil_resolve",
+            "VK_KHR_descriptor_update_template",
+            "VK_KHR_device_group",
+            "VK_KHR_draw_indirect_count",
+            "VK_KHR_driver_properties",
+            "VK_KHR_dynamic_rendering",
+            "VK_KHR_dynamic_rendering_local_read",
+            "VK_KHR_external_fence",
+            "VK_KHR_external_fence_win32",
+            "VK_KHR_external_memory",
+            "VK_KHR_external_memory_win32",
+            "VK_KHR_external_semaphore",
+            "VK_KHR_external_semaphore_win32",
+            "VK_KHR_format_feature_flags2",
+            "VK_KHR_fragment_shader_barycentric",
+            "VK_KHR_fragment_shading_rate",
+            "VK_KHR_get_memory_requirements2",
+            "VK_KHR_global_priority",
+            "VK_KHR_image_format_list",
+            "VK_KHR_imageless_framebuffer",
+            "VK_KHR_index_type_uint8",
+            "VK_KHR_line_rasterization",
+            "VK_KHR_load_store_op_none",
+            "VK_KHR_maintenance1",
+            "VK_KHR_maintenance10",
+            "VK_KHR_maintenance2",
+            "VK_KHR_maintenance3",
+            "VK_KHR_maintenance4",
+            "VK_KHR_maintenance5",
+            "VK_KHR_maintenance6",
+            "VK_KHR_maintenance7",
+            "VK_KHR_maintenance8",
+            "VK_KHR_maintenance9",
+            "VK_KHR_map_memory2",
+            "VK_KHR_multiview",
+            "VK_KHR_pipeline_binary",
+            "VK_KHR_pipeline_executable_properties",
+            "VK_KHR_pipeline_library",
+            "VK_KHR_present_id",
+            "VK_KHR_present_id2",
+            "VK_KHR_present_mode_fifo_latest_ready",
+            "VK_KHR_present_wait",
+            "VK_KHR_present_wait2",
+            "VK_KHR_push_descriptor",
+            "VK_KHR_ray_query",
+            "VK_KHR_ray_tracing_maintenance1",
+            "VK_KHR_ray_tracing_pipeline",
+            "VK_KHR_ray_tracing_position_fetch",
+            "VK_KHR_relaxed_block_layout",
+            "VK_KHR_robustness2",
+            "VK_KHR_sampler_mirror_clamp_to_edge",
+            "VK_KHR_sampler_ycbcr_conversion",
+            "VK_KHR_separate_depth_stencil_layouts",
+            "VK_KHR_shader_atomic_int64",
+            "VK_KHR_shader_bfloat16",
+            "VK_KHR_shader_clock",
+            "VK_KHR_shader_draw_parameters",
+            "VK_KHR_shader_expect_assume",
+            "VK_KHR_shader_float16_int8",
+            "VK_KHR_shader_float_controls",
+            "VK_KHR_shader_float_controls2",
+            "VK_KHR_shader_fma",
+            "VK_KHR_shader_integer_dot_product",
+            "VK_KHR_shader_maximal_reconvergence",
+            "VK_KHR_shader_non_semantic_info",
+            "VK_KHR_shader_quad_control",
+            "VK_KHR_shader_relaxed_extended_instruction",
+            "VK_KHR_shader_subgroup_extended_types",
+            "VK_KHR_shader_subgroup_rotate",
+            "VK_KHR_shader_subgroup_uniform_control_flow",
+            "VK_KHR_shader_terminate_invocation",
+            "VK_KHR_shader_untyped_pointers",
+            "VK_KHR_spirv_1_4",
+            "VK_KHR_storage_buffer_storage_class",
+            "VK_KHR_swapchain",
+            "VK_KHR_swapchain_maintenance1",
+            "VK_KHR_swapchain_mutable_format",
+            "VK_KHR_synchronization2",
+            "VK_KHR_timeline_semaphore",
+            "VK_KHR_unified_image_layouts",
+            "VK_KHR_uniform_buffer_standard_layout",
+            "VK_KHR_variable_pointers",
+            "VK_KHR_vertex_attribute_divisor",
+            "VK_KHR_video_decode_av1",
+            "VK_KHR_video_decode_h264",
+            "VK_KHR_video_decode_h265",
+            "VK_KHR_video_decode_queue",
+            "VK_KHR_video_decode_vp9",
+            "VK_KHR_video_encode_av1",
+            "VK_KHR_video_encode_h264",
+            "VK_KHR_video_encode_h265",
+            "VK_KHR_video_encode_intra_refresh",
+            "VK_KHR_video_encode_quantization_map",
+            "VK_KHR_video_encode_queue",
+            "VK_KHR_video_maintenance1",
+            "VK_KHR_video_maintenance2",
+            "VK_KHR_video_queue",
+            "VK_KHR_vulkan_memory_model",
+            "VK_KHR_win32_keyed_mutex",
+            "VK_KHR_workgroup_memory_explicit_layout",
+            "VK_KHR_zero_initialize_workgroup_memory",
+            "VK_EXT_4444_formats",
+            "VK_EXT_attachment_feedback_loop_dynamic_state",
+            "VK_EXT_attachment_feedback_loop_layout",
+            "VK_EXT_blend_operation_advanced",
+            "VK_EXT_border_color_swizzle",
+            "VK_EXT_buffer_device_address",
+            "VK_EXT_calibrated_timestamps",
+            "VK_EXT_color_write_enable",
+            "VK_EXT_conditional_rendering",
+            "VK_EXT_conservative_rasterization",
+            "VK_EXT_custom_border_color",
+            "VK_EXT_custom_resolve",
+            "VK_EXT_depth_bias_control",
+            "VK_EXT_depth_clamp_control",
+            "VK_EXT_depth_clamp_zero_one",
+            "VK_EXT_depth_clip_control",
+            "VK_EXT_depth_clip_enable",
+            "VK_EXT_depth_range_unrestricted",
+            "VK_EXT_descriptor_buffer",
+            "VK_EXT_descriptor_heap",
+            "VK_EXT_descriptor_indexing",
+            "VK_EXT_device_address_binding_report",
+            "VK_EXT_device_fault",
+            "VK_EXT_device_generated_commands",
+            "VK_EXT_discard_rectangles",
+            "VK_EXT_dynamic_rendering_unused_attachments",
+            "VK_EXT_extended_dynamic_state",
+            "VK_EXT_extended_dynamic_state2",
+            "VK_EXT_extended_dynamic_state3",
+            "VK_EXT_external_memory_host",
+            "VK_EXT_fragment_shader_interlock",
+            "VK_EXT_full_screen_exclusive",
+            "VK_EXT_global_priority",
+            "VK_EXT_global_priority_query",
+            "VK_EXT_graphics_pipeline_library",
+            "VK_EXT_hdr_metadata",
+            "VK_EXT_host_image_copy",
+            "VK_EXT_host_query_reset",
+            "VK_EXT_image_2d_view_of_3d",
+            "VK_EXT_image_robustness",
+            "VK_EXT_image_sliced_view_of_3d",
+            "VK_EXT_image_view_min_lod",
+            "VK_EXT_index_type_uint8",
+            "VK_EXT_inline_uniform_block",
+            "VK_EXT_legacy_vertex_attributes",
+            "VK_EXT_line_rasterization",
+            "VK_EXT_load_store_op_none",
+            "VK_EXT_memory_budget",
+            "VK_EXT_memory_decompression",
+            "VK_EXT_memory_priority",
+            "VK_EXT_mesh_shader",
+            "VK_EXT_multi_draw",
+            "VK_EXT_mutable_descriptor_type",
+            "VK_EXT_nested_command_buffer",
+            "VK_EXT_non_seamless_cube_map",
+            "VK_EXT_opacity_micromap",
+            "VK_EXT_pageable_device_local_memory",
+            "VK_EXT_pci_bus_info",
+            "VK_EXT_pipeline_creation_cache_control",
+            "VK_EXT_pipeline_creation_feedback",
+            "VK_EXT_pipeline_library_group_handles",
+            "VK_EXT_pipeline_robustness",
+            "VK_EXT_post_depth_coverage",
+            "VK_EXT_present_mode_fifo_latest_ready",
+            "VK_EXT_present_timing",
+            "VK_EXT_primitive_topology_list_restart",
+            "VK_EXT_primitives_generated_query",
+            "VK_EXT_private_data",
+            "VK_EXT_provoking_vertex",
+            "VK_EXT_queue_family_foreign",
+            "VK_EXT_ray_tracing_invocation_reorder",
+            "VK_EXT_robustness2",
+            "VK_EXT_sample_locations",
+            "VK_EXT_sampler_filter_minmax",
+            "VK_EXT_scalar_block_layout",
+            "VK_EXT_separate_stencil_usage",
+            "VK_EXT_shader_64bit_indexing",
+            "VK_EXT_shader_atomic_float",
+            "VK_EXT_shader_demote_to_helper_invocation",
+            "VK_EXT_shader_float8",
+            "VK_EXT_shader_image_atomic_int64",
+            "VK_EXT_shader_module_identifier",
+            "VK_EXT_shader_object",
+            "VK_EXT_shader_replicated_composites",
+            "VK_EXT_shader_subgroup_ballot",
+            "VK_EXT_shader_subgroup_vote",
+            "VK_EXT_shader_uniform_buffer_unsized_array",
+            "VK_EXT_shader_viewport_index_layer",
+            "VK_EXT_subgroup_size_control",
+            "VK_EXT_swapchain_maintenance1",
+            "VK_EXT_texel_buffer_alignment",
+            "VK_EXT_tooling_info",
+            "VK_EXT_transform_feedback",
+            "VK_EXT_vertex_attribute_divisor",
+            "VK_EXT_vertex_attribute_robustness",
+            "VK_EXT_vertex_input_dynamic_state",
+            "VK_EXT_ycbcr_2plane_444_formats",
+            "VK_EXT_ycbcr_image_arrays",
+            "VK_EXT_zero_initialize_device_memory",
+            "VK_NV_acquire_winrt_display",
+            "VK_NV_clip_space_w_scaling",
+            "VK_NV_cluster_acceleration_structure",
+            "VK_NV_compute_occupancy_priority",
+            "VK_NV_compute_shader_derivatives",
+            "VK_NV_cooperative_matrix",
+            "VK_NV_cooperative_matrix2",
+            "VK_NV_cooperative_vector",
+            "VK_NV_copy_memory_indirect",
+            "VK_NV_corner_sampled_image",
+            "VK_NV_coverage_reduction_mode",
+            "VK_NV_cuda_kernel_launch",
+            "VK_NV_dedicated_allocation",
+            "VK_NV_dedicated_allocation_image_aliasing",
+            "VK_NV_descriptor_pool_overallocation",
+            "VK_NV_device_diagnostic_checkpoints",
+            "VK_NV_device_diagnostics_config",
+            "VK_NV_device_generated_commands",
+            "VK_NV_device_generated_commands_compute",
+            "VK_NV_disk_cache_utils",
+            "VK_NV_external_compute_queue",
+            "VK_NV_external_memory",
+            "VK_NV_external_memory_win32",
+            "VK_NV_fill_rectangle",
+            "VK_NV_fragment_coverage_to_color",
+            "VK_NV_fragment_shader_barycentric",
+            "VK_NV_fragment_shading_rate_enums",
+            "VK_NV_framebuffer_mixed_samples",
+            "VK_NV_geometry_shader_passthrough",
+            "VK_NV_inherited_viewport_scissor",
+            "VK_NV_internal_nvpresent",
+            "VK_NV_linear_color_attachment",
+            "VK_NV_low_latency",
+            "VK_NV_low_latency2",
+            "VK_NV_memory_decompression",
+            "VK_NV_mesh_shader",
+            "VK_NV_optical_flow",
+            "VK_NV_partitioned_acceleration_structure",
+            "VK_NV_present_metering",
+            "VK_NV_raw_access_chains",
+            "VK_NV_ray_tracing",
+            "VK_NV_ray_tracing_invocation_reorder",
+            "VK_NV_ray_tracing_motion_blur",
+            "VK_NV_representative_fragment_test",
+            "VK_NV_sample_mask_override_coverage",
+            "VK_NV_scissor_exclusive",
+            "VK_NV_shader_atomic_float16_vector",
+            "VK_NV_shader_image_footprint",
+            "VK_NV_shader_sm_builtins",
+            "VK_NV_shader_subgroup_partitioned",
+            "VK_NV_shading_rate_image",
+            "VK_NV_viewport_array2",
+            "VK_NV_viewport_swizzle",
+            "VK_NV_win32_keyed_mutex",
+            "VK_NVX_binary_import",
+            "VK_NVX_image_view_handle",
+            "VK_NVX_multiview_per_view_attributes",
+            "VK_AMD_buffer_marker",
+            "VK_GOOGLE_hlsl_functionality1",
+            "VK_GOOGLE_user_type"
+          ],
+          "features": {
+            "sampler_anisotropy": true,
+            "shader_int64": true
+          },
+          "resource_access": {
+            "enabled": {
+              "allocator_device_address": false,
+              "descriptor_indexing": true,
+              "device_address": false,
+              "update_after_bind": false
+            },
+            "limits": {
+              "max_descriptor_set_sampled_images": 1048576,
+              "max_descriptor_set_samplers": 1048576,
+              "max_per_stage_descriptor_sampled_images": 1048576,
+              "max_per_stage_descriptor_samplers": 1048576,
+              "max_per_stage_resources": 4294967295,
+              "max_per_stage_update_after_bind_resources": 4294967295,
+              "max_per_stage_update_after_bind_sampled_images": 1048576,
+              "max_per_stage_update_after_bind_samplers": 1048576,
+              "max_sampler_lod_bias": 15.0,
+              "max_set_update_after_bind_sampled_images": 1048576,
+              "max_set_update_after_bind_samplers": 1048576,
+              "max_update_after_bind_descriptors_all_pools": 4294967295
+            },
+            "supported": {
+              "device_address": true,
+              "sampled_image_update_after_bind": true
+            }
+          },
+          "schema_version": 3,
+          "vendor_id": 4318
+        },
+        "manifest": "28b57b3cd45a90ac1b1b997236c91dec112dd9bb5f0fccd907d6f01e9ceec064",
+        "command": [
+          "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-125923-body-lit-outline-depth-order-a29b63\\msaa-release\\AzurePlayer.exe",
+          "--project",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-105539-full-scene-character-composition-b37668\\project\\history-actor.azureproject",
+          "--width",
+          "2560",
+          "--height",
+          "1440",
+          "--capture-fps",
+          "60",
+          "--capture-frames",
+          "2",
+          "--fixed-frame-step",
+          "--qa-camera",
+          "scene",
+          "--qa-light",
+          "scene",
+          "--capture-dir",
+          "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261119-143002-nr-reflection-confidence-lod-1e8769\\nvidia-candidate\\frames",
+          "--runtime-report",
+          "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261119-143002-nr-reflection-confidence-lod-1e8769\\nvidia-candidate\\runtime.json",
+          "--resource-root",
+          "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-125923-body-lit-outline-depth-order-a29b63\\msaa-release"
+        ]
+      },
+      "rows": [
+        {
+          "frame": 0,
+          "control": {
+            "png": "72fadcc6e73e6fbefcf60357a5e42b28ddfb5667a9e032e38f7f0ed63e80268b",
+            "raw": "bc18247e599cae36a2f0db767a0b82aa29a208190ca6ac7d69ff5c18f3909210",
+            "archive": "f39f4f7671a5c7140e161ed057a39f8c03a0363d83f7c8bb3551517e7efff4c7",
+            "donor": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-150229-face-native-geometry-mask-sampling-d5d93e\\projected-reflection-32-step-candidate\\baseline-nvidia\\frames\\frame_000000.png",
+            "donorSha256": "72fadcc6e73e6fbefcf60357a5e42b28ddfb5667a9e032e38f7f0ed63e80268b",
+            "archivedControlPixelDifferences": 0
+          },
+          "candidate": {
+            "png": "028bd1e2501f8fe437d9b09413bfe37094cbfaaa1d19639790ff58b78b3d50f3",
+            "raw": "260e6dadfca6308400fdc0305d306d128223aa50f19ef4e5731244f46d893fb9",
+            "archive": "d382fc5da4a800cb40b856a590855bf2ed41496569fc4eca802431a902710876",
+            "donor": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-150229-face-native-geometry-mask-sampling-d5d93e\\projected-reflection-32-step-candidate\\baseline-nvidia\\frames\\frame_000000.png",
+            "donorSha256": "72fadcc6e73e6fbefcf60357a5e42b28ddfb5667a9e032e38f7f0ed63e80268b",
+            "archivedControlPixelDifferences": 593663
+          },
+          "metrics": {
+            "complete": {
+              "control": {
+                "pixels": 3686400,
+                "ssim": 0.8277961015701294,
+                "medianReference": 0.40663331747055054,
+                "medianCandidate": 0.41095688939094543,
+                "medianLumaRelativeError": 0.010632606170319582,
+                "meanAbsByte": 11.990855848524305,
+                "diagnosticMedianMatchedLumaSsim": 0.8285591006278992,
+                "medianSignedRgbBytes": [
+                  2.0,
+                  1.0,
+                  1.0
+                ],
+                "exactPixels": 22080,
+                "peak": 242
+              },
+              "candidate": {
+                "pixels": 3686400,
+                "ssim": 0.8281238079071045,
+                "medianReference": 0.40663331747055054,
+                "medianCandidate": 0.41095688939094543,
+                "medianLumaRelativeError": 0.010632606170319582,
+                "meanAbsByte": 11.974351128472222,
+                "diagnosticMedianMatchedLumaSsim": 0.8288808465003967,
+                "medianSignedRgbBytes": [
+                  2.0,
+                  1.0,
+                  1.0
+                ],
+                "exactPixels": 22109,
+                "peak": 242
+              },
+              "changed": 593663,
+              "newOverOne": 9333,
+              "recovered": 7210,
+              "controlOverOne": 3473902,
+              "candidateOverOne": 3476025,
+              "highFrequency": [
+                18.48886489868164,
+                25.600454330444336,
+                25.59707260131836
+              ]
+            },
+            "ceiling": {
+              "control": {
+                "pixels": 537600,
+                "ssim": 0.8411242365837097,
+                "medianReference": 0.8463764786720276,
+                "medianCandidate": 0.8992117643356323,
+                "medianLumaRelativeError": 0.062425276452039144,
+                "meanAbsByte": 14.291892361111111,
+                "diagnosticMedianMatchedLumaSsim": 0.8463874459266663,
+                "medianSignedRgbBytes": [
+                  11.0,
+                  11.0,
+                  11.0
+                ],
+                "exactPixels": 9085,
+                "peak": 195
+              },
+              "candidate": {
+                "pixels": 537600,
+                "ssim": 0.8412759304046631,
+                "medianReference": 0.8463764786720276,
+                "medianCandidate": 0.8992117643356323,
+                "medianLumaRelativeError": 0.062425276452039144,
+                "meanAbsByte": 14.271154513888888,
+                "diagnosticMedianMatchedLumaSsim": 0.8465366959571838,
+                "medianSignedRgbBytes": [
+                  11.0,
+                  11.0,
+                  11.0
+                ],
+                "exactPixels": 9114,
+                "peak": 195
+              },
+              "changed": 79416,
+              "newOverOne": 150,
+              "recovered": 168,
+              "controlOverOne": 487272,
+              "candidateOverOne": 487254,
+              "highFrequency": [
+                12.721052169799805,
+                21.033416748046875,
+                21.09195899963379
+              ]
+            },
+            "leftDoor": {
+              "control": {
+                "pixels": 253500,
+                "ssim": 0.8868878483772278,
+                "medianReference": 0.5621686577796936,
+                "medianCandidate": 0.5502784848213196,
+                "medianLumaRelativeError": 0.021150544047287716,
+                "meanAbsByte": 8.083737015121631,
+                "diagnosticMedianMatchedLumaSsim": 0.8851497769355774,
+                "medianSignedRgbBytes": [
+                  2.0,
+                  1.0,
+                  1.0
+                ],
+                "exactPixels": 1193,
+                "peak": 165
+              },
+              "candidate": {
+                "pixels": 253500,
+                "ssim": 0.8869471549987793,
+                "medianReference": 0.5621686577796936,
+                "medianCandidate": 0.5502784848213196,
+                "medianLumaRelativeError": 0.021150544047287716,
+                "meanAbsByte": 8.075435897435897,
+                "diagnosticMedianMatchedLumaSsim": 0.8852118253707886,
+                "medianSignedRgbBytes": [
+                  2.0,
+                  1.0,
+                  1.0
+                ],
+                "exactPixels": 1197,
+                "peak": 165
+              },
+              "changed": 8900,
+              "newOverOne": 49,
+              "recovered": 47,
+              "controlOverOne": 238256,
+              "candidateOverOne": 238258,
+              "highFrequency": [
+                11.707696914672852,
+                17.473712921142578,
+                17.477357864379883
+              ]
+            },
+            "rightWall": {
+              "control": {
+                "pixels": 128800,
+                "ssim": 0.8834997415542603,
+                "medianReference": 0.32994508743286133,
+                "medianCandidate": 0.30750200152397156,
+                "medianLumaRelativeError": 0.06802066999544762,
+                "meanAbsByte": 11.896048136645963,
+                "diagnosticMedianMatchedLumaSsim": 0.8830279111862183,
+                "medianSignedRgbBytes": [
+                  -8.0,
+                  -8.0,
+                  -7.0
+                ],
+                "exactPixels": 350,
+                "peak": 118
+              },
+              "candidate": {
+                "pixels": 128800,
+                "ssim": 0.8835201263427734,
+                "medianReference": 0.32994508743286133,
+                "medianCandidate": 0.30750200152397156,
+                "medianLumaRelativeError": 0.06802066999544762,
+                "meanAbsByte": 11.897292960662526,
+                "diagnosticMedianMatchedLumaSsim": 0.8830654621124268,
+                "medianSignedRgbBytes": [
+                  -8.0,
+                  -8.0,
+                  -7.0
+                ],
+                "exactPixels": 343,
+                "peak": 118
+              },
+              "changed": 19275,
+              "newOverOne": 279,
+              "recovered": 181,
+              "controlOverOne": 123604,
+              "candidateOverOne": 123702,
+              "highFrequency": [
+                7.028468132019043,
+                8.379462242126465,
+                8.378527641296387
+              ]
+            },
+            "centerFloor": {
+              "control": {
+                "pixels": 97200,
+                "ssim": 0.8292058706283569,
+                "medianReference": 0.29490983486175537,
+                "medianCandidate": 0.2475568801164627,
+                "medianLumaRelativeError": 0.1605675672616692,
+                "meanAbsByte": 16.100836762688616,
+                "diagnosticMedianMatchedLumaSsim": 0.8159244060516357,
+                "medianSignedRgbBytes": [
+                  -11.0,
+                  -14.0,
+                  -9.0
+                ],
+                "exactPixels": 64,
+                "peak": 183
+              },
+              "candidate": {
+                "pixels": 97200,
+                "ssim": 0.8306552171707153,
+                "medianReference": 0.29490983486175537,
+                "medianCandidate": 0.247658833861351,
+                "medianLumaRelativeError": 0.16022185568193806,
+                "meanAbsByte": 16.059674211248286,
+                "diagnosticMedianMatchedLumaSsim": 0.817782461643219,
+                "medianSignedRgbBytes": [
+                  -11.0,
+                  -14.0,
+                  -9.0
+                ],
+                "exactPixels": 54,
+                "peak": 183
+              },
+              "changed": 16645,
+              "newOverOne": 160,
+              "recovered": 138,
+              "controlOverOne": 96247,
+              "candidateOverOne": 96269,
+              "highFrequency": [
+                11.518051147460938,
+                16.612350463867188,
+                16.615549087524414
+              ]
+            },
+            "cyanRing": {
+              "control": {
+                "pixels": 27600,
+                "ssim": 0.7528694868087769,
+                "medianReference": 0.298764705657959,
+                "medianCandidate": 0.2749764919281006,
+                "medianLumaRelativeError": 0.07962190071103095,
+                "meanAbsByte": 15.350857487922704,
+                "diagnosticMedianMatchedLumaSsim": 0.7384704947471619,
+                "medianSignedRgbBytes": [
+                  -7.0,
+                  -6.0,
+                  -5.0
+                ],
+                "exactPixels": 5,
+                "peak": 94
+              },
+              "candidate": {
+                "pixels": 27600,
+                "ssim": 0.7528742551803589,
+                "medianReference": 0.298764705657959,
+                "medianCandidate": 0.274727463722229,
+                "medianLumaRelativeError": 0.08045542689787807,
+                "meanAbsByte": 15.336666666666666,
+                "diagnosticMedianMatchedLumaSsim": 0.7383028268814087,
+                "medianSignedRgbBytes": [
+                  -7.0,
+                  -6.0,
+                  -5.0
+                ],
+                "exactPixels": 6,
+                "peak": 94
+              },
+              "changed": 3472,
+              "newOverOne": 2,
+              "recovered": 2,
+              "controlOverOne": 27483,
+              "candidateOverOne": 27483,
+              "highFrequency": [
+                2.72178053855896,
+                7.556826114654541,
+                7.564742565155029
+              ]
+            },
+            "leftFloor": {
+              "control": {
+                "pixels": 67900,
+                "ssim": 0.8553433418273926,
+                "medianReference": 0.368437260389328,
+                "medianCandidate": 0.37314900755882263,
+                "medianLumaRelativeError": 0.012788465435107517,
+                "meanAbsByte": 6.873784977908689,
+                "diagnosticMedianMatchedLumaSsim": 0.8570441603660583,
+                "medianSignedRgbBytes": [
+                  -1.0,
+                  -2.0,
+                  -1.0
+                ],
+                "exactPixels": 350,
+                "peak": 122
+              },
+              "candidate": {
+                "pixels": 67900,
+                "ssim": 0.8554296493530273,
+                "medianReference": 0.368437260389328,
+                "medianCandidate": 0.37314900755882263,
+                "medianLumaRelativeError": 0.012788465435107517,
+                "meanAbsByte": 6.95853706431026,
+                "diagnosticMedianMatchedLumaSsim": 0.8570963740348816,
+                "medianSignedRgbBytes": [
+                  -1.0,
+                  -2.0,
+                  -2.0
+                ],
+                "exactPixels": 111,
+                "peak": 122
+              },
+              "changed": 17431,
+              "newOverOne": 1154,
+              "recovered": 112,
+              "controlOverOne": 62456,
+              "candidateOverOne": 63498,
+              "highFrequency": [
+                14.571454048156738,
+                25.306901931762695,
+                25.2753963470459
+              ]
+            }
+          }
+        },
+        {
+          "frame": 1,
+          "control": {
+            "png": "3988d0d78687c0288a2b73b4df6a226e3180e77ec3e682ce8dacd09ba34f5974",
+            "raw": "5d807c93335c7dde65582c891b9a994e4674229a1b7a44ae89a7ed5e0c650764",
+            "archive": "1ddcfe3184207fe56e963c3e97d8d52cbbbfc31ed3cf35b61853e17f784a1d07",
+            "donor": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-150229-face-native-geometry-mask-sampling-d5d93e\\projected-reflection-32-step-candidate\\baseline-nvidia\\frames\\frame_000001.png",
+            "donorSha256": "3988d0d78687c0288a2b73b4df6a226e3180e77ec3e682ce8dacd09ba34f5974",
+            "archivedControlPixelDifferences": 0
+          },
+          "candidate": {
+            "png": "c3ea7ed6323a3fc48d8cb54e4770d2b4db47287b7fd33cebc9d1cacb0e4929a0",
+            "raw": "0d96dbf3ef425133610ad718b99db61e4ad6a9b87b991d57cc7940e8d21c8c7a",
+            "archive": "27ddfd6a5c487739ebd1940fa1d195ed86c9e67bc3c786bd89c4b5bf34a2cd58",
+            "donor": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-150229-face-native-geometry-mask-sampling-d5d93e\\projected-reflection-32-step-candidate\\baseline-nvidia\\frames\\frame_000001.png",
+            "donorSha256": "3988d0d78687c0288a2b73b4df6a226e3180e77ec3e682ce8dacd09ba34f5974",
+            "archivedControlPixelDifferences": 604914
+          },
+          "metrics": {
+            "complete": {
+              "control": {
+                "pixels": 3686400,
+                "ssim": 0.8278223872184753,
+                "medianReference": 0.40663331747055054,
+                "medianCandidate": 0.41083139181137085,
+                "medianLumaRelativeError": 0.010323980255563659,
+                "meanAbsByte": 11.987490776909722,
+                "diagnosticMedianMatchedLumaSsim": 0.8285658955574036,
+                "medianSignedRgbBytes": [
+                  2.0,
+                  1.0,
+                  1.0
+                ],
+                "exactPixels": 22107,
+                "peak": 242
+              },
+              "candidate": {
+                "pixels": 3686400,
+                "ssim": 0.8281586170196533,
+                "medianReference": 0.40663331747055054,
+                "medianCandidate": 0.41083139181137085,
+                "medianLumaRelativeError": 0.010323980255563659,
+                "meanAbsByte": 11.97075538917824,
+                "diagnosticMedianMatchedLumaSsim": 0.8288962244987488,
+                "medianSignedRgbBytes": [
+                  2.0,
+                  1.0,
+                  1.0
+                ],
+                "exactPixels": 22102,
+                "peak": 242
+              },
+              "changed": 604914,
+              "newOverOne": 9334,
+              "recovered": 7230,
+              "controlOverOne": 3473702,
+              "candidateOverOne": 3475806,
+              "highFrequency": [
+                18.48886489868164,
+                25.610715866088867,
+                25.60552978515625
+              ]
+            },
+            "ceiling": {
+              "control": {
+                "pixels": 537600,
+                "ssim": 0.8410954475402832,
+                "medianReference": 0.8463764786720276,
+                "medianCandidate": 0.8992117643356323,
+                "medianLumaRelativeError": 0.062425276452039144,
+                "meanAbsByte": 14.292847222222223,
+                "diagnosticMedianMatchedLumaSsim": 0.8463585376739502,
+                "medianSignedRgbBytes": [
+                  11.0,
+                  11.0,
+                  11.0
+                ],
+                "exactPixels": 9087,
+                "peak": 195
+              },
+              "candidate": {
+                "pixels": 537600,
+                "ssim": 0.8412321209907532,
+                "medianReference": 0.8463764786720276,
+                "medianCandidate": 0.8992117643356323,
+                "medianLumaRelativeError": 0.062425276452039144,
+                "meanAbsByte": 14.272057291666666,
+                "diagnosticMedianMatchedLumaSsim": 0.8464928865432739,
+                "medianSignedRgbBytes": [
+                  11.0,
+                  11.0,
+                  11.0
+                ],
+                "exactPixels": 9109,
+                "peak": 195
+              },
+              "changed": 79283,
+              "newOverOne": 149,
+              "recovered": 171,
+              "controlOverOne": 487278,
+              "candidateOverOne": 487256,
+              "highFrequency": [
+                12.721052169799805,
+                21.02484893798828,
+                21.093381881713867
+              ]
+            },
+            "leftDoor": {
+              "control": {
+                "pixels": 253500,
+                "ssim": 0.8868863582611084,
+                "medianReference": 0.5621686577796936,
+                "medianCandidate": 0.5502784848213196,
+                "medianLumaRelativeError": 0.021150544047287716,
+                "meanAbsByte": 8.083591058514136,
+                "diagnosticMedianMatchedLumaSsim": 0.8851481676101685,
+                "medianSignedRgbBytes": [
+                  2.0,
+                  1.0,
+                  1.0
+                ],
+                "exactPixels": 1191,
+                "peak": 165
+              },
+              "candidate": {
+                "pixels": 253500,
+                "ssim": 0.8869444131851196,
+                "medianReference": 0.5621686577796936,
+                "medianCandidate": 0.5502784848213196,
+                "medianLumaRelativeError": 0.021150544047287716,
+                "meanAbsByte": 8.075239973701512,
+                "diagnosticMedianMatchedLumaSsim": 0.8852089643478394,
+                "medianSignedRgbBytes": [
+                  2.0,
+                  1.0,
+                  1.0
+                ],
+                "exactPixels": 1197,
+                "peak": 165
+              },
+              "changed": 8815,
+              "newOverOne": 51,
+              "recovered": 46,
+              "controlOverOne": 238254,
+              "candidateOverOne": 238259,
+              "highFrequency": [
+                11.707696914672852,
+                17.474681854248047,
+                17.476598739624023
+              ]
+            },
+            "rightWall": {
+              "control": {
+                "pixels": 128800,
+                "ssim": 0.8834869861602783,
+                "medianReference": 0.32994508743286133,
+                "medianCandidate": 0.30750200152397156,
+                "medianLumaRelativeError": 0.06802066999544762,
+                "meanAbsByte": 11.893925983436853,
+                "diagnosticMedianMatchedLumaSsim": 0.8830145001411438,
+                "medianSignedRgbBytes": [
+                  -8.0,
+                  -8.0,
+                  -7.0
+                ],
+                "exactPixels": 341,
+                "peak": 118
+              },
+              "candidate": {
+                "pixels": 128800,
+                "ssim": 0.883505642414093,
+                "medianReference": 0.32994508743286133,
+                "medianCandidate": 0.30750200152397156,
+                "medianLumaRelativeError": 0.06802066999544762,
+                "meanAbsByte": 11.895178571428572,
+                "diagnosticMedianMatchedLumaSsim": 0.8830500245094299,
+                "medianSignedRgbBytes": [
+                  -8.0,
+                  -8.0,
+                  -7.0
+                ],
+                "exactPixels": 334,
+                "peak": 118
+              },
+              "changed": 19393,
+              "newOverOne": 278,
+              "recovered": 183,
+              "controlOverOne": 123597,
+              "candidateOverOne": 123692,
+              "highFrequency": [
+                7.028468132019043,
+                8.377102851867676,
+                8.382997512817383
+              ]
+            },
+            "centerFloor": {
+              "control": {
+                "pixels": 97200,
+                "ssim": 0.8296183943748474,
+                "medianReference": 0.29490983486175537,
+                "medianCandidate": 0.24845099449157715,
+                "medianLumaRelativeError": 0.15753574441475204,
+                "meanAbsByte": 16.021971879286696,
+                "diagnosticMedianMatchedLumaSsim": 0.8166679739952087,
+                "medianSignedRgbBytes": [
+                  -10.0,
+                  -14.0,
+                  -9.0
+                ],
+                "exactPixels": 63,
+                "peak": 183
+              },
+              "candidate": {
+                "pixels": 97200,
+                "ssim": 0.8313232064247131,
+                "medianReference": 0.29490983486175537,
+                "medianCandidate": 0.24861961603164673,
+                "medianLumaRelativeError": 0.15696397121448347,
+                "meanAbsByte": 15.98286694101509,
+                "diagnosticMedianMatchedLumaSsim": 0.8188852071762085,
+                "medianSignedRgbBytes": [
+                  -10.0,
+                  -14.0,
+                  -9.0
+                ],
+                "exactPixels": 48,
+                "peak": 183
+              },
+              "changed": 20105,
+              "newOverOne": 180,
+              "recovered": 144,
+              "controlOverOne": 96198,
+              "candidateOverOne": 96234,
+              "highFrequency": [
+                11.518051147460938,
+                16.710729598999023,
+                16.684316635131836
+              ]
+            },
+            "cyanRing": {
+              "control": {
+                "pixels": 27600,
+                "ssim": 0.75460284948349,
+                "medianReference": 0.298764705657959,
+                "medianCandidate": 0.27490001916885376,
+                "medianLumaRelativeError": 0.0798778638746798,
+                "meanAbsByte": 15.259106280193237,
+                "diagnosticMedianMatchedLumaSsim": 0.7402628660202026,
+                "medianSignedRgbBytes": [
+                  -6.0,
+                  -6.0,
+                  -5.0
+                ],
+                "exactPixels": 3,
+                "peak": 94
+              },
+              "candidate": {
+                "pixels": 27600,
+                "ssim": 0.7546892166137695,
+                "medianReference": 0.298764705657959,
+                "medianCandidate": 0.27457255125045776,
+                "medianLumaRelativeError": 0.08097393684512932,
+                "meanAbsByte": 15.242125603864734,
+                "diagnosticMedianMatchedLumaSsim": 0.7401211261749268,
+                "medianSignedRgbBytes": [
+                  -7.0,
+                  -6.0,
+                  -5.0
+                ],
+                "exactPixels": 3,
+                "peak": 94
+              },
+              "changed": 5197,
+              "newOverOne": 10,
+              "recovered": 9,
+              "controlOverOne": 27462,
+              "candidateOverOne": 27463,
+              "highFrequency": [
+                2.72178053855896,
+                7.508162021636963,
+                7.517850399017334
+              ]
+            },
+            "leftFloor": {
+              "control": {
+                "pixels": 67900,
+                "ssim": 0.8553996086120605,
+                "medianReference": 0.368437260389328,
+                "medianCandidate": 0.37314900755882263,
+                "medianLumaRelativeError": 0.012788465435107517,
+                "meanAbsByte": 6.869558173784978,
+                "diagnosticMedianMatchedLumaSsim": 0.8571003079414368,
+                "medianSignedRgbBytes": [
+                  -1.0,
+                  -2.0,
+                  -1.0
+                ],
+                "exactPixels": 346,
+                "peak": 122
+              },
+              "candidate": {
+                "pixels": 67900,
+                "ssim": 0.8554862141609192,
+                "medianReference": 0.368437260389328,
+                "medianCandidate": 0.37355294823646545,
+                "medianLumaRelativeError": 0.013884827614155253,
+                "meanAbsByte": 6.952950417280314,
+                "diagnosticMedianMatchedLumaSsim": 0.857286810874939,
+                "medianSignedRgbBytes": [
+                  -1.0,
+                  -2.0,
+                  -2.0
+                ],
+                "exactPixels": 107,
+                "peak": 122
+              },
+              "changed": 17657,
+              "newOverOne": 1150,
+              "recovered": 112,
+              "controlOverOne": 62443,
+              "candidateOverOne": 63481,
+              "highFrequency": [
+                14.571454048156738,
+                25.30219078063965,
+                25.273521423339844
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "intel": {
+      "control": {
+        "camera": {
+          "qaCameraPosition": [
+            -0.266043,
+            2.26206,
+            -24.9053
+          ],
+          "qaCameraTarget": [
+            -0.261116,
+            2.32175,
+            -23.9071
+          ],
+          "cameraLens": {
+            "farPlane": 10000.0,
+            "nearPlane": 0.10000000149011612,
+            "offsetNdc": [
+              -0.0002929684706032276,
+              7.717559492448345e-05
+            ],
+            "projection": "perspective",
+            "schemaVersion": 1,
+            "verticalFovRadians": 0.9986935257911682
+          },
+          "cameraUp": [
+            -0.0002945943851955235,
+            0.9982167482376099,
+            -0.05969396233558655
+          ],
+          "gradeSettings": {
+            "schemaVersion": 2,
+            "exposureEv": 0,
+            "saturation": 1,
+            "contrast": 1,
+            "tint": [
+              1,
+              1,
+              1
+            ],
+            "toneMappingEnabled": true,
+            "lut": {
+              "schemaVersion": 1,
+              "asset": "gi:/captured-3534.azlut",
+              "exposureMultiplier": 1,
+              "dimension": 32,
+              "inputDomain": "logc3-full-log",
+              "outputDomain": "linear",
+              "fingerprintAlgorithm": "FNV-1a-64",
+              "fingerprint": "b963486c619e8333"
+            }
+          },
+          "bloomSettings": {
+            "schemaVersion": 1,
+            "enabled": true,
+            "threshold": 1.05,
+            "strength": 0.16
+          },
+          "nprLighting": {
+            "ambientColor": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "ambientDirection": [
+              0.0,
+              1.0,
+              0.0
+            ],
+            "ambientWeight": 1.0,
+            "directionBias": 0.0,
+            "directionFloor": 1.0,
+            "directionGain": 0.0,
+            "enabled": true,
+            "indoorMix": 0.0,
+            "litAmbientMix": 0.0,
+            "mainColorMix": 0.0,
+            "outdoorGain": 1.0,
+            "schemaVersion": 1,
+            "shadowAmbientGain": 1.0,
+            "shadowOverride": 0.0,
+            "specularFloor": 0.550000011920929,
+            "useSceneIrradiance": true
+          },
+          "screenReflectionProducer": "projected-history",
+          "screenReflectionLevels": 7,
+          "sceneTriangles": 547653,
+          "skinnedVertices": 77802,
+          "transparentTriangles": 10735,
+          "width": 2560,
+          "height": 1440,
+          "fps": 60
+        },
+        "gpu": {
+          "api_version": 4210991,
+          "compute": {
+            "shader": true,
+            "storage_image_write_without_format": true
+          },
+          "descriptor_indexing": {
+            "descriptor_binding_partially_bound": true,
+            "descriptor_binding_variable_descriptor_count": true,
+            "runtime_descriptor_array": true,
+            "shader_sampled_image_array_non_uniform_indexing": true
+          },
+          "device_id": 42888,
+          "device_name": "Intel(R) RaptorLake-S Mobile Graphics Controller",
+          "driver_version": 1661340,
+          "extensions": [
+            "VK_EXT_device_address_binding_report",
+            "VK_EXT_full_screen_exclusive",
+            "VK_KHR_swapchain",
+            "VK_KHR_external_memory",
+            "VK_KHR_external_memory_win32",
+            "VK_EXT_external_memory_host",
+            "VK_KHR_external_semaphore",
+            "VK_KHR_external_semaphore_win32",
+            "VK_KHR_external_fence",
+            "VK_KHR_external_fence_win32",
+            "VK_KHR_timeline_semaphore",
+            "VK_KHR_win32_keyed_mutex",
+            "VK_KHR_get_memory_requirements2",
+            "VK_KHR_bind_memory2",
+            "VK_KHR_dedicated_allocation",
+            "VK_KHR_sampler_mirror_clamp_to_edge",
+            "VK_KHR_maintenance1",
+            "VK_KHR_maintenance2",
+            "VK_KHR_maintenance3",
+            "VK_KHR_maintenance4",
+            "VK_KHR_maintenance5",
+            "VK_KHR_maintenance6",
+            "VK_KHR_synchronization2",
+            "VK_KHR_shader_draw_parameters",
+            "VK_KHR_push_descriptor",
+            "VK_KHR_descriptor_update_template",
+            "VK_KHR_multiview",
+            "VK_KHR_shader_float16_int8",
+            "VK_KHR_shader_float_controls",
+            "VK_KHR_16bit_storage",
+            "VK_KHR_8bit_storage",
+            "VK_EXT_shader_subgroup_ballot",
+            "VK_EXT_shader_subgroup_vote",
+            "VK_KHR_storage_buffer_storage_class",
+            "VK_KHR_variable_pointers",
+            "VK_KHR_relaxed_block_layout",
+            "VK_EXT_sampler_filter_minmax",
+            "VK_KHR_device_group",
+            "VK_KHR_sampler_ycbcr_conversion",
+            "VK_EXT_ycbcr_2plane_444_formats",
+            "VK_EXT_4444_formats",
+            "VK_EXT_post_depth_coverage",
+            "VK_EXT_shader_viewport_index_layer",
+            "VK_EXT_shader_stencil_export",
+            "VK_EXT_conservative_rasterization",
+            "VK_EXT_sample_locations",
+            "VK_KHR_draw_indirect_count",
+            "VK_EXT_multi_draw",
+            "VK_KHR_image_format_list",
+            "VK_EXT_image_view_min_lod",
+            "VK_KHR_vertex_attribute_divisor",
+            "VK_EXT_vertex_attribute_divisor",
+            "VK_EXT_descriptor_indexing",
+            "VK_EXT_mutable_descriptor_type",
+            "VK_EXT_inline_uniform_block",
+            "VK_KHR_create_renderpass2",
+            "VK_KHR_dynamic_rendering",
+            "VK_KHR_dynamic_rendering_local_read",
+            "VK_KHR_load_store_op_none",
+            "VK_EXT_load_store_op_none",
+            "VK_KHR_swapchain_mutable_format",
+            "VK_KHR_depth_stencil_resolve",
+            "VK_KHR_driver_properties",
+            "VK_KHR_vulkan_memory_model",
+            "VK_EXT_conditional_rendering",
+            "VK_EXT_hdr_metadata",
+            "VK_KHR_fragment_shading_rate",
+            "VK_EXT_depth_clip_enable",
+            "VK_EXT_depth_clip_control",
+            "VK_EXT_scalar_block_layout",
+            "VK_KHR_imageless_framebuffer",
+            "VK_KHR_buffer_device_address",
+            "VK_EXT_buffer_device_address",
+            "VK_KHR_pipeline_library",
+            "VK_EXT_host_query_reset",
+            "VK_KHR_performance_query",
+            "VK_NV_device_diagnostic_checkpoints",
+            "VK_KHR_separate_depth_stencil_layouts",
+            "VK_KHR_shader_clock",
+            "VK_KHR_spirv_1_4",
+            "VK_KHR_uniform_buffer_standard_layout",
+            "VK_EXT_separate_stencil_usage",
+            "VK_EXT_fragment_shader_interlock",
+            "VK_EXT_index_type_uint8",
+            "VK_KHR_index_type_uint8",
+            "VK_EXT_primitive_topology_list_restart",
+            "VK_KHR_shader_subgroup_extended_types",
+            "VK_KHR_line_rasterization",
+            "VK_EXT_line_rasterization",
+            "VK_EXT_memory_budget",
+            "VK_EXT_memory_priority",
+            "VK_EXT_pageable_device_local_memory",
+            "VK_EXT_texel_buffer_alignment",
+            "VK_INTEL_performance_query",
+            "VK_EXT_subgroup_size_control",
+            "VK_EXT_shader_demote_to_helper_invocation",
+            "VK_EXT_pipeline_creation_feedback",
+            "VK_EXT_pipeline_creation_cache_control",
+            "VK_KHR_pipeline_executable_properties",
+            "VK_EXT_graphics_pipeline_library",
+            "VK_EXT_transform_feedback",
+            "VK_EXT_provoking_vertex",
+            "VK_EXT_extended_dynamic_state",
+            "VK_EXT_extended_dynamic_state2",
+            "VK_EXT_extended_dynamic_state3",
+            "VK_EXT_vertex_input_dynamic_state",
+            "VK_EXT_custom_border_color",
+            "VK_EXT_robustness2",
+            "VK_EXT_image_robustness",
+            "VK_EXT_pipeline_robustness",
+            "VK_KHR_calibrated_timestamps",
+            "VK_EXT_calibrated_timestamps",
+            "VK_KHR_shader_integer_dot_product",
+            "VK_KHR_shader_subgroup_uniform_control_flow",
+            "VK_KHR_shader_terminate_invocation",
+            "VK_KHR_workgroup_memory_explicit_layout",
+            "VK_EXT_shader_atomic_float",
+            "VK_KHR_copy_commands2",
+            "VK_KHR_shader_non_semantic_info",
+            "VK_KHR_zero_initialize_workgroup_memory",
+            "VK_EXT_shader_atomic_float2",
+            "VK_EXT_global_priority",
+            "VK_EXT_global_priority_query",
+            "VK_KHR_global_priority",
+            "VK_KHR_format_feature_flags2",
+            "VK_KHR_video_queue",
+            "VK_KHR_video_decode_queue",
+            "VK_KHR_video_decode_h264",
+            "VK_KHR_video_decode_h265",
+            "VK_EXT_color_write_enable",
+            "VK_NV_compute_shader_derivatives",
+            "VK_EXT_private_data",
+            "VK_EXT_image_2d_view_of_3d",
+            "VK_EXT_primitives_generated_query",
+            "VK_EXT_shader_module_identifier",
+            "VK_EXT_attachment_feedback_loop_layout",
+            "VK_KHR_map_memory2",
+            "VK_EXT_host_image_copy",
+            "VK_KHR_shader_subgroup_rotate",
+            "VK_KHR_shader_expect_assume",
+            "VK_KHR_shader_float_controls2"
+          ],
+          "features": {
+            "sampler_anisotropy": true,
+            "shader_int64": true
+          },
+          "resource_access": {
+            "enabled": {
+              "allocator_device_address": false,
+              "descriptor_indexing": true,
+              "device_address": false,
+              "update_after_bind": false
+            },
+            "limits": {
+              "max_descriptor_set_sampled_images": 1800,
+              "max_descriptor_set_samplers": 576,
+              "max_per_stage_descriptor_sampled_images": 200,
+              "max_per_stage_descriptor_samplers": 64,
+              "max_per_stage_resources": 200,
+              "max_per_stage_update_after_bind_resources": 1048576,
+              "max_per_stage_update_after_bind_sampled_images": 1048576,
+              "max_per_stage_update_after_bind_samplers": 1048576,
+              "max_sampler_lod_bias": 15.99609375,
+              "max_set_update_after_bind_sampled_images": 1048576,
+              "max_set_update_after_bind_samplers": 1048576,
+              "max_update_after_bind_descriptors_all_pools": 1048576
+            },
+            "supported": {
+              "device_address": true,
+              "sampled_image_update_after_bind": true
+            }
+          },
+          "schema_version": 3,
+          "vendor_id": 32902
+        },
+        "manifest": "63d5af9f89bdfa5bdadbe450225172a2a8b1f4459c16067ee8a0762fa08b4d04",
+        "command": [
+          "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-125923-body-lit-outline-depth-order-a29b63\\msaa-release\\AzurePlayer.exe",
+          "--project",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-105539-full-scene-character-composition-b37668\\project\\history-actor.azureproject",
+          "--width",
+          "2560",
+          "--height",
+          "1440",
+          "--capture-fps",
+          "60",
+          "--capture-frames",
+          "2",
+          "--fixed-frame-step",
+          "--qa-camera",
+          "scene",
+          "--qa-light",
+          "scene",
+          "--capture-dir",
+          "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261119-143002-nr-reflection-confidence-lod-1e8769\\intel-control\\frames",
+          "--runtime-report",
+          "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261119-143002-nr-reflection-confidence-lod-1e8769\\intel-control\\runtime.json",
+          "--resource-root",
+          "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-125923-body-lit-outline-depth-order-a29b63\\msaa-release"
+        ]
+      },
+      "candidate": {
+        "camera": {
+          "qaCameraPosition": [
+            -0.266043,
+            2.26206,
+            -24.9053
+          ],
+          "qaCameraTarget": [
+            -0.261116,
+            2.32175,
+            -23.9071
+          ],
+          "cameraLens": {
+            "farPlane": 10000.0,
+            "nearPlane": 0.10000000149011612,
+            "offsetNdc": [
+              -0.0002929684706032276,
+              7.717559492448345e-05
+            ],
+            "projection": "perspective",
+            "schemaVersion": 1,
+            "verticalFovRadians": 0.9986935257911682
+          },
+          "cameraUp": [
+            -0.0002945943851955235,
+            0.9982167482376099,
+            -0.05969396233558655
+          ],
+          "gradeSettings": {
+            "schemaVersion": 2,
+            "exposureEv": 0,
+            "saturation": 1,
+            "contrast": 1,
+            "tint": [
+              1,
+              1,
+              1
+            ],
+            "toneMappingEnabled": true,
+            "lut": {
+              "schemaVersion": 1,
+              "asset": "gi:/captured-3534.azlut",
+              "exposureMultiplier": 1,
+              "dimension": 32,
+              "inputDomain": "logc3-full-log",
+              "outputDomain": "linear",
+              "fingerprintAlgorithm": "FNV-1a-64",
+              "fingerprint": "b963486c619e8333"
+            }
+          },
+          "bloomSettings": {
+            "schemaVersion": 1,
+            "enabled": true,
+            "threshold": 1.05,
+            "strength": 0.16
+          },
+          "nprLighting": {
+            "ambientColor": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "ambientDirection": [
+              0.0,
+              1.0,
+              0.0
+            ],
+            "ambientWeight": 1.0,
+            "directionBias": 0.0,
+            "directionFloor": 1.0,
+            "directionGain": 0.0,
+            "enabled": true,
+            "indoorMix": 0.0,
+            "litAmbientMix": 0.0,
+            "mainColorMix": 0.0,
+            "outdoorGain": 1.0,
+            "schemaVersion": 1,
+            "shadowAmbientGain": 1.0,
+            "shadowOverride": 0.0,
+            "specularFloor": 0.550000011920929,
+            "useSceneIrradiance": true
+          },
+          "screenReflectionProducer": "projected-history",
+          "screenReflectionLevels": 7,
+          "sceneTriangles": 547653,
+          "skinnedVertices": 77802,
+          "transparentTriangles": 10735,
+          "width": 2560,
+          "height": 1440,
+          "fps": 60
+        },
+        "gpu": {
+          "api_version": 4210991,
+          "compute": {
+            "shader": true,
+            "storage_image_write_without_format": true
+          },
+          "descriptor_indexing": {
+            "descriptor_binding_partially_bound": true,
+            "descriptor_binding_variable_descriptor_count": true,
+            "runtime_descriptor_array": true,
+            "shader_sampled_image_array_non_uniform_indexing": true
+          },
+          "device_id": 42888,
+          "device_name": "Intel(R) RaptorLake-S Mobile Graphics Controller",
+          "driver_version": 1661340,
+          "extensions": [
+            "VK_EXT_device_address_binding_report",
+            "VK_EXT_full_screen_exclusive",
+            "VK_KHR_swapchain",
+            "VK_KHR_external_memory",
+            "VK_KHR_external_memory_win32",
+            "VK_EXT_external_memory_host",
+            "VK_KHR_external_semaphore",
+            "VK_KHR_external_semaphore_win32",
+            "VK_KHR_external_fence",
+            "VK_KHR_external_fence_win32",
+            "VK_KHR_timeline_semaphore",
+            "VK_KHR_win32_keyed_mutex",
+            "VK_KHR_get_memory_requirements2",
+            "VK_KHR_bind_memory2",
+            "VK_KHR_dedicated_allocation",
+            "VK_KHR_sampler_mirror_clamp_to_edge",
+            "VK_KHR_maintenance1",
+            "VK_KHR_maintenance2",
+            "VK_KHR_maintenance3",
+            "VK_KHR_maintenance4",
+            "VK_KHR_maintenance5",
+            "VK_KHR_maintenance6",
+            "VK_KHR_synchronization2",
+            "VK_KHR_shader_draw_parameters",
+            "VK_KHR_push_descriptor",
+            "VK_KHR_descriptor_update_template",
+            "VK_KHR_multiview",
+            "VK_KHR_shader_float16_int8",
+            "VK_KHR_shader_float_controls",
+            "VK_KHR_16bit_storage",
+            "VK_KHR_8bit_storage",
+            "VK_EXT_shader_subgroup_ballot",
+            "VK_EXT_shader_subgroup_vote",
+            "VK_KHR_storage_buffer_storage_class",
+            "VK_KHR_variable_pointers",
+            "VK_KHR_relaxed_block_layout",
+            "VK_EXT_sampler_filter_minmax",
+            "VK_KHR_device_group",
+            "VK_KHR_sampler_ycbcr_conversion",
+            "VK_EXT_ycbcr_2plane_444_formats",
+            "VK_EXT_4444_formats",
+            "VK_EXT_post_depth_coverage",
+            "VK_EXT_shader_viewport_index_layer",
+            "VK_EXT_shader_stencil_export",
+            "VK_EXT_conservative_rasterization",
+            "VK_EXT_sample_locations",
+            "VK_KHR_draw_indirect_count",
+            "VK_EXT_multi_draw",
+            "VK_KHR_image_format_list",
+            "VK_EXT_image_view_min_lod",
+            "VK_KHR_vertex_attribute_divisor",
+            "VK_EXT_vertex_attribute_divisor",
+            "VK_EXT_descriptor_indexing",
+            "VK_EXT_mutable_descriptor_type",
+            "VK_EXT_inline_uniform_block",
+            "VK_KHR_create_renderpass2",
+            "VK_KHR_dynamic_rendering",
+            "VK_KHR_dynamic_rendering_local_read",
+            "VK_KHR_load_store_op_none",
+            "VK_EXT_load_store_op_none",
+            "VK_KHR_swapchain_mutable_format",
+            "VK_KHR_depth_stencil_resolve",
+            "VK_KHR_driver_properties",
+            "VK_KHR_vulkan_memory_model",
+            "VK_EXT_conditional_rendering",
+            "VK_EXT_hdr_metadata",
+            "VK_KHR_fragment_shading_rate",
+            "VK_EXT_depth_clip_enable",
+            "VK_EXT_depth_clip_control",
+            "VK_EXT_scalar_block_layout",
+            "VK_KHR_imageless_framebuffer",
+            "VK_KHR_buffer_device_address",
+            "VK_EXT_buffer_device_address",
+            "VK_KHR_pipeline_library",
+            "VK_EXT_host_query_reset",
+            "VK_KHR_performance_query",
+            "VK_NV_device_diagnostic_checkpoints",
+            "VK_KHR_separate_depth_stencil_layouts",
+            "VK_KHR_shader_clock",
+            "VK_KHR_spirv_1_4",
+            "VK_KHR_uniform_buffer_standard_layout",
+            "VK_EXT_separate_stencil_usage",
+            "VK_EXT_fragment_shader_interlock",
+            "VK_EXT_index_type_uint8",
+            "VK_KHR_index_type_uint8",
+            "VK_EXT_primitive_topology_list_restart",
+            "VK_KHR_shader_subgroup_extended_types",
+            "VK_KHR_line_rasterization",
+            "VK_EXT_line_rasterization",
+            "VK_EXT_memory_budget",
+            "VK_EXT_memory_priority",
+            "VK_EXT_pageable_device_local_memory",
+            "VK_EXT_texel_buffer_alignment",
+            "VK_INTEL_performance_query",
+            "VK_EXT_subgroup_size_control",
+            "VK_EXT_shader_demote_to_helper_invocation",
+            "VK_EXT_pipeline_creation_feedback",
+            "VK_EXT_pipeline_creation_cache_control",
+            "VK_KHR_pipeline_executable_properties",
+            "VK_EXT_graphics_pipeline_library",
+            "VK_EXT_transform_feedback",
+            "VK_EXT_provoking_vertex",
+            "VK_EXT_extended_dynamic_state",
+            "VK_EXT_extended_dynamic_state2",
+            "VK_EXT_extended_dynamic_state3",
+            "VK_EXT_vertex_input_dynamic_state",
+            "VK_EXT_custom_border_color",
+            "VK_EXT_robustness2",
+            "VK_EXT_image_robustness",
+            "VK_EXT_pipeline_robustness",
+            "VK_KHR_calibrated_timestamps",
+            "VK_EXT_calibrated_timestamps",
+            "VK_KHR_shader_integer_dot_product",
+            "VK_KHR_shader_subgroup_uniform_control_flow",
+            "VK_KHR_shader_terminate_invocation",
+            "VK_KHR_workgroup_memory_explicit_layout",
+            "VK_EXT_shader_atomic_float",
+            "VK_KHR_copy_commands2",
+            "VK_KHR_shader_non_semantic_info",
+            "VK_KHR_zero_initialize_workgroup_memory",
+            "VK_EXT_shader_atomic_float2",
+            "VK_EXT_global_priority",
+            "VK_EXT_global_priority_query",
+            "VK_KHR_global_priority",
+            "VK_KHR_format_feature_flags2",
+            "VK_KHR_video_queue",
+            "VK_KHR_video_decode_queue",
+            "VK_KHR_video_decode_h264",
+            "VK_KHR_video_decode_h265",
+            "VK_EXT_color_write_enable",
+            "VK_NV_compute_shader_derivatives",
+            "VK_EXT_private_data",
+            "VK_EXT_image_2d_view_of_3d",
+            "VK_EXT_primitives_generated_query",
+            "VK_EXT_shader_module_identifier",
+            "VK_EXT_attachment_feedback_loop_layout",
+            "VK_KHR_map_memory2",
+            "VK_EXT_host_image_copy",
+            "VK_KHR_shader_subgroup_rotate",
+            "VK_KHR_shader_expect_assume",
+            "VK_KHR_shader_float_controls2"
+          ],
+          "features": {
+            "sampler_anisotropy": true,
+            "shader_int64": true
+          },
+          "resource_access": {
+            "enabled": {
+              "allocator_device_address": false,
+              "descriptor_indexing": true,
+              "device_address": false,
+              "update_after_bind": false
+            },
+            "limits": {
+              "max_descriptor_set_sampled_images": 1800,
+              "max_descriptor_set_samplers": 576,
+              "max_per_stage_descriptor_sampled_images": 200,
+              "max_per_stage_descriptor_samplers": 64,
+              "max_per_stage_resources": 200,
+              "max_per_stage_update_after_bind_resources": 1048576,
+              "max_per_stage_update_after_bind_sampled_images": 1048576,
+              "max_per_stage_update_after_bind_samplers": 1048576,
+              "max_sampler_lod_bias": 15.99609375,
+              "max_set_update_after_bind_sampled_images": 1048576,
+              "max_set_update_after_bind_samplers": 1048576,
+              "max_update_after_bind_descriptors_all_pools": 1048576
+            },
+            "supported": {
+              "device_address": true,
+              "sampled_image_update_after_bind": true
+            }
+          },
+          "schema_version": 3,
+          "vendor_id": 32902
+        },
+        "manifest": "07c490acc93f25a659546633ab154b7adce3a8de77f1bcd5ec5d403abf72f53d",
+        "command": [
+          "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-125923-body-lit-outline-depth-order-a29b63\\msaa-release\\AzurePlayer.exe",
+          "--project",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-105539-full-scene-character-composition-b37668\\project\\history-actor.azureproject",
+          "--width",
+          "2560",
+          "--height",
+          "1440",
+          "--capture-fps",
+          "60",
+          "--capture-frames",
+          "2",
+          "--fixed-frame-step",
+          "--qa-camera",
+          "scene",
+          "--qa-light",
+          "scene",
+          "--capture-dir",
+          "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261119-143002-nr-reflection-confidence-lod-1e8769\\intel-candidate\\frames",
+          "--runtime-report",
+          "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261119-143002-nr-reflection-confidence-lod-1e8769\\intel-candidate\\runtime.json",
+          "--resource-root",
+          "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-125923-body-lit-outline-depth-order-a29b63\\msaa-release"
+        ]
+      },
+      "rows": [
+        {
+          "frame": 0,
+          "control": {
+            "png": "b7033381fb8b76d033c285832ac084c52c173062b2b1b9d87589c4437e5a5f5a",
+            "raw": "d2159a1bf8b246555b8ee5a272f4cd6fbededab0127f154bb704f76da730d525",
+            "archive": "86de6b3039783c89ba131afecdf66682478ea063cf2fc256451c3e569b205a7d",
+            "donor": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-150229-face-native-geometry-mask-sampling-d5d93e\\projected-reflection-32-step-candidate\\baseline-intel\\frames\\frame_000000.png",
+            "donorSha256": "37ab3d8efeacd44922d1a5b2c3af30ffbe5e5e7b20ca784950a26e67ce8074cf",
+            "archivedControlPixelDifferences": 46
+          },
+          "candidate": {
+            "png": "0ffb455c956544398ec4135dde652fccc4f254bbd53d994db0208eed6dac9d02",
+            "raw": "2637aab651a3d214e4a3498e992dd498f558dfdf349b9a0c8e4c174608f35752",
+            "archive": "07056ed27cd85f59611db06daf6398fe28c693a5631cf95c0be513a354e2f349",
+            "donor": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-150229-face-native-geometry-mask-sampling-d5d93e\\projected-reflection-32-step-candidate\\baseline-intel\\frames\\frame_000000.png",
+            "donorSha256": "37ab3d8efeacd44922d1a5b2c3af30ffbe5e5e7b20ca784950a26e67ce8074cf",
+            "archivedControlPixelDifferences": 594314
+          },
+          "metrics": {
+            "complete": {
+              "control": {
+                "pixels": 3686400,
+                "ssim": 0.826923668384552,
+                "medianReference": 0.40663331747055054,
+                "medianCandidate": 0.4106784462928772,
+                "medianLumaRelativeError": 0.009947853873581372,
+                "meanAbsByte": 12.009583604600694,
+                "diagnosticMedianMatchedLumaSsim": 0.8276539444923401,
+                "medianSignedRgbBytes": [
+                  2.0,
+                  1.0,
+                  1.0
+                ],
+                "exactPixels": 23862,
+                "peak": 243
+              },
+              "candidate": {
+                "pixels": 3686400,
+                "ssim": 0.8272698521614075,
+                "medianReference": 0.40663331747055054,
+                "medianCandidate": 0.41074511408805847,
+                "medianLumaRelativeError": 0.01011180451981956,
+                "meanAbsByte": 11.993043348524306,
+                "diagnosticMedianMatchedLumaSsim": 0.8280050158500671,
+                "medianSignedRgbBytes": [
+                  2.0,
+                  1.0,
+                  1.0
+                ],
+                "exactPixels": 23681,
+                "peak": 243
+              },
+              "changed": 594275,
+              "newOverOne": 9431,
+              "recovered": 7147,
+              "controlOverOne": 3471831,
+              "candidateOverOne": 3474115,
+              "highFrequency": [
+                18.48886489868164,
+                26.009458541870117,
+                26.006534576416016
+              ]
+            },
+            "ceiling": {
+              "control": {
+                "pixels": 537600,
+                "ssim": 0.8405366539955139,
+                "medianReference": 0.8463764786720276,
+                "medianCandidate": 0.8996588587760925,
+                "medianLumaRelativeError": 0.06295352180351879,
+                "meanAbsByte": 14.309858010912698,
+                "diagnosticMedianMatchedLumaSsim": 0.845865786075592,
+                "medianSignedRgbBytes": [
+                  11.0,
+                  11.0,
+                  11.0
+                ],
+                "exactPixels": 10504,
+                "peak": 192
+              },
+              "candidate": {
+                "pixels": 537600,
+                "ssim": 0.8407136797904968,
+                "medianReference": 0.8463764786720276,
+                "medianCandidate": 0.8996588587760925,
+                "medianLumaRelativeError": 0.06295352180351879,
+                "meanAbsByte": 14.288937251984127,
+                "diagnosticMedianMatchedLumaSsim": 0.8460414409637451,
+                "medianSignedRgbBytes": [
+                  11.0,
+                  11.0,
+                  11.0
+                ],
+                "exactPixels": 10523,
+                "peak": 192
+              },
+              "changed": 79354,
+              "newOverOne": 136,
+              "recovered": 154,
+              "controlOverOne": 485477,
+              "candidateOverOne": 485459,
+              "highFrequency": [
+                12.721052169799805,
+                21.326778411865234,
+                21.382055282592773
+              ]
+            },
+            "leftDoor": {
+              "control": {
+                "pixels": 253500,
+                "ssim": 0.884918749332428,
+                "medianReference": 0.5621686577796936,
+                "medianCandidate": 0.5502784848213196,
+                "medianLumaRelativeError": 0.021150544047287716,
+                "meanAbsByte": 8.108535174227482,
+                "diagnosticMedianMatchedLumaSsim": 0.8830593824386597,
+                "medianSignedRgbBytes": [
+                  2.0,
+                  1.0,
+                  1.0
+                ],
+                "exactPixels": 1135,
+                "peak": 165
+              },
+              "candidate": {
+                "pixels": 253500,
+                "ssim": 0.8849712610244751,
+                "medianReference": 0.5621686577796936,
+                "medianCandidate": 0.5502784848213196,
+                "medianLumaRelativeError": 0.021150544047287716,
+                "meanAbsByte": 8.10047074293228,
+                "diagnosticMedianMatchedLumaSsim": 0.8831143379211426,
+                "medianSignedRgbBytes": [
+                  2.0,
+                  1.0,
+                  1.0
+                ],
+                "exactPixels": 1140,
+                "peak": 165
+              },
+              "changed": 8731,
+              "newOverOne": 37,
+              "recovered": 47,
+              "controlOverOne": 238308,
+              "candidateOverOne": 238298,
+              "highFrequency": [
+                11.707696914672852,
+                17.967679977416992,
+                17.966693878173828
+              ]
+            },
+            "rightWall": {
+              "control": {
+                "pixels": 128800,
+                "ssim": 0.8828596472740173,
+                "medianReference": 0.32994508743286133,
+                "medianCandidate": 0.30750200152397156,
+                "medianLumaRelativeError": 0.06802066999544762,
+                "meanAbsByte": 11.94243530020704,
+                "diagnosticMedianMatchedLumaSsim": 0.8824377655982971,
+                "medianSignedRgbBytes": [
+                  -8.0,
+                  -8.0,
+                  -7.0
+                ],
+                "exactPixels": 349,
+                "peak": 118
+              },
+              "candidate": {
+                "pixels": 128800,
+                "ssim": 0.8829025626182556,
+                "medianReference": 0.32994508743286133,
+                "medianCandidate": 0.30750200152397156,
+                "medianLumaRelativeError": 0.06802066999544762,
+                "meanAbsByte": 11.944378881987578,
+                "diagnosticMedianMatchedLumaSsim": 0.8825004696846008,
+                "medianSignedRgbBytes": [
+                  -8.0,
+                  -8.0,
+                  -7.0
+                ],
+                "exactPixels": 342,
+                "peak": 118
+              },
+              "changed": 19466,
+              "newOverOne": 271,
+              "recovered": 183,
+              "controlOverOne": 123655,
+              "candidateOverOne": 123743,
+              "highFrequency": [
+                7.028468132019043,
+                8.458904266357422,
+                8.485219955444336
+              ]
+            },
+            "centerFloor": {
+              "control": {
+                "pixels": 97200,
+                "ssim": 0.828565776348114,
+                "medianReference": 0.29490983486175537,
+                "medianCandidate": 0.24648629128932953,
+                "medianLumaRelativeError": 0.16419779148811808,
+                "meanAbsByte": 16.185692729766803,
+                "diagnosticMedianMatchedLumaSsim": 0.8146505355834961,
+                "medianSignedRgbBytes": [
+                  -11.0,
+                  -14.0,
+                  -9.0
+                ],
+                "exactPixels": 53,
+                "peak": 182
+              },
+              "candidate": {
+                "pixels": 97200,
+                "ssim": 0.8300234079360962,
+                "medianReference": 0.29490983486175537,
+                "medianCandidate": 0.2465725541114807,
+                "medianLumaRelativeError": 0.1639052857390588,
+                "meanAbsByte": 16.14474622770919,
+                "diagnosticMedianMatchedLumaSsim": 0.8165112733840942,
+                "medianSignedRgbBytes": [
+                  -11.0,
+                  -14.0,
+                  -9.0
+                ],
+                "exactPixels": 39,
+                "peak": 182
+              },
+              "changed": 16726,
+              "newOverOne": 162,
+              "recovered": 111,
+              "controlOverOne": 96301,
+              "candidateOverOne": 96352,
+              "highFrequency": [
+                11.518051147460938,
+                17.12076187133789,
+                17.1225528717041
+              ]
+            },
+            "cyanRing": {
+              "control": {
+                "pixels": 27600,
+                "ssim": 0.7524057626724243,
+                "medianReference": 0.298764705657959,
+                "medianCandidate": 0.2748274803161621,
+                "medianLumaRelativeError": 0.08012065979842153,
+                "meanAbsByte": 15.388357487922706,
+                "diagnosticMedianMatchedLumaSsim": 0.7379083037376404,
+                "medianSignedRgbBytes": [
+                  -7.0,
+                  -6.0,
+                  -5.0
+                ],
+                "exactPixels": 2,
+                "peak": 94
+              },
+              "candidate": {
+                "pixels": 27600,
+                "ssim": 0.7524223923683167,
+                "medianReference": 0.298764705657959,
+                "medianCandidate": 0.27450981736183167,
+                "medianLumaRelativeError": 0.08118391442092075,
+                "meanAbsByte": 15.37298309178744,
+                "diagnosticMedianMatchedLumaSsim": 0.7376989722251892,
+                "medianSignedRgbBytes": [
+                  -7.0,
+                  -6.0,
+                  -5.0
+                ],
+                "exactPixels": 2,
+                "peak": 94
+              },
+              "changed": 3584,
+              "newOverOne": 3,
+              "recovered": 4,
+              "controlOverOne": 27489,
+              "candidateOverOne": 27488,
+              "highFrequency": [
+                2.72178053855896,
+                7.575807571411133,
+                7.57703161239624
+              ]
+            },
+            "leftFloor": {
+              "control": {
+                "pixels": 67900,
+                "ssim": 0.8593763709068298,
+                "medianReference": 0.368437260389328,
+                "medianCandidate": 0.3729666769504547,
+                "medianLumaRelativeError": 0.012293589840344786,
+                "meanAbsByte": 6.765773195876289,
+                "diagnosticMedianMatchedLumaSsim": 0.8610173463821411,
+                "medianSignedRgbBytes": [
+                  -1.0,
+                  -2.0,
+                  -1.0
+                ],
+                "exactPixels": 349,
+                "peak": 122
+              },
+              "candidate": {
+                "pixels": 67900,
+                "ssim": 0.8595520853996277,
+                "medianReference": 0.368437260389328,
+                "medianCandidate": 0.37310588359832764,
+                "medianLumaRelativeError": 0.012671419834319403,
+                "meanAbsByte": 6.850103092783505,
+                "diagnosticMedianMatchedLumaSsim": 0.8612074851989746,
+                "medianSignedRgbBytes": [
+                  -1.0,
+                  -2.0,
+                  -2.0
+                ],
+                "exactPixels": 111,
+                "peak": 122
+              },
+              "changed": 17383,
+              "newOverOne": 1176,
+              "recovered": 132,
+              "controlOverOne": 62364,
+              "candidateOverOne": 63408,
+              "highFrequency": [
+                14.571454048156738,
+                25.24148941040039,
+                25.218469619750977
+              ]
+            }
+          }
+        },
+        {
+          "frame": 1,
+          "control": {
+            "png": "16eac749205e3a4db871f790009ad97a8511c4777f17502f8582ce8afb706963",
+            "raw": "59ea1bceff144b0b8cabb5797110dbcca7d6502562932b5e5d4e1b56701ceda8",
+            "archive": "6161e313297bd4e3f6e82d4a4555ff2f0ff1a383720b6f472fe7e8a912fbcb36",
+            "donor": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-150229-face-native-geometry-mask-sampling-d5d93e\\projected-reflection-32-step-candidate\\baseline-intel\\frames\\frame_000001.png",
+            "donorSha256": "aa0c090070e1f5295e0ee0f9fd5d8a76c5f2177033e51a14c8d61f29bff526f6",
+            "archivedControlPixelDifferences": 14
+          },
+          "candidate": {
+            "png": "26562ff911d7bb5bd02721f3ecab1e685e1116784d3d51c9d4d1778876398b37",
+            "raw": "294d3e9a0de277216261b39abfb8ab0b6e21d083ccaeca70c4173e877fc352ba",
+            "archive": "6414b2344e962c1933fa4fac8344e76fc4d5dfdd70de2021c631a53594bf13cc",
+            "donor": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-150229-face-native-geometry-mask-sampling-d5d93e\\projected-reflection-32-step-candidate\\baseline-intel\\frames\\frame_000001.png",
+            "donorSha256": "aa0c090070e1f5295e0ee0f9fd5d8a76c5f2177033e51a14c8d61f29bff526f6",
+            "archivedControlPixelDifferences": 605674
+          },
+          "metrics": {
+            "complete": {
+              "control": {
+                "pixels": 3686400,
+                "ssim": 0.8269588351249695,
+                "medianReference": 0.40663331747055054,
+                "medianCandidate": 0.4106353223323822,
+                "medianLumaRelativeError": 0.009841802650914114,
+                "meanAbsByte": 12.005484031394676,
+                "diagnosticMedianMatchedLumaSsim": 0.8276809453964233,
+                "medianSignedRgbBytes": [
+                  2.0,
+                  1.0,
+                  1.0
+                ],
+                "exactPixels": 23909,
+                "peak": 243
+              },
+              "candidate": {
+                "pixels": 3686400,
+                "ssim": 0.8273148536682129,
+                "medianReference": 0.40663331747055054,
+                "medianCandidate": 0.4106353223323822,
+                "medianLumaRelativeError": 0.009841802650914114,
+                "meanAbsByte": 11.988982928240741,
+                "diagnosticMedianMatchedLumaSsim": 0.8280311226844788,
+                "medianSignedRgbBytes": [
+                  2.0,
+                  1.0,
+                  1.0
+                ],
+                "exactPixels": 23679,
+                "peak": 243
+              },
+              "changed": 605664,
+              "newOverOne": 9462,
+              "recovered": 7164,
+              "controlOverOne": 3471551,
+              "candidateOverOne": 3473849,
+              "highFrequency": [
+                18.48886489868164,
+                26.016786575317383,
+                26.01378059387207
+              ]
+            },
+            "ceiling": {
+              "control": {
+                "pixels": 537600,
+                "ssim": 0.840497612953186,
+                "medianReference": 0.8463764786720276,
+                "medianCandidate": 0.8996588587760925,
+                "medianLumaRelativeError": 0.06295352180351879,
+                "meanAbsByte": 14.310412946428572,
+                "diagnosticMedianMatchedLumaSsim": 0.8458271622657776,
+                "medianSignedRgbBytes": [
+                  11.0,
+                  11.0,
+                  11.0
+                ],
+                "exactPixels": 10502,
+                "peak": 192
+              },
+              "candidate": {
+                "pixels": 537600,
+                "ssim": 0.8406638503074646,
+                "medianReference": 0.8463764786720276,
+                "medianCandidate": 0.8996588587760925,
+                "medianLumaRelativeError": 0.06295352180351879,
+                "meanAbsByte": 14.289478546626984,
+                "diagnosticMedianMatchedLumaSsim": 0.8459916114807129,
+                "medianSignedRgbBytes": [
+                  11.0,
+                  11.0,
+                  11.0
+                ],
+                "exactPixels": 10525,
+                "peak": 192
+              },
+              "changed": 79276,
+              "newOverOne": 139,
+              "recovered": 160,
+              "controlOverOne": 485481,
+              "candidateOverOne": 485460,
+              "highFrequency": [
+                12.721052169799805,
+                21.33091163635254,
+                21.382230758666992
+              ]
+            },
+            "leftDoor": {
+              "control": {
+                "pixels": 253500,
+                "ssim": 0.884918749332428,
+                "medianReference": 0.5621686577796936,
+                "medianCandidate": 0.5502784848213196,
+                "medianLumaRelativeError": 0.021150544047287716,
+                "meanAbsByte": 8.108557527942143,
+                "diagnosticMedianMatchedLumaSsim": 0.8830592036247253,
+                "medianSignedRgbBytes": [
+                  2.0,
+                  1.0,
+                  1.0
+                ],
+                "exactPixels": 1133,
+                "peak": 165
+              },
+              "candidate": {
+                "pixels": 253500,
+                "ssim": 0.8849697709083557,
+                "medianReference": 0.5621686577796936,
+                "medianCandidate": 0.5502784848213196,
+                "medianLumaRelativeError": 0.021150544047287716,
+                "meanAbsByte": 8.100545693622617,
+                "diagnosticMedianMatchedLumaSsim": 0.8831126689910889,
+                "medianSignedRgbBytes": [
+                  2.0,
+                  1.0,
+                  1.0
+                ],
+                "exactPixels": 1137,
+                "peak": 165
+              },
+              "changed": 8728,
+              "newOverOne": 37,
+              "recovered": 48,
+              "controlOverOne": 238308,
+              "candidateOverOne": 238297,
+              "highFrequency": [
+                11.707696914672852,
+                17.96772575378418,
+                17.96685218811035
+              ]
+            },
+            "rightWall": {
+              "control": {
+                "pixels": 128800,
+                "ssim": 0.8828598856925964,
+                "medianReference": 0.32994508743286133,
+                "medianCandidate": 0.30750200152397156,
+                "medianLumaRelativeError": 0.06802066999544762,
+                "meanAbsByte": 11.9403933747412,
+                "diagnosticMedianMatchedLumaSsim": 0.8824390769004822,
+                "medianSignedRgbBytes": [
+                  -8.0,
+                  -8.0,
+                  -7.0
+                ],
+                "exactPixels": 343,
+                "peak": 118
+              },
+              "candidate": {
+                "pixels": 128800,
+                "ssim": 0.8829115033149719,
+                "medianReference": 0.32994508743286133,
+                "medianCandidate": 0.30750200152397156,
+                "medianLumaRelativeError": 0.06802066999544762,
+                "meanAbsByte": 11.942054865424431,
+                "diagnosticMedianMatchedLumaSsim": 0.8825110793113708,
+                "medianSignedRgbBytes": [
+                  -8.0,
+                  -8.0,
+                  -7.0
+                ],
+                "exactPixels": 334,
+                "peak": 118
+              },
+              "changed": 19600,
+              "newOverOne": 274,
+              "recovered": 183,
+              "controlOverOne": 123650,
+              "candidateOverOne": 123741,
+              "highFrequency": [
+                7.028468132019043,
+                8.46325969696045,
+                8.480754852294922
+              ]
+            },
+            "centerFloor": {
+              "control": {
+                "pixels": 97200,
+                "ssim": 0.8291232585906982,
+                "medianReference": 0.29490983486175537,
+                "medianCandidate": 0.24744707345962524,
+                "medianLumaRelativeError": 0.16093990702066346,
+                "meanAbsByte": 16.09192729766804,
+                "diagnosticMedianMatchedLumaSsim": 0.8155066967010498,
+                "medianSignedRgbBytes": [
+                  -10.0,
+                  -14.0,
+                  -9.0
+                ],
+                "exactPixels": 65,
+                "peak": 182
+              },
+              "candidate": {
+                "pixels": 97200,
+                "ssim": 0.8309244513511658,
+                "medianReference": 0.29490983486175537,
+                "medianCandidate": 0.247658833861351,
+                "medianLumaRelativeError": 0.16022185568193806,
+                "meanAbsByte": 16.054811385459534,
+                "diagnosticMedianMatchedLumaSsim": 0.817897617816925,
+                "medianSignedRgbBytes": [
+                  -10.0,
+                  -14.0,
+                  -9.0
+                ],
+                "exactPixels": 40,
+                "peak": 182
+              },
+              "changed": 20960,
+              "newOverOne": 173,
+              "recovered": 126,
+              "controlOverOne": 96260,
+              "candidateOverOne": 96307,
+              "highFrequency": [
+                11.518051147460938,
+                17.26911735534668,
+                17.244089126586914
+              ]
+            },
+            "cyanRing": {
+              "control": {
+                "pixels": 27600,
+                "ssim": 0.7541956901550293,
+                "medianReference": 0.298764705657959,
+                "medianCandidate": 0.27459806203842163,
+                "medianLumaRelativeError": 0.08088854928936805,
+                "meanAbsByte": 15.298671497584541,
+                "diagnosticMedianMatchedLumaSsim": 0.7396460771560669,
+                "medianSignedRgbBytes": [
+                  -7.0,
+                  -6.0,
+                  -5.0
+                ],
+                "exactPixels": 2,
+                "peak": 94
+              },
+              "candidate": {
+                "pixels": 27600,
+                "ssim": 0.7543325424194336,
+                "medianReference": 0.298764705657959,
+                "medianCandidate": 0.27444708347320557,
+                "medianLumaRelativeError": 0.08139389199671218,
+                "meanAbsByte": 15.281413043478262,
+                "diagnosticMedianMatchedLumaSsim": 0.7396875023841858,
+                "medianSignedRgbBytes": [
+                  -7.0,
+                  -6.0,
+                  -5.0
+                ],
+                "exactPixels": 2,
+                "peak": 94
+              },
+              "changed": 5147,
+              "newOverOne": 14,
+              "recovered": 13,
+              "controlOverOne": 27472,
+              "candidateOverOne": 27473,
+              "highFrequency": [
+                2.72178053855896,
+                7.531588077545166,
+                7.529598712921143
+              ]
+            },
+            "leftFloor": {
+              "control": {
+                "pixels": 67900,
+                "ssim": 0.8593950271606445,
+                "medianReference": 0.368437260389328,
+                "medianCandidate": 0.37310588359832764,
+                "medianLumaRelativeError": 0.012671419834319403,
+                "meanAbsByte": 6.764123711340206,
+                "diagnosticMedianMatchedLumaSsim": 0.861084520816803,
+                "medianSignedRgbBytes": [
+                  -1.0,
+                  -2.0,
+                  -1.0
+                ],
+                "exactPixels": 352,
+                "peak": 122
+              },
+              "candidate": {
+                "pixels": 67900,
+                "ssim": 0.859562337398529,
+                "medianReference": 0.368437260389328,
+                "medianCandidate": 0.37310588359832764,
+                "medianLumaRelativeError": 0.012671419834319403,
+                "meanAbsByte": 6.8480166912125675,
+                "diagnosticMedianMatchedLumaSsim": 0.8612180352210999,
+                "medianSignedRgbBytes": [
+                  -1.0,
+                  -2.0,
+                  -2.0
+                ],
+                "exactPixels": 111,
+                "peak": 122
+              },
+              "changed": 17430,
+              "newOverOne": 1178,
+              "recovered": 132,
+              "controlOverOne": 62354,
+              "candidateOverOne": 63400,
+              "highFrequency": [
+                14.571454048156738,
+                25.23765754699707,
+                25.217361450195312
+              ]
+            }
+          }
+        }
+      ]
+    }
+  },
+  "retainedShaderCatalogExact": true,
+  "retainedHostSha256": "1a30d925a674ddb1d95876cb80181106a0217e12a7228a35b5980b134954cb69",
+  "regionalGates": {
+    "ssim": 0.95,
+    "lumaRelative": 0.1,
+    "newOverOne": 0
+  },
+  "frozenRegression": "Production source, host and all 895 retained shaders restored exactly. Candidate rejected if any gate fails.",
+  "rectangles": {
+    "complete": [
+      0,
+      0,
+      2560,
+      1440
+    ],
+    "ceiling": [
+      0,
+      0,
+      2560,
+      210
+    ],
+    "leftDoor": [
+      70,
+      300,
+      720,
+      690
+    ],
+    "rightWall": [
+      1920,
+      390,
+      2480,
+      620
+    ],
+    "centerFloor": [
+      1010,
+      990,
+      1550,
+      1170
+    ],
+    "cyanRing": [
+      1040,
+      1060,
+      1270,
+      1180
+    ],
+    "leftFloor": [
+      60,
+      950,
+      545,
+      1090
+    ]
+  },
+  "sourceFiles": {
+    "shaders/reflection_spatial_filter.comp": "7b363f9e326a7afff4d1737c869839208b52cf9d4debbf18a0fbaedb1108b30b",
+    "shaders/projected_reflection_trace.hlsl": "5d0c8281a576eb8a9ef659cccaafacee6b846ecc0605e8e0c011b2495055b259",
+    "src/render/ReflectionSpatialFilter.cpp": "ff05ee19afd20292b20c05b0c237c8d69585be15ab9f4a34346741a64328047c",
+    "src/render/ProjectedScreenReflectionGpu.cpp": "4069275ca48efa21ce379ae77906f006477ce81187ac1802cd4123929b6de6c0"
+  },
+  "resourceJobs": [
+    {
+      "id": 2223,
+      "owner": "01a1d0a9-829a-7c11-a7a8-017e743887d9",
+      "task": "nr-confidence-lod-build",
+      "kind": "build",
+      "priority": 1,
+      "estimate_seconds": 20.0,
+      "pid": 38504,
+      "state": "interrupted",
+      "submitted": 1795069884.8596232,
+      "started": null,
+      "ended": 1795081265.8313665,
+      "wait_seconds": null,
+      "run_seconds": null,
+      "lock_attempts": 0,
+      "exit_code": null,
+      "reason": "Queue process exited",
+      "output": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261119-143002-nr-reflection-confidence-lod-1e8769",
+      "log_path": null
+    },
+    {
+      "id": 2225,
+      "owner": "01a1d0a9-829a-7c11-a7a8-017e743887d9",
+      "task": "nr-confidence-lod-build-resume",
+      "kind": "build",
+      "priority": 1,
+      "estimate_seconds": 20.0,
+      "pid": 5060,
+      "state": "failed",
+      "submitted": 1795081293.761857,
+      "started": 1795081295.8043778,
+      "ended": 1795081300.3513687,
+      "wait_seconds": 2.0470000000000255,
+      "run_seconds": 4.5,
+      "lock_attempts": 3,
+      "exit_code": 1,
+      "reason": null,
+      "output": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261119-143002-nr-reflection-confidence-lod-1e8769",
+      "log_path": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261119-143002-nr-reflection-confidence-lod-1e8769\\process.log"
+    },
+    {
+      "id": 2227,
+      "owner": "01a1d0a9-829a-7c11-a7a8-017e743887d9",
+      "task": "nr-confidence-lod-exact-control-build",
+      "kind": "build",
+      "priority": 1,
+      "estimate_seconds": 20.0,
+      "pid": 19988,
+      "state": "succeeded",
+      "submitted": 1795081344.0151134,
+      "started": 1795081349.173466,
+      "ended": 1795081351.5780592,
+      "wait_seconds": 5.125,
+      "run_seconds": 2.375,
+      "lock_attempts": 6,
+      "exit_code": 0,
+      "reason": null,
+      "output": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261119-143002-nr-reflection-confidence-lod-1e8769",
+      "log_path": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261119-143002-nr-reflection-confidence-lod-1e8769\\process.log"
+    },
+    {
+      "id": 2228,
+      "owner": "01a1d0a9-829a-7c11-a7a8-017e743887d9",
+      "task": "nr-confidence-lod-dual-device-pair",
+      "kind": "gpu",
+      "priority": 1,
+      "estimate_seconds": 180.0,
+      "pid": 20912,
+      "state": "succeeded",
+      "submitted": 1795081361.1779573,
+      "started": 1795081361.249959,
+      "ended": 1795081954.0802357,
+      "wait_seconds": 0.047000000000025466,
+      "run_seconds": 592.8130000000001,
+      "lock_attempts": 1,
+      "exit_code": 0,
+      "reason": null,
+      "output": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261119-143002-nr-reflection-confidence-lod-1e8769",
+      "log_path": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261119-143002-nr-reflection-confidence-lod-1e8769\\process.log"
+    }
+  ],
+  "evidenceBudget": {
+    "allowed": true,
+    "reasons": [],
+    "totalBytes": 1024208138240,
+    "freeBytes": 224083845120,
+    "usedBytes": 7295614,
+    "plannedBytes": 5000000,
+    "quotaBytes": 2147483648,
+    "reserveBytes": 214748364800,
+    "diagnostic": false,
+    "managedPool": {
+      "allowed": true,
+      "reasons": [],
+      "reservedBytes": 15274071087,
+      "projectedBytes": 15274071087,
+      "limitBytes": 17179869184
+    }
+  },
+  "crops": "target-crops.npz",
+  "frozen": {
+    "existingEvidence": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\docs\\acceptance\\nr\\evidence\\2026-11-16\\projected-history-layer-frozen\\qualification.json",
+    "sha256": "7b5da648388e6bf34b35702d9088e568affb33e3e8b1f0e76595853d88f1fba8",
+    "sameDriverExact": true,
+    "originalFrozenExact": false,
+    "candidateAdopted": false,
+    "productionFingerprintRestored": true,
+    "policy": "Candidate rejected before integration. Original cross-driver gate stays open."
+  },
+  "validation": {
+    "archiveSha256": "6b895fc99efc9d48bb3d0aeef11fbedb7df9426749a715c262775af15fd8b521",
+    "files": {
+      "experiment.py": "97c0b2c75cd5008da984c6334551e10bee9f1a575c5f20031eac7709dd0e2d62",
+      "archive.py": "94516013878f642fd7d1bfc4fdf64f65f3a295bd3cc65f0d5c6dac513c8e4bd4",
+      "verify.py": "2096509b1d4ad6309d8f385e950b1b0f5065d2303fc06e91510d0ae9d7d91666",
+      "score.py": "b5a4b382e37be5f398b2910c083954e3aef4b8f1824ab9c3d33addadecb06199",
+      "control.comp": "7b363f9e326a7afff4d1737c869839208b52cf9d4debbf18a0fbaedb1108b30b",
+      "candidate.comp": "4b5ad61775405fd52feea0b2fc3a27fe7a5c3695d9d6fd91f2250ae010c4593b",
+      "candidate.diff": "3579c16610685a871469f88e7d8ed66f3e5c3a79e96454f6af294dd53a685720",
+      "build.json": "5356858049cf0d4122875f47af0bec17c6ff8f10eed88a6fb61e826941314aae",
+      "target-crops.npz": "17cf8d49c72f3ee91a15560963fc1b6f912c8a7287ad3bae30d4ad5a67926237",
+      "nvidia-control/command.json": "92e460cfe79864dc0bfa5ed93e3642d13c1aab88ffc3ed72961d42b716af5ad9",
+      "nvidia-control/player.log": "06c06c821fc99f94d05493fd744bf768b286b50a6aeb95dcbc0cda9db864d574",
+      "nvidia-control/frames/capture_manifest.json": "5adff19f1d2dede279e5da0175876202c88fecf868b937ffbd68f7ce4102fb89",
+      "nvidia-control/frames/gpu_capabilities.json": "fcc84c76d84bace150db35ec07631ab83809bdd1c365b6d96cb8afe8e354190a",
+      "nvidia-control/runtime-errors.json": "b628fab7aa64c96fe7cb4db946b80b9432f94ea5b4aa5826b852975042912328",
+      "nvidia-candidate/command.json": "b13436a88bc959e143a03d4cb23817cd1f89cb9e88df4fa0ff96ffaddb113946",
+      "nvidia-candidate/player.log": "85ed3c929ddaf260d8ec1435d6425a72cf5d85cee69a6feb891b1ded23b6b6e5",
+      "nvidia-candidate/frames/capture_manifest.json": "28b57b3cd45a90ac1b1b997236c91dec112dd9bb5f0fccd907d6f01e9ceec064",
+      "nvidia-candidate/frames/gpu_capabilities.json": "fcc84c76d84bace150db35ec07631ab83809bdd1c365b6d96cb8afe8e354190a",
+      "nvidia-candidate/runtime-errors.json": "b628fab7aa64c96fe7cb4db946b80b9432f94ea5b4aa5826b852975042912328",
+      "intel-control/command.json": "80840bcd05c35a96940910053faf9619b278d050ade5caf5d4a106476e3766a1",
+      "intel-control/player.log": "2e9e306b03acb16a40779b4a23c0cf2feab39fce1bfc7b8135872974c35806d1",
+      "intel-control/frames/capture_manifest.json": "63d5af9f89bdfa5bdadbe450225172a2a8b1f4459c16067ee8a0762fa08b4d04",
+      "intel-control/frames/gpu_capabilities.json": "052830ed89bea19f0e9a17839082b9f979cfab2b17908f9ee83df5f0e0bcd85f",
+      "intel-control/runtime-errors.json": "b628fab7aa64c96fe7cb4db946b80b9432f94ea5b4aa5826b852975042912328",
+      "intel-candidate/command.json": "13e375f4f30c955d805c5e1a327b76b7dfba4a41530bfbda9b02c7f023461a66",
+      "intel-candidate/player.log": "bbcf310bf3d3fe16d577ab4ce815bc62c603fa4fab5dbcc2d41121de205c2bb8",
+      "intel-candidate/frames/capture_manifest.json": "07c490acc93f25a659546633ab154b7adce3a8de77f1bcd5ec5d403abf72f53d",
+      "intel-candidate/frames/gpu_capabilities.json": "052830ed89bea19f0e9a17839082b9f979cfab2b17908f9ee83df5f0e0bcd85f",
+      "intel-candidate/runtime-errors.json": "b628fab7aa64c96fe7cb4db946b80b9432f94ea5b4aa5826b852975042912328"
+    }
+  }
+}

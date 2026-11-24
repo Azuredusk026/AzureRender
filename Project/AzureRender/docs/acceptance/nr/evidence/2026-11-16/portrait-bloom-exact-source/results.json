@@ -1,0 +1,551 @@
+{
+  "status": "measured source; native same-camera output and adoption pending",
+  "productionBloomChanged": false,
+  "affectedEyePoint": [
+    667,
+    808
+  ],
+  "comparison": {
+    "status": "qualified-same-camera-source",
+    "reference": "same-camera linear fixture with bloom disabled",
+    "fullNativeReference": "different camera and pose",
+    "devices": {
+      "nvidia": {
+        "nativeBloomAtEye": [
+          0.003312101121991873,
+          0.004889957141131163,
+          0.05232337862253189
+        ],
+        "currentBloomAtEye": [
+          0.0,
+          0.0,
+          0.14601962268352509
+        ],
+        "priorApproximateBloomAtEye": [
+          0.003532721661031246,
+          0.004901127424091101,
+          0.052457425743341446
+        ],
+        "point": [
+          667,
+          808
+        ],
+        "losslessBase": {
+          "hair-crown": {
+            "overOne": 0,
+            "peak": 1,
+            "worstPoint": [
+              711,
+              400
+            ]
+          },
+          "hair-fringe": {
+            "overOne": 0,
+            "peak": 1,
+            "worstPoint": [
+              705,
+              570
+            ]
+          },
+          "face-cheek": {
+            "overOne": 0,
+            "peak": 1,
+            "worstPoint": [
+              715,
+              852
+            ]
+          },
+          "face-chin": {
+            "overOne": 0,
+            "peak": 1,
+            "worstPoint": [
+              777,
+              960
+            ]
+          },
+          "eye-left": {
+            "overOne": 0,
+            "peak": 1,
+            "worstPoint": [
+              625,
+              784
+            ]
+          }
+        },
+        "nativeFilter": {
+          "hair-crown": {
+            "overOne": 5413,
+            "peak": 7,
+            "worstPoint": [
+              809,
+              400
+            ]
+          },
+          "hair-fringe": {
+            "overOne": 552,
+            "peak": 2,
+            "worstPoint": [
+              743,
+              570
+            ]
+          },
+          "face-cheek": {
+            "overOne": 0,
+            "peak": 1,
+            "worstPoint": [
+              705,
+              852
+            ]
+          },
+          "face-chin": {
+            "overOne": 0,
+            "peak": 1,
+            "worstPoint": [
+              773,
+              960
+            ]
+          },
+          "eye-left": {
+            "overOne": 1588,
+            "peak": 52,
+            "worstPoint": [
+              666,
+              810
+            ]
+          }
+        },
+        "currentPlayer": {
+          "hair-crown": {
+            "overOne": 0,
+            "peak": 1,
+            "worstPoint": [
+              711,
+              400
+            ]
+          },
+          "hair-fringe": {
+            "overOne": 0,
+            "peak": 1,
+            "worstPoint": [
+              705,
+              570
+            ]
+          },
+          "face-cheek": {
+            "overOne": 0,
+            "peak": 1,
+            "worstPoint": [
+              715,
+              852
+            ]
+          },
+          "face-chin": {
+            "overOne": 0,
+            "peak": 1,
+            "worstPoint": [
+              773,
+              960
+            ]
+          },
+          "eye-left": {
+            "overOne": 418,
+            "peak": 90,
+            "worstPoint": [
+              667,
+              808
+            ]
+          }
+        },
+        "localAnalytical": {
+          "hair-crown": {
+            "overOne": 0,
+            "peak": 1,
+            "worstPoint": [
+              711,
+              400
+            ]
+          },
+          "hair-fringe": {
+            "overOne": 0,
+            "peak": 1,
+            "worstPoint": [
+              705,
+              570
+            ]
+          },
+          "face-cheek": {
+            "overOne": 0,
+            "peak": 1,
+            "worstPoint": [
+              715,
+              852
+            ]
+          },
+          "face-chin": {
+            "overOne": 0,
+            "peak": 1,
+            "worstPoint": [
+              777,
+              960
+            ]
+          },
+          "eye-left": {
+            "overOne": 420,
+            "peak": 90,
+            "worstPoint": [
+              667,
+              808
+            ]
+          }
+        },
+        "currentToLocalModel": {
+          "hair-crown": {
+            "overOne": 0,
+            "peak": 1,
+            "worstPoint": [
+              713,
+              400
+            ]
+          },
+          "hair-fringe": {
+            "overOne": 0,
+            "peak": 1,
+            "worstPoint": [
+              713,
+              570
+            ]
+          },
+          "face-cheek": {
+            "overOne": 0,
+            "peak": 1,
+            "worstPoint": [
+              722,
+              852
+            ]
+          },
+          "face-chin": {
+            "overOne": 0,
+            "peak": 1,
+            "worstPoint": [
+              773,
+              960
+            ]
+          },
+          "eye-left": {
+            "overOne": 0,
+            "peak": 1,
+            "worstPoint": [
+              625,
+              784
+            ]
+          }
+        }
+      },
+      "intel": {
+        "nativeBloomAtEye": [
+          0.003312101121991873,
+          0.004889957141131163,
+          0.05232337862253189
+        ],
+        "currentBloomAtEye": [
+          0.0,
+          0.0,
+          0.14601962268352509
+        ],
+        "priorApproximateBloomAtEye": [
+          0.0034964170772582293,
+          0.004848067183047533,
+          0.05232337862253189
+        ],
+        "point": [
+          667,
+          808
+        ],
+        "losslessBase": {
+          "hair-crown": {
+            "overOne": 22,
+            "peak": 5,
+            "worstPoint": [
+              780,
+              549
+            ]
+          },
+          "hair-fringe": {
+            "overOne": 16,
+            "peak": 4,
+            "worstPoint": [
+              784,
+              598
+            ]
+          },
+          "face-cheek": {
+            "overOne": 0,
+            "peak": 1,
+            "worstPoint": [
+              710,
+              852
+            ]
+          },
+          "face-chin": {
+            "overOne": 0,
+            "peak": 1,
+            "worstPoint": [
+              777,
+              960
+            ]
+          },
+          "eye-left": {
+            "overOne": 6,
+            "peak": 13,
+            "worstPoint": [
+              677,
+              813
+            ]
+          }
+        },
+        "nativeFilter": {
+          "hair-crown": {
+            "overOne": 5400,
+            "peak": 7,
+            "worstPoint": [
+              809,
+              400
+            ]
+          },
+          "hair-fringe": {
+            "overOne": 569,
+            "peak": 3,
+            "worstPoint": [
+              784,
+              598
+            ]
+          },
+          "face-cheek": {
+            "overOne": 0,
+            "peak": 1,
+            "worstPoint": [
+              705,
+              852
+            ]
+          },
+          "face-chin": {
+            "overOne": 0,
+            "peak": 1,
+            "worstPoint": [
+              772,
+              960
+            ]
+          },
+          "eye-left": {
+            "overOne": 1600,
+            "peak": 52,
+            "worstPoint": [
+              666,
+              810
+            ]
+          }
+        },
+        "currentPlayer": {
+          "hair-crown": {
+            "overOne": 22,
+            "peak": 5,
+            "worstPoint": [
+              780,
+              549
+            ]
+          },
+          "hair-fringe": {
+            "overOne": 17,
+            "peak": 4,
+            "worstPoint": [
+              784,
+              598
+            ]
+          },
+          "face-cheek": {
+            "overOne": 0,
+            "peak": 1,
+            "worstPoint": [
+              705,
+              852
+            ]
+          },
+          "face-chin": {
+            "overOne": 0,
+            "peak": 1,
+            "worstPoint": [
+              777,
+              960
+            ]
+          },
+          "eye-left": {
+            "overOne": 415,
+            "peak": 90,
+            "worstPoint": [
+              667,
+              808
+            ]
+          }
+        },
+        "localAnalytical": {
+          "hair-crown": {
+            "overOne": 22,
+            "peak": 5,
+            "worstPoint": [
+              780,
+              549
+            ]
+          },
+          "hair-fringe": {
+            "overOne": 16,
+            "peak": 4,
+            "worstPoint": [
+              784,
+              598
+            ]
+          },
+          "face-cheek": {
+            "overOne": 0,
+            "peak": 1,
+            "worstPoint": [
+              710,
+              852
+            ]
+          },
+          "face-chin": {
+            "overOne": 0,
+            "peak": 1,
+            "worstPoint": [
+              777,
+              960
+            ]
+          },
+          "eye-left": {
+            "overOne": 417,
+            "peak": 90,
+            "worstPoint": [
+              667,
+              808
+            ]
+          }
+        },
+        "currentToLocalModel": {
+          "hair-crown": {
+            "overOne": 0,
+            "peak": 1,
+            "worstPoint": [
+              712,
+              400
+            ]
+          },
+          "hair-fringe": {
+            "overOne": 0,
+            "peak": 1,
+            "worstPoint": [
+              703,
+              570
+            ]
+          },
+          "face-cheek": {
+            "overOne": 0,
+            "peak": 1,
+            "worstPoint": [
+              705,
+              852
+            ]
+          },
+          "face-chin": {
+            "overOne": 0,
+            "peak": 1,
+            "worstPoint": [
+              799,
+              960
+            ]
+          },
+          "eye-left": {
+            "overOne": 0,
+            "peak": 1,
+            "worstPoint": [
+              625,
+              784
+            ]
+          }
+        }
+      }
+    }
+  },
+  "probe": {
+    "status": "qualified",
+    "shaders": {
+      "high": "8501d1bffbfc4f5b378966dd80eb51103584899d3c980f92c42eab90e05a98c0",
+      "low": "f410c8db665bf9f165b87eb05cf2cedca3805ce3c7fd756f482fa4c4afcb6c03"
+    },
+    "devices": {
+      "nvidia": {
+        "high": "1694e453368e1ba064c6e83aa1d13a61faad00b5b53bf2c824e9e38b9e5d13a6",
+        "low": "c543af8cf74170ea70d7b0e5a7b363fa3506579645403278bd8d0b08396bce80",
+        "hdrSha256": "36741f53e2adb2a7ab2c1014170154e7a974b499b05929a66a5682c501d73bc0",
+        "oldProbeOverOne": 0,
+        "oldProbeMax": 1,
+        "rawPeak": [
+          12.890625,
+          10.171875,
+          8.375
+        ],
+        "irisPoint": [
+          0.058258056640625,
+          0.006343841552734375,
+          0.006671905517578125
+        ]
+      },
+      "intel": {
+        "high": "59b0d478953ddf062055a163533b538346e2cac6d3738f20c82c5284b15dc62e",
+        "low": "ec783b42c5852f2cf7156fe4939b0c6150ff2170991ced52fe726a073cf42e0a",
+        "hdrSha256": "e2ee196e0dae9d50788b9970ff880010d553ff2c9cdd8679e30aade987aa4d41",
+        "oldProbeOverOne": 0,
+        "oldProbeMax": 1,
+        "rawPeak": [
+          12.953125,
+          10.2421875,
+          8.4140625
+        ],
+        "irisPoint": [
+          0.05828857421875,
+          0.0063323974609375,
+          0.0066375732421875
+        ]
+      }
+    },
+    "player": "a81b21b464231741b3331ae4839fb3f716e0f0b69137c33490e6dd7c129851be",
+    "shaderSetWithoutProbe": "7ac833e9de81bef3759ea40e8f8ab472650213b6d284aab9ca17b3a4aeb841a3",
+    "retainedCaptures": {
+      "nvidia": {
+        "source": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-130854-portrait-bloom-float-probe-f681e6\\nvidia-high\\frames\\frame_000000.png",
+        "receipt": "35820ff65f967433e74cde43f98e120a7f38af37a4b69a4b6179585e2b6c36f8",
+        "sha256": "1694e453368e1ba064c6e83aa1d13a61faad00b5b53bf2c824e9e38b9e5d13a6",
+        "program": "8501d1bffbfc4f5b378966dd80eb51103584899d3c980f92c42eab90e05a98c0"
+      },
+      "intel": {
+        "source": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-130854-portrait-bloom-float-probe-f681e6\\intel-high\\frames\\frame_000000.png",
+        "receipt": "35820ff65f967433e74cde43f98e120a7f38af37a4b69a4b6179585e2b6c36f8",
+        "sha256": "59b0d478953ddf062055a163533b538346e2cac6d3738f20c82c5284b15dc62e",
+        "program": "8501d1bffbfc4f5b378966dd80eb51103584899d3c980f92c42eab90e05a98c0"
+      }
+    }
+  },
+  "archive": {
+    "sha256": "153b4480700ce29b62934a830b09a657e877197b1305f7dc4c865b4cbe444bf6",
+    "members": {
+      "bloom-exact-comparison.json": "ba310c77d2a5830314c0f68cdff4c5ce6772f3b828fd590e645383b89062265a",
+      "exact-probe-receipts.json": "821c575775a837e93b9e2ba16dab59ca8b08a880ceec0614525d2c158f51f804",
+      "compare-exact.py": "e756a339026a971be9738aafcc5246a388018b85c5deceb18c59d84cd83748a3",
+      "retry-expired-portrait-probes.py": "d247150f01c5eb2ad5a9a2ded40fdc2d4290c9654fc59e8042721db9e78e3a49",
+      "float-high.frag": "ada09ed79be60f620b99248466a10b5c5908bf91a33d7013ae553e521cc8ef33",
+      "float-low.frag": "8581e1211930fe051eea13bb585f1c09bb3790478a225806ce8f8e54a69c6d9b",
+      "archive-exact-portrait-bloom.py": "26989bde19bd315a37617c632e3f2474d6ef4b028b03676b7c98b57b597cc0d0",
+      "source/portrait-results.json": "1aa2375ed54707c74456439f95f30e5762cee8e5605595da2854f3f074bb324f",
+      "source/native-math.py": "614adffb879fff6215ef51aeee81f07a4df0c883b5a41859425ab14d88c178a3",
+      "source/native-footprint-results.json": "b17f7803fc0356c1ad9c6987da98b26b0d4c039f4ec923222745fde8d1db6c9d"
+    }
+  }
+}

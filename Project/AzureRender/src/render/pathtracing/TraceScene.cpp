@@ -29,6 +29,10 @@ std::array<std::uint32_t,4> appendTexture(std::vector<std::uint32_t>& pixels,con
     for(std::size_t i=0;i<static_cast<std::size_t>(width)*height;++i)pixels.push_back(static_cast<unsigned>(rgba[i*4])|(static_cast<unsigned>(rgba[i*4+1])<<8)|(static_cast<unsigned>(rgba[i*4+2])<<16)|(static_cast<unsigned>(rgba[i*4+3])<<24));
     return {start,width,height,srgb?1U:0U};
 }
+std::array<std::uint32_t,4> appendNormalTexture(std::vector<std::uint32_t>& pixels,const AssetMaterial& material){
+    if(!material.normalTexturePresent)return {};
+    return appendTexture(pixels,material.normalPixels,material.normalWidth,material.normalHeight,false);
+}
 std::vector<float> environmentDistribution(unsigned width,unsigned height,const std::vector<std::uint16_t>& rgba,unsigned columns,unsigned rows){
  if(!width||!height||!columns||!rows||rgba.size()!=static_cast<std::size_t>(width)*height*4)throw std::invalid_argument("Invalid environment distribution");
  const auto half=[](std::uint16_t h){const unsigned e=(h>>10)&31,m=h&1023;return (h&32768?-1.F:1.F)*(e?std::ldexp(1.F+static_cast<float>(m)/1024,static_cast<int>(e)-15):std::ldexp(static_cast<float>(m),-24));};

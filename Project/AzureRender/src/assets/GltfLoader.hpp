@@ -82,6 +82,7 @@ enum AssetMaterialFeature : std::uint32_t {
     MaterialFeatureR11G11B10Output = 1U << 26U,
     MaterialFeatureMirroredCoarseUv = 1U << 27U,
     MaterialFeatureEllipseMajorCoverage = 1U << 28U,
+    MaterialFeatureHairReferenceRasterGrid = 1U << 29U,
     MaterialFeatureShadowCoverageMask = MaterialFeatureGeometryShadow|MaterialFeatureSqrtAlphaShadow,
 };
 
@@ -96,7 +97,12 @@ struct AssetFaceSdfProfile {
     static constexpr std::uint32_t kSchemaVersion = 1;
 
     bool present = false;
+    bool authoredMaskMip = false;
     std::uint32_t schemaVersion = kSchemaVersion;
+    struct Highlight {
+        bool present=false;
+        std::array<float,2> viewOffset{};
+    } highlight;
     std::array<float,9> headBasis{1,0,0,0,1,0,0,0,1};
     std::vector<std::uint8_t> pixels;
     std::uint32_t width = 0;
@@ -126,6 +132,10 @@ struct AssetMaterial {
         bool present=false,write=false;
         Compare compare=Compare::Less;
     } blendDepth;
+    enum class MultiplyReceiver : std::uint8_t { Unrestricted, Eye, Face };
+    MultiplyReceiver multiplyReceiver = MultiplyReceiver::Unrestricted;
+    bool multiplyDepthPrepass = false;
+    float multiplyCoverageScale = 1.F;
     azurerender::UnlitTextureLayers unlitTextureLayers;
     enum class CharacterVisibility : std::uint8_t { SceneVisibility,MainLightShadow,ObjectShadow,One };
     std::array<unsigned,9> authoredMipLevels{};
@@ -147,6 +157,13 @@ struct AssetMaterial {
     bool materialProfileExplicit = false;
     float radianceScale = 1.0F;
     azurerender::MaterialDisplayTransform displayTransform=azurerender::MaterialDisplayTransform::Scene;
+    struct ColorAdjustment {
+        bool present=false;
+        float brightness=1.F,contrast=1.F,saturation=1.F;
+        std::array<float,4> tint{1.F,1.F,1.F,0.F};
+        std::array<float,3> rimColor{};
+        float rimIntensity=0.F,rimWidth=0.F;
+    } colorAdjustment;
     azurerender::MaterialEnvironmentLighting environmentLighting;
     azurerender::MaterialMainLightShadow mainLightShadow=azurerender::MaterialMainLightShadow::Scene;
     using CoverageTexture=azurerender::MaterialCoverageTexture;
@@ -157,6 +174,8 @@ struct AssetMaterial {
     std::vector<std::uint8_t> baseColorPixels;
     std::uint32_t baseColorWidth = 0;
     std::uint32_t baseColorHeight = 0;
+    // Explicit provenance keeps authored neutral maps distinct from fallback pixels.
+    bool normalTexturePresent = true;
     std::vector<std::uint8_t> normalPixels;
     std::uint32_t normalWidth = 0;
     std::uint32_t normalHeight = 0;
@@ -237,6 +256,7 @@ struct AssetMaterial {
     struct EyeSurface {
         bool present=false;
         bool nprLighting=false;
+        AssetMaterialFrame mainRampFrame;
         float shadowScale=1;
         std::array<float,3> ambientColor{1,1,1},mainColor{1,1,1};
         float parallaxScale=0,matcapNormalScale=0,alphaPremultiply=0,matcapShadowFloor=0;
@@ -271,6 +291,8 @@ struct AssetMaterial {
             bool present=false;
             float scale=0;
             std::array<float,3> color{1,1,1};
+            bool faceMask=false;
+            float geometryScale=1;
         } viewTint;
         struct MainRamp {
             bool present=false;
@@ -279,9 +301,11 @@ struct AssetMaterial {
         using CharacterVisibility=AssetMaterial::CharacterVisibility;
         CharacterVisibility characterVisibility=CharacterVisibility::SceneVisibility;
         float localDiffuseFloorScale=1;
+        bool localDiffuseIndirectNormal=false;
         using RampComposition=azurerender::NprRampComposition;
         RampComposition rampComposition=RampComposition::MaskVisibility;
         float shadowSaturation=1;
+        bool mainBrightnessSaturation=false;
     } nprDiffuse;
     struct SpecularInput {
         enum class Source : std::uint8_t { EmissiveAlpha, MetallicRoughnessAlpha };
@@ -326,6 +350,15 @@ inline void validateProjectedHairPrimaryTextureFootprint(const AssetMaterial& ma
         if (!usesLinearPointMipSampling(material.textureSettings[slot]))
             throw std::invalid_argument("projectedRamp.primaryTextureFootprint requires linear filtering, nearest mip and anisotropy one");
     }
+}
+
+inline void validateProjectedHairReferenceRasterGrid(const AssetMaterial& material) {
+    if ((material.materialFeatures & MaterialFeatureHairReferenceRasterGrid) == 0) return;
+    constexpr auto required = MaterialFeatureHairAnisotropy | MaterialFeatureHairProjectedRamp | MaterialFeatureMirroredCoarseUv;
+    if (!material.projectedHairRamp.present || material.materialClass != AssetMaterialClass::Hair
+        || material.materialProfileVersion != 2 || (material.materialFeatures & required) != required
+        || material.alphaMode == AssetAlphaMode::Blend)
+        throw std::invalid_argument("projectedRamp.referenceRasterGrid requires version two hair with mirrored-coarse-uv and opaque or mask alpha");
 }
 
 inline void validateHairPointMipReferenceNormal(const AssetMaterial& material) {

@@ -1,0 +1,295 @@
+{
+  "status": "depth-and-culling-control",
+  "overallStatus": "failed-user-review",
+  "geometry": {
+    "783": {
+      "vertexStride": 132,
+      "indexStride": 2,
+      "indices": 17037,
+      "baseVertex": 0,
+      "signature": [
+        {
+          "name": "SV_Position",
+          "components": 4,
+          "type": 0
+        },
+        {
+          "name": "TEXCOORD0",
+          "components": 2,
+          "type": 0
+        },
+        {
+          "name": "TEXCOORD1",
+          "components": 3,
+          "type": 0
+        },
+        {
+          "name": "TEXCOORD2",
+          "components": 3,
+          "type": 0
+        },
+        {
+          "name": "TEXCOORD3",
+          "components": 4,
+          "type": 0
+        },
+        {
+          "name": "TEXCOORD4",
+          "components": 3,
+          "type": 0
+        },
+        {
+          "name": "TEXCOORD5",
+          "components": 3,
+          "type": 0
+        },
+        {
+          "name": "TEXCOORD6",
+          "components": 3,
+          "type": 0
+        },
+        {
+          "name": "TEXCOORD7",
+          "components": 4,
+          "type": 0
+        },
+        {
+          "name": "TEXCOORD8",
+          "components": 3,
+          "type": 0
+        },
+        {
+          "name": "TEXCOORD9",
+          "components": 1,
+          "type": 4
+        }
+      ],
+      "vertexSha256": "fef0374bebc7e0848af9e97c441a339669847c55aa4a227d9a36c77c34fe9a82",
+      "indexSha256": "507fcdc6d78e70f8f5a2dbbaf54190f20596a6236027f7a8f7cf2a940c6b5742",
+      "pixelShaderSha256": "08d1d1a9d4da95d1212bfa1c076c801dbf24cee45964a03e63f4de92f81f117a"
+    },
+    "804": {
+      "vertexStride": 116,
+      "indexStride": 2,
+      "indices": 8718,
+      "baseVertex": 0,
+      "signature": [
+        {
+          "name": "SV_Position",
+          "components": 4,
+          "type": 0
+        },
+        {
+          "name": "TEXCOORD0",
+          "components": 2,
+          "type": 0
+        },
+        {
+          "name": "TEXCOORD1",
+          "components": 3,
+          "type": 0
+        },
+        {
+          "name": "TEXCOORD2",
+          "components": 3,
+          "type": 0
+        },
+        {
+          "name": "TEXCOORD3",
+          "components": 4,
+          "type": 0
+        },
+        {
+          "name": "TEXCOORD4",
+          "components": 3,
+          "type": 0
+        },
+        {
+          "name": "TEXCOORD5",
+          "components": 3,
+          "type": 0
+        },
+        {
+          "name": "TEXCOORD6",
+          "components": 3,
+          "type": 0
+        },
+        {
+          "name": "TEXCOORD7",
+          "components": 3,
+          "type": 0
+        },
+        {
+          "name": "TEXCOORD8",
+          "components": 1,
+          "type": 4
+        }
+      ],
+      "vertexSha256": "1e248bf04bdabf5247c51529659c4daf4321124f47fa52129a37f0f2d5f53310",
+      "indexSha256": "9efd0722771e8c3cf544bc276cabd27842b8531af6cf19b6cea5249373db973c",
+      "pixelShaderSha256": "dd03b00088d5f4a8f0165d6be61aa1c2a0b2e6aa8a4196072b0ec0f150eebdf0"
+    },
+    "1018": {
+      "vertexStride": 92,
+      "indexStride": 2,
+      "indices": 17037,
+      "baseVertex": 0,
+      "signature": [
+        {
+          "name": "SV_Position",
+          "components": 4,
+          "type": 0
+        },
+        {
+          "name": "TEXCOORD0",
+          "components": 2,
+          "type": 0
+        },
+        {
+          "name": "TEXCOORD1",
+          "components": 3,
+          "type": 0
+        },
+        {
+          "name": "TEXCOORD2",
+          "components": 3,
+          "type": 0
+        },
+        {
+          "name": "TEXCOORD3",
+          "components": 4,
+          "type": 0
+        },
+        {
+          "name": "TEXCOORD4",
+          "components": 3,
+          "type": 0
+        },
+        {
+          "name": "TEXCOORD5",
+          "components": 3,
+          "type": 0
+        },
+        {
+          "name": "TEXCOORD6",
+          "components": 1,
+          "type": 4
+        }
+      ],
+      "vertexSha256": "dd16be74bc7806d0ec700ca303048181291cf4c87a035826b43573c4fce69132",
+      "indexSha256": "507fcdc6d78e70f8f5a2dbbaf54190f20596a6236027f7a8f7cf2a940c6b5742",
+      "pixelShaderSha256": "a04e640e475f1e82fc57ca1f67628610059d51561dcabf4d6ce5b927fa683feb"
+    },
+    "1383": {
+      "vertexStride": 116,
+      "indexStride": 2,
+      "indices": 10698,
+      "baseVertex": 0,
+      "signature": [
+        {
+          "name": "SV_Position",
+          "components": 4,
+          "type": 0
+        },
+        {
+          "name": "TEXCOORD0",
+          "components": 2,
+          "type": 0
+        },
+        {
+          "name": "TEXCOORD1",
+          "components": 3,
+          "type": 0
+        },
+        {
+          "name": "TEXCOORD2",
+          "components": 3,
+          "type": 0
+        },
+        {
+          "name": "TEXCOORD3",
+          "components": 4,
+          "type": 0
+        },
+        {
+          "name": "TEXCOORD4",
+          "components": 3,
+          "type": 0
+        },
+        {
+          "name": "TEXCOORD5",
+          "components": 3,
+          "type": 0
+        },
+        {
+          "name": "TEXCOORD6",
+          "components": 3,
+          "type": 0
+        },
+        {
+          "name": "TEXCOORD7",
+          "components": 3,
+          "type": 0
+        },
+        {
+          "name": "TEXCOORD8",
+          "components": 1,
+          "type": 4
+        }
+      ],
+      "vertexSha256": "73bd819efa0c0d44cf6ef1e68cc117c5fe64754e029878f6183ffdbc54768f73",
+      "indexSha256": "32f292e8455e2624e350059d74117d0ea90343495c0020e982b589cd7c87cd1a",
+      "pixelShaderSha256": "135b25965ed786752775596a86f4069f58942eae340be4d143d291eea9429680"
+    }
+  },
+  "controls": {
+    "body-outline-geometry-control": {
+      "back": {
+        "native": 1184,
+        "actual": 543,
+        "shared": 531,
+        "extra": 12,
+        "missing": 653
+      },
+      "front": {
+        "native": 1184,
+        "actual": 44610,
+        "shared": 1118,
+        "extra": 43492,
+        "missing": 66
+      }
+    },
+    "body-outline-depth-control": {
+      "back": {
+        "native": 1184,
+        "actual": 498,
+        "shared": 498,
+        "extra": 0,
+        "missing": 686
+      }
+    }
+  },
+  "original": {
+    "front": {
+      "totalGreen": 44610,
+      "nativeResidualCovered": 61,
+      "missing": []
+    },
+    "back": {
+      "totalGreen": 543,
+      "nativeResidualCovered": 61,
+      "missing": []
+    }
+  },
+  "corrected": {
+    "back": {
+      "totalGreen": 498,
+      "nativeResidualCovered": 61,
+      "missing": []
+    }
+  },
+  "archive": {
+    "members": 22,
+    "sha256": "89323f81788069f382b7aab13cf0bffd68aaadfeac19c9cdcd7c91ad160c0b1e"
+  }
+}

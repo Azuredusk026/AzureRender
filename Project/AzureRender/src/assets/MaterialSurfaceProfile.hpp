@@ -1,6 +1,7 @@
 #pragma once
 #include "assets/GltfLoader.hpp"
 #include "assets/MaterialBlendDepth.hpp"
+#include "assets/MaterialColorAdjustment.hpp"
 #include "assets/MaterialOutputPrecision.hpp"
 #include "assets/MaterialUvPolicy.hpp"
 #include "assets/MaterialRimResponse.hpp"
@@ -10,14 +11,14 @@
 namespace azurerender {
 // Binding 27 is a versioned union, indexed by the stable material order.
 struct alignas(16) PackedMaterialSurfaceProfile {
-    static constexpr unsigned kLayoutVersion=22;
+    static constexpr unsigned kLayoutVersion=23;
     using Row=std::array<float,4>;
-    std::array<Row,22> rows=[] {
-        std::array<Row,22> value{};value[19][3]=1;return value;
+    std::array<Row,23> rows=[] {
+        std::array<Row,23> value{};value[19][3]=1;return value;
     }();
 };
 static_assert(std::is_standard_layout_v<PackedMaterialSurfaceProfile>);
-static_assert(sizeof(PackedMaterialSurfaceProfile)==352);
+static_assert(sizeof(PackedMaterialSurfaceProfile)==368);
 static_assert(alignof(PackedMaterialSurfaceProfile)==16);
 static_assert(offsetof(PackedMaterialSurfaceProfile,rows)==0);
 static_assert(sizeof(PackedMaterialSurfaceProfile::Row)==16);
@@ -60,7 +61,7 @@ inline PackedMaterialSurfaceProfile packEyeSurfaceProfile(const AssetMaterial::E
         eye.matcapColor,{eye.directWeights[0],eye.directWeights[1],eye.directWeights[2],0},eye.uvScaleOffset}}};
     result.rows[19][3]=1;
     if(eye.nprLighting){
-        result.rows[6]={eye.shadowScale,0,0,1};
+        result.rows[6]={eye.shadowScale,eye.mainRampFrame.present?1.F:0.F,0,1};
         result.rows[7]={eye.ambientColor[0],eye.ambientColor[1],eye.ambientColor[2],0};
         result.rows[8]={eye.mainColor[0],eye.mainColor[1],eye.mainColor[2],0};
     }
@@ -73,6 +74,7 @@ inline PackedMaterialSurfaceProfile packMaterialSurfaceProfile(const AssetMateri
     validateMaterialOutputPrecision(material);
     validateMaterialUvPolicy(material);
     validateMaterialRimResponse(material);
+    validateMaterialColorAdjustment(material);
     if(material.projectedHairRamp.lighting.mainBrightnessSaturation&&
         (!material.projectedHairRamp.present||!material.projectedHairRamp.lighting.present
             ||material.projectedHairRamp.surfaceResponse!=AssetMaterial::ProjectedHairRamp::SurfaceResponse::StrandDiffuse
@@ -88,6 +90,7 @@ inline PackedMaterialSurfaceProfile packMaterialSurfaceProfile(const AssetMateri
     validateMaterialCoverage(material);
     validateHairPointMipReferenceNormal(material);
     validateProjectedHairPrimaryTextureFootprint(material);
+    validateProjectedHairReferenceRasterGrid(material);
     const bool lit=(material.materialFeatures&(MaterialFeatureUnlitSurface|MaterialFeatureMultiplyComposite|MaterialFeatureOverlay))==0
         &&!material.unlitTextureLayers.present&&material.materialClass!=AssetMaterialClass::Overlay;
     const bool microfacetClass=(material.materialClass==AssetMaterialClass::Generic||material.materialClass==AssetMaterialClass::Fabric
@@ -139,6 +142,7 @@ inline PackedMaterialSurfaceProfile packMaterialSurfaceProfile(const AssetMateri
         if(p.attenuateColorBlend)r[15][3]=2.F;
         r[19][3]=material.radianceScale;
         r[21][0]=static_cast<float>(material.displayTransform);
+        r[22][0]=material.normalTexturePresent?0.F:1.F;
         return result;
     }
     if(material.nprDiffuse.present) {
@@ -148,6 +152,7 @@ inline PackedMaterialSurfaceProfile packMaterialSurfaceProfile(const AssetMateri
         result.rows[1][0]=static_cast<float>(material.nprDiffuse.rimResponse);
         result.rows[1][3]=static_cast<float>(material.nprDiffuse.rampComposition);
         result.rows[6][0]=material.nprDiffuse.shadowSaturation-1;
+        if(material.nprDiffuse.localDiffuseIndirectNormal)result.rows[6][3]=1.F;
         result.rows[3][0]=static_cast<float>(material.nprDiffuse.characterVisibility);
         result.rows[3][1]=material.nprDiffuse.localDiffuseFloorScale;
         result.rows[3][2]=material.nprDiffuse.screenLightingNormal?2.F:material.nprDiffuse.radialLightingNormal?1.F:0.F;
@@ -159,6 +164,10 @@ inline PackedMaterialSurfaceProfile packMaterialSurfaceProfile(const AssetMateri
         if(material.nprDiffuse.viewTint.present) {
             const auto& tint=material.nprDiffuse.viewTint;
             result.rows[2]={tint.color[0],tint.color[1],tint.color[2],tint.scale};
+            if(tint.faceMask) {
+                result.rows[6][1]=1.F;
+                result.rows[6][2]=tint.geometryScale;
+            }
         }
         if(material.nprDiffuse.lighting.present) {
             const auto& light=material.nprDiffuse.lighting;
@@ -178,17 +187,34 @@ inline PackedMaterialSurfaceProfile packMaterialSurfaceProfile(const AssetMateri
             result.rows[4]={0,0,ramp.iridescence,ramp.flipV?-1.F:1.F};
         }
     }
+    if(material.faceSdf.highlight.present) {
+        const auto& shift=material.faceSdf.highlight.viewOffset;
+        result.rows[12]={shift[0],shift[1],1.F,0.F};
+    }
+    if(material.nprDiffuse.mainBrightnessSaturation)result.rows[12][3]=1.F;
     if (material.projectedHairRamp.axisDiagonalPrimaryTextureFootprint) {
         result.rows[6][3] += 16.F;
         result.rows[12] = {material.textureSettings[0].mipBias, material.textureSettings[6].mipBias,
             material.textureSettings[7].mipBias, 0.F};
     }
+    if(material.colorAdjustment.present) {
+        const auto& adjustment=material.colorAdjustment;
+        result.rows[13]={adjustment.brightness,adjustment.contrast,adjustment.saturation,1.F};
+        result.rows[14]=adjustment.tint;
+        result.rows[15]={adjustment.rimColor[0],adjustment.rimColor[1],adjustment.rimColor[2],adjustment.rimIntensity};
+        result.rows[16][0]=adjustment.rimWidth;
+    }
     result.rows[19][3]=material.radianceScale;
+    if((material.materialFeatures&MaterialFeatureMultiplyComposite)!=0)
+        result.rows[20]={static_cast<float>(material.multiplyReceiver),material.multiplyCoverageScale,0.F,
+            material.multiplyDepthPrepass?1.F:0.F};
+    if(material.faceSdf.authoredMaskMip)result.rows[20][2]=1.F;
     result.rows[21][0]=static_cast<float>(material.displayTransform);
     const auto environmentFlags=materialEnvironmentFlags(material.environmentLighting);
     result.rows[21][1]=static_cast<float>(environmentFlags);
     result.rows[21][2]=environmentFlags?material.environmentLighting.globalIntensity.value_or(-1.F):0.F;
     result.rows[21][3]=static_cast<float>(material.mainLightShadow);
+    result.rows[22][0]=material.normalTexturePresent?0.F:1.F;
     return result;
 }
 }

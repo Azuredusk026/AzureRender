@@ -1,0 +1,643 @@
+{
+  "baseCommit": "aab204a",
+  "state": "release-production-and-player-pair-passed",
+  "player": {
+    "results": {
+      "baseline": {
+        "switch-reflection": {
+          "stateFrames": [
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12
+          ],
+          "replayedActions": 2,
+          "fixedSteps": 11,
+          "producer": "projected-history",
+          "historyInput": 11,
+          "redReflectionMeans": [
+            [
+              0.5476432835933867,
+              0.0
+            ],
+            [
+              0.5476432835933867,
+              0.0
+            ],
+            [
+              0.5476432835933867,
+              0.0
+            ],
+            [
+              0.5476432835933867,
+              0.0
+            ],
+            [
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.5454840247221957
+            ],
+            [
+              0.0,
+              0.5454840247221957
+            ],
+            [
+              0.0,
+              0.5454840247221957
+            ],
+            [
+              0.0,
+              0.5454840247221957
+            ],
+            [
+              0.0,
+              0.5454840247221957
+            ],
+            [
+              0.0,
+              0.5454840247221957
+            ],
+            [
+              0.0,
+              0.5454840247221957
+            ]
+          ],
+          "lightingWitnessMean": [
+            0.000542524130395192,
+            0.000542524130395192,
+            0.000542524130395192,
+            0.000542524130395192,
+            0.000542524130395192,
+            0.000542524130395192,
+            0.000542524130395192,
+            0.000542524130395192,
+            0.000542524130395192,
+            0.000542524130395192,
+            0.000542524130395192,
+            0.000542524130395192
+          ]
+        },
+        "idle-reflection": {
+          "stateFrames": [],
+          "replayedActions": 0,
+          "fixedSteps": 11,
+          "producer": "projected-history",
+          "historyInput": 11,
+          "redReflectionMeans": [
+            [
+              0.5476432835933867,
+              0.0
+            ],
+            [
+              0.5476432835933867,
+              0.0
+            ],
+            [
+              0.5476432835933867,
+              0.0
+            ],
+            [
+              0.5476432835933867,
+              0.0
+            ],
+            [
+              0.5476432835933867,
+              0.0
+            ],
+            [
+              0.5476432835933867,
+              0.0
+            ],
+            [
+              0.5476432835933867,
+              0.0
+            ],
+            [
+              0.5476432835933867,
+              0.0
+            ],
+            [
+              0.5476432835933867,
+              0.0
+            ],
+            [
+              0.5476432835933867,
+              0.0
+            ],
+            [
+              0.5476432835933867,
+              0.0
+            ],
+            [
+              0.5476432835933867,
+              0.0
+            ]
+          ],
+          "lightingWitnessMean": [
+            0.000542524130395192,
+            0.000542524130395192,
+            0.000542524130395192,
+            0.000542524130395192,
+            0.000542524130395192,
+            0.000542524130395192,
+            0.000542524130395192,
+            0.000542524130395192,
+            0.000542524130395192,
+            0.000542524130395192,
+            0.000542524130395192,
+            0.000542524130395192
+          ]
+        },
+        "switch-beauty": {
+          "stateFrames": [
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12
+          ],
+          "replayedActions": 2,
+          "fixedSteps": 11,
+          "producer": "projected-history",
+          "historyInput": 11,
+          "redReflectionMeans": [
+            [
+              0.5475676333106521,
+              0.0
+            ],
+            [
+              0.5475676333106521,
+              0.0
+            ],
+            [
+              0.5475676333106521,
+              0.0
+            ],
+            [
+              0.5475676333106521,
+              0.0
+            ],
+            [
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.5452608198773137
+            ],
+            [
+              0.0,
+              0.5452608198773137
+            ],
+            [
+              0.0,
+              0.5452608198773137
+            ],
+            [
+              0.0,
+              0.5452608198773137
+            ],
+            [
+              0.0,
+              0.5452608198773137
+            ],
+            [
+              0.0,
+              0.5452608198773137
+            ],
+            [
+              0.0,
+              0.5452608198773137
+            ]
+          ],
+          "lightingWitnessMean": [
+            0.000542524130395192,
+            0.000542524130395192,
+            0.000542524130395192,
+            0.000542524130395192,
+            0.9990964417167343,
+            0.9990964417167343,
+            0.9990964417167343,
+            0.9990964417167343,
+            0.9990964417167343,
+            0.9990964417167343,
+            0.9990964417167343,
+            0.9990964417167343
+          ]
+        }
+      },
+      "candidate": {
+        "switch-reflection": {
+          "stateFrames": [
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12
+          ],
+          "replayedActions": 2,
+          "fixedSteps": 11,
+          "producer": "projected-history",
+          "historyInput": 11,
+          "redReflectionMeans": [
+            [
+              0.5476432835933867,
+              0.0
+            ],
+            [
+              0.5476432835933867,
+              0.0
+            ],
+            [
+              0.5476432835933867,
+              0.0
+            ],
+            [
+              0.5476432835933867,
+              0.0
+            ],
+            [
+              0.0,
+              0.5476407625810056
+            ],
+            [
+              0.0,
+              0.5454840247221957
+            ],
+            [
+              0.0,
+              0.5454840247221957
+            ],
+            [
+              0.0,
+              0.5454840247221957
+            ],
+            [
+              0.0,
+              0.5454840247221957
+            ],
+            [
+              0.0,
+              0.5454840247221957
+            ],
+            [
+              0.0,
+              0.5454840247221957
+            ],
+            [
+              0.0,
+              0.5454840247221957
+            ]
+          ],
+          "lightingWitnessMean": [
+            0.000542524130395192,
+            0.000542524130395192,
+            0.000542524130395192,
+            0.000542524130395192,
+            0.000542524130395192,
+            0.000542524130395192,
+            0.000542524130395192,
+            0.000542524130395192,
+            0.000542524130395192,
+            0.000542524130395192,
+            0.000542524130395192,
+            0.000542524130395192
+          ]
+        },
+        "idle-reflection": {
+          "stateFrames": [],
+          "replayedActions": 0,
+          "fixedSteps": 11,
+          "producer": "projected-history",
+          "historyInput": 11,
+          "redReflectionMeans": [
+            [
+              0.5476432835933867,
+              0.0
+            ],
+            [
+              0.5476432835933867,
+              0.0
+            ],
+            [
+              0.5476432835933867,
+              0.0
+            ],
+            [
+              0.5476432835933867,
+              0.0
+            ],
+            [
+              0.5476432835933867,
+              0.0
+            ],
+            [
+              0.5476432835933867,
+              0.0
+            ],
+            [
+              0.5476432835933867,
+              0.0
+            ],
+            [
+              0.5476432835933867,
+              0.0
+            ],
+            [
+              0.5476432835933867,
+              0.0
+            ],
+            [
+              0.5476432835933867,
+              0.0
+            ],
+            [
+              0.5476432835933867,
+              0.0
+            ],
+            [
+              0.5476432835933867,
+              0.0
+            ]
+          ],
+          "lightingWitnessMean": [
+            0.000542524130395192,
+            0.000542524130395192,
+            0.000542524130395192,
+            0.000542524130395192,
+            0.000542524130395192,
+            0.000542524130395192,
+            0.000542524130395192,
+            0.000542524130395192,
+            0.000542524130395192,
+            0.000542524130395192,
+            0.000542524130395192,
+            0.000542524130395192
+          ]
+        },
+        "switch-beauty": {
+          "stateFrames": [
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12
+          ],
+          "replayedActions": 2,
+          "fixedSteps": 11,
+          "producer": "projected-history",
+          "historyInput": 11,
+          "redReflectionMeans": [
+            [
+              0.5475676333106521,
+              0.0
+            ],
+            [
+              0.5475676333106521,
+              0.0
+            ],
+            [
+              0.5475676333106521,
+              0.0
+            ],
+            [
+              0.5475676333106521,
+              0.0
+            ],
+            [
+              0.0,
+              0.5474417241006369
+            ],
+            [
+              0.0,
+              0.5452608198773137
+            ],
+            [
+              0.0,
+              0.5452608198773137
+            ],
+            [
+              0.0,
+              0.5452608198773137
+            ],
+            [
+              0.0,
+              0.5452608198773137
+            ],
+            [
+              0.0,
+              0.5452608198773137
+            ],
+            [
+              0.0,
+              0.5452608198773137
+            ],
+            [
+              0.0,
+              0.5452608198773137
+            ]
+          ],
+          "lightingWitnessMean": [
+            0.000542524130395192,
+            0.000542524130395192,
+            0.000542524130395192,
+            0.000542524130395192,
+            0.9990964417167343,
+            0.9990964417167343,
+            0.9990964417167343,
+            0.9990964417167343,
+            0.9990964417167343,
+            0.9990964417167343,
+            0.9990964417167343,
+            0.9990964417167343
+          ]
+        }
+      }
+    },
+    "playerSha256": "66add617c83a3319f849c1036669a582cfe61e86865e76ddab76ede41ee02220",
+    "candidateSha256": "01e00f4b63d38c2d0f217c530d809086ac205369752b5b2df0551052e28d2109",
+    "idleExact": true
+  },
+  "gpuCases": 17,
+  "redHitsBefore": 0,
+  "redHitsAfter": 2432,
+  "deferred": [
+    "matching native reference inputs",
+    "NVIDIA 592.82 original frozen frames"
+  ],
+  "pending": [
+    "rotation and resets",
+    "normal fallback",
+    "dual config devices and timing"
+  ],
+  "validation": {
+    "archiveSha256": "410646a7383fbb01d5dd83137ece103c87584dca079a26895aded05e42178a52",
+    "bytes": 1141707,
+    "files": {
+      "verify.py": "8e737a3304ead140f4c43f862aff8459589cffd9656133dc38b3eeb6229f0c4a",
+      "test_screen_space_reflections_gpu.py": "870e5e72810d78bcb90f9e4316fa0b9a9c34c1c91213a4df30f7e5732f502471",
+      "check.py": "4ff972407b1dc6000bc8036d70653b07c4ba0ea61f3a88f0681ae9da14ed808d",
+      "player_pair.py": "55dc6ab1cd8ff992b2a4d987bc9abbe9621ce7dcf369966f04c47f515be4d7c6",
+      "baseline.hlsl": "5d0c8281a576eb8a9ef659cccaafacee6b846ecc0605e8e0c011b2495055b259",
+      "candidate.hlsl": "19208628753108b2ef4937f90467c1bc02ac892c6c6d83647e4e12dbd84a4c12",
+      "red.json": "2c5b8ee5865e6f88282a1d185f6bd692673797e7395acbab73d405f7ad7fb871",
+      "green.json": "83771ed79fcfa1eef227f8e40c894f4bc263032b888c386a839b9da0a0ffa95d",
+      "player-pair.json": "d1af9c1eac184c0c090d8d0875eb924d63a633d358552bff94b12b794bef956a",
+      "green-history-disoccluded/0.bin": "2df1ffd4660261edd837f5f1f774dd9c0f0608a0505e66cf7b6f7aee8f233281",
+      "green-history-disoccluded/1.bin": "f636cee96c893fab8571084c15f02719008078eef66a127c3b976b94832e44d3",
+      "green-history-disoccluded/2.bin": "e2cc2a1fa6131cf4d86faa3baf78851f35a36853e2467c257b3df9d89e85cce5",
+      "green-history-response-background/0.bin": "2df1ffd4660261edd837f5f1f774dd9c0f0608a0505e66cf7b6f7aee8f233281",
+      "green-history-response-background/1.bin": "f636cee96c893fab8571084c15f02719008078eef66a127c3b976b94832e44d3",
+      "green-history-response-background/2.bin": "e2cc2a1fa6131cf4d86faa3baf78851f35a36853e2467c257b3df9d89e85cce5",
+      "green-history-response-cutout/0.bin": "2df1ffd4660261edd837f5f1f774dd9c0f0608a0505e66cf7b6f7aee8f233281",
+      "green-history-response-cutout/1.bin": "f636cee96c893fab8571084c15f02719008078eef66a127c3b976b94832e44d3",
+      "green-history-response-cutout/2.bin": "06867a5598387de6f4a022677b104ac2231af04397e782caf68e8009ef606101",
+      "green-history-response-depth/0.bin": "2df1ffd4660261edd837f5f1f774dd9c0f0608a0505e66cf7b6f7aee8f233281",
+      "green-history-response-depth/1.bin": "f636cee96c893fab8571084c15f02719008078eef66a127c3b976b94832e44d3",
+      "green-history-response-depth/2.bin": "e2cc2a1fa6131cf4d86faa3baf78851f35a36853e2467c257b3df9d89e85cce5",
+      "green-history-response-missing/0.bin": "2df1ffd4660261edd837f5f1f774dd9c0f0608a0505e66cf7b6f7aee8f233281",
+      "green-history-response-missing/1.bin": "f636cee96c893fab8571084c15f02719008078eef66a127c3b976b94832e44d3",
+      "green-history-response-missing/2.bin": "e2cc2a1fa6131cf4d86faa3baf78851f35a36853e2467c257b3df9d89e85cce5",
+      "green-history-response-moving/0.bin": "2df1ffd4660261edd837f5f1f774dd9c0f0608a0505e66cf7b6f7aee8f233281",
+      "green-history-response-moving/1.bin": "f636cee96c893fab8571084c15f02719008078eef66a127c3b976b94832e44d3",
+      "green-history-response-moving/2.bin": "181406cea6e273010ee4bb5b2e7b5cd5fde6315b777e5fc72b03433888a5f0a0",
+      "green-history-response-moving-depth/0.bin": "2df1ffd4660261edd837f5f1f774dd9c0f0608a0505e66cf7b6f7aee8f233281",
+      "green-history-response-moving-depth/1.bin": "f636cee96c893fab8571084c15f02719008078eef66a127c3b976b94832e44d3",
+      "green-history-response-moving-depth/2.bin": "e2cc2a1fa6131cf4d86faa3baf78851f35a36853e2467c257b3df9d89e85cce5",
+      "green-history-response-nonfinite/0.bin": "2df1ffd4660261edd837f5f1f774dd9c0f0608a0505e66cf7b6f7aee8f233281",
+      "green-history-response-nonfinite/1.bin": "f636cee96c893fab8571084c15f02719008078eef66a127c3b976b94832e44d3",
+      "green-history-response-nonfinite/2.bin": "e2cc2a1fa6131cf4d86faa3baf78851f35a36853e2467c257b3df9d89e85cce5",
+      "green-history-response-outside/0.bin": "2df1ffd4660261edd837f5f1f774dd9c0f0608a0505e66cf7b6f7aee8f233281",
+      "green-history-response-outside/1.bin": "f636cee96c893fab8571084c15f02719008078eef66a127c3b976b94832e44d3",
+      "green-history-response-outside/2.bin": "e2cc2a1fa6131cf4d86faa3baf78851f35a36853e2467c257b3df9d89e85cce5",
+      "green-history-response-partial/0.bin": "2df1ffd4660261edd837f5f1f774dd9c0f0608a0505e66cf7b6f7aee8f233281",
+      "green-history-response-partial/1.bin": "f636cee96c893fab8571084c15f02719008078eef66a127c3b976b94832e44d3",
+      "green-history-response-partial/2.bin": "06867a5598387de6f4a022677b104ac2231af04397e782caf68e8009ef606101",
+      "green-history-response-reactive/0.bin": "2df1ffd4660261edd837f5f1f774dd9c0f0608a0505e66cf7b6f7aee8f233281",
+      "green-history-response-reactive/1.bin": "f636cee96c893fab8571084c15f02719008078eef66a127c3b976b94832e44d3",
+      "green-history-response-reactive/2.bin": "e2cc2a1fa6131cf4d86faa3baf78851f35a36853e2467c257b3df9d89e85cce5",
+      "green-history-response-tracked/0.bin": "2df1ffd4660261edd837f5f1f774dd9c0f0608a0505e66cf7b6f7aee8f233281",
+      "green-history-response-tracked/1.bin": "f636cee96c893fab8571084c15f02719008078eef66a127c3b976b94832e44d3",
+      "green-history-response-tracked/2.bin": "560d576943887fa85e96de65b446e2202724beefa3d7a64e21b159efe7066117",
+      "green-history-response-zero-depth/0.bin": "2df1ffd4660261edd837f5f1f774dd9c0f0608a0505e66cf7b6f7aee8f233281",
+      "green-history-response-zero-depth/1.bin": "f636cee96c893fab8571084c15f02719008078eef66a127c3b976b94832e44d3",
+      "green-history-response-zero-depth/2.bin": "e2cc2a1fa6131cf4d86faa3baf78851f35a36853e2467c257b3df9d89e85cce5",
+      "green-history-shifted/0.bin": "2df1ffd4660261edd837f5f1f774dd9c0f0608a0505e66cf7b6f7aee8f233281",
+      "green-history-shifted/1.bin": "f636cee96c893fab8571084c15f02719008078eef66a127c3b976b94832e44d3",
+      "green-history-shifted/2.bin": "560d576943887fa85e96de65b446e2202724beefa3d7a64e21b159efe7066117",
+      "green-history-static/0.bin": "2df1ffd4660261edd837f5f1f774dd9c0f0608a0505e66cf7b6f7aee8f233281",
+      "green-history-static/1.bin": "8f2ad65dded02476e76fccf16f1363c59a0e2eeb454d42c7f1e16ce0d29a2993",
+      "green-history-static/2.bin": "d544d8617170c43f3a3bbe417d1bb54eb0fb3d7dc815dc7f7e02a064456192c5",
+      "green-history-wrong-pose/0.bin": "2df1ffd4660261edd837f5f1f774dd9c0f0608a0505e66cf7b6f7aee8f233281",
+      "green-history-wrong-pose/1.bin": "f636cee96c893fab8571084c15f02719008078eef66a127c3b976b94832e44d3",
+      "green-history-wrong-pose/2.bin": "e2cc2a1fa6131cf4d86faa3baf78851f35a36853e2467c257b3df9d89e85cce5",
+      "green-positive/0.bin": "2df1ffd4660261edd837f5f1f774dd9c0f0608a0505e66cf7b6f7aee8f233281",
+      "green-positive/1.bin": "8f2ad65dded02476e76fccf16f1363c59a0e2eeb454d42c7f1e16ce0d29a2993",
+      "green-positive/2.bin": "d544d8617170c43f3a3bbe417d1bb54eb0fb3d7dc815dc7f7e02a064456192c5",
+      "baseline/switch-reflection/player.log": "8a7281f02e360fbe91e7d3bd8b55d6ad267483a071dc094caeff14eaf995e20d",
+      "baseline/switch-reflection/runtime.json": "9736e618a6135fa9cf19edbec0faf391be3fc98c22ebd56166f67be90005aa26",
+      "baseline/switch-reflection/frames/frame_000000.png": "1517b3fd55f009bf4fdc7ee28b67783187b26b8c2aa7b460849655670d760ab5",
+      "baseline/switch-reflection/frames/frame_000001.png": "ecd7f21b5e028601143f2d7a9c98a55d8a9907489954587787d658112ff61850",
+      "baseline/switch-reflection/frames/frame_000002.png": "ecd7f21b5e028601143f2d7a9c98a55d8a9907489954587787d658112ff61850",
+      "baseline/switch-reflection/frames/frame_000003.png": "ecd7f21b5e028601143f2d7a9c98a55d8a9907489954587787d658112ff61850",
+      "baseline/switch-reflection/frames/frame_000004.png": "f72d40e5076ca08c4371f928303bee24cfce70c93444dc34443d8da69244852d",
+      "baseline/switch-reflection/frames/frame_000005.png": "633fa60b9e4e47e20c9758cf6184b0dfe278ec429053639831efabcd759669f5",
+      "baseline/switch-reflection/frames/frame_000006.png": "633fa60b9e4e47e20c9758cf6184b0dfe278ec429053639831efabcd759669f5",
+      "baseline/switch-reflection/frames/frame_000007.png": "633fa60b9e4e47e20c9758cf6184b0dfe278ec429053639831efabcd759669f5",
+      "baseline/switch-reflection/frames/frame_000008.png": "633fa60b9e4e47e20c9758cf6184b0dfe278ec429053639831efabcd759669f5",
+      "baseline/switch-reflection/frames/frame_000009.png": "633fa60b9e4e47e20c9758cf6184b0dfe278ec429053639831efabcd759669f5",
+      "baseline/switch-reflection/frames/frame_000010.png": "633fa60b9e4e47e20c9758cf6184b0dfe278ec429053639831efabcd759669f5",
+      "baseline/switch-reflection/frames/frame_000011.png": "633fa60b9e4e47e20c9758cf6184b0dfe278ec429053639831efabcd759669f5",
+      "baseline/idle-reflection/player.log": "7e4cb709f3da1e28057aed878c9c8cfa87e325038aadaffa84041378c6bd457e",
+      "baseline/idle-reflection/runtime.json": "8d89b55fd709a89b3adc15c20d2fe42577d49dcca64634d6da27c53942f877b3",
+      "baseline/idle-reflection/frames/frame_000000.png": "1517b3fd55f009bf4fdc7ee28b67783187b26b8c2aa7b460849655670d760ab5",
+      "baseline/idle-reflection/frames/frame_000001.png": "ecd7f21b5e028601143f2d7a9c98a55d8a9907489954587787d658112ff61850",
+      "baseline/idle-reflection/frames/frame_000002.png": "ecd7f21b5e028601143f2d7a9c98a55d8a9907489954587787d658112ff61850",
+      "baseline/idle-reflection/frames/frame_000003.png": "ecd7f21b5e028601143f2d7a9c98a55d8a9907489954587787d658112ff61850",
+      "baseline/idle-reflection/frames/frame_000004.png": "ecd7f21b5e028601143f2d7a9c98a55d8a9907489954587787d658112ff61850",
+      "baseline/idle-reflection/frames/frame_000005.png": "ecd7f21b5e028601143f2d7a9c98a55d8a9907489954587787d658112ff61850",
+      "baseline/idle-reflection/frames/frame_000006.png": "ecd7f21b5e028601143f2d7a9c98a55d8a9907489954587787d658112ff61850",
+      "baseline/idle-reflection/frames/frame_000007.png": "ecd7f21b5e028601143f2d7a9c98a55d8a9907489954587787d658112ff61850",
+      "baseline/idle-reflection/frames/frame_000008.png": "ecd7f21b5e028601143f2d7a9c98a55d8a9907489954587787d658112ff61850",
+      "baseline/idle-reflection/frames/frame_000009.png": "ecd7f21b5e028601143f2d7a9c98a55d8a9907489954587787d658112ff61850",
+      "baseline/idle-reflection/frames/frame_000010.png": "ecd7f21b5e028601143f2d7a9c98a55d8a9907489954587787d658112ff61850",
+      "baseline/idle-reflection/frames/frame_000011.png": "ecd7f21b5e028601143f2d7a9c98a55d8a9907489954587787d658112ff61850",
+      "baseline/switch-beauty/player.log": "2c33174fb4e9152eedcba0fbf548e0864076ab2c118a2c7b2e31403c6555d9c0",
+      "baseline/switch-beauty/runtime.json": "4f944a4e5712b44f283e5fb5315bf5a5aecd6f11a5110e2fea528fcf1f9ce8ce",
+      "baseline/switch-beauty/frames/frame_000000.png": "3e545f5ffdfd22c737ab10ff477c3fd64b1099f555879641c6c76d0fe9248a50",
+      "baseline/switch-beauty/frames/frame_000001.png": "fca313ce18023f44e5217693395aba233399a09e07e136dd81678dae3f44eff3",
+      "baseline/switch-beauty/frames/frame_000002.png": "fca313ce18023f44e5217693395aba233399a09e07e136dd81678dae3f44eff3",
+      "baseline/switch-beauty/frames/frame_000003.png": "3ff3ddf0ac0b8678790fc6313a84ff0e5af582a548e147d48cbee4a862b37284",
+      "baseline/switch-beauty/frames/frame_000004.png": "0ac604ae3331cb64496970a44f62c7a9297d0a5f89c9cd6224ff2d0b89e213d8",
+      "baseline/switch-beauty/frames/frame_000005.png": "aa421e920892e3dcabfa0542644764ffdbf789f97d592e2e4c4e7542710fa10a",
+      "baseline/switch-beauty/frames/frame_000006.png": "aa421e920892e3dcabfa0542644764ffdbf789f97d592e2e4c4e7542710fa10a",
+      "baseline/switch-beauty/frames/frame_000007.png": "aa421e920892e3dcabfa0542644764ffdbf789f97d592e2e4c4e7542710fa10a",
+      "baseline/switch-beauty/frames/frame_000008.png": "aa421e920892e3dcabfa0542644764ffdbf789f97d592e2e4c4e7542710fa10a",
+      "baseline/switch-beauty/frames/frame_000009.png": "aa421e920892e3dcabfa0542644764ffdbf789f97d592e2e4c4e7542710fa10a",
+      "baseline/switch-beauty/frames/frame_000010.png": "aa421e920892e3dcabfa0542644764ffdbf789f97d592e2e4c4e7542710fa10a",
+      "baseline/switch-beauty/frames/frame_000011.png": "aa421e920892e3dcabfa0542644764ffdbf789f97d592e2e4c4e7542710fa10a",
+      "candidate/switch-reflection/player.log": "80e75df62d526c69d56c5c89487d6eda46699c7355b7c91e875f27f7495b9371",
+      "candidate/switch-reflection/runtime.json": "3aef1a4e060afa98daf05e00807b593ff1b4206145452e0026904ec5f149ef80",
+      "candidate/switch-reflection/frames/frame_000000.png": "1517b3fd55f009bf4fdc7ee28b67783187b26b8c2aa7b460849655670d760ab5",
+      "candidate/switch-reflection/frames/frame_000001.png": "ecd7f21b5e028601143f2d7a9c98a55d8a9907489954587787d658112ff61850",
+      "candidate/switch-reflection/frames/frame_000002.png": "ecd7f21b5e028601143f2d7a9c98a55d8a9907489954587787d658112ff61850",
+      "candidate/switch-reflection/frames/frame_000003.png": "ecd7f21b5e028601143f2d7a9c98a55d8a9907489954587787d658112ff61850",
+      "candidate/switch-reflection/frames/frame_000004.png": "ce0b36b68b05c324fb2656bbcdf2e368469e187300d057c66e88c848ed697c14",
+      "candidate/switch-reflection/frames/frame_000005.png": "633fa60b9e4e47e20c9758cf6184b0dfe278ec429053639831efabcd759669f5",
+      "candidate/switch-reflection/frames/frame_000006.png": "633fa60b9e4e47e20c9758cf6184b0dfe278ec429053639831efabcd759669f5",
+      "candidate/switch-reflection/frames/frame_000007.png": "633fa60b9e4e47e20c9758cf6184b0dfe278ec429053639831efabcd759669f5",
+      "candidate/switch-reflection/frames/frame_000008.png": "633fa60b9e4e47e20c9758cf6184b0dfe278ec429053639831efabcd759669f5",
+      "candidate/switch-reflection/frames/frame_000009.png": "633fa60b9e4e47e20c9758cf6184b0dfe278ec429053639831efabcd759669f5",
+      "candidate/switch-reflection/frames/frame_000010.png": "633fa60b9e4e47e20c9758cf6184b0dfe278ec429053639831efabcd759669f5",
+      "candidate/switch-reflection/frames/frame_000011.png": "633fa60b9e4e47e20c9758cf6184b0dfe278ec429053639831efabcd759669f5",
+      "candidate/idle-reflection/player.log": "4325f6fa979a49ce5c5ebe02d232956dd7650630cdb1cb9c58b5f7b671e25769",
+      "candidate/idle-reflection/runtime.json": "62f6e709c565e5b7f413fdf48c95e379fe9bdbe07d51e1dac48a7af856a3aeb9",
+      "candidate/idle-reflection/frames/frame_000000.png": "1517b3fd55f009bf4fdc7ee28b67783187b26b8c2aa7b460849655670d760ab5",
+      "candidate/idle-reflection/frames/frame_000001.png": "ecd7f21b5e028601143f2d7a9c98a55d8a9907489954587787d658112ff61850",
+      "candidate/idle-reflection/frames/frame_000002.png": "ecd7f21b5e028601143f2d7a9c98a55d8a9907489954587787d658112ff61850",
+      "candidate/idle-reflection/frames/frame_000003.png": "ecd7f21b5e028601143f2d7a9c98a55d8a9907489954587787d658112ff61850",
+      "candidate/idle-reflection/frames/frame_000004.png": "ecd7f21b5e028601143f2d7a9c98a55d8a9907489954587787d658112ff61850",
+      "candidate/idle-reflection/frames/frame_000005.png": "ecd7f21b5e028601143f2d7a9c98a55d8a9907489954587787d658112ff61850",
+      "candidate/idle-reflection/frames/frame_000006.png": "ecd7f21b5e028601143f2d7a9c98a55d8a9907489954587787d658112ff61850",
+      "candidate/idle-reflection/frames/frame_000007.png": "ecd7f21b5e028601143f2d7a9c98a55d8a9907489954587787d658112ff61850",
+      "candidate/idle-reflection/frames/frame_000008.png": "ecd7f21b5e028601143f2d7a9c98a55d8a9907489954587787d658112ff61850",
+      "candidate/idle-reflection/frames/frame_000009.png": "ecd7f21b5e028601143f2d7a9c98a55d8a9907489954587787d658112ff61850",
+      "candidate/idle-reflection/frames/frame_000010.png": "ecd7f21b5e028601143f2d7a9c98a55d8a9907489954587787d658112ff61850",
+      "candidate/idle-reflection/frames/frame_000011.png": "ecd7f21b5e028601143f2d7a9c98a55d8a9907489954587787d658112ff61850",
+      "candidate/switch-beauty/player.log": "b662cdc29f675394a969977a5f7a7d5ec0dc9f7c3e68bfbd9ed1c283ac781259",
+      "candidate/switch-beauty/runtime.json": "70ecaec1410130e55250eb4e74b33123c7ea85e43fd58104d5ac5a4ad857fe41",
+      "candidate/switch-beauty/frames/frame_000000.png": "3e545f5ffdfd22c737ab10ff477c3fd64b1099f555879641c6c76d0fe9248a50",
+      "candidate/switch-beauty/frames/frame_000001.png": "fca313ce18023f44e5217693395aba233399a09e07e136dd81678dae3f44eff3",
+      "candidate/switch-beauty/frames/frame_000002.png": "fca313ce18023f44e5217693395aba233399a09e07e136dd81678dae3f44eff3",
+      "candidate/switch-beauty/frames/frame_000003.png": "3ff3ddf0ac0b8678790fc6313a84ff0e5af582a548e147d48cbee4a862b37284",
+      "candidate/switch-beauty/frames/frame_000004.png": "4ee40eacc661d244c04d1a2bfbf13fd118b5aa45c40cfeb2d3901094fac3ccd4",
+      "candidate/switch-beauty/frames/frame_000005.png": "aa421e920892e3dcabfa0542644764ffdbf789f97d592e2e4c4e7542710fa10a",
+      "candidate/switch-beauty/frames/frame_000006.png": "aa421e920892e3dcabfa0542644764ffdbf789f97d592e2e4c4e7542710fa10a",
+      "candidate/switch-beauty/frames/frame_000007.png": "aa421e920892e3dcabfa0542644764ffdbf789f97d592e2e4c4e7542710fa10a",
+      "candidate/switch-beauty/frames/frame_000008.png": "aa421e920892e3dcabfa0542644764ffdbf789f97d592e2e4c4e7542710fa10a",
+      "candidate/switch-beauty/frames/frame_000009.png": "aa421e920892e3dcabfa0542644764ffdbf789f97d592e2e4c4e7542710fa10a",
+      "candidate/switch-beauty/frames/frame_000010.png": "aa421e920892e3dcabfa0542644764ffdbf789f97d592e2e4c4e7542710fa10a",
+      "candidate/switch-beauty/frames/frame_000011.png": "aa421e920892e3dcabfa0542644764ffdbf789f97d592e2e4c4e7542710fa10a"
+    }
+  }
+}

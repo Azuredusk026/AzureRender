@@ -33,10 +33,18 @@ void parsing() {
  require(parseUnlitTextureLayers(coplanar,2).present,"Coplanar transparent overlays parse");
  require(parseUnlitTextureLayers(coplanar,2).depthCompare==UnlitTextureLayers::DepthCompare::LessOrEqual,"Inclusive surface depth is owned by the parsed material");
  require(p.depthCompare==UnlitTextureLayers::DepthCompare::Less,"Default depth is strict");
+ auto history=base;history["submission"]="projected-history";
+ const auto projected=parseUnlitTextureLayers(history,2);
+ require(projected.present&&projected.submission!=p.submission,
+   "Explicit projected history must preserve transparent material ownership");
+ auto unsupportedHistory=history;unsupportedHistory["composite"]="additive";reject(unsupportedHistory);
+ unsupportedHistory=history;unsupportedHistory["fogMode"]="scene";reject(unsupportedHistory);
  auto surfaceOverlay=base;surfaceOverlay["submission"]="opaque-overlay";
  surfaceOverlay["composite"]="additive";surfaceOverlay["depthCompare"]="less-or-equal";
  surfaceOverlay["softIntersection"]["enabled"]=false;
  require(parseUnlitTextureLayers(surfaceOverlay,2).present,"Opaque surface overlays accept explicit compatible ownership");
+ require(parseUnlitTextureLayers(surfaceOverlay,2).submission!=projected.submission,
+   "Projected history and opaque overlays have separate ownership");
  for(const auto& pair:std::initializer_list<std::pair<const char*,Json>>{
      {"composite","alpha"},{"depthCompare","less"},{"fogMode","scene"},{"submission","opaque"},{"submission",true}}) {
   auto invalid=surfaceOverlay;invalid[pair.first]=pair.second;reject(invalid);

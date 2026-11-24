@@ -1,0 +1,438 @@
+{
+  "status": "native-normal-mip-comparison",
+  "overallStatus": "failed-user-review",
+  "baseLevel": {
+    "19": {
+      "direct": {
+        "exact": 4194304,
+        "mean": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "maximum": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "flip-y": {
+        "exact": 44538,
+        "mean": [
+          68.73823165893555,
+          31.18362808227539,
+          46.87972593307495,
+          3.968334197998047
+        ],
+        "maximum": [
+          255,
+          216,
+          215,
+          89
+        ]
+      },
+      "negate-g": {
+        "exact": 4194304,
+        "mean": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "maximum": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "20": {
+      "direct": {
+        "exact": 0,
+        "mean": [
+          131.19777512550354,
+          62.36615061759949,
+          131.19777512550354,
+          192.51646304130554
+        ],
+        "maximum": [
+          255,
+          255,
+          255,
+          255
+        ]
+      },
+      "flip-y": {
+        "exact": 0,
+        "mean": [
+          136.08983206748962,
+          62.363436460494995,
+          136.08983206748962,
+          192.51646304130554
+        ],
+        "maximum": [
+          255,
+          255,
+          255,
+          255
+        ]
+      },
+      "negate-g": {
+        "exact": 0,
+        "mean": [
+          131.19777512550354,
+          62.36615061759949,
+          131.19777512550354,
+          192.51646304130554
+        ],
+        "maximum": [
+          255,
+          255,
+          255,
+          255
+        ]
+      }
+    },
+    "21": {
+      "direct": {
+        "exact": 0,
+        "mean": [
+          0.0023424625396728516,
+          31.121932983398438
+        ],
+        "maximum": [
+          13,
+          255
+        ]
+      },
+      "flip-y": {
+        "exact": 1665,
+        "mean": [
+          31.714030027389526,
+          24.276926517486572
+        ],
+        "maximum": [
+          255,
+          255
+        ]
+      },
+      "negate-g": {
+        "exact": 4188357,
+        "mean": [
+          0.0023424625396728516,
+          0.0018482208251953125
+        ],
+        "maximum": [
+          13,
+          12
+        ]
+      }
+    }
+  },
+  "player": {
+    "native": {
+      "format": "BC5_UNORM",
+      "storage": "BC5_UNORM",
+      "resource": "ResourceId::85362",
+      "width": 2048,
+      "height": 2048,
+      "levels": [
+        {
+          "mip": 0,
+          "bytes": 4194304,
+          "path": "t21-mip0.bin",
+          "sha256": "da2d7afa5f4b82899db396d2e7e339293ef77591fd7b75b07b6cb68b54f56be0"
+        },
+        {
+          "mip": 1,
+          "bytes": 1048576,
+          "path": "t21-mip1.bin",
+          "sha256": "6b0d3ba0717156e69f136e9d7ee6296b13ffed9d404f180b361634fd50297859"
+        },
+        {
+          "mip": 2,
+          "bytes": 262144,
+          "path": "t21-mip2.bin",
+          "sha256": "b3931f75590e8c1ea62f341324a118cfa38023e30bb8f889a2c80c43692a366c"
+        },
+        {
+          "mip": 3,
+          "bytes": 65536,
+          "path": "t21-mip3.bin",
+          "sha256": "31dcad0e96a8d9e393ab12d8fd95f744ca2560c65b13201f6fbfe5f041e5c0f6"
+        },
+        {
+          "mip": 4,
+          "bytes": 16384,
+          "path": "t21-mip4.bin",
+          "sha256": "7dd8b45305e41783ad83b26603d62851d32ac80bc0668dfde399568c01a4e5e1"
+        },
+        {
+          "mip": 5,
+          "bytes": 4096,
+          "path": "t21-mip5.bin",
+          "sha256": "033896770caa6cc7d192690c598f36cf26894921b1fa9f98870e694a6e05032d"
+        },
+        {
+          "mip": 6,
+          "bytes": 1024,
+          "path": "t21-mip6.bin",
+          "sha256": "9a1ef4529a370f139d19048b80ae39324546444ae90e21101f729e20a9671a31"
+        },
+        {
+          "mip": 7,
+          "bytes": 256,
+          "path": "t21-mip7.bin",
+          "sha256": "6eb6a1c515f097897791d0264f014bbb16efaf4ec675c874d23b349f72d7c264"
+        },
+        {
+          "mip": 8,
+          "bytes": 64,
+          "path": "t21-mip8.bin",
+          "sha256": "b9e17c2df73d59831748c9363160d8ef0eef44d4100ce4b40e45c92e44bba04d"
+        },
+        {
+          "mip": 9,
+          "bytes": 16,
+          "path": "t21-mip9.bin",
+          "sha256": "83b779b3224500b0b14c1d4a114f4bc52561d71e577c32a71d55e801107dbb48"
+        },
+        {
+          "mip": 10,
+          "bytes": 16,
+          "path": "t21-mip10.bin",
+          "sha256": "feda27711f939ac0cb237900f29ae05741eba00f5e50471af90fbb1f8affb0c3"
+        },
+        {
+          "mip": 11,
+          "bytes": 16,
+          "path": "t21-mip11.bin",
+          "sha256": "b2559c76bbeb2a0d8a5a701068a58e776ca0768a4a05c6895491148cc0ccc595"
+        }
+      ]
+    },
+    "assets": {
+      "source-y": {
+        "sha256": "9af6444367b57d5106dc6765a8880e863ba935350fbe22e7b8f0c9c0619652f9",
+        "baseShape": [
+          2048,
+          2048,
+          3
+        ],
+        "hostShape": [
+          2048,
+          2048,
+          3
+        ],
+        "exactRg": 0,
+        "meanRg": [
+          0.0023424625396728516,
+          31.121932983398438
+        ],
+        "maximumRg": [
+          13,
+          255
+        ]
+      },
+      "negative-y": {
+        "sha256": "23f2327eb5e752e9b43d9ffd83bfc77b06761e5b65f37f8952befba33c54482f",
+        "baseShape": [
+          2048,
+          2048,
+          3
+        ],
+        "hostShape": [
+          2048,
+          2048,
+          3
+        ],
+        "exactRg": 1914578,
+        "meanRg": [
+          0.0023424625396728516,
+          0.5442335605621338
+        ],
+        "maximumRg": [
+          13,
+          12
+        ]
+      }
+    },
+    "devices": {
+      "nvidia": {
+        "source-y": {
+          "overEight": 27,
+          "peak": 42,
+          "improved": 13,
+          "worsened": 7,
+          "newFrameOverOne": 4707,
+          "frameOverOne": 186313,
+          "positions": [
+            10,
+            13,
+            26,
+            38,
+            39,
+            11,
+            17,
+            10,
+            42,
+            16,
+            9,
+            22,
+            15,
+            9,
+            41,
+            20,
+            13,
+            38,
+            28,
+            19,
+            12,
+            42,
+            27,
+            1,
+            5,
+            2,
+            11,
+            16,
+            13,
+            10
+          ],
+          "sha256": "9ba062bb2a644788ad91b78c4c77faa50a1cf611737c4f86c9c1604958b0d0fb"
+        },
+        "negative-y": {
+          "overEight": 30,
+          "peak": 39,
+          "improved": 3,
+          "worsened": 0,
+          "newFrameOverOne": 121,
+          "frameOverOne": 182795,
+          "positions": [
+            9,
+            13,
+            22,
+            30,
+            37,
+            12,
+            17,
+            11,
+            39,
+            16,
+            10,
+            23,
+            15,
+            9,
+            38,
+            21,
+            14,
+            38,
+            28,
+            19,
+            13,
+            39,
+            27,
+            11,
+            14,
+            16,
+            11,
+            12,
+            19,
+            13
+          ],
+          "sha256": "b1617834280883ed30b6b575d637d9e8bc783fc7766e699d0f32e1566bf109d4"
+        }
+      },
+      "intel": {
+        "source-y": {
+          "overEight": 27,
+          "peak": 42,
+          "improved": 13,
+          "worsened": 8,
+          "newFrameOverOne": 4627,
+          "frameOverOne": 189712,
+          "positions": [
+            10,
+            13,
+            26,
+            38,
+            39,
+            11,
+            17,
+            10,
+            42,
+            16,
+            9,
+            22,
+            14,
+            9,
+            41,
+            20,
+            13,
+            38,
+            28,
+            19,
+            12,
+            42,
+            27,
+            1,
+            5,
+            2,
+            11,
+            16,
+            13,
+            10
+          ],
+          "sha256": "36096286e7b512ede91a8b2ce5172a5e355c1a1da9cbc86f71ac04def8e6c55a"
+        },
+        "negative-y": {
+          "overEight": 30,
+          "peak": 39,
+          "improved": 1,
+          "worsened": 1,
+          "newFrameOverOne": 125,
+          "frameOverOne": 186318,
+          "positions": [
+            9,
+            13,
+            22,
+            31,
+            36,
+            12,
+            17,
+            11,
+            39,
+            16,
+            10,
+            23,
+            15,
+            9,
+            38,
+            21,
+            14,
+            37,
+            28,
+            19,
+            13,
+            39,
+            27,
+            11,
+            14,
+            16,
+            11,
+            12,
+            19,
+            13
+          ],
+          "sha256": "114a8cd220e81e1ce9761b8b6ed4b7c21df67e202a1a2a67a5747ee6d7a8d97f"
+        }
+      }
+    }
+  },
+  "archive": {
+    "members": 18,
+    "sha256": "9c7964964852f782b0458d32f94bf4263c1df064fce93aa244f33400af3d0de7"
+  }
+}

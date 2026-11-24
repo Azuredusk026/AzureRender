@@ -1,0 +1,205 @@
+{
+  "status": "retained-trace-comparison",
+  "nativeGameFrame": 3534,
+  "nativeEvent": 8702,
+  "nativeDepthEvent": 8811,
+  "playerEvent": 21668,
+  "inputDepthAlignmentMeters": 0.02,
+  "resolvedAttachmentRows": "native rows reversed to display",
+  "units": "absolute Rec.709 luma of compressed RGB, multiplied by confidence",
+  "scope": "Raw trace, prior to level generation, temporal filtering and final composition",
+  "nativeDepthSha256": "2b1858f3d80354c90a194a7a45c76297349e7794bed35dc59d62b694f6703777",
+  "nativeOutputSha256": {
+    "15781": "2fea6f7dd90000166dd40134eb7b991ba590a4e5dc6ef8824f0998eb6caec609",
+    "16501": "c703a5276d22056e5a12ad4a4c681e5ae92f595a6eda1e2042416a090c3f58f0",
+    "15861": "171466668545a4639d9f0a49809e00a262836a09979e6243ed395cf93f2bf853"
+  },
+  "playerAttachmentSha256": {
+    "currentDepth": "b6c9b61c16c5f22020951ff80dafda2018aaab1710408da33346e93a1a2d119a",
+    "outputConfidence": "a2c0f82a7ca1eb5a6bef9422e7e5ce99b44f7ce094897eb75f598bd52ce7d955",
+    "outputFootprint": "88753d2b4b075348ef54f81fd1bad6ce511657f7c0c1f087d55597d881be72fb",
+    "outputColor": "6eaa98569e8811f8db33de96b5fc997c7ace19908325ea1395c06d8910d27ae3",
+    "surfaceMask": "cd1fb537c37464dc6bc2db970eb5416d81a8d9a72df3ecc98e44d3a083380fef",
+    "normalRoughness": "f03fec3f493693988fc25740deb2d4d8fb5dac7a64f2a35f872c99c370f2625b"
+  },
+  "regions": {
+    "centerFloor": {
+      "halfRectangle": [
+        505,
+        495,
+        775,
+        585
+      ],
+      "depthAlignedSamples": 24073,
+      "bothHitCompressedLuma": {
+        "native": [
+          0.001548390197753906,
+          0.0453416015625,
+          0.1782390625,
+          0.401556015625,
+          0.6858414062499999
+        ],
+        "player": [
+          0.0,
+          0.024426513671875,
+          0.1057171875,
+          0.38389462890625,
+          0.6910140625
+        ],
+        "absoluteDelta": [
+          0.0,
+          0.010173466796874996,
+          0.048842968749999965,
+          0.26550906249999995,
+          0.6652506347656248
+        ],
+        "correlation": 0.5629806518142829
+      },
+      "confidenceWeightedTraceResidual": {
+        "totalAbsoluteLuma": 2245.3272084490586,
+        "subregions": {
+          "bothHits": {
+            "samples": 19043,
+            "absoluteLuma": 1754.6468638594301,
+            "errorShare": 0.7814659962506926
+          },
+          "nativeOnly": {
+            "samples": 2296,
+            "absoluteLuma": 366.2233976230756,
+            "errorShare": 0.16310468970624614
+          },
+          "playerOnly": {
+            "samples": 813,
+            "absoluteLuma": 124.45694696655274,
+            "errorShare": 0.055429314043061166
+          },
+          "neither": {
+            "samples": 1921,
+            "absoluteLuma": 0.0,
+            "errorShare": 0.0
+          }
+        }
+      }
+    },
+    "cyanRing": {
+      "halfRectangle": [
+        520,
+        530,
+        635,
+        590
+      ],
+      "depthAlignedSamples": 6900,
+      "bothHitCompressedLuma": {
+        "native": [
+          0.00876475830078125,
+          0.05293376953125,
+          0.18358652343749998,
+          0.46599375,
+          0.642805078125
+        ],
+        "player": [
+          0.0,
+          0.04074580078125,
+          0.13541914062500002,
+          0.43841093749999993,
+          0.536121875
+        ],
+        "absoluteDelta": [
+          0.0,
+          0.007317851562499997,
+          0.05133437499999999,
+          0.31139164062500035,
+          0.6239674621582032
+        ],
+        "correlation": 0.5257428964715295
+      },
+      "confidenceWeightedTraceResidual": {
+        "totalAbsoluteLuma": 755.9376343943517,
+        "subregions": {
+          "bothHits": {
+            "samples": 6477,
+            "absoluteLuma": 662.4659885257855,
+            "errorShare": 0.8763500563859947
+          },
+          "nativeOnly": {
+            "samples": 180,
+            "absoluteLuma": 49.96875094669117,
+            "errorShare": 0.06610168441570653
+          },
+          "playerOnly": {
+            "samples": 214,
+            "absoluteLuma": 43.502894921875,
+            "errorShare": 0.05754825919829882
+          },
+          "neither": {
+            "samples": 29,
+            "absoluteLuma": 0.0,
+            "errorShare": 0.0
+          }
+        }
+      }
+    },
+    "archivedFloor": {
+      "halfRectangle": [
+        530,
+        550,
+        730,
+        680
+      ],
+      "depthAlignedSamples": 26000,
+      "bothHitCompressedLuma": {
+        "native": [
+          0.021486328125,
+          0.10063964843749999,
+          0.24390859375,
+          0.50544375,
+          0.6858414062499999
+        ],
+        "player": [
+          0.0,
+          0.06046347656249999,
+          0.17657578124999998,
+          0.45022343749999993,
+          0.66926875
+        ],
+        "absoluteDelta": [
+          0.0,
+          0.011795703125000001,
+          0.05258242187500001,
+          0.25898398437500003,
+          0.6239674621582032
+        ],
+        "correlation": 0.5793960413627157
+      },
+      "confidenceWeightedTraceResidual": {
+        "totalAbsoluteLuma": 2743.2591574368043,
+        "subregions": {
+          "bothHits": {
+            "samples": 23041,
+            "absoluteLuma": 2149.639100730549,
+            "errorShare": 0.7836077371337709
+          },
+          "nativeOnly": {
+            "samples": 897,
+            "absoluteLuma": 252.86010693818935,
+            "errorShare": 0.09217507075578382
+          },
+          "playerOnly": {
+            "samples": 1549,
+            "absoluteLuma": 340.7599497680664,
+            "errorShare": 0.1242171921104455
+          },
+          "neither": {
+            "samples": 513,
+            "absoluteLuma": 0.0,
+            "errorShare": 0.0
+          }
+        }
+      }
+    }
+  },
+  "validationZip": {
+    "bytes": 10790,
+    "sha256": "ef831372fa7768ac810c1c0c660ed084b834ea994c4242453592c05abf912471"
+  }
+}

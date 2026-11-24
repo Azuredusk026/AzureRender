@@ -1,0 +1,117 @@
+{
+  "status": "measured-reflection-storage-in-same-frame",
+  "reads": {
+    "a": {
+      "frame": {
+        "png": "ed3552859bb085ec55fd1bdfac54d2c2c10e5aa15219f84856fe4d47b8bdf12e",
+        "referencePng": "a9657b4558f9d3cb03872d60d5e9e979af3eb6eb6c1a69784096148ff6f73c35",
+        "raw": "db58cc78e557b728b80a8a0025c14847210923a9eb080efb6ba8b904c50965ca",
+        "archive": "9a34ee2110b60ee047856f4ccaf1381665486cad092a28c3e8850cb69378ee81",
+        "changed": 41953,
+        "overOne": 40842,
+        "peak": 255,
+        "bounds": [
+          0,
+          0,
+          754,
+          712
+        ]
+      },
+      "againstKnown": {
+        "native": 1540,
+        "native-repeat": 706,
+        "serial-a": 279
+      }
+    },
+    "b": {
+      "frame": {
+        "png": "698f0304489bd61c7622a9a772a13cf344180d6f03bbb669bcbb3293052246f0",
+        "referencePng": "a9657b4558f9d3cb03872d60d5e9e979af3eb6eb6c1a69784096148ff6f73c35",
+        "raw": "3dc30f61d35239fe6fc85508306019e686f2bb59395f0e5810536937ebb93b52",
+        "archive": "f517a0d084b5f4bf46a029e0c26782acfec2bca4a8faa15eff4ef1970f9b1be7",
+        "changed": 43214,
+        "overOne": 41505,
+        "peak": 255,
+        "bounds": [
+          0,
+          0,
+          1272,
+          712
+        ]
+      },
+      "againstKnown": {
+        "native": 279,
+        "native-repeat": 1967,
+        "serial-a": 1540
+      }
+    },
+    "serial": {
+      "frame": {
+        "png": "ed3552859bb085ec55fd1bdfac54d2c2c10e5aa15219f84856fe4d47b8bdf12e",
+        "referencePng": "a9657b4558f9d3cb03872d60d5e9e979af3eb6eb6c1a69784096148ff6f73c35",
+        "raw": "db58cc78e557b728b80a8a0025c14847210923a9eb080efb6ba8b904c50965ca",
+        "archive": "76ab30ecd301dc144b5ab75ac8ee2260dc26a3f811fd409240f973c6e477ffe6",
+        "changed": 41953,
+        "overOne": 40842,
+        "peak": 255,
+        "bounds": [
+          0,
+          0,
+          754,
+          712
+        ]
+      },
+      "againstKnown": {
+        "native": 1540,
+        "native-repeat": 706,
+        "serial-a": 279
+      }
+    }
+  },
+  "pairs": {
+    "a-b": {
+      "storedRgbChanged": 1583,
+      "storedConfidenceChanged": 0,
+      "floorInputSurfaceChanged": 0,
+      "upperStoredRgbChanged": 0,
+      "upperStoredConfidenceChanged": 0,
+      "upperInputSurfaceChanged": 0,
+      "realFloorChanged": 1235,
+      "realUpperChanged": 0,
+      "otherImageChanged": 1261
+    },
+    "a-serial": {
+      "storedRgbChanged": 0,
+      "storedConfidenceChanged": 0,
+      "floorInputSurfaceChanged": 0,
+      "upperStoredRgbChanged": 0,
+      "upperStoredConfidenceChanged": 0,
+      "upperInputSurfaceChanged": 0,
+      "realFloorChanged": 0,
+      "realUpperChanged": 0,
+      "otherImageChanged": 0
+    },
+    "b-serial": {
+      "storedRgbChanged": 1583,
+      "storedConfidenceChanged": 0,
+      "floorInputSurfaceChanged": 0,
+      "upperStoredRgbChanged": 0,
+      "upperStoredConfidenceChanged": 0,
+      "upperInputSurfaceChanged": 0,
+      "realFloorChanged": 1235,
+      "realUpperChanged": 0,
+      "otherImageChanged": 1261
+    }
+  },
+  "player": "f8f86018d82b7e47a399a9cd451a61701122afb6f2dda680456862289167ae38",
+  "programs": {
+    "mesh_object_clipmap_field.frag.spv": "0077f9a2f970cba482c20986d5c7f1b3041b3a60efcc81e2b255f61cfd36be05",
+    "mesh_object_clipmap_field_early.frag.spv": "20eaa4f00f28b1e9fa829dd8e02229d261576f0181bc278b1649129478a17796",
+    "mesh_object_clipmap_field_lighting.frag.spv": "25256f6cf76e35e05def4dff15a56069573025eae7f3c952fd21fb5810b882eb",
+    "mesh_object_clipmap_field_early_lighting.frag.spv": "7b9893e5ea11541ef63b96aba4be7eb69fd1af9e071fb6ed5aa602a18ebcca31"
+  },
+  "source": "2df45c56e9f58a3b6bb18ade2ae2796f6cbab336be2e6a84a0953fde08101fd3",
+  "diagnosticSource": "85cddfdc8d145be5e2b594029bb1d10ea614c664d0efd23b8152df80a57222ab",
+  "job": 1501,
+  "archiveSha256": "5805af364bdad2670bfd128d0b80987ee3689829af8e3fc84f98dca3e10cd14e"
+}

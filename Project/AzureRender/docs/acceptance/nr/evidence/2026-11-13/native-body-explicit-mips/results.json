@@ -1,0 +1,460 @@
+{
+  "scope": "native-event-328-body-normal",
+  "status": "qualified-source-diagnostic",
+  "overallStatus": "failed-user-review",
+  "comparison": {
+    "regions": {
+      "total": 9116,
+      "depthWithinOneUlp": 7997
+    },
+    "devices": {
+      "nvidia": {
+        "copyControlExact": true,
+        "baselineRestored": true,
+        "implicitVsFrozenReceiver": {
+          "exact": 9116,
+          "withinOne": 9116,
+          "maximum": 0
+        },
+        "anyExplicitMip": {
+          "exact": 7997,
+          "withinOne": 7997,
+          "maximum": 0
+        },
+        "uniqueExplicitMip": 5688,
+        "ambiguousExplicitMip": 2309,
+        "implicitLodHypotheses": {
+          "axis-euclidean": {
+            "exact": 7653,
+            "withinOne": 7853,
+            "maximum": 32
+          },
+          "axis-diagonal": {
+            "exact": 7996,
+            "withinOne": 7996,
+            "maximum": 2
+          }
+        },
+        "cpuPredictionsAgainstActualMip": {
+          "rounded": [
+            {
+              "exact": 4671,
+              "withinOne": 7891,
+              "maximum": 26
+            },
+            {
+              "exact": 4886,
+              "withinOne": 7915,
+              "maximum": 153
+            },
+            {
+              "exact": 4700,
+              "withinOne": 7883,
+              "maximum": 135
+            },
+            {
+              "exact": 4577,
+              "withinOne": 7941,
+              "maximum": 148
+            },
+            {
+              "exact": 4401,
+              "withinOne": 7917,
+              "maximum": 271
+            },
+            {
+              "exact": 4689,
+              "withinOne": 7866,
+              "maximum": 2
+            },
+            {
+              "exact": 2571,
+              "withinOne": 7290,
+              "maximum": 135
+            },
+            {
+              "exact": 3661,
+              "withinOne": 7967,
+              "maximum": 93
+            },
+            {
+              "exact": 5568,
+              "withinOne": 7997,
+              "maximum": 1
+            },
+            {
+              "exact": 7521,
+              "withinOne": 7997,
+              "maximum": 1
+            },
+            {
+              "exact": 7517,
+              "withinOne": 7997,
+              "maximum": 1
+            }
+          ],
+          "fractional": [
+            {
+              "exact": 6884,
+              "withinOne": 7996,
+              "maximum": 3
+            },
+            {
+              "exact": 6542,
+              "withinOne": 7995,
+              "maximum": 2
+            },
+            {
+              "exact": 6354,
+              "withinOne": 7958,
+              "maximum": 4
+            },
+            {
+              "exact": 6262,
+              "withinOne": 7993,
+              "maximum": 2
+            },
+            {
+              "exact": 6003,
+              "withinOne": 7995,
+              "maximum": 218
+            },
+            {
+              "exact": 5771,
+              "withinOne": 7997,
+              "maximum": 1
+            },
+            {
+              "exact": 5809,
+              "withinOne": 7988,
+              "maximum": 59
+            },
+            {
+              "exact": 5702,
+              "withinOne": 7997,
+              "maximum": 1
+            },
+            {
+              "exact": 5568,
+              "withinOne": 7997,
+              "maximum": 1
+            },
+            {
+              "exact": 7521,
+              "withinOne": 7997,
+              "maximum": 1
+            },
+            {
+              "exact": 7517,
+              "withinOne": 7997,
+              "maximum": 1
+            }
+          ]
+        }
+      },
+      "intel": {
+        "copyControlExact": true,
+        "baselineRestored": true,
+        "implicitVsFrozenReceiver": {
+          "exact": 7507,
+          "withinOne": 8960,
+          "maximum": 32
+        },
+        "anyExplicitMip": {
+          "exact": 7997,
+          "withinOne": 7997,
+          "maximum": 0
+        },
+        "uniqueExplicitMip": 5662,
+        "ambiguousExplicitMip": 2335,
+        "implicitLodHypotheses": {
+          "axis-euclidean": {
+            "exact": 7979,
+            "withinOne": 7992,
+            "maximum": 3
+          },
+          "axis-diagonal": {
+            "exact": 7640,
+            "withinOne": 7847,
+            "maximum": 32
+          }
+        },
+        "cpuPredictionsAgainstActualMip": {
+          "rounded": [
+            {
+              "exact": 4891,
+              "withinOne": 7916,
+              "maximum": 26
+            },
+            {
+              "exact": 5264,
+              "withinOne": 7930,
+              "maximum": 153
+            },
+            {
+              "exact": 5116,
+              "withinOne": 7958,
+              "maximum": 135
+            },
+            {
+              "exact": 4897,
+              "withinOne": 7971,
+              "maximum": 148
+            },
+            {
+              "exact": 4723,
+              "withinOne": 7862,
+              "maximum": 271
+            },
+            {
+              "exact": 4585,
+              "withinOne": 7894,
+              "maximum": 2
+            },
+            {
+              "exact": 2482,
+              "withinOne": 7390,
+              "maximum": 134
+            },
+            {
+              "exact": 4915,
+              "withinOne": 7995,
+              "maximum": 93
+            },
+            {
+              "exact": 7782,
+              "withinOne": 7997,
+              "maximum": 1
+            },
+            {
+              "exact": 7801,
+              "withinOne": 7997,
+              "maximum": 1
+            },
+            {
+              "exact": 7803,
+              "withinOne": 7997,
+              "maximum": 1
+            }
+          ],
+          "fractional": [
+            {
+              "exact": 7805,
+              "withinOne": 7997,
+              "maximum": 1
+            },
+            {
+              "exact": 7790,
+              "withinOne": 7997,
+              "maximum": 1
+            },
+            {
+              "exact": 7784,
+              "withinOne": 7997,
+              "maximum": 1
+            },
+            {
+              "exact": 7802,
+              "withinOne": 7997,
+              "maximum": 1
+            },
+            {
+              "exact": 7820,
+              "withinOne": 7997,
+              "maximum": 1
+            },
+            {
+              "exact": 7811,
+              "withinOne": 7997,
+              "maximum": 1
+            },
+            {
+              "exact": 7801,
+              "withinOne": 7997,
+              "maximum": 1
+            },
+            {
+              "exact": 7786,
+              "withinOne": 7997,
+              "maximum": 1
+            },
+            {
+              "exact": 7782,
+              "withinOne": 7997,
+              "maximum": 1
+            },
+            {
+              "exact": 7801,
+              "withinOne": 7997,
+              "maximum": 1
+            },
+            {
+              "exact": 7803,
+              "withinOne": 7997,
+              "maximum": 1
+            }
+          ]
+        }
+      }
+    },
+    "crossDevice": {
+      "implicitDifferent": 1609,
+      "explicitDifferentPerLevel": [
+        1210,
+        1593,
+        1791,
+        1993,
+        2165,
+        2483,
+        2444,
+        2558,
+        2703,
+        340,
+        317
+      ]
+    }
+  },
+  "native": {
+    "status": "qualified",
+    "devices": {
+      "nvidia": {
+        "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+        "implicitSha256": "ab75eae17e96713f8ab6938c7224218825c895b1edc30d2874bd808f821f8115",
+        "attachmentSha256": "e21d26ec4c69a65e6e2ac7e3fceff3d3d7da6b5d79e6ee76e29cd42cf4ca8205",
+        "pixelShaderSha256": "907e0a39de60c6fc742ef86c230eb59ef2034b9a92909ce529df469a1986e1bc",
+        "mips": {
+          "0": {
+            "sha256": "9849c3a88392f091aab7463edf004ad9263d238208b24e6a7af5a681d628514b",
+            "programSha256": "25b9e1e9419415d77848c9fdb429d0e60923e3987894a004d5e19b848cfe7d08"
+          },
+          "1": {
+            "sha256": "d3208b50831aa1f2f5a5e5e89df0de51afdf7254b5345fe0ce77696592cc2ad0",
+            "programSha256": "266fd570513c92101d666abe7580206814e550e17cc18d2be19f7a0ed4eb9034"
+          },
+          "2": {
+            "sha256": "8e1e46ea67d6dc83b69adb075e84ee85df20b482dfb63fa23321c712bbbc9bad",
+            "programSha256": "6ca7782c16b2dda33ff8337224a14b343992e0529b3d93beff8cce682762534c"
+          },
+          "3": {
+            "sha256": "6fa4a1b50d2559f95e16d7fec364478907348d73a95d7b6a736e3fd127177a65",
+            "programSha256": "4df4d380139678e4a149ae36ff1cb4209bceb9608d3860ce355d6e3e16ece235"
+          },
+          "4": {
+            "sha256": "fb29db7c42d77351073725af818caf3d3e5b9ded723c5d72d6ae1c3f7b8807bf",
+            "programSha256": "23d7ccb5d83f9ae92ac2e4c1cc7aabc2c1193dafaea20b81f6b353aa57aefaec"
+          },
+          "5": {
+            "sha256": "095e74a14299b0c867ce5cce76e5afb2fd374471eb62dadccfcd32dc9b39a2e8",
+            "programSha256": "6931754b73990c23705799d9b4423742415ead26bac8e27cc792f41b70db49b3"
+          },
+          "6": {
+            "sha256": "a4407d05f278473e62b5f5397992f5f97f2d71458fc8a16c82d07013a62e3685",
+            "programSha256": "964029c97f3b9549c41e32ff93d28b99610e03778b751c47ff612a8e5d33bbc3"
+          },
+          "7": {
+            "sha256": "ca6fba8c8ac9037998f17b3611749f653e920c28b28b9b2d84577e098898bfb2",
+            "programSha256": "b8dc4b45de28f6375106a47a6bea41ee000262d152075f3436e9414f78e1bfec"
+          },
+          "8": {
+            "sha256": "a4ba291520bde0e4998f89a9522ff4ec0600ce38abf2c1679ea931a47fc26292",
+            "programSha256": "2fe3da5bd09100eb0c6d1ca8cc3ca1b9394e68218bf45aadb912d99582f83363"
+          },
+          "9": {
+            "sha256": "66b80b2c3e3503f5b39f507ec3ffffd8e0bfe7bbc6ef4d8964b51ccd0cf51ed8",
+            "programSha256": "3c0006e78fd361ce663e9b301619c137e9fda1cd853e2674818a59a460c9b2f4"
+          },
+          "10": {
+            "sha256": "6d49e4b0f17b3b14f4e03891f29e1896458708660ca4080227c777487f84d72e",
+            "programSha256": "bddc278dcd25285f180505cb6fc530b7ce6df7994c9c26414321930de4c9e6ac"
+          }
+        },
+        "copyControlExact": true,
+        "baselineRestored": true,
+        "messages": [
+          "NVIDIA Nsight Perf SDK\nNVD3D11Counters::GetCounterAvailabilityImage\nNvPerf could not determine counter availability for this GPU",
+          "NVIDIA Nsight Perf SDK\nNVD3D11Counters::Impl::TryInitializePerfSDK\nNvPerf could not initialize counter availability image"
+        ]
+      },
+      "intel": {
+        "device": "Intel(R) UHD Graphics",
+        "implicitSha256": "6ad3ee0fe6f2969a24aec88fdd79c7234073e97a094baa03f4d58c3c07fdf92e",
+        "attachmentSha256": "2b8621a05468cdad7925266e36c81f7d5fe3f24a269505196e5dacba668d58f4",
+        "pixelShaderSha256": "907e0a39de60c6fc742ef86c230eb59ef2034b9a92909ce529df469a1986e1bc",
+        "mips": {
+          "0": {
+            "sha256": "2c99f70970b64410bdfd52091ff4a691562f9df17d7e76214d0cda8da194baea",
+            "programSha256": "25b9e1e9419415d77848c9fdb429d0e60923e3987894a004d5e19b848cfe7d08"
+          },
+          "1": {
+            "sha256": "d843a02830fa917814a124c8daa33216643ec541c655fce3c496bf859696951e",
+            "programSha256": "266fd570513c92101d666abe7580206814e550e17cc18d2be19f7a0ed4eb9034"
+          },
+          "2": {
+            "sha256": "cbd4d65be9e45caa4970263621a3c3e4af03a6b0c0f15b8f609698f7867f8010",
+            "programSha256": "6ca7782c16b2dda33ff8337224a14b343992e0529b3d93beff8cce682762534c"
+          },
+          "3": {
+            "sha256": "6c4ac92be292bf3ec827e080bf41d5c61211ece4f9d2e08b7a81f2965ada8a12",
+            "programSha256": "4df4d380139678e4a149ae36ff1cb4209bceb9608d3860ce355d6e3e16ece235"
+          },
+          "4": {
+            "sha256": "ce59cf76138e09aa64e67d0133b91b35e5955a42f4ccd34c70f5368f45942a04",
+            "programSha256": "23d7ccb5d83f9ae92ac2e4c1cc7aabc2c1193dafaea20b81f6b353aa57aefaec"
+          },
+          "5": {
+            "sha256": "93e49c4b961f6c9a7bb3e84c00057f5dfbcc533cdd71837d78b37f4d286e093e",
+            "programSha256": "6931754b73990c23705799d9b4423742415ead26bac8e27cc792f41b70db49b3"
+          },
+          "6": {
+            "sha256": "1a0701ba8825634140de9a3ddf92ca7e5afc593c6df935cd2bc5604e3d807257",
+            "programSha256": "964029c97f3b9549c41e32ff93d28b99610e03778b751c47ff612a8e5d33bbc3"
+          },
+          "7": {
+            "sha256": "002e2fa4ba8994df6d3b2129c11dc14c073436811f35d4296aac9cb1e3a46dda",
+            "programSha256": "b8dc4b45de28f6375106a47a6bea41ee000262d152075f3436e9414f78e1bfec"
+          },
+          "8": {
+            "sha256": "6a59f8ef5d2df2a8699d1c21cd6b9c76118818ca4c23f99382fb281c9a49e21f",
+            "programSha256": "2fe3da5bd09100eb0c6d1ca8cc3ca1b9394e68218bf45aadb912d99582f83363"
+          },
+          "9": {
+            "sha256": "6f3d1964e19ab6621afbef85627ae809cf576dba690a60942909727e8e74c37d",
+            "programSha256": "3c0006e78fd361ce663e9b301619c137e9fda1cd853e2674818a59a460c9b2f4"
+          },
+          "10": {
+            "sha256": "a2e3202ab4662f3ffb7949064d49b91c8a9c0e79d6689f33a94dbd435aca2741",
+            "programSha256": "bddc278dcd25285f180505cb6fc530b7ce6df7994c9c26414321930de4c9e6ac"
+          }
+        },
+        "copyControlExact": true,
+        "baselineRestored": true,
+        "messages": []
+      }
+    }
+  },
+  "dispatch": {
+    "id": 7,
+    "owner": "01a1d0a9-829a-7c11-a7a8-017e743887d9",
+    "task": "quality-native-body-explicit-mips",
+    "kind": "gpu",
+    "priority": 1,
+    "estimate_seconds": 120.0,
+    "pid": 11684,
+    "state": "succeeded",
+    "submitted": 1794502838.9145463,
+    "started": 1794505533.185436,
+    "ended": 1794505543.7374332,
+    "wait_seconds": 2694.25,
+    "run_seconds": 10.530999999959022,
+    "lock_attempts": 92,
+    "exit_code": 0,
+    "reason": null,
+    "output": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261113-010018-receiver-body-explicit-mips-747472",
+    "log_path": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261113-010018-receiver-body-explicit-mips-747472\\process.log"
+  },
+  "archive": {
+    "sha256": "a429249e47550c9f0419ce98da61295b938b0f97cb7e16a329a13c61fd385df9",
+    "members": 35,
+    "bytes": 665871
+  }
+}

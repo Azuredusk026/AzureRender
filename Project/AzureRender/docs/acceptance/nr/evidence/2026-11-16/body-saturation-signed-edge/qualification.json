@@ -1,0 +1,548 @@
+{
+  "status": "qualified-signed-body-edge-candidate-controls",
+  "source": "ecdfb61f79b2b82c38120576dd2f6d98ecd52852a25601162223fb568e15c8eb",
+  "native": "48afd6546c23cfa85099a765cc94ada4813a684538c695faf6d70d6daf2261b5",
+  "scope": "pixels newly outside unchanged one-color-step tolerance",
+  "productionBodyAcceptance": false,
+  "devices": {
+    "nvidia": {
+      "samples": [
+        {
+          "point": [
+            1250,
+            387
+          ],
+          "distanceFromNativeBodyBoundary": 2.799999952316284,
+          "finalNativePackedColorUnchangedSinceBody": true,
+          "preexistingDelta": [
+            1,
+            1,
+            1
+          ],
+          "saturationDelta": [
+            2,
+            1,
+            1
+          ],
+          "needsHigherRgb": [],
+          "needsLowerRgb": [
+            0
+          ]
+        },
+        {
+          "point": [
+            1373,
+            392
+          ],
+          "distanceFromNativeBodyBoundary": 2.0,
+          "finalNativePackedColorUnchangedSinceBody": true,
+          "preexistingDelta": [
+            1,
+            1,
+            1
+          ],
+          "saturationDelta": [
+            2,
+            1,
+            1
+          ],
+          "needsHigherRgb": [],
+          "needsLowerRgb": [
+            0
+          ]
+        },
+        {
+          "point": [
+            1303,
+            400
+          ],
+          "distanceFromNativeBodyBoundary": 1.0,
+          "finalNativePackedColorUnchangedSinceBody": true,
+          "preexistingDelta": [
+            1,
+            1,
+            1
+          ],
+          "saturationDelta": [
+            2,
+            1,
+            1
+          ],
+          "needsHigherRgb": [],
+          "needsLowerRgb": [
+            0
+          ]
+        },
+        {
+          "point": [
+            1304,
+            400
+          ],
+          "distanceFromNativeBodyBoundary": 2.0,
+          "finalNativePackedColorUnchangedSinceBody": true,
+          "preexistingDelta": [
+            1,
+            1,
+            1
+          ],
+          "saturationDelta": [
+            2,
+            1,
+            1
+          ],
+          "needsHigherRgb": [],
+          "needsLowerRgb": [
+            0
+          ]
+        },
+        {
+          "point": [
+            1265,
+            525
+          ],
+          "distanceFromNativeBodyBoundary": 2.0,
+          "finalNativePackedColorUnchangedSinceBody": true,
+          "preexistingDelta": [
+            1,
+            1,
+            1
+          ],
+          "saturationDelta": [
+            2,
+            1,
+            1
+          ],
+          "needsHigherRgb": [],
+          "needsLowerRgb": [
+            0
+          ]
+        },
+        {
+          "point": [
+            1203,
+            867
+          ],
+          "distanceFromNativeBodyBoundary": 4.196899890899658,
+          "finalNativePackedColorUnchangedSinceBody": true,
+          "preexistingDelta": [
+            -1,
+            -1,
+            1
+          ],
+          "saturationDelta": [
+            0,
+            -2,
+            0
+          ],
+          "needsHigherRgb": [
+            1
+          ],
+          "needsLowerRgb": []
+        }
+      ],
+      "needChannelCorrection": {
+        "lower": 5,
+        "higher": 1
+      },
+      "nativeOwnership": {
+        "bodyUntilFinal": 6
+      },
+      "interiorCount": 0,
+      "source": [
+        "87ceab9ca80473c86708c15f95f8e831b6d1179a23de36061b638a2c169b6993",
+        "42e882e75d56e4bd5d98c18993e3d8114e3f58cdd466d1343d4b72bb60e41e6d"
+      ]
+    },
+    "intel": {
+      "samples": [
+        {
+          "point": [
+            1338,
+            348
+          ],
+          "distanceFromNativeBodyBoundary": 3.0,
+          "finalNativePackedColorUnchangedSinceBody": true,
+          "preexistingDelta": [
+            1,
+            1,
+            1
+          ],
+          "saturationDelta": [
+            2,
+            1,
+            1
+          ],
+          "needsHigherRgb": [],
+          "needsLowerRgb": [
+            0
+          ]
+        },
+        {
+          "point": [
+            1314,
+            360
+          ],
+          "distanceFromNativeBodyBoundary": 5.196899890899658,
+          "finalNativePackedColorUnchangedSinceBody": true,
+          "preexistingDelta": [
+            -1,
+            -1,
+            -1
+          ],
+          "saturationDelta": [
+            -1,
+            -1,
+            -2
+          ],
+          "needsHigherRgb": [
+            2
+          ],
+          "needsLowerRgb": []
+        },
+        {
+          "point": [
+            1212,
+            362
+          ],
+          "distanceFromNativeBodyBoundary": 2.0,
+          "finalNativePackedColorUnchangedSinceBody": true,
+          "preexistingDelta": [
+            -1,
+            0,
+            -1
+          ],
+          "saturationDelta": [
+            -1,
+            0,
+            -2
+          ],
+          "needsHigherRgb": [
+            2
+          ],
+          "needsLowerRgb": []
+        },
+        {
+          "point": [
+            1187,
+            368
+          ],
+          "distanceFromNativeBodyBoundary": 3.59689998626709,
+          "finalNativePackedColorUnchangedSinceBody": true,
+          "preexistingDelta": [
+            1,
+            1,
+            1
+          ],
+          "saturationDelta": [
+            2,
+            1,
+            1
+          ],
+          "needsHigherRgb": [],
+          "needsLowerRgb": [
+            0
+          ]
+        },
+        {
+          "point": [
+            1186,
+            371
+          ],
+          "distanceFromNativeBodyBoundary": 4.196899890899658,
+          "finalNativePackedColorUnchangedSinceBody": true,
+          "preexistingDelta": [
+            1,
+            1,
+            1
+          ],
+          "saturationDelta": [
+            2,
+            1,
+            1
+          ],
+          "needsHigherRgb": [],
+          "needsLowerRgb": [
+            0
+          ]
+        },
+        {
+          "point": [
+            1221,
+            375
+          ],
+          "distanceFromNativeBodyBoundary": 3.196899890899658,
+          "finalNativePackedColorUnchangedSinceBody": true,
+          "preexistingDelta": [
+            1,
+            0,
+            1
+          ],
+          "saturationDelta": [
+            2,
+            0,
+            1
+          ],
+          "needsHigherRgb": [],
+          "needsLowerRgb": [
+            0
+          ]
+        },
+        {
+          "point": [
+            1367,
+            377
+          ],
+          "distanceFromNativeBodyBoundary": 3.0,
+          "finalNativePackedColorUnchangedSinceBody": true,
+          "preexistingDelta": [
+            1,
+            1,
+            1
+          ],
+          "saturationDelta": [
+            2,
+            1,
+            1
+          ],
+          "needsHigherRgb": [],
+          "needsLowerRgb": [
+            0
+          ]
+        },
+        {
+          "point": [
+            1367,
+            378
+          ],
+          "distanceFromNativeBodyBoundary": 3.196899890899658,
+          "finalNativePackedColorUnchangedSinceBody": true,
+          "preexistingDelta": [
+            1,
+            0,
+            1
+          ],
+          "saturationDelta": [
+            2,
+            0,
+            1
+          ],
+          "needsHigherRgb": [],
+          "needsLowerRgb": [
+            0
+          ]
+        },
+        {
+          "point": [
+            1250,
+            387
+          ],
+          "distanceFromNativeBodyBoundary": 2.799999952316284,
+          "finalNativePackedColorUnchangedSinceBody": true,
+          "preexistingDelta": [
+            1,
+            1,
+            1
+          ],
+          "saturationDelta": [
+            2,
+            1,
+            1
+          ],
+          "needsHigherRgb": [],
+          "needsLowerRgb": [
+            0
+          ]
+        },
+        {
+          "point": [
+            1238,
+            388
+          ],
+          "distanceFromNativeBodyBoundary": 5.0,
+          "finalNativePackedColorUnchangedSinceBody": true,
+          "preexistingDelta": [
+            -1,
+            -1,
+            1
+          ],
+          "saturationDelta": [
+            0,
+            -2,
+            1
+          ],
+          "needsHigherRgb": [
+            1
+          ],
+          "needsLowerRgb": []
+        },
+        {
+          "point": [
+            1239,
+            389
+          ],
+          "distanceFromNativeBodyBoundary": 5.793799877166748,
+          "finalNativePackedColorUnchangedSinceBody": true,
+          "preexistingDelta": [
+            -1,
+            0,
+            -1
+          ],
+          "saturationDelta": [
+            0,
+            0,
+            -2
+          ],
+          "needsHigherRgb": [
+            2
+          ],
+          "needsLowerRgb": []
+        },
+        {
+          "point": [
+            1327,
+            394
+          ],
+          "distanceFromNativeBodyBoundary": 14.181398391723633,
+          "finalNativePackedColorUnchangedSinceBody": true,
+          "preexistingDelta": [
+            1,
+            0,
+            1
+          ],
+          "saturationDelta": [
+            2,
+            0,
+            0
+          ],
+          "needsHigherRgb": [],
+          "needsLowerRgb": [
+            0
+          ]
+        },
+        {
+          "point": [
+            1304,
+            399
+          ],
+          "distanceFromNativeBodyBoundary": 2.196899890899658,
+          "finalNativePackedColorUnchangedSinceBody": true,
+          "preexistingDelta": [
+            1,
+            1,
+            1
+          ],
+          "saturationDelta": [
+            2,
+            1,
+            1
+          ],
+          "needsHigherRgb": [],
+          "needsLowerRgb": [
+            0
+          ]
+        },
+        {
+          "point": [
+            1303,
+            400
+          ],
+          "distanceFromNativeBodyBoundary": 1.0,
+          "finalNativePackedColorUnchangedSinceBody": true,
+          "preexistingDelta": [
+            1,
+            1,
+            1
+          ],
+          "saturationDelta": [
+            2,
+            1,
+            1
+          ],
+          "needsHigherRgb": [],
+          "needsLowerRgb": [
+            0
+          ]
+        },
+        {
+          "point": [
+            1304,
+            402
+          ],
+          "distanceFromNativeBodyBoundary": 1.399999976158142,
+          "finalNativePackedColorUnchangedSinceBody": true,
+          "preexistingDelta": [
+            1,
+            1,
+            1
+          ],
+          "saturationDelta": [
+            2,
+            1,
+            1
+          ],
+          "needsHigherRgb": [],
+          "needsLowerRgb": [
+            0
+          ]
+        },
+        {
+          "point": [
+            1265,
+            525
+          ],
+          "distanceFromNativeBodyBoundary": 2.0,
+          "finalNativePackedColorUnchangedSinceBody": true,
+          "preexistingDelta": [
+            1,
+            1,
+            1
+          ],
+          "saturationDelta": [
+            2,
+            1,
+            1
+          ],
+          "needsHigherRgb": [],
+          "needsLowerRgb": [
+            0
+          ]
+        },
+        {
+          "point": [
+            1271,
+            1085
+          ],
+          "distanceFromNativeBodyBoundary": 12.5906982421875,
+          "finalNativePackedColorUnchangedSinceBody": true,
+          "preexistingDelta": [
+            -1,
+            0,
+            -1
+          ],
+          "saturationDelta": [
+            -1,
+            0,
+            -2
+          ],
+          "needsHigherRgb": [
+            2
+          ],
+          "needsLowerRgb": []
+        }
+      ],
+      "needChannelCorrection": {
+        "lower": 12,
+        "higher": 5
+      },
+      "nativeOwnership": {
+        "bodyUntilFinal": 17
+      },
+      "interiorCount": 2,
+      "source": [
+        "6f133cc93ac4edb5309c5c852c22eee8ec8e05cb48070d49c980b343d7cfac47",
+        "7791e691a716f8f52443ccc563034c9dbfc216c0bb19c5db1bb1cfaa8427bb76"
+      ]
+    }
+  },
+  "archiveSha256": "0a8c72224409077dbc92f53c785278e829ae5f438f154807bd80e2c3f6c9ff78"
+}

@@ -326,6 +326,26 @@ void testProjectedHairRamp(const nlohmann::json& fixture,const std::filesystem::
     const auto pointMipPacked=packMaterialSurfaceProfile(load(pointMipSource).materials[0]);
     require(pointMipPacked.rows[6][3]==16&&pointMipPacked.rows[12]==std::array<float,4>{-1,-1,-1,0},
         "Projected hair primary footprint must retain its flag and three sampler biases");
+    require((load(pointMipSource).materials[0].materialFeatures&MaterialFeatureHairReferenceRasterGrid)==0,
+        "Projected hair must retain its reference vertex positions by default");
+    auto rasterGridSource=pointMipSource;
+    auto& rasterGridProfile=rasterGridSource["materials"][0]["extras"]["azureRenderMaterial"];
+    rasterGridProfile["hair"]["projectedRamp"]["referenceRasterGrid"]="nearest-8";
+    const auto rasterGridMaterial=load(rasterGridSource).materials[0];
+    require((rasterGridMaterial.materialFeatures&MaterialFeatureHairReferenceRasterGrid)!=0,
+        "The projected hair reference raster grid must reach the vertex feature word");
+    require(packMaterialSurfaceProfile(rasterGridMaterial).rows==pointMipPacked.rows,
+        "The reference raster grid must preserve the fragment surface profile");
+    for(const auto& value:Json::array({nullptr,true,8,"floor-8"})) {
+        auto invalid=rasterGridSource;
+        invalid["materials"][0]["extras"]["azureRenderMaterial"]["hair"]["projectedRamp"]["referenceRasterGrid"]=value;
+        reject(invalid,"referenceRasterGrid");
+    }
+    auto unsupportedRasterGrid=rasterGridSource;
+    auto& unsupportedGridProfile=unsupportedRasterGrid["materials"][0]["extras"]["azureRenderMaterial"];
+    unsupportedGridProfile["hair"]["projectedRamp"].erase("primaryTextureFootprint");
+    unsupportedGridProfile["features"]={"hair-anisotropy","hair-projected-ramp"};
+    reject(unsupportedRasterGrid,"referenceRasterGrid");
     auto invalidFootprint=pointMipSource;
     invalidFootprint["materials"][0]["extras"]["azureRenderMaterial"]["features"]={"hair-anisotropy","hair-projected-ramp"};
     reject(invalidFootprint,"primaryTextureFootprint");
@@ -647,6 +667,51 @@ void testMultiplyComposite(const nlohmann::json& fixture, const std::filesystem:
     require(overlay.alphaMode==AssetAlphaMode::Blend
         &&(overlay.materialFeatures&MaterialFeatureMultiplyComposite)!=0,
         "Multiply composite must retain its explicit transparent feature");
+    auto eyeOverlay=source;
+    auto& eyeComposite=eyeOverlay["materials"][0]["extras"]["azureRenderMaterial"]["composite"];
+    eyeComposite["receiver"]="eye";
+    eyeComposite["coverageScale"]=.95;
+    const auto eyeProfile=azurerender::packMaterialSurfaceProfile(load(eyeOverlay).materials.at(0));
+    require(eyeProfile.rows[20][0]==1.F&&eyeProfile.rows[20][1]==.95F,
+        "Eye multiply composite must carry its receiver filter and coverage scale");
+    auto faceOverlay=eyeOverlay;
+    faceOverlay["materials"][0]["extras"]["azureRenderMaterial"]["composite"]["receiver"]="face";
+    const auto faceProfile=azurerender::packMaterialSurfaceProfile(load(faceOverlay).materials.at(0));
+    require(faceProfile.rows[20][0]==2.F&&faceProfile.rows[20][1]==.95F,
+        "Face multiply composite must carry a distinct receiver filter and the coverage scale");
+    auto depthOverlay=faceOverlay;
+    auto& depthComposite=depthOverlay["materials"][0]["extras"]["azureRenderMaterial"]["composite"];
+    depthComposite["depthPrepass"]=true;
+    const auto depthMaterial=load(depthOverlay).materials.at(0);
+    require(depthMaterial.multiplyDepthPrepass&&packMaterialSurfaceProfile(depthMaterial).rows[20][3]==1.F,
+        "Receiver-bound multiply must carry the depth prepass through the packed material");
+    depthComposite.erase("receiver");
+    reject(depthOverlay);
+    depthComposite["receiver"]="face";
+    for(const auto& value:Json::array({1,"true",nullptr})){
+        depthComposite["depthPrepass"]=value;
+        reject(depthOverlay);
+    }
+    depthComposite["depthPrepass"]=true;
+    auto depthConflict=depthOverlay;
+    depthConflict["materials"][0]["extras"]["azureRenderMaterial"]["blendDepth"]={{"schemaVersion",1},{"write",true}};
+    reject(depthConflict);
+    depthComposite["depthPrepass"]=false;
+    require(!load(depthOverlay).materials.at(0).multiplyDepthPrepass,
+        "An explicitly disabled prepass must keep ordinary multiply recording");
+    const auto defaultProfile=azurerender::packMaterialSurfaceProfile(overlay);
+    require(defaultProfile.rows[20][0]==0.F&&defaultProfile.rows[20][1]==1.F,
+        "Multiply composite defaults must preserve unrestricted coverage");
+    for(const auto& value:Json::array({"skin","other",1,false,nullptr})) {
+        auto invalid=eyeOverlay;
+        invalid["materials"][0]["extras"]["azureRenderMaterial"]["composite"]["receiver"]=value;
+        reject(invalid);
+    }
+    for(const auto& value:Json::array({-.01,1.01,".95",nullptr})) {
+        auto invalid=eyeOverlay;
+        invalid["materials"][0]["extras"]["azureRenderMaterial"]["composite"]["coverageScale"]=value;
+        reject(invalid);
+    }
     auto generic=source;
     generic["materials"][0]["extras"]["azureRenderMaterial"]["class"]="generic";
     generic["materials"][0]["extras"]["azureRenderMaterial"]["features"]={"multiply-composite"};
@@ -845,6 +910,199 @@ void testMaterialUvPolicy(const nlohmann::json& fixture,const std::filesystem::p
     std::ofstream(materialPath)<<MaterialData::parse(document).encode().dump();
     const auto reopened=MaterialData::load(materialPath).interpret([](const std::string&)->std::filesystem::path{throw std::runtime_error("Unexpected UV policy image");});
     require((reopened.materialFeatures&MaterialFeatureMirroredCoarseUv)!=0,"Material save and reopen preserves UV policy");
+}
+
+void testFaceHighlightProfile(const nlohmann::json& fixture,const std::filesystem::path& directory) {
+    using Json=nlohmann::json;
+    auto source=fixture;
+    source["materials"]=Json::array({source["materials"][0]});
+    for(auto& mesh:source["meshes"])for(auto& primitive:mesh["primitives"])primitive["material"]=0;
+    auto& material=source["materials"][0];
+    material.erase("extensions");
+    material.erase("emissiveTexture");
+    material.erase("emissiveFactor");
+    const int image=static_cast<int>(source["images"].size());
+    const std::array<std::uint8_t,4> pixel{64,64,64,255};
+    require(stbi_write_png((directory/"face-highlight.png").string().c_str(),1,1,4,pixel.data(),4)!=0,
+        "Cannot write face highlight fixture");
+    source["images"].push_back({{"uri","face-highlight.png"}});
+    const int texture=static_cast<int>(source["textures"].size());
+    source["textures"].push_back({{"source",image}});
+    source["nodes"].push_back({{"name","HighlightHead"}});
+    const auto profile=[](Json& document)->Json& {return document["materials"][0]["extras"]["azureRenderMaterial"];};
+    profile(source)={{"schemaVersion",2},{"class","face"},{"features",{"face-sdf-eligible"}},
+        {"faceSdf",{{"schemaVersion",2},{"texture",texture},{"maskTexture",texture},{"rampTexture",texture},
+            {"texCoord",0},{"headNode","HighlightHead"},{"headBasis",{1,0,0,0,1,0,0,0,1}},
+            {"highlight",{{"schemaVersion",1},{"texture",texture},{"viewOffset",{.03,-.02}}}}}},
+        {"nprDiffuse",{{"schemaVersion",1},{"shadowScale",1},{"lightingInputs","host-scene-radiance"},
+            {"shadowMask","none"},{"baseAo","one"},{"shadowAlbedo","base-color"}}}};
+    const auto path=directory/"face-highlight.gltf";
+    const auto load=[&](const Json& doc){std::ofstream(path)<<doc.dump();return loadGltfAsset(path.string()).materials.at(0);};
+    const auto loaded=load(source);
+    require(loaded.specularEmissiveWidth==1&&loaded.specularEmissiveHeight==1
+        &&loaded.textureSettings[3].colorSpace=="linear"&&loaded.textureSettings[3].mipBias==-1.F,
+        "Face highlight must load its linear texture into the shared material slot");
+    require(packMaterialSurfaceProfile(loaded).rows[12]==PackedMaterialSurfaceProfile::Row{.03F,-.02F,1.F,0.F},
+        "Face highlight must retain the authored view shift and presence");
+    auto legacy=source;profile(legacy)["faceSdf"].erase("highlight");
+    require(packMaterialSurfaceProfile(load(legacy)).rows[12][2]==0.F,"Face highlight must be opt-in");
+    auto mipMask=source;
+    std::filesystem::copy_file(directory/"outline-mask.dds",directory/"face-geometry-mask.dds",
+        std::filesystem::copy_options::overwrite_existing);
+    const int maskImage=static_cast<int>(mipMask["images"].size());
+    const int maskTexture=static_cast<int>(mipMask["textures"].size());
+    mipMask["images"].push_back({{"uri","face-geometry-mask.dds"}});
+    mipMask["textures"].push_back({{"source",maskImage}});
+    auto& maskProfile=profile(mipMask)["faceSdf"];
+    maskProfile["maskTexture"]=maskTexture;
+    maskProfile["maskSampling"]="authored-mip";
+    const auto authoredMask=load(mipMask);
+    using MipFilter=TextureImportSettings::MipFilter;
+    require(authoredMask.textureSettings[4].mipPolicy=="generate"
+        &&authoredMask.textureSettings[4].mipBias==-1.F
+        &&authoredMask.textureSettings[4].mipFilter==MipFilter::Nearest
+        &&authoredMask.authoredMipLevels[4]==2
+        &&packMaterialSurfaceProfile(authoredMask).rows[20][2]==1.F,
+        "Face SDF mask sampling must retain the authored mip chain and select the shader policy");
+    require(authoredMask.textureSettings[5].mipPolicy=="none"&&authoredMask.textureSettings[7].mipPolicy=="none",
+        "Face distance-field and ramp lookups must retain explicit base-level sampling");
+    auto fixedMask=mipMask;
+    profile(fixedMask)["faceSdf"].erase("maskSampling");
+    const auto fixed=load(fixedMask);
+    require(fixed.textureSettings[4].mipPolicy=="none"&&packMaterialSurfaceProfile(fixed).rows[20][2]==0.F,
+        "Omitted mask sampling must preserve the fixed lookup");
+    const auto rejectMaskSampling=[&](const Json& document) {
+        std::string failure;
+        try{(void)load(document);}catch(const std::exception& error){failure=error.what();}
+        require(failure.find("faceSdf.maskSampling")!=std::string::npos,
+            "Invalid face SDF mask sampling must report its field");
+    };
+    auto invalidMask=mipMask;
+    profile(invalidMask)["faceSdf"]["maskSampling"]=true;
+    rejectMaskSampling(invalidMask);
+    invalidMask=mipMask;
+    invalidMask["images"][maskImage]["uri"]="face-highlight.png";
+    rejectMaskSampling(invalidMask);
+    invalidMask=mipMask;
+    profile(invalidMask)["faceSdf"]["schemaVersion"]=1;
+    profile(invalidMask)["faceSdf"].erase("highlight");
+    rejectMaskSampling(invalidMask);
+    const auto maskMetadata=directory/"face-geometry-mask.dds.azmeta";
+    std::ofstream(maskMetadata)<<Json{{"settings",{{"texture",{{"mipFilter","linear"}}}}}}.dump();
+    rejectMaskSampling(mipMask);
+    std::filesystem::remove(maskMetadata);
+    require(packMaterialSurfaceProfile(loaded).rows[12][3]==0.F,"Face main brightness saturation must be opt-in");
+    auto saturated=source;profile(saturated)["nprDiffuse"]["mainBrightnessSaturation"]=true;
+    require(packMaterialSurfaceProfile(load(saturated)).rows[12][3]==1.F,
+        "Face main brightness saturation must reach the lighting profile");
+    profile(saturated)["faceSdf"].erase("highlight");
+    require(packMaterialSurfaceProfile(load(saturated)).rows[12][3]==1.F,
+        "Face main brightness saturation must also support a face without a highlight texture");
+    auto saturatedSkin=source;
+    profile(saturatedSkin)["class"]="skin";
+    profile(saturatedSkin)["features"]=Json::array();
+    profile(saturatedSkin).erase("faceSdf");
+    profile(saturatedSkin)["nprDiffuse"]["mainBrightnessSaturation"]=true;
+    const auto skin=load(saturatedSkin);
+    require(skin.materialClass==AssetMaterialClass::Skin
+        &&packMaterialSurfaceProfile(skin).rows[12][3]==1.F,
+        "Opaque NPR skin must carry explicit main brightness saturation");
+    saturatedSkin["materials"][0]["alphaMode"]="BLEND";
+    std::string saturationError;
+    try{(void)load(saturatedSkin);}catch(const std::exception& error){saturationError=error.what();}
+    require(saturationError.find("nprDiffuse.mainBrightnessSaturation")!=std::string::npos,
+        "Blended skin must reject main brightness saturation");
+    auto maskedTint=source;
+    profile(maskedTint)["nprDiffuse"]["viewTint"]={{"schemaVersion",1},{"scale",.85},
+        {"color",{.38,.12,.14}},{"mode","face-mask"},{"geometryScale",.595}};
+    auto tintRows=packMaterialSurfaceProfile(load(maskedTint)).rows;
+    require(tintRows[2]==PackedMaterialSurfaceProfile::Row{.38F,.12F,.14F,.85F}
+        &&tintRows[6][1]==1.F&&tintRows[6][2]==.595F,
+        "Face view tint must carry its mask policy and geometry scale");
+    auto localRadial=source;
+    profile(localRadial)["nprDiffuse"]["indirectNormal"]="face-frame-radial-horizontal";
+    profile(localRadial)["nprDiffuse"]["localDiffuseNormal"]="indirect";
+    require(packMaterialSurfaceProfile(load(localRadial)).rows[6][3]==1.F,
+        "Face local diffuse must be able to consume its authored indirect normal");
+    require(packMaterialSurfaceProfile(loaded).rows[6][3]==0.F,
+        "Omitted local diffuse normal must retain surface lighting");
+    profile(localRadial)["nprDiffuse"]["indirectNormal"]="surface";
+    std::string localError;
+    try{(void)load(localRadial);}catch(const std::exception& error){localError=error.what();}
+    require(localError.find("nprDiffuse.localDiffuseNormal")!=std::string::npos,
+        "A local indirect normal must have an authored radial source");
+    auto geometryTint=maskedTint;
+    auto& geometryViewTint=profile(geometryTint)["nprDiffuse"]["viewTint"];
+    geometryViewTint.erase("mode");
+    geometryViewTint.erase("geometryScale");
+    const auto geometryRows=packMaterialSurfaceProfile(load(geometryTint)).rows;
+    require(geometryRows[2]==tintRows[2]&&geometryRows[6][1]==0.F,
+        "Geometry view tint must preserve the existing material profile");
+    const auto rejectTint=[&](const Json& doc){
+        std::string message;
+        try{(void)load(doc);}catch(const std::exception& error){message=error.what();}
+        require(message.find("nprDiffuse.viewTint")!=std::string::npos,
+            "Invalid face view tint must report its own field");
+    };
+    auto invalidTint=maskedTint;
+    profile(invalidTint)["nprDiffuse"]["viewTint"]["geometryScale"]=1.01;
+    rejectTint(invalidTint);
+    invalidTint=maskedTint;
+    profile(invalidTint)["nprDiffuse"]["viewTint"].erase("geometryScale");
+    rejectTint(invalidTint);
+    invalidTint=maskedTint;
+    profile(invalidTint)["nprDiffuse"]["viewTint"]["mode"]="other";
+    rejectTint(invalidTint);
+    const auto reject=[&](const Json& doc){
+        std::string message;
+        try{(void)load(doc);}catch(const std::exception& error){message=error.what();}
+        require(message.find("highlight")!=std::string::npos,"Invalid face highlight must produce its own diagnostic");
+    };
+    auto bad=source;profile(bad)["faceSdf"]["highlight"]["viewOffset"]={.3};reject(bad);
+    bad=source;profile(bad)["faceSdf"]["highlight"]["texture"]=texture+100;reject(bad);
+    bad=source;profile(bad).erase("nprDiffuse");reject(bad);
+    bad=source;bad["materials"][0]["emissiveTexture"]={{"index",texture}};reject(bad);
+    bad=source;profile(bad)["nprDiffuse"]["mainBrightnessSaturation"]="true";
+    try {
+        (void)load(bad);
+        require(false,"Face main brightness saturation must reject non-boolean inputs");
+    } catch(const std::exception& error) {
+        require(std::string(error.what()).find("nprDiffuse.mainBrightnessSaturation")!=std::string::npos,
+            "Face main brightness saturation must report its field name");
+    }
+}
+
+void testMaterialColorAdjustment(const nlohmann::json& fixture,const std::filesystem::path& directory) {
+    using Json=nlohmann::json;
+    auto source=fixture;
+    auto& material=source["materials"][0];
+    material.erase("extensions");
+    material["alphaMode"]="BLEND";
+    material["extras"]["azureRenderMaterial"]={{"schemaVersion",2},{"class","fabric"},
+        {"features",Json::array()},
+        {"colorAdjustment",{{"schemaVersion",1},{"brightness",1},{"contrast",1},{"saturation",1},
+            {"tint",{1,1,1,0}},{"rim",{{"color",{.2,.02,.01}},{"intensity",2.5},{"width",.75}}}}}};
+    const auto path=directory/"color-adjustment.gltf";
+    const auto load=[&](const Json& doc){std::ofstream(path)<<doc.dump();return loadGltfAsset(path.string()).materials.at(0);};
+    const auto profile=[](Json& doc)->Json& {return doc["materials"][0]["extras"]["azureRenderMaterial"];};
+    const auto loaded=packMaterialSurfaceProfile(load(source));
+    require(loaded.rows[13]==PackedMaterialSurfaceProfile::Row{1,1,1,1}
+        &&loaded.rows[14]==PackedMaterialSurfaceProfile::Row{1,1,1,0}
+        &&loaded.rows[15]==PackedMaterialSurfaceProfile::Row{.2F,.02F,.01F,2.5F}
+        &&loaded.rows[16][0]==.75F,"Color adjustment must retain the public profile fields");
+    auto legacy=source;profile(legacy).erase("colorAdjustment");
+    require(packMaterialSurfaceProfile(load(legacy)).rows[13][3]==0,"Color adjustment must be opt-in");
+    const auto reject=[&](const Json& doc){
+        std::string message;
+        try{(void)load(doc);}catch(const std::exception& error){message=error.what();}
+        require(message.find("colorAdjustment")!=std::string::npos,"Invalid colorAdjustment must produce its own diagnostic");
+    };
+    auto bad=source;profile(bad)["colorAdjustment"]["rim"]["width"]=1.01;reject(bad);
+    bad=source;profile(bad)["colorAdjustment"]["rim"]["color"]={.2,.1};reject(bad);
+    bad=source;profile(bad)["colorAdjustment"]["tint"]={1,1,1,1.01};reject(bad);
+    bad=source;profile(bad)["colorAdjustment"]["extra"]=false;reject(bad);
+    bad=source;profile(bad)["schemaVersion"]=1;reject(bad);
+    bad=source;profile(bad)["class"]="hair";reject(bad);
 }
 
 void testMaterialRadianceScale(const nlohmann::json& fixture,const std::filesystem::path& directory) {
@@ -1070,6 +1328,25 @@ void testEyeRadialSurface(const nlohmann::json& fixture,const std::filesystem::p
     lighting(nprEye)["mainColor"]={1,.92,.86};
     lighting(nprEye)["shadowScale"]=.55;
     const auto nprMaterial=load(nprEye).materials.at(0);
+    auto framedEye=nprEye;
+    framedEye["nodes"].push_back({{"name","eye-light-frame"}});
+    framedEye["scenes"][0]["nodes"].push_back(1);
+    lighting(framedEye)["mainRampFrame"]={{"schemaVersion",1},{"node","eye-light-frame"},
+        {"basis",{1,0,0,0,1,0,0,0,1}}};
+    const auto projected=load(framedEye);
+    const auto packedProjected=azurerender::packMaterialSurfaceProfile(projected.materials.at(0));
+    require(packedProjected.rows[6][1]==1.F,"Eye head-plane main ramp must enable its packed shader option");
+    for(const auto* name:{"missing","duplicate","invalid-basis","host-lambert"}){
+        auto invalid=framedEye;
+        if(std::string_view(name)=="missing")invalid["nodes"][1]["name"]="other";
+        if(std::string_view(name)=="duplicate")invalid["nodes"].push_back(invalid["nodes"][1].get<Json>());
+        if(std::string_view(name)=="invalid-basis")lighting(invalid)["mainRampFrame"]["basis"][4]=0;
+        if(std::string_view(name)=="host-lambert"){
+            auto frame=lighting(invalid)["mainRampFrame"].get<Json>();
+            lighting(invalid)=authoredLighting;lighting(invalid)["mainRampFrame"]=std::move(frame);
+        }
+        reject(invalid,"mainRampFrame");
+    }
     require(nprMaterial.eyeSurface.nprLighting&&std::abs(nprMaterial.eyeSurface.shadowScale-.55F)<1e-6F,
         "Eye NPR lighting fields must reach the typed material");
     const auto nprPacked=packMaterialSurfaceProfile(nprMaterial);
@@ -1296,6 +1573,8 @@ int main(int argc,char** argv) { try {
     testOutlineSurface(input,directory);
     testMaterialOutputPrecision(input,directory);
     testMaterialUvPolicy(input,directory);
+    testFaceHighlightProfile(input,directory);
+    testMaterialColorAdjustment(input,directory);
     testMaterialRadianceScale(input,directory);
     testMaterialDisplayTransform(input,directory);
     testEyeRadialSurface(input,directory);

@@ -1,0 +1,293 @@
+{
+  "status": "qualified-eye-receiver",
+  "overallStatus": "failed-user-review",
+  "devices": {
+    "nvidia": {
+      "device": "nvidia",
+      "baselineControl": {
+        "samples": 3686400,
+        "overOne": 0,
+        "peak": 0
+      },
+      "baselineControlPositions": [],
+      "localCandidateChanged": 94,
+      "localOutsideNativeOverlayOverOne": 0,
+      "remoteCandidateChanged": 0,
+      "candidateChanged": 94,
+      "nativeOverlayChanged": 95,
+      "coveredIrisChanged": 94,
+      "uncoveredIrisChanged": 0,
+      "changedOutsideNativeOverlay": 0,
+      "outsideNativeOverlayOverOne": {
+        "samples": 3686305,
+        "overOne": 0,
+        "peak": 0
+      },
+      "baseline": {
+        "iris": {
+          "samples": 255,
+          "overOne": 131,
+          "peak": 95
+        },
+        "iris-native-overlay": {
+          "samples": 94,
+          "overOne": 94,
+          "peak": 95
+        },
+        "iris-outside-native-overlay": {
+          "samples": 161,
+          "overOne": 37,
+          "peak": 20
+        },
+        "face": {
+          "samples": 1176,
+          "overOne": 1174,
+          "peak": 46
+        },
+        "skin": {
+          "samples": 28966,
+          "overOne": 10957,
+          "peak": 44
+        }
+      },
+      "candidate": {
+        "iris": {
+          "samples": 255,
+          "overOne": 52,
+          "peak": 20
+        },
+        "iris-native-overlay": {
+          "samples": 94,
+          "overOne": 15,
+          "peak": 15
+        },
+        "iris-outside-native-overlay": {
+          "samples": 161,
+          "overOne": 37,
+          "peak": 20
+        },
+        "face": {
+          "samples": 1176,
+          "overOne": 1174,
+          "peak": 46
+        },
+        "skin": {
+          "samples": 28966,
+          "overOne": 10957,
+          "peak": 44
+        }
+      },
+      "candidateRegional": {
+        "iris": {
+          "pixels": 255,
+          "ssim": 0.9800910046468799,
+          "medianLuminanceRelativeError": 0.011089778228747777,
+          "passed": true
+        },
+        "iris-native-overlay": {
+          "pixels": 94,
+          "ssim": 0.9734897118304664,
+          "medianLuminanceRelativeError": 0.015948689725813703,
+          "passed": true
+        },
+        "iris-outside-native-overlay": {
+          "pixels": 161,
+          "ssim": 0.9839451756080156,
+          "medianLuminanceRelativeError": 0.04180495322005739,
+          "passed": true
+        },
+        "face": {
+          "pixels": 1176,
+          "ssim": 0.9948966785519591,
+          "medianLuminanceRelativeError": 0.019484224638619554,
+          "passed": true
+        },
+        "skin": {
+          "pixels": 28966,
+          "ssim": 0.9883011336151029,
+          "medianLuminanceRelativeError": 0.002132151353702811,
+          "passed": true
+        }
+      },
+      "candidateSha256": "d036aa5592c0de8d0ada56f78db4ab0b9932f4627e6568699b24e0af5fb390db"
+    },
+    "intel": {
+      "device": "intel",
+      "baselineControl": {
+        "samples": 3686400,
+        "overOne": 0,
+        "peak": 0
+      },
+      "baselineControlPositions": [],
+      "localCandidateChanged": 94,
+      "localOutsideNativeOverlayOverOne": 0,
+      "remoteCandidateChanged": 0,
+      "candidateChanged": 94,
+      "nativeOverlayChanged": 95,
+      "coveredIrisChanged": 94,
+      "uncoveredIrisChanged": 0,
+      "changedOutsideNativeOverlay": 0,
+      "outsideNativeOverlayOverOne": {
+        "samples": 3686305,
+        "overOne": 0,
+        "peak": 0
+      },
+      "baseline": {
+        "iris": {
+          "samples": 255,
+          "overOne": 133,
+          "peak": 95
+        },
+        "iris-native-overlay": {
+          "samples": 94,
+          "overOne": 94,
+          "peak": 95
+        },
+        "iris-outside-native-overlay": {
+          "samples": 161,
+          "overOne": 39,
+          "peak": 27
+        },
+        "face": {
+          "samples": 1176,
+          "overOne": 1170,
+          "peak": 34
+        },
+        "skin": {
+          "samples": 28966,
+          "overOne": 10485,
+          "peak": 44
+        }
+      },
+      "candidate": {
+        "iris": {
+          "samples": 255,
+          "overOne": 56,
+          "peak": 27
+        },
+        "iris-native-overlay": {
+          "samples": 94,
+          "overOne": 17,
+          "peak": 15
+        },
+        "iris-outside-native-overlay": {
+          "samples": 161,
+          "overOne": 39,
+          "peak": 27
+        },
+        "face": {
+          "samples": 1176,
+          "overOne": 1170,
+          "peak": 34
+        },
+        "skin": {
+          "samples": 28966,
+          "overOne": 10485,
+          "peak": 44
+        }
+      },
+      "candidateRegional": {
+        "iris": {
+          "pixels": 255,
+          "ssim": 0.9830627236088976,
+          "medianLuminanceRelativeError": 0.009946273866373248,
+          "passed": true
+        },
+        "iris-native-overlay": {
+          "pixels": 94,
+          "ssim": 0.97415469858024,
+          "medianLuminanceRelativeError": 0.013474759647834691,
+          "passed": true
+        },
+        "iris-outside-native-overlay": {
+          "pixels": 161,
+          "ssim": 0.9882636823212818,
+          "medianLuminanceRelativeError": 0.04436649685040958,
+          "passed": true
+        },
+        "face": {
+          "pixels": 1176,
+          "ssim": 0.9950648058786188,
+          "medianLuminanceRelativeError": 0.01659997511672593,
+          "passed": true
+        },
+        "skin": {
+          "pixels": 28966,
+          "ssim": 0.9884022894532879,
+          "medianLuminanceRelativeError": 0.0009760491156015975,
+          "passed": true
+        }
+      },
+      "candidateSha256": "4c2d142dfdef92b76feb0f895c7f2be1211da6f275ac607fc6daccdba45f5952"
+    }
+  },
+  "frozen": {
+    "status": "source-driver-unavailable",
+    "expectedDriver": 2484371456,
+    "error": "vkEnumeratePhysicalDevices returned -3"
+  },
+  "newDriverFrozen": {
+    "expected": [
+      "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+      "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+      "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+      "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574"
+    ],
+    "actual": [
+      "b57a67f263f0bc0d9cc53a279f74e90696b47c5802e60cd5b54196cc647fbdc3",
+      "dcf466cd4ea345671eaad5efd4128584e02de9a05e6f218acf2ebf5409abe90f",
+      "974756b6d8dba263a333c613eaf24a33d53be96b24e6c000b78646341f492050",
+      "e27b4d25426d5d36725ccb159d7fe2324f4eb60b0993d369e91e45260bc6fbeb"
+    ],
+    "exact": false
+  },
+  "sameDriverControl": {
+    "candidatePlayerSha256": "15af3bcbc67daec51bb88e71f9715494b80e41ce386cb928ace8b45acb44eebd",
+    "preChangeFragmentCount": 769,
+    "driver": 2496905216,
+    "comparison": [
+      {
+        "frame": "frame_000000.png",
+        "pngExact": true,
+        "anyPixels": 0,
+        "overOne": 0,
+        "maximum": 0
+      },
+      {
+        "frame": "frame_000001.png",
+        "pngExact": true,
+        "anyPixels": 0,
+        "overOne": 0,
+        "maximum": 0
+      },
+      {
+        "frame": "frame_000002.png",
+        "pngExact": true,
+        "anyPixels": 0,
+        "overOne": 0,
+        "maximum": 0
+      },
+      {
+        "frame": "frame_000003.png",
+        "pngExact": true,
+        "anyPixels": 0,
+        "overOne": 0,
+        "maximum": 0
+      }
+    ],
+    "exact": true
+  },
+  "tests": {
+    "cpu": "iris-production-cpu.log",
+    "intel": "iris-production-intel-ctest.log",
+    "nvidia": "iris-production-nvidia-retest-ctest.log",
+    "receiverIntel": "iris-receiver-registered-intel.log",
+    "receiverNvidia": "iris-receiver-registered-nvidia.log"
+  },
+  "playerSha256": "15af3bcbc67daec51bb88e71f9715494b80e41ce386cb928ace8b45acb44eebd",
+  "shaderCount": 895,
+  "archive": {
+    "sha256": "3576717ab324d5bdf39063cb25572cb1d0ad0684c99c5f91e84d3f273343227e",
+    "members": 53
+  }
+}

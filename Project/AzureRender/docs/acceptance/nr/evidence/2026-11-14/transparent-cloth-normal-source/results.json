@@ -1,0 +1,91 @@
+{
+  "overallStatus": "failed-user-review",
+  "evidenceType": "native-shader-trace",
+  "event": 1383,
+  "normalResource": {
+    "binding": 21,
+    "format": "BC5_UNORM",
+    "mipCount": 12
+  },
+  "points": [
+    {
+      "point": [
+        1234,
+        789
+      ],
+      "primitive": 1207,
+      "isotropicLod": 0.0712737634191231,
+      "shaderSample": [
+        0.5612726211547852,
+        0.20904859900474548
+      ],
+      "baseNormal": [
+        0.5310554504394531,
+        0.8451999425888062,
+        -0.06014304980635643
+      ],
+      "normalIntensity": 1.0,
+      "isFrontFace": false,
+      "signedDoubleArea": -139.878173828125,
+      "selectedMip": 0,
+      "selectedSampleMaxError": 0.001678612652946887,
+      "selectedBaseNormalAngularError": 0.19630847073229907,
+      "detailApplied": false,
+      "baseToRimAngle": 0.0
+    },
+    {
+      "point": [
+        1231,
+        792
+      ],
+      "primitive": 2968,
+      "isotropicLod": 1.6607545001503712,
+      "shaderSample": [
+        0.5652094483375549,
+        0.31030747294425964
+      ],
+      "baseNormal": [
+        0.7424913644790649,
+        0.6665984988212585,
+        -0.06597664207220078
+      ],
+      "normalIntensity": 1.0,
+      "isFrontFace": false,
+      "signedDoubleArea": -53.523193359375,
+      "selectedMip": 1,
+      "selectedSampleMaxError": 0.0017391090299568868,
+      "selectedBaseNormalAngularError": 0.21715578706886596,
+      "detailApplied": false,
+      "baseToRimAngle": 0.02533278828140836
+    },
+    {
+      "point": [
+        1166,
+        784
+      ],
+      "primitive": 902,
+      "isotropicLod": 0.25784683639182226,
+      "shaderSample": [
+        0.4788738787174225,
+        0.5093156099319458
+      ],
+      "baseNormal": [
+        0.8870657086372375,
+        0.13847072422504425,
+        0.4403863549232483
+      ],
+      "normalIntensity": 1.0,
+      "isFrontFace": true,
+      "signedDoubleArea": 233.848388671875,
+      "selectedMip": 0,
+      "selectedSampleMaxError": 0.0029728005914126943,
+      "selectedBaseNormalAngularError": 0.45243874594566924,
+      "detailApplied": false,
+      "baseToRimAngle": 0.030906803514638554
+    }
+  ],
+  "archive": {
+    "sha256": "a4ee637dcbdf2d8714baae18ec95a18d01b6588dc3204c955ffc5766c77ca520",
+    "members": 22
+  }
+}

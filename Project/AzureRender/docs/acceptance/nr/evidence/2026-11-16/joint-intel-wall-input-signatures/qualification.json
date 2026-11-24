@@ -1,0 +1,155 @@
+{
+  "status": "measured-opaque-wall-source-input-signatures",
+  "sampleResults": {
+    "a": {
+      "outputs": {
+        "png": "036f240bfeec5c985d0cb97cec6923f3221ba579b0e1c2c628bc4205fcf660cc",
+        "referencePng": "a9657b4558f9d3cb03872d60d5e9e979af3eb6eb6c1a69784096148ff6f73c35",
+        "raw": "19349ca4c27bc568fe2f66a8612fade7a3df9dd3a679b4dd1a60e435eb979b41",
+        "archive": "6fbc2b8385f69a1f5fcdd447590da165f95b0210667231be5cfa8bf96151d250",
+        "changed": 28782,
+        "overOne": 28463,
+        "peak": 240,
+        "bounds": [
+          0,
+          0,
+          943,
+          712
+        ]
+      },
+      "matchedDisputedPixels": 456,
+      "signatureHistograms": {
+        "materialTextures": [
+          44,
+          60,
+          60,
+          60,
+          61,
+          66,
+          56,
+          49
+        ],
+        "directLighting": [
+          61,
+          63,
+          58,
+          54,
+          49,
+          54,
+          64,
+          53
+        ],
+        "indirectLighting": [
+          56,
+          67,
+          53,
+          55,
+          71,
+          48,
+          52,
+          54
+        ]
+      }
+    },
+    "b": {
+      "outputs": {
+        "png": "2d3f4539910290118f1d31377d0313c5591d9422c98b78c5ae18349a23c3d8fc",
+        "referencePng": "a9657b4558f9d3cb03872d60d5e9e979af3eb6eb6c1a69784096148ff6f73c35",
+        "raw": "611604ce01e73706b92992ffa73e317596a7d7cb51cbc5aef7d053657857b28f",
+        "archive": "76a4a223e1243d7caef8297ba5de72cd80d51968965d49635d189d44077ed80b",
+        "changed": 28355,
+        "overOne": 28056,
+        "peak": 240,
+        "bounds": [
+          0,
+          0,
+          754,
+          712
+        ]
+      },
+      "matchedDisputedPixels": 456,
+      "signatureHistograms": {
+        "materialTextures": [
+          44,
+          60,
+          60,
+          60,
+          61,
+          66,
+          56,
+          49
+        ],
+        "directLighting": [
+          61,
+          63,
+          58,
+          54,
+          49,
+          54,
+          64,
+          53
+        ],
+        "indirectLighting": [
+          56,
+          67,
+          53,
+          55,
+          71,
+          48,
+          52,
+          54
+        ]
+      }
+    }
+  },
+  "paired": {
+    "labels": [
+      "a",
+      "b"
+    ],
+    "changedSignatures": {
+      "materialTextures": 0,
+      "directLighting": 0,
+      "indirectLighting": 0
+    },
+    "pairedPixels": 456,
+    "upperBeautyChanged": 427
+  },
+  "shaderPrograms": {
+    "mesh_object_clipmap_field.frag.spv": "dffd016bad84145ca136ba34f73924e1d9ef441c25c3dc5eec720bd55fd3384b",
+    "mesh_object_clipmap_field_early.frag.spv": "7e4c746ce00b991f63efbc7605c81e2f90e5ca8d05fc0eb6c6db906a9ee1f7ab",
+    "mesh_object_clipmap_field_lighting.frag.spv": "548f48ca21fbb967ba679ace9b82d105c7ba67509f6dd9d2a94f239a33fdf114",
+    "mesh_object_clipmap_field_early_lighting.frag.spv": "8c024d3f5dbe0196a1973af11153b687c680e6d96208d9403ed43f7e66e94e24",
+    "character_snapshot_clipmap_field.frag.spv": "d47be66504b97ae42b4a51baf7f907086e2103910dc1ae2b81fcf180f0a18f3f",
+    "character_snapshot_clipmap_field_early.frag.spv": "0e6beb55025e8ef58a18a59d37a14a492779fd380e44f314a6e2c9c732151693",
+    "character_snapshot_clipmap_field_lighting.frag.spv": "dfbeb29bff8e2b81212283c142d42cb8ca27a218eeb2b730fbbc134d4be97ea0",
+    "character_snapshot_clipmap_field_early_lighting.frag.spv": "97407f8d8a5cc7deb8ba45baa802021152ce783acc808d63ef0ad5e2411c6dac",
+    "character_snapshot_object_clipmap_field.frag.spv": "45c347aa46c6ad11b2f5c301890aded5a1c9dc504f601894d20f87de3104851e",
+    "character_snapshot_object_clipmap_field_early.frag.spv": "25ad1e89ef20a68b6c4b5f2d9709cd471862557eeaa321eb4713d8964a70f132",
+    "character_snapshot_object_clipmap_field_lighting.frag.spv": "cb51561179500dbac3bd2eedc4804cc96d068432d347092369786d11833fb314",
+    "character_snapshot_object_clipmap_field_early_lighting.frag.spv": "36a3f444853736c8d96e94d7c669ded962ccc2014207df9fee86274af54c1be2",
+    "spatial_antialiasing.frag.spv": "7f0c9c3b7e27eda948d78c2230edb9cdbb0cf53aa3fb77f9ff02b2f74aa90291"
+  },
+  "source": "2df45c56e9f58a3b6bb18ade2ae2796f6cbab336be2e6a84a0953fde08101fd3",
+  "modifiedSource": "0da966128d59e3983dff4b84bb17a6246a214d50da40cdfb9587d63818e890f0",
+  "displayProbeSource": "1d6066e67c25ea0322f06ad0f55c96c861e790a7234a424323c9a6def0ba2996",
+  "regions": {
+    "upper": {
+      "changed": 427,
+      "peak": 52
+    },
+    "ground": {
+      "changed": 0,
+      "peak": 0
+    },
+    "diagnosticPanels": {
+      "changed": 0,
+      "peak": 0
+    },
+    "wholeFrame": {
+      "changed": 427,
+      "peak": 52
+    }
+  },
+  "archiveSha256": "9f48527e6d4852e0aace666a074771eb7964b78e9bc21a70e9670616e450da1c"
+}

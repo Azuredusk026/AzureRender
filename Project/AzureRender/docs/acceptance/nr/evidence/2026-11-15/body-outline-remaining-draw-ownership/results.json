@@ -1,0 +1,2427 @@
+{
+  "status": "measured-final-draw-ownership",
+  "strictVisualAcceptance": "failed-user-review",
+  "inputSha256": {
+    "body-visible-ownership-points.bin": "55db208c761f1501813aa517e87382c4a5f0a5ca1ebd7f894093c29f9de3fb9f",
+    "snapshot-shell-cloth-reference.png": "48afd6546c23cfa85099a765cc94ada4813a684538c695faf6d70d6daf2261b5",
+    "1018-1018.bin.gz": "55ee528f599855c8d3edbc08269920194d840504e9d77f82fd9c23f1e228ed88",
+    "1383-1383.bin.gz": "c3f21d1bd3e169bac68a2eb21eca90083dde060669f23e6d05780c9f6f7a83bb",
+    "1383-1382.bin.gz": "199fa5dbb1b2363d9c3c321a4a7a7e5de280f699115f2aa5a51c44cadf494b4a"
+  },
+  "devices": {
+    "nvidia": {
+      "frame": "6828300ca3eccd73a4cc77b6fe8aabdb621cda2a42bd8b52790732f9451f8b9c",
+      "events": {
+        "1018": {
+          "pixels": 1112,
+          "stageOverEight": 177,
+          "finalOverEight": 177,
+          "nativeStageToFinalOverEight": 0,
+          "witnesses": [
+            {
+              "point": [
+                1258,
+                971
+              ],
+              "actual": [
+                69,
+                38,
+                31
+              ],
+              "nativeOutline": [
+                95,
+                88,
+                90
+              ],
+              "nativeFinal": [
+                95,
+                88,
+                90
+              ],
+              "nativeClothBefore": [
+                95,
+                88,
+                90
+              ],
+              "nativeClothAfter": [
+                95,
+                88,
+                90
+              ],
+              "stagePeak": 59,
+              "finalPeak": 59
+            },
+            {
+              "point": [
+                1255,
+                920
+              ],
+              "actual": [
+                67,
+                39,
+                34
+              ],
+              "nativeOutline": [
+                86,
+                77,
+                79
+              ],
+              "nativeFinal": [
+                86,
+                77,
+                79
+              ],
+              "nativeClothBefore": [
+                86,
+                77,
+                79
+              ],
+              "nativeClothAfter": [
+                86,
+                77,
+                79
+              ],
+              "stagePeak": 45,
+              "finalPeak": 45
+            },
+            {
+              "point": [
+                1255,
+                921
+              ],
+              "actual": [
+                67,
+                40,
+                34
+              ],
+              "nativeOutline": [
+                87,
+                77,
+                79
+              ],
+              "nativeFinal": [
+                87,
+                77,
+                79
+              ],
+              "nativeClothBefore": [
+                87,
+                77,
+                79
+              ],
+              "nativeClothAfter": [
+                87,
+                77,
+                79
+              ],
+              "stagePeak": 45,
+              "finalPeak": 45
+            },
+            {
+              "point": [
+                1255,
+                922
+              ],
+              "actual": [
+                68,
+                40,
+                34
+              ],
+              "nativeOutline": [
+                87,
+                78,
+                79
+              ],
+              "nativeFinal": [
+                87,
+                78,
+                79
+              ],
+              "nativeClothBefore": [
+                87,
+                78,
+                79
+              ],
+              "nativeClothAfter": [
+                87,
+                78,
+                79
+              ],
+              "stagePeak": 45,
+              "finalPeak": 45
+            },
+            {
+              "point": [
+                1255,
+                923
+              ],
+              "actual": [
+                68,
+                40,
+                35
+              ],
+              "nativeOutline": [
+                87,
+                78,
+                80
+              ],
+              "nativeFinal": [
+                87,
+                78,
+                80
+              ],
+              "nativeClothBefore": [
+                87,
+                78,
+                80
+              ],
+              "nativeClothAfter": [
+                87,
+                78,
+                80
+              ],
+              "stagePeak": 45,
+              "finalPeak": 45
+            },
+            {
+              "point": [
+                1256,
+                934
+              ],
+              "actual": [
+                68,
+                41,
+                38
+              ],
+              "nativeOutline": [
+                89,
+                80,
+                83
+              ],
+              "nativeFinal": [
+                89,
+                80,
+                83
+              ],
+              "nativeClothBefore": [
+                89,
+                80,
+                83
+              ],
+              "nativeClothAfter": [
+                89,
+                80,
+                83
+              ],
+              "stagePeak": 45,
+              "finalPeak": 45
+            },
+            {
+              "point": [
+                1256,
+                935
+              ],
+              "actual": [
+                69,
+                41,
+                38
+              ],
+              "nativeOutline": [
+                89,
+                80,
+                83
+              ],
+              "nativeFinal": [
+                89,
+                80,
+                83
+              ],
+              "nativeClothBefore": [
+                89,
+                80,
+                83
+              ],
+              "nativeClothAfter": [
+                89,
+                80,
+                83
+              ],
+              "stagePeak": 45,
+              "finalPeak": 45
+            },
+            {
+              "point": [
+                1256,
+                936
+              ],
+              "actual": [
+                69,
+                42,
+                39
+              ],
+              "nativeOutline": [
+                90,
+                81,
+                84
+              ],
+              "nativeFinal": [
+                90,
+                81,
+                84
+              ],
+              "nativeClothBefore": [
+                90,
+                81,
+                84
+              ],
+              "nativeClothAfter": [
+                90,
+                81,
+                84
+              ],
+              "stagePeak": 45,
+              "finalPeak": 45
+            },
+            {
+              "point": [
+                1256,
+                937
+              ],
+              "actual": [
+                69,
+                42,
+                39
+              ],
+              "nativeOutline": [
+                91,
+                81,
+                84
+              ],
+              "nativeFinal": [
+                91,
+                81,
+                84
+              ],
+              "nativeClothBefore": [
+                91,
+                81,
+                84
+              ],
+              "nativeClothAfter": [
+                91,
+                81,
+                84
+              ],
+              "stagePeak": 45,
+              "finalPeak": 45
+            },
+            {
+              "point": [
+                1256,
+                938
+              ],
+              "actual": [
+                70,
+                43,
+                39
+              ],
+              "nativeOutline": [
+                91,
+                82,
+                84
+              ],
+              "nativeFinal": [
+                91,
+                82,
+                84
+              ],
+              "nativeClothBefore": [
+                91,
+                82,
+                84
+              ],
+              "nativeClothAfter": [
+                91,
+                82,
+                84
+              ],
+              "stagePeak": 45,
+              "finalPeak": 45
+            }
+          ]
+        },
+        "1038": {
+          "pixels": 2,
+          "stageOverEight": 1,
+          "finalOverEight": 2,
+          "nativeStageToFinalOverEight": 1,
+          "witnesses": [
+            {
+              "point": [
+                1261,
+                309
+              ],
+              "actual": [
+                67,
+                36,
+                30
+              ],
+              "nativeOutline": [
+                66,
+                38,
+                33
+              ],
+              "nativeFinal": [
+                81,
+                55,
+                48
+              ],
+              "nativeClothBefore": [
+                81,
+                55,
+                48
+              ],
+              "nativeClothAfter": [
+                81,
+                55,
+                48
+              ],
+              "stagePeak": 3,
+              "finalPeak": 19
+            },
+            {
+              "point": [
+                1303,
+                307
+              ],
+              "actual": [
+                82,
+                47,
+                36
+              ],
+              "nativeOutline": [
+                72,
+                45,
+                37
+              ],
+              "nativeFinal": [
+                72,
+                44,
+                40
+              ],
+              "nativeClothBefore": [
+                72,
+                44,
+                40
+              ],
+              "nativeClothAfter": [
+                72,
+                44,
+                40
+              ],
+              "stagePeak": 10,
+              "finalPeak": 10
+            }
+          ]
+        },
+        "1079": {
+          "pixels": 8,
+          "stageOverEight": 8,
+          "finalOverEight": 4,
+          "nativeStageToFinalOverEight": 8,
+          "witnesses": [
+            {
+              "point": [
+                1381,
+                405
+              ],
+              "actual": [
+                36,
+                47,
+                58
+              ],
+              "nativeOutline": [
+                153,
+                118,
+                107
+              ],
+              "nativeFinal": [
+                91,
+                91,
+                90
+              ],
+              "nativeClothBefore": [
+                91,
+                91,
+                90
+              ],
+              "nativeClothAfter": [
+                91,
+                91,
+                90
+              ],
+              "stagePeak": 117,
+              "finalPeak": 55
+            },
+            {
+              "point": [
+                1193,
+                390
+              ],
+              "actual": [
+                55,
+                57,
+                61
+              ],
+              "nativeOutline": [
+                78,
+                53,
+                44
+              ],
+              "nativeFinal": [
+                27,
+                27,
+                32
+              ],
+              "nativeClothBefore": [
+                27,
+                27,
+                32
+              ],
+              "nativeClothAfter": [
+                27,
+                27,
+                32
+              ],
+              "stagePeak": 23,
+              "finalPeak": 30
+            },
+            {
+              "point": [
+                1023,
+                657
+              ],
+              "actual": [
+                56,
+                57,
+                61
+              ],
+              "nativeOutline": [
+                97,
+                63,
+                51
+              ],
+              "nativeFinal": [
+                43,
+                42,
+                46
+              ],
+              "nativeClothBefore": [
+                43,
+                42,
+                46
+              ],
+              "nativeClothAfter": [
+                43,
+                42,
+                46
+              ],
+              "stagePeak": 41,
+              "finalPeak": 15
+            },
+            {
+              "point": [
+                1174,
+                391
+              ],
+              "actual": [
+                75,
+                78,
+                80
+              ],
+              "nativeOutline": [
+                103,
+                79,
+                68
+              ],
+              "nativeFinal": [
+                69,
+                69,
+                71
+              ],
+              "nativeClothBefore": [
+                69,
+                69,
+                71
+              ],
+              "nativeClothAfter": [
+                69,
+                69,
+                71
+              ],
+              "stagePeak": 28,
+              "finalPeak": 9
+            },
+            {
+              "point": [
+                1301,
+                323
+              ],
+              "actual": [
+                117,
+                106,
+                101
+              ],
+              "nativeOutline": [
+                110,
+                73,
+                61
+              ],
+              "nativeFinal": [
+                110,
+                100,
+                95
+              ],
+              "nativeClothBefore": [
+                110,
+                100,
+                95
+              ],
+              "nativeClothAfter": [
+                110,
+                100,
+                95
+              ],
+              "stagePeak": 40,
+              "finalPeak": 7
+            },
+            {
+              "point": [
+                1313,
+                483
+              ],
+              "actual": [
+                38,
+                43,
+                47
+              ],
+              "nativeOutline": [
+                85,
+                66,
+                59
+              ],
+              "nativeFinal": [
+                35,
+                38,
+                43
+              ],
+              "nativeClothBefore": [
+                35,
+                38,
+                43
+              ],
+              "nativeClothAfter": [
+                35,
+                38,
+                43
+              ],
+              "stagePeak": 47,
+              "finalPeak": 5
+            },
+            {
+              "point": [
+                1260,
+                321
+              ],
+              "actual": [
+                68,
+                67,
+                72
+              ],
+              "nativeOutline": [
+                92,
+                62,
+                53
+              ],
+              "nativeFinal": [
+                65,
+                64,
+                71
+              ],
+              "nativeClothBefore": [
+                65,
+                64,
+                71
+              ],
+              "nativeClothAfter": [
+                65,
+                64,
+                71
+              ],
+              "stagePeak": 24,
+              "finalPeak": 3
+            },
+            {
+              "point": [
+                1346,
+                443
+              ],
+              "actual": [
+                84,
+                83,
+                85
+              ],
+              "nativeOutline": [
+                95,
+                64,
+                53
+              ],
+              "nativeFinal": [
+                84,
+                82,
+                86
+              ],
+              "nativeClothBefore": [
+                84,
+                82,
+                86
+              ],
+              "nativeClothAfter": [
+                84,
+                82,
+                86
+              ],
+              "stagePeak": 32,
+              "finalPeak": 1
+            }
+          ]
+        },
+        "1116": {
+          "pixels": 5,
+          "stageOverEight": 5,
+          "finalOverEight": 3,
+          "nativeStageToFinalOverEight": 5,
+          "witnesses": [
+            {
+              "point": [
+                1250,
+                853
+              ],
+              "actual": [
+                29,
+                34,
+                38
+              ],
+              "nativeOutline": [
+                77,
+                66,
+                67
+              ],
+              "nativeFinal": [
+                55,
+                60,
+                64
+              ],
+              "nativeClothBefore": [
+                55,
+                60,
+                64
+              ],
+              "nativeClothAfter": [
+                55,
+                60,
+                64
+              ],
+              "stagePeak": 48,
+              "finalPeak": 26
+            },
+            {
+              "point": [
+                1171,
+                861
+              ],
+              "actual": [
+                27,
+                31,
+                35
+              ],
+              "nativeOutline": [
+                88,
+                60,
+                51
+              ],
+              "nativeFinal": [
+                13,
+                13,
+                15
+              ],
+              "nativeClothBefore": [
+                13,
+                13,
+                15
+              ],
+              "nativeClothAfter": [
+                13,
+                13,
+                15
+              ],
+              "stagePeak": 61,
+              "finalPeak": 20
+            },
+            {
+              "point": [
+                1250,
+                843
+              ],
+              "actual": [
+                26,
+                31,
+                35
+              ],
+              "nativeOutline": [
+                77,
+                64,
+                64
+              ],
+              "nativeFinal": [
+                15,
+                15,
+                17
+              ],
+              "nativeClothBefore": [
+                15,
+                15,
+                17
+              ],
+              "nativeClothAfter": [
+                15,
+                15,
+                17
+              ],
+              "stagePeak": 51,
+              "finalPeak": 18
+            },
+            {
+              "point": [
+                1161,
+                828
+              ],
+              "actual": [
+                17,
+                19,
+                22
+              ],
+              "nativeOutline": [
+                64,
+                37,
+                32
+              ],
+              "nativeFinal": [
+                11,
+                12,
+                14
+              ],
+              "nativeClothBefore": [
+                11,
+                12,
+                14
+              ],
+              "nativeClothAfter": [
+                11,
+                12,
+                14
+              ],
+              "stagePeak": 47,
+              "finalPeak": 8
+            },
+            {
+              "point": [
+                1229,
+                1098
+              ],
+              "actual": [
+                35,
+                39,
+                44
+              ],
+              "nativeOutline": [
+                83,
+                51,
+                44
+              ],
+              "nativeFinal": [
+                35,
+                38,
+                43
+              ],
+              "nativeClothBefore": [
+                35,
+                38,
+                43
+              ],
+              "nativeClothAfter": [
+                35,
+                38,
+                43
+              ],
+              "stagePeak": 48,
+              "finalPeak": 1
+            }
+          ]
+        },
+        "1383": {
+          "pixels": 57,
+          "stageOverEight": 20,
+          "finalOverEight": 56,
+          "nativeStageToFinalOverEight": 57,
+          "witnesses": [
+            {
+              "point": [
+                1252,
+                839
+              ],
+              "actual": [
+                65,
+                39,
+                32
+              ],
+              "nativeOutline": [
+                77,
+                67,
+                67
+              ],
+              "nativeFinal": [
+                139,
+                83,
+                109
+              ],
+              "nativeClothBefore": [
+                77,
+                67,
+                67
+              ],
+              "nativeClothAfter": [
+                139,
+                83,
+                109
+              ],
+              "stagePeak": 35,
+              "finalPeak": 77
+            },
+            {
+              "point": [
+                1255,
+                837
+              ],
+              "actual": [
+                69,
+                35,
+                24
+              ],
+              "nativeOutline": [
+                63,
+                35,
+                27
+              ],
+              "nativeFinal": [
+                131,
+                70,
+                99
+              ],
+              "nativeClothBefore": [
+                63,
+                35,
+                27
+              ],
+              "nativeClothAfter": [
+                131,
+                70,
+                99
+              ],
+              "stagePeak": 6,
+              "finalPeak": 75
+            },
+            {
+              "point": [
+                1252,
+                838
+              ],
+              "actual": [
+                66,
+                39,
+                33
+              ],
+              "nativeOutline": [
+                77,
+                66,
+                67
+              ],
+              "nativeFinal": [
+                136,
+                78,
+                105
+              ],
+              "nativeClothBefore": [
+                77,
+                66,
+                67
+              ],
+              "nativeClothAfter": [
+                136,
+                78,
+                105
+              ],
+              "stagePeak": 34,
+              "finalPeak": 72
+            },
+            {
+              "point": [
+                1255,
+                836
+              ],
+              "actual": [
+                69,
+                34,
+                24
+              ],
+              "nativeOutline": [
+                63,
+                35,
+                27
+              ],
+              "nativeFinal": [
+                128,
+                65,
+                95
+              ],
+              "nativeClothBefore": [
+                63,
+                35,
+                27
+              ],
+              "nativeClothAfter": [
+                128,
+                65,
+                95
+              ],
+              "stagePeak": 6,
+              "finalPeak": 71
+            },
+            {
+              "point": [
+                1252,
+                837
+              ],
+              "actual": [
+                67,
+                39,
+                33
+              ],
+              "nativeOutline": [
+                77,
+                66,
+                67
+              ],
+              "nativeFinal": [
+                133,
+                74,
+                102
+              ],
+              "nativeClothBefore": [
+                77,
+                66,
+                67
+              ],
+              "nativeClothAfter": [
+                133,
+                74,
+                102
+              ],
+              "stagePeak": 34,
+              "finalPeak": 69
+            },
+            {
+              "point": [
+                1255,
+                835
+              ],
+              "actual": [
+                69,
+                34,
+                24
+              ],
+              "nativeOutline": [
+                63,
+                35,
+                27
+              ],
+              "nativeFinal": [
+                126,
+                60,
+                91
+              ],
+              "nativeClothBefore": [
+                63,
+                35,
+                27
+              ],
+              "nativeClothAfter": [
+                126,
+                60,
+                91
+              ],
+              "stagePeak": 6,
+              "finalPeak": 67
+            },
+            {
+              "point": [
+                1252,
+                836
+              ],
+              "actual": [
+                67,
+                39,
+                33
+              ],
+              "nativeOutline": [
+                77,
+                66,
+                67
+              ],
+              "nativeFinal": [
+                131,
+                70,
+                99
+              ],
+              "nativeClothBefore": [
+                77,
+                66,
+                67
+              ],
+              "nativeClothAfter": [
+                131,
+                70,
+                99
+              ],
+              "stagePeak": 34,
+              "finalPeak": 66
+            },
+            {
+              "point": [
+                1152,
+                797
+              ],
+              "actual": [
+                70,
+                38,
+                29
+              ],
+              "nativeOutline": [
+                64,
+                39,
+                33
+              ],
+              "nativeFinal": [
+                134,
+                67,
+                88
+              ],
+              "nativeClothBefore": [
+                64,
+                39,
+                33
+              ],
+              "nativeClothAfter": [
+                134,
+                67,
+                88
+              ],
+              "stagePeak": 6,
+              "finalPeak": 64
+            },
+            {
+              "point": [
+                1152,
+                796
+              ],
+              "actual": [
+                71,
+                38,
+                29
+              ],
+              "nativeOutline": [
+                64,
+                40,
+                33
+              ],
+              "nativeFinal": [
+                134,
+                62,
+                85
+              ],
+              "nativeClothBefore": [
+                64,
+                40,
+                33
+              ],
+              "nativeClothAfter": [
+                134,
+                62,
+                85
+              ],
+              "stagePeak": 7,
+              "finalPeak": 63
+            },
+            {
+              "point": [
+                1252,
+                835
+              ],
+              "actual": [
+                68,
+                39,
+                33
+              ],
+              "nativeOutline": [
+                77,
+                66,
+                66
+              ],
+              "nativeFinal": [
+                128,
+                65,
+                95
+              ],
+              "nativeClothBefore": [
+                77,
+                66,
+                66
+              ],
+              "nativeClothAfter": [
+                128,
+                65,
+                95
+              ],
+              "stagePeak": 33,
+              "finalPeak": 62
+            }
+          ]
+        }
+      }
+    },
+    "intel": {
+      "frame": "3108484ccf766937115935762f10207c46f0dbe608ece93a31304630ed2fea53",
+      "events": {
+        "1018": {
+          "pixels": 1112,
+          "stageOverEight": 178,
+          "finalOverEight": 178,
+          "nativeStageToFinalOverEight": 0,
+          "witnesses": [
+            {
+              "point": [
+                1258,
+                971
+              ],
+              "actual": [
+                69,
+                38,
+                31
+              ],
+              "nativeOutline": [
+                95,
+                88,
+                90
+              ],
+              "nativeFinal": [
+                95,
+                88,
+                90
+              ],
+              "nativeClothBefore": [
+                95,
+                88,
+                90
+              ],
+              "nativeClothAfter": [
+                95,
+                88,
+                90
+              ],
+              "stagePeak": 59,
+              "finalPeak": 59
+            },
+            {
+              "point": [
+                1255,
+                920
+              ],
+              "actual": [
+                67,
+                39,
+                34
+              ],
+              "nativeOutline": [
+                86,
+                77,
+                79
+              ],
+              "nativeFinal": [
+                86,
+                77,
+                79
+              ],
+              "nativeClothBefore": [
+                86,
+                77,
+                79
+              ],
+              "nativeClothAfter": [
+                86,
+                77,
+                79
+              ],
+              "stagePeak": 45,
+              "finalPeak": 45
+            },
+            {
+              "point": [
+                1255,
+                921
+              ],
+              "actual": [
+                68,
+                40,
+                34
+              ],
+              "nativeOutline": [
+                87,
+                77,
+                79
+              ],
+              "nativeFinal": [
+                87,
+                77,
+                79
+              ],
+              "nativeClothBefore": [
+                87,
+                77,
+                79
+              ],
+              "nativeClothAfter": [
+                87,
+                77,
+                79
+              ],
+              "stagePeak": 45,
+              "finalPeak": 45
+            },
+            {
+              "point": [
+                1255,
+                922
+              ],
+              "actual": [
+                68,
+                40,
+                34
+              ],
+              "nativeOutline": [
+                87,
+                78,
+                79
+              ],
+              "nativeFinal": [
+                87,
+                78,
+                79
+              ],
+              "nativeClothBefore": [
+                87,
+                78,
+                79
+              ],
+              "nativeClothAfter": [
+                87,
+                78,
+                79
+              ],
+              "stagePeak": 45,
+              "finalPeak": 45
+            },
+            {
+              "point": [
+                1255,
+                923
+              ],
+              "actual": [
+                68,
+                40,
+                35
+              ],
+              "nativeOutline": [
+                87,
+                78,
+                80
+              ],
+              "nativeFinal": [
+                87,
+                78,
+                80
+              ],
+              "nativeClothBefore": [
+                87,
+                78,
+                80
+              ],
+              "nativeClothAfter": [
+                87,
+                78,
+                80
+              ],
+              "stagePeak": 45,
+              "finalPeak": 45
+            },
+            {
+              "point": [
+                1256,
+                934
+              ],
+              "actual": [
+                68,
+                41,
+                38
+              ],
+              "nativeOutline": [
+                89,
+                80,
+                83
+              ],
+              "nativeFinal": [
+                89,
+                80,
+                83
+              ],
+              "nativeClothBefore": [
+                89,
+                80,
+                83
+              ],
+              "nativeClothAfter": [
+                89,
+                80,
+                83
+              ],
+              "stagePeak": 45,
+              "finalPeak": 45
+            },
+            {
+              "point": [
+                1256,
+                935
+              ],
+              "actual": [
+                69,
+                41,
+                38
+              ],
+              "nativeOutline": [
+                89,
+                80,
+                83
+              ],
+              "nativeFinal": [
+                89,
+                80,
+                83
+              ],
+              "nativeClothBefore": [
+                89,
+                80,
+                83
+              ],
+              "nativeClothAfter": [
+                89,
+                80,
+                83
+              ],
+              "stagePeak": 45,
+              "finalPeak": 45
+            },
+            {
+              "point": [
+                1256,
+                936
+              ],
+              "actual": [
+                69,
+                42,
+                39
+              ],
+              "nativeOutline": [
+                90,
+                81,
+                84
+              ],
+              "nativeFinal": [
+                90,
+                81,
+                84
+              ],
+              "nativeClothBefore": [
+                90,
+                81,
+                84
+              ],
+              "nativeClothAfter": [
+                90,
+                81,
+                84
+              ],
+              "stagePeak": 45,
+              "finalPeak": 45
+            },
+            {
+              "point": [
+                1256,
+                937
+              ],
+              "actual": [
+                70,
+                42,
+                39
+              ],
+              "nativeOutline": [
+                91,
+                81,
+                84
+              ],
+              "nativeFinal": [
+                91,
+                81,
+                84
+              ],
+              "nativeClothBefore": [
+                91,
+                81,
+                84
+              ],
+              "nativeClothAfter": [
+                91,
+                81,
+                84
+              ],
+              "stagePeak": 45,
+              "finalPeak": 45
+            },
+            {
+              "point": [
+                1256,
+                938
+              ],
+              "actual": [
+                70,
+                43,
+                39
+              ],
+              "nativeOutline": [
+                91,
+                82,
+                84
+              ],
+              "nativeFinal": [
+                91,
+                82,
+                84
+              ],
+              "nativeClothBefore": [
+                91,
+                82,
+                84
+              ],
+              "nativeClothAfter": [
+                91,
+                82,
+                84
+              ],
+              "stagePeak": 45,
+              "finalPeak": 45
+            }
+          ]
+        },
+        "1038": {
+          "pixels": 2,
+          "stageOverEight": 1,
+          "finalOverEight": 2,
+          "nativeStageToFinalOverEight": 1,
+          "witnesses": [
+            {
+              "point": [
+                1261,
+                309
+              ],
+              "actual": [
+                67,
+                35,
+                30
+              ],
+              "nativeOutline": [
+                66,
+                38,
+                33
+              ],
+              "nativeFinal": [
+                81,
+                55,
+                48
+              ],
+              "nativeClothBefore": [
+                81,
+                55,
+                48
+              ],
+              "nativeClothAfter": [
+                81,
+                55,
+                48
+              ],
+              "stagePeak": 3,
+              "finalPeak": 20
+            },
+            {
+              "point": [
+                1303,
+                307
+              ],
+              "actual": [
+                82,
+                47,
+                36
+              ],
+              "nativeOutline": [
+                72,
+                45,
+                37
+              ],
+              "nativeFinal": [
+                72,
+                44,
+                40
+              ],
+              "nativeClothBefore": [
+                72,
+                44,
+                40
+              ],
+              "nativeClothAfter": [
+                72,
+                44,
+                40
+              ],
+              "stagePeak": 10,
+              "finalPeak": 10
+            }
+          ]
+        },
+        "1079": {
+          "pixels": 8,
+          "stageOverEight": 8,
+          "finalOverEight": 4,
+          "nativeStageToFinalOverEight": 8,
+          "witnesses": [
+            {
+              "point": [
+                1381,
+                405
+              ],
+              "actual": [
+                36,
+                47,
+                58
+              ],
+              "nativeOutline": [
+                153,
+                118,
+                107
+              ],
+              "nativeFinal": [
+                91,
+                91,
+                90
+              ],
+              "nativeClothBefore": [
+                91,
+                91,
+                90
+              ],
+              "nativeClothAfter": [
+                91,
+                91,
+                90
+              ],
+              "stagePeak": 117,
+              "finalPeak": 55
+            },
+            {
+              "point": [
+                1193,
+                390
+              ],
+              "actual": [
+                54,
+                57,
+                61
+              ],
+              "nativeOutline": [
+                78,
+                53,
+                44
+              ],
+              "nativeFinal": [
+                27,
+                27,
+                32
+              ],
+              "nativeClothBefore": [
+                27,
+                27,
+                32
+              ],
+              "nativeClothAfter": [
+                27,
+                27,
+                32
+              ],
+              "stagePeak": 24,
+              "finalPeak": 30
+            },
+            {
+              "point": [
+                1023,
+                657
+              ],
+              "actual": [
+                56,
+                57,
+                61
+              ],
+              "nativeOutline": [
+                97,
+                63,
+                51
+              ],
+              "nativeFinal": [
+                43,
+                42,
+                46
+              ],
+              "nativeClothBefore": [
+                43,
+                42,
+                46
+              ],
+              "nativeClothAfter": [
+                43,
+                42,
+                46
+              ],
+              "stagePeak": 41,
+              "finalPeak": 15
+            },
+            {
+              "point": [
+                1174,
+                391
+              ],
+              "actual": [
+                75,
+                78,
+                80
+              ],
+              "nativeOutline": [
+                103,
+                79,
+                68
+              ],
+              "nativeFinal": [
+                69,
+                69,
+                71
+              ],
+              "nativeClothBefore": [
+                69,
+                69,
+                71
+              ],
+              "nativeClothAfter": [
+                69,
+                69,
+                71
+              ],
+              "stagePeak": 28,
+              "finalPeak": 9
+            },
+            {
+              "point": [
+                1301,
+                323
+              ],
+              "actual": [
+                117,
+                106,
+                101
+              ],
+              "nativeOutline": [
+                110,
+                73,
+                61
+              ],
+              "nativeFinal": [
+                110,
+                100,
+                95
+              ],
+              "nativeClothBefore": [
+                110,
+                100,
+                95
+              ],
+              "nativeClothAfter": [
+                110,
+                100,
+                95
+              ],
+              "stagePeak": 40,
+              "finalPeak": 7
+            },
+            {
+              "point": [
+                1313,
+                483
+              ],
+              "actual": [
+                38,
+                43,
+                47
+              ],
+              "nativeOutline": [
+                85,
+                66,
+                59
+              ],
+              "nativeFinal": [
+                35,
+                38,
+                43
+              ],
+              "nativeClothBefore": [
+                35,
+                38,
+                43
+              ],
+              "nativeClothAfter": [
+                35,
+                38,
+                43
+              ],
+              "stagePeak": 47,
+              "finalPeak": 5
+            },
+            {
+              "point": [
+                1260,
+                321
+              ],
+              "actual": [
+                68,
+                67,
+                72
+              ],
+              "nativeOutline": [
+                92,
+                62,
+                53
+              ],
+              "nativeFinal": [
+                65,
+                64,
+                71
+              ],
+              "nativeClothBefore": [
+                65,
+                64,
+                71
+              ],
+              "nativeClothAfter": [
+                65,
+                64,
+                71
+              ],
+              "stagePeak": 24,
+              "finalPeak": 3
+            },
+            {
+              "point": [
+                1346,
+                443
+              ],
+              "actual": [
+                84,
+                83,
+                85
+              ],
+              "nativeOutline": [
+                95,
+                64,
+                53
+              ],
+              "nativeFinal": [
+                84,
+                82,
+                86
+              ],
+              "nativeClothBefore": [
+                84,
+                82,
+                86
+              ],
+              "nativeClothAfter": [
+                84,
+                82,
+                86
+              ],
+              "stagePeak": 32,
+              "finalPeak": 1
+            }
+          ]
+        },
+        "1116": {
+          "pixels": 5,
+          "stageOverEight": 5,
+          "finalOverEight": 3,
+          "nativeStageToFinalOverEight": 5,
+          "witnesses": [
+            {
+              "point": [
+                1250,
+                853
+              ],
+              "actual": [
+                29,
+                34,
+                38
+              ],
+              "nativeOutline": [
+                77,
+                66,
+                67
+              ],
+              "nativeFinal": [
+                55,
+                60,
+                64
+              ],
+              "nativeClothBefore": [
+                55,
+                60,
+                64
+              ],
+              "nativeClothAfter": [
+                55,
+                60,
+                64
+              ],
+              "stagePeak": 48,
+              "finalPeak": 26
+            },
+            {
+              "point": [
+                1171,
+                861
+              ],
+              "actual": [
+                26,
+                31,
+                35
+              ],
+              "nativeOutline": [
+                88,
+                60,
+                51
+              ],
+              "nativeFinal": [
+                13,
+                13,
+                15
+              ],
+              "nativeClothBefore": [
+                13,
+                13,
+                15
+              ],
+              "nativeClothAfter": [
+                13,
+                13,
+                15
+              ],
+              "stagePeak": 62,
+              "finalPeak": 20
+            },
+            {
+              "point": [
+                1250,
+                843
+              ],
+              "actual": [
+                26,
+                31,
+                35
+              ],
+              "nativeOutline": [
+                77,
+                64,
+                64
+              ],
+              "nativeFinal": [
+                15,
+                15,
+                17
+              ],
+              "nativeClothBefore": [
+                15,
+                15,
+                17
+              ],
+              "nativeClothAfter": [
+                15,
+                15,
+                17
+              ],
+              "stagePeak": 51,
+              "finalPeak": 18
+            },
+            {
+              "point": [
+                1161,
+                828
+              ],
+              "actual": [
+                17,
+                19,
+                22
+              ],
+              "nativeOutline": [
+                64,
+                37,
+                32
+              ],
+              "nativeFinal": [
+                11,
+                12,
+                14
+              ],
+              "nativeClothBefore": [
+                11,
+                12,
+                14
+              ],
+              "nativeClothAfter": [
+                11,
+                12,
+                14
+              ],
+              "stagePeak": 47,
+              "finalPeak": 8
+            },
+            {
+              "point": [
+                1229,
+                1098
+              ],
+              "actual": [
+                35,
+                39,
+                44
+              ],
+              "nativeOutline": [
+                83,
+                51,
+                44
+              ],
+              "nativeFinal": [
+                35,
+                38,
+                43
+              ],
+              "nativeClothBefore": [
+                35,
+                38,
+                43
+              ],
+              "nativeClothAfter": [
+                35,
+                38,
+                43
+              ],
+              "stagePeak": 48,
+              "finalPeak": 1
+            }
+          ]
+        },
+        "1383": {
+          "pixels": 57,
+          "stageOverEight": 20,
+          "finalOverEight": 56,
+          "nativeStageToFinalOverEight": 57,
+          "witnesses": [
+            {
+              "point": [
+                1252,
+                839
+              ],
+              "actual": [
+                66,
+                39,
+                32
+              ],
+              "nativeOutline": [
+                77,
+                67,
+                67
+              ],
+              "nativeFinal": [
+                139,
+                83,
+                109
+              ],
+              "nativeClothBefore": [
+                77,
+                67,
+                67
+              ],
+              "nativeClothAfter": [
+                139,
+                83,
+                109
+              ],
+              "stagePeak": 35,
+              "finalPeak": 77
+            },
+            {
+              "point": [
+                1255,
+                837
+              ],
+              "actual": [
+                70,
+                34,
+                24
+              ],
+              "nativeOutline": [
+                63,
+                35,
+                27
+              ],
+              "nativeFinal": [
+                131,
+                70,
+                99
+              ],
+              "nativeClothBefore": [
+                63,
+                35,
+                27
+              ],
+              "nativeClothAfter": [
+                131,
+                70,
+                99
+              ],
+              "stagePeak": 7,
+              "finalPeak": 75
+            },
+            {
+              "point": [
+                1252,
+                838
+              ],
+              "actual": [
+                66,
+                38,
+                33
+              ],
+              "nativeOutline": [
+                77,
+                66,
+                67
+              ],
+              "nativeFinal": [
+                136,
+                78,
+                105
+              ],
+              "nativeClothBefore": [
+                77,
+                66,
+                67
+              ],
+              "nativeClothAfter": [
+                136,
+                78,
+                105
+              ],
+              "stagePeak": 34,
+              "finalPeak": 72
+            },
+            {
+              "point": [
+                1255,
+                836
+              ],
+              "actual": [
+                70,
+                34,
+                24
+              ],
+              "nativeOutline": [
+                63,
+                35,
+                27
+              ],
+              "nativeFinal": [
+                128,
+                65,
+                95
+              ],
+              "nativeClothBefore": [
+                63,
+                35,
+                27
+              ],
+              "nativeClothAfter": [
+                128,
+                65,
+                95
+              ],
+              "stagePeak": 7,
+              "finalPeak": 71
+            },
+            {
+              "point": [
+                1252,
+                837
+              ],
+              "actual": [
+                67,
+                38,
+                33
+              ],
+              "nativeOutline": [
+                77,
+                66,
+                67
+              ],
+              "nativeFinal": [
+                133,
+                74,
+                102
+              ],
+              "nativeClothBefore": [
+                77,
+                66,
+                67
+              ],
+              "nativeClothAfter": [
+                133,
+                74,
+                102
+              ],
+              "stagePeak": 34,
+              "finalPeak": 69
+            },
+            {
+              "point": [
+                1255,
+                835
+              ],
+              "actual": [
+                70,
+                34,
+                24
+              ],
+              "nativeOutline": [
+                63,
+                35,
+                27
+              ],
+              "nativeFinal": [
+                126,
+                60,
+                91
+              ],
+              "nativeClothBefore": [
+                63,
+                35,
+                27
+              ],
+              "nativeClothAfter": [
+                126,
+                60,
+                91
+              ],
+              "stagePeak": 7,
+              "finalPeak": 67
+            },
+            {
+              "point": [
+                1252,
+                836
+              ],
+              "actual": [
+                68,
+                39,
+                33
+              ],
+              "nativeOutline": [
+                77,
+                66,
+                67
+              ],
+              "nativeFinal": [
+                131,
+                70,
+                99
+              ],
+              "nativeClothBefore": [
+                77,
+                66,
+                67
+              ],
+              "nativeClothAfter": [
+                131,
+                70,
+                99
+              ],
+              "stagePeak": 34,
+              "finalPeak": 66
+            },
+            {
+              "point": [
+                1152,
+                797
+              ],
+              "actual": [
+                70,
+                38,
+                29
+              ],
+              "nativeOutline": [
+                64,
+                39,
+                33
+              ],
+              "nativeFinal": [
+                134,
+                67,
+                88
+              ],
+              "nativeClothBefore": [
+                64,
+                39,
+                33
+              ],
+              "nativeClothAfter": [
+                134,
+                67,
+                88
+              ],
+              "stagePeak": 6,
+              "finalPeak": 64
+            },
+            {
+              "point": [
+                1152,
+                796
+              ],
+              "actual": [
+                71,
+                38,
+                29
+              ],
+              "nativeOutline": [
+                64,
+                40,
+                33
+              ],
+              "nativeFinal": [
+                134,
+                62,
+                85
+              ],
+              "nativeClothBefore": [
+                64,
+                40,
+                33
+              ],
+              "nativeClothAfter": [
+                134,
+                62,
+                85
+              ],
+              "stagePeak": 7,
+              "finalPeak": 63
+            },
+            {
+              "point": [
+                1252,
+                835
+              ],
+              "actual": [
+                68,
+                39,
+                33
+              ],
+              "nativeOutline": [
+                77,
+                66,
+                66
+              ],
+              "nativeFinal": [
+                128,
+                65,
+                95
+              ],
+              "nativeClothBefore": [
+                77,
+                66,
+                66
+              ],
+              "nativeClothAfter": [
+                128,
+                65,
+                95
+              ],
+              "stagePeak": 33,
+              "finalPeak": 62
+            }
+          ]
+        }
+      }
+    }
+  },
+  "archive": {
+    "sha256": "8b5ebc4400d32e90ec947d811f62cd2dcf5f77ca69e836dc26d625bd0085e101",
+    "members": {
+      "body-outline-remaining-draw-ownership.py": "b2a9ba9b2e25c5e695a254701c90a211649b9434fcea9cb9d1e09b9dbadffc52",
+      "body-outline-remaining-draw-ownership.json": "b108ca8838f961316202bcf02dbf6c78c6839522584323a5fb429e6c1388a9a2",
+      "archive-body-outline-remaining-draw-ownership.py": "e60c117a600bdd4828fd0997f743cbe3e12da1bec958e5f207ad19fda02d8adb",
+      "nvidia/results.json": "186696bed04186a6c7cbba3d8859ee9d7f927980a6b389f9817f7300e1ac4d20",
+      "nvidia/frames/gpu_capabilities.json": "93c9fb29461fae11a7e57d4e49112071a71940dee571f1f6696ffbf03c392879",
+      "nvidia/command.json": "1a72760fb5a87ff46eb26a9e04309b596ce479261f296f3f073e390895b841d0",
+      "intel/results.json": "48add83654021e0894ccedc8db63c50baf098d6b7b5e327116bb75110d8e53b4",
+      "intel/frames/gpu_capabilities.json": "a38eaca3509b417cfe23614fe415bd9ccc5622fc682d8623142cdeb7dc3d85cc",
+      "intel/command.json": "35a5ed18ecaaa0585ba02dd683591cdf4378023703463fc0f6f26a56febc5b35"
+    }
+  }
+}

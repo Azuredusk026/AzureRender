@@ -1,0 +1,69 @@
+{
+  "status": "qualified-native-outline-window-origin-controls",
+  "overall": "failed-user-review",
+  "actualAddressesMatch": 105,
+  "independentSamples": 39,
+  "underlyingClipCoordinatePrecision": 32,
+  "subpixelGridBits": 8,
+  "origin": "top-left",
+  "directCase": {
+    "point": [
+      1272,
+      1080
+    ],
+    "primitive": 3803,
+    "address": [
+      1273,
+      359
+    ],
+    "hardware": [
+      1273.335693359375,
+      359.998291015625
+    ],
+    "predicted": {
+      "continuousFloat64": [
+        1273.3341064453125,
+        360.0
+      ],
+      "snappedFloat64": [
+        1273.335693359375,
+        359.998291015625
+      ],
+      "float32TranslateScale": [
+        1273.335693359375,
+        360.0015563964844
+      ],
+      "float32ScaleTranslate": [
+        1273.335693359375,
+        360.0015563964844
+      ],
+      "float32FusedScaleTranslate": [
+        1273.335693359375,
+        360.0015563964844
+      ]
+    },
+    "matches": {
+      "continuousFloat64": false,
+      "snappedFloat64": true,
+      "float32TranslateScale": false,
+      "float32ScaleTranslate": false,
+      "float32FusedScaleTranslate": false
+    }
+  },
+  "fullSourceFootprint": 1118,
+  "modeledAddressesDifferingFromContinuous": 327,
+  "archive": {
+    "sha256": "f8c7a6826254f1220cd7169dd5ec120e98e58d9e81e08fab97560b1a8f96c056",
+    "members": {
+      "archive-body-outline-window-origin.py": "4365b791ba6e16f283a7869d6c7f5fbb76793ef636f01ab17244309385718919",
+      "body-outline-address-rounding-independent.py": "a5fcae4cb12b0e5c5a2d937a1d94729540122aad526436039a8a31b0af2bc327",
+      "body-outline-address-rounding-independent.json": "8fc56cd12a43e666f9e4fe39adb4635679203a49b2d4fe874feae0e7ff7bf2ed",
+      "body-outline-viewport-float-address-check.py": "c16f2b4c12522d5f8054780f2ddbfa722b32d7bc4189012ed8d103fa7edec544",
+      "body-outline-viewport-float-address-check.json": "76d1ea9a3ef9890cdf04d6fd1953a14942ea8bf48118d6bd29baffb8d8d4abc9",
+      "trace-body-outline-source.py": "d09b022a127f58106d1c986cd6bbd10ab1f4cc9ac0f3325dfaab849b8f3b39b0",
+      "trace-body-outline-address-controls-source.json": "650ae00f9d53c34d9e99c063e7f9cb096f851affe80048a6db117e658b196508",
+      "trace-body-outline-address-controls-request.json": "a89381d53eff7bb2a2a9c2f915364d91e7f26d7d693cf4d3647e40b4fd93e42a",
+      "trace-body-outline-addresses-source.json": "7abf470021c66469a46860dbd6ac4b67cd4d71befc46864cd819bdebf4c351b4"
+    }
+  }
+}

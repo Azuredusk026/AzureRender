@@ -1,0 +1,354 @@
+{
+  "status": "measured-fixed-pose-geometry-source-comparison",
+  "events": {
+    "body": {
+      "vertices": 3289,
+      "triangles": 5679,
+      "sameIndexedTriangleCount": 5679,
+      "projectedCoverage": [
+        136029,
+        136028
+      ],
+      "coverageDifferences": [
+        [
+          1181,
+          898
+        ]
+      ],
+      "highErrorInCoverageDiff": [],
+      "nativeVisibleScope": 47458,
+      "nativeVisibleCovered": [
+        47457,
+        47456
+      ],
+      "nativeVisibleMissing": [
+        [
+          [
+            1199,
+            951
+          ]
+        ],
+        [
+          [
+            1181,
+            898
+          ],
+          [
+            1199,
+            951
+          ]
+        ]
+      ],
+      "nativeFloat32Coverage": 136030,
+      "nativeFloat32VisibleMissing": [],
+      "nativeFloat32VulkanModelDisagreement": [
+        [
+          1181,
+          898
+        ],
+        [
+          1199,
+          951
+        ]
+      ],
+      "facePublicSource": null,
+      "exactWorldPositions": 3289,
+      "worldPositionMaxMeters": 0.0,
+      "viewportPixelPeak": [
+        5.955153346803854e-05,
+        0.00016779259982513395
+      ],
+      "viewportPixelP95": [
+        2.9666391264981925e-05,
+        0.00011158472208308012
+      ],
+      "quantizedVerticesDiffering": 68,
+      "depthMaxError": 5.239247302668559e-07,
+      "exactUvCount": 3289,
+      "uvPeak": [
+        0.0,
+        0.0
+      ],
+      "mirroredVUvPeak": [
+        0.0,
+        0.9983994960784912
+      ],
+      "nativeVertex": "fef0374bebc7e0848af9e97c441a339669847c55aa4a227d9a36c77c34fe9a82",
+      "nativeIndex": "507fcdc6d78e70f8f5a2dbbaf54190f20596a6236027f7a8f7cf2a940c6b5742"
+    },
+    "face": {
+      "vertices": 1792,
+      "triangles": 2906,
+      "sameIndexedTriangleCount": 2906,
+      "projectedCoverage": [
+        11462,
+        11462
+      ],
+      "coverageDifferences": [],
+      "highErrorInCoverageDiff": [],
+      "nativeVisibleScope": 3663,
+      "nativeVisibleCovered": [
+        3663,
+        3663
+      ],
+      "nativeVisibleMissing": [
+        [],
+        []
+      ],
+      "nativeFloat32Coverage": 11462,
+      "nativeFloat32VisibleMissing": [],
+      "nativeFloat32VulkanModelDisagreement": [],
+      "facePublicSource": {
+        "scene": "df056aa9dc0e4f4edc1b27b4b762f5ccd4b4fa4f33ebe7974e130162ff039008",
+        "asset": "ff83e532fb5d03f899197bd9e495a4a97a16b65b3fcb77203e56e1bc9d836a90",
+        "capture": "9ea4f390166d5ad49bb9b9b6c7b518d1714b53b89f562f9727d88ab0f98634fc"
+      },
+      "exactWorldPositions": 0,
+      "worldPositionMaxMeters": 2.448619406352563e-05,
+      "viewportPixelPeak": [
+        0.0006112982184731663,
+        0.017455753785071693
+      ],
+      "viewportPixelP95": [
+        0.00015626002838189286,
+        0.016601680980500078
+      ],
+      "quantizedVerticesDiffering": 233,
+      "depthMaxError": 1.8918586563998474e-06,
+      "exactUvCount": 0,
+      "uvPeak": [
+        0.0,
+        0.9837599992752075
+      ],
+      "mirroredVUvPeak": [
+        0.0,
+        2.9802322387695312e-08
+      ],
+      "nativeVertex": "1e248bf04bdabf5247c51529659c4daf4321124f47fa52129a37f0f2d5f53310",
+      "nativeIndex": "9efd0722771e8c3cf544bc276cabd27842b8531af6cf19b6cea5249373db973c"
+    }
+  },
+  "sources": {
+    "body-native-lit-outline-production-native-order.gltf": "a183a03f38d40bc16a954aab92ed4f93f3171f1c54231ae989f9aefa1e2d2605",
+    "body-native-lit-outline-blend-depth.azurelevel": "cc3b0dc801154869df57bc5c80f6d241740de9d45126c977d815ce4244490d1a",
+    "capture_manifest.json": "054bb8de6d9c1d7718acddaf10322816112f6d17694df2a78aa684461af0c474",
+    "captured-opaque-overlays.glb": "ff83e532fb5d03f899197bd9e495a4a97a16b65b3fcb77203e56e1bc9d836a90"
+  },
+  "overall": "failed-user-review",
+  "scope": "isolated-fixed-pose-projection-reconstruction",
+  "renderedBodyControls": {
+    "nvidia": {
+      "frame": "87ceab9ca80473c86708c15f95f8e831b6d1179a23de36061b638a2c169b6993",
+      "locationErrors": [
+        {
+          "point": [
+            1181,
+            898
+          ],
+          "original": [
+            112,
+            85,
+            75
+          ],
+          "rendered": [
+            113,
+            86,
+            77
+          ],
+          "maximum": 2
+        },
+        {
+          "point": [
+            1199,
+            951
+          ],
+          "original": [
+            109,
+            80,
+            71
+          ],
+          "rendered": [
+            86,
+            59,
+            49
+          ],
+          "maximum": 23
+        }
+      ]
+    },
+    "intel": {
+      "frame": "6f133cc93ac4edb5309c5c852c22eee8ec8e05cb48070d49c980b343d7cfac47",
+      "locationErrors": [
+        {
+          "point": [
+            1181,
+            898
+          ],
+          "original": [
+            112,
+            85,
+            75
+          ],
+          "rendered": [
+            113,
+            86,
+            77
+          ],
+          "maximum": 2
+        },
+        {
+          "point": [
+            1199,
+            951
+          ],
+          "original": [
+            109,
+            80,
+            71
+          ],
+          "rendered": [
+            110,
+            82,
+            73
+          ],
+          "maximum": 2
+        }
+      ]
+    }
+  },
+  "nativeContourStages": {
+    "1181,898": {
+      "nativeSequence": [
+        {
+          "stage": 782,
+          "packed": 0,
+          "display": [
+            0,
+            0,
+            0
+          ],
+          "candidateErrors": {
+            "nvidia": 113,
+            "intel": 113
+          }
+        },
+        {
+          "stage": 783,
+          "packed": 1763373971,
+          "display": [
+            112,
+            85,
+            75
+          ],
+          "candidateErrors": {
+            "nvidia": 2,
+            "intel": 2
+          }
+        },
+        {
+          "stage": 1383,
+          "packed": 1763373971,
+          "display": [
+            112,
+            85,
+            75
+          ],
+          "candidateErrors": {
+            "nvidia": 2,
+            "intel": 2
+          }
+        }
+      ],
+      "actual": {
+        "nvidia": [
+          113,
+          86,
+          77
+        ],
+        "intel": [
+          113,
+          86,
+          77
+        ]
+      }
+    },
+    "1199,951": {
+      "nativeSequence": [
+        {
+          "stage": 782,
+          "packed": 0,
+          "display": [
+            0,
+            0,
+            0
+          ],
+          "candidateErrors": {
+            "nvidia": 86,
+            "intel": 110
+          }
+        },
+        {
+          "stage": 783,
+          "packed": 1746574222,
+          "display": [
+            109,
+            80,
+            71
+          ],
+          "candidateErrors": {
+            "nvidia": 23,
+            "intel": 2
+          }
+        },
+        {
+          "stage": 1383,
+          "packed": 1746574222,
+          "display": [
+            109,
+            80,
+            71
+          ],
+          "candidateErrors": {
+            "nvidia": 23,
+            "intel": 2
+          }
+        }
+      ],
+      "actual": {
+        "nvidia": [
+          86,
+          59,
+          49
+        ],
+        "intel": [
+          110,
+          82,
+          73
+        ]
+      }
+    }
+  },
+  "faceOpaqueBase": {
+    "knownPrimitives": 12,
+    "sharedResidualPrimitives": 49,
+    "selectedMipDifferences": 0,
+    "modeledLinearBasePeak": 0.001043153546363862
+  },
+  "frozenReference": "48afd6546c23cfa85099a765cc94ada4813a684538c695faf6d70d6daf2261b5",
+  "archive": {
+    "sha256": "4d0dea41aa3da0e4ab040cf702cc49688b14dd6a0f544c62e26b61a097c53184",
+    "members": {
+      "archive-fixed-pose-face-and-body-geometry.py": "a3a33bbfac6353471d8f4ae8ff24e5abd6e5f170e8990d5aadc1c23f9a985585",
+      "score-fixed-pose-face-and-body-geometry.py": "19328072124f0f03c1e7d1d6c444b7c5c372fd1675ee6ca5d92327faff2ebd39",
+      "fixed-pose-face-and-body-geometry.json": "5c2706dba054fead191a7c8dcdb8e29661904127e75b7b24c58c445923d13190",
+      "score-native-body-contour-stage-controls.py": "a67c3f95d2b523638bccdf3f8c189de50b03f234b232549527c2bf4eb9e5172e",
+      "body-contour-raw-stage-controls.json": "e32828cdb1bdb4a8945a61af507ab1db1a7dbdeb55cb92fc270d922771613577",
+      "score-face-opaque-primitive-residuals.py": "8d673f30b2604f36879e56cda4bcb5d7ac191a6cc6eff661f6ea9f8ea1a7d142",
+      "face-opaque-primitive-residuals.json": "f62efd3c8a19a78462101b2d8a24de673e1a41d10f0dfa5c7623318b2d4ca4da",
+      "score-face-projection-base-texture.py": "7ce2d8823a2fe380c3c873199023345cc3d703aceb428366400e1459056ad7f5",
+      "face-opaque-projection-texture-controls.json": "dcfd1e85e3afbe0a297b5b86da2f3fd52af4fad20a5fd2da5c29fcbf3ffa1c3b",
+      "nvidia/frames/capture_manifest.json": "054bb8de6d9c1d7718acddaf10322816112f6d17694df2a78aa684461af0c474",
+      "intel/frames/capture_manifest.json": "b30a905dd83cf90ad1c2385dc7f9407be52bb5e1adee22c74b51d0808022121f"
+    }
+  }
+}

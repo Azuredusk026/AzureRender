@@ -1,0 +1,493 @@
+{
+  "status": "probed-two-device-iris-color-before-packing",
+  "strictAcceptance": false,
+  "embeddedPythonLaunchRetest": true,
+  "rawScale": 0.25,
+  "scope": "Diagnostic range inferred from observed marker and both matched beauty outputs; empty intervals are unresolved.",
+  "channelWitnesses": {
+    "nvidia:[1308, 266]": {
+      "point": [
+        1308,
+        266
+      ],
+      "channel": "B",
+      "native": 0.3910156190395355,
+      "inferredRawPlayer": [
+        0.390380859375,
+        0.390625
+      ],
+      "delta": [
+        -0.0006347596645355225,
+        -0.00039061903953552246
+      ],
+      "bareDisplay": 168,
+      "truncatedDisplay": 166
+    },
+    "intel:[1255, 258]": {
+      "point": [
+        1255,
+        258
+      ],
+      "channel": "G",
+      "native": 0.0420847088098526,
+      "inferredRawPlayer": [
+        0.0468597412109375,
+        0.046875
+      ],
+      "delta": [
+        0.0047750324010849,
+        0.0047902911901474
+      ],
+      "bareDisplay": 61,
+      "truncatedDisplay": 61
+    },
+    "intel:[1261, 262]": {
+      "point": [
+        1261,
+        262
+      ],
+      "channel": "R",
+      "native": 0.10030224919319153,
+      "inferredRawPlayer": [
+        0.096588134765625,
+        0.09661865234375
+      ],
+      "delta": [
+        -0.0037141144275665283,
+        -0.0036835968494415283
+      ],
+      "bareDisplay": 87,
+      "truncatedDisplay": 87
+    }
+  },
+  "deviceProbes": {
+    "nvidia": {
+      "frame": "4f094fc04d8398d6f405d9a181962a4508bf07ea260082a45b68965c94756809",
+      "baseline": "22c078be96711fabecb10cef50ba1d05e367c5ea935edbd4188df1c881168cc9",
+      "packed": "7c8df9bc95f611ffd1943367493f517a0da708d64a93ac7a2003f83e8b93dafd",
+      "pixels": "2eb6f3339b34ce80febea7e7b85d1ff05aef9e6446f824a0567255c3de81ffdf",
+      "exactOutside": true,
+      "rows": [
+        {
+          "point": [
+            1308,
+            266
+          ],
+          "native": [
+            0.10907690972089767,
+            0.08877171576023102,
+            0.3910156190395355
+          ],
+          "codes": [
+            247,
+            92,
+            63
+          ],
+          "bareDisplay": [
+            93,
+            84,
+            168
+          ],
+          "packedDisplay": [
+            93,
+            84,
+            166
+          ],
+          "possibleRawIntervals": [
+            [
+              [
+                0.109100341796875,
+                0.109130859375
+              ]
+            ],
+            [
+              [
+                0.0887451171875,
+                0.088775634765625
+              ]
+            ],
+            [
+              [
+                0.390380859375,
+                0.390625
+              ]
+            ]
+          ]
+        },
+        {
+          "point": [
+            1255,
+            258
+          ],
+          "native": [
+            0.6466585397720337,
+            0.0420847088098526,
+            0.04187528416514397
+          ],
+          "codes": [
+            88,
+            198,
+            92
+          ],
+          "bareDisplay": [
+            210,
+            58,
+            58
+          ],
+          "packedDisplay": [
+            210,
+            58,
+            57
+          ],
+          "possibleRawIntervals": [
+            [],
+            [
+              [
+                0.042083740234375,
+                0.0420989990234375
+              ]
+            ],
+            [
+              [
+                0.0418701171875,
+                0.041900634765625
+              ]
+            ]
+          ]
+        },
+        {
+          "point": [
+            1261,
+            262
+          ],
+          "native": [
+            0.10030224919319153,
+            0.0365184023976326,
+            0.17258310317993164
+          ],
+          "codes": [
+            214,
+            89,
+            133
+          ],
+          "bareDisplay": [
+            89,
+            54,
+            115
+          ],
+          "packedDisplay": [
+            89,
+            54,
+            115
+          ],
+          "possibleRawIntervals": [
+            [
+              [
+                0.10028076171875,
+                0.100311279296875
+              ]
+            ],
+            [],
+            [
+              [
+                0.1724853515625,
+                0.172607421875
+              ]
+            ]
+          ]
+        },
+        {
+          "point": [
+            1260,
+            262
+          ],
+          "native": [
+            0.08829041570425034,
+            0.10012374073266983,
+            0.9129123091697693
+          ],
+          "codes": [
+            79,
+            207,
+            75
+          ],
+          "bareDisplay": [
+            84,
+            89,
+            245
+          ],
+          "packedDisplay": [
+            84,
+            89,
+            244
+          ],
+          "possibleRawIntervals": [
+            [
+              [
+                0.088348388671875,
+                0.08837890625
+              ]
+            ],
+            [
+              [
+                0.100067138671875,
+                0.10009765625
+              ]
+            ],
+            [
+              [
+                0.91162109375,
+                0.912109375
+              ]
+            ]
+          ]
+        }
+      ]
+    },
+    "intel": {
+      "frame": "03b7d9e7a5703b1ef6b02026cd6ceb6cce747675d69cf1270e3875b656cd9ee9",
+      "baseline": "f38b565e9f903112045395700a6094e6134239219384baa1255053e6049cba9e",
+      "packed": "23cb7483e695a78b76c67e43cfc0bb52dbc5796abc5194e3559af6dbd44514c6",
+      "pixels": "82b58fae8f8e97c3c1cadfa3a2057427e47f0438a22aa3f66f883f735a8b72ce",
+      "exactOutside": true,
+      "rows": [
+        {
+          "point": [
+            1308,
+            266
+          ],
+          "native": [
+            0.10907690972089767,
+            0.08877171576023102,
+            0.3910156190395355
+          ],
+          "codes": [
+            240,
+            83,
+            65
+          ],
+          "bareDisplay": [
+            93,
+            84,
+            168
+          ],
+          "packedDisplay": [
+            92,
+            84,
+            168
+          ],
+          "possibleRawIntervals": [
+            [],
+            [
+              [
+                0.088470458984375,
+                0.0885009765625
+              ]
+            ],
+            [
+              [
+                0.390869140625,
+                0.39111328125
+              ]
+            ]
+          ]
+        },
+        {
+          "point": [
+            1255,
+            258
+          ],
+          "native": [
+            0.6466585397720337,
+            0.0420847088098526,
+            0.04187528416514397
+          ],
+          "codes": [
+            111,
+            255,
+            212
+          ],
+          "bareDisplay": [
+            211,
+            61,
+            60
+          ],
+          "packedDisplay": [
+            211,
+            61,
+            60
+          ],
+          "possibleRawIntervals": [
+            [
+              [
+                0.652099609375,
+                0.65234375
+              ]
+            ],
+            [
+              [
+                0.0468597412109375,
+                0.046875
+              ]
+            ],
+            [
+              [
+                0.0455322265625,
+                0.045562744140625
+              ]
+            ]
+          ]
+        },
+        {
+          "point": [
+            1261,
+            262
+          ],
+          "native": [
+            0.10030224919319153,
+            0.0365184023976326,
+            0.17258310317993164
+          ],
+          "codes": [
+            93,
+            50,
+            131
+          ],
+          "bareDisplay": [
+            87,
+            53,
+            115
+          ],
+          "packedDisplay": [
+            87,
+            53,
+            115
+          ],
+          "possibleRawIntervals": [
+            [
+              [
+                0.096588134765625,
+                0.09661865234375
+              ]
+            ],
+            [
+              [
+                0.035919189453125,
+                0.0359344482421875
+              ]
+            ],
+            [
+              [
+                0.1722412109375,
+                0.17236328125
+              ]
+            ]
+          ]
+        },
+        {
+          "point": [
+            1260,
+            262
+          ],
+          "native": [
+            0.08829041570425034,
+            0.10012374073266983,
+            0.9129123091697693
+          ],
+          "codes": [
+            119,
+            43,
+            89
+          ],
+          "bareDisplay": [
+            84,
+            90,
+            246
+          ],
+          "packedDisplay": [
+            84,
+            90,
+            244
+          ],
+          "possibleRawIntervals": [
+            [
+              [
+                0.089569091796875,
+                0.089599609375
+              ]
+            ],
+            [
+              [
+                0.102874755859375,
+                0.1029052734375
+              ]
+            ],
+            [
+              [
+                0.91845703125,
+                0.9189453125
+              ]
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "nativeShader": "2fed357c703e0c981455a06d6e4e809cdb519aebca2838365137fdd5c8944b1e",
+  "player": "f8f86018d82b7e47a399a9cd451a61701122afb6f2dda680456862289167ae38",
+  "programs": {
+    "mesh_object_early_lighting.frag.spv": "9235552ee65ac58d6f4e74feaba15ee0f73857a9655eec3728146a32358eb458",
+    "mesh_object_lighting.frag.spv": "25d34597291a6a31a2a5ca3c671f46460625e810bbdbc3548424c4ddeaef709d",
+    "mesh_object_early.frag.spv": "ff286d858a52bdc9e0c94beaac5ec588dc23b937564f71da6ba0f9d046f8523e",
+    "mesh_object.frag.spv": "2b42b1998974d96b981f3ae41b4f2a83b4a5740ba5be94b24bb35a40d49aa248"
+  },
+  "shaderSource": "586ded7cca75d27fd5823ce5e340ab065cd80f056fb054a9979d06671416938f",
+  "queue": [
+    {
+      "id": 1461,
+      "task": "nr-iris-packing-boundary-native",
+      "state": "failed",
+      "exitCode": 1,
+      "elapsedSeconds": 137.9539999999979
+    },
+    {
+      "id": 1462,
+      "task": "nr-iris-packing-boundary-native-retest",
+      "state": "succeeded",
+      "exitCode": 0,
+      "elapsedSeconds": 6.625
+    },
+    {
+      "id": 1463,
+      "task": "nr-player-iris-prepacking-bins",
+      "state": "succeeded",
+      "exitCode": 0,
+      "elapsedSeconds": 210.45300000000134
+    }
+  ],
+  "validation": {
+    "archive": "0d920698da21d03f1dfb31728e1b41b960d0a36e12d60734d1f12bc92e160602",
+    "files": {
+      "native/request.json": "127d05e2317d2cbf7be828dc4810f61f197b1d41267328dbe8dcef39c4bf9423",
+      "native/results.json": "edf017b0c5f4bd50d8fa1c22ef386052d747dcd2f88f5abe7f35a148739fde79",
+      "player/results.json": "72063088ad8bdb3f9398acc2303c8aeb455fd0b8cd24434029728d4d686d0ded",
+      "player/nvidia-pixels.npz": "2eb6f3339b34ce80febea7e7b85d1ff05aef9e6446f824a0567255c3de81ffdf",
+      "player/nvidia/frames/capture_manifest.json": "4359cf12d51bb1015fcbfbc6ecfa51674ae0d7535d7d08e3cf218870101f6786",
+      "player/nvidia/frames/gpu_capabilities.json": "93c9fb29461fae11a7e57d4e49112071a71940dee571f1f6696ffbf03c392879",
+      "player/nvidia/command.json": "5450b3b9626fd536492024e93bc17d11f44c272ee6fda885d6e06d3c3fb501ea",
+      "player/nvidia/runtime.json": "a72780bcb4ab78e822288e728f545427e22476f38876ea8fe3bb90ca09a40c7c",
+      "player/intel-pixels.npz": "82b58fae8f8e97c3c1cadfa3a2057427e47f0438a22aa3f66f883f735a8b72ce",
+      "player/intel/frames/capture_manifest.json": "3da70905c9073062772ea8a5fb587d2958a5e8d949585c65b7b3860d6b6ebe78",
+      "player/intel/frames/gpu_capabilities.json": "a38eaca3509b417cfe23614fe415bd9ccc5622fc682d8623142cdeb7dc3d85cc",
+      "player/intel/command.json": "c9095aa4e3b143ac42096ab939e13da03fedd4394792b7bc4450aa97d972431c",
+      "player/intel/runtime.json": "a72780bcb4ab78e822288e728f545427e22476f38876ea8fe3bb90ca09a40c7c",
+      "source/iris-packing-boundary-native.py": "6c66a7dd28c7de50ca6804fcce428d1b074f02515c7f1b750991791593a69bb0",
+      "source/iris-player-prepacking-bins.py": "2977c175018ddfb7dc7c17e8c45accb53db29782216a90679c1f79a0b6a700ac",
+      "source/archive-iris-player-prepacking.py": "1614ad4631504a7d210383eb3c18dd93212d3c490a2be5248f420d1446cb5fe0",
+      "source/run-with-stage-log.py": "edc0a9392285e7198606af2710bebefa9e6fc7abe5b5b369f2caa6d3ea4eb3a3",
+      "logs/iris-packing-boundary-native.log": "6c46996e09c73969e42e4fff034a5499c5982e3f47994277464d3a6d5bde20e3",
+      "logs/iris-packing-boundary-native-retest.log": "7938314619eb69b36c6e7529e4f51638d64d844d268e84d251b49c3cd9935412",
+      "logs/iris-player-prepacking-bins.log": "ebd293535976063766e40c65a19b7a2e099a03fbe8ef1e35689f0c44dace507e"
+    }
+  }
+}

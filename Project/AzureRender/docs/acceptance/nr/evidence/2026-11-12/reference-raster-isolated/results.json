@@ -1,0 +1,4850 @@
+{
+  "status": "qualified-isolated-raster-and-receiver-sources",
+  "overallStatus": "failed-user-review",
+  "scope": {
+    "local": "external-input-31dd33daee8d4b8f858fe1db1fef5a95",
+    "main": "external-input-6f327a5eba664deb85a0c22136b17726",
+    "sourceBase": "eb05be0008bbbc7fc737b925eec079d10b2d6f6b",
+    "plannedBytes": 134217728,
+    "localInputs": [
+      "20261112-010418-scene-reference-object-visibility-709f68",
+      "20261112-013522-scene-visibility-atlas-source-33c6c3",
+      "20261111-232828-scene-reference-normal-60ddfa",
+      "20261110-030251-hair-main-chroma-public-9e799c",
+      "20261110-031856-hair-main-chroma-debug-668bf2",
+      "20261110-003435-visibility-numeric-contract-4f95e7",
+      "20261110-003031-reciprocal-compact-profile-4e7929",
+      "20261110-112309-hair-relative-projection-control-b9da17",
+      "20261111-213928-scene-reference-depth-728062",
+      "20261112-020715-scene-visibility-reference-calibration-f77af1",
+      "20261112-024632-native-atlas-and-receiver-producers-d5e705",
+      "20261112-025941-visibility-projection-depth-c1c792",
+      "20261112-032619-native-object-record-calibration-19d2f9",
+      "20261112-033450-native-object-record-source-capture-071c26",
+      "20261112-040725-reference-object-shadow-raster-2c9e58",
+      "20261112-041837-reference-object-shadow-raster-capture-60f161",
+      "20261112-044926-material-reference-object-visibility-344def",
+      "20261112-053111-intel-reference-visibility-sources-5238e2",
+      "20261112-061922-project-reference-visibility-profile-47902e",
+      "20261112-072016-native-receiver-producer-replay-523058",
+      "20261112-073905-reference-scene-outline-depth-d97cff",
+      "20261112-083618-native-cloth-receiver-normal-input-a94a9c",
+      "20261112-084230-cloth-receiver-authored-mips-a73d87",
+      "20261112-090101-cloth-receiver-native-sampler-e301d1",
+      "20261112-091515-cloth-receiver-normal-y-29da47",
+      "20261112-093321-reference-normal-sampled-rg-ceb2c6",
+      "20261112-103417-eyebrow-receiver-producer-1f8f43",
+      "20261112-104825-native-hair-normal-mip-bias-883aba",
+      "20261112-105542-native-eyebrow-hair-stencil-8ad501",
+      "20261112-110307-reference-depth-stencil-coverage-198047",
+      "20261112-114419-reference-geometric-normal-3e57b5",
+      "20261112-133809-reference-receiver-source-isolation-6cdff0",
+      "20261112-135432-reference-outline-projection-d784cf",
+      "20261112-143340-native-texture-sampling-footprint-750e56",
+      "20261112-153052-reference-hair-mip-footprint-510ded",
+      "20261112-155601-reference-hair-live-lod-2d2bfd",
+      "20261112-164303-reference-hair-mip-boundary-342000",
+      "20261112-173549-reference-hair-color-source-196fbc",
+      "20261112-174157-reference-hair-color-pair-8d76da",
+      "20261112-175619-reference-hair-color-triple-d2d080",
+      "20261112-180345-native-body-normal-source-43299d",
+      "20261112-182312-projected-hair-point-mip-82adc1",
+      "20261112-213454-reference-raster-source-a825da"
+    ],
+    "mainInputs": [
+      "20261103-234012-character-reference-stages-5abe6c",
+      "20261022-201845-endfield-capture-954719",
+      "20261027-022702-object-visibility-depth-reconstruction-c7312f"
+    ],
+    "change": "Function-local precision for the hair viewport grid; native receiver post-vertex and independent attachment substitution",
+    "gate": "Stable two-device reference attachments, whole-frame RGB comparisons, and full receiver attachment identity for replay qualification"
+  },
+  "lease": {
+    "owner": "01a1c099-8121-7be3-b0b8-7af2f9a06b2a",
+    "task": "quality-reference-raster-isolated-gpu",
+    "output": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-230338-reference-raster-isolated-c086fb",
+    "pid": 49100,
+    "token": "553f5c4ee6374337815203172bfc2c0a",
+    "started": 1794496248.6181626,
+    "state": "released",
+    "ended": 1794496462.3969812
+  },
+  "predecessor": {
+    "owner": "01a1c097-ec33-7790-8c18-08a2b0ddb0c3",
+    "task": "full-debug-195-195",
+    "output": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261112-011326-handoff-final-regression-e2e260",
+    "pid": 20084,
+    "token": "943061c283df4b4da18dc996b296efc0",
+    "started": 1794496017.654072,
+    "state": "released",
+    "ended": 1794496200.2174163
+  },
+  "executions": {
+    "native-receiver-mesh-execution.json": {
+      "status": "exited",
+      "exitCode": 0,
+      "reason": null,
+      "seconds": 8.422000000020489,
+      "logTruncated": false,
+      "samplingSeconds": 1,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-B",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-230338-reference-raster-isolated-c086fb\\next-native-receiver-mesh.py",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-230338-reference-raster-isolated-c086fb"
+      ],
+      "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-230338-reference-raster-isolated-c086fb\\tmp"
+    },
+    "receiver-source-isolation-execution.json": {
+      "status": "exited",
+      "exitCode": 0,
+      "reason": null,
+      "seconds": 16.234000000054948,
+      "logTruncated": false,
+      "samplingSeconds": 1,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-B",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-230338-reference-raster-isolated-c086fb\\next-production-receiver-source-isolation.py",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-230338-reference-raster-isolated-c086fb"
+      ],
+      "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-230338-reference-raster-isolated-c086fb\\tmp"
+    },
+    "grid\\intel-execution.json": {
+      "status": "exited",
+      "exitCode": 0,
+      "reason": null,
+      "seconds": 157.875,
+      "logTruncated": false,
+      "samplingSeconds": 1,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-B",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-230338-reference-raster-isolated-c086fb\\diagnostics-capture.py",
+        "grid",
+        "intel"
+      ],
+      "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-230338-reference-raster-isolated-c086fb\\tmp"
+    },
+    "grid\\nvidia-execution.json": {
+      "status": "exited",
+      "exitCode": 0,
+      "reason": null,
+      "seconds": 28.406000000075437,
+      "logTruncated": false,
+      "samplingSeconds": 1,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-B",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-230338-reference-raster-isolated-c086fb\\diagnostics-capture.py",
+        "grid",
+        "nvidia"
+      ],
+      "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-230338-reference-raster-isolated-c086fb\\tmp"
+    }
+  },
+  "grid": {
+    "nvidia": {
+      "mode": "grid",
+      "device": "nvidia",
+      "validationClean": true,
+      "allocatorZero": true,
+      "planes": {
+        "raster": {
+          "exact": true,
+          "baseline": "f1ef0ea6a727554f6593b2c2333e49650eec5c8f2b25acb03d8e250ae8ce35a2",
+          "candidate": "f1ef0ea6a727554f6593b2c2333e49650eec5c8f2b25acb03d8e250ae8ce35a2"
+        },
+        "hardware": {
+          "exact": true,
+          "baseline": "f1ef0ea6a727554f6593b2c2333e49650eec5c8f2b25acb03d8e250ae8ce35a2",
+          "candidate": "f1ef0ea6a727554f6593b2c2333e49650eec5c8f2b25acb03d8e250ae8ce35a2"
+        },
+        "packedNormals": {
+          "exact": true,
+          "baseline": "37df16157c41a1ffdacb7b2ad21e9d84d7a0b81612e7b79c0bc294c496c1c424",
+          "candidate": "37df16157c41a1ffdacb7b2ad21e9d84d7a0b81612e7b79c0bc294c496c1c424"
+        },
+        "objectIds": {
+          "exact": true,
+          "baseline": "d14ae2982d8d7b1f99c93572ba6d0ce9f9af3643cd250a2636b3c4b765a62a10",
+          "candidate": "d14ae2982d8d7b1f99c93572ba6d0ce9f9af3643cd250a2636b3c4b765a62a10"
+        },
+        "objectVisibility": {
+          "exact": true,
+          "baseline": "1010efb44d81c2bef5c0384cd50844a97537cf79c5750f35220b4b0e2cae8336",
+          "candidate": "1010efb44d81c2bef5c0384cd50844a97537cf79c5750f35220b4b0e2cae8336"
+        }
+      },
+      "colors": [
+        {
+          "overOne": 0,
+          "introduced": 0,
+          "closed": 0,
+          "maximum": 1,
+          "exactOldPng": false,
+          "wholeRgbChanged": 3,
+          "insideMaskRgbChanged": 2,
+          "outsideMaskRgbChanged": 1,
+          "sha256": "ffea66c041ab1eefe894c17600fadfb141d21c0e4707a2404f2073e82280be52",
+          "baselineSha256": "e7673fd8104605089e3cfec894dd2337acd7579569be86a23683ed1cb6f622a4"
+        },
+        {
+          "overOne": 0,
+          "introduced": 0,
+          "closed": 0,
+          "maximum": 1,
+          "exactOldPng": false,
+          "wholeRgbChanged": 3,
+          "insideMaskRgbChanged": 2,
+          "outsideMaskRgbChanged": 1,
+          "sha256": "ffea66c041ab1eefe894c17600fadfb141d21c0e4707a2404f2073e82280be52",
+          "baselineSha256": "e7673fd8104605089e3cfec894dd2337acd7579569be86a23683ed1cb6f622a4"
+        },
+        {
+          "overOne": 0,
+          "introduced": 0,
+          "closed": 0,
+          "maximum": 1,
+          "exactOldPng": false,
+          "wholeRgbChanged": 3,
+          "insideMaskRgbChanged": 2,
+          "outsideMaskRgbChanged": 1,
+          "sha256": "ffea66c041ab1eefe894c17600fadfb141d21c0e4707a2404f2073e82280be52",
+          "baselineSha256": "e7673fd8104605089e3cfec894dd2337acd7579569be86a23683ed1cb6f622a4"
+        }
+      ],
+      "display1240_248": [
+        1240,
+        248,
+        146,
+        68,
+        67,
+        146,
+        68,
+        67,
+        145,
+        68,
+        67
+      ],
+      "selectedRgb": {
+        "1240,248": {
+          "display": [
+            1240,
+            248
+          ],
+          "baseline": [
+            146,
+            68,
+            67
+          ],
+          "candidate": [
+            146,
+            68,
+            67
+          ],
+          "native": [
+            145,
+            68,
+            67
+          ]
+        },
+        "1248,281": {
+          "display": [
+            1248,
+            281
+          ],
+          "baseline": [
+            69,
+            36,
+            34
+          ],
+          "candidate": [
+            69,
+            36,
+            34
+          ],
+          "native": [
+            69,
+            36,
+            34
+          ]
+        }
+      },
+      "receiver": {},
+      "unchangedReferenceGeometry": true,
+      "visibilityRExact": null
+    },
+    "intel": {
+      "mode": "grid",
+      "device": "intel",
+      "validationClean": true,
+      "allocatorZero": true,
+      "planes": {
+        "raster": {
+          "exact": true,
+          "baseline": "d2dbed224741d08e346cd7a30f2feed0b3883bb5346d42c7889d84df8d241a45",
+          "candidate": "d2dbed224741d08e346cd7a30f2feed0b3883bb5346d42c7889d84df8d241a45"
+        },
+        "hardware": {
+          "exact": true,
+          "baseline": "d2dbed224741d08e346cd7a30f2feed0b3883bb5346d42c7889d84df8d241a45",
+          "candidate": "d2dbed224741d08e346cd7a30f2feed0b3883bb5346d42c7889d84df8d241a45"
+        },
+        "packedNormals": {
+          "exact": true,
+          "baseline": "cc379c0b311eaf6c4d28093c88adf642190ee5b694d1a9b32d98a811fab73132",
+          "candidate": "cc379c0b311eaf6c4d28093c88adf642190ee5b694d1a9b32d98a811fab73132"
+        },
+        "objectIds": {
+          "exact": true,
+          "baseline": "f831b78c8c2d0242fb00e5530f59791d952141d85fa02bf41e1aa2387bc7248b",
+          "candidate": "f831b78c8c2d0242fb00e5530f59791d952141d85fa02bf41e1aa2387bc7248b"
+        },
+        "objectVisibility": {
+          "exact": true,
+          "baseline": "6e7b8e5a946cd8758a935462ae68e1bc6d25c6b9ab2a2e54ce8bfb8b2ad7e4c3",
+          "candidate": "6e7b8e5a946cd8758a935462ae68e1bc6d25c6b9ab2a2e54ce8bfb8b2ad7e4c3"
+        }
+      },
+      "colors": [
+        {
+          "overOne": 31,
+          "introduced": 0,
+          "closed": 1,
+          "maximum": 15,
+          "exactOldPng": false,
+          "wholeRgbChanged": 32,
+          "insideMaskRgbChanged": 29,
+          "outsideMaskRgbChanged": 3,
+          "sha256": "c1048edf8050909466043aa49ad5372fc52c624030e9c892dac1b1c6e649fd92",
+          "baselineSha256": "282969ea1d2cb48896ed20d9104e8422fe6fa70bb12f404e9af908c03e9463df"
+        },
+        {
+          "overOne": 31,
+          "introduced": 0,
+          "closed": 1,
+          "maximum": 15,
+          "exactOldPng": false,
+          "wholeRgbChanged": 32,
+          "insideMaskRgbChanged": 29,
+          "outsideMaskRgbChanged": 3,
+          "sha256": "c1048edf8050909466043aa49ad5372fc52c624030e9c892dac1b1c6e649fd92",
+          "baselineSha256": "282969ea1d2cb48896ed20d9104e8422fe6fa70bb12f404e9af908c03e9463df"
+        },
+        {
+          "overOne": 31,
+          "introduced": 0,
+          "closed": 1,
+          "maximum": 15,
+          "exactOldPng": false,
+          "wholeRgbChanged": 32,
+          "insideMaskRgbChanged": 29,
+          "outsideMaskRgbChanged": 3,
+          "sha256": "c1048edf8050909466043aa49ad5372fc52c624030e9c892dac1b1c6e649fd92",
+          "baselineSha256": "282969ea1d2cb48896ed20d9104e8422fe6fa70bb12f404e9af908c03e9463df"
+        }
+      ],
+      "display1240_248": [
+        1240,
+        248,
+        116,
+        52,
+        52,
+        146,
+        68,
+        67,
+        145,
+        68,
+        67
+      ],
+      "selectedRgb": {
+        "1240,248": {
+          "display": [
+            1240,
+            248
+          ],
+          "baseline": [
+            116,
+            52,
+            52
+          ],
+          "candidate": [
+            146,
+            68,
+            67
+          ],
+          "native": [
+            145,
+            68,
+            67
+          ]
+        },
+        "1248,281": {
+          "display": [
+            1248,
+            281
+          ],
+          "baseline": [
+            75,
+            40,
+            38
+          ],
+          "candidate": [
+            75,
+            40,
+            38
+          ],
+          "native": [
+            69,
+            36,
+            34
+          ]
+        }
+      },
+      "receiver": {},
+      "unchangedReferenceGeometry": true,
+      "visibilityRExact": null
+    }
+  },
+  "gridWholeFrame": {
+    "nvidia": {
+      "whole": {
+        "changed": 3,
+        "overOne": 0,
+        "maximum": 1,
+        "boxXYXY": [
+          1257,
+          217,
+          1257,
+          221
+        ],
+        "hist": [
+          0,
+          3
+        ]
+      },
+      "frozen": {
+        "changed": 2,
+        "overOne": 0,
+        "maximum": 1,
+        "boxXYXY": [
+          1257,
+          217,
+          1257,
+          219
+        ],
+        "hist": [
+          0,
+          2
+        ]
+      },
+      "outsideFrozen": {
+        "changed": 1,
+        "overOne": 0,
+        "maximum": 1,
+        "boxXYXY": [
+          1257,
+          221,
+          1257,
+          221
+        ],
+        "hist": [
+          0,
+          1
+        ]
+      }
+    },
+    "intel": {
+      "whole": {
+        "changed": 32,
+        "overOne": 1,
+        "maximum": 30,
+        "boxXYXY": [
+          1197,
+          192,
+          1361,
+          366
+        ],
+        "hist": [
+          0,
+          31,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1
+        ]
+      },
+      "frozen": {
+        "changed": 29,
+        "overOne": 1,
+        "maximum": 30,
+        "boxXYXY": [
+          1197,
+          192,
+          1361,
+          366
+        ],
+        "hist": [
+          0,
+          28,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1
+        ]
+      },
+      "outsideFrozen": {
+        "changed": 3,
+        "overOne": 0,
+        "maximum": 1,
+        "boxXYXY": [
+          1218,
+          292,
+          1359,
+          318
+        ],
+        "hist": [
+          0,
+          3
+        ]
+      }
+    }
+  },
+  "shaderPrograms": {
+    "sourceSha256": "8c0f02765bbe5c425f88cd080689d6156ecc319d18fa59fd9f885324280a1e4d",
+    "programs": {
+      "mesh_reference_camera.vert.spv": {
+        "baselineSha256": "5ed62cbc35c0b50bece56df4e62e56bd9c60bfa942ce1b82130b70cdd55f765c",
+        "inlineSha256": "334e1dd090ec6b3f74754747c5335f732a6090e8eb1fd7e16f348afded55ae08",
+        "probeSha256": "d2f6f11bfb8f66861232e5fc08ceb54323da1004fa706a595e52f5863671688f",
+        "inlineMainDecorations": 36,
+        "isolatedMainDecorations": 0,
+        "isolatedHelperOperations": [
+          "OpFDiv",
+          "OpFMul",
+          "OpFAdd",
+          "OpVectorTimesScalar",
+          "OpFDiv",
+          "OpFAdd",
+          "OpFSub",
+          "OpFDiv"
+        ],
+        "command": [
+          "D:\\Tools\\VulkanSDK\\1.4.350.0\\Bin\\glslc.exe",
+          "-DAZURE_REFERENCE_CAMERA=1",
+          "-ID:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\shaders",
+          "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-213454-reference-raster-source-a825da\\next-grid-isolated-verified\\shader-probe\\mesh.vert",
+          "-o",
+          "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-213454-reference-raster-source-a825da\\next-grid-isolated-verified\\shader-probe\\mesh_reference_camera.vert.spv"
+        ]
+      },
+      "mesh_projected_reference_camera.vert.spv": {
+        "baselineSha256": "19d96fb30a5a6ec4968c92845d8ebfaf94539a68800c4b99de4125f82f9bb1bb",
+        "inlineSha256": "b029be52875fb35b71fdcd7cccbc7ca47bbbee75d4322e1a54c31d8ed1bbf3cb",
+        "probeSha256": "edb486ee6e02e7093dbd9d95f44305b9ffe8578ee605be9dfe41b645b874a104",
+        "inlineMainDecorations": 44,
+        "isolatedMainDecorations": 0,
+        "isolatedHelperOperations": [
+          "OpFDiv",
+          "OpFMul",
+          "OpFAdd",
+          "OpVectorTimesScalar",
+          "OpFDiv",
+          "OpFAdd",
+          "OpFSub",
+          "OpFDiv"
+        ],
+        "command": [
+          "D:\\Tools\\VulkanSDK\\1.4.350.0\\Bin\\glslc.exe",
+          "-DAZURE_PROJECTED_SURFACE=1",
+          "-DAZURE_REFERENCE_CAMERA=1",
+          "-ID:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\shaders",
+          "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-213454-reference-raster-source-a825da\\next-grid-isolated-verified\\shader-probe\\mesh.vert",
+          "-o",
+          "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-213454-reference-raster-source-a825da\\next-grid-isolated-verified\\shader-probe\\mesh_projected_reference_camera.vert.spv"
+        ]
+      },
+      "mesh_object_projected_reference_camera.vert.spv": {
+        "baselineSha256": "ecd7bb9e9f5f86a2d31039c1f047a77e561c5dfe4d57ea8f35f7db58f66bb207",
+        "inlineSha256": "5b99a1acdcd752a62ec89b7910420208e6c8a9450280c72640d1998a8169b8cb",
+        "probeSha256": "8b1a1f0601428a858c1cbf9a2ade95c12e443908deae9e89c17f8394feea22b6",
+        "inlineMainDecorations": 44,
+        "isolatedMainDecorations": 0,
+        "isolatedHelperOperations": [
+          "OpFDiv",
+          "OpFMul",
+          "OpFAdd",
+          "OpVectorTimesScalar",
+          "OpFDiv",
+          "OpFAdd",
+          "OpFSub",
+          "OpFDiv"
+        ],
+        "command": [
+          "D:\\Tools\\VulkanSDK\\1.4.350.0\\Bin\\glslc.exe",
+          "-DAZURE_PROJECTED_SURFACE=1",
+          "-DAZURE_OBJECT_SHADOW=1",
+          "-DAZURE_REFERENCE_CAMERA=1",
+          "-ID:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\shaders",
+          "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-213454-reference-raster-source-a825da\\next-grid-isolated-verified\\shader-probe\\mesh.vert",
+          "-o",
+          "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-213454-reference-raster-source-a825da\\next-grid-isolated-verified\\shader-probe\\mesh_object_projected_reference_camera.vert.spv"
+        ]
+      },
+      "mesh_object_reference_camera.vert.spv": {
+        "baselineSha256": "59268e157b6deeb4d81e0e38f6d4821cd63fa9d93a55c9f3ff5d2b82c8a1cccb",
+        "inlineSha256": "d05eca1ac4cab341122d880536982ddcab3384b3893c75f66b640978ebde81f0",
+        "probeSha256": "959175630344e4ad90bc2a47472f4cb52634f0a5541aa6d9bf7589df35d65b2f",
+        "inlineMainDecorations": 36,
+        "isolatedMainDecorations": 0,
+        "isolatedHelperOperations": [
+          "OpFDiv",
+          "OpFMul",
+          "OpFAdd",
+          "OpVectorTimesScalar",
+          "OpFDiv",
+          "OpFAdd",
+          "OpFSub",
+          "OpFDiv"
+        ],
+        "command": [
+          "D:\\Tools\\VulkanSDK\\1.4.350.0\\Bin\\glslc.exe",
+          "-DAZURE_OBJECT_SHADOW=1",
+          "-DAZURE_REFERENCE_CAMERA=1",
+          "-ID:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\shaders",
+          "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-213454-reference-raster-source-a825da\\next-grid-isolated-verified\\shader-probe\\mesh.vert",
+          "-o",
+          "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-213454-reference-raster-source-a825da\\next-grid-isolated-verified\\shader-probe\\mesh_object_reference_camera.vert.spv"
+        ]
+      }
+    }
+  },
+  "nativeMeshes": {
+    "status": "qualified",
+    "devices": {
+      "nvidia": {
+        "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+        "deviceID": 10464,
+        "events": {
+          "328": {
+            "numIndices": 17037,
+            "indexStride": 2,
+            "baseVertex": 0,
+            "vertexStride": 92,
+            "vertices": 3289,
+            "vertexProgramSha256": "588e2efbfc43c84cdd37d2c1295c69089d534802b1facdfaa3906c2d4fd36c77",
+            "pixelProgramSha256": "907e0a39de60c6fc742ef86c230eb59ef2034b9a92909ce529df469a1986e1bc",
+            "signature": [
+              {
+                "name": "SV_Position",
+                "index": 0,
+                "count": 4,
+                "system": "ShaderBuiltin.Position"
+              },
+              {
+                "name": "TEXCOORD",
+                "index": 0,
+                "count": 2,
+                "system": "ShaderBuiltin.Undefined"
+              },
+              {
+                "name": "TEXCOORD",
+                "index": 1,
+                "count": 3,
+                "system": "ShaderBuiltin.Undefined"
+              },
+              {
+                "name": "TEXCOORD",
+                "index": 2,
+                "count": 3,
+                "system": "ShaderBuiltin.Undefined"
+              },
+              {
+                "name": "TEXCOORD",
+                "index": 3,
+                "count": 4,
+                "system": "ShaderBuiltin.Undefined"
+              },
+              {
+                "name": "TEXCOORD",
+                "index": 4,
+                "count": 3,
+                "system": "ShaderBuiltin.Undefined"
+              },
+              {
+                "name": "TEXCOORD",
+                "index": 5,
+                "count": 3,
+                "system": "ShaderBuiltin.Undefined"
+              },
+              {
+                "name": "TEXCOORD",
+                "index": 6,
+                "count": 1,
+                "system": "ShaderBuiltin.Undefined"
+              }
+            ],
+            "pixelInput": [
+              {
+                "name": "SV_Position",
+                "index": 0,
+                "count": 4,
+                "system": "ShaderBuiltin.Position"
+              },
+              {
+                "name": "TEXCOORD",
+                "index": 0,
+                "count": 2,
+                "system": "ShaderBuiltin.Undefined"
+              },
+              {
+                "name": "TEXCOORD",
+                "index": 1,
+                "count": 3,
+                "system": "ShaderBuiltin.Undefined"
+              },
+              {
+                "name": "TEXCOORD",
+                "index": 2,
+                "count": 3,
+                "system": "ShaderBuiltin.Undefined"
+              },
+              {
+                "name": "TEXCOORD",
+                "index": 3,
+                "count": 4,
+                "system": "ShaderBuiltin.Undefined"
+              },
+              {
+                "name": "TEXCOORD",
+                "index": 4,
+                "count": 3,
+                "system": "ShaderBuiltin.Undefined"
+              },
+              {
+                "name": "TEXCOORD",
+                "index": 5,
+                "count": 3,
+                "system": "ShaderBuiltin.Undefined"
+              },
+              {
+                "name": "TEXCOORD",
+                "index": 6,
+                "count": 1,
+                "system": "ShaderBuiltin.Undefined"
+              },
+              {
+                "name": "SV_IsFrontFace",
+                "index": 0,
+                "count": 1,
+                "system": "ShaderBuiltin.IsFrontFace"
+              }
+            ],
+            "viewport": [
+              0.0,
+              0.0,
+              2560.0,
+              1440.0,
+              0.0,
+              1.0
+            ],
+            "vertexData": {
+              "path": "nvidia\\328-vertices.zlib",
+              "bytes": 245931,
+              "sha256": "239e214aa4337c88b6985106f29b072c00328299aac4e39ea34d9a9938667f9b",
+              "rawBytes": 302588,
+              "rawSha256": "b431730e309671fbaf90316c301f38627e88c5e26d8c605de1f76f6636964d79"
+            },
+            "indexData": {
+              "path": "nvidia\\328-indices.zlib",
+              "bytes": 18682,
+              "sha256": "8163a793249d757fa6da43c69ab5ff68644575e3ecadcbf96a2b1dad3663dcb7",
+              "rawBytes": 34074,
+              "rawSha256": "507fcdc6d78e70f8f5a2dbbaf54190f20596a6236027f7a8f7cf2a940c6b5742"
+            }
+          },
+          "345": {
+            "numIndices": 8718,
+            "indexStride": 2,
+            "baseVertex": 0,
+            "vertexStride": 76,
+            "vertices": 1792,
+            "vertexProgramSha256": "bee21d747a5ee3abea06b5db3535165471eea079222993a339377fe5e28b2a8e",
+            "pixelProgramSha256": "4d081d6dc8f5bd141d69ecb4a9c0b33ac48c6fddc1e544bca1af7a7a35370c13",
+            "signature": [
+              {
+                "name": "SV_Position",
+                "index": 0,
+                "count": 4,
+                "system": "ShaderBuiltin.Position"
+              },
+              {
+                "name": "TEXCOORD",
+                "index": 0,
+                "count": 2,
+                "system": "ShaderBuiltin.Undefined"
+              },
+              {
+                "name": "TEXCOORD",
+                "index": 1,
+                "count": 3,
+                "system": "ShaderBuiltin.Undefined"
+              },
+              {
+                "name": "TEXCOORD",
+                "index": 2,
+                "count": 3,
+                "system": "ShaderBuiltin.Undefined"
+              },
+              {
+                "name": "TEXCOORD",
+                "index": 3,
+                "count": 3,
+                "system": "ShaderBuiltin.Undefined"
+              },
+              {
+                "name": "TEXCOORD",
+                "index": 4,
+                "count": 3,
+                "system": "ShaderBuiltin.Undefined"
+              },
+              {
+                "name": "TEXCOORD",
+                "index": 5,
+                "count": 1,
+                "system": "ShaderBuiltin.Undefined"
+              }
+            ],
+            "pixelInput": [
+              {
+                "name": "SV_Position",
+                "index": 0,
+                "count": 4,
+                "system": "ShaderBuiltin.Position"
+              },
+              {
+                "name": "TEXCOORD",
+                "index": 0,
+                "count": 2,
+                "system": "ShaderBuiltin.Undefined"
+              },
+              {
+                "name": "TEXCOORD",
+                "index": 1,
+                "count": 3,
+                "system": "ShaderBuiltin.Undefined"
+              },
+              {
+                "name": "TEXCOORD",
+                "index": 2,
+                "count": 3,
+                "system": "ShaderBuiltin.Undefined"
+              },
+              {
+                "name": "TEXCOORD",
+                "index": 3,
+                "count": 3,
+                "system": "ShaderBuiltin.Undefined"
+              },
+              {
+                "name": "TEXCOORD",
+                "index": 4,
+                "count": 3,
+                "system": "ShaderBuiltin.Undefined"
+              },
+              {
+                "name": "TEXCOORD",
+                "index": 5,
+                "count": 1,
+                "system": "ShaderBuiltin.Undefined"
+              },
+              {
+                "name": "SV_IsFrontFace",
+                "index": 0,
+                "count": 1,
+                "system": "ShaderBuiltin.IsFrontFace"
+              }
+            ],
+            "viewport": [
+              0.0,
+              0.0,
+              2560.0,
+              1440.0,
+              0.0,
+              1.0
+            ],
+            "vertexData": {
+              "path": "nvidia\\345-vertices.zlib",
+              "bytes": 104500,
+              "sha256": "68b0a0d6e493b0ac716ffb7f76de8b1b77ffb2117688016d92ff0d4d23791309",
+              "rawBytes": 136192,
+              "rawSha256": "960783fc01122461ed52fb3b62d6f0f270180bea59ff9c9d82a5f45406d43aea"
+            },
+            "indexData": {
+              "path": "nvidia\\345-indices.zlib",
+              "bytes": 9568,
+              "sha256": "93234f50c8a9fe924e0609f73bb1391068819756b9189327e6b02858cd9b6820",
+              "rawBytes": 17436,
+              "rawSha256": "9efd0722771e8c3cf544bc276cabd27842b8531af6cf19b6cea5249373db973c"
+            }
+          },
+          "377": {
+            "numIndices": 102882,
+            "indexStride": 2,
+            "baseVertex": 0,
+            "vertexStride": 92,
+            "vertices": 32021,
+            "vertexProgramSha256": "588e2efbfc43c84cdd37d2c1295c69089d534802b1facdfaa3906c2d4fd36c77",
+            "pixelProgramSha256": "cf35bcfab626ca6ba74fdb95f36f0947b8a5df93eed4adf2f94cedf9951feca0",
+            "signature": [
+              {
+                "name": "SV_Position",
+                "index": 0,
+                "count": 4,
+                "system": "ShaderBuiltin.Position"
+              },
+              {
+                "name": "TEXCOORD",
+                "index": 0,
+                "count": 2,
+                "system": "ShaderBuiltin.Undefined"
+              },
+              {
+                "name": "TEXCOORD",
+                "index": 1,
+                "count": 3,
+                "system": "ShaderBuiltin.Undefined"
+              },
+              {
+                "name": "TEXCOORD",
+                "index": 2,
+                "count": 3,
+                "system": "ShaderBuiltin.Undefined"
+              },
+              {
+                "name": "TEXCOORD",
+                "index": 3,
+                "count": 4,
+                "system": "ShaderBuiltin.Undefined"
+              },
+              {
+                "name": "TEXCOORD",
+                "index": 4,
+                "count": 3,
+                "system": "ShaderBuiltin.Undefined"
+              },
+              {
+                "name": "TEXCOORD",
+                "index": 5,
+                "count": 3,
+                "system": "ShaderBuiltin.Undefined"
+              },
+              {
+                "name": "TEXCOORD",
+                "index": 6,
+                "count": 1,
+                "system": "ShaderBuiltin.Undefined"
+              }
+            ],
+            "pixelInput": [
+              {
+                "name": "SV_Position",
+                "index": 0,
+                "count": 4,
+                "system": "ShaderBuiltin.Position"
+              },
+              {
+                "name": "TEXCOORD",
+                "index": 0,
+                "count": 2,
+                "system": "ShaderBuiltin.Undefined"
+              },
+              {
+                "name": "TEXCOORD",
+                "index": 1,
+                "count": 3,
+                "system": "ShaderBuiltin.Undefined"
+              },
+              {
+                "name": "TEXCOORD",
+                "index": 2,
+                "count": 3,
+                "system": "ShaderBuiltin.Undefined"
+              },
+              {
+                "name": "TEXCOORD",
+                "index": 3,
+                "count": 4,
+                "system": "ShaderBuiltin.Undefined"
+              },
+              {
+                "name": "TEXCOORD",
+                "index": 4,
+                "count": 3,
+                "system": "ShaderBuiltin.Undefined"
+              },
+              {
+                "name": "TEXCOORD",
+                "index": 5,
+                "count": 3,
+                "system": "ShaderBuiltin.Undefined"
+              },
+              {
+                "name": "TEXCOORD",
+                "index": 6,
+                "count": 1,
+                "system": "ShaderBuiltin.Undefined"
+              },
+              {
+                "name": "SV_IsFrontFace",
+                "index": 0,
+                "count": 1,
+                "system": "ShaderBuiltin.IsFrontFace"
+              }
+            ],
+            "viewport": [
+              0.0,
+              0.0,
+              2560.0,
+              1440.0,
+              0.0,
+              1.0
+            ],
+            "vertexData": {
+              "path": "nvidia\\377-vertices.zlib",
+              "bytes": 1881072,
+              "sha256": "1496ba193d199c137b701ec6100fc0904710caa43f2f99d212e9cb609b540f6e",
+              "rawBytes": 2945932,
+              "rawSha256": "125f3eadbf2d48dfb09796362f343d62b2a859a9030e9414d4afaeb7d59fa9e3"
+            },
+            "indexData": {
+              "path": "nvidia\\377-indices.zlib",
+              "bytes": 112486,
+              "sha256": "8b552266f218587145f0438928d4bf4b5826267822e9bc7935b58189a1e1dfdf",
+              "rawBytes": 205764,
+              "rawSha256": "ee9dec6cf9021d71c8c60460c0e95aeccb06fe32a9eb0ae9631b133686c9ebf6"
+            }
+          }
+        },
+        "messages": [
+          "NVIDIA Nsight Perf SDK\nNVD3D11Counters::GetCounterAvailabilityImage\nNvPerf could not determine counter availability for this GPU",
+          "NVIDIA Nsight Perf SDK\nNVD3D11Counters::Impl::TryInitializePerfSDK\nNvPerf could not initialize counter availability image"
+        ]
+      },
+      "intel": {
+        "device": "Intel(R) UHD Graphics",
+        "deviceID": 42888,
+        "events": {
+          "328": {
+            "numIndices": 17037,
+            "indexStride": 2,
+            "baseVertex": 0,
+            "vertexStride": 92,
+            "vertices": 3289,
+            "vertexProgramSha256": "588e2efbfc43c84cdd37d2c1295c69089d534802b1facdfaa3906c2d4fd36c77",
+            "pixelProgramSha256": "907e0a39de60c6fc742ef86c230eb59ef2034b9a92909ce529df469a1986e1bc",
+            "signature": [
+              {
+                "name": "SV_Position",
+                "index": 0,
+                "count": 4,
+                "system": "ShaderBuiltin.Position"
+              },
+              {
+                "name": "TEXCOORD",
+                "index": 0,
+                "count": 2,
+                "system": "ShaderBuiltin.Undefined"
+              },
+              {
+                "name": "TEXCOORD",
+                "index": 1,
+                "count": 3,
+                "system": "ShaderBuiltin.Undefined"
+              },
+              {
+                "name": "TEXCOORD",
+                "index": 2,
+                "count": 3,
+                "system": "ShaderBuiltin.Undefined"
+              },
+              {
+                "name": "TEXCOORD",
+                "index": 3,
+                "count": 4,
+                "system": "ShaderBuiltin.Undefined"
+              },
+              {
+                "name": "TEXCOORD",
+                "index": 4,
+                "count": 3,
+                "system": "ShaderBuiltin.Undefined"
+              },
+              {
+                "name": "TEXCOORD",
+                "index": 5,
+                "count": 3,
+                "system": "ShaderBuiltin.Undefined"
+              },
+              {
+                "name": "TEXCOORD",
+                "index": 6,
+                "count": 1,
+                "system": "ShaderBuiltin.Undefined"
+              }
+            ],
+            "pixelInput": [
+              {
+                "name": "SV_Position",
+                "index": 0,
+                "count": 4,
+                "system": "ShaderBuiltin.Position"
+              },
+              {
+                "name": "TEXCOORD",
+                "index": 0,
+                "count": 2,
+                "system": "ShaderBuiltin.Undefined"
+              },
+              {
+                "name": "TEXCOORD",
+                "index": 1,
+                "count": 3,
+                "system": "ShaderBuiltin.Undefined"
+              },
+              {
+                "name": "TEXCOORD",
+                "index": 2,
+                "count": 3,
+                "system": "ShaderBuiltin.Undefined"
+              },
+              {
+                "name": "TEXCOORD",
+                "index": 3,
+                "count": 4,
+                "system": "ShaderBuiltin.Undefined"
+              },
+              {
+                "name": "TEXCOORD",
+                "index": 4,
+                "count": 3,
+                "system": "ShaderBuiltin.Undefined"
+              },
+              {
+                "name": "TEXCOORD",
+                "index": 5,
+                "count": 3,
+                "system": "ShaderBuiltin.Undefined"
+              },
+              {
+                "name": "TEXCOORD",
+                "index": 6,
+                "count": 1,
+                "system": "ShaderBuiltin.Undefined"
+              },
+              {
+                "name": "SV_IsFrontFace",
+                "index": 0,
+                "count": 1,
+                "system": "ShaderBuiltin.IsFrontFace"
+              }
+            ],
+            "viewport": [
+              0.0,
+              0.0,
+              2560.0,
+              1440.0,
+              0.0,
+              1.0
+            ],
+            "vertexData": {
+              "path": "intel\\328-vertices.zlib",
+              "bytes": 245932,
+              "sha256": "042b19ec1cb626acaf2fb8b3e4f6aaac4af8488c8e13629bb4a69e5e2933bca7",
+              "rawBytes": 302588,
+              "rawSha256": "3077e9c90bf876fbc6639c0af16fb57e3e1d945e5f89da310c9b7a49517d0bdd"
+            },
+            "indexData": {
+              "path": "intel\\328-indices.zlib",
+              "bytes": 18682,
+              "sha256": "8163a793249d757fa6da43c69ab5ff68644575e3ecadcbf96a2b1dad3663dcb7",
+              "rawBytes": 34074,
+              "rawSha256": "507fcdc6d78e70f8f5a2dbbaf54190f20596a6236027f7a8f7cf2a940c6b5742"
+            }
+          },
+          "345": {
+            "numIndices": 8718,
+            "indexStride": 2,
+            "baseVertex": 0,
+            "vertexStride": 76,
+            "vertices": 1792,
+            "vertexProgramSha256": "bee21d747a5ee3abea06b5db3535165471eea079222993a339377fe5e28b2a8e",
+            "pixelProgramSha256": "4d081d6dc8f5bd141d69ecb4a9c0b33ac48c6fddc1e544bca1af7a7a35370c13",
+            "signature": [
+              {
+                "name": "SV_Position",
+                "index": 0,
+                "count": 4,
+                "system": "ShaderBuiltin.Position"
+              },
+              {
+                "name": "TEXCOORD",
+                "index": 0,
+                "count": 2,
+                "system": "ShaderBuiltin.Undefined"
+              },
+              {
+                "name": "TEXCOORD",
+                "index": 1,
+                "count": 3,
+                "system": "ShaderBuiltin.Undefined"
+              },
+              {
+                "name": "TEXCOORD",
+                "index": 2,
+                "count": 3,
+                "system": "ShaderBuiltin.Undefined"
+              },
+              {
+                "name": "TEXCOORD",
+                "index": 3,
+                "count": 3,
+                "system": "ShaderBuiltin.Undefined"
+              },
+              {
+                "name": "TEXCOORD",
+                "index": 4,
+                "count": 3,
+                "system": "ShaderBuiltin.Undefined"
+              },
+              {
+                "name": "TEXCOORD",
+                "index": 5,
+                "count": 1,
+                "system": "ShaderBuiltin.Undefined"
+              }
+            ],
+            "pixelInput": [
+              {
+                "name": "SV_Position",
+                "index": 0,
+                "count": 4,
+                "system": "ShaderBuiltin.Position"
+              },
+              {
+                "name": "TEXCOORD",
+                "index": 0,
+                "count": 2,
+                "system": "ShaderBuiltin.Undefined"
+              },
+              {
+                "name": "TEXCOORD",
+                "index": 1,
+                "count": 3,
+                "system": "ShaderBuiltin.Undefined"
+              },
+              {
+                "name": "TEXCOORD",
+                "index": 2,
+                "count": 3,
+                "system": "ShaderBuiltin.Undefined"
+              },
+              {
+                "name": "TEXCOORD",
+                "index": 3,
+                "count": 3,
+                "system": "ShaderBuiltin.Undefined"
+              },
+              {
+                "name": "TEXCOORD",
+                "index": 4,
+                "count": 3,
+                "system": "ShaderBuiltin.Undefined"
+              },
+              {
+                "name": "TEXCOORD",
+                "index": 5,
+                "count": 1,
+                "system": "ShaderBuiltin.Undefined"
+              },
+              {
+                "name": "SV_IsFrontFace",
+                "index": 0,
+                "count": 1,
+                "system": "ShaderBuiltin.IsFrontFace"
+              }
+            ],
+            "viewport": [
+              0.0,
+              0.0,
+              2560.0,
+              1440.0,
+              0.0,
+              1.0
+            ],
+            "vertexData": {
+              "path": "intel\\345-vertices.zlib",
+              "bytes": 104498,
+              "sha256": "7f1c58cf50a13a5c09ff49acd135c0950826480737aa6525539075e9ec522887",
+              "rawBytes": 136192,
+              "rawSha256": "67f1f0f9484c6a75ae71d53a31cc3536487fe60c4073645a478f260bfd1aceda"
+            },
+            "indexData": {
+              "path": "intel\\345-indices.zlib",
+              "bytes": 9568,
+              "sha256": "93234f50c8a9fe924e0609f73bb1391068819756b9189327e6b02858cd9b6820",
+              "rawBytes": 17436,
+              "rawSha256": "9efd0722771e8c3cf544bc276cabd27842b8531af6cf19b6cea5249373db973c"
+            }
+          },
+          "377": {
+            "numIndices": 102882,
+            "indexStride": 2,
+            "baseVertex": 0,
+            "vertexStride": 92,
+            "vertices": 32021,
+            "vertexProgramSha256": "588e2efbfc43c84cdd37d2c1295c69089d534802b1facdfaa3906c2d4fd36c77",
+            "pixelProgramSha256": "cf35bcfab626ca6ba74fdb95f36f0947b8a5df93eed4adf2f94cedf9951feca0",
+            "signature": [
+              {
+                "name": "SV_Position",
+                "index": 0,
+                "count": 4,
+                "system": "ShaderBuiltin.Position"
+              },
+              {
+                "name": "TEXCOORD",
+                "index": 0,
+                "count": 2,
+                "system": "ShaderBuiltin.Undefined"
+              },
+              {
+                "name": "TEXCOORD",
+                "index": 1,
+                "count": 3,
+                "system": "ShaderBuiltin.Undefined"
+              },
+              {
+                "name": "TEXCOORD",
+                "index": 2,
+                "count": 3,
+                "system": "ShaderBuiltin.Undefined"
+              },
+              {
+                "name": "TEXCOORD",
+                "index": 3,
+                "count": 4,
+                "system": "ShaderBuiltin.Undefined"
+              },
+              {
+                "name": "TEXCOORD",
+                "index": 4,
+                "count": 3,
+                "system": "ShaderBuiltin.Undefined"
+              },
+              {
+                "name": "TEXCOORD",
+                "index": 5,
+                "count": 3,
+                "system": "ShaderBuiltin.Undefined"
+              },
+              {
+                "name": "TEXCOORD",
+                "index": 6,
+                "count": 1,
+                "system": "ShaderBuiltin.Undefined"
+              }
+            ],
+            "pixelInput": [
+              {
+                "name": "SV_Position",
+                "index": 0,
+                "count": 4,
+                "system": "ShaderBuiltin.Position"
+              },
+              {
+                "name": "TEXCOORD",
+                "index": 0,
+                "count": 2,
+                "system": "ShaderBuiltin.Undefined"
+              },
+              {
+                "name": "TEXCOORD",
+                "index": 1,
+                "count": 3,
+                "system": "ShaderBuiltin.Undefined"
+              },
+              {
+                "name": "TEXCOORD",
+                "index": 2,
+                "count": 3,
+                "system": "ShaderBuiltin.Undefined"
+              },
+              {
+                "name": "TEXCOORD",
+                "index": 3,
+                "count": 4,
+                "system": "ShaderBuiltin.Undefined"
+              },
+              {
+                "name": "TEXCOORD",
+                "index": 4,
+                "count": 3,
+                "system": "ShaderBuiltin.Undefined"
+              },
+              {
+                "name": "TEXCOORD",
+                "index": 5,
+                "count": 3,
+                "system": "ShaderBuiltin.Undefined"
+              },
+              {
+                "name": "TEXCOORD",
+                "index": 6,
+                "count": 1,
+                "system": "ShaderBuiltin.Undefined"
+              },
+              {
+                "name": "SV_IsFrontFace",
+                "index": 0,
+                "count": 1,
+                "system": "ShaderBuiltin.IsFrontFace"
+              }
+            ],
+            "viewport": [
+              0.0,
+              0.0,
+              2560.0,
+              1440.0,
+              0.0,
+              1.0
+            ],
+            "vertexData": {
+              "path": "intel\\377-vertices.zlib",
+              "bytes": 1881139,
+              "sha256": "18063a2d0d24e311df79cccef57758fdc7d7a97c6590bf5fcb6891542712fbe0",
+              "rawBytes": 2945932,
+              "rawSha256": "8411c51237ef221054fa004fcf72776f7b95e38547684933ccc47aa236125dad"
+            },
+            "indexData": {
+              "path": "intel\\377-indices.zlib",
+              "bytes": 112486,
+              "sha256": "8b552266f218587145f0438928d4bf4b5826267822e9bc7935b58189a1e1dfdf",
+              "rawBytes": 205764,
+              "rawSha256": "ee9dec6cf9021d71c8c60460c0e95aeccb06fe32a9eb0ae9631b133686c9ebf6"
+            }
+          }
+        },
+        "messages": []
+      }
+    }
+  },
+  "meshComparison": {
+    "events": {
+      "328": {
+        "indicesSha256": "507fcdc6d78e70f8f5a2dbbaf54190f20596a6236027f7a8f7cf2a940c6b5742",
+        "vertices": 3289,
+        "fields": {
+          "SV_Position0": {
+            "exactComponents": [
+              3289,
+              3289,
+              3289,
+              3289
+            ],
+            "exactRows": 3289,
+            "maximumAbsolute": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          "TEXCOORD0": {
+            "exactComponents": [
+              3289,
+              3289
+            ],
+            "exactRows": 3289,
+            "maximumAbsolute": [
+              0.0,
+              0.0
+            ]
+          },
+          "TEXCOORD1": {
+            "exactComponents": [
+              3289,
+              3289,
+              3289
+            ],
+            "exactRows": 3289,
+            "maximumAbsolute": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          "TEXCOORD2": {
+            "exactComponents": [
+              2132,
+              2152,
+              2151
+            ],
+            "exactRows": 1887,
+            "maximumAbsolute": [
+              1.1920928955078125e-07,
+              1.1920928955078125e-07,
+              1.1920928955078125e-07
+            ]
+          },
+          "TEXCOORD3": {
+            "exactComponents": [
+              1566,
+              1156,
+              1548,
+              3289
+            ],
+            "exactRows": 747,
+            "maximumAbsolute": [
+              1.043081283569336e-06,
+              3.8743019104003906e-07,
+              3.5762786865234375e-07,
+              0.0
+            ]
+          },
+          "TEXCOORD4": {
+            "exactComponents": [
+              3289,
+              3289,
+              3289
+            ],
+            "exactRows": 3289,
+            "maximumAbsolute": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          "TEXCOORD5": {
+            "exactComponents": [
+              3289,
+              3289,
+              3289
+            ],
+            "exactRows": 3289,
+            "maximumAbsolute": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          "TEXCOORD6": {
+            "exactComponents": [
+              3289
+            ],
+            "exactRows": 3289,
+            "maximumAbsolute": [
+              0.0
+            ]
+          }
+        }
+      },
+      "345": {
+        "indicesSha256": "9efd0722771e8c3cf544bc276cabd27842b8531af6cf19b6cea5249373db973c",
+        "vertices": 1792,
+        "fields": {
+          "SV_Position0": {
+            "exactComponents": [
+              1792,
+              1792,
+              1792,
+              1792
+            ],
+            "exactRows": 1792,
+            "maximumAbsolute": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          "TEXCOORD0": {
+            "exactComponents": [
+              1792,
+              1792
+            ],
+            "exactRows": 1792,
+            "maximumAbsolute": [
+              0.0,
+              0.0
+            ]
+          },
+          "TEXCOORD1": {
+            "exactComponents": [
+              1792,
+              1792,
+              1792
+            ],
+            "exactRows": 1792,
+            "maximumAbsolute": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          "TEXCOORD2": {
+            "exactComponents": [
+              486,
+              533,
+              519
+            ],
+            "exactRows": 103,
+            "maximumAbsolute": [
+              1.1920928955078125e-07,
+              1.1920928955078125e-07,
+              1.1920928955078125e-07
+            ]
+          },
+          "TEXCOORD3": {
+            "exactComponents": [
+              1792,
+              1792,
+              1792
+            ],
+            "exactRows": 1792,
+            "maximumAbsolute": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          "TEXCOORD4": {
+            "exactComponents": [
+              1792,
+              1792,
+              1792
+            ],
+            "exactRows": 1792,
+            "maximumAbsolute": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          "TEXCOORD5": {
+            "exactComponents": [
+              1792
+            ],
+            "exactRows": 1792,
+            "maximumAbsolute": [
+              0.0
+            ]
+          }
+        }
+      },
+      "377": {
+        "indicesSha256": "ee9dec6cf9021d71c8c60460c0e95aeccb06fe32a9eb0ae9631b133686c9ebf6",
+        "vertices": 32021,
+        "fields": {
+          "SV_Position0": {
+            "exactComponents": [
+              32021,
+              32021,
+              32021,
+              32021
+            ],
+            "exactRows": 32021,
+            "maximumAbsolute": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          "TEXCOORD0": {
+            "exactComponents": [
+              32021,
+              32021
+            ],
+            "exactRows": 32021,
+            "maximumAbsolute": [
+              0.0,
+              0.0
+            ]
+          },
+          "TEXCOORD1": {
+            "exactComponents": [
+              32021,
+              32021,
+              32021
+            ],
+            "exactRows": 32021,
+            "maximumAbsolute": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          "TEXCOORD2": {
+            "exactComponents": [
+              17764,
+              18157,
+              17705
+            ],
+            "exactRows": 14232,
+            "maximumAbsolute": [
+              1.7881393432617188e-07,
+              1.7881393432617188e-07,
+              1.7881393432617188e-07
+            ]
+          },
+          "TEXCOORD3": {
+            "exactComponents": [
+              12875,
+              12474,
+              12781,
+              32021
+            ],
+            "exactRows": 6110,
+            "maximumAbsolute": [
+              2.0265579223632812e-06,
+              2.0265579223632812e-06,
+              2.771615982055664e-06,
+              0.0
+            ]
+          },
+          "TEXCOORD4": {
+            "exactComponents": [
+              32021,
+              32021,
+              32021
+            ],
+            "exactRows": 32021,
+            "maximumAbsolute": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          "TEXCOORD5": {
+            "exactComponents": [
+              32021,
+              32021,
+              32021
+            ],
+            "exactRows": 32021,
+            "maximumAbsolute": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          "TEXCOORD6": {
+            "exactComponents": [
+              32021
+            ],
+            "exactRows": 32021,
+            "maximumAbsolute": [
+              0.0
+            ]
+          }
+        }
+      }
+    },
+    "cloth": {
+      "nvidia": {
+        "nativeUnmatched": 67,
+        "whollyUnmatched": 67,
+        "ambiguousUnmatched": 0,
+        "exactCoverage": 53,
+        "snappedCoverage": 53,
+        "candidatePositions": [
+          [
+            1395,
+            1032
+          ],
+          [
+            1396,
+            1032
+          ],
+          [
+            1394,
+            1031
+          ],
+          [
+            1395,
+            1031
+          ],
+          [
+            1396,
+            1031
+          ],
+          [
+            1397,
+            1031
+          ],
+          [
+            1393,
+            1030
+          ],
+          [
+            1394,
+            1030
+          ],
+          [
+            1395,
+            1030
+          ],
+          [
+            1396,
+            1030
+          ],
+          [
+            1397,
+            1030
+          ],
+          [
+            1398,
+            1030
+          ],
+          [
+            1399,
+            1030
+          ],
+          [
+            1393,
+            1029
+          ],
+          [
+            1394,
+            1029
+          ],
+          [
+            1395,
+            1029
+          ],
+          [
+            1396,
+            1029
+          ],
+          [
+            1397,
+            1029
+          ],
+          [
+            1398,
+            1029
+          ],
+          [
+            1399,
+            1029
+          ],
+          [
+            1400,
+            1029
+          ],
+          [
+            1395,
+            1028
+          ],
+          [
+            1396,
+            1028
+          ],
+          [
+            1397,
+            1028
+          ],
+          [
+            1398,
+            1028
+          ],
+          [
+            1399,
+            1028
+          ],
+          [
+            1400,
+            1028
+          ],
+          [
+            1401,
+            1028
+          ],
+          [
+            1396,
+            1027
+          ],
+          [
+            1397,
+            1027
+          ],
+          [
+            1398,
+            1027
+          ],
+          [
+            1399,
+            1027
+          ],
+          [
+            1400,
+            1027
+          ],
+          [
+            1401,
+            1027
+          ],
+          [
+            1402,
+            1027
+          ],
+          [
+            1397,
+            1026
+          ],
+          [
+            1398,
+            1026
+          ],
+          [
+            1399,
+            1026
+          ],
+          [
+            1400,
+            1026
+          ],
+          [
+            1401,
+            1026
+          ],
+          [
+            1402,
+            1026
+          ],
+          [
+            1403,
+            1026
+          ],
+          [
+            1398,
+            1025
+          ],
+          [
+            1399,
+            1025
+          ],
+          [
+            1400,
+            1025
+          ],
+          [
+            1401,
+            1025
+          ],
+          [
+            1402,
+            1025
+          ],
+          [
+            1403,
+            1025
+          ],
+          [
+            1399,
+            1024
+          ],
+          [
+            1400,
+            1024
+          ],
+          [
+            1401,
+            1024
+          ],
+          [
+            1402,
+            1024
+          ],
+          [
+            1401,
+            1023
+          ]
+        ],
+        "receiverOverOne": 158,
+        "nativeUnmatchedCoverageOverOne": 0,
+        "overOneOutsideNativeUnmatchedCoverage": 158
+      },
+      "intel": {
+        "nativeUnmatched": 67,
+        "whollyUnmatched": 67,
+        "ambiguousUnmatched": 0,
+        "exactCoverage": 53,
+        "snappedCoverage": 53,
+        "candidatePositions": [
+          [
+            1395,
+            1032
+          ],
+          [
+            1396,
+            1032
+          ],
+          [
+            1394,
+            1031
+          ],
+          [
+            1395,
+            1031
+          ],
+          [
+            1396,
+            1031
+          ],
+          [
+            1397,
+            1031
+          ],
+          [
+            1393,
+            1030
+          ],
+          [
+            1394,
+            1030
+          ],
+          [
+            1395,
+            1030
+          ],
+          [
+            1396,
+            1030
+          ],
+          [
+            1397,
+            1030
+          ],
+          [
+            1398,
+            1030
+          ],
+          [
+            1399,
+            1030
+          ],
+          [
+            1393,
+            1029
+          ],
+          [
+            1394,
+            1029
+          ],
+          [
+            1395,
+            1029
+          ],
+          [
+            1396,
+            1029
+          ],
+          [
+            1397,
+            1029
+          ],
+          [
+            1398,
+            1029
+          ],
+          [
+            1399,
+            1029
+          ],
+          [
+            1400,
+            1029
+          ],
+          [
+            1395,
+            1028
+          ],
+          [
+            1396,
+            1028
+          ],
+          [
+            1397,
+            1028
+          ],
+          [
+            1398,
+            1028
+          ],
+          [
+            1399,
+            1028
+          ],
+          [
+            1400,
+            1028
+          ],
+          [
+            1401,
+            1028
+          ],
+          [
+            1396,
+            1027
+          ],
+          [
+            1397,
+            1027
+          ],
+          [
+            1398,
+            1027
+          ],
+          [
+            1399,
+            1027
+          ],
+          [
+            1400,
+            1027
+          ],
+          [
+            1401,
+            1027
+          ],
+          [
+            1402,
+            1027
+          ],
+          [
+            1397,
+            1026
+          ],
+          [
+            1398,
+            1026
+          ],
+          [
+            1399,
+            1026
+          ],
+          [
+            1400,
+            1026
+          ],
+          [
+            1401,
+            1026
+          ],
+          [
+            1402,
+            1026
+          ],
+          [
+            1403,
+            1026
+          ],
+          [
+            1398,
+            1025
+          ],
+          [
+            1399,
+            1025
+          ],
+          [
+            1400,
+            1025
+          ],
+          [
+            1401,
+            1025
+          ],
+          [
+            1402,
+            1025
+          ],
+          [
+            1403,
+            1025
+          ],
+          [
+            1399,
+            1024
+          ],
+          [
+            1400,
+            1024
+          ],
+          [
+            1401,
+            1024
+          ],
+          [
+            1402,
+            1024
+          ],
+          [
+            1401,
+            1023
+          ]
+        ],
+        "receiverOverOne": 223,
+        "nativeUnmatchedCoverageOverOne": 0,
+        "overOneOutsideNativeUnmatchedCoverage": 223
+      }
+    }
+  },
+  "receiverSourceIsolation": {
+    "status": "qualified",
+    "rawSourceProgramSha256": "12a5568b8c5bce3b980f3aeb3edefa956a6ca7e67f248bd756ae593e2e16d5e0",
+    "parametersSha256": "4975464726f6c181e2ceb126e4e75f6b38309c958c6ba1ed1aaac516d2852fd9",
+    "atlasSha256": {
+      "nvidia": "df174554896d0969532f372427354f38efb7b6ce7e7e57d1902e674d0d3ab7da",
+      "intel": "379c0962dd7b4cd89aee2d1c03843ba2b1ff96c0dd7825dc82d683fb6edf232c"
+    },
+    "devices": {
+      "nvidia": {
+        "actualSha256": "1010efb44d81c2bef5c0384cd50844a97537cf79c5750f35220b4b0e2cae8336",
+        "cases": {
+          "cached-nvidia-atlas": {
+            "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+            "validationErrors": 0,
+            "vendor": 4318,
+            "zeroAllocator": true,
+            "outputSha256": "1010efb44d81c2bef5c0384cd50844a97537cf79c5750f35220b4b0e2cae8336",
+            "actualFullAttachmentExact": true,
+            "receiver": {
+              "samples": 49384,
+              "overOne": 237,
+              "maximum": 44,
+              "closed": 0,
+              "introduced": 0,
+              "byNativeNormalOwner": {
+                "296": {
+                  "samples": 496,
+                  "overOne": 2,
+                  "closed": 0,
+                  "introduced": 0
+                },
+                "310": {
+                  "samples": 255,
+                  "overOne": 0,
+                  "closed": 0,
+                  "introduced": 0
+                },
+                "328": {
+                  "samples": 9116,
+                  "overOne": 46,
+                  "closed": 0,
+                  "introduced": 0
+                },
+                "345": {
+                  "samples": 3825,
+                  "overOne": 30,
+                  "closed": 0,
+                  "introduced": 0
+                },
+                "377": {
+                  "samples": 16629,
+                  "overOne": 158,
+                  "closed": 0,
+                  "introduced": 0
+                },
+                "422": {
+                  "samples": 19063,
+                  "overOne": 1,
+                  "closed": 0,
+                  "introduced": 0
+                }
+              }
+            },
+            "hair": {
+              "samples": 17017,
+              "overOne": 0,
+              "maximum": 1,
+              "closed": 0,
+              "introduced": 0
+            },
+            "focusedBody": {
+              "1235,1072": {
+                "value": 27,
+                "baseline": 27,
+                "native": 27
+              },
+              "1334,1014": {
+                "value": 17,
+                "baseline": 17,
+                "native": 17
+              },
+              "1332,1012": {
+                "value": 127,
+                "baseline": 127,
+                "native": 139
+              },
+              "1254,1089": {
+                "value": 54,
+                "baseline": 54,
+                "native": 54
+              },
+              "1308,1080": {
+                "value": 239,
+                "baseline": 239,
+                "native": 239
+              }
+            }
+          },
+          "cached-intel-atlas": {
+            "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+            "validationErrors": 0,
+            "vendor": 4318,
+            "zeroAllocator": true,
+            "outputSha256": "b415923106eeb609770f4105ceccd2a0bbb38a33ed496c2dc462ed4e34441259",
+            "actualFullAttachmentExact": false,
+            "receiver": {
+              "samples": 49384,
+              "overOne": 236,
+              "maximum": 44,
+              "closed": 3,
+              "introduced": 2,
+              "byNativeNormalOwner": {
+                "296": {
+                  "samples": 496,
+                  "overOne": 2,
+                  "closed": 0,
+                  "introduced": 0
+                },
+                "310": {
+                  "samples": 255,
+                  "overOne": 0,
+                  "closed": 0,
+                  "introduced": 0
+                },
+                "328": {
+                  "samples": 9116,
+                  "overOne": 44,
+                  "closed": 3,
+                  "introduced": 1
+                },
+                "345": {
+                  "samples": 3825,
+                  "overOne": 30,
+                  "closed": 0,
+                  "introduced": 0
+                },
+                "377": {
+                  "samples": 16629,
+                  "overOne": 159,
+                  "closed": 0,
+                  "introduced": 1
+                },
+                "422": {
+                  "samples": 19063,
+                  "overOne": 1,
+                  "closed": 0,
+                  "introduced": 0
+                }
+              }
+            },
+            "hair": {
+              "samples": 17017,
+              "overOne": 0,
+              "maximum": 1,
+              "closed": 0,
+              "introduced": 0
+            },
+            "focusedBody": {
+              "1235,1072": {
+                "value": 27,
+                "baseline": 27,
+                "native": 27
+              },
+              "1334,1014": {
+                "value": 17,
+                "baseline": 17,
+                "native": 17
+              },
+              "1332,1012": {
+                "value": 127,
+                "baseline": 127,
+                "native": 139
+              },
+              "1254,1089": {
+                "value": 54,
+                "baseline": 54,
+                "native": 54
+              },
+              "1308,1080": {
+                "value": 239,
+                "baseline": 239,
+                "native": 239
+              }
+            }
+          },
+          "native-atlas": {
+            "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+            "validationErrors": 0,
+            "vendor": 4318,
+            "zeroAllocator": true,
+            "outputSha256": "c5f7ff9e5f807152c63bba1e35a3f0e3eb38f18dee7a20a5d627a88d0ddd51b7",
+            "actualFullAttachmentExact": false,
+            "receiver": {
+              "samples": 49384,
+              "overOne": 233,
+              "maximum": 44,
+              "closed": 6,
+              "introduced": 2,
+              "byNativeNormalOwner": {
+                "296": {
+                  "samples": 496,
+                  "overOne": 1,
+                  "closed": 1,
+                  "introduced": 0
+                },
+                "310": {
+                  "samples": 255,
+                  "overOne": 0,
+                  "closed": 0,
+                  "introduced": 0
+                },
+                "328": {
+                  "samples": 9116,
+                  "overOne": 43,
+                  "closed": 4,
+                  "introduced": 1
+                },
+                "345": {
+                  "samples": 3825,
+                  "overOne": 30,
+                  "closed": 0,
+                  "introduced": 0
+                },
+                "377": {
+                  "samples": 16629,
+                  "overOne": 159,
+                  "closed": 0,
+                  "introduced": 1
+                },
+                "422": {
+                  "samples": 19063,
+                  "overOne": 0,
+                  "closed": 1,
+                  "introduced": 0
+                }
+              }
+            },
+            "hair": {
+              "samples": 17017,
+              "overOne": 0,
+              "maximum": 1,
+              "closed": 0,
+              "introduced": 0
+            },
+            "focusedBody": {
+              "1235,1072": {
+                "value": 27,
+                "baseline": 27,
+                "native": 27
+              },
+              "1334,1014": {
+                "value": 17,
+                "baseline": 17,
+                "native": 17
+              },
+              "1332,1012": {
+                "value": 127,
+                "baseline": 127,
+                "native": 139
+              },
+              "1254,1089": {
+                "value": 54,
+                "baseline": 54,
+                "native": 54
+              },
+              "1308,1080": {
+                "value": 239,
+                "baseline": 239,
+                "native": 239
+              }
+            }
+          },
+          "native-normals": {
+            "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+            "validationErrors": 0,
+            "vendor": 4318,
+            "zeroAllocator": true,
+            "outputSha256": "aea256df21a1a28c4ba00a735f569dfbc5d8cb7f672241e4e1b82065149fc0ab",
+            "actualFullAttachmentExact": false,
+            "receiver": {
+              "samples": 49384,
+              "overOne": 85,
+              "maximum": 44,
+              "closed": 165,
+              "introduced": 13,
+              "byNativeNormalOwner": {
+                "296": {
+                  "samples": 496,
+                  "overOne": 2,
+                  "closed": 0,
+                  "introduced": 0
+                },
+                "310": {
+                  "samples": 255,
+                  "overOne": 0,
+                  "closed": 0,
+                  "introduced": 0
+                },
+                "328": {
+                  "samples": 9116,
+                  "overOne": 5,
+                  "closed": 42,
+                  "introduced": 1
+                },
+                "345": {
+                  "samples": 3825,
+                  "overOne": 27,
+                  "closed": 4,
+                  "introduced": 1
+                },
+                "377": {
+                  "samples": 16629,
+                  "overOne": 50,
+                  "closed": 119,
+                  "introduced": 11
+                },
+                "422": {
+                  "samples": 19063,
+                  "overOne": 1,
+                  "closed": 0,
+                  "introduced": 0
+                }
+              }
+            },
+            "hair": {
+              "samples": 17017,
+              "overOne": 0,
+              "maximum": 1,
+              "closed": 0,
+              "introduced": 0
+            },
+            "focusedBody": {
+              "1235,1072": {
+                "value": 23,
+                "baseline": 27,
+                "native": 27
+              },
+              "1334,1014": {
+                "value": 17,
+                "baseline": 17,
+                "native": 17
+              },
+              "1332,1012": {
+                "value": 139,
+                "baseline": 127,
+                "native": 139
+              },
+              "1254,1089": {
+                "value": 54,
+                "baseline": 54,
+                "native": 54
+              },
+              "1308,1080": {
+                "value": 239,
+                "baseline": 239,
+                "native": 239
+              }
+            }
+          },
+          "native-normals-atlas": {
+            "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+            "validationErrors": 0,
+            "vendor": 4318,
+            "zeroAllocator": true,
+            "outputSha256": "c09b99a3014541780c898ef5f0c682988c37f41c3f1b3dc996165857d0223d60",
+            "actualFullAttachmentExact": false,
+            "receiver": {
+              "samples": 49384,
+              "overOne": 76,
+              "maximum": 44,
+              "closed": 173,
+              "introduced": 12,
+              "byNativeNormalOwner": {
+                "296": {
+                  "samples": 496,
+                  "overOne": 1,
+                  "closed": 1,
+                  "introduced": 0
+                },
+                "310": {
+                  "samples": 255,
+                  "overOne": 0,
+                  "closed": 0,
+                  "introduced": 0
+                },
+                "328": {
+                  "samples": 9116,
+                  "overOne": 0,
+                  "closed": 46,
+                  "introduced": 0
+                },
+                "345": {
+                  "samples": 3825,
+                  "overOne": 27,
+                  "closed": 4,
+                  "introduced": 1
+                },
+                "377": {
+                  "samples": 16629,
+                  "overOne": 48,
+                  "closed": 121,
+                  "introduced": 11
+                },
+                "422": {
+                  "samples": 19063,
+                  "overOne": 0,
+                  "closed": 1,
+                  "introduced": 0
+                }
+              }
+            },
+            "hair": {
+              "samples": 17017,
+              "overOne": 0,
+              "maximum": 0,
+              "closed": 0,
+              "introduced": 0
+            },
+            "focusedBody": {
+              "1235,1072": {
+                "value": 27,
+                "baseline": 27,
+                "native": 27
+              },
+              "1334,1014": {
+                "value": 17,
+                "baseline": 17,
+                "native": 17
+              },
+              "1332,1012": {
+                "value": 139,
+                "baseline": 127,
+                "native": 139
+              },
+              "1254,1089": {
+                "value": 54,
+                "baseline": 54,
+                "native": 54
+              },
+              "1308,1080": {
+                "value": 239,
+                "baseline": 239,
+                "native": 239
+              }
+            }
+          },
+          "native-depth": {
+            "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+            "validationErrors": 0,
+            "vendor": 4318,
+            "zeroAllocator": true,
+            "outputSha256": "65be6f8b28f65a40f0a26404b405551249ded958720882951266370f3a6156dc",
+            "actualFullAttachmentExact": false,
+            "receiver": {
+              "samples": 49384,
+              "overOne": 193,
+              "maximum": 27,
+              "closed": 52,
+              "introduced": 8,
+              "byNativeNormalOwner": {
+                "296": {
+                  "samples": 496,
+                  "overOne": 1,
+                  "closed": 1,
+                  "introduced": 0
+                },
+                "310": {
+                  "samples": 255,
+                  "overOne": 0,
+                  "closed": 0,
+                  "introduced": 0
+                },
+                "328": {
+                  "samples": 9116,
+                  "overOne": 45,
+                  "closed": 1,
+                  "introduced": 0
+                },
+                "345": {
+                  "samples": 3825,
+                  "overOne": 5,
+                  "closed": 26,
+                  "introduced": 1
+                },
+                "377": {
+                  "samples": 16629,
+                  "overOne": 141,
+                  "closed": 24,
+                  "introduced": 7
+                },
+                "422": {
+                  "samples": 19063,
+                  "overOne": 1,
+                  "closed": 0,
+                  "introduced": 0
+                }
+              }
+            },
+            "hair": {
+              "samples": 17017,
+              "overOne": 0,
+              "maximum": 1,
+              "closed": 0,
+              "introduced": 0
+            },
+            "focusedBody": {
+              "1235,1072": {
+                "value": 27,
+                "baseline": 27,
+                "native": 27
+              },
+              "1334,1014": {
+                "value": 17,
+                "baseline": 17,
+                "native": 17
+              },
+              "1332,1012": {
+                "value": 127,
+                "baseline": 127,
+                "native": 139
+              },
+              "1254,1089": {
+                "value": 54,
+                "baseline": 54,
+                "native": 54
+              },
+              "1308,1080": {
+                "value": 239,
+                "baseline": 239,
+                "native": 239
+              }
+            }
+          },
+          "native-depth-atlas": {
+            "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+            "validationErrors": 0,
+            "vendor": 4318,
+            "zeroAllocator": true,
+            "outputSha256": "9f5a08f15f3d08f90950d6f8f6b3ff891ac920f5d5ddfd2394299f7dc0be4dc3",
+            "actualFullAttachmentExact": false,
+            "receiver": {
+              "samples": 49384,
+              "overOne": 189,
+              "maximum": 27,
+              "closed": 58,
+              "introduced": 10,
+              "byNativeNormalOwner": {
+                "296": {
+                  "samples": 496,
+                  "overOne": 0,
+                  "closed": 2,
+                  "introduced": 0
+                },
+                "310": {
+                  "samples": 255,
+                  "overOne": 0,
+                  "closed": 0,
+                  "introduced": 0
+                },
+                "328": {
+                  "samples": 9116,
+                  "overOne": 42,
+                  "closed": 5,
+                  "introduced": 1
+                },
+                "345": {
+                  "samples": 3825,
+                  "overOne": 5,
+                  "closed": 26,
+                  "introduced": 1
+                },
+                "377": {
+                  "samples": 16629,
+                  "overOne": 142,
+                  "closed": 24,
+                  "introduced": 8
+                },
+                "422": {
+                  "samples": 19063,
+                  "overOne": 0,
+                  "closed": 1,
+                  "introduced": 0
+                }
+              }
+            },
+            "hair": {
+              "samples": 17017,
+              "overOne": 0,
+              "maximum": 1,
+              "closed": 0,
+              "introduced": 0
+            },
+            "focusedBody": {
+              "1235,1072": {
+                "value": 27,
+                "baseline": 27,
+                "native": 27
+              },
+              "1334,1014": {
+                "value": 17,
+                "baseline": 17,
+                "native": 17
+              },
+              "1332,1012": {
+                "value": 127,
+                "baseline": 127,
+                "native": 139
+              },
+              "1254,1089": {
+                "value": 54,
+                "baseline": 54,
+                "native": 54
+              },
+              "1308,1080": {
+                "value": 239,
+                "baseline": 239,
+                "native": 239
+              }
+            }
+          },
+          "native-depth-normals": {
+            "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+            "validationErrors": 0,
+            "vendor": 4318,
+            "zeroAllocator": true,
+            "outputSha256": "84b319de13004b436abf9c4bbae7dfa5f7f59463e0491b6df4252d7ab67201e3",
+            "actualFullAttachmentExact": false,
+            "receiver": {
+              "samples": 49384,
+              "overOne": 10,
+              "maximum": 20,
+              "closed": 228,
+              "introduced": 1,
+              "byNativeNormalOwner": {
+                "296": {
+                  "samples": 496,
+                  "overOne": 1,
+                  "closed": 1,
+                  "introduced": 0
+                },
+                "310": {
+                  "samples": 255,
+                  "overOne": 0,
+                  "closed": 0,
+                  "introduced": 0
+                },
+                "328": {
+                  "samples": 9116,
+                  "overOne": 5,
+                  "closed": 42,
+                  "introduced": 1
+                },
+                "345": {
+                  "samples": 3825,
+                  "overOne": 0,
+                  "closed": 30,
+                  "introduced": 0
+                },
+                "377": {
+                  "samples": 16629,
+                  "overOne": 3,
+                  "closed": 155,
+                  "introduced": 0
+                },
+                "422": {
+                  "samples": 19063,
+                  "overOne": 1,
+                  "closed": 0,
+                  "introduced": 0
+                }
+              }
+            },
+            "hair": {
+              "samples": 17017,
+              "overOne": 0,
+              "maximum": 1,
+              "closed": 0,
+              "introduced": 0
+            },
+            "focusedBody": {
+              "1235,1072": {
+                "value": 23,
+                "baseline": 27,
+                "native": 27
+              },
+              "1334,1014": {
+                "value": 17,
+                "baseline": 17,
+                "native": 17
+              },
+              "1332,1012": {
+                "value": 139,
+                "baseline": 127,
+                "native": 139
+              },
+              "1254,1089": {
+                "value": 54,
+                "baseline": 54,
+                "native": 54
+              },
+              "1308,1080": {
+                "value": 239,
+                "baseline": 239,
+                "native": 239
+              }
+            }
+          },
+          "native-depth-normals-atlas": {
+            "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+            "validationErrors": 0,
+            "vendor": 4318,
+            "zeroAllocator": true,
+            "outputSha256": "ed6b1149357db8d07e9fd5fd247d372890e31f50303879f4e1f8607ac8e8b76e",
+            "actualFullAttachmentExact": false,
+            "receiver": {
+              "samples": 49384,
+              "overOne": 0,
+              "maximum": 0,
+              "closed": 237,
+              "introduced": 0,
+              "byNativeNormalOwner": {
+                "296": {
+                  "samples": 496,
+                  "overOne": 0,
+                  "closed": 2,
+                  "introduced": 0
+                },
+                "310": {
+                  "samples": 255,
+                  "overOne": 0,
+                  "closed": 0,
+                  "introduced": 0
+                },
+                "328": {
+                  "samples": 9116,
+                  "overOne": 0,
+                  "closed": 46,
+                  "introduced": 0
+                },
+                "345": {
+                  "samples": 3825,
+                  "overOne": 0,
+                  "closed": 30,
+                  "introduced": 0
+                },
+                "377": {
+                  "samples": 16629,
+                  "overOne": 0,
+                  "closed": 158,
+                  "introduced": 0
+                },
+                "422": {
+                  "samples": 19063,
+                  "overOne": 0,
+                  "closed": 1,
+                  "introduced": 0
+                }
+              }
+            },
+            "hair": {
+              "samples": 17017,
+              "overOne": 0,
+              "maximum": 0,
+              "closed": 0,
+              "introduced": 0
+            },
+            "focusedBody": {
+              "1235,1072": {
+                "value": 27,
+                "baseline": 27,
+                "native": 27
+              },
+              "1334,1014": {
+                "value": 17,
+                "baseline": 17,
+                "native": 17
+              },
+              "1332,1012": {
+                "value": 139,
+                "baseline": 127,
+                "native": 139
+              },
+              "1254,1089": {
+                "value": 54,
+                "baseline": 54,
+                "native": 54
+              },
+              "1308,1080": {
+                "value": 239,
+                "baseline": 239,
+                "native": 239
+              }
+            }
+          },
+          "body-live": {
+            "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+            "validationErrors": 0,
+            "vendor": 4318,
+            "zeroAllocator": true,
+            "outputSha256": "83dc0207b39f2950da729e4c479865af65e2a7f9f86767135a75ea9dc71163d1",
+            "actualFullAttachmentExact": true,
+            "receiver": {
+              "samples": 49384,
+              "overOne": 236,
+              "maximum": 44,
+              "closed": 0,
+              "introduced": 0,
+              "byNativeNormalOwner": {
+                "296": {
+                  "samples": 496,
+                  "overOne": 2,
+                  "closed": 0,
+                  "introduced": 0
+                },
+                "310": {
+                  "samples": 255,
+                  "overOne": 0,
+                  "closed": 0,
+                  "introduced": 0
+                },
+                "328": {
+                  "samples": 9116,
+                  "overOne": 45,
+                  "closed": 0,
+                  "introduced": 0
+                },
+                "345": {
+                  "samples": 3825,
+                  "overOne": 30,
+                  "closed": 0,
+                  "introduced": 0
+                },
+                "377": {
+                  "samples": 16629,
+                  "overOne": 158,
+                  "closed": 0,
+                  "introduced": 0
+                },
+                "422": {
+                  "samples": 19063,
+                  "overOne": 1,
+                  "closed": 0,
+                  "introduced": 0
+                }
+              }
+            },
+            "hair": {
+              "samples": 17017,
+              "overOne": 0,
+              "maximum": 1,
+              "closed": 0,
+              "introduced": 0
+            },
+            "focusedBody": {
+              "1235,1072": {
+                "value": 23,
+                "baseline": 23,
+                "native": 27
+              },
+              "1334,1014": {
+                "value": 14,
+                "baseline": 14,
+                "native": 17
+              },
+              "1332,1012": {
+                "value": 139,
+                "baseline": 139,
+                "native": 139
+              },
+              "1254,1089": {
+                "value": 61,
+                "baseline": 61,
+                "native": 54
+              },
+              "1308,1080": {
+                "value": 244,
+                "baseline": 244,
+                "native": 239
+              }
+            }
+          },
+          "body-native-atlas": {
+            "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+            "validationErrors": 0,
+            "vendor": 4318,
+            "zeroAllocator": true,
+            "outputSha256": "56c2c7ee1082e2e53751de4111174ccf14fcd2db3cb304a3009ed380902cf41d",
+            "actualFullAttachmentExact": false,
+            "receiver": {
+              "samples": 49384,
+              "overOne": 231,
+              "maximum": 44,
+              "closed": 7,
+              "introduced": 2,
+              "byNativeNormalOwner": {
+                "296": {
+                  "samples": 496,
+                  "overOne": 1,
+                  "closed": 1,
+                  "introduced": 0
+                },
+                "310": {
+                  "samples": 255,
+                  "overOne": 0,
+                  "closed": 0,
+                  "introduced": 0
+                },
+                "328": {
+                  "samples": 9116,
+                  "overOne": 41,
+                  "closed": 5,
+                  "introduced": 1
+                },
+                "345": {
+                  "samples": 3825,
+                  "overOne": 30,
+                  "closed": 0,
+                  "introduced": 0
+                },
+                "377": {
+                  "samples": 16629,
+                  "overOne": 159,
+                  "closed": 0,
+                  "introduced": 1
+                },
+                "422": {
+                  "samples": 19063,
+                  "overOne": 0,
+                  "closed": 1,
+                  "introduced": 0
+                }
+              }
+            },
+            "hair": {
+              "samples": 17017,
+              "overOne": 0,
+              "maximum": 1,
+              "closed": 0,
+              "introduced": 0
+            },
+            "focusedBody": {
+              "1235,1072": {
+                "value": 27,
+                "baseline": 23,
+                "native": 27
+              },
+              "1334,1014": {
+                "value": 14,
+                "baseline": 14,
+                "native": 17
+              },
+              "1332,1012": {
+                "value": 139,
+                "baseline": 139,
+                "native": 139
+              },
+              "1254,1089": {
+                "value": 61,
+                "baseline": 61,
+                "native": 54
+              },
+              "1308,1080": {
+                "value": 244,
+                "baseline": 244,
+                "native": 239
+              }
+            }
+          },
+          "body-native-depth-atlas": {
+            "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+            "validationErrors": 0,
+            "vendor": 4318,
+            "zeroAllocator": true,
+            "outputSha256": "2a514d5554dfbc227a98acbee1a752c4eeee543dabec4888c4c1cc04f8cef4a9",
+            "actualFullAttachmentExact": false,
+            "receiver": {
+              "samples": 49384,
+              "overOne": 187,
+              "maximum": 27,
+              "closed": 59,
+              "introduced": 10,
+              "byNativeNormalOwner": {
+                "296": {
+                  "samples": 496,
+                  "overOne": 0,
+                  "closed": 2,
+                  "introduced": 0
+                },
+                "310": {
+                  "samples": 255,
+                  "overOne": 0,
+                  "closed": 0,
+                  "introduced": 0
+                },
+                "328": {
+                  "samples": 9116,
+                  "overOne": 40,
+                  "closed": 6,
+                  "introduced": 1
+                },
+                "345": {
+                  "samples": 3825,
+                  "overOne": 5,
+                  "closed": 26,
+                  "introduced": 1
+                },
+                "377": {
+                  "samples": 16629,
+                  "overOne": 142,
+                  "closed": 24,
+                  "introduced": 8
+                },
+                "422": {
+                  "samples": 19063,
+                  "overOne": 0,
+                  "closed": 1,
+                  "introduced": 0
+                }
+              }
+            },
+            "hair": {
+              "samples": 17017,
+              "overOne": 0,
+              "maximum": 1,
+              "closed": 0,
+              "introduced": 0
+            },
+            "focusedBody": {
+              "1235,1072": {
+                "value": 27,
+                "baseline": 23,
+                "native": 27
+              },
+              "1334,1014": {
+                "value": 14,
+                "baseline": 14,
+                "native": 17
+              },
+              "1332,1012": {
+                "value": 139,
+                "baseline": 139,
+                "native": 139
+              },
+              "1254,1089": {
+                "value": 61,
+                "baseline": 61,
+                "native": 54
+              },
+              "1308,1080": {
+                "value": 244,
+                "baseline": 244,
+                "native": 239
+              }
+            }
+          }
+        },
+        "reproducingAtlasSources": [
+          "nvidia"
+        ],
+        "selectedAtlas": "nvidia"
+      },
+      "intel": {
+        "actualSha256": "6e7b8e5a946cd8758a935462ae68e1bc6d25c6b9ab2a2e54ce8bfb8b2ad7e4c3",
+        "cases": {
+          "cached-intel-atlas": {
+            "device": "Intel(R) RaptorLake-S Mobile Graphics Controller",
+            "validationErrors": 0,
+            "vendor": 32902,
+            "zeroAllocator": true,
+            "outputSha256": "6e7b8e5a946cd8758a935462ae68e1bc6d25c6b9ab2a2e54ce8bfb8b2ad7e4c3",
+            "actualFullAttachmentExact": true,
+            "receiver": {
+              "samples": 49384,
+              "overOne": 494,
+              "maximum": 201,
+              "closed": 0,
+              "introduced": 0,
+              "byNativeNormalOwner": {
+                "296": {
+                  "samples": 496,
+                  "overOne": 9,
+                  "closed": 0,
+                  "introduced": 0
+                },
+                "310": {
+                  "samples": 255,
+                  "overOne": 2,
+                  "closed": 0,
+                  "introduced": 0
+                },
+                "328": {
+                  "samples": 9116,
+                  "overOne": 77,
+                  "closed": 0,
+                  "introduced": 0
+                },
+                "345": {
+                  "samples": 3825,
+                  "overOne": 46,
+                  "closed": 0,
+                  "introduced": 0
+                },
+                "377": {
+                  "samples": 16629,
+                  "overOne": 223,
+                  "closed": 0,
+                  "introduced": 0
+                },
+                "422": {
+                  "samples": 19063,
+                  "overOne": 137,
+                  "closed": 0,
+                  "introduced": 0
+                }
+              }
+            },
+            "hair": {
+              "samples": 17017,
+              "overOne": 111,
+              "maximum": 45,
+              "closed": 0,
+              "introduced": 0
+            },
+            "focusedBody": {
+              "1235,1072": {
+                "value": 27,
+                "baseline": 27,
+                "native": 27
+              },
+              "1334,1014": {
+                "value": 17,
+                "baseline": 17,
+                "native": 17
+              },
+              "1332,1012": {
+                "value": 128,
+                "baseline": 128,
+                "native": 139
+              },
+              "1254,1089": {
+                "value": 61,
+                "baseline": 61,
+                "native": 54
+              },
+              "1308,1080": {
+                "value": 244,
+                "baseline": 244,
+                "native": 239
+              }
+            }
+          },
+          "cached-nvidia-atlas": {
+            "device": "Intel(R) RaptorLake-S Mobile Graphics Controller",
+            "validationErrors": 0,
+            "vendor": 32902,
+            "zeroAllocator": true,
+            "outputSha256": "6fb4ab72cf2700c63dc4d4f74ea24bddc3772195a15004b6614a965ab339b8ff",
+            "actualFullAttachmentExact": false,
+            "receiver": {
+              "samples": 49384,
+              "overOne": 495,
+              "maximum": 201,
+              "closed": 2,
+              "introduced": 3,
+              "byNativeNormalOwner": {
+                "296": {
+                  "samples": 496,
+                  "overOne": 9,
+                  "closed": 0,
+                  "introduced": 0
+                },
+                "310": {
+                  "samples": 255,
+                  "overOne": 2,
+                  "closed": 0,
+                  "introduced": 0
+                },
+                "328": {
+                  "samples": 9116,
+                  "overOne": 79,
+                  "closed": 1,
+                  "introduced": 3
+                },
+                "345": {
+                  "samples": 3825,
+                  "overOne": 46,
+                  "closed": 0,
+                  "introduced": 0
+                },
+                "377": {
+                  "samples": 16629,
+                  "overOne": 222,
+                  "closed": 1,
+                  "introduced": 0
+                },
+                "422": {
+                  "samples": 19063,
+                  "overOne": 137,
+                  "closed": 0,
+                  "introduced": 0
+                }
+              }
+            },
+            "hair": {
+              "samples": 17017,
+              "overOne": 111,
+              "maximum": 45,
+              "closed": 0,
+              "introduced": 0
+            },
+            "focusedBody": {
+              "1235,1072": {
+                "value": 27,
+                "baseline": 27,
+                "native": 27
+              },
+              "1334,1014": {
+                "value": 17,
+                "baseline": 17,
+                "native": 17
+              },
+              "1332,1012": {
+                "value": 128,
+                "baseline": 128,
+                "native": 139
+              },
+              "1254,1089": {
+                "value": 61,
+                "baseline": 61,
+                "native": 54
+              },
+              "1308,1080": {
+                "value": 244,
+                "baseline": 244,
+                "native": 239
+              }
+            }
+          },
+          "native-atlas": {
+            "device": "Intel(R) RaptorLake-S Mobile Graphics Controller",
+            "validationErrors": 0,
+            "vendor": 32902,
+            "zeroAllocator": true,
+            "outputSha256": "539a6d1b16bfad0ef4c82dd25c339f0371afe31ccef859f85976f0bc11828da7",
+            "actualFullAttachmentExact": false,
+            "receiver": {
+              "samples": 49384,
+              "overOne": 492,
+              "maximum": 201,
+              "closed": 2,
+              "introduced": 0,
+              "byNativeNormalOwner": {
+                "296": {
+                  "samples": 496,
+                  "overOne": 9,
+                  "closed": 0,
+                  "introduced": 0
+                },
+                "310": {
+                  "samples": 255,
+                  "overOne": 2,
+                  "closed": 0,
+                  "introduced": 0
+                },
+                "328": {
+                  "samples": 9116,
+                  "overOne": 76,
+                  "closed": 1,
+                  "introduced": 0
+                },
+                "345": {
+                  "samples": 3825,
+                  "overOne": 46,
+                  "closed": 0,
+                  "introduced": 0
+                },
+                "377": {
+                  "samples": 16629,
+                  "overOne": 223,
+                  "closed": 0,
+                  "introduced": 0
+                },
+                "422": {
+                  "samples": 19063,
+                  "overOne": 136,
+                  "closed": 1,
+                  "introduced": 0
+                }
+              }
+            },
+            "hair": {
+              "samples": 17017,
+              "overOne": 111,
+              "maximum": 45,
+              "closed": 0,
+              "introduced": 0
+            },
+            "focusedBody": {
+              "1235,1072": {
+                "value": 27,
+                "baseline": 27,
+                "native": 27
+              },
+              "1334,1014": {
+                "value": 17,
+                "baseline": 17,
+                "native": 17
+              },
+              "1332,1012": {
+                "value": 128,
+                "baseline": 128,
+                "native": 139
+              },
+              "1254,1089": {
+                "value": 61,
+                "baseline": 61,
+                "native": 54
+              },
+              "1308,1080": {
+                "value": 244,
+                "baseline": 244,
+                "native": 239
+              }
+            }
+          },
+          "native-normals": {
+            "device": "Intel(R) RaptorLake-S Mobile Graphics Controller",
+            "validationErrors": 0,
+            "vendor": 32902,
+            "zeroAllocator": true,
+            "outputSha256": "1cea1f047a9bfe94eec419f8c52bda9373ae3e66acc4338405320b0ac80e8db7",
+            "actualFullAttachmentExact": false,
+            "receiver": {
+              "samples": 49384,
+              "overOne": 281,
+              "maximum": 32,
+              "closed": 240,
+              "introduced": 27,
+              "byNativeNormalOwner": {
+                "296": {
+                  "samples": 496,
+                  "overOne": 8,
+                  "closed": 1,
+                  "introduced": 0
+                },
+                "310": {
+                  "samples": 255,
+                  "overOne": 2,
+                  "closed": 0,
+                  "introduced": 0
+                },
+                "328": {
+                  "samples": 9116,
+                  "overOne": 42,
+                  "closed": 42,
+                  "introduced": 7
+                },
+                "345": {
+                  "samples": 3825,
+                  "overOne": 43,
+                  "closed": 5,
+                  "introduced": 2
+                },
+                "377": {
+                  "samples": 16629,
+                  "overOne": 67,
+                  "closed": 171,
+                  "introduced": 15
+                },
+                "422": {
+                  "samples": 19063,
+                  "overOne": 119,
+                  "closed": 21,
+                  "introduced": 3
+                }
+              }
+            },
+            "hair": {
+              "samples": 17017,
+              "overOne": 96,
+              "maximum": 25,
+              "closed": 18,
+              "introduced": 3
+            },
+            "focusedBody": {
+              "1235,1072": {
+                "value": 23,
+                "baseline": 27,
+                "native": 27
+              },
+              "1334,1014": {
+                "value": 17,
+                "baseline": 17,
+                "native": 17
+              },
+              "1332,1012": {
+                "value": 139,
+                "baseline": 128,
+                "native": 139
+              },
+              "1254,1089": {
+                "value": 61,
+                "baseline": 61,
+                "native": 54
+              },
+              "1308,1080": {
+                "value": 239,
+                "baseline": 244,
+                "native": 239
+              }
+            }
+          },
+          "native-normals-atlas": {
+            "device": "Intel(R) RaptorLake-S Mobile Graphics Controller",
+            "validationErrors": 0,
+            "vendor": 32902,
+            "zeroAllocator": true,
+            "outputSha256": "836392ddbbb2793b0d0b9529042ee5d949520b7c375dd906c75bc3488d7fadf8",
+            "actualFullAttachmentExact": false,
+            "receiver": {
+              "samples": 49384,
+              "overOne": 277,
+              "maximum": 32,
+              "closed": 243,
+              "introduced": 26,
+              "byNativeNormalOwner": {
+                "296": {
+                  "samples": 496,
+                  "overOne": 8,
+                  "closed": 1,
+                  "introduced": 0
+                },
+                "310": {
+                  "samples": 255,
+                  "overOne": 2,
+                  "closed": 0,
+                  "introduced": 0
+                },
+                "328": {
+                  "samples": 9116,
+                  "overOne": 40,
+                  "closed": 43,
+                  "introduced": 6
+                },
+                "345": {
+                  "samples": 3825,
+                  "overOne": 43,
+                  "closed": 5,
+                  "introduced": 2
+                },
+                "377": {
+                  "samples": 16629,
+                  "overOne": 66,
+                  "closed": 172,
+                  "introduced": 15
+                },
+                "422": {
+                  "samples": 19063,
+                  "overOne": 118,
+                  "closed": 22,
+                  "introduced": 3
+                }
+              }
+            },
+            "hair": {
+              "samples": 17017,
+              "overOne": 96,
+              "maximum": 25,
+              "closed": 18,
+              "introduced": 3
+            },
+            "focusedBody": {
+              "1235,1072": {
+                "value": 27,
+                "baseline": 27,
+                "native": 27
+              },
+              "1334,1014": {
+                "value": 17,
+                "baseline": 17,
+                "native": 17
+              },
+              "1332,1012": {
+                "value": 139,
+                "baseline": 128,
+                "native": 139
+              },
+              "1254,1089": {
+                "value": 61,
+                "baseline": 61,
+                "native": 54
+              },
+              "1308,1080": {
+                "value": 239,
+                "baseline": 244,
+                "native": 239
+              }
+            }
+          },
+          "native-depth": {
+            "device": "Intel(R) RaptorLake-S Mobile Graphics Controller",
+            "validationErrors": 0,
+            "vendor": 32902,
+            "zeroAllocator": true,
+            "outputSha256": "7d1fa7cc15a44b7adeadd4dde1dcde373935fff3bf26f5c8893dd20e381ea3fb",
+            "actualFullAttachmentExact": false,
+            "receiver": {
+              "samples": 49384,
+              "overOne": 268,
+              "maximum": 169,
+              "closed": 254,
+              "introduced": 28,
+              "byNativeNormalOwner": {
+                "296": {
+                  "samples": 496,
+                  "overOne": 2,
+                  "closed": 8,
+                  "introduced": 1
+                },
+                "310": {
+                  "samples": 255,
+                  "overOne": 0,
+                  "closed": 2,
+                  "introduced": 0
+                },
+                "328": {
+                  "samples": 9116,
+                  "overOne": 44,
+                  "closed": 39,
+                  "introduced": 6
+                },
+                "345": {
+                  "samples": 3825,
+                  "overOne": 5,
+                  "closed": 42,
+                  "introduced": 1
+                },
+                "377": {
+                  "samples": 16629,
+                  "overOne": 192,
+                  "closed": 47,
+                  "introduced": 16
+                },
+                "422": {
+                  "samples": 19063,
+                  "overOne": 25,
+                  "closed": 116,
+                  "introduced": 4
+                }
+              }
+            },
+            "hair": {
+              "samples": 17017,
+              "overOne": 20,
+              "maximum": 45,
+              "closed": 94,
+              "introduced": 3
+            },
+            "focusedBody": {
+              "1235,1072": {
+                "value": 27,
+                "baseline": 27,
+                "native": 27
+              },
+              "1334,1014": {
+                "value": 17,
+                "baseline": 17,
+                "native": 17
+              },
+              "1332,1012": {
+                "value": 128,
+                "baseline": 128,
+                "native": 139
+              },
+              "1254,1089": {
+                "value": 54,
+                "baseline": 61,
+                "native": 54
+              },
+              "1308,1080": {
+                "value": 244,
+                "baseline": 244,
+                "native": 239
+              }
+            }
+          },
+          "native-depth-atlas": {
+            "device": "Intel(R) RaptorLake-S Mobile Graphics Controller",
+            "validationErrors": 0,
+            "vendor": 32902,
+            "zeroAllocator": true,
+            "outputSha256": "03ff084e15a5cbf6781d8f2ee5c3382066a1a0a4263eb5e4a7906542cc637718",
+            "actualFullAttachmentExact": false,
+            "receiver": {
+              "samples": 49384,
+              "overOne": 265,
+              "maximum": 169,
+              "closed": 256,
+              "introduced": 27,
+              "byNativeNormalOwner": {
+                "296": {
+                  "samples": 496,
+                  "overOne": 1,
+                  "closed": 8,
+                  "introduced": 0
+                },
+                "310": {
+                  "samples": 255,
+                  "overOne": 0,
+                  "closed": 2,
+                  "introduced": 0
+                },
+                "328": {
+                  "samples": 9116,
+                  "overOne": 43,
+                  "closed": 40,
+                  "introduced": 6
+                },
+                "345": {
+                  "samples": 3825,
+                  "overOne": 5,
+                  "closed": 42,
+                  "introduced": 1
+                },
+                "377": {
+                  "samples": 16629,
+                  "overOne": 192,
+                  "closed": 47,
+                  "introduced": 16
+                },
+                "422": {
+                  "samples": 19063,
+                  "overOne": 24,
+                  "closed": 117,
+                  "introduced": 4
+                }
+              }
+            },
+            "hair": {
+              "samples": 17017,
+              "overOne": 20,
+              "maximum": 45,
+              "closed": 94,
+              "introduced": 3
+            },
+            "focusedBody": {
+              "1235,1072": {
+                "value": 27,
+                "baseline": 27,
+                "native": 27
+              },
+              "1334,1014": {
+                "value": 17,
+                "baseline": 17,
+                "native": 17
+              },
+              "1332,1012": {
+                "value": 128,
+                "baseline": 128,
+                "native": 139
+              },
+              "1254,1089": {
+                "value": 54,
+                "baseline": 61,
+                "native": 54
+              },
+              "1308,1080": {
+                "value": 244,
+                "baseline": 244,
+                "native": 239
+              }
+            }
+          },
+          "native-depth-normals": {
+            "device": "Intel(R) RaptorLake-S Mobile Graphics Controller",
+            "validationErrors": 0,
+            "vendor": 32902,
+            "zeroAllocator": true,
+            "outputSha256": "294bb7731d2f6cf88444951c4e40d0dd9a8677cba2764038117d5415708d9e9e",
+            "actualFullAttachmentExact": false,
+            "receiver": {
+              "samples": 49384,
+              "overOne": 6,
+              "maximum": 13,
+              "closed": 490,
+              "introduced": 2,
+              "byNativeNormalOwner": {
+                "296": {
+                  "samples": 496,
+                  "overOne": 1,
+                  "closed": 9,
+                  "introduced": 1
+                },
+                "310": {
+                  "samples": 255,
+                  "overOne": 0,
+                  "closed": 2,
+                  "introduced": 0
+                },
+                "328": {
+                  "samples": 9116,
+                  "overOne": 2,
+                  "closed": 76,
+                  "introduced": 1
+                },
+                "345": {
+                  "samples": 3825,
+                  "overOne": 0,
+                  "closed": 46,
+                  "introduced": 0
+                },
+                "377": {
+                  "samples": 16629,
+                  "overOne": 2,
+                  "closed": 221,
+                  "introduced": 0
+                },
+                "422": {
+                  "samples": 19063,
+                  "overOne": 1,
+                  "closed": 136,
+                  "introduced": 0
+                }
+              }
+            },
+            "hair": {
+              "samples": 17017,
+              "overOne": 0,
+              "maximum": 1,
+              "closed": 111,
+              "introduced": 0
+            },
+            "focusedBody": {
+              "1235,1072": {
+                "value": 23,
+                "baseline": 27,
+                "native": 27
+              },
+              "1334,1014": {
+                "value": 17,
+                "baseline": 17,
+                "native": 17
+              },
+              "1332,1012": {
+                "value": 139,
+                "baseline": 128,
+                "native": 139
+              },
+              "1254,1089": {
+                "value": 54,
+                "baseline": 61,
+                "native": 54
+              },
+              "1308,1080": {
+                "value": 239,
+                "baseline": 244,
+                "native": 239
+              }
+            }
+          },
+          "native-depth-normals-atlas": {
+            "device": "Intel(R) RaptorLake-S Mobile Graphics Controller",
+            "validationErrors": 0,
+            "vendor": 32902,
+            "zeroAllocator": true,
+            "outputSha256": "f49aed38731ee3c2246f9ac2f6d0ef8cbda6a89f7d5af57a399301270cd181cd",
+            "actualFullAttachmentExact": false,
+            "receiver": {
+              "samples": 49384,
+              "overOne": 0,
+              "maximum": 1,
+              "closed": 494,
+              "introduced": 0,
+              "byNativeNormalOwner": {
+                "296": {
+                  "samples": 496,
+                  "overOne": 0,
+                  "closed": 9,
+                  "introduced": 0
+                },
+                "310": {
+                  "samples": 255,
+                  "overOne": 0,
+                  "closed": 2,
+                  "introduced": 0
+                },
+                "328": {
+                  "samples": 9116,
+                  "overOne": 0,
+                  "closed": 77,
+                  "introduced": 0
+                },
+                "345": {
+                  "samples": 3825,
+                  "overOne": 0,
+                  "closed": 46,
+                  "introduced": 0
+                },
+                "377": {
+                  "samples": 16629,
+                  "overOne": 0,
+                  "closed": 223,
+                  "introduced": 0
+                },
+                "422": {
+                  "samples": 19063,
+                  "overOne": 0,
+                  "closed": 137,
+                  "introduced": 0
+                }
+              }
+            },
+            "hair": {
+              "samples": 17017,
+              "overOne": 0,
+              "maximum": 1,
+              "closed": 111,
+              "introduced": 0
+            },
+            "focusedBody": {
+              "1235,1072": {
+                "value": 27,
+                "baseline": 27,
+                "native": 27
+              },
+              "1334,1014": {
+                "value": 17,
+                "baseline": 17,
+                "native": 17
+              },
+              "1332,1012": {
+                "value": 139,
+                "baseline": 128,
+                "native": 139
+              },
+              "1254,1089": {
+                "value": 54,
+                "baseline": 61,
+                "native": 54
+              },
+              "1308,1080": {
+                "value": 239,
+                "baseline": 244,
+                "native": 239
+              }
+            }
+          },
+          "body-live": {
+            "device": "Intel(R) RaptorLake-S Mobile Graphics Controller",
+            "validationErrors": 0,
+            "vendor": 32902,
+            "zeroAllocator": true,
+            "outputSha256": "6f50540f27d16ed465cf2bf1be6f2be343b7ab8ac09680dbc2c7c48d89350824",
+            "actualFullAttachmentExact": true,
+            "receiver": {
+              "samples": 49384,
+              "overOne": 494,
+              "maximum": 201,
+              "closed": 0,
+              "introduced": 0,
+              "byNativeNormalOwner": {
+                "296": {
+                  "samples": 496,
+                  "overOne": 9,
+                  "closed": 0,
+                  "introduced": 0
+                },
+                "310": {
+                  "samples": 255,
+                  "overOne": 2,
+                  "closed": 0,
+                  "introduced": 0
+                },
+                "328": {
+                  "samples": 9116,
+                  "overOne": 77,
+                  "closed": 0,
+                  "introduced": 0
+                },
+                "345": {
+                  "samples": 3825,
+                  "overOne": 46,
+                  "closed": 0,
+                  "introduced": 0
+                },
+                "377": {
+                  "samples": 16629,
+                  "overOne": 223,
+                  "closed": 0,
+                  "introduced": 0
+                },
+                "422": {
+                  "samples": 19063,
+                  "overOne": 137,
+                  "closed": 0,
+                  "introduced": 0
+                }
+              }
+            },
+            "hair": {
+              "samples": 17017,
+              "overOne": 111,
+              "maximum": 45,
+              "closed": 0,
+              "introduced": 0
+            },
+            "focusedBody": {
+              "1235,1072": {
+                "value": 23,
+                "baseline": 23,
+                "native": 27
+              },
+              "1334,1014": {
+                "value": 14,
+                "baseline": 14,
+                "native": 17
+              },
+              "1332,1012": {
+                "value": 139,
+                "baseline": 139,
+                "native": 139
+              },
+              "1254,1089": {
+                "value": 61,
+                "baseline": 61,
+                "native": 54
+              },
+              "1308,1080": {
+                "value": 244,
+                "baseline": 244,
+                "native": 239
+              }
+            }
+          },
+          "body-native-atlas": {
+            "device": "Intel(R) RaptorLake-S Mobile Graphics Controller",
+            "validationErrors": 0,
+            "vendor": 32902,
+            "zeroAllocator": true,
+            "outputSha256": "7ebcf53e42906e431ccc943289b82dfb00a5f18dc90eb6307d8a0caa286ec074",
+            "actualFullAttachmentExact": false,
+            "receiver": {
+              "samples": 49384,
+              "overOne": 491,
+              "maximum": 201,
+              "closed": 3,
+              "introduced": 0,
+              "byNativeNormalOwner": {
+                "296": {
+                  "samples": 496,
+                  "overOne": 9,
+                  "closed": 0,
+                  "introduced": 0
+                },
+                "310": {
+                  "samples": 255,
+                  "overOne": 2,
+                  "closed": 0,
+                  "introduced": 0
+                },
+                "328": {
+                  "samples": 9116,
+                  "overOne": 75,
+                  "closed": 2,
+                  "introduced": 0
+                },
+                "345": {
+                  "samples": 3825,
+                  "overOne": 46,
+                  "closed": 0,
+                  "introduced": 0
+                },
+                "377": {
+                  "samples": 16629,
+                  "overOne": 223,
+                  "closed": 0,
+                  "introduced": 0
+                },
+                "422": {
+                  "samples": 19063,
+                  "overOne": 136,
+                  "closed": 1,
+                  "introduced": 0
+                }
+              }
+            },
+            "hair": {
+              "samples": 17017,
+              "overOne": 111,
+              "maximum": 45,
+              "closed": 0,
+              "introduced": 0
+            },
+            "focusedBody": {
+              "1235,1072": {
+                "value": 27,
+                "baseline": 23,
+                "native": 27
+              },
+              "1334,1014": {
+                "value": 14,
+                "baseline": 14,
+                "native": 17
+              },
+              "1332,1012": {
+                "value": 139,
+                "baseline": 139,
+                "native": 139
+              },
+              "1254,1089": {
+                "value": 61,
+                "baseline": 61,
+                "native": 54
+              },
+              "1308,1080": {
+                "value": 244,
+                "baseline": 244,
+                "native": 239
+              }
+            }
+          },
+          "body-native-depth-atlas": {
+            "device": "Intel(R) RaptorLake-S Mobile Graphics Controller",
+            "validationErrors": 0,
+            "vendor": 32902,
+            "zeroAllocator": true,
+            "outputSha256": "095adc58dc217aed2c4b5a6a119f2cbb857b929fb8010efcd715b6207ac074cc",
+            "actualFullAttachmentExact": false,
+            "receiver": {
+              "samples": 49384,
+              "overOne": 262,
+              "maximum": 169,
+              "closed": 259,
+              "introduced": 27,
+              "byNativeNormalOwner": {
+                "296": {
+                  "samples": 496,
+                  "overOne": 1,
+                  "closed": 8,
+                  "introduced": 0
+                },
+                "310": {
+                  "samples": 255,
+                  "overOne": 0,
+                  "closed": 2,
+                  "introduced": 0
+                },
+                "328": {
+                  "samples": 9116,
+                  "overOne": 40,
+                  "closed": 43,
+                  "introduced": 6
+                },
+                "345": {
+                  "samples": 3825,
+                  "overOne": 5,
+                  "closed": 42,
+                  "introduced": 1
+                },
+                "377": {
+                  "samples": 16629,
+                  "overOne": 192,
+                  "closed": 47,
+                  "introduced": 16
+                },
+                "422": {
+                  "samples": 19063,
+                  "overOne": 24,
+                  "closed": 117,
+                  "introduced": 4
+                }
+              }
+            },
+            "hair": {
+              "samples": 17017,
+              "overOne": 20,
+              "maximum": 45,
+              "closed": 94,
+              "introduced": 3
+            },
+            "focusedBody": {
+              "1235,1072": {
+                "value": 27,
+                "baseline": 23,
+                "native": 27
+              },
+              "1334,1014": {
+                "value": 14,
+                "baseline": 14,
+                "native": 17
+              },
+              "1332,1012": {
+                "value": 139,
+                "baseline": 139,
+                "native": 139
+              },
+              "1254,1089": {
+                "value": 54,
+                "baseline": 61,
+                "native": 54
+              },
+              "1308,1080": {
+                "value": 244,
+                "baseline": 244,
+                "native": 239
+              }
+            }
+          }
+        },
+        "reproducingAtlasSources": [
+          "intel"
+        ],
+        "selectedAtlas": "intel"
+      }
+    }
+  },
+  "bodyVisibilityChanges": {
+    "nvidia": {
+      "closed": {
+        "samples": 5,
+        "exactDepth": 5,
+        "normalDeltaChanged": 4,
+        "normalExactBefore": 0,
+        "normalExactAfter": 4,
+        "maximumVisibilityError": 0,
+        "rows": [
+          {
+            "pixel": [
+              1252,
+              1087
+            ],
+            "visibility": [
+              105,
+              95,
+              95
+            ],
+            "depthUlp": 0,
+            "normal": [
+              [
+                502,
+                664
+              ],
+              [
+                503,
+                665
+              ],
+              [
+                503,
+                665
+              ]
+            ]
+          },
+          {
+            "pixel": [
+              1316,
+              1084
+            ],
+            "visibility": [
+              201,
+              219,
+              219
+            ],
+            "depthUlp": 0,
+            "normal": [
+              [
+                582,
+                732
+              ],
+              [
+                581,
+                732
+              ],
+              [
+                581,
+                732
+              ]
+            ]
+          },
+          {
+            "pixel": [
+              1232,
+              1069
+            ],
+            "visibility": [
+              194,
+              208,
+              208
+            ],
+            "depthUlp": 0,
+            "normal": [
+              [
+                601,
+                708
+              ],
+              [
+                601,
+                709
+              ],
+              [
+                601,
+                709
+              ]
+            ]
+          },
+          {
+            "pixel": [
+              1377,
+              1033
+            ],
+            "visibility": [
+              248,
+              251,
+              251
+            ],
+            "depthUlp": 0,
+            "normal": [
+              [
+                271,
+                723
+              ],
+              [
+                272,
+                723
+              ],
+              [
+                272,
+                724
+              ]
+            ]
+          },
+          {
+            "pixel": [
+              1332,
+              1012
+            ],
+            "visibility": [
+              127,
+              139,
+              139
+            ],
+            "depthUlp": 0,
+            "normal": [
+              [
+                151,
+                707
+              ],
+              [
+                151,
+                708
+              ],
+              [
+                151,
+                708
+              ]
+            ]
+          }
+        ]
+      },
+      "introduced": {
+        "samples": 4,
+        "exactDepth": 4,
+        "normalDeltaChanged": 3,
+        "normalExactBefore": 2,
+        "normalExactAfter": 1,
+        "maximumVisibilityError": 7,
+        "rows": [
+          {
+            "pixel": [
+              1254,
+              1089
+            ],
+            "visibility": [
+              54,
+              61,
+              54
+            ],
+            "depthUlp": 0,
+            "normal": [
+              [
+                599,
+                699
+              ],
+              [
+                598,
+                699
+              ],
+              [
+                599,
+                699
+              ]
+            ]
+          },
+          {
+            "pixel": [
+              1308,
+              1080
+            ],
+            "visibility": [
+              239,
+              244,
+              239
+            ],
+            "depthUlp": 0,
+            "normal": [
+              [
+                576,
+                739
+              ],
+              [
+                577,
+                739
+              ],
+              [
+                576,
+                739
+              ]
+            ]
+          },
+          {
+            "pixel": [
+              1235,
+              1072
+            ],
+            "visibility": [
+              27,
+              23,
+              27
+            ],
+            "depthUlp": 0,
+            "normal": [
+              [
+                614,
+                704
+              ],
+              [
+                613,
+                704
+              ],
+              [
+                613,
+                704
+              ]
+            ]
+          },
+          {
+            "pixel": [
+              1334,
+              1014
+            ],
+            "visibility": [
+              17,
+              14,
+              17
+            ],
+            "depthUlp": 0,
+            "normal": [
+              [
+                104,
+                715
+              ],
+              [
+                105,
+                715
+              ],
+              [
+                105,
+                716
+              ]
+            ]
+          }
+        ]
+      },
+      "unchangedBad": {
+        "samples": 41,
+        "exactDepth": 40,
+        "normalDeltaChanged": 1,
+        "normalExactBefore": 3,
+        "normalExactAfter": 3,
+        "maximumVisibilityError": 23,
+        "rows": []
+      },
+      "stableGood": {
+        "samples": 9066,
+        "exactDepth": 8821,
+        "normalDeltaChanged": 683,
+        "normalExactBefore": 5338,
+        "normalExactAfter": 5541,
+        "maximumVisibilityError": 1,
+        "rows": []
+      }
+    },
+    "intel": {
+      "closed": {
+        "samples": 3,
+        "exactDepth": 1,
+        "normalDeltaChanged": 1,
+        "normalExactBefore": 0,
+        "normalExactAfter": 1,
+        "maximumVisibilityError": 0,
+        "rows": [
+          {
+            "pixel": [
+              1320,
+              1082
+            ],
+            "visibility": [
+              252,
+              250,
+              250
+            ],
+            "depthUlp": -9,
+            "normal": [
+              [
+                643,
+                707
+              ],
+              [
+                642,
+                707
+              ],
+              [
+                642,
+                706
+              ]
+            ]
+          },
+          {
+            "pixel": [
+              1238,
+              1071
+            ],
+            "visibility": [
+              105,
+              116,
+              116
+            ],
+            "depthUlp": 1,
+            "normal": [
+              [
+                606,
+                725
+              ],
+              [
+                605,
+                725
+              ],
+              [
+                605,
+                726
+              ]
+            ]
+          },
+          {
+            "pixel": [
+              1332,
+              1012
+            ],
+            "visibility": [
+              128,
+              139,
+              139
+            ],
+            "depthUlp": 0,
+            "normal": [
+              [
+                151,
+                707
+              ],
+              [
+                151,
+                708
+              ],
+              [
+                151,
+                708
+              ]
+            ]
+          }
+        ]
+      },
+      "introduced": {
+        "samples": 3,
+        "exactDepth": 1,
+        "normalDeltaChanged": 2,
+        "normalExactBefore": 0,
+        "normalExactAfter": 1,
+        "maximumVisibilityError": 4,
+        "rows": [
+          {
+            "pixel": [
+              1235,
+              1072
+            ],
+            "visibility": [
+              27,
+              23,
+              27
+            ],
+            "depthUlp": 0,
+            "normal": [
+              [
+                614,
+                704
+              ],
+              [
+                613,
+                704
+              ],
+              [
+                613,
+                704
+              ]
+            ]
+          },
+          {
+            "pixel": [
+              1333,
+              1021
+            ],
+            "visibility": [
+              23,
+              20,
+              23
+            ],
+            "depthUlp": -1,
+            "normal": [
+              [
+                126,
+                813
+              ],
+              [
+                127,
+                813
+              ],
+              [
+                128,
+                814
+              ]
+            ]
+          },
+          {
+            "pixel": [
+              1334,
+              1014
+            ],
+            "visibility": [
+              17,
+              14,
+              17
+            ],
+            "depthUlp": -1,
+            "normal": [
+              [
+                104,
+                715
+              ],
+              [
+                105,
+                715
+              ],
+              [
+                105,
+                716
+              ]
+            ]
+          }
+        ]
+      },
+      "unchangedBad": {
+        "samples": 74,
+        "exactDepth": 19,
+        "normalDeltaChanged": 2,
+        "normalExactBefore": 26,
+        "normalExactAfter": 28,
+        "maximumVisibilityError": 34,
+        "rows": []
+      },
+      "stableGood": {
+        "samples": 9036,
+        "exactDepth": 3551,
+        "normalDeltaChanged": 681,
+        "normalExactBefore": 5094,
+        "normalExactAfter": 5283,
+        "maximumVisibilityError": 1,
+        "rows": []
+      }
+    }
+  },
+  "archive": {
+    "sha256": "03a52f824f0d8d66df84504fb908d09a3af3bef25494e3a4995cdfec26dc490c",
+    "bytes": 5518502,
+    "members": 167
+  }
+}

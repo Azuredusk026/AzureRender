@@ -40,6 +40,8 @@ struct ProjectedReflectionInputs {
     VkExtent2D sourceExtent{},traceExtent{};
     // The caller produces unique in-bounds 8x8 tiles (X in high 16 bits, Y in low 16).
     VkBuffer tiles{};VkDeviceSize tileBytes=0;unsigned tileCount=0;
+    // Optional source-sized premultiplied RGBA layer from the same submission as previousColor.
+    VkImageView previousColorLayer{};
 };
 struct ProjectedReflectionOutputs {
     // Borrowed GENERAL views use R11G11B10_FLOAT, R16G16_UNORM and R8_UNORM.

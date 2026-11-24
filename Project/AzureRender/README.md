@@ -416,9 +416,12 @@ GPU 可映射缓冲的用途选择及双设备检查见[内存分配](docs/accep
 含雾关卡的资源身份、重开复用及画面兼容见[复用验证](docs/acceptance/recovery/view-fog-resource-reuse.md)。
 
 全身衣料的实际差异、材质区域及辐照响应见[全身对照](docs/acceptance/nr/full-body-native-comparison.md)。
+眼周与脸部阴影可按眼部或脸部类别限制乘色接收。
+验收记录见[眼部乘色接收表面](docs/acceptance/nr/eye-multiply-receiver.md)及[脸部覆盖](docs/acceptance/nr/face-skin-color-sources.md)。
 
 材质环境来源、主光对象阴影及原生对照见[接收验证](docs/acceptance/nr/material-lighting-reception.md)。
 五份衣料的实际高光资源及参数差异见[原生输入核验](docs/acceptance/nr/native-cloth-inputs.md)。
+透明衣料的片元颜色、材质轮廓及双设备对照见[脸部与体表验收](docs/acceptance/nr/face-skin-color-sources.md)。
 视角色带、室内颜色及漫反射权重见[颜色合成核验](docs/acceptance/nr/npr-view-ramp-composition.md)。
 公共接入与三十六个匹配区域的检查见[运行时验证](docs/acceptance/nr/npr-ramp-runtime.md)。
 
@@ -470,6 +473,7 @@ GPU 可映射缓冲的用途选择及双设备检查见[内存分配](docs/accep
 投影深度、法线转换及分帧所有权见[表面准备](docs/runtime/projected-reflection-preparation.md)。
 
 公共生产、历史输入和足迹过滤见[投影反射组合](docs/runtime/projected-screen-reflection.md)。
+无光照透明内容可声明参与[反射历史图层](docs/runtime/unlit-texture-layers.md#反射历史图层)。
 
 完整程序清单及 DXC 热重载见[编译配置](docs/development/shader-hot-reload.md)。
 
@@ -546,6 +550,7 @@ Lit 法线阈值、重建下限及实际材质见[解码验收](docs/acceptance/
 物流彩色环带的源实例及采样见[还原验收](docs/acceptance/nr/opaque-logistics-rings.md)。
 
 公共 glTF 采样器及完整场景结果见[采样器验收](docs/acceptance/nr/gltf-sampler-contract.md)。
+glTF 原始蒙皮权重的导入条件见[资产格式](docs/runtime/asset-formats.md#格式能力)。
 原版动态反射过滤及公共接入边界见[来源验收](docs/acceptance/nr/reflection-filter-source.md)。
 四通道表面快照及格式选择见[快照契约](docs/runtime/reflection-surface-snapshot.md)。
 最近深度、反向深度及奇数维度归约见[层级契约](docs/runtime/depth-pyramid.md)。
@@ -579,6 +584,7 @@ Lit 法线阈值、重建下限及实际材质见[解码验收](docs/acceptance/
 逐材质 NPR 光色及真实皮肤色带见[光色验证](docs/acceptance/nr/npr-material-lighting.md)。
 材质边缘响应、视角色彩及正交切线见[边缘验证](docs/acceptance/nr/material-rim-and-view-tint.md)。
 脸部遮罩、头部朝向及宽度混合见[脸部轮廓光](docs/runtime/face-masked-rim.md)。
+脸部主光饱和度与视角染色见[NPR 漫反射](docs/runtime/npr-diffuse.md)。
 服装内部描边和外轮廓的配置见[描边投影](docs/runtime/outline-projection.md)。
 屏幕表面法线与头发独立法线快照见[输入核验](docs/acceptance/nr/screen-surface-normal.md)。
 虹膜的导出坐标和验证方法见[眼部输入](docs/acceptance/nr/eye-npr-inputs.md)。
@@ -714,6 +720,7 @@ CPU 与编辑回归范围见[解释验证](docs/acceptance/nr/material-document-
 公共机制及实景待项见[六面反射验收](docs/acceptance/nr/reflection-cube.md)。
 
 径向眼表面支持视差、Matcap 与显式宿主照明。
+主光色带可按模型的头部平面取光，并随角色姿态更新。
 公共验证及原生待项见[眼睛验收](docs/acceptance/nr/eye-radial-surface.md)。
 
 三个公开模型工程已交付，支持编辑、保存和独立发布。
@@ -1187,8 +1194,12 @@ Intel 实际 Player 的完整可见量附件逐字节匹配固定输入的 `Prof
 
 [体表接收法线纹理](docs/acceptance/nr/native-body-normal-source.md)记录原生和夹具的法线层级内容。
 
+[体表法线原生选层](docs/acceptance/nr/native-body-explicit-mips.md)记录双设备的十一层实际读回。
+
 [投影头发主纹理层级](docs/acceptance/nr/projected-hair-point-mip.md)记录可选材质路径及双设备生产回归。
 
 [原创曲库设置恢复](docs/acceptance/npr-room/music-playlist.md#原创曲库设置恢复)记录循环、音量及静音重开和保存失败重试。
 
 [原创交互恢复检查点](docs/plans/2026-11-18-npr-room-execution.md#2026-年-11-月-24-日检查点)记录可选语音、交谈、音乐及设置恢复。
+
+[投影头发参考光栅网格](docs/acceptance/nr/projected-hair-reference-grid.md)记录顶点子像素策略、双设备回归及静态区域。

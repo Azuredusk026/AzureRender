@@ -1,0 +1,118 @@
+{
+  "status": "verified-retained-evidence",
+  "actualSceneStatus": "failed-user-review",
+  "eyeShadowControl": {
+    "point": [
+      1262,
+      257
+    ],
+    "primitive": 140,
+    "sourceMips": [
+      4
+    ],
+    "sourceDisplayBefore": [
+      101,
+      57,
+      85
+    ],
+    "sourceDisplayAfter": [
+      82,
+      26,
+      56
+    ],
+    "playerActual": [
+      67,
+      20,
+      48
+    ],
+    "nvidiaReplayProjectedBefore": [
+      82,
+      46,
+      74
+    ],
+    "nvidiaReplayWithNativeMultiplication": [
+      67,
+      20,
+      48
+    ]
+  },
+  "samplingControl": [
+    {
+      "point": [
+        1302,
+        265
+      ],
+      "nvidiaLevel": [
+        5
+      ],
+      "intelLevel": [
+        4
+      ],
+      "intelNativeReplay": [
+        108,
+        66,
+        146
+      ],
+      "intelPlayer": [
+        108,
+        66,
+        147
+      ]
+    },
+    {
+      "point": [
+        1260,
+        262
+      ],
+      "nvidiaLevel": [
+        5
+      ],
+      "intelLevel": [
+        4
+      ],
+      "intelNativeReplay": [
+        86,
+        75,
+        255
+      ],
+      "intelPlayer": [
+        87,
+        76,
+        254
+      ]
+    },
+    {
+      "point": [
+        1261,
+        261
+      ],
+      "nvidiaLevel": [
+        5
+      ],
+      "intelLevel": [
+        4
+      ],
+      "intelNativeReplay": [
+        100,
+        59,
+        122
+      ],
+      "intelPlayer": [
+        100,
+        59,
+        123
+      ]
+    }
+  ],
+  "projectedCurrentDisableOverlay": "pending",
+  "archive": {
+    "sha256": "b92277d3415fc01fb011e81051c962e29da0324e87b9a834a7edbc80c4e891cf",
+    "members": {
+      "archive-iris-retained-residual.py": "8298c56d2de81db3fa36743784f03870b4087014b3c9f099392a1cff0688871e",
+      "iris-projected-source-memory.py": "6fd0aae1dcde7dfa63f76a17c9fda32e88f55c5bc62f433aebbcca7595dbc25a",
+      "iris-projected-source-memory.json": "a9f7f80c579a46fb702fd1b3d3fa0e8dfcf87ce630d68def4f7f9ed30f72e67e",
+      "iris-retained-overlay-factor-check.py": "202b6f19a76046e10f9c84dc18be5ef2882133cab1d8f2e13c02c0d08f8f94b1",
+      "iris-retained-overlay-factor-check.json": "d18717b2cd52cdfa129f0b0b11f469acbaf4ac546592e0b19a8335053ca1099d"
+    }
+  }
+}

@@ -1,0 +1,171 @@
+{
+  "status": "rejected-by-joint-scene-regional-gates",
+  "baseline": "32-step Player trace",
+  "sameDeviceCapturePairs": {
+    "nvidia": [
+      {
+        "centerFloor": [
+          0.8322577476501465,
+          0.18956282491936766,
+          161
+        ],
+        "cyanRing": [
+          0.7619521617889404,
+          0.07710177079426388,
+          97
+        ],
+        "newOverOne": {
+          "complete": 10914,
+          "ceiling": 276,
+          "leftDoor": 107,
+          "rightWall": 241,
+          "centerFloor": 525,
+          "cyanRing": 67,
+          "leftFloor": 709
+        }
+      },
+      {
+        "centerFloor": [
+          0.8342195749282837,
+          0.16571372817550387,
+          159
+        ],
+        "cyanRing": [
+          0.7640515565872192,
+          0.07838807048064415,
+          97
+        ],
+        "newOverOne": {
+          "complete": 11074,
+          "ceiling": 288,
+          "leftDoor": 110,
+          "rightWall": 248,
+          "centerFloor": 534,
+          "cyanRing": 95,
+          "leftFloor": 707
+        }
+      },
+      {
+        "centerFloor": [
+          0.8337478041648865,
+          0.16571372817550387,
+          159
+        ],
+        "cyanRing": [
+          0.7640530467033386,
+          0.07838807048064415,
+          97
+        ],
+        "newOverOne": {
+          "complete": 11059,
+          "ceiling": 287,
+          "leftDoor": 110,
+          "rightWall": 236,
+          "centerFloor": 537,
+          "cyanRing": 95,
+          "leftFloor": 707
+        }
+      }
+    ],
+    "intel": [
+      {
+        "centerFloor": [
+          0.8313669562339783,
+          0.19079282447876475,
+          161
+        ],
+        "cyanRing": [
+          0.7608997225761414,
+          0.0784143052086409,
+          97
+        ],
+        "newOverOne": {
+          "complete": 10918,
+          "ceiling": 294,
+          "leftDoor": 108,
+          "rightWall": 257,
+          "centerFloor": 435,
+          "cyanRing": 57,
+          "leftFloor": 714
+        }
+      },
+      {
+        "centerFloor": [
+          0.8337437510490417,
+          0.16722961433503525,
+          159
+        ],
+        "cyanRing": [
+          0.763319730758667,
+          0.07948414345109368,
+          97
+        ],
+        "newOverOne": {
+          "complete": 11262,
+          "ceiling": 296,
+          "leftDoor": 116,
+          "rightWall": 260,
+          "centerFloor": 520,
+          "cyanRing": 95,
+          "leftFloor": 721
+        }
+      },
+      {
+        "centerFloor": [
+          0.8334890007972717,
+          0.16722961433503525,
+          159
+        ],
+        "cyanRing": [
+          0.7633041143417358,
+          0.07948414345109368,
+          97
+        ],
+        "newOverOne": {
+          "complete": 11219,
+          "ceiling": 295,
+          "leftDoor": 116,
+          "rightWall": 251,
+          "centerFloor": 524,
+          "cyanRing": 95,
+          "leftFloor": 721
+        }
+      }
+    ]
+  },
+  "program": {
+    "baseline32": "a90a380c65c914b94e9fea2df3135825272d1a9fac41b07804ab572b52b5f754",
+    "candidate": "974fd6e08bbbd997f281ad0b9ecf1bb2b02ad9c3a3dd8c9db8f0aba84528af8c",
+    "candidateSource": "0f6254b20eedf1ff55b376d12c7bfd544d94723c281b577475e7529e442c3353",
+    "patch": "9efa79e94de5667ecf1233cf89b994a9f784e3a47d1df5b141da2e4745efca8b",
+    "seed": 42.0,
+    "yAxis": "height minus Vulkan pixel center",
+    "compiler": "2f94ff0e55750801ee09a573be2c0fa90e632d12ec11c004fa0dbb5a8a9341d2",
+    "arguments": [
+      "-spirv",
+      "-T",
+      "cs_6_0",
+      "-E",
+      "main",
+      "-HV",
+      "2018",
+      "-fspv-target-env=vulkan1.1",
+      "-fvk-b-shift",
+      "0",
+      "0",
+      "-fvk-t-shift",
+      "1",
+      "0",
+      "-fvk-s-shift",
+      "8",
+      "0",
+      "-fvk-u-shift",
+      "9",
+      "0",
+      "-Od"
+    ]
+  },
+  "originalFrozenRgbRequired": true,
+  "qualified": false,
+  "archive": "88c607d561fffc02b87f7424b52d525cf16c1bd8559bf3e7b23c1c1da972cca8"
+}

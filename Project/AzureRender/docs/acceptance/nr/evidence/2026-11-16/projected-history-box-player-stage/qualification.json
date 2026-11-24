@@ -1,0 +1,637 @@
+{
+  "status": "qualified-player-crate-current-snapshot",
+  "request": "1b00727e0fe19aae329000314ed1d1fc8c0580fed0e11dd3d20542bf0dd9f135",
+  "events": {
+    "trace": 21668,
+    "snapshot": 17734
+  },
+  "resources": [
+    "ResourceId::9289",
+    "ResourceId::9300",
+    "ResourceId::9303"
+  ],
+  "points": [
+    {
+      "known": {
+        "previousPixelXY": [
+          1462,
+          696
+        ],
+        "event": 6587,
+        "primitive": 3,
+        "instance": 3,
+        "triangle": 121,
+        "nativeUV": [
+          0.5963650409302308,
+          0.5594283181356952
+        ],
+        "playerUV": [
+          0.5950416674685499,
+          0.5603085729829621
+        ],
+        "maxPlaneDistanceMeters": 0.0012653798835418652,
+        "deltaCompressedLuma": -0.1031560928013877,
+        "unrestrictedNativeEightPixelBestRgb": 0.0464439529740426,
+        "compressedNative": [
+          0.11188204683434519,
+          0.10358846487424112,
+          0.0731786643538595
+        ],
+        "compressedPlayer": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "priorSampleIfAlsoQualified": null
+      },
+      "nativeGbufferNormal": [
+        0.043988268822431564,
+        0.02150537632405758,
+        0.36168134212493896,
+        0.0
+      ],
+      "nativeGbufferBase": [
+        0.0888671875,
+        0.08642578125,
+        0.0888671875,
+        0.0
+      ],
+      "nativeEarlier": [
+        0.1259765625,
+        0.11663818359375,
+        0.0823974609375,
+        0.0
+      ],
+      "nativeCurrentStages": {
+        "9002": [
+          0.008544921875,
+          0.0126953125,
+          0.0166015625,
+          1.0
+        ],
+        "10366": [
+          0.04248046875,
+          0.0458984375,
+          0.03125,
+          1.0
+        ],
+        "10479": [
+          0.04248046875,
+          0.0458984375,
+          0.03125,
+          1.0
+        ],
+        "10480": [
+          0.04248046875,
+          0.0458984375,
+          0.03125,
+          1.0
+        ],
+        "11393": [
+          0.04248046875,
+          0.0458984375,
+          0.03125,
+          1.0
+        ]
+      },
+      "playerEarlier": [
+        0.0,
+        0.0,
+        -0.0,
+        1.0
+      ],
+      "playerCurrent": [
+        0.0,
+        0.0,
+        -0.0,
+        1.0
+      ],
+      "playerSurface": [
+        25.460641860961914,
+        0.5799098610877991,
+        0.04980766773223877,
+        0.3825538754463196
+      ],
+      "currentNormalAngleDegrees": 4.268254807826288,
+      "playerNormal": [
+        0.11744260813366053,
+        -0.9905398869569402,
+        -0.07097863158793288
+      ],
+      "nativeNormalMirroredX": [
+        0.04918252273296941,
+        -0.99371051932238,
+        -0.10060061255115088
+      ],
+      "rawPerceptualRoughnessDifference": 0.020872533321380615,
+      "previousCompressedLumaDifference": -0.10315609280138768,
+      "currentComparedWithNativeFirstShading": -0.01189745437079731,
+      "withinPlayerCurrentMinusPrevious": 0.0,
+      "withinNativeFirstShadingMinusPrevious": -0.09125863843059037
+    },
+    {
+      "known": {
+        "previousPixelXY": [
+          1443,
+          653
+        ],
+        "event": 6587,
+        "primitive": 3,
+        "instance": 3,
+        "triangle": 123,
+        "nativeUV": [
+          0.6457835043020217,
+          0.6738895986811053
+        ],
+        "playerUV": [
+          0.6444572390759731,
+          0.6747714882626562
+        ],
+        "maxPlaneDistanceMeters": 0.0003971823030192111,
+        "deltaCompressedLuma": -0.12078250819439745,
+        "unrestrictedNativeEightPixelBestRgb": 0.020077384043989323,
+        "compressedNative": [
+          0.204505729267819,
+          0.18207418916294427,
+          0.1322586910079627
+        ],
+        "compressedPlayer": [
+          0.07183322003172445,
+          0.06140947201450261,
+          0.04532064355313845
+        ],
+        "priorSampleIfAlsoQualified": null
+      },
+      "nativeGbufferNormal": [
+        0.4995112419128418,
+        0.0,
+        0.3196480870246887,
+        0.0
+      ],
+      "nativeGbufferBase": [
+        0.11181640625,
+        0.10693359375,
+        0.072265625,
+        0.0
+      ],
+      "nativeEarlier": [
+        0.257080078125,
+        0.2288818359375,
+        0.166259765625,
+        0.0
+      ],
+      "nativeCurrentStages": {
+        "9002": [
+          0.0634765625,
+          0.060546875,
+          0.05078125,
+          1.0
+        ],
+        "10366": [
+          0.103515625,
+          0.099609375,
+          0.06640625,
+          1.0
+        ],
+        "10479": [
+          0.103515625,
+          0.099609375,
+          0.06640625,
+          1.0
+        ],
+        "10480": [
+          0.103515625,
+          0.099609375,
+          0.06640625,
+          1.0
+        ],
+        "11393": [
+          0.103515625,
+          0.099609375,
+          0.06640625,
+          1.0
+        ]
+      },
+      "playerEarlier": [
+        0.077392578125,
+        0.066162109375,
+        0.048828125,
+        1.0
+      ],
+      "playerCurrent": [
+        0.077392578125,
+        0.066162109375,
+        0.048828125,
+        1.0
+      ],
+      "playerSurface": [
+        25.97785186767578,
+        0.008433043956756592,
+        0.009741663932800293,
+        0.34416520595550537
+      ],
+      "currentNormalAngleDegrees": 1.4957176200883164,
+      "playerNormal": [
+        -0.02021102418290187,
+        -0.017496031121706734,
+        -0.999642637844378
+      ],
+      "nativeNormalMirroredX": [
+        0.0,
+        -0.00097847217875634,
+        -0.9999995212959831
+      ],
+      "rawPerceptualRoughnessDifference": 0.02451711893081665,
+      "previousCompressedLumaDifference": -0.12078250819439745,
+      "currentComparedWithNativeFirstShading": 0.005608300045133371,
+      "withinPlayerCurrentMinusPrevious": 0.0,
+      "withinNativeFirstShadingMinusPrevious": -0.12639080823953086
+    },
+    {
+      "known": {
+        "previousPixelXY": [
+          1505,
+          664
+        ],
+        "event": 6613,
+        "primitive": 11,
+        "instance": 0,
+        "triangle": 40,
+        "nativeUV": [
+          0.10676969408378968,
+          0.01875379622489586
+        ],
+        "playerUV": [
+          0.10595917691529744,
+          0.019292797742149814
+        ],
+        "maxPlaneDistanceMeters": 0.0007154699413129174,
+        "deltaCompressedLuma": -0.2200310162151701,
+        "unrestrictedNativeEightPixelBestRgb": 0.0361363980798349,
+        "compressedNative": [
+          0.5007313505607021,
+          0.3910287664553876,
+          0.045496099463676255
+        ],
+        "compressedPlayer": [
+          0.19575888474376596,
+          0.16503043392892205,
+          0.13469467897113685
+        ],
+        "priorSampleIfAlsoQualified": null
+      },
+      "nativeGbufferNormal": [
+        0.5092864036560059,
+        0.027370478957891464,
+        0.4046920835971832,
+        0.0
+      ],
+      "nativeGbufferBase": [
+        0.33203125,
+        0.30078125,
+        0.26171875,
+        0.0
+      ],
+      "nativeEarlier": [
+        1.0029296875,
+        0.783203125,
+        0.09112548828125,
+        0.5458984375
+      ],
+      "nativeCurrentStages": {
+        "9002": [
+          0.32421875,
+          0.26171875,
+          0.21875,
+          1.0
+        ],
+        "10366": [
+          0.32421875,
+          0.26171875,
+          0.21875,
+          1.0
+        ],
+        "10479": [
+          0.32421875,
+          0.26171875,
+          0.21875,
+          1.0
+        ],
+        "10480": [
+          0.32421875,
+          0.26171875,
+          0.21875,
+          1.0
+        ],
+        "11393": [
+          0.32421875,
+          0.26171875,
+          0.21875,
+          1.0
+        ]
+      },
+      "playerEarlier": [
+        0.243408203125,
+        0.2052001953125,
+        0.16748046875,
+        1.0
+      ],
+      "playerCurrent": [
+        0.243408203125,
+        0.2052001953125,
+        0.16748046875,
+        1.0
+      ],
+      "playerSurface": [
+        15.84035873413086,
+        0.10477912425994873,
+        0.012214839458465576,
+        0.40346747636795044
+      ],
+      "currentNormalAngleDegrees": 17.497216248722854,
+      "playerNormal": [
+        -0.03074713766436354,
+        -0.263749529326749,
+        -0.9641010316898158
+      ],
+      "nativeNormalMirroredX": [
+        -0.0196302278928695,
+        0.03822734102003408,
+        -0.9990762356053777
+      ],
+      "rawPerceptualRoughnessDifference": -0.001224607229232788,
+      "previousCompressedLumaDifference": -0.22003101621517013,
+      "currentComparedWithNativeFirstShading": -0.035958502357623136,
+      "withinPlayerCurrentMinusPrevious": 0.0,
+      "withinNativeFirstShadingMinusPrevious": -0.18407251385754697
+    },
+    {
+      "known": {
+        "previousPixelXY": [
+          1541,
+          666
+        ],
+        "event": 6613,
+        "primitive": 11,
+        "instance": 0,
+        "triangle": 40,
+        "nativeUV": [
+          0.04861709457037723,
+          0.015475380805559914
+        ],
+        "playerUV": [
+          0.04780650629927346,
+          0.016014265452500447
+        ],
+        "maxPlaneDistanceMeters": 0.0007148947897778032,
+        "deltaCompressedLuma": -0.11194772880772967,
+        "unrestrictedNativeEightPixelBestRgb": 0.034742696061872066,
+        "compressedNative": [
+          0.4009944428195379,
+          0.3185141854343375,
+          0.0675636150921322
+        ],
+        "compressedPlayer": [
+          0.25850832729905865,
+          0.20601013758146272,
+          0.05104996379435192
+        ],
+        "priorSampleIfAlsoQualified": null
+      },
+      "nativeGbufferNormal": [
+        0.5083088874816895,
+        0.04203323647379875,
+        0.38905179500579834,
+        0.0
+      ],
+      "nativeGbufferBase": [
+        0.484375,
+        0.43359375,
+        0.0498046875,
+        0.0
+      ],
+      "nativeEarlier": [
+        0.66943359375,
+        0.53173828125,
+        0.11279296875,
+        0.1641845703125
+      ],
+      "nativeCurrentStages": {
+        "9002": [
+          0.6328125,
+          0.5078125,
+          0.11328125,
+          1.0
+        ],
+        "10366": [
+          0.6328125,
+          0.5078125,
+          0.11328125,
+          1.0
+        ],
+        "10479": [
+          0.6328125,
+          0.5078125,
+          0.11328125,
+          1.0
+        ],
+        "10480": [
+          0.6328125,
+          0.5078125,
+          0.11328125,
+          1.0
+        ],
+        "11393": [
+          0.6328125,
+          0.5078125,
+          0.11328125,
+          1.0
+        ]
+      },
+      "playerEarlier": [
+        0.3486328125,
+        0.27783203125,
+        0.06884765625,
+        1.0
+      ],
+      "playerCurrent": [
+        0.3486328125,
+        0.27783203125,
+        0.06884765625,
+        1.0
+      ],
+      "playerSurface": [
+        15.836782455444336,
+        0.09746772050857544,
+        0.0017497241497039795,
+        0.448967844247818
+      ],
+      "currentNormalAngleDegrees": 17.896570698199174,
+      "playerNormal": [
+        -0.004242086795104572,
+        -0.23630383691527707,
+        -0.9716699549531934
+      ],
+      "nativeNormalMirroredX": [
+        -0.018091037895435997,
+        0.07342841950377503,
+        -0.997136390649265
+      ],
+      "rawPerceptualRoughnessDifference": 0.05991604924201965,
+      "previousCompressedLumaDifference": -0.11194772880772967,
+      "currentComparedWithNativeFirstShading": -0.10385180006167086,
+      "withinPlayerCurrentMinusPrevious": 0.0,
+      "withinNativeFirstShadingMinusPrevious": -0.008095928746058804
+    },
+    {
+      "known": {
+        "previousPixelXY": [
+          1517,
+          664
+        ],
+        "event": 6613,
+        "primitive": 11,
+        "instance": 0,
+        "triangle": 40,
+        "nativeUV": [
+          0.08737097187622808,
+          0.01874402762257378
+        ],
+        "playerUV": [
+          0.08656036142798017,
+          0.01928303745747287
+        ],
+        "maxPlaneDistanceMeters": 0.0007139208822150859,
+        "deltaCompressedLuma": -0.22220996294682085,
+        "unrestrictedNativeEightPixelBestRgb": 0.033775508306742114,
+        "compressedNative": [
+          0.5045960328979197,
+          0.3971940009675859,
+          0.03918722786647315
+        ],
+        "compressedPlayer": [
+          0.20388726919339165,
+          0.16666666666666666,
+          0.1305150631681244
+        ],
+        "priorSampleIfAlsoQualified": null
+      },
+      "nativeGbufferNormal": [
+        0.5229716300964355,
+        0.05669599398970604,
+        0.40664711594581604,
+        0.0
+      ],
+      "nativeGbufferBase": [
+        0.34765625,
+        0.318359375,
+        0.24609375,
+        0.0
+      ],
+      "nativeEarlier": [
+        1.0185546875,
+        0.8017578125,
+        0.0791015625,
+        0.004962921142578125
+      ],
+      "nativeCurrentStages": {
+        "9002": [
+          0.3515625,
+          0.28515625,
+          0.21484375,
+          1.0
+        ],
+        "10366": [
+          0.3515625,
+          0.28515625,
+          0.21484375,
+          1.0
+        ],
+        "10479": [
+          0.3515625,
+          0.28515625,
+          0.21484375,
+          1.0
+        ],
+        "10480": [
+          0.3515625,
+          0.28515625,
+          0.21484375,
+          1.0
+        ],
+        "11393": [
+          0.3515625,
+          0.28515625,
+          0.21484375,
+          1.0
+        ]
+      },
+      "playerEarlier": [
+        0.256103515625,
+        0.2093505859375,
+        0.1639404296875,
+        1.0
+      ],
+      "playerCurrent": [
+        0.256103515625,
+        0.2093505859375,
+        0.1639404296875,
+        1.0
+      ],
+      "playerSurface": [
+        15.839646339416504,
+        0.10134688019752502,
+        0.03139743208885193,
+        0.4158899784088135
+      ],
+      "currentNormalAngleDegrees": 19.80987566736403,
+      "playerNormal": [
+        -0.08213322886842836,
+        -0.265115519091131,
+        -0.9607121807558633
+      ],
+      "nativeNormalMirroredX": [
+        -0.05160099784849793,
+        0.0757547819372486,
+        -0.9957904147131962
+      ],
+      "rawPerceptualRoughnessDifference": 0.009242862462997437,
+      "previousCompressedLumaDifference": -0.22220996294682085,
+      "currentComparedWithNativeFirstShading": -0.045702633344006476,
+      "withinPlayerCurrentMinusPrevious": 0.0,
+      "withinNativeFirstShadingMinusPrevious": -0.17650732960281437
+    }
+  ],
+  "scope": "Current-frame normals are same-coordinate observations. Prior-frame surface matching was independently qualified; this readback does not assert current-frame material ownership.",
+  "input": {
+    "native": "9183a8ef8a6439ec8b61adcf28990abefe13be7722f86d07d4357f06cd0c78c4",
+    "player": "8febd8a708f2914fa89d17f2ebad05c0790cf759bc6018a968bae7065a1be1ae"
+  },
+  "queue": {
+    "1456": {
+      "id": 1456,
+      "task": "nr-joint-reflection-box-player-surface-readback",
+      "state": "failed",
+      "exitCode": 1
+    },
+    "1458": {
+      "id": 1458,
+      "task": "nr-joint-reflection-box-player-worker-retest",
+      "state": "succeeded",
+      "exitCode": 0
+    }
+  },
+  "validation": {
+    "archiveSha256": "7afb78521c9318ab71a0436fa13814c845befcad775dbf87a5530990b90aebc6",
+    "files": {
+      "native/results.json": "9183a8ef8a6439ec8b61adcf28990abefe13be7722f86d07d4357f06cd0c78c4",
+      "player/checkpoint.json": "8febd8a708f2914fa89d17f2ebad05c0790cf759bc6018a968bae7065a1be1ae",
+      "source/projected-history-box-player-readback.py": "400e7f5189e3a0dc1e6cc615a0245bda933b3267862d9f54f990584b697974a3",
+      "logs/worker-initial.log": "cdf645b7f8b70f500175602b2bcb353e1678ff07e7f2b69a93bae11e7b6516cf",
+      "logs/worker-validated.log": "9010ea89c1d552bad144d6aff6f9356940ffaa6144b925d1e83e5b9aff4a3f27",
+      "capture/results.json": "81d485173f257e1e30b65420757755b05accacc9e32ae529d5034e622dcdcad1",
+      "capture/request.json": "1b00727e0fe19aae329000314ed1d1fc8c0580fed0e11dd3d20542bf0dd9f135",
+      "capture/progress.json": "d49937febe8ec62719bca220b29ff9ad1f7faaf12102f793eff1fe0adaee2a6e"
+    }
+  }
+}

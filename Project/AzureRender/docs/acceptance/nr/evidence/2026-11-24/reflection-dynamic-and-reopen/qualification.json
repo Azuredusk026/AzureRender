@@ -1,0 +1,182 @@
+{
+  "base": "7f867f9",
+  "results": {
+    "gpu": [
+      {
+        "mode": "history-reset",
+        "result": {
+          "composition": "public",
+          "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+          "filteredRedHits": 0,
+          "liveBuffers": 0,
+          "liveImages": 0,
+          "minimumConfidence": 128,
+          "minimumFraction": 0.75,
+          "mode": "history-reset",
+          "redHits": 0,
+          "regionPixels": 2432,
+          "staticHits": 0,
+          "status": "failed",
+          "surfacePreparation": true,
+          "validationErrors": 0
+        }
+      },
+      {
+        "mode": "history-response-moving",
+        "result": {
+          "composition": "public",
+          "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+          "filteredRedHits": 2432,
+          "liveBuffers": 0,
+          "liveImages": 0,
+          "minimumConfidence": 128,
+          "minimumFraction": 0.75,
+          "mode": "history-response-moving",
+          "redHits": 2432,
+          "regionPixels": 2432,
+          "staticHits": 2432,
+          "status": "passed",
+          "surfacePreparation": true,
+          "validationErrors": 0
+        }
+      },
+      {
+        "mode": "history-response-moving-depth",
+        "result": {
+          "composition": "public",
+          "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+          "filteredRedHits": 0,
+          "liveBuffers": 0,
+          "liveImages": 0,
+          "minimumConfidence": 128,
+          "minimumFraction": 0.75,
+          "mode": "history-response-moving-depth",
+          "redHits": 0,
+          "regionPixels": 2432,
+          "staticHits": 0,
+          "status": "failed",
+          "surfacePreparation": true,
+          "validationErrors": 0
+        }
+      },
+      {
+        "mode": "history-disoccluded",
+        "result": {
+          "composition": "public",
+          "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+          "filteredRedHits": 0,
+          "liveBuffers": 0,
+          "liveImages": 0,
+          "minimumConfidence": 128,
+          "minimumFraction": 0.75,
+          "mode": "history-disoccluded",
+          "redHits": 0,
+          "regionPixels": 2432,
+          "staticHits": 0,
+          "status": "failed",
+          "surfacePreparation": true,
+          "validationErrors": 0
+        }
+      },
+      {
+        "mode": "history-shifted",
+        "result": {
+          "composition": "public",
+          "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+          "filteredRedHits": 2432,
+          "liveBuffers": 0,
+          "liveImages": 0,
+          "minimumConfidence": 128,
+          "minimumFraction": 0.75,
+          "mode": "history-shifted",
+          "redHits": 2432,
+          "regionPixels": 2432,
+          "staticHits": 2432,
+          "status": "passed",
+          "surfacePreparation": true,
+          "validationErrors": 0
+        }
+      }
+    ],
+    "rotatingSignals": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.5477779242619917,
+      0.5454875490632793,
+      0.5454875490632793,
+      0.5454875490632793,
+      0.5454875490632793,
+      0.5454875490632793,
+      0.5454875490632793,
+      0.5454875490632793
+    ]
+  },
+  "reopen": {
+    "replayedActions": 2,
+    "initialState": false,
+    "finalState": true,
+    "exactFrames": 12
+  },
+  "validation": {
+    "archiveSha256": "f39ab93aab0ba0f76f55fac70f701724d41a4f20e345d840e57db2a4b5d8c2ff",
+    "bytes": 746150,
+    "files": {
+      "verify.py": "72bc5823f270cf292880a89b6be7fc041934b5bbb4bcec40dcb0b6c82e1ff084",
+      "run.py": "74fc722cc51afc8f908b46c257ba851ec819dfe84820c0c3c50e8c0d92b1dafc",
+      "reopen.py": "617c4cb939e3147a5560ee661fca94c4b350c2a5976af77e676f4eadde4191ee",
+      "test_screen_space_reflections_gpu.py": "870e5e72810d78bcb90f9e4316fa0b9a9c34c1c91213a4df30f7e5732f502471",
+      "results.json": "5967a42c6a25663d425ea71cc9e72e16064d329972cbe0dcd52b9ba7caa6a153",
+      "reopen.json": "a0e56839a9aeaa3f37f5835da04650df00b635e517bf29555878ae17a1bea3ba",
+      "history-disoccluded-qualified/0.bin": "2df1ffd4660261edd837f5f1f774dd9c0f0608a0505e66cf7b6f7aee8f233281",
+      "history-disoccluded-qualified/1.bin": "f636cee96c893fab8571084c15f02719008078eef66a127c3b976b94832e44d3",
+      "history-disoccluded-qualified/2.bin": "e2cc2a1fa6131cf4d86faa3baf78851f35a36853e2467c257b3df9d89e85cce5",
+      "history-disoccluded-qualified/3.bin": "64c588482bd953e634473919c99664a8ea9f4e3ede5e0bbee7bda0888e698d14",
+      "history-reset-qualified/0.bin": "b84feba355fa403055046d68ca0476f9002fa832993614503582ac98c0b9b0f7",
+      "history-reset-qualified/1.bin": "f636cee96c893fab8571084c15f02719008078eef66a127c3b976b94832e44d3",
+      "history-reset-qualified/2.bin": "560d576943887fa85e96de65b446e2202724beefa3d7a64e21b159efe7066117",
+      "history-reset-qualified/3.bin": "f22f1592778ced1f2f72c8cf5f18016d1214e85f2f32a2f8042331298626a6b9",
+      "history-response-moving-depth-qualified/0.bin": "2df1ffd4660261edd837f5f1f774dd9c0f0608a0505e66cf7b6f7aee8f233281",
+      "history-response-moving-depth-qualified/1.bin": "f636cee96c893fab8571084c15f02719008078eef66a127c3b976b94832e44d3",
+      "history-response-moving-depth-qualified/2.bin": "e2cc2a1fa6131cf4d86faa3baf78851f35a36853e2467c257b3df9d89e85cce5",
+      "history-response-moving-depth-qualified/3.bin": "64c588482bd953e634473919c99664a8ea9f4e3ede5e0bbee7bda0888e698d14",
+      "history-response-moving-qualified/0.bin": "2df1ffd4660261edd837f5f1f774dd9c0f0608a0505e66cf7b6f7aee8f233281",
+      "history-response-moving-qualified/1.bin": "f636cee96c893fab8571084c15f02719008078eef66a127c3b976b94832e44d3",
+      "history-response-moving-qualified/2.bin": "181406cea6e273010ee4bb5b2e7b5cd5fde6315b777e5fc72b03433888a5f0a0",
+      "history-response-moving-qualified/3.bin": "7bb10a4910683dca8046eeb141f09840398190b249757a5e2273f191b7281db6",
+      "history-shifted-qualified/0.bin": "2df1ffd4660261edd837f5f1f774dd9c0f0608a0505e66cf7b6f7aee8f233281",
+      "history-shifted-qualified/1.bin": "f636cee96c893fab8571084c15f02719008078eef66a127c3b976b94832e44d3",
+      "history-shifted-qualified/2.bin": "560d576943887fa85e96de65b446e2202724beefa3d7a64e21b159efe7066117",
+      "history-shifted-qualified/3.bin": "6edec5b80dc60747588c98d87dfe4244444a72a22918166999834d8a27634916",
+      "rotating/player.log": "a915610dfd1d9fde8c074579e0a53c848b727d4c61a580f0499f7a0c6a2210ff",
+      "rotating/runtime.json": "3bf51806433498aecd493db0ed54be8fdde2dbe531991290054927fa626ce003",
+      "rotating/frames/frame_000000.png": "1517b3fd55f009bf4fdc7ee28b67783187b26b8c2aa7b460849655670d760ab5",
+      "rotating/frames/frame_000001.png": "ecd7f21b5e028601143f2d7a9c98a55d8a9907489954587787d658112ff61850",
+      "rotating/frames/frame_000002.png": "ecd7f21b5e028601143f2d7a9c98a55d8a9907489954587787d658112ff61850",
+      "rotating/frames/frame_000003.png": "ecd7f21b5e028601143f2d7a9c98a55d8a9907489954587787d658112ff61850",
+      "rotating/frames/frame_000004.png": "c2a5ba8d07887a6d126bfeaaaa39250e1cae7310f8de4064bf81c7d9353e83b0",
+      "rotating/frames/frame_000005.png": "86b420deb9f8acda97866ea06428306fe04bd29f68275706b2ce3aa01f599356",
+      "rotating/frames/frame_000006.png": "86b420deb9f8acda97866ea06428306fe04bd29f68275706b2ce3aa01f599356",
+      "rotating/frames/frame_000007.png": "86b420deb9f8acda97866ea06428306fe04bd29f68275706b2ce3aa01f599356",
+      "rotating/frames/frame_000008.png": "86b420deb9f8acda97866ea06428306fe04bd29f68275706b2ce3aa01f599356",
+      "rotating/frames/frame_000009.png": "86b420deb9f8acda97866ea06428306fe04bd29f68275706b2ce3aa01f599356",
+      "rotating/frames/frame_000010.png": "86b420deb9f8acda97866ea06428306fe04bd29f68275706b2ce3aa01f599356",
+      "rotating/frames/frame_000011.png": "86b420deb9f8acda97866ea06428306fe04bd29f68275706b2ce3aa01f599356",
+      "rotating-reopen/player.log": "c97b3bab7a016370231a79f0aa9ce98e37cb62f6e934b47ccf20e3b95e058d96",
+      "rotating-reopen/runtime.json": "b69d82ca7c9b31807b517130ed5ff87f439d103a055d4317e5f3a2b808614a9a",
+      "rotating-reopen/frames/frame_000000.png": "1517b3fd55f009bf4fdc7ee28b67783187b26b8c2aa7b460849655670d760ab5",
+      "rotating-reopen/frames/frame_000001.png": "ecd7f21b5e028601143f2d7a9c98a55d8a9907489954587787d658112ff61850",
+      "rotating-reopen/frames/frame_000002.png": "ecd7f21b5e028601143f2d7a9c98a55d8a9907489954587787d658112ff61850",
+      "rotating-reopen/frames/frame_000003.png": "ecd7f21b5e028601143f2d7a9c98a55d8a9907489954587787d658112ff61850",
+      "rotating-reopen/frames/frame_000004.png": "c2a5ba8d07887a6d126bfeaaaa39250e1cae7310f8de4064bf81c7d9353e83b0",
+      "rotating-reopen/frames/frame_000005.png": "86b420deb9f8acda97866ea06428306fe04bd29f68275706b2ce3aa01f599356",
+      "rotating-reopen/frames/frame_000006.png": "86b420deb9f8acda97866ea06428306fe04bd29f68275706b2ce3aa01f599356",
+      "rotating-reopen/frames/frame_000007.png": "86b420deb9f8acda97866ea06428306fe04bd29f68275706b2ce3aa01f599356",
+      "rotating-reopen/frames/frame_000008.png": "86b420deb9f8acda97866ea06428306fe04bd29f68275706b2ce3aa01f599356",
+      "rotating-reopen/frames/frame_000009.png": "86b420deb9f8acda97866ea06428306fe04bd29f68275706b2ce3aa01f599356",
+      "rotating-reopen/frames/frame_000010.png": "86b420deb9f8acda97866ea06428306fe04bd29f68275706b2ce3aa01f599356",
+      "rotating-reopen/frames/frame_000011.png": "86b420deb9f8acda97866ea06428306fe04bd29f68275706b2ce3aa01f599356"
+    }
+  }
+}

@@ -1,0 +1,117 @@
+{
+  "matchingPrimitives": 10,
+  "lut": {
+    "face-native-shadow-lut-t14": {
+      "assets": {
+        "14": "0dfee224d3b9e4406a5a63c5cd934d0c1a18a8afca0fa0c72526b3fc7c8e5dbb"
+      },
+      "devices": {
+        "nvidia": {
+          "overOne": 1174,
+          "overEight": 10,
+          "peak": 45,
+          "selected": [
+            11,
+            21,
+            45,
+            22,
+            11,
+            10,
+            10,
+            15,
+            24,
+            20
+          ],
+          "regional": {
+            "pixels": 1176,
+            "ssim": 0.9949019605020277,
+            "medianLuminanceRelativeError": 0.019484224638619554,
+            "passed": true
+          }
+        },
+        "intel": {
+          "overOne": 1170,
+          "overEight": 8,
+          "peak": 34,
+          "selected": [
+            9,
+            14,
+            34,
+            14,
+            8,
+            9,
+            8,
+            16,
+            26,
+            21
+          ],
+          "regional": {
+            "pixels": 1176,
+            "ssim": 0.9950758164171486,
+            "medianLuminanceRelativeError": 0.01659997511672593,
+            "passed": true
+          }
+        }
+      }
+    },
+    "face-native-shadow-lut-t18-t14": {
+      "assets": {
+        "18": "1ef169e49c170925696815b285581fe1cb1eb838a0277b0bf80439964a452bed",
+        "14": "0dfee224d3b9e4406a5a63c5cd934d0c1a18a8afca0fa0c72526b3fc7c8e5dbb"
+      },
+      "devices": {
+        "nvidia": {
+          "overOne": 1166,
+          "overEight": 3,
+          "peak": 27,
+          "selected": [
+            2,
+            1,
+            0,
+            1,
+            1,
+            1,
+            4,
+            17,
+            27,
+            23
+          ],
+          "regional": {
+            "pixels": 1176,
+            "ssim": 0.9957416501405371,
+            "medianLuminanceRelativeError": 0.01744299593236683,
+            "passed": true
+          }
+        },
+        "intel": {
+          "overOne": 1166,
+          "overEight": 3,
+          "peak": 27,
+          "selected": [
+            2,
+            1,
+            1,
+            1,
+            1,
+            1,
+            2,
+            17,
+            27,
+            23
+          ],
+          "regional": {
+            "pixels": 1176,
+            "ssim": 0.9955975213596447,
+            "medianLuminanceRelativeError": 0.01744299593236683,
+            "passed": true
+          }
+        }
+      }
+    }
+  },
+  "overallStatus": "failed-user-review",
+  "archive": {
+    "members": 20,
+    "sha256": "b61c6a2cb29f267e73c193068af15085fc42be20a6baca046c9e34e7ac4118c3"
+  }
+}

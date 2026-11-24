@@ -1,0 +1,95 @@
+{
+  "status": "verified-controls",
+  "actualSceneStatus": "failed-user-review",
+  "currentGpuScope": "pending",
+  "witnessMaximumDisplayError": 1,
+  "findings": {
+    "previousSurface": {
+      "engine-qualified-lit-surfaces-replay": {
+        "sha256": "4e177b82a8f71a46e9e9dd329618a19dea324ef24eaa58abe8fb52eae7846e77",
+        "nativeAddressWithinFive": 1116
+      },
+      "engine-screen-normal-fixed-replay": {
+        "sha256": "0fdd2f1230f43eba818ca6a03c8dcdc9c91b15c336d8ef5e42e2b5cf95683e02",
+        "nativeAddressWithinFive": 1116
+      }
+    },
+    "projection": {
+      "sourceVertexCount": 3289,
+      "reconstructed": 1118,
+      "exactIndex": 726,
+      "maxAbsoluteCoordinateDelta": [
+        3.617051527271542e-05,
+        9.988345755118644e-05
+      ]
+    },
+    "boundary": {
+      "boundaryPixels": 392,
+      "nearBoundaryNormalOver45": 3,
+      "matchedCoordinateOverEight": [
+        399,
+        400
+      ]
+    },
+    "visibility": {
+      "nvidia": {
+        "visibilitySha256": "1010efb44d81c2bef5c0384cd50844a97537cf79c5750f35220b4b0e2cae8336",
+        "referenceWithinOneVisibility": [
+          1118,
+          1099
+        ],
+        "colorOverEightAndVisibilityOverOne": [
+          0,
+          16
+        ]
+      },
+      "intel": {
+        "visibilitySha256": "6e7b8e5a946cd8758a935462ae68e1bc6d25c6b9ab2a2e54ce8bfb8b2ad7e4c3",
+        "referenceWithinOneVisibility": [
+          1118,
+          1102
+        ],
+        "colorOverEightAndVisibilityOverOne": [
+          0,
+          13
+        ]
+      }
+    },
+    "globalRim": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "modeledLocalRim": {
+      "overEight": [
+        610,
+        587
+      ],
+      "maximum": [
+        88,
+        88
+      ],
+      "modelScope": "native raster addresses and normals, candidate material and scene lights, unit radial visibility"
+    }
+  },
+  "archive": {
+    "sha256": "3d87c2634a664d8d38e8ed7713422fe84fcb9950ac4931528cd886dc33e72e09",
+    "members": {
+      "archive-body-outline-light-controls.py": "ab7f6b244fa10e544ee66de23141f6c8d9fa07fa3b6177a67ac8b83c3b539e43",
+      "body-outline-retained-player-surface.py": "9fa97a42eba09fcb2044a7702a3874a85604c95545b78f108da9b1aedb45073a",
+      "body-outline-retained-player-surface.json": "b57ef38bbf5b535ec949eaab3baff928c613cf57b21bcc60ecc2ca69769ee345",
+      "body-outline-player-projection-model.py": "b035b5a00d55bbba2712ccfe21d13bc5b2cf5c5fc8185fdcd4d635bd8c25b29e",
+      "body-outline-player-projection-model.json": "296c9f3992f98b125cacefb05852ae3174b287ecfc7d222bf161eba8a06e95a4",
+      "body-outline-evaluate-address-fork.py": "5efa7c914df820895ee779acbdc2dffbb867a6599893d69377109b4cf04cb00b",
+      "body-outline-evaluate-address-fork.json": "52025b61dda410e17ded48aa59881198a7540b0784a3fd4cc46c85bb9b6439fc",
+      "body-outline-existing-light-lanes.py": "514f481862cf51bcaa1570078824a8e04301ae13f67a2a72034f306801c7f225",
+      "body-outline-existing-light-lanes.json": "1c96f090e12cc2901e3ee82eaac0fb3513fa009f2b78ae03a4d99713662852b3",
+      "body-outline-main-rim-footprint.py": "4c336684f9fb311e1ca89e92789dff51476171522882d66b8e1e061b0045fcab",
+      "body-outline-main-rim-footprint.json": "eb00b19821787ecce7ce691b265df56fafcbbc915e21d8995b97ab2bf384ff19",
+      "body-outline-visibility-inputs.py": "8882afd2ef9ecf773b646d791c01265a2273ea2829eecb46c182f195421091c4",
+      "body-outline-visibility-inputs.json": "9e0ab1ad030e2c37b4729ae9f5b0bdf7179fca937932d14dcbf96e799a20e714",
+      "body-outline-local-rim-model.py": "8a34b36e140154cf54a9989fb812a97224f3775ed2651fc5a6817c82953d39fe",
+      "body-outline-local-rim-model.json": "10be1693518b5ad381bed9457461ba92ebe2ad3eecf29605bf4ddc9d96e8c357"
+    }
+  }
+}

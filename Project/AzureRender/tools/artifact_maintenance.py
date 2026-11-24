@@ -751,14 +751,18 @@ def guarded_run(build, name, command, timeout=600):
         if not record or record['status']!='active' or record.get('processPid'):
             raise ValueError('Command requires an active, idle managed task')
         record.update(processPid=-1,generation=record.get('generation',0)+1);save(db,name,record)
-    process=None;reader=None;errors=[];truncated=[False];start=time.monotonic();reason=None
+    process=None;job=None;reader=None;errors=[];truncated=[False];start=time.monotonic();reason=None
     try:
         temporary=real_path(path/'tmp');temporary.mkdir(exist_ok=True)
         environment=managed_environment(temporary)
         kwargs=dict(cwd=Path(build).parent,stdout=subprocess.PIPE,stderr=subprocess.STDOUT,env=environment)
-        if os.name=='nt':kwargs['creationflags']=subprocess.CREATE_NO_WINDOW|subprocess.CREATE_NEW_PROCESS_GROUP
-        else:kwargs['start_new_session']=True
-        process=subprocess.Popen(command,**kwargs)
+        if os.name == 'nt':
+            from managed_windows_job import WindowsJob
+            job = WindowsJob()
+            kwargs['creationflags'] = subprocess.CREATE_NO_WINDOW | subprocess.CREATE_NEW_PROCESS_GROUP
+            process = job.start(command, **kwargs)
+        else:
+            process = subprocess.Popen(command, start_new_session=True, **kwargs)
         with database(build,True) as db:
             current=rows(db)[name];current['processPid']=process.pid;save(db,name,current)
         def drain():
@@ -784,14 +788,17 @@ def guarded_run(build, name, command, timeout=600):
                 if time.monotonic()-start>timeout:raise TimeoutError('Owned command time budget exceeded')
             except (OSError,ValueError,TimeoutError) as error:
                 reason=str(error)
-                if os.name=='nt':
-                    subprocess.run(['taskkill.exe','/PID',str(process.pid),'/T','/F'],capture_output=True,creationflags=subprocess.CREATE_NO_WINDOW)
+                if job is not None:
+                    job.terminate(process)
                 else:
                     import signal
                     os.killpg(process.pid,signal.SIGKILL)
                 break
             time.sleep(1)
-        process.wait(timeout=10);reader.join(timeout=10)
+        process.wait(timeout=10)
+        if job is not None:
+            job.close()
+        reader.join(timeout=10)
         if reader.is_alive():reason=reason or 'Foreground command left an output pipe open'
         if errors:reason=reason or errors[0]
         if not reason:
@@ -801,6 +808,8 @@ def guarded_run(build, name, command, timeout=600):
                 if not final['allowed']:reason=','.join(final['reasons'])
             except (OSError,ValueError) as error:reason=str(error)
     finally:
+        if job is not None:
+            job.close()
         if process and process.stdout:process.stdout.close()
         with database(build,True) as db:
             current=rows(db)[name];current['processPid']=None;save(db,name,current)

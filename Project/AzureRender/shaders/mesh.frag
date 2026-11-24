@@ -20,6 +20,12 @@ layout(full_quads) in;
 #if defined(AZURE_ORDINARY_EARLY_DEPTH) && !defined(AZURE_SURFACE_RADIANCE_FAST)
 layout(early_fragment_tests) in;
 #endif
+#if !defined(AZURE_OPAQUE_SNAPSHOT) && !defined(AZURE_GEOMETRY_SAMPLES) && \
+    !defined(AZURE_ORDINARY_EARLY_DEPTH) && !defined(AZURE_SURFACE_RADIANCE_REUSE) && \
+    !defined(AZURE_HAIR_PIXEL_INTEGRAL) && !defined(AZURE_PROJECTED_HISTORY_LAYER) && !defined(AZURE_VIEW_FOG)
+#define AZURE_FACE_RECEIVER_DEPTH 1
+layout(depth_less) out float gl_FragDepth;
+#endif
 #include "node_opacity.glsl"
 #if defined(AZURE_VIEW_FOG)
 #include "view_fog.glsl"
@@ -261,9 +267,14 @@ float materialCharacterVisibility(uint source,vec3 normal,float sceneVisibility,
     return source==1u?mainShadow:source==3u?1.0:sceneVisibility;
 }
 layout(location = 0) out vec4 outputColor;
+#if defined(AZURE_PROJECTED_HISTORY_LAYER)
+vec4 outputNormal;
+vec4 outputDisplayMask;
+#else
 layout(location = 1) out vec4 outputNormal;
 #if !defined(AZURE_OPAQUE_SNAPSHOT)
 layout(location=2) out vec4 outputDisplayMask;
+#endif
 #endif
 
 struct SceneLightSample { vec3 incoming;vec3 direction;float distanceSquared;float attenuation; };
@@ -292,7 +303,7 @@ struct ProjectedHairProfile {
     vec4 secondaryColor;
     vec4 objectX,objectY,objectZ;
 };
-struct PackedMaterialSurfaceProfile { vec4 rows[22]; };
+struct PackedMaterialSurfaceProfile { vec4 rows[23]; };
 #include "unlit_texture_layers.glsl"
 layout(std430,binding=27) readonly buffer MaterialSurfaceProfiles {
     PackedMaterialSurfaceProfile profiles[];
@@ -541,7 +552,18 @@ vec4 materialDiffuseRampRgba(float coordinate) {
 }
 
 vec3 materialNprLitAlbedo(vec3 base,vec3 normal,vec3 view) {
-    vec4 tint=materialSurfaceProfiles.profiles[material.materialPadding>>1U].rows[2];
+    uint profileIndex=material.materialPadding>>1U;
+    vec4 tint=materialSurfaceProfiles.profiles[profileIndex].rows[2];
+#if defined(AZURE_EXTENDED_MATERIAL_LIGHTING)
+    vec2 maskPolicy=materialSurfaceProfiles.profiles[profileIndex].rows[6].yz;
+    if(maskPolicy.x>.5) {
+        vec2 mask=azureSamplePrimaryUv(AZ_TEX_STYLE_MASK,textureCoordinate).rg;
+        vec3 geometry=normalize(worldNormal)*(gl_FrontFacing?1.0:-1.0);
+        float maskInfluence=mix(maskPolicy.y,1.0,mask.g)*mask.r;
+        float weight=clamp(tint.w*(1.0-clamp(dot(geometry,view),0.0,1.0))*maskInfluence,0.0,1.0);
+        return base*mix(vec3(1),tint.rgb,weight);
+    }
+#endif
     return characterDiffuseViewTint(base,normal,view,tint);
 }
 CharacterDiffuseResponse materialNprDiffuseResponse(vec4 base,float metallic,vec4 ramp,float baseAo,float visibility,float mainShadow,vec3 normal,vec3 view) {
@@ -821,12 +843,29 @@ vec4 evaluateIrradianceVolume(vec3 position,vec3 normal,bool surfaceReceiver) {
 #endif
 }
 
-float dualFaceRampCoordinate(vec3 direction, vec3 normal, out vec4 distanceSample) {
+float authoredFaceGeometryMask(sampler2D mask, vec2 uv) {
+    vec2 baseExtent=vec2(textureSize(mask,0));
+    vec2 dx=azurePrimaryDx(uv)*baseExtent;
+    vec2 dy=azurePrimaryDy(uv)*baseExtent;
+    float footprintSquared=max(dot(dx,dx),dot(dy,dy));
+    float lod=0.5*log2(max(footprintSquared,1e-12))-1.0;
+    int level=int(clamp(floor(lod+0.5),0.0,float(textureQueryLevels(mask)-1)));
+    ivec2 extent=textureSize(mask,level);
+    vec2 texel=clamp(uv,vec2(0),vec2(1))*vec2(extent)-0.5;
+    ivec2 origin=ivec2(floor(texel));
+    ivec2 lo=clamp(origin,ivec2(0),extent-1);
+    ivec2 hi=clamp(origin+1,ivec2(0),extent-1);
+    vec2 weight=fract(texel);
+    float bottom=mix(texelFetch(mask,lo,level).g,texelFetch(mask,ivec2(hi.x,lo.y),level).g,weight.x);
+    float top=mix(texelFetch(mask,ivec2(lo.x,hi.y),level).g,texelFetch(mask,hi,level).g,weight.x);
+    return mix(bottom,top,weight.y);
+}
+
+float dualFaceRampCoordinate(vec3 direction, vec3 normal, out vec4 distanceSample, float geometryMask) {
     mat3 headFrame=mat3(instanceFaceFrame);
     vec3 localLight=transpose(headFrame)*direction;
     vec3 localCamera=transpose(headFrame)*(-camera.cameraForward.xyz);
     distanceSample=textureLod(AZ_TEX_FACE_SDF,faceSdfSampleUv(textureCoordinate,localLight.x),0.0);
-    float geometryMask=textureLod(AZ_TEX_STYLE_MASK,textureCoordinate,0.0).g;
     return faceSdfRampCoordinate(distanceSample,geometryMask,localLight,localCamera,
         dot(normal,direction),material.hairParameters.xyz);
 }
@@ -858,6 +897,9 @@ void main()
 #endif
 #endif
 {
+#if defined(AZURE_FACE_RECEIVER_DEPTH)
+    gl_FragDepth = gl_FragCoord.z;
+#endif
     azurePreparePrimaryUv(textureCoordinate);
 #if defined(AZURE_COMPUTED_MATERIAL_VIEW)
 #if !defined(AZURE_OPAQUE_SNAPSHOT)
@@ -995,6 +1037,10 @@ void main()
     if (!gl_FrontFacing) {
         geometricNormal = -geometricNormal;
     }
+#if defined(AZURE_PROJECTED_HISTORY_LAYER)
+    if(azureWriteUnlitBlendBeauty(baseColor,geometricNormal,platformMask,vec3(0),1.0))return;
+    discard;
+#endif
 #if defined(AZURE_SURFACE_RADIANCE_REUSE) && !defined(AZURE_OPAQUE_SNAPSHOT)
 #if defined(AZURE_SURFACE_RADIANCE_FAST)
     if(!azureWriteSurfaceRadiance(geometricNormal))discard;return;
@@ -1013,7 +1059,8 @@ void main()
     mat3 tangentToWorld = mat3(tangent, bitangent, geometricNormal);
     vec4 normalSample=azureSamplePrimaryUv(AZ_TEX_NORMAL,textureCoordinate);
     vec3 sampledNormal = normalSample.xyz * 2.0 - 1.0;
-    vec3 shadedNormal = normalize(tangentToWorld * sampledNormal);
+    bool normalTexturePresent=materialSurfaceProfiles.profiles[material.materialPadding>>1U].rows[22].x<.5;
+    vec3 shadedNormal = normalTexturePresent?normalize(tangentToWorld * sampledNormal):geometricNormal;
     vec4 hairData =
 #if defined(AZURE_GEOMETRY_SAMPLES)
         true
@@ -1358,21 +1405,33 @@ void main()
         faceSdfWeight);
     bool dualFaceSdf=faceSdfEnabled>0.0 && materialFeatureEnabled(2048U)>0.5;
     bool signedMainRamp=false;
-    if(eyeNpr){signedMainRamp=true;rampCoordinate=characterMainRampCoordinate(shadedNormal,lightDirection,0);}
+    if(eyeNpr){
+        vec3 eyeLight=lightDirection;
+        if(materialSurfaceProfiles.profiles[material.materialPadding>>1U].rows[6].y>.5){
+            vec3 side=instanceFaceFrame[0].xyz,front=instanceFaceFrame[2].xyz;
+            vec3 projected=side*dot(eyeLight,side)+front*dot(eyeLight,front);
+            if(dot(projected,projected)>1e-12)eyeLight=normalize(projected);
+        }
+        signedMainRamp=true;
+        rampCoordinate=characterMainRampCoordinate(shadedNormal,eyeLight,0);
+    }
     if(materialFeatureEnabled(524288U)>.5&&!dualFaceSdf) {
         vec4 rampInput=materialSurfaceProfiles.profiles[material.materialPadding>>1U].rows[1];
         signedMainRamp=rampInput.y>.5;
         if(signedMainRamp)rampCoordinate=characterMainRampCoordinate(shadedNormal,lightDirection,rampInput.z);
     }
     vec3 faceLightingNormal=shadedNormal;
+    float faceSdfGeometryMask=0.0;
     if(dualFaceSdf) {
         toonWeight=qaEffectMode==1 && qaEffectDisabled?0.0:1.0;
-        rampCoordinate=dualFaceRampCoordinate(lightDirection,shadedNormal,faceSdfSample);
+        bool authoredMaskMip=materialSurfaceProfiles.profiles[material.materialPadding>>1U].rows[20].z>.5;
+        faceSdfGeometryMask=authoredMaskMip?authoredFaceGeometryMask(AZ_TEX_STYLE_MASK,textureCoordinate)
+            :textureLod(AZ_TEX_STYLE_MASK,textureCoordinate,0.0).g;
+        rampCoordinate=dualFaceRampCoordinate(lightDirection,shadedNormal,faceSdfSample,faceSdfGeometryMask);
         mat3 headFrame=mat3(instanceFaceFrame);
         float localLightX=(transpose(headFrame)*lightDirection).x;
-        float geometryMix=textureLod(AZ_TEX_STYLE_MASK,textureCoordinate,0.0).g;
         faceLightingNormal=faceSdfWorldNormal(faceSdfSample,localLightX,
-            headFrame,shadedNormal,geometryMix);
+            headFrame,shadedNormal,faceSdfGeometryMask);
         faceIllumination=rampCoordinate;
         faceSdfWeight=0.0;
     }
@@ -1575,8 +1634,13 @@ void main()
         }
         vec2 localResponse=light.characterResponse.yz;
         if(nprDiffuse)localResponse.x*=materialSurfaceProfiles.profiles[material.materialPadding>>1U].rows[3].y;
+        vec3 wrapNormal=localLightingNormal;
+#if defined(AZURE_EXTENDED_MATERIAL_LIGHTING)
+        if(dualFaceSdf&&materialSurfaceProfiles.profiles[material.materialPadding>>1U].rows[6].w>.5)
+            wrapNormal=indirectDiffuseNormal;
+#endif
         vec3 characterRadiance=characterLight?characterLocalLightRadiance(radiance,
-            dot(localLightingNormal,pointDirection),localResponse,characterSceneVisibility):radiance;
+            dot(wrapNormal,pointDirection),localResponse,characterSceneVisibility):radiance;
         if(!specularOnly) {
 #if defined(AZURE_COMPUTED_MATERIAL_VIEW) && !defined(AZURE_OPAQUE_SNAPSHOT)
         if(eyeRadial&&!eyeNpr&&(azureOrdinaryOpaque?true:(camera.clusterLighting.x>.5))) {
@@ -1594,7 +1658,7 @@ void main()
         vec3 localDiffuseResponse=vec3(pointDiffuse);
         if(dualFaceSdf) {
             vec4 localDistanceSample;
-            float localCoordinate=dualFaceRampCoordinate(pointDirection,localLightingNormal,localDistanceSample);
+            float localCoordinate=dualFaceRampCoordinate(pointDirection,localLightingNormal,localDistanceSample,faceSdfGeometryMask);
             localDiffuseResponse=textureLod(AZ_TEX_MATCAP,vec2(localCoordinate,.5),0.0).rgb;
         } else if(sceneCharacter) {
             float coordinate=materialFeatureEnabled(8192U)>.5
@@ -1623,7 +1687,7 @@ void main()
             vec4 localRamp;
             if(dualFaceSdf) {
                 vec4 distanceValue;
-                localCoordinate=dualFaceRampCoordinate(pointDirection,localLightingNormal,distanceValue);
+                localCoordinate=dualFaceRampCoordinate(pointDirection,localLightingNormal,distanceValue,faceSdfGeometryMask);
                 localRamp=textureLod(AZ_TEX_MATCAP,vec2(localCoordinate,.5),0);
             } else localRamp=materialDiffuseRampRgba(localCoordinate);
             float visibility=light.coneType.y>1.5&&light.directionOuter.w>.5?shadowVisibility:1.0;
@@ -2119,9 +2183,49 @@ if(azureOrdinaryOpaque){        beautyColor=azureBeautyReplace(beautyColor,blend
             combinedDirect=characterDiffuseSaturation(eyeMainDirect,saturation)+clusteredDiffuse*eyeAlphaMultiplier;
             eyeHostMatcap=characterDiffuseSaturation(eyeHostMatcap,saturation);
         }
+#if defined(AZURE_EXTENDED_MATERIAL_LIGHTING)
+        float faceMainSaturation=1.0;
+        vec3 faceHighlight=vec3(0);
+        if(dualFaceSdf) {
+            vec4 highlightProfile=materialSurfaceProfiles.profiles[material.materialPadding>>1U].rows[12];
+            if(highlightProfile.z>.5&&!(qaEffectMode==5&&qaEffectDisabled)) {
+                mat3 headFrame=mat3(instanceFaceFrame);
+                vec2 viewOffset=vec2(dot(viewDirection,normalize(headFrame[0])),
+                    -dot(viewDirection,normalize(headFrame[1])))*highlightProfile.xy;
+                faceHighlight=texture(AZ_TEX_SPECULAR_EMISSIVE,textureCoordinate+viewOffset).rgb
+                    *(illumination.ambient+illumination.direct);
+                directSpecular+=faceHighlight;
+                beautyColor+=faceHighlight;
+            }
+            if(highlightProfile.w>.5) {
+                vec3 mainColor=response.color*(illumination.ambient+illumination.direct)+faceHighlight;
+                faceMainSaturation=characterMainBrightnessSaturation(mainColor);
+                beautyColor+=characterDiffuseSaturation(mainColor,faceMainSaturation)-mainColor;
+            }
+        }
+#endif
         sceneMainDiffuse=response.color*illumination.direct;
+#if defined(AZURE_EXTENDED_MATERIAL_LIGHTING)
+        if(nprDiffuse&&AZURE_MATERIAL_CLASS==1U&&AZURE_ALPHA_MODE==0
+            &&materialSurfaceProfiles.profiles[material.materialPadding>>1U].rows[12].w>.5) {
+            float saturation=characterMainBrightnessSaturation(combinedAmbient+sceneMainDiffuse);
+            combinedAmbient=characterDiffuseSaturation(combinedAmbient,saturation);
+            vec3 saturatedMain=characterDiffuseSaturation(sceneMainDiffuse,saturation);
+            combinedDirect+=saturatedMain-sceneMainDiffuse;
+            sceneMainDiffuse=saturatedMain;
+        }
+#endif
         beautyColor+=combinedAmbient+combinedDirect-ambientDiffuse-directDiffuse;
         ambientDiffuse=combinedAmbient;directDiffuse=combinedDirect;
+#if defined(AZURE_EXTENDED_MATERIAL_LIGHTING)
+        if(faceMainSaturation>1.0) {
+            ambientDiffuse=characterDiffuseSaturation(ambientDiffuse,faceMainSaturation);
+            vec3 adjustedMain=characterDiffuseSaturation(sceneMainDiffuse,faceMainSaturation);
+            directDiffuse+=adjustedMain-sceneMainDiffuse;
+            sceneMainDiffuse=adjustedMain;
+            directSpecular+=characterDiffuseSaturation(faceHighlight,faceMainSaturation)-faceHighlight;
+        }
+#endif
         if(specularRamp&&!(qaEffectMode==5&&qaEffectDisabled)){
             float viewAlpha=textureLod(AZ_TEX_STYLE_MASK,
                 vec2(specularRampDot(shadedNormal,-camera.cameraForward.xyz)*.5+.5,.5),0).a;
@@ -2383,6 +2487,28 @@ if(azureOrdinaryOpaque){        beautyColor=azureBeautyReplace(beautyColor,blend
         ambientDiffuse*=characterBlend.a;directSpecular*=characterBlend.a;ambientSpecular*=characterBlend.a;
         kkSpecular*=characterBlend.a;secondaryKkSpecular*=characterBlend.a;rimLighting*=characterBlend.a;emissive*=characterBlend.a;
     }
+#if defined(AZURE_EXTENDED_MATERIAL_LIGHTING)
+    if(!azureOrdinaryOpaque&&materialFeatureEnabled(262144U)<.5&&AZURE_MATERIAL_CLASS<=5U&&AZURE_MATERIAL_CLASS!=3U) {
+        uint profileIndex=material.materialPadding>>1U;
+        vec4 adjustment=materialSurfaceProfiles.profiles[profileIndex].rows[13];
+        if(adjustment.w>.5) {
+            vec4 tint=materialSurfaceProfiles.profiles[profileIndex].rows[14];
+            if(any(notEqual(adjustment.xyz,vec3(1.0)))||tint.a!=0.0) {
+                beautyColor=characterDiffuseSaturation(beautyColor,adjustment.z);
+                beautyColor=(beautyColor-.5)*adjustment.y+.5;
+                beautyColor=mix(beautyColor*adjustment.x,tint.rgb,tint.a);
+            }
+            if(!(qaEffectMode==4&&qaEffectDisabled)) {
+                vec4 rim=materialSurfaceProfiles.profiles[profileIndex].rows[15];
+                float rimWidth=materialSurfaceProfiles.profiles[profileIndex].rows[16].x;
+                float facing=1.0-abs(dot(shadedNormal,viewDirection));
+                vec3 contribution=rim.rgb*(rim.w*smoothstep(rimWidth,1.0,facing));
+                beautyColor+=contribution;
+                rimLighting+=contribution;
+            }
+        }
+    }
+#endif
     float radianceScale=azureMaterialRadianceScale();
     if(radianceScale!=1.0) {
         beautyColor*=radianceScale;
@@ -2464,6 +2590,42 @@ if(azureOrdinaryOpaque){        beautyColor=azureBeautyReplace(beautyColor,blend
     }
     if (AZURE_ALPHA_MODE == 2) outputColor.a *= material.nodeOpacity;
     if(multiplyComposite) {
+        vec4 compositeProfile=materialSurfaceProfiles.profiles[material.materialPadding>>1U].rows[20];
+#if !defined(AZURE_OPAQUE_SNAPSHOT)
+        if (compositeProfile.x>.5) {
+            ivec2 pixel=ivec2(AZURE_FRAGMENT_COORD.xy);
+            float receiverCode=texelFetch(opaqueSceneColor,pixel,0).a;
+#if defined(AZURE_GEOMETRY_SAMPLES)
+            uint requiredReceiver=compositeProfile.x<1.5?0u:2u;
+            uint sampleReceiver=(uint(receiverCode)>>(2*gl_SampleID))&3u;
+            if(sampleReceiver!=requiredReceiver)discard;
+#else
+            bool receiverMatches=compositeProfile.x<1.5?receiverCode<=.5:receiverCode>1.5;
+            if(!receiverMatches || texelFetch(overlaySceneDepth,pixel,0).r>=100000.0)discard;
+#endif
+        }
+#endif
+        compositeCoverage*=compositeProfile.y;
+        if(compositeProfile.w>.5&&compositeCoverage<=0.0)discard;
+#if defined(AZURE_FACE_RECEIVER_DEPTH)
+        if (compositeProfile.w > 0.5 && compositeProfile.x > 1.5) {
+            ivec2 pixel = ivec2(AZURE_FRAGMENT_COORD.xy);
+            ivec2 extent = textureSize(opaqueSceneColor, 0);
+            if (all(greaterThan(pixel, ivec2(0))) && all(lessThan(pixel, extent - ivec2(1)))) {
+                const ivec2 dx = ivec2(1, 0);
+                const ivec2 dy = ivec2(0, 1);
+                bool row = texelFetch(opaqueSceneColor, pixel - dx, 0).a > 1.5 &&
+                           texelFetch(opaqueSceneColor, pixel + dx, 0).a > 1.5;
+                bool column = texelFetch(opaqueSceneColor, pixel - dy, 0).a > 1.5 &&
+                              texelFetch(opaqueSceneColor, pixel + dy, 0).a > 1.5;
+                // Keep the receiver silhouette at its rasterized depth.
+                if (row || column) {
+                    uint depth = floatBitsToUint(gl_FragCoord.z);
+                    gl_FragDepth = uintBitsToFloat(max(depth, 2u) - 2u);
+                }
+            }
+        }
+#endif
         outputColor.rgb=mix(vec3(1.0),outputColor.rgb,compositeCoverage);
         outputColor.a=0.0;
     }
@@ -2486,6 +2648,9 @@ if(azureOrdinaryOpaque){        beautyColor=azureBeautyReplace(beautyColor,blend
 #endif
     vec3 innerOutlineNormal = geometricNormal;
 #if defined(AZURE_OPAQUE_SNAPSHOT)
+    // Snapshot alpha identifies the opaque receiver, independently of scene colour.
+    if(AZURE_MATERIAL_CLASS==6U)outputColor.a=0.0;
+    if(AZURE_MATERIAL_CLASS==2U)outputColor.a=2.0;
     vec3 snapshotNormal=shadedNormal;
     if(projectedHair&&(projectedHairFlags&4U)!=0U) {
         ProjectedHairProfile p=loadProjectedHairSurfaceProfile(material.materialPadding>>1U);

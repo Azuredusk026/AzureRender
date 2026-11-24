@@ -1,0 +1,171 @@
+{
+  "status": "measured-native-iris-derivative-lanes",
+  "overall": "failed-user-review",
+  "scope": 255,
+  "nativeSharedMipSeven": 20,
+  "shaderMipBias": -1.0,
+  "devices": {
+    "nvidia": {
+      "coarseEuclideanMatches": 247,
+      "fineEuclideanMatches": 244,
+      "coarseSeamMatches": 20,
+      "nativePeakControl": {
+        "point": [
+          1262,
+          257
+        ],
+        "hardware": [
+          7
+        ],
+        "derivativeMagnitude": {
+          "x-coarse": [
+            0.9437293044088437,
+            0.11899645477912357
+          ],
+          "y-coarse": [
+            0.024394523431243743,
+            0.07773339352395468
+          ],
+          "x-fine": [
+            0.9437293044088437,
+            0.11899645477912357
+          ],
+          "y-fine": [
+            0.024394523431243743,
+            0.07773339352395468
+          ]
+        },
+        "policy": {
+          "coarse-largestEuclidean": 7,
+          "fine-largestEuclidean": 7,
+          "coarse-largestComponent": 7,
+          "fine-largestComponent": 7,
+          "coarse-largestManhattan": 7,
+          "fine-largestManhattan": 7
+        }
+      },
+      "quadModel": {
+        "fine": {
+          "lodMatches": 244,
+          "absoluteGradientP95": 0.0021664908170346752,
+          "absoluteGradientPeak": 0.00410682633259829,
+          "seamLodMatches": 19
+        },
+        "coarseTopLeft": {
+          "lodMatches": 243,
+          "absoluteGradientP95": 0.029538370775483186,
+          "absoluteGradientPeak": 0.9432785978667348,
+          "seamLodMatches": 19
+        },
+        "coarseBottomLeft": {
+          "lodMatches": 247,
+          "absoluteGradientP95": 0.0018901649727640045,
+          "absoluteGradientPeak": 0.004146191974384372,
+          "seamLodMatches": 20
+        },
+        "coarseTopRight": {
+          "lodMatches": 240,
+          "absoluteGradientP95": 0.0325700535032202,
+          "absoluteGradientPeak": 0.9432785978667348,
+          "seamLodMatches": 19
+        },
+        "coarseBottomRight": {
+          "lodMatches": 244,
+          "absoluteGradientP95": 0.02977035091452653,
+          "absoluteGradientPeak": 0.8969383452290683,
+          "seamLodMatches": 20
+        }
+      }
+    },
+    "intel": {
+      "coarseEuclideanMatches": 255,
+      "fineEuclideanMatches": 252,
+      "coarseSeamMatches": 20,
+      "nativePeakControl": {
+        "point": [
+          1262,
+          257
+        ],
+        "hardware": [
+          7
+        ],
+        "derivativeMagnitude": {
+          "x-coarse": [
+            0.9437293044088437,
+            0.11899645477912357
+          ],
+          "y-coarse": [
+            0.024394523431243743,
+            0.07773339352395468
+          ],
+          "x-fine": [
+            0.9437293044088437,
+            0.11899645477912357
+          ],
+          "y-fine": [
+            0.024394523431243743,
+            0.07773339352395468
+          ]
+        },
+        "policy": {
+          "coarse-largestEuclidean": 7,
+          "fine-largestEuclidean": 7,
+          "coarse-largestComponent": 7,
+          "fine-largestComponent": 7,
+          "coarse-largestManhattan": 7,
+          "fine-largestManhattan": 7
+        }
+      },
+      "quadModel": {
+        "fine": {
+          "lodMatches": 252,
+          "absoluteGradientP95": 0.0021664908719753496,
+          "absoluteGradientPeak": 0.004106824476002968,
+          "seamLodMatches": 19
+        },
+        "coarseTopLeft": {
+          "lodMatches": 251,
+          "absoluteGradientP95": 0.029538365371897482,
+          "absoluteGradientPeak": 0.9432786012388412,
+          "seamLodMatches": 19
+        },
+        "coarseBottomLeft": {
+          "lodMatches": 255,
+          "absoluteGradientP95": 0.0018901569620484802,
+          "absoluteGradientPeak": 0.004146198879415142,
+          "seamLodMatches": 20
+        },
+        "coarseTopRight": {
+          "lodMatches": 248,
+          "absoluteGradientP95": 0.03257004873177546,
+          "absoluteGradientPeak": 0.9432786012388412,
+          "seamLodMatches": 19
+        },
+        "coarseBottomRight": {
+          "lodMatches": 252,
+          "absoluteGradientP95": 0.029770346682525917,
+          "absoluteGradientPeak": 0.8969383456115043,
+          "seamLodMatches": 20
+        }
+      }
+    }
+  },
+  "archive": {
+    "sha256": "c3edc67525c97f4347435058847d14ff224134c6e19ab54a22601abb61f23413",
+    "members": {
+      "package-iris-native-derivative-and-face-tint.py": "6969d3309fe6f28808b68bd2e04e767035f5193477d7d2947d0baaa2d8788c65",
+      "iris-native-matcap-coordinates.py": "46ec0feee6bdf08242f36d69f55593c37bd4f6a62e353375e98616dba37af797",
+      "iris-native-matcap-coordinates/request.json": "b9ead26230251a71864dd4d8f22bc2be02004549a7970d65fb9165b5a82ec739",
+      "iris-native-matcap-coordinates/results.json": "619645be4c17e92122a78f2f8d8d849427c68a8ff67f2383284080b6b50d1720",
+      "iris-matcap-hardware-lod-derivatives.py": "00f4b4a4777286d920cea37051a63b4948c4d2a20ced9933530977d546c32e55",
+      "iris-matcap-hardware-lod-derivatives.json": "4d73a6e3223e1abb3a19ac3ab332bfe882734ae4e975ac83952a7505a9617f8e",
+      "iris-matcap-native-quad-model.py": "5261f412cc05deb148126cb1adfeb6921dcdd88f3e36619f557aafd208869645",
+      "iris-matcap-native-quad-model.json": "2ec129bcc1106c3b1347cf33f319781018e8228f0ad5ef078bbae3b55e644fbb",
+      "iris-native-matcap-d3d-vulkan-owned-levels.json": "b1c285dfd50f882cb43424ff32fc4b19cf27bd905e6ddf87cedc1e161d4dcd2c",
+      "iris-native-matcap-coordinates/nvidia-vertices.bin": "9bb674a418190872b6e4f765c65a53ed36e95784876dee1fa64b24c6f7d28b2d",
+      "iris-native-matcap-coordinates/nvidia-indices.bin": "e602cf93c30df7402251b9221ec944f4a1b0ab1d588c415ef956117670267c4b",
+      "iris-native-matcap-coordinates/intel-vertices.bin": "72731335373862df183afb612b4ad847db40d056739e730562fe2645e4475a82",
+      "iris-native-matcap-coordinates/intel-indices.bin": "e602cf93c30df7402251b9221ec944f4a1b0ab1d588c415ef956117670267c4b"
+    }
+  }
+}

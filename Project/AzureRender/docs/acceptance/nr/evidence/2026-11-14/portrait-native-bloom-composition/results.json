@@ -1,0 +1,150 @@
+{
+  "status": "native-bloom-source-qualified",
+  "overallStatus": "failed-user-review",
+  "nativeFrames": {
+    "10401": {
+      "event": 1777,
+      "shaderSha256": "abce4b1d99960f6bd80da460f06e03f0cd078e28c46fa9822ef6a53f7e8a91bc",
+      "name": "10401-1777-compose",
+      "textures": {
+        "0": {
+          "id": "ResourceId::141843",
+          "width": 2560,
+          "height": 1440,
+          "depth": 1,
+          "format": "R16G16B16A16_FLOAT",
+          "storage": "R16G16B16A16_FLOAT"
+        },
+        "1": {
+          "id": "ResourceId::141910",
+          "width": 1280,
+          "height": 720,
+          "depth": 1,
+          "format": "R11G11B10_FLOAT",
+          "storage": "R11G11B10_FLOAT"
+        },
+        "2": {
+          "id": "ResourceId::15724",
+          "width": 1024,
+          "height": 32,
+          "depth": 1,
+          "format": "R16G16B16A16_FLOAT",
+          "storage": "R16G16B16A16_FLOAT"
+        }
+      },
+      "targets": [
+        "ResourceId::15929",
+        "ResourceId::0",
+        "ResourceId::0",
+        "ResourceId::0",
+        "ResourceId::0",
+        "ResourceId::0",
+        "ResourceId::0",
+        "ResourceId::0"
+      ],
+      "bloomSha256": "8dc3ff815809fd1ab9a2e9fc41be94cd014d95b16ebd3defea505cf04dc92e47",
+      "bloomSummary": {
+        "peak": [
+          10.875,
+          0.765625,
+          0.78125
+        ],
+        "mean": [
+          0.07124983151753743,
+          0.06050573673513201,
+          0.05686040374967787
+        ],
+        "percentile99": [
+          0.29296875,
+          0.173828125,
+          0.1640625
+        ],
+        "nonzero": [
+          921600,
+          921600,
+          921600
+        ],
+        "compositionScale": [
+          0.9999998807907104,
+          0.9999998807907104,
+          0.9999998807907104
+        ]
+      }
+    },
+    "6834": {
+      "event": 1598,
+      "shaderSha256": "abce4b1d99960f6bd80da460f06e03f0cd078e28c46fa9822ef6a53f7e8a91bc",
+      "name": "6834-1598-compose",
+      "textures": {
+        "0": {
+          "id": "ResourceId::16349",
+          "width": 2560,
+          "height": 1440,
+          "depth": 1,
+          "format": "R16G16B16A16_FLOAT",
+          "storage": "R16G16B16A16_FLOAT"
+        },
+        "1": {
+          "id": "ResourceId::141858",
+          "width": 1280,
+          "height": 720,
+          "depth": 1,
+          "format": "R11G11B10_FLOAT",
+          "storage": "R11G11B10_FLOAT"
+        },
+        "2": {
+          "id": "ResourceId::15724",
+          "width": 1024,
+          "height": 32,
+          "depth": 1,
+          "format": "R16G16B16A16_FLOAT",
+          "storage": "R16G16B16A16_FLOAT"
+        }
+      },
+      "targets": [
+        "ResourceId::15929",
+        "ResourceId::0",
+        "ResourceId::0",
+        "ResourceId::0",
+        "ResourceId::0",
+        "ResourceId::0",
+        "ResourceId::0",
+        "ResourceId::0"
+      ],
+      "bloomSha256": "2f41bac25c5bb8978661739f84ba904d029b5137dbfdd3fa31d9e7e622e6824c",
+      "bloomSummary": {
+        "peak": [
+          17.5,
+          0.9609375,
+          1.4375
+        ],
+        "mean": [
+          0.11887949413723416,
+          0.09241422732671102,
+          0.08982611762152778
+        ],
+        "percentile99": [
+          0.49609375,
+          0.27734375,
+          0.2734375
+        ],
+        "nonzero": [
+          921600,
+          921600,
+          921600
+        ],
+        "compositionScale": [
+          0.9999998807907104,
+          0.9999998807907104,
+          0.9999998807907104
+        ]
+      }
+    }
+  },
+  "sameFullScreenShader": true,
+  "fixturePoseMatched": false,
+  "archive": {
+    "members": 12,
+    "sha256": "81612ee36a855df1673e9d1e017b324e44596b1596eab04036fb75d79f4dcbe2"
+  }
+}

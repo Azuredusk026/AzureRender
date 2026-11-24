@@ -1,0 +1,171 @@
+{
+  "status": "qualified",
+  "events": {
+    "783": {
+      "cull": "CullMode.Back",
+      "frontCCW": true,
+      "depth": {
+        "depthEnable": "True",
+        "depthWrites": "True",
+        "depthFunction": "CompareFunction.Equal",
+        "stencilEnable": "False"
+      },
+      "front": {
+        "function": "CompareFunction.AlwaysTrue",
+        "passOperation": "StencilOperation.Keep",
+        "failOperation": "StencilOperation.Keep",
+        "depthFailOperation": "StencilOperation.Keep",
+        "reference": "0"
+      },
+      "back": {
+        "function": "CompareFunction.AlwaysTrue",
+        "passOperation": "StencilOperation.Keep",
+        "failOperation": "StencilOperation.Keep",
+        "depthFailOperation": "StencilOperation.Keep",
+        "reference": "0"
+      },
+      "target": "ResourceId::141967",
+      "depthView": "ResourceId::141971",
+      "color": "ResourceId::141976"
+    },
+    "1017": {
+      "cull": "CullMode.Front",
+      "frontCCW": true,
+      "depth": {
+        "depthEnable": "True",
+        "depthWrites": "True",
+        "depthFunction": "CompareFunction.Greater",
+        "stencilEnable": "True"
+      },
+      "front": {
+        "function": "CompareFunction.AlwaysTrue",
+        "passOperation": "StencilOperation.Replace",
+        "failOperation": "StencilOperation.Keep",
+        "depthFailOperation": "StencilOperation.Keep",
+        "reference": "36"
+      },
+      "back": {
+        "function": "CompareFunction.AlwaysTrue",
+        "passOperation": "StencilOperation.Replace",
+        "failOperation": "StencilOperation.Keep",
+        "depthFailOperation": "StencilOperation.Keep",
+        "reference": "36"
+      },
+      "target": "ResourceId::141967",
+      "depthView": "ResourceId::141971",
+      "color": "ResourceId::141976",
+      "depthBytes": 29491200,
+      "depthSha256": "598c753a12886c59673e1e1c240a2d54496f9ad2ff74aa5d34002d0c89aa9794"
+    },
+    "1018": {
+      "cull": "CullMode.Front",
+      "frontCCW": true,
+      "depth": {
+        "depthEnable": "True",
+        "depthWrites": "True",
+        "depthFunction": "CompareFunction.Greater",
+        "stencilEnable": "True"
+      },
+      "front": {
+        "function": "CompareFunction.AlwaysTrue",
+        "passOperation": "StencilOperation.Replace",
+        "failOperation": "StencilOperation.Keep",
+        "depthFailOperation": "StencilOperation.Keep",
+        "reference": "36"
+      },
+      "back": {
+        "function": "CompareFunction.AlwaysTrue",
+        "passOperation": "StencilOperation.Replace",
+        "failOperation": "StencilOperation.Keep",
+        "depthFailOperation": "StencilOperation.Keep",
+        "reference": "36"
+      },
+      "target": "ResourceId::141967",
+      "depthView": "ResourceId::141971",
+      "color": "ResourceId::141976",
+      "depthBytes": 29491200,
+      "depthSha256": "b37880f71e59edc343dd446b40beda810eab2a64d6710f4338678a787c9f0e5d"
+    },
+    "1138": {
+      "cull": "CullMode.Front",
+      "frontCCW": true,
+      "depth": {
+        "depthEnable": "True",
+        "depthWrites": "False",
+        "depthFunction": "CompareFunction.Equal",
+        "stencilEnable": "True"
+      },
+      "front": {
+        "function": "CompareFunction.NotEqual",
+        "passOperation": "StencilOperation.Keep",
+        "failOperation": "StencilOperation.Keep",
+        "depthFailOperation": "StencilOperation.Keep",
+        "reference": "16"
+      },
+      "back": {
+        "function": "CompareFunction.NotEqual",
+        "passOperation": "StencilOperation.Keep",
+        "failOperation": "StencilOperation.Keep",
+        "depthFailOperation": "StencilOperation.Keep",
+        "reference": "16"
+      },
+      "target": "ResourceId::141967",
+      "depthView": "ResourceId::141971",
+      "color": "ResourceId::141976"
+    },
+    "1160": {
+      "cull": "CullMode.Front",
+      "frontCCW": true,
+      "depth": {
+        "depthEnable": "True",
+        "depthWrites": "False",
+        "depthFunction": "CompareFunction.GreaterEqual",
+        "stencilEnable": "False"
+      },
+      "front": {
+        "function": "CompareFunction.AlwaysTrue",
+        "passOperation": "StencilOperation.Keep",
+        "failOperation": "StencilOperation.Keep",
+        "depthFailOperation": "StencilOperation.Keep",
+        "reference": "0"
+      },
+      "back": {
+        "function": "CompareFunction.AlwaysTrue",
+        "passOperation": "StencilOperation.Keep",
+        "failOperation": "StencilOperation.Keep",
+        "depthFailOperation": "StencilOperation.Keep",
+        "reference": "0"
+      },
+      "target": "ResourceId::141967",
+      "depthView": "ResourceId::141971",
+      "color": "ResourceId::141976"
+    },
+    "1383": {
+      "cull": "CullMode.NoCull",
+      "frontCCW": true,
+      "depth": {
+        "depthEnable": "True",
+        "depthWrites": "True",
+        "depthFunction": "CompareFunction.GreaterEqual",
+        "stencilEnable": "False"
+      },
+      "front": {
+        "function": "CompareFunction.AlwaysTrue",
+        "passOperation": "StencilOperation.Keep",
+        "failOperation": "StencilOperation.Keep",
+        "depthFailOperation": "StencilOperation.Keep",
+        "reference": "0"
+      },
+      "back": {
+        "function": "CompareFunction.AlwaysTrue",
+        "passOperation": "StencilOperation.Keep",
+        "failOperation": "StencilOperation.Keep",
+        "depthFailOperation": "StencilOperation.Keep",
+        "reference": "0"
+      },
+      "target": "ResourceId::141967",
+      "depthView": "ResourceId::141971",
+      "color": "ResourceId::141925"
+    }
+  }
+}

@@ -1,0 +1,108 @@
+{
+  "status": "measured-native-tint-diffuse-rim-separately",
+  "formalAcceptance": false,
+  "inputs": "399c87a115fe853717bc12be4b8b1996b19f85cfd36d5d0b4968f11be7e037e1",
+  "modes": {
+    "diffuse": {
+      "job": 1523,
+      "samples": {
+        "nvidia": {
+          "raw": "b2ee64b53399667686cff8a8f5de19e89b23d0a8503716289e15a81885c4ba9f",
+          "png": "8e3317261aef0e01ffff287efe17c70bf67ac3195c4482415deef57215898294",
+          "control": "f1ab2e655871812f15c47b67a541251d43b96a5a4d85e0c5b705295c26767ba3",
+          "deltaArchive": "3d3341b95e3f1563e52491bb4dca2ca68b06a74ce0566ca2926e1e644d85ff2f",
+          "changed": 818,
+          "outsideFace": 0,
+          "irisChanged": 0,
+          "face": {
+            "overOne": 227,
+            "overEight": 1,
+            "peak": 10,
+            "newOverOne": 30
+          },
+          "trackedFaceEdge": {
+            "improved": 49,
+            "worsened": 0,
+            "peak": 10
+          }
+        },
+        "intel": {
+          "raw": "5ecce156a9ae2003912c50113ec099a2176837b715fb219ba3e434dc6539afa5",
+          "png": "3bca34a70af26b1347a80b836d69236fca862bd4499b35091ba9c3d437d89ac6",
+          "control": "b9a77ffe07580069d021a14902edec44508de1202bb75e0a4e356518576fb2f9",
+          "deltaArchive": "a3b577829df4ceb49eed9f08abcbfe3dd7236c3659bc68cda98220ad4c7e6987",
+          "changed": 802,
+          "outsideFace": 0,
+          "irisChanged": 0,
+          "face": {
+            "overOne": 229,
+            "overEight": 3,
+            "peak": 39,
+            "newOverOne": 29
+          },
+          "trackedFaceEdge": {
+            "improved": 49,
+            "worsened": 0,
+            "peak": 10
+          }
+        }
+      },
+      "diagnosticSource": "cf5f5fc6c016c02a987cf1ec1fa40d31abe1ae7fff13ec1b57b8de0a9ec4b180",
+      "changedPrograms": {
+        "mesh_object_early_lighting.frag.spv": "950d20c7d826e24dbc73d44859f8479fd3a1b5d9a0419cbade03942ed62b8638",
+        "mesh_object_lighting.frag.spv": "d04f692559afaf705b2e6e1a149564bd1dedf95a4c4575c742f8c864d5239dc7"
+      }
+    },
+    "rim": {
+      "job": 1524,
+      "samples": {
+        "nvidia": {
+          "raw": "087ac4e9c7c73cae9f9a6fd698e19ce2cb7fbd0e4f300d3979edc16ce66c4a03",
+          "png": "8e95a40991be0a979ac19eedaac5d862d6cb20ad1ab66ff61d9b214ed6b36a7c",
+          "control": "f1ab2e655871812f15c47b67a541251d43b96a5a4d85e0c5b705295c26767ba3",
+          "deltaArchive": "a87ce80b0c907fa40b105535ccdbeef55fb60967055622a7b5072da1e4c5bfb1",
+          "changed": 134,
+          "outsideFace": 0,
+          "irisChanged": 0,
+          "face": {
+            "overOne": 346,
+            "overEight": 17,
+            "peak": 19,
+            "newOverOne": 3
+          },
+          "trackedFaceEdge": {
+            "improved": 39,
+            "worsened": 0,
+            "peak": 19
+          }
+        },
+        "intel": {
+          "raw": "2053e23c1d9492b1f62bbb6156a39f6693223e12c8f527e5b57cc2af6e0d66ca",
+          "png": "4f24ebade1f374bb0ca25393309165ca33061a70b8afef98756b0ad409b9329b",
+          "control": "b9a77ffe07580069d021a14902edec44508de1202bb75e0a4e356518576fb2f9",
+          "deltaArchive": "6b55e52b11e5d84b43db2b52683e6025e7aa5a0b1d2d25ddf457b3b317d20399",
+          "changed": 127,
+          "outsideFace": 0,
+          "irisChanged": 0,
+          "face": {
+            "overOne": 358,
+            "overEight": 19,
+            "peak": 39,
+            "newOverOne": 3
+          },
+          "trackedFaceEdge": {
+            "improved": 39,
+            "worsened": 0,
+            "peak": 19
+          }
+        }
+      },
+      "diagnosticSource": "66c5623223553ff208fefa07faf4f493653e4bf54a0b51b14fab480bb9f8dca1",
+      "changedPrograms": {
+        "mesh_object_early_lighting.frag.spv": "4eabc367ad89fb1370fd3d257263bb9cf50ad5fccf3ed8bcc85d619bd0c81c0f",
+        "mesh_object_lighting.frag.spv": "3b97afeb43f4e81b10d824e82b885f5f0833f480441aa7c356e89b45dbe9c860"
+      }
+    }
+  },
+  "archiveSha256": "25e2374bc40f70dfac39d3e0c8eb4ebdda124280d6f6e68f01ca9ae10e3f6584"
+}

@@ -1,0 +1,172 @@
+{
+  "overallStatus": "failed-user-review",
+  "observation": "source-attribution",
+  "originalEvent": 804,
+  "playerEvent": 876,
+  "nativeMaskSlot": 20,
+  "nativeMipBias": -1,
+  "peakNativeRgbaError": 0.0005962026762027228,
+  "peakPlayerMipZeroError": 0.0016055836397058654,
+  "rows": [
+    {
+      "point": [
+        1280,
+        318
+      ],
+      "primitive": 1297,
+      "nativeMip": 3,
+      "estimatedLod": 4.096223795919897,
+      "nativeRgbaError": 7.630095762323208e-06,
+      "playerMipZeroRgbError": 0.0004240746591606115,
+      "nativeMaskGreen": 0.7039291858673096,
+      "playerMaskGreen": 0.99365234375
+    },
+    {
+      "point": [
+        1279,
+        318
+      ],
+      "primitive": 1297,
+      "nativeMip": 3,
+      "estimatedLod": 4.095531480163205,
+      "nativeRgbaError": 2.3971585665916173e-06,
+      "playerMipZeroRgbError": 0.0016055836397058654,
+      "nativeMaskGreen": 0.6476691961288452,
+      "playerMaskGreen": 0.9716796875
+    },
+    {
+      "point": [
+        1306,
+        304
+      ],
+      "primitive": 736,
+      "nativeMip": 3,
+      "estimatedLod": 3.751613555746023,
+      "nativeRgbaError": 0.00036499570397774406,
+      "playerMipZeroRgbError": 0.00015510110294118112,
+      "nativeMaskGreen": 0.04104676842689514,
+      "playerMaskGreen": 0.031951904296875
+    },
+    {
+      "point": [
+        1313,
+        297
+      ],
+      "primitive": 717,
+      "nativeMip": 3,
+      "estimatedLod": 3.956176450553202,
+      "nativeRgbaError": 0.0005962026762027228,
+      "playerMipZeroRgbError": 0.00038140988817403354,
+      "nativeMaskGreen": 0.07653925567865372,
+      "playerMaskGreen": 0.0099334716796875
+    },
+    {
+      "point": [
+        1312,
+        298
+      ],
+      "primitive": 717,
+      "nativeMip": 3,
+      "estimatedLod": 3.9520639208866535,
+      "nativeRgbaError": 5.6098490297529224e-09,
+      "playerMipZeroRgbError": 0.00042700674019602314,
+      "nativeMaskGreen": 0.01568627543747425,
+      "playerMaskGreen": 0.00201416015625
+    },
+    {
+      "point": [
+        1318,
+        289
+      ],
+      "primitive": 699,
+      "nativeMip": 2,
+      "estimatedLod": 3.1593835685241225,
+      "nativeRgbaError": 0.00035363459119608365,
+      "playerMipZeroRgbError": 0.0004576439950980671,
+      "nativeMaskGreen": 0.0005493247881531715,
+      "playerMaskGreen": 0.0
+    },
+    {
+      "point": [
+        1316,
+        292
+      ],
+      "primitive": 708,
+      "nativeMip": 2,
+      "estimatedLod": 3.009591108217476,
+      "nativeRgbaError": 7.887447581511609e-06,
+      "playerMipZeroRgbError": 6.797640931366367e-05,
+      "nativeMaskGreen": 0.0,
+      "playerMaskGreen": 0.0035400390625
+    },
+    {
+      "point": [
+        1247,
+        293
+      ],
+      "primitive": 1108,
+      "nativeMip": 2,
+      "estimatedLod": 2.839933251973258,
+      "nativeRgbaError": 0.00016454481611072325,
+      "playerMipZeroRgbError": 0.00047104779411766273,
+      "nativeMaskGreen": 0.0,
+      "playerMaskGreen": 0.0039215087890625
+    },
+    {
+      "point": [
+        1314,
+        295
+      ],
+      "primitive": 729,
+      "nativeMip": 1,
+      "estimatedLod": 1.71701769130049,
+      "nativeRgbaError": 2.5816992217375656e-06,
+      "playerMipZeroRgbError": 0.0003120571959251972,
+      "nativeMaskGreen": 0.0,
+      "playerMaskGreen": 0.0
+    },
+    {
+      "point": [
+        1310,
+        300
+      ],
+      "primitive": 728,
+      "nativeMip": 3,
+      "estimatedLod": 3.7661151167488325,
+      "nativeRgbaError": 5.6098490297529224e-09,
+      "playerMipZeroRgbError": 7.575539981607982e-05,
+      "nativeMaskGreen": 0.01568627543747425,
+      "playerMaskGreen": 0.0
+    },
+    {
+      "point": [
+        1307,
+        303
+      ],
+      "primitive": 735,
+      "nativeMip": 3,
+      "estimatedLod": 3.9343288256606437,
+      "nativeRgbaError": 0.000192452645769281,
+      "playerMipZeroRgbError": 8.903952205874255e-05,
+      "nativeMaskGreen": 0.029053177684545517,
+      "playerMaskGreen": 0.0027008056640625
+    },
+    {
+      "point": [
+        1318,
+        288
+      ],
+      "primitive": 700,
+      "nativeMip": 2,
+      "estimatedLod": 2.9636240273253183,
+      "nativeRgbaError": 0.0005945977042702832,
+      "playerMipZeroRgbError": 0.00029578115425865636,
+      "nativeMaskGreen": 0.0,
+      "playerMaskGreen": 0.00286865234375
+    }
+  ],
+  "archive": {
+    "sha256": "c6c8df10c62ad351fa436546cbbb219ff2f5c1081c3b150ebda85e57c37dba99",
+    "members": 39
+  }
+}

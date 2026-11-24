@@ -1,0 +1,63 @@
+{
+  "devices": {
+    "nvidia": {
+      "focusImproved": 61,
+      "focusChanged": 61,
+      "focusOverEight": [
+        61,
+        0
+      ],
+      "focusPeak": [
+        44,
+        5
+      ],
+      "nativeCoverage": 1184,
+      "nativeCoverageChanged": 571,
+      "nativeCoverageChangedOverOne": 564,
+      "nativeCoverageImproved": 540,
+      "nativeCoverageOverEight": [
+        1136,
+        734
+      ],
+      "changedPixels": 571,
+      "newGlobalOverOne": 0,
+      "frameSha256": "9f5a4dca11aec9b4996ddb3b1d962eb3108cb02c8a9b5f858bf22a725582e096"
+    },
+    "intel": {
+      "focusImproved": 61,
+      "focusChanged": 61,
+      "focusOverEight": [
+        61,
+        0
+      ],
+      "focusPeak": [
+        44,
+        5
+      ],
+      "nativeCoverage": 1184,
+      "nativeCoverageChanged": 571,
+      "nativeCoverageChangedOverOne": 564,
+      "nativeCoverageImproved": 538,
+      "nativeCoverageOverEight": [
+        1136,
+        735
+      ],
+      "changedPixels": 571,
+      "newGlobalOverOne": 2,
+      "frameSha256": "27f4aee0eabdb85084cfb031c6b329222282e5aaca66b0c79c7d1eb40d1362df"
+    }
+  },
+  "overallStatus": "failed-user-review",
+  "coverageIntersection": {
+    "nvidia": {
+      "visibleIntersection": 571,
+      "litOnly": 0,
+      "shellOnly": 600
+    },
+    "intel": {
+      "visibleIntersection": 571,
+      "litOnly": 0,
+      "shellOnly": 600
+    }
+  }
+}

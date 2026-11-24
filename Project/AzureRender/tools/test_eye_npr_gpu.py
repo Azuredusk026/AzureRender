@@ -1,9 +1,12 @@
 """Verify the public NPR eye adapter with constant-color oracles and mip controls."""
 import argparse
+import base64
 import hashlib
 import json
+import math
 from pathlib import Path
 import re
+import struct
 import subprocess
 import tempfile
 import uuid
@@ -20,9 +23,26 @@ def linear(rgb):
     return np.where(x<=.04045,x/12.92,((x+.055)/1.055)**2.4)
 
 
+def animate_frame(model):
+    # Only the light frame animates. The eye mesh, camera and world light stay fixed.
+    model['nodes'].append(dict(name='eye-main-frame'))
+    model['scenes'][0]['nodes'].append(1)
+    half = math.sqrt(.5)
+    # Keep the turned pose inside the loop, so it is sampled before playback wraps.
+    data = struct.pack('<15f', 0, .4, 1, 0, 0, 0, 1, 0, 0, half, half, 0, 0, half, half)
+    model['buffers'].append(dict(byteLength=len(data),
+        uri='data:application/octet-stream;base64,'+base64.b64encode(data).decode()))
+    model['bufferViews'].extend([dict(buffer=1,byteOffset=0,byteLength=12),dict(buffer=1,byteOffset=12,byteLength=48)])
+    model['accessors'].extend([dict(bufferView=4,componentType=5126,count=3,type='SCALAR',min=[0],max=[1]),
+                              dict(bufferView=5,componentType=5126,count=3,type='VEC4')])
+    model['animations']=[dict(name='turn eye light frame',samplers=[dict(input=4,output=5,interpolation='STEP')],
+                              channels=[dict(sampler=0,target=dict(node=1,path='rotation'))])]
+
+
 def run(player,output,selected=None,validation=None):
     names=['ambient','main','combined','dark','shadow-zero','shadow-one','matcap-rgba','matcap-rgb',
-           'matcap-alpha','matcap-dark','fixed','document','mip-low','mip-high','high-chroma']
+           'matcap-alpha','matcap-dark','fixed','document','mip-low','mip-high','high-chroma',
+           'main-frame-animated','main-frame-control']
     if selected:
         assert set(selected)<=set(names);names=[x for x in names if x in selected]
     output.mkdir(parents=True,exist_ok=False);digest=hashlib.sha256(player.read_bytes()).hexdigest()
@@ -34,6 +54,8 @@ def run(player,output,selected=None,validation=None):
             model=json.loads((folder/'plane.gltf').read_text(encoding='utf-8'));material=model['materials'][0]
             ambient=np.array([.25,.5,.75]) if name not in ['main','dark','matcap-dark'] else np.zeros(3)
             main=np.full(3,.4) if name in ['main','combined','fixed','document'] else np.zeros(3)
+            frame_case=name.startswith('main-frame-')
+            if frame_case:ambient=np.full(3,.6);main=np.zeros(3)
             matcap=name.startswith(('matcap-','mip-'));base=[0,0,0,255] if matcap else [128,64,224,255]
             if name=='high-chroma':ambient=np.full(3,16.);base=[32,64,224,255]
             mc=[64,128,192,128] if matcap else [0,0,0,0]
@@ -41,6 +63,10 @@ def run(player,output,selected=None,validation=None):
             if name=='matcap-alpha':mc[:3]=[0,0,0]
             for filename,value in [('base.png',base),('ramp.png',[255,255,255,128]),('matcap.png',mc)]:
                 Image.new('RGBA',(4,1),tuple(value)).save(folder/filename)
+            if frame_case:
+                ramp=Image.new('RGBA',(16,1));ramp.putdata([(255,255,255,17*i) for i in range(16)])
+                ramp.save(folder/'ramp.png')
+                animate_frame(model)
             source_images=[dict(uri=x) for x in ['base.png','ramp.png','matcap.png']]
             model['images']=source_images;model['textures']=[dict(source=i,sampler=0) for i in range(3)]
             model['samplers']=[dict(wrapS=33071,wrapT=33071,magFilter=9729,minFilter=9729)]
@@ -50,6 +76,8 @@ def run(player,output,selected=None,validation=None):
                 matcapColor=color,uvScaleOffset=[1,1,0,0],lightingInputs=dict(source='host-authored',
                     illuminationModel='npr-main-ambient',matcapShadowFloor=.55,directWeights=[0,0,0],
                     ambientColor=ambient.tolist(),mainColor=main.tolist(),shadowScale=shadow))
+            if name=='main-frame-animated':eye['lightingInputs']['mainRampFrame']=dict(schemaVersion=1,
+                node='eye-main-frame',basis=[1,0,0,0,1,0,0,0,1])
             material.clear();material.update(name='public-eye',doubleSided=True,alphaMode='OPAQUE',
                 pbrMetallicRoughness=dict(baseColorTexture=dict(index=0),metallicFactor=0,roughnessFactor=1),
                 extras=dict(azureSlotId='eye',azureRenderMaterial={'schemaVersion':2,'class':'eye',
@@ -66,6 +94,7 @@ def run(player,output,selected=None,validation=None):
             (folder/'plane.gltf').write_text(json.dumps(model),encoding='utf-8')
             level_path=folder/'level.azurelevel';level=json.loads(level_path.read_text(encoding='utf-8'))
             level['lights'][0]['intensity']=1
+            if frame_case:level['lights'][0]['shape']['direction']=[0,-math.sqrt(.5),-math.sqrt(.5)]
             level['renderSettings'].update(sceneLighting=True,skyIntensity=0,nprLighting=dict(schemaVersion=1,enabled=True,
                 ambientDirection=[0,0,1],directionBias=0,directionGain=0,directionFloor=1,litAmbientMix=0,
                 ambientColor=[1,1,1],shadowOverride=1,indoorMix=0,useSceneIrradiance=False,
@@ -83,6 +112,9 @@ def run(player,output,selected=None,validation=None):
                 '--capture-dir',str(folder/'frames'),'--capture-frames','2','--fixed-frame-step','--qa-camera','scene',
                 '--qa-light','scene','--runtime-report',str(folder/'runtime.json')]
             if name=='fixed':command+=['--disable-bindless','--disable-compute-skinning','--disable-parallel-recording']
+            if frame_case:
+                command[command.index('--capture-frames')+1]='3'
+                command+=['--qa-animation','--capture-fps','3']
             with (folder/'player.log').open('w',encoding='utf-8') as log:
                 subprocess.run(command,stdout=log,stderr=subprocess.STDOUT,check=True,timeout=180,cwd=folder)
             log=(folder/'player.log').read_text(encoding='utf-8',errors='replace')
@@ -95,9 +127,14 @@ def run(player,output,selected=None,validation=None):
             manifest=json.loads((folder/'frames/capture_manifest.json').read_text(encoding='utf-8'))
             assert manifest['materialSurfaceProfileLayoutVersion']==MATERIAL_SURFACE_PROFILE_LAYOUT_VERSION
             frame=folder/'frames/frame_000001.png';pixels=np.asarray(Image.open(frame).convert('RGB'));frames[name]=pixels
-            assert np.array_equal(pixels,np.asarray(Image.open(folder/'frames/frame_000000.png').convert('RGB'))),name
+            if frame_case:
+                animation=[np.asarray(Image.open(folder/f'frames/frame_{i:06d}.png').convert('RGB')) for i in range(3)]
+                report.setdefault('frameCaptureSequences',{})[name]=[a[64,64].tolist() for a in animation]
+                frames[name]=animation
+            else:
+                assert np.array_equal(pixels,np.asarray(Image.open(folder/'frames/frame_000000.png').convert('RGB'))),name
             error=None;expected=None
-            if not name.startswith('mip-'):
+            if not frame_case and not name.startswith('mip-'):
                 alpha=128/255;illum=ambient+main
                 diffuse=linear(base[:3])*.96*(shadow+(1-shadow)*alpha)*illum
                 cap=(linear(mc[:3])*color[3]+mc[3]/255*np.asarray(color[:3]))*(.5*alpha+.5)*(alpha*.45+.55)*illum
@@ -113,6 +150,14 @@ def run(player,output,selected=None,validation=None):
         if 'mip-low' in frames and 'mip-high' in frames:
             changed=int(np.any(frames['mip-low']!=frames['mip-high'],axis=2).sum());assert changed>32,changed
             report['mipChangedPixels']=changed
+        if all(name in frames for name in ('main-frame-animated','main-frame-control')):
+            animated,control=(frames[name] for name in ('main-frame-animated','main-frame-control'))
+            assert all(np.array_equal(control[0],frame) for frame in control[1:]),report['frameCaptureSequences']
+            focus=lambda frame:linear(frame[60:69,60:69])
+            errors=[float(np.abs(focus(frame)-focus(control[0])).max()) for frame in animated]
+            report['frameProjectionSeparation']=errors
+            assert np.array_equal(animated[0],animated[1]), report['frameCaptureSequences']
+            assert errors[0]>.015 and errors[2]<=.008, (errors,report['frameCaptureSequences'])
         assert hashlib.sha256(player.read_bytes()).hexdigest()==digest
         report.update(status='passed',maximumLinearError=maximum)
     finally:(output/'summary.json').write_text(json.dumps(report,indent=2),encoding='utf-8')

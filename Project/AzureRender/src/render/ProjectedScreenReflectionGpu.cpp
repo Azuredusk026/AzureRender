@@ -64,7 +64,8 @@ void ProjectedScreenReflectionGpu::record(rhi::ICommandRecorder& commands,unsign
     const ProjectedReflectionPreparationParameters surface{parameters.maxRoughness,parameters.strength};(void)surface.frame(source_,extent_,view.depthReciprocal);
     for(unsigned i=0;i<frames_;++i){const auto p=prepare_->output(i);const auto base=signals_->base(i),all=signals_->output(i);
         for(const auto own:{p.depth,p.normalRoughness,p.mask,p.footprint,base.color,base.confidence,all.color,all.confidence,depth_->output(i).view,filter_->output(i).view,neutralView_})
-            for(const auto borrowed:{inputs.surface,inputs.color,inputs.motion,history?history->color:VK_NULL_HANDLE})
+            for(const auto borrowed:{inputs.surface,inputs.color,inputs.motion,history?history->color:VK_NULL_HANDLE,
+                history?history->colorLayer:VK_NULL_HANDLE})
                 require(!borrowed||borrowed!=own,"Projected composition snapshot or history aliases owned resources");
     }
     const auto p=prepare_->output(slot);
@@ -72,6 +73,7 @@ void ProjectedScreenReflectionGpu::record(rhi::ICommandRecorder& commands,unsign
         signals_->beginBaseWrite(commands,slot);const auto base=signals_->base(slot);
         prepare_->record(commands,slot,inputs.surface,{base.confidenceImage,base.confidence,extent_},view.depthReciprocal,surface);
         ProjectedReflectionInputs sampled;sampled.previousColor=history?history->color:inputs.color;sampled.currentDepth=p.depth;
+        sampled.previousColorLayer=history?history->colorLayer:VK_NULL_HANDLE;
         sampled.previousDepth=history?prepare_->output(history->slot).depth:p.depth;sampled.motion=inputs.motion?inputs.motion:neutralView_;
         sampled.surfaceMask=p.mask;sampled.normalRoughness=p.normalRoughness;sampled.sourceExtent=source_;sampled.traceExtent=extent_;sampled.tiles=p.tiles;sampled.tileBytes=p.tileBytes;sampled.tileCount=p.tileCount;
         ray_->record(commands,slot,sampled,{base.color,p.footprint,base.confidence,extent_},view,ray);

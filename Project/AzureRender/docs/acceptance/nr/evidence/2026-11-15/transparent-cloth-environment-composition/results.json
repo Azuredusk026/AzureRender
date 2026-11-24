@@ -1,0 +1,434 @@
+{
+  "status": "measured-player-environment-lanes",
+  "sourceShader": "f8f6330ff880404dafdc2f6c5c7db0cc13fc36c2433267b9894f80b1f2c53c36",
+  "nativeCube": {
+    "resource": "ResourceId::11467",
+    "width": 128,
+    "height": 128,
+    "mips": 8,
+    "slices": 6,
+    "firstMip": 0,
+    "numMips": 8,
+    "format": "BC6_UFLOAT"
+  },
+  "nativeTraceSha256": "3e32786ab1c98bff3acfdf6827204441d0d9ee9edbfac71a3de77ad81fa2b69f",
+  "originalRestored": "34736b7f04f9ed28ce51a22309803a6f0e605bd506297e7a8b59a014682830a8",
+  "materialRadianceScale": 0.25,
+  "witnesses": [
+    {
+      "point": [
+        1234,
+        789
+      ],
+      "player": {
+        "indirect-radiance": [
+          0.06488037109375,
+          0.09490966796875,
+          0.1195068359375
+        ],
+        "indirect-response": [
+          0.599609375,
+          0.599609375,
+          0.599609375
+        ],
+        "indirect-product": [
+          0.00972747802734375,
+          0.0142364501953125,
+          0.017913818359375
+        ],
+        "reflect-vector": [
+          0.6376953125,
+          0.33251953125,
+          0.049407958984375
+        ],
+        "roughness": [
+          0.720703125,
+          0.599609375,
+          1.0
+        ]
+      },
+      "nativeExposedIndirect": [
+        0.0023542721393030597,
+        0.002366532637216534,
+        0.0024563415035429026
+      ],
+      "playerExposedIndirect": [
+        0.00972747802734375,
+        0.0142364501953125,
+        0.017913818359375
+      ],
+      "nativeCubeLod": 4.322752475738525,
+      "nativeCubeSample": [
+        0.474853515625,
+        0.45068359375,
+        0.387939453125
+      ],
+      "nativeCubeDirection": [
+        -0.03920459747314453,
+        -0.11199813336133957,
+        -0.9929347634315491
+      ],
+      "nativeTint": [
+        0.8783068656921387,
+        0.9302293062210083,
+        1.1216931343078613
+      ],
+      "nativeResponseAndSample": [
+        0.01072186604142189,
+        0.010176125913858414,
+        0.00875940639525652
+      ],
+      "shaderProductError": 9.268522262573242e-06,
+      "nativeIndirectError": 0.015457476855832097,
+      "calculatedProduct": [
+        0.009725719690322876,
+        0.014227181673049927,
+        0.01791435480117798
+      ]
+    },
+    {
+      "point": [
+        1231,
+        792
+      ],
+      "player": {
+        "indirect-radiance": [
+          0.06781005859375,
+          0.0989990234375,
+          0.12451171875
+        ],
+        "indirect-response": [
+          0.599609375,
+          0.599609375,
+          0.599609375
+        ],
+        "indirect-product": [
+          0.01016998291015625,
+          0.0148468017578125,
+          0.0186767578125
+        ],
+        "reflect-vector": [
+          0.70458984375,
+          0.35791015625,
+          0.0665283203125
+        ],
+        "roughness": [
+          0.71826171875,
+          0.599609375,
+          1.0
+        ]
+      },
+      "nativeExposedIndirect": [
+        0.0022636999139690195,
+        0.0022653341805110028,
+        0.0023518597587290913
+      ],
+      "playerExposedIndirect": [
+        0.01016998291015625,
+        0.0148468017578125,
+        0.0186767578125
+      ],
+      "nativeCubeLod": 4.315157413482666,
+      "nativeCubeSample": [
+        0.45166015625,
+        0.4267578125,
+        0.367431640625
+      ],
+      "nativeCubeDirection": [
+        -0.08126667141914368,
+        -0.11116088181734085,
+        -0.9904741048812866
+      ],
+      "nativeTint": [
+        0.8783068656921387,
+        0.9302293062210083,
+        1.1216931343078613
+      ],
+      "nativeResponseAndSample": [
+        0.010309380479156971,
+        0.009740971028804779,
+        0.008386820554733276
+      ],
+      "shaderProductError": 1.2159347534179688e-05,
+      "nativeIndirectError": 0.01632489805377091,
+      "calculatedProduct": [
+        0.010164886713027954,
+        0.014840185642242432,
+        0.01866459846496582
+      ]
+    },
+    {
+      "point": [
+        1166,
+        784
+      ],
+      "player": {
+        "indirect-radiance": [
+          0.0806884765625,
+          0.12103271484375,
+          0.154541015625
+        ],
+        "indirect-response": [
+          0.06988525390625,
+          0.06988525390625,
+          0.06988525390625
+        ],
+        "indirect-product": [
+          0.0013971328735351562,
+          0.0020961761474609375,
+          0.0026760101318359375
+        ],
+        "reflect-vector": [
+          0.122314453125,
+          0.5439453125,
+          0.1751708984375
+        ],
+        "roughness": [
+          0.76416015625,
+          0.599609375,
+          1.0
+        ]
+      },
+      "nativeExposedIndirect": [
+        0.0018120076907381932,
+        0.0017704331520206756,
+        0.0017862874579767651
+      ],
+      "playerExposedIndirect": [
+        0.0013971328735351562,
+        0.0020961761474609375,
+        0.0026760101318359375
+      ],
+      "nativeCubeLod": 4.481039047241211,
+      "nativeCubeSample": [
+        0.67431640625,
+        0.6220703125,
+        0.5205078125
+      ],
+      "nativeCubeDirection": [
+        0.755523681640625,
+        0.09463921189308167,
+        -0.6482495069503784
+      ],
+      "nativeTint": [
+        0.8783068656921387,
+        0.9302293062210083,
+        1.1216931343078613
+      ],
+      "nativeResponseAndSample": [
+        0.008252276107668877,
+        0.007612889166921377,
+        0.00636996841058135
+      ],
+      "shaderProductError": 2.4024397134780884e-05,
+      "nativeIndirectError": 0.0008897226738591724,
+      "calculatedProduct": [
+        0.0014097336679697037,
+        0.0021146005019545555,
+        0.0027000345289707184
+      ]
+    }
+  ],
+  "operandControls": [
+    {
+      "point": [
+        1234,
+        789
+      ],
+      "NdotV": 0.80990070104599,
+      "faceReflectance": [
+        0.039912715554237366,
+        0.039912715554237366,
+        0.039912715554237366
+      ],
+      "baseLobe": [
+        0.10168066620826721,
+        0.10168066620826721,
+        0.10168066620826721
+      ],
+      "nativeResponse": [
+        0.019831566593961878,
+        0.021003939687342925,
+        0.02532706159991854
+      ],
+      "nativeRadiance": [
+        0.474853515625,
+        0.45068359375,
+        0.387939453125
+      ],
+      "nativeReflection": [
+        -0.03920459747314453,
+        -0.11199813336133957,
+        -0.9929347634315491
+      ],
+      "playerResponse": [
+        0.599609375,
+        0.599609375,
+        0.599609375
+      ],
+      "playerRadiance": [
+        0.06488037109375,
+        0.09490966796875,
+        0.1195068359375
+      ],
+      "fixedEnvironmentWithPlayerResponse": [
+        0.07118165493011475,
+        0.06755852699279785,
+        0.05815303325653076
+      ],
+      "fixedResponseWithPlayerEnvironment": [
+        0.00032166984999666557,
+        0.0004983692354403419,
+        0.0007566892488501053
+      ],
+      "nativeExposedIndirect": [
+        0.002354272279373526,
+        0.0023665327552999903,
+        0.0024563416065838963
+      ],
+      "updateEnvironmentError": 0.06882738265074122,
+      "updateResponseError": 0.0020326024293768606
+    },
+    {
+      "point": [
+        1231,
+        792
+      ],
+      "NdotV": 0.8110605478286743,
+      "faceReflectance": [
+        0.03999999910593033,
+        0.03999999910593033,
+        0.03999999910593033
+      ],
+      "baseLobe": [
+        0.10279452800750732,
+        0.10279452800750732,
+        0.10279452800750732
+      ],
+      "nativeResponse": [
+        0.020047815743541347,
+        0.021232972732901177,
+        0.025603235219706946
+      ],
+      "nativeRadiance": [
+        0.45166015625,
+        0.4267578125,
+        0.367431640625
+      ],
+      "nativeReflection": [
+        -0.08126667141914368,
+        -0.11116088181734085,
+        -0.9904741048812866
+      ],
+      "playerResponse": [
+        0.599609375,
+        0.599609375,
+        0.599609375
+      ],
+      "playerRadiance": [
+        0.06781005859375,
+        0.0989990234375,
+        0.12451171875
+      ],
+      "fixedEnvironmentWithPlayerResponse": [
+        0.06770491600036621,
+        0.06397199630737305,
+        0.055078864097595215
+      ],
+      "fixedResponseWithPlayerEnvironment": [
+        0.00033986089006156063,
+        0.0005255108913080705,
+        0.0007969757056915614
+      ],
+      "nativeExposedIndirect": [
+        0.0022636998977997734,
+        0.002265334249091263,
+        0.0023518596805211763
+      ],
+      "updateEnvironmentError": 0.06544121610256644,
+      "updateResponseError": 0.0019238390077382127
+    },
+    {
+      "point": [
+        1166,
+        784
+      ],
+      "NdotV": 0.6750134825706482,
+      "faceReflectance": [
+        0.03999999910593033,
+        0.03999999910593033,
+        0.03999999910593033
+      ],
+      "baseLobe": [
+        0.038796279579401016,
+        0.038796279579401016,
+        0.038796279579401016
+      ],
+      "nativeResponse": [
+        0.010748708905782736,
+        0.011384135111272809,
+        0.013727267146874784
+      ],
+      "nativeRadiance": [
+        0.67431640625,
+        0.6220703125,
+        0.5205078125
+      ],
+      "nativeReflection": [
+        0.755523681640625,
+        0.09463921189308167,
+        -0.6482495069503784
+      ],
+      "playerResponse": [
+        0.06988525390625,
+        0.06988525390625,
+        0.06988525390625
+      ],
+      "playerRadiance": [
+        0.0806884765625,
+        0.12103271484375,
+        0.154541015625
+      ],
+      "fixedEnvironmentWithPlayerResponse": [
+        0.011781193315982819,
+        0.010868385434150696,
+        0.009093955159187317
+      ],
+      "fixedResponseWithPlayerEnvironment": [
+        0.00021682423665534634,
+        0.000344463194666351,
+        0.0005303564516584313
+      ],
+      "nativeExposedIndirect": [
+        0.0018120076902936961,
+        0.0017704331215529247,
+        0.0017862874485557276
+      ],
+      "updateEnvironmentError": 0.009969185625689122,
+      "updateResponseError": 0.0015951834536383498
+    }
+  ],
+  "overallVisualAcceptance": "failed-user-review",
+  "archive": {
+    "sha256": "a2c21b3ef1c8028aef09c1f8d1d4603119d574cd55d65f65e55f6fd546a3d3ef",
+    "members": {
+      "analyze-cloth-environment.py": "ea0a7e46c1038285d6562df2eb2eb595d1e495f4242137227ec9952d3230618c",
+      "archive-cloth-environment-composition.py": "a0cc9b115b50a6fd8155811dd337b4311d2e5923974ade4fac38c99684d10914",
+      "cloth-native-light-lanes.json": "df7e45d7cebbeddcae2592f75d008237ac0169644f0a1cd21f503008cf021229",
+      "cloth-environment-composition.json": "e42aa2c604dcc18796ec6097161178c14e860a67b7c3d2934c5f30cfb97aa035",
+      "cloth-environment-source.py": "fbc5289c8d04c92be13f8a888d71a493a1351ddbf5c6f31ca71cef0de9e9a795",
+      "cloth-environment-source.json": "3e32786ab1c98bff3acfdf6827204441d0d9ee9edbfac71a3de77ad81fa2b69f",
+      "cloth-environment-native-response.py": "2f2f1b9de454a61034bef361c0bc91693fc471befdc75d7201186fad327cc854",
+      "cloth-environment-native-response.json": "9078203cb8546974592bf2c02b496256841410ac1a4ac9beaef13d88527c6cc7",
+      "cloth-environment-replay/mesh-indirect-product.frag": "f3a58e9413b5af3dfb0004da0ee51fd3e37bf158bb217f07f567933c29e8bcfd",
+      "cloth-directional-rim-worker.py": "4989b894afead3afd821ff61424f9caabaa5cf90cd8083caa586bde73452d40f",
+      "cloth-environment-replay/request.json": "86912309f2026acf5fcaa398794566fe4777b3186fc18f9c051d910ed9ffd133",
+      "cloth-environment-replay/results.json": "51d876027a3ceed6c88378fca65badf4888121ebe98618a26d5d06ad9a5afa80",
+      "cloth-environment-replay/967-mipindirect-radiance-direct.bin": "29e4572d343d28bf0dfbdcf47b2dbbd77e97327aee4580f5ce5dffa21e4ebf30",
+      "cloth-environment-replay/967-mipindirect-response-direct.bin": "21d3339321ab8cfe629ad7d6d028d8e07068d408ee9a6e1df6463a4f44b484b7",
+      "cloth-environment-replay/967-mipindirect-product-direct.bin": "ee273f401d25028259405f000762097ca039dc7c9e813793f31347d95b35ba4c",
+      "cloth-environment-replay/967-mipreflect-vector-direct.bin": "e681df66c839c1b588a68c9cd000bfb267e0701f9a2fbf24a41aa3cdffa217da",
+      "cloth-environment-replay/967-miproughness-direct.bin": "9bc4065a4e2d0d77e573b5d3335125056f969dda27246f2453c2c2ef078e1922"
+    }
+  }
+}

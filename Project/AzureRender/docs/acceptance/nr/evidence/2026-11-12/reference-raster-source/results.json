@@ -1,0 +1,1363 @@
+{
+  "overallStatus": "failed-user-review",
+  "cases": {
+    "grid": {
+      "nvidia": {
+        "mode": "grid",
+        "device": "nvidia",
+        "validationClean": true,
+        "allocatorZero": true,
+        "planes": {
+          "raster": {
+            "exact": true,
+            "baseline": "f1ef0ea6a727554f6593b2c2333e49650eec5c8f2b25acb03d8e250ae8ce35a2",
+            "candidate": "f1ef0ea6a727554f6593b2c2333e49650eec5c8f2b25acb03d8e250ae8ce35a2"
+          },
+          "hardware": {
+            "exact": true,
+            "baseline": "f1ef0ea6a727554f6593b2c2333e49650eec5c8f2b25acb03d8e250ae8ce35a2",
+            "candidate": "f1ef0ea6a727554f6593b2c2333e49650eec5c8f2b25acb03d8e250ae8ce35a2"
+          },
+          "packedNormals": {
+            "exact": true,
+            "baseline": "37df16157c41a1ffdacb7b2ad21e9d84d7a0b81612e7b79c0bc294c496c1c424",
+            "candidate": "37df16157c41a1ffdacb7b2ad21e9d84d7a0b81612e7b79c0bc294c496c1c424"
+          },
+          "objectIds": {
+            "exact": true,
+            "baseline": "d14ae2982d8d7b1f99c93572ba6d0ce9f9af3643cd250a2636b3c4b765a62a10",
+            "candidate": "d14ae2982d8d7b1f99c93572ba6d0ce9f9af3643cd250a2636b3c4b765a62a10"
+          },
+          "objectVisibility": {
+            "exact": true,
+            "baseline": "1010efb44d81c2bef5c0384cd50844a97537cf79c5750f35220b4b0e2cae8336",
+            "candidate": "1010efb44d81c2bef5c0384cd50844a97537cf79c5750f35220b4b0e2cae8336"
+          }
+        },
+        "colors": [
+          {
+            "overOne": 0,
+            "introduced": 0,
+            "closed": 0,
+            "maximum": 1,
+            "exactOldPng": false,
+            "wholeRgbChanged": 3,
+            "insideMaskRgbChanged": 2,
+            "outsideMaskRgbChanged": 1,
+            "sha256": "ffea66c041ab1eefe894c17600fadfb141d21c0e4707a2404f2073e82280be52",
+            "baselineSha256": "e7673fd8104605089e3cfec894dd2337acd7579569be86a23683ed1cb6f622a4"
+          },
+          {
+            "overOne": 0,
+            "introduced": 0,
+            "closed": 0,
+            "maximum": 1,
+            "exactOldPng": false,
+            "wholeRgbChanged": 3,
+            "insideMaskRgbChanged": 2,
+            "outsideMaskRgbChanged": 1,
+            "sha256": "ffea66c041ab1eefe894c17600fadfb141d21c0e4707a2404f2073e82280be52",
+            "baselineSha256": "e7673fd8104605089e3cfec894dd2337acd7579569be86a23683ed1cb6f622a4"
+          },
+          {
+            "overOne": 0,
+            "introduced": 0,
+            "closed": 0,
+            "maximum": 1,
+            "exactOldPng": false,
+            "wholeRgbChanged": 3,
+            "insideMaskRgbChanged": 2,
+            "outsideMaskRgbChanged": 1,
+            "sha256": "ffea66c041ab1eefe894c17600fadfb141d21c0e4707a2404f2073e82280be52",
+            "baselineSha256": "e7673fd8104605089e3cfec894dd2337acd7579569be86a23683ed1cb6f622a4"
+          }
+        ],
+        "display1240_248": [
+          1240,
+          248,
+          146,
+          68,
+          67,
+          146,
+          68,
+          67,
+          145,
+          68,
+          67
+        ],
+        "selectedRgb": {
+          "1240,248": {
+            "display": [
+              1240,
+              248
+            ],
+            "baseline": [
+              146,
+              68,
+              67
+            ],
+            "candidate": [
+              146,
+              68,
+              67
+            ],
+            "native": [
+              145,
+              68,
+              67
+            ]
+          },
+          "1248,281": {
+            "display": [
+              1248,
+              281
+            ],
+            "baseline": [
+              69,
+              36,
+              34
+            ],
+            "candidate": [
+              69,
+              36,
+              34
+            ],
+            "native": [
+              69,
+              36,
+              34
+            ]
+          }
+        },
+        "receiver": {},
+        "unchangedReferenceGeometry": true,
+        "visibilityRExact": null
+      },
+      "intel": {
+        "mode": "grid",
+        "device": "intel",
+        "validationClean": true,
+        "allocatorZero": true,
+        "planes": {
+          "raster": {
+            "exact": true,
+            "baseline": "d2dbed224741d08e346cd7a30f2feed0b3883bb5346d42c7889d84df8d241a45",
+            "candidate": "d2dbed224741d08e346cd7a30f2feed0b3883bb5346d42c7889d84df8d241a45"
+          },
+          "hardware": {
+            "exact": true,
+            "baseline": "d2dbed224741d08e346cd7a30f2feed0b3883bb5346d42c7889d84df8d241a45",
+            "candidate": "d2dbed224741d08e346cd7a30f2feed0b3883bb5346d42c7889d84df8d241a45"
+          },
+          "packedNormals": {
+            "exact": true,
+            "baseline": "cc379c0b311eaf6c4d28093c88adf642190ee5b694d1a9b32d98a811fab73132",
+            "candidate": "cc379c0b311eaf6c4d28093c88adf642190ee5b694d1a9b32d98a811fab73132"
+          },
+          "objectIds": {
+            "exact": true,
+            "baseline": "f831b78c8c2d0242fb00e5530f59791d952141d85fa02bf41e1aa2387bc7248b",
+            "candidate": "f831b78c8c2d0242fb00e5530f59791d952141d85fa02bf41e1aa2387bc7248b"
+          },
+          "objectVisibility": {
+            "exact": true,
+            "baseline": "6e7b8e5a946cd8758a935462ae68e1bc6d25c6b9ab2a2e54ce8bfb8b2ad7e4c3",
+            "candidate": "6e7b8e5a946cd8758a935462ae68e1bc6d25c6b9ab2a2e54ce8bfb8b2ad7e4c3"
+          }
+        },
+        "colors": [
+          {
+            "overOne": 31,
+            "introduced": 0,
+            "closed": 1,
+            "maximum": 15,
+            "exactOldPng": false,
+            "wholeRgbChanged": 6166,
+            "insideMaskRgbChanged": 29,
+            "outsideMaskRgbChanged": 6137,
+            "sha256": "c91d8032adc8256b379443e48217e52a2b96d3e336beaaba2cbe1fc5230f15c4",
+            "baselineSha256": "282969ea1d2cb48896ed20d9104e8422fe6fa70bb12f404e9af908c03e9463df"
+          },
+          {
+            "overOne": 31,
+            "introduced": 0,
+            "closed": 1,
+            "maximum": 15,
+            "exactOldPng": false,
+            "wholeRgbChanged": 6166,
+            "insideMaskRgbChanged": 29,
+            "outsideMaskRgbChanged": 6137,
+            "sha256": "c91d8032adc8256b379443e48217e52a2b96d3e336beaaba2cbe1fc5230f15c4",
+            "baselineSha256": "282969ea1d2cb48896ed20d9104e8422fe6fa70bb12f404e9af908c03e9463df"
+          },
+          {
+            "overOne": 31,
+            "introduced": 0,
+            "closed": 1,
+            "maximum": 15,
+            "exactOldPng": false,
+            "wholeRgbChanged": 6166,
+            "insideMaskRgbChanged": 29,
+            "outsideMaskRgbChanged": 6137,
+            "sha256": "c91d8032adc8256b379443e48217e52a2b96d3e336beaaba2cbe1fc5230f15c4",
+            "baselineSha256": "282969ea1d2cb48896ed20d9104e8422fe6fa70bb12f404e9af908c03e9463df"
+          }
+        ],
+        "display1240_248": [
+          1240,
+          248,
+          116,
+          52,
+          52,
+          146,
+          68,
+          67,
+          145,
+          68,
+          67
+        ],
+        "selectedRgb": {
+          "1240,248": {
+            "display": [
+              1240,
+              248
+            ],
+            "baseline": [
+              116,
+              52,
+              52
+            ],
+            "candidate": [
+              146,
+              68,
+              67
+            ],
+            "native": [
+              145,
+              68,
+              67
+            ]
+          },
+          "1248,281": {
+            "display": [
+              1248,
+              281
+            ],
+            "baseline": [
+              75,
+              40,
+              38
+            ],
+            "candidate": [
+              75,
+              40,
+              38
+            ],
+            "native": [
+              69,
+              36,
+              34
+            ]
+          }
+        },
+        "receiver": {},
+        "unchangedReferenceGeometry": true,
+        "visibilityRExact": null
+      }
+    },
+    "body": {
+      "nvidia": {
+        "mode": "body",
+        "device": "nvidia",
+        "validationClean": true,
+        "allocatorZero": true,
+        "planes": {
+          "raster": {
+            "exact": true,
+            "baseline": "f1ef0ea6a727554f6593b2c2333e49650eec5c8f2b25acb03d8e250ae8ce35a2",
+            "candidate": "f1ef0ea6a727554f6593b2c2333e49650eec5c8f2b25acb03d8e250ae8ce35a2"
+          },
+          "hardware": {
+            "exact": true,
+            "baseline": "f1ef0ea6a727554f6593b2c2333e49650eec5c8f2b25acb03d8e250ae8ce35a2",
+            "candidate": "f1ef0ea6a727554f6593b2c2333e49650eec5c8f2b25acb03d8e250ae8ce35a2"
+          },
+          "packedNormals": {
+            "exact": false,
+            "baseline": "37df16157c41a1ffdacb7b2ad21e9d84d7a0b81612e7b79c0bc294c496c1c424",
+            "candidate": "4556a69f17870b368d913acf3acae2c1b621f7c958263f08c2368dbde2d3e846"
+          },
+          "objectIds": {
+            "exact": true,
+            "baseline": "d14ae2982d8d7b1f99c93572ba6d0ce9f9af3643cd250a2636b3c4b765a62a10",
+            "candidate": "d14ae2982d8d7b1f99c93572ba6d0ce9f9af3643cd250a2636b3c4b765a62a10"
+          },
+          "objectVisibility": {
+            "exact": false,
+            "baseline": "1010efb44d81c2bef5c0384cd50844a97537cf79c5750f35220b4b0e2cae8336",
+            "candidate": "83dc0207b39f2950da729e4c479865af65e2a7f9f86767135a75ea9dc71163d1"
+          }
+        },
+        "colors": [
+          {
+            "overOne": 0,
+            "introduced": 0,
+            "closed": 0,
+            "maximum": 1,
+            "exactOldPng": false,
+            "wholeRgbChanged": 48,
+            "insideMaskRgbChanged": 0,
+            "outsideMaskRgbChanged": 48,
+            "sha256": "f0af8910adc1163482959d65341073a251d0a6910ea317533c23a94756219fbb",
+            "baselineSha256": "e7673fd8104605089e3cfec894dd2337acd7579569be86a23683ed1cb6f622a4"
+          },
+          {
+            "overOne": 0,
+            "introduced": 0,
+            "closed": 0,
+            "maximum": 1,
+            "exactOldPng": false,
+            "wholeRgbChanged": 48,
+            "insideMaskRgbChanged": 0,
+            "outsideMaskRgbChanged": 48,
+            "sha256": "f0af8910adc1163482959d65341073a251d0a6910ea317533c23a94756219fbb",
+            "baselineSha256": "e7673fd8104605089e3cfec894dd2337acd7579569be86a23683ed1cb6f622a4"
+          },
+          {
+            "overOne": 0,
+            "introduced": 0,
+            "closed": 0,
+            "maximum": 1,
+            "exactOldPng": false,
+            "wholeRgbChanged": 48,
+            "insideMaskRgbChanged": 0,
+            "outsideMaskRgbChanged": 48,
+            "sha256": "f0af8910adc1163482959d65341073a251d0a6910ea317533c23a94756219fbb",
+            "baselineSha256": "e7673fd8104605089e3cfec894dd2337acd7579569be86a23683ed1cb6f622a4"
+          }
+        ],
+        "display1240_248": [
+          1240,
+          248,
+          146,
+          68,
+          67,
+          146,
+          68,
+          67,
+          145,
+          68,
+          67
+        ],
+        "selectedRgb": {
+          "1240,248": {
+            "display": [
+              1240,
+              248
+            ],
+            "baseline": [
+              146,
+              68,
+              67
+            ],
+            "candidate": [
+              146,
+              68,
+              67
+            ],
+            "native": [
+              145,
+              68,
+              67
+            ]
+          },
+          "1248,281": {
+            "display": [
+              1248,
+              281
+            ],
+            "baseline": [
+              69,
+              36,
+              34
+            ],
+            "candidate": [
+              69,
+              36,
+              34
+            ],
+            "native": [
+              69,
+              36,
+              34
+            ]
+          }
+        },
+        "receiver": {
+          "296": {
+            "samples": 496,
+            "baselineOverOne": 2,
+            "overOne": 2,
+            "closed": 0,
+            "introduced": 0,
+            "normalsChanged": 0,
+            "baselineNormalOverOne": 0,
+            "normalOverOne": 0,
+            "baselineNormalMaximum": 0,
+            "normalMaximum": 0
+          },
+          "310": {
+            "samples": 255,
+            "baselineOverOne": 0,
+            "overOne": 0,
+            "closed": 0,
+            "introduced": 0,
+            "normalsChanged": 0,
+            "baselineNormalOverOne": 123,
+            "normalOverOne": 123,
+            "baselineNormalMaximum": 3,
+            "normalMaximum": 3
+          },
+          "328": {
+            "samples": 9116,
+            "baselineOverOne": 46,
+            "overOne": 45,
+            "closed": 5,
+            "introduced": 4,
+            "normalsChanged": 920,
+            "baselineNormalOverOne": 141,
+            "normalOverOne": 104,
+            "baselineNormalMaximum": 26,
+            "normalMaximum": 26
+          },
+          "345": {
+            "samples": 3825,
+            "baselineOverOne": 30,
+            "overOne": 30,
+            "closed": 0,
+            "introduced": 0,
+            "normalsChanged": 0,
+            "baselineNormalOverOne": 2,
+            "normalOverOne": 2,
+            "baselineNormalMaximum": 3,
+            "normalMaximum": 3
+          },
+          "377": {
+            "samples": 16629,
+            "baselineOverOne": 158,
+            "overOne": 158,
+            "closed": 0,
+            "introduced": 0,
+            "normalsChanged": 0,
+            "baselineNormalOverOne": 2710,
+            "normalOverOne": 2710,
+            "baselineNormalMaximum": 574,
+            "normalMaximum": 574
+          },
+          "422": {
+            "samples": 19063,
+            "baselineOverOne": 1,
+            "overOne": 1,
+            "closed": 0,
+            "introduced": 0,
+            "normalsChanged": 0,
+            "baselineNormalOverOne": 0,
+            "normalOverOne": 0,
+            "baselineNormalMaximum": 1,
+            "normalMaximum": 1
+          }
+        },
+        "unchangedReferenceGeometry": true,
+        "visibilityRExact": true
+      },
+      "intel": {
+        "mode": "body",
+        "device": "intel",
+        "validationClean": true,
+        "allocatorZero": true,
+        "planes": {
+          "raster": {
+            "exact": true,
+            "baseline": "d2dbed224741d08e346cd7a30f2feed0b3883bb5346d42c7889d84df8d241a45",
+            "candidate": "d2dbed224741d08e346cd7a30f2feed0b3883bb5346d42c7889d84df8d241a45"
+          },
+          "hardware": {
+            "exact": true,
+            "baseline": "d2dbed224741d08e346cd7a30f2feed0b3883bb5346d42c7889d84df8d241a45",
+            "candidate": "d2dbed224741d08e346cd7a30f2feed0b3883bb5346d42c7889d84df8d241a45"
+          },
+          "packedNormals": {
+            "exact": false,
+            "baseline": "cc379c0b311eaf6c4d28093c88adf642190ee5b694d1a9b32d98a811fab73132",
+            "candidate": "59b67c3d77576567e86b9858f4cfd8d1c55c8a77d298e17ecbece765a185ae9e"
+          },
+          "objectIds": {
+            "exact": true,
+            "baseline": "f831b78c8c2d0242fb00e5530f59791d952141d85fa02bf41e1aa2387bc7248b",
+            "candidate": "f831b78c8c2d0242fb00e5530f59791d952141d85fa02bf41e1aa2387bc7248b"
+          },
+          "objectVisibility": {
+            "exact": false,
+            "baseline": "6e7b8e5a946cd8758a935462ae68e1bc6d25c6b9ab2a2e54ce8bfb8b2ad7e4c3",
+            "candidate": "6f50540f27d16ed465cf2bf1be6f2be343b7ab8ac09680dbc2c7c48d89350824"
+          }
+        },
+        "colors": [
+          {
+            "overOne": 32,
+            "introduced": 0,
+            "closed": 0,
+            "maximum": 29,
+            "exactOldPng": false,
+            "wholeRgbChanged": 40,
+            "insideMaskRgbChanged": 0,
+            "outsideMaskRgbChanged": 40,
+            "sha256": "6e83bbd407aba45525a871dceeca298a164eba3cf8656c632164b4fae608eceb",
+            "baselineSha256": "282969ea1d2cb48896ed20d9104e8422fe6fa70bb12f404e9af908c03e9463df"
+          },
+          {
+            "overOne": 32,
+            "introduced": 0,
+            "closed": 0,
+            "maximum": 29,
+            "exactOldPng": false,
+            "wholeRgbChanged": 40,
+            "insideMaskRgbChanged": 0,
+            "outsideMaskRgbChanged": 40,
+            "sha256": "6e83bbd407aba45525a871dceeca298a164eba3cf8656c632164b4fae608eceb",
+            "baselineSha256": "282969ea1d2cb48896ed20d9104e8422fe6fa70bb12f404e9af908c03e9463df"
+          },
+          {
+            "overOne": 32,
+            "introduced": 0,
+            "closed": 0,
+            "maximum": 29,
+            "exactOldPng": false,
+            "wholeRgbChanged": 40,
+            "insideMaskRgbChanged": 0,
+            "outsideMaskRgbChanged": 40,
+            "sha256": "6e83bbd407aba45525a871dceeca298a164eba3cf8656c632164b4fae608eceb",
+            "baselineSha256": "282969ea1d2cb48896ed20d9104e8422fe6fa70bb12f404e9af908c03e9463df"
+          }
+        ],
+        "display1240_248": [
+          1240,
+          248,
+          116,
+          52,
+          52,
+          116,
+          52,
+          52,
+          145,
+          68,
+          67
+        ],
+        "selectedRgb": {
+          "1240,248": {
+            "display": [
+              1240,
+              248
+            ],
+            "baseline": [
+              116,
+              52,
+              52
+            ],
+            "candidate": [
+              116,
+              52,
+              52
+            ],
+            "native": [
+              145,
+              68,
+              67
+            ]
+          },
+          "1248,281": {
+            "display": [
+              1248,
+              281
+            ],
+            "baseline": [
+              75,
+              40,
+              38
+            ],
+            "candidate": [
+              75,
+              40,
+              38
+            ],
+            "native": [
+              69,
+              36,
+              34
+            ]
+          }
+        },
+        "receiver": {
+          "296": {
+            "samples": 496,
+            "baselineOverOne": 9,
+            "overOne": 9,
+            "closed": 0,
+            "introduced": 0,
+            "normalsChanged": 0,
+            "baselineNormalOverOne": 0,
+            "normalOverOne": 0,
+            "baselineNormalMaximum": 1,
+            "normalMaximum": 1
+          },
+          "310": {
+            "samples": 255,
+            "baselineOverOne": 2,
+            "overOne": 2,
+            "closed": 0,
+            "introduced": 0,
+            "normalsChanged": 0,
+            "baselineNormalOverOne": 123,
+            "normalOverOne": 123,
+            "baselineNormalMaximum": 3,
+            "normalMaximum": 3
+          },
+          "328": {
+            "samples": 9116,
+            "baselineOverOne": 77,
+            "overOne": 77,
+            "closed": 3,
+            "introduced": 3,
+            "normalsChanged": 931,
+            "baselineNormalOverOne": 276,
+            "normalOverOne": 243,
+            "baselineNormalMaximum": 32,
+            "normalMaximum": 32
+          },
+          "345": {
+            "samples": 3825,
+            "baselineOverOne": 46,
+            "overOne": 46,
+            "closed": 0,
+            "introduced": 0,
+            "normalsChanged": 0,
+            "baselineNormalOverOne": 2,
+            "normalOverOne": 2,
+            "baselineNormalMaximum": 3,
+            "normalMaximum": 3
+          },
+          "377": {
+            "samples": 16629,
+            "baselineOverOne": 223,
+            "overOne": 223,
+            "closed": 0,
+            "introduced": 0,
+            "normalsChanged": 0,
+            "baselineNormalOverOne": 3863,
+            "normalOverOne": 3863,
+            "baselineNormalMaximum": 751,
+            "normalMaximum": 751
+          },
+          "422": {
+            "samples": 19063,
+            "baselineOverOne": 137,
+            "overOne": 137,
+            "closed": 0,
+            "introduced": 0,
+            "normalsChanged": 0,
+            "baselineNormalOverOne": 30,
+            "normalOverOne": 30,
+            "baselineNormalMaximum": 93,
+            "normalMaximum": 93
+          }
+        },
+        "unchangedReferenceGeometry": true,
+        "visibilityRExact": true
+      }
+    }
+  },
+  "gridUnchangedReferencePlanes": true,
+  "gridNvidiaPass": true,
+  "gridIntelImproved": true,
+  "bodyUnchangedReferenceGeometry": true,
+  "bodyVisibilityRExact": true,
+  "bodyScopedNormals": true,
+  "bodyRegion": {
+    "nvidia": {
+      "samples": 9116,
+      "baselineOverOne": 46,
+      "overOne": 45,
+      "closed": 5,
+      "introduced": 4,
+      "normalsChanged": 920,
+      "baselineNormalOverOne": 141,
+      "normalOverOne": 104,
+      "baselineNormalMaximum": 26,
+      "normalMaximum": 26
+    },
+    "intel": {
+      "samples": 9116,
+      "baselineOverOne": 77,
+      "overOne": 77,
+      "closed": 3,
+      "introduced": 3,
+      "normalsChanged": 931,
+      "baselineNormalOverOne": 276,
+      "normalOverOne": 243,
+      "baselineNormalMaximum": 32,
+      "normalMaximum": 32
+    }
+  },
+  "status": "qualified-independent-raster-sources",
+  "lease": {
+    "owner": "01a1c099-8121-7be3-b0b8-7af2f9a06b2a",
+    "task": "quality-reference-raster-source-gpu",
+    "output": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-213454-reference-raster-source-a825da",
+    "pid": 35160,
+    "token": "a8343ba685c24116aadbe5aa7567f4df",
+    "started": 1794495290.2124033,
+    "state": "released",
+    "ended": 1794495557.7174811
+  },
+  "predecessor": {
+    "owner": "01a1c097-ec33-7790-8c18-08a2b0ddb0c3",
+    "task": "nr-isolated-projected-hair-debug",
+    "output": "D:\\Projects\\FYP-worktrees\\nr-integration-verified\\Project\\AzureRender\\build\\runs\\20261112-213746-nr-projected-hair-integration-b5c673",
+    "pid": 34384,
+    "token": "0e443fbbf268490181838bf166e2dcb9",
+    "started": 1794494118.4123175,
+    "state": "released",
+    "ended": 1794495190.1542976
+  },
+  "gridWholeFrameChange": {
+    "nvidia": {
+      "whole": {
+        "changed": 3,
+        "overOne": 0,
+        "maximum": 1,
+        "boxXYXY": [
+          1257,
+          217,
+          1257,
+          221
+        ],
+        "hist": [
+          0,
+          3
+        ]
+      },
+      "frozen": {
+        "changed": 2,
+        "overOne": 0,
+        "maximum": 1,
+        "boxXYXY": [
+          1257,
+          217,
+          1257,
+          219
+        ],
+        "hist": [
+          0,
+          2
+        ]
+      },
+      "outsideFrozen": {
+        "changed": 1,
+        "overOne": 0,
+        "maximum": 1,
+        "boxXYXY": [
+          1257,
+          221,
+          1257,
+          221
+        ],
+        "hist": [
+          0,
+          1
+        ]
+      }
+    },
+    "intel": {
+      "whole": {
+        "changed": 6166,
+        "overOne": 6122,
+        "maximum": 208,
+        "boxXYXY": [
+          940,
+          180,
+          1650,
+          1327
+        ],
+        "hist": [
+          0,
+          44,
+          11,
+          29,
+          96,
+          195,
+          324,
+          424,
+          683,
+          503,
+          383,
+          459,
+          247,
+          155,
+          112,
+          88,
+          39,
+          57,
+          71,
+          72,
+          81,
+          78,
+          89,
+          100,
+          126,
+          96,
+          66,
+          50,
+          69,
+          51,
+          106,
+          104,
+          58,
+          50,
+          34,
+          42,
+          46,
+          68,
+          58,
+          42,
+          43,
+          57,
+          49,
+          18,
+          10,
+          5,
+          5,
+          7,
+          7,
+          8,
+          9,
+          7,
+          5,
+          7,
+          10,
+          7,
+          6,
+          7,
+          7,
+          11,
+          22,
+          67,
+          15,
+          8,
+          84,
+          127,
+          8,
+          8,
+          10,
+          4,
+          0,
+          2,
+          2,
+          0,
+          3,
+          3,
+          3,
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          0,
+          1,
+          0,
+          0,
+          1,
+          0,
+          0,
+          1,
+          0,
+          0,
+          1,
+          1,
+          0,
+          1,
+          0,
+          1,
+          1,
+          2,
+          5,
+          7,
+          7,
+          6,
+          3,
+          2,
+          3,
+          2,
+          1,
+          0,
+          4,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          2,
+          9,
+          11,
+          17,
+          11,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1
+        ]
+      },
+      "frozen": {
+        "changed": 29,
+        "overOne": 1,
+        "maximum": 30,
+        "boxXYXY": [
+          1197,
+          192,
+          1361,
+          366
+        ],
+        "hist": [
+          0,
+          28,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1
+        ]
+      },
+      "outsideFrozen": {
+        "changed": 6137,
+        "overOne": 6121,
+        "maximum": 208,
+        "boxXYXY": [
+          940,
+          180,
+          1650,
+          1327
+        ],
+        "hist": [
+          0,
+          16,
+          11,
+          29,
+          96,
+          195,
+          324,
+          424,
+          683,
+          503,
+          383,
+          459,
+          247,
+          155,
+          112,
+          88,
+          39,
+          57,
+          71,
+          72,
+          81,
+          78,
+          89,
+          100,
+          126,
+          96,
+          66,
+          50,
+          69,
+          51,
+          105,
+          104,
+          58,
+          50,
+          34,
+          42,
+          46,
+          68,
+          58,
+          42,
+          43,
+          57,
+          49,
+          18,
+          10,
+          5,
+          5,
+          7,
+          7,
+          8,
+          9,
+          7,
+          5,
+          7,
+          10,
+          7,
+          6,
+          7,
+          7,
+          11,
+          22,
+          67,
+          15,
+          8,
+          84,
+          127,
+          8,
+          8,
+          10,
+          4,
+          0,
+          2,
+          2,
+          0,
+          3,
+          3,
+          3,
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          0,
+          1,
+          0,
+          0,
+          1,
+          0,
+          0,
+          1,
+          0,
+          0,
+          1,
+          1,
+          0,
+          1,
+          0,
+          1,
+          1,
+          2,
+          5,
+          7,
+          7,
+          6,
+          3,
+          2,
+          3,
+          2,
+          1,
+          0,
+          4,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          2,
+          9,
+          11,
+          17,
+          11,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1
+        ]
+      }
+    }
+  },
+  "gridSpirvDecorationComparison": {
+    "mesh_object_projected_reference_camera.vert.spv": [
+      {
+        "function": "%main",
+        "instructionsBefore": 431,
+        "instructionsAfter": 481,
+        "decoratedBefore": 0,
+        "decoratedAfter": 44,
+        "added": {
+          "OpMatrixTimesScalar": 4,
+          "OpFAdd": 17,
+          "OpVectorTimesScalar": 6,
+          "OpMatrixTimesVector": 9,
+          "OpFSub": 2,
+          "OpFMul": 3,
+          "OpFDiv": 3
+        },
+        "lost": {},
+        "commonOperationPrefix": 35,
+        "decorationDifferencesInPrefix": 0
+      }
+    ],
+    "mesh_object_reference_camera.vert.spv": [
+      {
+        "function": "%main",
+        "instructionsBefore": 422,
+        "instructionsAfter": 472,
+        "decoratedBefore": 0,
+        "decoratedAfter": 36,
+        "added": {
+          "OpMatrixTimesScalar": 4,
+          "OpFAdd": 17,
+          "OpVectorTimesScalar": 6,
+          "OpMatrixTimesVector": 3,
+          "OpFSub": 2,
+          "OpFDiv": 3,
+          "OpFMul": 1
+        },
+        "lost": {},
+        "commonOperationPrefix": 32,
+        "decorationDifferencesInPrefix": 0
+      }
+    ],
+    "mesh_projected_reference_camera.vert.spv": [
+      {
+        "function": "%main",
+        "instructionsBefore": 428,
+        "instructionsAfter": 478,
+        "decoratedBefore": 0,
+        "decoratedAfter": 44,
+        "added": {
+          "OpMatrixTimesScalar": 4,
+          "OpFAdd": 17,
+          "OpVectorTimesScalar": 6,
+          "OpMatrixTimesVector": 9,
+          "OpFSub": 2,
+          "OpFMul": 3,
+          "OpFDiv": 3
+        },
+        "lost": {},
+        "commonOperationPrefix": 35,
+        "decorationDifferencesInPrefix": 0
+      }
+    ],
+    "mesh_reference_camera.vert.spv": [
+      {
+        "function": "%main",
+        "instructionsBefore": 419,
+        "instructionsAfter": 469,
+        "decoratedBefore": 0,
+        "decoratedAfter": 36,
+        "added": {
+          "OpMatrixTimesScalar": 4,
+          "OpFAdd": 17,
+          "OpVectorTimesScalar": 6,
+          "OpMatrixTimesVector": 3,
+          "OpFSub": 2,
+          "OpFDiv": 3,
+          "OpFMul": 1
+        },
+        "lost": {},
+        "commonOperationPrefix": 32,
+        "decorationDifferencesInPrefix": 0
+      }
+    ]
+  },
+  "sourceCommit": "48847a4caa9031d7ccc70e90c093c9fab81984a3",
+  "archive": {
+    "sha256": "6c01afe0b7d156e45de04d0f487060e2000e3b739fb613e331ed374f925cc6bd",
+    "bytes": 1977579,
+    "members": 75
+  }
+}

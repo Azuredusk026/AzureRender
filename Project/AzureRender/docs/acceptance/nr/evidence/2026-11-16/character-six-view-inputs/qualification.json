@@ -1,0 +1,634 @@
+{
+  "status": "qualified-six-camera-inputs",
+  "visualAcceptance": "regional-comparison-pending",
+  "jobs": {
+    "1409": {
+      "task": "nr-qa-world-camera-runtime-dll-retest",
+      "state": "succeeded",
+      "exitCode": 0
+    },
+    "1412": {
+      "task": "nr-qa-camera-frozen-four-same-driver",
+      "state": "succeeded",
+      "exitCode": 0
+    },
+    "1413": {
+      "task": "nr-character-six-camera-first-four-runtime",
+      "state": "succeeded",
+      "exitCode": 0
+    },
+    "1425": {
+      "task": "nr-character-six-camera-final-eight-path-retest",
+      "state": "succeeded",
+      "exitCode": 0
+    }
+  },
+  "assets": {
+    "asset": "b1f9d78053c0e36c966502847c0a90688307a3d98808db93ff8465a620e6e883",
+    "project": "fc4f59e1ac132cac099346a629e4fa5ce941b8aae1cdd3f25939d664264b7188",
+    "startupLevel": "dbc1f99b05fcef84fc4bc3a9285f36072a1bb91fbb8df81bf59ba4840a0749d3",
+    "player": "97461e73dbe281f335bb5e29b1ed880b80caa07800ec1fe24b17c807e0bfe77c",
+    "cameras": "b8e0fe41beffee3376a0a6de0f2b1bde4806c68314c7e3573cede206a4824f05"
+  },
+  "devices": {
+    "nvidia": [
+      {
+        "camera": "face-front",
+        "cameraInput": {
+          "project": "fc4f59e1ac132cac099346a629e4fa5ce941b8aae1cdd3f25939d664264b7188",
+          "level": "dbc1f99b05fcef84fc4bc3a9285f36072a1bb91fbb8df81bf59ba4840a0749d3",
+          "runtimeTarget": [
+            -0.836067156507705,
+            2.6400917953991714,
+            -20.791527980300202
+          ],
+          "angle": 0,
+          "t": [
+            -0.6988141874524147,
+            2.6400917953991714,
+            -21.782064008158606
+          ],
+          "rot": [
+            0,
+            172.1110815753877,
+            0
+          ],
+          "target": [
+            -0.7839110282666947,
+            2.6400917953991714,
+            -21.167931670886396
+          ],
+          "forward": [
+            -0.13725296905529025,
+            0.0,
+            0.9905360278584053
+          ],
+          "fov": 40
+        },
+        "sha256": "708c5fb55396f0f31573c1726c1bb6269de35aa67f13d2269a7bad0b60a0c01f",
+        "captureManifest": "691545efec48134cd6ab59e70f784fa170a409c784af142c878bc2a34a8a91e2",
+        "runtimeReport": "05406e3ef9f1cd987f2d2a5a8678ef0b299c44d50e787f18840503c6976c6e22",
+        "extent": [
+          1280,
+          720
+        ],
+        "driver": 2496905216,
+        "device": 10464,
+        "animationInstances": 11
+      },
+      {
+        "camera": "face-three-quarter-left",
+        "cameraInput": {
+          "project": "fc4f59e1ac132cac099346a629e4fa5ce941b8aae1cdd3f25939d664264b7188",
+          "level": "dbc1f99b05fcef84fc4bc3a9285f36072a1bb91fbb8df81bf59ba4840a0749d3",
+          "runtimeTarget": [
+            -0.5546333781492073,
+            2.6400917953991714,
+            -20.8648941168496
+          ],
+          "angle": 45,
+          "t": [
+            -1.1579956153004898,
+            2.6400917953991714,
+            -21.66236136431485
+          ],
+          "rot": [
+            0,
+            -142.8889184246123,
+            0
+          ],
+          "target": [
+            -0.7839110282666947,
+            2.6400917953991714,
+            -21.167931670886396
+          ],
+          "forward": [
+            0.6033622371512825,
+            0.0,
+            0.7974672474652483
+          ],
+          "fov": 40
+        },
+        "sha256": "e468838b3a9ae3b42dcb333d263e5d2b83942fbd9eb8903c80f4d0b6712a9056",
+        "captureManifest": "2b31926d6852450d6b54fc9dab2519682da05469368d11919087e76d46bd59e4",
+        "runtimeReport": "05406e3ef9f1cd987f2d2a5a8678ef0b299c44d50e787f18840503c6976c6e22",
+        "extent": [
+          1280,
+          720
+        ],
+        "driver": 2496905216,
+        "device": 10464,
+        "animationInstances": 11
+      },
+      {
+        "camera": "face-three-quarter-right",
+        "cameraInput": {
+          "project": "fc4f59e1ac132cac099346a629e4fa5ce941b8aae1cdd3f25939d664264b7188",
+          "level": "dbc1f99b05fcef84fc4bc3a9285f36072a1bb91fbb8df81bf59ba4840a0749d3",
+          "runtimeTarget": [
+            -1.086948582303489,
+            2.6400917953991714,
+            -20.938654020768908
+          ],
+          "angle": -45,
+          "t": [
+            -0.2894813348382406,
+            2.6400917953991714,
+            -21.542016257920192
+          ],
+          "rot": [
+            0,
+            127.11108157538769,
+            0
+          ],
+          "target": [
+            -0.7839110282666947,
+            2.6400917953991714,
+            -21.167931670886396
+          ],
+          "forward": [
+            -0.7974672474652484,
+            0.0,
+            0.6033622371512823
+          ],
+          "fov": 40
+        },
+        "sha256": "e186f973d0870f9c07ca59eb5564e030ae9d224eec429ed7fac1720805adc966",
+        "captureManifest": "c1beabb3c7715ad80bc5c1604aa6b635cc318bc30786884b6c3a735c1d690a1c",
+        "runtimeReport": "05406e3ef9f1cd987f2d2a5a8678ef0b299c44d50e787f18840503c6976c6e22",
+        "extent": [
+          1280,
+          720
+        ],
+        "driver": 2496905216,
+        "device": 10464,
+        "animationInstances": 11
+      },
+      {
+        "camera": "face-side-left",
+        "cameraInput": {
+          "project": "fc4f59e1ac132cac099346a629e4fa5ce941b8aae1cdd3f25939d664264b7188",
+          "level": "dbc1f99b05fcef84fc4bc3a9285f36072a1bb91fbb8df81bf59ba4840a0749d3",
+          "runtimeTarget": [
+            -0.4075073376805006,
+            2.6400917953991714,
+            -21.115775542645387
+          ],
+          "angle": 90,
+          "t": [
+            -1.398043365538906,
+            2.6400917953991714,
+            -21.253028511700677
+          ],
+          "rot": [
+            0,
+            -97.88891842461231,
+            0
+          ],
+          "target": [
+            -0.7839110282666947,
+            2.6400917953991714,
+            -21.167931670886396
+          ],
+          "forward": [
+            0.9905360278584053,
+            0.0,
+            0.13725296905529027
+          ],
+          "fov": 40
+        },
+        "sha256": "4feb99d3b64923c1819d5a41accea222da46b217aa73c9cd7eba08ce1937e7be",
+        "captureManifest": "a977c726caffcea31d2ed448710746fc90f08b18974be9b1ced20ce6c011ba0b",
+        "runtimeReport": "05406e3ef9f1cd987f2d2a5a8678ef0b299c44d50e787f18840503c6976c6e22",
+        "extent": [
+          1280,
+          720
+        ],
+        "driver": 2496905216,
+        "device": 10464,
+        "animationInstances": 11
+      },
+      {
+        "camera": "face-side-right",
+        "cameraInput": {
+          "project": "fc4f59e1ac132cac099346a629e4fa5ce941b8aae1cdd3f25939d664264b7188",
+          "level": "dbc1f99b05fcef84fc4bc3a9285f36072a1bb91fbb8df81bf59ba4840a0749d3",
+          "runtimeTarget": [
+            -1.1603147188528888,
+            2.6400917953991714,
+            -21.220087799127406
+          ],
+          "angle": -90,
+          "t": [
+            -0.1697786909944834,
+            2.6400917953991714,
+            -21.082834830072116
+          ],
+          "rot": [
+            0,
+            82.11108157538769,
+            0
+          ],
+          "target": [
+            -0.7839110282666947,
+            2.6400917953991714,
+            -21.167931670886396
+          ],
+          "forward": [
+            -0.9905360278584053,
+            0.0,
+            -0.13725296905529016
+          ],
+          "fov": 40
+        },
+        "sha256": "2ba4aa3c50c89bb1baef31f222a301f615af5d0cf3a5b0b7395825bc6fbf2467",
+        "captureManifest": "6c04c39e75d2e6e56b05eb83cf1bc4951178b79d3a979b8485f38569e25e46e7",
+        "runtimeReport": "05406e3ef9f1cd987f2d2a5a8678ef0b299c44d50e787f18840503c6976c6e22",
+        "extent": [
+          1280,
+          720
+        ],
+        "driver": 2496905216,
+        "device": 10464,
+        "animationInstances": 11
+      },
+      {
+        "camera": "back-detail",
+        "cameraInput": {
+          "project": "fc4f59e1ac132cac099346a629e4fa5ce941b8aae1cdd3f25939d664264b7188",
+          "level": "dbc1f99b05fcef84fc4bc3a9285f36072a1bb91fbb8df81bf59ba4840a0749d3",
+          "runtimeTarget": [
+            -0.854983693241268,
+            2.054915525391084,
+            -20.655009905056573
+          ],
+          "angle": 180,
+          "t": [
+            -0.9922366622965573,
+            2.054915525391084,
+            -19.66447387719817
+          ],
+          "rot": [
+            0,
+            -7.888918424612257,
+            0
+          ],
+          "target": [
+            -0.7904747977852821,
+            2.054915525391084,
+            -21.120561838150024
+          ],
+          "forward": [
+            0.13725296905528925,
+            0.0,
+            -0.9905360278584054
+          ],
+          "fov": 47
+        },
+        "sha256": "3c45327440ada8eb611a88598d97717fc05709daf1cd2988fc0aa068a93907bc",
+        "captureManifest": "809221763eeeeb514a11ae113e218d21b3b537f6691ffa1af96f4420377032a1",
+        "runtimeReport": "05406e3ef9f1cd987f2d2a5a8678ef0b299c44d50e787f18840503c6976c6e22",
+        "extent": [
+          1280,
+          720
+        ],
+        "driver": 2496905216,
+        "device": 10464,
+        "animationInstances": 11
+      }
+    ],
+    "intel": [
+      {
+        "camera": "face-front",
+        "cameraInput": {
+          "project": "fc4f59e1ac132cac099346a629e4fa5ce941b8aae1cdd3f25939d664264b7188",
+          "level": "dbc1f99b05fcef84fc4bc3a9285f36072a1bb91fbb8df81bf59ba4840a0749d3",
+          "runtimeTarget": [
+            -0.836067156507705,
+            2.6400917953991714,
+            -20.791527980300202
+          ],
+          "angle": 0,
+          "t": [
+            -0.6988141874524147,
+            2.6400917953991714,
+            -21.782064008158606
+          ],
+          "rot": [
+            0,
+            172.1110815753877,
+            0
+          ],
+          "target": [
+            -0.7839110282666947,
+            2.6400917953991714,
+            -21.167931670886396
+          ],
+          "forward": [
+            -0.13725296905529025,
+            0.0,
+            0.9905360278584053
+          ],
+          "fov": 40
+        },
+        "sha256": "2301c79fc8ef7c463b978580c1ee33d5fd176bbff4de14894995e1e74f76ec58",
+        "captureManifest": "96987f74b24e5bb9a5c65ecfafb00364ca00dccfb1a63db326353e657efc2e86",
+        "runtimeReport": "05406e3ef9f1cd987f2d2a5a8678ef0b299c44d50e787f18840503c6976c6e22",
+        "extent": [
+          1280,
+          720
+        ],
+        "driver": 1661340,
+        "device": 42888,
+        "animationInstances": 11
+      },
+      {
+        "camera": "face-three-quarter-left",
+        "cameraInput": {
+          "project": "fc4f59e1ac132cac099346a629e4fa5ce941b8aae1cdd3f25939d664264b7188",
+          "level": "dbc1f99b05fcef84fc4bc3a9285f36072a1bb91fbb8df81bf59ba4840a0749d3",
+          "runtimeTarget": [
+            -0.5546333781492073,
+            2.6400917953991714,
+            -20.8648941168496
+          ],
+          "angle": 45,
+          "t": [
+            -1.1579956153004898,
+            2.6400917953991714,
+            -21.66236136431485
+          ],
+          "rot": [
+            0,
+            -142.8889184246123,
+            0
+          ],
+          "target": [
+            -0.7839110282666947,
+            2.6400917953991714,
+            -21.167931670886396
+          ],
+          "forward": [
+            0.6033622371512825,
+            0.0,
+            0.7974672474652483
+          ],
+          "fov": 40
+        },
+        "sha256": "554f952cfb660bb80ef6276342f4c57f05c6f96d79d6e09bb25e04e5dccb364f",
+        "captureManifest": "d547bfd0834cf494923413d96dc48d2bf1cad3b0daed8e5b4ac7ff2752daf544",
+        "runtimeReport": "05406e3ef9f1cd987f2d2a5a8678ef0b299c44d50e787f18840503c6976c6e22",
+        "extent": [
+          1280,
+          720
+        ],
+        "driver": 1661340,
+        "device": 42888,
+        "animationInstances": 11
+      },
+      {
+        "camera": "face-three-quarter-right",
+        "cameraInput": {
+          "project": "fc4f59e1ac132cac099346a629e4fa5ce941b8aae1cdd3f25939d664264b7188",
+          "level": "dbc1f99b05fcef84fc4bc3a9285f36072a1bb91fbb8df81bf59ba4840a0749d3",
+          "runtimeTarget": [
+            -1.086948582303489,
+            2.6400917953991714,
+            -20.938654020768908
+          ],
+          "angle": -45,
+          "t": [
+            -0.2894813348382406,
+            2.6400917953991714,
+            -21.542016257920192
+          ],
+          "rot": [
+            0,
+            127.11108157538769,
+            0
+          ],
+          "target": [
+            -0.7839110282666947,
+            2.6400917953991714,
+            -21.167931670886396
+          ],
+          "forward": [
+            -0.7974672474652484,
+            0.0,
+            0.6033622371512823
+          ],
+          "fov": 40
+        },
+        "sha256": "19a8338706b5732b65e942bdfa9320d785906ed83bd57947d3ae22d15d1f707d",
+        "captureManifest": "6ee2db87f40fde949a8f002776f1369c5ba823c252d015efd2bf80d39eb40f9d",
+        "runtimeReport": "05406e3ef9f1cd987f2d2a5a8678ef0b299c44d50e787f18840503c6976c6e22",
+        "extent": [
+          1280,
+          720
+        ],
+        "driver": 1661340,
+        "device": 42888,
+        "animationInstances": 11
+      },
+      {
+        "camera": "face-side-left",
+        "cameraInput": {
+          "project": "fc4f59e1ac132cac099346a629e4fa5ce941b8aae1cdd3f25939d664264b7188",
+          "level": "dbc1f99b05fcef84fc4bc3a9285f36072a1bb91fbb8df81bf59ba4840a0749d3",
+          "runtimeTarget": [
+            -0.4075073376805006,
+            2.6400917953991714,
+            -21.115775542645387
+          ],
+          "angle": 90,
+          "t": [
+            -1.398043365538906,
+            2.6400917953991714,
+            -21.253028511700677
+          ],
+          "rot": [
+            0,
+            -97.88891842461231,
+            0
+          ],
+          "target": [
+            -0.7839110282666947,
+            2.6400917953991714,
+            -21.167931670886396
+          ],
+          "forward": [
+            0.9905360278584053,
+            0.0,
+            0.13725296905529027
+          ],
+          "fov": 40
+        },
+        "sha256": "ddf3ec43b3aa28e3f1813e4168f2c18bceafd0dc18c191d3a2a4b53cbd0dfbc4",
+        "captureManifest": "8c7fe800b63e69cc9328603fb12939636378ca3365f433af5ce5fba09570eef9",
+        "runtimeReport": "05406e3ef9f1cd987f2d2a5a8678ef0b299c44d50e787f18840503c6976c6e22",
+        "extent": [
+          1280,
+          720
+        ],
+        "driver": 1661340,
+        "device": 42888,
+        "animationInstances": 11
+      },
+      {
+        "camera": "face-side-right",
+        "cameraInput": {
+          "project": "fc4f59e1ac132cac099346a629e4fa5ce941b8aae1cdd3f25939d664264b7188",
+          "level": "dbc1f99b05fcef84fc4bc3a9285f36072a1bb91fbb8df81bf59ba4840a0749d3",
+          "runtimeTarget": [
+            -1.1603147188528888,
+            2.6400917953991714,
+            -21.220087799127406
+          ],
+          "angle": -90,
+          "t": [
+            -0.1697786909944834,
+            2.6400917953991714,
+            -21.082834830072116
+          ],
+          "rot": [
+            0,
+            82.11108157538769,
+            0
+          ],
+          "target": [
+            -0.7839110282666947,
+            2.6400917953991714,
+            -21.167931670886396
+          ],
+          "forward": [
+            -0.9905360278584053,
+            0.0,
+            -0.13725296905529016
+          ],
+          "fov": 40
+        },
+        "sha256": "2346ecca27f5fcf9d15d48d11a9c45480049e2addc7574609c6a37a0c8e0d33a",
+        "captureManifest": "9718cb4e457d9a0f5adfcc06a636fd184c6d6bcc88ad1bb4838bddd38f7ef1e4",
+        "runtimeReport": "05406e3ef9f1cd987f2d2a5a8678ef0b299c44d50e787f18840503c6976c6e22",
+        "extent": [
+          1280,
+          720
+        ],
+        "driver": 1661340,
+        "device": 42888,
+        "animationInstances": 11
+      },
+      {
+        "camera": "back-detail",
+        "cameraInput": {
+          "project": "fc4f59e1ac132cac099346a629e4fa5ce941b8aae1cdd3f25939d664264b7188",
+          "level": "dbc1f99b05fcef84fc4bc3a9285f36072a1bb91fbb8df81bf59ba4840a0749d3",
+          "runtimeTarget": [
+            -0.854983693241268,
+            2.054915525391084,
+            -20.655009905056573
+          ],
+          "angle": 180,
+          "t": [
+            -0.9922366622965573,
+            2.054915525391084,
+            -19.66447387719817
+          ],
+          "rot": [
+            0,
+            -7.888918424612257,
+            0
+          ],
+          "target": [
+            -0.7904747977852821,
+            2.054915525391084,
+            -21.120561838150024
+          ],
+          "forward": [
+            0.13725296905528925,
+            0.0,
+            -0.9905360278584054
+          ],
+          "fov": 47
+        },
+        "sha256": "a9657b4558f9d3cb03872d60d5e9e979af3eb6eb6c1a69784096148ff6f73c35",
+        "captureManifest": "bccd5302a24cba0c463c235d07303b8efa2556d45eec10828aa608f51199cdb6",
+        "runtimeReport": "05406e3ef9f1cd987f2d2a5a8678ef0b299c44d50e787f18840503c6976c6e22",
+        "extent": [
+          1280,
+          720
+        ],
+        "driver": 1661340,
+        "device": 42888,
+        "animationInstances": 11
+      }
+    ]
+  },
+  "frozenRegression": {
+    "player": "97461e73dbe281f335bb5e29b1ed880b80caa07800ec1fe24b17c807e0bfe77c",
+    "retainedPlayer": "1a30d925a674ddb1d95876cb80181106a0217e12a7228a35b5980b134954cb69",
+    "currentDriver": 2496905216,
+    "sameDriverExact": true,
+    "originalFrozenExact": false,
+    "frames": [
+      {
+        "frame": "frame_000000.png",
+        "sha256": "b57a67f263f0bc0d9cc53a279f74e90696b47c5802e60cd5b54196cc647fbdc3",
+        "sameDriver": {
+          "differingPixels": 0,
+          "overOne": 0,
+          "peak": 0
+        },
+        "originalFrozen": {
+          "differingPixels": 228,
+          "overOne": 0,
+          "peak": 1
+        }
+      },
+      {
+        "frame": "frame_000001.png",
+        "sha256": "dcf466cd4ea345671eaad5efd4128584e02de9a05e6f218acf2ebf5409abe90f",
+        "sameDriver": {
+          "differingPixels": 0,
+          "overOne": 0,
+          "peak": 0
+        },
+        "originalFrozen": {
+          "differingPixels": 330,
+          "overOne": 3,
+          "peak": 7
+        }
+      },
+      {
+        "frame": "frame_000002.png",
+        "sha256": "974756b6d8dba263a333c613eaf24a33d53be96b24e6c000b78646341f492050",
+        "sameDriver": {
+          "differingPixels": 0,
+          "overOne": 0,
+          "peak": 0
+        },
+        "originalFrozen": {
+          "differingPixels": 397,
+          "overOne": 4,
+          "peak": 37
+        }
+      },
+      {
+        "frame": "frame_000003.png",
+        "sha256": "e27b4d25426d5d36725ccb159d7fe2324f4eb60b0993d369e91e45260bc6fbeb",
+        "sameDriver": {
+          "differingPixels": 0,
+          "overOne": 0,
+          "peak": 0
+        },
+        "originalFrozen": {
+          "differingPixels": 421,
+          "overOne": 4,
+          "peak": 23
+        }
+      }
+    ]
+  },
+  "contactSheetSha256": "dedfaef3e3b5809b4e9008fda40c7399dc4c2a4ec00715d174bdd76416116ab8",
+  "commandLineTestLogSha256": "0521387c38a0a42f11bde62c45e220f6b2c9115f78f01e331eda6c60f8f1663f"
+}

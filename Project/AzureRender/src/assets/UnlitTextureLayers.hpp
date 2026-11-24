@@ -18,7 +18,7 @@ struct UnlitTextureLayers {
     enum class Composite { Alpha, Additive };
     enum class FogMode { None, Scene };
     enum class DepthCompare { Less, LessOrEqual };
-    enum class Submission { Transparent,OpaqueOverlay };
+    enum class Submission { Transparent,OpaqueOverlay,ProjectedHistory };
     Composite composite=Composite::Alpha;
     FogMode fogMode=FogMode::None;
     DepthCompare depthCompare=DepthCompare::Less;

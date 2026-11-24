@@ -1,0 +1,274 @@
+{
+  "status": "qualified-readonly-pair-rejected-single-glyph",
+  "gate": "open",
+  "formal": {
+    "targetSsim": 0.95,
+    "targetMedianRelativeLumaError": 0.1,
+    "neighborNewOverOne": 0,
+    "peakRgb": 1,
+    "originalFrozenExact": true
+  },
+  "queue": {
+    "1451": {
+      "task": "nr-immutable-scene-readonly-capture-rebuild",
+      "state": "succeeded",
+      "exitCode": 0
+    },
+    "1452": {
+      "task": "nr-immutable-joint-scene-glyph-nvidia",
+      "state": "failed",
+      "exitCode": 1
+    },
+    "1453": {
+      "task": "nr-immutable-joint-scene-glyph-nvidia-retest",
+      "state": "succeeded",
+      "exitCode": 0
+    },
+    "1454": {
+      "task": "nr-joint-glyph-nvidia-sampler-sidecars",
+      "state": "succeeded",
+      "exitCode": 0
+    },
+    "1455": {
+      "task": "nr-joint-glyph-intel-sampler-sidecars",
+      "state": "failed",
+      "exitCode": 1
+    },
+    "1457": {
+      "task": "nr-joint-glyph-intel-actual-baseline-paired",
+      "state": "succeeded",
+      "exitCode": 0
+    }
+  },
+  "results": {
+    "nvidia": {
+      "firstExact": true,
+      "secondChanged": 187703,
+      "regions": {
+        "complete": {
+          "baselineSsim": 0.8278223872184753,
+          "candidateSsim": 0.8276806473731995,
+          "baselineLumaError": 0.010323980255563659,
+          "candidateLumaError": 0.01200203747338642,
+          "addedOverOne": 1268,
+          "peak": 242
+        },
+        "ceiling": {
+          "baselineSsim": 0.8410954475402832,
+          "candidateSsim": 0.8411267995834351,
+          "baselineLumaError": 0.062425276452039144,
+          "candidateLumaError": 0.062425276452039144,
+          "addedOverOne": 11,
+          "peak": 195
+        },
+        "leftDoor": {
+          "baselineSsim": 0.8868863582611084,
+          "candidateSsim": 0.8868846297264099,
+          "baselineLumaError": 0.021150544047287716,
+          "candidateLumaError": 0.021150544047287716,
+          "addedOverOne": 6,
+          "peak": 165
+        },
+        "rightWall": {
+          "baselineSsim": 0.8834869861602783,
+          "candidateSsim": 0.8834838271141052,
+          "baselineLumaError": 0.06802066999544762,
+          "candidateLumaError": 0.06802066999544762,
+          "addedOverOne": 4,
+          "peak": 118
+        },
+        "centerFloor": {
+          "baselineSsim": 0.8296183943748474,
+          "candidateSsim": 0.8254776000976562,
+          "baselineLumaError": 0.15753574441475204,
+          "candidateLumaError": 0.10528984192057587,
+          "addedOverOne": 9,
+          "peak": 183
+        },
+        "cyanRing": {
+          "baselineSsim": 0.75460284948349,
+          "candidateSsim": 0.7495422959327698,
+          "baselineLumaError": 0.0798778638746798,
+          "candidateLumaError": 0.027400427735793344,
+          "addedOverOne": 16,
+          "peak": 87
+        },
+        "leftFloor": {
+          "baselineSsim": 0.8553996086120605,
+          "candidateSsim": 0.8554080128669739,
+          "baselineLumaError": 0.012788465435107517,
+          "candidateLumaError": 0.012788465435107517,
+          "addedOverOne": 1,
+          "peak": 122
+        }
+      },
+      "driver": 2496905216
+    },
+    "intel": {
+      "firstExact": true,
+      "secondChanged": 187588,
+      "regions": {
+        "complete": {
+          "baselineSsim": 0.8269586563110352,
+          "candidateSsim": 0.8268314599990845,
+          "baselineLumaError": 0.009841802650914114,
+          "candidateLumaError": 0.0112305093317014,
+          "addedOverOne": 1286,
+          "peak": 243
+        },
+        "ceiling": {
+          "baselineSsim": 0.840497612953186,
+          "candidateSsim": 0.8405290842056274,
+          "baselineLumaError": 0.06295352180351879,
+          "candidateLumaError": 0.06295352180351879,
+          "addedOverOne": 11,
+          "peak": 192
+        },
+        "leftDoor": {
+          "baselineSsim": 0.884918749332428,
+          "candidateSsim": 0.8849170207977295,
+          "baselineLumaError": 0.021150544047287716,
+          "candidateLumaError": 0.021150544047287716,
+          "addedOverOne": 3,
+          "peak": 165
+        },
+        "rightWall": {
+          "baselineSsim": 0.8828598856925964,
+          "candidateSsim": 0.8828495144844055,
+          "baselineLumaError": 0.06802066999544762,
+          "candidateLumaError": 0.06802066999544762,
+          "addedOverOne": 5,
+          "peak": 118
+        },
+        "centerFloor": {
+          "baselineSsim": 0.8291232585906982,
+          "candidateSsim": 0.8249921202659607,
+          "baselineLumaError": 0.16093990702066346,
+          "candidateLumaError": 0.10688551156218787,
+          "addedOverOne": 9,
+          "peak": 182
+        },
+        "cyanRing": {
+          "baselineSsim": 0.7541956901550293,
+          "candidateSsim": 0.7485679984092712,
+          "baselineLumaError": 0.08088854928936805,
+          "candidateLumaError": 0.028312558354813225,
+          "addedOverOne": 13,
+          "peak": 87
+        },
+        "leftFloor": {
+          "baselineSsim": 0.8593950271606445,
+          "candidateSsim": 0.8593888282775879,
+          "baselineLumaError": 0.012671419834319403,
+          "candidateLumaError": 0.012671419834319403,
+          "addedOverOne": 2,
+          "peak": 122
+        }
+      },
+      "driver": 1661340
+    }
+  },
+  "intelRetainedControlDrift": {
+    "archive": "db0139805058bb813c80422fccff8039495cb255a5a586677dc9279e222db3a6",
+    "frames": {
+      "frame_000000.png": {
+        "inputPng": "37ab3d8efeacd44922d1a5b2c3af30ffbe5e5e7b20ca784950a26e67ce8074cf",
+        "actualPng": "b7033381fb8b76d033c285832ac084c52c173062b2b1b9d87589c4437e5a5f5a",
+        "actualDecodedBgra": "d2159a1bf8b246555b8ee5a272f4cd6fbededab0127f154bb704f76da730d525",
+        "baselineDecodedBgra": "9fe90cafd5db20fe98e853066c65f37d5733daef24804f4737334086b64c9274",
+        "different": 46,
+        "overOne": 25,
+        "peak": 43
+      },
+      "frame_000001.png": {
+        "inputPng": "aa0c090070e1f5295e0ee0f9fd5d8a76c5f2177033e51a14c8d61f29bff526f6",
+        "actualPng": "834404818c673bc63382b53379363449a8a1bc8da11c434eb47ddcf3ad220414",
+        "actualDecodedBgra": "3fb4a0466ffc05ab7df783aefb6b51a153e09daa9a0ded8e8e327fa104f93607",
+        "baselineDecodedBgra": "7b32f39d8276cb29272ab83ccf96cc54855b385d0f5f5e81ebee559a37a616f1",
+        "different": 18,
+        "overOne": 11,
+        "peak": 18
+      }
+    }
+  },
+  "diagnosticMissingSamplerFirstFrameChanged": 60783,
+  "candidateInputs": {
+    "source": "df488d21a694ab8663a5ba090680cedd1cfdafd22e07a244f5eda78b1eb6610a",
+    "variant": "5362212d220baac3a914dea1e0f281e4c87b383ba992653182d01f0da84454ac",
+    "textures": {
+      "10480-0.dds": "fbe4e260ac2544673364351dfa204662eaa52f3fd7a4ec9bc8bf0b6a3c93ef76",
+      "10480-0.dds.azmeta": "407f3005b74ecefea3c3d849bb1c5bd61c5714dd88c7c709c1f4c2b87fd0be52",
+      "10480-1.dds": "a695b4e1c5ab442c6f55332b57c374d0988fa19376dc04823d9a76e83e566c8d",
+      "10480-1.dds.azmeta": "4c07b977b645248321fa230b1c12423105fcd447407a541c8798fb351cdc6100",
+      "10480-2.dds": "51f6ea3119023d915b1ae2a61076d02cee14eea335ca201b2175535d17d0c2af",
+      "10480-2.dds.azmeta": "b1de2491e80f45b454b6d635368b9dbaee85548afabb01ab4bc0f3f74e95679c"
+    }
+  },
+  "immutableInputs": {
+    "history-actor.azureproject": "b5339a45d2f7ae9c4011af3463ab9e5996462a7825166d1034c96654630a88a8",
+    "scene/history-actor.azurelevel": "d99683193ef5aa3fd002bb4075b2a01639c1bd1a463df9fa484a4ea22944ce7e",
+    "captured-central-glyph/event-10480.gltf": "df488d21a694ab8663a5ba090680cedd1cfdafd22e07a244f5eda78b1eb6610a",
+    "captured-central-glyph/10480-0.dds": "fbe4e260ac2544673364351dfa204662eaa52f3fd7a4ec9bc8bf0b6a3c93ef76",
+    "captured-central-glyph/10480-1.dds": "a695b4e1c5ab442c6f55332b57c374d0988fa19376dc04823d9a76e83e566c8d",
+    "captured-central-glyph/10480-2.dds": "51f6ea3119023d915b1ae2a61076d02cee14eea335ca201b2175535d17d0c2af",
+    "captured-central-glyph/10480-0.dds.azmeta": "407f3005b74ecefea3c3d849bb1c5bd61c5714dd88c7c709c1f4c2b87fd0be52",
+    "captured-central-glyph/10480-1.dds.azmeta": "4c07b977b645248321fa230b1c12423105fcd447407a541c8798fb351cdc6100",
+    "captured-central-glyph/10480-2.dds.azmeta": "b1de2491e80f45b454b6d635368b9dbaee85548afabb01ab4bc0f3f74e95679c"
+  },
+  "validation": {
+    "archiveSha256": "ba022db5d0a7580940fa44a2cb773d96cc11048e928766628aed40190bdeb0d2",
+    "files": {
+      "captures/nvidia-no-sampler/deltas.zip": "e063112fe3071236d80a6dad52a9f069e46e0b0d8cccb177b2ef7863253d2936",
+      "captures/nvidia-no-sampler/receipt.json": "a5d88bc997f0e15c5e9bdd092a8593058cfcac1c8bca850a52a35af1cb391a80",
+      "captures/nvidia-no-sampler/qualification.json": "889415a3a9a9eb3de68724b3c1ff4a86c2b54c807263370dc3a49318464b0067",
+      "captures/nvidia-no-sampler/candidate/command.json": "502689abc8eaa40273a43564055cd8b2c17617aca4505eb106aa7a7549392339",
+      "captures/nvidia-no-sampler/candidate/player.log": "87700763cd48dd495aa91c3e3a0dc708d89092bbebd64f165ba0635b13f34088",
+      "captures/nvidia-no-sampler/candidate/runtime.json": "f6906d5bf1eaf05258644030de201ce37c00f764b9f443c210878095e96b1081",
+      "captures/nvidia-no-sampler/candidate/frames/capture_manifest.json": "44d2c160aa38a2580d71203ec37021ac968410cf77183fa66716e75908562e88",
+      "captures/nvidia-no-sampler/candidate/frames/gpu_capabilities.json": "fcc84c76d84bace150db35ec07631ab83809bdd1c365b6d96cb8afe8e354190a",
+      "captures/nvidia-samplers/deltas.zip": "a4c4e4852926293d7a5ce5fb5d8e6998a0da368c336fbd753bb2adc4cfb29e2e",
+      "captures/nvidia-samplers/receipt.json": "ccfcb22377f95fae2b26ba96ddd1322aa626728649f2335cffcf6a3c8d95a7a2",
+      "captures/nvidia-samplers/qualification.json": "3dbf598d749c89b517402109d7fe20eed97fe16a44fba2c74edff4779e2acca3",
+      "captures/nvidia-samplers/candidate/command.json": "a8455acb0db3bd42becbf24ca22b31dbee853c39f023b4b7127cc0e7a34a866c",
+      "captures/nvidia-samplers/candidate/player.log": "1b7498a7bfa1d1ddd0eeae89aefd2a5f9e7b09d2f44d27928c38d0ca5167f961",
+      "captures/nvidia-samplers/candidate/runtime.json": "1b26d2f273ddd8a22f8b33a6362e124d732c4befe14aab31d66dcd7e613c9ab2",
+      "captures/nvidia-samplers/candidate/frames/capture_manifest.json": "41c7d22a55f49f46e9acbd6a78a7aa866e99ea004dfba969109b99a0950da69f",
+      "captures/nvidia-samplers/candidate/frames/gpu_capabilities.json": "fcc84c76d84bace150db35ec07631ab83809bdd1c365b6d96cb8afe8e354190a",
+      "captures/intel-samplers/deltas.zip": "6239fece6eb8060848f2ef3125f2d211951bace9017c007e00cdd7796c5c47e1",
+      "captures/intel-samplers/receipt.json": "5b2d84212c8937e64a00554d428c21e9ecc2b78a8b952ee705d1fcbd945381ed",
+      "captures/intel-samplers/qualification.json": "265691a0b05d474a44466faedbf6377dd763c7cdc7de7bb691f50d6e68eb7b0a",
+      "captures/intel-samplers/candidate/command.json": "5ae6d781fbb2f5dc97928dc4f400b0a7cc98082a81e5e3b2df4e5cc74ff942c7",
+      "captures/intel-samplers/candidate/player.log": "ca1022679483d81eb0fd6fae6102b8bc83b5b62cb4406078f9eb65cd83c1e51b",
+      "captures/intel-samplers/candidate/runtime.json": "64919b45422593bfaca089e68c7b5891c8260b07906f4e32b865fdbd424ef4bd",
+      "captures/intel-samplers/candidate/frames/capture_manifest.json": "0e3ef16d8782aa7c8c52b2e71df9336401c0d05208d603c25cee4b0f1db66946",
+      "captures/intel-samplers/candidate/frames/gpu_capabilities.json": "052830ed89bea19f0e9a17839082b9f979cfab2b17908f9ee83df5f0e0bcd85f",
+      "captures/nvidia-baseline/command.json": "eee7fd78b6fc54f851e189898be0a8bc78a6dbeb618ae7057da9a5fe5470071d",
+      "captures/nvidia-baseline/player.log": "a4f58c9ca30ddf7d537e7145f5331ea574ebed5335e1522ceabf6e0acdc36eea",
+      "captures/nvidia-baseline/runtime.json": "de2f38bcdab7c38de0b9de2422292896e5e93a9fddf5f0b6f341c39b3ed85707",
+      "captures/nvidia-baseline/frames/capture_manifest.json": "c57025b96144e1c4b4242515eaab53084782ef1b446465a7554ebfd7958b33bc",
+      "captures/nvidia-baseline/frames/gpu_capabilities.json": "fcc84c76d84bace150db35ec07631ab83809bdd1c365b6d96cb8afe8e354190a",
+      "captures/intel-baseline/command.json": "470b37ba55168987c9466a075dfa35317cf4337707df60b569e8052f035e394e",
+      "captures/intel-baseline/player.log": "09fab8155f41ce4d36071705f7a7500f5f64baf243aefc3500892f37a01e32a9",
+      "captures/intel-baseline/runtime.json": "711416b72cb426907e109cdf297114586e14e045d109c8f19c039931d9460d4d",
+      "captures/intel-baseline/frames/capture_manifest.json": "1c29363b93230ead87b1810cb9ace717fff59e8fe47c83db8ca5aad8ab52df76",
+      "captures/intel-baseline/frames/gpu_capabilities.json": "052830ed89bea19f0e9a17839082b9f979cfab2b17908f9ee83df5f0e0bcd85f",
+      "captures/intel-baseline/intel-actual-baseline-deltas.json": "5a15f87c603d433040b68c01d2c5b5e87905808268b8bf04609c639cb51c6a8d",
+      "captures/intel-baseline/intel-actual-baseline-deltas.zip": "db0139805058bb813c80422fccff8039495cb255a5a586677dc9279e222db3a6",
+      "source/build-immutable-scene-capture-player.py": "70302e97e2ca354a343711955f0439b8c497911a0d1f5d20f45703c69d93f8a6",
+      "source/run-immutable-scene-glyph-capture.py": "525f7e4dd24d0fc7dce1bbd781c9183f244aceee710fd7bda8d3dc3762859d73",
+      "source/compact-immutable-glyph-pair.py": "38673d2d18564b0d28b3b96f530ed95a200f2ae975527e8264e2e504d85c9768",
+      "source/archive-immutable-scene-glyph.py": "7052fc80d54fe255470de0bb320b2c2d2e1f4fe78996c0dc90debd168f323f95",
+      "build/main.cpp": "2b8b4bb98da510f150869872bd88b4de606cd17370cc1f62c462608d775eec71",
+      "build/AssetDatabase.cpp": "91a571a1f7b9967fd49609dedd92c83854b9ee4ac42c116392dceb92326ceddb",
+      "build/qualification.json": "7be5df6b5f008635f8ff6aa0fe3bfb78ff80e6722c47fe9980dddc4fb7fdae36",
+      "logs/retest-joint-glyph-nvidia-sampler-sidecars.log": "d60433a0f4587998b169e82f5bf7393e8b64246e784be148d4658a00a08f89c3",
+      "logs/retest-joint-glyph-intel-actual-baseline-paired.log": "f259c5d943a71edeb2e2208f751f7d7e0f19c008b4bc0b9c2b6a336e9d17f6c5",
+      "logs/retest-joint-glyph-intel-sampler-sidecars.log": "878a6457103095e3db0222f01be16b50ac3f572cdf772b116c0da428f23ec9cb",
+      "logs/retest-immutable-joint-scene-glyph-nvidia.log": "1003be110512023b65a1acc22e30644d7a41218d0868d625e313947fada63ceb",
+      "asset/10480-0.dds.azmeta": "407f3005b74ecefea3c3d849bb1c5bd61c5714dd88c7c709c1f4c2b87fd0be52",
+      "asset/10480-1.dds.azmeta": "4c07b977b645248321fa230b1c12423105fcd447407a541c8798fb351cdc6100",
+      "asset/10480-2.dds.azmeta": "b1de2491e80f45b454b6d635368b9dbaee85548afabb01ab4bc0f3f74e95679c",
+      "asset/event-10480.gltf": "5362212d220baac3a914dea1e0f281e4c87b383ba992653182d01f0da84454ac"
+    }
+  }
+}

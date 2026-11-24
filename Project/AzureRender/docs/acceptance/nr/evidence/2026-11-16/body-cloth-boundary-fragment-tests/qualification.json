@@ -1,0 +1,802 @@
+{
+  "status": "retained-body-cloth-draw-rejection",
+  "request": {
+    "capture": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-231945-projected-hair-reference-grid-4b775d\\iris-overlay-player-rdc\\overlay_frame1.rdc",
+    "captureSha256": "6960267c0d71e4d05b6bfe0e2730c332ed71955f1fde6d69eb7d8aadf13eff24",
+    "currentFixedPoseSha256": "f1ab2e655871812f15c47b67a541251d43b96a5a4d85e0c5b705295c26767ba3",
+    "controlEvent": 876,
+    "points": [
+      [
+        1200,
+        379
+      ],
+      [
+        1206,
+        374
+      ],
+      [
+        1197,
+        854
+      ],
+      [
+        1211,
+        830
+      ],
+      [
+        1274,
+        523
+      ],
+      [
+        1201,
+        379
+      ]
+    ],
+    "currentFixedPoseRGB": [
+      [
+        138,
+        117,
+        105
+      ],
+      [
+        136,
+        115,
+        103
+      ],
+      [
+        46,
+        47,
+        49
+      ],
+      [
+        85,
+        63,
+        59
+      ],
+      [
+        59,
+        62,
+        66
+      ],
+      [
+        57,
+        61,
+        65
+      ]
+    ]
+  },
+  "playerDisplaySha256": "9d11c1e964f385a33a8f585d4475c161f94d2986addc76204992a22a56fdaf67",
+  "displayEvent": 1021,
+  "attachment": "ResourceId::175",
+  "points": [
+    {
+      "point": [
+        1200,
+        379
+      ],
+      "retainedDisplay": [
+        138,
+        117,
+        105
+      ],
+      "currentFixedPose": [
+        138,
+        117,
+        105
+      ],
+      "exact": true,
+      "draws": []
+    },
+    {
+      "point": [
+        1206,
+        374
+      ],
+      "retainedDisplay": [
+        136,
+        115,
+        103
+      ],
+      "currentFixedPose": [
+        136,
+        115,
+        103
+      ],
+      "exact": true,
+      "draws": []
+    },
+    {
+      "point": [
+        1197,
+        854
+      ],
+      "retainedDisplay": [
+        46,
+        47,
+        49
+      ],
+      "currentFixedPose": [
+        46,
+        47,
+        49
+      ],
+      "exact": true,
+      "draws": []
+    },
+    {
+      "point": [
+        1211,
+        830
+      ],
+      "retainedDisplay": [
+        85,
+        63,
+        59
+      ],
+      "currentFixedPose": [
+        85,
+        63,
+        59
+      ],
+      "exact": true,
+      "draws": []
+    },
+    {
+      "point": [
+        1274,
+        523
+      ],
+      "retainedDisplay": [
+        59,
+        62,
+        66
+      ],
+      "currentFixedPose": [
+        59,
+        62,
+        66
+      ],
+      "exact": true,
+      "draws": []
+    },
+    {
+      "point": [
+        1201,
+        379
+      ],
+      "retainedDisplay": [
+        57,
+        61,
+        65
+      ],
+      "currentFixedPose": [
+        57,
+        61,
+        65
+      ],
+      "exact": true,
+      "draws": []
+    }
+  ],
+  "events": {
+    "839": {
+      "indices": 102927,
+      "shader": "f8f6330ff880404dafdc2f6c5c7db0cc13fc36c2433267b9894f80b1f2c53c36",
+      "points": [
+        {
+          "point": [
+            1200,
+            379
+          ],
+          "changed": false,
+          "fragments": []
+        },
+        {
+          "point": [
+            1206,
+            374
+          ],
+          "changed": false,
+          "fragments": []
+        },
+        {
+          "point": [
+            1274,
+            523
+          ],
+          "changed": true,
+          "fragments": [
+            {
+              "primitive": 10294,
+              "depthFailed": true,
+              "stencilFailed": false,
+              "culled": false,
+              "discarded": false,
+              "before": [
+                0.03497314453125,
+                0.05499267578125,
+                0.074951171875,
+                1.0
+              ],
+              "fragment": [
+                0.009414945729076862,
+                0.011114298366010189,
+                0.013172919861972332,
+                1.0
+              ],
+              "after": [
+                0.03497314453125,
+                0.05499267578125,
+                0.074951171875,
+                1.0
+              ],
+              "preDepth": 0.9674383401870728,
+              "shaderDepth": 0.9680949449539185,
+              "postDepth": 0.9674383401870728
+            },
+            {
+              "primitive": 19607,
+              "depthFailed": false,
+              "stencilFailed": false,
+              "culled": false,
+              "discarded": false,
+              "before": [
+                0.03497314453125,
+                0.05499267578125,
+                0.074951171875,
+                1.0
+              ],
+              "fragment": [
+                0.0434732623398304,
+                0.04798433557152748,
+                0.05386735871434212,
+                1.0
+              ],
+              "after": [
+                0.04345703125,
+                0.0479736328125,
+                0.053863525390625,
+                1.0
+              ],
+              "preDepth": 0.9674383401870728,
+              "shaderDepth": 0.967438280582428,
+              "postDepth": 0.967438280582428
+            },
+            {
+              "primitive": 19962,
+              "depthFailed": true,
+              "stencilFailed": false,
+              "culled": false,
+              "discarded": false,
+              "before": [
+                0.04345703125,
+                0.0479736328125,
+                0.053863525390625,
+                1.0
+              ],
+              "fragment": [
+                0.007686885539442301,
+                0.00693904934450984,
+                0.008269001729786396,
+                1.0
+              ],
+              "after": [
+                0.04345703125,
+                0.0479736328125,
+                0.053863525390625,
+                1.0
+              ],
+              "preDepth": 0.967438280582428,
+              "shaderDepth": 0.9678921103477478,
+              "postDepth": 0.967438280582428
+            },
+            {
+              "primitive": 21532,
+              "depthFailed": true,
+              "stencilFailed": false,
+              "culled": false,
+              "discarded": false,
+              "before": [
+                0.04345703125,
+                0.0479736328125,
+                0.053863525390625,
+                1.0
+              ],
+              "fragment": [
+                0.005302888341248035,
+                0.0043007852509617805,
+                0.005707946605980396,
+                1.0
+              ],
+              "after": [
+                0.04345703125,
+                0.0479736328125,
+                0.053863525390625,
+                1.0
+              ],
+              "preDepth": 0.967438280582428,
+              "shaderDepth": 0.9699071645736694,
+              "postDepth": 0.967438280582428
+            },
+            {
+              "primitive": 21542,
+              "depthFailed": true,
+              "stencilFailed": false,
+              "culled": false,
+              "discarded": false,
+              "before": [
+                0.04345703125,
+                0.0479736328125,
+                0.053863525390625,
+                1.0
+              ],
+              "fragment": [
+                0.005570640787482262,
+                0.004714852664619684,
+                0.006402940955013037,
+                1.0
+              ],
+              "after": [
+                0.04345703125,
+                0.0479736328125,
+                0.053863525390625,
+                1.0
+              ],
+              "preDepth": 0.967438280582428,
+              "shaderDepth": 0.9698319435119629,
+              "postDepth": 0.967438280582428
+            },
+            {
+              "primitive": 22048,
+              "depthFailed": true,
+              "stencilFailed": false,
+              "culled": false,
+              "discarded": false,
+              "before": [
+                0.04345703125,
+                0.0479736328125,
+                0.053863525390625,
+                1.0
+              ],
+              "fragment": [
+                0.008315508253872395,
+                0.008284017443656921,
+                0.010775100439786911,
+                1.0
+              ],
+              "after": [
+                0.04345703125,
+                0.0479736328125,
+                0.053863525390625,
+                1.0
+              ],
+              "preDepth": 0.967438280582428,
+              "shaderDepth": 0.9699779152870178,
+              "postDepth": 0.967438280582428
+            },
+            {
+              "primitive": 31545,
+              "depthFailed": true,
+              "stencilFailed": false,
+              "culled": false,
+              "discarded": false,
+              "before": [
+                0.04345703125,
+                0.0479736328125,
+                0.053863525390625,
+                1.0
+              ],
+              "fragment": [
+                0.003331985557451844,
+                0.002889156574383378,
+                0.00432556914165616,
+                1.0
+              ],
+              "after": [
+                0.04345703125,
+                0.0479736328125,
+                0.053863525390625,
+                1.0
+              ],
+              "preDepth": 0.967438280582428,
+              "shaderDepth": 0.9694837331771851,
+              "postDepth": 0.967438280582428
+            }
+          ]
+        },
+        {
+          "point": [
+            1201,
+            379
+          ],
+          "changed": true,
+          "fragments": [
+            {
+              "primitive": 22876,
+              "depthFailed": false,
+              "stencilFailed": false,
+              "culled": false,
+              "discarded": false,
+              "before": [
+                0.03497314453125,
+                0.05499267578125,
+                0.074951171875,
+                1.0
+              ],
+              "fragment": [
+                0.041169848293066025,
+                0.046689607203006744,
+                0.0523320809006691,
+                1.0
+              ],
+              "after": [
+                0.041168212890625,
+                0.046661376953125,
+                0.05230712890625,
+                1.0
+              ],
+              "preDepth": 0.9693740606307983,
+              "shaderDepth": 0.9693740010261536,
+              "postDepth": 0.9693740010261536
+            }
+          ]
+        }
+      ]
+    },
+    "845": {
+      "indices": 61923,
+      "shader": "115338114898ef9d9525671704df30d351ee1d18012cebd15826352a0c40765f",
+      "points": [
+        {
+          "point": [
+            1197,
+            854
+          ],
+          "changed": true,
+          "fragments": [
+            {
+              "primitive": 461,
+              "depthFailed": false,
+              "stencilFailed": false,
+              "culled": false,
+              "discarded": false,
+              "before": [
+                0.03497314453125,
+                0.05499267578125,
+                0.074951171875,
+                1.0
+              ],
+              "fragment": [
+                0.027372390031814575,
+                0.02848890796303749,
+                0.030302712693810463,
+                1.0
+              ],
+              "after": [
+                0.0273590087890625,
+                0.0284881591796875,
+                0.0302886962890625,
+                1.0
+              ],
+              "preDepth": 0.9690823554992676,
+              "shaderDepth": 0.9690822958946228,
+              "postDepth": 0.9690822958946228
+            },
+            {
+              "primitive": 16105,
+              "depthFailed": true,
+              "stencilFailed": false,
+              "culled": false,
+              "discarded": false,
+              "before": [
+                0.0273590087890625,
+                0.0284881591796875,
+                0.0302886962890625,
+                1.0
+              ],
+              "fragment": [
+                0.00986754335463047,
+                0.009836784563958645,
+                0.011521627195179462,
+                1.0
+              ],
+              "after": [
+                0.0273590087890625,
+                0.0284881591796875,
+                0.0302886962890625,
+                1.0
+              ],
+              "preDepth": 0.9690822958946228,
+              "shaderDepth": 0.9725926518440247,
+              "postDepth": 0.9690822958946228
+            },
+            {
+              "primitive": 17687,
+              "depthFailed": true,
+              "stencilFailed": false,
+              "culled": false,
+              "discarded": false,
+              "before": [
+                0.0273590087890625,
+                0.0284881591796875,
+                0.0302886962890625,
+                1.0
+              ],
+              "fragment": [
+                0.02509237825870514,
+                0.010637981817126274,
+                0.018966959789395332,
+                1.0
+              ],
+              "after": [
+                0.0273590087890625,
+                0.0284881591796875,
+                0.0302886962890625,
+                1.0
+              ],
+              "preDepth": 0.9690822958946228,
+              "shaderDepth": 0.9725850224494934,
+              "postDepth": 0.9690822958946228
+            },
+            {
+              "primitive": 19297,
+              "depthFailed": true,
+              "stencilFailed": false,
+              "culled": false,
+              "discarded": false,
+              "before": [
+                0.0273590087890625,
+                0.0284881591796875,
+                0.0302886962890625,
+                1.0
+              ],
+              "fragment": [
+                0.05917438864707947,
+                0.008979754522442818,
+                0.021634111180901527,
+                1.0
+              ],
+              "after": [
+                0.0273590087890625,
+                0.0284881591796875,
+                0.0302886962890625,
+                1.0
+              ],
+              "preDepth": 0.9690822958946228,
+              "shaderDepth": 0.9723779559135437,
+              "postDepth": 0.9690822958946228
+            },
+            {
+              "primitive": 19328,
+              "depthFailed": true,
+              "stencilFailed": false,
+              "culled": false,
+              "discarded": false,
+              "before": [
+                0.0273590087890625,
+                0.0284881591796875,
+                0.0302886962890625,
+                1.0
+              ],
+              "fragment": [
+                0.046895429491996765,
+                0.008042942732572556,
+                0.023488415405154228,
+                1.0
+              ],
+              "after": [
+                0.0273590087890625,
+                0.0284881591796875,
+                0.0302886962890625,
+                1.0
+              ],
+              "preDepth": 0.9690822958946228,
+              "shaderDepth": 0.9720052480697632,
+              "postDepth": 0.9690822958946228
+            },
+            {
+              "primitive": 19423,
+              "depthFailed": true,
+              "stencilFailed": false,
+              "culled": false,
+              "discarded": false,
+              "before": [
+                0.0273590087890625,
+                0.0284881591796875,
+                0.0302886962890625,
+                1.0
+              ],
+              "fragment": [
+                0.04920973628759384,
+                0.00810406357049942,
+                0.023423532024025917,
+                1.0
+              ],
+              "after": [
+                0.0273590087890625,
+                0.0284881591796875,
+                0.0302886962890625,
+                1.0
+              ],
+              "preDepth": 0.9690822958946228,
+              "shaderDepth": 0.9719033241271973,
+              "postDepth": 0.9690822958946228
+            }
+          ]
+        },
+        {
+          "point": [
+            1211,
+            830
+          ],
+          "changed": false,
+          "fragments": [
+            {
+              "primitive": 19439,
+              "depthFailed": true,
+              "stencilFailed": false,
+              "culled": false,
+              "discarded": false,
+              "before": [
+                0.0916748046875,
+                0.049163818359375,
+                0.04412841796875,
+                1.0
+              ],
+              "fragment": [
+                0.054541390389204025,
+                0.007754267193377018,
+                0.0210620928555727,
+                1.0
+              ],
+              "after": [
+                0.0916748046875,
+                0.049163818359375,
+                0.04412841796875,
+                1.0
+              ],
+              "preDepth": 0.9690716862678528,
+              "shaderDepth": 0.9717627763748169,
+              "postDepth": 0.9690716862678528
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "secondLayerDepthGap": 0.0026910901069641113,
+  "earlierNativeMeshColors": {
+    "nvidia": [
+      {
+        "point": [
+          1200,
+          379
+        ],
+        "native": [
+          23,
+          23,
+          25
+        ],
+        "exactMesh": [
+          53,
+          56,
+          58
+        ]
+      },
+      {
+        "point": [
+          1206,
+          374
+        ],
+        "native": [
+          23,
+          22,
+          23
+        ],
+        "exactMesh": [
+          54,
+          58,
+          61
+        ]
+      },
+      {
+        "point": [
+          1274,
+          523
+        ],
+        "native": [
+          22,
+          21,
+          25
+        ],
+        "exactMesh": [
+          59,
+          62,
+          66
+        ]
+      },
+      {
+        "point": [
+          1201,
+          379
+        ],
+        "native": [
+          20,
+          21,
+          23
+        ],
+        "exactMesh": [
+          57,
+          61,
+          65
+        ]
+      }
+    ],
+    "intel": [
+      {
+        "point": [
+          1200,
+          379
+        ],
+        "native": [
+          23,
+          23,
+          25
+        ],
+        "exactMesh": [
+          53,
+          56,
+          58
+        ]
+      },
+      {
+        "point": [
+          1206,
+          374
+        ],
+        "native": [
+          23,
+          22,
+          23
+        ],
+        "exactMesh": [
+          54,
+          58,
+          61
+        ]
+      },
+      {
+        "point": [
+          1274,
+          523
+        ],
+        "native": [
+          22,
+          21,
+          25
+        ],
+        "exactMesh": [
+          59,
+          62,
+          66
+        ]
+      },
+      {
+        "point": [
+          1201,
+          379
+        ],
+        "native": [
+          20,
+          21,
+          23
+        ],
+        "exactMesh": [
+          57,
+          61,
+          65
+        ]
+      }
+    ]
+  },
+  "archiveSha256": "6bc1d0aad6a363f672d401cf382c63482bfca0a8732d13a97f2514a2e3e1f260"
+}

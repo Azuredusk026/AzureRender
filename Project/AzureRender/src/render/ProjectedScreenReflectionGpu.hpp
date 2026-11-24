@@ -24,6 +24,7 @@ struct ProjectedScreenReflectionInputs {
 struct ProjectedScreenReflectionHistory {
     // This slot must contain a successfully submitted depth from this owner.
     unsigned slot=0;VkImageView color{};ReflectionTraceView view;
+    VkImageView colorLayer{};
 };
 // Combines public producers and footprint-driven filtering with packed signals.
 // Perspective cameras use a finite far plane. The caller publishes borrowed inputs,

@@ -1,0 +1,1356 @@
+{
+  "overallStatus": "failed-user-review",
+  "nativeFrame": 6834,
+  "capture": {
+    "status": "qualified",
+    "passes": [
+      {
+        "kind": "extract",
+        "event": 1410,
+        "width": 1280,
+        "height": 720,
+        "resource": "ResourceId::141910",
+        "inputs": {
+          "0": "ResourceId::16349"
+        },
+        "output": "1410-r11.bin",
+        "sha256": "7c6c0b61dbeec02be1dd294c7fa3ecb0e9f26e88042e8ca1f3b627d44e68174a",
+        "constants": {
+          "0": "1410-cb0.bin",
+          "1": "1410-cb1.bin"
+        },
+        "samplers": [
+          {
+            "minify": "FilterMode.Linear",
+            "magnify": "FilterMode.Linear",
+            "mip": "FilterMode.Point",
+            "address": [
+              "AddressMode.ClampEdge",
+              "AddressMode.ClampEdge"
+            ]
+          }
+        ]
+      },
+      {
+        "kind": "down",
+        "event": 1419,
+        "width": 640,
+        "height": 360,
+        "resource": "ResourceId::141906",
+        "inputs": {
+          "0": "ResourceId::141910"
+        },
+        "output": "1419-r11.bin",
+        "sha256": "adc69d8768c97282459eeeac79189dbf485f182a5d4d8297afce59b3509c0b19",
+        "constants": {
+          "0": "1419-cb0.bin"
+        },
+        "samplers": [
+          {
+            "minify": "FilterMode.Linear",
+            "magnify": "FilterMode.Linear",
+            "mip": "FilterMode.Point",
+            "address": [
+              "AddressMode.ClampEdge",
+              "AddressMode.ClampEdge"
+            ]
+          }
+        ]
+      },
+      {
+        "kind": "down",
+        "event": 1428,
+        "width": 320,
+        "height": 180,
+        "resource": "ResourceId::141902",
+        "inputs": {
+          "0": "ResourceId::141906"
+        },
+        "output": "1428-r11.bin",
+        "sha256": "07beeba30c9d01db87a8c04f7c719ca66004a06df2cb83c469016516f55f4a47",
+        "constants": {
+          "0": "1428-cb0.bin"
+        },
+        "samplers": [
+          {
+            "minify": "FilterMode.Linear",
+            "magnify": "FilterMode.Linear",
+            "mip": "FilterMode.Point",
+            "address": [
+              "AddressMode.ClampEdge",
+              "AddressMode.ClampEdge"
+            ]
+          }
+        ]
+      },
+      {
+        "kind": "down",
+        "event": 1437,
+        "width": 160,
+        "height": 90,
+        "resource": "ResourceId::141898",
+        "inputs": {
+          "0": "ResourceId::141902"
+        },
+        "output": "1437-r11.bin",
+        "sha256": "d618d243c0cc548fe096346c64789ca50c1295fdb151504897656b3cb1fba2df",
+        "constants": {
+          "0": "1437-cb0.bin"
+        },
+        "samplers": [
+          {
+            "minify": "FilterMode.Linear",
+            "magnify": "FilterMode.Linear",
+            "mip": "FilterMode.Point",
+            "address": [
+              "AddressMode.ClampEdge",
+              "AddressMode.ClampEdge"
+            ]
+          }
+        ]
+      },
+      {
+        "kind": "down",
+        "event": 1446,
+        "width": 80,
+        "height": 45,
+        "resource": "ResourceId::141894",
+        "inputs": {
+          "0": "ResourceId::141898"
+        },
+        "output": "1446-r11.bin",
+        "sha256": "5ee5c76a78c1cb9e3a01d173465531b43a495852fe401a84fc64f6eb64a2963d",
+        "constants": {
+          "0": "1446-cb0.bin"
+        },
+        "samplers": [
+          {
+            "minify": "FilterMode.Linear",
+            "magnify": "FilterMode.Linear",
+            "mip": "FilterMode.Point",
+            "address": [
+              "AddressMode.ClampEdge",
+              "AddressMode.ClampEdge"
+            ]
+          }
+        ]
+      },
+      {
+        "kind": "down",
+        "event": 1455,
+        "width": 40,
+        "height": 23,
+        "resource": "ResourceId::141886",
+        "inputs": {
+          "0": "ResourceId::141894"
+        },
+        "output": "1455-r11.bin",
+        "sha256": "6f94bc4edf025e1d0f3cd15ae7608b31bdd2e42e495b57789adf2c05dc00fefb",
+        "constants": {
+          "0": "1455-cb0.bin"
+        },
+        "samplers": [
+          {
+            "minify": "FilterMode.Linear",
+            "magnify": "FilterMode.Linear",
+            "mip": "FilterMode.Point",
+            "address": [
+              "AddressMode.ClampEdge",
+              "AddressMode.ClampEdge"
+            ]
+          }
+        ]
+      },
+      {
+        "kind": "down",
+        "event": 1464,
+        "width": 20,
+        "height": 11,
+        "resource": "ResourceId::141878",
+        "inputs": {
+          "0": "ResourceId::141886"
+        },
+        "output": "1464-r11.bin",
+        "sha256": "d5c5876b077cd0a05e0c2630a34f1e1976635eeb01d34e16cb0e4e70e6698532",
+        "constants": {
+          "0": "1464-cb0.bin"
+        },
+        "samplers": [
+          {
+            "minify": "FilterMode.Linear",
+            "magnify": "FilterMode.Linear",
+            "mip": "FilterMode.Point",
+            "address": [
+              "AddressMode.ClampEdge",
+              "AddressMode.ClampEdge"
+            ]
+          }
+        ]
+      },
+      {
+        "kind": "down",
+        "event": 1473,
+        "width": 10,
+        "height": 6,
+        "resource": "ResourceId::141870",
+        "inputs": {
+          "0": "ResourceId::141878"
+        },
+        "output": "1473-r11.bin",
+        "sha256": "dd9472951f45a3b90f9552c996d02f17528da283442d8537864beb1da009ca5e",
+        "constants": {
+          "0": "1473-cb0.bin"
+        },
+        "samplers": [
+          {
+            "minify": "FilterMode.Linear",
+            "magnify": "FilterMode.Linear",
+            "mip": "FilterMode.Point",
+            "address": [
+              "AddressMode.ClampEdge",
+              "AddressMode.ClampEdge"
+            ]
+          }
+        ]
+      },
+      {
+        "kind": "seed",
+        "event": 1482,
+        "width": 5,
+        "height": 3,
+        "resource": "ResourceId::141862",
+        "inputs": {
+          "0": "ResourceId::141870"
+        },
+        "output": "1482-r11.bin",
+        "sha256": "fb32eaa9bcc9cdad8de5cd66a644e43f2569c3eec8d9a64c913a5076b06e3af0",
+        "constants": {
+          "0": "1482-cb0.bin"
+        },
+        "samplers": [
+          {
+            "minify": "FilterMode.Linear",
+            "magnify": "FilterMode.Linear",
+            "mip": "FilterMode.Point",
+            "address": [
+              "AddressMode.ClampEdge",
+              "AddressMode.ClampEdge"
+            ]
+          }
+        ]
+      },
+      {
+        "kind": "seed",
+        "event": 1491,
+        "width": 10,
+        "height": 6,
+        "resource": "ResourceId::141866",
+        "inputs": {
+          "0": "ResourceId::141862",
+          "1": "ResourceId::141870"
+        },
+        "output": "1491-r11.bin",
+        "sha256": "bdafb5b9df0ae507d9e14f4d348f623c1fda59976ab88585bf7f6652ab30c9d0",
+        "constants": {
+          "0": "1491-cb0.bin"
+        },
+        "samplers": [
+          {
+            "minify": "FilterMode.Linear",
+            "magnify": "FilterMode.Linear",
+            "mip": "FilterMode.Point",
+            "address": [
+              "AddressMode.ClampEdge",
+              "AddressMode.ClampEdge"
+            ]
+          }
+        ]
+      },
+      {
+        "kind": "up",
+        "event": 1500,
+        "width": 20,
+        "height": 11,
+        "resource": "ResourceId::141874",
+        "inputs": {
+          "0": "ResourceId::141866",
+          "1": "ResourceId::141878"
+        },
+        "output": "1500-r11.bin",
+        "sha256": "a07e501317a4121d49e062f408738affc52aee9dcb52c73fba1eeb0d9bf7b29b",
+        "constants": {
+          "0": "1500-cb0.bin"
+        },
+        "samplers": [
+          {
+            "minify": "FilterMode.Linear",
+            "magnify": "FilterMode.Linear",
+            "mip": "FilterMode.Point",
+            "address": [
+              "AddressMode.ClampEdge",
+              "AddressMode.ClampEdge"
+            ]
+          }
+        ]
+      },
+      {
+        "kind": "up",
+        "event": 1509,
+        "width": 40,
+        "height": 23,
+        "resource": "ResourceId::141882",
+        "inputs": {
+          "0": "ResourceId::141874",
+          "1": "ResourceId::141886"
+        },
+        "output": "1509-r11.bin",
+        "sha256": "f566941ebf8a01eeb3c2ce0a3b8979dcd7d7dbcb1c12e8a2dbb7785a1a6df30e",
+        "constants": {
+          "0": "1509-cb0.bin"
+        },
+        "samplers": [
+          {
+            "minify": "FilterMode.Linear",
+            "magnify": "FilterMode.Linear",
+            "mip": "FilterMode.Point",
+            "address": [
+              "AddressMode.ClampEdge",
+              "AddressMode.ClampEdge"
+            ]
+          }
+        ]
+      },
+      {
+        "kind": "up",
+        "event": 1518,
+        "width": 80,
+        "height": 45,
+        "resource": "ResourceId::141890",
+        "inputs": {
+          "0": "ResourceId::141882",
+          "1": "ResourceId::141894"
+        },
+        "output": "1518-r11.bin",
+        "sha256": "ec50f158469adf435ee956c6ec03450f0a962b0a21c40b7538ed1f89d52da601",
+        "constants": {
+          "0": "1518-cb0.bin"
+        },
+        "samplers": [
+          {
+            "minify": "FilterMode.Linear",
+            "magnify": "FilterMode.Linear",
+            "mip": "FilterMode.Point",
+            "address": [
+              "AddressMode.ClampEdge",
+              "AddressMode.ClampEdge"
+            ]
+          }
+        ]
+      },
+      {
+        "kind": "up",
+        "event": 1527,
+        "width": 160,
+        "height": 90,
+        "resource": "ResourceId::15881",
+        "inputs": {
+          "0": "ResourceId::141890",
+          "1": "ResourceId::141898"
+        },
+        "output": "1527-r11.bin",
+        "sha256": "a7b528b1852fecd190b69781913fd7d73ba8b8fef917762a716a4094ecc1b53d",
+        "constants": {
+          "0": "1527-cb0.bin"
+        },
+        "samplers": [
+          {
+            "minify": "FilterMode.Linear",
+            "magnify": "FilterMode.Linear",
+            "mip": "FilterMode.Point",
+            "address": [
+              "AddressMode.ClampEdge",
+              "AddressMode.ClampEdge"
+            ]
+          }
+        ]
+      },
+      {
+        "kind": "up",
+        "event": 1536,
+        "width": 320,
+        "height": 180,
+        "resource": "ResourceId::15873",
+        "inputs": {
+          "0": "ResourceId::15881",
+          "1": "ResourceId::141902"
+        },
+        "output": "1536-r11.bin",
+        "sha256": "55914c3aae4dbc25a8595e168e148d14b2c0ef0030b10b6719cf169a2b9f3e9c",
+        "constants": {
+          "0": "1536-cb0.bin"
+        },
+        "samplers": [
+          {
+            "minify": "FilterMode.Linear",
+            "magnify": "FilterMode.Linear",
+            "mip": "FilterMode.Point",
+            "address": [
+              "AddressMode.ClampEdge",
+              "AddressMode.ClampEdge"
+            ]
+          }
+        ]
+      },
+      {
+        "kind": "up",
+        "event": 1545,
+        "width": 640,
+        "height": 360,
+        "resource": "ResourceId::15865",
+        "inputs": {
+          "0": "ResourceId::15873",
+          "1": "ResourceId::141906"
+        },
+        "output": "1545-r11.bin",
+        "sha256": "24c010c1bec80f7f0cad3004300ee0fc93e4ff3a68c3c91cf5493296c53fbdf8",
+        "constants": {
+          "0": "1545-cb0.bin"
+        },
+        "samplers": [
+          {
+            "minify": "FilterMode.Linear",
+            "magnify": "FilterMode.Linear",
+            "mip": "FilterMode.Point",
+            "address": [
+              "AddressMode.ClampEdge",
+              "AddressMode.ClampEdge"
+            ]
+          }
+        ]
+      },
+      {
+        "kind": "up",
+        "event": 1554,
+        "width": 1280,
+        "height": 720,
+        "resource": "ResourceId::141858",
+        "inputs": {
+          "0": "ResourceId::15865",
+          "1": "ResourceId::141910"
+        },
+        "output": "1554-r11.bin",
+        "sha256": "2f41bac25c5bb8978661739f84ba904d029b5137dbfdd3fa31d9e7e622e6824c",
+        "constants": {
+          "0": "1554-cb0.bin"
+        },
+        "samplers": [
+          {
+            "minify": "FilterMode.Linear",
+            "magnify": "FilterMode.Linear",
+            "mip": "FilterMode.Point",
+            "address": [
+              "AddressMode.ClampEdge",
+              "AddressMode.ClampEdge"
+            ]
+          }
+        ]
+      }
+    ],
+    "sceneSha256": "4182f0fb45ccd00940a0b0f535dc710b05235c811b17291209280a05cd81958e"
+  },
+  "parameters": {
+    "threshold": 0.5225216150283813,
+    "kneeStart": 0.2612507939338684,
+    "kneeWidth": 0.5225416421890259,
+    "kneeGain": 0.9568615555763245,
+    "reconstructionBlend": 0.7699999809265137,
+    "subtexelSteps": 256,
+    "outputQuantization": "truncate"
+  },
+  "reconstruction": {
+    "1410": {
+      "independent": {
+        "total": 921600,
+        "exact": 880080,
+        "overOneUnit": 19,
+        "maximumUnits": [
+          2,
+          2,
+          1
+        ],
+        "maximumAbsolute": [
+          0.4966239929199219,
+          0.030900001525878906,
+          0.10684776306152344
+        ],
+        "meanAbsolute": [
+          0.0006164434598758817,
+          0.0004608400631695986,
+          0.0009298304212279618
+        ],
+        "quantizedMaximumAbsolute": [
+          0.25,
+          0.015625,
+          0.03125
+        ]
+      },
+      "accumulated": {
+        "total": 921600,
+        "exact": 880080,
+        "overOneUnit": 19,
+        "maximumUnits": [
+          2,
+          2,
+          1
+        ],
+        "maximumAbsolute": [
+          0.4966239929199219,
+          0.030900001525878906,
+          0.10684776306152344
+        ],
+        "meanAbsolute": [
+          0.0006164434598758817,
+          0.0004608400631695986,
+          0.0009298304212279618
+        ],
+        "quantizedMaximumAbsolute": [
+          0.25,
+          0.015625,
+          0.03125
+        ]
+      }
+    },
+    "1419": {
+      "independent": {
+        "total": 230400,
+        "exact": 230293,
+        "overOneUnit": 0,
+        "maximumUnits": [
+          1,
+          1,
+          1
+        ],
+        "maximumAbsolute": [
+          0.24241065979003906,
+          0.01548302173614502,
+          0.030120491981506348
+        ],
+        "meanAbsolute": [
+          0.0006308718584477901,
+          0.0004728567146230489,
+          0.0009575093281455338
+        ],
+        "quantizedMaximumAbsolute": [
+          0.001953125,
+          0.00048828125,
+          0.0009765625
+        ]
+      },
+      "accumulated": {
+        "total": 230400,
+        "exact": 220779,
+        "overOneUnit": 0,
+        "maximumUnits": [
+          1,
+          1,
+          1
+        ],
+        "maximumAbsolute": [
+          0.23938751220703125,
+          0.015435099601745605,
+          0.03011620044708252
+        ],
+        "meanAbsolute": [
+          0.0006121623446233571,
+          0.0004565698036458343,
+          0.0009436138207092881
+        ],
+        "quantizedMaximumAbsolute": [
+          0.03125,
+          0.015625,
+          0.015625
+        ]
+      }
+    },
+    "1428": {
+      "independent": {
+        "total": 57600,
+        "exact": 57592,
+        "overOneUnit": 0,
+        "maximumUnits": [
+          1,
+          1,
+          0
+        ],
+        "maximumAbsolute": [
+          0.12431621551513672,
+          0.007769107818603516,
+          0.015583395957946777
+        ],
+        "meanAbsolute": [
+          0.0006744331330992281,
+          0.000516866915859282,
+          0.0010390798561275005
+        ],
+        "quantizedMaximumAbsolute": [
+          0.0009765625,
+          0.00390625,
+          0.0
+        ]
+      },
+      "accumulated": {
+        "total": 57600,
+        "exact": 55170,
+        "overOneUnit": 0,
+        "maximumUnits": [
+          1,
+          1,
+          1
+        ],
+        "maximumAbsolute": [
+          0.12431621551513672,
+          0.007581055164337158,
+          0.01553809642791748
+        ],
+        "meanAbsolute": [
+          0.0006580046028830111,
+          0.0005014669732190669,
+          0.0010242363205179572
+        ],
+        "quantizedMaximumAbsolute": [
+          0.0078125,
+          0.0078125,
+          0.0078125
+        ]
+      }
+    },
+    "1437": {
+      "independent": {
+        "total": 14400,
+        "exact": 14400,
+        "overOneUnit": 0,
+        "maximumUnits": [
+          0,
+          0,
+          0
+        ],
+        "maximumAbsolute": [
+          0.02586531639099121,
+          0.0052703022956848145,
+          0.013526558876037598
+        ],
+        "meanAbsolute": [
+          0.0006614575977437198,
+          0.000515659456141293,
+          0.0010167659493163228
+        ],
+        "quantizedMaximumAbsolute": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "accumulated": {
+        "total": 14400,
+        "exact": 13783,
+        "overOneUnit": 0,
+        "maximumUnits": [
+          1,
+          1,
+          1
+        ],
+        "maximumAbsolute": [
+          0.025864601135253906,
+          0.005260050296783447,
+          0.013512492179870605
+        ],
+        "meanAbsolute": [
+          0.000645047053694725,
+          0.0004990826710127294,
+          0.0010026387171819806
+        ],
+        "quantizedMaximumAbsolute": [
+          0.00390625,
+          0.00390625,
+          0.0078125
+        ]
+      }
+    },
+    "1446": {
+      "independent": {
+        "total": 3600,
+        "exact": 3600,
+        "overOneUnit": 0,
+        "maximumUnits": [
+          0,
+          0,
+          0
+        ],
+        "maximumAbsolute": [
+          0.015413284301757812,
+          0.0038029849529266357,
+          0.007769286632537842
+        ],
+        "meanAbsolute": [
+          0.0006738211959600449,
+          0.0005251213442534208,
+          0.0010712117655202746
+        ],
+        "quantizedMaximumAbsolute": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "accumulated": {
+        "total": 3600,
+        "exact": 3451,
+        "overOneUnit": 0,
+        "maximumUnits": [
+          1,
+          1,
+          1
+        ],
+        "maximumAbsolute": [
+          0.015412449836730957,
+          0.003795415163040161,
+          0.0077225565910339355
+        ],
+        "meanAbsolute": [
+          0.0006567773525603116,
+          0.0005059501272626221,
+          0.0010591892059892416
+        ],
+        "quantizedMaximumAbsolute": [
+          0.001953125,
+          0.001953125,
+          0.00390625
+        ]
+      }
+    },
+    "1455": {
+      "independent": {
+        "total": 920,
+        "exact": 907,
+        "overOneUnit": 0,
+        "maximumUnits": [
+          1,
+          1,
+          1
+        ],
+        "maximumAbsolute": [
+          0.0076790452003479,
+          0.001949220895767212,
+          0.003877103328704834
+        ],
+        "meanAbsolute": [
+          0.0006758904783055186,
+          0.0005272731650620699,
+          0.0010547429556027055
+        ],
+        "quantizedMaximumAbsolute": [
+          0.001953125,
+          0.00048828125,
+          0.00390625
+        ]
+      },
+      "accumulated": {
+        "total": 920,
+        "exact": 873,
+        "overOneUnit": 0,
+        "maximumUnits": [
+          1,
+          1,
+          1
+        ],
+        "maximumAbsolute": [
+          0.007672250270843506,
+          0.001946091651916504,
+          0.003877103328704834
+        ],
+        "meanAbsolute": [
+          0.0006589756812900305,
+          0.0005102363647893071,
+          0.0010464979568496346
+        ],
+        "quantizedMaximumAbsolute": [
+          0.001953125,
+          0.001953125,
+          0.00390625
+        ]
+      }
+    },
+    "1464": {
+      "independent": {
+        "total": 220,
+        "exact": 219,
+        "overOneUnit": 0,
+        "maximumUnits": [
+          0,
+          1,
+          0
+        ],
+        "maximumAbsolute": [
+          0.0029425621032714844,
+          0.0019345283508300781,
+          0.0037581026554107666
+        ],
+        "meanAbsolute": [
+          0.0006719836965203285,
+          0.0005402364768087864,
+          0.0010655975202098489
+        ],
+        "quantizedMaximumAbsolute": [
+          0.0,
+          0.0009765625,
+          0.0
+        ]
+      },
+      "accumulated": {
+        "total": 220,
+        "exact": 208,
+        "overOneUnit": 0,
+        "maximumUnits": [
+          1,
+          1,
+          1
+        ],
+        "maximumAbsolute": [
+          0.0029424428939819336,
+          0.0018922239542007446,
+          0.003660067915916443
+        ],
+        "meanAbsolute": [
+          0.0006506090867333114,
+          0.0005221581668592989,
+          0.0010504743549972773
+        ],
+        "quantizedMaximumAbsolute": [
+          0.001953125,
+          0.00048828125,
+          0.00390625
+        ]
+      }
+    },
+    "1473": {
+      "independent": {
+        "total": 60,
+        "exact": 59,
+        "overOneUnit": 0,
+        "maximumUnits": [
+          0,
+          1,
+          0
+        ],
+        "maximumAbsolute": [
+          0.0017529726028442383,
+          0.0009634494781494141,
+          0.0019240230321884155
+        ],
+        "meanAbsolute": [
+          0.0006982345366850495,
+          0.0005177097045816481,
+          0.0009208688861690462
+        ],
+        "quantizedMaximumAbsolute": [
+          0.0,
+          0.0009765625,
+          0.0
+        ]
+      },
+      "accumulated": {
+        "total": 60,
+        "exact": 54,
+        "overOneUnit": 0,
+        "maximumUnits": [
+          1,
+          1,
+          1
+        ],
+        "maximumAbsolute": [
+          0.0017349720001220703,
+          0.000963255763053894,
+          0.001908823847770691
+        ],
+        "meanAbsolute": [
+          0.0006819750997237861,
+          0.0005085518350824714,
+          0.0008663331973366439
+        ],
+        "quantizedMaximumAbsolute": [
+          0.0009765625,
+          0.0009765625,
+          0.001953125
+        ]
+      }
+    },
+    "1482": {
+      "independent": {
+        "total": 15,
+        "exact": 15,
+        "overOneUnit": 0,
+        "maximumUnits": [
+          0,
+          0,
+          0
+        ],
+        "maximumAbsolute": [
+          0.0018530488014221191,
+          0.0008199363946914673,
+          0.001932293176651001
+        ],
+        "meanAbsolute": [
+          0.0008238474256359041,
+          0.0003826439497061074,
+          0.0008297264575958252
+        ],
+        "quantizedMaximumAbsolute": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "accumulated": {
+        "total": 15,
+        "exact": 15,
+        "overOneUnit": 0,
+        "maximumUnits": [
+          0,
+          0,
+          0
+        ],
+        "maximumAbsolute": [
+          0.0018330216407775879,
+          0.0008053332567214966,
+          0.0018780529499053955
+        ],
+        "meanAbsolute": [
+          0.0007850448018871248,
+          0.00037430625525303185,
+          0.0007958402275107801
+        ],
+        "quantizedMaximumAbsolute": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    "1491": {
+      "independent": {
+        "total": 60,
+        "exact": 59,
+        "overOneUnit": 0,
+        "maximumUnits": [
+          0,
+          0,
+          1
+        ],
+        "maximumAbsolute": [
+          0.0018712133169174194,
+          0.0009744539856910706,
+          0.0018163546919822693
+        ],
+        "meanAbsolute": [
+          0.000565829745028168,
+          0.0004919979837723076,
+          0.0009568427922204137
+        ],
+        "quantizedMaximumAbsolute": [
+          0.0,
+          0.0,
+          0.001953125
+        ]
+      },
+      "accumulated": {
+        "total": 60,
+        "exact": 59,
+        "overOneUnit": 0,
+        "maximumUnits": [
+          0,
+          0,
+          1
+        ],
+        "maximumAbsolute": [
+          0.0018712133169174194,
+          0.0009744539856910706,
+          0.0018163546919822693
+        ],
+        "meanAbsolute": [
+          0.0005508558242581785,
+          0.0004882544162683189,
+          0.0009493558318354189
+        ],
+        "quantizedMaximumAbsolute": [
+          0.0,
+          0.0,
+          0.001953125
+        ]
+      }
+    },
+    "1500": {
+      "independent": {
+        "total": 220,
+        "exact": 214,
+        "overOneUnit": 0,
+        "maximumUnits": [
+          1,
+          1,
+          0
+        ],
+        "maximumAbsolute": [
+          0.0019449591636657715,
+          0.0009733662009239197,
+          0.0019443482160568237
+        ],
+        "meanAbsolute": [
+          0.0006029601790942252,
+          0.0004759045841637999,
+          0.0009470743243582547
+        ],
+        "quantizedMaximumAbsolute": [
+          0.001953125,
+          0.0009765625,
+          0.0
+        ]
+      },
+      "accumulated": {
+        "total": 220,
+        "exact": 209,
+        "overOneUnit": 0,
+        "maximumUnits": [
+          1,
+          1,
+          1
+        ],
+        "maximumAbsolute": [
+          0.0019449591636657715,
+          0.0009733662009239197,
+          0.0019443482160568237
+        ],
+        "meanAbsolute": [
+          0.000599843799136579,
+          0.00047437314060516655,
+          0.0009236485930159688
+        ],
+        "quantizedMaximumAbsolute": [
+          0.001953125,
+          0.0009765625,
+          0.001953125
+        ]
+      }
+    },
+    "1509": {
+      "independent": {
+        "total": 920,
+        "exact": 910,
+        "overOneUnit": 0,
+        "maximumUnits": [
+          1,
+          1,
+          1
+        ],
+        "maximumAbsolute": [
+          0.0029479265213012695,
+          0.0019290149211883545,
+          0.003730684518814087
+        ],
+        "meanAbsolute": [
+          0.0006678455974906683,
+          0.0005190809606574476,
+          0.0009684910764917731
+        ],
+        "quantizedMaximumAbsolute": [
+          0.001953125,
+          0.0009765625,
+          0.001953125
+        ]
+      },
+      "accumulated": {
+        "total": 920,
+        "exact": 864,
+        "overOneUnit": 0,
+        "maximumUnits": [
+          1,
+          1,
+          1
+        ],
+        "maximumAbsolute": [
+          0.0029479265213012695,
+          0.0019290149211883545,
+          0.003730684518814087
+        ],
+        "meanAbsolute": [
+          0.0006467279745265841,
+          0.0005104792071506381,
+          0.0009517541038803756
+        ],
+        "quantizedMaximumAbsolute": [
+          0.001953125,
+          0.0009765625,
+          0.001953125
+        ]
+      }
+    },
+    "1518": {
+      "independent": {
+        "total": 3600,
+        "exact": 3532,
+        "overOneUnit": 0,
+        "maximumUnits": [
+          1,
+          1,
+          1
+        ],
+        "maximumAbsolute": [
+          0.0054822564125061035,
+          0.001959294080734253,
+          0.0038929730653762817
+        ],
+        "meanAbsolute": [
+          0.0006686050328426063,
+          0.000523130118381232,
+          0.0010145108681172132
+        ],
+        "quantizedMaximumAbsolute": [
+          0.001953125,
+          0.001953125,
+          0.001953125
+        ]
+      },
+      "accumulated": {
+        "total": 3600,
+        "exact": 3353,
+        "overOneUnit": 8,
+        "maximumUnits": [
+          1,
+          1,
+          2
+        ],
+        "maximumAbsolute": [
+          0.0054822564125061035,
+          0.001959294080734253,
+          0.0038929730653762817
+        ],
+        "meanAbsolute": [
+          0.0006443559541366994,
+          0.0005166718037799001,
+          0.0010041086934506893
+        ],
+        "quantizedMaximumAbsolute": [
+          0.001953125,
+          0.001953125,
+          0.00390625
+        ]
+      }
+    },
+    "1527": {
+      "independent": {
+        "total": 14400,
+        "exact": 14152,
+        "overOneUnit": 0,
+        "maximumUnits": [
+          1,
+          1,
+          1
+        ],
+        "maximumAbsolute": [
+          0.014572739601135254,
+          0.0019679665565490723,
+          0.0038941800594329834
+        ],
+        "meanAbsolute": [
+          0.0006745781283825636,
+          0.0005291812703944743,
+          0.0010007406817749143
+        ],
+        "quantizedMaximumAbsolute": [
+          0.0078125,
+          0.001953125,
+          0.001953125
+        ]
+      },
+      "accumulated": {
+        "total": 14400,
+        "exact": 13279,
+        "overOneUnit": 13,
+        "maximumUnits": [
+          2,
+          1,
+          2
+        ],
+        "maximumAbsolute": [
+          0.014572739601135254,
+          0.002286255359649658,
+          0.0038941800594329834
+        ],
+        "meanAbsolute": [
+          0.000656630436424166,
+          0.0005198729922994971,
+          0.000987194012850523
+        ],
+        "quantizedMaximumAbsolute": [
+          0.0078125,
+          0.001953125,
+          0.00390625
+        ]
+      }
+    },
+    "1536": {
+      "independent": {
+        "total": 57600,
+        "exact": 56401,
+        "overOneUnit": 0,
+        "maximumUnits": [
+          1,
+          1,
+          1
+        ],
+        "maximumAbsolute": [
+          0.02262258529663086,
+          0.0039040446281433105,
+          0.0077187418937683105
+        ],
+        "meanAbsolute": [
+          0.0006785477744415402,
+          0.0005322170909494162,
+          0.0010018616449087858
+        ],
+        "quantizedMaximumAbsolute": [
+          0.00390625,
+          0.001953125,
+          0.00390625
+        ]
+      },
+      "accumulated": {
+        "total": 57600,
+        "exact": 52417,
+        "overOneUnit": 21,
+        "maximumUnits": [
+          2,
+          1,
+          2
+        ],
+        "maximumAbsolute": [
+          0.02262258529663086,
+          0.0039040446281433105,
+          0.0077187418937683105
+        ],
+        "meanAbsolute": [
+          0.0006651908624917269,
+          0.0005238298908807337,
+          0.000988825224339962
+        ],
+        "quantizedMaximumAbsolute": [
+          0.0078125,
+          0.00390625,
+          0.00390625
+        ]
+      }
+    },
+    "1545": {
+      "independent": {
+        "total": 230400,
+        "exact": 226871,
+        "overOneUnit": 0,
+        "maximumUnits": [
+          1,
+          1,
+          1
+        ],
+        "maximumAbsolute": [
+          0.12114715576171875,
+          0.0076868534088134766,
+          0.015453100204467773
+        ],
+        "meanAbsolute": [
+          0.0006725399871356785,
+          0.0005243789055384696,
+          0.0010490396525710821
+        ],
+        "quantizedMaximumAbsolute": [
+          0.015625,
+          0.00390625,
+          0.0078125
+        ]
+      },
+      "accumulated": {
+        "total": 230400,
+        "exact": 208240,
+        "overOneUnit": 354,
+        "maximumUnits": [
+          2,
+          2,
+          3
+        ],
+        "maximumAbsolute": [
+          0.12114715576171875,
+          0.0076868534088134766,
+          0.015453100204467773
+        ],
+        "meanAbsolute": [
+          0.0006615992169827223,
+          0.0005180512089282274,
+          0.0010361996246501803
+        ],
+        "quantizedMaximumAbsolute": [
+          0.015625,
+          0.00390625,
+          0.0078125
+        ]
+      }
+    },
+    "1554": {
+      "independent": {
+        "total": 921600,
+        "exact": 906193,
+        "overOneUnit": 0,
+        "maximumUnits": [
+          1,
+          1,
+          1
+        ],
+        "maximumAbsolute": [
+          0.24541091918945312,
+          0.007785201072692871,
+          0.031161785125732422
+        ],
+        "meanAbsolute": [
+          0.000668299151584506,
+          0.0005259548779577017,
+          0.0010125802364200354
+        ],
+        "quantizedMaximumAbsolute": [
+          0.0625,
+          0.0078125,
+          0.0078125
+        ]
+      },
+      "accumulated": {
+        "total": 921600,
+        "exact": 826024,
+        "overOneUnit": 1149,
+        "maximumUnits": [
+          2,
+          2,
+          2
+        ],
+        "maximumAbsolute": [
+          0.24541091918945312,
+          0.007785201072692871,
+          0.031161785125732422
+        ],
+        "meanAbsolute": [
+          0.0006573614082299173,
+          0.0005200537270866334,
+          0.0009994478896260262
+        ],
+        "quantizedMaximumAbsolute": [
+          0.125,
+          0.0078125,
+          0.015625
+        ]
+      }
+    }
+  }
+}

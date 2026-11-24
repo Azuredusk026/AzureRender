@@ -1,0 +1,171 @@
+{
+  "status": "verified-full-scene-native-body-candidate-frames",
+  "allVisualAcceptance": false,
+  "deviceSourceControlExact": true,
+  "repeatExact": false,
+  "captures": {
+    "nvidia": {
+      "task": "nr-joint-character-referenced-native-body-nvidia",
+      "id": 1465,
+      "status": "succeeded",
+      "exitCode": 0,
+      "elapsedSeconds": 317.0939999999973,
+      "baseline": "3c45327440ada8eb611a88598d97717fc05709daf1cd2988fc0aa068a93907bc",
+      "difference": {
+        "png": "839ea72c033a403e63e3e3ed2d2cc24739d696473f80c9164e68ff7a5691ff8e",
+        "referencePng": "3c45327440ada8eb611a88598d97717fc05709daf1cd2988fc0aa068a93907bc",
+        "raw": "826c206ead69c397311348637887070e3777333a9d47a74de615f6c64b5b853f",
+        "archive": "e6d2c0ed7271c93ad2ed783e8a5197a014f399e96d6f2cb28a615e6771c02be3",
+        "changed": 326,
+        "overOne": 92,
+        "peak": 45,
+        "bounds": [
+          607,
+          99,
+          752,
+          715
+        ]
+      }
+    },
+    "intel": {
+      "task": "nr-joint-character-referenced-native-body-intel",
+      "id": 1470,
+      "status": "succeeded",
+      "exitCode": 0,
+      "elapsedSeconds": 283.75,
+      "baseline": "a9657b4558f9d3cb03872d60d5e9e979af3eb6eb6c1a69784096148ff6f73c35",
+      "difference": {
+        "png": "819070c61bcedc1e7e8d19731cbb86bc25bb1d2f3bbf300d6abd79c5e47ae86f",
+        "referencePng": "a9657b4558f9d3cb03872d60d5e9e979af3eb6eb6c1a69784096148ff6f73c35",
+        "raw": "6e071a17b3c56f36f462e41080e524a7fe097c4bed6f069803f1c2c3aa437a3d",
+        "archive": "7951a70e69464941a66bfe99a35d29ee390be169a9df18049cbc22d77bbb8cf3",
+        "changed": 1580,
+        "overOne": 749,
+        "peak": 45,
+        "bounds": [
+          123,
+          99,
+          1272,
+          712
+        ]
+      }
+    },
+    "intel-repeat": {
+      "task": "nr-joint-character-referenced-native-body-intel-repeat",
+      "id": 1474,
+      "status": "succeeded",
+      "exitCode": 0,
+      "elapsedSeconds": 100.13999999999942,
+      "baseline": "a9657b4558f9d3cb03872d60d5e9e979af3eb6eb6c1a69784096148ff6f73c35",
+      "difference": {
+        "png": "3127cb3a57ae788d7560d646b86dc4df6d1d9f137eef12979ab31cbf98ceb81a",
+        "referencePng": "a9657b4558f9d3cb03872d60d5e9e979af3eb6eb6c1a69784096148ff6f73c35",
+        "raw": "a0e01547ad6fd8311542a28007a516c5ece27afc1abacc7ff0e6af3e0706afdd",
+        "archive": "8fc45ed2d344a0d1b78e57c6a98c04052d46a4fe2a879b04751522da51c963d1",
+        "changed": 746,
+        "overOne": 493,
+        "peak": 52,
+        "bounds": [
+          607,
+          99,
+          943,
+          712
+        ]
+      }
+    }
+  },
+  "output": {
+    "nvidia": {
+      "bodyCrop": 64,
+      "floorCrop": 0,
+      "overOne": 92
+    },
+    "intel": {
+      "bodyCrop": 63,
+      "floorCrop": 662,
+      "overOne": 749
+    },
+    "intel-repeat": {
+      "bodyCrop": 63,
+      "floorCrop": 0,
+      "overOne": 493
+    },
+    "overlap": 82
+  },
+  "cropCoordinates": {
+    "body": [
+      718,
+      270,
+      733,
+      275
+    ],
+    "floor": [
+      906,
+      628,
+      944,
+      656
+    ]
+  },
+  "assets": {
+    "identity": {
+      "archive": "371f24a5b476b593cb641e85d53a2d5bead124393c56acfc805af2ce22282a3c",
+      "bufferCounts": 1,
+      "views": 10038,
+      "imageCount": 67
+    },
+    "native": {
+      "archive": "4fb3f4d46e8381285d982b591446a359bf3dbff22ad23392de5a44c4c7d857ff",
+      "bufferCounts": 2,
+      "views": 10046,
+      "imageCount": 67,
+      "newBodyBufferSha256": "c45c9ec232a441134552114c8753d922b5be86f74863d7327c7c962b28575945"
+    }
+  },
+  "frameCountPerCapture": 1,
+  "validation": {
+    "archive": "e273240e47734ad679ce03b3af886fea0e749656cf4c0779ee7e06d02045545a",
+    "members": {
+      "player/nvidia-identity/command.json": "8e58fdb2ae909edf0afc060d8fa7b858e2c39d17cfdc17cf187229b068a9e6ec",
+      "player/nvidia-identity/runtime.json": "05406e3ef9f1cd987f2d2a5a8678ef0b299c44d50e787f18840503c6976c6e22",
+      "player/nvidia-identity/result.json": "1f1c6b87ff81621fa51c0dcf6df671298fc808dc15c9575a4a6120c01adb2c16",
+      "player/nvidia-identity/frames/capture_manifest.json": "9d1af279fae3aa8df0cefb2bccd19fd80a53e6247c61425901ed4cee61139687",
+      "player/nvidia-identity/frames/gpu_capabilities.json": "fcc84c76d84bace150db35ec07631ab83809bdd1c365b6d96cb8afe8e354190a",
+      "frames/nvidia-identity.zip": "600ed92735afa5066951ba13aaebc6b470e3d94fb2970f07887e840cb683f659",
+      "player/nvidia-native/command.json": "02f707b41c29354147a0d35396297fd00d31337339cf9e620f007139c5d02fd8",
+      "player/nvidia-native/runtime.json": "05406e3ef9f1cd987f2d2a5a8678ef0b299c44d50e787f18840503c6976c6e22",
+      "player/nvidia-native/result.json": "d247fdb059f39cada330cf27744109059d2a8aca26a7c6781d95ebb8d03a284f",
+      "player/nvidia-native/frames/capture_manifest.json": "f3360359fe86bfc73934e6bf685c551a3491b385b73c35c1483640569fca5afe",
+      "player/nvidia-native/frames/gpu_capabilities.json": "fcc84c76d84bace150db35ec07631ab83809bdd1c365b6d96cb8afe8e354190a",
+      "frames/nvidia-native.zip": "e6d2c0ed7271c93ad2ed783e8a5197a014f399e96d6f2cb28a615e6771c02be3",
+      "data/nvidia-qualification.json": "1aa248a377e05588caf14aa31326375fee8027ca5ae30d6882e00840417c57b2",
+      "logs/nvidia.log": "11c0b646b9e1a84d9283d62d02cb7aa2514678ecc4f544d3a68960a26452968a",
+      "player/intel-identity/command.json": "b3c2f03d728c86652174085429c33f075db9300b40739e458bdb4b8860474bfe",
+      "player/intel-identity/runtime.json": "05406e3ef9f1cd987f2d2a5a8678ef0b299c44d50e787f18840503c6976c6e22",
+      "player/intel-identity/result.json": "8fc06a2f7970c37a825aa73f76d37d647e6007932321d651541c66af169ac074",
+      "player/intel-identity/frames/capture_manifest.json": "a8dc06175e6611ed00a93965cf0415c214fbf5ca5250ad2f32b0542ed1597f12",
+      "player/intel-identity/frames/gpu_capabilities.json": "052830ed89bea19f0e9a17839082b9f979cfab2b17908f9ee83df5f0e0bcd85f",
+      "frames/intel-identity.zip": "e24fa6b425e80e9aa872760629d03820ab306afd2948b109be471b6c273c4f71",
+      "player/intel-native/command.json": "4266c1019a5a3dfc6ee03b92f87565547d1b12b948fa63eae0b7c32452d71617",
+      "player/intel-native/runtime.json": "05406e3ef9f1cd987f2d2a5a8678ef0b299c44d50e787f18840503c6976c6e22",
+      "player/intel-native/result.json": "5b38b7f0c86ec1c8999be57b3e284a5ffe0ccd31e69a67e58cb4ee3b9c4e6dab",
+      "player/intel-native/frames/capture_manifest.json": "ba5b3ef84d5abd13dea35e6f008086bdf7734ee83617df9424c9dfacf5ee4c63",
+      "player/intel-native/frames/gpu_capabilities.json": "052830ed89bea19f0e9a17839082b9f979cfab2b17908f9ee83df5f0e0bcd85f",
+      "frames/intel-native.zip": "7951a70e69464941a66bfe99a35d29ee390be169a9df18049cbc22d77bbb8cf3",
+      "data/intel-qualification.json": "550f748aa14031669a3d15fa6dca56ef8f15315afe9e364580bf0af53a49d02c",
+      "logs/intel.log": "eb4c0b65d7184a5d8cba873308fb63020ba596767412aedb90be01579ed900d6",
+      "player/intel-native-repeat/command.json": "95aa1b5402fabf957f1f13291f95758d948927eb94d41af8654b497a5dd76a88",
+      "player/intel-native-repeat/runtime.json": "05406e3ef9f1cd987f2d2a5a8678ef0b299c44d50e787f18840503c6976c6e22",
+      "player/intel-native-repeat/result.json": "bc1698a49a793bd1760739424287f5a93e8454b23df9a71c23f5a681addf3916",
+      "player/intel-native-repeat/frames/capture_manifest.json": "5ce527674353b3fb59aca55fde879d79e6f8b097efeba96c7b2ae28cdfdda1c8",
+      "player/intel-native-repeat/frames/gpu_capabilities.json": "052830ed89bea19f0e9a17839082b9f979cfab2b17908f9ee83df5f0e0bcd85f",
+      "frames/intel-native-repeat.zip": "8fc45ed2d344a0d1b78e57c6a98c04052d46a4fe2a879b04751522da51c963d1",
+      "data/intel-repeat-qualification.json": "18385ee0772f55b25d65da89a70fd4d9470cdf3560ad5d9192e4182951df377a",
+      "logs/intel-repeat.log": "4375c4738c7b008b7129dee721f1ee859f18c7967e65b9d7e693d3ee9bd71ecd",
+      "assets/identity.zip": "371f24a5b476b593cb641e85d53a2d5bead124393c56acfc805af2ce22282a3c",
+      "assets/native.zip": "4fb3f4d46e8381285d982b591446a359bf3dbff22ad23392de5a44c4c7d857ff",
+      "source/joint-character-referenced-body.py": "32f7b021114297a65803d0b1f2107b913f7a82a7cc5acb28aa2529599f018836",
+      "source/build-animated-body-topology-candidate.py": "c040a3f8746d701802af0871d595f811b47ed6972951a00bc70222616d2481ce",
+      "source/archive-joint-character-referenced-body.py": "2f1dd83b8eb830a3a14f852628371ee4a6d2c6ce2ece5f55f62da5565d9cef85"
+    }
+  }
+}

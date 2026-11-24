@@ -1,0 +1,590 @@
+{
+  "status": "rescored-completed-nvidia-projected-reflection-filter",
+  "job": 1622,
+  "dispatchResult": "budget-stopped-after-completed-capture",
+  "candidatePrograms": {
+    "projected_reflection_trace.comp.spv": "fe59cb9d8406a6ffb67dbaa26f23c0a817045e86195fe0f017ef9dd22d6853c2",
+    "reflection_spatial_filter.comp.spv": "dd618e8823128ffa53d1c3cf1ba582a6a123ff920ad45fb5131ff77409dad6d7"
+  },
+  "reference": "af67600fcbb25060f1770a4bedb5e13b64a981229c9b24d9db29492db1fb5e18",
+  "captureManifest": "6a68afb67aa65ab50739d21bf0c40da21c860d74ee64b09c7507a5fa5119c91b",
+  "frames": [
+    {
+      "sha256": "120d2de3b5ab10ec2f4865ed348ca7b0d0f4e1a31a5c311c892ef5c56bcafc6c",
+      "raw": "389cfae5eb4dd945981699c852cc9614298c3071bc0a5a63b52f6bb5d4738431",
+      "metrics": {
+        "complete": {
+          "control": {
+            "pixels": 3686400,
+            "ssim": 0.8156728744506836,
+            "medianReference": 0.40663331747055054,
+            "medianCandidate": 0.4078862965106964,
+            "medianLumaRelativeError": 0.0030813486901171546,
+            "meanAbsByte": 12.292019223813657,
+            "diagnosticMedianMatchedLumaSsim": 0.8159422278404236,
+            "medianSignedRgbBytes": [
+              2.0,
+              1.0,
+              1.0
+            ],
+            "exactPixels": 22138,
+            "peak": 242
+          },
+          "candidate": {
+            "pixels": 3686400,
+            "ssim": 0.8159037232398987,
+            "medianReference": 0.40663331747055054,
+            "medianCandidate": 0.40558433532714844,
+            "medianLumaRelativeError": 0.0025796758365184123,
+            "meanAbsByte": 12.193814380787037,
+            "diagnosticMedianMatchedLumaSsim": 0.8156808614730835,
+            "medianSignedRgbBytes": [
+              2.0,
+              1.0,
+              1.0
+            ],
+            "exactPixels": 21854,
+            "peak": 243
+          },
+          "highFrequency": [
+            18.48886489868164,
+            34.9108772277832,
+            34.929439544677734
+          ],
+          "newOverOne": 38138
+        },
+        "ceiling": {
+          "control": {
+            "pixels": 537600,
+            "ssim": 0.8280209302902222,
+            "medianReference": 0.8463764786720276,
+            "medianCandidate": 0.900831401348114,
+            "medianLumaRelativeError": 0.06433888942840979,
+            "meanAbsByte": 14.552993551587301,
+            "diagnosticMedianMatchedLumaSsim": 0.8339679837226868,
+            "medianSignedRgbBytes": [
+              11.0,
+              11.0,
+              11.0
+            ],
+            "exactPixels": 9114,
+            "peak": 205
+          },
+          "candidate": {
+            "pixels": 537600,
+            "ssim": 0.8282982110977173,
+            "medianReference": 0.8463764786720276,
+            "medianCandidate": 0.9003646969795227,
+            "medianLumaRelativeError": 0.06378747480341505,
+            "meanAbsByte": 14.473320932539682,
+            "diagnosticMedianMatchedLumaSsim": 0.8341875672340393,
+            "medianSignedRgbBytes": [
+              11.0,
+              11.0,
+              11.0
+            ],
+            "exactPixels": 9174,
+            "peak": 204
+          },
+          "highFrequency": [
+            12.721052169799805,
+            30.625385284423828,
+            30.806257247924805
+          ],
+          "newOverOne": 254
+        },
+        "leftDoor": {
+          "control": {
+            "pixels": 253500,
+            "ssim": 0.87735915184021,
+            "medianReference": 0.5621686577796936,
+            "medianCandidate": 0.5502784848213196,
+            "medianLumaRelativeError": 0.021150544047287716,
+            "meanAbsByte": 8.276439184746877,
+            "diagnosticMedianMatchedLumaSsim": 0.8753918409347534,
+            "medianSignedRgbBytes": [
+              2.0,
+              1.0,
+              1.0
+            ],
+            "exactPixels": 1195,
+            "peak": 165
+          },
+          "candidate": {
+            "pixels": 253500,
+            "ssim": 0.8774456977844238,
+            "medianReference": 0.5621686577796936,
+            "medianCandidate": 0.5502784848213196,
+            "medianLumaRelativeError": 0.021150544047287716,
+            "meanAbsByte": 8.253016436554898,
+            "diagnosticMedianMatchedLumaSsim": 0.8754792809486389,
+            "medianSignedRgbBytes": [
+              2.0,
+              1.0,
+              1.0
+            ],
+            "exactPixels": 1205,
+            "peak": 165
+          },
+          "highFrequency": [
+            11.707696914672852,
+            25.86113166809082,
+            25.858304977416992
+          ],
+          "newOverOne": 107
+        },
+        "rightWall": {
+          "control": {
+            "pixels": 128800,
+            "ssim": 0.8795275092124939,
+            "medianReference": 0.32994508743286133,
+            "medianCandidate": 0.30750200152397156,
+            "medianLumaRelativeError": 0.06802066999544762,
+            "meanAbsByte": 11.971353519668737,
+            "diagnosticMedianMatchedLumaSsim": 0.8788303732872009,
+            "medianSignedRgbBytes": [
+              -8.0,
+              -8.0,
+              -7.0
+            ],
+            "exactPixels": 352,
+            "peak": 122
+          },
+          "candidate": {
+            "pixels": 128800,
+            "ssim": 0.8797085881233215,
+            "medianReference": 0.32994508743286133,
+            "medianCandidate": 0.30689412355422974,
+            "medianLumaRelativeError": 0.06986303102125169,
+            "meanAbsByte": 12.017481884057972,
+            "diagnosticMedianMatchedLumaSsim": 0.8791441321372986,
+            "medianSignedRgbBytes": [
+              -8.0,
+              -8.0,
+              -7.0
+            ],
+            "exactPixels": 315,
+            "peak": 122
+          },
+          "highFrequency": [
+            7.028468132019043,
+            11.539972305297852,
+            11.560249328613281
+          ],
+          "newOverOne": 2026
+        },
+        "centerFloor": {
+          "control": {
+            "pixels": 97200,
+            "ssim": 0.8236345052719116,
+            "medianReference": 0.29490983486175537,
+            "medianCandidate": 0.24744707345962524,
+            "medianLumaRelativeError": 0.16093990702066346,
+            "meanAbsByte": 16.16144718792867,
+            "diagnosticMedianMatchedLumaSsim": 0.8093398213386536,
+            "medianSignedRgbBytes": [
+              -11.0,
+              -14.0,
+              -9.0
+            ],
+            "exactPixels": 62,
+            "peak": 155
+          },
+          "candidate": {
+            "pixels": 97200,
+            "ssim": 0.8240382075309753,
+            "medianReference": 0.29490983486175537,
+            "medianCandidate": 0.2516431510448456,
+            "medianLumaRelativeError": 0.14671156639178168,
+            "meanAbsByte": 15.288844307270233,
+            "diagnosticMedianMatchedLumaSsim": 0.8125174641609192,
+            "medianSignedRgbBytes": [
+              -10.0,
+              -13.0,
+              -9.0
+            ],
+            "exactPixels": 58,
+            "peak": 154
+          },
+          "highFrequency": [
+            11.518051147460938,
+            24.178672790527344,
+            24.256202697753906
+          ],
+          "newOverOne": 499
+        },
+        "cyanRing": {
+          "control": {
+            "pixels": 27600,
+            "ssim": 0.7431238889694214,
+            "medianReference": 0.298764705657959,
+            "medianCandidate": 0.27461767196655273,
+            "medianLumaRelativeError": 0.08082291259346745,
+            "meanAbsByte": 15.451956521739131,
+            "diagnosticMedianMatchedLumaSsim": 0.7282902598381042,
+            "medianSignedRgbBytes": [
+              -7.0,
+              -6.0,
+              -5.0
+            ],
+            "exactPixels": 4,
+            "peak": 98
+          },
+          "candidate": {
+            "pixels": 27600,
+            "ssim": 0.7370699048042297,
+            "medianReference": 0.298764705657959,
+            "medianCandidate": 0.28390589356422424,
+            "medianLumaRelativeError": 0.049734161406420827,
+            "meanAbsByte": 13.823309178743962,
+            "diagnosticMedianMatchedLumaSsim": 0.7288374900817871,
+            "medianSignedRgbBytes": [
+              -6.0,
+              -7.0,
+              -5.0
+            ],
+            "exactPixels": 8,
+            "peak": 101
+          },
+          "highFrequency": [
+            2.72178053855896,
+            8.262588500976562,
+            8.919466972351074
+          ],
+          "newOverOne": 98
+        },
+        "leftFloor": {
+          "control": {
+            "pixels": 67900,
+            "ssim": 0.8401069045066833,
+            "medianReference": 0.368437260389328,
+            "medianCandidate": 0.37197646498680115,
+            "medianLumaRelativeError": 0.00960598988748658,
+            "meanAbsByte": 7.217756504663721,
+            "diagnosticMedianMatchedLumaSsim": 0.8415233492851257,
+            "medianSignedRgbBytes": [
+              -1.0,
+              -2.0,
+              -1.0
+            ],
+            "exactPixels": 352,
+            "peak": 128
+          },
+          "candidate": {
+            "pixels": 67900,
+            "ssim": 0.8411337733268738,
+            "medianReference": 0.368437260389328,
+            "medianCandidate": 0.37197646498680115,
+            "medianLumaRelativeError": 0.00960598988748658,
+            "meanAbsByte": 7.072101129111438,
+            "diagnosticMedianMatchedLumaSsim": 0.8425458073616028,
+            "medianSignedRgbBytes": [
+              -1.0,
+              -2.0,
+              -1.0
+            ],
+            "exactPixels": 121,
+            "peak": 128
+          },
+          "highFrequency": [
+            14.571454048156738,
+            34.798065185546875,
+            34.56657409667969
+          ],
+          "newOverOne": 1514
+        }
+      },
+      "delta": "2dca60aaeb85bdebf2e26153bea8780c086a1493ea47348fc37cc20cadcd081b",
+      "member": "frame-0.bgra-xor"
+    },
+    {
+      "sha256": "6ecda337533d563fe3f05af3b89629e51cad2db7aafc7a3319b6d12f3c1965e6",
+      "raw": "052bf878f9610f3ffa2c8a89bbd3b15f42b164581fabf69889f1aaa10bae75fa",
+      "metrics": {
+        "complete": {
+          "control": {
+            "pixels": 3686400,
+            "ssim": 0.8174570202827454,
+            "medianReference": 0.40663331747055054,
+            "medianCandidate": 0.4091019928455353,
+            "medianLumaRelativeError": 0.006071011077845408,
+            "meanAbsByte": 12.016256058304398,
+            "diagnosticMedianMatchedLumaSsim": 0.8179949522018433,
+            "medianSignedRgbBytes": [
+              2.0,
+              1.0,
+              2.0
+            ],
+            "exactPixels": 23714,
+            "peak": 242
+          },
+          "candidate": {
+            "pixels": 3686400,
+            "ssim": 0.8174238801002502,
+            "medianReference": 0.40663331747055054,
+            "medianCandidate": 0.40658822655677795,
+            "medianLumaRelativeError": 0.00011088838969976584,
+            "meanAbsByte": 11.96019675925926,
+            "diagnosticMedianMatchedLumaSsim": 0.8174128532409668,
+            "medianSignedRgbBytes": [
+              2.0,
+              1.0,
+              2.0
+            ],
+            "exactPixels": 23504,
+            "peak": 243
+          },
+          "highFrequency": [
+            18.48886489868164,
+            33.86408996582031,
+            33.8974723815918
+          ],
+          "newOverOne": 49684
+        },
+        "ceiling": {
+          "control": {
+            "pixels": 537600,
+            "ssim": 0.825897753238678,
+            "medianReference": 0.8463764786720276,
+            "medianCandidate": 0.900831401348114,
+            "medianLumaRelativeError": 0.06433888942840979,
+            "meanAbsByte": 14.556390128968253,
+            "diagnosticMedianMatchedLumaSsim": 0.8318806290626526,
+            "medianSignedRgbBytes": [
+              11.0,
+              11.0,
+              11.0
+            ],
+            "exactPixels": 9119,
+            "peak": 205
+          },
+          "candidate": {
+            "pixels": 537600,
+            "ssim": 0.8261780142784119,
+            "medianReference": 0.8463764786720276,
+            "medianCandidate": 0.9007883071899414,
+            "medianLumaRelativeError": 0.06428797336533557,
+            "meanAbsByte": 14.472924727182539,
+            "diagnosticMedianMatchedLumaSsim": 0.8321329951286316,
+            "medianSignedRgbBytes": [
+              11.0,
+              11.0,
+              11.0
+            ],
+            "exactPixels": 9199,
+            "peak": 204
+          },
+          "highFrequency": [
+            12.721052169799805,
+            30.00743865966797,
+            30.221168518066406
+          ],
+          "newOverOne": 268
+        },
+        "leftDoor": {
+          "control": {
+            "pixels": 253500,
+            "ssim": 0.8796553611755371,
+            "medianReference": 0.5621686577796936,
+            "medianCandidate": 0.5502784848213196,
+            "medianLumaRelativeError": 0.021150544047287716,
+            "meanAbsByte": 8.230629848783694,
+            "diagnosticMedianMatchedLumaSsim": 0.8777176737785339,
+            "medianSignedRgbBytes": [
+              2.0,
+              1.0,
+              1.0
+            ],
+            "exactPixels": 1180,
+            "peak": 165
+          },
+          "candidate": {
+            "pixels": 253500,
+            "ssim": 0.8798205256462097,
+            "medianReference": 0.5621686577796936,
+            "medianCandidate": 0.5502784848213196,
+            "medianLumaRelativeError": 0.021150544047287716,
+            "meanAbsByte": 8.20619986850756,
+            "diagnosticMedianMatchedLumaSsim": 0.8778848052024841,
+            "medianSignedRgbBytes": [
+              2.0,
+              1.0,
+              1.0
+            ],
+            "exactPixels": 1173,
+            "peak": 165
+          },
+          "highFrequency": [
+            11.707696914672852,
+            24.510732650756836,
+            24.51095962524414
+          ],
+          "newOverOne": 89
+        },
+        "rightWall": {
+          "control": {
+            "pixels": 128800,
+            "ssim": 0.8789818286895752,
+            "medianReference": 0.32994508743286133,
+            "medianCandidate": 0.30705493688583374,
+            "medianLumaRelativeError": 0.06937563679194156,
+            "meanAbsByte": 11.96807453416149,
+            "diagnosticMedianMatchedLumaSsim": 0.8782781958580017,
+            "medianSignedRgbBytes": [
+              -8.0,
+              -8.0,
+              -7.0
+            ],
+            "exactPixels": 334,
+            "peak": 122
+          },
+          "candidate": {
+            "pixels": 128800,
+            "ssim": 0.8791112899780273,
+            "medianReference": 0.32994508743286133,
+            "medianCandidate": 0.30588236451148987,
+            "medianLumaRelativeError": 0.07292947777641287,
+            "meanAbsByte": 12.033830227743271,
+            "diagnosticMedianMatchedLumaSsim": 0.8784736394882202,
+            "medianSignedRgbBytes": [
+              -8.0,
+              -8.0,
+              -7.0
+            ],
+            "exactPixels": 311,
+            "peak": 122
+          },
+          "highFrequency": [
+            7.028468132019043,
+            11.066277503967285,
+            11.10600471496582
+          ],
+          "newOverOne": 1919
+        },
+        "centerFloor": {
+          "control": {
+            "pixels": 97200,
+            "ssim": 0.8569229245185852,
+            "medianReference": 0.29490983486175537,
+            "medianCandidate": 0.26588237285614014,
+            "medianLumaRelativeError": 0.09842826035022675,
+            "meanAbsByte": 12.125661865569272,
+            "diagnosticMedianMatchedLumaSsim": 0.8483045697212219,
+            "medianSignedRgbBytes": [
+              -7.0,
+              -8.0,
+              -6.0
+            ],
+            "exactPixels": 140,
+            "peak": 153
+          },
+          "candidate": {
+            "pixels": 97200,
+            "ssim": 0.8566656112670898,
+            "medianReference": 0.29490983486175537,
+            "medianCandidate": 0.2709764838218689,
+            "medianLumaRelativeError": 0.08115480804872341,
+            "meanAbsByte": 11.658333333333333,
+            "diagnosticMedianMatchedLumaSsim": 0.850926399230957,
+            "medianSignedRgbBytes": [
+              -6.0,
+              -8.0,
+              -6.0
+            ],
+            "exactPixels": 169,
+            "peak": 152
+          },
+          "highFrequency": [
+            11.518051147460938,
+            22.46854591369629,
+            22.56943130493164
+          ],
+          "newOverOne": 1433
+        },
+        "cyanRing": {
+          "control": {
+            "pixels": 27600,
+            "ssim": 0.7864192724227905,
+            "medianReference": 0.298764705657959,
+            "medianCandidate": 0.29030394554138184,
+            "medianLumaRelativeError": 0.02831914197476678,
+            "meanAbsByte": 12.90963768115942,
+            "diagnosticMedianMatchedLumaSsim": 0.7821282148361206,
+            "medianSignedRgbBytes": [
+              -5.0,
+              -5.0,
+              -3.0
+            ],
+            "exactPixels": 15,
+            "peak": 85
+          },
+          "candidate": {
+            "pixels": 27600,
+            "ssim": 0.7866798043251038,
+            "medianReference": 0.298764705657959,
+            "medianCandidate": 0.29467061161994934,
+            "medianLumaRelativeError": 0.013703405926055973,
+            "meanAbsByte": 12.054021739130436,
+            "diagnosticMedianMatchedLumaSsim": 0.7848426103591919,
+            "medianSignedRgbBytes": [
+              -5.0,
+              -6.0,
+              -4.0
+            ],
+            "exactPixels": 18,
+            "peak": 85
+          },
+          "highFrequency": [
+            2.72178053855896,
+            7.21753454208374,
+            7.635381698608398
+          ],
+          "newOverOne": 189
+        },
+        "leftFloor": {
+          "control": {
+            "pixels": 67900,
+            "ssim": 0.8570399284362793,
+            "medianReference": 0.368437260389328,
+            "medianCandidate": 0.37197646498680115,
+            "medianLumaRelativeError": 0.00960598988748658,
+            "meanAbsByte": 6.920991654393716,
+            "diagnosticMedianMatchedLumaSsim": 0.8583249449729919,
+            "medianSignedRgbBytes": [
+              -1.0,
+              -2.0,
+              -1.0
+            ],
+            "exactPixels": 380,
+            "peak": 114
+          },
+          "candidate": {
+            "pixels": 67900,
+            "ssim": 0.8581380844116211,
+            "medianReference": 0.368437260389328,
+            "medianCandidate": 0.37242352962493896,
+            "medianLumaRelativeError": 0.01081939766732243,
+            "meanAbsByte": 6.808939617083947,
+            "diagnosticMedianMatchedLumaSsim": 0.8595770597457886,
+            "medianSignedRgbBytes": [
+              -1.0,
+              -2.0,
+              -1.0
+            ],
+            "exactPixels": 135,
+            "peak": 114
+          },
+          "highFrequency": [
+            14.571454048156738,
+            32.756072998046875,
+            32.5511360168457
+          ],
+          "newOverOne": 1825
+        }
+      },
+      "delta": "9bd28139b7f644c8ab039a9fb90f190c43478ea76f319a8ded3fc9006d360372",
+      "member": "frame-1.bgra-xor"
+    }
+  ],
+  "validationArchive": "3fc63f2dd4fb18bb6cedd9182ff1cd32973aa1fa8795618f05a91da4e733712b"
+}

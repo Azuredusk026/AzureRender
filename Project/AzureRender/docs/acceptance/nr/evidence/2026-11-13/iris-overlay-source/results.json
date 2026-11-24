@@ -1,0 +1,537 @@
+{
+  "status": "qualified-source-control",
+  "overallStatus": "failed-user-review",
+  "nativeCoverage": {
+    "nativePassed": 95,
+    "depthRejected": 52,
+    "stencilRejected": 41
+  },
+  "devices": {
+    "materialFactor": {
+      "nvidia": {
+        "device": "nvidia",
+        "baselineControl": {
+          "samples": 3686400,
+          "overOne": 0,
+          "peak": 0
+        },
+        "baselineControlPositions": [],
+        "localCandidateChanged": 136,
+        "localOutsideNativeOverlayOverOne": 41,
+        "remoteCandidateChanged": 0,
+        "candidateChanged": 136,
+        "nativeOverlayChanged": 95,
+        "coveredIrisChanged": 94,
+        "uncoveredIrisChanged": 0,
+        "changedOutsideNativeOverlay": 41,
+        "outsideNativeOverlayOverOne": {
+          "samples": 3686305,
+          "overOne": 41,
+          "peak": 46
+        },
+        "baseline": {
+          "iris": {
+            "samples": 255,
+            "overOne": 131,
+            "peak": 95
+          },
+          "iris-native-overlay": {
+            "samples": 94,
+            "overOne": 94,
+            "peak": 95
+          },
+          "iris-outside-native-overlay": {
+            "samples": 161,
+            "overOne": 37,
+            "peak": 20
+          },
+          "face": {
+            "samples": 1176,
+            "overOne": 1174,
+            "peak": 46
+          },
+          "skin": {
+            "samples": 28966,
+            "overOne": 10957,
+            "peak": 44
+          }
+        },
+        "candidate": {
+          "iris": {
+            "samples": 255,
+            "overOne": 130,
+            "peak": 42
+          },
+          "iris-native-overlay": {
+            "samples": 94,
+            "overOne": 93,
+            "peak": 42
+          },
+          "iris-outside-native-overlay": {
+            "samples": 161,
+            "overOne": 37,
+            "peak": 20
+          },
+          "face": {
+            "samples": 1176,
+            "overOne": 1174,
+            "peak": 46
+          },
+          "skin": {
+            "samples": 28966,
+            "overOne": 10957,
+            "peak": 44
+          }
+        },
+        "candidateRegional": {
+          "iris": {
+            "pixels": 255,
+            "ssim": 0.9784507313345544,
+            "medianLuminanceRelativeError": 0.07591725673487085,
+            "passed": true
+          },
+          "iris-native-overlay": {
+            "pixels": 94,
+            "ssim": 0.9700341836461607,
+            "medianLuminanceRelativeError": 0.24987587129863337,
+            "passed": false
+          },
+          "iris-outside-native-overlay": {
+            "pixels": 161,
+            "ssim": 0.983364740543927,
+            "medianLuminanceRelativeError": 0.04180495322005739,
+            "passed": true
+          },
+          "face": {
+            "pixels": 1176,
+            "ssim": 0.9948966785519591,
+            "medianLuminanceRelativeError": 0.019484224638619554,
+            "passed": true
+          },
+          "skin": {
+            "pixels": 28966,
+            "ssim": 0.9883011336151029,
+            "medianLuminanceRelativeError": 0.002132151353702811,
+            "passed": true
+          }
+        },
+        "candidateSha256": "da2c702c77a520c490687ecbf0ef952494bf5a4fbc0f2b7b02467054af3c40d3"
+      },
+      "intel": {
+        "device": "intel",
+        "baselineControl": {
+          "samples": 3686400,
+          "overOne": 18,
+          "peak": 202
+        },
+        "baselineControlPositions": [
+          [
+            965,
+            762
+          ],
+          [
+            966,
+            762
+          ],
+          [
+            968,
+            763
+          ],
+          [
+            969,
+            763
+          ],
+          [
+            972,
+            764
+          ],
+          [
+            971,
+            766
+          ],
+          [
+            972,
+            767
+          ],
+          [
+            973,
+            767
+          ],
+          [
+            974,
+            767
+          ],
+          [
+            969,
+            768
+          ],
+          [
+            970,
+            768
+          ],
+          [
+            973,
+            768
+          ],
+          [
+            971,
+            769
+          ],
+          [
+            972,
+            769
+          ],
+          [
+            973,
+            769
+          ],
+          [
+            973,
+            770
+          ],
+          [
+            970,
+            773
+          ],
+          [
+            971,
+            773
+          ]
+        ],
+        "localCandidateChanged": 136,
+        "localOutsideNativeOverlayOverOne": 40,
+        "remoteCandidateChanged": 18,
+        "candidateChanged": 154,
+        "nativeOverlayChanged": 95,
+        "coveredIrisChanged": 94,
+        "uncoveredIrisChanged": 0,
+        "changedOutsideNativeOverlay": 59,
+        "outsideNativeOverlayOverOne": {
+          "samples": 3686305,
+          "overOne": 58,
+          "peak": 202
+        },
+        "baseline": {
+          "iris": {
+            "samples": 255,
+            "overOne": 133,
+            "peak": 95
+          },
+          "iris-native-overlay": {
+            "samples": 94,
+            "overOne": 94,
+            "peak": 95
+          },
+          "iris-outside-native-overlay": {
+            "samples": 161,
+            "overOne": 39,
+            "peak": 27
+          },
+          "face": {
+            "samples": 1176,
+            "overOne": 1170,
+            "peak": 34
+          },
+          "skin": {
+            "samples": 28966,
+            "overOne": 10485,
+            "peak": 44
+          }
+        },
+        "candidate": {
+          "iris": {
+            "samples": 255,
+            "overOne": 132,
+            "peak": 42
+          },
+          "iris-native-overlay": {
+            "samples": 94,
+            "overOne": 93,
+            "peak": 42
+          },
+          "iris-outside-native-overlay": {
+            "samples": 161,
+            "overOne": 39,
+            "peak": 27
+          },
+          "face": {
+            "samples": 1176,
+            "overOne": 1170,
+            "peak": 34
+          },
+          "skin": {
+            "samples": 28966,
+            "overOne": 10485,
+            "peak": 44
+          }
+        },
+        "candidateRegional": {
+          "iris": {
+            "pixels": 255,
+            "ssim": 0.9814141825302997,
+            "medianLuminanceRelativeError": 0.07408122214082061,
+            "passed": true
+          },
+          "iris-native-overlay": {
+            "pixels": 94,
+            "ssim": 0.9707431468173099,
+            "medianLuminanceRelativeError": 0.25514811402024257,
+            "passed": false
+          },
+          "iris-outside-native-overlay": {
+            "pixels": 161,
+            "ssim": 0.9876444766732876,
+            "medianLuminanceRelativeError": 0.04436649685040958,
+            "passed": true
+          },
+          "face": {
+            "pixels": 1176,
+            "ssim": 0.9950648058786188,
+            "medianLuminanceRelativeError": 0.01659997511672593,
+            "passed": true
+          },
+          "skin": {
+            "pixels": 28966,
+            "ssim": 0.9884022894532879,
+            "medianLuminanceRelativeError": 0.0009760491156015975,
+            "passed": true
+          }
+        },
+        "candidateSha256": "3542b90c8c34cf82b6cd9e25b4edb8ee60ab0bc24972e964081bef0263fb257c"
+      }
+    },
+    "authoredMipTint": {
+      "nvidia": {
+        "device": "nvidia",
+        "baselineControl": {
+          "samples": 3686400,
+          "overOne": 0,
+          "peak": 0
+        },
+        "baselineControlPositions": [],
+        "localCandidateChanged": 136,
+        "localOutsideNativeOverlayOverOne": 41,
+        "remoteCandidateChanged": 0,
+        "candidateChanged": 136,
+        "nativeOverlayChanged": 95,
+        "coveredIrisChanged": 94,
+        "uncoveredIrisChanged": 0,
+        "changedOutsideNativeOverlay": 41,
+        "outsideNativeOverlayOverOne": {
+          "samples": 3686305,
+          "overOne": 41,
+          "peak": 83
+        },
+        "baseline": {
+          "iris": {
+            "samples": 255,
+            "overOne": 131,
+            "peak": 95
+          },
+          "iris-native-overlay": {
+            "samples": 94,
+            "overOne": 94,
+            "peak": 95
+          },
+          "iris-outside-native-overlay": {
+            "samples": 161,
+            "overOne": 37,
+            "peak": 20
+          },
+          "face": {
+            "samples": 1176,
+            "overOne": 1174,
+            "peak": 46
+          },
+          "skin": {
+            "samples": 28966,
+            "overOne": 10957,
+            "peak": 44
+          }
+        },
+        "candidate": {
+          "iris": {
+            "samples": 255,
+            "overOne": 88,
+            "peak": 20
+          },
+          "iris-native-overlay": {
+            "samples": 94,
+            "overOne": 51,
+            "peak": 16
+          },
+          "iris-outside-native-overlay": {
+            "samples": 161,
+            "overOne": 37,
+            "peak": 20
+          },
+          "face": {
+            "samples": 1176,
+            "overOne": 1174,
+            "peak": 46
+          },
+          "skin": {
+            "samples": 28966,
+            "overOne": 10957,
+            "peak": 44
+          }
+        },
+        "candidateRegional": {
+          "iris": {
+            "pixels": 255,
+            "ssim": 0.9883177886290407,
+            "medianLuminanceRelativeError": 0.010825035015433183,
+            "passed": true
+          },
+          "iris-native-overlay": {
+            "pixels": 94,
+            "ssim": 0.9916510005132562,
+            "medianLuminanceRelativeError": 0.0058190154303930895,
+            "passed": true
+          },
+          "iris-outside-native-overlay": {
+            "pixels": 161,
+            "ssim": 0.9863716897649648,
+            "medianLuminanceRelativeError": 0.04180495322005739,
+            "passed": true
+          },
+          "face": {
+            "pixels": 1176,
+            "ssim": 0.9948966785519591,
+            "medianLuminanceRelativeError": 0.019484224638619554,
+            "passed": true
+          },
+          "skin": {
+            "pixels": 28966,
+            "ssim": 0.9883011336151029,
+            "medianLuminanceRelativeError": 0.002132151353702811,
+            "passed": true
+          }
+        },
+        "candidateSha256": "929dd9604046bbae6754dcb106cb2f782dc1032327a8e8dcd7ae083f17efcd71"
+      },
+      "intel": {
+        "device": "intel",
+        "baselineControl": {
+          "samples": 3686400,
+          "overOne": 2,
+          "peak": 224
+        },
+        "baselineControlPositions": [
+          [
+            1315,
+            1351
+          ],
+          [
+            1316,
+            1351
+          ]
+        ],
+        "localCandidateChanged": 136,
+        "localOutsideNativeOverlayOverOne": 40,
+        "remoteCandidateChanged": 2,
+        "candidateChanged": 138,
+        "nativeOverlayChanged": 95,
+        "coveredIrisChanged": 94,
+        "uncoveredIrisChanged": 0,
+        "changedOutsideNativeOverlay": 43,
+        "outsideNativeOverlayOverOne": {
+          "samples": 3686305,
+          "overOne": 42,
+          "peak": 224
+        },
+        "baseline": {
+          "iris": {
+            "samples": 255,
+            "overOne": 133,
+            "peak": 95
+          },
+          "iris-native-overlay": {
+            "samples": 94,
+            "overOne": 94,
+            "peak": 95
+          },
+          "iris-outside-native-overlay": {
+            "samples": 161,
+            "overOne": 39,
+            "peak": 27
+          },
+          "face": {
+            "samples": 1176,
+            "overOne": 1170,
+            "peak": 34
+          },
+          "skin": {
+            "samples": 28966,
+            "overOne": 10485,
+            "peak": 44
+          }
+        },
+        "candidate": {
+          "iris": {
+            "samples": 255,
+            "overOne": 92,
+            "peak": 27
+          },
+          "iris-native-overlay": {
+            "samples": 94,
+            "overOne": 53,
+            "peak": 16
+          },
+          "iris-outside-native-overlay": {
+            "samples": 161,
+            "overOne": 39,
+            "peak": 27
+          },
+          "face": {
+            "samples": 1176,
+            "overOne": 1170,
+            "peak": 34
+          },
+          "skin": {
+            "samples": 28966,
+            "overOne": 10485,
+            "peak": 44
+          }
+        },
+        "candidateRegional": {
+          "iris": {
+            "pixels": 255,
+            "ssim": 0.9913956738039826,
+            "medianLuminanceRelativeError": 0.010825035015433183,
+            "passed": true
+          },
+          "iris-native-overlay": {
+            "pixels": 94,
+            "ssim": 0.9925875976342772,
+            "medianLuminanceRelativeError": 0.019384100732169694,
+            "passed": true
+          },
+          "iris-outside-native-overlay": {
+            "pixels": 161,
+            "ssim": 0.9906997679651773,
+            "medianLuminanceRelativeError": 0.04436649685040958,
+            "passed": true
+          },
+          "face": {
+            "pixels": 1176,
+            "ssim": 0.9950648058786188,
+            "medianLuminanceRelativeError": 0.01659997511672593,
+            "passed": true
+          },
+          "skin": {
+            "pixels": 28966,
+            "ssim": 0.9884022894532879,
+            "medianLuminanceRelativeError": 0.0009760491156015975,
+            "passed": true
+          }
+        },
+        "candidateSha256": "040e6bb526350ae45eeb5d2a111c659d2bf62f7c4290ebee06fc299900a8feb1"
+      }
+    }
+  },
+  "archive": {
+    "sha256": "0633ffec18d0537c35edeb07e3f805997ce4f03c318da54c5448ed898c0f15f4",
+    "members": 48
+  }
+}

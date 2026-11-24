@@ -8,6 +8,10 @@ inline bool opaqueSurfaceOverlay(const AssetMaterial& material) noexcept {
     return material.unlitTextureLayers.present
         &&material.unlitTextureLayers.submission==UnlitTextureLayers::Submission::OpaqueOverlay;
 }
+inline bool projectedHistoryOverlay(const AssetMaterial& material) noexcept {
+    return material.unlitTextureLayers.present
+        &&material.unlitTextureLayers.submission==UnlitTextureLayers::Submission::ProjectedHistory;
+}
 // Matches shadow.frag priority: geometry coverage precedes alpha policies.
 inline bool fullyCoveredShadow(const AssetMaterial& material,float nodeOpacity) noexcept {
     return nodeOpacity==1.F&&((material.materialFeatures&MaterialFeatureGeometryShadow)!=0
@@ -25,6 +29,7 @@ inline constexpr unsigned surfaceFacingIndex(bool doubleSided,bool mirrored) noe
 // Plain PBR with optional emission/neutral bits shares one bounded fast path.
 inline bool ordinaryOpaqueMaterial(const AssetMaterial& material) noexcept {
     return material.materialClass==AssetMaterialClass::Generic&&material.alphaMode==AssetAlphaMode::Opaque
+        &&!material.colorAdjustment.present
         &&(material.materialFeatures&~std::uint32_t{MaterialFeatureNeutralFallback|MaterialFeatureEmissiveMask})==0;
 }
 inline bool fullyCoveredOrdinaryMaterial(const AssetMaterial& material,float nodeOpacity) noexcept {
@@ -55,7 +60,9 @@ inline bool integralMaterialProgram(const std::string& path) noexcept {
     return path.find("_integral",separator==std::string::npos?0:separator+1)!=std::string::npos;
 }
 inline bool extendedMaterialLighting(const AssetMaterial& material) noexcept {
-    return material.environmentLighting.diffuse!=MaterialEnvironmentSource::Scene
+    return material.colorAdjustment.present||material.faceSdf.highlight.present||material.nprDiffuse.mainBrightnessSaturation
+        ||material.nprDiffuse.viewTint.faceMask||material.nprDiffuse.localDiffuseIndirectNormal
+        ||material.environmentLighting.diffuse!=MaterialEnvironmentSource::Scene
         ||material.environmentLighting.reflection!=MaterialEnvironmentSource::Scene
         ||material.environmentLighting.fittedSpecular||material.environmentLighting.reflectionLayer.has_value()
         ||material.mainLightShadow!=MaterialMainLightShadow::Scene

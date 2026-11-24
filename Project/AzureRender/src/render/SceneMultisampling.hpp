@@ -16,7 +16,8 @@ public:
     static constexpr VkSampleCountFlagBits kSamples=VK_SAMPLE_COUNT_4_BIT;
     static constexpr std::uint64_t kMaximumBytes=512ULL*1024*1024;
     SceneMultisampling(rhi::IRhi&,rhi::IGpuAllocator&,VkExtent2D,VkFormat depth,VkFormat secondary,
-        SceneSecondaryResolve,std::uint32_t sourceSlots,std::vector<SceneMultisampleDestination>,const std::string& shaderDirectory);
+        SceneSecondaryResolve,std::uint32_t sourceSlots,std::vector<SceneMultisampleDestination>,const std::string& shaderDirectory,
+        bool packSnapshotReceivers=false);
     ~SceneMultisampling();
     SceneMultisampling(const SceneMultisampling&)=delete;
     SceneMultisampling& operator=(const SceneMultisampling&)=delete;
@@ -45,6 +46,7 @@ private:
     struct Source {std::array<rhi::GpuImage,4> images{};std::array<VkImageView,4> views{};VkFramebuffer framebuffer{};};
     std::uint32_t attachmentCount_=3;
     rhi::IRhi& rhi_;rhi::IGpuAllocator& allocator_;VkExtent2D extent_{};SceneSecondaryResolve secondaryResolve_{};
+    bool packSnapshotReceivers_=false;
     std::vector<Source> sources_;std::vector<SceneMultisampleDestination> destinations_;
     std::vector<VkFramebuffer> outputs_;std::vector<VkDescriptorSet> sets_;
     VkRenderPass sourcePass_{},resolvePass_{};VkSampler sampler_{};VkDescriptorSetLayout descriptors_{};

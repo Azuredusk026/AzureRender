@@ -1,0 +1,151 @@
+{
+  "status": "tested-primary-opaque-snapshot",
+  "request": "only-opaque-snapshot-primary",
+  "devices": {
+    "intel": {
+      "repeatExact": false,
+      "serialExact": false,
+      "samples": [
+        {
+          "label": "primary-opaque-snapshot-1",
+          "frame": {
+            "png": "3127cb3a57ae788d7560d646b86dc4df6d1d9f137eef12979ab31cbf98ceb81a",
+            "referencePng": "a9657b4558f9d3cb03872d60d5e9e979af3eb6eb6c1a69784096148ff6f73c35",
+            "raw": "a0e01547ad6fd8311542a28007a516c5ece27afc1abacc7ff0e6af3e0706afdd",
+            "archive": "ffe5ef1af8e65689c9459f0a3f1f1b2ea9cd24be8873dffb9fc295cbe53d2e05",
+            "changed": 746,
+            "overOne": 493,
+            "peak": 52,
+            "bounds": [
+              607,
+              99,
+              943,
+              712
+            ]
+          },
+          "againstKnown": {
+            "serial-a": 427,
+            "serial-b": 427,
+            "native": 1688,
+            "native-repeat": 0
+          },
+          "controlChanged": 427,
+          "controlOverOne": 407,
+          "controlPeak": 52,
+          "groundOverOne": 0,
+          "upperOverOne": 407
+        },
+        {
+          "label": "primary-opaque-snapshot-2",
+          "frame": {
+            "png": "3127cb3a57ae788d7560d646b86dc4df6d1d9f137eef12979ab31cbf98ceb81a",
+            "referencePng": "a9657b4558f9d3cb03872d60d5e9e979af3eb6eb6c1a69784096148ff6f73c35",
+            "raw": "a0e01547ad6fd8311542a28007a516c5ece27afc1abacc7ff0e6af3e0706afdd",
+            "archive": "6d284437067c81041f2aaa7c2644c8c2ec1bb32195470e89146ed3ea6b45e67f",
+            "changed": 746,
+            "overOne": 493,
+            "peak": 52,
+            "bounds": [
+              607,
+              99,
+              943,
+              712
+            ]
+          },
+          "againstKnown": {
+            "serial-a": 427,
+            "serial-b": 427,
+            "native": 1688,
+            "native-repeat": 0
+          },
+          "controlChanged": 427,
+          "controlOverOne": 407,
+          "controlPeak": 52,
+          "groundOverOne": 0,
+          "upperOverOne": 407
+        },
+        {
+          "label": "primary-opaque-snapshot-3",
+          "frame": {
+            "png": "f55252639ef131b9c40373ec2340e105fbc81bfa22e8de72a7961de492c1b456",
+            "referencePng": "a9657b4558f9d3cb03872d60d5e9e979af3eb6eb6c1a69784096148ff6f73c35",
+            "raw": "fa3d9d2c38214b67761ec32039c6e52e6cb2dfc8ad48c3b23b860755976c0a8a",
+            "archive": "0d3d95c1e2400ee7c2318fd814194049f9661c0dfcb880ac72c5aa8bc236ee55",
+            "changed": 319,
+            "overOne": 86,
+            "peak": 45,
+            "bounds": [
+              607,
+              99,
+              754,
+              712
+            ]
+          },
+          "againstKnown": {
+            "serial-a": 0,
+            "serial-b": 0,
+            "native": 1261,
+            "native-repeat": 427
+          },
+          "controlChanged": 0,
+          "controlOverOne": 0,
+          "controlPeak": 0,
+          "groundOverOne": 0,
+          "upperOverOne": 0
+        }
+      ]
+    },
+    "nvidia": {
+      "repeatExact": true,
+      "serialExact": true,
+      "samples": [
+        {
+          "label": "primary-opaque-snapshot-1",
+          "frame": {
+            "png": "839ea72c033a403e63e3e3ed2d2cc24739d696473f80c9164e68ff7a5691ff8e",
+            "referencePng": "3c45327440ada8eb611a88598d97717fc05709daf1cd2988fc0aa068a93907bc",
+            "raw": "826c206ead69c397311348637887070e3777333a9d47a74de615f6c64b5b853f",
+            "archive": "a8540fce2b0ec28c07f14fee10176c3d65896d29f11f47b2f936c35c07762a6c",
+            "changed": 326,
+            "overOne": 92,
+            "peak": 45,
+            "bounds": [
+              607,
+              99,
+              752,
+              715
+            ]
+          },
+          "againstKnown": {
+            "native": 0
+          },
+          "controlChanged": 0,
+          "controlOverOne": 0,
+          "controlPeak": 0,
+          "groundOverOne": 0,
+          "upperOverOne": 0
+        }
+      ]
+    }
+  },
+  "focusedCandidateQualified": false,
+  "productionAcceptance": false,
+  "build": {
+    "status": "linked-primary-opaque-snapshot-diagnostic",
+    "source": "3fcd08e35ec2322c0f72857d8c1f59195bdc517bfc33c4889ef3f049976cb6c3",
+    "diagnostic": "9fe6d22c00bb1b24b65c51a0ebd3b86da749506b6e81c0c89b3a620e52fdd5c1",
+    "object": "ba520db2bd0dfcbfb33538d35ab5d44cf48852b1517e452659843b8100619f6d",
+    "player": "dab90a7ab519ce77eb516a4b880f88b097e65a31aa2f1fbedc8c06e7ecc25ad0",
+    "immutableSourcePlayer": "f8f86018d82b7e47a399a9cd451a61701122afb6f2dda680456862289167ae38",
+    "introduction": "Only the opaque-snapshot pass uses the primary recorder when enabled.",
+    "supportedModes": [
+      "1"
+    ]
+  },
+  "queues": [
+    1522,
+    1525,
+    1528
+  ],
+  "archiveSha256": "3ce23b215c79ed61df7909236586bd9b328985820a993124ba6ccf4a376653dc"
+}

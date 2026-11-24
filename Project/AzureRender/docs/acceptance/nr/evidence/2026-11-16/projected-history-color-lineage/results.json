@@ -1,0 +1,318 @@
+{
+  "status": "registered-history-and-main-color-readback",
+  "jobs": {
+    "native": 1394,
+    "player": 1410
+  },
+  "native": {
+    "trace": 8702,
+    "draw": 10480,
+    "previousSha256": "9667b36a4cf8716ca807be9a5ea270b47c8981fd38427dc22304e649ffa679a8"
+  },
+  "player": {
+    "trace": 21668,
+    "prepare": 21661,
+    "currentOpaqueWriter": 17734,
+    "lateMain": 27513,
+    "previousSha256": "ff7c9086cec80cada14f34816ae5953975446f86a420e242b2cf7b1ce0f69778",
+    "currentSha256": "9ac0ffb2344df623707d818734da32471f89190435909f2f95514d06194e5e38"
+  },
+  "sourceAddresses": 74,
+  "distinctNeutralDarkerAddresses": 27,
+  "confirmedGlyphAddresses": 26,
+  "brighteningThreshold": 0.02,
+  "witnesses": [
+    {
+      "pixel": [
+        1168,
+        677
+      ],
+      "glyph": false,
+      "nativeDrawChange": 0.0,
+      "playerMainChange": 0.0012399517731215975
+    },
+    {
+      "pixel": [
+        1235,
+        561
+      ],
+      "glyph": true,
+      "nativeDrawChange": 0.3867919792850827,
+      "playerMainChange": 0.3949112862160167
+    },
+    {
+      "pixel": [
+        1235,
+        590
+      ],
+      "glyph": true,
+      "nativeDrawChange": 0.5399826498201691,
+      "playerMainChange": 0.5754854438086411
+    },
+    {
+      "pixel": [
+        1235,
+        599
+      ],
+      "glyph": true,
+      "nativeDrawChange": 0.44495321204209837,
+      "playerMainChange": 0.45586318965426487
+    },
+    {
+      "pixel": [
+        1235,
+        613
+      ],
+      "glyph": true,
+      "nativeDrawChange": 0.41690562770562767,
+      "playerMainChange": 0.4274323442056461
+    },
+    {
+      "pixel": [
+        1235,
+        626
+      ],
+      "glyph": true,
+      "nativeDrawChange": 0.4308003674989549,
+      "playerMainChange": 0.4424894421425214
+    },
+    {
+      "pixel": [
+        1239,
+        585
+      ],
+      "glyph": true,
+      "nativeDrawChange": 0.41827151377601507,
+      "playerMainChange": 0.4267696574548804
+    },
+    {
+      "pixel": [
+        1239,
+        608
+      ],
+      "glyph": true,
+      "nativeDrawChange": 0.4450057336107839,
+      "playerMainChange": 0.455381905194214
+    },
+    {
+      "pixel": [
+        1243,
+        640
+      ],
+      "glyph": true,
+      "nativeDrawChange": 0.40662109025915993,
+      "playerMainChange": 0.4150201661127006
+    },
+    {
+      "pixel": [
+        1255,
+        649
+      ],
+      "glyph": true,
+      "nativeDrawChange": 0.4290876398287529,
+      "playerMainChange": 0.4397117931987246
+    },
+    {
+      "pixel": [
+        1259,
+        690
+      ],
+      "glyph": true,
+      "nativeDrawChange": 0.4253452621224686,
+      "playerMainChange": 0.43921791626882595
+    },
+    {
+      "pixel": [
+        1260,
+        599
+      ],
+      "glyph": true,
+      "nativeDrawChange": 0.30112579877953377,
+      "playerMainChange": 0.3689866609091556
+    },
+    {
+      "pixel": [
+        1264,
+        751
+      ],
+      "glyph": true,
+      "nativeDrawChange": 0.4313771705680055,
+      "playerMainChange": 0.4189827754134038
+    },
+    {
+      "pixel": [
+        1268,
+        649
+      ],
+      "glyph": true,
+      "nativeDrawChange": 0.36088454154253563,
+      "playerMainChange": 0.3730760823611833
+    },
+    {
+      "pixel": [
+        1268,
+        676
+      ],
+      "glyph": true,
+      "nativeDrawChange": 0.3372189115090707,
+      "playerMainChange": 0.351232556777675
+    },
+    {
+      "pixel": [
+        1272,
+        653
+      ],
+      "glyph": true,
+      "nativeDrawChange": 0.46018021889145444,
+      "playerMainChange": 0.4580377782141297
+    },
+    {
+      "pixel": [
+        1284,
+        694
+      ],
+      "glyph": true,
+      "nativeDrawChange": 0.4505948626110731,
+      "playerMainChange": 0.4536002818643112
+    },
+    {
+      "pixel": [
+        1292,
+        717
+      ],
+      "glyph": true,
+      "nativeDrawChange": 0.5362086775338728,
+      "playerMainChange": 0.5691356175219475
+    },
+    {
+      "pixel": [
+        1297,
+        756
+      ],
+      "glyph": true,
+      "nativeDrawChange": 0.4015081503206139,
+      "playerMainChange": 0.4170086623773318
+    },
+    {
+      "pixel": [
+        1301,
+        742
+      ],
+      "glyph": true,
+      "nativeDrawChange": 0.4322045336849295,
+      "playerMainChange": 0.4484863394089811
+    },
+    {
+      "pixel": [
+        1305,
+        608
+      ],
+      "glyph": true,
+      "nativeDrawChange": 0.5687914753141174,
+      "playerMainChange": 0.5564867748461009
+    },
+    {
+      "pixel": [
+        1305,
+        640
+      ],
+      "glyph": true,
+      "nativeDrawChange": 0.36464946317647823,
+      "playerMainChange": 0.36453816501565794
+    },
+    {
+      "pixel": [
+        1305,
+        667
+      ],
+      "glyph": true,
+      "nativeDrawChange": 0.3452800792437982,
+      "playerMainChange": 0.3533133682978397
+    },
+    {
+      "pixel": [
+        1305,
+        726
+      ],
+      "glyph": true,
+      "nativeDrawChange": 0.3154652731643357,
+      "playerMainChange": 0.3235424998608022
+    },
+    {
+      "pixel": [
+        1305,
+        733
+      ],
+      "glyph": true,
+      "nativeDrawChange": 0.4458800108387771,
+      "playerMainChange": 0.4486045661235826
+    },
+    {
+      "pixel": [
+        1305,
+        751
+      ],
+      "glyph": true,
+      "nativeDrawChange": 0.42839911868508623,
+      "playerMainChange": 0.43887209245670017
+    },
+    {
+      "pixel": [
+        1305,
+        760
+      ],
+      "glyph": true,
+      "nativeDrawChange": 0.5233644801955403,
+      "playerMainChange": 0.5599668030906528
+    }
+  ],
+  "fullFilterOutput": {
+    "event": 21729,
+    "resource": "ResourceId::9490",
+    "shaderSha256": "7e305dcfc3227ad7f98d8a8832c976b378a4f62007b2044943e29fc98e1d76bc",
+    "fullOutputSha256": "1f293d7659ce381add7ab6f7bb6fd97d712ece2d26445c07de28d2abc776d1de",
+    "sampleSha256": "8e439f4cc066f4c32936fdf799642f054cc5422e1d8e35d30d3eb827fcd88092",
+    "samples": 4940,
+    "layout": "little-endian uint16 x,y followed by four float32 values",
+    "parameters": [
+      [
+        0.0007812500116415322,
+        0.0013888889225199819,
+        6.0,
+        0.25
+      ],
+      [
+        9.999900817871094,
+        0.00010013480641646311,
+        1.0,
+        0.009999999776482582
+      ],
+      [
+        0.009999999776482582,
+        1.0,
+        1280.0,
+        720.0
+      ],
+      [
+        1.0,
+        1.0,
+        1.0,
+        0.0
+      ]
+    ]
+  },
+  "productionGate": "open",
+  "files": {
+    "native-results.json": "21d3f0bc6276863bf8e2a25abbae237d867b843c984cac2656e1e7ed97037b01",
+    "native-request.json": "f3fd226ac8fbe44fbe0e72da2312bf2479ec2aacb945e33e7fb90a5d02fff738",
+    "player-results.json": "1a2e66df7030ffec80c0139cf85c160f917982ed7ac10bb337a23b6abaaf5d34",
+    "player-request.json": "ae87dabf12a717c1aacda23e218f8e520eba35379ff4961f9316a66a687f703c",
+    "stage-groups.json": "ccb3beec8ba089fa264ebcef36f038f8f5dfb6121bc9132665a3a2228fdca4e6",
+    "fixed-address-witnesses.json": "751f9af23ba55fc65a805a3d7f569fdcbbb7154e963075ae0aa1ce7853bdec83",
+    "filtered-samples.bin": "8e439f4cc066f4c32936fdf799642f054cc5422e1d8e35d30d3eb827fcd88092",
+    "native-readback.py": "405c7d0c675a86d73fea9bacc365c6cb3b3a9d54456258a3d17d5acf64df8b51",
+    "player-readback.py": "e14a6dd304b61ab7a8cc3b1e0b161444b05e141907b42cc7bb701cbc2a3bccec",
+    "compare.py": "c9b2076371ef34a0368d78d7e546672054a85a6daf98efaffcb68b2c664fcd7b"
+  },
+  "archiveSha256": "19a9c530ff9df62bafab930eaacdc6935ed8123bbb7bc8d4f45165d04ab92c5c"
+}

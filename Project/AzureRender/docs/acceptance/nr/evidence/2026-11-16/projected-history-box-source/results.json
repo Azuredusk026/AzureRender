@@ -1,0 +1,1274 @@
+{
+  "nativeHistory": "9667b36a4cf8716ca807be9a5ea270b47c8981fd38427dc22304e649ffa679a8",
+  "status": "stationary-captured-box-geometry-source-comparison",
+  "asset": {
+    "glb": "e5114c25c94955685a89cad321f737790f58f2e2565bcb349a245dbe7287cb6d",
+    "receipt": "0a3a29df74b44a0ad9f40869587ec25f750fdfed6ae3e28783aba11c6916d204",
+    "project": "ae54210f8b6a52a2f139bdc573cda016bdf5a6bb9aa2b971cd61f91ce067fbea",
+    "level": "ef555199856c701c5abdfa044f5de1da2a5fcc641f6767aa9acb9d7518ddb3df",
+    "material": "M_prop_base01_zmdmachine+1_001_02-baked"
+  },
+  "depth": {
+    "native": "76a4b539ed98345f51ebbc0e686347aefd98e26ad1ffe1da65b82f16082d80a9",
+    "player": "b6c9b61c16c5f22020951ff80dafda2018aaab1710408da33346e93a1a2d119a"
+  },
+  "mask": {
+    "6587": "1ae2a4c5e8d7786db6c70b4e91c225279bbc33085fd98dced1d4e3a0aa18d22b",
+    "6600": "60f9c976900f2814c6288c4fde76f0ccc420a0b190d1e5c401ae4861abf7177f",
+    "6613": "77a75d1cc0d158572e7208f7e4b360b8cb42b34834262fc4c603f6287e3373b8",
+    "6626": "a7380c6b480139b679a6d389131ba8f7975ce0645d960e6714da55e3e65fd342",
+    "6652": "5a4b5741692300def71863b799c81b5a9efe6cfe3cdc8316321a14df53e4faa4"
+  },
+  "playerHistory": "ff7c9086cec80cada14f34816ae5953975446f86a420e242b2cf7b1ce0f69778",
+  "routes": {
+    "native": {
+      "maskAddresses": 5846,
+      "controls": {
+        "geometryTranslationMeters": [
+          0.1,
+          0.1,
+          0.1
+        ],
+        "shiftedStillNearInteriorUvWithoutMaskEventCheck": 70
+      },
+      "comparisons": {
+        "pairedNearestTriangle": {
+          "addresses": 5541,
+          "metrics": {
+            "centerFloor": {
+              "qualified": {
+                "samples": 3607,
+                "priorAddresses": 2866,
+                "medianCompressedLuma": -0.013195120837291576,
+                "negative": 2729,
+                "maximumDarkLuma": 0.2731035072484566,
+                "negativeEnergy": 103.0122777728868
+              },
+              "maskOnly": {
+                "samples": 3844,
+                "priorAddresses": 3058,
+                "medianCompressedLuma": -0.01286771150021776,
+                "negative": 2887,
+                "maximumDarkLuma": 0.4097941115041854,
+                "negativeEnergy": 109.99997362810662
+              }
+            },
+            "cyanRing": {
+              "qualified": {
+                "samples": 1447,
+                "priorAddresses": 1332,
+                "medianCompressedLuma": -0.014272903184892532,
+                "negative": 1149,
+                "maximumDarkLuma": 0.2731035072484566,
+                "negativeEnergy": 43.588803736858885
+              },
+              "maskOnly": {
+                "samples": 1537,
+                "priorAddresses": 1415,
+                "medianCompressedLuma": -0.015292694258361321,
+                "negative": 1216,
+                "maximumDarkLuma": 0.4097941115041854,
+                "negativeEnergy": 47.701222045968855
+              }
+            }
+          },
+          "surfaceDistancePercentiles": [
+            9.49161455559673e-05,
+            0.0007741454284925305,
+            0.0091089176021808
+          ],
+          "uvDeltaPercentiles": [
+            0.0008109236799811459,
+            0.0010596637038124967,
+            0.0021089973375250093
+          ]
+        },
+        "sourceEventMatchesDrawMask": {
+          "addresses": 5541,
+          "metrics": {
+            "centerFloor": {
+              "qualified": {
+                "samples": 3607,
+                "priorAddresses": 2866,
+                "medianCompressedLuma": -0.013195120837291576,
+                "negative": 2729,
+                "maximumDarkLuma": 0.2731035072484566,
+                "negativeEnergy": 103.0122777728868
+              },
+              "maskOnly": {
+                "samples": 3844,
+                "priorAddresses": 3058,
+                "medianCompressedLuma": -0.01286771150021776,
+                "negative": 2887,
+                "maximumDarkLuma": 0.4097941115041854,
+                "negativeEnergy": 109.99997362810662
+              }
+            },
+            "cyanRing": {
+              "qualified": {
+                "samples": 1447,
+                "priorAddresses": 1332,
+                "medianCompressedLuma": -0.014272903184892532,
+                "negative": 1149,
+                "maximumDarkLuma": 0.2731035072484566,
+                "negativeEnergy": 43.588803736858885
+              },
+              "maskOnly": {
+                "samples": 1537,
+                "priorAddresses": 1415,
+                "medianCompressedLuma": -0.015292694258361321,
+                "negative": 1216,
+                "maximumDarkLuma": 0.4097941115041854,
+                "negativeEnergy": 47.701222045968855
+              }
+            }
+          },
+          "surfaceDistancePercentiles": [
+            9.49161455559673e-05,
+            0.0007741454284925305,
+            0.0091089176021808
+          ],
+          "uvDeltaPercentiles": [
+            0.0008109236799811459,
+            0.0010596637038124967,
+            0.0021089973375250093
+          ]
+        },
+        "nearInteriorUv": {
+          "addresses": 4107,
+          "metrics": {
+            "centerFloor": {
+              "qualified": {
+                "samples": 2546,
+                "priorAddresses": 1962,
+                "medianCompressedLuma": -0.012185696989914917,
+                "negative": 1923,
+                "maximumDarkLuma": 0.2690645271942692,
+                "negativeEnergy": 64.01918587891656
+              },
+              "maskOnly": {
+                "samples": 3844,
+                "priorAddresses": 3058,
+                "medianCompressedLuma": -0.01286771150021776,
+                "negative": 2887,
+                "maximumDarkLuma": 0.4097941115041854,
+                "negativeEnergy": 109.99997362810662
+              }
+            },
+            "cyanRing": {
+              "qualified": {
+                "samples": 755,
+                "priorAddresses": 695,
+                "medianCompressedLuma": -0.011097669316282942,
+                "negative": 640,
+                "maximumDarkLuma": 0.17114120212336292,
+                "negativeEnergy": 14.276584495951795
+              },
+              "maskOnly": {
+                "samples": 1537,
+                "priorAddresses": 1415,
+                "medianCompressedLuma": -0.015292694258361321,
+                "negative": 1216,
+                "maximumDarkLuma": 0.4097941115041854,
+                "negativeEnergy": 47.701222045968855
+              }
+            }
+          },
+          "surfaceDistancePercentiles": [
+            9.08674422468e-05,
+            0.0007148393980491071,
+            0.0012944378692380152
+          ],
+          "uvDeltaPercentiles": [
+            0.0008108109227871315,
+            0.0010547940697601677,
+            0.0015410795826848122
+          ]
+        },
+        "nearInteriorUvStrict": {
+          "addresses": 1823,
+          "metrics": {
+            "centerFloor": {
+              "qualified": {
+                "samples": 971,
+                "priorAddresses": 702,
+                "medianCompressedLuma": -0.015575463049561181,
+                "negative": 617,
+                "maximumDarkLuma": 0.2690645271942692,
+                "negativeEnergy": 32.958107236614104
+              },
+              "maskOnly": {
+                "samples": 3844,
+                "priorAddresses": 3058,
+                "medianCompressedLuma": -0.01286771150021776,
+                "negative": 2887,
+                "maximumDarkLuma": 0.4097941115041854,
+                "negativeEnergy": 109.99997362810662
+              }
+            },
+            "cyanRing": {
+              "qualified": {
+                "samples": 12,
+                "priorAddresses": 11,
+                "medianCompressedLuma": -0.008019545029681257,
+                "negative": 11,
+                "maximumDarkLuma": 0.14866296085354896,
+                "negativeEnergy": 0.2564268437645405
+              },
+              "maskOnly": {
+                "samples": 1537,
+                "priorAddresses": 1415,
+                "medianCompressedLuma": -0.015292694258361321,
+                "negative": 1216,
+                "maximumDarkLuma": 0.4097941115041854,
+                "negativeEnergy": 47.701222045968855
+              }
+            }
+          },
+          "surfaceDistancePercentiles": [
+            8.994661596478959e-05,
+            0.0005692175723630661,
+            0.0007756057684714286
+          ],
+          "uvDeltaPercentiles": [
+            0.0008105277365688613,
+            0.0008116770069868245,
+            0.0008130711228605495
+          ]
+        }
+      },
+      "unrestrictedNeighborhoodBestRgb": {
+        "centerFloor": {
+          "certifiedAddresses": 1962,
+          "lumaBelowPoint10": 69,
+          "disjointTileFixedShift": [
+            {
+              "offset": [
+                0,
+                -2
+              ],
+              "train": 1048,
+              "test": 914,
+              "originalTestMeanRgb": 0.04643597251325235,
+              "fixedOffsetTestMeanRgb": 0.044589932137097,
+              "severeOriginalTestMeanRgb": 0.20681523963849713,
+              "severeFixedOffsetTestMeanRgb": 0.13508922870446213
+            },
+            {
+              "offset": [
+                0,
+                -1
+              ],
+              "train": 914,
+              "test": 1048,
+              "originalTestMeanRgb": 0.04598375287804988,
+              "fixedOffsetTestMeanRgb": 0.04565730706224788,
+              "severeOriginalTestMeanRgb": 0.210850940184711,
+              "severeFixedOffsetTestMeanRgb": 0.1971372714502761
+            }
+          ],
+          "severeStillRgbOverPoint02AtEight": 14,
+          "severeStillRgbOverPoint05AtEight": 0,
+          "severeMedianBestRgbAtEight": 0.008580974222785837
+        },
+        "cyanRing": {
+          "certifiedAddresses": 695,
+          "lumaBelowPoint10": 13,
+          "disjointTileFixedShift": [
+            {
+              "offset": [
+                0,
+                1
+              ],
+              "train": 359,
+              "test": 336,
+              "originalTestMeanRgb": 0.03351227377695554,
+              "fixedOffsetTestMeanRgb": 0.02416615341975168,
+              "severeOriginalTestMeanRgb": 0.14209408860327766,
+              "severeFixedOffsetTestMeanRgb": 0.06904925125418654
+            },
+            {
+              "offset": [
+                0,
+                2
+              ],
+              "train": 336,
+              "test": 359,
+              "originalTestMeanRgb": 0.03412586919530852,
+              "fixedOffsetTestMeanRgb": 0.02521746212965481,
+              "severeOriginalTestMeanRgb": 0.1606581790165418,
+              "severeFixedOffsetTestMeanRgb": 0.023139708219928397
+            }
+          ],
+          "severeStillRgbOverPoint02AtEight": 0,
+          "severeStillRgbOverPoint05AtEight": 0,
+          "severeMedianBestRgbAtEight": 0.0051676171853119734
+        }
+      },
+      "largestDarknessWitnesses": [
+        {
+          "previousPixelXY": [
+            1457,
+            434
+          ],
+          "event": 6587,
+          "primitive": 4,
+          "instance": 4,
+          "triangle": 122,
+          "nativeUV": [
+            0.6039507917457336,
+            0.6235018121400079
+          ],
+          "playerUV": [
+            0.6026115203011656,
+            0.6243911897721484
+          ],
+          "maxPlaneDistanceMeters": 0.0011849839504384457,
+          "deltaCompressedLuma": -0.26912212269731284,
+          "unrestrictedNativeEightPixelBestRgb": 0.08084151472650772
+        },
+        {
+          "previousPixelXY": [
+            1077,
+            618
+          ],
+          "event": 6587,
+          "primitive": 0,
+          "instance": 0,
+          "triangle": 112,
+          "nativeUV": [
+            0.9108699204530114,
+            0.6225436274849836
+          ],
+          "playerUV": [
+            0.9104797876701245,
+            0.6223265571475091
+          ],
+          "maxPlaneDistanceMeters": 0.0037244924253043085,
+          "deltaCompressedLuma": -0.2427115248072441,
+          "unrestrictedNativeEightPixelBestRgb": 0.0037794900992116354
+        },
+        {
+          "previousPixelXY": [
+            1430,
+            445
+          ],
+          "event": 6587,
+          "primitive": 4,
+          "instance": 4,
+          "triangle": 143,
+          "nativeUV": [
+            0.7310633007019067,
+            0.46678899719889994
+          ],
+          "playerUV": [
+            0.7297431818705755,
+            0.4676340390729847
+          ],
+          "maxPlaneDistanceMeters": 0.0014906993323176698,
+          "deltaCompressedLuma": -0.21703965129062597,
+          "unrestrictedNativeEightPixelBestRgb": 0.04206218140528528
+        },
+        {
+          "previousPixelXY": [
+            1476,
+            450
+          ],
+          "event": 6587,
+          "primitive": 4,
+          "instance": 4,
+          "triangle": 122,
+          "nativeUV": [
+            0.5534562032756408,
+            0.5799449677275281
+          ],
+          "playerUV": [
+            0.5521181821960858,
+            0.580833603350605
+          ],
+          "maxPlaneDistanceMeters": 0.0012842070256332057,
+          "deltaCompressedLuma": -0.17304663600070624,
+          "unrestrictedNativeEightPixelBestRgb": 0.009847310745134286
+        },
+        {
+          "previousPixelXY": [
+            1498,
+            666
+          ],
+          "event": 6613,
+          "primitive": 11,
+          "instance": 0,
+          "triangle": 40,
+          "nativeUV": [
+            0.11811977636407069,
+            0.015509029771159056
+          ],
+          "playerUV": [
+            0.11730935801833536,
+            0.01604798153835392
+          ],
+          "maxPlaneDistanceMeters": 0.0007742886793862377,
+          "deltaCompressedLuma": -0.2690645271942692,
+          "unrestrictedNativeEightPixelBestRgb": 0.022633891131147624
+        },
+        {
+          "previousPixelXY": [
+            1539,
+            666
+          ],
+          "event": 6613,
+          "primitive": 11,
+          "instance": 0,
+          "triangle": 40,
+          "nativeUV": [
+            0.05184921313961999,
+            0.015476986627832336
+          ],
+          "playerUV": [
+            0.051038601208604276,
+            0.016015891010499717
+          ],
+          "maxPlaneDistanceMeters": 0.0007134069093405191,
+          "deltaCompressedLuma": -0.2682529345935341,
+          "unrestrictedNativeEightPixelBestRgb": 0.008580974222785837
+        },
+        {
+          "previousPixelXY": [
+            1515,
+            665
+          ],
+          "event": 6613,
+          "primitive": 11,
+          "instance": 0,
+          "triangle": 40,
+          "nativeUV": [
+            0.09060444254784594,
+            0.0171306155909501
+          ],
+          "playerUV": [
+            0.0897938388582619,
+            0.01766962286169831
+          ],
+          "maxPlaneDistanceMeters": 0.0001499913264146961,
+          "deltaCompressedLuma": -0.26425652182029985,
+          "unrestrictedNativeEightPixelBestRgb": 0.01653594527695927
+        },
+        {
+          "previousPixelXY": [
+            1498,
+            665
+          ],
+          "event": 6613,
+          "primitive": 11,
+          "instance": 0,
+          "triangle": 40,
+          "nativeUV": [
+            0.11808819934218161,
+            0.017143533495257046
+          ],
+          "playerUV": [
+            0.11727768205950583,
+            0.017682556420829727
+          ],
+          "maxPlaneDistanceMeters": 9.108822693768852e-05,
+          "deltaCompressedLuma": -0.26227128999063226,
+          "unrestrictedNativeEightPixelBestRgb": 0.009968862002455003
+        },
+        {
+          "previousPixelXY": [
+            1183,
+            444
+          ],
+          "event": 6626,
+          "primitive": 16,
+          "instance": 1,
+          "triangle": 518,
+          "nativeUV": [
+            0.06144378015716166,
+            0.3791570446572165
+          ],
+          "playerUV": [
+            0.06300681342764518,
+            0.38003888031906774
+          ],
+          "maxPlaneDistanceMeters": 0.0011256333731872409,
+          "deltaCompressedLuma": -0.37709054854828405,
+          "unrestrictedNativeEightPixelBestRgb": 0.09108559875815712
+        },
+        {
+          "previousPixelXY": [
+            1189,
+            401
+          ],
+          "event": 6626,
+          "primitive": 16,
+          "instance": 1,
+          "triangle": 6,
+          "nativeUV": [
+            0.6392431282133244,
+            0.8724011438992538
+          ],
+          "playerUV": [
+            0.6401121762691019,
+            0.8739592392458747
+          ],
+          "maxPlaneDistanceMeters": 0.00037320605411933646,
+          "deltaCompressedLuma": -0.30724040618932325,
+          "unrestrictedNativeEightPixelBestRgb": 0.11030780065777754
+        },
+        {
+          "previousPixelXY": [
+            1189,
+            402
+          ],
+          "event": 6626,
+          "primitive": 16,
+          "instance": 1,
+          "triangle": 6,
+          "nativeUV": [
+            0.636166240441249,
+            0.8724707985814121
+          ],
+          "playerUV": [
+            0.6370355188551753,
+            0.874028741162402
+          ],
+          "maxPlaneDistanceMeters": 0.0011332616880441872,
+          "deltaCompressedLuma": -0.2502461021114805,
+          "unrestrictedNativeEightPixelBestRgb": 0.08224425753244648
+        },
+        {
+          "previousPixelXY": [
+            1247,
+            435
+          ],
+          "event": 6626,
+          "primitive": 16,
+          "instance": 1,
+          "triangle": 62,
+          "nativeUV": [
+            0.5862598963559003,
+            0.7427458591248678
+          ],
+          "playerUV": [
+            0.5876118956289476,
+            0.7444879533381974
+          ],
+          "maxPlaneDistanceMeters": 0.004919792170988154,
+          "deltaCompressedLuma": -0.23258086509856982,
+          "unrestrictedNativeEightPixelBestRgb": 0.06478670085316066
+        },
+        {
+          "previousPixelXY": [
+            1623,
+            719
+          ],
+          "event": 6652,
+          "primitive": 17,
+          "instance": 0,
+          "triangle": 9,
+          "nativeUV": [
+            0.7430337562146921,
+            0.07542026739669197
+          ],
+          "playerUV": [
+            0.7419341823022501,
+            0.07610187139884098
+          ],
+          "maxPlaneDistanceMeters": 0.00025033559252485386,
+          "deltaCompressedLuma": -0.07198917719160965,
+          "unrestrictedNativeEightPixelBestRgb": 0.00413916504691654
+        },
+        {
+          "previousPixelXY": [
+            1180,
+            616
+          ],
+          "event": 6652,
+          "primitive": 18,
+          "instance": 1,
+          "triangle": 18,
+          "nativeUV": [
+            0.7791440795007801,
+            0.46712735666946625
+          ],
+          "playerUV": [
+            0.7799814364071876,
+            0.46816780003339653
+          ],
+          "maxPlaneDistanceMeters": 0.003973530470769948,
+          "deltaCompressedLuma": -0.028660696199479106,
+          "unrestrictedNativeEightPixelBestRgb": 0.004210644383055108
+        },
+        {
+          "previousPixelXY": [
+            1639,
+            741
+          ],
+          "event": 6652,
+          "primitive": 17,
+          "instance": 0,
+          "triangle": 9,
+          "nativeUV": [
+            0.7094793585978083,
+            0.027413212218509786
+          ],
+          "playerUV": [
+            0.7083937402895912,
+            0.028099166341798217
+          ],
+          "maxPlaneDistanceMeters": 0.0002496143354745302,
+          "deltaCompressedLuma": -0.02545998003637087,
+          "unrestrictedNativeEightPixelBestRgb": 0.005488346834743182
+        },
+        {
+          "previousPixelXY": [
+            1633,
+            720
+          ],
+          "event": 6652,
+          "primitive": 17,
+          "instance": 0,
+          "triangle": 8,
+          "nativeUV": [
+            0.72154023236781,
+            0.0726219523877018
+          ],
+          "playerUV": [
+            0.7204490495384073,
+            0.07330142542825667
+          ],
+          "maxPlaneDistanceMeters": 0.0008200828120744784,
+          "deltaCompressedLuma": -0.024469329125178248,
+          "unrestrictedNativeEightPixelBestRgb": 0.004676422151506238
+        }
+      ]
+    },
+    "player": {
+      "maskAddresses": 6676,
+      "controls": {
+        "geometryTranslationMeters": [
+          0.1,
+          0.1,
+          0.1
+        ],
+        "shiftedStillNearInteriorUvWithoutMaskEventCheck": 20
+      },
+      "comparisons": {
+        "pairedNearestTriangle": {
+          "addresses": 6252,
+          "metrics": {
+            "centerFloor": {
+              "qualified": {
+                "samples": 2807,
+                "priorAddresses": 2648,
+                "medianCompressedLuma": -0.012585973450190873,
+                "negative": 2138,
+                "maximumDarkLuma": 0.2705334803544192,
+                "negativeEnergy": 75.17219072426059
+              },
+              "maskOnly": {
+                "samples": 3059,
+                "priorAddresses": 2879,
+                "medianCompressedLuma": -0.012874804873365725,
+                "negative": 2328,
+                "maximumDarkLuma": 0.2705334803544192,
+                "negativeEnergy": 81.62686755771526
+              }
+            },
+            "cyanRing": {
+              "qualified": {
+                "samples": 1396,
+                "priorAddresses": 1349,
+                "medianCompressedLuma": -0.013210809920080818,
+                "negative": 1065,
+                "maximumDarkLuma": 0.16623996753505996,
+                "negativeEnergy": 37.35036159930733
+              },
+              "maskOnly": {
+                "samples": 1498,
+                "priorAddresses": 1449,
+                "medianCompressedLuma": -0.013759933831606652,
+                "negative": 1139,
+                "maximumDarkLuma": 0.16623996753505996,
+                "negativeEnergy": 39.919006360825826
+              }
+            }
+          },
+          "surfaceDistancePercentiles": [
+            0.00010572880181527685,
+            0.0008666352833480559,
+            0.0092548007900351
+          ],
+          "uvDeltaPercentiles": [
+            0.0008110797500327837,
+            0.001061988344032927,
+            0.002108496425648393
+          ]
+        },
+        "sourceEventMatchesDrawMask": {
+          "addresses": 6252,
+          "metrics": {
+            "centerFloor": {
+              "qualified": {
+                "samples": 2807,
+                "priorAddresses": 2648,
+                "medianCompressedLuma": -0.012585973450190873,
+                "negative": 2138,
+                "maximumDarkLuma": 0.2705334803544192,
+                "negativeEnergy": 75.17219072426059
+              },
+              "maskOnly": {
+                "samples": 3059,
+                "priorAddresses": 2879,
+                "medianCompressedLuma": -0.012874804873365725,
+                "negative": 2328,
+                "maximumDarkLuma": 0.2705334803544192,
+                "negativeEnergy": 81.62686755771526
+              }
+            },
+            "cyanRing": {
+              "qualified": {
+                "samples": 1396,
+                "priorAddresses": 1349,
+                "medianCompressedLuma": -0.013210809920080818,
+                "negative": 1065,
+                "maximumDarkLuma": 0.16623996753505996,
+                "negativeEnergy": 37.35036159930733
+              },
+              "maskOnly": {
+                "samples": 1498,
+                "priorAddresses": 1449,
+                "medianCompressedLuma": -0.013759933831606652,
+                "negative": 1139,
+                "maximumDarkLuma": 0.16623996753505996,
+                "negativeEnergy": 39.919006360825826
+              }
+            }
+          },
+          "surfaceDistancePercentiles": [
+            0.00010572880181527685,
+            0.0008666352833480559,
+            0.0092548007900351
+          ],
+          "uvDeltaPercentiles": [
+            0.0008110797500327837,
+            0.001061988344032927,
+            0.002108496425648393
+          ]
+        },
+        "nearInteriorUv": {
+          "addresses": 4263,
+          "metrics": {
+            "centerFloor": {
+              "qualified": {
+                "samples": 1621,
+                "priorAddresses": 1538,
+                "medianCompressedLuma": -0.014706048357306918,
+                "negative": 1247,
+                "maximumDarkLuma": 0.2705334803544192,
+                "negativeEnergy": 40.85807521030493
+              },
+              "maskOnly": {
+                "samples": 3059,
+                "priorAddresses": 2879,
+                "medianCompressedLuma": -0.012874804873365725,
+                "negative": 2328,
+                "maximumDarkLuma": 0.2705334803544192,
+                "negativeEnergy": 81.62686755771526
+              }
+            },
+            "cyanRing": {
+              "qualified": {
+                "samples": 692,
+                "priorAddresses": 668,
+                "medianCompressedLuma": -0.012025347756601894,
+                "negative": 579,
+                "maximumDarkLuma": 0.1267729575358615,
+                "negativeEnergy": 13.479406337116183
+              },
+              "maskOnly": {
+                "samples": 1498,
+                "priorAddresses": 1449,
+                "medianCompressedLuma": -0.013759933831606652,
+                "negative": 1139,
+                "maximumDarkLuma": 0.16623996753505996,
+                "negativeEnergy": 39.919006360825826
+              }
+            }
+          },
+          "surfaceDistancePercentiles": [
+            9.06049112245968e-05,
+            0.0007174637233886508,
+            0.0023993947589171275
+          ],
+          "uvDeltaPercentiles": [
+            0.0008108418841780817,
+            0.0010533128321470464,
+            0.0013588818039409034
+          ]
+        },
+        "nearInteriorUvStrict": {
+          "addresses": 1983,
+          "metrics": {
+            "centerFloor": {
+              "qualified": {
+                "samples": 487,
+                "priorAddresses": 472,
+                "medianCompressedLuma": -0.012585973450190873,
+                "negative": 297,
+                "maximumDarkLuma": 0.2705334803544192,
+                "negativeEnergy": 17.419943780022848
+              },
+              "maskOnly": {
+                "samples": 3059,
+                "priorAddresses": 2879,
+                "medianCompressedLuma": -0.012874804873365725,
+                "negative": 2328,
+                "maximumDarkLuma": 0.2705334803544192,
+                "negativeEnergy": 81.62686755771526
+              }
+            },
+            "cyanRing": {
+              "qualified": {
+                "samples": 17,
+                "priorAddresses": 16,
+                "medianCompressedLuma": -0.019566037854640984,
+                "negative": 17,
+                "maximumDarkLuma": 0.05682800773297738,
+                "negativeEnergy": 0.329461942808073
+              },
+              "maskOnly": {
+                "samples": 1498,
+                "priorAddresses": 1449,
+                "medianCompressedLuma": -0.013759933831606652,
+                "negative": 1139,
+                "maximumDarkLuma": 0.16623996753505996,
+                "negativeEnergy": 39.919006360825826
+              }
+            }
+          },
+          "surfaceDistancePercentiles": [
+            8.988817820557867e-05,
+            0.0007146350833813661,
+            0.0007767683934407984
+          ],
+          "uvDeltaPercentiles": [
+            0.0008105188570477872,
+            0.000811861943686723,
+            0.0008133157057435864
+          ]
+        }
+      },
+      "unrestrictedNeighborhoodBestRgb": {
+        "centerFloor": {
+          "certifiedAddresses": 1538,
+          "lumaBelowPoint10": 60,
+          "disjointTileFixedShift": [
+            {
+              "offset": [
+                0,
+                -1
+              ],
+              "train": 775,
+              "test": 763,
+              "originalTestMeanRgb": 0.05298265663199918,
+              "fixedOffsetTestMeanRgb": 0.049489037894719395,
+              "severeOriginalTestMeanRgb": 0.22798172594315086,
+              "severeFixedOffsetTestMeanRgb": 0.19735831452807673
+            },
+            {
+              "offset": [
+                0,
+                -1
+              ],
+              "train": 763,
+              "test": 775,
+              "originalTestMeanRgb": 0.04911648190011205,
+              "fixedOffsetTestMeanRgb": 0.048242270116559544,
+              "severeOriginalTestMeanRgb": 0.20903668581241835,
+              "severeFixedOffsetTestMeanRgb": 0.18045217343897196
+            }
+          ],
+          "severeStillRgbOverPoint02AtEight": 21,
+          "severeStillRgbOverPoint05AtEight": 0,
+          "severeMedianBestRgbAtEight": 0.010797677931664945
+        },
+        "cyanRing": {
+          "certifiedAddresses": 668,
+          "lumaBelowPoint10": 6,
+          "disjointTileFixedShift": [
+            {
+              "offset": [
+                0,
+                2
+              ],
+              "train": 347,
+              "test": 321,
+              "originalTestMeanRgb": 0.03763490595553445,
+              "fixedOffsetTestMeanRgb": 0.023280081814869562,
+              "severeOriginalTestMeanRgb": 0.14063164956031324,
+              "severeFixedOffsetTestMeanRgb": 0.010129457269023588
+            },
+            {
+              "offset": [
+                0,
+                2
+              ],
+              "train": 321,
+              "test": 347,
+              "originalTestMeanRgb": 0.03397305110425918,
+              "fixedOffsetTestMeanRgb": 0.024835064902784733,
+              "severeOriginalTestMeanRgb": null,
+              "severeFixedOffsetTestMeanRgb": null
+            }
+          ],
+          "severeStillRgbOverPoint02AtEight": 0,
+          "severeStillRgbOverPoint05AtEight": 0,
+          "severeMedianBestRgbAtEight": 0.005712968379795791
+        }
+      },
+      "largestDarknessWitnesses": [
+        {
+          "previousPixelXY": [
+            1457,
+            434
+          ],
+          "event": 6587,
+          "primitive": 4,
+          "instance": 4,
+          "triangle": 122,
+          "nativeUV": [
+            0.6039507917457336,
+            0.6235018121400079
+          ],
+          "playerUV": [
+            0.6026115203011656,
+            0.6243911897721484
+          ],
+          "maxPlaneDistanceMeters": 0.0011849839504384457,
+          "deltaCompressedLuma": -0.26912212269731284,
+          "unrestrictedNativeEightPixelBestRgb": 0.08084151472650772
+        },
+        {
+          "previousPixelXY": [
+            1477,
+            451
+          ],
+          "event": 6587,
+          "primitive": 4,
+          "instance": 4,
+          "triangle": 122,
+          "nativeUV": [
+            0.5507792106778086,
+            0.5772719212602735
+          ],
+          "playerUV": [
+            0.5494411954646886,
+            0.5781605627817675
+          ],
+          "maxPlaneDistanceMeters": 0.0004038668739347776,
+          "deltaCompressedLuma": -0.18845399677314453,
+          "unrestrictedNativeEightPixelBestRgb": 0.007004701844985306
+        },
+        {
+          "previousPixelXY": [
+            1442,
+            416
+          ],
+          "event": 6587,
+          "primitive": 4,
+          "instance": 4,
+          "triangle": 123,
+          "nativeUV": [
+            0.6437682979188055,
+            0.6725545766979026
+          ],
+          "playerUV": [
+            0.6424277153162555,
+            0.6734447592532734
+          ],
+          "maxPlaneDistanceMeters": 0.0012840731217863691,
+          "deltaCompressedLuma": -0.1879143748716852,
+          "unrestrictedNativeEightPixelBestRgb": 0.016837583967118402
+        },
+        {
+          "previousPixelXY": [
+            1454,
+            434
+          ],
+          "event": 6587,
+          "primitive": 4,
+          "instance": 4,
+          "triangle": 122,
+          "nativeUV": [
+            0.6119872301533971,
+            0.6235091852129903
+          ],
+          "playerUV": [
+            0.6106479592394979,
+            0.6243985097506474
+          ],
+          "maxPlaneDistanceMeters": 0.0012848265852352253,
+          "deltaCompressedLuma": -0.18276414806325914,
+          "unrestrictedNativeEightPixelBestRgb": 0.04566475075408583
+        },
+        {
+          "previousPixelXY": [
+            1494,
+            666
+          ],
+          "event": 6613,
+          "primitive": 11,
+          "instance": 0,
+          "triangle": 40,
+          "nativeUV": [
+            0.12458615151070743,
+            0.015512226710185931
+          ],
+          "playerUV": [
+            0.12377572102632171,
+            0.016051202139564364
+          ],
+          "maxPlaneDistanceMeters": 0.0007736417158467727,
+          "deltaCompressedLuma": -0.2705334803544192,
+          "unrestrictedNativeEightPixelBestRgb": 0.008842068495483954
+        },
+        {
+          "previousPixelXY": [
+            1535,
+            666
+          ],
+          "event": 6613,
+          "primitive": 11,
+          "instance": 0,
+          "triangle": 40,
+          "nativeUV": [
+            0.058313625835803455,
+            0.015480182607422805
+          ],
+          "playerUV": [
+            0.057503027573677125,
+            0.016019094868890787
+          ],
+          "maxPlaneDistanceMeters": 0.0007139231497741809,
+          "deltaCompressedLuma": -0.2698478635692264,
+          "unrestrictedNativeEightPixelBestRgb": 0.01100753191528947
+        },
+        {
+          "previousPixelXY": [
+            1498,
+            666
+          ],
+          "event": 6613,
+          "primitive": 11,
+          "instance": 0,
+          "triangle": 40,
+          "nativeUV": [
+            0.11811977636407069,
+            0.015509029771159056
+          ],
+          "playerUV": [
+            0.11730935801833536,
+            0.01604798153835392
+          ],
+          "maxPlaneDistanceMeters": 0.0007742886793862377,
+          "deltaCompressedLuma": -0.2690645271942692,
+          "unrestrictedNativeEightPixelBestRgb": 0.022633891131147624
+        },
+        {
+          "previousPixelXY": [
+            1539,
+            666
+          ],
+          "event": 6613,
+          "primitive": 11,
+          "instance": 0,
+          "triangle": 40,
+          "nativeUV": [
+            0.05184921313961999,
+            0.015476986627832336
+          ],
+          "playerUV": [
+            0.051038601208604276,
+            0.016015891010499717
+          ],
+          "maxPlaneDistanceMeters": 0.0007134069093405191,
+          "deltaCompressedLuma": -0.2682529345935341,
+          "unrestrictedNativeEightPixelBestRgb": 0.008580974222785837
+        },
+        {
+          "previousPixelXY": [
+            1183,
+            444
+          ],
+          "event": 6626,
+          "primitive": 16,
+          "instance": 1,
+          "triangle": 518,
+          "nativeUV": [
+            0.06144378015716166,
+            0.3791570446572165
+          ],
+          "playerUV": [
+            0.06300681342764518,
+            0.38003888031906774
+          ],
+          "maxPlaneDistanceMeters": 0.0011256333731872409,
+          "deltaCompressedLuma": -0.37709054854828405,
+          "unrestrictedNativeEightPixelBestRgb": 0.09108559875815712
+        },
+        {
+          "previousPixelXY": [
+            1189,
+            401
+          ],
+          "event": 6626,
+          "primitive": 16,
+          "instance": 1,
+          "triangle": 6,
+          "nativeUV": [
+            0.6392431282133244,
+            0.8724011438992538
+          ],
+          "playerUV": [
+            0.6401121762691019,
+            0.8739592392458747
+          ],
+          "maxPlaneDistanceMeters": 0.00037320605411933646,
+          "deltaCompressedLuma": -0.30724040618932325,
+          "unrestrictedNativeEightPixelBestRgb": 0.11030780065777754
+        },
+        {
+          "previousPixelXY": [
+            1181,
+            444
+          ],
+          "event": 6626,
+          "primitive": 16,
+          "instance": 1,
+          "triangle": 518,
+          "nativeUV": [
+            0.05524409073609714,
+            0.37958327921566587
+          ],
+          "playerUV": [
+            0.05680845831073835,
+            0.38046536636366185
+          ],
+          "maxPlaneDistanceMeters": 0.001126994064248705,
+          "deltaCompressedLuma": -0.3012305400906876,
+          "unrestrictedNativeEightPixelBestRgb": 0.10285492247887316
+        },
+        {
+          "previousPixelXY": [
+            1248,
+            426
+          ],
+          "event": 6626,
+          "primitive": 16,
+          "instance": 1,
+          "triangle": 62,
+          "nativeUV": [
+            0.614280617078892,
+            0.7459771857020037
+          ],
+          "playerUV": [
+            0.6156425700852771,
+            0.7477216779746826
+          ],
+          "maxPlaneDistanceMeters": 0.004178014249710721,
+          "deltaCompressedLuma": -0.2850694492330011,
+          "unrestrictedNativeEightPixelBestRgb": 0.0695504562328762
+        },
+        {
+          "previousPixelXY": [
+            1573,
+            695
+          ],
+          "event": 6652,
+          "primitive": 17,
+          "instance": 0,
+          "triangle": 25,
+          "nativeUV": [
+            0.8668823266807028,
+            0.43779774200965466
+          ],
+          "playerUV": [
+            0.866180699969112,
+            0.43897106873685854
+          ],
+          "maxPlaneDistanceMeters": 0.000286432730468321,
+          "deltaCompressedLuma": -0.04736943385538624,
+          "unrestrictedNativeEightPixelBestRgb": 0.014533823597328095
+        },
+        {
+          "previousPixelXY": [
+            1597,
+            748
+          ],
+          "event": 6652,
+          "primitive": 17,
+          "instance": 0,
+          "triangle": 9,
+          "nativeUV": [
+            0.8005937073474951,
+            0.01422085150200918
+          ],
+          "playerUV": [
+            0.7994720710608173,
+            0.014920168537167511
+          ],
+          "maxPlaneDistanceMeters": 0.0008376283613233363,
+          "deltaCompressedLuma": -0.019015524176287168,
+          "unrestrictedNativeEightPixelBestRgb": 0.0014693182583456928
+        },
+        {
+          "previousPixelXY": [
+            1175,
+            628
+          ],
+          "event": 6652,
+          "primitive": 18,
+          "instance": 1,
+          "triangle": 47,
+          "nativeUV": [
+            0.7728060364404574,
+            0.4026719342238815
+          ],
+          "playerUV": [
+            0.7718495533250037,
+            0.40192022154152085
+          ],
+          "maxPlaneDistanceMeters": 0.000969870887832894,
+          "deltaCompressedLuma": -0.017547104470085173,
+          "unrestrictedNativeEightPixelBestRgb": 0.0069107816005420375
+        },
+        {
+          "previousPixelXY": [
+            1565,
+            730
+          ],
+          "event": 6652,
+          "primitive": 17,
+          "instance": 0,
+          "triangle": 24,
+          "nativeUV": [
+            0.9451090521333798,
+            0.418315635361144
+          ],
+          "playerUV": [
+            0.9443906964387738,
+            0.4194942980334101
+          ],
+          "maxPlaneDistanceMeters": 0.0008604535656039679,
+          "deltaCompressedLuma": -0.015506089347829129,
+          "unrestrictedNativeEightPixelBestRgb": 0.005279473808372244
+        }
+      ]
+    }
+  },
+  "pairedArraysSha256": "661012548c7ebb0e389e338b8b153a77ad69788ff0b58d4710eefd5e5a82871a",
+  "archiveSha256": "deac40951e5a7b38d8b5ba68aebbf222d66e4c0c115d84b16b99dd16934c38f3",
+  "scope": "Paired stationary source plane and UV, reflected through the retained native and Player history depths at one archived camera. The translated geometry is only a negative control. A closest independent neighboring color is a bound, not a common correction or texture proof."
+}

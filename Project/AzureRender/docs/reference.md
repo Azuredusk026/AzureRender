@@ -50,8 +50,9 @@
 
 | 参数 | 可选值 |
 | --- | --- |
-| `--qa-camera` | `full-body-front`、`face-front`、`face-three-quarter`、`back-detail`、`lighting-sweep` |
-| `--qa-light` | `neutral-material`、`stylized-key`、`specular-rim`、`rear-emissive` |
+| `--qa-camera` | `scene`、`full-body-front`、`face-front`、`face-three-quarter`、`back-detail`、`lighting-sweep` |
+| `--qa-camera-pose` | 世界坐标中的相机位置和注视点共六个数值，最后一个数值为纵向视野角，单位为度 |
+| `--qa-light` | `scene`、`neutral-material`、`stylized-key`、`specular-rim`、`rear-emissive` |
 | `--qa-effect` | `toon`、`shadow`、`hair-kk`、`rim`、`specular`、`emissive`、`outline`、`face-sdf`、`overlay`、`bloom` |
 | `--qa-effect-state` | `enabled`、`disabled`、`isolation` |
 | `--qa-isolation` | 见下表 |
@@ -60,6 +61,8 @@
 | `--diagnostic-view` | `beauty`、`normal`、`outline`、`shadow` |
 
 `--qa-effect-state` 必须配合 `--qa-effect`。
+
+`--qa-camera-pose` 与 `--qa-camera scene` 配合使用，适用于 Player 的场景采集。相机采用居中的透视投影，继承当前近远裁剪面。纵向视野角范围为 1 至 179 度，注视点与相机位置须形成非竖直方向。关卡和动画继续使用项目原有数据，采集清单记录实际位姿和镜头参数。
 
 QA Isolation：
 

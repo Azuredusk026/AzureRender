@@ -1,0 +1,303 @@
+{
+  "status": "qualified-static-region-control",
+  "overallStatus": "failed-user-review",
+  "geometry": {
+    "sourceEvent": 1245,
+    "vertices": 36,
+    "indices": 96,
+    "sourceBuffers": [
+      {
+        "rid": "ResourceId::1000000000000000410",
+        "file": "buffer_0.bin",
+        "bytes": 1440,
+        "sha256": "ed59dd8cbb2ce8f577f7b8226b15b77350bd71316b337d9a384d3859ab1e0518"
+      },
+      {
+        "rid": "ResourceId::1000000000000000409",
+        "file": "buffer_1.bin",
+        "bytes": 192,
+        "sha256": "32bf28f1198eb3579e6767d2082d12bd7617890df33fdd9258bb46fd4f55f779"
+      }
+    ],
+    "projectedPixelBounds": [
+      [
+        1242.9177172038062,
+        254.52051994613552
+      ],
+      [
+        1319.7360799650241,
+        263.3208877375739
+      ]
+    ],
+    "maximumReprojectionErrorPixels": 4.107957478183266e-05,
+    "textureV": "one-minus-native",
+    "sourceProject": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\qualified-background-geometry-static\\qualified.azureproject",
+    "sourceLevel": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\qualified-background-geometry-static\\scene\\static-qualified.azurelevel",
+    "sourceMaterial": "67d632b6-c69f-5d87-9728-9da8bbedef8d",
+    "linkedFiles": 178,
+    "linkedBytes": 334312090,
+    "maximumOutputBytes": 1036490702,
+    "overlayGeometrySha256": "18630e2051e7e6282c2ab939023803511d20f81bd9a0fc15e9ebc69c9725ad9d"
+  },
+  "footprint": {
+    "geometryPixels": 188,
+    "nativeChanged": 95,
+    "nativeOutsideGeometry": 0,
+    "irisGeometry": 94,
+    "irisUnchangedInsideGeometry": 0,
+    "nativeIrisOutsideGeometry": 0,
+    "rawBounds": [
+      [
+        1240,
+        252
+      ],
+      [
+        1322,
+        266
+      ]
+    ]
+  },
+  "history": {
+    "sampledHistories": 125,
+    "outcomes": {
+      "depthTestFailed": 15,
+      "passed": 95,
+      "stencilTestFailed": 15
+    },
+    "sourceTint": [
+      0.6231937408447266,
+      0.18207712471485138,
+      0.36842724680900574
+    ],
+    "sourceTextureMip": 2,
+    "alphaRatioMinMedianMax": [
+      0.9397375987753339,
+      0.9500155616656604,
+      0.9538442160569605
+    ],
+    "factorRebuildMaxError": 4.6407407694459835e-08
+  },
+  "devices": {
+    "nvidia": {
+      "device": "nvidia",
+      "baselineControl": {
+        "samples": 3686400,
+        "overOne": 0,
+        "peak": 0
+      },
+      "baselineControlPositions": [],
+      "candidateChanged": 136,
+      "nativeOverlayChanged": 95,
+      "coveredIrisChanged": 94,
+      "uncoveredIrisChanged": 0,
+      "changedOutsideNativeOverlay": 41,
+      "outsideNativeOverlayOverOne": {
+        "samples": 3686305,
+        "overOne": 41,
+        "peak": 38
+      },
+      "baseline": {
+        "iris": {
+          "samples": 255,
+          "overOne": 131,
+          "peak": 95
+        },
+        "iris-native-overlay": {
+          "samples": 94,
+          "overOne": 94,
+          "peak": 95
+        },
+        "iris-outside-native-overlay": {
+          "samples": 161,
+          "overOne": 37,
+          "peak": 20
+        },
+        "face": {
+          "samples": 1176,
+          "overOne": 1174,
+          "peak": 46
+        },
+        "skin": {
+          "samples": 28966,
+          "overOne": 10957,
+          "peak": 44
+        }
+      },
+      "candidate": {
+        "iris": {
+          "samples": 255,
+          "overOne": 131,
+          "peak": 52
+        },
+        "iris-native-overlay": {
+          "samples": 94,
+          "overOne": 94,
+          "peak": 52
+        },
+        "iris-outside-native-overlay": {
+          "samples": 161,
+          "overOne": 37,
+          "peak": 20
+        },
+        "face": {
+          "samples": 1176,
+          "overOne": 1174,
+          "peak": 46
+        },
+        "skin": {
+          "samples": 28966,
+          "overOne": 10957,
+          "peak": 44
+        }
+      },
+      "candidateRegional": {
+        "iris": {
+          "pixels": 255,
+          "ssim": 0.9782896727347768,
+          "medianLuminanceRelativeError": 0.016585042170893217,
+          "passed": true
+        },
+        "iris-native-overlay": {
+          "pixels": 94,
+          "ssim": 0.969344400624813,
+          "medianLuminanceRelativeError": 0.06492410228186594,
+          "passed": true
+        },
+        "iris-outside-native-overlay": {
+          "pixels": 161,
+          "ssim": 0.9835123781902835,
+          "medianLuminanceRelativeError": 0.04180495322005739,
+          "passed": true
+        },
+        "face": {
+          "pixels": 1176,
+          "ssim": 0.9948966785519591,
+          "medianLuminanceRelativeError": 0.019484224638619554,
+          "passed": true
+        },
+        "skin": {
+          "pixels": 28966,
+          "ssim": 0.9883011336151029,
+          "medianLuminanceRelativeError": 0.002132151353702811,
+          "passed": true
+        }
+      },
+      "candidateSha256": "54f5c7485bdacba6590e2f9076f57b1347f65af0d2ce986eb4c4ac0c4a9287c4"
+    },
+    "intel": {
+      "device": "intel",
+      "baselineControl": {
+        "samples": 3686400,
+        "overOne": 1,
+        "peak": 224
+      },
+      "baselineControlPositions": [
+        [
+          1315,
+          1351
+        ]
+      ],
+      "candidateChanged": 137,
+      "nativeOverlayChanged": 95,
+      "coveredIrisChanged": 94,
+      "uncoveredIrisChanged": 0,
+      "changedOutsideNativeOverlay": 42,
+      "outsideNativeOverlayOverOne": {
+        "samples": 3686305,
+        "overOne": 42,
+        "peak": 224
+      },
+      "baseline": {
+        "iris": {
+          "samples": 255,
+          "overOne": 133,
+          "peak": 95
+        },
+        "iris-native-overlay": {
+          "samples": 94,
+          "overOne": 94,
+          "peak": 95
+        },
+        "iris-outside-native-overlay": {
+          "samples": 161,
+          "overOne": 39,
+          "peak": 27
+        },
+        "face": {
+          "samples": 1176,
+          "overOne": 1170,
+          "peak": 34
+        },
+        "skin": {
+          "samples": 28966,
+          "overOne": 10485,
+          "peak": 44
+        }
+      },
+      "candidate": {
+        "iris": {
+          "samples": 255,
+          "overOne": 133,
+          "peak": 52
+        },
+        "iris-native-overlay": {
+          "samples": 94,
+          "overOne": 94,
+          "peak": 52
+        },
+        "iris-outside-native-overlay": {
+          "samples": 161,
+          "overOne": 39,
+          "peak": 27
+        },
+        "face": {
+          "samples": 1176,
+          "overOne": 1170,
+          "peak": 34
+        },
+        "skin": {
+          "samples": 28966,
+          "overOne": 10485,
+          "peak": 44
+        }
+      },
+      "candidateRegional": {
+        "iris": {
+          "pixels": 255,
+          "ssim": 0.9819474875279653,
+          "medianLuminanceRelativeError": 0.009946273866373248,
+          "passed": true
+        },
+        "iris-native-overlay": {
+          "pixels": 94,
+          "ssim": 0.971205424136375,
+          "medianLuminanceRelativeError": 0.06697847877127013,
+          "passed": true
+        },
+        "iris-outside-native-overlay": {
+          "pixels": 161,
+          "ssim": 0.9882192512472789,
+          "medianLuminanceRelativeError": 0.04436649685040958,
+          "passed": true
+        },
+        "face": {
+          "pixels": 1176,
+          "ssim": 0.9950648058786188,
+          "medianLuminanceRelativeError": 0.01659997511672593,
+          "passed": true
+        },
+        "skin": {
+          "pixels": 28966,
+          "ssim": 0.9884022894532879,
+          "medianLuminanceRelativeError": 0.0009760491156015975,
+          "passed": true
+        }
+      },
+      "candidateSha256": "33510295ba139b774354e5433bc45317b88e161dc57be6bdcc5f6c1b8d328cb9"
+    }
+  },
+  "archive": {
+    "sha256": "c9632e1b52c1d1c20bf0bebc34eae0872a3228b264166c5ecd596266d71a948f",
+    "members": 45
+  }
+}

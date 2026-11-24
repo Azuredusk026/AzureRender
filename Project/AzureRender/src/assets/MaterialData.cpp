@@ -159,7 +159,7 @@ AssetMaterial MaterialData::interpret(const std::function<std::filesystem::path(
     if(parameterOverride&&result.coverageTexture.present&&textures.contains("metallicRoughness"))
         throw std::invalid_argument("coverageTexture owns the metallicRoughness image slot during parameter overrides");
     if(parameterOverride&&(result.materialClass!=AssetMaterialClass::Generic
-        ||result.specularInput.present||result.nprDiffuse.present||result.eyeSurface.present
+        ||result.specularInput.present||result.nprDiffuse.present||result.eyeSurface.present||result.colorAdjustment.present
         ||result.projectedHairRamp.present||result.faceSdf.present||result.outlineSurface.present
         ||(result.materialFeatures&(MaterialFeatureUnlitSurface|MaterialFeatureSceneRefraction|MaterialFeatureMultiplyComposite)))
         &&(parameters.value("transmission",0.F)>0||parameters.value("thickness",0.F)>0))
@@ -185,6 +185,7 @@ AssetMaterial MaterialData::interpret(const std::function<std::filesystem::path(
     if(parameters.contains("baseColor"))
         applyBaseColorTint(result.baseColorPixels,parameters.at("baseColor").get<std::array<float,4>>(),
                           result.textureSettings[0].colorSpace=="srgb");
+    if(!parameterOverride||textures.contains("normal"))result.normalTexturePresent=textures.contains("normal");
     image("normal",result.normalPixels,result.normalWidth,result.normalHeight,{128,128,255,255});
     image("metallicRoughness",result.metallicRoughnessPixels,result.metallicRoughnessWidth,result.metallicRoughnessHeight,{255,255,255,255});
     for(std::size_t i=0;i<result.metallicRoughnessPixels.size();i+=4){result.metallicRoughnessPixels[i+1]=static_cast<std::uint8_t>(std::lround(result.metallicRoughnessPixels[i+1]*parameters.value("roughness",1.)));result.metallicRoughnessPixels[i+2]=static_cast<std::uint8_t>(std::lround(result.metallicRoughnessPixels[i+2]*parameters.value("metallic",1.)));}
@@ -258,7 +259,16 @@ void applyMaterialBindings(LoadedAsset& mesh,const std::map<std::string,Material
         const auto lost=[&](bool condition,const char* field){if(condition){if(!losses.empty())losses+=", ";losses+=field;}};
         lost(source.materialClass!=replacement.materialClass,"class");
         lost(source.faceSdf.present&&!replacement.faceSdf.present,"faceSdf");
+        lost(source.faceSdf.authoredMaskMip&&!replacement.faceSdf.authoredMaskMip,"faceSdf.maskSampling");
+        lost(source.multiplyDepthPrepass&&!replacement.multiplyDepthPrepass,"composite.depthPrepass");
+        lost(source.faceSdf.highlight.present&&!replacement.faceSdf.highlight.present,"faceSdf.highlight");
         lost(source.nprDiffuse.present&&!replacement.nprDiffuse.present,"nprDiffuse");
+        lost(source.nprDiffuse.mainBrightnessSaturation&&!replacement.nprDiffuse.mainBrightnessSaturation,
+            "nprDiffuse.mainBrightnessSaturation");
+        lost(source.nprDiffuse.localDiffuseIndirectNormal&&!replacement.nprDiffuse.localDiffuseIndirectNormal,
+            "nprDiffuse.localDiffuseNormal");
+        lost(source.nprDiffuse.viewTint.faceMask&&!replacement.nprDiffuse.viewTint.faceMask,"nprDiffuse.viewTint.mode");
+        lost(source.colorAdjustment.present&&!replacement.colorAdjustment.present,"colorAdjustment");
         lost(source.coverageTexture.present&&!replacement.coverageTexture.present,"coverageTexture");
         lost((source.sampledReferenceNormal && !replacement.sampledReferenceNormal)
             || (source.geometricReferenceNormal && !replacement.geometricReferenceNormal)
@@ -268,10 +278,15 @@ void applyMaterialBindings(LoadedAsset& mesh,const std::map<std::string,Material
         lost(source.projectedHairRamp.present&&!replacement.projectedHairRamp.present,"hair.projectedRamp");
         lost(source.projectedHairRamp.axisDiagonalPrimaryTextureFootprint
             && !replacement.projectedHairRamp.axisDiagonalPrimaryTextureFootprint,"hair.projectedRamp.primaryTextureFootprint");
+        lost((source.materialFeatures & MaterialFeatureHairReferenceRasterGrid)
+            && !(replacement.materialFeatures & MaterialFeatureHairReferenceRasterGrid),"hair.projectedRamp.referenceRasterGrid");
         lost(source.eyeSurface.present&&!replacement.eyeSurface.present,"eyeSurface");
+        lost(source.eyeSurface.mainRampFrame.present&&!replacement.eyeSurface.mainRampFrame.present,"eyeSurface.lightingInputs.mainRampFrame");
         lost(source.unlitTextureLayers.present&&!replacement.unlitTextureLayers.present,"surface.layers");
         lost(source.unlitTextureLayers.submission==UnlitTextureLayers::Submission::OpaqueOverlay
             &&replacement.unlitTextureLayers.submission!=UnlitTextureLayers::Submission::OpaqueOverlay,"surface.submission");
+        lost(source.unlitTextureLayers.submission==UnlitTextureLayers::Submission::ProjectedHistory
+            &&replacement.unlitTextureLayers.submission!=UnlitTextureLayers::Submission::ProjectedHistory,"surface.submission");
         lost(source.outlineSurface.present&&!replacement.outlineSurface.present,"outlineSurface");
         lost(source.specularInput.present&&!replacement.specularInput.present,"specularInput");
         lost(source.specularRamp.present&&!replacement.specularRamp.present,"specularRamp");

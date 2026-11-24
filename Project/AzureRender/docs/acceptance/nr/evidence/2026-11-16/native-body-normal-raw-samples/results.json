@@ -1,0 +1,801 @@
+{
+  "event": 328,
+  "result": {
+    "status": "measured-native-normal-input-differences",
+    "scope": 9116,
+    "qualified": 8827,
+    "heldOut": 3793,
+    "sourceSha256": "1a58783a335b7145714a488c02c693348f2682e2b4c99777df1c37d49754eb98",
+    "devices": {
+      "nvidia": {
+        "uvAbsoluteMaximum": 3.771179788447654e-07,
+        "uvAbsoluteMedian": 3.761105510369234e-08,
+        "uvRoundedEqual": 1324,
+        "packingFromExactImplicit": {
+          "exact": 8281,
+          "withinOne": 8827,
+          "worst": 1.0,
+          "heldOutExact": 3547,
+          "heldOutWithinOne": 3793
+        },
+        "mips": {
+          "0": {
+            "rawComparison": {
+              "rasterUv": {
+                "max": 0.006805130366851597,
+                "median": 6.744120301319101e-05,
+                "medianBias": [
+                  1.1687184553466068e-10,
+                  1.1687184553466068e-10
+                ],
+                "heldOutExact": 324,
+                "heldOutWithinUnorm16": 613
+              },
+              "hardwareUv": {
+                "max": 0.006830105200535064,
+                "median": 6.755186396156798e-05,
+                "medianBias": [
+                  1.1687184553466068e-10,
+                  1.1687184553466068e-10
+                ],
+                "heldOutExact": 324,
+                "heldOutWithinUnorm16": 614
+              }
+            },
+            "packingFromExactSamples": {
+              "exact": 8295,
+              "withinOne": 8827,
+              "worst": 1.0,
+              "heldOutExact": 3563,
+              "heldOutWithinOne": 3793
+            }
+          },
+          "1": {
+            "rawComparison": {
+              "rasterUv": {
+                "max": 0.003932019442069445,
+                "median": 9.684667867770891e-05,
+                "medianBias": [
+                  1.1687184553466068e-10,
+                  1.1687184553466068e-10
+                ],
+                "heldOutExact": 188,
+                "heldOutWithinUnorm16": 301
+              },
+              "hardwareUv": {
+                "max": 0.003932019442069445,
+                "median": 9.684100204487844e-05,
+                "medianBias": [
+                  1.1687184553466068e-10,
+                  1.1687184553466068e-10
+                ],
+                "heldOutExact": 188,
+                "heldOutWithinUnorm16": 301
+              }
+            },
+            "packingFromExactSamples": {
+              "exact": 8279,
+              "withinOne": 8827,
+              "worst": 1.0,
+              "heldOutExact": 3557,
+              "heldOutWithinOne": 3793
+            }
+          },
+          "2": {
+            "rawComparison": {
+              "rasterUv": {
+                "max": 0.006622651324552586,
+                "median": 0.00011278716455986881,
+                "medianBias": [
+                  1.1687184553466068e-10,
+                  1.1687184553466068e-10
+                ],
+                "heldOutExact": 148,
+                "heldOutWithinUnorm16": 209
+              },
+              "hardwareUv": {
+                "max": 0.006622651324552586,
+                "median": 0.00011276614432242926,
+                "medianBias": [
+                  1.1687184553466068e-10,
+                  1.1687184553466068e-10
+                ],
+                "heldOutExact": 148,
+                "heldOutWithinUnorm16": 209
+              }
+            },
+            "packingFromExactSamples": {
+              "exact": 8305,
+              "withinOne": 8827,
+              "worst": 1.0,
+              "heldOutExact": 3560,
+              "heldOutWithinOne": 3793
+            }
+          },
+          "3": {
+            "rawComparison": {
+              "rasterUv": {
+                "max": 0.0024525079072690303,
+                "median": 0.00012107003970643349,
+                "medianBias": [
+                  1.1687184553466068e-10,
+                  4.12966690810368e-06
+                ],
+                "heldOutExact": 137,
+                "heldOutWithinUnorm16": 179
+              },
+              "hardwareUv": {
+                "max": 0.0024525079072690303,
+                "median": 0.00012107003970643349,
+                "medianBias": [
+                  1.1687184553466068e-10,
+                  4.12966690810368e-06
+                ],
+                "heldOutExact": 137,
+                "heldOutWithinUnorm16": 179
+              }
+            },
+            "packingFromExactSamples": {
+              "exact": 8290,
+              "withinOne": 8827,
+              "worst": 1.0,
+              "heldOutExact": 3542,
+              "heldOutWithinOne": 3793
+            }
+          },
+          "4": {
+            "rawComparison": {
+              "rasterUv": {
+                "max": 0.0023523329219231615,
+                "median": 0.0001575416543570518,
+                "medianBias": [
+                  3.87786149310676e-05,
+                  2.4614013543589053e-05
+                ],
+                "heldOutExact": 135,
+                "heldOutWithinUnorm16": 166
+              },
+              "hardwareUv": {
+                "max": 0.0023523329219231615,
+                "median": 0.00015741852151243685,
+                "medianBias": [
+                  3.8864332086885334e-05,
+                  2.4614013543589053e-05
+                ],
+                "heldOutExact": 135,
+                "heldOutWithinUnorm16": 166
+              }
+            },
+            "packingFromExactSamples": {
+              "exact": 8261,
+              "withinOne": 8827,
+              "worst": 1.0,
+              "heldOutExact": 3555,
+              "heldOutWithinOne": 3793
+            }
+          },
+          "5": {
+            "rawComparison": {
+              "rasterUv": {
+                "max": 0.0013312459993763404,
+                "median": 0.00017859171084666503,
+                "medianBias": [
+                  3.141942812279197e-05,
+                  0.0001573450425091938
+                ],
+                "heldOutExact": 122,
+                "heldOutWithinUnorm16": 144
+              },
+              "hardwareUv": {
+                "max": 0.0013312459993763404,
+                "median": 0.0001785874366760365,
+                "medianBias": [
+                  3.141942812279197e-05,
+                  0.00015722606696333408
+                ],
+                "heldOutExact": 122,
+                "heldOutWithinUnorm16": 144
+              }
+            },
+            "packingFromExactSamples": {
+              "exact": 8301,
+              "withinOne": 8827,
+              "worst": 1.0,
+              "heldOutExact": 3562,
+              "heldOutWithinOne": 3793
+            }
+          },
+          "6": {
+            "rawComparison": {
+              "rasterUv": {
+                "max": 0.0015029521382489142,
+                "median": 0.000179844159705983,
+                "medianBias": [
+                  8.483385505464458e-05,
+                  -0.0001719968993456611
+                ],
+                "heldOutExact": 0,
+                "heldOutWithinUnorm16": 6
+              },
+              "hardwareUv": {
+                "max": 0.0015029521382489142,
+                "median": 0.000179844159705983,
+                "medianBias": [
+                  8.483385505464458e-05,
+                  -0.0001719968993456611
+                ],
+                "heldOutExact": 0,
+                "heldOutWithinUnorm16": 6
+              }
+            },
+            "packingFromExactSamples": {
+              "exact": 8299,
+              "withinOne": 8827,
+              "worst": 1.0,
+              "heldOutExact": 3585,
+              "heldOutWithinOne": 3793
+            }
+          },
+          "7": {
+            "rawComparison": {
+              "rasterUv": {
+                "max": 0.0007249632502804304,
+                "median": 0.00029915652522186087,
+                "medianBias": [
+                  -0.00010298151595922178,
+                  0.0002784401061488029
+                ],
+                "heldOutExact": 0,
+                "heldOutWithinUnorm16": 0
+              },
+              "hardwareUv": {
+                "max": 0.0007249632502804304,
+                "median": 0.00029915652522186087,
+                "medianBias": [
+                  -0.00010298151595922178,
+                  0.0002784401061488029
+                ],
+                "heldOutExact": 0,
+                "heldOutWithinUnorm16": 0
+              }
+            },
+            "packingFromExactSamples": {
+              "exact": 8311,
+              "withinOne": 8827,
+              "worst": 1.0,
+              "heldOutExact": 3568,
+              "heldOutWithinOne": 3793
+            }
+          },
+          "8": {
+            "rawComparison": {
+              "rasterUv": {
+                "max": 0.0005338183805054242,
+                "median": 0.0003534654776255475,
+                "medianBias": [
+                  -0.00018217797372854783,
+                  0.00042416441674325567
+                ],
+                "heldOutExact": 0,
+                "heldOutWithinUnorm16": 0
+              },
+              "hardwareUv": {
+                "max": 0.0005338183805054242,
+                "median": 0.0003534654776255475,
+                "medianBias": [
+                  -0.00018217797372854783,
+                  0.00042416441674325567
+                ],
+                "heldOutExact": 0,
+                "heldOutWithinUnorm16": 0
+              }
+            },
+            "packingFromExactSamples": {
+              "exact": 8267,
+              "withinOne": 8827,
+              "worst": 1.0,
+              "heldOutExact": 3562,
+              "heldOutWithinOne": 3793
+            }
+          },
+          "9": {
+            "rawComparison": {
+              "rasterUv": {
+                "max": 1.3373879825362422e-05,
+                "median": 4.188804065496932e-06,
+                "medianBias": [
+                  -2.1242627910034173e-06,
+                  3.3510666267444478e-06
+                ],
+                "heldOutExact": 0,
+                "heldOutWithinUnorm16": 3793
+              },
+              "hardwareUv": {
+                "max": 1.3373879825362422e-05,
+                "median": 4.188804065496932e-06,
+                "medianBias": [
+                  -2.1242627910034173e-06,
+                  3.3510666267444478e-06
+                ],
+                "heldOutExact": 0,
+                "heldOutWithinUnorm16": 3793
+              }
+            },
+            "packingFromExactSamples": {
+              "exact": 8308,
+              "withinOne": 8827,
+              "worst": 1.0,
+              "heldOutExact": 3567,
+              "heldOutWithinOne": 3793
+            }
+          },
+          "10": {
+            "rawComparison": {
+              "rasterUv": {
+                "max": 1.1687184553466068e-10,
+                "median": 1.1687184553466068e-10,
+                "medianBias": [
+                  1.1687184553466068e-10,
+                  1.1687184553466068e-10
+                ],
+                "heldOutExact": 3793,
+                "heldOutWithinUnorm16": 3793
+              },
+              "hardwareUv": {
+                "max": 1.1687184553466068e-10,
+                "median": 1.1687184553466068e-10,
+                "medianBias": [
+                  1.1687184553466068e-10,
+                  1.1687184553466068e-10
+                ],
+                "heldOutExact": 3793,
+                "heldOutWithinUnorm16": 3793
+              }
+            },
+            "packingFromExactSamples": {
+              "exact": 8308,
+              "withinOne": 8827,
+              "worst": 1.0,
+              "heldOutExact": 3559,
+              "heldOutWithinOne": 3793
+            }
+          }
+        }
+      },
+      "intel": {
+        "uvAbsoluteMaximum": 0.00017072394128248014,
+        "uvAbsoluteMedian": 1.731987542274993e-08,
+        "uvRoundedEqual": 4535,
+        "packingFromExactImplicit": {
+          "exact": 8571,
+          "withinOne": 8827,
+          "worst": 1.0,
+          "heldOutExact": 3673,
+          "heldOutWithinOne": 3793
+        },
+        "mips": {
+          "0": {
+            "rawComparison": {
+              "rasterUv": {
+                "max": 0.0005827705900208202,
+                "median": 2.7115271539202013e-07,
+                "medianBias": [
+                  -1.390775045129189e-08,
+                  -8.999132661280385e-09
+                ],
+                "heldOutExact": 988,
+                "heldOutWithinUnorm16": 3633
+              },
+              "hardwareUv": {
+                "max": 0.00023856229808816298,
+                "median": 1.094621771002835e-07,
+                "medianBias": [
+                  -1.3790878550246077e-08,
+                  -9.81723558002301e-09
+                ],
+                "heldOutExact": 1018,
+                "heldOutWithinUnorm16": 3742
+              }
+            },
+            "packingFromExactSamples": {
+              "exact": 8581,
+              "withinOne": 8827,
+              "worst": 1.0,
+              "heldOutExact": 3687,
+              "heldOutWithinOne": 3793
+            }
+          },
+          "1": {
+            "rawComparison": {
+              "rasterUv": {
+                "max": 0.0006127673036911974,
+                "median": 2.8984219468952688e-08,
+                "medianBias": [
+                  -8.181029687026609e-09,
+                  -1.0284723017672803e-08
+                ],
+                "heldOutExact": 1105,
+                "heldOutWithinUnorm16": 3604
+              },
+              "hardwareUv": {
+                "max": 0.00021649871219769912,
+                "median": 2.7581757211514457e-08,
+                "medianBias": [
+                  -7.713542249376815e-09,
+                  -1.0635338554276785e-08
+                ],
+                "heldOutExact": 1140,
+                "heldOutWithinUnorm16": 3711
+              }
+            },
+            "packingFromExactSamples": {
+              "exact": 8577,
+              "withinOne": 8827,
+              "worst": 1.0,
+              "heldOutExact": 3674,
+              "heldOutWithinOne": 3793
+            }
+          },
+          "2": {
+            "rawComparison": {
+              "rasterUv": {
+                "max": 0.0004724068134104309,
+                "median": 7.624803137484815e-07,
+                "medianBias": [
+                  -1.5193340807684308e-08,
+                  -5.060885133190141e-07
+                ],
+                "heldOutExact": 808,
+                "heldOutWithinUnorm16": 3532
+              },
+              "hardwareUv": {
+                "max": 0.00014581366413446428,
+                "median": 7.046437730529043e-07,
+                "medianBias": [
+                  -1.542708449875363e-08,
+                  -5.853276292544507e-07
+                ],
+                "heldOutExact": 811,
+                "heldOutWithinUnorm16": 3582
+              }
+            },
+            "packingFromExactSamples": {
+              "exact": 8553,
+              "withinOne": 8827,
+              "worst": 1.0,
+              "heldOutExact": 3666,
+              "heldOutWithinOne": 3793
+            }
+          },
+          "3": {
+            "rawComparison": {
+              "rasterUv": {
+                "max": 0.0003897073556060615,
+                "median": 1.4371982142158402e-06,
+                "medianBias": [
+                  -1.1763652832952332e-06,
+                  -4.2693287710671157e-07
+                ],
+                "heldOutExact": 615,
+                "heldOutWithinUnorm16": 3617
+              },
+              "hardwareUv": {
+                "max": 0.00020353183025073607,
+                "median": 1.4081305148849754e-06,
+                "medianBias": [
+                  -1.1558459252491993e-06,
+                  -4.5556648109457143e-07
+                ],
+                "heldOutExact": 619,
+                "heldOutWithinUnorm16": 3641
+              }
+            },
+            "packingFromExactSamples": {
+              "exact": 8582,
+              "withinOne": 8827,
+              "worst": 1.0,
+              "heldOutExact": 3678,
+              "heldOutWithinOne": 3793
+            }
+          },
+          "4": {
+            "rawComparison": {
+              "rasterUv": {
+                "max": 0.0004102229404182034,
+                "median": 2.937440444772399e-06,
+                "medianBias": [
+                  -2.5996974870601264e-06,
+                  -2.669570158819745e-06
+                ],
+                "heldOutExact": 523,
+                "heldOutWithinUnorm16": 3567
+              },
+              "hardwareUv": {
+                "max": 0.0004102229404182034,
+                "median": 2.882260234399192e-06,
+                "medianBias": [
+                  -2.5894461559428095e-06,
+                  -2.6762652463041547e-06
+                ],
+                "heldOutExact": 528,
+                "heldOutWithinUnorm16": 3588
+              }
+            },
+            "packingFromExactSamples": {
+              "exact": 8602,
+              "withinOne": 8827,
+              "worst": 1.0,
+              "heldOutExact": 3700,
+              "heldOutWithinOne": 3793
+            }
+          },
+          "5": {
+            "rawComparison": {
+              "rasterUv": {
+                "max": 0.00019469955722162258,
+                "median": 4.267383690303994e-06,
+                "medianBias": [
+                  -2.0662943521765342e-06,
+                  -6.73310429444296e-06
+                ],
+                "heldOutExact": 510,
+                "heldOutWithinUnorm16": 3148
+              },
+              "hardwareUv": {
+                "max": 0.0001602833678409077,
+                "median": 4.241905626478637e-06,
+                "medianBias": [
+                  -2.0541897675085963e-06,
+                  -6.723838026134743e-06
+                ],
+                "heldOutExact": 512,
+                "heldOutWithinUnorm16": 3158
+              }
+            },
+            "packingFromExactSamples": {
+              "exact": 8595,
+              "withinOne": 8827,
+              "worst": 1.0,
+              "heldOutExact": 3699,
+              "heldOutWithinOne": 3793
+            }
+          },
+          "6": {
+            "rawComparison": {
+              "rasterUv": {
+                "max": 0.00013849932272558263,
+                "median": 6.9346581520468575e-06,
+                "medianBias": [
+                  -6.834665934263295e-06,
+                  -6.958433226067484e-06
+                ],
+                "heldOutExact": 340,
+                "heldOutWithinUnorm16": 3435
+              },
+              "hardwareUv": {
+                "max": 0.00012221481619761887,
+                "median": 6.9349419836717274e-06,
+                "medianBias": [
+                  -6.834582454318117e-06,
+                  -6.960703879177466e-06
+                ],
+                "heldOutExact": 341,
+                "heldOutWithinUnorm16": 3438
+              }
+            },
+            "packingFromExactSamples": {
+              "exact": 8584,
+              "withinOne": 8827,
+              "worst": 1.0,
+              "heldOutExact": 3697,
+              "heldOutWithinOne": 3793
+            }
+          },
+          "7": {
+            "rawComparison": {
+              "rasterUv": {
+                "max": 5.672305238013653e-05,
+                "median": 2.114398806762896e-06,
+                "medianBias": [
+                  -3.973642970223068e-09,
+                  -4.2584830639569304e-06
+                ],
+                "heldOutExact": 1,
+                "heldOutWithinUnorm16": 3709
+              },
+              "hardwareUv": {
+                "max": 1.8247335898835537e-05,
+                "median": 2.114398806762896e-06,
+                "medianBias": [
+                  -3.973642970223068e-09,
+                  -4.2584830639569304e-06
+                ],
+                "heldOutExact": 1,
+                "heldOutWithinUnorm16": 3711
+              }
+            },
+            "packingFromExactSamples": {
+              "exact": 8578,
+              "withinOne": 8827,
+              "worst": 1.0,
+              "heldOutExact": 3704,
+              "heldOutWithinOne": 3793
+            }
+          },
+          "8": {
+            "rawComparison": {
+              "rasterUv": {
+                "max": 1.5332067714035613e-05,
+                "median": 8.765388914699912e-09,
+                "medianBias": [
+                  -3.3892837425497646e-09,
+                  -4.441130352361711e-09
+                ],
+                "heldOutExact": 3766,
+                "heldOutWithinUnorm16": 3792
+              },
+              "hardwareUv": {
+                "max": 1.531593939835263e-05,
+                "median": 8.765388914699912e-09,
+                "medianBias": [
+                  -3.3892837425497646e-09,
+                  -4.441130352361711e-09
+                ],
+                "heldOutExact": 3767,
+                "heldOutWithinUnorm16": 3793
+              }
+            },
+            "packingFromExactSamples": {
+              "exact": 8589,
+              "withinOne": 8827,
+              "worst": 1.0,
+              "heldOutExact": 3695,
+              "heldOutWithinOne": 3793
+            }
+          },
+          "9": {
+            "rawComparison": {
+              "rasterUv": {
+                "max": 5.858435350281077e-06,
+                "median": 9.466620043419027e-09,
+                "medianBias": [
+                  1.1687184553466068e-10,
+                  -5.843592609799941e-09
+                ],
+                "heldOutExact": 3782,
+                "heldOutWithinUnorm16": 3793
+              },
+              "hardwareUv": {
+                "max": 2.9685450542160652e-08,
+                "median": 9.466620043419027e-09,
+                "medianBias": [
+                  1.1687184553466068e-10,
+                  -5.843592609799941e-09
+                ],
+                "heldOutExact": 3783,
+                "heldOutWithinUnorm16": 3793
+              }
+            },
+            "packingFromExactSamples": {
+              "exact": 8599,
+              "withinOne": 8827,
+              "worst": 1.0,
+              "heldOutExact": 3692,
+              "heldOutWithinOne": 3793
+            }
+          },
+          "10": {
+            "rawComparison": {
+              "rasterUv": {
+                "max": 1.1687184553466068e-10,
+                "median": 1.1687184553466068e-10,
+                "medianBias": [
+                  1.1687184553466068e-10,
+                  1.1687184553466068e-10
+                ],
+                "heldOutExact": 3793,
+                "heldOutWithinUnorm16": 3793
+              },
+              "hardwareUv": {
+                "max": 1.1687184553466068e-10,
+                "median": 1.1687184553466068e-10,
+                "medianBias": [
+                  1.1687184553466068e-10,
+                  1.1687184553466068e-10
+                ],
+                "heldOutExact": 3793,
+                "heldOutWithinUnorm16": 3793
+              }
+            },
+            "packingFromExactSamples": {
+              "exact": 8599,
+              "withinOne": 8827,
+              "worst": 1.0,
+              "heldOutExact": 3693,
+              "heldOutWithinOne": 3793
+            }
+          }
+        }
+      }
+    },
+    "nativeDeviceDifference": {
+      "uv": {
+        "exact": 1144,
+        "peak": 0.00017070770263671875,
+        "overOneUnorm16": 3
+      },
+      "implicit": {
+        "exact": 725,
+        "peak": 0.044932782649993896,
+        "overOneUnorm16": 7526
+      },
+      "0": {
+        "exact": 755,
+        "peak": 0.006820797920227051,
+        "overOneUnorm16": 7420
+      },
+      "1": {
+        "exact": 448,
+        "peak": 0.003914296627044678,
+        "overOneUnorm16": 8121
+      },
+      "2": {
+        "exact": 339,
+        "peak": 0.006619453430175781,
+        "overOneUnorm16": 8355
+      },
+      "3": {
+        "exact": 313,
+        "peak": 0.0024524927139282227,
+        "overOneUnorm16": 8416
+      },
+      "4": {
+        "exact": 311,
+        "peak": 0.002357006072998047,
+        "overOneUnorm16": 8461
+      },
+      "5": {
+        "exact": 286,
+        "peak": 0.0013782978057861328,
+        "overOneUnorm16": 8498
+      },
+      "6": {
+        "exact": 0,
+        "peak": 0.0015008151531219482,
+        "overOneUnorm16": 8813
+      },
+      "7": {
+        "exact": 0,
+        "peak": 0.0007216930389404297,
+        "overOneUnorm16": 8827
+      },
+      "8": {
+        "exact": 0,
+        "peak": 0.0005338191986083984,
+        "overOneUnorm16": 8827
+      },
+      "9": {
+        "exact": 0,
+        "peak": 1.671910285949707e-05,
+        "overOneUnorm16": 1
+      },
+      "10": {
+        "exact": 8827,
+        "peak": 0.0,
+        "overOneUnorm16": 0
+      }
+    }
+  },
+  "hardwareReadbackSha256": "1a58783a335b7145714a488c02c693348f2682e2b4c99777df1c37d49754eb98",
+  "archive": {
+    "sha256": "fa01e762611ef5fab4bc91570efab2540b9c176d470298869beb67c3dcdef06c",
+    "bytes": 17163,
+    "members": {
+      "body-native-normal-raw-samples.py": "950334509b9857e6ed70b5d986b74d5d57324b0aecdbf72a057c71dc7b7f10cb",
+      "score-body-native-normal-raw-samples.py": "f31facd8b55519c227b436da3ff5961431683e2b123827e34e716a3a46b07495",
+      "body-native-normal-raw-samples-analysis.json": "3b4ba1e7433c47998fba1ecf75fd027158a637cdf29c092fb3ea57612a4e2cf9",
+      "readback/results.json": "1a58783a335b7145714a488c02c693348f2682e2b4c99777df1c37d49754eb98",
+      "archive-native-character-hardware-lanes.py": "7519a78d3c4f5870927dcec16d443d518832dd1a9b11e0c6590809add2108809"
+    }
+  }
+}

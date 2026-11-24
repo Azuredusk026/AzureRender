@@ -1,0 +1,2969 @@
+{
+  "status": "qualified-projected-hair-reference-grid",
+  "overallStatus": "failed-user-review",
+  "source": {
+    "local": "external-input-ab262dcb6e0648549508b59f0ef06b3a",
+    "main": "external-input-0eb092a8f8b14532b0175eff68bb6cac",
+    "sourceBase": "1cceff89e7f7ac40c5e2085045063470c2306083",
+    "plannedBytes": 536870912,
+    "localInputs": [
+      "20261112-010418-scene-reference-object-visibility-709f68",
+      "20261112-013522-scene-visibility-atlas-source-33c6c3",
+      "20261111-232828-scene-reference-normal-60ddfa",
+      "20261110-030251-hair-main-chroma-public-9e799c",
+      "20261110-031856-hair-main-chroma-debug-668bf2",
+      "20261110-003435-visibility-numeric-contract-4f95e7",
+      "20261110-003031-reciprocal-compact-profile-4e7929",
+      "20261110-112309-hair-relative-projection-control-b9da17",
+      "20261111-213928-scene-reference-depth-728062",
+      "20261112-020715-scene-visibility-reference-calibration-f77af1",
+      "20261112-024632-native-atlas-and-receiver-producers-d5e705",
+      "20261112-025941-visibility-projection-depth-c1c792",
+      "20261112-032619-native-object-record-calibration-19d2f9",
+      "20261112-033450-native-object-record-source-capture-071c26",
+      "20261112-040725-reference-object-shadow-raster-2c9e58",
+      "20261112-041837-reference-object-shadow-raster-capture-60f161",
+      "20261112-044926-material-reference-object-visibility-344def",
+      "20261112-053111-intel-reference-visibility-sources-5238e2",
+      "20261112-061922-project-reference-visibility-profile-47902e",
+      "20261112-072016-native-receiver-producer-replay-523058",
+      "20261112-073905-reference-scene-outline-depth-d97cff",
+      "20261112-083618-native-cloth-receiver-normal-input-a94a9c",
+      "20261112-084230-cloth-receiver-authored-mips-a73d87",
+      "20261112-090101-cloth-receiver-native-sampler-e301d1",
+      "20261112-091515-cloth-receiver-normal-y-29da47",
+      "20261112-093321-reference-normal-sampled-rg-ceb2c6",
+      "20261112-103417-eyebrow-receiver-producer-1f8f43",
+      "20261112-104825-native-hair-normal-mip-bias-883aba",
+      "20261112-105542-native-eyebrow-hair-stencil-8ad501",
+      "20261112-110307-reference-depth-stencil-coverage-198047",
+      "20261112-114419-reference-geometric-normal-3e57b5",
+      "20261112-133809-reference-receiver-source-isolation-6cdff0",
+      "20261112-135432-reference-outline-projection-d784cf",
+      "20261112-143340-native-texture-sampling-footprint-750e56",
+      "20261112-153052-reference-hair-mip-footprint-510ded",
+      "20261112-155601-reference-hair-live-lod-2d2bfd",
+      "20261112-164303-reference-hair-mip-boundary-342000",
+      "20261112-173549-reference-hair-color-source-196fbc",
+      "20261112-174157-reference-hair-color-pair-8d76da",
+      "20261112-175619-reference-hair-color-triple-d2d080",
+      "20261112-180345-native-body-normal-source-43299d",
+      "20261112-182312-projected-hair-point-mip-82adc1",
+      "20261112-213454-reference-raster-source-a825da",
+      "20261112-230338-reference-raster-isolated-c086fb"
+    ],
+    "mainInputs": [
+      "20261103-234012-character-reference-stages-5abe6c",
+      "20261022-201845-endfield-capture-954719",
+      "20261027-022702-object-visibility-depth-reconstruction-c7312f"
+    ],
+    "change": "Opt-in reference camera subpixel position for projected opaque hair with function-local precision",
+    "gate": "Exact equality to the qualified isolated raster control, default four frames and scoped dual-configuration dual-device regression"
+  },
+  "builds": {
+    "release": {
+      "configuration": "Release",
+      "shaderCount": 895,
+      "changedShaders": {
+        "mesh_compute_reference_camera.vert.spv": {
+          "before": "ac95b72af5d871952a5744779e2474887533b718e15d07e0e82ecbb443e256d4",
+          "after": "01cf0c3cd0115aa361fbb26dc44797c9eb80ea006471e56e4b5f42c5fb729fe5"
+        },
+        "mesh_object_compute_reference_camera.vert.spv": {
+          "before": "c79282dde83acf3a4a398981c44acb140dac2841a09cffc2882491dc70a1873e",
+          "after": "7026d58f4cc3fd2ad20e2bb105d2fa721feae855fdda345f22aa753f9aedfa99"
+        },
+        "mesh_object_projected_bindless_compute_reference_camera.vert.spv": {
+          "before": "535191264fa3d5c7652d924772a3e580e56737b9fed4edd5f8c9ede0fa8f46d6",
+          "after": "6113579c679b141b32e60e21001c30887eeb599f0222cbb99b9247444b4f3a57"
+        },
+        "mesh_object_projected_bindless_reference_camera.vert.spv": {
+          "before": "745f87f1b71f8b44d3a7d254ebcddf3e0b712981e88be5c2615f9248231c4926",
+          "after": "7c696646cc4492e8263c67686980f3d8c6695e9f2310dc2b8f1426eb33b0cafd"
+        },
+        "mesh_object_projected_compute_reference_camera.vert.spv": {
+          "before": "054213d33037542e02506873affcdfeb47651195502406544a7ed0ef6cf7ee53",
+          "after": "839db49e7c73e541e8d385268f7bc441541922fdf041874f051b58cba72a0c04"
+        },
+        "mesh_object_projected_reference_camera.vert.spv": {
+          "before": "ecd7bb9e9f5f86a2d31039c1f047a77e561c5dfe4d57ea8f35f7db58f66bb207",
+          "after": "c6f43ba80370a25f389c068a3c6ef8e36c90ced272b32d7c94e2cfcdabd71775"
+        },
+        "mesh_object_reference_camera.vert.spv": {
+          "before": "59268e157b6deeb4d81e0e38f6d4821cd63fa9d93a55c9f3ff5d2b82c8a1cccb",
+          "after": "c6d5e73f0ed4c695e1fa776c8094df87f341393414e45c13cbdc5ee374591949"
+        },
+        "mesh_projected_bindless_compute_reference_camera.vert.spv": {
+          "before": "2f87ef52dd965bcd4dfc53984a2fc5dc3218f4d3c06a3ee7191285f5617b9821",
+          "after": "8b4b113895a49766f009e3a74bbff1d79bba16934482d8c10e830f4e0b915ba9"
+        },
+        "mesh_projected_bindless_reference_camera.vert.spv": {
+          "before": "02ea20dfac4fbaefd3654846b9aac2bd6703c2f144712613e498d2e792217603",
+          "after": "09346e76bec00c15618a7c1739bb86e6ad8e9d91e143721b8397155ca2a268a5"
+        },
+        "mesh_projected_compute_reference_camera.vert.spv": {
+          "before": "26fea8a800b94e7c8eae324b6cc821ac7e44917c8ec35d115b8c86dcfb42caae",
+          "after": "b63328380d0800b17d064443443ed50aabff7cb646222861fce6bc080b604e25"
+        },
+        "mesh_projected_reference_camera.vert.spv": {
+          "before": "19d96fb30a5a6ec4968c92845d8ebfaf94539a68800c4b99de4125f82f9bb1bb",
+          "after": "14e1fd5af330144229474cd68530aaac552887f545fb9029c296a891e2995cd4"
+        },
+        "mesh_reference_camera.vert.spv": {
+          "before": "5ed62cbc35c0b50bece56df4e62e56bd9c60bfa942ce1b82130b70cdd55f765c",
+          "after": "786b6dc0c201216346d96600a669622c66de4782aa2011e2537ed23d41bfd6e9"
+        }
+      },
+      "ctestCommand": [
+        "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+        "--test-dir",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\release",
+        "-R",
+        "^(AzureRender[.](ReferenceCameraView|ReferenceCameraBinding|ExtensionRegistry|ScreenObjectVisibility|MaterialCoverage|CharacterRepair|MaterialUvPolicy)|AzureEngine[.]ProjectReferenceViews|AzureAssets[.](MaterialDocument|MaterialUvImport)|AzureEditor[.]ProjectFlow)$",
+        "--no-tests=error",
+        "--output-on-failure",
+        "--output-junit",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-231945-projected-hair-reference-grid-4b775d\\release-ctest.xml"
+      ],
+      "ctestExit": 0,
+      "tests": 11,
+      "playerSha256": "426eb1e89b2ede603b4da05c2e2f9f2b30ff061799dff23738892202568fea46"
+    },
+    "debug": {
+      "configuration": "Debug",
+      "shaderCount": 895,
+      "changedShaders": {
+        "mesh_compute_reference_camera.vert.spv": {
+          "before": "ac95b72af5d871952a5744779e2474887533b718e15d07e0e82ecbb443e256d4",
+          "after": "01cf0c3cd0115aa361fbb26dc44797c9eb80ea006471e56e4b5f42c5fb729fe5"
+        },
+        "mesh_object_compute_reference_camera.vert.spv": {
+          "before": "c79282dde83acf3a4a398981c44acb140dac2841a09cffc2882491dc70a1873e",
+          "after": "7026d58f4cc3fd2ad20e2bb105d2fa721feae855fdda345f22aa753f9aedfa99"
+        },
+        "mesh_object_projected_bindless_compute_reference_camera.vert.spv": {
+          "before": "535191264fa3d5c7652d924772a3e580e56737b9fed4edd5f8c9ede0fa8f46d6",
+          "after": "6113579c679b141b32e60e21001c30887eeb599f0222cbb99b9247444b4f3a57"
+        },
+        "mesh_object_projected_bindless_reference_camera.vert.spv": {
+          "before": "745f87f1b71f8b44d3a7d254ebcddf3e0b712981e88be5c2615f9248231c4926",
+          "after": "7c696646cc4492e8263c67686980f3d8c6695e9f2310dc2b8f1426eb33b0cafd"
+        },
+        "mesh_object_projected_compute_reference_camera.vert.spv": {
+          "before": "054213d33037542e02506873affcdfeb47651195502406544a7ed0ef6cf7ee53",
+          "after": "839db49e7c73e541e8d385268f7bc441541922fdf041874f051b58cba72a0c04"
+        },
+        "mesh_object_projected_reference_camera.vert.spv": {
+          "before": "ecd7bb9e9f5f86a2d31039c1f047a77e561c5dfe4d57ea8f35f7db58f66bb207",
+          "after": "c6f43ba80370a25f389c068a3c6ef8e36c90ced272b32d7c94e2cfcdabd71775"
+        },
+        "mesh_object_reference_camera.vert.spv": {
+          "before": "59268e157b6deeb4d81e0e38f6d4821cd63fa9d93a55c9f3ff5d2b82c8a1cccb",
+          "after": "c6d5e73f0ed4c695e1fa776c8094df87f341393414e45c13cbdc5ee374591949"
+        },
+        "mesh_projected_bindless_compute_reference_camera.vert.spv": {
+          "before": "2f87ef52dd965bcd4dfc53984a2fc5dc3218f4d3c06a3ee7191285f5617b9821",
+          "after": "8b4b113895a49766f009e3a74bbff1d79bba16934482d8c10e830f4e0b915ba9"
+        },
+        "mesh_projected_bindless_reference_camera.vert.spv": {
+          "before": "02ea20dfac4fbaefd3654846b9aac2bd6703c2f144712613e498d2e792217603",
+          "after": "09346e76bec00c15618a7c1739bb86e6ad8e9d91e143721b8397155ca2a268a5"
+        },
+        "mesh_projected_compute_reference_camera.vert.spv": {
+          "before": "26fea8a800b94e7c8eae324b6cc821ac7e44917c8ec35d115b8c86dcfb42caae",
+          "after": "b63328380d0800b17d064443443ed50aabff7cb646222861fce6bc080b604e25"
+        },
+        "mesh_projected_reference_camera.vert.spv": {
+          "before": "19d96fb30a5a6ec4968c92845d8ebfaf94539a68800c4b99de4125f82f9bb1bb",
+          "after": "14e1fd5af330144229474cd68530aaac552887f545fb9029c296a891e2995cd4"
+        },
+        "mesh_reference_camera.vert.spv": {
+          "before": "5ed62cbc35c0b50bece56df4e62e56bd9c60bfa942ce1b82130b70cdd55f765c",
+          "after": "786b6dc0c201216346d96600a669622c66de4782aa2011e2537ed23d41bfd6e9"
+        }
+      },
+      "ctestCommand": [
+        "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+        "--test-dir",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\debug",
+        "-R",
+        "^(AzureRender[.](ReferenceCameraView|ReferenceCameraBinding|ExtensionRegistry|ScreenObjectVisibility|MaterialCoverage|CharacterRepair|MaterialUvPolicy)|AzureEngine[.]ProjectReferenceViews|AzureAssets[.](MaterialDocument|MaterialUvImport))$",
+        "--no-tests=error",
+        "--output-on-failure",
+        "--output-junit",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-231945-projected-hair-reference-grid-4b775d\\debug-ctest.xml"
+      ],
+      "ctestExit": 0,
+      "tests": 10,
+      "playerSha256": "cdd8121a0d5638a3ad76006a23397ebf05b582dd5db036200a22403cb900169c"
+    }
+  },
+  "fixtures": [
+    {
+      "relative": "character/hair-coverage.glb",
+      "originalSha256": "9aba6b5a8e67919ad6bb22ae7524639c39b4466e3f52058bd4c3dfc8e80d7285",
+      "candidateSha256": "19e20c3cd9007c97260d1dd0580774e86e7167f368c240f6f16d69998fd9c3ea",
+      "unchangedPayloadSha256": "187c43e2756ed8a9c3fcc05246c4e7df9ee41ee499a8e850edf3833e5d2026ca"
+    }
+  ],
+  "cases": {
+    "release-nvidia": {
+      "configuration": "Release",
+      "device": "nvidia",
+      "pci": [
+        4318,
+        10464
+      ],
+      "descriptorIndexing": false,
+      "attachments": {
+        "raster": {
+          "exact": true,
+          "sha256": "f1ef0ea6a727554f6593b2c2333e49650eec5c8f2b25acb03d8e250ae8ce35a2",
+          "baselineSha256": "f1ef0ea6a727554f6593b2c2333e49650eec5c8f2b25acb03d8e250ae8ce35a2"
+        },
+        "hardware": {
+          "exact": true,
+          "sha256": "f1ef0ea6a727554f6593b2c2333e49650eec5c8f2b25acb03d8e250ae8ce35a2",
+          "baselineSha256": "f1ef0ea6a727554f6593b2c2333e49650eec5c8f2b25acb03d8e250ae8ce35a2"
+        },
+        "packedNormals": {
+          "exact": true,
+          "sha256": "37df16157c41a1ffdacb7b2ad21e9d84d7a0b81612e7b79c0bc294c496c1c424",
+          "baselineSha256": "37df16157c41a1ffdacb7b2ad21e9d84d7a0b81612e7b79c0bc294c496c1c424"
+        },
+        "objectIds": {
+          "exact": true,
+          "sha256": "d14ae2982d8d7b1f99c93572ba6d0ce9f9af3643cd250a2636b3c4b765a62a10",
+          "baselineSha256": "d14ae2982d8d7b1f99c93572ba6d0ce9f9af3643cd250a2636b3c4b765a62a10"
+        },
+        "objectVisibility": {
+          "exact": true,
+          "sha256": "1010efb44d81c2bef5c0384cd50844a97537cf79c5750f35220b4b0e2cae8336",
+          "baselineSha256": "1010efb44d81c2bef5c0384cd50844a97537cf79c5750f35220b4b0e2cae8336"
+        }
+      },
+      "colors": [
+        {
+          "exactDiagnosticPng": true,
+          "sha256": "ffea66c041ab1eefe894c17600fadfb141d21c0e4707a2404f2073e82280be52",
+          "expectedSha256": "ffea66c041ab1eefe894c17600fadfb141d21c0e4707a2404f2073e82280be52",
+          "overOne": 0,
+          "maximum": 1
+        },
+        {
+          "exactDiagnosticPng": true,
+          "sha256": "ffea66c041ab1eefe894c17600fadfb141d21c0e4707a2404f2073e82280be52",
+          "expectedSha256": "ffea66c041ab1eefe894c17600fadfb141d21c0e4707a2404f2073e82280be52",
+          "overOne": 0,
+          "maximum": 1
+        },
+        {
+          "exactDiagnosticPng": true,
+          "sha256": "ffea66c041ab1eefe894c17600fadfb141d21c0e4707a2404f2073e82280be52",
+          "expectedSha256": "ffea66c041ab1eefe894c17600fadfb141d21c0e4707a2404f2073e82280be52",
+          "overOne": 0,
+          "maximum": 1
+        }
+      ],
+      "validationClean": true,
+      "allocatorZero": true,
+      "playerSha256": "426eb1e89b2ede603b4da05c2e2f9f2b30ff061799dff23738892202568fea46",
+      "receiver": {
+        "samples": 49384,
+        "baselineOverOne": 237,
+        "overOne": 237,
+        "introduced": 0,
+        "closed": 0,
+        "normalsChanged": 0
+      },
+      "hairVisibility": {
+        "overOne": 0,
+        "baselineOverOne": 0,
+        "closed": 0,
+        "introduced": 0
+      },
+      "referenceNormal": {
+        "baselineExact": 16967,
+        "exact": 16967,
+        "baselineOverOne": 0,
+        "overOne": 0,
+        "maximum": 1,
+        "changed": 0
+      }
+    },
+    "release-intel": {
+      "configuration": "Release",
+      "device": "intel",
+      "pci": [
+        32902,
+        42888
+      ],
+      "descriptorIndexing": false,
+      "attachments": {
+        "raster": {
+          "exact": true,
+          "sha256": "d2dbed224741d08e346cd7a30f2feed0b3883bb5346d42c7889d84df8d241a45",
+          "baselineSha256": "d2dbed224741d08e346cd7a30f2feed0b3883bb5346d42c7889d84df8d241a45"
+        },
+        "hardware": {
+          "exact": true,
+          "sha256": "d2dbed224741d08e346cd7a30f2feed0b3883bb5346d42c7889d84df8d241a45",
+          "baselineSha256": "d2dbed224741d08e346cd7a30f2feed0b3883bb5346d42c7889d84df8d241a45"
+        },
+        "packedNormals": {
+          "exact": true,
+          "sha256": "cc379c0b311eaf6c4d28093c88adf642190ee5b694d1a9b32d98a811fab73132",
+          "baselineSha256": "cc379c0b311eaf6c4d28093c88adf642190ee5b694d1a9b32d98a811fab73132"
+        },
+        "objectIds": {
+          "exact": true,
+          "sha256": "f831b78c8c2d0242fb00e5530f59791d952141d85fa02bf41e1aa2387bc7248b",
+          "baselineSha256": "f831b78c8c2d0242fb00e5530f59791d952141d85fa02bf41e1aa2387bc7248b"
+        },
+        "objectVisibility": {
+          "exact": true,
+          "sha256": "6e7b8e5a946cd8758a935462ae68e1bc6d25c6b9ab2a2e54ce8bfb8b2ad7e4c3",
+          "baselineSha256": "6e7b8e5a946cd8758a935462ae68e1bc6d25c6b9ab2a2e54ce8bfb8b2ad7e4c3"
+        }
+      },
+      "colors": [
+        {
+          "exactDiagnosticPng": true,
+          "sha256": "c1048edf8050909466043aa49ad5372fc52c624030e9c892dac1b1c6e649fd92",
+          "expectedSha256": "c1048edf8050909466043aa49ad5372fc52c624030e9c892dac1b1c6e649fd92",
+          "overOne": 31,
+          "maximum": 15
+        },
+        {
+          "exactDiagnosticPng": true,
+          "sha256": "c1048edf8050909466043aa49ad5372fc52c624030e9c892dac1b1c6e649fd92",
+          "expectedSha256": "c1048edf8050909466043aa49ad5372fc52c624030e9c892dac1b1c6e649fd92",
+          "overOne": 31,
+          "maximum": 15
+        },
+        {
+          "exactDiagnosticPng": true,
+          "sha256": "c1048edf8050909466043aa49ad5372fc52c624030e9c892dac1b1c6e649fd92",
+          "expectedSha256": "c1048edf8050909466043aa49ad5372fc52c624030e9c892dac1b1c6e649fd92",
+          "overOne": 31,
+          "maximum": 15
+        }
+      ],
+      "validationClean": true,
+      "allocatorZero": true,
+      "playerSha256": "426eb1e89b2ede603b4da05c2e2f9f2b30ff061799dff23738892202568fea46",
+      "receiver": {
+        "samples": 49384,
+        "baselineOverOne": 608,
+        "overOne": 494,
+        "introduced": 1,
+        "closed": 115,
+        "normalsChanged": 1034
+      },
+      "hairVisibility": {
+        "overOne": 111,
+        "baselineOverOne": 208,
+        "closed": 98,
+        "introduced": 1
+      },
+      "referenceNormal": {
+        "baselineExact": 15274,
+        "exact": 16135,
+        "baselineOverOne": 886,
+        "overOne": 25,
+        "maximum": 93,
+        "changed": 904
+      }
+    },
+    "debug-nvidia": {
+      "configuration": "Debug",
+      "device": "nvidia",
+      "pci": [
+        4318,
+        10464
+      ],
+      "descriptorIndexing": false,
+      "attachments": {
+        "raster": {
+          "exact": true,
+          "sha256": "f1ef0ea6a727554f6593b2c2333e49650eec5c8f2b25acb03d8e250ae8ce35a2",
+          "baselineSha256": "f1ef0ea6a727554f6593b2c2333e49650eec5c8f2b25acb03d8e250ae8ce35a2"
+        },
+        "hardware": {
+          "exact": true,
+          "sha256": "f1ef0ea6a727554f6593b2c2333e49650eec5c8f2b25acb03d8e250ae8ce35a2",
+          "baselineSha256": "f1ef0ea6a727554f6593b2c2333e49650eec5c8f2b25acb03d8e250ae8ce35a2"
+        },
+        "packedNormals": {
+          "exact": true,
+          "sha256": "37df16157c41a1ffdacb7b2ad21e9d84d7a0b81612e7b79c0bc294c496c1c424",
+          "baselineSha256": "37df16157c41a1ffdacb7b2ad21e9d84d7a0b81612e7b79c0bc294c496c1c424"
+        },
+        "objectIds": {
+          "exact": true,
+          "sha256": "d14ae2982d8d7b1f99c93572ba6d0ce9f9af3643cd250a2636b3c4b765a62a10",
+          "baselineSha256": "d14ae2982d8d7b1f99c93572ba6d0ce9f9af3643cd250a2636b3c4b765a62a10"
+        },
+        "objectVisibility": {
+          "exact": true,
+          "sha256": "1010efb44d81c2bef5c0384cd50844a97537cf79c5750f35220b4b0e2cae8336",
+          "baselineSha256": "1010efb44d81c2bef5c0384cd50844a97537cf79c5750f35220b4b0e2cae8336"
+        }
+      },
+      "colors": [
+        {
+          "exactDiagnosticPng": true,
+          "sha256": "ffea66c041ab1eefe894c17600fadfb141d21c0e4707a2404f2073e82280be52",
+          "expectedSha256": "ffea66c041ab1eefe894c17600fadfb141d21c0e4707a2404f2073e82280be52",
+          "overOne": 0,
+          "maximum": 1
+        },
+        {
+          "exactDiagnosticPng": true,
+          "sha256": "ffea66c041ab1eefe894c17600fadfb141d21c0e4707a2404f2073e82280be52",
+          "expectedSha256": "ffea66c041ab1eefe894c17600fadfb141d21c0e4707a2404f2073e82280be52",
+          "overOne": 0,
+          "maximum": 1
+        },
+        {
+          "exactDiagnosticPng": true,
+          "sha256": "ffea66c041ab1eefe894c17600fadfb141d21c0e4707a2404f2073e82280be52",
+          "expectedSha256": "ffea66c041ab1eefe894c17600fadfb141d21c0e4707a2404f2073e82280be52",
+          "overOne": 0,
+          "maximum": 1
+        }
+      ],
+      "validationClean": true,
+      "allocatorZero": true,
+      "playerSha256": "cdd8121a0d5638a3ad76006a23397ebf05b582dd5db036200a22403cb900169c",
+      "receiver": {
+        "samples": 49384,
+        "baselineOverOne": 237,
+        "overOne": 237,
+        "introduced": 0,
+        "closed": 0,
+        "normalsChanged": 0
+      },
+      "hairVisibility": {
+        "overOne": 0,
+        "baselineOverOne": 0,
+        "closed": 0,
+        "introduced": 0
+      },
+      "referenceNormal": {
+        "baselineExact": 16967,
+        "exact": 16967,
+        "baselineOverOne": 0,
+        "overOne": 0,
+        "maximum": 1,
+        "changed": 0
+      }
+    },
+    "debug-intel": {
+      "configuration": "Debug",
+      "device": "intel",
+      "pci": [
+        32902,
+        42888
+      ],
+      "descriptorIndexing": false,
+      "attachments": {
+        "raster": {
+          "exact": true,
+          "sha256": "d2dbed224741d08e346cd7a30f2feed0b3883bb5346d42c7889d84df8d241a45",
+          "baselineSha256": "d2dbed224741d08e346cd7a30f2feed0b3883bb5346d42c7889d84df8d241a45"
+        },
+        "hardware": {
+          "exact": true,
+          "sha256": "d2dbed224741d08e346cd7a30f2feed0b3883bb5346d42c7889d84df8d241a45",
+          "baselineSha256": "d2dbed224741d08e346cd7a30f2feed0b3883bb5346d42c7889d84df8d241a45"
+        },
+        "packedNormals": {
+          "exact": true,
+          "sha256": "cc379c0b311eaf6c4d28093c88adf642190ee5b694d1a9b32d98a811fab73132",
+          "baselineSha256": "cc379c0b311eaf6c4d28093c88adf642190ee5b694d1a9b32d98a811fab73132"
+        },
+        "objectIds": {
+          "exact": true,
+          "sha256": "f831b78c8c2d0242fb00e5530f59791d952141d85fa02bf41e1aa2387bc7248b",
+          "baselineSha256": "f831b78c8c2d0242fb00e5530f59791d952141d85fa02bf41e1aa2387bc7248b"
+        },
+        "objectVisibility": {
+          "exact": true,
+          "sha256": "6e7b8e5a946cd8758a935462ae68e1bc6d25c6b9ab2a2e54ce8bfb8b2ad7e4c3",
+          "baselineSha256": "6e7b8e5a946cd8758a935462ae68e1bc6d25c6b9ab2a2e54ce8bfb8b2ad7e4c3"
+        }
+      },
+      "colors": [
+        {
+          "exactDiagnosticPng": true,
+          "sha256": "c1048edf8050909466043aa49ad5372fc52c624030e9c892dac1b1c6e649fd92",
+          "expectedSha256": "c1048edf8050909466043aa49ad5372fc52c624030e9c892dac1b1c6e649fd92",
+          "overOne": 31,
+          "maximum": 15
+        },
+        {
+          "exactDiagnosticPng": true,
+          "sha256": "c1048edf8050909466043aa49ad5372fc52c624030e9c892dac1b1c6e649fd92",
+          "expectedSha256": "c1048edf8050909466043aa49ad5372fc52c624030e9c892dac1b1c6e649fd92",
+          "overOne": 31,
+          "maximum": 15
+        },
+        {
+          "exactDiagnosticPng": true,
+          "sha256": "c1048edf8050909466043aa49ad5372fc52c624030e9c892dac1b1c6e649fd92",
+          "expectedSha256": "c1048edf8050909466043aa49ad5372fc52c624030e9c892dac1b1c6e649fd92",
+          "overOne": 31,
+          "maximum": 15
+        }
+      ],
+      "validationClean": true,
+      "allocatorZero": true,
+      "playerSha256": "cdd8121a0d5638a3ad76006a23397ebf05b582dd5db036200a22403cb900169c",
+      "receiver": {
+        "samples": 49384,
+        "baselineOverOne": 608,
+        "overOne": 494,
+        "introduced": 1,
+        "closed": 115,
+        "normalsChanged": 1034
+      },
+      "hairVisibility": {
+        "overOne": 111,
+        "baselineOverOne": 208,
+        "closed": 98,
+        "introduced": 1
+      },
+      "referenceNormal": {
+        "baselineExact": 15274,
+        "exact": 16135,
+        "baselineOverOne": 886,
+        "overOne": 25,
+        "maximum": 93,
+        "changed": 904
+      }
+    },
+    "release-nvidia-indexed": {
+      "configuration": "Release",
+      "device": "nvidia",
+      "pci": [
+        4318,
+        10464
+      ],
+      "descriptorIndexing": true,
+      "attachments": {
+        "raster": {
+          "exact": true,
+          "sha256": "f1ef0ea6a727554f6593b2c2333e49650eec5c8f2b25acb03d8e250ae8ce35a2",
+          "baselineSha256": "f1ef0ea6a727554f6593b2c2333e49650eec5c8f2b25acb03d8e250ae8ce35a2"
+        },
+        "hardware": {
+          "exact": true,
+          "sha256": "f1ef0ea6a727554f6593b2c2333e49650eec5c8f2b25acb03d8e250ae8ce35a2",
+          "baselineSha256": "f1ef0ea6a727554f6593b2c2333e49650eec5c8f2b25acb03d8e250ae8ce35a2"
+        },
+        "packedNormals": {
+          "exact": true,
+          "sha256": "37df16157c41a1ffdacb7b2ad21e9d84d7a0b81612e7b79c0bc294c496c1c424",
+          "baselineSha256": "37df16157c41a1ffdacb7b2ad21e9d84d7a0b81612e7b79c0bc294c496c1c424"
+        },
+        "objectIds": {
+          "exact": true,
+          "sha256": "d14ae2982d8d7b1f99c93572ba6d0ce9f9af3643cd250a2636b3c4b765a62a10",
+          "baselineSha256": "d14ae2982d8d7b1f99c93572ba6d0ce9f9af3643cd250a2636b3c4b765a62a10"
+        },
+        "objectVisibility": {
+          "exact": true,
+          "sha256": "1010efb44d81c2bef5c0384cd50844a97537cf79c5750f35220b4b0e2cae8336",
+          "baselineSha256": "1010efb44d81c2bef5c0384cd50844a97537cf79c5750f35220b4b0e2cae8336"
+        }
+      },
+      "colors": [
+        {
+          "exactDiagnosticPng": true,
+          "sha256": "ffea66c041ab1eefe894c17600fadfb141d21c0e4707a2404f2073e82280be52",
+          "expectedSha256": "ffea66c041ab1eefe894c17600fadfb141d21c0e4707a2404f2073e82280be52",
+          "overOne": 0,
+          "maximum": 1
+        },
+        {
+          "exactDiagnosticPng": true,
+          "sha256": "ffea66c041ab1eefe894c17600fadfb141d21c0e4707a2404f2073e82280be52",
+          "expectedSha256": "ffea66c041ab1eefe894c17600fadfb141d21c0e4707a2404f2073e82280be52",
+          "overOne": 0,
+          "maximum": 1
+        },
+        {
+          "exactDiagnosticPng": true,
+          "sha256": "ffea66c041ab1eefe894c17600fadfb141d21c0e4707a2404f2073e82280be52",
+          "expectedSha256": "ffea66c041ab1eefe894c17600fadfb141d21c0e4707a2404f2073e82280be52",
+          "overOne": 0,
+          "maximum": 1
+        }
+      ],
+      "validationClean": true,
+      "allocatorZero": true,
+      "playerSha256": "426eb1e89b2ede603b4da05c2e2f9f2b30ff061799dff23738892202568fea46",
+      "receiver": {
+        "samples": 49384,
+        "baselineOverOne": 237,
+        "overOne": 237,
+        "introduced": 0,
+        "closed": 0,
+        "normalsChanged": 0
+      },
+      "hairVisibility": {
+        "overOne": 0,
+        "baselineOverOne": 0,
+        "closed": 0,
+        "introduced": 0
+      },
+      "referenceNormal": {
+        "baselineExact": 16967,
+        "exact": 16967,
+        "baselineOverOne": 0,
+        "overOne": 0,
+        "maximum": 1,
+        "changed": 0
+      }
+    }
+  },
+  "originalFour": {
+    "exitCode": 0,
+    "frames": [
+      {
+        "frame": "frame_000000.png",
+        "sha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "expectedSha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "pngExact": true
+      },
+      {
+        "frame": "frame_000001.png",
+        "sha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "expectedSha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "pngExact": true
+      },
+      {
+        "frame": "frame_000002.png",
+        "sha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "expectedSha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "pngExact": true
+      },
+      {
+        "frame": "frame_000003.png",
+        "sha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "expectedSha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "pngExact": true
+      }
+    ],
+    "validationClean": true,
+    "allocatorZero": true,
+    "depthCaptureAbsent": true,
+    "allExact": true,
+    "playerSha256": "426eb1e89b2ede603b4da05c2e2f9f2b30ff061799dff23738892202568fea46",
+    "projectSha256": "13638585d18092a315bd7586a88b349fe256c468eb9090ccb6189232b8209d78",
+    "taskBytes": 459924776,
+    "taskBudgetBytes": 536870912
+  },
+  "leases": {
+    "release-build": {
+      "owner": "01a1c099-8121-7be3-b0b8-7af2f9a06b2a",
+      "task": "quality-projected-hair-reference-grid-build-release",
+      "output": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-231945-projected-hair-reference-grid-4b775d",
+      "pid": 17208,
+      "token": "b59bdff9bdf449faa0ce51f6d0bacba1",
+      "started": 1794497468.7254808,
+      "state": "released",
+      "ended": 1794497672.1553955
+    },
+    "release": {
+      "id": 2,
+      "owner": "01a1d0a9-829a-7c11-a7a8-017e743887d9",
+      "task": "quality-reference-grid-release",
+      "kind": "gpu",
+      "priority": 1,
+      "estimate_seconds": 280.0,
+      "pid": 23320,
+      "state": "succeeded",
+      "submitted": 1794502401.0754428,
+      "started": 1794502567.6637504,
+      "ended": 1794502830.3405333,
+      "wait_seconds": 166.5779999999795,
+      "run_seconds": 262.655999999959,
+      "lock_attempts": 5,
+      "exit_code": 0,
+      "reason": null,
+      "output": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-231945-projected-hair-reference-grid-4b775d",
+      "log_path": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-231945-projected-hair-reference-grid-4b775d\\process.log"
+    },
+    "debug": {
+      "id": 180,
+      "owner": "01a1d0a9-829a-7c11-a7a8-017e743887d9",
+      "task": "quality-reference-grid-debug",
+      "kind": "gpu",
+      "priority": 1,
+      "estimate_seconds": 165.0,
+      "pid": 43240,
+      "state": "budget-stopped",
+      "submitted": 1794536414.065446,
+      "started": 1794536414.1303442,
+      "ended": 1794536478.6862938,
+      "wait_seconds": 0.03100000007543713,
+      "run_seconds": 64.54700000002049,
+      "lock_attempts": 1,
+      "exit_code": 0,
+      "reason": "managed-pool-limit",
+      "output": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-231945-projected-hair-reference-grid-4b775d",
+      "log_path": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-231945-projected-hair-reference-grid-4b775d\\process.log"
+    },
+    "frozen-four": {
+      "id": 4,
+      "owner": "01a1d0a9-829a-7c11-a7a8-017e743887d9",
+      "task": "quality-reference-grid-frozen-four",
+      "kind": "gpu",
+      "priority": 1,
+      "estimate_seconds": 160.0,
+      "pid": 5380,
+      "state": "succeeded",
+      "submitted": 1794502544.9634986,
+      "started": 1794504629.418042,
+      "ended": 1794504782.8746219,
+      "wait_seconds": 2084.4370000000345,
+      "run_seconds": 153.43699999991804,
+      "lock_attempts": 209,
+      "exit_code": 0,
+      "reason": null,
+      "output": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-231945-projected-hair-reference-grid-4b775d",
+      "log_path": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-231945-projected-hair-reference-grid-4b775d\\process.log"
+    },
+    "static-regions": {
+      "id": 6,
+      "owner": "01a1d0a9-829a-7c11-a7a8-017e743887d9",
+      "task": "quality-reference-grid-static-regions",
+      "kind": "gpu",
+      "priority": 1,
+      "estimate_seconds": 240.0,
+      "pid": 11192,
+      "state": "succeeded",
+      "submitted": 1794502743.2255423,
+      "started": 1794505026.8775423,
+      "ended": 1794505438.457068,
+      "wait_seconds": 2283.625,
+      "run_seconds": 411.5470000000205,
+      "lock_attempts": 241,
+      "exit_code": 0,
+      "reason": null,
+      "output": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-231945-projected-hair-reference-grid-4b775d",
+      "log_path": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-231945-projected-hair-reference-grid-4b775d\\process.log"
+    }
+  },
+  "executions": {
+    "debug-build-execution": {
+      "status": "budget-stopped",
+      "exitCode": 1,
+      "reason": "Task byte/file-count budget exceeded",
+      "seconds": 113.34399999992456,
+      "logTruncated": false,
+      "samplingSeconds": 1,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-B",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-231945-projected-hair-reference-grid-4b775d\\build.py",
+        "Debug"
+      ],
+      "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\tmp"
+    },
+    "release-build-execution": {
+      "status": "exited",
+      "exitCode": 0,
+      "reason": null,
+      "seconds": 174.15600000007544,
+      "logTruncated": false,
+      "samplingSeconds": 1,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-B",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-231945-projected-hair-reference-grid-4b775d\\build.py",
+        "Release"
+      ],
+      "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\tmp"
+    },
+    "release-cpu-tests-execution": {
+      "status": "exited",
+      "exitCode": 0,
+      "reason": null,
+      "seconds": 29.20299999997951,
+      "logTruncated": false,
+      "samplingSeconds": 1,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-B",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-231945-projected-hair-reference-grid-4b775d\\verify-build.py",
+        "Release"
+      ],
+      "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-231945-projected-hair-reference-grid-4b775d\\tmp"
+    }
+  },
+  "sourceProvenance": {
+    "mainHead": "01cc6b26e52d8d602aae1b75d7259a5da4f10dbd",
+    "mainIntegration": "01cc6b26e52d8d602aae1b75d7259a5da4f10dbd",
+    "threeTextureSource": "48847a4caa9031d7ccc70e90c093c9fab81984a3",
+    "independentIntegrationEvidenceSha256": "b584ef161a658a639b06a30f9af4addf2fa74d4bf5c200e8c01b679ec01c12ae",
+    "candidateBase": "1cceff89e7f7ac40c5e2085045063470c2306083",
+    "candidateDiffSha256": "bfcd11b839cd5d86728f7d27bd30079a5157bfc177a27d95a84004ef66a8a1fa",
+    "candidatePaths": {
+      "docs/runtime/projected-hair-lighting.md": "948cb70d7babced599895362c9d93ff3d9ed906344a39fc05a3f1e62fc4fa75d",
+      "schemas/azure_render_material.schema.json": "f4657667ba941d8e47543a78cfa4c719144dcf16d5d6d6de92eceb58735de266",
+      "shaders/mesh.vert": "ff89f2bb4b480f60712d90da474340dd08ef9537eb038f9b4db65f091c991257",
+      "src/assets/GltfLoader.cpp": "1bdec44a47e4dea52729716e9f913b096339d5b7f65bda60557879f86e5687d2",
+      "src/assets/GltfLoader.hpp": "e7df517043b4b51dc3fedb04e7bf23ada79712a2ab6a37a7a9bcde6c28c19172",
+      "src/assets/MaterialData.cpp": "68894481f8ac3162eae405f919dd08d2fb5e847ebce69a3df0ad2ea5a55828cc",
+      "src/assets/MaterialSurfaceProfile.hpp": "714b11f9dd2813c43abebf292c63fd4e0fe29ee90e5ef0a1798e5d8744f98fcf",
+      "tests/CharacterRepairTests.cpp": "195ea79bf407273d6124d820d66dfff0b9b3c65e3e220ca0933422e746ad53aa"
+    }
+  },
+  "staticQuality": {
+    "referenceSha256": "48afd6546c23cfa85099a765cc94ada4813a684538c695faf6d70d6daf2261b5",
+    "control": {
+      "cloth-889": {
+        "pixels": 45988,
+        "ssim": 0.9649861059263044,
+        "medianLuminanceRelativeError": 0.025255227112728665,
+        "passed": true
+      },
+      "cloth-910": {
+        "pixels": 17990,
+        "ssim": 0.9971133404550964,
+        "medianLuminanceRelativeError": 0.007587464804037823,
+        "passed": true
+      },
+      "cloth-928": {
+        "pixels": 118661,
+        "ssim": 0.9640891217258782,
+        "medianLuminanceRelativeError": 0.015617534807916595,
+        "passed": true
+      },
+      "hair-opaque": {
+        "pixels": 16459,
+        "ssim": 0.9905399273891877,
+        "medianLuminanceRelativeError": 0.00800284966464992,
+        "passed": true
+      },
+      "hair-outline": {
+        "pixels": 2832,
+        "ssim": 0.9887400074318425,
+        "medianLuminanceRelativeError": 0.010298226327711284,
+        "passed": true
+      },
+      "hair-front-blend": {
+        "pixels": 725,
+        "ssim": 0.9631629221486834,
+        "medianLuminanceRelativeError": 0.008207790365465054,
+        "passed": true
+      },
+      "hair-back-blend": {
+        "pixels": 236,
+        "ssim": 0.9925574983044438,
+        "medianLuminanceRelativeError": 0.017686263544832593,
+        "passed": true
+      },
+      "hair-complete": {
+        "pixels": 20361,
+        "ssim": 0.9889305404056262,
+        "medianLuminanceRelativeError": 0.005165617227883023,
+        "passed": true
+      }
+    },
+    "devices": {
+      "nvidia": {
+        "frameSha256": "fb7bfcfae5e324af6c5cec30ce76938dda4064edf9e8017c140da5b6d7fad033",
+        "regions": {
+          "cloth-889": {
+            "pixels": 45988,
+            "ssim": 0.9649861059263044,
+            "medianLuminanceRelativeError": 0.025255227112728665,
+            "passed": true
+          },
+          "cloth-910": {
+            "pixels": 17990,
+            "ssim": 0.9971133404550964,
+            "medianLuminanceRelativeError": 0.007587464804037823,
+            "passed": true
+          },
+          "cloth-928": {
+            "pixels": 118661,
+            "ssim": 0.9640891217258782,
+            "medianLuminanceRelativeError": 0.015617534807916595,
+            "passed": true
+          },
+          "hair-opaque": {
+            "pixels": 16459,
+            "ssim": 0.9905399273891877,
+            "medianLuminanceRelativeError": 0.00800284966464992,
+            "passed": true
+          },
+          "hair-outline": {
+            "pixels": 2832,
+            "ssim": 0.9887400074318425,
+            "medianLuminanceRelativeError": 0.010298226327711284,
+            "passed": true
+          },
+          "hair-front-blend": {
+            "pixels": 725,
+            "ssim": 0.9631629221486834,
+            "medianLuminanceRelativeError": 0.008207790365465054,
+            "passed": true
+          },
+          "hair-back-blend": {
+            "pixels": 236,
+            "ssim": 0.9925574983044438,
+            "medianLuminanceRelativeError": 0.017686263544832593,
+            "passed": true
+          },
+          "hair-complete": {
+            "pixels": 20361,
+            "ssim": 0.9889305404056262,
+            "medianLuminanceRelativeError": 0.005165617227883023,
+            "passed": true
+          }
+        }
+      },
+      "intel": {
+        "frameSha256": "80f7ec1ed33f73330ab18ce7cc9c75d699a5218cc8eb60ed183d1ae5623237c0",
+        "regions": {
+          "cloth-889": {
+            "pixels": 45988,
+            "ssim": 0.9596788470135167,
+            "medianLuminanceRelativeError": 0.030207199529296198,
+            "passed": true
+          },
+          "cloth-910": {
+            "pixels": 17990,
+            "ssim": 0.9967682417328367,
+            "medianLuminanceRelativeError": 0.007587464804037823,
+            "passed": true
+          },
+          "cloth-928": {
+            "pixels": 118661,
+            "ssim": 0.9632251767683923,
+            "medianLuminanceRelativeError": 0.017312977178523214,
+            "passed": true
+          },
+          "hair-opaque": {
+            "pixels": 16459,
+            "ssim": 0.9895572679673449,
+            "medianLuminanceRelativeError": 0.0071148097031250935,
+            "passed": true
+          },
+          "hair-outline": {
+            "pixels": 2832,
+            "ssim": 0.9881105813416304,
+            "medianLuminanceRelativeError": 0.00029920985548788007,
+            "passed": true
+          },
+          "hair-front-blend": {
+            "pixels": 725,
+            "ssim": 0.9602683442777246,
+            "medianLuminanceRelativeError": 0.005339373657793244,
+            "passed": true
+          },
+          "hair-back-blend": {
+            "pixels": 236,
+            "ssim": 0.991389500908939,
+            "medianLuminanceRelativeError": 0.01431694739987755,
+            "passed": true
+          },
+          "hair-complete": {
+            "pixels": 20361,
+            "ssim": 0.9879326670292617,
+            "medianLuminanceRelativeError": 0.005384716327103035,
+            "passed": true
+          }
+        }
+      }
+    },
+    "thresholds": {
+      "ssim": 0.95,
+      "medianLuminanceRelativeError": 0.1
+    }
+  },
+  "hairQuality": {
+    "referenceSha256": "7590b5bbe131bdd9960f3357dd4240f5b48208ebee9a5f713197431f9bafcf6e",
+    "masks": {
+      "rawOpaqueHair": 17017,
+      "qualifiedInterior": 166
+    },
+    "cases": {
+      "release-nvidia": {
+        "frameSha256": "ffea66c041ab1eefe894c17600fadfb141d21c0e4707a2404f2073e82280be52",
+        "regions": {
+          "unqualifiedWindows": {
+            "pixels": 17017,
+            "ssim": 0.539271338985676,
+            "medianLuminanceRelativeError": 0.003867201642397722,
+            "passed": false
+          },
+          "qualifiedInterior": {
+            "pixels": 166,
+            "ssim": 0.999116227840252,
+            "medianLuminanceRelativeError": 0.001160680507273543,
+            "passed": true
+          }
+        },
+        "rgbOverOne": 0,
+        "maximumByteError": 1,
+        "visibilityOverOne": 0,
+        "normalOverOne": 0,
+        "nearMipBoundary": 0,
+        "residuals": []
+      },
+      "release-intel": {
+        "frameSha256": "c1048edf8050909466043aa49ad5372fc52c624030e9c892dac1b1c6e649fd92",
+        "regions": {
+          "unqualifiedWindows": {
+            "pixels": 17017,
+            "ssim": 0.5395166515518046,
+            "medianLuminanceRelativeError": 0.0,
+            "passed": false
+          },
+          "qualifiedInterior": {
+            "pixels": 166,
+            "ssim": 0.9994432702298698,
+            "medianLuminanceRelativeError": 0.0017610123028373608,
+            "passed": true
+          }
+        },
+        "rgbOverOne": 31,
+        "maximumByteError": 15,
+        "visibilityOverOne": 17,
+        "normalOverOne": 8,
+        "nearMipBoundary": 8,
+        "residuals": [
+          {
+            "display": [
+              1278,
+              163
+            ],
+            "actual": [
+              204,
+              96,
+              92
+            ],
+            "expected": [
+              202,
+              96,
+              92
+            ],
+            "rgbError": 2,
+            "visibilityError": 0,
+            "normalError": 0,
+            "referenceLod": 0.8330892324447632,
+            "nearMipBoundary": false
+          },
+          {
+            "display": [
+              1282,
+              165
+            ],
+            "actual": [
+              231,
+              114,
+              107
+            ],
+            "expected": [
+              231,
+              114,
+              109
+            ],
+            "rgbError": 2,
+            "visibilityError": 0,
+            "normalError": 0,
+            "referenceLod": 4.4463629722595215,
+            "nearMipBoundary": false
+          },
+          {
+            "display": [
+              1297,
+              171
+            ],
+            "actual": [
+              77,
+              22,
+              27
+            ],
+            "expected": [
+              74,
+              21,
+              25
+            ],
+            "rgbError": 3,
+            "visibilityError": 8,
+            "normalError": 0,
+            "referenceLod": 0.2405555248260498,
+            "nearMipBoundary": false
+          },
+          {
+            "display": [
+              1266,
+              179
+            ],
+            "actual": [
+              93,
+              31,
+              34
+            ],
+            "expected": [
+              91,
+              30,
+              33
+            ],
+            "rgbError": 2,
+            "visibilityError": 6,
+            "normalError": 0,
+            "referenceLod": 1.9388086795806885,
+            "nearMipBoundary": false
+          },
+          {
+            "display": [
+              1260,
+              180
+            ],
+            "actual": [
+              91,
+              30,
+              32
+            ],
+            "expected": [
+              89,
+              29,
+              31
+            ],
+            "rgbError": 2,
+            "visibilityError": 6,
+            "normalError": 0,
+            "referenceLod": 0.9677286148071289,
+            "nearMipBoundary": false
+          },
+          {
+            "display": [
+              1245,
+              237
+            ],
+            "actual": [
+              124,
+              54,
+              59
+            ],
+            "expected": [
+              126,
+              55,
+              60
+            ],
+            "rgbError": 2,
+            "visibilityError": 0,
+            "normalError": 0,
+            "referenceLod": 0.9598261117935181,
+            "nearMipBoundary": false
+          },
+          {
+            "display": [
+              1283,
+              239
+            ],
+            "actual": [
+              124,
+              44,
+              53
+            ],
+            "expected": [
+              126,
+              46,
+              54
+            ],
+            "rgbError": 2,
+            "visibilityError": 0,
+            "normalError": 0,
+            "referenceLod": 0.8145495653152466,
+            "nearMipBoundary": false
+          },
+          {
+            "display": [
+              1289,
+              248
+            ],
+            "actual": [
+              97,
+              32,
+              39
+            ],
+            "expected": [
+              98,
+              34,
+              39
+            ],
+            "rgbError": 2,
+            "visibilityError": 0,
+            "normalError": 0,
+            "referenceLod": 0.7996196746826172,
+            "nearMipBoundary": false
+          },
+          {
+            "display": [
+              1353,
+              258
+            ],
+            "actual": [
+              123,
+              54,
+              52
+            ],
+            "expected": [
+              127,
+              56,
+              54
+            ],
+            "rgbError": 4,
+            "visibilityError": 16,
+            "normalError": 0,
+            "referenceLod": 0.7576113939285278,
+            "nearMipBoundary": false
+          },
+          {
+            "display": [
+              1230,
+              261
+            ],
+            "actual": [
+              95,
+              36,
+              39
+            ],
+            "expected": [
+              96,
+              38,
+              40
+            ],
+            "rgbError": 2,
+            "visibilityError": 0,
+            "normalError": 0,
+            "referenceLod": 0.924453854560852,
+            "nearMipBoundary": false
+          },
+          {
+            "display": [
+              1367,
+              261
+            ],
+            "actual": [
+              227,
+              121,
+              113
+            ],
+            "expected": [
+              227,
+              121,
+              111
+            ],
+            "rgbError": 2,
+            "visibilityError": 0,
+            "normalError": 0,
+            "referenceLod": 2.305938482284546,
+            "nearMipBoundary": false
+          },
+          {
+            "display": [
+              1322,
+              262
+            ],
+            "actual": [
+              101,
+              42,
+              42
+            ],
+            "expected": [
+              103,
+              43,
+              41
+            ],
+            "rgbError": 2,
+            "visibilityError": 2,
+            "normalError": 15,
+            "referenceLod": 1.5009574890136719,
+            "nearMipBoundary": true
+          },
+          {
+            "display": [
+              1322,
+              263
+            ],
+            "actual": [
+              105,
+              47,
+              49
+            ],
+            "expected": [
+              104,
+              44,
+              43
+            ],
+            "rgbError": 6,
+            "visibilityError": 7,
+            "normalError": 50,
+            "referenceLod": 1.5009574890136719,
+            "nearMipBoundary": true
+          },
+          {
+            "display": [
+              1380,
+              276
+            ],
+            "actual": [
+              198,
+              111,
+              102
+            ],
+            "expected": [
+              196,
+              111,
+              102
+            ],
+            "rgbError": 2,
+            "visibilityError": 0,
+            "normalError": 0,
+            "referenceLod": 2.507282018661499,
+            "nearMipBoundary": false
+          },
+          {
+            "display": [
+              1221,
+              280
+            ],
+            "actual": [
+              68,
+              19,
+              23
+            ],
+            "expected": [
+              70,
+              20,
+              24
+            ],
+            "rgbError": 2,
+            "visibilityError": 10,
+            "normalError": 0,
+            "referenceLod": 1.0497472286224365,
+            "nearMipBoundary": false
+          },
+          {
+            "display": [
+              1220,
+              281
+            ],
+            "actual": [
+              72,
+              20,
+              25
+            ],
+            "expected": [
+              74,
+              21,
+              25
+            ],
+            "rgbError": 2,
+            "visibilityError": 7,
+            "normalError": 0,
+            "referenceLod": 1.0497472286224365,
+            "nearMipBoundary": false
+          },
+          {
+            "display": [
+              1248,
+              281
+            ],
+            "actual": [
+              75,
+              40,
+              38
+            ],
+            "expected": [
+              69,
+              36,
+              34
+            ],
+            "rgbError": 6,
+            "visibilityError": 0,
+            "normalError": 13,
+            "referenceLod": 3.501850128173828,
+            "nearMipBoundary": true
+          },
+          {
+            "display": [
+              1353,
+              284
+            ],
+            "actual": [
+              133,
+              49,
+              54
+            ],
+            "expected": [
+              133,
+              49,
+              56
+            ],
+            "rgbError": 2,
+            "visibilityError": 0,
+            "normalError": 0,
+            "referenceLod": 1.0312132835388184,
+            "nearMipBoundary": false
+          },
+          {
+            "display": [
+              1222,
+              287
+            ],
+            "actual": [
+              79,
+              24,
+              28
+            ],
+            "expected": [
+              75,
+              23,
+              27
+            ],
+            "rgbError": 4,
+            "visibilityError": 17,
+            "normalError": 0,
+            "referenceLod": 1.5753443241119385,
+            "nearMipBoundary": false
+          },
+          {
+            "display": [
+              1223,
+              287
+            ],
+            "actual": [
+              69,
+              20,
+              23
+            ],
+            "expected": [
+              72,
+              22,
+              25
+            ],
+            "rgbError": 3,
+            "visibilityError": 12,
+            "normalError": 0,
+            "referenceLod": 1.5753443241119385,
+            "nearMipBoundary": false
+          },
+          {
+            "display": [
+              1327,
+              287
+            ],
+            "actual": [
+              121,
+              52,
+              56
+            ],
+            "expected": [
+              116,
+              49,
+              53
+            ],
+            "rgbError": 5,
+            "visibilityError": 23,
+            "normalError": 0,
+            "referenceLod": 0.9883949756622314,
+            "nearMipBoundary": false
+          },
+          {
+            "display": [
+              1326,
+              290
+            ],
+            "actual": [
+              120,
+              49,
+              52
+            ],
+            "expected": [
+              122,
+              51,
+              53
+            ],
+            "rgbError": 2,
+            "visibilityError": 11,
+            "normalError": 0,
+            "referenceLod": 1.0776240825653076,
+            "nearMipBoundary": false
+          },
+          {
+            "display": [
+              1317,
+              297
+            ],
+            "actual": [
+              101,
+              33,
+              36
+            ],
+            "expected": [
+              109,
+              35,
+              38
+            ],
+            "rgbError": 8,
+            "visibilityError": 5,
+            "normalError": 17,
+            "referenceLod": 1.5010995864868164,
+            "nearMipBoundary": true
+          },
+          {
+            "display": [
+              1318,
+              298
+            ],
+            "actual": [
+              107,
+              38,
+              42
+            ],
+            "expected": [
+              109,
+              38,
+              42
+            ],
+            "rgbError": 2,
+            "visibilityError": 0,
+            "normalError": 5,
+            "referenceLod": 1.5036306381225586,
+            "nearMipBoundary": true
+          },
+          {
+            "display": [
+              1317,
+              299
+            ],
+            "actual": [
+              123,
+              45,
+              48
+            ],
+            "expected": [
+              118,
+              42,
+              46
+            ],
+            "rgbError": 5,
+            "visibilityError": 10,
+            "normalError": 23,
+            "referenceLod": 1.501624345779419,
+            "nearMipBoundary": true
+          },
+          {
+            "display": [
+              1317,
+              300
+            ],
+            "actual": [
+              125,
+              48,
+              51
+            ],
+            "expected": [
+              120,
+              45,
+              49
+            ],
+            "rgbError": 5,
+            "visibilityError": 1,
+            "normalError": 27,
+            "referenceLod": 1.502086877822876,
+            "nearMipBoundary": true
+          },
+          {
+            "display": [
+              1333,
+              312
+            ],
+            "actual": [
+              120,
+              61,
+              61
+            ],
+            "expected": [
+              119,
+              55,
+              53
+            ],
+            "rgbError": 8,
+            "visibilityError": 0,
+            "normalError": 0,
+            "referenceLod": 2.2829272747039795,
+            "nearMipBoundary": false
+          },
+          {
+            "display": [
+              1322,
+              320
+            ],
+            "actual": [
+              119,
+              55,
+              55
+            ],
+            "expected": [
+              114,
+              51,
+              52
+            ],
+            "rgbError": 5,
+            "visibilityError": 21,
+            "normalError": 1,
+            "referenceLod": 2.611396312713623,
+            "nearMipBoundary": false
+          },
+          {
+            "display": [
+              1242,
+              327
+            ],
+            "actual": [
+              65,
+              23,
+              27
+            ],
+            "expected": [
+              67,
+              24,
+              29
+            ],
+            "rgbError": 2,
+            "visibilityError": 10,
+            "normalError": 1,
+            "referenceLod": 2.052777051925659,
+            "nearMipBoundary": false
+          },
+          {
+            "display": [
+              1255,
+              334
+            ],
+            "actual": [
+              74,
+              30,
+              33
+            ],
+            "expected": [
+              71,
+              28,
+              31
+            ],
+            "rgbError": 3,
+            "visibilityError": 11,
+            "normalError": 0,
+            "referenceLod": 2.146778106689453,
+            "nearMipBoundary": false
+          },
+          {
+            "display": [
+              1243,
+              342
+            ],
+            "actual": [
+              83,
+              25,
+              28
+            ],
+            "expected": [
+              98,
+              35,
+              39
+            ],
+            "rgbError": 15,
+            "visibilityError": 0,
+            "normalError": 93,
+            "referenceLod": 2.502040386199951,
+            "nearMipBoundary": true
+          }
+        ]
+      },
+      "release-nvidia-indexed": {
+        "frameSha256": "ffea66c041ab1eefe894c17600fadfb141d21c0e4707a2404f2073e82280be52",
+        "regions": {
+          "unqualifiedWindows": {
+            "pixels": 17017,
+            "ssim": 0.539271338985676,
+            "medianLuminanceRelativeError": 0.003867201642397722,
+            "passed": false
+          },
+          "qualifiedInterior": {
+            "pixels": 166,
+            "ssim": 0.999116227840252,
+            "medianLuminanceRelativeError": 0.001160680507273543,
+            "passed": true
+          }
+        },
+        "rgbOverOne": 0,
+        "maximumByteError": 1,
+        "visibilityOverOne": 0,
+        "normalOverOne": 0,
+        "nearMipBoundary": 0,
+        "residuals": []
+      },
+      "debug-nvidia": {
+        "frameSha256": "ffea66c041ab1eefe894c17600fadfb141d21c0e4707a2404f2073e82280be52",
+        "regions": {
+          "unqualifiedWindows": {
+            "pixels": 17017,
+            "ssim": 0.539271338985676,
+            "medianLuminanceRelativeError": 0.003867201642397722,
+            "passed": false
+          },
+          "qualifiedInterior": {
+            "pixels": 166,
+            "ssim": 0.999116227840252,
+            "medianLuminanceRelativeError": 0.001160680507273543,
+            "passed": true
+          }
+        },
+        "rgbOverOne": 0,
+        "maximumByteError": 1,
+        "visibilityOverOne": 0,
+        "normalOverOne": 0,
+        "nearMipBoundary": 0,
+        "residuals": []
+      },
+      "debug-intel": {
+        "frameSha256": "c1048edf8050909466043aa49ad5372fc52c624030e9c892dac1b1c6e649fd92",
+        "regions": {
+          "unqualifiedWindows": {
+            "pixels": 17017,
+            "ssim": 0.5395166515518046,
+            "medianLuminanceRelativeError": 0.0,
+            "passed": false
+          },
+          "qualifiedInterior": {
+            "pixels": 166,
+            "ssim": 0.9994432702298698,
+            "medianLuminanceRelativeError": 0.0017610123028373608,
+            "passed": true
+          }
+        },
+        "rgbOverOne": 31,
+        "maximumByteError": 15,
+        "visibilityOverOne": 17,
+        "normalOverOne": 8,
+        "nearMipBoundary": 8,
+        "residuals": [
+          {
+            "display": [
+              1278,
+              163
+            ],
+            "actual": [
+              204,
+              96,
+              92
+            ],
+            "expected": [
+              202,
+              96,
+              92
+            ],
+            "rgbError": 2,
+            "visibilityError": 0,
+            "normalError": 0,
+            "referenceLod": 0.8330892324447632,
+            "nearMipBoundary": false
+          },
+          {
+            "display": [
+              1282,
+              165
+            ],
+            "actual": [
+              231,
+              114,
+              107
+            ],
+            "expected": [
+              231,
+              114,
+              109
+            ],
+            "rgbError": 2,
+            "visibilityError": 0,
+            "normalError": 0,
+            "referenceLod": 4.4463629722595215,
+            "nearMipBoundary": false
+          },
+          {
+            "display": [
+              1297,
+              171
+            ],
+            "actual": [
+              77,
+              22,
+              27
+            ],
+            "expected": [
+              74,
+              21,
+              25
+            ],
+            "rgbError": 3,
+            "visibilityError": 8,
+            "normalError": 0,
+            "referenceLod": 0.2405555248260498,
+            "nearMipBoundary": false
+          },
+          {
+            "display": [
+              1266,
+              179
+            ],
+            "actual": [
+              93,
+              31,
+              34
+            ],
+            "expected": [
+              91,
+              30,
+              33
+            ],
+            "rgbError": 2,
+            "visibilityError": 6,
+            "normalError": 0,
+            "referenceLod": 1.9388086795806885,
+            "nearMipBoundary": false
+          },
+          {
+            "display": [
+              1260,
+              180
+            ],
+            "actual": [
+              91,
+              30,
+              32
+            ],
+            "expected": [
+              89,
+              29,
+              31
+            ],
+            "rgbError": 2,
+            "visibilityError": 6,
+            "normalError": 0,
+            "referenceLod": 0.9677286148071289,
+            "nearMipBoundary": false
+          },
+          {
+            "display": [
+              1245,
+              237
+            ],
+            "actual": [
+              124,
+              54,
+              59
+            ],
+            "expected": [
+              126,
+              55,
+              60
+            ],
+            "rgbError": 2,
+            "visibilityError": 0,
+            "normalError": 0,
+            "referenceLod": 0.9598261117935181,
+            "nearMipBoundary": false
+          },
+          {
+            "display": [
+              1283,
+              239
+            ],
+            "actual": [
+              124,
+              44,
+              53
+            ],
+            "expected": [
+              126,
+              46,
+              54
+            ],
+            "rgbError": 2,
+            "visibilityError": 0,
+            "normalError": 0,
+            "referenceLod": 0.8145495653152466,
+            "nearMipBoundary": false
+          },
+          {
+            "display": [
+              1289,
+              248
+            ],
+            "actual": [
+              97,
+              32,
+              39
+            ],
+            "expected": [
+              98,
+              34,
+              39
+            ],
+            "rgbError": 2,
+            "visibilityError": 0,
+            "normalError": 0,
+            "referenceLod": 0.7996196746826172,
+            "nearMipBoundary": false
+          },
+          {
+            "display": [
+              1353,
+              258
+            ],
+            "actual": [
+              123,
+              54,
+              52
+            ],
+            "expected": [
+              127,
+              56,
+              54
+            ],
+            "rgbError": 4,
+            "visibilityError": 16,
+            "normalError": 0,
+            "referenceLod": 0.7576113939285278,
+            "nearMipBoundary": false
+          },
+          {
+            "display": [
+              1230,
+              261
+            ],
+            "actual": [
+              95,
+              36,
+              39
+            ],
+            "expected": [
+              96,
+              38,
+              40
+            ],
+            "rgbError": 2,
+            "visibilityError": 0,
+            "normalError": 0,
+            "referenceLod": 0.924453854560852,
+            "nearMipBoundary": false
+          },
+          {
+            "display": [
+              1367,
+              261
+            ],
+            "actual": [
+              227,
+              121,
+              113
+            ],
+            "expected": [
+              227,
+              121,
+              111
+            ],
+            "rgbError": 2,
+            "visibilityError": 0,
+            "normalError": 0,
+            "referenceLod": 2.305938482284546,
+            "nearMipBoundary": false
+          },
+          {
+            "display": [
+              1322,
+              262
+            ],
+            "actual": [
+              101,
+              42,
+              42
+            ],
+            "expected": [
+              103,
+              43,
+              41
+            ],
+            "rgbError": 2,
+            "visibilityError": 2,
+            "normalError": 15,
+            "referenceLod": 1.5009574890136719,
+            "nearMipBoundary": true
+          },
+          {
+            "display": [
+              1322,
+              263
+            ],
+            "actual": [
+              105,
+              47,
+              49
+            ],
+            "expected": [
+              104,
+              44,
+              43
+            ],
+            "rgbError": 6,
+            "visibilityError": 7,
+            "normalError": 50,
+            "referenceLod": 1.5009574890136719,
+            "nearMipBoundary": true
+          },
+          {
+            "display": [
+              1380,
+              276
+            ],
+            "actual": [
+              198,
+              111,
+              102
+            ],
+            "expected": [
+              196,
+              111,
+              102
+            ],
+            "rgbError": 2,
+            "visibilityError": 0,
+            "normalError": 0,
+            "referenceLod": 2.507282018661499,
+            "nearMipBoundary": false
+          },
+          {
+            "display": [
+              1221,
+              280
+            ],
+            "actual": [
+              68,
+              19,
+              23
+            ],
+            "expected": [
+              70,
+              20,
+              24
+            ],
+            "rgbError": 2,
+            "visibilityError": 10,
+            "normalError": 0,
+            "referenceLod": 1.0497472286224365,
+            "nearMipBoundary": false
+          },
+          {
+            "display": [
+              1220,
+              281
+            ],
+            "actual": [
+              72,
+              20,
+              25
+            ],
+            "expected": [
+              74,
+              21,
+              25
+            ],
+            "rgbError": 2,
+            "visibilityError": 7,
+            "normalError": 0,
+            "referenceLod": 1.0497472286224365,
+            "nearMipBoundary": false
+          },
+          {
+            "display": [
+              1248,
+              281
+            ],
+            "actual": [
+              75,
+              40,
+              38
+            ],
+            "expected": [
+              69,
+              36,
+              34
+            ],
+            "rgbError": 6,
+            "visibilityError": 0,
+            "normalError": 13,
+            "referenceLod": 3.501850128173828,
+            "nearMipBoundary": true
+          },
+          {
+            "display": [
+              1353,
+              284
+            ],
+            "actual": [
+              133,
+              49,
+              54
+            ],
+            "expected": [
+              133,
+              49,
+              56
+            ],
+            "rgbError": 2,
+            "visibilityError": 0,
+            "normalError": 0,
+            "referenceLod": 1.0312132835388184,
+            "nearMipBoundary": false
+          },
+          {
+            "display": [
+              1222,
+              287
+            ],
+            "actual": [
+              79,
+              24,
+              28
+            ],
+            "expected": [
+              75,
+              23,
+              27
+            ],
+            "rgbError": 4,
+            "visibilityError": 17,
+            "normalError": 0,
+            "referenceLod": 1.5753443241119385,
+            "nearMipBoundary": false
+          },
+          {
+            "display": [
+              1223,
+              287
+            ],
+            "actual": [
+              69,
+              20,
+              23
+            ],
+            "expected": [
+              72,
+              22,
+              25
+            ],
+            "rgbError": 3,
+            "visibilityError": 12,
+            "normalError": 0,
+            "referenceLod": 1.5753443241119385,
+            "nearMipBoundary": false
+          },
+          {
+            "display": [
+              1327,
+              287
+            ],
+            "actual": [
+              121,
+              52,
+              56
+            ],
+            "expected": [
+              116,
+              49,
+              53
+            ],
+            "rgbError": 5,
+            "visibilityError": 23,
+            "normalError": 0,
+            "referenceLod": 0.9883949756622314,
+            "nearMipBoundary": false
+          },
+          {
+            "display": [
+              1326,
+              290
+            ],
+            "actual": [
+              120,
+              49,
+              52
+            ],
+            "expected": [
+              122,
+              51,
+              53
+            ],
+            "rgbError": 2,
+            "visibilityError": 11,
+            "normalError": 0,
+            "referenceLod": 1.0776240825653076,
+            "nearMipBoundary": false
+          },
+          {
+            "display": [
+              1317,
+              297
+            ],
+            "actual": [
+              101,
+              33,
+              36
+            ],
+            "expected": [
+              109,
+              35,
+              38
+            ],
+            "rgbError": 8,
+            "visibilityError": 5,
+            "normalError": 17,
+            "referenceLod": 1.5010995864868164,
+            "nearMipBoundary": true
+          },
+          {
+            "display": [
+              1318,
+              298
+            ],
+            "actual": [
+              107,
+              38,
+              42
+            ],
+            "expected": [
+              109,
+              38,
+              42
+            ],
+            "rgbError": 2,
+            "visibilityError": 0,
+            "normalError": 5,
+            "referenceLod": 1.5036306381225586,
+            "nearMipBoundary": true
+          },
+          {
+            "display": [
+              1317,
+              299
+            ],
+            "actual": [
+              123,
+              45,
+              48
+            ],
+            "expected": [
+              118,
+              42,
+              46
+            ],
+            "rgbError": 5,
+            "visibilityError": 10,
+            "normalError": 23,
+            "referenceLod": 1.501624345779419,
+            "nearMipBoundary": true
+          },
+          {
+            "display": [
+              1317,
+              300
+            ],
+            "actual": [
+              125,
+              48,
+              51
+            ],
+            "expected": [
+              120,
+              45,
+              49
+            ],
+            "rgbError": 5,
+            "visibilityError": 1,
+            "normalError": 27,
+            "referenceLod": 1.502086877822876,
+            "nearMipBoundary": true
+          },
+          {
+            "display": [
+              1333,
+              312
+            ],
+            "actual": [
+              120,
+              61,
+              61
+            ],
+            "expected": [
+              119,
+              55,
+              53
+            ],
+            "rgbError": 8,
+            "visibilityError": 0,
+            "normalError": 0,
+            "referenceLod": 2.2829272747039795,
+            "nearMipBoundary": false
+          },
+          {
+            "display": [
+              1322,
+              320
+            ],
+            "actual": [
+              119,
+              55,
+              55
+            ],
+            "expected": [
+              114,
+              51,
+              52
+            ],
+            "rgbError": 5,
+            "visibilityError": 21,
+            "normalError": 1,
+            "referenceLod": 2.611396312713623,
+            "nearMipBoundary": false
+          },
+          {
+            "display": [
+              1242,
+              327
+            ],
+            "actual": [
+              65,
+              23,
+              27
+            ],
+            "expected": [
+              67,
+              24,
+              29
+            ],
+            "rgbError": 2,
+            "visibilityError": 10,
+            "normalError": 1,
+            "referenceLod": 2.052777051925659,
+            "nearMipBoundary": false
+          },
+          {
+            "display": [
+              1255,
+              334
+            ],
+            "actual": [
+              74,
+              30,
+              33
+            ],
+            "expected": [
+              71,
+              28,
+              31
+            ],
+            "rgbError": 3,
+            "visibilityError": 11,
+            "normalError": 0,
+            "referenceLod": 2.146778106689453,
+            "nearMipBoundary": false
+          },
+          {
+            "display": [
+              1243,
+              342
+            ],
+            "actual": [
+              83,
+              25,
+              28
+            ],
+            "expected": [
+              98,
+              35,
+              39
+            ],
+            "rgbError": 15,
+            "visibilityError": 0,
+            "normalError": 93,
+            "referenceLod": 2.502040386199951,
+            "nearMipBoundary": true
+          }
+        ]
+      }
+    }
+  },
+  "portrait": {
+    "control": {
+      "hair-crown": {
+        "bounds": [
+          710,
+          400,
+          820,
+          550
+        ],
+        "ssim": 0.9998374037865481,
+        "medianLuminanceRelativeError": 0.0,
+        "passed": true
+      },
+      "hair-fringe": {
+        "bounds": [
+          700,
+          570,
+          800,
+          650
+        ],
+        "ssim": 0.9998433148393195,
+        "medianLuminanceRelativeError": 0.00044616577081012525,
+        "passed": true
+      },
+      "face-cheek": {
+        "bounds": [
+          705,
+          852,
+          795,
+          885
+        ],
+        "ssim": 0.9997730808342687,
+        "medianLuminanceRelativeError": 0.0,
+        "passed": true
+      },
+      "face-chin": {
+        "bounds": [
+          770,
+          960,
+          810,
+          985
+        ],
+        "ssim": 0.9997533314820359,
+        "medianLuminanceRelativeError": 0.0,
+        "passed": true
+      },
+      "eye-left": {
+        "bounds": [
+          625,
+          784,
+          683,
+          814
+        ],
+        "ssim": 0.9986740962004589,
+        "medianLuminanceRelativeError": 0.01735456498490053,
+        "passed": true
+      }
+    },
+    "referenceSha256": "a5741544d3be8c0aab82bfb3a09239354f57a5cf9ad9cfb5e55676600c4ae81a",
+    "cases": {
+      "nvidia": {
+        "frameSha256": "368360534cdf731101794b4af511e91773b6d62ade57cf9203af1ec37767c0cb",
+        "playerSha256": "426eb1e89b2ede603b4da05c2e2f9f2b30ff061799dff23738892202568fea46",
+        "regions": {
+          "hair-crown": {
+            "bounds": [
+              710,
+              400,
+              820,
+              550
+            ],
+            "ssim": 0.9998374037865481,
+            "medianLuminanceRelativeError": 0.0,
+            "passed": true
+          },
+          "hair-fringe": {
+            "bounds": [
+              700,
+              570,
+              800,
+              650
+            ],
+            "ssim": 0.9998433148393195,
+            "medianLuminanceRelativeError": 0.00044616577081012525,
+            "passed": true
+          },
+          "face-cheek": {
+            "bounds": [
+              705,
+              852,
+              795,
+              885
+            ],
+            "ssim": 0.9997730808342687,
+            "medianLuminanceRelativeError": 0.0,
+            "passed": true
+          },
+          "face-chin": {
+            "bounds": [
+              770,
+              960,
+              810,
+              985
+            ],
+            "ssim": 0.9997533314820359,
+            "medianLuminanceRelativeError": 0.0,
+            "passed": true
+          },
+          "eye-left": {
+            "bounds": [
+              625,
+              784,
+              683,
+              814
+            ],
+            "ssim": 0.9986740962004589,
+            "medianLuminanceRelativeError": 0.01735456498490053,
+            "passed": true
+          }
+        }
+      },
+      "intel": {
+        "frameSha256": "7455d13bda68b4ae8e42280b2c5b2f5ae8d3b1baee4c1fdd8582fb66ffe9f0a6",
+        "playerSha256": "426eb1e89b2ede603b4da05c2e2f9f2b30ff061799dff23738892202568fea46",
+        "regions": {
+          "hair-crown": {
+            "bounds": [
+              710,
+              400,
+              820,
+              550
+            ],
+            "ssim": 0.999359217247138,
+            "medianLuminanceRelativeError": 0.0006883100464353877,
+            "passed": true
+          },
+          "hair-fringe": {
+            "bounds": [
+              700,
+              570,
+              800,
+              650
+            ],
+            "ssim": 0.9994433935925381,
+            "medianLuminanceRelativeError": 0.0014517520731535428,
+            "passed": true
+          },
+          "face-cheek": {
+            "bounds": [
+              705,
+              852,
+              795,
+              885
+            ],
+            "ssim": 0.9992530153644696,
+            "medianLuminanceRelativeError": 0.0,
+            "passed": true
+          },
+          "face-chin": {
+            "bounds": [
+              770,
+              960,
+              810,
+              985
+            ],
+            "ssim": 0.9994091689733198,
+            "medianLuminanceRelativeError": 0.0,
+            "passed": true
+          },
+          "eye-left": {
+            "bounds": [
+              625,
+              784,
+              683,
+              814
+            ],
+            "ssim": 0.9983482662067649,
+            "medianLuminanceRelativeError": 0.014376289349816574,
+            "passed": true
+          }
+        }
+      }
+    }
+  },
+  "portraitPixels": {
+    "referenceSha256": "a5741544d3be8c0aab82bfb3a09239354f57a5cf9ad9cfb5e55676600c4ae81a",
+    "thresholdByte": 1,
+    "cases": {
+      "nvidia": {
+        "frameSha256": "368360534cdf731101794b4af511e91773b6d62ade57cf9203af1ec37767c0cb",
+        "regions": {
+          "eye-left": {
+            "pixels": 1740,
+            "overOne": 418,
+            "maxByte": 90,
+            "interiorOverOne": 264,
+            "p95Byte": 25.049999999999955,
+            "worstPixel": [
+              667,
+              808
+            ],
+            "worstCandidate": [
+              68,
+              19,
+              109
+            ],
+            "worstReference": [
+              68,
+              19,
+              19
+            ]
+          },
+          "face-cheek": {
+            "pixels": 2970,
+            "overOne": 0,
+            "maxByte": 1,
+            "interiorOverOne": 0,
+            "p95Byte": 1.0,
+            "worstPixel": [
+              715,
+              852
+            ],
+            "worstCandidate": [
+              148,
+              130,
+              118
+            ],
+            "worstReference": [
+              149,
+              130,
+              118
+            ]
+          },
+          "face-chin": {
+            "pixels": 1000,
+            "overOne": 0,
+            "maxByte": 1,
+            "interiorOverOne": 0,
+            "p95Byte": 1.0,
+            "worstPixel": [
+              773,
+              960
+            ],
+            "worstCandidate": [
+              149,
+              129,
+              117
+            ],
+            "worstReference": [
+              149,
+              129,
+              118
+            ]
+          }
+        }
+      },
+      "intel": {
+        "frameSha256": "7455d13bda68b4ae8e42280b2c5b2f5ae8d3b1baee4c1fdd8582fb66ffe9f0a6",
+        "regions": {
+          "eye-left": {
+            "pixels": 1740,
+            "overOne": 415,
+            "maxByte": 90,
+            "interiorOverOne": 259,
+            "p95Byte": 25.049999999999955,
+            "worstPixel": [
+              667,
+              808
+            ],
+            "worstCandidate": [
+              68,
+              18,
+              109
+            ],
+            "worstReference": [
+              68,
+              19,
+              19
+            ]
+          },
+          "face-cheek": {
+            "pixels": 2970,
+            "overOne": 0,
+            "maxByte": 1,
+            "interiorOverOne": 0,
+            "p95Byte": 1.0,
+            "worstPixel": [
+              705,
+              852
+            ],
+            "worstCandidate": [
+              148,
+              129,
+              116
+            ],
+            "worstReference": [
+              148,
+              128,
+              116
+            ]
+          },
+          "face-chin": {
+            "pixels": 1000,
+            "overOne": 0,
+            "maxByte": 1,
+            "interiorOverOne": 0,
+            "p95Byte": 1.0,
+            "worstPixel": [
+              777,
+              960
+            ],
+            "worstCandidate": [
+              149,
+              130,
+              117
+            ],
+            "worstReference": [
+              150,
+              130,
+              117
+            ]
+          }
+        }
+      }
+    }
+  },
+  "faceAndSkin": {
+    "referenceSha256": "48afd6546c23cfa85099a765cc94ada4813a684538c695faf6d70d6daf2261b5",
+    "masks": {
+      "iris": {
+        "event": 846,
+        "pixels": 255,
+        "sha256": "3383359cfacf5dce9466be7a6a33e0bd0809158c33f532e2f226efeda9cd1b16"
+      },
+      "face": {
+        "event": 804,
+        "pixels": 3663,
+        "sha256": "cb7ed7030771a6f5d5ff1ed49ce22d668d09de342497e97e9141ed25ea4b2bbb"
+      },
+      "skin": {
+        "event": 783,
+        "pixels": 47458,
+        "sha256": "31e2da8fe073f66154c286c7488defbcfed759b1d9f7b030e03cfc95d7846cf0"
+      }
+    },
+    "cases": {
+      "static-nvidia": {
+        "sha256": "fb7bfcfae5e324af6c5cec30ce76938dda4064edf9e8017c140da5b6d7fad033",
+        "regions": {
+          "iris": {
+            "pixels": 255,
+            "ssim": 0.9336286490015627,
+            "medianLuminanceRelativeError": 0.18567849088415733,
+            "passed": false,
+            "overOne": 131,
+            "maxByte": 95,
+            "meanMaxByte": 11.184313725490195,
+            "p95Byte": 45.0
+          },
+          "skin": {
+            "pixels": 28966,
+            "ssim": 0.9883011336151029,
+            "medianLuminanceRelativeError": 0.002132151353702811,
+            "passed": true,
+            "overOne": 10957,
+            "maxByte": 44,
+            "meanMaxByte": 1.4597459089967548,
+            "p95Byte": 3.0
+          },
+          "face": {
+            "pixels": 1176,
+            "ssim": 0.9948966785519591,
+            "medianLuminanceRelativeError": 0.019484224638619554,
+            "passed": true,
+            "overOne": 1174,
+            "maxByte": 46,
+            "meanMaxByte": 4.375,
+            "p95Byte": 6.0
+          }
+        }
+      },
+      "static-intel": {
+        "sha256": "80f7ec1ed33f73330ab18ce7cc9c75d699a5218cc8eb60ed183d1ae5623237c0",
+        "regions": {
+          "iris": {
+            "pixels": 255,
+            "ssim": 0.9363732397230357,
+            "medianLuminanceRelativeError": 0.17747977496929687,
+            "passed": false,
+            "overOne": 133,
+            "maxByte": 95,
+            "meanMaxByte": 11.345098039215687,
+            "p95Byte": 44.29999999999998
+          },
+          "skin": {
+            "pixels": 28966,
+            "ssim": 0.9884022894532879,
+            "medianLuminanceRelativeError": 0.0009760491156015975,
+            "passed": true,
+            "overOne": 10485,
+            "maxByte": 44,
+            "meanMaxByte": 1.4220120140854795,
+            "p95Byte": 3.0
+          },
+          "face": {
+            "pixels": 1176,
+            "ssim": 0.9950648058786188,
+            "medianLuminanceRelativeError": 0.01659997511672593,
+            "passed": true,
+            "overOne": 1170,
+            "maxByte": 34,
+            "meanMaxByte": 4.280612244897959,
+            "p95Byte": 6.0
+          }
+        }
+      },
+      "release-nvidia": {
+        "sha256": "ffea66c041ab1eefe894c17600fadfb141d21c0e4707a2404f2073e82280be52",
+        "regions": {
+          "iris": {
+            "pixels": 255,
+            "ssim": 0.6879123050018303,
+            "medianLuminanceRelativeError": 0.5767681872141323,
+            "passed": false,
+            "overOne": 255,
+            "maxByte": 181,
+            "meanMaxByte": 72.70196078431373,
+            "p95Byte": 169.29999999999998
+          },
+          "skin": {
+            "pixels": 28966,
+            "ssim": 0.9833866624801703,
+            "medianLuminanceRelativeError": 0.0009760491156015975,
+            "passed": true,
+            "overOne": 10499,
+            "maxByte": 72,
+            "meanMaxByte": 1.6548367051025341,
+            "p95Byte": 3.0
+          },
+          "face": {
+            "pixels": 1176,
+            "ssim": 0.9769655307276593,
+            "medianLuminanceRelativeError": 0.01659997511672593,
+            "passed": true,
+            "overOne": 1175,
+            "maxByte": 46,
+            "meanMaxByte": 4.658163265306122,
+            "p95Byte": 6.0
+          }
+        }
+      },
+      "release-intel": {
+        "sha256": "c1048edf8050909466043aa49ad5372fc52c624030e9c892dac1b1c6e649fd92",
+        "regions": {
+          "iris": {
+            "pixels": 255,
+            "ssim": 0.7146923989769692,
+            "medianLuminanceRelativeError": 0.5764423713478273,
+            "passed": false,
+            "overOne": 255,
+            "maxByte": 180,
+            "meanMaxByte": 72.12941176470588,
+            "p95Byte": 168.29999999999998
+          },
+          "skin": {
+            "pixels": 28966,
+            "ssim": 0.983465806518473,
+            "medianLuminanceRelativeError": 0.0009760491156015975,
+            "passed": true,
+            "overOne": 10078,
+            "maxByte": 72,
+            "meanMaxByte": 1.6283228612856453,
+            "p95Byte": 3.0
+          },
+          "face": {
+            "pixels": 1176,
+            "ssim": 0.9772959903955398,
+            "medianLuminanceRelativeError": 0.01659997511672593,
+            "passed": true,
+            "overOne": 1170,
+            "maxByte": 34,
+            "meanMaxByte": 4.569727891156463,
+            "p95Byte": 6.0
+          }
+        }
+      }
+    },
+    "method": "Iris: actual opaque draw ownership and final composite RGB. Skin/face: opaque ownership eroded six pixels."
+  },
+  "eyeBloomControl": {
+    "referenceSha256": "a5741544d3be8c0aab82bfb3a09239354f57a5cf9ad9cfb5e55676600c4ae81a",
+    "world": {
+      "sha256": "368360534cdf731101794b4af511e91773b6d62ade57cf9203af1ec37767c0cb",
+      "overOne": 418,
+      "maximum": 90,
+      "peakBlue": 109
+    },
+    "bloomDisabled": {
+      "sha256": "de7ea097122de79a2c5aa28571c7c2f5918d91fc6830cee7e22d9cbe6a36afad",
+      "overOne": 0,
+      "maximum": 1,
+      "peakBlue": 19
+    },
+    "isolated": {
+      "sha256": "b4faa0fa3d806b16b12d31234a1eb3082df4eddea730fb96e8fb9a3066e18eeb",
+      "overOne": 0,
+      "maximum": 0,
+      "peakBlue": 19
+    }
+  },
+  "integrationPreflight": {
+    "main": "01cc6b26e52d8d602aae1b75d7259a5da4f10dbd",
+    "base": "1cceff89e7f7ac40c5e2085045063470c2306083",
+    "paths": {
+      "docs/runtime/projected-hair-lighting.md": {
+        "result": "no-upstream-overlap"
+      },
+      "schemas/azure_render_material.schema.json": {
+        "result": "no-upstream-overlap"
+      },
+      "shaders/mesh.vert": {
+        "result": "merged",
+        "conflicts": 0,
+        "mergedSha256": "ad64a986547c454fe0a3e7e692d5d76329d8c4fc18b6eb690e495919925ddce9"
+      },
+      "src/assets/GltfLoader.cpp": {
+        "result": "no-upstream-overlap"
+      },
+      "src/assets/GltfLoader.hpp": {
+        "result": "merged",
+        "conflicts": 0,
+        "mergedSha256": "0c92d22b0012590c25220a67f2196c878386f6195a7d1c2ee9b6f7da9cc62d68"
+      },
+      "src/assets/MaterialData.cpp": {
+        "result": "merged",
+        "conflicts": 0,
+        "mergedSha256": "0e038a6a1c1aeb8881c42dc1f5340d008093540798c3136f4097d0713787f3f5"
+      },
+      "src/assets/MaterialSurfaceProfile.hpp": {
+        "result": "no-upstream-overlap"
+      },
+      "tests/CharacterRepairTests.cpp": {
+        "result": "no-upstream-overlap"
+      }
+    }
+  },
+  "archive": {
+    "sha256": "16c7ba4b488b9e4a8f881face7d65992991c8999726f136bef15dd79aa0d57ad",
+    "bytes": 936250,
+    "members": 158
+  }
+}

@@ -4,7 +4,75 @@
 状态：采集与差异定位完成，联合画质未通过。
 范围见[全身核验计划](../../plans/2026-11-01-full-body-native-comparison.md)。
 
+## 动态角色网格
+
+联合场景使用含十段动画的角色资产。以原生绘制 783 和 804 的索引和纹理坐标核对该资产，脸部 2,906 个三角形全部对应；身体有 5,610 个共同三角形，原生独有 69 个，现用资产独有 169 个。现用资产独有的三角形占身体静止网格面积的约 3.39%，高度集中在 1.15 至 1.32 米。
+
+原生身体静止数据由绘制 1018 的实际顶点缓冲读取。3,249 对共同顶点中，3,247 对的位置距离不超过 0.00001 米。独有三角形涉及 62 个原生顶点，其中 31 个没有对应的现用纹理坐标，因此单独更换索引无法恢复这些面。
+
+独立网格候选保留共同三角形的索引和全部原顶点属性，按原生缓冲补齐所需静止顶点、纹理坐标和骨骼权重。骨架、动画及其他网格保留原有内容。候选已通过序列化和来源校验，动态轮廓、接缝及画面按同机位、同动作时点和双设备验收。
+
+[网格结果](evidence/2026-11-16/dynamic-body-topology/results.json)和[验证归档](evidence/2026-11-16/dynamic-body-topology/validation.zip)记录原生读回、三角形对应以及候选资产指纹。
+
+绘制 783 的原生身体覆盖 136,029 个像素。按捕获的投影、骨骼矩阵和静止顶点重建时，原生覆盖掩码逐像素一致。身体原生权重的整数和为 65,534、65,535 或 65,536；按原始值除以 65,535 后参与蒙皮，候选网格在同一帧的几何覆盖中无缺失或额外像素。导入器按顶点权重和再归一化时，同一候选有两个覆盖像素缺失。
+
+网格候选在十段动画的 70 个时点未产生新的退化三角形。这项检查使用独立网格候选；原生蒙皮数据的几何核对只覆盖固定捕获帧。实际播放器的双设备画面仍需确认动态轮廓、接缝、衣料遮挡和着色。[权重结果](evidence/2026-11-16/dynamic-body-native-weights/results.json)和[验证归档](evidence/2026-11-16/dynamic-body-native-weights/validation.zip)记录两项检查。
+
+原生权重候选的身体图元保存 3,289 个顶点的 16 位整数权重。直接解析候选文件，按项目十段动画各采样七个时点：没有新增退化三角形，245 对静止位置重合的顶点在采样时点均保持接合。同一候选的原始整数权重与再次归一化的权重所产生的顶点位移差不超过 0.046 毫米。[候选资产结果](evidence/2026-11-16/dynamic-native-weight-asset/results.json)和[验证归档](evidence/2026-11-16/dynamic-native-weight-asset/validation.zip)记录资产、动作时点和核对脚本。
+
+播放器候选包含[原始权重导入契约](../../runtime/asset-formats.md#格式能力)。动画姿态、节点透明度、形变目标及蒙皮批处理四项检查通过。[导入与构建记录](evidence/2026-11-16/dynamic-body-native-weights/importer-qualification.json)记录受检源码和可执行程序摘要。动态成片仍按同机位、同动作时点的双设备对照验收。
+
+独立轮廓夹具保留原始骨架、身体图元和待机动画的数据，以统一的不透明无光照材质采集两个动作帧。NVIDIA 与 Intel 的覆盖掩码逐像素一致。固定输入与候选配对时，两个动作帧分别少覆盖 4,699 和 4,698 个像素；其中 4,694 和 4,698 个像素落在原输入独有三角形的可见覆盖内。按背面剔除重建覆盖时，单张掩码与实际画面至多相差 27 个像素。此项核对网格轮廓；完整衣料遮挡、接缝着色与原生同姿态成片仍按联合场景验收。
+
+[双设备轮廓结果](evidence/2026-11-16/dynamic-body-geometry-player/qualification.json)和[验证归档](evidence/2026-11-16/dynamic-body-geometry-player/validation.zip)保存实际画面、动画状态与三角形覆盖核对程序。
+
+### 完整场景后视机位
+
+引用式 glTF 复用原角色的网格缓冲和 67 张纹理。候选仅随附 270,884 字节的身体数据。两块显卡的原模型引用对照与各自留存画面逐像素一致。
+
+身体候选在腰侧的 16×6 像素区域产生稳定变化。NVIDIA 的超差像素为 64 个，Intel 两次均为 63 个。该机位使用同一动作起点和 1280×720 画面。
+
+Intel 首次采集在右侧地面另有 662 个超差像素。该区域的超差在同一候选复跑时消失。画面仍有其他差异，动画状态完全一致。完整衣料与照明仍需按同姿态原生画面验收。
+
+[后视机位回执](evidence/2026-11-16/joint-character-referenced-body/qualification.json)和[验证归档](evidence/2026-11-16/joint-character-referenced-body/validation.zip)保存真实成片差量、原资产指纹和设备记录。
+
+Intel 关闭并行录制后，同一候选的两次采集逐像素一致。腰侧区域仍有 63 个像素超过一个色阶，右侧地面区域为零。串行配置可用于重复采集。默认并行录制的波动继续核对。[串行采集结果](evidence/2026-11-16/joint-character-intel-serial/qualification.json)及[归档](evidence/2026-11-16/joint-character-intel-serial/validation.zip)保存命令、实际成片差量和运行状态。
+
+Intel 单独输出反射分量时，两次默认采集逐像素一致。串行与默认配置在右侧地面有 845 个像素超过一个色阶，腰侧区域没有超差。完整画面的差异涉及地面反射。
+
+仅由主线程录制次级命令时，两次成片仍出现两种结果。第一帧与串行成片一致，第二帧与已有波动帧一致。后续需分别核对次级命令执行和并行场景准备。[录制路径核对](evidence/2026-11-16/joint-character-secondary-recording/qualification.json)及[验证归档](evidence/2026-11-16/joint-character-secondary-recording/validation.zip)保存两组对照、帧差、源码和构建收据。
+
+Intel 将反射计算写入主命令缓冲区时，保留并行场景准备及其他绘制的录制方式。两次实际成片与串行对照逐像素一致。另一次同步验证确认验证层已加载，未报告同步或布局错误。[主命令缓冲区对照](evidence/2026-11-16/joint-character-reflection-primary/qualification.json)及[验证归档](evidence/2026-11-16/joint-character-reflection-primary/validation.zip)保存成片差量、构建和验证层记录。
+
+按线性时间反射限定录制方式的源码候选完成双设备复测。Intel 两次分别复现串行成片和已有波动帧，候选未通过稳定性验收。NVIDIA 两次与已知身体候选成片一致，四帧同驱动回归逐像素一致。[源码候选回执](evidence/2026-11-16/primary-linear-production-trial/qualification.json)和[归档](evidence/2026-11-16/primary-linear-production-trial/validation.zip)保存构建、失败帧和回归结果。
+
+Intel 使用顶点着色器蒙皮时，两次完整成片仍有 407 个像素超差。有符号的整帧差量与计算蒙皮对照完全一致。差异集中于画面上方的 37×22 像素范围。[蒙皮路径对照](evidence/2026-11-16/joint-intel-vertex-skinning-repeat/qualification.json)及[验证归档](evidence/2026-11-16/joint-intel-vertex-skinning-repeat/validation.zip)保存成片和输入记录。
+
+同帧探针在完整画面中读取滤波后的屏幕空间反射。Intel 默认配置出现两种成片，其中一种与串行对照逐像素一致。另一次采集中，地面反射颜色探针有 1,583 个像素变化，对应的正式画面采样区有 1,235 个像素变化。可信度、表面探针及上方对照区域的读数一致。地面波动发生在反射颜色进入材质合成之前。[反射颜色探针记录](evidence/2026-11-16/joint-intel-reflection-storage-field/qualification.json)及[验证归档](evidence/2026-11-16/joint-intel-reflection-storage-field/validation.zip)保存帧差、源码和运行回执。
+
+不透明快照探针同时读取四个纹素的颜色签名和滤波后的屏幕空间反射。Intel 上方区域复现 427 处变化，有符号差量与既有上方波动逐像素一致，峰差为 52 个色阶。三个同帧探针的快照颜色签名、反射及表面读数一致。该批次的地面保持一致，地面波动时的快照输入仍待核对。[快照输入记录](evidence/2026-11-16/joint-intel-reflection-opaque-input/qualification.json)及[验证归档](evidence/2026-11-16/joint-intel-reflection-opaque-input/validation.zip)保存完整差量和采集记录。
+
+后续四次 Intel 采集中，第四次复现地面波动。地面实际画面有 1,235 处改变，峰差为 7 个色阶。快照有 165 个颜色签名改变，输入集中于画面坐标 [904,168] 至 [957,193]。同帧反射颜色探针位置仅有 15 处可辨识改变，反射数值需在充分覆盖的位置重测。[地面输入结果](evidence/2026-11-16/joint-intel-reflection-ground-input-witness/qualification.json)和[验证归档](evidence/2026-11-16/joint-intel-reflection-ground-input-witness/validation.zip)保存四次采集及像素坐标。
+
+充分覆盖的同帧探针完成不透明快照和反射同步复测。四次 Intel 采集中的三次整帧一致，另一次在上方快照颜色探针有 456 处变化，在地面滤波反射颜色探针有 1,583 处变化。正式画面的地面区域有 1,235 处变化。快照透明度、上下表面及反射可信度的探针读数一致。快照颜色波动已延伸到反射合成前，具体射线采样位置继续核对。[配对探针结果](evidence/2026-11-16/joint-intel-reflection-ground-paired-panels/qualification.json)和[验证归档](evidence/2026-11-16/joint-intel-reflection-ground-paired-panels/validation.zip)保存实际成片差量、探针源码和坐标。
+
+Intel 两次配对采集均在 456 个快照颜色波动位置读到材质槽 307，画面上方同时有 427 处色值变化。按加载顺序和实际请求的 6,851 个纹理槽复算，材质归属建筑网格 `native-7c16ba31954da6e8.glb` 的 `M_mod_map01_zmdbuliding+1_002_12`。继续核对该材质的纹理、直接光与间接光输入。[快照材质归属](evidence/2026-11-16/joint-intel-wall-material-owner/qualification.json)和[验证归档](evidence/2026-11-16/joint-intel-wall-material-owner/validation.zip)保存两次采集、解码和材质索引复算。
+
+去除读数范围内的空间抗锯齿后，两帧均能解码全部 456 个材质取样位置。两帧在画面上方有 427 处变化，地面及读数区逐像素一致。材质纹理、直接光和间接光的三位签名逐点一致。地面波动时的各项输入仍按同帧取样继续核对。[材质输入签名](evidence/2026-11-16/joint-intel-wall-input-signatures/qualification.json)和[验证归档](evidence/2026-11-16/joint-intel-wall-input-signatures/validation.zip)保存验证记录。
+
+地面复现 1,235 处波动时，同帧的不透明快照颜色探针在建筑材质上有 310 处改变。其中 277 处的直接光三位签名变化，纹理及间接光签名一致。画面上方同时复现 427 处变化。后续核对直接光的阴影可见度和聚簇灯光输入。[地面与建筑直接光结果](evidence/2026-11-16/joint-intel-wall-ground-direct-input/qualification.json)及[验证归档](evidence/2026-11-16/joint-intel-wall-ground-direct-input/validation.zip)保存相关像素及双帧差量。
+
+独立的地面波动采集在下方区域复现 1,235 处变化，上方区域逐像素一致。建筑材质的 456 个配对位置中，310 处快照颜色变化。其中 305 处的阴影可见度签名改变，261 处的聚簇灯光贡献签名改变，271 处的合成直接光签名改变。阴影图集、采样深度范围与接收位置继续按同帧取样核对。[阴影可见度结果](evidence/2026-11-16/joint-intel-wall-shadow-visibility-input/qualification.json)和[验证归档](evidence/2026-11-16/joint-intel-wall-shadow-visibility-input/validation.zip)保存采集指纹、取样程序和配对统计。
+
+只将不透明快照绘制放在主命令缓冲区。Intel 三次采集仍出现两种成片，两次上方区域各有 407 个像素超差，另一次与串行图逐像素一致。NVIDIA 的成片与对应控制图逐像素一致。该候选未通过 Intel 稳定性验收。[不透明快照录制结果](evidence/2026-11-16/joint-intel-primary-opaque-snapshot/qualification.json)和[验证归档](evidence/2026-11-16/joint-intel-primary-opaque-snapshot/validation.zip)保存源码、实际帧差和运行状态。
+
+首帧反射探针在空间滤波前核对实际取样。滤波变化区域对应的 469 个半分辨率位置中，387 个能解码且均有命中，其中 111 个取样覆盖已观察到变化的不透明颜色纹素。追踪和滤波程序分别写入校验标记，在图中可解码的位置全部读回预期值。该结果确认部分地面反射直接读取发生变化的快照颜色。[射线取样结果](evidence/2026-11-16/joint-intel-raw-reflection-donor-membership/qualification.json)和[验证归档](evidence/2026-11-16/joint-intel-raw-reflection-donor-membership/validation.zip)保存程序、实际帧差和解码标记。
+
 ## 采集范围
+
+角色根节点相对方向覆盖正向、左右四分之三侧向、左右侧向及背向六个机位。NVIDIA 与 Intel 均以 1280×720 采集，使用同一联合场景、资产和动画起点。[六机位采集记录](evidence/2026-11-16/character-six-view-inputs/qualification.json)保存相机参数、图像摘要和冻结回归结果。当前 NVIDIA 驱动下的四帧冻结回归逐像素一致；原始冻结图的 RGB 峰值差为 1、7、37、23。
+
+首帧实际头部朝向与角色根节点正向相差 38.15°。正脸采集按头骨骼的世界朝向摆放相机，以蒙皮后的脸部边界为视点。两块设备的采集回执确认第九段动画、零秒和相同镜头参数，双眼均可见。[正脸采集记录](evidence/2026-11-16/character-head-front/qualification.json)和[正脸裁图归档](evidence/2026-11-16/character-head-front/validation.zip)保存实际机位和裁图。眼部、脸部和身体的原生成片仍按同姿态区域对照验收。
 
 完整场景与独立角色采用同一全身机位。
 模型、十三份材质、角色灯组及动画输入一致。

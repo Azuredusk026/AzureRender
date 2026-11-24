@@ -9,7 +9,8 @@
 #include <stdexcept>
 
 void check(bool condition, const char* message) { if (!condition) throw std::runtime_error(message); }
-std::string rigidFixture(bool mixedSkin=false) {
+std::string rigidFixture(bool mixedSkin=false, int quantizedDifference=0,
+                         bool preserveWeightCodes=false) {
     std::string json=R"({"asset":{"version":"2.0"},"buffers":[{"byteLength":92}],"bufferViews":[{"buffer":0,"byteOffset":0,"byteLength":36},{"buffer":0,"byteOffset":36,"byteLength":8},{"buffer":0,"byteOffset":44,"byteLength":24},{"buffer":0,"byteOffset":68,"byteLength":24}],"accessors":[{"bufferView":0,"componentType":5126,"count":3,"type":"VEC3","min":[0,0,0],"max":[1,1,0]},{"bufferView":1,"componentType":5126,"count":2,"type":"SCALAR","min":[0],"max":[2]},{"bufferView":2,"componentType":5126,"count":2,"type":"VEC3"},{"bufferView":3,"componentType":5126,"count":2,"type":"VEC3"}],"meshes":[{"primitives":[{"attributes":{"POSITION":0},"mode":4}]}],"nodes":[{"translation":[2,0,0],"children":[1]},{"mesh":0,"translation":[0,3,0]},{"mesh":0,"translation":[-5,0,0]}],"scenes":[{"nodes":[0,2]}],"scene":0,"animations":[{"samplers":[{"input":1,"output":2},{"input":1,"output":3,"interpolation":"STEP"}],"channels":[{"sampler":0,"target":{"node":0,"path":"translation"}},{"sampler":1,"target":{"node":1,"path":"scale"}}]}]})";
     const float values[]={0,0,0, 1,0,0, 0,1,0, 0,2, 2,0,0, 4,0,0, 1,1,1, 0,0,0};
     std::string binary(reinterpret_cast<const char*>(values),sizeof(values));
@@ -18,14 +19,26 @@ std::string rigidFixture(bool mixedSkin=false) {
         source["skins"]=nlohmann::json::array({{{"joints",{0}}}});
         source["nodes"][2]["skin"]=0;
         source["bufferViews"].push_back({{"buffer",0},{"byteOffset",92},{"byteLength",12}});
-        source["bufferViews"].push_back({{"buffer",0},{"byteOffset",104},{"byteLength",48}});
+        const bool quantized=quantizedDifference!=0;
+        source["bufferViews"].push_back({{"buffer",0},{"byteOffset",104},
+                                         {"byteLength",quantized?24:48}});
         source["accessors"].push_back({{"bufferView",4},{"componentType",5121},{"count",3},{"type","VEC4"}});
-        source["accessors"].push_back({{"bufferView",5},{"componentType",5126},{"count",3},{"type","VEC4"}});
-        source["meshes"][0]["primitives"][0]["attributes"]["JOINTS_0"]=4;
-        source["meshes"][0]["primitives"][0]["attributes"]["WEIGHTS_0"]=5;
+        source["accessors"].push_back({{"bufferView",5},{"componentType",quantized?5123:5126},
+                                      {"count",3},{"type","VEC4"}});
+        if(quantized)source["accessors"][5]["normalized"]=true;
+        auto& primitive=source["meshes"][0]["primitives"][0];
+        primitive["attributes"]["JOINTS_0"]=4;
+        primitive["attributes"]["WEIGHTS_0"]=5;
+        if(preserveWeightCodes)primitive["extras"]["azurePreserveSkinWeightCodes"]=true;
         binary.append(12,'\0');
-        const float weights[]={1,0,0,0,1,0,0,0,1,0,0,0};
-        binary.append(reinterpret_cast<const char*>(weights),sizeof(weights));
+        if(quantized) {
+            const auto remainder=static_cast<std::uint16_t>(32767+quantizedDifference);
+            const std::uint16_t weights[]={32768,remainder,0,0,32768,remainder,0,0,32768,remainder,0,0};
+            binary.append(reinterpret_cast<const char*>(weights),sizeof(weights));
+        } else {
+            const float weights[]={1,0,0,0,1,0,0,0,1,0,0,0};
+            binary.append(reinterpret_cast<const char*>(weights),sizeof(weights));
+        }
         source["buffers"][0]["byteLength"]=binary.size();json=source.dump();
     }
     while(json.size()%4)json+=' ';
@@ -73,6 +86,24 @@ int main() {
         check(azurerender::deformedVertexPosition(mixed,0,&mixedPose,{0,0})==std::array<float,3>{3,3,0}
             && azurerender::deformedVertexPosition(mixed,3,&mixedPose,{0,0})==std::array<float,3>{3,0,0},
             "A mixed asset must animate rigid children and real skin through one palette");
+        for(const int delta:{-1,1}) {
+            const auto standard=loadEmbeddedGltfAsset(rigidFixture(true,delta),true);
+            const auto preserved=loadEmbeddedGltfAsset(rigidFixture(true,delta,true),true);
+            const auto& defaultWeights=standard.vertices.at(3).weights;
+            const auto& sourceWeights=preserved.vertices.at(3).weights;
+            check(std::abs(defaultWeights[0]+defaultWeights[1]-1.0F)<1e-7F,
+                  "Ordinary glTF weights must remain normalized at import");
+            check(sourceWeights==std::array<float,4>{32768.0F/65535.0F,
+                      static_cast<float>(32767+delta)/65535.0F,0,0},
+                  "Opted-in source weights must retain each original UNORM16 code");
+            check(defaultWeights!=sourceWeights,"The fixture must exercise quantization at both boundaries");
+        }
+        for(const int delta:{0,-2,2}) {
+            bool rejected=false;
+            try { (void)loadEmbeddedGltfAsset(rigidFixture(true,delta,true),true); }
+            catch(const std::runtime_error&) { rejected=true; }
+            check(rejected,"Source weight codes require normalized UINT16 and a sum within one code");
+        }
         LoadedAsset asset;
         asset.hasSkin = true;
         asset.nodes.resize(2);

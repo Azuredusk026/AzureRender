@@ -1,0 +1,2462 @@
+{
+  "status": "measured-candidate-residual-overlap",
+  "strictAcceptance": "failed",
+  "regions": 255,
+  "nativeCoveredPixels": 94,
+  "receipts": {
+    "iris-native-matcap-d3d-vulkan-owned-levels.json": "b1c285dfd50f882cb43424ff32fc4b19cf27bd905e6ddf87cedc1e161d4dcd2c",
+    "iris-matcap-projective-footprint.json": "a45333252b2999c7a9ac6be432c93d401e5b9b3aa4e570c3b0432a9fe68a2247",
+    "iris-base-footprint-native-match.json": "dd0c875bff25098215bd8f596c6f1dc2bfabdfc99db41cf7a558680c38f63243",
+    "results.json": "d5954fc2745874e6f63c0ab8e576c20b23cd637887f7c75b138f0a9bbc178363"
+  },
+  "devices": {
+    "nvidia": {
+      "bare": {
+        "overOne": [
+          10,
+          8
+        ],
+        "peak": [
+          19,
+          2
+        ],
+        "noNewOrOutside": true,
+        "overlapWithNativeCover": 2,
+        "outsideNativeCover": 6,
+        "matcapLevelMismatchOverlap": 0,
+        "overOneByChannel": [
+          0,
+          0,
+          8
+        ],
+        "residual": [
+          {
+            "point": [
+              1302,
+              258
+            ],
+            "baselineDelta": [
+              0,
+              1,
+              2
+            ],
+            "candidateDelta": [
+              0,
+              1,
+              2
+            ],
+            "covered": true,
+            "matcapControl": {
+              "point": [
+                1302,
+                258
+              ],
+              "level": 3,
+              "native": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8
+              ],
+              "matches": true,
+              "agreesDouble": true,
+              "matcapError": 5.960464477539063e-08,
+              "gradientError": 6.506812677553597e-08
+            }
+          },
+          {
+            "point": [
+              1253,
+              259
+            ],
+            "baselineDelta": [
+              0,
+              1,
+              2
+            ],
+            "candidateDelta": [
+              0,
+              1,
+              2
+            ],
+            "covered": false,
+            "matcapControl": {
+              "point": [
+                1253,
+                259
+              ],
+              "level": 3,
+              "native": [
+                3
+              ],
+              "matches": true,
+              "agreesDouble": true,
+              "matcapError": 5.960464477539063e-08,
+              "gradientError": 2.982035707255193e-08
+            }
+          },
+          {
+            "point": [
+              1254,
+              259
+            ],
+            "baselineDelta": [
+              0,
+              0,
+              2
+            ],
+            "candidateDelta": [
+              0,
+              0,
+              2
+            ],
+            "covered": false,
+            "matcapControl": {
+              "point": [
+                1254,
+                259
+              ],
+              "level": 3,
+              "native": [
+                3
+              ],
+              "matches": true,
+              "agreesDouble": true,
+              "matcapError": 8.940696716308594e-08,
+              "gradientError": 1.03551121344303e-07
+            }
+          },
+          {
+            "point": [
+              1310,
+              260
+            ],
+            "baselineDelta": [
+              0,
+              0,
+              2
+            ],
+            "candidateDelta": [
+              0,
+              0,
+              2
+            ],
+            "covered": true,
+            "matcapControl": {
+              "point": [
+                1310,
+                260
+              ],
+              "level": 3,
+              "native": [
+                3
+              ],
+              "matches": true,
+              "agreesDouble": true,
+              "matcapError": 5.960464477539063e-08,
+              "gradientError": 4.374180395672056e-08
+            }
+          },
+          {
+            "point": [
+              1251,
+              262
+            ],
+            "baselineDelta": [
+              0,
+              0,
+              2
+            ],
+            "candidateDelta": [
+              0,
+              0,
+              2
+            ],
+            "covered": false,
+            "matcapControl": {
+              "point": [
+                1251,
+                262
+              ],
+              "level": 3,
+              "native": [
+                0,
+                1,
+                2,
+                3,
+                4
+              ],
+              "matches": true,
+              "agreesDouble": true,
+              "matcapError": 5.960464477539063e-08,
+              "gradientError": 4.881194548556067e-08
+            }
+          },
+          {
+            "point": [
+              1301,
+              262
+            ],
+            "baselineDelta": [
+              0,
+              0,
+              2
+            ],
+            "candidateDelta": [
+              0,
+              0,
+              2
+            ],
+            "covered": false,
+            "matcapControl": {
+              "point": [
+                1301,
+                262
+              ],
+              "level": 3,
+              "native": [
+                2,
+                3
+              ],
+              "matches": true,
+              "agreesDouble": true,
+              "matcapError": 1.1920928955078125e-07,
+              "gradientError": 8.287541586327052e-08
+            }
+          },
+          {
+            "point": [
+              1310,
+              264
+            ],
+            "baselineDelta": [
+              1,
+              0,
+              2
+            ],
+            "candidateDelta": [
+              1,
+              0,
+              2
+            ],
+            "covered": false,
+            "matcapControl": {
+              "point": [
+                1310,
+                264
+              ],
+              "level": 4,
+              "native": [
+                4
+              ],
+              "matches": true,
+              "agreesDouble": true,
+              "matcapError": 2.9802322387695312e-08,
+              "gradientError": 4.854099594497896e-08
+            }
+          },
+          {
+            "point": [
+              1256,
+              265
+            ],
+            "baselineDelta": [
+              0,
+              0,
+              2
+            ],
+            "candidateDelta": [
+              0,
+              0,
+              2
+            ],
+            "covered": false,
+            "matcapControl": {
+              "point": [
+                1256,
+                265
+              ],
+              "level": 4,
+              "native": [
+                4
+              ],
+              "matches": true,
+              "agreesDouble": true,
+              "matcapError": 8.940696716308594e-08,
+              "gradientError": 7.378796479384775e-08
+            }
+          }
+        ]
+      },
+      "covered": {
+        "overOne": [
+          22,
+          20
+        ],
+        "peak": [
+          15,
+          3
+        ],
+        "noNewOrOutside": true,
+        "overlapWithNativeCover": 14,
+        "outsideNativeCover": 6,
+        "matcapLevelMismatchOverlap": 0,
+        "overOneByChannel": [
+          3,
+          0,
+          18
+        ],
+        "residual": [
+          {
+            "point": [
+              1255,
+              257
+            ],
+            "baselineDelta": [
+              0,
+              0,
+              2
+            ],
+            "candidateDelta": [
+              0,
+              0,
+              2
+            ],
+            "covered": true,
+            "matcapControl": {
+              "point": [
+                1255,
+                257
+              ],
+              "level": 3,
+              "native": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8
+              ],
+              "matches": true,
+              "agreesDouble": true,
+              "matcapError": 0.0,
+              "gradientError": 3.307249152317837e-08
+            }
+          },
+          {
+            "point": [
+              1303,
+              257
+            ],
+            "baselineDelta": [
+              2,
+              0,
+              1
+            ],
+            "candidateDelta": [
+              2,
+              0,
+              1
+            ],
+            "covered": true,
+            "matcapControl": {
+              "point": [
+                1303,
+                257
+              ],
+              "level": 3,
+              "native": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8
+              ],
+              "matches": true,
+              "agreesDouble": true,
+              "matcapError": 0.0,
+              "gradientError": 8.721729005678469e-08
+            }
+          },
+          {
+            "point": [
+              1253,
+              258
+            ],
+            "baselineDelta": [
+              0,
+              0,
+              2
+            ],
+            "candidateDelta": [
+              0,
+              0,
+              2
+            ],
+            "covered": true,
+            "matcapControl": {
+              "point": [
+                1253,
+                258
+              ],
+              "level": 3,
+              "native": [
+                3
+              ],
+              "matches": true,
+              "agreesDouble": true,
+              "matcapError": 5.960464477539063e-08,
+              "gradientError": 3.976798634841572e-08
+            }
+          },
+          {
+            "point": [
+              1255,
+              258
+            ],
+            "baselineDelta": [
+              2,
+              1,
+              1
+            ],
+            "candidateDelta": [
+              2,
+              1,
+              1
+            ],
+            "covered": true,
+            "matcapControl": {
+              "point": [
+                1255,
+                258
+              ],
+              "level": 3,
+              "native": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8
+              ],
+              "matches": true,
+              "agreesDouble": true,
+              "matcapError": 2.9802322387695312e-08,
+              "gradientError": 4.3417385298116784e-08
+            }
+          },
+          {
+            "point": [
+              1302,
+              258
+            ],
+            "baselineDelta": [
+              1,
+              1,
+              2
+            ],
+            "candidateDelta": [
+              1,
+              1,
+              2
+            ],
+            "covered": true,
+            "matcapControl": {
+              "point": [
+                1302,
+                258
+              ],
+              "level": 3,
+              "native": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8
+              ],
+              "matches": true,
+              "agreesDouble": true,
+              "matcapError": 5.960464477539063e-08,
+              "gradientError": 6.506812677553597e-08
+            }
+          },
+          {
+            "point": [
+              1303,
+              258
+            ],
+            "baselineDelta": [
+              2,
+              0,
+              2
+            ],
+            "candidateDelta": [
+              2,
+              0,
+              2
+            ],
+            "covered": true,
+            "matcapControl": {
+              "point": [
+                1303,
+                258
+              ],
+              "level": 3,
+              "native": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8
+              ],
+              "matches": true,
+              "agreesDouble": true,
+              "matcapError": 5.960464477539063e-08,
+              "gradientError": 7.42974155532039e-08
+            }
+          },
+          {
+            "point": [
+              1253,
+              259
+            ],
+            "baselineDelta": [
+              0,
+              1,
+              2
+            ],
+            "candidateDelta": [
+              0,
+              1,
+              2
+            ],
+            "covered": false,
+            "matcapControl": {
+              "point": [
+                1253,
+                259
+              ],
+              "level": 3,
+              "native": [
+                3
+              ],
+              "matches": true,
+              "agreesDouble": true,
+              "matcapError": 5.960464477539063e-08,
+              "gradientError": 2.982035707255193e-08
+            }
+          },
+          {
+            "point": [
+              1254,
+              259
+            ],
+            "baselineDelta": [
+              0,
+              0,
+              2
+            ],
+            "candidateDelta": [
+              0,
+              0,
+              2
+            ],
+            "covered": false,
+            "matcapControl": {
+              "point": [
+                1254,
+                259
+              ],
+              "level": 3,
+              "native": [
+                3
+              ],
+              "matches": true,
+              "agreesDouble": true,
+              "matcapError": 8.940696716308594e-08,
+              "gradientError": 1.03551121344303e-07
+            }
+          },
+          {
+            "point": [
+              1260,
+              259
+            ],
+            "baselineDelta": [
+              1,
+              1,
+              3
+            ],
+            "candidateDelta": [
+              1,
+              1,
+              3
+            ],
+            "covered": true,
+            "matcapControl": {
+              "point": [
+                1260,
+                259
+              ],
+              "level": 3,
+              "native": [
+                3
+              ],
+              "matches": true,
+              "agreesDouble": true,
+              "matcapError": 5.960464477539063e-08,
+              "gradientError": 3.525611702581699e-08
+            }
+          },
+          {
+            "point": [
+              1301,
+              259
+            ],
+            "baselineDelta": [
+              0,
+              0,
+              2
+            ],
+            "candidateDelta": [
+              0,
+              0,
+              2
+            ],
+            "covered": true,
+            "matcapControl": {
+              "point": [
+                1301,
+                259
+              ],
+              "level": 3,
+              "native": [
+                3
+              ],
+              "matches": true,
+              "agreesDouble": true,
+              "matcapError": 5.960464477539063e-08,
+              "gradientError": 8.560619613184883e-08
+            }
+          },
+          {
+            "point": [
+              1303,
+              259
+            ],
+            "baselineDelta": [
+              0,
+              1,
+              3
+            ],
+            "candidateDelta": [
+              0,
+              1,
+              3
+            ],
+            "covered": true,
+            "matcapControl": {
+              "point": [
+                1303,
+                259
+              ],
+              "level": 4,
+              "native": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8
+              ],
+              "matches": true,
+              "agreesDouble": true,
+              "matcapError": 5.960464477539063e-08,
+              "gradientError": 6.648041872558963e-08
+            }
+          },
+          {
+            "point": [
+              1309,
+              259
+            ],
+            "baselineDelta": [
+              0,
+              1,
+              2
+            ],
+            "candidateDelta": [
+              0,
+              1,
+              2
+            ],
+            "covered": true,
+            "matcapControl": {
+              "point": [
+                1309,
+                259
+              ],
+              "level": 3,
+              "native": [
+                3
+              ],
+              "matches": true,
+              "agreesDouble": true,
+              "matcapError": 2.9802322387695312e-08,
+              "gradientError": 5.542103520550512e-08
+            }
+          },
+          {
+            "point": [
+              1300,
+              260
+            ],
+            "baselineDelta": [
+              0,
+              0,
+              2
+            ],
+            "candidateDelta": [
+              0,
+              0,
+              2
+            ],
+            "covered": true,
+            "matcapControl": {
+              "point": [
+                1300,
+                260
+              ],
+              "level": 3,
+              "native": [
+                3
+              ],
+              "matches": true,
+              "agreesDouble": true,
+              "matcapError": 5.960464477539063e-08,
+              "gradientError": 7.60336215099855e-08
+            }
+          },
+          {
+            "point": [
+              1301,
+              260
+            ],
+            "baselineDelta": [
+              0,
+              0,
+              2
+            ],
+            "candidateDelta": [
+              0,
+              0,
+              2
+            ],
+            "covered": true,
+            "matcapControl": {
+              "point": [
+                1301,
+                260
+              ],
+              "level": 3,
+              "native": [
+                3
+              ],
+              "matches": true,
+              "agreesDouble": true,
+              "matcapError": 5.960464477539063e-08,
+              "gradientError": 7.546507224676091e-08
+            }
+          },
+          {
+            "point": [
+              1310,
+              260
+            ],
+            "baselineDelta": [
+              1,
+              0,
+              2
+            ],
+            "candidateDelta": [
+              1,
+              0,
+              2
+            ],
+            "covered": true,
+            "matcapControl": {
+              "point": [
+                1310,
+                260
+              ],
+              "level": 3,
+              "native": [
+                3
+              ],
+              "matches": true,
+              "agreesDouble": true,
+              "matcapError": 5.960464477539063e-08,
+              "gradientError": 4.374180395672056e-08
+            }
+          },
+          {
+            "point": [
+              1312,
+              260
+            ],
+            "baselineDelta": [
+              1,
+              0,
+              2
+            ],
+            "candidateDelta": [
+              1,
+              0,
+              2
+            ],
+            "covered": true,
+            "matcapControl": {
+              "point": [
+                1312,
+                260
+              ],
+              "level": 7,
+              "native": [
+                7
+              ],
+              "matches": true,
+              "agreesDouble": true,
+              "matcapError": 2.384185791015625e-07,
+              "gradientError": 7.818732683517737e-08
+            }
+          },
+          {
+            "point": [
+              1251,
+              262
+            ],
+            "baselineDelta": [
+              0,
+              0,
+              2
+            ],
+            "candidateDelta": [
+              0,
+              0,
+              2
+            ],
+            "covered": false,
+            "matcapControl": {
+              "point": [
+                1251,
+                262
+              ],
+              "level": 3,
+              "native": [
+                0,
+                1,
+                2,
+                3,
+                4
+              ],
+              "matches": true,
+              "agreesDouble": true,
+              "matcapError": 5.960464477539063e-08,
+              "gradientError": 4.881194548556067e-08
+            }
+          },
+          {
+            "point": [
+              1301,
+              262
+            ],
+            "baselineDelta": [
+              0,
+              0,
+              2
+            ],
+            "candidateDelta": [
+              0,
+              0,
+              2
+            ],
+            "covered": false,
+            "matcapControl": {
+              "point": [
+                1301,
+                262
+              ],
+              "level": 3,
+              "native": [
+                2,
+                3
+              ],
+              "matches": true,
+              "agreesDouble": true,
+              "matcapError": 1.1920928955078125e-07,
+              "gradientError": 8.287541586327052e-08
+            }
+          },
+          {
+            "point": [
+              1310,
+              264
+            ],
+            "baselineDelta": [
+              1,
+              0,
+              2
+            ],
+            "candidateDelta": [
+              1,
+              0,
+              2
+            ],
+            "covered": false,
+            "matcapControl": {
+              "point": [
+                1310,
+                264
+              ],
+              "level": 4,
+              "native": [
+                4
+              ],
+              "matches": true,
+              "agreesDouble": true,
+              "matcapError": 2.9802322387695312e-08,
+              "gradientError": 4.854099594497896e-08
+            }
+          },
+          {
+            "point": [
+              1256,
+              265
+            ],
+            "baselineDelta": [
+              0,
+              0,
+              2
+            ],
+            "candidateDelta": [
+              0,
+              0,
+              2
+            ],
+            "covered": false,
+            "matcapControl": {
+              "point": [
+                1256,
+                265
+              ],
+              "level": 4,
+              "native": [
+                4
+              ],
+              "matches": true,
+              "agreesDouble": true,
+              "matcapError": 8.940696716308594e-08,
+              "gradientError": 7.378796479384775e-08
+            }
+          }
+        ]
+      },
+      "commonResidualPixels": 8
+    },
+    "intel": {
+      "bare": {
+        "overOne": [
+          19,
+          16
+        ],
+        "peak": [
+          27,
+          3
+        ],
+        "noNewOrOutside": true,
+        "overlapWithNativeCover": 5,
+        "outsideNativeCover": 11,
+        "matcapLevelMismatchOverlap": 0,
+        "overOneByChannel": [
+          2,
+          1,
+          15
+        ],
+        "residual": [
+          {
+            "point": [
+              1255,
+              258
+            ],
+            "baselineDelta": [
+              2,
+              3,
+              3
+            ],
+            "candidateDelta": [
+              2,
+              3,
+              3
+            ],
+            "covered": true,
+            "matcapControl": {
+              "point": [
+                1255,
+                258
+              ],
+              "level": 3,
+              "native": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8
+              ],
+              "matches": true,
+              "agreesDouble": true,
+              "matcapError": 0.0,
+              "gradientError": 5.195610131014661e-08
+            }
+          },
+          {
+            "point": [
+              1302,
+              258
+            ],
+            "baselineDelta": [
+              0,
+              1,
+              2
+            ],
+            "candidateDelta": [
+              0,
+              1,
+              2
+            ],
+            "covered": true,
+            "matcapControl": {
+              "point": [
+                1302,
+                258
+              ],
+              "level": 3,
+              "native": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8
+              ],
+              "matches": true,
+              "agreesDouble": true,
+              "matcapError": 1.1920928955078125e-07,
+              "gradientError": 1.014457596815177e-07
+            }
+          },
+          {
+            "point": [
+              1253,
+              259
+            ],
+            "baselineDelta": [
+              0,
+              1,
+              2
+            ],
+            "candidateDelta": [
+              0,
+              1,
+              2
+            ],
+            "covered": false,
+            "matcapControl": {
+              "point": [
+                1253,
+                259
+              ],
+              "level": 3,
+              "native": [
+                3
+              ],
+              "matches": true,
+              "agreesDouble": true,
+              "matcapError": 5.960464477539063e-08,
+              "gradientError": 3.392924319278734e-08
+            }
+          },
+          {
+            "point": [
+              1254,
+              259
+            ],
+            "baselineDelta": [
+              0,
+              0,
+              2
+            ],
+            "candidateDelta": [
+              0,
+              0,
+              2
+            ],
+            "covered": false,
+            "matcapControl": {
+              "point": [
+                1254,
+                259
+              ],
+              "level": 3,
+              "native": [
+                3
+              ],
+              "matches": true,
+              "agreesDouble": true,
+              "matcapError": 8.940696716308594e-08,
+              "gradientError": 7.374456334474644e-08
+            }
+          },
+          {
+            "point": [
+              1303,
+              259
+            ],
+            "baselineDelta": [
+              0,
+              1,
+              2
+            ],
+            "candidateDelta": [
+              0,
+              1,
+              2
+            ],
+            "covered": true,
+            "matcapControl": {
+              "point": [
+                1303,
+                259
+              ],
+              "level": 4,
+              "native": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8
+              ],
+              "matches": true,
+              "agreesDouble": true,
+              "matcapError": 5.960464477539063e-08,
+              "gradientError": 2.8527515016918414e-08
+            }
+          },
+          {
+            "point": [
+              1300,
+              260
+            ],
+            "baselineDelta": [
+              0,
+              0,
+              2
+            ],
+            "candidateDelta": [
+              0,
+              0,
+              2
+            ],
+            "covered": true,
+            "matcapControl": {
+              "point": [
+                1300,
+                260
+              ],
+              "level": 3,
+              "native": [
+                3
+              ],
+              "matches": true,
+              "agreesDouble": true,
+              "matcapError": 5.960464477539063e-08,
+              "gradientError": 7.60918308362335e-08
+            }
+          },
+          {
+            "point": [
+              1310,
+              260
+            ],
+            "baselineDelta": [
+              0,
+              0,
+              2
+            ],
+            "candidateDelta": [
+              0,
+              0,
+              2
+            ],
+            "covered": true,
+            "matcapControl": {
+              "point": [
+                1310,
+                260
+              ],
+              "level": 3,
+              "native": [
+                3
+              ],
+              "matches": true,
+              "agreesDouble": true,
+              "matcapError": 5.960464477539063e-08,
+              "gradientError": 6.814705821867051e-08
+            }
+          },
+          {
+            "point": [
+              1251,
+              262
+            ],
+            "baselineDelta": [
+              0,
+              0,
+              2
+            ],
+            "candidateDelta": [
+              0,
+              0,
+              2
+            ],
+            "covered": false,
+            "matcapControl": {
+              "point": [
+                1251,
+                262
+              ],
+              "level": 3,
+              "native": [
+                0,
+                1,
+                2,
+                3,
+                4
+              ],
+              "matches": true,
+              "agreesDouble": true,
+              "matcapError": 1.1920928955078125e-07,
+              "gradientError": 4.282517440667988e-08
+            }
+          },
+          {
+            "point": [
+              1260,
+              262
+            ],
+            "baselineDelta": [
+              3,
+              -13,
+              10
+            ],
+            "candidateDelta": [
+              0,
+              1,
+              2
+            ],
+            "covered": false,
+            "matcapControl": {
+              "point": [
+                1260,
+                262
+              ],
+              "level": 3,
+              "native": [
+                3
+              ],
+              "matches": true,
+              "agreesDouble": true,
+              "matcapError": 5.960464477539063e-08,
+              "gradientError": 5.383502016398367e-08
+            }
+          },
+          {
+            "point": [
+              1261,
+              262
+            ],
+            "baselineDelta": [
+              9,
+              1,
+              1
+            ],
+            "candidateDelta": [
+              -2,
+              0,
+              0
+            ],
+            "covered": false,
+            "matcapControl": {
+              "point": [
+                1261,
+                262
+              ],
+              "level": 3,
+              "native": [
+                3
+              ],
+              "matches": true,
+              "agreesDouble": true,
+              "matcapError": 5.960464477539063e-08,
+              "gradientError": 5.023092530809237e-08
+            }
+          },
+          {
+            "point": [
+              1301,
+              262
+            ],
+            "baselineDelta": [
+              0,
+              0,
+              2
+            ],
+            "candidateDelta": [
+              0,
+              0,
+              2
+            ],
+            "covered": false,
+            "matcapControl": {
+              "point": [
+                1301,
+                262
+              ],
+              "level": 3,
+              "native": [
+                2,
+                3
+              ],
+              "matches": true,
+              "agreesDouble": true,
+              "matcapError": 5.960464477539063e-08,
+              "gradientError": 4.778423712270552e-08
+            }
+          },
+          {
+            "point": [
+              1310,
+              264
+            ],
+            "baselineDelta": [
+              1,
+              0,
+              2
+            ],
+            "candidateDelta": [
+              1,
+              0,
+              2
+            ],
+            "covered": false,
+            "matcapControl": {
+              "point": [
+                1310,
+                264
+              ],
+              "level": 4,
+              "native": [
+                4
+              ],
+              "matches": true,
+              "agreesDouble": true,
+              "matcapError": 5.960464477539063e-08,
+              "gradientError": 5.239566125414541e-08
+            }
+          },
+          {
+            "point": [
+              1256,
+              265
+            ],
+            "baselineDelta": [
+              0,
+              0,
+              2
+            ],
+            "candidateDelta": [
+              0,
+              0,
+              2
+            ],
+            "covered": false,
+            "matcapControl": {
+              "point": [
+                1256,
+                265
+              ],
+              "level": 4,
+              "native": [
+                4
+              ],
+              "matches": true,
+              "agreesDouble": true,
+              "matcapError": 1.1920928955078125e-07,
+              "gradientError": 4.3832289575718164e-08
+            }
+          },
+          {
+            "point": [
+              1257,
+              265
+            ],
+            "baselineDelta": [
+              0,
+              0,
+              2
+            ],
+            "candidateDelta": [
+              0,
+              0,
+              2
+            ],
+            "covered": false,
+            "matcapControl": {
+              "point": [
+                1257,
+                265
+              ],
+              "level": 4,
+              "native": [
+                4
+              ],
+              "matches": true,
+              "agreesDouble": true,
+              "matcapError": 5.960464477539063e-08,
+              "gradientError": 8.445250299082829e-08
+            }
+          },
+          {
+            "point": [
+              1303,
+              266
+            ],
+            "baselineDelta": [
+              1,
+              0,
+              2
+            ],
+            "candidateDelta": [
+              1,
+              0,
+              2
+            ],
+            "covered": false,
+            "matcapControl": {
+              "point": [
+                1303,
+                266
+              ],
+              "level": 7,
+              "native": [
+                7
+              ],
+              "matches": true,
+              "agreesDouble": true,
+              "matcapError": 0.0,
+              "gradientError": 3.946993287762268e-08
+            }
+          },
+          {
+            "point": [
+              1304,
+              267
+            ],
+            "baselineDelta": [
+              0,
+              1,
+              2
+            ],
+            "candidateDelta": [
+              0,
+              1,
+              2
+            ],
+            "covered": false,
+            "matcapControl": {
+              "point": [
+                1304,
+                267
+              ],
+              "level": 3,
+              "native": [
+                3
+              ],
+              "matches": true,
+              "agreesDouble": true,
+              "matcapError": 5.960464477539063e-08,
+              "gradientError": 7.410942548524702e-08
+            }
+          }
+        ]
+      },
+      "covered": {
+        "overOne": [
+          30,
+          27
+        ],
+        "peak": [
+          27,
+          4
+        ],
+        "noNewOrOutside": true,
+        "overlapWithNativeCover": 16,
+        "outsideNativeCover": 11,
+        "matcapLevelMismatchOverlap": 0,
+        "overOneByChannel": [
+          4,
+          1,
+          25
+        ],
+        "residual": [
+          {
+            "point": [
+              1254,
+              257
+            ],
+            "baselineDelta": [
+              1,
+              1,
+              2
+            ],
+            "candidateDelta": [
+              1,
+              1,
+              2
+            ],
+            "covered": true,
+            "matcapControl": {
+              "point": [
+                1254,
+                257
+              ],
+              "level": 3,
+              "native": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8
+              ],
+              "matches": true,
+              "agreesDouble": true,
+              "matcapError": 5.960464477539063e-08,
+              "gradientError": 6.647445316421141e-08
+            }
+          },
+          {
+            "point": [
+              1255,
+              257
+            ],
+            "baselineDelta": [
+              0,
+              -1,
+              2
+            ],
+            "candidateDelta": [
+              0,
+              -1,
+              2
+            ],
+            "covered": true,
+            "matcapControl": {
+              "point": [
+                1255,
+                257
+              ],
+              "level": 3,
+              "native": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8
+              ],
+              "matches": true,
+              "agreesDouble": true,
+              "matcapError": 5.960464477539063e-08,
+              "gradientError": 8.233750292685471e-08
+            }
+          },
+          {
+            "point": [
+              1303,
+              257
+            ],
+            "baselineDelta": [
+              3,
+              0,
+              1
+            ],
+            "candidateDelta": [
+              3,
+              0,
+              1
+            ],
+            "covered": true,
+            "matcapControl": {
+              "point": [
+                1303,
+                257
+              ],
+              "level": 3,
+              "native": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8
+              ],
+              "matches": true,
+              "agreesDouble": true,
+              "matcapError": 5.960464477539063e-08,
+              "gradientError": 7.737802132368188e-08
+            }
+          },
+          {
+            "point": [
+              1307,
+              257
+            ],
+            "baselineDelta": [
+              1,
+              1,
+              2
+            ],
+            "candidateDelta": [
+              1,
+              1,
+              2
+            ],
+            "covered": true,
+            "matcapControl": {
+              "point": [
+                1307,
+                257
+              ],
+              "level": 3,
+              "native": [
+                3
+              ],
+              "matches": true,
+              "agreesDouble": true,
+              "matcapError": 2.9802322387695312e-08,
+              "gradientError": 1.0806065042778812e-08
+            }
+          },
+          {
+            "point": [
+              1253,
+              258
+            ],
+            "baselineDelta": [
+              0,
+              1,
+              2
+            ],
+            "candidateDelta": [
+              0,
+              1,
+              2
+            ],
+            "covered": true,
+            "matcapControl": {
+              "point": [
+                1253,
+                258
+              ],
+              "level": 3,
+              "native": [
+                3
+              ],
+              "matches": true,
+              "agreesDouble": true,
+              "matcapError": 5.960464477539063e-08,
+              "gradientError": 5.6591632713320905e-08
+            }
+          },
+          {
+            "point": [
+              1255,
+              258
+            ],
+            "baselineDelta": [
+              3,
+              4,
+              4
+            ],
+            "candidateDelta": [
+              3,
+              4,
+              4
+            ],
+            "covered": true,
+            "matcapControl": {
+              "point": [
+                1255,
+                258
+              ],
+              "level": 3,
+              "native": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8
+              ],
+              "matches": true,
+              "agreesDouble": true,
+              "matcapError": 0.0,
+              "gradientError": 5.195610131014661e-08
+            }
+          },
+          {
+            "point": [
+              1302,
+              258
+            ],
+            "baselineDelta": [
+              1,
+              1,
+              2
+            ],
+            "candidateDelta": [
+              1,
+              1,
+              2
+            ],
+            "covered": true,
+            "matcapControl": {
+              "point": [
+                1302,
+                258
+              ],
+              "level": 3,
+              "native": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8
+              ],
+              "matches": true,
+              "agreesDouble": true,
+              "matcapError": 1.1920928955078125e-07,
+              "gradientError": 1.014457596815177e-07
+            }
+          },
+          {
+            "point": [
+              1303,
+              258
+            ],
+            "baselineDelta": [
+              2,
+              0,
+              2
+            ],
+            "candidateDelta": [
+              2,
+              0,
+              2
+            ],
+            "covered": true,
+            "matcapControl": {
+              "point": [
+                1303,
+                258
+              ],
+              "level": 3,
+              "native": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8
+              ],
+              "matches": true,
+              "agreesDouble": true,
+              "matcapError": 5.960464477539063e-08,
+              "gradientError": 7.779692023923701e-08
+            }
+          },
+          {
+            "point": [
+              1253,
+              259
+            ],
+            "baselineDelta": [
+              0,
+              1,
+              2
+            ],
+            "candidateDelta": [
+              0,
+              1,
+              2
+            ],
+            "covered": false,
+            "matcapControl": {
+              "point": [
+                1253,
+                259
+              ],
+              "level": 3,
+              "native": [
+                3
+              ],
+              "matches": true,
+              "agreesDouble": true,
+              "matcapError": 5.960464477539063e-08,
+              "gradientError": 3.392924319278734e-08
+            }
+          },
+          {
+            "point": [
+              1254,
+              259
+            ],
+            "baselineDelta": [
+              0,
+              0,
+              2
+            ],
+            "candidateDelta": [
+              0,
+              0,
+              2
+            ],
+            "covered": false,
+            "matcapControl": {
+              "point": [
+                1254,
+                259
+              ],
+              "level": 3,
+              "native": [
+                3
+              ],
+              "matches": true,
+              "agreesDouble": true,
+              "matcapError": 8.940696716308594e-08,
+              "gradientError": 7.374456334474644e-08
+            }
+          },
+          {
+            "point": [
+              1260,
+              259
+            ],
+            "baselineDelta": [
+              0,
+              1,
+              3
+            ],
+            "candidateDelta": [
+              0,
+              1,
+              3
+            ],
+            "covered": true,
+            "matcapControl": {
+              "point": [
+                1260,
+                259
+              ],
+              "level": 3,
+              "native": [
+                3
+              ],
+              "matches": true,
+              "agreesDouble": true,
+              "matcapError": 2.9802322387695312e-08,
+              "gradientError": 3.709395740569832e-08
+            }
+          },
+          {
+            "point": [
+              1301,
+              259
+            ],
+            "baselineDelta": [
+              0,
+              0,
+              2
+            ],
+            "candidateDelta": [
+              0,
+              0,
+              2
+            ],
+            "covered": true,
+            "matcapControl": {
+              "point": [
+                1301,
+                259
+              ],
+              "level": 3,
+              "native": [
+                3
+              ],
+              "matches": true,
+              "agreesDouble": true,
+              "matcapError": 1.1920928955078125e-07,
+              "gradientError": 8.754800262522622e-08
+            }
+          },
+          {
+            "point": [
+              1303,
+              259
+            ],
+            "baselineDelta": [
+              1,
+              1,
+              3
+            ],
+            "candidateDelta": [
+              1,
+              1,
+              3
+            ],
+            "covered": true,
+            "matcapControl": {
+              "point": [
+                1303,
+                259
+              ],
+              "level": 4,
+              "native": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8
+              ],
+              "matches": true,
+              "agreesDouble": true,
+              "matcapError": 5.960464477539063e-08,
+              "gradientError": 2.8527515016918414e-08
+            }
+          },
+          {
+            "point": [
+              1309,
+              259
+            ],
+            "baselineDelta": [
+              0,
+              1,
+              2
+            ],
+            "candidateDelta": [
+              0,
+              1,
+              2
+            ],
+            "covered": true,
+            "matcapControl": {
+              "point": [
+                1309,
+                259
+              ],
+              "level": 3,
+              "native": [
+                3
+              ],
+              "matches": true,
+              "agreesDouble": true,
+              "matcapError": 5.960464477539063e-08,
+              "gradientError": 5.503856553845665e-08
+            }
+          },
+          {
+            "point": [
+              1300,
+              260
+            ],
+            "baselineDelta": [
+              0,
+              0,
+              2
+            ],
+            "candidateDelta": [
+              0,
+              0,
+              2
+            ],
+            "covered": true,
+            "matcapControl": {
+              "point": [
+                1300,
+                260
+              ],
+              "level": 3,
+              "native": [
+                3
+              ],
+              "matches": true,
+              "agreesDouble": true,
+              "matcapError": 5.960464477539063e-08,
+              "gradientError": 7.60918308362335e-08
+            }
+          },
+          {
+            "point": [
+              1301,
+              260
+            ],
+            "baselineDelta": [
+              0,
+              0,
+              2
+            ],
+            "candidateDelta": [
+              0,
+              0,
+              2
+            ],
+            "covered": true,
+            "matcapControl": {
+              "point": [
+                1301,
+                260
+              ],
+              "level": 3,
+              "native": [
+                3
+              ],
+              "matches": true,
+              "agreesDouble": true,
+              "matcapError": 5.960464477539063e-08,
+              "gradientError": 7.667003981692844e-08
+            }
+          },
+          {
+            "point": [
+              1310,
+              260
+            ],
+            "baselineDelta": [
+              1,
+              0,
+              2
+            ],
+            "candidateDelta": [
+              1,
+              0,
+              2
+            ],
+            "covered": true,
+            "matcapControl": {
+              "point": [
+                1310,
+                260
+              ],
+              "level": 3,
+              "native": [
+                3
+              ],
+              "matches": true,
+              "agreesDouble": true,
+              "matcapError": 5.960464477539063e-08,
+              "gradientError": 6.814705821867051e-08
+            }
+          },
+          {
+            "point": [
+              1312,
+              260
+            ],
+            "baselineDelta": [
+              1,
+              0,
+              2
+            ],
+            "candidateDelta": [
+              1,
+              0,
+              2
+            ],
+            "covered": true,
+            "matcapControl": {
+              "point": [
+                1312,
+                260
+              ],
+              "level": 7,
+              "native": [
+                7
+              ],
+              "matches": true,
+              "agreesDouble": true,
+              "matcapError": 1.7881393432617188e-07,
+              "gradientError": 8.246287752644577e-08
+            }
+          },
+          {
+            "point": [
+              1251,
+              262
+            ],
+            "baselineDelta": [
+              0,
+              0,
+              2
+            ],
+            "candidateDelta": [
+              0,
+              0,
+              2
+            ],
+            "covered": false,
+            "matcapControl": {
+              "point": [
+                1251,
+                262
+              ],
+              "level": 3,
+              "native": [
+                0,
+                1,
+                2,
+                3,
+                4
+              ],
+              "matches": true,
+              "agreesDouble": true,
+              "matcapError": 1.1920928955078125e-07,
+              "gradientError": 4.282517440667988e-08
+            }
+          },
+          {
+            "point": [
+              1260,
+              262
+            ],
+            "baselineDelta": [
+              3,
+              -13,
+              10
+            ],
+            "candidateDelta": [
+              0,
+              1,
+              2
+            ],
+            "covered": false,
+            "matcapControl": {
+              "point": [
+                1260,
+                262
+              ],
+              "level": 3,
+              "native": [
+                3
+              ],
+              "matches": true,
+              "agreesDouble": true,
+              "matcapError": 5.960464477539063e-08,
+              "gradientError": 5.383502016398367e-08
+            }
+          },
+          {
+            "point": [
+              1261,
+              262
+            ],
+            "baselineDelta": [
+              9,
+              1,
+              1
+            ],
+            "candidateDelta": [
+              -2,
+              0,
+              0
+            ],
+            "covered": false,
+            "matcapControl": {
+              "point": [
+                1261,
+                262
+              ],
+              "level": 3,
+              "native": [
+                3
+              ],
+              "matches": true,
+              "agreesDouble": true,
+              "matcapError": 5.960464477539063e-08,
+              "gradientError": 5.023092530809237e-08
+            }
+          },
+          {
+            "point": [
+              1301,
+              262
+            ],
+            "baselineDelta": [
+              0,
+              0,
+              2
+            ],
+            "candidateDelta": [
+              0,
+              0,
+              2
+            ],
+            "covered": false,
+            "matcapControl": {
+              "point": [
+                1301,
+                262
+              ],
+              "level": 3,
+              "native": [
+                2,
+                3
+              ],
+              "matches": true,
+              "agreesDouble": true,
+              "matcapError": 5.960464477539063e-08,
+              "gradientError": 4.778423712270552e-08
+            }
+          },
+          {
+            "point": [
+              1310,
+              264
+            ],
+            "baselineDelta": [
+              1,
+              0,
+              2
+            ],
+            "candidateDelta": [
+              1,
+              0,
+              2
+            ],
+            "covered": false,
+            "matcapControl": {
+              "point": [
+                1310,
+                264
+              ],
+              "level": 4,
+              "native": [
+                4
+              ],
+              "matches": true,
+              "agreesDouble": true,
+              "matcapError": 5.960464477539063e-08,
+              "gradientError": 5.239566125414541e-08
+            }
+          },
+          {
+            "point": [
+              1256,
+              265
+            ],
+            "baselineDelta": [
+              0,
+              0,
+              2
+            ],
+            "candidateDelta": [
+              0,
+              0,
+              2
+            ],
+            "covered": false,
+            "matcapControl": {
+              "point": [
+                1256,
+                265
+              ],
+              "level": 4,
+              "native": [
+                4
+              ],
+              "matches": true,
+              "agreesDouble": true,
+              "matcapError": 1.1920928955078125e-07,
+              "gradientError": 4.3832289575718164e-08
+            }
+          },
+          {
+            "point": [
+              1257,
+              265
+            ],
+            "baselineDelta": [
+              0,
+              0,
+              2
+            ],
+            "candidateDelta": [
+              0,
+              0,
+              2
+            ],
+            "covered": false,
+            "matcapControl": {
+              "point": [
+                1257,
+                265
+              ],
+              "level": 4,
+              "native": [
+                4
+              ],
+              "matches": true,
+              "agreesDouble": true,
+              "matcapError": 5.960464477539063e-08,
+              "gradientError": 8.445250299082829e-08
+            }
+          },
+          {
+            "point": [
+              1303,
+              266
+            ],
+            "baselineDelta": [
+              1,
+              0,
+              2
+            ],
+            "candidateDelta": [
+              1,
+              0,
+              2
+            ],
+            "covered": false,
+            "matcapControl": {
+              "point": [
+                1303,
+                266
+              ],
+              "level": 7,
+              "native": [
+                7
+              ],
+              "matches": true,
+              "agreesDouble": true,
+              "matcapError": 0.0,
+              "gradientError": 3.946993287762268e-08
+            }
+          },
+          {
+            "point": [
+              1304,
+              267
+            ],
+            "baselineDelta": [
+              0,
+              1,
+              2
+            ],
+            "candidateDelta": [
+              0,
+              1,
+              2
+            ],
+            "covered": false,
+            "matcapControl": {
+              "point": [
+                1304,
+                267
+              ],
+              "level": 3,
+              "native": [
+                3
+              ],
+              "matches": true,
+              "agreesDouble": true,
+              "matcapError": 5.960464477539063e-08,
+              "gradientError": 7.410942548524702e-08
+            }
+          }
+        ]
+      },
+      "commonResidualPixels": 16
+    }
+  },
+  "archive": "3a1e580e556bfc19a7b9f65f1fe222e0e1c8dafba1522b5f1f597ece3b07f7ac"
+}

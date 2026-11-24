@@ -266,6 +266,9 @@ private:
     void destroyScreenReflectionResources();
     void destroyReflectionHistoryResources();
     void createReflectionMotionResources(const RenderContext&);
+    void createProjectedHistoryLayer(const RenderContext&);
+    void destroyProjectedHistoryLayer() noexcept;
+    rhi::RenderPassBeginDesc projectedHistoryLayerBegin(const RenderContext&) const;
     bool screenReflectionTemporalPrepared() const noexcept{return reflectionReprojection_||projectedReflectionHistoryPrepared_;}
     bool reflectionHistoryAvailable(unsigned slot) const noexcept;
     void recordScreenReflection(rhi::ICommandRecorder&,unsigned,const ReflectionTraceInputs&,const ReflectionTraceView&,const ScreenSpaceReflectionSettings&);
@@ -283,6 +286,11 @@ private:
     bool projectedReflectionHistoryPrepared_=false;
     std::unique_ptr<MotionVectorTarget> reflectionOwnedMotion_;
     std::array<VkFramebuffer,kMaxFramesInFlight> reflectionMotionFramebuffers_{};
+    std::array<GpuTexture,kMaxFramesInFlight> projectedHistoryLayer_{};
+    std::array<VkFramebuffer,kMaxFramesInFlight> projectedHistoryLayerFrames_{};
+    VkRenderPass projectedHistoryLayerPass_{};
+    // [depth comparison][vertex color stream][facing]
+    std::array<std::array<std::array<VkPipeline,4>,2>,2> projectedHistoryLayerPipelines_{};
     std::array<bool,kMaxFramesInFlight> reflectionHistoryValid_{};
     std::optional<unsigned> reflectionPendingSlot_;
     std::optional<ReflectionTraceView> reflectionPendingView_;
@@ -652,6 +660,7 @@ private:
     std::array<VkPipeline,4> additiveBlendPipelines_{},vertexColorAdditiveBlendPipelines_{};
     std::array<std::array<VkPipeline,4>,2> surfaceOverlayPipelines_{},surfaceOverlaySnapshotPipelines_{};
     std::array<VkPipeline,4> multiplyPipelines_{};
+    std::array<VkPipeline,4> multiplyDepthPipelines_{};
     std::array<VkPipeline,2> sceneTintPipelines_{};
     VkPipeline outlinePipeline_ = VK_NULL_HANDLE;
     VkPipeline outlineDepthPipeline_=VK_NULL_HANDLE;
@@ -799,7 +808,8 @@ private:
     void recordMainDraws(const RenderContext& context, std::uint32_t stage = 0,
         const SceneInstanceSnapshot* snapshot = nullptr,
         std::size_t firstTransparent = 0, std::size_t transparentCount = static_cast<std::size_t>(-1),
-        rhi::ICommandRecorder* recordingCommands = nullptr, SceneSubmissionCounters* recordingCounters = nullptr);
+        rhi::ICommandRecorder* recordingCommands = nullptr, SceneSubmissionCounters* recordingCounters = nullptr,
+        bool projectedHistoryLayer = false);
     rhi::RenderPassBeginDesc mainPassDescription(const RenderContext& context) const;
     void drawPrimitive(
         rhi::ICommandRecorder& commands,
@@ -811,7 +821,8 @@ private:
         std::uint32_t textureBase = 0,
         std::size_t globalMaterialBase = 0,
         SceneSubmissionCounters* counters = nullptr,
-        const SceneInstanceSnapshot* snapshot = nullptr, bool snapshotSurfaceOverlay=false,bool allowConservative=false);
+        const SceneInstanceSnapshot* snapshot = nullptr, bool snapshotSurfaceOverlay=false,bool allowConservative=false,
+        bool projectedHistoryLayer=false);
     void buildSceneState();
     void destroyGraphicsPipelinesForRecreate();
 };

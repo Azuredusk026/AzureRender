@@ -1,0 +1,251 @@
+{
+  "status": "rejected-primary-linear-production-at-repeatability",
+  "trialAdopted": false,
+  "devices": {
+    "intel": {
+      "stable": false,
+      "expected": "fa3d9d2c38214b67761ec32039c6e52e6cb2dfc8ad48c3b23b860755976c0a8a",
+      "renders": {
+        "a": {
+          "png": "f55252639ef131b9c40373ec2340e105fbc81bfa22e8de72a7961de492c1b456",
+          "referencePng": "a9657b4558f9d3cb03872d60d5e9e979af3eb6eb6c1a69784096148ff6f73c35",
+          "raw": "fa3d9d2c38214b67761ec32039c6e52e6cb2dfc8ad48c3b23b860755976c0a8a",
+          "archive": "800bd12c007d904205e6de4dcda3f9a5d9fd440d74828ead6973be6e93951f41",
+          "changed": 319,
+          "overOne": 86,
+          "peak": 45,
+          "bounds": [
+            607,
+            99,
+            754,
+            712
+          ]
+        },
+        "b": {
+          "png": "3127cb3a57ae788d7560d646b86dc4df6d1d9f137eef12979ab31cbf98ceb81a",
+          "referencePng": "a9657b4558f9d3cb03872d60d5e9e979af3eb6eb6c1a69784096148ff6f73c35",
+          "raw": "a0e01547ad6fd8311542a28007a516c5ece27afc1abacc7ff0e6af3e0706afdd",
+          "archive": "1e0434e7db0db3480c33dcca8cb7df38e1e421782547453261815c4f6f8f3153",
+          "changed": 746,
+          "overOne": 493,
+          "peak": 52,
+          "bounds": [
+            607,
+            99,
+            943,
+            712
+          ]
+        }
+      }
+    },
+    "nvidia": {
+      "stable": true,
+      "expected": "826c206ead69c397311348637887070e3777333a9d47a74de615f6c64b5b853f",
+      "renders": {
+        "a": {
+          "png": "839ea72c033a403e63e3e3ed2d2cc24739d696473f80c9164e68ff7a5691ff8e",
+          "referencePng": "3c45327440ada8eb611a88598d97717fc05709daf1cd2988fc0aa068a93907bc",
+          "raw": "826c206ead69c397311348637887070e3777333a9d47a74de615f6c64b5b853f",
+          "archive": "485e064e7c09e3da0b1ab6f1d13816b9ce6604b3b29fc9c65bb9666276489b18",
+          "changed": 326,
+          "overOne": 92,
+          "peak": 45,
+          "bounds": [
+            607,
+            99,
+            752,
+            715
+          ]
+        },
+        "b": {
+          "png": "839ea72c033a403e63e3e3ed2d2cc24739d696473f80c9164e68ff7a5691ff8e",
+          "referencePng": "3c45327440ada8eb611a88598d97717fc05709daf1cd2988fc0aa068a93907bc",
+          "raw": "826c206ead69c397311348637887070e3777333a9d47a74de615f6c64b5b853f",
+          "archive": "622cc6a2f11b4864fdc92a831441f8cd30ca07bcdbb6b9ff58ae7cc66516f932",
+          "changed": 326,
+          "overOne": 92,
+          "peak": 45,
+          "bounds": [
+            607,
+            99,
+            752,
+            715
+          ]
+        }
+      }
+    }
+  },
+  "frozen": {
+    "status": "measured-primary-linear-reflection-frozen",
+    "linkedPlayer": "775a4737afbec406e79b75f87fcded2ee836579850528f2e6be145a9c9461f1a",
+    "scope": {
+      "currentDriver": [
+        "b57a67f263f0bc0d9cc53a279f74e90696b47c5802e60cd5b54196cc647fbdc3",
+        "dcf466cd4ea345671eaad5efd4128584e02de9a05e6f218acf2ebf5409abe90f",
+        "974756b6d8dba263a333c613eaf24a33d53be96b24e6c000b78646341f492050",
+        "e27b4d25426d5d36725ccb159d7fe2324f4eb60b0993d369e91e45260bc6fbeb"
+      ],
+      "originalFrozen": [
+        "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574"
+      ]
+    },
+    "frames": {
+      "frame_000000.png": {
+        "frame": "frame_000000.png",
+        "sha256": "b57a67f263f0bc0d9cc53a279f74e90696b47c5802e60cd5b54196cc647fbdc3",
+        "reference": "b57a67f263f0bc0d9cc53a279f74e90696b47c5802e60cd5b54196cc647fbdc3",
+        "historical": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "decoded": "209f05e590c7b47cc42c83dda27705cc436098517c811e3e0a1478ddaa4fa025",
+        "sameDriver": {
+          "differingPixels": 0,
+          "overOne": 0,
+          "peak": 0
+        },
+        "historicalFrozen": {
+          "differingPixels": 228,
+          "overOne": 0,
+          "peak": 1
+        }
+      },
+      "frame_000001.png": {
+        "frame": "frame_000001.png",
+        "sha256": "dcf466cd4ea345671eaad5efd4128584e02de9a05e6f218acf2ebf5409abe90f",
+        "reference": "dcf466cd4ea345671eaad5efd4128584e02de9a05e6f218acf2ebf5409abe90f",
+        "historical": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "decoded": "6830ad6c9a7e35bfd250a34cada78bde4abc9479eb4e07a2bcb50b13552e8b2d",
+        "sameDriver": {
+          "differingPixels": 0,
+          "overOne": 0,
+          "peak": 0
+        },
+        "historicalFrozen": {
+          "differingPixels": 330,
+          "overOne": 3,
+          "peak": 7
+        }
+      },
+      "frame_000002.png": {
+        "frame": "frame_000002.png",
+        "sha256": "974756b6d8dba263a333c613eaf24a33d53be96b24e6c000b78646341f492050",
+        "reference": "974756b6d8dba263a333c613eaf24a33d53be96b24e6c000b78646341f492050",
+        "historical": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "decoded": "8e5f43861f6e911472c7c2fddb1c18298054403544290cc1b967c3fc8a59db88",
+        "sameDriver": {
+          "differingPixels": 0,
+          "overOne": 0,
+          "peak": 0
+        },
+        "historicalFrozen": {
+          "differingPixels": 397,
+          "overOne": 4,
+          "peak": 37
+        }
+      },
+      "frame_000003.png": {
+        "frame": "frame_000003.png",
+        "sha256": "e27b4d25426d5d36725ccb159d7fe2324f4eb60b0993d369e91e45260bc6fbeb",
+        "reference": "e27b4d25426d5d36725ccb159d7fe2324f4eb60b0993d369e91e45260bc6fbeb",
+        "historical": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "decoded": "91899446de78a614f0eb00a0882a6f35046df9a80be809fb6a684cce0704c2d6",
+        "sameDriver": {
+          "differingPixels": 0,
+          "overOne": 0,
+          "peak": 0
+        },
+        "historicalFrozen": {
+          "differingPixels": 421,
+          "overOne": 4,
+          "peak": 23
+        }
+      }
+    },
+    "sameDriverExact": true,
+    "originalFrozenExact": false,
+    "project": "13638585d18092a315bd7586a88b349fe256c468eb9090ccb6189232b8209d78",
+    "shaderPrograms": {
+      "character_projected_history.frag.spv": "b0ff43bb3c280137dbb86afb784c503c49e6b57875d3c6d292d57c6985ac14cf",
+      "character_projected_history_bindless.frag.spv": "1d7e32da25503fd61ce456a33fdaf67cb5ce577018936659fb7eef2b30d90bc1",
+      "projected_reflection_trace.comp.spv": "c9d8330bfb623308bc056efabd81c599633199389124667247169fa11f7bf4a8"
+    }
+  },
+  "queue": [
+    {
+      "id": 1490,
+      "task": "nr-build-primary-linear-reflection-production-source",
+      "state": "succeeded",
+      "exitCode": 0,
+      "elapsedSeconds": 20.906000000002678
+    },
+    {
+      "id": 1491,
+      "task": "nr-joint-character-intel-primary-linear-production",
+      "state": "failed",
+      "exitCode": 1,
+      "elapsedSeconds": 163.98399999999674
+    },
+    {
+      "id": 1492,
+      "task": "nr-joint-character-nvidia-primary-linear-production",
+      "state": "succeeded",
+      "exitCode": 0,
+      "elapsedSeconds": 166.23399999999674
+    },
+    {
+      "id": 1493,
+      "task": "nr-primary-linear-production-current-and-original-frozen",
+      "state": "succeeded",
+      "exitCode": 0,
+      "elapsedSeconds": 322.5159999999887
+    }
+  ],
+  "validation": {
+    "archive": "37456cb3d5fdd852abbebf6d243f2fc6b8dba697957c2c4ccb37f5c3293d1318",
+    "files": {
+      "sources/trial.patch": "a6721dc59b150760f9b33f9253d5e2180953a13dfd33a11d2a6f5cb3ec0dee78",
+      "raw/intel.json": "7c7cee77eb3bd93f2871808e7e7f45ac26dea62e032e5443db4d48a1c6d1a947",
+      "frames/intel-linear-production-a.zip": "800bd12c007d904205e6de4dcda3f9a5d9fd440d74828ead6973be6e93951f41",
+      "player/intel-linear-production-a/command.json": "d9a06931b7d07d74f70448f4c0ffb4cac0fadf559a336d20bdc5742e3e97e16e",
+      "player/intel-linear-production-a/runtime.json": "05406e3ef9f1cd987f2d2a5a8678ef0b299c44d50e787f18840503c6976c6e22",
+      "player/intel-linear-production-a/result.json": "18571e72b3f95627f2d0d5389821a7bb37c6316ecfe0250011dc73194491cd15",
+      "player/intel-linear-production-a/frames/capture_manifest.json": "aae9c065fd6787b91b0efaa4ab0eccbc8888ccea1eaa30c9d2b539d1c622fcb9",
+      "player/intel-linear-production-a/frames/gpu_capabilities.json": "052830ed89bea19f0e9a17839082b9f979cfab2b17908f9ee83df5f0e0bcd85f",
+      "frames/intel-linear-production-b.zip": "1e0434e7db0db3480c33dcca8cb7df38e1e421782547453261815c4f6f8f3153",
+      "player/intel-linear-production-b/command.json": "45dfff8364e7a49279c0d99d31b0cefcef08bff09d7b11dc612092879c406741",
+      "player/intel-linear-production-b/runtime.json": "05406e3ef9f1cd987f2d2a5a8678ef0b299c44d50e787f18840503c6976c6e22",
+      "player/intel-linear-production-b/result.json": "9de99cf87607f53fa81b072396510a74df71ebe62d97cd7355d86b732be868d9",
+      "player/intel-linear-production-b/frames/capture_manifest.json": "be4c7dd74c03e4f5836171b38b647d97900676960764c5add5cb38ff086760b8",
+      "player/intel-linear-production-b/frames/gpu_capabilities.json": "052830ed89bea19f0e9a17839082b9f979cfab2b17908f9ee83df5f0e0bcd85f",
+      "raw/nvidia.json": "a6142244753916841a043818e3b59947783829390ab6cfc12cee662723b0272a",
+      "frames/nvidia-linear-production-a.zip": "485e064e7c09e3da0b1ab6f1d13816b9ce6604b3b29fc9c65bb9666276489b18",
+      "player/nvidia-linear-production-a/command.json": "89eae88ec37cd9f8f74eba19ea8f0488bf41c76ba3e49b40362fc95cad3b671a",
+      "player/nvidia-linear-production-a/runtime.json": "05406e3ef9f1cd987f2d2a5a8678ef0b299c44d50e787f18840503c6976c6e22",
+      "player/nvidia-linear-production-a/result.json": "bdeb5ebd7a59d59eacbd3676a15cca30e4a4879b02df47399a60ac31fa4cf0a7",
+      "player/nvidia-linear-production-a/frames/capture_manifest.json": "f6c24393f52e46a4e0bbfb6cf774ef2966f36b241c71336aa5fea53123894735",
+      "player/nvidia-linear-production-a/frames/gpu_capabilities.json": "fcc84c76d84bace150db35ec07631ab83809bdd1c365b6d96cb8afe8e354190a",
+      "frames/nvidia-linear-production-b.zip": "622cc6a2f11b4864fdc92a831441f8cd30ca07bcdbb6b9ff58ae7cc66516f932",
+      "player/nvidia-linear-production-b/command.json": "f1ba6c13d1b39b78eda9dad8722d0cde728412c85e29f277098831b83e2383be",
+      "player/nvidia-linear-production-b/runtime.json": "05406e3ef9f1cd987f2d2a5a8678ef0b299c44d50e787f18840503c6976c6e22",
+      "player/nvidia-linear-production-b/result.json": "816165429bc16209aa55fdd30a7445de571a3e9729679c30798ac060a65662ef",
+      "player/nvidia-linear-production-b/frames/capture_manifest.json": "e848116036196a5dc5c2bfc46c8ea0ddba0533306f65bf70560adbf766172334",
+      "player/nvidia-linear-production-b/frames/gpu_capabilities.json": "fcc84c76d84bace150db35ec07631ab83809bdd1c365b6d96cb8afe8e354190a",
+      "build/qualification.json": "b1f7ac302e86a47958eabc4cc53123c46a9df30889d0b29d31faf2b5d6584f59",
+      "build/compile.log": "c6c369e7b53889916b8a8170d82f3f4c3c0113f042bc5ae1af35914bb799ef8f",
+      "build/link.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "frozen/command.json": "263821343ec6bcc2b75f2944e805571feaaaf9287101df9fb7bbc5ae9f0e374b",
+      "frozen/runtime.json": "92ddb3562790b5a5a793a3804ed9b993619a391edf46f03b642b4144273d0837",
+      "frozen/qualification.json": "2f12d76e249897a937ba0ec1602f5cbf4ba8269cf5ea5384044b1fa1e9613b5b",
+      "frozen/streamed-frames.json": "a40210ea5b98619c9a0068aa6d67efc8e338ec1b05425d49ca3777c1797d0989",
+      "frozen/frames/capture_manifest.json": "9e948cc9d3ecf167cb887ef076be788d959b6d33ed597244b8ce69130182226a",
+      "frozen/frames/gpu_capabilities.json": "fcc84c76d84bace150db35ec07631ab83809bdd1c365b6d96cb8afe8e354190a",
+      "sources/build-primary-linear-reflection-player.py": "1916897a2dfb177da32494df76a111bce86247ef4fa0d50a1dd20176b0e63ba9",
+      "sources/joint-character-referenced-body.py": "344036b9e790423d67451192813c7cb15c65bedb7d902a4ffa0162bdb9681307",
+      "sources/run-primary-linear-frozen-regression.py": "99b0e8e370fe860b6f9ae5b6b693900e8d36e61acf620213ecdad9d055adf9b9",
+      "logs/joint-character-intel-primary-linear-production.log": "56b771d0770b6d05e362270f19386e70a6cfa5cf8194baea078524a17bfeff43",
+      "logs/joint-character-nvidia-primary-linear-production.log": "aea32cca24df5850af784726c5e6f552f7ed1fb8694a1fa044c77655641c1350",
+      "logs/primary-linear-frozen.log": "dcb8fc708a5b66fad211c17fc209f1466c5831c9ef6af215eb697d5ae897a3cd"
+    }
+  }
+}

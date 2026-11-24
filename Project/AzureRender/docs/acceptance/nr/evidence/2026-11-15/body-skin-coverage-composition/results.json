@@ -1,0 +1,616 @@
+{
+  "status": "measured-native-skin-surface-composition",
+  "reference": "48afd6546c23cfa85099a765cc94ada4813a684538c695faf6d70d6daf2261b5",
+  "mask": "31e2da8fe073f66154c286c7488defbcfed759b1d9f7b030e03cfc95d7846cf0",
+  "nativeEvents": {
+    "0": 43647,
+    "1018": 89,
+    "1038": 39,
+    "1079": 577,
+    "1116": 228,
+    "1383": 2878
+  },
+  "normalExit": true,
+  "devices": {
+    "nvidia": {
+      "radialFace": {
+        "frame": "b2848d59cc968603e818d76813df7d9748224bc0222c10600b22212ed6c9ec35",
+        "metrics": {
+          "completeSkinCoverage": {
+            "pixels": 47458,
+            "ssim": 0.9629484096965999,
+            "medianLuminanceRelativeError": 0.006897918273240311,
+            "passed": true,
+            "overOne": 17985,
+            "overEight": 1796,
+            "peak": 115
+          },
+          "0": {
+            "pixels": 43647,
+            "ssim": 0.9649995740953492,
+            "medianLuminanceRelativeError": 0.004128319347820588,
+            "passed": true,
+            "overOne": 15156,
+            "overEight": 444,
+            "peak": 81
+          },
+          "1018": {
+            "pixels": 89,
+            "ssim": 0.37914078142187924,
+            "medianLuminanceRelativeError": 1.522379448995455,
+            "passed": false,
+            "overOne": 89,
+            "overEight": 89,
+            "peak": 54
+          },
+          "1079": {
+            "pixels": 577,
+            "ssim": 0.9642925378323027,
+            "medianLuminanceRelativeError": 0.4131018046439864,
+            "passed": false,
+            "overOne": 484,
+            "overEight": 198,
+            "peak": 115
+          },
+          "1116": {
+            "pixels": 228,
+            "ssim": 0.982086689850212,
+            "medianLuminanceRelativeError": 0.16670442745932984,
+            "passed": false,
+            "overOne": 131,
+            "overEight": 29,
+            "peak": 74
+          },
+          "1383": {
+            "pixels": 2878,
+            "ssim": 0.9481138646224868,
+            "medianLuminanceRelativeError": 0.11058708855634282,
+            "passed": false,
+            "overOne": 2086,
+            "overEight": 1000,
+            "peak": 46
+          }
+        },
+        "boundary": {}
+      },
+      "outlineHighlights": {
+        "frame": "6828300ca3eccd73a4cc77b6fe8aabdb621cda2a42bd8b52790732f9451f8b9c",
+        "metrics": {
+          "completeSkinCoverage": {
+            "pixels": 47458,
+            "ssim": 0.9833038768204203,
+            "medianLuminanceRelativeError": 0.0065048664584776645,
+            "passed": true,
+            "overOne": 17985,
+            "overEight": 1708,
+            "peak": 115
+          },
+          "0": {
+            "pixels": 43647,
+            "ssim": 0.9862370897421218,
+            "medianLuminanceRelativeError": 0.004128319347820588,
+            "passed": true,
+            "overOne": 15156,
+            "overEight": 444,
+            "peak": 81
+          },
+          "1018": {
+            "pixels": 89,
+            "ssim": 0.9944649445319294,
+            "medianLuminanceRelativeError": 0.10345110900141466,
+            "passed": false,
+            "overOne": 89,
+            "overEight": 1,
+            "peak": 17
+          },
+          "1079": {
+            "pixels": 577,
+            "ssim": 0.9667917072434791,
+            "medianLuminanceRelativeError": 0.4131018046439864,
+            "passed": false,
+            "overOne": 484,
+            "overEight": 198,
+            "peak": 115
+          },
+          "1116": {
+            "pixels": 228,
+            "ssim": 0.9845874911478073,
+            "medianLuminanceRelativeError": 0.16670442745932984,
+            "passed": false,
+            "overOne": 131,
+            "overEight": 29,
+            "peak": 74
+          },
+          "1383": {
+            "pixels": 2878,
+            "ssim": 0.9419059930722037,
+            "medianLuminanceRelativeError": 0.11058708855634282,
+            "passed": false,
+            "overOne": 2086,
+            "overEight": 1000,
+            "peak": 46
+          }
+        },
+        "boundary": {
+          "samples": [
+            {
+              "pixels": 43647,
+              "outsideDistance": 0,
+              "overOne": 15156,
+              "overEight": 444
+            },
+            {
+              "pixels": 41646,
+              "outsideDistance": 1,
+              "overOne": 14138,
+              "overEight": 269
+            },
+            {
+              "pixels": 39168,
+              "outsideDistance": 2,
+              "overOne": 13135,
+              "overEight": 129
+            },
+            {
+              "pixels": 36727,
+              "outsideDistance": 3,
+              "overOne": 12360,
+              "overEight": 36
+            },
+            {
+              "pixels": 34597,
+              "outsideDistance": 4,
+              "overOne": 11834,
+              "overEight": 7
+            },
+            {
+              "pixels": 32401,
+              "outsideDistance": 5,
+              "overOne": 11342,
+              "overEight": 2
+            },
+            {
+              "pixels": 30561,
+              "outsideDistance": 6,
+              "overOne": 11018,
+              "overEight": 0
+            },
+            {
+              "pixels": 26918,
+              "outsideDistance": 8,
+              "overOne": 10399,
+              "overEight": 0
+            },
+            {
+              "pixels": 20765,
+              "outsideDistance": 12,
+              "overOne": 9141,
+              "overEight": 0
+            },
+            {
+              "pixels": 15829,
+              "outsideDistance": 16,
+              "overOne": 7421,
+              "overEight": 0
+            }
+          ],
+          "maxDistanceForOverEight": 5.393799781799316,
+          "worst": {
+            "point": [
+              1197,
+              854
+            ],
+            "reference": [
+              127,
+              93,
+              80
+            ],
+            "player": [
+              46,
+              47,
+              49
+            ],
+            "error": 81
+          }
+        }
+      },
+      "clothDirectional": {
+        "frame": "933c04c884907917e93018b442752e12e3a66c58e4794524be4cbf5dfe68a903",
+        "metrics": {
+          "completeSkinCoverage": {
+            "pixels": 47458,
+            "ssim": 0.965009216389276,
+            "medianLuminanceRelativeError": 0.006897918273240311,
+            "passed": true,
+            "overOne": 17718,
+            "overEight": 1056,
+            "peak": 115
+          },
+          "0": {
+            "pixels": 43647,
+            "ssim": 0.9655179527483493,
+            "medianLuminanceRelativeError": 0.004128319347820588,
+            "passed": true,
+            "overOne": 15156,
+            "overEight": 444,
+            "peak": 81
+          },
+          "1018": {
+            "pixels": 89,
+            "ssim": 0.37914078142187924,
+            "medianLuminanceRelativeError": 1.522379448995455,
+            "passed": false,
+            "overOne": 89,
+            "overEight": 89,
+            "peak": 54
+          },
+          "1079": {
+            "pixels": 577,
+            "ssim": 0.9642954834666752,
+            "medianLuminanceRelativeError": 0.4131018046439864,
+            "passed": false,
+            "overOne": 484,
+            "overEight": 198,
+            "peak": 115
+          },
+          "1116": {
+            "pixels": 228,
+            "ssim": 0.9844008342122605,
+            "medianLuminanceRelativeError": 0.16670442745932984,
+            "passed": false,
+            "overOne": 131,
+            "overEight": 29,
+            "peak": 74
+          },
+          "1383": {
+            "pixels": 2878,
+            "ssim": 0.9739991786370809,
+            "medianLuminanceRelativeError": 0.02553579286417397,
+            "passed": true,
+            "overOne": 1819,
+            "overEight": 260,
+            "peak": 28
+          }
+        },
+        "boundary": {}
+      }
+    },
+    "intel": {
+      "radialFace": {
+        "frame": "47ea26e0a35eb08338f4fa17f451b98b8ea4bd22635232de9e5d0778f5fdc132",
+        "metrics": {
+          "completeSkinCoverage": {
+            "pixels": 47458,
+            "ssim": 0.9631032025038799,
+            "medianLuminanceRelativeError": 0.004039272461031687,
+            "passed": true,
+            "overOne": 17291,
+            "overEight": 1801,
+            "peak": 115
+          },
+          "0": {
+            "pixels": 43647,
+            "ssim": 0.9651758212488748,
+            "medianLuminanceRelativeError": 0.0011555900802001555,
+            "passed": true,
+            "overOne": 14481,
+            "overEight": 444,
+            "peak": 81
+          },
+          "1018": {
+            "pixels": 89,
+            "ssim": 0.3794769844333468,
+            "medianLuminanceRelativeError": 1.522379448995455,
+            "passed": false,
+            "overOne": 89,
+            "overEight": 89,
+            "peak": 54
+          },
+          "1079": {
+            "pixels": 577,
+            "ssim": 0.9641851299810857,
+            "medianLuminanceRelativeError": 0.4131018046439864,
+            "passed": false,
+            "overOne": 473,
+            "overEight": 200,
+            "peak": 115
+          },
+          "1116": {
+            "pixels": 228,
+            "ssim": 0.9816259689897042,
+            "medianLuminanceRelativeError": 0.13890451169542606,
+            "passed": false,
+            "overOne": 132,
+            "overEight": 32,
+            "peak": 74
+          },
+          "1383": {
+            "pixels": 2878,
+            "ssim": 0.9480379476720505,
+            "medianLuminanceRelativeError": 0.10757984235613494,
+            "passed": false,
+            "overOne": 2077,
+            "overEight": 1000,
+            "peak": 46
+          }
+        },
+        "boundary": {}
+      },
+      "outlineHighlights": {
+        "frame": "3108484ccf766937115935762f10207c46f0dbe608ece93a31304630ed2fea53",
+        "metrics": {
+          "completeSkinCoverage": {
+            "pixels": 47458,
+            "ssim": 0.9834421642293306,
+            "medianLuminanceRelativeError": 0.004039272461031687,
+            "passed": true,
+            "overOne": 17291,
+            "overEight": 1713,
+            "peak": 115
+          },
+          "0": {
+            "pixels": 43647,
+            "ssim": 0.9863939736114734,
+            "medianLuminanceRelativeError": 0.0011555900802001555,
+            "passed": true,
+            "overOne": 14481,
+            "overEight": 444,
+            "peak": 81
+          },
+          "1018": {
+            "pixels": 89,
+            "ssim": 0.9944856556839421,
+            "medianLuminanceRelativeError": 0.09500798115265817,
+            "passed": true,
+            "overOne": 89,
+            "overEight": 1,
+            "peak": 18
+          },
+          "1079": {
+            "pixels": 577,
+            "ssim": 0.9666792243858598,
+            "medianLuminanceRelativeError": 0.4131018046439864,
+            "passed": false,
+            "overOne": 473,
+            "overEight": 200,
+            "peak": 115
+          },
+          "1116": {
+            "pixels": 228,
+            "ssim": 0.9841612552505602,
+            "medianLuminanceRelativeError": 0.13890451169542606,
+            "passed": false,
+            "overOne": 132,
+            "overEight": 32,
+            "peak": 74
+          },
+          "1383": {
+            "pixels": 2878,
+            "ssim": 0.9418594044846473,
+            "medianLuminanceRelativeError": 0.10757984235613494,
+            "passed": false,
+            "overOne": 2077,
+            "overEight": 1000,
+            "peak": 46
+          }
+        },
+        "boundary": {
+          "samples": [
+            {
+              "pixels": 43647,
+              "outsideDistance": 0,
+              "overOne": 14481,
+              "overEight": 444
+            },
+            {
+              "pixels": 41646,
+              "outsideDistance": 1,
+              "overOne": 13477,
+              "overEight": 270
+            },
+            {
+              "pixels": 39168,
+              "outsideDistance": 2,
+              "overOne": 12493,
+              "overEight": 129
+            },
+            {
+              "pixels": 36727,
+              "outsideDistance": 3,
+              "overOne": 11720,
+              "overEight": 36
+            },
+            {
+              "pixels": 34597,
+              "outsideDistance": 4,
+              "overOne": 11225,
+              "overEight": 7
+            },
+            {
+              "pixels": 32401,
+              "outsideDistance": 5,
+              "overOne": 10793,
+              "overEight": 2
+            },
+            {
+              "pixels": 30561,
+              "outsideDistance": 6,
+              "overOne": 10522,
+              "overEight": 0
+            },
+            {
+              "pixels": 26918,
+              "outsideDistance": 8,
+              "overOne": 9957,
+              "overEight": 0
+            },
+            {
+              "pixels": 20765,
+              "outsideDistance": 12,
+              "overOne": 8846,
+              "overEight": 0
+            },
+            {
+              "pixels": 15829,
+              "outsideDistance": 16,
+              "overOne": 7241,
+              "overEight": 0
+            }
+          ],
+          "maxDistanceForOverEight": 5.393799781799316,
+          "worst": {
+            "point": [
+              1197,
+              854
+            ],
+            "reference": [
+              127,
+              93,
+              80
+            ],
+            "player": [
+              46,
+              47,
+              49
+            ],
+            "error": 81
+          }
+        }
+      },
+      "clothDirectional": {
+        "frame": "c1e3f3a21af4c53b87679634518ee396fec196a9f6400a917f361514788367f7",
+        "metrics": {
+          "completeSkinCoverage": {
+            "pixels": 47458,
+            "ssim": 0.9651714771698695,
+            "medianLuminanceRelativeError": 0.004039272461031687,
+            "passed": true,
+            "overOne": 17007,
+            "overEight": 1063,
+            "peak": 115
+          },
+          "0": {
+            "pixels": 43647,
+            "ssim": 0.965701010130737,
+            "medianLuminanceRelativeError": 0.0011555900802001555,
+            "passed": true,
+            "overOne": 14481,
+            "overEight": 444,
+            "peak": 81
+          },
+          "1018": {
+            "pixels": 89,
+            "ssim": 0.3794769844333468,
+            "medianLuminanceRelativeError": 1.522379448995455,
+            "passed": false,
+            "overOne": 89,
+            "overEight": 89,
+            "peak": 54
+          },
+          "1079": {
+            "pixels": 577,
+            "ssim": 0.9641886932574819,
+            "medianLuminanceRelativeError": 0.4131018046439864,
+            "passed": false,
+            "overOne": 473,
+            "overEight": 200,
+            "peak": 115
+          },
+          "1116": {
+            "pixels": 228,
+            "ssim": 0.9839326752889812,
+            "medianLuminanceRelativeError": 0.13890451169542606,
+            "passed": false,
+            "overOne": 132,
+            "overEight": 32,
+            "peak": 74
+          },
+          "1383": {
+            "pixels": 2878,
+            "ssim": 0.9739435122091913,
+            "medianLuminanceRelativeError": 0.02476837037896972,
+            "passed": true,
+            "overOne": 1793,
+            "overEight": 262,
+            "peak": 28
+          }
+        },
+        "boundary": {}
+      }
+    }
+  },
+  "nativeAttachments": {
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-143507-native-cloth-variants-d877ef\\variant-targets\\e889\\target-888.bin": "87258f1d79af1d10ea2dafcb9409454019d6770a8fff78c4bac3a65e99531aed",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-143507-native-cloth-variants-d877ef\\variant-targets\\e889\\target-889.bin": "592031a8b565f674669ef8ea164c591db0a8b557444d633cda012265100610e7",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-143507-native-cloth-variants-d877ef\\variant-targets\\e910\\target-909.bin": "592031a8b565f674669ef8ea164c591db0a8b557444d633cda012265100610e7",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-143507-native-cloth-variants-d877ef\\variant-targets\\e910\\target-910.bin": "c6cd59006d8d6bdbdb0438c1e7ae814c0b5206557a691921ce5fbf017a117a85",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-143507-native-cloth-variants-d877ef\\variant-targets\\e928\\target-927.bin": "c6cd59006d8d6bdbdb0438c1e7ae814c0b5206557a691921ce5fbf017a117a85",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-143507-native-cloth-variants-d877ef\\variant-targets\\e928\\target-928.bin": "72a2b02bfe274fde9eb44d696a768b9d019276852e7e068be565d5322ce8f336",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\post-opaque-ownership\\975-975.bin.gz": "472f6a7a727f3135405c4d574ba3501b42dd5e22aa3bcf71efee3724558eff45",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\post-opaque-ownership\\975-974.bin.gz": "7118974dec13cc873ad391dd15a0fa97f6b56b435dca8f3d9a3198e27661041b",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\post-opaque-ownership\\1018-1018.bin.gz": "55ee528f599855c8d3edbc08269920194d840504e9d77f82fd9c23f1e228ed88",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\post-opaque-ownership\\1018-1017.bin.gz": "de77cd354964e57175622fd6c21c6d9d2ebdfbfd63caeddfb065b6045e9a82be",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\post-opaque-ownership\\1038-1038.bin.gz": "21eca5d35154f397a538c8d125c5054bf6d33b71de7f35a87db4ce56245d4efd",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\post-opaque-ownership\\1038-1037.bin.gz": "55ee528f599855c8d3edbc08269920194d840504e9d77f82fd9c23f1e228ed88",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\post-opaque-ownership\\1059-1059.bin.gz": "b6ed3d196ad8ba7211a48c65b94281fc1166611392f571f5b8f4c9e61ce90dc0",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\post-opaque-ownership\\1059-1058.bin.gz": "21eca5d35154f397a538c8d125c5054bf6d33b71de7f35a87db4ce56245d4efd",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\post-opaque-ownership\\1079-1079.bin.gz": "346bd977072c84b698dd0ceb151040423606e557ff8948fc79f0c031ceaf24d4",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\post-opaque-ownership\\1079-1078.bin.gz": "0740a38d0d5dfc83e68d6baf84fa8761813e08ffe0f2e437a9a613e778631e67",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\post-opaque-ownership\\1099-1099.bin.gz": "4b2a18e293a2d16b3334f15593befac013eb39f1f76874c8638c7817a8af8c0c",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\post-opaque-ownership\\1099-1098.bin.gz": "40bb127f0deb70ee955c951040a77eafe5c740fab214bc1ade20b503154eef46",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\post-opaque-ownership\\1116-1116.bin.gz": "751ea23364f4f27f8d3d6dc8fd35a30c58b90b0221ce6abe61f644083b5ad942",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\post-opaque-ownership\\1116-1115.bin.gz": "4b2a18e293a2d16b3334f15593befac013eb39f1f76874c8638c7817a8af8c0c",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\post-opaque-ownership\\1138-1138.bin.gz": "a284c5929d3f0f4e241238ada543513e28a1856a4316bbe537eecd54557c945d",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\post-opaque-ownership\\1138-1137.bin.gz": "751ea23364f4f27f8d3d6dc8fd35a30c58b90b0221ce6abe61f644083b5ad942",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\post-opaque-ownership\\1160-1160.bin.gz": "a284c5929d3f0f4e241238ada543513e28a1856a4316bbe537eecd54557c945d",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\post-opaque-ownership\\1160-1159.bin.gz": "a284c5929d3f0f4e241238ada543513e28a1856a4316bbe537eecd54557c945d",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\post-opaque-ownership\\1230-1230.bin.gz": "8f17116efdee02863210165a03a9333c6be84bd561d3e4a7b60523a091f90cd0",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\post-opaque-ownership\\1230-1229.bin.gz": "a284c5929d3f0f4e241238ada543513e28a1856a4316bbe537eecd54557c945d",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\post-opaque-ownership\\1245-1245.bin.gz": "2cbbb9794c05980401489f152812fa14faf9f5492913a5e949483bc4be44b867",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\post-opaque-ownership\\1245-1244.bin.gz": "fb99bbee0f8157e76d639922761dfcaf95a387f1ee67b66e9460cc7dacb23285",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\post-opaque-ownership\\1267-1267.bin.gz": "3b2ed7e823eee25c7d15633e2145c7c561b968cf2d96cd901e4a5f5b7c0e63b1",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\post-opaque-ownership\\1267-1266.bin.gz": "2cbbb9794c05980401489f152812fa14faf9f5492913a5e949483bc4be44b867",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\post-opaque-ownership\\1291-1291.bin.gz": "9332fcd6fe10841dd014c3fff7d3f0f61474577fc8ce6bbe0cfdb7759f4177de",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\post-opaque-ownership\\1291-1290.bin.gz": "3b2ed7e823eee25c7d15633e2145c7c561b968cf2d96cd901e4a5f5b7c0e63b1",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\post-opaque-ownership\\1314-1314.bin.gz": "859370a57929d250f7d6b50acad8de579f7a69b97ac8028e65259f9c58cd663e",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\post-opaque-ownership\\1314-1313.bin.gz": "9332fcd6fe10841dd014c3fff7d3f0f61474577fc8ce6bbe0cfdb7759f4177de",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\post-opaque-ownership\\1339-1339.bin.gz": "859370a57929d250f7d6b50acad8de579f7a69b97ac8028e65259f9c58cd663e",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\post-opaque-ownership\\1339-1338.bin.gz": "859370a57929d250f7d6b50acad8de579f7a69b97ac8028e65259f9c58cd663e",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\post-opaque-ownership\\1358-1358.bin.gz": "b66d8847ef4dda69e30c5d0a416f445fa7baf0eaed75ea146d87b61e4cae1a43",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\post-opaque-ownership\\1358-1357.bin.gz": "0998a3cfc6829870267edd086943870c6cb1f2536f85f4f047196854570533e4",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\post-opaque-ownership\\1383-1383.bin.gz": "c3f21d1bd3e169bac68a2eb21eca90083dde060669f23e6d05780c9f6f7a83bb",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\post-opaque-ownership\\1383-1382.bin.gz": "199fa5dbb1b2363d9c3c321a4a7a7e5de280f699115f2aa5a51c44cadf494b4a"
+  },
+  "archive": {
+    "sha256": "8507f1822201d92483f9c7f68a74a0c1bba0b87cfa83b4709e0ce12fd147bd5e",
+    "members": {
+      "body-skin-coverage-composition.json": "09d3cfe4b918d54b5bd5565c52611057b1b520d0ad10ee33d340f50878ec6513",
+      "script.py": "620664c57508b62a5cd3c9b1ea06536312fd8622e5d2b89fdb12552ba0a5014c",
+      "archive.py": "e79fda08eec4d066328ae953e73b715d936337f9e39b064d170bd0e215fbe334",
+      "skin.png": "31e2da8fe073f66154c286c7488defbcfed759b1d9f7b030e03cfc95d7846cf0",
+      "mask-source.json": "9ba6075b6ac61cd9b64972c608938941e837d520306f10cde82c476cf2a144f3",
+      "nvidia/radialFace/command.json": "2302c677115181a4e7bff3b9cdfca5c1239a531bfb5aee640b569d36361165cb",
+      "nvidia/radialFace/frames/gpu_capabilities.json": "93c9fb29461fae11a7e57d4e49112071a71940dee571f1f6696ffbf03c392879",
+      "nvidia/radialFace/frames/capture_manifest.json": "af1012620604c6771823f7f048f94bb60c44b3b7bc213ddfb5f46dbb55ab7e08",
+      "nvidia/outlineHighlights/command.json": "1a72760fb5a87ff46eb26a9e04309b596ce479261f296f3f073e390895b841d0",
+      "nvidia/outlineHighlights/frames/gpu_capabilities.json": "93c9fb29461fae11a7e57d4e49112071a71940dee571f1f6696ffbf03c392879",
+      "nvidia/outlineHighlights/frames/capture_manifest.json": "e6cdbc58b182fb1384305427324a3b67c386babb4ef0404ff57c29aee247cbaf",
+      "nvidia/outlineHighlights/results.json": "186696bed04186a6c7cbba3d8859ee9d7f927980a6b389f9817f7300e1ac4d20",
+      "nvidia/clothDirectional/command.json": "f11c7df249dfd567870142d47ef1aecfef625bae624ee227f61c3f9c81096722",
+      "nvidia/clothDirectional/frames/gpu_capabilities.json": "93c9fb29461fae11a7e57d4e49112071a71940dee571f1f6696ffbf03c392879",
+      "nvidia/clothDirectional/frames/capture_manifest.json": "3e2dd389749b962de67e6e4c82fa3c6494480ce8a33b1918851bd373e4caabeb",
+      "nvidia/clothDirectional/results.json": "204c9c40773019ff0d2d40f12ed07e0c712da049c2063eb9ce0843ebf85d0791",
+      "intel/radialFace/command.json": "297b75baaab34f1c29acfce4977af742457de374751286a6a30b10aebdcbda43",
+      "intel/radialFace/frames/gpu_capabilities.json": "a38eaca3509b417cfe23614fe415bd9ccc5622fc682d8623142cdeb7dc3d85cc",
+      "intel/radialFace/frames/capture_manifest.json": "99c8c68a737a7bac984899e0cdd166e79b934362f304bdef3528acf2f64d39ce",
+      "intel/outlineHighlights/command.json": "35a5ed18ecaaa0585ba02dd683591cdf4378023703463fc0f6f26a56febc5b35",
+      "intel/outlineHighlights/frames/gpu_capabilities.json": "a38eaca3509b417cfe23614fe415bd9ccc5622fc682d8623142cdeb7dc3d85cc",
+      "intel/outlineHighlights/frames/capture_manifest.json": "28403b271303d58caac3ec47c8aae7107f1eea2c68305b21a09b3361d116e152",
+      "intel/outlineHighlights/results.json": "48add83654021e0894ccedc8db63c50baf098d6b7b5e327116bb75110d8e53b4",
+      "intel/clothDirectional/command.json": "24c74f40812ec916b1839381e19fe728742a6a7de3c02798e264f0abb5b27352",
+      "intel/clothDirectional/frames/gpu_capabilities.json": "a38eaca3509b417cfe23614fe415bd9ccc5622fc682d8623142cdeb7dc3d85cc",
+      "intel/clothDirectional/frames/capture_manifest.json": "42af8b451f657cfdcd0c045f5d13f5f4e15e631f0ca20ca3372860c71683fdea",
+      "intel/clothDirectional/results.json": "d5b3d224eda3cd6d596aede3b1269608f9d7709700f3e15b11562fb4565c5e76"
+    }
+  }
+}

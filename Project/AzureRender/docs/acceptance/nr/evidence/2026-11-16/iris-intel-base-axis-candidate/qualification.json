@@ -1,0 +1,193 @@
+{
+  "status": "measured-intel-axis-footprint-candidate",
+  "strict": false,
+  "player": "f8f86018d82b7e47a399a9cd451a61701122afb6f2dda680456862289167ae38",
+  "candidateSource": "55b8fdb7a293fb4aa88df3c14eafdc84fb790765225176024b19ce88457a81f6",
+  "source": "c180ad8bf13fcd7aaed4f2f1d30d22ebd1a4aa3cd02590b683fb918de3aa40b6",
+  "programs": {
+    "mesh_object_early_lighting.frag.spv": "58675ae2efa2c4657731a73d4246a33e81093334f6861edbb0f9b4c045c198c0",
+    "mesh_object_lighting.frag.spv": "1a67b45254da4fd379a44b86f80ffa1479f66a9542482382df94eb41233beaf4",
+    "mesh_object_early.frag.spv": "daecfa57622446928ae49e249fc94cfd6788df102f9bcdc8df157dd2ae8b562d",
+    "mesh_object.frag.spv": "b44dd78c4a89af9a236f81b12c37cfb03fa40daf6270c28203f7ddfe26259d29"
+  },
+  "inputs": {
+    "project": "0b2f7392f65cdb19cf8c1b5c5545a0d1260e469ea6b9bf1cbcad5cd27bf3cebd",
+    "level": "9c65a143adceef1eec5dd97d314ce7816dde09357ed23f16262b80721d9962b8",
+    "native": "fb99bbee0f8157e76d639922761dfcaf95a387f1ee67b66e9460cc7dacb23285"
+  },
+  "motionScope": "registered bare iris, one fixed frame",
+  "hardwareProjection": {
+    "hardwareQuery": 251,
+    "Fineaxis": 255,
+    "Finediagonal": 250,
+    "Coarseaxis": 255,
+    "Coarsediagonal": 251
+  },
+  "frame": "282f7457472413283f514b180394d755398d81c3f6020bc14d49f246d52e3a5e",
+  "control": "23cb7483e695a78b76c67e43cfc0bb52dbc5796abc5194e3559af6dbd44514c6",
+  "original": "f38b565e9f903112045395700a6094e6134239219384baa1255053e6049cba9e",
+  "frameProbe": "727e86e9161858519be23cbd2cec5da293453feaa7ee57f8f79946cbf92beeb8",
+  "outside": 0,
+  "new": [
+    3,
+    4
+  ],
+  "peak": [
+    3,
+    3,
+    28
+  ],
+  "overOne": [
+    16,
+    10,
+    14
+  ],
+  "changed": [
+    {
+      "point": [
+        1261,
+        257
+      ],
+      "deltas": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          -1
+        ],
+        [
+          6,
+          1,
+          1
+        ]
+      ]
+    },
+    {
+      "point": [
+        1261,
+        261
+      ],
+      "deltas": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          11,
+          1,
+          -13
+        ]
+      ]
+    },
+    {
+      "point": [
+        1260,
+        262
+      ],
+      "deltas": [
+        [
+          0,
+          1,
+          2
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          3,
+          -13,
+          9
+        ]
+      ]
+    },
+    {
+      "point": [
+        1261,
+        262
+      ],
+      "deltas": [
+        [
+          -2,
+          0,
+          0
+        ],
+        [
+          -2,
+          0,
+          0
+        ],
+        [
+          8,
+          0,
+          0
+        ]
+      ]
+    },
+    {
+      "point": [
+        1302,
+        265
+      ],
+      "deltas": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          5,
+          -16,
+          -28
+        ]
+      ]
+    }
+  ],
+  "queue": [
+    {
+      "id": 1468,
+      "task": "nr-iris-intel-base-axis-two-precision-controls",
+      "state": "failed",
+      "exitCode": 1,
+      "elapsedSeconds": 26.75
+    },
+    {
+      "id": 1473,
+      "task": "nr-iris-intel-base-axis-retest",
+      "state": "succeeded",
+      "exitCode": 0,
+      "elapsedSeconds": 144.70300000000134
+    }
+  ],
+  "validation": {
+    "archive": "50d64c76a621983612b565597bac813191eecbf4d049af52152912fb97b7c462",
+    "files": {
+      "player/results.json": "a853f6c9f026426fafab6990afb15f8e7e9e325474f9d17108419e5f4abaafd4",
+      "player/pixels.npz": "727e86e9161858519be23cbd2cec5da293453feaa7ee57f8f79946cbf92beeb8",
+      "source/iris-intel-base-axis-candidate.py": "69678937e42e14a333bb714f7792b32f18d597980c047042b0fd337f5588d59b",
+      "source/iris-player-prepacking-bins.py": "2977c175018ddfb7dc7c17e8c45accb53db29782216a90679c1f79a0b6a700ac",
+      "logs/axis-initial.log": "20da7f4acde22f1f130616dec46d48aa0e8666d1676ab2ae5d1c8f2b8feb5f1b",
+      "logs/axis-retest.log": "4e1d8dfb6e3a44ef53f99192dd3577071a71b3bfac907760c35a91a48fe778a6",
+      "player/command.json": "027622ec07f244cc0cc0921b5a04c95f8e9c07d438509b7fa788bb2a40186120",
+      "player/runtime.json": "a72780bcb4ab78e822288e728f545427e22476f38876ea8fe3bb90ca09a40c7c",
+      "player/frames/capture_manifest.json": "ada9302b0fcdb2fe4f4f53b7ef2b79f70afb477f252f7c4cdb6474ae785fdd79",
+      "player/frames/gpu_capabilities.json": "a38eaca3509b417cfe23614fe415bd9ccc5622fc682d8623142cdeb7dc3d85cc"
+    }
+  }
+}

@@ -185,6 +185,7 @@ void appendShowcasePlatform(LoadedAsset& asset, const Vector3& footPivot) {
         38, 50, 66, 255, 38, 50, 66, 255,
         38, 50, 66, 255, 38, 50, 66, 255,
     };
+    platformMaterial.normalTexturePresent = false;
     platformMaterial.normalWidth = 2;
     platformMaterial.normalHeight = 2;
     platformMaterial.normalPixels = {
@@ -1324,6 +1325,12 @@ void CharacterSceneRenderer::registerPasses(
         const auto pass=graph.addCommandPass("character-transparent-prepare",[owner,ticket](rhi::ICommandRecorder& commands){owner->record(commands,*ticket);});
         graph.use(pass,jointResource,RenderGraphUsage::Storage,false);
         graph.use(pass,*gpuTransparentResource,RenderGraphUsage::Storage,true);
+    }else if(!oitIndexBuffers_.empty()&&oitIndexBuffers_[context.currentFrame].buffer){
+        const auto& buffer=oitIndexBuffers_[context.currentFrame];
+        rhi::BufferBarrierDesc initial{};
+        initial.buffer=buffer.buffer;initial.size=buffer.size;
+        initial.dstStageMask=VK_PIPELINE_STAGE_HOST_BIT;initial.dstAccessMask=VK_ACCESS_HOST_WRITE_BIT;
+        gpuTransparentResource=graph.importBuffer("transparent-sorted-indices",initial);
     }
     std::optional<RenderGraph::PassId> skinningPass;
     if (computeSkinningEnabled_) {
@@ -1643,6 +1650,25 @@ void CharacterSceneRenderer::registerPasses(
     std::optional<RenderGraph::ResourceId> reflectionResource;
     if(screenReflectionPrepared()&&reflectionActive_[context.currentFrame]){
         const auto slot=context.currentFrame;publishScreenReflectionOutput(slot);
+        if(projectedHistoryLayerPass_){
+            rhi::ImageBarrierDesc layerInitial{};layerInitial.image=projectedHistoryLayer_[slot].image.image;
+            const auto layer=graph.importImage("character-projected-history-layer",layerInitial);
+            const auto pass=graph.addGraphicsPass("character-projected-history-layer",projectedHistoryLayerBegin(context),
+                [this,frozenContext,frozenInstances](rhi::ICommandRecorder& commands){
+                    recordMainDraws(*frozenContext,3,frozenInstances.get(),0,static_cast<std::size_t>(-1),&commands,nullptr,true);
+                });
+            graph.attachment(pass,layer,RenderGraphUsage::ColorAttachment,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
+            graph.attachment(pass,snapshotDepth,RenderGraphUsage::DepthReadAttachment,VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL);
+            graph.use(pass,overlayDepth,RenderGraphUsage::Sampled,false);
+            for(auto resource:{instanceResource,jointResource,morphTargetResource,morphWeightResource})
+                graph.use(pass,resource,RenderGraphUsage::VertexStorage,false);
+            if(skinnedResource)graph.use(pass,*skinnedResource,RenderGraphUsage::VertexStorage,false);
+            if(gpuTransparentResource)graph.use(pass,*gpuTransparentResource,RenderGraphUsage::IndexBuffer,false);
+            for(std::uint32_t key=0;key<meshResourceCount_;++key){
+                graph.use(pass,vertexResources[key],RenderGraphUsage::VertexBuffer,false);
+                graph.use(pass,indexResources[key],RenderGraphUsage::IndexBuffer,false);
+            }
+        }
         const auto output=screenReflectionOutput(slot);rhi::ImageBarrierDesc initial{};initial.image=output.image;
         reflectionResource=graph.importImage("character-filtered-reflection",initial);
         const auto view=reflectionViews_[slot];const auto settings=reflectionSettings_[slot];
@@ -1657,6 +1683,10 @@ void CharacterSceneRenderer::registerPasses(
             previous.newLayout=VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;previous.dstStageMask=VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT;
             previous.dstAccessMask=VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT;
             graph.use(producer,graph.importImage("character-reflection-previous-color",previous),RenderGraphUsage::ComputeSampled,false);
+            if(projectedHistoryLayerPass_){
+                previous.image=projectedHistoryLayer_[reflectionHistorySlot_].image.image;
+                graph.use(producer,graph.importImage("character-reflection-previous-layer",previous),RenderGraphUsage::ComputeSampled,false);
+            }
         }
         graph.write(producer,*reflectionResource);
     }
@@ -1779,16 +1809,6 @@ void CharacterSceneRenderer::registerPasses(
     if(outlineMaskResource)graph.use(main,*outlineMaskResource,RenderGraphUsage::Sampled,false);
     graph.use(main, resources.shadow, RenderGraphUsage::Sampled, false);
     if(gpuTransparentResource)graph.use(main,*gpuTransparentResource,RenderGraphUsage::IndexBuffer,false);
-    else if (!oitIndexBuffers_.empty() && oitIndexBuffers_[context.currentFrame].buffer != VK_NULL_HANDLE) {
-        const auto& buffer = oitIndexBuffers_[context.currentFrame];
-        rhi::BufferBarrierDesc initial{};
-        initial.buffer = buffer.buffer;
-        initial.size = buffer.size;
-        initial.dstStageMask = VK_PIPELINE_STAGE_HOST_BIT;
-        initial.dstAccessMask = VK_ACCESS_HOST_WRITE_BIT;
-        const auto transparentIndices = graph.importBuffer("transparent-sorted-indices", initial);
-        graph.use(main, transparentIndices, RenderGraphUsage::IndexBuffer, false);
-    }
     if (indirectResource) graph.use(main, *indirectResource, RenderGraphUsage::IndirectBuffer, false);
     if(conservativeIndirectResource)graph.use(main,*conservativeIndirectResource,RenderGraphUsage::IndirectBuffer,false);
     if(conservativeReady)graph.read(main,*conservativeReady);
@@ -1912,12 +1932,24 @@ void CharacterSceneRenderer::recordScene(const RenderContext& context) {
             context.commands->imageBarrier({motionTarget_->image().image,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,1,
                 VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT,VK_ACCESS_SHADER_READ_BIT});
         }
+        if(projectedHistoryLayerPass_){
+            context.commands->imageBarrier({overlaySceneDepth_[slot].image.image,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,
+                VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,1,VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT,VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT,
+                VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT,VK_ACCESS_SHADER_READ_BIT});
+            context.commands->beginRenderPass(projectedHistoryLayerBegin(context));
+            recordMainDraws(context,3,instanceSnapshot_.get(),0,static_cast<std::size_t>(-1),context.commands,nullptr,true);
+            context.commands->endRenderPass();
+        }
         for(const auto image:{overlaySceneDepth_[slot].image.image,opaqueSceneColor_[slot].image.image})context.commands->imageBarrier({image,
             VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,1,VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT,
             VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT,VK_ACCESS_SHADER_READ_BIT});
-        if(projectedReflectionHistoryPrepared_&&reflectionHistoryAvailable(slot))context.commands->imageBarrier({opaqueSceneColor_[reflectionHistorySlot_].image.image,
-            VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,1,VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT,
-            VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT,VK_ACCESS_SHADER_READ_BIT});
+        if(projectedReflectionHistoryPrepared_&&reflectionHistoryAvailable(slot)){
+            const auto publishPrevious=[&](VkImage image){context.commands->imageBarrier({image,
+                VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,1,VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT,
+                VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT,VK_ACCESS_SHADER_READ_BIT});};
+            publishPrevious(opaqueSceneColor_[reflectionHistorySlot_].image.image);
+            if(projectedHistoryLayerPass_)publishPrevious(projectedHistoryLayer_[reflectionHistorySlot_].image.image);
+        }
         recordScreenReflection(*context.commands,slot,{overlaySceneDepth_[slot].view,opaqueSceneColor_[slot].view,context.renderExtent.width,context.renderExtent.height},
             reflectionViews_[slot],reflectionSettings_[slot]);
     }
@@ -2478,6 +2510,13 @@ void CharacterSceneRenderer::uploadMaterialTexture(LoadedAsset& asset,std::vecto
         SampledTextureUpload request;request.width=width;request.height=height;request.format=colorFormat;
         request.mipLevels=levels;request.semantic=settings.semantic();request.alphaCutoff=cutoff;
         request.sampler=settings.sampler(1,16);request.sampler.maxLod=VK_LOD_CLAMP_NONE;
+        if(slot==4&&m.faceSdf.authoredMaskMip) {
+            // Keep filtered mask reads on the original base-level sampler.
+            // The face geometry calculation fetches authored levels directly.
+            auto fixedLookup=azurerender::TextureImportSettings{};
+            fixedLookup.wrapU=fixedLookup.wrapV="clamp";
+            request.sampler=fixedLookup.sampler(1,16);
+        }
         const auto bytes=materialPixelLogicalBytes(m,kind);
         if(bytes>=16U*1024U*1024U)RuntimeDiagnostics::instance().info("render",
             "Scene material texture begin: "+m.name+", slot="+std::to_string(slot)+", bytes="+std::to_string(bytes));
@@ -3189,7 +3228,7 @@ void CharacterSceneRenderer::createOverlayDepth(const RenderContext& context) {
             destinations.push_back({{opaqueSceneColor_[frame].image.image,overlayDepthAttachments_[frame].image,overlaySceneDepth_[frame].image.image},
                 {opaqueSceneColor_[frame].view,overlayDepthViews_[frame],overlaySceneDepth_[frame].view}});
         snapshotMultisampling_=std::make_unique<SceneMultisampling>(*rhi_,*allocator_,context.renderExtent,context.depthFormat,reflectionSurfaceFormat_,
-            reflectionSurfaceFormat_==VK_FORMAT_R32G32B32A32_SFLOAT?SceneSecondaryResolve::MinimumDepthSample:SceneSecondaryResolve::Minimum,static_cast<std::uint32_t>(kMaxFramesInFlight),std::move(destinations),shaderDirectory_);
+            reflectionSurfaceFormat_==VK_FORMAT_R32G32B32A32_SFLOAT?SceneSecondaryResolve::MinimumDepthSample:SceneSecondaryResolve::Minimum,static_cast<std::uint32_t>(kMaxFramesInFlight),std::move(destinations),shaderDirectory_,true);
     }
     if(surfaceRadiance_&&kSurfaceRadianceFrameSelection&&context.depthFormat==VK_FORMAT_D32_SFLOAT
         &&std::uint64_t(context.renderExtent.width)*context.renderExtent.height*4*kMaxFramesInFlight<=64ULL*1024*1024
@@ -3382,6 +3421,7 @@ void CharacterSceneRenderer::recordOutlineMask(const RenderContext& context,cons
 
 void CharacterSceneRenderer::recordOverlayDepth(const RenderContext& context,const SceneInstanceSnapshot& snapshot,rhi::ICommandRecorder& commands){
     bool depthShell=false;
+    bool compositeReceiver=false;
     bool colorRequired=screenSpaceReflectionActive(snapshot.settings.screenSpaceReflection,
         snapshot.settings.sceneLightingEnabled,qaIsolationMode_,!(qaEffectMode_==5&&!qaEffectEnabled_));
     bool sampled=colorRequired||viewFog_!=nullptr;
@@ -3401,10 +3441,12 @@ void CharacterSceneRenderer::recordOverlayDepth(const RenderContext& context,con
             colorRequired|=material.nprDiffuse.screenLightingNormal;
             sampled|=(material.materialFeatures&(MaterialFeatureBrowOverlay|MaterialFeatureSceneTint|MaterialFeatureSceneRefraction|MaterialFeatureUnlitTextureLayers))!=0;
             colorRequired|=(material.materialFeatures&(MaterialFeatureSceneRefraction|MaterialFeatureSceneTint))!=0||opaqueSurfaceOverlay(material);
+            compositeReceiver|=material.multiplyReceiver!=AssetMaterial::MultiplyReceiver::Unrestricted;
             depthShell|=material.outlineSurface.present&&material.outlineSurface.depthPrepass;
         }
     }
-    if(!sampled&&!depthShell)return;
+    if(!sampled&&!compositeReceiver&&!depthShell)return;
+    colorRequired|=compositeReceiver;
     if(colorRequired&&context.depthTestEnabled)
         recordDepthCoverage(context,snapshot,commands,DepthCoverageMode::SnapshotPrefill);
     recordDepthCoverage(context,snapshot,commands,colorRequired?DepthCoverageMode::SnapshotColor:DepthCoverageMode::SnapshotDepth);
@@ -4305,6 +4347,34 @@ void CharacterSceneRenderer::createGraphicsPipeline(
             throw;
         }
         if (strictBlendModule) rhi_->destroyShaderModule(strictBlendModule);
+        if(projectedHistoryLayerPass_){
+            std::array<std::array<bool,2>,2> needed{};
+            const auto inspect=[&](const LoadedAsset& asset){
+                for(const auto& material:asset.materials)if(projectedHistoryOverlay(material)){
+                    const auto& layers=material.unlitTextureLayers;
+                    needed[layers.depthCompare==UnlitTextureLayers::DepthCompare::LessOrEqual]
+                        [layers.useVertexColor&&!asset.vertexColors.empty()]=true;
+                }
+            };
+            inspect(asset_);for(const auto& resource:additionalResources_)inspect(resource->asset);
+            const auto shader=rhi_->createShaderModule(readBinaryFile(shaderDirectory+
+                (bindlessTextures_?"/character_projected_history_bindless.frag.spv":"/character_projected_history.frag.spv")));
+            try{
+                auto layer=materialDesc;layer.fragmentShader=shader;layer.renderPass=projectedHistoryLayerPass_;
+                layer.colorAttachmentCount=1;layer.colorWriteMasks={0xf};layer.rasterizationSamples=VK_SAMPLE_COUNT_1_BIT;
+                layer.minSampleShading=0.F;
+                for(unsigned depth=0;depth<2;++depth)for(unsigned color=0;color<2;++color)if(needed[depth][color]){
+                    layer.depthCompare=depth?VK_COMPARE_OP_LESS_OR_EQUAL:VK_COMPARE_OP_LESS;
+                    layer.vertexBindings[1].stride=color?sizeof(std::array<float,4>):0;
+                    for(unsigned facing=0;facing<4;++facing){
+                        layer.frontFace=(facing&1U)?VK_FRONT_FACE_CLOCKWISE:VK_FRONT_FACE_COUNTER_CLOCKWISE;
+                        layer.cullMode=facing>=2||!context.faceCullingEnabled?VK_CULL_MODE_NONE:VK_CULL_MODE_BACK_BIT;
+                        projectedHistoryLayerPipelines_[depth][color][facing]=rhi_->createGraphicsPipeline(layer);
+                    }
+                }
+            }catch(...){rhi_->destroyShaderModule(shader);throw;}
+            rhi_->destroyShaderModule(shader);
+        }
         if(additive){auto composed=materialDesc;composed.primaryColorBlend=rhi::PrimaryColorBlend::Additive;
             if(context.displayMaskEnabled){composed.colorWriteMasks.assign(composed.colorAttachmentCount,0xf);composed.colorWriteMasks[2]=0;}
             createFacingPipelines(additiveBlendPipelines_,composed);
@@ -4323,12 +4393,26 @@ void CharacterSceneRenderer::createGraphicsPipeline(
         };
         inspectComposites(asset_);
         for (const auto& resource : additionalResources_) inspectComposites(resource->asset);
-        if (needsMultiply) {
+        const auto hasMultiplyDepth=[](const LoadedAsset& asset) {
+            return std::any_of(asset.materials.begin(),asset.materials.end(),[](const AssetMaterial& material) {
+                return material.multiplyDepthPrepass;
+            });
+        };
+        const bool multiplyDepthEnabled=hasMultiplyDepth(asset_)
+            ||std::any_of(additionalResources_.begin(),additionalResources_.end(),
+                [&](const auto& resource){return hasMultiplyDepth(resource->asset);});
+        if (needsMultiply || (context.depthTestEnabled && multiplyDepthEnabled)) {
             auto multiplyDesc = materialDesc;
             multiplyDesc.primaryColorBlend = rhi::PrimaryColorBlend::Multiply;
             multiplyDesc.depthCompare = VK_COMPARE_OP_LESS_OR_EQUAL;
             multiplyDesc.cullMode = context.faceCullingEnabled ? VK_CULL_MODE_BACK_BIT : VK_CULL_MODE_NONE;
-            createFacingPipelines(multiplyPipelines_, multiplyDesc);
+            if (needsMultiply) createFacingPipelines(multiplyPipelines_, multiplyDesc);
+            if (context.depthTestEnabled && multiplyDepthEnabled) {
+                auto prepass = multiplyDesc;
+                prepass.depthWrite = true;
+                prepass.colorWriteMasks.assign(prepass.colorAttachmentCount, 0);
+                createFacingPipelines(multiplyDepthPipelines_, prepass);
+            }
         }
         if (needsSceneTint) {
             auto tintDesc = materialDesc;
@@ -4499,6 +4583,8 @@ void CharacterSceneRenderer::destroyResources() {
              &multiplyPipelines_[0],
              &multiplyPipelines_[1],
              &multiplyPipelines_[2],&multiplyPipelines_[3],
+             &multiplyDepthPipelines_[0],&multiplyDepthPipelines_[1],
+             &multiplyDepthPipelines_[2],&multiplyDepthPipelines_[3],
              &sceneTintPipelines_[0],&sceneTintPipelines_[1],
              &outlinePipeline_,&outlineDepthPipeline_,&outlineDepthMirroredPipeline_,
              &outlineMirroredPipeline_,
@@ -4662,6 +4748,8 @@ void CharacterSceneRenderer::destroyGraphicsPipelinesForRecreate() {
              &multiplyPipelines_[0],
              &multiplyPipelines_[1],
              &multiplyPipelines_[2],&multiplyPipelines_[3],
+             &multiplyDepthPipelines_[0],&multiplyDepthPipelines_[1],
+             &multiplyDepthPipelines_[2],&multiplyDepthPipelines_[3],
              &sceneTintPipelines_[0],&sceneTintPipelines_[1],
              &outlinePipeline_,&outlineDepthPipeline_,&outlineDepthMirroredPipeline_,
              &outlineMirroredPipeline_,
@@ -5396,7 +5484,8 @@ void CharacterSceneRenderer::prepareTransparentIndices() {
 }
 
 void CharacterSceneRenderer::recordMainDraws(const RenderContext& context, std::uint32_t stage,
-    const SceneInstanceSnapshot* snapshot, std::size_t firstTransparent, std::size_t transparentCount, rhi::ICommandRecorder* recordingCommands, SceneSubmissionCounters* recordingCounters) {
+    const SceneInstanceSnapshot* snapshot, std::size_t firstTransparent, std::size_t transparentCount,
+    rhi::ICommandRecorder* recordingCommands, SceneSubmissionCounters* recordingCounters,bool projectedHistoryLayer) {
     if (snapshot == nullptr) throw std::logic_error("Main recording requires an instance snapshot");
     if (firstTransparent > snapshot->visibleIndices.size())
         throw std::out_of_range("Transparent recording range");
@@ -5519,6 +5608,10 @@ void CharacterSceneRenderer::recordMainDraws(const RenderContext& context, std::
             const auto* primitive = snapshot != nullptr
                 ? &mesh.primitives.at(snapshot->buffers.transparentPrimitives[meshKey][primitiveSlot])
                 : transparentPrimitivesByMesh_[meshKey][primitiveSlot];
+            if(projectedHistoryLayer&&!projectedHistoryOverlay(mesh.materials[primitive->materialIndex])){
+                oitReadIndex+=primitive->indexCount;
+                continue;
+            }
             if (snapshot->buffers.transparentIndices != VK_NULL_HANDLE) {
                 const VkDeviceSize offsetBytes =
                     static_cast<VkDeviceSize>(oitReadIndex)
@@ -5535,7 +5628,7 @@ void CharacterSceneRenderer::recordMainDraws(const RenderContext& context, std::
                 1,
                 firstInstance,
                 textureBase,
-                globalMaterialBase, counters, snapshot);
+                globalMaterialBase, counters, snapshot,false,false,projectedHistoryLayer);
             oitReadIndex += primitive->indexCount;
         }
     }
@@ -5551,7 +5644,8 @@ void CharacterSceneRenderer::drawPrimitive(
     const std::uint32_t firstInstance,
     const std::uint32_t textureBase,
     const std::size_t globalMaterialBase,
-    SceneSubmissionCounters* counters, const SceneInstanceSnapshot* snapshot,bool snapshotSurfaceOverlay,bool allowConservative) {
+    SceneSubmissionCounters* counters, const SceneInstanceSnapshot* snapshot,bool snapshotSurfaceOverlay,bool allowConservative,
+    bool projectedHistoryLayer) {
     const auto recordRun = [&](const PrimitiveOpacityRun& run) {
     if (run.opacity == 0) return;
     const auto firstInstance=run.firstInstance;
@@ -5591,7 +5685,10 @@ void CharacterSceneRenderer::drawPrimitive(
         ?snapshot->buffers.vertexColors.at(snapshot->instances.at(firstInstance).meshKey):whiteVertexColorBuffer_.buffer;
     if(!snapshot&&!mesh.vertexColors.empty())throw std::logic_error("Vertex colors require immutable recording buffers");
     commands.bindVertexStream(1,colorBuffer,0);
-    const auto fullPipeline=materialUvPipeline(material,surfaceOverlay?pipeline:materialLightingPipeline(material,pipeline));
+    const bool inclusive=material.unlitTextureLayers.depthCompare==UnlitTextureLayers::DepthCompare::LessOrEqual;
+    const auto fullPipeline=projectedHistoryLayer
+        ?projectedHistoryLayerPipelines_[inclusive][vertexColor][surfaceFacingIndex(material.doubleSided,mirrored)]
+        :materialUvPipeline(material,surfaceOverlay?pipeline:materialLightingPipeline(material,pipeline));
     const auto primitiveIndex=static_cast<std::size_t>(&primitive-mesh.primitives.data());
     bool useConservative=snapshot&&allowConservative&&run.opacity==1.F&&ordinaryOpaqueMaterial(material)
         &&firstIndexOffset==primitive.firstIndex&&snapshot->buffers.conservativeIndirect!=VK_NULL_HANDLE;
@@ -5626,7 +5723,7 @@ void CharacterSceneRenderer::drawPrimitive(
             materialFeaturesForFrame(material),
             material.materialProfileVersion,
             static_cast<std::uint32_t>((globalMaterialBase+primitive.materialIndex)<<1U) |
-            ((snapshot != nullptr ? snapshot->gizmo.selectedPrimitive : selectedPrimitiveIndex_)
+            (!projectedHistoryLayer&&(snapshot != nullptr ? snapshot->gizmo.selectedPrimitive : selectedPrimitiveIndex_)
                 == static_cast<std::int32_t>(
                        &primitive - mesh.primitives.data())
             ? 1U
@@ -5695,9 +5792,18 @@ void CharacterSceneRenderer::drawPrimitive(
             ++recordedDrawCalls;
         }
     } else {
-        commands.drawIndexed(
-            primitive.indexCount, firstIndexOffset, instanceCount,
-            materialOriginFirstInstance(material,snapshot,firstInstance,instanceCount));
+        const auto drawInstance=materialOriginFirstInstance(material,snapshot,firstInstance,instanceCount);
+        if(!projectedHistoryLayer&&material.multiplyDepthPrepass) {
+            const auto prepass=multiplyDepthPipelines_[surfaceFacingIndex(material.doubleSided,mirrored)];
+            if(prepass!=VK_NULL_HANDLE) {
+                commands.bindPipeline(materialUvPipeline(material,materialLightingPipeline(material,prepass)));
+                commands.drawIndexed(primitive.indexCount,firstIndexOffset,instanceCount,drawInstance);
+                commands.bindPipeline(fullPipeline);
+                ++recordedDrawCalls;
+                if(counters)counters->pipelineBinds+=2;
+            }
+        }
+        commands.drawIndexed(primitive.indexCount,firstIndexOffset,instanceCount,drawInstance);
         ++recordedDrawCalls;
     }
     if (counters != nullptr) {

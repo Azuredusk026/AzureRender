@@ -1,0 +1,56 @@
+{
+  "status": "measured-native-iris-mip-footprint-equivalence",
+  "overall": "failed-user-review",
+  "sourcePrograms": {
+    "gradient": "4d73a6e3223e1abb3a19ac3ab332bfe882734ae4e975ac83952a7505a9617f8e",
+    "quad": "2ec129bcc1106c3b1347cf33f319781018e8228f0ad5ef078bbae3b55e644fbb"
+  },
+  "scope": 255,
+  "devices": {
+    "nvidia": {
+      "rule": "coarse-diagonal-footprint",
+      "matchingSamples": {
+        "calibration": 143,
+        "holdout": 112,
+        "total": 255,
+        "matchesSeam": 20
+      },
+      "uniqueLevels": 172,
+      "projectiveCoordinateError": 2.384185791015625e-07
+    },
+    "intel": {
+      "rule": "coarse-axis-length",
+      "matchingSamples": {
+        "calibration": 143,
+        "holdout": 112,
+        "total": 255,
+        "matchesSeam": 20
+      },
+      "uniqueLevels": 168,
+      "projectiveCoordinateError": 1.7881393432617188e-07
+    }
+  },
+  "vulkanQuery": {
+    "nvidiaMatches": {
+      "euclidean": 242,
+      "diagonal": 255
+    },
+    "intelReplay": "unsupported-capture-extension"
+  },
+  "archive": {
+    "sha256": "c47bac621f841df69e3970d3d831348023fea6b6d5f79ef14dc44e4d0d83d791",
+    "members": {
+      "archive-iris-native-mip-footprints.py": "4089e56a5be5422b790e18cbe2926b4fc13720fabbd51f188e6ae24cdfea59b0",
+      "iris-native-coarse-threshold-alternatives.py": "a7b2fc46a067ac547be95a7258da7f1165f4413e5d7455b408640e57e9c9f039",
+      "iris-native-coarse-threshold-alternatives.json": "d7d863a887f5db6bbfef05a550644b79de44fad79ea339f02925cdffa07ea1b2",
+      "iris-matcap-projective-footprint.py": "1bf9bc880e7b3b9be085d6a434e67f89c1456d24e1807a030296ac12c99a8c7a",
+      "iris-matcap-projective-footprint.json": "a45333252b2999c7a9ac6be432c93d401e5b9b3aa4e570c3b0432a9fe68a2247",
+      "iris-vulkan-approximate-footprint-query.py": "44b0cd6d098ce5ff5c152b3ae65770092bf565f51fb85907dfe1421659117e29",
+      "iris-vulkan-approximate-footprint-query.json": "0423a31bf993c212060927d785df88c7e665451028cd3d3ea73e40eecc4fc837",
+      "iris-native-matcap-d3d-vulkan-owned-levels.json": "b1c285dfd50f882cb43424ff32fc4b19cf27bd905e6ddf87cedc1e161d4dcd2c",
+      "iris-vulkan-footprint-nvidia-matcap/request.json": "e353295bf6a86a8793e94cbd362ac63eda4e7d9e67bf130196ddeea7fba132af",
+      "iris-vulkan-footprint-nvidia-matcap/results.json": "c8fddc4fb30b1fcb36f9dfa523227399846c44689e970f50ca34d9592e4b236e",
+      "iris-vulkan-footprint-intel/results.json": "08f8d4940e8a3eb3e993b7d9abad8618f372b7ca299299690649ab4de46ce140"
+    }
+  }
+}

@@ -64,6 +64,7 @@ UnlitTextureLayers parseUnlitTextureLayers(const Json& source,std::size_t textur
     UnlitTextureLayers result;result.layerCount=static_cast<unsigned>(layers.size());
     if(source.contains("submission")) {
         if(source.at("submission")=="opaque-overlay")result.submission=UnlitTextureLayers::Submission::OpaqueOverlay;
+        else if(source.at("submission")=="projected-history")result.submission=UnlitTextureLayers::Submission::ProjectedHistory;
         else if(source.at("submission")!="transparent")invalid("submission");
     }
     if(source.contains("colorBlendResponse")) {
@@ -147,6 +148,12 @@ void validateUnlitSubmission(const UnlitTextureLayers& profile) {
     if(profile.attenuateColorBlend&&profile.submission!=UnlitTextureLayers::Submission::OpaqueOverlay)
         invalid("colorBlendResponse requires opaque overlay submission");
     if(profile.submission==UnlitTextureLayers::Submission::Transparent)return;
+    if(profile.submission==UnlitTextureLayers::Submission::ProjectedHistory) {
+        if(!profile.present||profile.composite!=UnlitTextureLayers::Composite::Alpha
+            ||profile.fogMode!=UnlitTextureLayers::FogMode::None)
+            invalid("projected history submission requires alpha compositing without per-layer fog");
+        return;
+    }
     if(profile.submission!=UnlitTextureLayers::Submission::OpaqueOverlay||!profile.present
         ||profile.composite!=UnlitTextureLayers::Composite::Additive
         ||profile.depthCompare!=UnlitTextureLayers::DepthCompare::LessOrEqual

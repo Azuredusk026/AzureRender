@@ -1,0 +1,2061 @@
+{
+  "status": "native-sampling-qualified",
+  "overallStatus": "failed-user-review",
+  "replay": {
+    "status": "qualified",
+    "devices": {
+      "nvidia": {
+        "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+        "implicitSha256": "b5f76e2bfe5979ebc9e43994e7d284e1080f32c0488344569956c78d3dc8760d",
+        "attachmentSha256": "9acc7f9a4af80ced517044d2da91ac336fea72a798f0ce9e426b3ee728741388",
+        "pixelShaderSha256": "2fed357c703e0c981455a06d6e4e809cdb519aebca2838365137fdd5c8944b1e",
+        "mips": {
+          "0": {
+            "sha256": "7041580d8a1ca22a669c5159538c026d63ba4022cb7f705c002093c209441244",
+            "programSha256": "7f59cf9475c6233e12e9407576fdbad10b7ba165ec4e6de83651d761945f5877"
+          },
+          "1": {
+            "sha256": "40996e9e46b7a1fa26d6ee9d94e25994375467b17ff6bdec869c94735eebd5f0",
+            "programSha256": "8c938387cadb49c6f7c8f6889a2f8dd429d70af1b91794a36fb9d376205a46c8"
+          },
+          "2": {
+            "sha256": "b171ee0969a28df62c28f6c5f51f8acb1fae9a8540a451b2baa30a9c7c59c1cd",
+            "programSha256": "21e9de5922db56e207fedd957624f73d953017f8cc5c85fd9b85f79928d78aad"
+          },
+          "3": {
+            "sha256": "ebf10e3f3b48ca0a9e6823cd64bbfe91c596b375abc0f0c47de1803fbbb80f90",
+            "programSha256": "f234065b3197cfa09442ee5150f67ddc152d2b675098363ef30b6643453e2342"
+          },
+          "4": {
+            "sha256": "0a6e5d936fd75cb551638c79ef3cbfd69e9eaf13bdd9ee18f2cf9d19489dd2d6",
+            "programSha256": "fc7ef67ecfebc186287f9ae2a9f065dc3d5882a3047fcd7a14d70ebcb81e9856"
+          },
+          "5": {
+            "sha256": "66ccb3332e522661a987ec834ca140d68d0c2e8a2ce5ea330b071c2f54ff197b",
+            "programSha256": "dd1cb2be3bf86dea9e69b28cd6440c6b1d4524cb01fdce658394f99d7feb8749"
+          },
+          "6": {
+            "sha256": "2c96c008b487b021bf5ff9dda01780fc85d9f823797647a156bf82dd565cafd0",
+            "programSha256": "56e4a9f4fc0b3e2771cd72ca8c700ed37681618ff77fcc51d08f53c31a977e02"
+          },
+          "7": {
+            "sha256": "52675448e05e9f83cb9c34a9caf1853c69fab8f300767a3f1df0f6f9c088c546",
+            "programSha256": "15664992001cf64456f43dc1d2657b0911cba80d49991a88548e2f36d01619ce"
+          },
+          "8": {
+            "sha256": "b080a64de2b83920773d40d14e119f701b79317f6774c4ea6ac88c3274b2f37e",
+            "programSha256": "6f20f18827fbd45b1bfb000adc89aa39a1f755b8ff386d8ca3428e67f73d9ad6"
+          },
+          "9": {
+            "sha256": "f56b1ae3081bbea663f04411a835ad3f13e569c8540677443c7ee422c449cf11",
+            "programSha256": "be76fc9a576fc0575c0056bffef23f5d836e2a46eb2ff10196a62d8502c5809d"
+          }
+        },
+        "texture": {
+          "resource": "ResourceId::139680",
+          "width": 512,
+          "height": 512,
+          "mips": 10
+        },
+        "copyControlExact": true,
+        "baselineRestored": true,
+        "messages": [
+          "NVIDIA Nsight Perf SDK\nNVD3D11Counters::GetCounterAvailabilityImage\nNvPerf could not determine counter availability for this GPU",
+          "NVIDIA Nsight Perf SDK\nNVD3D11Counters::Impl::TryInitializePerfSDK\nNvPerf could not initialize counter availability image"
+        ]
+      },
+      "intel": {
+        "device": "Intel(R) UHD Graphics",
+        "implicitSha256": "7cc5a9836b7f6ce35ca64ad7f9f7e383fecbb55dac461428bb9a6b58b77a593b",
+        "attachmentSha256": "e19d5a6728ed42946d6a2f11874fff1a466e00e5189b0d0d5997527f94165a43",
+        "pixelShaderSha256": "2fed357c703e0c981455a06d6e4e809cdb519aebca2838365137fdd5c8944b1e",
+        "mips": {
+          "0": {
+            "sha256": "b4865a66e71974ae44a337ba19d02a316b30b8bce18bb2dabe0b06ed6ae8636a",
+            "programSha256": "7f59cf9475c6233e12e9407576fdbad10b7ba165ec4e6de83651d761945f5877"
+          },
+          "1": {
+            "sha256": "3844dfa787fc41d607a4f862fadcd200140d95bb23eae6d497580274e5d763b3",
+            "programSha256": "8c938387cadb49c6f7c8f6889a2f8dd429d70af1b91794a36fb9d376205a46c8"
+          },
+          "2": {
+            "sha256": "bcc0e7c86425d192eabf5400ef9ba1fa4d6d2812e97e9fbd9b0313cbe06bb863",
+            "programSha256": "21e9de5922db56e207fedd957624f73d953017f8cc5c85fd9b85f79928d78aad"
+          },
+          "3": {
+            "sha256": "dbec0301f8e54a2cf49a707a999f7f5be885404613594f9fda603f550cc06455",
+            "programSha256": "f234065b3197cfa09442ee5150f67ddc152d2b675098363ef30b6643453e2342"
+          },
+          "4": {
+            "sha256": "7e349601b054e7f5165c652b415a71da0404abb240220e984d990880d0f7b33f",
+            "programSha256": "fc7ef67ecfebc186287f9ae2a9f065dc3d5882a3047fcd7a14d70ebcb81e9856"
+          },
+          "5": {
+            "sha256": "e7b4b28f4c589869be3730bddb2a79e8426ae813a214544128cf1671483b90ad",
+            "programSha256": "dd1cb2be3bf86dea9e69b28cd6440c6b1d4524cb01fdce658394f99d7feb8749"
+          },
+          "6": {
+            "sha256": "8d96706a4d0512da2d9b9a73d52e4240c4f2e2d92f7682413b15a92306d0ca50",
+            "programSha256": "56e4a9f4fc0b3e2771cd72ca8c700ed37681618ff77fcc51d08f53c31a977e02"
+          },
+          "7": {
+            "sha256": "0d87d2a0073c96d1e3f963886c7f52e1110cd946ff8a6b2df363cbdebfd3890e",
+            "programSha256": "15664992001cf64456f43dc1d2657b0911cba80d49991a88548e2f36d01619ce"
+          },
+          "8": {
+            "sha256": "81c835a3b828e8a24885f95dd1703bdb67fec81d0eda0152c4424d07a583a184",
+            "programSha256": "6f20f18827fbd45b1bfb000adc89aa39a1f755b8ff386d8ca3428e67f73d9ad6"
+          },
+          "9": {
+            "sha256": "bde4e42c87735594c5875f802ee8b5aa18958670737e690c6d4c4b2bac79cb59",
+            "programSha256": "be76fc9a576fc0575c0056bffef23f5d836e2a46eb2ff10196a62d8502c5809d"
+          }
+        },
+        "texture": {
+          "resource": "ResourceId::139680",
+          "width": 512,
+          "height": 512,
+          "mips": 10
+        },
+        "copyControlExact": true,
+        "baselineRestored": true,
+        "messages": []
+      }
+    }
+  },
+  "comparison": {
+    "nvidia": {
+      "all": {
+        "0,1,2,3,4": 1,
+        "3,4": 2,
+        "4": 240,
+        "5": 12
+      },
+      "residual": [
+        {
+          "x": 1253,
+          "y": 259,
+          "primitive": 61,
+          "lastDepthFailed": false,
+          "native": [
+            83,
+            77,
+            200
+          ],
+          "candidate": [
+            83,
+            78,
+            202
+          ],
+          "delta": [
+            0,
+            1,
+            2
+          ],
+          "maximum": 2,
+          "matchingNativeLevels": [
+            4
+          ]
+        },
+        {
+          "x": 1254,
+          "y": 259,
+          "primitive": 73,
+          "lastDepthFailed": false,
+          "native": [
+            86,
+            90,
+            246
+          ],
+          "candidate": [
+            86,
+            90,
+            248
+          ],
+          "delta": [
+            0,
+            0,
+            2
+          ],
+          "maximum": 2,
+          "matchingNativeLevels": [
+            4
+          ]
+        },
+        {
+          "x": 1261,
+          "y": 261,
+          "primitive": 136,
+          "lastDepthFailed": false,
+          "native": [
+            89,
+            58,
+            135
+          ],
+          "candidate": [
+            100,
+            59,
+            123
+          ],
+          "delta": [
+            11,
+            1,
+            -12
+          ],
+          "maximum": 12,
+          "matchingNativeLevels": [
+            5
+          ]
+        },
+        {
+          "x": 1250,
+          "y": 262,
+          "primitive": 37,
+          "lastDepthFailed": false,
+          "native": [
+            116,
+            79,
+            99
+          ],
+          "candidate": [
+            113,
+            78,
+            97
+          ],
+          "delta": [
+            -3,
+            -1,
+            -2
+          ],
+          "maximum": 3,
+          "matchingNativeLevels": [
+            4
+          ]
+        },
+        {
+          "x": 1251,
+          "y": 262,
+          "primitive": 56,
+          "lastDepthFailed": false,
+          "native": [
+            95,
+            54,
+            137
+          ],
+          "candidate": [
+            95,
+            54,
+            139
+          ],
+          "delta": [
+            0,
+            0,
+            2
+          ],
+          "maximum": 2,
+          "matchingNativeLevels": [
+            4
+          ]
+        },
+        {
+          "x": 1262,
+          "y": 262,
+          "primitive": 129,
+          "lastDepthFailed": false,
+          "native": [
+            116,
+            90,
+            105
+          ],
+          "candidate": [
+            112,
+            85,
+            100
+          ],
+          "delta": [
+            -4,
+            -5,
+            -5
+          ],
+          "maximum": 5,
+          "matchingNativeLevels": [
+            4
+          ]
+        },
+        {
+          "x": 1301,
+          "y": 262,
+          "primitive": 207,
+          "lastDepthFailed": false,
+          "native": [
+            89,
+            66,
+            202
+          ],
+          "candidate": [
+            89,
+            66,
+            204
+          ],
+          "delta": [
+            0,
+            0,
+            2
+          ],
+          "maximum": 2,
+          "matchingNativeLevels": [
+            4
+          ]
+        },
+        {
+          "x": 1261,
+          "y": 263,
+          "primitive": 126,
+          "lastDepthFailed": false,
+          "native": [
+            109,
+            63,
+            95
+          ],
+          "candidate": [
+            106,
+            61,
+            93
+          ],
+          "delta": [
+            -3,
+            -2,
+            -2
+          ],
+          "maximum": 3,
+          "matchingNativeLevels": [
+            4
+          ]
+        },
+        {
+          "x": 1299,
+          "y": 263,
+          "primitive": 200,
+          "lastDepthFailed": false,
+          "native": [
+            128,
+            105,
+            114
+          ],
+          "candidate": [
+            122,
+            98,
+            105
+          ],
+          "delta": [
+            -6,
+            -7,
+            -9
+          ],
+          "maximum": 9,
+          "matchingNativeLevels": [
+            4
+          ]
+        },
+        {
+          "x": 1312,
+          "y": 263,
+          "primitive": 286,
+          "lastDepthFailed": false,
+          "native": [
+            138,
+            97,
+            109
+          ],
+          "candidate": [
+            132,
+            92,
+            103
+          ],
+          "delta": [
+            -6,
+            -5,
+            -6
+          ],
+          "maximum": 6,
+          "matchingNativeLevels": [
+            4
+          ]
+        },
+        {
+          "x": 1251,
+          "y": 264,
+          "primitive": 39,
+          "lastDepthFailed": false,
+          "native": [
+            132,
+            106,
+            107
+          ],
+          "candidate": [
+            121,
+            91,
+            88
+          ],
+          "delta": [
+            -11,
+            -15,
+            -19
+          ],
+          "maximum": 19,
+          "matchingNativeLevels": [
+            4
+          ]
+        },
+        {
+          "x": 1252,
+          "y": 264,
+          "primitive": 101,
+          "lastDepthFailed": false,
+          "native": [
+            103,
+            54,
+            119
+          ],
+          "candidate": [
+            101,
+            54,
+            117
+          ],
+          "delta": [
+            -2,
+            0,
+            -2
+          ],
+          "maximum": 2,
+          "matchingNativeLevels": [
+            4
+          ]
+        },
+        {
+          "x": 1260,
+          "y": 264,
+          "primitive": 120,
+          "lastDepthFailed": false,
+          "native": [
+            103,
+            51,
+            109
+          ],
+          "candidate": [
+            100,
+            50,
+            106
+          ],
+          "delta": [
+            -3,
+            -1,
+            -3
+          ],
+          "maximum": 3,
+          "matchingNativeLevels": [
+            4
+          ]
+        },
+        {
+          "x": 1300,
+          "y": 264,
+          "primitive": 197,
+          "lastDepthFailed": false,
+          "native": [
+            115,
+            68,
+            91
+          ],
+          "candidate": [
+            113,
+            67,
+            90
+          ],
+          "delta": [
+            -2,
+            -1,
+            -1
+          ],
+          "maximum": 2,
+          "matchingNativeLevels": [
+            4
+          ]
+        },
+        {
+          "x": 1311,
+          "y": 264,
+          "primitive": 287,
+          "lastDepthFailed": false,
+          "native": [
+            103,
+            53,
+            105
+          ],
+          "candidate": [
+            102,
+            52,
+            103
+          ],
+          "delta": [
+            -1,
+            -1,
+            -2
+          ],
+          "maximum": 2,
+          "matchingNativeLevels": [
+            4
+          ]
+        },
+        {
+          "x": 1253,
+          "y": 265,
+          "primitive": 102,
+          "lastDepthFailed": false,
+          "native": [
+            98,
+            66,
+            102
+          ],
+          "candidate": [
+            95,
+            63,
+            99
+          ],
+          "delta": [
+            -3,
+            -3,
+            -3
+          ],
+          "maximum": 3,
+          "matchingNativeLevels": [
+            4
+          ]
+        },
+        {
+          "x": 1254,
+          "y": 265,
+          "primitive": 99,
+          "lastDepthFailed": false,
+          "native": [
+            92,
+            88,
+            157
+          ],
+          "candidate": [
+            90,
+            87,
+            155
+          ],
+          "delta": [
+            -2,
+            -1,
+            -2
+          ],
+          "maximum": 2,
+          "matchingNativeLevels": [
+            4
+          ]
+        },
+        {
+          "x": 1255,
+          "y": 265,
+          "primitive": 98,
+          "lastDepthFailed": false,
+          "native": [
+            88,
+            86,
+            185
+          ],
+          "candidate": [
+            87,
+            85,
+            183
+          ],
+          "delta": [
+            -1,
+            -1,
+            -2
+          ],
+          "maximum": 2,
+          "matchingNativeLevels": [
+            4
+          ]
+        },
+        {
+          "x": 1258,
+          "y": 265,
+          "primitive": 113,
+          "lastDepthFailed": false,
+          "native": [
+            94,
+            86,
+            152
+          ],
+          "candidate": [
+            92,
+            84,
+            148
+          ],
+          "delta": [
+            -2,
+            -2,
+            -4
+          ],
+          "maximum": 4,
+          "matchingNativeLevels": [
+            5
+          ]
+        },
+        {
+          "x": 1259,
+          "y": 265,
+          "primitive": 112,
+          "lastDepthFailed": false,
+          "native": [
+            103,
+            72,
+            106
+          ],
+          "candidate": [
+            99,
+            68,
+            100
+          ],
+          "delta": [
+            -4,
+            -4,
+            -6
+          ],
+          "maximum": 6,
+          "matchingNativeLevels": [
+            4
+          ]
+        },
+        {
+          "x": 1301,
+          "y": 265,
+          "primitive": 187,
+          "lastDepthFailed": false,
+          "native": [
+            105,
+            60,
+            115
+          ],
+          "candidate": [
+            105,
+            59,
+            113
+          ],
+          "delta": [
+            0,
+            -1,
+            -2
+          ],
+          "maximum": 2,
+          "matchingNativeLevels": [
+            4
+          ]
+        },
+        {
+          "x": 1311,
+          "y": 265,
+          "primitive": 287,
+          "lastDepthFailed": false,
+          "native": [
+            156,
+            115,
+            106
+          ],
+          "candidate": [
+            144,
+            98,
+            89
+          ],
+          "delta": [
+            -12,
+            -17,
+            -17
+          ],
+          "maximum": 17,
+          "matchingNativeLevels": [
+            4
+          ]
+        },
+        {
+          "x": 1254,
+          "y": 266,
+          "primitive": 103,
+          "lastDepthFailed": false,
+          "native": [
+            119,
+            101,
+            111
+          ],
+          "candidate": [
+            108,
+            85,
+            91
+          ],
+          "delta": [
+            -11,
+            -16,
+            -20
+          ],
+          "maximum": 20,
+          "matchingNativeLevels": [
+            4
+          ]
+        },
+        {
+          "x": 1255,
+          "y": 266,
+          "primitive": 104,
+          "lastDepthFailed": false,
+          "native": [
+            108,
+            87,
+            107
+          ],
+          "candidate": [
+            103,
+            81,
+            99
+          ],
+          "delta": [
+            -5,
+            -6,
+            -8
+          ],
+          "maximum": 8,
+          "matchingNativeLevels": [
+            4
+          ]
+        },
+        {
+          "x": 1256,
+          "y": 266,
+          "primitive": 107,
+          "lastDepthFailed": false,
+          "native": [
+            102,
+            79,
+            110
+          ],
+          "candidate": [
+            97,
+            74,
+            102
+          ],
+          "delta": [
+            -5,
+            -5,
+            -8
+          ],
+          "maximum": 8,
+          "matchingNativeLevels": [
+            4
+          ]
+        },
+        {
+          "x": 1257,
+          "y": 266,
+          "primitive": 109,
+          "lastDepthFailed": false,
+          "native": [
+            111,
+            89,
+            105
+          ],
+          "candidate": [
+            105,
+            81,
+            95
+          ],
+          "delta": [
+            -6,
+            -8,
+            -10
+          ],
+          "maximum": 10,
+          "matchingNativeLevels": [
+            4
+          ]
+        },
+        {
+          "x": 1302,
+          "y": 266,
+          "primitive": 184,
+          "lastDepthFailed": false,
+          "native": [
+            101,
+            75,
+            118
+          ],
+          "candidate": [
+            99,
+            73,
+            114
+          ],
+          "delta": [
+            -2,
+            -2,
+            -4
+          ],
+          "maximum": 4,
+          "matchingNativeLevels": [
+            4
+          ]
+        },
+        {
+          "x": 1307,
+          "y": 266,
+          "primitive": 311,
+          "lastDepthFailed": false,
+          "native": [
+            94,
+            93,
+            223
+          ],
+          "candidate": [
+            93,
+            92,
+            221
+          ],
+          "delta": [
+            -1,
+            -1,
+            -2
+          ],
+          "maximum": 2,
+          "matchingNativeLevels": [
+            4
+          ]
+        },
+        {
+          "x": 1308,
+          "y": 266,
+          "primitive": 311,
+          "lastDepthFailed": false,
+          "native": [
+            93,
+            84,
+            168
+          ],
+          "candidate": [
+            91,
+            83,
+            165
+          ],
+          "delta": [
+            -2,
+            -1,
+            -3
+          ],
+          "maximum": 3,
+          "matchingNativeLevels": [
+            4
+          ]
+        },
+        {
+          "x": 1309,
+          "y": 266,
+          "primitive": 308,
+          "lastDepthFailed": false,
+          "native": [
+            99,
+            59,
+            115
+          ],
+          "candidate": [
+            97,
+            57,
+            111
+          ],
+          "delta": [
+            -2,
+            -2,
+            -4
+          ],
+          "maximum": 4,
+          "matchingNativeLevels": [
+            4
+          ]
+        },
+        {
+          "x": 1310,
+          "y": 266,
+          "primitive": 297,
+          "lastDepthFailed": false,
+          "native": [
+            140,
+            103,
+            111
+          ],
+          "candidate": [
+            130,
+            89,
+            92
+          ],
+          "delta": [
+            -10,
+            -14,
+            -19
+          ],
+          "maximum": 19,
+          "matchingNativeLevels": [
+            4
+          ]
+        },
+        {
+          "x": 1303,
+          "y": 267,
+          "primitive": 183,
+          "lastDepthFailed": false,
+          "native": [
+            115,
+            92,
+            106
+          ],
+          "candidate": [
+            109,
+            84,
+            95
+          ],
+          "delta": [
+            -6,
+            -8,
+            -11
+          ],
+          "maximum": 11,
+          "matchingNativeLevels": [
+            4
+          ]
+        },
+        {
+          "x": 1304,
+          "y": 267,
+          "primitive": 182,
+          "lastDepthFailed": false,
+          "native": [
+            96,
+            70,
+            105
+          ],
+          "candidate": [
+            93,
+            67,
+            101
+          ],
+          "delta": [
+            -3,
+            -3,
+            -4
+          ],
+          "maximum": 4,
+          "matchingNativeLevels": [
+            4
+          ]
+        },
+        {
+          "x": 1305,
+          "y": 267,
+          "primitive": 180,
+          "lastDepthFailed": false,
+          "native": [
+            92,
+            71,
+            137
+          ],
+          "candidate": [
+            89,
+            68,
+            132
+          ],
+          "delta": [
+            -3,
+            -3,
+            -5
+          ],
+          "maximum": 5,
+          "matchingNativeLevels": [
+            4
+          ]
+        },
+        {
+          "x": 1306,
+          "y": 267,
+          "primitive": 178,
+          "lastDepthFailed": false,
+          "native": [
+            91,
+            69,
+            129
+          ],
+          "candidate": [
+            89,
+            67,
+            124
+          ],
+          "delta": [
+            -2,
+            -2,
+            -5
+          ],
+          "maximum": 5,
+          "matchingNativeLevels": [
+            4
+          ]
+        },
+        {
+          "x": 1307,
+          "y": 267,
+          "primitive": 176,
+          "lastDepthFailed": false,
+          "native": [
+            90,
+            56,
+            98
+          ],
+          "candidate": [
+            87,
+            54,
+            94
+          ],
+          "delta": [
+            -3,
+            -2,
+            -4
+          ],
+          "maximum": 4,
+          "matchingNativeLevels": [
+            4
+          ]
+        },
+        {
+          "x": 1308,
+          "y": 267,
+          "primitive": 177,
+          "lastDepthFailed": false,
+          "native": [
+            120,
+            92,
+            106
+          ],
+          "candidate": [
+            114,
+            85,
+            97
+          ],
+          "delta": [
+            -6,
+            -7,
+            -9
+          ],
+          "maximum": 9,
+          "matchingNativeLevels": [
+            4
+          ]
+        }
+      ],
+      "allNativeCovered": 255,
+      "uncoveredResidualCount": 37,
+      "uncoveredUniqueMip4": 35,
+      "uncoveredLastNativeDepthRejected": 0
+    },
+    "intel": {
+      "all": {
+        "0,1,2,3,4": 1,
+        "1,2,4": 1,
+        "3,4": 1,
+        "4": 245,
+        "5": 7
+      },
+      "residual": [
+        {
+          "x": 1253,
+          "y": 259,
+          "primitive": 61,
+          "lastDepthFailed": false,
+          "native": [
+            83,
+            77,
+            200
+          ],
+          "candidate": [
+            83,
+            78,
+            202
+          ],
+          "delta": [
+            0,
+            1,
+            2
+          ],
+          "maximum": 2,
+          "matchingNativeLevels": [
+            4
+          ]
+        },
+        {
+          "x": 1254,
+          "y": 259,
+          "primitive": 73,
+          "lastDepthFailed": false,
+          "native": [
+            86,
+            90,
+            246
+          ],
+          "candidate": [
+            86,
+            90,
+            248
+          ],
+          "delta": [
+            0,
+            0,
+            2
+          ],
+          "maximum": 2,
+          "matchingNativeLevels": [
+            4
+          ]
+        },
+        {
+          "x": 1261,
+          "y": 261,
+          "primitive": 136,
+          "lastDepthFailed": false,
+          "native": [
+            89,
+            58,
+            135
+          ],
+          "candidate": [
+            100,
+            59,
+            123
+          ],
+          "delta": [
+            11,
+            1,
+            -12
+          ],
+          "maximum": 12,
+          "matchingNativeLevels": [
+            4
+          ]
+        },
+        {
+          "x": 1250,
+          "y": 262,
+          "primitive": 37,
+          "lastDepthFailed": false,
+          "native": [
+            116,
+            79,
+            99
+          ],
+          "candidate": [
+            114,
+            78,
+            98
+          ],
+          "delta": [
+            -2,
+            -1,
+            -1
+          ],
+          "maximum": 2,
+          "matchingNativeLevels": [
+            4
+          ]
+        },
+        {
+          "x": 1251,
+          "y": 262,
+          "primitive": 56,
+          "lastDepthFailed": false,
+          "native": [
+            95,
+            54,
+            137
+          ],
+          "candidate": [
+            95,
+            54,
+            139
+          ],
+          "delta": [
+            0,
+            0,
+            2
+          ],
+          "maximum": 2,
+          "matchingNativeLevels": [
+            4
+          ]
+        },
+        {
+          "x": 1260,
+          "y": 262,
+          "primitive": 130,
+          "lastDepthFailed": false,
+          "native": [
+            84,
+            89,
+            244
+          ],
+          "candidate": [
+            87,
+            76,
+            254
+          ],
+          "delta": [
+            3,
+            -13,
+            10
+          ],
+          "maximum": 13,
+          "matchingNativeLevels": [
+            4
+          ]
+        },
+        {
+          "x": 1261,
+          "y": 262,
+          "primitive": 132,
+          "lastDepthFailed": false,
+          "native": [
+            89,
+            53,
+            115
+          ],
+          "candidate": [
+            97,
+            54,
+            116
+          ],
+          "delta": [
+            8,
+            1,
+            1
+          ],
+          "maximum": 8,
+          "matchingNativeLevels": [
+            4
+          ]
+        },
+        {
+          "x": 1262,
+          "y": 262,
+          "primitive": 129,
+          "lastDepthFailed": false,
+          "native": [
+            116,
+            90,
+            105
+          ],
+          "candidate": [
+            112,
+            85,
+            100
+          ],
+          "delta": [
+            -4,
+            -5,
+            -5
+          ],
+          "maximum": 5,
+          "matchingNativeLevels": [
+            4
+          ]
+        },
+        {
+          "x": 1301,
+          "y": 262,
+          "primitive": 207,
+          "lastDepthFailed": false,
+          "native": [
+            89,
+            66,
+            202
+          ],
+          "candidate": [
+            89,
+            66,
+            204
+          ],
+          "delta": [
+            0,
+            0,
+            2
+          ],
+          "maximum": 2,
+          "matchingNativeLevels": [
+            4
+          ]
+        },
+        {
+          "x": 1261,
+          "y": 263,
+          "primitive": 126,
+          "lastDepthFailed": false,
+          "native": [
+            109,
+            63,
+            95
+          ],
+          "candidate": [
+            106,
+            61,
+            93
+          ],
+          "delta": [
+            -3,
+            -2,
+            -2
+          ],
+          "maximum": 3,
+          "matchingNativeLevels": [
+            4
+          ]
+        },
+        {
+          "x": 1299,
+          "y": 263,
+          "primitive": 200,
+          "lastDepthFailed": false,
+          "native": [
+            128,
+            105,
+            114
+          ],
+          "candidate": [
+            122,
+            98,
+            105
+          ],
+          "delta": [
+            -6,
+            -7,
+            -9
+          ],
+          "maximum": 9,
+          "matchingNativeLevels": [
+            4
+          ]
+        },
+        {
+          "x": 1312,
+          "y": 263,
+          "primitive": 286,
+          "lastDepthFailed": false,
+          "native": [
+            138,
+            97,
+            109
+          ],
+          "candidate": [
+            132,
+            92,
+            103
+          ],
+          "delta": [
+            -6,
+            -5,
+            -6
+          ],
+          "maximum": 6,
+          "matchingNativeLevels": [
+            4
+          ]
+        },
+        {
+          "x": 1251,
+          "y": 264,
+          "primitive": 39,
+          "lastDepthFailed": false,
+          "native": [
+            132,
+            106,
+            107
+          ],
+          "candidate": [
+            121,
+            90,
+            88
+          ],
+          "delta": [
+            -11,
+            -16,
+            -19
+          ],
+          "maximum": 19,
+          "matchingNativeLevels": [
+            4
+          ]
+        },
+        {
+          "x": 1252,
+          "y": 264,
+          "primitive": 101,
+          "lastDepthFailed": false,
+          "native": [
+            103,
+            54,
+            119
+          ],
+          "candidate": [
+            101,
+            54,
+            117
+          ],
+          "delta": [
+            -2,
+            0,
+            -2
+          ],
+          "maximum": 2,
+          "matchingNativeLevels": [
+            4
+          ]
+        },
+        {
+          "x": 1260,
+          "y": 264,
+          "primitive": 120,
+          "lastDepthFailed": false,
+          "native": [
+            103,
+            51,
+            109
+          ],
+          "candidate": [
+            100,
+            50,
+            106
+          ],
+          "delta": [
+            -3,
+            -1,
+            -3
+          ],
+          "maximum": 3,
+          "matchingNativeLevels": [
+            4
+          ]
+        },
+        {
+          "x": 1311,
+          "y": 264,
+          "primitive": 287,
+          "lastDepthFailed": false,
+          "native": [
+            103,
+            53,
+            105
+          ],
+          "candidate": [
+            102,
+            52,
+            103
+          ],
+          "delta": [
+            -1,
+            -1,
+            -2
+          ],
+          "maximum": 2,
+          "matchingNativeLevels": [
+            4
+          ]
+        },
+        {
+          "x": 1253,
+          "y": 265,
+          "primitive": 102,
+          "lastDepthFailed": false,
+          "native": [
+            98,
+            66,
+            102
+          ],
+          "candidate": [
+            95,
+            63,
+            98
+          ],
+          "delta": [
+            -3,
+            -3,
+            -4
+          ],
+          "maximum": 4,
+          "matchingNativeLevels": [
+            4
+          ]
+        },
+        {
+          "x": 1254,
+          "y": 265,
+          "primitive": 99,
+          "lastDepthFailed": false,
+          "native": [
+            92,
+            88,
+            157
+          ],
+          "candidate": [
+            90,
+            87,
+            155
+          ],
+          "delta": [
+            -2,
+            -1,
+            -2
+          ],
+          "maximum": 2,
+          "matchingNativeLevels": [
+            4
+          ]
+        },
+        {
+          "x": 1255,
+          "y": 265,
+          "primitive": 98,
+          "lastDepthFailed": false,
+          "native": [
+            88,
+            86,
+            185
+          ],
+          "candidate": [
+            87,
+            85,
+            183
+          ],
+          "delta": [
+            -1,
+            -1,
+            -2
+          ],
+          "maximum": 2,
+          "matchingNativeLevels": [
+            4
+          ]
+        },
+        {
+          "x": 1258,
+          "y": 265,
+          "primitive": 113,
+          "lastDepthFailed": false,
+          "native": [
+            94,
+            86,
+            152
+          ],
+          "candidate": [
+            92,
+            84,
+            148
+          ],
+          "delta": [
+            -2,
+            -2,
+            -4
+          ],
+          "maximum": 4,
+          "matchingNativeLevels": [
+            5
+          ]
+        },
+        {
+          "x": 1259,
+          "y": 265,
+          "primitive": 112,
+          "lastDepthFailed": false,
+          "native": [
+            103,
+            72,
+            106
+          ],
+          "candidate": [
+            99,
+            68,
+            101
+          ],
+          "delta": [
+            -4,
+            -4,
+            -5
+          ],
+          "maximum": 5,
+          "matchingNativeLevels": [
+            4
+          ]
+        },
+        {
+          "x": 1301,
+          "y": 265,
+          "primitive": 187,
+          "lastDepthFailed": false,
+          "native": [
+            105,
+            60,
+            115
+          ],
+          "candidate": [
+            104,
+            59,
+            113
+          ],
+          "delta": [
+            -1,
+            -1,
+            -2
+          ],
+          "maximum": 2,
+          "matchingNativeLevels": [
+            4
+          ]
+        },
+        {
+          "x": 1302,
+          "y": 265,
+          "primitive": 192,
+          "lastDepthFailed": false,
+          "native": [
+            103,
+            82,
+            174
+          ],
+          "candidate": [
+            108,
+            66,
+            147
+          ],
+          "delta": [
+            5,
+            -16,
+            -27
+          ],
+          "maximum": 27,
+          "matchingNativeLevels": [
+            4
+          ]
+        },
+        {
+          "x": 1311,
+          "y": 265,
+          "primitive": 287,
+          "lastDepthFailed": false,
+          "native": [
+            156,
+            115,
+            106
+          ],
+          "candidate": [
+            144,
+            98,
+            89
+          ],
+          "delta": [
+            -12,
+            -17,
+            -17
+          ],
+          "maximum": 17,
+          "matchingNativeLevels": [
+            4
+          ]
+        },
+        {
+          "x": 1254,
+          "y": 266,
+          "primitive": 103,
+          "lastDepthFailed": false,
+          "native": [
+            119,
+            101,
+            111
+          ],
+          "candidate": [
+            108,
+            85,
+            91
+          ],
+          "delta": [
+            -11,
+            -16,
+            -20
+          ],
+          "maximum": 20,
+          "matchingNativeLevels": [
+            4
+          ]
+        },
+        {
+          "x": 1255,
+          "y": 266,
+          "primitive": 104,
+          "lastDepthFailed": false,
+          "native": [
+            108,
+            87,
+            107
+          ],
+          "candidate": [
+            103,
+            81,
+            99
+          ],
+          "delta": [
+            -5,
+            -6,
+            -8
+          ],
+          "maximum": 8,
+          "matchingNativeLevels": [
+            4
+          ]
+        },
+        {
+          "x": 1256,
+          "y": 266,
+          "primitive": 107,
+          "lastDepthFailed": false,
+          "native": [
+            102,
+            79,
+            110
+          ],
+          "candidate": [
+            97,
+            74,
+            101
+          ],
+          "delta": [
+            -5,
+            -5,
+            -9
+          ],
+          "maximum": 9,
+          "matchingNativeLevels": [
+            4
+          ]
+        },
+        {
+          "x": 1257,
+          "y": 266,
+          "primitive": 109,
+          "lastDepthFailed": false,
+          "native": [
+            111,
+            89,
+            105
+          ],
+          "candidate": [
+            105,
+            82,
+            95
+          ],
+          "delta": [
+            -6,
+            -7,
+            -10
+          ],
+          "maximum": 10,
+          "matchingNativeLevels": [
+            4
+          ]
+        },
+        {
+          "x": 1302,
+          "y": 266,
+          "primitive": 184,
+          "lastDepthFailed": false,
+          "native": [
+            101,
+            75,
+            118
+          ],
+          "candidate": [
+            99,
+            73,
+            114
+          ],
+          "delta": [
+            -2,
+            -2,
+            -4
+          ],
+          "maximum": 4,
+          "matchingNativeLevels": [
+            4
+          ]
+        },
+        {
+          "x": 1307,
+          "y": 266,
+          "primitive": 311,
+          "lastDepthFailed": false,
+          "native": [
+            94,
+            93,
+            223
+          ],
+          "candidate": [
+            93,
+            92,
+            221
+          ],
+          "delta": [
+            -1,
+            -1,
+            -2
+          ],
+          "maximum": 2,
+          "matchingNativeLevels": [
+            4
+          ]
+        },
+        {
+          "x": 1308,
+          "y": 266,
+          "primitive": 311,
+          "lastDepthFailed": false,
+          "native": [
+            93,
+            84,
+            168
+          ],
+          "candidate": [
+            91,
+            83,
+            165
+          ],
+          "delta": [
+            -2,
+            -1,
+            -3
+          ],
+          "maximum": 3,
+          "matchingNativeLevels": [
+            4
+          ]
+        },
+        {
+          "x": 1309,
+          "y": 266,
+          "primitive": 308,
+          "lastDepthFailed": false,
+          "native": [
+            99,
+            59,
+            115
+          ],
+          "candidate": [
+            97,
+            57,
+            111
+          ],
+          "delta": [
+            -2,
+            -2,
+            -4
+          ],
+          "maximum": 4,
+          "matchingNativeLevels": [
+            4
+          ]
+        },
+        {
+          "x": 1310,
+          "y": 266,
+          "primitive": 297,
+          "lastDepthFailed": false,
+          "native": [
+            140,
+            103,
+            111
+          ],
+          "candidate": [
+            130,
+            89,
+            92
+          ],
+          "delta": [
+            -10,
+            -14,
+            -19
+          ],
+          "maximum": 19,
+          "matchingNativeLevels": [
+            4
+          ]
+        },
+        {
+          "x": 1303,
+          "y": 267,
+          "primitive": 183,
+          "lastDepthFailed": false,
+          "native": [
+            115,
+            92,
+            106
+          ],
+          "candidate": [
+            109,
+            84,
+            95
+          ],
+          "delta": [
+            -6,
+            -8,
+            -11
+          ],
+          "maximum": 11,
+          "matchingNativeLevels": [
+            4
+          ]
+        },
+        {
+          "x": 1304,
+          "y": 267,
+          "primitive": 182,
+          "lastDepthFailed": false,
+          "native": [
+            96,
+            70,
+            105
+          ],
+          "candidate": [
+            93,
+            67,
+            102
+          ],
+          "delta": [
+            -3,
+            -3,
+            -3
+          ],
+          "maximum": 3,
+          "matchingNativeLevels": [
+            4
+          ]
+        },
+        {
+          "x": 1305,
+          "y": 267,
+          "primitive": 180,
+          "lastDepthFailed": false,
+          "native": [
+            92,
+            71,
+            137
+          ],
+          "candidate": [
+            89,
+            68,
+            131
+          ],
+          "delta": [
+            -3,
+            -3,
+            -6
+          ],
+          "maximum": 6,
+          "matchingNativeLevels": [
+            4
+          ]
+        },
+        {
+          "x": 1306,
+          "y": 267,
+          "primitive": 178,
+          "lastDepthFailed": false,
+          "native": [
+            91,
+            69,
+            129
+          ],
+          "candidate": [
+            89,
+            67,
+            124
+          ],
+          "delta": [
+            -2,
+            -2,
+            -5
+          ],
+          "maximum": 5,
+          "matchingNativeLevels": [
+            4
+          ]
+        },
+        {
+          "x": 1307,
+          "y": 267,
+          "primitive": 176,
+          "lastDepthFailed": false,
+          "native": [
+            90,
+            56,
+            98
+          ],
+          "candidate": [
+            87,
+            54,
+            94
+          ],
+          "delta": [
+            -3,
+            -2,
+            -4
+          ],
+          "maximum": 4,
+          "matchingNativeLevels": [
+            4
+          ]
+        },
+        {
+          "x": 1308,
+          "y": 267,
+          "primitive": 177,
+          "lastDepthFailed": false,
+          "native": [
+            120,
+            92,
+            106
+          ],
+          "candidate": [
+            114,
+            85,
+            97
+          ],
+          "delta": [
+            -6,
+            -7,
+            -9
+          ],
+          "maximum": 9,
+          "matchingNativeLevels": [
+            4
+          ]
+        }
+      ],
+      "allNativeCovered": 255,
+      "uncoveredResidualCount": 39,
+      "uncoveredUniqueMip4": 38,
+      "uncoveredLastNativeDepthRejected": 0
+    }
+  },
+  "archive": {
+    "members": 33,
+    "sha256": "cb00b5a6c72d41f3ce576d46222ddf439f4b6d77c958a17531959c92b0d29d85"
+  }
+}

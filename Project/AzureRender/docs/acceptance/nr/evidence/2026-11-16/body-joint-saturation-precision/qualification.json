@@ -1,0 +1,293 @@
+{
+  "status": "paired-full-frame-skin-captures",
+  "productionBodyAcceptance": false,
+  "executable": "a3171469e009750d51821709047c99162bb5570f0233113b8dbae6a8679cb631",
+  "inputs": {
+    "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-125923-body-lit-outline-depth-order-a29b63\\face-candidate\\late-face-overlay-1230.azurematerial": "24a48584b252de8e93b74a5c13e78465452faa3076158a4a51c8212b87646387",
+    "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-125923-body-lit-outline-depth-order-a29b63\\face-candidate\\late-face-overlay-1230.azurematerial.azmeta": "4cddaca59b9ceff7e85ee56c4c674f9a12b9613d59a6c01108122b2b35577963",
+    "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-125923-body-lit-outline-depth-order-a29b63\\face-candidate\\late-face-overlay-1230.bin": "c769c00280e189656cdbd2ad4a698501bbea28c1c05d1e8de127b676ad95d95e",
+    "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-125923-body-lit-outline-depth-order-a29b63\\face-candidate\\late-face-overlay-1230.dds": "0ea41ca2831851e697b6869c7248867547950eea8d7095d38e649717a2624497",
+    "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-125923-body-lit-outline-depth-order-a29b63\\face-candidate\\late-face-overlay-1230.dds.azmeta": "a3eff6fc542fed3d8104c8cb34d174a99593d9f34221d5d50ca2133b26d8e31f",
+    "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-125923-body-lit-outline-depth-order-a29b63\\face-candidate\\late-face-overlay-1230.gltf": "fd4994cdb8cae5e238588d05388d10a450fca4ab6a5f967b47d7946f41dd7def",
+    "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-125923-body-lit-outline-depth-order-a29b63\\face-candidate\\late-face-overlay-1230.gltf.azmeta": "4659c30424586935da642ec96bc5e8b73fb191aa7d53f01973757902890fcc94",
+    "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-125923-body-lit-outline-depth-order-a29b63\\face-candidate\\late-face-overlay-1358.bin": "fdd6ab7d9a5857a7732cfb292e81fae9260fd87312cae4c9c985a67e93e637bf",
+    "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-125923-body-lit-outline-depth-order-a29b63\\face-candidate\\late-face-overlay-1358.dds": "30baf01840c98ae87338d826a9effb0bad4f01f9f868e3979b60381956a814e4",
+    "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-125923-body-lit-outline-depth-order-a29b63\\face-candidate\\late-face-overlay-1358.dds.azmeta": "aafa66ed5397d0d966c702c5c5d357d69f44d3a8cf3b6464bce9e765daaef77d",
+    "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-125923-body-lit-outline-depth-order-a29b63\\face-candidate\\late-face-overlay-1358.gltf": "63f77bd66aad6b824863e201ceddf23fcaf61c3de2a84b4cef0dc39429436e95",
+    "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-125923-body-lit-outline-depth-order-a29b63\\face-candidate\\late-face-overlay-1358.gltf.azmeta": "7b4c04bda6ab81406c9169626c20e0c0c1de83ee7eb2365173d381ad415bc3f1",
+    "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-125923-body-lit-outline-depth-order-a29b63\\face-quality-release-isolated-mask\\public-combined-nvidia\\recipe\\nearest\\inputs\\face-quality-public-nearest.azurematerial": "94d87cc0cdfe85547760a2fc0f5cf13c6e12afc2327ca9688667519302e302f9",
+    "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-125923-body-lit-outline-depth-order-a29b63\\face-quality-release-isolated-mask\\public-combined-nvidia\\recipe\\nearest\\inputs\\face-quality-public-nearest.azurematerial.azmeta": "9a91ee05c0b478474f1cea7293f8846b0279acb259b481ed293c056de50789d6",
+    "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-125923-body-lit-outline-depth-order-a29b63\\face-quality-release-isolated-mask\\public-combined-nvidia\\face-quality-native-production-combined.azurelevel": "df056aa9dc0e4f4edc1b27b4b762f5ccd4b4fa4f33ebe7974e130162ff039008",
+    "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-150229-face-native-geometry-mask-sampling-d5d93e\\assets-sdf\\face-native-geometry-mask-sampling-sdf.dds": "e4d7865a20fad774cc896c4b821442bf1649d91207ca2715b1b01255f8ed55ab",
+    "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-125923-body-lit-outline-depth-order-a29b63\\face-quality-release-isolated-mask\\public-combined-nvidia\\recipe\\mask\\inputs\\face-quality-public-mask.dds.azmeta": "1d5187a1ab37b25ffe1b622206ad7942fbac42a4cf6f4ffc77517a48e6a69a45",
+    "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-125923-body-lit-outline-depth-order-a29b63\\face-quality-release-isolated-mask\\public-combined-nvidia\\recipe\\mask\\inputs\\face-quality-public-mask.azurematerial": "1e9d6dff9e0a8a0d834675a452ea5dadbd48107456d977060dea32d43061216f",
+    "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-125923-body-lit-outline-depth-order-a29b63\\face-quality-release-isolated-mask\\public-combined-nvidia\\recipe\\mask\\inputs\\face-quality-public-mask.azurematerial.azmeta": "aa7e3b59e4dc05666a04ee6b4eab444440cbeea45cc2f5ff5a9919fe78426cf9",
+    "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-125923-body-lit-outline-depth-order-a29b63\\face-quality-release-isolated-mask\\public-combined-nvidia\\face-quality-native-production-combined.azurelevel.azmeta": "2dd87d2cd8acd0e04644ef76768b87922e5b7f294261b9587d1c5c7e1390d91f",
+    "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-231945-projected-hair-reference-grid-4b775d\\iris-overlay-geometry-project\\character\\late-face-overlay-1230.bin.azmeta": "f78f2b7b9fd21e762629cee155f3b5da11bdda0f9864465ad5caf54044b1c194",
+    "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-231945-projected-hair-reference-grid-4b775d\\iris-overlay-geometry-project\\character\\late-face-overlay-1358.bin.azmeta": "88bdc3e12851c8e7885578297962b0253ddfc048885ba8a5825d7f7fd8bb2776"
+  },
+  "pathRewrites": {
+    "character:/late-face-overlay-1230.gltf": "qa_character:/late-face-overlay-1230.gltf",
+    "character:/late-face-overlay-1358.gltf": "qa_character:/late-face-overlay-1358.gltf"
+  },
+  "source": "4b6fcfc9a8ed7bd9efefc26378bfd3780f789f39d47af4fed198256bdcbc6ed4",
+  "diagnosticSource": "4d3a74abc0e99477983d0f5b2e8e16f57865bc34014c8fd0b283853004bc6806",
+  "changedPrograms": {
+    "mesh.frag.spv": "d5c753c3714ef7cd2eaacff16af4d051f41fab8bdbdcb8e7338eb58e735cb384",
+    "mesh_early.frag.spv": "2a0552e8d83797a4f1952e97f21e7966a047771308c7933e9c8e34b2d2857085",
+    "mesh_lighting.frag.spv": "538f1316ad854b17f3c3be4abdc26a03de124a9c52ca3de1d937556f8e246d4a",
+    "mesh_early_lighting.frag.spv": "da53d9248641424373a3564824271dead792c0be3cc3be0f55cab34c73a27340",
+    "mesh_uvquad.frag.spv": "9283428f330e8a24276f5be5482f94ba89fd7a463f4a2e0ed09c4c4929ef8d7f",
+    "mesh_coverage_uvquad.frag.spv": "91123eff6b6167b71bb46522036a27e5955d75790fa67a6d601f7ee70562be57",
+    "mesh_object.frag.spv": "3636561b53d072e24e9171be5d7a343241f03333185a16f7ae9626f092dad0cf",
+    "mesh_object_early.frag.spv": "4b62d6735b74d665b0fe94ca4fc86234238dce3493421437e5cc11610531166c",
+    "mesh_object_lighting.frag.spv": "fc99ca8b21ea9e4155f48621d7b5b9ab51bfa17fdcb77f162773a0fb255e07c0",
+    "mesh_object_early_lighting.frag.spv": "f87fd3f391ebf0fe7aba299369ab55469cc0294d751fed06d12a380ef95c333f",
+    "mesh_object_uvquad.frag.spv": "107df83013124e0fa9cb1bf89906deac4ff04900e1c252d58e0bad2aab41577c",
+    "mesh_object_coverage_uvquad.frag.spv": "238cfadb86e58ac0ffde4819fb1864050276f27163f3716f1115aaac3ac513e6"
+  },
+  "tintConsumer": "body-main-saturation-and-unsigned-output",
+  "samples": {
+    "nvidia-control": {
+      "raw": "dc774a20b9508fe0433ce355180c7ecdd68117e10adb045ea91f92494bf3a504",
+      "png": "f1ab2e655871812f15c47b67a541251d43b96a5a4d85e0c5b705295c26767ba3",
+      "control": "f1ab2e655871812f15c47b67a541251d43b96a5a4d85e0c5b705295c26767ba3",
+      "deltaArchive": "4d67db0a9e201362753f49ebb2936a1f435d1161db4659076a569ca49527cf1c",
+      "changed": 0,
+      "outsideFace": 0,
+      "irisChanged": 0,
+      "face": {
+        "overOne": 355,
+        "overEight": 50,
+        "peak": 25,
+        "newOverOne": 0
+      },
+      "trackedFaceEdge": {
+        "improved": 0,
+        "worsened": 0,
+        "peak": 25
+      }
+    },
+    "intel-control": {
+      "raw": "138896eaf72e33edc1e62cd00e2d29199a2642ed9b799f6cc1005126d4912be7",
+      "png": "b9a77ffe07580069d021a14902edec44508de1202bb75e0a4e356518576fb2f9",
+      "control": "b9a77ffe07580069d021a14902edec44508de1202bb75e0a4e356518576fb2f9",
+      "deltaArchive": "f554b24ffa9794c7af7c4c206440caa25f5ba9f29c4c1b6e885f7e34f13cf816",
+      "changed": 0,
+      "outsideFace": 0,
+      "irisChanged": 0,
+      "face": {
+        "overOne": 366,
+        "overEight": 52,
+        "peak": 38,
+        "newOverOne": 0
+      },
+      "trackedFaceEdge": {
+        "improved": 0,
+        "worsened": 0,
+        "peak": 25
+      }
+    },
+    "nvidia-native-tint": {
+      "raw": "5d205629b8c3e8a73044b6e58f7043b9db7d10d117355182e816402bf1f5d08f",
+      "png": "4aab9b4c8de9111302a8840807e71441e8ea7a19320dbd9f546a5cf69fde47b7",
+      "control": "f1ab2e655871812f15c47b67a541251d43b96a5a4d85e0c5b705295c26767ba3",
+      "deltaArchive": "0a6800ca2b27e0ce5cf469aeeb5f9aa362c3b873f90e2a46d4a919af2ea30720",
+      "changed": 32616,
+      "outsideFace": 32616,
+      "irisChanged": 0,
+      "face": {
+        "overOne": 355,
+        "overEight": 50,
+        "peak": 25,
+        "newOverOne": 0
+      },
+      "skin": {
+        "overOne": 6760,
+        "controlOverOne": 17985,
+        "peak": 115,
+        "controlPeak": 115,
+        "newOverOne": 659,
+        "outsideSkin": 82
+      }
+    },
+    "intel-native-tint": {
+      "raw": "81d36bd220ab03f5a638b7f72f0af62824850d9fe25fedb1336435b22bf185a5",
+      "png": "bc89a22d75cc068acb55e67c868e06e72a6e58fd5f9aac102529809c0570a16c",
+      "control": "b9a77ffe07580069d021a14902edec44508de1202bb75e0a4e356518576fb2f9",
+      "deltaArchive": "370bea155d2b007b2bada61ed83b9409f22fb726bc53babef9e24d7d107c6fba",
+      "changed": 36180,
+      "outsideFace": 36180,
+      "irisChanged": 0,
+      "face": {
+        "overOne": 366,
+        "overEight": 52,
+        "peak": 38,
+        "newOverOne": 0
+      },
+      "skin": {
+        "overOne": 7325,
+        "controlOverOne": 17291,
+        "peak": 115,
+        "controlPeak": 115,
+        "newOverOne": 859,
+        "outsideSkin": 108
+      }
+    }
+  },
+  "nativeReference": "48afd6546c23cfa85099a765cc94ada4813a684538c695faf6d70d6daf2261b5",
+  "nativeStageSelection": "d153beee6db3448cee7ad79c0a1faf74a0cb03c75b6459afb54c45fe0bb2eef1",
+  "skinClassification": {
+    "nvidia": {
+      "groups": {
+        "OpaqueInterior": {
+          "pixels": 30561,
+          "baselineOverOne": 11018,
+          "candidateOverOne": 1583,
+          "newOverOne": 522,
+          "peak": 8
+        },
+        "OpaqueEdge": {
+          "pixels": 13086,
+          "baselineOverOne": 4138,
+          "candidateOverOne": 2358,
+          "newOverOne": 125,
+          "peak": 81
+        },
+        "LaterNativeDraw": {
+          "pixels": 3811,
+          "baselineOverOne": 2829,
+          "candidateOverOne": 2819,
+          "newOverOne": 12,
+          "peak": 115
+        }
+      },
+      "furthestOutsideChangePixels": 67.756591796875,
+      "witnesses": [
+        {
+          "point": [
+            1200,
+            379
+          ],
+          "peak": 115,
+          "nativeDraws": [
+            783,
+            1079
+          ],
+          "skinDistance": 1.399999976158142
+        },
+        {
+          "point": [
+            1206,
+            374
+          ],
+          "peak": 113,
+          "nativeDraws": [
+            783,
+            1079
+          ],
+          "skinDistance": 1.399999976158142
+        },
+        {
+          "point": [
+            1197,
+            854
+          ],
+          "peak": 81,
+          "nativeDraws": [
+            783
+          ],
+          "skinDistance": 1.0
+        },
+        {
+          "point": [
+            1211,
+            830
+          ],
+          "peak": 74,
+          "nativeDraws": [
+            783,
+            1116
+          ],
+          "skinDistance": 1.0
+        }
+      ]
+    },
+    "intel": {
+      "groups": {
+        "OpaqueInterior": {
+          "pixels": 30561,
+          "baselineOverOne": 10522,
+          "candidateOverOne": 2065,
+          "newOverOne": 608,
+          "peak": 8
+        },
+        "OpaqueEdge": {
+          "pixels": 13086,
+          "baselineOverOne": 3959,
+          "candidateOverOne": 2461,
+          "newOverOne": 234,
+          "peak": 81
+        },
+        "LaterNativeDraw": {
+          "pixels": 3811,
+          "baselineOverOne": 2810,
+          "candidateOverOne": 2799,
+          "newOverOne": 17,
+          "peak": 115
+        }
+      },
+      "furthestOutsideChangePixels": 67.36279296875,
+      "witnesses": [
+        {
+          "point": [
+            1200,
+            379
+          ],
+          "peak": 115,
+          "nativeDraws": [
+            783,
+            1079
+          ],
+          "skinDistance": 1.399999976158142
+        },
+        {
+          "point": [
+            1206,
+            374
+          ],
+          "peak": 113,
+          "nativeDraws": [
+            783,
+            1079
+          ],
+          "skinDistance": 1.399999976158142
+        },
+        {
+          "point": [
+            1197,
+            854
+          ],
+          "peak": 81,
+          "nativeDraws": [
+            783
+          ],
+          "skinDistance": 1.0
+        },
+        {
+          "point": [
+            1211,
+            830
+          ],
+          "peak": 74,
+          "nativeDraws": [
+            783,
+            1116
+          ],
+          "skinDistance": 1.0
+        }
+      ]
+    }
+  },
+  "archiveSha256": "283b3873c18010b4544f2f5ab562f3b70554de190b60a37f0c3ebfbcec0920bb"
+}

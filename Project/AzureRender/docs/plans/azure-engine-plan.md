@@ -851,6 +851,7 @@ KK、脸部阴影和色带具有非零的原生区域响应。
 八秒联合候选保留十四像素的严格重开失败。
 
 透明衣料的深度行为按[专项计划](2026-11-03-blend-depth.md)执行。
+透明衣料的颜色调整、脸部和体表的局部差异按[区域验收](../acceptance/nr/face-skin-color-sources.md)核对。
 版本二画像声明深度写入及同深度比较方式。
 普通薄片与衣料分别核验实际遮挡和缺省兼容。
 固定姿态的完整角色区域继续按既定门槛验收。
@@ -998,6 +999,7 @@ Q1 的整体外观和时间稳定性继续验收。
 
 动态角色正面完成完整画面、照明候选及底色采集。
 同机位可辨认虹膜、竖瞳、纹理及高光。
+虹膜主灯可按[头部平面](../runtime/eye-radial-surface.md)绑定，正式材质的固定姿态与转头夹具独立验收。
 远景眼部的几何尺度及发冠图案继续按来源核对。
 
 动态头发的主坐标已按冻结参考恢复。
@@ -1711,3 +1713,95 @@ M4A、AAC 与中文深目录图片路径通过定向修复及复测。
 [独立单元核对](2026-11-18-npr-room-execution.md#当前独立单元核对)记录当前认领范围及剩余依赖。
 工具退出、本地媒体和原创目录包的自动单元已处理。
 人工复验按用户点名安排，正式房间与 Steam 保持暂停。
+
+[头发光栅量化与体表法线](../acceptance/nr/reference-raster-source.md)记录双设备来源对照。顶点精度传播和体表可见量分别持有后续验证项，整体画质按原条件验收。
+
+[量化精度隔离与接收输入](../acceptance/nr/reference-raster-isolated.md)核对完整帧与五类参考附件，并以实际 GPU 复算确认体表可见量的图集来源。Intel 冻结 RGB 和生产接收输入按原条件继续验收。
+
+[投影头发参考光栅网格](../acceptance/nr/projected-hair-reference-grid.md)完成双配置、双设备及冻结四帧。
+完整接收、Intel 头发和全身虹膜仍有超差。
+
+[虹膜覆盖来源](../acceptance/nr/iris-native-overlay.md)核对原生覆盖对 94 个虹膜位置的影响。
+
+[固定姿态眼部阴影几何](../acceptance/nr/iris-overlay-geometry.md)通过双设备虹膜区域门槛，逐像素遮挡与乘色继续验收。
+
+[眼部阴影纹理与遮挡](../acceptance/nr/iris-overlay-source.md)核对原生纹理、乘色及完整几何覆盖。
+
+[体表法线原生选层](../acceptance/nr/native-body-explicit-mips.md)核对双设备选层。
+7,997 处合格深度位置均可用显式样本复现隐式法线。
+
+[体表接收法线小数精度](../acceptance/nr/body-fractional-normal.md)核对生产 Player 及新增可见量超差。
+
+[描边阴影查找表](../acceptance/nr/evidence/2026-11-16/body-outline-native-shadow-response/results.json)核对原生 1018 号绘制与双设备实际输出。完整颜色按一字节门槛验收。
+
+[原生地面画面对照](../acceptance/nr/evidence/2026-11-16/joint-scene-native-floor/results.json)保留第 3534 帧与实际场景的结构和亮度读数。中央地面与青色环带继续核对反射输入。
+
+[投影反射射线步数](../acceptance/nr/scene-material-quality-diagnosis.md#联合场景步数对照)记录联合场景的双设备配对画面。32 步候选未通过中央亮度及邻区门槛，后续按实际历史取样坐标、深度和颜色核对。
+[原始反射颜色](../acceptance/nr/evidence/2026-11-16/projected-reflection-shared-hits/results.json)核对中央地面与青色环带的共同命中误差，完整画面按结构相似度和亮度门槛验收。
+[原生取样坐标](../acceptance/nr/evidence/2026-11-16/projected-history-native-endpoints/results.json)已核对两区的原生颜色来源。两端取样贡献继续用 Player 的实际坐标和颜色比较。
+[原生历史回移](../acceptance/nr/evidence/2026-11-16/projected-history-native-motion/results.json)核对地面和青色环带的运动幅度。
+[原生回移亮度](../acceptance/nr/evidence/2026-11-16/projected-history-native-motion-color/results.json)用原生颜色核对回移贡献，实际 Player 取样和历史颜色继续验收。
+[两端历史落点](../acceptance/nr/evidence/2026-11-16/projected-history-bilateral-endpoints/results.json)已核对实际取样和原始颜色。相位候选按联合场景双设备验收。
+
+[角色硬件分项](../acceptance/nr/evidence/2026-11-16/native-hair-lighting-lanes/results.json)、[体表法线](../acceptance/nr/evidence/2026-11-16/native-body-normal-raw-samples/results.json)和[虹膜眼影覆盖](../acceptance/nr/evidence/2026-11-16/iris-projective-covered/results.json)保存原生和 Player 双设备回读。角色严格颜色门槛继续验收。
+
+[固定姿态材质对照](../acceptance/nr/evidence/2026-11-16/fixed-pose-material-controls/results.json)核对身体主光饱和度、第一层衣料及皮肤图集深度。两个画面对照存在新增超差，角色生产颜色和覆盖按原门槛验收。
+
+[双层衣料与覆盖](../acceptance/nr/evidence/2026-11-16/native-two-cloth-overlay-controls/results.json)核对两个原生绘制与定向衣料合成，覆盖及新增误差按原门槛验收。
+
+[动态角色网格](../acceptance/nr/full-body-native-comparison.md#动态角色网格)记录身体和脸部的原生索引对照及身体网格候选，动态画面继续按原门槛验收。
+
+[角色机位采集](../acceptance/nr/full-body-native-comparison.md#采集范围)记录双设备角色根节点的六个方向与头骨骼对齐的正脸，区域外观及原始冻结图继续验收。
+[脸部局部光](../acceptance/nr/evidence/2026-11-16/face-local-light-player/qualification.json)核对六个同屏坐标的原生与 Player 着色读数，按光源和响应继续定位。
+[脸部局部光输出](../acceptance/nr/evidence/2026-11-16/face-local-light-output/qualification.json)通过零倍率与等倍率回放验证局部漫反射对附件的作用，原生输出阶段继续对齐。
+[虹膜基色与眼影](../acceptance/nr/evidence/2026-11-16/iris-canonical-base-covered/qualification.json)通过双设备区域外和新增误差核对，区域内的剩余色差继续按一个色阶验收。
+[虹膜打包前颜色](../acceptance/nr/eye-npr-inputs.md#虹膜打包前颜色)确认三个异常点的原生与 Player 线性值在颜色打包前已分离。
+
+[反射历史图层](../acceptance/nr/scene-material-quality-diagnosis.md#反射历史图层合成)通过双设备小场景合成核对；中央地面、青色环带及原始冻结图继续按区域门槛验收。
+
+[原生时间合成](../acceptance/nr/scene-material-quality-diagnosis.md#原生反射历史的时间合成)确认反射与主画面时间合成共用上一帧 HDR 输入。固定取色对照确认字形与货箱的颜色还需要分别核对。
+
+[联合场景字形提交](../acceptance/nr/scene-material-quality-diagnosis.md#联合场景字形提交)完成双设备配对。首帧逐像素一致，第二帧中央亮度和邻区新增超差仍未通过。
+
+[播放器冻结画面](../acceptance/nr/scene-material-quality-diagnosis.md#播放器冻结画面)通过当前 NVIDIA 驱动的四帧回归；原始冻结图的四帧峰差为 1、7、37、23，逐像素门槛待验收。
+[反射过滤器输入](../acceptance/nr/scene-material-quality-diagnosis.md#反射过滤器输入核对)通过 4,940 点校准。覆盖模型显示字形与货箱需联合核对，两区继续按实际成片验收。
+[反射射线采样相位](../acceptance/nr/scene-material-quality-diagnosis.md#反射射线采样相位)完成双设备三帧配对，区域与邻区门槛未通过。
+原生身体权重和投影重建已确认固定捕获帧的几何覆盖。原始量化权重导入通过动画、形变和蒙皮回归。[独立动态轮廓](../acceptance/nr/evidence/2026-11-16/dynamic-body-geometry-player/qualification.json)通过双设备掩码核对；完整衣料遮挡与着色按联合场景成片验收。
+[完整场景后视机位](../acceptance/nr/full-body-native-comparison.md#完整场景后视机位)确认双设备原模型对照精确。身体候选的腰侧变化可复现，Intel 地面差异继续定位。
+近景泛光的双设备线性读回已完成。原生泛光外观按同机位同姿态的完整画面验收，全身虹膜按已知覆盖区域核对采样与遮挡。
+
+[反射几何法线候选](../acceptance/nr/evidence/2026-11-21/reflection-geometric-normal-candidate/README.md)完成控制、成片及恢复核验。
+中央地面 SSIM 为 0.83670，环带为 0.75535。
+两区与邻区门槛未通过，匹配输入及冻结环境继续待验。
+
+[检修站反射法线对照](../acceptance/nr/evidence/2026-11-21/original-normal-contract/README.md)通过冻结输入与实际绑定核对。
+几何法线保留右侧 97 个命中，历史接收仍为零。
+统一几何法线候选淘汰，匹配输入及冻结环境继续待验。
+
+[检修站法线与历史交叉对照](../acceptance/nr/evidence/2026-11-21/original-normal-history-cross/README.md)通过六条实际 GPU 路径。
+三种法线均恢复运动反射，错误深度控制均与原路径一致。
+生产采用继续等待匹配输入及 592.82 冻结环境。
+
+[检修站边缘历史拒绝](../acceptance/nr/evidence/2026-11-21/original-history-edge-rejection/README.md)闭合倾斜路径的单点差异。
+87 个命中包含 86 个有效历史接收和一次背景拒绝。
+世界位置误差约 4.092 米，原拒绝门槛保持有效。
+
+[运动反射生产接入](../acceptance/nr/evidence/2026-11-24/motion-history-production/README.md)通过主配置与实际 Player 配对。
+按 F 的第 4 帧恢复反射，无输入十二帧精确一致。
+动态、法线及双配置回归见[接入计划](../plans/2026-11-24-original-reflection-production.md)。
+匹配参考输入及 592.82 四帧按用户授权延期。
+
+[动态反射与项目重开](../acceptance/nr/evidence/2026-11-24/reflection-dynamic-and-reopen/README.md)通过五项组合及旋转回放。
+独立启动的十二帧精确一致，默认法线及双配置回归接续。
+
+[默认法线来源契约](../acceptance/nr/evidence/2026-11-24/normal-texture-provenance/README.md)通过实际附件与双配置资产检查。
+无贴图的 97 个接收点方向误差为零，显式贴图保留解码。
+光栅化和路径追踪共享来源语义，材质表为版本 23。
+
+[原创反射集中回归](../acceptance/nr/evidence/2026-11-24/final-original-reflection/README.md)通过双配置和双设备检查。
+14 项 CPU、20 条反射路径及 24 项材质视图检查通过。
+十二次 Player 启动和同一路径重开通过，双设备短测满足预算。
+
+[原创反射交付](../acceptance/nr/2026-11-24-original-reflection-delivery.md)完成本轮可执行自动验收。
+运动历史、默认法线、双配置双设备及短测均通过。
+人工项登记为待人工复验，参考输入与 592.82 专项延期。

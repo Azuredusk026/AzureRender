@@ -58,13 +58,24 @@
             "directWeights": {"$ref": "#/$defs/color3"},
             "ambientColor": {"$ref": "#/$defs/color3"},
             "mainColor": {"$ref": "#/$defs/color3"},
-            "shadowScale": {"type": "number", "minimum": 0, "maximum": 1}
+            "shadowScale": {"type": "number", "minimum": 0, "maximum": 1},
+            "mainRampFrame": {
+              "type": "object", "additionalProperties": false,
+              "required": ["schemaVersion", "node", "basis"],
+              "properties": {
+                "schemaVersion": {"const": 1},
+                "node": {"type": "string", "minLength": 1},
+                "basis": {"type": "array", "minItems": 9, "maxItems": 9,
+                  "items": {"type": "number", "minimum": -1.0001, "maximum": 1.0001}}
+              }
+            }
           },
           "allOf": [{
             "if": {"properties": {"illuminationModel": {"const": "npr-main-ambient"}}},
             "then": {"required": ["ambientColor", "mainColor", "shadowScale"]},
             "else": {"not": {"anyOf": [
-              {"required": ["ambientColor"]}, {"required": ["mainColor"]}, {"required": ["shadowScale"]}
+              {"required": ["ambientColor"]}, {"required": ["mainColor"]}, {"required": ["shadowScale"]},
+              {"required": ["mainRampFrame"]}
             ]}}
           }]
         }

@@ -1,0 +1,128 @@
+{
+  "status": "measured-face-overlay-pixel-acceptance-in-fixed-pose",
+  "queues": [
+    1532,
+    1533
+  ],
+  "pixels": {
+    "nvidia": [
+      {
+        "point": [
+          1264,
+          261
+        ],
+        "control": [
+          141,
+          129,
+          122
+        ],
+        "normal": [
+          92,
+          93,
+          96
+        ],
+        "receiverBypass": [
+          57,
+          62,
+          71
+        ],
+        "normalCropChanged": 36,
+        "bypassCropChanged": 41
+      },
+      {
+        "point": [
+          1321,
+          271
+        ],
+        "control": [
+          186,
+          122,
+          101
+        ],
+        "normal": [
+          122,
+          88,
+          79
+        ],
+        "receiverBypass": [
+          122,
+          88,
+          79
+        ],
+        "normalCropChanged": 10,
+        "bypassCropChanged": 10
+      }
+    ],
+    "intel": [
+      {
+        "point": [
+          1264,
+          261
+        ],
+        "control": [
+          151,
+          138,
+          130
+        ],
+        "normal": [
+          98,
+          100,
+          102
+        ],
+        "receiverBypass": [
+          62,
+          71,
+          80
+        ],
+        "normalCropChanged": 36,
+        "bypassCropChanged": 41
+      },
+      {
+        "point": [
+          1321,
+          271
+        ],
+        "control": [
+          223,
+          161,
+          139
+        ],
+        "normal": [
+          223,
+          161,
+          139
+        ],
+        "receiverBypass": [
+          223,
+          161,
+          139
+        ],
+        "normalCropChanged": 9,
+        "bypassCropChanged": 9
+      }
+    ]
+  },
+  "nativeHairPrepass": {
+    "point": [
+      1321,
+      271
+    ],
+    "predicted": null,
+    "prepassCommitted": [
+      74
+    ],
+    "colorCommitted": [
+      74
+    ],
+    "depth": {
+      "1338": 0.030964965000748634,
+      "1339": 0.030965019017457962,
+      "1357": 0.030965019017457962,
+      "1358": 0.030965019017457962
+    },
+    "depthAdvanced": true,
+    "depthRetained": true
+  },
+  "formalFaceAcceptance": false,
+  "archiveSha256": "b970cf8d7bc24334b6867947d783fb06bd89e3fdfd649fcf260814370d5503e7"
+}

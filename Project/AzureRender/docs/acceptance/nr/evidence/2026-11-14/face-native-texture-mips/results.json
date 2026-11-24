@@ -1,0 +1,230 @@
+{
+  "status": "authored-base-color-qualified",
+  "overallStatus": "failed-user-review",
+  "input": {
+    "18": {
+      "sourceSha256": "e08905c619b5c86fb4a790c3e9d2863b63cfceae6ed7b2158c99b78797562a02",
+      "inputSha256": "a46f08ee9c989ca589eb545c1d538142e86399f54fce2c773d8fecccca47541b",
+      "sourceLevels": 11,
+      "exactBasePixels": 850279,
+      "basePixels": 1048576,
+      "overEight": 180233,
+      "nativeOpaqueWithHostZero": 173037
+    },
+    "20": {
+      "sourceSha256": "0c269bed18e0648accb28166821ee6158480f54a681f33e873b01e7e973a5a01",
+      "inputSha256": "db38cc2209f2069080dbf0f8f324f5b12ee370337a64225b84a2e31b01a97689",
+      "sourceLevels": 9,
+      "exactBasePixels": 65536,
+      "basePixels": 65536,
+      "overEight": 0,
+      "nativeOpaqueWithHostZero": 0
+    },
+    "authoredMipBias": -1.0,
+    "authoredEmotionWeight": 0.0
+  },
+  "baseColor": {
+    "assets": {
+      "18": "1ef169e49c170925696815b285581fe1cb1eb838a0277b0bf80439964a452bed"
+    },
+    "devices": {
+      "nvidia": {
+        "overOne": 1166,
+        "overEight": 3,
+        "peak": 27,
+        "selected": [
+          2,
+          1,
+          0,
+          1,
+          1,
+          1,
+          4,
+          17,
+          27,
+          23
+        ],
+        "regional": {
+          "pixels": 1176,
+          "ssim": 0.9957414952864777,
+          "medianLuminanceRelativeError": 0.01744299593236683,
+          "passed": true
+        }
+      },
+      "intel": {
+        "overOne": 1165,
+        "overEight": 3,
+        "peak": 27,
+        "selected": [
+          2,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          17,
+          27,
+          23
+        ],
+        "regional": {
+          "pixels": 1176,
+          "ssim": 0.9955841527042972,
+          "medianLuminanceRelativeError": 0.01744299593236683,
+          "passed": true
+        }
+      }
+    }
+  },
+  "variants": {
+    "face-legacy-lookup-t20": {
+      "assets": {
+        "20": "e4d7865a20fad774cc896c4b821442bf1649d91207ca2715b1b01255f8ed55ab"
+      },
+      "devices": {
+        "nvidia": {
+          "overOne": 1174,
+          "overEight": 10,
+          "peak": 46,
+          "selected": [
+            11,
+            21,
+            46,
+            22,
+            11,
+            10,
+            10,
+            15,
+            24,
+            20
+          ],
+          "regional": {
+            "pixels": 1176,
+            "ssim": 0.9948966785519591,
+            "medianLuminanceRelativeError": 0.019484224638619554,
+            "passed": true
+          }
+        },
+        "intel": {
+          "overOne": 1170,
+          "overEight": 7,
+          "peak": 34,
+          "selected": [
+            9,
+            14,
+            34,
+            14,
+            8,
+            8,
+            8,
+            16,
+            26,
+            21
+          ],
+          "regional": {
+            "pixels": 1176,
+            "ssim": 0.9950648058786188,
+            "medianLuminanceRelativeError": 0.01659997511672593,
+            "passed": true
+          }
+        }
+      }
+    },
+    "face-legacy-lookup-t18-t20": {
+      "assets": {
+        "18": "1ef169e49c170925696815b285581fe1cb1eb838a0277b0bf80439964a452bed",
+        "20": "e4d7865a20fad774cc896c4b821442bf1649d91207ca2715b1b01255f8ed55ab"
+      },
+      "devices": {
+        "nvidia": {
+          "overOne": 1166,
+          "overEight": 3,
+          "peak": 27,
+          "selected": [
+            2,
+            1,
+            0,
+            1,
+            1,
+            1,
+            4,
+            17,
+            27,
+            23
+          ],
+          "regional": {
+            "pixels": 1176,
+            "ssim": 0.9957414952864777,
+            "medianLuminanceRelativeError": 0.01744299593236683,
+            "passed": true
+          }
+        },
+        "intel": {
+          "overOne": 1165,
+          "overEight": 3,
+          "peak": 27,
+          "selected": [
+            2,
+            1,
+            1,
+            1,
+            1,
+            1,
+            2,
+            17,
+            27,
+            23
+          ],
+          "regional": {
+            "pixels": 1176,
+            "ssim": 0.9955841527042972,
+            "medianLuminanceRelativeError": 0.01744299593236683,
+            "passed": true
+          }
+        }
+      }
+    }
+  },
+  "frames": {
+    "face-t18": {
+      "nvidia": {
+        "sha256": "27b6275baeebb0b9bb1f7a73af0617363dd64c5726d1c8aad2e8bbf951d01481",
+        "originalSha256": "d036aa5592c0de8d0ada56f78db4ab0b9932f4627e6568699b24e0af5fb390db",
+        "exact": false
+      },
+      "intel": {
+        "sha256": "13dda685ac6d2e58c6ccf8b01c2b99695c3fcaa7fac437e566fa4f34ab369415",
+        "originalSha256": "4c2d142dfdef92b76feb0f895c7f2be1211da6f275ac607fc6daccdba45f5952",
+        "exact": false
+      }
+    },
+    "face-legacy-lookup-t20": {
+      "nvidia": {
+        "sha256": "d036aa5592c0de8d0ada56f78db4ab0b9932f4627e6568699b24e0af5fb390db",
+        "originalSha256": "d036aa5592c0de8d0ada56f78db4ab0b9932f4627e6568699b24e0af5fb390db",
+        "exact": true
+      },
+      "intel": {
+        "sha256": "4c2d142dfdef92b76feb0f895c7f2be1211da6f275ac607fc6daccdba45f5952",
+        "originalSha256": "4c2d142dfdef92b76feb0f895c7f2be1211da6f275ac607fc6daccdba45f5952",
+        "exact": true
+      }
+    },
+    "face-legacy-lookup-t18-t20": {
+      "nvidia": {
+        "sha256": "27b6275baeebb0b9bb1f7a73af0617363dd64c5726d1c8aad2e8bbf951d01481",
+        "originalSha256": "d036aa5592c0de8d0ada56f78db4ab0b9932f4627e6568699b24e0af5fb390db",
+        "exact": false
+      },
+      "intel": {
+        "sha256": "13dda685ac6d2e58c6ccf8b01c2b99695c3fcaa7fac437e566fa4f34ab369415",
+        "originalSha256": "4c2d142dfdef92b76feb0f895c7f2be1211da6f275ac607fc6daccdba45f5952",
+        "exact": false
+      }
+    }
+  },
+  "archive": {
+    "members": 34,
+    "sha256": "113e5cb0182de07f3c6aac3ed14de6ab9b94c42abdd942388051abfac8f1a580"
+  }
+}

@@ -1,0 +1,376 @@
+{
+  "status": "passed-original-playable-control",
+  "baseline": "ec659d9",
+  "runtimeCandidate": "fe5ba3b982cdd739b6396c09256aca7f96a6ccde",
+  "playerSha256": "1a30d925a674ddb1d95876cb80181106a0217e12a7228a35b5980b134954cb69",
+  "shaderCount": 895,
+  "rayProgramSha256": "9b77643b12d533f69e7a159ba975dfaf75e56253429371d6f7470ea6a567e20a",
+  "productionValidation": "frozen-runtime-diagnostic-scope",
+  "measured": {
+    "switch-reflection": {
+      "stateFrames": [
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "replayedActions": 2,
+      "fixedSteps": 11,
+      "producer": "projected-history",
+      "historyInput": 11,
+      "redReflectionMeans": [
+        [
+          0.5476432835933867,
+          0.0
+        ],
+        [
+          0.5476432835933867,
+          0.0
+        ],
+        [
+          0.5476432835933867,
+          0.0
+        ],
+        [
+          0.5476432835933867,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.5454840247221957
+        ],
+        [
+          0.0,
+          0.5454840247221957
+        ],
+        [
+          0.0,
+          0.5454840247221957
+        ],
+        [
+          0.0,
+          0.5454840247221957
+        ],
+        [
+          0.0,
+          0.5454840247221957
+        ],
+        [
+          0.0,
+          0.5454840247221957
+        ],
+        [
+          0.0,
+          0.5454840247221957
+        ]
+      ],
+      "lightingWitnessMean": [
+        0.000542524130395192,
+        0.000542524130395192,
+        0.000542524130395192,
+        0.000542524130395192,
+        0.000542524130395192,
+        0.000542524130395192,
+        0.000542524130395192,
+        0.000542524130395192,
+        0.000542524130395192,
+        0.000542524130395192,
+        0.000542524130395192,
+        0.000542524130395192
+      ]
+    },
+    "idle-reflection": {
+      "stateFrames": [],
+      "replayedActions": 0,
+      "fixedSteps": 11,
+      "producer": "projected-history",
+      "historyInput": 11,
+      "redReflectionMeans": [
+        [
+          0.5476432835933867,
+          0.0
+        ],
+        [
+          0.5476432835933867,
+          0.0
+        ],
+        [
+          0.5476432835933867,
+          0.0
+        ],
+        [
+          0.5476432835933867,
+          0.0
+        ],
+        [
+          0.5476432835933867,
+          0.0
+        ],
+        [
+          0.5476432835933867,
+          0.0
+        ],
+        [
+          0.5476432835933867,
+          0.0
+        ],
+        [
+          0.5476432835933867,
+          0.0
+        ],
+        [
+          0.5476432835933867,
+          0.0
+        ],
+        [
+          0.5476432835933867,
+          0.0
+        ],
+        [
+          0.5476432835933867,
+          0.0
+        ],
+        [
+          0.5476432835933867,
+          0.0
+        ]
+      ],
+      "lightingWitnessMean": [
+        0.000542524130395192,
+        0.000542524130395192,
+        0.000542524130395192,
+        0.000542524130395192,
+        0.000542524130395192,
+        0.000542524130395192,
+        0.000542524130395192,
+        0.000542524130395192,
+        0.000542524130395192,
+        0.000542524130395192,
+        0.000542524130395192,
+        0.000542524130395192
+      ]
+    },
+    "switch-beauty": {
+      "stateFrames": [
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "replayedActions": 2,
+      "fixedSteps": 11,
+      "producer": "projected-history",
+      "historyInput": 11,
+      "redReflectionMeans": [
+        [
+          0.5475676333106521,
+          0.0
+        ],
+        [
+          0.5475676333106521,
+          0.0
+        ],
+        [
+          0.5475676333106521,
+          0.0
+        ],
+        [
+          0.5475676333106521,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.5452608198773137
+        ],
+        [
+          0.0,
+          0.5452608198773137
+        ],
+        [
+          0.0,
+          0.5452608198773137
+        ],
+        [
+          0.0,
+          0.5452608198773137
+        ],
+        [
+          0.0,
+          0.5452608198773137
+        ],
+        [
+          0.0,
+          0.5452608198773137
+        ],
+        [
+          0.0,
+          0.5452608198773137
+        ]
+      ],
+      "lightingWitnessMean": [
+        0.000542524130395192,
+        0.000542524130395192,
+        0.000542524130395192,
+        0.000542524130395192,
+        0.9990964417167343,
+        0.9990964417167343,
+        0.9990964417167343,
+        0.9990964417167343,
+        0.9990964417167343,
+        0.9990964417167343,
+        0.9990964417167343,
+        0.9990964417167343
+      ]
+    }
+  },
+  "queue": [
+    {
+      "id": 2289,
+      "task": "nr-original-reflection-switch",
+      "state": "failed",
+      "exit_code": 1,
+      "wait_seconds": 0.03200000000288128,
+      "run_seconds": 2.2179999999971187
+    },
+    {
+      "id": 2291,
+      "task": "nr-original-reflection-switch-preflight-corrected",
+      "state": "failed",
+      "exit_code": 1,
+      "wait_seconds": 124.35900000000038,
+      "run_seconds": 11.64100000000326
+    },
+    {
+      "id": 2292,
+      "task": "nr-original-reflection-switch-valid-level",
+      "state": "failed",
+      "exit_code": 1,
+      "wait_seconds": 0.030999999999039574,
+      "run_seconds": 33.56300000000192
+    },
+    {
+      "id": 2293,
+      "task": "nr-original-reflection-switch-loader-validation",
+      "state": "succeeded",
+      "exit_code": 0,
+      "wait_seconds": 0.014999999999417923,
+      "run_seconds": 17.35900000000038
+    }
+  ],
+  "captureScriptSourceSha256": "7af9d93ecedabb5b8b865c56b11cfc88774c4bb2a43d415cf7b71609d7d527a4",
+  "validation": {
+    "archiveSha256": "0caf7c7907795e982f3413642c75950c880b6677e72205fc4597a0d63655c69a",
+    "bytes": 347320,
+    "files": {
+      "batch-2289-preflight.log": "711f8698f184e9085d29b552e46dbe798324a3ae744ac137a14ac141ca54c1b4",
+      "batch-2291-load.log": "8152290860088dd32c79aa3df90fc063cb5f92301d75987a748f6444a01e7b3b",
+      "batch-2291-receipt.json": "b055c335fc4d4f1d2b577faabab22636631b31ba7c5278bf358c7adca9930fec",
+      "batch-2292-diagnostic-measurements.json": "3fe483c6a8cd509dbdac2b146f66454925004a22e6fc2c69e2eb46d9da5bb03a",
+      "batch-2292-layer.log": "a61f7701d163259946b0753e842e15f4646df3c1833c964e396a3409b6ea689b",
+      "budget.json": "db375301fe235a35baf06cfb95f8ada940fc4eb2db312da0b3d01692a8b56957",
+      "capture-switch_fixture.py": "7af9d93ecedabb5b8b865c56b11cfc88774c4bb2a43d415cf7b71609d7d527a4",
+      "frozen-programs.json": "26bcc84dbaba8b047e1c27ac24639b832e9390ec9c335f4efa1d2ea2f22009c3",
+      "idle-reflection/actions.json": "ef180a223a1290eb7b84770862189dbdef14ed8da7b48d4644eb070cb79b4fc7",
+      "idle-reflection/assets/floor.gltf": "ee538f281846a09d00795bcfeed28b646dd19d14919196772bb6b7fb68c71d6d",
+      "idle-reflection/assets/inspection-card.gltf": "536e88e31f1b7b3d7579a4ff8f3809e6c513071214e81d4f13186d60e5b8cbb0",
+      "idle-reflection/assets/probe.azenv": "b01a95a769c39c2f6a11a30cdcaab0b08a33d523dabe8cc7e32d8fc163467a02",
+      "idle-reflection/assets/scene.azurelevel": "b1c9c2ded1866177ae53f02ce0b0dec42f873a51a8398bf3e36b1bf58fdb585e",
+      "idle-reflection/assets/switch.lua": "3b0ad77b387db6ad8d3652e73709650c61f56540ff73f4ff41e7af09c3d3373f",
+      "idle-reflection/assets/target.gltf": "7082ed031415a680c9453b9502e6ae9db85235a4fec97478c12ffd6ebdf951c8",
+      "idle-reflection/expected.json": "63ed5032e7602298a2b36e609f537c7b4f4ac242bacd5380be571a2842d66509",
+      "idle-reflection/frames/capture_manifest.json": "9c3305404bacb85909839e903220bcd81d9f9d2e3211e22c1c909a4a4219c162",
+      "idle-reflection/frames/frame_000000.png": "1517b3fd55f009bf4fdc7ee28b67783187b26b8c2aa7b460849655670d760ab5",
+      "idle-reflection/frames/frame_000001.png": "ecd7f21b5e028601143f2d7a9c98a55d8a9907489954587787d658112ff61850",
+      "idle-reflection/frames/frame_000002.png": "ecd7f21b5e028601143f2d7a9c98a55d8a9907489954587787d658112ff61850",
+      "idle-reflection/frames/frame_000003.png": "ecd7f21b5e028601143f2d7a9c98a55d8a9907489954587787d658112ff61850",
+      "idle-reflection/frames/frame_000004.png": "ecd7f21b5e028601143f2d7a9c98a55d8a9907489954587787d658112ff61850",
+      "idle-reflection/frames/frame_000005.png": "ecd7f21b5e028601143f2d7a9c98a55d8a9907489954587787d658112ff61850",
+      "idle-reflection/frames/frame_000006.png": "ecd7f21b5e028601143f2d7a9c98a55d8a9907489954587787d658112ff61850",
+      "idle-reflection/frames/frame_000007.png": "ecd7f21b5e028601143f2d7a9c98a55d8a9907489954587787d658112ff61850",
+      "idle-reflection/frames/frame_000008.png": "ecd7f21b5e028601143f2d7a9c98a55d8a9907489954587787d658112ff61850",
+      "idle-reflection/frames/frame_000009.png": "ecd7f21b5e028601143f2d7a9c98a55d8a9907489954587787d658112ff61850",
+      "idle-reflection/frames/frame_000010.png": "ecd7f21b5e028601143f2d7a9c98a55d8a9907489954587787d658112ff61850",
+      "idle-reflection/frames/frame_000011.png": "ecd7f21b5e028601143f2d7a9c98a55d8a9907489954587787d658112ff61850",
+      "idle-reflection/frames/gpu_capabilities.json": "fcc84c76d84bace150db35ec07631ab83809bdd1c365b6d96cb8afe8e354190a",
+      "idle-reflection/player.log": "b75ef30250e27cf816c06bc828b8bbdd6f5a41dd7776b03703330cc81413c00e",
+      "idle-reflection/project.azureproject": "91fa666b938f7837c6e685f49cc288d4eac8bd9039468a0c251bb41ea19f4711",
+      "idle-reflection/receipt.json": "3b9e861392f72a6ae66f232c3667ae2247fc8c25280ae8929a2e7b1990b57daf",
+      "idle-reflection/runtime.json": "6b24c976fb60177ee30ed1123f6775aba39236171755c5f73360bb5152660aa7",
+      "measurements.json": "3fe483c6a8cd509dbdac2b146f66454925004a22e6fc2c69e2eb46d9da5bb03a",
+      "switch-beauty/actions.json": "584c86ea30965456a363f27b93931457b20a385a6695a479acf719af07bf7baa",
+      "switch-beauty/assets/floor.gltf": "ee538f281846a09d00795bcfeed28b646dd19d14919196772bb6b7fb68c71d6d",
+      "switch-beauty/assets/inspection-card.gltf": "536e88e31f1b7b3d7579a4ff8f3809e6c513071214e81d4f13186d60e5b8cbb0",
+      "switch-beauty/assets/probe.azenv": "b01a95a769c39c2f6a11a30cdcaab0b08a33d523dabe8cc7e32d8fc163467a02",
+      "switch-beauty/assets/scene.azurelevel": "b1c9c2ded1866177ae53f02ce0b0dec42f873a51a8398bf3e36b1bf58fdb585e",
+      "switch-beauty/assets/switch.lua": "3b0ad77b387db6ad8d3652e73709650c61f56540ff73f4ff41e7af09c3d3373f",
+      "switch-beauty/assets/target.gltf": "7082ed031415a680c9453b9502e6ae9db85235a4fec97478c12ffd6ebdf951c8",
+      "switch-beauty/expected.json": "63ed5032e7602298a2b36e609f537c7b4f4ac242bacd5380be571a2842d66509",
+      "switch-beauty/frames/capture_manifest.json": "825a04d3c2a65934c1f0febcb50c1b6898ce8ed44c7a6ca542efb262a2112a7e",
+      "switch-beauty/frames/frame_000000.png": "3e545f5ffdfd22c737ab10ff477c3fd64b1099f555879641c6c76d0fe9248a50",
+      "switch-beauty/frames/frame_000001.png": "fca313ce18023f44e5217693395aba233399a09e07e136dd81678dae3f44eff3",
+      "switch-beauty/frames/frame_000002.png": "fca313ce18023f44e5217693395aba233399a09e07e136dd81678dae3f44eff3",
+      "switch-beauty/frames/frame_000003.png": "3ff3ddf0ac0b8678790fc6313a84ff0e5af582a548e147d48cbee4a862b37284",
+      "switch-beauty/frames/frame_000004.png": "0ac604ae3331cb64496970a44f62c7a9297d0a5f89c9cd6224ff2d0b89e213d8",
+      "switch-beauty/frames/frame_000005.png": "aa421e920892e3dcabfa0542644764ffdbf789f97d592e2e4c4e7542710fa10a",
+      "switch-beauty/frames/frame_000006.png": "aa421e920892e3dcabfa0542644764ffdbf789f97d592e2e4c4e7542710fa10a",
+      "switch-beauty/frames/frame_000007.png": "aa421e920892e3dcabfa0542644764ffdbf789f97d592e2e4c4e7542710fa10a",
+      "switch-beauty/frames/frame_000008.png": "aa421e920892e3dcabfa0542644764ffdbf789f97d592e2e4c4e7542710fa10a",
+      "switch-beauty/frames/frame_000009.png": "aa421e920892e3dcabfa0542644764ffdbf789f97d592e2e4c4e7542710fa10a",
+      "switch-beauty/frames/frame_000010.png": "aa421e920892e3dcabfa0542644764ffdbf789f97d592e2e4c4e7542710fa10a",
+      "switch-beauty/frames/frame_000011.png": "aa421e920892e3dcabfa0542644764ffdbf789f97d592e2e4c4e7542710fa10a",
+      "switch-beauty/frames/gpu_capabilities.json": "fcc84c76d84bace150db35ec07631ab83809bdd1c365b6d96cb8afe8e354190a",
+      "switch-beauty/player.log": "4bc8b557a64c4247496422a64b05cd9d03adf0174047ab539b52755a92014943",
+      "switch-beauty/project.azureproject": "91fa666b938f7837c6e685f49cc288d4eac8bd9039468a0c251bb41ea19f4711",
+      "switch-beauty/receipt.json": "2fc763250e01d0b6d53ea5c280ab666f59d694bab1820a8c5cd37e1bdc022a65",
+      "switch-beauty/runtime.json": "b6a609aea0d5e0868f9ba99bff12e71eccb9f0da8b545f246a55dfdbe2249d26",
+      "switch-reflection/actions.json": "584c86ea30965456a363f27b93931457b20a385a6695a479acf719af07bf7baa",
+      "switch-reflection/assets/floor.gltf": "ee538f281846a09d00795bcfeed28b646dd19d14919196772bb6b7fb68c71d6d",
+      "switch-reflection/assets/inspection-card.gltf": "536e88e31f1b7b3d7579a4ff8f3809e6c513071214e81d4f13186d60e5b8cbb0",
+      "switch-reflection/assets/probe.azenv": "b01a95a769c39c2f6a11a30cdcaab0b08a33d523dabe8cc7e32d8fc163467a02",
+      "switch-reflection/assets/scene.azurelevel": "b1c9c2ded1866177ae53f02ce0b0dec42f873a51a8398bf3e36b1bf58fdb585e",
+      "switch-reflection/assets/switch.lua": "3b0ad77b387db6ad8d3652e73709650c61f56540ff73f4ff41e7af09c3d3373f",
+      "switch-reflection/assets/target.gltf": "7082ed031415a680c9453b9502e6ae9db85235a4fec97478c12ffd6ebdf951c8",
+      "switch-reflection/expected.json": "63ed5032e7602298a2b36e609f537c7b4f4ac242bacd5380be571a2842d66509",
+      "switch-reflection/frames/capture_manifest.json": "b57b7237a7b74cbe544bed48a3a213aef2ea53da0190b0737c5da339b808334a",
+      "switch-reflection/frames/frame_000000.png": "1517b3fd55f009bf4fdc7ee28b67783187b26b8c2aa7b460849655670d760ab5",
+      "switch-reflection/frames/frame_000001.png": "ecd7f21b5e028601143f2d7a9c98a55d8a9907489954587787d658112ff61850",
+      "switch-reflection/frames/frame_000002.png": "ecd7f21b5e028601143f2d7a9c98a55d8a9907489954587787d658112ff61850",
+      "switch-reflection/frames/frame_000003.png": "ecd7f21b5e028601143f2d7a9c98a55d8a9907489954587787d658112ff61850",
+      "switch-reflection/frames/frame_000004.png": "f72d40e5076ca08c4371f928303bee24cfce70c93444dc34443d8da69244852d",
+      "switch-reflection/frames/frame_000005.png": "633fa60b9e4e47e20c9758cf6184b0dfe278ec429053639831efabcd759669f5",
+      "switch-reflection/frames/frame_000006.png": "633fa60b9e4e47e20c9758cf6184b0dfe278ec429053639831efabcd759669f5",
+      "switch-reflection/frames/frame_000007.png": "633fa60b9e4e47e20c9758cf6184b0dfe278ec429053639831efabcd759669f5",
+      "switch-reflection/frames/frame_000008.png": "633fa60b9e4e47e20c9758cf6184b0dfe278ec429053639831efabcd759669f5",
+      "switch-reflection/frames/frame_000009.png": "633fa60b9e4e47e20c9758cf6184b0dfe278ec429053639831efabcd759669f5",
+      "switch-reflection/frames/frame_000010.png": "633fa60b9e4e47e20c9758cf6184b0dfe278ec429053639831efabcd759669f5",
+      "switch-reflection/frames/frame_000011.png": "633fa60b9e4e47e20c9758cf6184b0dfe278ec429053639831efabcd759669f5",
+      "switch-reflection/frames/gpu_capabilities.json": "fcc84c76d84bace150db35ec07631ab83809bdd1c365b6d96cb8afe8e354190a",
+      "switch-reflection/player.log": "1ff11d7928c3c647c0b3d2015e4153aedf8a701af217e62fa27ff692095813e0",
+      "switch-reflection/project.azureproject": "91fa666b938f7837c6e685f49cc288d4eac8bd9039468a0c251bb41ea19f4711",
+      "switch-reflection/receipt.json": "5bd1006cc37639f0b5723098e3ce9e57dc40891cada9b3987dc58577bd9ad56f",
+      "switch-reflection/runtime.json": "3e1291c4c35da706d9e09d2ccafa7528a5d9cfa475ce46982413083c0aeed73f",
+      "switch_fixture.py": "642367c2a23f59ddcc5bd4283f0b786a1542ae1eb5b14845277711892d800e17",
+      "task-card.json": "dd59a6b9c4a3c6ea5405f100c367c7271230a345ba3308bf18a7b38f2484319b",
+      "test_screen_space_reflections_gpu.py": "870e5e72810d78bcb90f9e4316fa0b9a9c34c1c91213a4df30f7e5732f502471",
+      "verify.py": "db6bb34bd2626b9a5ed356a17ec7c4b52d43c4b24774985065de60db9ee2d5c0"
+    }
+  }
+}

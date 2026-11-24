@@ -1,0 +1,396 @@
+{
+  "status": "measured; strict gates open",
+  "productionCandidates": {
+    "body": false,
+    "cloth": false
+  },
+  "body": {
+    "status": "measured-opaque-skin-main-light-saturation",
+    "devices": {
+      "nvidia": {
+        "control": "87ceab9ca80473c86708c15f95f8e831b6d1179a23de36061b638a2c169b6993",
+        "frame": "42e882e75d56e4bd5d98c18993e3d8114e3f58cdd466d1343d4b72bb60e41e6d",
+        "layers": {
+          "skin": {
+            "scope": 47458,
+            "changed": 21600,
+            "overOne": [
+              17985,
+              6158
+            ],
+            "overEight": [
+              1708,
+              1708
+            ],
+            "peak": [
+              115,
+              116
+            ],
+            "newOverOne": 6
+          },
+          "interior": {
+            "scope": 30561,
+            "changed": 18118,
+            "overOne": [
+              11018,
+              627
+            ],
+            "overEight": [
+              0,
+              0
+            ],
+            "peak": [
+              8,
+              8
+            ],
+            "newOverOne": 0
+          },
+          "edge": {
+            "scope": 13086,
+            "changed": 3480,
+            "overOne": [
+              4138,
+              2702
+            ],
+            "overEight": [
+              444,
+              444
+            ],
+            "peak": [
+              81,
+              81
+            ],
+            "newOverOne": 6
+          },
+          "covered": {
+            "scope": 3811,
+            "changed": 2,
+            "overOne": [
+              2829,
+              2829
+            ],
+            "overEight": [
+              1264,
+              1264
+            ],
+            "peak": [
+              115,
+              116
+            ],
+            "newOverOne": 0
+          }
+        },
+        "outsideSkinChanged": 0
+      },
+      "intel": {
+        "control": "6f133cc93ac4edb5309c5c852c22eee8ec8e05cb48070d49c980b343d7cfac47",
+        "frame": "7791e691a716f8f52443ccc563034c9dbfc216c0bb19c5db1bb1cfaa8427bb76",
+        "layers": {
+          "skin": {
+            "scope": 47458,
+            "changed": 21721,
+            "overOne": [
+              17291,
+              6124
+            ],
+            "overEight": [
+              1713,
+              1713
+            ],
+            "peak": [
+              115,
+              116
+            ],
+            "newOverOne": 17
+          },
+          "interior": {
+            "scope": 30561,
+            "changed": 18190,
+            "overOne": [
+              10522,
+              581
+            ],
+            "overEight": [
+              0,
+              0
+            ],
+            "peak": [
+              8,
+              8
+            ],
+            "newOverOne": 2
+          },
+          "edge": {
+            "scope": 13086,
+            "changed": 3530,
+            "overOne": [
+              3959,
+              2733
+            ],
+            "overEight": [
+              444,
+              444
+            ],
+            "peak": [
+              81,
+              81
+            ],
+            "newOverOne": 15
+          },
+          "covered": {
+            "scope": 3811,
+            "changed": 1,
+            "overOne": [
+              2810,
+              2810
+            ],
+            "overEight": [
+              1269,
+              1269
+            ],
+            "peak": [
+              115,
+              116
+            ],
+            "newOverOne": 0
+          }
+        },
+        "outsideSkinChanged": 0
+      }
+    },
+    "preflight": "6e0bdbe10e04b07e66c3675d31a3031ee80feb0de18f5aa294f280c8c086c496",
+    "reference": "48afd6546c23cfa85099a765cc94ada4813a684538c695faf6d70d6daf2261b5",
+    "allGates": "open"
+  },
+  "cloth": {
+    "status": "measured",
+    "candidateQualified": false,
+    "source": {
+      "status": "prepared-fixed-pose-candidate",
+      "candidateInputs": {
+        "character/nr-body-first-cloth-shell-from-source.gltf": "8997a97e913b694f3293cc27f71b1df0319e626cd9e57e841b9ae937cec39c6f",
+        "character/nr-body-first-cloth-shell-from-source.bin": "f98b558abc201bd80426ef14e66acaf6f1d47e6d1f880e04a4736a39a8b2db25"
+      },
+      "referenceAsset": "a183a03f38d40bc16a954aab92ed4f93f3171f1c54231ae989f9aefa1e2d2605",
+      "changedPrimitive": 1,
+      "draw": 1079,
+      "vertexCount": 32021,
+      "triangleCount": 34294,
+      "originalWindingMatches": [
+        33910,
+        0
+      ],
+      "physicalPlayerAcceptance": "pending"
+    },
+    "nativeGate": "unchanged",
+    "reference": "48afd6546c23cfa85099a765cc94ada4813a684538c695faf6d70d6daf2261b5",
+    "devices": {
+      "nvidia": {
+        "metrics": {
+          "firstShell": {
+            "count": 577,
+            "changed": 33,
+            "overOne": [
+              484,
+              485
+            ],
+            "overEight": [
+              198,
+              199
+            ],
+            "peak": [
+              115,
+              43
+            ]
+          },
+          "unresolvedGeometry": {
+            "count": 20,
+            "changed": 4,
+            "overOne": [
+              20,
+              20
+            ],
+            "overEight": [
+              14,
+              14
+            ],
+            "peak": [
+              41,
+              41
+            ]
+          },
+          "otherSkin": {
+            "count": 3234,
+            "changed": 0,
+            "overOne": [
+              2345,
+              2345
+            ],
+            "overEight": [
+              1066,
+              1066
+            ],
+            "peak": [
+              74,
+              74
+            ]
+          }
+        },
+        "fullFrameNewOverOne": 19,
+        "changedOutsideFirstShell": 533,
+        "probe": {
+          "point": [
+            1274,
+            523
+          ],
+          "reference": [
+            22,
+            21,
+            25
+          ],
+          "previous": [
+            59,
+            62,
+            66
+          ],
+          "current": [
+            59,
+            62,
+            66
+          ],
+          "error": [
+            41,
+            41
+          ]
+        },
+        "qualified": false
+      },
+      "intel": {
+        "metrics": {
+          "firstShell": {
+            "count": 577,
+            "changed": 29,
+            "overOne": [
+              473,
+              472
+            ],
+            "overEight": [
+              200,
+              201
+            ],
+            "peak": [
+              115,
+              42
+            ]
+          },
+          "unresolvedGeometry": {
+            "count": 20,
+            "changed": 2,
+            "overOne": [
+              19,
+              19
+            ],
+            "overEight": [
+              14,
+              14
+            ],
+            "peak": [
+              41,
+              41
+            ]
+          },
+          "otherSkin": {
+            "count": 3234,
+            "changed": 0,
+            "overOne": [
+              2337,
+              2337
+            ],
+            "overEight": [
+              1069,
+              1069
+            ],
+            "peak": [
+              74,
+              74
+            ]
+          }
+        },
+        "fullFrameNewOverOne": 19,
+        "changedOutsideFirstShell": 518,
+        "probe": {
+          "point": [
+            1274,
+            523
+          ],
+          "reference": [
+            22,
+            21,
+            25
+          ],
+          "previous": [
+            59,
+            62,
+            66
+          ],
+          "current": [
+            59,
+            62,
+            66
+          ],
+          "error": [
+            41,
+            41
+          ]
+        },
+        "qualified": false
+      }
+    }
+  },
+  "atlasFinal": {
+    "native": [
+      44344,
+      44060,
+      43954,
+      43932,
+      43903
+    ],
+    "player": [
+      44345,
+      44061,
+      43955,
+      43933,
+      43904
+    ]
+  },
+  "faceDiffuse": {
+    "nvidia": {
+      "points": 6,
+      "maxLinearError": 5.3128591581685924e-08
+    },
+    "intel": {
+      "points": 6,
+      "maxLinearError": 1.7204596081121792e-08
+    }
+  },
+  "archive": {
+    "sha256": "29b0830ef7b7286c21968267540bf9a70aef6405af8ba2e1bb79692b84c5dc94",
+    "members": {
+      "body/results.json": "ecdfb61f79b2b82c38120576dd2f6d98ecd52852a25601162223fb568e15c8eb",
+      "cloth/results.json": "b179c3b28f2391718c8e13af8a1320c3501b3431e54a56f97b899dc826a3c8a4",
+      "atlas/results.json": "1ec98cbc22bb5c07d87dc143b8e746edcfba18de4edc2597091aad25eb002d08",
+      "face/results.json": "71beb8f189bd71d97f890cc6b9fd066fea75cd5b3bbb36b31f0370fb99a23446",
+      "archive-fixed-pose-material-controls.py": "2c933d0d54dbeca472bce7797e6037d644dcdf0e92ce028a64850cff93d488ad",
+      "face-opaque-main-light-native-score.json": "26090f14c7e08c006ffab11ce447b70d312d9b491cf7edb66a13daaa351c196c",
+      "body-opaque-main-saturation-player.py": "ff9bf1d369cfde028f312e9429328f9f0750b9a7410c3d70c2e264f3bf3b588f",
+      "native-first-cloth-shell-player.py": "f423335bc246fef1a63a13c5bd5864889411a91469cb5db5624b44ce70264b1c",
+      "score-face-opaque-main-light-lanes.py": "011deae0d80b78c57eacc51c9d30d168bbf59ad95d29fa68eacdb60372774629",
+      "body/preflight.json": "6e0bdbe10e04b07e66c3675d31a3031ee80feb0de18f5aa294f280c8c086c496",
+      "cloth/input-receipt.json": "4f5d48ec61080ca252d620a19663257ed6f1e5a9a467f31bdba945bbaf001d17",
+      "body/nvidia/receipt.json": "4af0e9d42936f4e0a41ee514988706377abd8b1d9a9a350ae90ec83a91e167da",
+      "cloth/nvidia/capture-receipt.json": "2d2f0589bd379549b4a55a44786b7a53c8e98938047c6194980f4c43187dc3c4",
+      "body/intel/receipt.json": "6f2a36e905504f68b21924f4ef1b8c1c2259ccc5d23d4eae3bed1930b84172e8",
+      "cloth/intel/capture-receipt.json": "3dc008c8b95c9427ef134e9b9aa8841af25a0d1495bca1dfc7c9c603518b73a7"
+    }
+  }
+}

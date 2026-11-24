@@ -1,0 +1,133 @@
+{
+  "overallStatus": "failed-user-review",
+  "lateDepth": {
+    "nvidia": {
+      "whole": {
+        "coverageChanges": 1170,
+        "coverageMoreThanOne": 1170,
+        "focusImproved": 61,
+        "focusPeak": 5,
+        "coverageOverEight": 626,
+        "outsideChanges": 1,
+        "frame": "f1ad627cc5b029c354ed73c8f0b63c2d5768f76c4a84192271182f82daa14417",
+        "newGlobalOverOne": 3
+      },
+      "groups": {
+        "coverage": {
+          "pixels": 1184,
+          "overOne": [
+            1179,
+            1182
+          ],
+          "overEight": [
+            1136,
+            626
+          ],
+          "nativeOutlineAfterVsFinal": {
+            "overOne": 72,
+            "overEight": 71,
+            "peak": 75
+          }
+        },
+        "outlineVisible": {
+          "pixels": 1112,
+          "overOne": [
+            1112,
+            1112
+          ],
+          "overEight": [
+            1111,
+            561
+          ],
+          "nativeOutlineAfterVsFinal": {
+            "overOne": 0,
+            "overEight": 0,
+            "peak": 0
+          }
+        },
+        "clothLater": {
+          "pixels": 57,
+          "overOne": [
+            54,
+            57
+          ],
+          "overEight": [
+            16,
+            56
+          ],
+          "nativeOutlineAfterVsFinal": {
+            "overOne": 57,
+            "overEight": 57,
+            "peak": 72
+          }
+        }
+      }
+    },
+    "intel": {
+      "whole": {
+        "coverageChanges": 1170,
+        "coverageMoreThanOne": 1170,
+        "focusImproved": 61,
+        "focusPeak": 5,
+        "coverageOverEight": 627,
+        "outsideChanges": 0,
+        "frame": "3d0f4628f202e0bbcae0f89814fce5fb844c574ead6d3a809275a6a788a92230",
+        "newGlobalOverOne": 3
+      },
+      "groups": {
+        "coverage": {
+          "pixels": 1184,
+          "overOne": [
+            1179,
+            1179
+          ],
+          "overEight": [
+            1136,
+            627
+          ],
+          "nativeOutlineAfterVsFinal": {
+            "overOne": 72,
+            "overEight": 71,
+            "peak": 75
+          }
+        },
+        "outlineVisible": {
+          "pixels": 1112,
+          "overOne": [
+            1112,
+            1109
+          ],
+          "overEight": [
+            1111,
+            562
+          ],
+          "nativeOutlineAfterVsFinal": {
+            "overOne": 0,
+            "overEight": 0,
+            "peak": 0
+          }
+        },
+        "clothLater": {
+          "pixels": 57,
+          "overOne": [
+            54,
+            57
+          ],
+          "overEight": [
+            16,
+            56
+          ],
+          "nativeOutlineAfterVsFinal": {
+            "overOne": 57,
+            "overEight": 57,
+            "peak": 72
+          }
+        }
+      }
+    }
+  },
+  "archive": {
+    "members": 13,
+    "sha256": "ccc3a9d033366c9b17971d1e8e09114f7840cc7f4b1d4775d789db745ecc96cc"
+  }
+}

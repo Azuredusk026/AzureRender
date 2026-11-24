@@ -1,0 +1,150 @@
+{
+  "status": "calibrated-source-coverage-prediction",
+  "comparisonSha256": "79955cb2738590528b3923a41474b37b566065cf31a61c251775ec0f6e0c392f",
+  "jointSceneActualCapture": "pending",
+  "regions": {
+    "glyph": {
+      "status": "conditional-local-source-ssim-ceiling",
+      "modifiedPackedHits": 783,
+      "sourceMaskSha256": "7045223cdc5eaabed6205b22f987bb92a456795cde279951a340b90705ec9f18",
+      "depthSha256": {
+        "native": "76a4b539ed98345f51ebbc0e686347aefd98e26ad1ffe1da65b82f16082d80a9",
+        "player": "b6c9b61c16c5f22020951ff80dafda2018aaab1710408da33346e93a1a2d119a"
+      },
+      "playerEarlierColor": "ff7c9086cec80cada14f34816ae5953975446f86a420e242b2cf7b1ce0f69778",
+      "scope": "Modeled fixed input/filter; perfect SSIM permitted wherever the four-tap full-resolution sampler can see a changed color and nonzero confidence. Downstream spread (e.g. bloom) and extra source draws are outside this ceiling.",
+      "captureFrame": "frame_000001.png",
+      "baselineSha256": "77c30284317b49d75bb833ae01c9906d8f3863f592f0a3ad2014a480102cc5d9",
+      "referenceSha256": "af67600fcbb25060f1770a4bedb5e13b64a981229c9b24d9db29492db1fb5e18",
+      "centerFloor": {
+        "fullBounds": [
+          1010,
+          990,
+          1550,
+          1170
+        ],
+        "pixels": 97200,
+        "halfChanged": 6135,
+        "eligibleFullPixels": 28753,
+        "affectedSsimWindows": 33708,
+        "baselineSsim": 0.8429770373958674,
+        "idealDirectReferenceCopySsim": 0.8828019499778748,
+        "conditionalSsimCeiling": 0.9187080463188475
+      },
+      "cyanRing": {
+        "fullBounds": [
+          1040,
+          1060,
+          1270,
+          1180
+        ],
+        "pixels": 27600,
+        "halfChanged": 2229,
+        "eligibleFullPixels": 10394,
+        "affectedSsimWindows": 12092,
+        "baselineSsim": 0.7546486941690598,
+        "idealDirectReferenceCopySsim": 0.8416052460670471,
+        "conditionalSsimCeiling": 0.9077638667582305
+      }
+    },
+    "glyph-and-box": {
+      "oracle": "known-draws",
+      "modifiedPackedHits": 7046,
+      "depthSha256": {
+        "native": "76a4b539ed98345f51ebbc0e686347aefd98e26ad1ffe1da65b82f16082d80a9",
+        "player": "b6c9b61c16c5f22020951ff80dafda2018aaab1710408da33346e93a1a2d119a"
+      },
+      "thresholdMaxCompressedRgb": 0.02,
+      "playerEarlierColor": "ff7c9086cec80cada14f34816ae5953975446f86a420e242b2cf7b1ce0f69778",
+      "drawMaskSha256": {
+        "10480": "7045223cdc5eaabed6205b22f987bb92a456795cde279951a340b90705ec9f18",
+        "6587": "1ae2a4c5e8d7786db6c70b4e91c225279bbc33085fd98dced1d4e3a0aa18d22b",
+        "6600": "60f9c976900f2814c6288c4fde76f0ccc420a0b190d1e5c401ae4861abf7177f",
+        "6613": "77a75d1cc0d158572e7208f7e4b360b8cb42b34834262fc4c603f6287e3373b8",
+        "6626": "a7380c6b480139b679a6d389131ba8f7975ce0645d960e6714da55e3e65fd342",
+        "6652": "5a4b5741692300def71863b799c81b5a9efe6cfe3cdc8316321a14df53e4faa4"
+      },
+      "status": "conditional-local-source-ssim-ceiling",
+      "scope": "Modeled fixed input/filter; perfect SSIM permitted wherever the four-tap full-resolution sampler can see a changed color and nonzero confidence. Downstream spread (e.g. bloom) and extra source draws are outside this ceiling.",
+      "captureFrame": "frame_000001.png",
+      "baselineSha256": "77c30284317b49d75bb833ae01c9906d8f3863f592f0a3ad2014a480102cc5d9",
+      "referenceSha256": "af67600fcbb25060f1770a4bedb5e13b64a981229c9b24d9db29492db1fb5e18",
+      "centerFloor": {
+        "fullBounds": [
+          1010,
+          990,
+          1550,
+          1170
+        ],
+        "pixels": 97200,
+        "halfChanged": 20054,
+        "eligibleFullPixels": 83341,
+        "affectedSsimWindows": 91372,
+        "baselineSsim": 0.8429770373958674,
+        "idealDirectReferenceCopySsim": 0.9523006081581116,
+        "conditionalSsimCeiling": 0.989543012466235
+      },
+      "cyanRing": {
+        "fullBounds": [
+          1040,
+          1060,
+          1270,
+          1180
+        ],
+        "pixels": 27600,
+        "halfChanged": 6572,
+        "eligibleFullPixels": 27466,
+        "affectedSsimWindows": 27600,
+        "baselineSsim": 0.7546486941690598,
+        "idealDirectReferenceCopySsim": 0.9834657907485962,
+        "conditionalSsimCeiling": 1.0
+      }
+    },
+    "registered": {
+      "oracle": "registered-source",
+      "modifiedPackedHits": 9177,
+      "depthSha256": {
+        "native": "76a4b539ed98345f51ebbc0e686347aefd98e26ad1ffe1da65b82f16082d80a9",
+        "player": "b6c9b61c16c5f22020951ff80dafda2018aaab1710408da33346e93a1a2d119a"
+      },
+      "thresholdMaxCompressedRgb": 0.02,
+      "playerEarlierColor": "ff7c9086cec80cada14f34816ae5953975446f86a420e242b2cf7b1ce0f69778",
+      "drawMaskSha256": null,
+      "status": "conditional-local-source-ssim-ceiling",
+      "scope": "Modeled fixed input/filter; perfect SSIM permitted wherever the four-tap full-resolution sampler can see a changed color and nonzero confidence. Downstream spread (e.g. bloom) and extra source draws are outside this ceiling.",
+      "captureFrame": "frame_000001.png",
+      "baselineSha256": "77c30284317b49d75bb833ae01c9906d8f3863f592f0a3ad2014a480102cc5d9",
+      "referenceSha256": "af67600fcbb25060f1770a4bedb5e13b64a981229c9b24d9db29492db1fb5e18",
+      "centerFloor": {
+        "fullBounds": [
+          1010,
+          990,
+          1550,
+          1170
+        ],
+        "pixels": 97200,
+        "halfChanged": 20343,
+        "eligibleFullPixels": 83607,
+        "affectedSsimWindows": 91484,
+        "baselineSsim": 0.8429770373958674,
+        "idealDirectReferenceCopySsim": 0.9579552412033081,
+        "conditionalSsimCeiling": 0.9895952535605534
+      },
+      "cyanRing": {
+        "fullBounds": [
+          1040,
+          1060,
+          1270,
+          1180
+        ],
+        "pixels": 27600,
+        "halfChanged": 6701,
+        "eligibleFullPixels": 27522,
+        "affectedSsimWindows": 27600,
+        "baselineSsim": 0.7546486941690598,
+        "idealDirectReferenceCopySsim": 0.9903602004051208,
+        "conditionalSsimCeiling": 1.0
+      }
+    }
+  }
+}

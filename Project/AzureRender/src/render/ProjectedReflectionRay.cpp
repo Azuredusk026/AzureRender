@@ -50,9 +50,10 @@ ProjectedReflectionRayGpu::ProjectedReflectionRayGpu(rhi::IRhi& backend,unsigned
         for(unsigned i=2;i<8;++i)bindings.push_back({i,VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE,1,VK_SHADER_STAGE_COMPUTE_BIT});
         bindings.push_back({8,VK_DESCRIPTOR_TYPE_SAMPLER,1,VK_SHADER_STAGE_COMPUTE_BIT});
         for(unsigned i=9;i<12;++i)bindings.push_back({i,VK_DESCRIPTOR_TYPE_STORAGE_IMAGE,1,VK_SHADER_STAGE_COMPUTE_BIT});
+        bindings.push_back({12,VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE,1,VK_SHADER_STAGE_COMPUTE_BIT});
         descriptors_=backend.createDescriptorSetLayout(bindings);rhi::DescriptorPoolDesc pool;pool.maxSets=frames;
         pool.sizes={{VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER,frames},{VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,frames},
-            {VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE,6*frames},{VK_DESCRIPTOR_TYPE_SAMPLER,frames},{VK_DESCRIPTOR_TYPE_STORAGE_IMAGE,3*frames}};
+            {VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE,7*frames},{VK_DESCRIPTOR_TYPE_SAMPLER,frames},{VK_DESCRIPTOR_TYPE_STORAGE_IMAGE,3*frames}};
         pool_=backend.createDescriptorPool(pool);const auto sets=backend.allocateDescriptorSets(pool_,descriptors_,frames);
         layout_=backend.createPipelineLayout(descriptors_,nullptr);shader_=backend.createShaderModule(code);pipeline_=backend.createComputePipeline({shader_,layout_});
         rhi::SamplerDesc point;point.filter=VK_FILTER_NEAREST;point.mipmapLinear=false;point.maxLod=1000;
@@ -73,7 +74,8 @@ void ProjectedReflectionRayGpu::release() noexcept{
 }
 void ProjectedReflectionRayGpu::record(rhi::ICommandRecorder& commands,unsigned index,const ProjectedReflectionInputs& inputs,const ProjectedReflectionOutputs& outputs,
     const ProjectedReflectionView& view,const ProjectedReflectionSettings& settings){
-    auto& slot=slots_.at(index);const auto frame=view.pack(inputs.sourceExtent,inputs.traceExtent,settings);
+    auto& slot=slots_.at(index);auto frame=view.pack(inputs.sourceExtent,inputs.traceExtent,settings);
+    frame[27][0]=inputs.previousColorLayer?1.F:0.F;
     require(outputs.extent.width==inputs.traceExtent.width&&outputs.extent.height==inputs.traceExtent.height,"Projected reflection output extent differs");
     require(inputs.tiles&&inputs.tileBytes>=4&&inputs.tileBytes%4==0&&inputs.tileCount<=65535&&std::uint64_t(inputs.tileCount)*4<=inputs.tileBytes,"Invalid projected reflection worklist");
     const auto capacity=std::uint64_t((inputs.traceExtent.width+7)/8)*((inputs.traceExtent.height+7)/8);
@@ -83,11 +85,14 @@ void ProjectedReflectionRayGpu::record(rhi::ICommandRecorder& commands,unsigned 
     for(const auto image:sampled)require(image!=VK_NULL_HANDLE,"Missing projected reflection sampled view");
     for(unsigned i=0;i<writable.size();++i){require(writable[i]!=VK_NULL_HANDLE,"Missing projected reflection output view");
         for(unsigned j=0;j<i;++j)require(writable[i]!=writable[j],"Projected reflection outputs alias");
-        for(const auto image:sampled)require(image!=writable[i],"Projected reflection input aliases output");}
+        for(const auto image:sampled)require(image!=writable[i],"Projected reflection input aliases output");
+        require(inputs.previousColorLayer!=writable[i],"Projected reflection history layer aliases output");}
     if(!inputs.tileCount)return;
     std::memcpy(slot.parameters.mapped,&frame,sizeof(frame));backend_.allocator().flush(slot.parameters,0,sizeof(frame));
     backend_.writeDescriptorBuffer({slot.set,1,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,inputs.tiles,VkDeviceSize(inputs.tileCount)*4});
     for(unsigned i=0;i<sampled.size();++i)backend_.writeDescriptorImage({slot.set,2+i,VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE,sampled[i],VK_NULL_HANDLE,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL});
+    backend_.writeDescriptorImage({slot.set,12,VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE,inputs.previousColorLayer?inputs.previousColorLayer:inputs.previousColor,
+        VK_NULL_HANDLE,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL});
     for(unsigned i=0;i<writable.size();++i)backend_.writeDescriptorImage({slot.set,9+i,VK_DESCRIPTOR_TYPE_STORAGE_IMAGE,writable[i],VK_NULL_HANDLE,VK_IMAGE_LAYOUT_GENERAL});
     commands.bindComputePipeline(pipeline_);commands.bindComputeDescriptorSet(layout_,slot.set);commands.dispatch(inputs.tileCount,1,1);
 }

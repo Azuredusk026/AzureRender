@@ -1,0 +1,94 @@
+{
+  "status": "verified-raw-ray-readback",
+  "captureQueue": 1534,
+  "rawFrame": {
+    "png": "90c7f62898d559a2d6054136b24e255d9e3969c3ee7898fe42aa284cbd639e10",
+    "referencePng": "a9657b4558f9d3cb03872d60d5e9e979af3eb6eb6c1a69784096148ff6f73c35",
+    "raw": "2d78c5173edd7f86701d70fc32b26ef2e1b7ed9b2f2ac61f4c7bb337913cd369",
+    "archive": "1e6f0e698fcde5c9feae77b3ed832f130a471f14b70d89caf787fccdae15e1ab",
+    "changed": 336985,
+    "overOne": 303445,
+    "peak": 210,
+    "bounds": [
+      0,
+      0,
+      1279,
+      719
+    ]
+  },
+  "programDigests": {
+    "mesh_object_clipmap_field.frag.spv": "d8e5c614e972d2a167401ab7ed540283b24e8f681119fa6e118cc2ecee2a4f8a",
+    "mesh_object_clipmap_field_early.frag.spv": "ab80180e971a851e13cd86db677eae32f1353deeb5caab95e2767400c22e98f7",
+    "mesh_object_clipmap_field_lighting.frag.spv": "48964a2162b95a7b1ff5b88eec93e2d8a5c7b778a0514916365e8e5e093ee8d5",
+    "mesh_object_clipmap_field_early_lighting.frag.spv": "dc1eb1b68c6d34f8accb275c503fd870323976df59d61502f19de005dca976a6",
+    "reflection_trace_packed.comp.spv": "61bc78a7093d6753b516183629aee77df6ea146fe1f56c5f7f9ffa79d6026594",
+    "reflection_trace_float.comp.spv": "5f100475a21cf5fbfa8b75d3cf9f8b2023a48a825c8bc29cd1ef62325481f25d",
+    "reflection_spatial_filter.comp.spv": "f1b66ef4d7c4796aa6529ad0bb1c308889c91918e66524284c1cf3a1d443ceea"
+  },
+  "markers": {
+    "1": {
+      "column": 2,
+      "visible": 48,
+      "exact": 48,
+      "falseMatches": 0
+    },
+    "2": {
+      "column": 5,
+      "visible": 56,
+      "exact": 56,
+      "falseMatches": 0
+    }
+  },
+  "stats": {
+    "affectedFilterSupport": 469,
+    "decoded": 387,
+    "hit": 387,
+    "touchesExactChangedSource": 111,
+    "touchesSourceBoundingBox": 238
+  },
+  "calibrationBgr": [
+    [
+      76,
+      79,
+      75
+    ],
+    [
+      81,
+      82,
+      210
+    ],
+    [
+      102,
+      211,
+      123
+    ],
+    [
+      106,
+      213,
+      215
+    ],
+    [
+      200,
+      80,
+      80
+    ],
+    [
+      201,
+      85,
+      210
+    ],
+    [
+      211,
+      212,
+      128
+    ],
+    [
+      214,
+      214,
+      215
+    ]
+  ],
+  "productionAcceptance": false,
+  "rawSupportOnly": true,
+  "archiveSha256": "b89ab67c31078a7a205744da9a20de8b7cdf52d8d1d9d79aa82c9eef4ac602e5"
+}

@@ -1,0 +1,1270 @@
+{
+  "status": "paired-full-frame-captures",
+  "productionFaceAcceptance": false,
+  "executable": "a3171469e009750d51821709047c99162bb5570f0233113b8dbae6a8679cb631",
+  "inputs": {
+    "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-125923-body-lit-outline-depth-order-a29b63\\face-candidate\\late-face-overlay-1230.azurematerial": "24a48584b252de8e93b74a5c13e78465452faa3076158a4a51c8212b87646387",
+    "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-125923-body-lit-outline-depth-order-a29b63\\face-candidate\\late-face-overlay-1230.azurematerial.azmeta": "4cddaca59b9ceff7e85ee56c4c674f9a12b9613d59a6c01108122b2b35577963",
+    "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-125923-body-lit-outline-depth-order-a29b63\\face-candidate\\late-face-overlay-1230.bin": "c769c00280e189656cdbd2ad4a698501bbea28c1c05d1e8de127b676ad95d95e",
+    "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-125923-body-lit-outline-depth-order-a29b63\\face-candidate\\late-face-overlay-1230.dds": "0ea41ca2831851e697b6869c7248867547950eea8d7095d38e649717a2624497",
+    "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-125923-body-lit-outline-depth-order-a29b63\\face-candidate\\late-face-overlay-1230.dds.azmeta": "a3eff6fc542fed3d8104c8cb34d174a99593d9f34221d5d50ca2133b26d8e31f",
+    "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-125923-body-lit-outline-depth-order-a29b63\\face-candidate\\late-face-overlay-1230.gltf": "fd4994cdb8cae5e238588d05388d10a450fca4ab6a5f967b47d7946f41dd7def",
+    "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-125923-body-lit-outline-depth-order-a29b63\\face-candidate\\late-face-overlay-1230.gltf.azmeta": "4659c30424586935da642ec96bc5e8b73fb191aa7d53f01973757902890fcc94",
+    "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-125923-body-lit-outline-depth-order-a29b63\\face-candidate\\late-face-overlay-1358.bin": "fdd6ab7d9a5857a7732cfb292e81fae9260fd87312cae4c9c985a67e93e637bf",
+    "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-125923-body-lit-outline-depth-order-a29b63\\face-candidate\\late-face-overlay-1358.dds": "30baf01840c98ae87338d826a9effb0bad4f01f9f868e3979b60381956a814e4",
+    "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-125923-body-lit-outline-depth-order-a29b63\\face-candidate\\late-face-overlay-1358.dds.azmeta": "aafa66ed5397d0d966c702c5c5d357d69f44d3a8cf3b6464bce9e765daaef77d",
+    "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-125923-body-lit-outline-depth-order-a29b63\\face-candidate\\late-face-overlay-1358.gltf": "63f77bd66aad6b824863e201ceddf23fcaf61c3de2a84b4cef0dc39429436e95",
+    "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-125923-body-lit-outline-depth-order-a29b63\\face-candidate\\late-face-overlay-1358.gltf.azmeta": "7b4c04bda6ab81406c9169626c20e0c0c1de83ee7eb2365173d381ad415bc3f1",
+    "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-125923-body-lit-outline-depth-order-a29b63\\face-quality-release-isolated-mask\\public-combined-nvidia\\recipe\\nearest\\inputs\\face-quality-public-nearest.azurematerial": "94d87cc0cdfe85547760a2fc0f5cf13c6e12afc2327ca9688667519302e302f9",
+    "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-125923-body-lit-outline-depth-order-a29b63\\face-quality-release-isolated-mask\\public-combined-nvidia\\recipe\\nearest\\inputs\\face-quality-public-nearest.azurematerial.azmeta": "9a91ee05c0b478474f1cea7293f8846b0279acb259b481ed293c056de50789d6",
+    "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-125923-body-lit-outline-depth-order-a29b63\\face-quality-release-isolated-mask\\public-combined-nvidia\\face-quality-native-production-combined.azurelevel": "df056aa9dc0e4f4edc1b27b4b762f5ccd4b4fa4f33ebe7974e130162ff039008",
+    "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-150229-face-native-geometry-mask-sampling-d5d93e\\assets-sdf\\face-native-geometry-mask-sampling-sdf.dds": "e4d7865a20fad774cc896c4b821442bf1649d91207ca2715b1b01255f8ed55ab",
+    "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-125923-body-lit-outline-depth-order-a29b63\\face-quality-release-isolated-mask\\public-combined-nvidia\\recipe\\mask\\inputs\\face-quality-public-mask.dds.azmeta": "1d5187a1ab37b25ffe1b622206ad7942fbac42a4cf6f4ffc77517a48e6a69a45",
+    "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-125923-body-lit-outline-depth-order-a29b63\\face-quality-release-isolated-mask\\public-combined-nvidia\\recipe\\mask\\inputs\\face-quality-public-mask.azurematerial": "1e9d6dff9e0a8a0d834675a452ea5dadbd48107456d977060dea32d43061216f",
+    "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-125923-body-lit-outline-depth-order-a29b63\\face-quality-release-isolated-mask\\public-combined-nvidia\\recipe\\mask\\inputs\\face-quality-public-mask.azurematerial.azmeta": "aa7e3b59e4dc05666a04ee6b4eab444440cbeea45cc2f5ff5a9919fe78426cf9",
+    "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261114-125923-body-lit-outline-depth-order-a29b63\\face-quality-release-isolated-mask\\public-combined-nvidia\\face-quality-native-production-combined.azurelevel.azmeta": "2dd87d2cd8acd0e04644ef76768b87922e5b7f294261b9587d1c5c7e1390d91f",
+    "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-231945-projected-hair-reference-grid-4b775d\\iris-overlay-geometry-project\\character\\late-face-overlay-1230.bin.azmeta": "f78f2b7b9fd21e762629cee155f3b5da11bdda0f9864465ad5caf54044b1c194",
+    "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-231945-projected-hair-reference-grid-4b775d\\iris-overlay-geometry-project\\character\\late-face-overlay-1358.bin.azmeta": "88bdc3e12851c8e7885578297962b0253ddfc048885ba8a5825d7f7fd8bb2776"
+  },
+  "pathRewrites": {
+    "character:/late-face-overlay-1230.gltf": "qa_character:/late-face-overlay-1230.gltf",
+    "character:/late-face-overlay-1358.gltf": "qa_character:/late-face-overlay-1358.gltf"
+  },
+  "source": "4b6fcfc9a8ed7bd9efefc26378bfd3780f789f39d47af4fed198256bdcbc6ed4",
+  "diagnosticSource": "eb0eb1e6c2a227960e2cbc929752e6a7c8bd48b66c1cb262613b62ebbd48a44a",
+  "changedPrograms": {
+    "mesh_object_early_lighting.frag.spv": "25344203f8bd687083686af3567874ed161ea77709404bc10211d5862dd87e14",
+    "mesh_object_lighting.frag.spv": "792f78a0c51bcd9fc025d1dc3c532509dd315d810b5576a51a0e910954e8f95d"
+  },
+  "samples": {
+    "nvidia-control": {
+      "raw": "dc774a20b9508fe0433ce355180c7ecdd68117e10adb045ea91f92494bf3a504",
+      "png": "f1ab2e655871812f15c47b67a541251d43b96a5a4d85e0c5b705295c26767ba3",
+      "control": "f1ab2e655871812f15c47b67a541251d43b96a5a4d85e0c5b705295c26767ba3",
+      "deltaArchive": "4d67db0a9e201362753f49ebb2936a1f435d1161db4659076a569ca49527cf1c",
+      "changed": 0,
+      "outsideFace": 0,
+      "irisChanged": 0,
+      "face": {
+        "overOne": 355,
+        "overEight": 50,
+        "peak": 25,
+        "newOverOne": 0
+      },
+      "trackedFaceEdge": {
+        "improved": 0,
+        "worsened": 0,
+        "peak": 25
+      }
+    },
+    "intel-control": {
+      "raw": "138896eaf72e33edc1e62cd00e2d29199a2642ed9b799f6cc1005126d4912be7",
+      "png": "b9a77ffe07580069d021a14902edec44508de1202bb75e0a4e356518576fb2f9",
+      "control": "b9a77ffe07580069d021a14902edec44508de1202bb75e0a4e356518576fb2f9",
+      "deltaArchive": "f554b24ffa9794c7af7c4c206440caa25f5ba9f29c4c1b6e885f7e34f13cf816",
+      "changed": 0,
+      "outsideFace": 0,
+      "irisChanged": 0,
+      "face": {
+        "overOne": 366,
+        "overEight": 52,
+        "peak": 38,
+        "newOverOne": 0
+      },
+      "trackedFaceEdge": {
+        "improved": 0,
+        "worsened": 0,
+        "peak": 25
+      }
+    },
+    "nvidia-native-tint": {
+      "raw": "83baf2417b060db113e64614e21e1085ee3df57a1d5b4df53040fffc44cb7b7f",
+      "png": "b2b49227cd530689d97715df641ebc718744bb9c709a89a40e3f6b234ed1c177",
+      "control": "f1ab2e655871812f15c47b67a541251d43b96a5a4d85e0c5b705295c26767ba3",
+      "deltaArchive": "cf6972ea0b996a8f4dc0bce470b211a5bed075d8872ef70629f05a4cec2a8107",
+      "changed": 818,
+      "outsideFace": 0,
+      "irisChanged": 0,
+      "face": {
+        "overOne": 202,
+        "overEight": 0,
+        "peak": 8,
+        "newOverOne": 31
+      },
+      "trackedFaceEdge": {
+        "improved": 49,
+        "worsened": 0,
+        "peak": 8
+      }
+    },
+    "intel-native-tint": {
+      "raw": "fb4183cdaf261683042ef52a100aae92d80978ab7abd07bb0126096668208946",
+      "png": "5a624dc8a1ea64fa5f32bf81020e4abe1cff77ce9bdf5519aafac7a9e93c5283",
+      "control": "b9a77ffe07580069d021a14902edec44508de1202bb75e0a4e356518576fb2f9",
+      "deltaArchive": "8efc709bf52a613f643594af982bd7ea685454cb143ab0b51f988fd5e25c3ef7",
+      "changed": 803,
+      "outsideFace": 0,
+      "irisChanged": 0,
+      "face": {
+        "overOne": 205,
+        "overEight": 2,
+        "peak": 39,
+        "newOverOne": 29
+      },
+      "trackedFaceEdge": {
+        "improved": 49,
+        "worsened": 0,
+        "peak": 8
+      }
+    }
+  },
+  "job": 1520,
+  "shaderBuild": {
+    "status": "linked-readonly-fixture-capture-entry",
+    "sourcePlayer": "68dfb40292112643358a0b2970cc523718080d98c5a0a68739f1aaaa877ad632",
+    "trace": {
+      "character_projected_history.frag.spv": "b0ff43bb3c280137dbb86afb784c503c49e6b57875d3c6d292d57c6985ac14cf",
+      "character_projected_history_bindless.frag.spv": "1d7e32da25503fd61ce456a33fdaf67cb5ce577018936659fb7eef2b30d90bc1",
+      "projected_reflection_trace.comp.spv": "c9d8330bfb623308bc056efabd81c599633199389124667247169fa11f7bf4a8"
+    },
+    "entrySource": "12ba0ab8402339ddec357dd7403584f9ad1e34daa57cb37bb2fe1bf2b5071ce3",
+    "diagnosticSource": "3685d177a6524fc7dd25cb035ca99243d3cf9c44f6f3eb8b1fe7d180462a02eb",
+    "candidatePlayer": "a3171469e009750d51821709047c99162bb5570f0233113b8dbae6a8679cb631",
+    "negativeCliExit": 1,
+    "entryObject": "3491bceae7d6a4d35a891f242caa28a9b63f7fc7baa1db55ad31e7f7c221215e",
+    "readOnlyProjectAssets": true,
+    "assetDatabaseSource": "ecf42ef530027c0cd04f0dac7870c372b8365bdc2f602bfeb2c17a1367611bb3",
+    "assetDatabaseDiagnostic": "91a571a1f7b9967fd49609dedd92c83854b9ee4ac42c116392dceb92326ceddb",
+    "assetDatabaseObject": "1cbce9982acb4fc0a87d6337c293696bc1b5c1271a8dc430c4ffa0e675fb4cd6"
+  },
+  "pointDiagnostics": {
+    "nvidia": {
+      "newOverOne": [
+        {
+          "point": [
+            1240,
+            268
+          ],
+          "nativeEvent": 804,
+          "controlSigned": [
+            -1,
+            0,
+            0
+          ],
+          "candidateSigned": [
+            1,
+            2,
+            2
+          ],
+          "core": false
+        },
+        {
+          "point": [
+            1318,
+            268
+          ],
+          "nativeEvent": 1358,
+          "controlSigned": [
+            0,
+            0,
+            1
+          ],
+          "candidateSigned": [
+            1,
+            0,
+            2
+          ],
+          "core": false
+        },
+        {
+          "point": [
+            1241,
+            271
+          ],
+          "nativeEvent": 804,
+          "controlSigned": [
+            0,
+            0,
+            1
+          ],
+          "candidateSigned": [
+            1,
+            2,
+            2
+          ],
+          "core": false
+        },
+        {
+          "point": [
+            1315,
+            272
+          ],
+          "nativeEvent": 1358,
+          "controlSigned": [
+            1,
+            1,
+            1
+          ],
+          "candidateSigned": [
+            1,
+            1,
+            2
+          ],
+          "core": false
+        },
+        {
+          "point": [
+            1247,
+            273
+          ],
+          "nativeEvent": 804,
+          "controlSigned": [
+            0,
+            0,
+            1
+          ],
+          "candidateSigned": [
+            0,
+            0,
+            2
+          ],
+          "core": false
+        },
+        {
+          "point": [
+            1249,
+            284
+          ],
+          "nativeEvent": 804,
+          "controlSigned": [
+            1,
+            0,
+            1
+          ],
+          "candidateSigned": [
+            1,
+            0,
+            2
+          ],
+          "core": false
+        },
+        {
+          "point": [
+            1245,
+            285
+          ],
+          "nativeEvent": 1358,
+          "controlSigned": [
+            -1,
+            -1,
+            0
+          ],
+          "candidateSigned": [
+            1,
+            1,
+            2
+          ],
+          "core": false
+        },
+        {
+          "point": [
+            1248,
+            285
+          ],
+          "nativeEvent": 804,
+          "controlSigned": [
+            0,
+            0,
+            1
+          ],
+          "candidateSigned": [
+            1,
+            1,
+            2
+          ],
+          "core": false
+        },
+        {
+          "point": [
+            1250,
+            287
+          ],
+          "nativeEvent": 804,
+          "controlSigned": [
+            0,
+            -1,
+            1
+          ],
+          "candidateSigned": [
+            1,
+            0,
+            2
+          ],
+          "core": false
+        },
+        {
+          "point": [
+            1315,
+            287
+          ],
+          "nativeEvent": 1358,
+          "controlSigned": [
+            0,
+            -1,
+            -1
+          ],
+          "candidateSigned": [
+            2,
+            1,
+            0
+          ],
+          "core": false
+        },
+        {
+          "point": [
+            1253,
+            289
+          ],
+          "nativeEvent": 804,
+          "controlSigned": [
+            0,
+            0,
+            1
+          ],
+          "candidateSigned": [
+            0,
+            0,
+            2
+          ],
+          "core": false
+        },
+        {
+          "point": [
+            1251,
+            290
+          ],
+          "nativeEvent": 804,
+          "controlSigned": [
+            1,
+            0,
+            1
+          ],
+          "candidateSigned": [
+            1,
+            0,
+            2
+          ],
+          "core": false
+        },
+        {
+          "point": [
+            1308,
+            290
+          ],
+          "nativeEvent": 1358,
+          "controlSigned": [
+            0,
+            1,
+            1
+          ],
+          "candidateSigned": [
+            0,
+            1,
+            2
+          ],
+          "core": false
+        },
+        {
+          "point": [
+            1312,
+            290
+          ],
+          "nativeEvent": 1358,
+          "controlSigned": [
+            0,
+            0,
+            1
+          ],
+          "candidateSigned": [
+            1,
+            1,
+            2
+          ],
+          "core": false
+        },
+        {
+          "point": [
+            1307,
+            291
+          ],
+          "nativeEvent": 1358,
+          "controlSigned": [
+            0,
+            1,
+            1
+          ],
+          "candidateSigned": [
+            0,
+            2,
+            1
+          ],
+          "core": false
+        },
+        {
+          "point": [
+            1252,
+            292
+          ],
+          "nativeEvent": 804,
+          "controlSigned": [
+            0,
+            -1,
+            1
+          ],
+          "candidateSigned": [
+            1,
+            0,
+            2
+          ],
+          "core": false
+        },
+        {
+          "point": [
+            1304,
+            292
+          ],
+          "nativeEvent": 1358,
+          "controlSigned": [
+            1,
+            1,
+            1
+          ],
+          "candidateSigned": [
+            1,
+            1,
+            2
+          ],
+          "core": false
+        },
+        {
+          "point": [
+            1258,
+            293
+          ],
+          "nativeEvent": 804,
+          "controlSigned": [
+            0,
+            0,
+            1
+          ],
+          "candidateSigned": [
+            0,
+            0,
+            2
+          ],
+          "core": true
+        },
+        {
+          "point": [
+            1288,
+            296
+          ],
+          "nativeEvent": 804,
+          "controlSigned": [
+            1,
+            -1,
+            -1
+          ],
+          "candidateSigned": [
+            2,
+            0,
+            0
+          ],
+          "core": true
+        },
+        {
+          "point": [
+            1262,
+            299
+          ],
+          "nativeEvent": 804,
+          "controlSigned": [
+            0,
+            1,
+            1
+          ],
+          "candidateSigned": [
+            0,
+            1,
+            2
+          ],
+          "core": false
+        },
+        {
+          "point": [
+            1259,
+            301
+          ],
+          "nativeEvent": 804,
+          "controlSigned": [
+            -1,
+            -1,
+            1
+          ],
+          "candidateSigned": [
+            0,
+            0,
+            2
+          ],
+          "core": false
+        },
+        {
+          "point": [
+            1301,
+            306
+          ],
+          "nativeEvent": 804,
+          "controlSigned": [
+            1,
+            -1,
+            -1
+          ],
+          "candidateSigned": [
+            5,
+            4,
+            4
+          ],
+          "core": false
+        },
+        {
+          "point": [
+            1264,
+            309
+          ],
+          "nativeEvent": 804,
+          "controlSigned": [
+            -1,
+            -1,
+            0
+          ],
+          "candidateSigned": [
+            1,
+            1,
+            2
+          ],
+          "core": false
+        },
+        {
+          "point": [
+            1297,
+            309
+          ],
+          "nativeEvent": 804,
+          "controlSigned": [
+            -1,
+            -1,
+            0
+          ],
+          "candidateSigned": [
+            3,
+            3,
+            3
+          ],
+          "core": false
+        },
+        {
+          "point": [
+            1265,
+            310
+          ],
+          "nativeEvent": 804,
+          "controlSigned": [
+            -1,
+            -1,
+            -1
+          ],
+          "candidateSigned": [
+            2,
+            1,
+            1
+          ],
+          "core": false
+        },
+        {
+          "point": [
+            1295,
+            310
+          ],
+          "nativeEvent": 804,
+          "controlSigned": [
+            -1,
+            0,
+            -1
+          ],
+          "candidateSigned": [
+            2,
+            3,
+            2
+          ],
+          "core": false
+        },
+        {
+          "point": [
+            1296,
+            310
+          ],
+          "nativeEvent": 804,
+          "controlSigned": [
+            1,
+            -1,
+            0
+          ],
+          "candidateSigned": [
+            5,
+            4,
+            3
+          ],
+          "core": false
+        },
+        {
+          "point": [
+            1292,
+            312
+          ],
+          "nativeEvent": 804,
+          "controlSigned": [
+            0,
+            -1,
+            0
+          ],
+          "candidateSigned": [
+            2,
+            1,
+            2
+          ],
+          "core": false
+        },
+        {
+          "point": [
+            1292,
+            313
+          ],
+          "nativeEvent": 804,
+          "controlSigned": [
+            1,
+            -1,
+            0
+          ],
+          "candidateSigned": [
+            6,
+            4,
+            4
+          ],
+          "core": false
+        },
+        {
+          "point": [
+            1289,
+            314
+          ],
+          "nativeEvent": 804,
+          "controlSigned": [
+            0,
+            -1,
+            0
+          ],
+          "candidateSigned": [
+            3,
+            2,
+            1
+          ],
+          "core": false
+        },
+        {
+          "point": [
+            1288,
+            315
+          ],
+          "nativeEvent": 804,
+          "controlSigned": [
+            0,
+            -1,
+            -1
+          ],
+          "candidateSigned": [
+            4,
+            4,
+            3
+          ],
+          "core": false
+        }
+      ],
+      "remainingOverEight": []
+    },
+    "intel": {
+      "newOverOne": [
+        {
+          "point": [
+            1240,
+            265
+          ],
+          "nativeEvent": 804,
+          "controlSigned": [
+            0,
+            -1,
+            1
+          ],
+          "candidateSigned": [
+            1,
+            0,
+            2
+          ],
+          "core": false
+        },
+        {
+          "point": [
+            1240,
+            268
+          ],
+          "nativeEvent": 804,
+          "controlSigned": [
+            -1,
+            0,
+            0
+          ],
+          "candidateSigned": [
+            1,
+            2,
+            2
+          ],
+          "core": false
+        },
+        {
+          "point": [
+            1241,
+            271
+          ],
+          "nativeEvent": 804,
+          "controlSigned": [
+            0,
+            0,
+            1
+          ],
+          "candidateSigned": [
+            1,
+            1,
+            2
+          ],
+          "core": false
+        },
+        {
+          "point": [
+            1315,
+            272
+          ],
+          "nativeEvent": 1358,
+          "controlSigned": [
+            0,
+            1,
+            1
+          ],
+          "candidateSigned": [
+            0,
+            1,
+            2
+          ],
+          "core": false
+        },
+        {
+          "point": [
+            1247,
+            273
+          ],
+          "nativeEvent": 804,
+          "controlSigned": [
+            0,
+            0,
+            1
+          ],
+          "candidateSigned": [
+            0,
+            0,
+            2
+          ],
+          "core": false
+        },
+        {
+          "point": [
+            1252,
+            274
+          ],
+          "nativeEvent": 804,
+          "controlSigned": [
+            0,
+            1,
+            1
+          ],
+          "candidateSigned": [
+            0,
+            1,
+            2
+          ],
+          "core": false
+        },
+        {
+          "point": [
+            1253,
+            278
+          ],
+          "nativeEvent": 804,
+          "controlSigned": [
+            1,
+            -1,
+            1
+          ],
+          "candidateSigned": [
+            1,
+            0,
+            2
+          ],
+          "core": false
+        },
+        {
+          "point": [
+            1255,
+            283
+          ],
+          "nativeEvent": 804,
+          "controlSigned": [
+            1,
+            0,
+            0
+          ],
+          "candidateSigned": [
+            2,
+            0,
+            0
+          ],
+          "core": false
+        },
+        {
+          "point": [
+            1245,
+            285
+          ],
+          "nativeEvent": 1358,
+          "controlSigned": [
+            -1,
+            -1,
+            0
+          ],
+          "candidateSigned": [
+            1,
+            1,
+            2
+          ],
+          "core": false
+        },
+        {
+          "point": [
+            1253,
+            289
+          ],
+          "nativeEvent": 804,
+          "controlSigned": [
+            0,
+            -1,
+            1
+          ],
+          "candidateSigned": [
+            0,
+            0,
+            2
+          ],
+          "core": false
+        },
+        {
+          "point": [
+            1251,
+            290
+          ],
+          "nativeEvent": 804,
+          "controlSigned": [
+            1,
+            -1,
+            1
+          ],
+          "candidateSigned": [
+            1,
+            0,
+            2
+          ],
+          "core": false
+        },
+        {
+          "point": [
+            1308,
+            290
+          ],
+          "nativeEvent": 1358,
+          "controlSigned": [
+            0,
+            1,
+            1
+          ],
+          "candidateSigned": [
+            0,
+            1,
+            2
+          ],
+          "core": false
+        },
+        {
+          "point": [
+            1252,
+            292
+          ],
+          "nativeEvent": 804,
+          "controlSigned": [
+            0,
+            -1,
+            1
+          ],
+          "candidateSigned": [
+            1,
+            0,
+            2
+          ],
+          "core": false
+        },
+        {
+          "point": [
+            1259,
+            301
+          ],
+          "nativeEvent": 804,
+          "controlSigned": [
+            0,
+            -1,
+            1
+          ],
+          "candidateSigned": [
+            1,
+            0,
+            2
+          ],
+          "core": false
+        },
+        {
+          "point": [
+            1298,
+            301
+          ],
+          "nativeEvent": 804,
+          "controlSigned": [
+            1,
+            1,
+            -1
+          ],
+          "candidateSigned": [
+            2,
+            1,
+            0
+          ],
+          "core": false
+        },
+        {
+          "point": [
+            1299,
+            301
+          ],
+          "nativeEvent": 804,
+          "controlSigned": [
+            1,
+            0,
+            0
+          ],
+          "candidateSigned": [
+            2,
+            1,
+            0
+          ],
+          "core": false
+        },
+        {
+          "point": [
+            1301,
+            306
+          ],
+          "nativeEvent": 804,
+          "controlSigned": [
+            1,
+            -1,
+            -1
+          ],
+          "candidateSigned": [
+            5,
+            4,
+            3
+          ],
+          "core": false
+        },
+        {
+          "point": [
+            1264,
+            309
+          ],
+          "nativeEvent": 804,
+          "controlSigned": [
+            -1,
+            -1,
+            0
+          ],
+          "candidateSigned": [
+            1,
+            1,
+            2
+          ],
+          "core": false
+        },
+        {
+          "point": [
+            1265,
+            310
+          ],
+          "nativeEvent": 804,
+          "controlSigned": [
+            -1,
+            -1,
+            -1
+          ],
+          "candidateSigned": [
+            2,
+            1,
+            1
+          ],
+          "core": false
+        },
+        {
+          "point": [
+            1295,
+            310
+          ],
+          "nativeEvent": 804,
+          "controlSigned": [
+            -1,
+            -1,
+            -1
+          ],
+          "candidateSigned": [
+            1,
+            2,
+            2
+          ],
+          "core": false
+        },
+        {
+          "point": [
+            1296,
+            310
+          ],
+          "nativeEvent": 804,
+          "controlSigned": [
+            1,
+            -1,
+            -1
+          ],
+          "candidateSigned": [
+            5,
+            4,
+            3
+          ],
+          "core": false
+        },
+        {
+          "point": [
+            1267,
+            311
+          ],
+          "nativeEvent": 804,
+          "controlSigned": [
+            -1,
+            -1,
+            0
+          ],
+          "candidateSigned": [
+            1,
+            0,
+            2
+          ],
+          "core": false
+        },
+        {
+          "point": [
+            1292,
+            312
+          ],
+          "nativeEvent": 804,
+          "controlSigned": [
+            0,
+            -1,
+            0
+          ],
+          "candidateSigned": [
+            2,
+            1,
+            2
+          ],
+          "core": false
+        },
+        {
+          "point": [
+            1292,
+            313
+          ],
+          "nativeEvent": 804,
+          "controlSigned": [
+            1,
+            -1,
+            0
+          ],
+          "candidateSigned": [
+            6,
+            4,
+            5
+          ],
+          "core": false
+        },
+        {
+          "point": [
+            1276,
+            314
+          ],
+          "nativeEvent": 804,
+          "controlSigned": [
+            0,
+            1,
+            1
+          ],
+          "candidateSigned": [
+            0,
+            1,
+            2
+          ],
+          "core": false
+        },
+        {
+          "point": [
+            1289,
+            314
+          ],
+          "nativeEvent": 804,
+          "controlSigned": [
+            1,
+            0,
+            0
+          ],
+          "candidateSigned": [
+            3,
+            2,
+            1
+          ],
+          "core": false
+        },
+        {
+          "point": [
+            1273,
+            315
+          ],
+          "nativeEvent": 804,
+          "controlSigned": [
+            1,
+            0,
+            0
+          ],
+          "candidateSigned": [
+            2,
+            1,
+            0
+          ],
+          "core": false
+        },
+        {
+          "point": [
+            1288,
+            315
+          ],
+          "nativeEvent": 804,
+          "controlSigned": [
+            0,
+            -1,
+            -1
+          ],
+          "candidateSigned": [
+            4,
+            3,
+            2
+          ],
+          "core": false
+        },
+        {
+          "point": [
+            1277,
+            317
+          ],
+          "nativeEvent": 804,
+          "controlSigned": [
+            1,
+            -1,
+            0
+          ],
+          "candidateSigned": [
+            2,
+            0,
+            0
+          ],
+          "core": false
+        }
+      ],
+      "remainingOverEight": [
+        {
+          "point": [
+            1264,
+            261
+          ],
+          "nativeEvent": 1230,
+          "controlSigned": [
+            10,
+            9,
+            10
+          ],
+          "candidateSigned": [
+            10,
+            9,
+            10
+          ],
+          "core": false
+        },
+        {
+          "point": [
+            1321,
+            271
+          ],
+          "nativeEvent": 1358,
+          "controlSigned": [
+            36,
+            38,
+            37
+          ],
+          "candidateSigned": [
+            37,
+            39,
+            39
+          ],
+          "core": false
+        }
+      ]
+    }
+  },
+  "archiveSha256": "399c87a115fe853717bc12be4b8b1996b19f85cfd36d5d0b4968f11be7e037e1"
+}

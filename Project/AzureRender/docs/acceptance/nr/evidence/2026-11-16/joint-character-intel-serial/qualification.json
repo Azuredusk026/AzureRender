@@ -1,0 +1,52 @@
+{
+  "status": "verified-intel-serial-repeat-exact",
+  "strictBodyAcceptance": false,
+  "normalParallelPathUnresolved": true,
+  "queue": {
+    "id": 1477,
+    "task": "nr-joint-character-intel-serial-frame-pair",
+    "state": "succeeded",
+    "exitCode": 0,
+    "elapsedSeconds": 172.375
+  },
+  "raw": "fa3d9d2c38214b67761ec32039c6e52e6cb2dfc8ad48c3b23b860755976c0a8a",
+  "img": "f55252639ef131b9c40373ec2340e105fbc81bfa22e8de72a7961de492c1b456",
+  "defaultRegionalOverOne": 662,
+  "serialRegionalOverOne": 0,
+  "serialBodyOverOne": 63,
+  "fullFrameAgainstBaseline": {
+    "png": "f55252639ef131b9c40373ec2340e105fbc81bfa22e8de72a7961de492c1b456",
+    "referencePng": "a9657b4558f9d3cb03872d60d5e9e979af3eb6eb6c1a69784096148ff6f73c35",
+    "raw": "fa3d9d2c38214b67761ec32039c6e52e6cb2dfc8ad48c3b23b860755976c0a8a",
+    "archive": "2d1eac541a39793d928292a4adce7dcd53fe3062d2fb4b83814d6c12f8c0c8f8",
+    "changed": 319,
+    "overOne": 86,
+    "peak": 45,
+    "bounds": [
+      607,
+      99,
+      754,
+      712
+    ]
+  },
+  "validation": {
+    "archive": "57e278c7af07a341f3faae71125871c11f9ffbb9d14f42d0e3779cbaa317fb6f",
+    "files": {
+      "raw/serial-qualification.json": "a8f8b6400bedf64e8399c2893ebdaaa611c928960d923866f74daaed2fa0cc6f",
+      "source/joint-character-referenced-body.py": "32f7b021114297a65803d0b1f2107b913f7a82a7cc5acb28aa2529599f018836",
+      "logs/serial.log": "378c4ff30800de0483ab33f226770dc433e2a90925cf97e78483b5dd05ae9da0",
+      "frames/intel-serial-a.zip": "2d1eac541a39793d928292a4adce7dcd53fe3062d2fb4b83814d6c12f8c0c8f8",
+      "player/serial-a/frames/capture_manifest.json": "512a917beb75f3756c5c97def8a7c41fe5b18a5b8453aecdc2816722d72488cc",
+      "player/serial-a/frames/gpu_capabilities.json": "052830ed89bea19f0e9a17839082b9f979cfab2b17908f9ee83df5f0e0bcd85f",
+      "player/serial-a/runtime.json": "05406e3ef9f1cd987f2d2a5a8678ef0b299c44d50e787f18840503c6976c6e22",
+      "player/serial-a/command.json": "95f25f79aa6373ba5dba50b6e131b0cfcf70dc8b39aafac8628beec652bc5a0a",
+      "player/serial-a/result.json": "05d9dc2463844aed13fe3f51ec5bb536a1a82a224fed1a7c0272d5d38c55a2f4",
+      "frames/intel-serial-b.zip": "c426593f3e6cb6a4ed87aa887b600f836abd2aa9486fae8ff0a420551a86ad8a",
+      "player/serial-b/frames/capture_manifest.json": "2cf727a5b124be9ea6e492d81b060e8d3483f952ac579a9e3d664a8831424c88",
+      "player/serial-b/frames/gpu_capabilities.json": "052830ed89bea19f0e9a17839082b9f979cfab2b17908f9ee83df5f0e0bcd85f",
+      "player/serial-b/runtime.json": "05406e3ef9f1cd987f2d2a5a8678ef0b299c44d50e787f18840503c6976c6e22",
+      "player/serial-b/command.json": "38053f54d76c5892820537807e8fe60b029971c71fade8871e380cdc9d6d35fe",
+      "player/serial-b/result.json": "dfca6e711e9056ba54d02d6b1b81b9de71a2d9101995bf8bcc093da692aee2d4"
+    }
+  }
+}

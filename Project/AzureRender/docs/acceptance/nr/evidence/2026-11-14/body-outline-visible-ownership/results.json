@@ -1,0 +1,335 @@
+{
+  "status": "source-attribution",
+  "outlineCoverage": 1184,
+  "events": {
+    "1018": {
+      "changed": 1184,
+      "sources": [
+        {
+          "path": "1018-1018.bin.gz",
+          "sha256": "733fc7f31649a82151c292d647dbd4b1c2a179dc8d95e75c7ad840772e41ad4a"
+        },
+        {
+          "path": "1018-1017.bin.gz",
+          "sha256": "dad46665739df78b244ba9907affd16572877f7bac1aae895cd5c1600a43db62"
+        }
+      ]
+    },
+    "1038": {
+      "changed": 2,
+      "sources": [
+        {
+          "path": "1038-1038.bin.gz",
+          "sha256": "848fc05a489e1e810a78a03e38ea2bbdb1e0fb77cf03866b077a178916db188a"
+        },
+        {
+          "path": "1038-1037.bin.gz",
+          "sha256": "733fc7f31649a82151c292d647dbd4b1c2a179dc8d95e75c7ad840772e41ad4a"
+        }
+      ]
+    },
+    "1059": {
+      "changed": 0,
+      "sources": [
+        {
+          "path": "1059-1059.bin.gz",
+          "sha256": "e52eff89f8bb8d657874bc61fe9335eaf5008f64167df55dcc8a16b89b0a48cb"
+        },
+        {
+          "path": "1059-1058.bin.gz",
+          "sha256": "848fc05a489e1e810a78a03e38ea2bbdb1e0fb77cf03866b077a178916db188a"
+        }
+      ]
+    },
+    "1079": {
+      "changed": 8,
+      "sources": [
+        {
+          "path": "1079-1079.bin.gz",
+          "sha256": "ac1e337c764061394cd2f5162b1be93cca384eb44b9695c314318bee987f964a"
+        },
+        {
+          "path": "1079-1078.bin.gz",
+          "sha256": "e52eff89f8bb8d657874bc61fe9335eaf5008f64167df55dcc8a16b89b0a48cb"
+        }
+      ]
+    },
+    "1099": {
+      "changed": 0,
+      "sources": [
+        {
+          "path": "1099-1099.bin.gz",
+          "sha256": "4d3623e9a709ac08511c781e30a8688c7d95638bd18dec6c20c9a863b8e7af9b"
+        },
+        {
+          "path": "1099-1098.bin.gz",
+          "sha256": "ac1e337c764061394cd2f5162b1be93cca384eb44b9695c314318bee987f964a"
+        }
+      ]
+    },
+    "1116": {
+      "changed": 6,
+      "sources": [
+        {
+          "path": "1116-1116.bin.gz",
+          "sha256": "4cd5cb9d35af01bf7a43eaafa6c8ddc7f8274646ddec00e6fbeecee1eadfe19f"
+        },
+        {
+          "path": "1116-1115.bin.gz",
+          "sha256": "4d3623e9a709ac08511c781e30a8688c7d95638bd18dec6c20c9a863b8e7af9b"
+        }
+      ]
+    },
+    "1138": {
+      "changed": 0,
+      "sources": [
+        {
+          "path": "1138-1138.bin.gz",
+          "sha256": "53ec32668a658c60a775939a18a2ac8b1a8f9fc16af0ec87536f3bb549ce4350"
+        },
+        {
+          "path": "1138-1137.bin.gz",
+          "sha256": "4cd5cb9d35af01bf7a43eaafa6c8ddc7f8274646ddec00e6fbeecee1eadfe19f"
+        }
+      ]
+    },
+    "1160": {
+      "changed": 0,
+      "sources": [
+        {
+          "path": "1160-1160.bin.gz",
+          "sha256": "53ec32668a658c60a775939a18a2ac8b1a8f9fc16af0ec87536f3bb549ce4350"
+        },
+        {
+          "path": "1160-1159.bin.gz",
+          "sha256": "53ec32668a658c60a775939a18a2ac8b1a8f9fc16af0ec87536f3bb549ce4350"
+        }
+      ]
+    },
+    "1230": {
+      "changed": 0,
+      "sources": [
+        {
+          "path": "1230-1230.bin.gz",
+          "sha256": "258a8e0f35cb68568a21d1cd530558b173b458ca3958d45d5dfc11116f53d8ed"
+        },
+        {
+          "path": "1230-1229.bin.gz",
+          "sha256": "53ec32668a658c60a775939a18a2ac8b1a8f9fc16af0ec87536f3bb549ce4350"
+        }
+      ]
+    },
+    "1245": {
+      "changed": 0,
+      "sources": [
+        {
+          "path": "1245-1245.bin.gz",
+          "sha256": "164746638e9148bbd5016e8bc8d8b3c4f34db2d080bf7e70807f5a21be5ab3b3"
+        },
+        {
+          "path": "1245-1244.bin.gz",
+          "sha256": "258a8e0f35cb68568a21d1cd530558b173b458ca3958d45d5dfc11116f53d8ed"
+        }
+      ]
+    },
+    "1267": {
+      "changed": 0,
+      "sources": [
+        {
+          "path": "1267-1267.bin.gz",
+          "sha256": "cf1268c6ff4fdbf4499186cc6453fa44d77db439abbe1b8f3e17772c1e820e10"
+        },
+        {
+          "path": "1267-1266.bin.gz",
+          "sha256": "164746638e9148bbd5016e8bc8d8b3c4f34db2d080bf7e70807f5a21be5ab3b3"
+        }
+      ]
+    },
+    "1291": {
+      "changed": 0,
+      "sources": [
+        {
+          "path": "1291-1291.bin.gz",
+          "sha256": "88dfc925af1b963af44d824c6533eccfe8cc90f747465186b9cd8d6a3a720518"
+        },
+        {
+          "path": "1291-1290.bin.gz",
+          "sha256": "cf1268c6ff4fdbf4499186cc6453fa44d77db439abbe1b8f3e17772c1e820e10"
+        }
+      ]
+    },
+    "1314": {
+      "changed": 0,
+      "sources": [
+        {
+          "path": "1314-1314.bin.gz",
+          "sha256": "7a81009cfbb7ddc242daed8e61deff011a2841bbb5ffa41b6ee075a87955e046"
+        },
+        {
+          "path": "1314-1313.bin.gz",
+          "sha256": "88dfc925af1b963af44d824c6533eccfe8cc90f747465186b9cd8d6a3a720518"
+        }
+      ]
+    },
+    "1339": {
+      "changed": 0,
+      "sources": [
+        {
+          "path": "1339-1339.bin.gz",
+          "sha256": "7a81009cfbb7ddc242daed8e61deff011a2841bbb5ffa41b6ee075a87955e046"
+        },
+        {
+          "path": "1339-1338.bin.gz",
+          "sha256": "7a81009cfbb7ddc242daed8e61deff011a2841bbb5ffa41b6ee075a87955e046"
+        }
+      ]
+    },
+    "1358": {
+      "changed": 0,
+      "sources": [
+        {
+          "path": "1358-1358.bin.gz",
+          "sha256": "f296f8072c0a7b81f1527571e7a9ec8ca5f393f78d29b691af34541f6c602930"
+        },
+        {
+          "path": "1358-1357.bin.gz",
+          "sha256": "7a81009cfbb7ddc242daed8e61deff011a2841bbb5ffa41b6ee075a87955e046"
+        }
+      ]
+    },
+    "1383": {
+      "changed": 57,
+      "sources": [
+        {
+          "path": "1383-1383.bin.gz",
+          "sha256": "b742829a6c1b20917dc88a25670090509ec89d7a5885add5931acd40d87ff484"
+        },
+        {
+          "path": "1383-1382.bin.gz",
+          "sha256": "f296f8072c0a7b81f1527571e7a9ec8ca5f393f78d29b691af34541f6c602930"
+        }
+      ]
+    }
+  },
+  "byLastDraw": {
+    "1018": 1112,
+    "1038": 2,
+    "1079": 8,
+    "1116": 5,
+    "1383": 57
+  },
+  "devices": {
+    "nvidia": {
+      "ordered-lit": {
+        "1018": {
+          "changed": 513,
+          "overOne": 1108,
+          "overEight": 721,
+          "peak": 148
+        },
+        "1038": {
+          "changed": 2,
+          "overOne": 2,
+          "overEight": 2,
+          "peak": 19
+        },
+        "1079": {
+          "changed": 0,
+          "overOne": 7,
+          "overEight": 4,
+          "peak": 55
+        },
+        "1116": {
+          "changed": 0,
+          "overOne": 4,
+          "overEight": 3,
+          "peak": 26
+        },
+        "1383": {
+          "changed": 56,
+          "overOne": 53,
+          "overEight": 4,
+          "peak": 24
+        },
+        "frameSha256": "5fc0753bea84d97ea7c6c750d1dfe87e7a53b0dce99e6032810554721740f6c7"
+      },
+      "lit": {
+        "1018": {
+          "changed": 513,
+          "overOne": 1108,
+          "overEight": 721,
+          "peak": 148
+        },
+        "1038": {
+          "changed": 2,
+          "overOne": 2,
+          "overEight": 2,
+          "peak": 19
+        },
+        "1079": {
+          "changed": 0,
+          "overOne": 7,
+          "overEight": 4,
+          "peak": 55
+        },
+        "1116": {
+          "changed": 0,
+          "overOne": 4,
+          "overEight": 3,
+          "peak": 26
+        },
+        "1383": {
+          "changed": 56,
+          "overOne": 53,
+          "overEight": 4,
+          "peak": 24
+        },
+        "frameSha256": "9f5a4dca11aec9b4996ddb3b1d962eb3108cb02c8a9b5f858bf22a725582e096"
+      }
+    },
+    "intel": {
+      "lit": {
+        "1018": {
+          "changed": 513,
+          "overOne": 1109,
+          "overEight": 721,
+          "peak": 148
+        },
+        "1038": {
+          "changed": 2,
+          "overOne": 2,
+          "overEight": 2,
+          "peak": 20
+        },
+        "1079": {
+          "changed": 0,
+          "overOne": 7,
+          "overEight": 4,
+          "peak": 55
+        },
+        "1116": {
+          "changed": 0,
+          "overOne": 4,
+          "overEight": 3,
+          "peak": 26
+        },
+        "1383": {
+          "changed": 56,
+          "overOne": 55,
+          "overEight": 5,
+          "peak": 24
+        },
+        "frameSha256": "27f4aee0eabdb85084cfb031c6b329222282e5aaca66b0c79c7d1eb40d1362df"
+      }
+    }
+  },
+  "pointOwnership": {
+    "encoding": "uint16 little-endian: x, y, last event",
+    "sha256": "55db208c761f1501813aa517e87382c4a5f0a5ca1ebd7f894093c29f9de3fb9f"
+  },
+  "overallStatus": "failed-user-review",
+  "archive": {
+    "sha256": "0d9dc587eac097428afbac6aa82af81b11a3279b90a7799ffff55990e656cc5b",
+    "members": 3
+  }
+}

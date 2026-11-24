@@ -1,0 +1,322 @@
+{
+  "status": "verified-same-screen-points-in-retained-captures",
+  "formalAcceptance": "pending",
+  "note": "Native local-loop RGB delta and Player clustered diffuse are different internal quantities. Same screen coordinates and draw ownership do not establish identical input geometry or final color equivalence.",
+  "capture": {
+    "event": 876,
+    "shader": "115338114898ef9d9525671704df30d351ee1d18012cebd15826352a0c40765f",
+    "push": "02000000055828000200000010000000",
+    "capture": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-231945-projected-hair-reference-grid-4b775d\\iris-overlay-player-rdc\\overlay_frame1.rdc",
+    "captureSha256": "6960267c0d71e4d05b6bfe0e2730c332ed71955f1fde6d69eb7d8aadf13eff24",
+    "baseline": "7f0920f3cb0a521ec404a362a3d39738b4be97c3ca8755e7c2507ec053567c92",
+    "points": [
+      [
+        1306,
+        304
+      ],
+      [
+        1313,
+        297
+      ],
+      [
+        1312,
+        298
+      ],
+      [
+        1301,
+        306
+      ],
+      [
+        1296,
+        310
+      ],
+      [
+        1288,
+        315
+      ]
+    ],
+    "groups": [
+      "dark",
+      "dark",
+      "dark",
+      "bright",
+      "bright",
+      "bright"
+    ]
+  },
+  "nativeQualification": "2f9ecf15c10e84b67d788102a7c6c3619b903b9b8d28bc170d7393aaf6c6ffba",
+  "variablesPrograms": {
+    "clusteredDiffuse": "aad7faef65e48a2db514fe3490c7a950f65ed90b43611e2edcd8b0660ec64eca",
+    "clusteredSpecular": "afd914a3036b76675a7b5fb5327e2d6bfb35ecd03f478e0065f50377a23e0a57",
+    "ambientDiffuse": "bdfae16ee8161edf88869524d96afe79516850c060b3b0f9c536fbfe41d11907",
+    "directDiffuse": "545702e9a79a2dda138a09c7e9a804c2fa74d99539c1bd05f72b4109d56474db",
+    "beautyColor": "a1d9d1e81741f5eb4a2515616e77bc759f20c484a7319a5fad91690880296d4f"
+  },
+  "rows": [
+    {
+      "point": [
+        1306,
+        304
+      ],
+      "group": "dark",
+      "nativeLocalLightContribution": {
+        "nvidia": [
+          1.0030990839004517,
+          0.4998356103897095,
+          0.3558296859264374
+        ],
+        "intel": [
+          1.0062574744224548,
+          0.5002371370792389,
+          0.3565532863140106
+        ]
+      },
+      "playerClusteredDiffuse": [
+        0.451171875,
+        0.2369384765625,
+        0.15234375
+      ],
+      "playerClusteredSpecular": [
+        5.4836273193359375e-06,
+        3.993511199951172e-06,
+        2.86102294921875e-06
+      ],
+      "playerAmbientDiffuse": [
+        0.02777099609375,
+        0.0178375244140625,
+        0.01438140869140625
+      ],
+      "playerDirectDiffuse": [
+        0.32275390625,
+        0.1954345703125,
+        0.1490478515625
+      ],
+      "playerBeauty": [
+        0.57958984375,
+        0.346435546875,
+        0.259033203125
+      ]
+    },
+    {
+      "point": [
+        1313,
+        297
+      ],
+      "group": "dark",
+      "nativeLocalLightContribution": {
+        "nvidia": [
+          1.198476791381836,
+          0.5795530676841736,
+          0.4183322787284851
+        ],
+        "intel": [
+          1.2022023797035217,
+          0.5797432363033295,
+          0.4189774692058563
+        ]
+      },
+      "playerClusteredDiffuse": [
+        0.52099609375,
+        0.26708984375,
+        0.170166015625
+      ],
+      "playerClusteredSpecular": [
+        3.886222839355469e-05,
+        2.8431415557861328e-05,
+        2.0444393157958984e-05
+      ],
+      "playerAmbientDiffuse": [
+        0.027191162109375,
+        0.0171356201171875,
+        0.0137786865234375
+      ],
+      "playerDirectDiffuse": [
+        0.33447265625,
+        0.197021484375,
+        0.1484375
+      ],
+      "playerBeauty": [
+        0.6923828125,
+        0.404052734375,
+        0.29833984375
+      ]
+    },
+    {
+      "point": [
+        1312,
+        298
+      ],
+      "group": "dark",
+      "nativeLocalLightContribution": {
+        "nvidia": [
+          1.3817749619483948,
+          0.6787817180156708,
+          0.48597609996795654
+        ],
+        "intel": [
+          1.386476457118988,
+          0.6781277358531952,
+          0.4862845242023468
+        ]
+      },
+      "playerClusteredDiffuse": [
+        0.52294921875,
+        0.273193359375,
+        0.174072265625
+      ],
+      "playerClusteredSpecular": [
+        4.190206527709961e-05,
+        3.063678741455078e-05,
+        2.205371856689453e-05
+      ],
+      "playerAmbientDiffuse": [
+        0.02764892578125,
+        0.0177001953125,
+        0.0141754150390625
+      ],
+      "playerDirectDiffuse": [
+        0.338623046875,
+        0.202880859375,
+        0.1524658203125
+      ],
+      "playerBeauty": [
+        0.73974609375,
+        0.4365234375,
+        0.3203125
+      ]
+    },
+    {
+      "point": [
+        1301,
+        306
+      ],
+      "group": "bright",
+      "nativeLocalLightContribution": {
+        "nvidia": [
+          1.1039488315582275,
+          0.6184723973274231,
+          0.43139782547950745
+        ],
+        "intel": [
+          1.1047630310058594,
+          0.6188178062438965,
+          0.43121618032455444
+        ]
+      },
+      "playerClusteredDiffuse": [
+        0.45556640625,
+        0.26123046875,
+        0.1708984375
+      ],
+      "playerClusteredSpecular": [
+        2.7239322662353516e-05,
+        1.990795135498047e-05,
+        1.436471939086914e-05
+      ],
+      "playerAmbientDiffuse": [
+        0.029327392578125,
+        0.020111083984375,
+        0.0161285400390625
+      ],
+      "playerDirectDiffuse": [
+        0.33642578125,
+        0.21923828125,
+        0.1671142578125
+      ],
+      "playerBeauty": [
+        0.61328125,
+        0.38818359375,
+        0.2880859375
+      ]
+    },
+    {
+      "point": [
+        1296,
+        310
+      ],
+      "group": "bright",
+      "nativeLocalLightContribution": {
+        "nvidia": [
+          0.6956250667572021,
+          0.39910149574279785,
+          0.2767260670661926
+        ],
+        "intel": [
+          0.697249174118042,
+          0.39944392442703247,
+          0.2767893075942993
+        ]
+      },
+      "playerClusteredDiffuse": [
+        0.393798828125,
+        0.2265625,
+        0.1505126953125
+      ],
+      "playerClusteredSpecular": [
+        9.298324584960938e-06,
+        6.794929504394531e-06,
+        4.887580871582031e-06
+      ],
+      "playerAmbientDiffuse": [
+        0.029205322265625,
+        0.019927978515625,
+        0.0160980224609375
+      ],
+      "playerDirectDiffuse": [
+        0.32080078125,
+        0.20947265625,
+        0.1619873046875
+      ],
+      "playerBeauty": [
+        0.484375,
+        0.309814453125,
+        0.235107421875
+      ]
+    },
+    {
+      "point": [
+        1288,
+        315
+      ],
+      "group": "bright",
+      "nativeLocalLightContribution": {
+        "nvidia": [
+          0.27572381496429443,
+          0.15808600187301636,
+          0.10910779237747192
+        ],
+        "intel": [
+          0.27628445625305176,
+          0.15813851356506348,
+          0.10909831523895264
+        ]
+      },
+      "playerClusteredDiffuse": [
+        0.2578125,
+        0.1507568359375,
+        0.1014404296875
+      ],
+      "playerClusteredSpecular": [
+        4.172325134277344e-07,
+        2.980232238769531e-07,
+        1.7881393432617188e-07
+      ],
+      "playerAmbientDiffuse": [
+        0.029266357421875,
+        0.0198822021484375,
+        0.016021728515625
+      ],
+      "playerDirectDiffuse": [
+        0.2880859375,
+        0.191650390625,
+        0.1507568359375
+      ],
+      "playerBeauty": [
+        0.33837890625,
+        0.224609375,
+        0.1763916015625
+      ]
+    }
+  ],
+  "archive": "57ddf60906a087c083efa66e637337c741caf105acd795c8e369992948ea08e3"
+}

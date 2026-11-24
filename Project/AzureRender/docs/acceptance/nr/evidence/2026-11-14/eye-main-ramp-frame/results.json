@@ -1,0 +1,246 @@
+{
+  "schemaVersion": 1,
+  "overallStatus": "failed-user-review",
+  "playerSha256": "1a30d925a674ddb1d95876cb80181106a0217e12a7228a35b5980b134954cb69",
+  "staticSourceResultsSha256": "9ecb428b225d7bf9e4e5732e488387b723c22d082c40ef35c69208abb047ba41",
+  "devices": {
+    "nvidia": {
+      "nprSuite": {
+        "maximumLinearError": 0.002788458143028194,
+        "frameProjectionSeparation": [
+          0.02145028471216992,
+          0.02145028471216992,
+          0.0
+        ],
+        "frameCaptureSequences": {
+          "main-frame-animated": [
+            [
+              99,
+              48,
+              175
+            ],
+            [
+              99,
+              48,
+              175
+            ],
+            [
+              96,
+              47,
+              171
+            ]
+          ],
+          "main-frame-control": [
+            [
+              96,
+              47,
+              171
+            ],
+            [
+              96,
+              47,
+              171
+            ],
+            [
+              96,
+              47,
+              171
+            ]
+          ]
+        },
+        "mipChangedPixels": 12892,
+        "cases": 17
+      },
+      "baseline": {
+        "device": "nvidia",
+        "variant": "baseline",
+        "frameSha256": "b2848d59cc968603e818d76813df7d9748224bc0222c10600b22212ed6c9ec35",
+        "playerSha256": "1a30d925a674ddb1d95876cb80181106a0217e12a7228a35b5980b134954cb69",
+        "irisOverOne": 52,
+        "irisOverEight": 10,
+        "irisPeak": 20,
+        "expectedFrameDifference": 0,
+        "expectedFramePeak": 0,
+        "outsideIrisDifference": 0
+      },
+      "projected": {
+        "device": "nvidia",
+        "variant": "projected",
+        "frameSha256": "8f732d547598e91901563aff64ab6b9d88a87a5280518973fe050e020c9f74c1",
+        "playerSha256": "1a30d925a674ddb1d95876cb80181106a0217e12a7228a35b5980b134954cb69",
+        "irisOverOne": 22,
+        "irisOverEight": 2,
+        "irisPeak": 15,
+        "expectedFrameDifference": 0,
+        "expectedFramePeak": 0,
+        "outsideIrisDifference": 0
+      }
+    },
+    "intel": {
+      "nprSuite": {
+        "maximumLinearError": 0.002788458143028194,
+        "frameProjectionSeparation": [
+          0.02145028471216992,
+          0.02145028471216992,
+          0.0
+        ],
+        "frameCaptureSequences": {
+          "main-frame-animated": [
+            [
+              99,
+              48,
+              175
+            ],
+            [
+              99,
+              48,
+              175
+            ],
+            [
+              96,
+              47,
+              171
+            ]
+          ],
+          "main-frame-control": [
+            [
+              96,
+              47,
+              171
+            ],
+            [
+              96,
+              47,
+              171
+            ],
+            [
+              96,
+              47,
+              171
+            ]
+          ]
+        },
+        "mipChangedPixels": 12892,
+        "cases": 17
+      },
+      "baseline": {
+        "device": "intel",
+        "variant": "baseline",
+        "frameSha256": "47ea26e0a35eb08338f4fa17f451b98b8ea4bd22635232de9e5d0778f5fdc132",
+        "playerSha256": "1a30d925a674ddb1d95876cb80181106a0217e12a7228a35b5980b134954cb69",
+        "irisOverOne": 56,
+        "irisOverEight": 13,
+        "irisPeak": 27,
+        "expectedFrameDifference": 0,
+        "expectedFramePeak": 0,
+        "outsideIrisDifference": 0
+      },
+      "projected": {
+        "device": "intel",
+        "variant": "projected",
+        "frameSha256": "6afeae40383c5dd2ba1d410ef9ee201aead8d101dd231463348b5235bbd17af7",
+        "playerSha256": "1a30d925a674ddb1d95876cb80181106a0217e12a7228a35b5980b134954cb69",
+        "irisOverOne": 30,
+        "irisOverEight": 5,
+        "irisPeak": 27,
+        "expectedFrameDifference": 0,
+        "expectedFramePeak": 0,
+        "outsideIrisDifference": 0
+      }
+    }
+  },
+  "archiveSha256": "677a75564c705d9796eaeeed73b3a696130e96755ba6d0eb7639ed96af3638b6",
+  "archiveEntries": {
+    "character-repair/archive-eye-main-frame.py": "3f562e7fc89ced2dfe578a2c999076d23c9ed21855fdcfad26e083ae4c2e63ce",
+    "character-repair/eye-native-public-frame.py": "f637e8f910b34cee2fd58b367473b94861fe89d131314c7c7d176938f3851bc3",
+    "character-repair/iris-main-frame-green.xml": "82cc3f45661647d3a3bb364067e8c9dad1859128322cbc0a366a51e583354aa9",
+    "character-repair/iris-main-frame-red.xml": "b15d758b9f317e81947319ebb4f444b5506d41a7ae4f7ea5e16fbd87098dbb15",
+    "eye-npr/test_eye_npr_gpu.py": "a940529cd95d97a5fb5b23613572146ad58019328e856ab2e1dbe5829722bf83",
+    "intel/native/baseline/command.json": "9fdbdc1fa23f976231cc739c38eeb94c207cde6504f5b8abc4c54dee927518ef",
+    "intel/native/baseline/frames/capture_manifest.json": "c65c4bbba7687072f412ade6dde85fd0cd7e922d6059ebf31ad0380af04b14db",
+    "intel/native/baseline/frames/gpu_capabilities.json": "a38eaca3509b417cfe23614fe415bd9ccc5622fc682d8623142cdeb7dc3d85cc",
+    "intel/native/baseline/player.log": "fc6fc37c787fc38bb1cc7473d96a7699f196ed108a9161821433575e7bf8fe61",
+    "intel/native/baseline/results.json": "8e8cc31c8f5e697ae21dea1fbfa44b2de95ad218acac5313ad27021b1ab5de99",
+    "intel/native/baseline/runtime.json": "fd2c9542b76bf80901952afda0ba6bd0dac184828575b75c695e7c7c1c16b4ec",
+    "intel/native/projected/command.json": "12e3c08ace0a32a4e6590e3fe9e774652c5ae84d19e5b2762161001b58141bbd",
+    "intel/native/projected/face-iris-public-main-frame.azurelevel": "ad20c371ffe8b959d8b63bcf8c16eb65ebd0afda5e48ce32b0f10ef39808d284",
+    "intel/native/projected/face-iris-public-main-frame.azurematerial": "a39fc9282406d9c1ff7167098e0bc29c702a353855e272e2213d9e7f85dc139f",
+    "intel/native/projected/face-iris-public-main-frame.azurematerial.azmeta": "843ca4e2645c753afac88dcae7c623921ba3e54cf88137d7c2698631f9149423",
+    "intel/native/projected/face-iris-public-main-frame.azureproject": "a15e582d09d483c232f83299cef49c2b7acbef310b62db5f7cf87d83cf2155d8",
+    "intel/native/projected/frames/capture_manifest.json": "9810dd6d36aeb5c6055f726056c789cab11afc34838d69a359fe296efe5cc11e",
+    "intel/native/projected/frames/gpu_capabilities.json": "a38eaca3509b417cfe23614fe415bd9ccc5622fc682d8623142cdeb7dc3d85cc",
+    "intel/native/projected/player.log": "cbf09c580d2c34c0982b76ee917972fa50bbfc59331468d3bf4c9fc58fd02bf8",
+    "intel/native/projected/results.json": "d16b9e74853d2671a0b52bd017430606dd155e40f1845d5a1f7175fe9be54245",
+    "intel/native/projected/runtime.json": "fd2c9542b76bf80901952afda0ba6bd0dac184828575b75c695e7c7c1c16b4ec",
+    "intel/npr-suite/main-frame-animated/base.png": "9469712c1d96c1a68e8b1898adaefe3bff4515b07649c34c0d7960f07c34fb35",
+    "intel/npr-suite/main-frame-animated/frames/capture_manifest.json": "a0eedbb045160c516d1e87904382cec482a39465935d4ae02c98b9f0d196186c",
+    "intel/npr-suite/main-frame-animated/frames/frame_000000.png": "f087d7e210bda0f586c8fec7b6a0e6180ab9dcf944081ab781e5da0e48f75583",
+    "intel/npr-suite/main-frame-animated/frames/frame_000001.png": "f087d7e210bda0f586c8fec7b6a0e6180ab9dcf944081ab781e5da0e48f75583",
+    "intel/npr-suite/main-frame-animated/frames/frame_000002.png": "2c5511f35f8e690751ee95c62f66c90c1df202fd4a6223d747a9ae8f9e74ac2c",
+    "intel/npr-suite/main-frame-animated/frames/gpu_capabilities.json": "052830ed89bea19f0e9a17839082b9f979cfab2b17908f9ee83df5f0e0bcd85f",
+    "intel/npr-suite/main-frame-animated/lab.azureproject": "fabadebfc78ccfcd83765bd2ab631acb93bbc031ee8ea8fd587c23a444bfd7d5",
+    "intel/npr-suite/main-frame-animated/level.azurelevel": "584c6829035de3a99be2715caaae98c57dc9deae75a505a1f8583282ba8065d7",
+    "intel/npr-suite/main-frame-animated/matcap.png": "5a3fa1890a8f9dcf74d8eeb40cb836df41e80351410574ccec06180bb1ece6d0",
+    "intel/npr-suite/main-frame-animated/plane.gltf": "1001e2dc92c9fd02c7cd367f6be265dd0ca7a8ad9f1cea22422473320c128ce4",
+    "intel/npr-suite/main-frame-animated/player.log": "9771ee135188acb9d65457f96c34842f1d144ce61f350f2da72741400c140263",
+    "intel/npr-suite/main-frame-animated/ramp.png": "5963b42444b701137c1a86a09f7d230e1008efcd3e92164b1dab170f5bc7e75f",
+    "intel/npr-suite/main-frame-animated/runtime.json": "e465657f094126e2964f796b98aafbf7b3684b858e27da9644089495a09a64fc",
+    "intel/npr-suite/main-frame-control/base.png": "9469712c1d96c1a68e8b1898adaefe3bff4515b07649c34c0d7960f07c34fb35",
+    "intel/npr-suite/main-frame-control/frames/capture_manifest.json": "98fccdac22c6375fa74a0299c0cf944441be1e7e58fbe75a903b8c599d0c49b0",
+    "intel/npr-suite/main-frame-control/frames/frame_000000.png": "2c5511f35f8e690751ee95c62f66c90c1df202fd4a6223d747a9ae8f9e74ac2c",
+    "intel/npr-suite/main-frame-control/frames/frame_000001.png": "2c5511f35f8e690751ee95c62f66c90c1df202fd4a6223d747a9ae8f9e74ac2c",
+    "intel/npr-suite/main-frame-control/frames/frame_000002.png": "2c5511f35f8e690751ee95c62f66c90c1df202fd4a6223d747a9ae8f9e74ac2c",
+    "intel/npr-suite/main-frame-control/frames/gpu_capabilities.json": "052830ed89bea19f0e9a17839082b9f979cfab2b17908f9ee83df5f0e0bcd85f",
+    "intel/npr-suite/main-frame-control/lab.azureproject": "fabadebfc78ccfcd83765bd2ab631acb93bbc031ee8ea8fd587c23a444bfd7d5",
+    "intel/npr-suite/main-frame-control/level.azurelevel": "584c6829035de3a99be2715caaae98c57dc9deae75a505a1f8583282ba8065d7",
+    "intel/npr-suite/main-frame-control/matcap.png": "5a3fa1890a8f9dcf74d8eeb40cb836df41e80351410574ccec06180bb1ece6d0",
+    "intel/npr-suite/main-frame-control/plane.gltf": "1355a4eb2940ad0eef901e3593a157ea8e2df9ea3cb569590cbcfc0e91f88ff7",
+    "intel/npr-suite/main-frame-control/player.log": "2cc48446d02a8ea34eee6e47979556883dc445b8281db9c5fc667bf5225591ce",
+    "intel/npr-suite/main-frame-control/ramp.png": "5963b42444b701137c1a86a09f7d230e1008efcd3e92164b1dab170f5bc7e75f",
+    "intel/npr-suite/main-frame-control/runtime.json": "0435a220a8eeb3101db65b64ed66293fb5d1c65bc03bc22cd7df2d3290c5b4d6",
+    "intel/npr-suite/summary.json": "ecc08b4a508cf2ab56820b1fa3e92204263dc59916d31614d60295183c613014",
+    "nvidia/native/baseline/command.json": "fb115f21bef66a53fc5221c4ac20748b27906e216b91f05de532c7e77680c197",
+    "nvidia/native/baseline/frames/capture_manifest.json": "50ef13ad304a85c05635f75289eb0ac750cf98c4acbaea378a19f0dfde0f132d",
+    "nvidia/native/baseline/frames/gpu_capabilities.json": "93c9fb29461fae11a7e57d4e49112071a71940dee571f1f6696ffbf03c392879",
+    "nvidia/native/baseline/player.log": "cc981b2a06b8afdf982face4a4dab05cf9533aa1439c2d9122c058583eeae5f0",
+    "nvidia/native/baseline/results.json": "8ccad26d067e6c93b921b4ae6334c56a6f6619447705c24a6463bf4ab6a4c159",
+    "nvidia/native/baseline/runtime.json": "fd2c9542b76bf80901952afda0ba6bd0dac184828575b75c695e7c7c1c16b4ec",
+    "nvidia/native/projected/command.json": "6872bb14145d830177fe1e932fa9a4fa40a25ba697edb59d1b354cb1115334b4",
+    "nvidia/native/projected/face-iris-public-main-frame.azurelevel": "ad20c371ffe8b959d8b63bcf8c16eb65ebd0afda5e48ce32b0f10ef39808d284",
+    "nvidia/native/projected/face-iris-public-main-frame.azurematerial": "a39fc9282406d9c1ff7167098e0bc29c702a353855e272e2213d9e7f85dc139f",
+    "nvidia/native/projected/face-iris-public-main-frame.azurematerial.azmeta": "843ca4e2645c753afac88dcae7c623921ba3e54cf88137d7c2698631f9149423",
+    "nvidia/native/projected/face-iris-public-main-frame.azureproject": "a15e582d09d483c232f83299cef49c2b7acbef310b62db5f7cf87d83cf2155d8",
+    "nvidia/native/projected/frames/capture_manifest.json": "1f6591868785e2d4cc439c3e83e0eb4fc263acdca7ce32bb3a12550c3a202198",
+    "nvidia/native/projected/frames/gpu_capabilities.json": "93c9fb29461fae11a7e57d4e49112071a71940dee571f1f6696ffbf03c392879",
+    "nvidia/native/projected/player.log": "2886b4697a1e8e3aec4cd900ac5c8a280fa3f0f7600414c9ca8acf7f0618f04f",
+    "nvidia/native/projected/results.json": "19f568486bda188cdea39a2cd7aa35b27dfd79544c2b5a811b320f0be6487c57",
+    "nvidia/native/projected/runtime.json": "fd2c9542b76bf80901952afda0ba6bd0dac184828575b75c695e7c7c1c16b4ec",
+    "nvidia/npr-suite/main-frame-animated/base.png": "9469712c1d96c1a68e8b1898adaefe3bff4515b07649c34c0d7960f07c34fb35",
+    "nvidia/npr-suite/main-frame-animated/frames/capture_manifest.json": "7a75e9c4820bd07f55a341d65abc6846b9539af6203b71a7329d148ef2dcf59c",
+    "nvidia/npr-suite/main-frame-animated/frames/frame_000000.png": "8a0aa23a6254557e0ff1e34f7d1737772237c30a4db476ed112034d93a2e870e",
+    "nvidia/npr-suite/main-frame-animated/frames/frame_000001.png": "8a0aa23a6254557e0ff1e34f7d1737772237c30a4db476ed112034d93a2e870e",
+    "nvidia/npr-suite/main-frame-animated/frames/frame_000002.png": "7da2e952fd242bd8677cff743708e1bc6c4fe5523bda06050a69fcf3b357920d",
+    "nvidia/npr-suite/main-frame-animated/frames/gpu_capabilities.json": "fcc84c76d84bace150db35ec07631ab83809bdd1c365b6d96cb8afe8e354190a",
+    "nvidia/npr-suite/main-frame-animated/lab.azureproject": "fabadebfc78ccfcd83765bd2ab631acb93bbc031ee8ea8fd587c23a444bfd7d5",
+    "nvidia/npr-suite/main-frame-animated/level.azurelevel": "584c6829035de3a99be2715caaae98c57dc9deae75a505a1f8583282ba8065d7",
+    "nvidia/npr-suite/main-frame-animated/matcap.png": "5a3fa1890a8f9dcf74d8eeb40cb836df41e80351410574ccec06180bb1ece6d0",
+    "nvidia/npr-suite/main-frame-animated/plane.gltf": "1001e2dc92c9fd02c7cd367f6be265dd0ca7a8ad9f1cea22422473320c128ce4",
+    "nvidia/npr-suite/main-frame-animated/player.log": "de34d7f388a1749450c41c9905556a5c691e8e3b2a80e316a28ec911f52b17f8",
+    "nvidia/npr-suite/main-frame-animated/ramp.png": "5963b42444b701137c1a86a09f7d230e1008efcd3e92164b1dab170f5bc7e75f",
+    "nvidia/npr-suite/main-frame-animated/runtime.json": "cc52d7deddabdbd1abe9d0ba1ac1be22523a27c4b283df4147e03cfb4c730533",
+    "nvidia/npr-suite/main-frame-control/base.png": "9469712c1d96c1a68e8b1898adaefe3bff4515b07649c34c0d7960f07c34fb35",
+    "nvidia/npr-suite/main-frame-control/frames/capture_manifest.json": "8342bab4a29914ebd0de9ed2306ec07d913f77e75c136f51ba9725dbac9b5c13",
+    "nvidia/npr-suite/main-frame-control/frames/frame_000000.png": "7da2e952fd242bd8677cff743708e1bc6c4fe5523bda06050a69fcf3b357920d",
+    "nvidia/npr-suite/main-frame-control/frames/frame_000001.png": "7da2e952fd242bd8677cff743708e1bc6c4fe5523bda06050a69fcf3b357920d",
+    "nvidia/npr-suite/main-frame-control/frames/frame_000002.png": "7da2e952fd242bd8677cff743708e1bc6c4fe5523bda06050a69fcf3b357920d",
+    "nvidia/npr-suite/main-frame-control/frames/gpu_capabilities.json": "fcc84c76d84bace150db35ec07631ab83809bdd1c365b6d96cb8afe8e354190a",
+    "nvidia/npr-suite/main-frame-control/lab.azureproject": "fabadebfc78ccfcd83765bd2ab631acb93bbc031ee8ea8fd587c23a444bfd7d5",
+    "nvidia/npr-suite/main-frame-control/level.azurelevel": "584c6829035de3a99be2715caaae98c57dc9deae75a505a1f8583282ba8065d7",
+    "nvidia/npr-suite/main-frame-control/matcap.png": "5a3fa1890a8f9dcf74d8eeb40cb836df41e80351410574ccec06180bb1ece6d0",
+    "nvidia/npr-suite/main-frame-control/plane.gltf": "1355a4eb2940ad0eef901e3593a157ea8e2df9ea3cb569590cbcfc0e91f88ff7",
+    "nvidia/npr-suite/main-frame-control/player.log": "9809b5ea2735fa3dce133ca191786ddb15df3427616d5a5aed97d95c3410e0ab",
+    "nvidia/npr-suite/main-frame-control/ramp.png": "5963b42444b701137c1a86a09f7d230e1008efcd3e92164b1dab170f5bc7e75f",
+    "nvidia/npr-suite/main-frame-control/runtime.json": "10b95cfaf39719d8e58366b4e693abbdb687b1e2434b413774db718640fc5545",
+    "nvidia/npr-suite/summary.json": "a1232f3e7ba750b29ef57346ebe359da04ee0062c7ebc7de6dfb4982ce7e8569"
+  }
+}

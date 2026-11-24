@@ -1,0 +1,206 @@
+{
+  "status": "compared",
+  "projectedAddressGate": "failed",
+  "geometry": [
+    {
+      "point": [
+        1350,
+        348
+      ],
+      "hardwarePrimitive": 1101,
+      "projectedPrimitive": 1101,
+      "hardwareAddress": [
+        1350,
+        1090
+      ],
+      "projectedAddress": [
+        1349,
+        1090
+      ],
+      "tracedSubpixelAddress": [
+        1350.0013427734375,
+        1090.6812744140625
+      ],
+      "projectedSubpixelAddress": [
+        1349.9999983194907,
+        1090.6807107201912
+      ],
+      "subpixelResidual": [
+        0.0013444539467855066,
+        0.0005636938712996198
+      ],
+      "snappedSubpixelAddress": [
+        1350.0013427734375,
+        1090.6805419921875
+      ],
+      "snappedResidual": [
+        0.0,
+        0.000732421875
+      ],
+      "nativeRegistersClip": [
+        0.17616717517375946,
+        -1.665118932723999,
+        3.2328226566314697
+      ],
+      "nativeRegisterProjectedAddress": [
+        1350.0013427734375,
+        1090.6812744140625
+      ],
+      "nativeRegisterProjectedError": [
+        0.0,
+        0.0
+      ],
+      "snappedModelPosition": [
+        -0.09874723430629694,
+        0.5657364945751203,
+        -3.225946053024645
+      ],
+      "inferredNativePosition": [
+        -0.09874717564465388,
+        0.5657371282632707,
+        -3.225944310212346
+      ],
+      "depthError": -1.8751529835825398e-08,
+      "primitiveExact": true,
+      "addressExact": false
+    },
+    {
+      "point": [
+        1173,
+        875
+      ],
+      "hardwarePrimitive": 4487,
+      "projectedPrimitive": 4487,
+      "hardwareAddress": [
+        1174,
+        565
+      ],
+      "projectedAddress": [
+        1174,
+        565
+      ],
+      "tracedSubpixelAddress": [
+        1174.26611328125,
+        565.0008544921875
+      ],
+      "projectedSubpixelAddress": [
+        1174.2648793691317,
+        565.0000075572798
+      ],
+      "subpixelResidual": [
+        0.0012339121183231327,
+        0.0008469349077131483
+      ],
+      "snappedSubpixelAddress": [
+        1174.26611328125,
+        564.9998168945312
+      ],
+      "snappedResidual": [
+        0.0,
+        0.00103759765625
+      ],
+      "nativeRegistersClip": [
+        -0.2720421850681305,
+        0.7065382599830627,
+        3.285534620285034
+      ],
+      "nativeRegisterProjectedAddress": [
+        1174.26611328125,
+        565.0008544921875
+      ],
+      "nativeRegisterProjectedError": [
+        0.0,
+        0.0
+      ],
+      "snappedModelPosition": [
+        0.15248788065603092,
+        -0.1813204899169438,
+        -3.288077899345513
+      ],
+      "inferredNativePosition": [
+        0.1524880933229312,
+        -0.1813193542185675,
+        -3.2880822760157056
+      ],
+      "depthError": 4.3500119908945756e-08,
+      "primitiveExact": true,
+      "addressExact": true
+    },
+    {
+      "point": [
+        1329,
+        1049
+      ],
+      "hardwarePrimitive": 3963,
+      "projectedPrimitive": 3963,
+      "hardwareAddress": [
+        1328,
+        390
+      ],
+      "projectedAddress": [
+        1328,
+        390
+      ],
+      "tracedSubpixelAddress": [
+        1328.6827392578125,
+        390.0005798339844
+      ],
+      "projectedSubpixelAddress": [
+        1328.683793312889,
+        390.0000191518368
+      ],
+      "subpixelResidual": [
+        -0.0010540550765654189,
+        0.0005606821475794277
+      ],
+      "snappedSubpixelAddress": [
+        1328.682373046875,
+        390.0005798339844
+      ],
+      "snappedResidual": [
+        0.0003662109375,
+        0.0
+      ],
+      "nativeRegistersClip": [
+        0.12408804148435593,
+        1.5023212432861328,
+        3.2794535160064697
+      ],
+      "nativeRegisterProjectedAddress": [
+        1328.6827392578125,
+        390.0005798339844
+      ],
+      "nativeRegisterProjectedError": [
+        0.0,
+        0.0
+      ],
+      "snappedModelPosition": [
+        -0.06955477623957404,
+        -0.43228584913729495,
+        -3.2851681903357766
+      ],
+      "inferredNativePosition": [
+        -0.06955520352594932,
+        -0.43228551839500173,
+        -3.285165854001718
+      ],
+      "depthError": -2.029603135209057e-08,
+      "primitiveExact": true,
+      "addressExact": true
+    }
+  ],
+  "overallVisualAcceptance": "failed-user-review",
+  "archive": {
+    "sha256": "7a3d3a2fc6c2fd108ea3383e797a341aeea495a8e2412ce85a87dc3edcaa4f4a",
+    "members": {
+      "body-outline-geometry-witnesses.py": "a2c812153d7713c11cc7526a20724be971187f0c3f724130c0c77c0aa6c6149f",
+      "body-outline-source-footprint.py": "9870d8980acc2d379961d00136af19ada8e5ea450c552c69b0e3d289bdb7df37",
+      "trace-body-outline-source.json": "0cb41feee51ce446312f15238b39aac2e67fc0382ef640e1a4f6063a0048870e",
+      "native-outline-1018.asm": "73bb782a8cba557488812e15fd5f0d1d34bb0d28a300ce4c70b87972c6df5b22",
+      "body-outline-geometry-witnesses.json": "cd58aac049e7690fb29ee4147917948b9a4d5204ac135319b01769f4e06dcfb8",
+      "body-outline-trace-1350-348.json": "bec5baf98c2548feb662f733038ae42c1f482b454ca425488c45395d5b4d25af",
+      "body-outline-trace-1173-875.json": "b8c005fa6f22f604401e781e47ec3d3d722f8f441c753ed843b0764bb6896070",
+      "body-outline-trace-1329-1049.json": "328936cf57034e7291800ffb63d40df3843f331f9af1d1981f237d4ba06b5e48"
+    }
+  }
+}

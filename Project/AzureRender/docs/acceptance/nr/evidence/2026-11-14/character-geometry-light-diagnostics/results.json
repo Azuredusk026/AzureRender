@@ -1,0 +1,118 @@
+{
+  "status": "verified-diagnostics",
+  "actualSceneStatus": "failed-user-review",
+  "bodyDepth": {
+    "sourceCoverage": 1184,
+    "gradientControls": {
+      "pixels": 66,
+      "withinPositionPrecisionBound": 66,
+      "snappedMax": 2.463942611087566e-07,
+      "rangeOfShallowestPixelDepthSlope": [
+        2.7482131924301343e-05,
+        9.315691059861553e-05,
+        0.00019959144599532538
+      ]
+    }
+  },
+  "hair": {
+    "status": "qualified-original-mask",
+    "colorWritePixels": 17017,
+    "sourceHashes": {
+      "before-hair.bin": "72a2b02bfe274fde9eb44d696a768b9d019276852e7e068be565d5322ce8f336",
+      "after-hair.bin": "7590b5bbe131bdd9960f3357dd4240f5b48208ebee9a5f713197431f9bafcf6e",
+      "native-hair-visible-mask.png": "298c2f71d5055769010c66b53d65137836a57efba0a3709f8bd37966f2d793c7"
+    },
+    "capturedPrimitiveMatches": 4,
+    "residuals": 31,
+    "residualsChangingGeometricCoverage": 0,
+    "residualsWithSingleSnappedTriangle": 0
+  },
+  "cpuTests": {
+    "quality-evidence-cpu-retest.xml": [
+      "AzureRender.SceneMultisampling",
+      "AzureRender.CharacterRepair"
+    ],
+    "quality-native-tools-cpu-retest.xml": [
+      "AzureTools.NativeNprLighting",
+      "AzureTools.NativeSurfaceColors",
+      "AzureTools.MaterialSemantics"
+    ]
+  },
+  "bodyLight": {
+    "scope": "native raster addresses and normals, candidate material and scene lights, spot cones converted from radians, unit radial visibility",
+    "modeledOverEight": [
+      610,
+      182
+    ],
+    "modeledMaximum": [
+      88,
+      75
+    ],
+    "referencePeakControl": {
+      "point": [
+        1325,
+        1120
+      ],
+      "baselineError": 88,
+      "bestHypotheticalRimError": 5,
+      "maxPossibleRimAdd": [
+        0.14874489306640384,
+        0.17306877903846182,
+        0.19346244188844464
+      ],
+      "perLightUpperBound": {
+        "captured-local-1": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "captured-local-3": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "captured-local-5": [
+          0.1645083748698611,
+          0.19141002419234707,
+          0.2139649386094545
+        ]
+      },
+      "native": [
+        125,
+        121,
+        126
+      ],
+      "actual": [
+        77,
+        45,
+        38
+      ],
+      "hypothetical": [
+        130,
+        123,
+        127
+      ]
+    },
+    "fourSourceColorBlendMaximumWeightError": 6.50908844002096e-06
+  },
+  "archive": {
+    "sha256": "264380a46870ea9d00edf4a4c807a01410921def7e5de0e3eb561278511a1bd8",
+    "members": {
+      "archive-geometry-and-light-diagnostics.py": "ad884f38b46b5b64b59bee7e9058678e44e06325f906b1fb2726b3e136dded2c",
+      "body-outline-unqualified-depth-probe.py": "4ced0c1633e665def3c325e636dfac00e90c95fb55a01e3b6076256861731ed9",
+      "body-outline-unqualified-depth-probe.json": "96c334ddc11a21b8356f03ac3fa1ff864c41de1922955683478bb7c6df254a56",
+      "body-outline-depth-gradient-audit.py": "2f8b13bec2fcaa8cb8d1f2707daf96342462ccf9f5bb77d949a5f0d44856a163",
+      "body-outline-depth-gradient-audit.json": "7fc74e47f046d1b2f9ce5f279165eea66f48630ef5a72bdf12f5701c323bc827",
+      "hair-native-mask-audit.py": "cdb91fd8ea3cdba6cc7625209a0a64b06dbf312d23069c29da7744f12e87685e",
+      "hair-native-mask-audit.json": "37bc0c5128f10a8b36b6d6ad00642ccc2f2f2b7f3891e3a162345072f59d0c87",
+      "body-outline-local-light-trace.py": "7ca13d6defdd64c0bcf68797a9ecf9d287c797ff870238e2c94bed81fcd3566a",
+      "body-outline-retained-light-trace.json": "3921640b0fa484678f6144f198f9bfb0b5184b6e08e4b0320c695d9f150aca2c",
+      "body-outline-local-rim-model.py": "8a34b36e140154cf54a9989fb812a97224f3775ed2651fc5a6817c82953d39fe",
+      "body-outline-local-rim-model.json": "10be1693518b5ad381bed9457461ba92ebe2ad3eecf29605bf4ddc9d96e8c357",
+      "body-outline-local-rim-angle-model.py": "2305f5c42ae7c1d4eda262bebe8f6d65c74c1c8910c58035676d0df35d9648d6",
+      "body-outline-local-rim-angle-model.json": "e59749d75421e3f0495f3b80f9b17d827f62f468c1a30bd50ea445e1ddd45957",
+      "quality-evidence-cpu-retest.xml": "9c66d6e7cbfaf141d68d55f1ae924664c47a5b5df3efe905f7310c91d5353892",
+      "quality-native-tools-cpu-retest.xml": "8209187be71c97289605617964eb766465314cef0d660374469ec9362391bdc3"
+    }
+  }
+}

@@ -1,0 +1,231 @@
+{
+  "status": "source-controls-qualified",
+  "actualSceneStatus": "failed-user-review",
+  "sourceDraw": 1018,
+  "sourceGeometry": {
+    "vertexSha256": "dd16be74bc7806d0ec700ca303048181291cf4c87a035826b43573c4fce69132",
+    "indexSha256": "507fcdc6d78e70f8f5a2dbbaf54190f20596a6236027f7a8f7cf2a940c6b5742",
+    "pixelShaderSha256": "a04e640e475f1e82fc57ca1f67628610059d51561dcabf4d6ce5b927fa683feb"
+  },
+  "maximumLinearAlbedoError": 0.0009561216139066242,
+  "maximumLinearTintError": 0.002027760261793382,
+  "maximumTracedNormalError": 4.5921029423467985e-08,
+  "normalControls": [
+    {
+      "point": [
+        1270,
+        1037
+      ],
+      "nativeSampleDisplay": [
+        1271,
+        1037
+      ],
+      "authoredNormal": [
+        0.9941689372062683,
+        -0.02304362878203392,
+        0.10534244030714035
+      ],
+      "nativePositionNormal": [
+        0.9941689831272977,
+        -0.023043651926791645,
+        0.10534240880819037
+      ],
+      "nativeOutputPixelNormal": [
+        -0.8514532021923997,
+        -0.006757565096765226,
+        0.5243870515089701
+      ],
+      "offset": [
+        1,
+        0
+      ],
+      "nativePositionMaximumError": 4.5921029423467985e-08,
+      "outputPixelMaximumError": 1.845622139398668,
+      "positionsAngle": 142.28772015785677
+    },
+    {
+      "point": [
+        1270,
+        1047
+      ],
+      "nativeSampleDisplay": [
+        1271,
+        1047
+      ],
+      "authoredNormal": [
+        0.9948486685752869,
+        -0.03631634637713432,
+        0.09464272856712341
+      ],
+      "nativePositionNormal": [
+        0.9948486734677496,
+        -0.03631637856685366,
+        0.09464268353786104
+      ],
+      "nativeOutputPixelNormal": [
+        -0.8009432774512198,
+        -0.07320449310038042,
+        0.5942482381089697
+      ],
+      "offset": [
+        1,
+        0
+      ],
+      "nativePositionMaximumError": 4.502926237437421e-08,
+      "outputPixelMaximumError": 1.7957919460265068,
+      "positionsAngle": 137.55432676777468
+    },
+    {
+      "point": [
+        1270,
+        1053
+      ],
+      "nativeSampleDisplay": [
+        1271,
+        1053
+      ],
+      "authoredNormal": [
+        0.9993612766265869,
+        -0.02770300582051277,
+        0.022572819143533707
+      ],
+      "nativePositionNormal": [
+        0.9993613003755867,
+        -0.02770303399398441,
+        0.022572842513616926
+      ],
+      "nativeOutputPixelNormal": [
+        -0.7744789485652345,
+        -0.09498326727686829,
+        0.6254282829923027
+      ],
+      "offset": [
+        1,
+        0
+      ],
+      "nativePositionMaximumError": 2.8173471638970327e-08,
+      "outputPixelMaximumError": 1.7738402251918215,
+      "positionsAngle": 139.221067930558
+    },
+    {
+      "point": [
+        1270,
+        1054
+      ],
+      "nativeSampleDisplay": [
+        1271,
+        1054
+      ],
+      "authoredNormal": [
+        0.99956214427948,
+        -0.019339779391884804,
+        -0.022393427789211273
+      ],
+      "nativePositionNormal": [
+        0.9995621569750038,
+        -0.0193397973345469,
+        -0.022393449545264833
+      ],
+      "nativeOutputPixelNormal": [
+        -0.7704820034722246,
+        -0.09814124378828708,
+        0.6298617138651267
+      ],
+      "offset": [
+        1,
+        0
+      ],
+      "nativePositionMaximumError": 2.175605355939081e-08,
+      "outputPixelMaximumError": 1.7700441477517046,
+      "positionsAngle": 141.47637423537205
+    }
+  ],
+  "sourceFootprint": {
+    "nativeCoverage": 1184,
+    "reconstructed": 1118,
+    "offsetCounts": [
+      {
+        "offset": [
+          -1,
+          -1
+        ],
+        "count": 110
+      },
+      {
+        "offset": [
+          -1,
+          0
+        ],
+        "count": 225
+      },
+      {
+        "offset": [
+          -1,
+          1
+        ],
+        "count": 176
+      },
+      {
+        "offset": [
+          0,
+          1
+        ],
+        "count": 47
+      },
+      {
+        "offset": [
+          1,
+          -1
+        ],
+        "count": 205
+      },
+      {
+        "offset": [
+          1,
+          0
+        ],
+        "count": 322
+      },
+      {
+        "offset": [
+          1,
+          1
+        ],
+        "count": 33
+      }
+    ],
+    "differingNormal": 1118,
+    "angleOver90": 608,
+    "quantilesDegrees": [
+      8.872259479401887,
+      80.56625901749523,
+      92.59201251838645,
+      109.2286602704199,
+      133.99310226285866,
+      166.1266240686071
+    ]
+  },
+  "notQualifiedCount": 66,
+  "archive": {
+    "sha256": "dda41844c745aa2f1e5260087a85aa2f17863e242e18f5c6648b1502f9742246",
+    "members": {
+      "archive-body-outline-source-controls.py": "b60c70f12132b8ee6108a0ba43d74b99eb91aeaf57d978aeb44483da891d83a7",
+      "body-outline-uv-albedo.py": "11887b73f1c37a8f07e22ab9c6ae81781ee2a8dc179364ea105c950b9977d5b2",
+      "body-outline-screen-normal-states.py": "25e3b08aba0588bec6540569edf343b140420edaefa0017118e15437a8e5863e",
+      "body-outline-source-footprint.py": "9870d8980acc2d379961d00136af19ada8e5ea450c552c69b0e3d289bdb7df37",
+      "body-outline-authored-albedo-controls.py": "cbccbd5757d53f478c44a68f445076af555e602310ef65dc1e257c259f80e0ad",
+      "body-outline-authored-albedo-controls.json": "ed58ae783461d31f09b1611e2cc3a3cacce2b532bc84bb2cbeb81329a8b89996",
+      "body-outline-screen-normal-states.json": "1d1ca4755d014922b5bbd42c26b1babe7fe9c4719d67cf6fad5c30b1b8317ca4",
+      "body-outline-source-footprint.json": "071b6179c37539254f82f8180cd1356516ef3d4c330fc896111f5cbfbeb02e65",
+      "source/1018-1270-1037.json": "df2895b339a66bdb16728a0d018a0ee5dc1c9f46ecaf475be94541376329af5f",
+      "source/1018-1270-1047.json": "88eadf6e4614ecbb35ea14f396f5d25ff977eb39a1b8b52e4b3cbfcc0d7b0933",
+      "source/1018-1270-1053.json": "57319b667126122b9f6effc0b02ff6f56b7b7face7f35379be07281ba149cc3c",
+      "source/1018-1270-1054.json": "8db568b9ecea5af6abec55e5f9e1b56977fd241d86ce2910fd11b859e178c6a4",
+      "source/ps-cb0.bin": "04ac7183f0cf0853cc0484e799e35389d505116afb8ff4028e4124870ed02155",
+      "source/ps-cb1.bin": "30ed44bbe849bdb3a1cff0c94840eef52c79a6e412a126a3c7ee71d5546f8f55",
+      "source/ps-cb6.bin": "06cf4e58d6ddb372c8ac2c405359e663deb370292f0ec7206898f698e41b292e",
+      "source/native-results.json": "56d70b72adf818db4a858f4253d842730737d0f567532c08a515e6a5ff707c9d",
+      "source/request.json": "ed8726c47e5d660f6d6db20372862033e5f69d01e8f9e457cd472eb2827b2049"
+    }
+  }
+}

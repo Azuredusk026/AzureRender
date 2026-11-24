@@ -1,0 +1,272 @@
+{
+  "status": "measured-history-inputs",
+  "scope": "Captured native prior color identity and native/Player depth at matched display coordinates. Player prior color and both actual endpoints are separate checks.",
+  "recordedSource": {
+    "manifest": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-060648-ray-vulkan-a27711\\frozen-inputs-portable\\manifest.json",
+    "receiptSha256": "f834b312bb6750e48a985968ae3f5b56aab35eeb1463e50ad6a46b87e898df8c",
+    "captureSha256": "5bf129d05acb43d41ab54042f6648c3d728decb253c94d0250037f01f0b778b3",
+    "unchangedAcrossDispatch": true
+  },
+  "sourceUsage": {
+    "prior-color": [
+      {
+        "event": 8702,
+        "usage": "ResourceUsage.CS_Resource"
+      }
+    ],
+    "prior-depth": [
+      {
+        "event": 8702,
+        "usage": "ResourceUsage.CS_Resource"
+      }
+    ]
+  },
+  "nativePriorColorSha256": "9667b36a4cf8716ca807be9a5ea270b47c8981fd38427dc22304e649ffa679a8",
+  "registration": {
+    "calibratedMaxWorldDifferenceMeters": 0.00462356282189063,
+    "incorrectYAxisMaxWorldDifferenceMeters": 5.451699288765094
+  },
+  "depthByDevice": {
+    "native": {
+      "event": 8702,
+      "sha256": "76a4b539ed98345f51ebbc0e686347aefd98e26ad1ffe1da65b82f16082d80a9"
+    },
+    "player": {
+      "event": 21668,
+      "sha256": "b6c9b61c16c5f22020951ff80dafda2018aaab1710408da33346e93a1a2d119a"
+    }
+  },
+  "debuggerWitness": {
+    "attachmentPixel": [
+      457,
+      0
+    ],
+    "previousUv": [
+      0.36399057507514954,
+      0.7902345061302185
+    ],
+    "sourceTexel": [
+      931,
+      1137
+    ],
+    "packed": 1687769909,
+    "priorLinear": [
+      0.296875,
+      0.2705078125,
+      0.2578125
+    ],
+    "priorCompressed": [
+      0.22891566157341003,
+      0.20858432352542877,
+      0.1987951695919037
+    ],
+    "debuggerReportSha256": "8fe663e5c964ac43fbe05c5f63c8bf99e56c35fc3bd2eb62ee7ea1f649f3fcd4"
+  },
+  "primaryRegions": {
+    "centerFloor": {
+      "alignedDepth": {
+        "halfRectangle": [
+          505,
+          495,
+          775,
+          585
+        ],
+        "valid": 24300,
+        "total": 24300,
+        "matched": {
+          "0.02": 24082,
+          "0.05": 24094,
+          "0.10": 24300
+        },
+        "worldDifferenceMeters": [
+          0.004722083190015418,
+          0.007194720014427674,
+          0.012875282644277139,
+          0.014125096844836102,
+          0.015686306270934723
+        ]
+      },
+      "previousColorSupport": {
+        "total": 21340,
+        "compatible": 21340,
+        "singleTexel": 2131,
+        "sourceMultiplicity": [
+          2.0,
+          34.0,
+          237.0
+        ],
+        "changedTraceWords": 21340,
+        "compatibleChangedWords": 21340,
+        "uniqueChangedWords": 2131,
+        "uniqueSourceRows": [
+          {
+            "sourceRows": [
+              0,
+              240
+            ],
+            "count": 0
+          },
+          {
+            "sourceRows": [
+              240,
+              480
+            ],
+            "count": 0
+          },
+          {
+            "sourceRows": [
+              480,
+              720
+            ],
+            "count": 1930
+          },
+          {
+            "sourceRows": [
+              720,
+              960
+            ],
+            "count": 199
+          },
+          {
+            "sourceRows": [
+              960,
+              1200
+            ],
+            "count": 2
+          },
+          {
+            "sourceRows": [
+              1200,
+              1440
+            ],
+            "count": 0
+          }
+        ]
+      }
+    },
+    "cyanRing": {
+      "alignedDepth": {
+        "halfRectangle": [
+          520,
+          530,
+          635,
+          590
+        ],
+        "valid": 6900,
+        "total": 6900,
+        "matched": {
+          "0.02": 6900,
+          "0.05": 6900,
+          "0.10": 6900
+        },
+        "worldDifferenceMeters": [
+          0.004195893898489779,
+          0.005472362995295065,
+          0.007478388610874542,
+          0.007807329777839662,
+          0.008100480454873871
+        ]
+      },
+      "previousColorSupport": {
+        "total": 6657,
+        "compatible": 6657,
+        "singleTexel": 914,
+        "sourceMultiplicity": [
+          1.0,
+          27.0,
+          243.0
+        ],
+        "changedTraceWords": 6657,
+        "compatibleChangedWords": 6657,
+        "uniqueChangedWords": 914,
+        "uniqueSourceRows": [
+          {
+            "sourceRows": [
+              0,
+              240
+            ],
+            "count": 0
+          },
+          {
+            "sourceRows": [
+              240,
+              480
+            ],
+            "count": 0
+          },
+          {
+            "sourceRows": [
+              480,
+              720
+            ],
+            "count": 904
+          },
+          {
+            "sourceRows": [
+              720,
+              960
+            ],
+            "count": 8
+          },
+          {
+            "sourceRows": [
+              960,
+              1200
+            ],
+            "count": 2
+          },
+          {
+            "sourceRows": [
+              1200,
+              1440
+            ],
+            "count": 0
+          }
+        ]
+      }
+    }
+  },
+  "files": {
+    "projected-history-source-preflight.json": {
+      "sha256": "4188af1e993afd9cb05f3492a0c6594c8b0aa507ebd144a3e317b259b45d3c87",
+      "bytes": 3058
+    },
+    "projected-history-depth-preview.json": {
+      "sha256": "c3a639c5a527d945fa917cce4ad453e55ec54293903b8fd757526f9ea17f0d57",
+      "bytes": 3706
+    },
+    "projected-history-native-color-support.json": {
+      "sha256": "6db515cdb4802c9d404df76a334bd581ce1784b27b482be8518fc63f3138d823",
+      "bytes": 8387
+    },
+    "projected-history-source-replay.py": {
+      "sha256": "a090924504fc8f3dc8e5c46efaa40b33d776c169bdd7df192ccbc399378623bf",
+      "bytes": 13559
+    },
+    "projected-history-coordinates.py": {
+      "sha256": "8e72b2e9b288691238006e668d64e7621eb824df2ea8d7ea7837f8b9bce48f5c",
+      "bytes": 13561
+    },
+    "score-projected-history-source.py": {
+      "sha256": "b584c0ac6623cb28b6d5173e5828af9cba838844e09bcdad45aec94ad6b87212",
+      "bytes": 4783
+    },
+    "preview-projected-history-depth.py": {
+      "sha256": "241b3eabbb4c235cd0b967fc3943420ff984e447dcfed59e7ee9a04fe0ed8c68",
+      "bytes": 2814
+    },
+    "preview-native-history-color-support.py": {
+      "sha256": "13636aed24035c46bacb89e3f93c10ebca8b9f03c92c900a63fc5747587230ff",
+      "bytes": 4697
+    },
+    "score-native-floor-reflection-inputs.py": {
+      "sha256": "80ea2f2026ddec0f4473bbf1b887436b08e8c2e4fd681f892389a10f7578180e",
+      "bytes": 13893
+    }
+  },
+  "archive": {
+    "file": "validation.zip",
+    "sha256": "b1c009cc22876d52f6d83486c1c9cb27c44f28244834c0119acb64be2084f1ac",
+    "bytes": 24650
+  }
+}

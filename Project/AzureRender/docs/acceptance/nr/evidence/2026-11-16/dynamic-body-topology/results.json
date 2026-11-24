@@ -1,0 +1,352 @@
+{
+  "status": "topology verified; visual acceptance pending",
+  "productionAssetAccepted": false,
+  "dynamicAsset": {
+    "status": "measured-asset-structure-and-framing",
+    "project": "fc4f59e1ac132cac099346a629e4fa5ce941b8aae1cdd3f25939d664264b7188",
+    "level": "dbc1f99b05fcef84fc4bc3a9285f36072a1bb91fbb8df81bf59ba4840a0749d3",
+    "actor": "b1f9d78053c0e36c966502847c0a90688307a3d98808db93ff8465a620e6e883",
+    "dynamicAnimations": 10,
+    "cameraFramingAtRest": {
+      "face-front": {
+        "bounds": [
+          [
+            0.404170405961086,
+            0.2777530664770526
+          ],
+          [
+            0.5958295940389142,
+            0.7240558824530646
+          ]
+        ],
+        "distance": [
+          0.5607382230274371,
+          0.6792617769725608
+        ]
+      },
+      "face-three-quarter-left": {
+        "bounds": [
+          [
+            0.4249288486005368,
+            0.27887686488610564
+          ],
+          [
+            0.6272952484253154,
+            0.7214188422076772
+          ]
+        ],
+        "distance": [
+          0.5575146151600902,
+          0.7192696237627814
+        ]
+      },
+      "face-three-quarter-right": {
+        "bounds": [
+          [
+            0.3727047515746844,
+            0.2788768648861054
+          ],
+          [
+            0.5750711513994652,
+            0.7214188423574268
+          ]
+        ],
+        "distance": [
+          0.5575146151600919,
+          0.7192696237627815
+        ]
+      },
+      "face-side-left": {
+        "bounds": [
+          [
+            0.426139937373212,
+            0.28250301296102914
+          ],
+          [
+            0.5847165169646203,
+            0.7155600793268967
+          ]
+        ],
+        "distance": [
+          0.5364709597826005,
+          0.7035290402173996
+        ]
+      },
+      "face-side-right": {
+        "bounds": [
+          [
+            0.41528348303538387,
+            0.28250301296102914
+          ],
+          [
+            0.5738600529598876,
+            0.71556007948946
+          ]
+        ],
+        "distance": [
+          0.5364709597826005,
+          0.7035290402173996
+        ]
+      }
+    },
+    "triangleUV": {
+      "body": {
+        "use": "UV correspondence only; does not qualify animated silhouettes",
+        "assetTriangles": 5779,
+        "nativeTriangles": 5679,
+        "nativeFiles": [
+          "fef0374bebc7e0848af9e97c441a339669847c55aa4a227d9a36c77c34fe9a82",
+          "507fcdc6d78e70f8f5a2dbbaf54190f20596a6236027f7a8f7cf2a940c6b5742"
+        ],
+        "event": 783,
+        "thresholds": {
+          "1e-06": {
+            "matched": 5610,
+            "assetOnly": 169,
+            "nativeOnly": 69,
+            "fixedPosedToDynamicUvAgreement": 0.9878499735868991,
+            "restAreaFractionUnpaired": 0.03391290456056595,
+            "indexOnlyRepairEligibility": {
+              "totalNativeVertices": 62,
+              "uniquelyReusable": 31,
+              "absentFromAsset": 31,
+              "ambiguousFromAsset": 0,
+              "nativeOnlyTrianglesWithExistingRigVertices": 0
+            },
+            "restYUnpaired": [
+              1.1513288021087646,
+              1.1860474348068237,
+              1.2520453929901123,
+              1.2865478992462158,
+              1.3168374300003052
+            ]
+          },
+          "1e-05": {
+            "matched": 5610,
+            "assetOnly": 169,
+            "nativeOnly": 69,
+            "fixedPosedToDynamicUvAgreement": 0.9878499735868991,
+            "restAreaFractionUnpaired": 0.03391290456056595,
+            "indexOnlyRepairEligibility": {
+              "totalNativeVertices": 62,
+              "uniquelyReusable": 31,
+              "absentFromAsset": 31,
+              "ambiguousFromAsset": 0,
+              "nativeOnlyTrianglesWithExistingRigVertices": 0
+            },
+            "restYUnpaired": [
+              1.1513288021087646,
+              1.1860474348068237,
+              1.2520453929901123,
+              1.2865478992462158,
+              1.3168374300003052
+            ]
+          },
+          "0.000125": {
+            "matched": 5610,
+            "assetOnly": 169,
+            "nativeOnly": 69,
+            "fixedPosedToDynamicUvAgreement": 0.9878499735868991,
+            "restAreaFractionUnpaired": 0.03391290456056595,
+            "indexOnlyRepairEligibility": {
+              "totalNativeVertices": 62,
+              "uniquelyReusable": 31,
+              "absentFromAsset": 31,
+              "ambiguousFromAsset": 0,
+              "nativeOnlyTrianglesWithExistingRigVertices": 0
+            },
+            "restYUnpaired": [
+              1.1513288021087646,
+              1.1860474348068237,
+              1.2520453929901123,
+              1.2865478992462158,
+              1.3168374300003052
+            ]
+          }
+        }
+      },
+      "face": {
+        "use": "UV correspondence only; does not qualify animated silhouettes",
+        "assetTriangles": 2906,
+        "nativeTriangles": 2906,
+        "nativeFiles": [
+          "1e248bf04bdabf5247c51529659c4daf4321124f47fa52129a37f0f2d5f53310",
+          "9efd0722771e8c3cf544bc276cabd27842b8531af6cf19b6cea5249373db973c"
+        ],
+        "event": 804,
+        "thresholds": {
+          "1e-06": {
+            "matched": 2906,
+            "assetOnly": 0,
+            "nativeOnly": 0,
+            "fixedPosedToDynamicUvAgreement": 1.0,
+            "restAreaFractionUnpaired": 0.0,
+            "indexOnlyRepairEligibility": null,
+            "restYUnpaired": null
+          },
+          "1e-05": {
+            "matched": 2906,
+            "assetOnly": 0,
+            "nativeOnly": 0,
+            "fixedPosedToDynamicUvAgreement": 1.0,
+            "restAreaFractionUnpaired": 0.0,
+            "indexOnlyRepairEligibility": null,
+            "restYUnpaired": null
+          },
+          "0.000125": {
+            "matched": 2906,
+            "assetOnly": 0,
+            "nativeOnly": 0,
+            "fixedPosedToDynamicUvAgreement": 1.0,
+            "restAreaFractionUnpaired": 0.0,
+            "indexOnlyRepairEligibility": null,
+            "restYUnpaired": null
+          }
+        }
+      }
+    }
+  },
+  "nativeRestRig": {
+    "matchVertices": 3249,
+    "positionAxes": [
+      0,
+      2,
+      1
+    ],
+    "positionSigns": [
+      -1,
+      1,
+      -1
+    ],
+    "translation": [
+      0.0,
+      -1.1920928955078125e-07,
+      9.313225746154785e-10
+    ],
+    "positionError": [
+      0.0,
+      9.313225746154785e-10,
+      4.6566128730773926e-09,
+      6.019111213109093e-08,
+      0.0011139651881470008
+    ],
+    "positionWithinTenMicrometers": 3247,
+    "weightMaxDifference": [
+      0.0,
+      2.3706341112372797e-08,
+      1.0353574820465284e-05,
+      0.05189599942276968
+    ],
+    "nativeBoneMappingVotes": {
+      "1": {
+        "6": 740
+      },
+      "2": {
+        "174": 463
+      },
+      "3": {
+        "140": 458
+      },
+      "4": {
+        "184": 469
+      },
+      "5": {
+        "5": 201
+      },
+      "6": {
+        "228": 138
+      },
+      "7": {
+        "229": 159
+      },
+      "8": {
+        "4": 151
+      },
+      "10": {
+        "3": 447
+      }
+    },
+    "nativePositionAndWeightBinding": "native-body-outline-input-retest",
+    "exactUvAgreement": 3289,
+    "matchedTriangles": 5610,
+    "verticesWithPackedFrame": 3289,
+    "tangentFrame": {
+      "normalAnglesDegrees": [
+        0.0,
+        0.0,
+        0.0,
+        0.00863386149070331,
+        0.01832930760203667,
+        0.021510072966510217
+      ],
+      "tangentAnglesDegrees": [
+        0.0,
+        8.263237673717308,
+        24.738602865388373,
+        44.994432672774536,
+        72.92918590925558,
+        89.65764761833535
+      ],
+      "mirroredHandMatches": 3249
+    }
+  },
+  "candidate": {
+    "status": "prepared-in-memory-skinned-mesh-candidate",
+    "scope": "isolated comparison; not a production asset",
+    "vertexCount": 3381,
+    "activeVertexCount": 3291,
+    "nativeVertexCount": 3289,
+    "triangles": 5679,
+    "identicalOriginalTriangles": 5610,
+    "replacedTriangles": 69,
+    "removedTriangles": 169,
+    "windingEvidence": {
+      "reversed": 5610
+    },
+    "appendedForMissingUv": 31,
+    "appendedForPosition": 3,
+    "boneCorrespondence": {
+      "1": 6,
+      "3": 140,
+      "4": 184,
+      "5": 5,
+      "6": 228,
+      "7": 229,
+      "8": 4
+    },
+    "appendedForDistinctNativeVertices": 1,
+    "maxTriangleUvComponentError": 5.960464477539063e-08,
+    "originalAttributeBytesUnchanged": true,
+    "originalGlb": "b1f9d78053c0e36c966502847c0a90688307a3d98808db93ff8465a620e6e883",
+    "candidateInputHashes": {
+      "POSITION": "f6af08fff65770d2c3445fa39b3e9cbd9ba8cfc2ed4a541acf8e881b160d382b",
+      "NORMAL": "54e8524650fae4f88acc4e7b2f4344aa67681e396917ba4e0ec212ae395207a9",
+      "TEXCOORD_0": "34f13528d501046545dc8c3a377b5c62f94048232edd3aacfe90cd367e2fd5c4",
+      "TEXCOORD_1": "2981ee0070e894cba8c791b3e6f85d8edf7731edccc9a17e25ad8f054b8287c8",
+      "JOINTS_0": "272b49f2ed61cc01e7bb8f8ead62336f65a777f41e86ca462d5890341916d99d",
+      "WEIGHTS_0": "76a9cb6e9ba8aa7b6aee47b0124c3feda445bf890b53db36835ad2e9d71b061f",
+      "TANGENT": "6262ec3fccefe2f85c6741879bc2df8175407ceb53ba8a9256163584f03c047b",
+      "INDICES": "3d32a96ebececfd40711c743a524d06705dab78bbbba5ad3c5d0358d9cacb566"
+    },
+    "serializedBytes": 29405456,
+    "serializedSha256": "757393530d169f15cc922b61a76dd4593c7a6c220342fde5091cb1c18cd44300",
+    "preservedOriginalBufferBytes": 26733248,
+    "untouchedAnimationCount": 10,
+    "untouchedSkinCount": 1
+  },
+  "archive": {
+    "sha256": "a43c3f6e051024231b0dd13db99f863c856934da9bdd241c4358e445e0a40456",
+    "members": {
+      "body-native-rest-rig-correspondence.py": "8685d851b282e0ef2c42107debb5b616e197b969645becb37729b2c0023c7636",
+      "build-animated-body-topology-candidate.py": "98873a3082cb0afe430ae894c2cef60fe5df288822e3f210e517bff96106bef7",
+      "character-dynamic-rest-inputs-score.py": "02deba8e8d894e49dfb13be219312a8e8cc46d97755fca9c4580d20a9f93ea7a",
+      "character-six-view-inputs.py": "6c1526b4e1f13ca2b2e60bfef8fd97eaf7b7c60694f3cb8e1f220f11ac230a67",
+      "character-dynamic-rest-inputs-score.json": "c64cf69dcb9e1e0cf458ec2e3c1f917a58d520785eca8819b84035519ccaaea2",
+      "body-native-rest-rig-correspondence.json": "aa16a272fc4b57c07c8b708903483cc1e2b77ee8ee6b56f6158ed358007a365b",
+      "animated-body-topology-candidate.json": "b107dfa18a84368c637a110525ced0b306b5c6f7b7b473f7da0cb1d0ef3222f2",
+      "archive-dynamic-body-topology.py": "6e480971ed79cc2cdbea94d7bf3e13c4e9560dea1183ad4309c01b0d2ed605ad",
+      "source/native-outline-inputs.json": "418f55bd5dcf421e2341053cc3d94ad1824620596d5522c61d9d2219050df0c8",
+      "source/native-face-and-body-geometry.json": "70614645fcdd8a5be9e3cd353b93621318aa82a62463963da6e81a2af6918221"
+    }
+  }
+}

@@ -1,0 +1,1111 @@
+{
+  "status": "strict-gate-open",
+  "deviceOrder": [
+    "nvidia",
+    "intel"
+  ],
+  "sourceEvent": 1018,
+  "originalTrace": "6f5e0169d74f3747ffae8f21d71458bed34ea57b7dd42f29478494ec4e5d669b",
+  "shadowPayload": "5f5204789f7199bba7eae9566b6a36870cbce8faa5845cbb6d7cd3392af45e7e",
+  "ownership": "55db208c761f1501813aa517e87382c4a5f0a5ca1ebd7f894093c29f9de3fb9f",
+  "reference": "48afd6546c23cfa85099a765cc94ada4813a684538c695faf6d70d6daf2261b5",
+  "shaderModel": "a4401a64f26c15bdaf71e746dd1d92a783bdace40ed8a43dac9ef816c0bed977",
+  "player": "1a30d925a674ddb1d95876cb80181106a0217e12a7228a35b5980b134954cb69",
+  "retainedSamples": 1112,
+  "originalVerticesUnchanged": true,
+  "devices": {
+    "nvidia": {
+      "attachment": "a3da6fc98915f6661576a16693c55ae5a342274c4734c4fc32ec49a27018c755",
+      "baseline": "9677c040c5498bd3d1f60a7f73413a6b998fc178bdfae62e2cb60dc09e264b8b",
+      "order": "87ceab9ca80473c86708c15f95f8e831b6d1179a23de36061b638a2c169b6993",
+      "source": {
+        "asset": "2ed08f6f-17da-53e2-acc7-a02f234bc5fe",
+        "file": "2ed08f6f-17da-53e2-acc7-a02f234bc5fe.dds",
+        "ddsSha256": "6cf915c33198d3afd064ab182e0378e96a1daea49e6ab2dd52ffc9f376d68b86",
+        "payloadSha256": "5f5204789f7199bba7eae9566b6a36870cbce8faa5845cbb6d7cd3392af45e7e",
+        "flipV": false,
+        "nativeResource": "ResourceId::13500"
+      },
+      "original": {
+        "overOne": 1052,
+        "overEight": 48,
+        "peak": 20
+      },
+      "candidate": {
+        "overOne": 841,
+        "overEight": 25,
+        "peak": 23
+      },
+      "unchangedOrderForOutline": true,
+      "newOverOne": [
+        {
+          "xy": [
+            1358,
+            353
+          ],
+          "before": [
+            183,
+            137,
+            120
+          ],
+          "candidate": [
+            182,
+            137,
+            121
+          ],
+          "reference": [
+            183,
+            136,
+            119
+          ],
+          "order": [
+            183,
+            137,
+            120
+          ]
+        },
+        {
+          "xy": [
+            1368,
+            371
+          ],
+          "before": [
+            169,
+            129,
+            115
+          ],
+          "candidate": [
+            169,
+            130,
+            115
+          ],
+          "reference": [
+            168,
+            128,
+            114
+          ],
+          "order": [
+            169,
+            129,
+            115
+          ]
+        },
+        {
+          "xy": [
+            1369,
+            372
+          ],
+          "before": [
+            174,
+            134,
+            120
+          ],
+          "candidate": [
+            173,
+            135,
+            121
+          ],
+          "reference": [
+            173,
+            133,
+            119
+          ],
+          "order": [
+            174,
+            134,
+            120
+          ]
+        },
+        {
+          "xy": [
+            1371,
+            379
+          ],
+          "before": [
+            170,
+            133,
+            120
+          ],
+          "candidate": [
+            169,
+            134,
+            120
+          ],
+          "reference": [
+            169,
+            132,
+            119
+          ],
+          "order": [
+            170,
+            133,
+            120
+          ]
+        },
+        {
+          "xy": [
+            1375,
+            393
+          ],
+          "before": [
+            153,
+            123,
+            110
+          ],
+          "candidate": [
+            153,
+            124,
+            111
+          ],
+          "reference": [
+            153,
+            123,
+            109
+          ],
+          "order": [
+            153,
+            123,
+            110
+          ]
+        },
+        {
+          "xy": [
+            1379,
+            400
+          ],
+          "before": [
+            161,
+            129,
+            117
+          ],
+          "candidate": [
+            160,
+            129,
+            118
+          ],
+          "reference": [
+            160,
+            128,
+            116
+          ],
+          "order": [
+            161,
+            129,
+            117
+          ]
+        },
+        {
+          "xy": [
+            1380,
+            402
+          ],
+          "before": [
+            158,
+            126,
+            115
+          ],
+          "candidate": [
+            158,
+            126,
+            116
+          ],
+          "reference": [
+            158,
+            126,
+            114
+          ],
+          "order": [
+            158,
+            126,
+            115
+          ]
+        },
+        {
+          "xy": [
+            1259,
+            983
+          ],
+          "before": [
+            97,
+            83,
+            85
+          ],
+          "candidate": [
+            94,
+            84,
+            86
+          ],
+          "reference": [
+            96,
+            84,
+            85
+          ],
+          "order": [
+            97,
+            83,
+            85
+          ]
+        },
+        {
+          "xy": [
+            1259,
+            984
+          ],
+          "before": [
+            97,
+            83,
+            85
+          ],
+          "candidate": [
+            94,
+            84,
+            86
+          ],
+          "reference": [
+            96,
+            84,
+            86
+          ],
+          "order": [
+            97,
+            83,
+            85
+          ]
+        },
+        {
+          "xy": [
+            1259,
+            985
+          ],
+          "before": [
+            97,
+            83,
+            85
+          ],
+          "candidate": [
+            94,
+            84,
+            86
+          ],
+          "reference": [
+            96,
+            84,
+            86
+          ],
+          "order": [
+            97,
+            83,
+            85
+          ]
+        },
+        {
+          "xy": [
+            1323,
+            1008
+          ],
+          "before": [
+            127,
+            120,
+            123
+          ],
+          "candidate": [
+            126,
+            120,
+            124
+          ],
+          "reference": [
+            126,
+            119,
+            122
+          ],
+          "order": [
+            127,
+            120,
+            123
+          ]
+        },
+        {
+          "xy": [
+            1324,
+            1014
+          ],
+          "before": [
+            128,
+            121,
+            124
+          ],
+          "candidate": [
+            127,
+            121,
+            125
+          ],
+          "reference": [
+            127,
+            120,
+            123
+          ],
+          "order": [
+            128,
+            121,
+            124
+          ]
+        },
+        {
+          "xy": [
+            1324,
+            1015
+          ],
+          "before": [
+            128,
+            121,
+            124
+          ],
+          "candidate": [
+            127,
+            122,
+            125
+          ],
+          "reference": [
+            127,
+            121,
+            123
+          ],
+          "order": [
+            128,
+            121,
+            124
+          ]
+        },
+        {
+          "xy": [
+            1324,
+            1016
+          ],
+          "before": [
+            129,
+            122,
+            124
+          ],
+          "candidate": [
+            128,
+            122,
+            125
+          ],
+          "reference": [
+            128,
+            121,
+            123
+          ],
+          "order": [
+            129,
+            122,
+            124
+          ]
+        },
+        {
+          "xy": [
+            1324,
+            1017
+          ],
+          "before": [
+            129,
+            122,
+            124
+          ],
+          "candidate": [
+            128,
+            122,
+            125
+          ],
+          "reference": [
+            128,
+            122,
+            123
+          ],
+          "order": [
+            129,
+            122,
+            124
+          ]
+        },
+        {
+          "xy": [
+            1325,
+            1018
+          ],
+          "before": [
+            128,
+            122,
+            124
+          ],
+          "candidate": [
+            127,
+            122,
+            125
+          ],
+          "reference": [
+            127,
+            121,
+            123
+          ],
+          "order": [
+            128,
+            122,
+            124
+          ]
+        },
+        {
+          "xy": [
+            1325,
+            1019
+          ],
+          "before": [
+            128,
+            122,
+            124
+          ],
+          "candidate": [
+            127,
+            122,
+            125
+          ],
+          "reference": [
+            127,
+            121,
+            123
+          ],
+          "order": [
+            128,
+            122,
+            124
+          ]
+        },
+        {
+          "xy": [
+            1326,
+            1024
+          ],
+          "before": [
+            128,
+            122,
+            125
+          ],
+          "candidate": [
+            127,
+            123,
+            126
+          ],
+          "reference": [
+            127,
+            122,
+            124
+          ],
+          "order": [
+            128,
+            122,
+            125
+          ]
+        },
+        {
+          "xy": [
+            1326,
+            1025
+          ],
+          "before": [
+            129,
+            123,
+            125
+          ],
+          "candidate": [
+            128,
+            123,
+            126
+          ],
+          "reference": [
+            128,
+            122,
+            124
+          ],
+          "order": [
+            129,
+            123,
+            125
+          ]
+        },
+        {
+          "xy": [
+            1326,
+            1026
+          ],
+          "before": [
+            129,
+            123,
+            125
+          ],
+          "candidate": [
+            128,
+            123,
+            126
+          ],
+          "reference": [
+            128,
+            123,
+            124
+          ],
+          "order": [
+            129,
+            123,
+            125
+          ]
+        }
+      ],
+      "outsideOwner": [
+        {
+          "xy": [
+            1199,
+            951
+          ],
+          "before": [
+            86,
+            59,
+            49
+          ],
+          "candidate": [
+            84,
+            59,
+            50
+          ],
+          "reference": [
+            109,
+            80,
+            71
+          ],
+          "order": [
+            86,
+            59,
+            49
+          ]
+        }
+      ],
+      "peak": [
+        {
+          "xy": [
+            1260,
+            320
+          ],
+          "before": [
+            76,
+            45,
+            37
+          ],
+          "candidate": [
+            71,
+            47,
+            41
+          ],
+          "reference": [
+            94,
+            65,
+            55
+          ],
+          "order": [
+            76,
+            45,
+            37
+          ]
+        }
+      ],
+      "recoveredOverOne": 231,
+      "newPeakOverEight": 6,
+      "strictPass": false,
+      "physicalDevice": {
+        "name": "NVIDIA GeForce RTX 4060 Laptop GPU",
+        "vendor": 4318,
+        "driver": 2496905216
+      }
+    },
+    "intel": {
+      "attachment": "85c951c3cb4681b49f57b419c0c9ef25ae421958f8cf713c60829e3ad2d3a419",
+      "baseline": "d9e4765f29878ee57f4330a5403ce44bd6d726fdb22f9a8aed08b115c78cb8b9",
+      "order": "6f133cc93ac4edb5309c5c852c22eee8ec8e05cb48070d49c980b343d7cfac47",
+      "source": {
+        "asset": "2ed08f6f-17da-53e2-acc7-a02f234bc5fe",
+        "file": "2ed08f6f-17da-53e2-acc7-a02f234bc5fe.dds",
+        "ddsSha256": "6cf915c33198d3afd064ab182e0378e96a1daea49e6ab2dd52ffc9f376d68b86",
+        "payloadSha256": "5f5204789f7199bba7eae9566b6a36870cbce8faa5845cbb6d7cd3392af45e7e",
+        "flipV": false,
+        "nativeResource": "ResourceId::13500"
+      },
+      "original": {
+        "overOne": 1052,
+        "overEight": 49,
+        "peak": 21
+      },
+      "candidate": {
+        "overOne": 822,
+        "overEight": 27,
+        "peak": 23
+      },
+      "unchangedOrderForOutline": true,
+      "newOverOne": [
+        {
+          "xy": [
+            1363,
+            359
+          ],
+          "before": [
+            183,
+            137,
+            122
+          ],
+          "candidate": [
+            182,
+            137,
+            123
+          ],
+          "reference": [
+            182,
+            136,
+            121
+          ],
+          "order": [
+            183,
+            137,
+            122
+          ]
+        },
+        {
+          "xy": [
+            1368,
+            370
+          ],
+          "before": [
+            174,
+            134,
+            120
+          ],
+          "candidate": [
+            173,
+            134,
+            121
+          ],
+          "reference": [
+            173,
+            133,
+            119
+          ],
+          "order": [
+            174,
+            134,
+            120
+          ]
+        },
+        {
+          "xy": [
+            1369,
+            372
+          ],
+          "before": [
+            174,
+            134,
+            120
+          ],
+          "candidate": [
+            173,
+            135,
+            121
+          ],
+          "reference": [
+            173,
+            133,
+            119
+          ],
+          "order": [
+            174,
+            134,
+            120
+          ]
+        },
+        {
+          "xy": [
+            1370,
+            375
+          ],
+          "before": [
+            173,
+            135,
+            120
+          ],
+          "candidate": [
+            173,
+            135,
+            121
+          ],
+          "reference": [
+            172,
+            134,
+            119
+          ],
+          "order": [
+            173,
+            135,
+            120
+          ]
+        },
+        {
+          "xy": [
+            1371,
+            379
+          ],
+          "before": [
+            170,
+            133,
+            120
+          ],
+          "candidate": [
+            169,
+            134,
+            120
+          ],
+          "reference": [
+            169,
+            132,
+            119
+          ],
+          "order": [
+            170,
+            133,
+            120
+          ]
+        },
+        {
+          "xy": [
+            1380,
+            402
+          ],
+          "before": [
+            158,
+            126,
+            115
+          ],
+          "candidate": [
+            158,
+            126,
+            116
+          ],
+          "reference": [
+            158,
+            126,
+            114
+          ],
+          "order": [
+            158,
+            126,
+            115
+          ]
+        },
+        {
+          "xy": [
+            1259,
+            983
+          ],
+          "before": [
+            97,
+            83,
+            85
+          ],
+          "candidate": [
+            94,
+            84,
+            86
+          ],
+          "reference": [
+            96,
+            84,
+            85
+          ],
+          "order": [
+            97,
+            83,
+            85
+          ]
+        },
+        {
+          "xy": [
+            1259,
+            984
+          ],
+          "before": [
+            97,
+            83,
+            85
+          ],
+          "candidate": [
+            94,
+            84,
+            86
+          ],
+          "reference": [
+            96,
+            84,
+            86
+          ],
+          "order": [
+            97,
+            83,
+            85
+          ]
+        },
+        {
+          "xy": [
+            1259,
+            985
+          ],
+          "before": [
+            97,
+            83,
+            85
+          ],
+          "candidate": [
+            94,
+            84,
+            86
+          ],
+          "reference": [
+            96,
+            84,
+            86
+          ],
+          "order": [
+            97,
+            83,
+            85
+          ]
+        },
+        {
+          "xy": [
+            1324,
+            1017
+          ],
+          "before": [
+            129,
+            122,
+            124
+          ],
+          "candidate": [
+            128,
+            122,
+            125
+          ],
+          "reference": [
+            128,
+            122,
+            123
+          ],
+          "order": [
+            129,
+            122,
+            124
+          ]
+        },
+        {
+          "xy": [
+            1325,
+            1018
+          ],
+          "before": [
+            128,
+            121,
+            124
+          ],
+          "candidate": [
+            127,
+            122,
+            125
+          ],
+          "reference": [
+            127,
+            121,
+            123
+          ],
+          "order": [
+            128,
+            121,
+            124
+          ]
+        },
+        {
+          "xy": [
+            1325,
+            1019
+          ],
+          "before": [
+            128,
+            122,
+            124
+          ],
+          "candidate": [
+            127,
+            122,
+            125
+          ],
+          "reference": [
+            127,
+            121,
+            123
+          ],
+          "order": [
+            128,
+            122,
+            124
+          ]
+        },
+        {
+          "xy": [
+            1326,
+            1025
+          ],
+          "before": [
+            129,
+            123,
+            125
+          ],
+          "candidate": [
+            128,
+            123,
+            126
+          ],
+          "reference": [
+            128,
+            122,
+            124
+          ],
+          "order": [
+            129,
+            123,
+            125
+          ]
+        },
+        {
+          "xy": [
+            1326,
+            1026
+          ],
+          "before": [
+            129,
+            123,
+            125
+          ],
+          "candidate": [
+            128,
+            123,
+            126
+          ],
+          "reference": [
+            128,
+            123,
+            124
+          ],
+          "order": [
+            129,
+            123,
+            125
+          ]
+        },
+        {
+          "xy": [
+            1215,
+            1054
+          ],
+          "before": [
+            82,
+            57,
+            50
+          ],
+          "candidate": [
+            80,
+            58,
+            51
+          ],
+          "reference": [
+            81,
+            57,
+            49
+          ],
+          "order": [
+            82,
+            57,
+            50
+          ]
+        }
+      ],
+      "outsideOwner": [],
+      "peak": [
+        {
+          "xy": [
+            1260,
+            320
+          ],
+          "before": [
+            76,
+            44,
+            37
+          ],
+          "candidate": [
+            71,
+            47,
+            41
+          ],
+          "reference": [
+            94,
+            65,
+            55
+          ],
+          "order": [
+            76,
+            44,
+            37
+          ]
+        }
+      ],
+      "recoveredOverOne": 245,
+      "newPeakOverEight": 8,
+      "strictPass": false,
+      "physicalDevice": {
+        "name": "Intel(R) RaptorLake-S Mobile Graphics Controller",
+        "vendor": 32902,
+        "driver": 1661340
+      }
+    }
+  },
+  "archive": {
+    "sha256": "96e8e3023967d1323f75050ecf8ad793bc9682fca341419fbe865edaab3ffab3",
+    "members": {
+      "dispatch.json": "c9d64c9cc5fa41885f2d732275ea1bee1cbfa924645f019997f7c4c9dcea6904",
+      "physical-results.json": "f4f0f3bfce78eff43c2bd364d227c90d43a898751abe2e0481b876603ed78041",
+      "native-lookup/native-body-outline-shadow-lut.bin": "5f5204789f7199bba7eae9566b6a36870cbce8faa5845cbb6d7cd3392af45e7e",
+      "trace-body-outline-shadow-lut-source.json": "6f5e0169d74f3747ffae8f21d71458bed34ea57b7dd42f29478494ec4e5d669b",
+      "trace-body-outline-source.py": "d09b022a127f58106d1c986cd6bbd10ab1f4cc9ac0f3325dfaab849b8f3b39b0",
+      "body-outline-native-palette-saturation-model.py": "546799ecbb24e07d0fdaceff2b2c61445dda1503a57723b0f010ac4976461ea7",
+      "body-outline-native-palette-saturation-model.json": "a4401a64f26c15bdaf71e746dd1d92a783bdace40ed8a43dac9ef816c0bed977",
+      "body-outline-native-shadow-lut-player.py": "7f7529cd0ee095580f91fa0588dfdf81d245235caca607a3d1e08d1354df6fa1",
+      "score-native-outline-shadow-response.py": "7882b42392603dbbac9def5918de2bba6b14408522beba23e9093d8b562137c2",
+      "archive-native-outline-shadow-response.py": "f7370d83837c8cbc695d0be5dd7196580e8bb7f66ca73ff31c791f65facf26c4",
+      "native-traces/body-outline-trace-1260-320.json": "415c13fffeccf9c0a82cf910bb0cbb30d8fc1be00243a11fcbc8e5c1a3bf8c79",
+      "native-traces/body-outline-trace-1334-417.json": "a553eee4cdef38e98a7ff7c59b4ebe766f512cb9bd4bb762139405cc8d5fdbd1",
+      "native-traces/body-outline-trace-1171-867.json": "904a786872b6e7940f3f7a04c6afa48e8b2b251b772c6e8419ec6e3499a2a864",
+      "native-traces/body-outline-trace-1257-927.json": "d714021804d64f23bd132cd4f18bd524ae923166fda12a2ce65c8c88ee34d7b8",
+      "nvidia/command.json": "f8bd9381e0e861ea6992799b61d53bd71c125e5f922f9338e0f217d66922e49a",
+      "nvidia/runtime.json": "fd2c9542b76bf80901952afda0ba6bd0dac184828575b75c695e7c7c1c16b4ec",
+      "nvidia/frames/capture_manifest.json": "cc9fa9ede98a212ee1c1b7f5e63bb632dc7891fa52388292280efdb81d5ed59e",
+      "nvidia/frames/gpu_capabilities.json": "93c9fb29461fae11a7e57d4e49112071a71940dee571f1f6696ffbf03c392879",
+      "nvidia/body-native-lit-outline-blend-depth.azurematerial": "fad25424a251298e481f9c1f46aa883a5378e57afbc78b4cf37974f7c16e5724",
+      "intel/command.json": "578eca746f7bad168f76cfd42b7c85c6d846ee50be815357ed9fb77187cc8afb",
+      "intel/runtime.json": "fd2c9542b76bf80901952afda0ba6bd0dac184828575b75c695e7c7c1c16b4ec",
+      "intel/frames/capture_manifest.json": "90f94de04a6b0c083f2d89bb422af708e64cbd20fcfec12723152aa3a43c98f7",
+      "intel/frames/gpu_capabilities.json": "a38eaca3509b417cfe23614fe415bd9ccc5622fc682d8623142cdeb7dc3d85cc",
+      "intel/body-native-lit-outline-blend-depth.azurematerial": "fad25424a251298e481f9c1f46aa883a5378e57afbc78b4cf37974f7c16e5724"
+    }
+  },
+  "shaderWitnessMaximumLinearError": 2.4030011175346644e-08
+}

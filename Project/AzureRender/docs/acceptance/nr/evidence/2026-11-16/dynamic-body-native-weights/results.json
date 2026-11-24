@@ -1,0 +1,537 @@
+{
+  "status": "captured pose geometry matched; Player coverage and appearance pending",
+  "productionAssetAccepted": false,
+  "scores": {
+    "topology": {
+      "status": "measured using native captured pose and vertex projection",
+      "nativeBodyTriangles": 5679,
+      "nativeSourceControlPixels": [
+        2.4204702514365815e-07,
+        2.9432092896130396e-05,
+        7.471347131788495e-05,
+        0.00012091916054708928,
+        0.0001842278127732925
+      ],
+      "maxClipAbsoluteError": 8.194720135801248e-07,
+      "originalMatchedCornersPixels": [
+        1.22606797116924e-06,
+        7.93643037508648e-05,
+        0.013669484613205652,
+        0.015531114845997946,
+        0.6540339550873848
+      ],
+      "candidateNewCornersPixels": [
+        4.27049250395088e-06,
+        0.00015462077995174426,
+        0.02586992520565494,
+        0.10436549211077521,
+        0.10520364161239473
+      ],
+      "candidateMatchedCornersPixels": [
+        1.22606797116924e-06,
+        7.93643037508648e-05,
+        0.013669484613205652,
+        0.015531114845997946,
+        0.6540339550873848
+      ],
+      "variant": "topology-only",
+      "candidateNewCornersOverQuarterPixel": 0,
+      "candidateNewCornersOverOnePixel": 0,
+      "rawWeightPreview": false,
+      "originalWeightSumCodes": {
+        "65534": 354,
+        "65535": 2517,
+        "65536": 418
+      },
+      "coverage": {
+        "scope": "draw geometry only; no blend, sample mask or depth from other draws",
+        "nativePixels": 136029,
+        "inputReconstructionDifference": 0,
+        "originalOutside": 1923,
+        "originalMissing": 1,
+        "candidateOutside": 2,
+        "candidateMissing": 2,
+        "recoveredNative": 0,
+        "lostNative": 1,
+        "newlyUncoveredPointsXY": [
+          [
+            1191,
+            959
+          ]
+        ],
+        "candidateMissingPointsXY": [
+          [
+            1349,
+            914
+          ],
+          [
+            1191,
+            959
+          ]
+        ],
+        "candidateOutsidePointsXY": [
+          [
+            1200,
+            952
+          ],
+          [
+            1198,
+            955
+          ]
+        ],
+        "nearbyTriangles": {
+          "[1191, 959]": {
+            "native": [
+              [
+                1962,
+                -0.011953,
+                [
+                  1138,
+                  1128,
+                  1134
+                ]
+              ],
+              [
+                1967,
+                0.001982,
+                [
+                  1138,
+                  1134,
+                  1142
+                ]
+              ],
+              [
+                1976,
+                0.001982,
+                [
+                  1147,
+                  1138,
+                  1142
+                ]
+              ]
+            ],
+            "baseline": [
+              [
+                221,
+                0.013249,
+                [
+                  144,
+                  145,
+                  149
+                ]
+              ],
+              [
+                223,
+                -0.013249,
+                [
+                  147,
+                  144,
+                  149
+                ]
+              ],
+              [
+                2180,
+                -0.008078,
+                [
+                  1264,
+                  1274,
+                  1270
+                ]
+              ],
+              [
+                2185,
+                -0.001905,
+                [
+                  1274,
+                  1278,
+                  1270
+                ]
+              ],
+              [
+                2194,
+                -0.001905,
+                [
+                  1274,
+                  1283,
+                  1278
+                ]
+              ]
+            ],
+            "candidate": [
+              [
+                2011,
+                -0.008078,
+                [
+                  1264,
+                  1274,
+                  1270
+                ]
+              ],
+              [
+                2016,
+                -0.001905,
+                [
+                  1274,
+                  1278,
+                  1270
+                ]
+              ],
+              [
+                2025,
+                -0.001905,
+                [
+                  1274,
+                  1283,
+                  1278
+                ]
+              ]
+            ]
+          }
+        }
+      },
+      "candidateIndices": "3d32a96ebececfd40711c743a524d06705dab78bbbba5ad3c5d0358d9cacb566",
+      "source": {
+        "constants": "b3e3e6207ff3b7cfa5e44cbff06611f73e250413bff500fb0f9550bd180db004",
+        "palette": "355a21275dc0d1f1775b4a1921c140e992dbe1878f5bfd0cf7c1238cd680e6db",
+        "bodyBindGeometry": "81f617bdd8c6154da6f8f3d40d35e7e6fcc98e74c77a275b658554b3ba0324c2",
+        "postVertex": "fef0374bebc7e0848af9e97c441a339669847c55aa4a227d9a36c77c34fe9a82",
+        "preamble": [
+          52,
+          24772
+        ]
+      }
+    },
+    "normalized": {
+      "status": "measured using native captured pose and vertex projection",
+      "nativeBodyTriangles": 5679,
+      "nativeSourceControlPixels": [
+        2.4204702514365815e-07,
+        2.9432092896130396e-05,
+        7.471347131788495e-05,
+        0.00012091916054708928,
+        0.0001842278127732925
+      ],
+      "maxClipAbsoluteError": 8.194720135801248e-07,
+      "originalMatchedCornersPixels": [
+        1.22606797116924e-06,
+        7.93643037508648e-05,
+        0.013669484613205652,
+        0.015531114845997946,
+        0.6540339550873848
+      ],
+      "candidateNewCornersPixels": [
+        4.27049250395088e-06,
+        5.4373953135646936e-05,
+        0.01380465536839247,
+        0.014162818641020597,
+        0.014168740994045435
+      ],
+      "candidateMatchedCornersPixels": [
+        5.697898374454321e-07,
+        3.752420071016134e-05,
+        0.013621435059681357,
+        0.015537853416948593,
+        0.016085060604966565
+      ],
+      "variant": "native-body-rig",
+      "candidateNewCornersOverQuarterPixel": 0,
+      "candidateNewCornersOverOnePixel": 0,
+      "rawWeightPreview": false,
+      "originalWeightSumCodes": {
+        "65534": 354,
+        "65535": 2517,
+        "65536": 418
+      },
+      "coverage": {
+        "scope": "draw geometry only; no blend, sample mask or depth from other draws",
+        "nativePixels": 136029,
+        "inputReconstructionDifference": 0,
+        "originalOutside": 1923,
+        "originalMissing": 1,
+        "candidateOutside": 0,
+        "candidateMissing": 2,
+        "recoveredNative": 0,
+        "lostNative": 1,
+        "newlyUncoveredPointsXY": [
+          [
+            1191,
+            959
+          ]
+        ],
+        "candidateMissingPointsXY": [
+          [
+            1349,
+            914
+          ],
+          [
+            1191,
+            959
+          ]
+        ],
+        "candidateOutsidePointsXY": [],
+        "nearbyTriangles": {
+          "[1191, 959]": {
+            "native": [
+              [
+                1962,
+                -0.011953,
+                [
+                  1138,
+                  1128,
+                  1134
+                ]
+              ],
+              [
+                1967,
+                0.001982,
+                [
+                  1138,
+                  1134,
+                  1142
+                ]
+              ],
+              [
+                1976,
+                0.001982,
+                [
+                  1147,
+                  1138,
+                  1142
+                ]
+              ]
+            ],
+            "baseline": [
+              [
+                221,
+                0.013249,
+                [
+                  144,
+                  145,
+                  149
+                ]
+              ],
+              [
+                223,
+                -0.013249,
+                [
+                  147,
+                  144,
+                  149
+                ]
+              ],
+              [
+                2180,
+                -0.008078,
+                [
+                  1264,
+                  1274,
+                  1270
+                ]
+              ],
+              [
+                2185,
+                -0.001905,
+                [
+                  1274,
+                  1278,
+                  1270
+                ]
+              ],
+              [
+                2194,
+                -0.001905,
+                [
+                  1274,
+                  1283,
+                  1278
+                ]
+              ]
+            ],
+            "candidate": [
+              [
+                2011,
+                -0.008078,
+                [
+                  4474,
+                  4484,
+                  4480
+                ]
+              ],
+              [
+                2016,
+                -0.001905,
+                [
+                  4484,
+                  4488,
+                  4480
+                ]
+              ],
+              [
+                2025,
+                -0.001905,
+                [
+                  4484,
+                  4493,
+                  4488
+                ]
+              ]
+            ]
+          }
+        }
+      },
+      "candidateIndices": "590d9b52074c07186626a7154fd4f95b7f9564f0a875c84aab99ab0f56a89aa6",
+      "source": {
+        "constants": "b3e3e6207ff3b7cfa5e44cbff06611f73e250413bff500fb0f9550bd180db004",
+        "palette": "355a21275dc0d1f1775b4a1921c140e992dbe1878f5bfd0cf7c1238cd680e6db",
+        "bodyBindGeometry": "81f617bdd8c6154da6f8f3d40d35e7e6fcc98e74c77a275b658554b3ba0324c2",
+        "postVertex": "fef0374bebc7e0848af9e97c441a339669847c55aa4a227d9a36c77c34fe9a82",
+        "preamble": [
+          52,
+          24772
+        ]
+      }
+    },
+    "unpacked": {
+      "status": "measured using native captured pose and vertex projection",
+      "nativeBodyTriangles": 5679,
+      "nativeSourceControlPixels": [
+        2.4204702514365815e-07,
+        2.9432092896130396e-05,
+        7.471347131788495e-05,
+        0.00012091916054708928,
+        0.0001842278127732925
+      ],
+      "maxClipAbsoluteError": 8.194720135801248e-07,
+      "originalMatchedCornersPixels": [
+        1.22606797116924e-06,
+        7.93643037508648e-05,
+        0.013669484613205652,
+        0.015531114845997946,
+        0.6540339550873848
+      ],
+      "candidateNewCornersPixels": [
+        1.860551328566171e-06,
+        3.857027833896965e-05,
+        0.0001052722757151204,
+        0.00015539046281891155,
+        0.00015680139283899883
+      ],
+      "candidateMatchedCornersPixels": [
+        2.4204702514365815e-07,
+        2.887876676027094e-05,
+        7.371367542795357e-05,
+        0.00012010232207825022,
+        0.0001842278127732925
+      ],
+      "variant": "native-body-rig",
+      "candidateNewCornersOverQuarterPixel": 0,
+      "candidateNewCornersOverOnePixel": 0,
+      "rawWeightPreview": true,
+      "originalWeightSumCodes": {
+        "65534": 354,
+        "65535": 2517,
+        "65536": 418
+      },
+      "coverage": {
+        "scope": "draw geometry only; no blend, sample mask or depth from other draws",
+        "nativePixels": 136029,
+        "inputReconstructionDifference": 0,
+        "originalOutside": 1923,
+        "originalMissing": 1,
+        "candidateOutside": 0,
+        "candidateMissing": 0,
+        "recoveredNative": 1,
+        "lostNative": 0,
+        "newlyUncoveredPointsXY": [],
+        "candidateMissingPointsXY": [],
+        "candidateOutsidePointsXY": [],
+        "nearbyTriangles": {}
+      },
+      "candidateIndices": "590d9b52074c07186626a7154fd4f95b7f9564f0a875c84aab99ab0f56a89aa6",
+      "source": {
+        "constants": "b3e3e6207ff3b7cfa5e44cbff06611f73e250413bff500fb0f9550bd180db004",
+        "palette": "355a21275dc0d1f1775b4a1921c140e992dbe1878f5bfd0cf7c1238cd680e6db",
+        "bodyBindGeometry": "81f617bdd8c6154da6f8f3d40d35e7e6fcc98e74c77a275b658554b3ba0324c2",
+        "postVertex": "fef0374bebc7e0848af9e97c441a339669847c55aa4a227d9a36c77c34fe9a82",
+        "preamble": [
+          52,
+          24772
+        ]
+      }
+    }
+  },
+  "nativeRig": {
+    "status": "prepared-in-memory-skinned-mesh-candidate",
+    "scope": "isolated comparison; not a production asset",
+    "variant": "native-body-rig",
+    "sourceBonePalette": 44,
+    "vertexCount": 6635,
+    "activeVertexCount": 3289,
+    "nativeVertexCount": 3289,
+    "triangles": 5679,
+    "identicalOriginalTriangles": 0,
+    "preservedSharedTriangleOrder": 5610,
+    "replacedTriangles": 69,
+    "removedTriangles": 169,
+    "windingEvidence": {
+      "reversed": 5610
+    },
+    "appendedForMissingUv": 31,
+    "appendedForPosition": 3,
+    "boneCorrespondence": {
+      "1": 6,
+      "3": 140,
+      "4": 184,
+      "5": 5,
+      "6": 228,
+      "7": 229,
+      "8": 4
+    },
+    "appendedForDistinctNativeVertices": 1,
+    "maxTriangleUvComponentError": 5.960464477539063e-08,
+    "originalAttributeBytesUnchanged": true,
+    "originalGlb": "b1f9d78053c0e36c966502847c0a90688307a3d98808db93ff8465a620e6e883",
+    "candidateInputHashes": {
+      "POSITION": "472503859610fdc338120d94337998a8e7843711a5508aa6e331b944e2dd7efc",
+      "NORMAL": "a4278a67be2bee9bc6e54817b962e0afd91cf47b818239ac3958c1feb8bdef0d",
+      "TEXCOORD_0": "dba365d97990556c01b60f52c79a5b3e69d5ae97644ce09c69a2ec977efb9aa3",
+      "TEXCOORD_1": "22949e687df36b81f79a06264347dff784bc5e94ca4b724f01b0789735f010f1",
+      "JOINTS_0": "b77e5eacf57731f1f61dbae1b79ad2b49d0f2bf71fa58073615a67cbc095911e",
+      "WEIGHTS_0": "adcb76f8cf6cc4eb47cc9574938c363255faa00187c0224a02d5f3a898997558",
+      "TANGENT": "fe8b710dfcb865468d9b244e3fd316ce2399eb633333974d62e3d3fd3bbecb60",
+      "INDICES": "590d9b52074c07186626a7154fd4f95b7f9564f0a875c84aab99ab0f56a89aa6"
+    },
+    "serializedBytes": 29665780,
+    "serializedSha256": "89f3adc4056ab824307bd6fe25d91a5a5a919178944c953e5537d0cdd63a59e9",
+    "preservedOriginalBufferBytes": 26733248,
+    "untouchedAnimationCount": 10,
+    "untouchedSkinCount": 1
+  },
+  "topologyAnimationCheck": {
+    "sampledPoses": 70,
+    "newDegenerateTriangles": 0,
+    "largestAnimatedSeam": [
+      0.00045656871615522624,
+      "a_actor_laevat_idle_loop_closed",
+      1.6833332777023315,
+      [
+        3371,
+        701
+      ]
+    ]
+  },
+  "archive": {
+    "sha256": "0162613bafa095d35a207450363a22ce192d2a71087dce3073db0b11d94e4b17",
+    "members": {
+      "animated-body-captured-pose.json": "1652b1c5100f8257ea1576311f168ea3a2e22c28a5646070c372b523a4c23b47",
+      "animated-body-captured-pose-native-rig.json": "93ed86255a140dfdf2206d2c0d3f6ce13fc21777a3adb8ed98becdd42e47e2be",
+      "animated-body-captured-pose-native-rig-weight-preview.json": "a5db37f976be6aa4dc48d40bbbaf74d4b02c2e457e6b7ee36a1f341e4e831e5e",
+      "animated-body-native-rig-candidate.json": "c2b0561c3a683a847026a24e041703fc2a2cdb8cd7bb5f72c852c2caa3a88030",
+      "animated-body-topology-deformation.json": "1941ba22e239f84794418851df003649a12152f923dd3db23bfc3fdcfe441b6e",
+      "build-animated-body-topology-candidate.py": "c159742357e3180ba0510814ec0b33b3fdd86307071c462adc18e303f3cf9542",
+      "score-animated-body-captured-pose.py": "c5bad01bd2dc5ecdb5f020d0eeaee03154a44c0975c2d082416bdbdf77510d94",
+      "score-animated-body-topology-deformation.py": "6d7d7939ad62ac88a383e9543b613d0ae6c4d6125818f529023347013610bd97",
+      "archive-animated-body-native-weights.py": "589b0eced9d9ba9c892ed8766579e20ee7e511c4e7cdf910f33240a67268c010"
+    }
+  }
+}

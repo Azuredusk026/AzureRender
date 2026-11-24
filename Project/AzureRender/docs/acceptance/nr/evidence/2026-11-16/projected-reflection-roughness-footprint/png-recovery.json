@@ -1,0 +1,16 @@
+{
+  "archive": "3fc63f2dd4fb18bb6cedd9182ff1cd32973aa1fa8795618f05a91da4e733712b",
+  "codec": "68e04ad4a1e51575f7f2eea7df1eca245dd1cf2d0b9525b156e4d440816e1ed3",
+  "frames": {
+    "frame_000000.png": {
+      "bytes": 5569910,
+      "sha256": "120d2de3b5ab10ec2f4865ed348ca7b0d0f4e1a31a5c311c892ef5c56bcafc6c",
+      "member": "frame-0.bgra-xor"
+    },
+    "frame_000001.png": {
+      "bytes": 5486562,
+      "sha256": "6ecda337533d563fe3f05af3b89629e51cad2db7aafc7a3319b6d12f3c1965e6",
+      "member": "frame-1.bgra-xor"
+    }
+  }
+}

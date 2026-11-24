@@ -1,0 +1,116 @@
+{
+  "texture": "12328adf1de59d0b84d64b2ef87e2f7908cce546992a89a9c77166c779b323a7",
+  "matchingBase": 4194304,
+  "baseTexels": 4194304,
+  "levels": [
+    "6d81a6567a79cab0bd88b6927a9c71933ff186babe2c9ba46338c2f8e4ad5424",
+    "d761742c6047be208093890092a4bdc24cb8fb8b74044feac6e48c9a2762e851",
+    "d287f7c5ce425a6c9902957ad705522edbd2eada64fe0460b2dec6d4a0450171",
+    "e7b1d5af15c463beb39eaf95a9efb2c8e622e6a296793d56fe4766ed88a9cb04",
+    "c0fd08139e07d74cd5485722a5aed4c9938cfe1c5170232b933b5ddf043092a5",
+    "c1405ee5249c4c4090ef758bc1fb8129ef9e7724eecd2248cba307549c45fde5",
+    "ebe0661c14feaacb1bc2cf555d5b959113c162caf02729f6095b02c32936b27a",
+    "be58bff236789f828f721d9bcb0265ee2957232c1cded5605fc1aa1bc5129a80",
+    "080883c8596c47c2d23482daf5dc9fddc354e9f3928bd437bd05db738387bf35",
+    "e09fe37caf1579461b59ac88bb22784ce93f6c52d7716dcf0c907f48770ae36f",
+    "cd65aebdc4b8a4c228b6f8b4c7ca50665beeb997ce508c8fa87a0b50ec6c6035",
+    "de508b1bff21f1f2d49d55d2a597fd34217276ec33ca156b2a2f757043f8cedc"
+  ],
+  "devices": {
+    "nvidia": {
+      "frame": "2bbdeb1ec3e1c55ddc9a602b9ff1f9005003ebf2710e036ed785e34e500d44b2",
+      "overEight": [
+        28,
+        28
+      ],
+      "peak": [
+        39,
+        39
+      ],
+      "errors": [
+        10,
+        13,
+        8,
+        6,
+        36,
+        12,
+        17,
+        11,
+        39,
+        16,
+        10,
+        23,
+        15,
+        9,
+        38,
+        21,
+        14,
+        10,
+        28,
+        20,
+        13,
+        39,
+        27,
+        11,
+        15,
+        16,
+        11,
+        12,
+        19,
+        13
+      ],
+      "newOverOne": 0,
+      "changedPixels": 27
+    },
+    "intel": {
+      "frame": "02820bb9f790d6a1e8ebc26006e09ed25b384c074e92fabef2c1de06ac1b3b9f",
+      "overEight": [
+        28,
+        28
+      ],
+      "peak": [
+        39,
+        39
+      ],
+      "errors": [
+        10,
+        13,
+        8,
+        6,
+        36,
+        12,
+        17,
+        11,
+        39,
+        16,
+        10,
+        23,
+        15,
+        9,
+        38,
+        21,
+        14,
+        10,
+        28,
+        19,
+        13,
+        38,
+        27,
+        11,
+        14,
+        16,
+        11,
+        12,
+        19,
+        13
+      ],
+      "newOverOne": 0,
+      "changedPixels": 18
+    }
+  },
+  "status": "failed-user-review",
+  "archive": {
+    "members": 8,
+    "sha256": "c20ab990e93867376fff3536faf13e66844b1b3a05bdb37d9d7be732c5093d67"
+  }
+}

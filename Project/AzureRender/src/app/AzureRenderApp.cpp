@@ -827,6 +827,12 @@ void AzureRenderApp::buildSceneFrameData(
         const auto view=gameView.value_or(azurerender::CameraViewDescriptor{});
         cameraPosition_=view.position;cameraTarget_=view.target;autoRotate_=false;rotationAngle_=0;
     }
+    if (runOptions_.qaCameraPose) {
+        cameraPosition_ = runOptions_.qaCameraPose->position;
+        cameraTarget_ = runOptions_.qaCameraPose->target;
+        autoRotate_ = false;
+        rotationAngle_ = 0;
+    }
     if(auto* presentation=activePresentation())frame.animations=presentation->animations();
 #if AZURE_WITH_EDITOR
     if(runOptions_.editorSession && runOptions_.editorSession->editCameraActive()){
@@ -889,6 +895,12 @@ void AzureRenderApp::buildSceneFrameData(
     azurerender::CameraViewDescriptor fallback;
     fallback.position=cameraPosition_;fallback.target=cameraTarget_;
     fallback.nearPlane=effectiveRenderSettings_.cameraNear;fallback.farPlane=effectiveRenderSettings_.cameraFar;
+    if (runOptions_.qaCameraPose) {
+        auto view = *runOptions_.qaCameraPose;
+        view.nearPlane = gameView ? gameView->nearPlane : fallback.nearPlane;
+        view.farPlane = gameView ? gameView->farPlane : fallback.farPlane;
+        gameView = view;
+    }
     const auto editingView=sceneViewActive?effectiveRenderSettings_.cameraView:std::optional<azurerender::CameraViewDescriptor>{};
     frame.camera=azurerender::selectRenderCamera(editingView,gameView,fallback);
     if(sceneRenderer_&&(frame.camera.view.projectionOffsetX!=0||frame.camera.view.projectionOffsetY!=0||frame.camera.view.referenceCalibration))

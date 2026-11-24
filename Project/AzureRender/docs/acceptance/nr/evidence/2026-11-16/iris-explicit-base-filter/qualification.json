@@ -1,0 +1,1398 @@
+{
+  "status": "tested-explicit-base-filter-strict-gates-open",
+  "strictAcceptance": false,
+  "nativeTexels": {
+    "nvidia": {
+      "colorEncoding": "direct",
+      "decodedTexelsVsCpu": {
+        "direct": {
+          "n": 651,
+          "p50": 0.0004338992671774067,
+          "p95": 0.0011086938770534793,
+          "max": 0.0018831419329731203,
+          "over1In255": 0
+        },
+        "srgbConverted": {
+          "n": 651,
+          "p50": 0.24374227443227287,
+          "p95": 0.2875376747243372,
+          "max": 0.2875376747243372,
+          "over1In255": 651
+        }
+      },
+      "rawMipHashes": {
+        "4": "2f2e954d34f40770e9d18ce21cd57668afe41225222a6e83f3b0393b8ff5607f",
+        "5": "e96865b60d843d7f06b661887c55caccc34ddfa78426a7f217793b41b80a4370"
+      },
+      "measuredDecodeThenLinearFilter": {
+        "n": 252,
+        "p50": 0.0003275871276855469,
+        "p95": 0.0015087477862834925,
+        "max": 0.0038700178265571594,
+        "over1In255": 0
+      },
+      "cpuDecodeThenLinearFilter": {
+        "n": 252,
+        "p50": 0.0005932748683045719,
+        "p95": 0.001879845989494755,
+        "max": 0.0038465331094772875,
+        "over1In255": 0
+      }
+    },
+    "intel": {
+      "colorEncoding": "direct",
+      "decodedTexelsVsCpu": {
+        "direct": {
+          "n": 645,
+          "p50": 0.0003789464339786497,
+          "p95": 0.0010616032781283866,
+          "max": 0.001147632913246821,
+          "over1In255": 0
+        },
+        "srgbConverted": {
+          "n": 645,
+          "p50": 0.24404381889785726,
+          "p95": 0.28680954398898406,
+          "max": 0.2871471264379295,
+          "over1In255": 645
+        }
+      },
+      "rawMipHashes": {
+        "4": "2f2e954d34f40770e9d18ce21cd57668afe41225222a6e83f3b0393b8ff5607f",
+        "5": "e96865b60d843d7f06b661887c55caccc34ddfa78426a7f217793b41b80a4370"
+      },
+      "measuredDecodeThenLinearFilter": {
+        "n": 252,
+        "p50": 0.00020030354789923877,
+        "p95": 0.0010224797709156516,
+        "max": 0.0025831980237853713,
+        "over1In255": 0
+      },
+      "cpuDecodeThenLinearFilter": {
+        "n": 252,
+        "p50": 0.0003879252026893626,
+        "p95": 0.0011316717774234677,
+        "max": 0.0025485703449780184,
+        "over1In255": 0
+      }
+    }
+  },
+  "nativeQueue": {
+    "id": 1480,
+    "task": "nr-iris-native-bc7-texel-taps",
+    "state": "succeeded",
+    "exitCode": 0,
+    "elapsedSeconds": 6.6710000000020955
+  },
+  "players": {
+    "intel": {
+      "status": "measured-intel-explicit-bilinear-base-filter",
+      "strict": false,
+      "player": "f8f86018d82b7e47a399a9cd451a61701122afb6f2dda680456862289167ae38",
+      "candidateSource": "991bf078c11e1d333a94558cac02fb0a33475d4905d0cf6883e9ed1feac0a93d",
+      "source": "c180ad8bf13fcd7aaed4f2f1d30d22ebd1a4aa3cd02590b683fb918de3aa40b6",
+      "programs": {
+        "mesh_object_early_lighting.frag.spv": "33d552635ca937dd27d6bffb051e342b8c984ef0a8f4ee54672130b018760b38",
+        "mesh_object_lighting.frag.spv": "9fe12ff2b4e1e97752bf788ad21b37d3206406d85528444e1b5e182aef8443dc",
+        "mesh_object_early.frag.spv": "fff630494d431503b1d6115e3bbd763c08ed127166500aa46bd74e1ae7f3d50a",
+        "mesh_object.frag.spv": "161e98942cd3748fb107b8f2f9a412fd1c81b980aba25996d55d86039671d809"
+      },
+      "inputs": {
+        "project": "0b2f7392f65cdb19cf8c1b5c5545a0d1260e469ea6b9bf1cbcad5cd27bf3cebd",
+        "level": "9c65a143adceef1eec5dd97d314ce7816dde09357ed23f16262b80721d9962b8",
+        "native": "fb99bbee0f8157e76d639922761dfcaf95a387f1ee67b66e9460cc7dacb23285"
+      },
+      "motionScope": "registered bare iris, one fixed frame",
+      "hardwareProjection": {
+        "hardwareQuery": 251,
+        "Fineaxis": 255,
+        "Finediagonal": 250,
+        "Coarseaxis": 255,
+        "Coarsediagonal": 251
+      },
+      "frame": "6c1d012ff3e8156f6e3a20173848f55e470a9b487ef2be2676f9c959d6573bbf",
+      "control": "23cb7483e695a78b76c67e43cfc0bb52dbc5796abc5194e3559af6dbd44514c6",
+      "original": "f38b565e9f903112045395700a6094e6134239219384baa1255053e6049cba9e",
+      "frameProbe": "0e3a31ad8edc4c43955b0a659f56c2776bd68d0843bd79d625bac2ed1e28342d",
+      "outside": 0,
+      "new": [
+        0,
+        0
+      ],
+      "peak": [
+        3,
+        3,
+        4
+      ],
+      "overOne": [
+        16,
+        10,
+        9
+      ],
+      "changed": [
+        {
+          "point": [
+            1259,
+            257
+          ],
+          "deltas": [
+            [
+              0,
+              0,
+              1
+            ],
+            [
+              0,
+              0,
+              1
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ]
+        },
+        {
+          "point": [
+            1303,
+            257
+          ],
+          "deltas": [
+            [
+              0,
+              1,
+              1
+            ],
+            [
+              0,
+              1,
+              1
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ]
+        },
+        {
+          "point": [
+            1255,
+            258
+          ],
+          "deltas": [
+            [
+              2,
+              3,
+              3
+            ],
+            [
+              2,
+              3,
+              3
+            ],
+            [
+              2,
+              3,
+              4
+            ]
+          ]
+        },
+        {
+          "point": [
+            1302,
+            258
+          ],
+          "deltas": [
+            [
+              0,
+              1,
+              2
+            ],
+            [
+              0,
+              0,
+              2
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ]
+        },
+        {
+          "point": [
+            1258,
+            260
+          ],
+          "deltas": [
+            [
+              1,
+              1,
+              1
+            ],
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ]
+        },
+        {
+          "point": [
+            1304,
+            261
+          ],
+          "deltas": [
+            [
+              1,
+              0,
+              1
+            ],
+            [
+              0,
+              0,
+              1
+            ],
+            [
+              1,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "point": [
+            1251,
+            264
+          ],
+          "deltas": [
+            [
+              1,
+              1,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "point": [
+            1256,
+            264
+          ],
+          "deltas": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              -1,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ]
+        },
+        {
+          "point": [
+            1305,
+            264
+          ],
+          "deltas": [
+            [
+              1,
+              0,
+              0
+            ],
+            [
+              0,
+              -1,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ]
+        },
+        {
+          "point": [
+            1253,
+            265
+          ],
+          "deltas": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              -1
+            ]
+          ]
+        },
+        {
+          "point": [
+            1257,
+            266
+          ],
+          "deltas": [
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "point": [
+            1309,
+            266
+          ],
+          "deltas": [
+            [
+              1,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              1,
+              0,
+              0
+            ]
+          ]
+        },
+        {
+          "point": [
+            1306,
+            267
+          ],
+          "deltas": [
+            [
+              1,
+              1,
+              0
+            ],
+            [
+              1,
+              0,
+              0
+            ],
+            [
+              1,
+              1,
+              0
+            ]
+          ]
+        }
+      ],
+      "queue": {
+        "id": 1478,
+        "task": "nr-iris-intel-explicit-base-filter",
+        "state": "succeeded",
+        "exitCode": 0,
+        "elapsedSeconds": 129.48500000000058
+      }
+    },
+    "nvidia": {
+      "status": "measured-nvidia-explicit-bilinear-base-filter",
+      "strict": false,
+      "player": "f8f86018d82b7e47a399a9cd451a61701122afb6f2dda680456862289167ae38",
+      "candidateSource": "991bf078c11e1d333a94558cac02fb0a33475d4905d0cf6883e9ed1feac0a93d",
+      "source": "c180ad8bf13fcd7aaed4f2f1d30d22ebd1a4aa3cd02590b683fb918de3aa40b6",
+      "programs": {
+        "mesh_object_early_lighting.frag.spv": "33d552635ca937dd27d6bffb051e342b8c984ef0a8f4ee54672130b018760b38",
+        "mesh_object_lighting.frag.spv": "9fe12ff2b4e1e97752bf788ad21b37d3206406d85528444e1b5e182aef8443dc",
+        "mesh_object_early.frag.spv": "fff630494d431503b1d6115e3bbd763c08ed127166500aa46bd74e1ae7f3d50a",
+        "mesh_object.frag.spv": "161e98942cd3748fb107b8f2f9a412fd1c81b980aba25996d55d86039671d809"
+      },
+      "inputs": {
+        "project": "0b2f7392f65cdb19cf8c1b5c5545a0d1260e469ea6b9bf1cbcad5cd27bf3cebd",
+        "level": "9c65a143adceef1eec5dd97d314ce7816dde09357ed23f16262b80721d9962b8",
+        "native": "fb99bbee0f8157e76d639922761dfcaf95a387f1ee67b66e9460cc7dacb23285"
+      },
+      "motionScope": "registered bare iris, one fixed frame",
+      "hardwareProjection": {
+        "hardwareQuery": 251,
+        "Fineaxis": 255,
+        "Finediagonal": 250,
+        "Coarseaxis": 255,
+        "Coarsediagonal": 251
+      },
+      "frame": "b35a45fac84f1a550772bba8750fe865b27fe83f36eac8b9e06504ef88cf263b",
+      "control": "7c8df9bc95f611ffd1943367493f517a0da708d64a93ac7a2003f83e8b93dafd",
+      "original": "22c078be96711fabecb10cef50ba1d05e367c5ea935edbd4188df1c881168cc9",
+      "frameProbe": "5e9c539fbf5bf27e0e365852c7a867e5c248908c2cf09fc54576cf6a99860b81",
+      "outside": 0,
+      "new": [
+        3,
+        6
+      ],
+      "peak": [
+        2,
+        2,
+        4
+      ],
+      "overOne": [
+        8,
+        1,
+        7
+      ],
+      "changed": [
+        {
+          "point": [
+            1250,
+            256
+          ],
+          "deltas": [
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              1,
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "point": [
+            1254,
+            257
+          ],
+          "deltas": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "point": [
+            1262,
+            257
+          ],
+          "deltas": [
+            [
+              0,
+              0,
+              1
+            ],
+            [
+              0,
+              0,
+              1
+            ],
+            [
+              0,
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "point": [
+            1303,
+            257
+          ],
+          "deltas": [
+            [
+              0,
+              1,
+              1
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "point": [
+            1255,
+            258
+          ],
+          "deltas": [
+            [
+              1,
+              0,
+              1
+            ],
+            [
+              1,
+              0,
+              0
+            ],
+            [
+              2,
+              4,
+              4
+            ]
+          ]
+        },
+        {
+          "point": [
+            1254,
+            259
+          ],
+          "deltas": [
+            [
+              0,
+              0,
+              2
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "point": [
+            1256,
+            259
+          ],
+          "deltas": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "point": [
+            1303,
+            259
+          ],
+          "deltas": [
+            [
+              0,
+              0,
+              1
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "point": [
+            1256,
+            260
+          ],
+          "deltas": [
+            [
+              1,
+              0,
+              1
+            ],
+            [
+              0,
+              0,
+              1
+            ],
+            [
+              1,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "point": [
+            1258,
+            260
+          ],
+          "deltas": [
+            [
+              1,
+              0,
+              1
+            ],
+            [
+              0,
+              0,
+              1
+            ],
+            [
+              0,
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "point": [
+            1300,
+            260
+          ],
+          "deltas": [
+            [
+              0,
+              0,
+              1
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "point": [
+            1304,
+            260
+          ],
+          "deltas": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "point": [
+            1310,
+            260
+          ],
+          "deltas": [
+            [
+              0,
+              0,
+              2
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "point": [
+            1312,
+            260
+          ],
+          "deltas": [
+            [
+              0,
+              0,
+              1
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              -1,
+              0,
+              0
+            ]
+          ]
+        },
+        {
+          "point": [
+            1250,
+            261
+          ],
+          "deltas": [
+            [
+              0,
+              0,
+              1
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "point": [
+            1256,
+            261
+          ],
+          "deltas": [
+            [
+              1,
+              1,
+              1
+            ],
+            [
+              1,
+              0,
+              0
+            ],
+            [
+              1,
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "point": [
+            1262,
+            261
+          ],
+          "deltas": [
+            [
+              1,
+              1,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "point": [
+            1299,
+            261
+          ],
+          "deltas": [
+            [
+              1,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "point": [
+            1302,
+            261
+          ],
+          "deltas": [
+            [
+              0,
+              0,
+              1
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              -1,
+              0,
+              0
+            ]
+          ]
+        },
+        {
+          "point": [
+            1304,
+            261
+          ],
+          "deltas": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              1,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "point": [
+            1306,
+            261
+          ],
+          "deltas": [
+            [
+              1,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              1,
+              0,
+              0
+            ]
+          ]
+        },
+        {
+          "point": [
+            1251,
+            262
+          ],
+          "deltas": [
+            [
+              0,
+              0,
+              2
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "point": [
+            1254,
+            262
+          ],
+          "deltas": [
+            [
+              1,
+              0,
+              0
+            ],
+            [
+              1,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ]
+        },
+        {
+          "point": [
+            1262,
+            262
+          ],
+          "deltas": [
+            [
+              1,
+              0,
+              1
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              1,
+              0,
+              0
+            ]
+          ]
+        },
+        {
+          "point": [
+            1302,
+            262
+          ],
+          "deltas": [
+            [
+              1,
+              1,
+              0
+            ],
+            [
+              1,
+              0,
+              0
+            ],
+            [
+              1,
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "point": [
+            1305,
+            262
+          ],
+          "deltas": [
+            [
+              0,
+              0,
+              1
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "point": [
+            1311,
+            262
+          ],
+          "deltas": [
+            [
+              0,
+              1,
+              1
+            ],
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "point": [
+            1258,
+            263
+          ],
+          "deltas": [
+            [
+              0,
+              0,
+              1
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "point": [
+            1307,
+            263
+          ],
+          "deltas": [
+            [
+              0,
+              0,
+              1
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "point": [
+            1312,
+            263
+          ],
+          "deltas": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "point": [
+            1251,
+            264
+          ],
+          "deltas": [
+            [
+              1,
+              1,
+              1
+            ],
+            [
+              1,
+              0,
+              1
+            ],
+            [
+              1,
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "point": [
+            1311,
+            264
+          ],
+          "deltas": [
+            [
+              1,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              1,
+              0,
+              0
+            ]
+          ]
+        },
+        {
+          "point": [
+            1256,
+            265
+          ],
+          "deltas": [
+            [
+              0,
+              0,
+              2
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "point": [
+            1301,
+            265
+          ],
+          "deltas": [
+            [
+              1,
+              0,
+              0
+            ],
+            [
+              1,
+              0,
+              -1
+            ],
+            [
+              1,
+              0,
+              0
+            ]
+          ]
+        },
+        {
+          "point": [
+            1311,
+            265
+          ],
+          "deltas": [
+            [
+              1,
+              0,
+              1
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              1,
+              0,
+              0
+            ]
+          ]
+        },
+        {
+          "point": [
+            1303,
+            266
+          ],
+          "deltas": [
+            [
+              1,
+              0,
+              1
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              1,
+              0,
+              0
+            ]
+          ]
+        },
+        {
+          "point": [
+            1310,
+            266
+          ],
+          "deltas": [
+            [
+              0,
+              1,
+              1
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "point": [
+            1306,
+            267
+          ],
+          "deltas": [
+            [
+              1,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              1,
+              1,
+              0
+            ]
+          ]
+        }
+      ],
+      "queue": {
+        "id": 1479,
+        "task": "nr-iris-nvidia-explicit-base-filter",
+        "state": "succeeded",
+        "exitCode": 0,
+        "elapsedSeconds": 103.625
+      }
+    }
+  },
+  "validation": {
+    "archive": "9e1e609896385d82c04dac5e0dd138e167085a0f98ab7bbad21cfb29bd526604",
+    "members": {
+      "native/request.json": "6c0ee3e65ffdc5795842e58aeed88c3fbbf227a45889d525274d39566643147c",
+      "native/results.json": "fd11ed2af720d51d7986322abf4512145d4b3e540368d14f9ac08601f5bd8af8",
+      "native/decomposition.json": "816cbb04a9b607f8cb7bec29b37971af4970cd5d432b9b7273058b6746a0087d",
+      "player/intel/results.json": "37ba5548e6b187ce09f776735d0ead3f7b97823a9f6251b8eb0f7078a0bdb6b5",
+      "player/intel/pixels.npz": "0e3a31ad8edc4c43955b0a659f56c2776bd68d0843bd79d625bac2ed1e28342d",
+      "player/intel/frames/capture_manifest.json": "0cf65874e65ec016114a545e631d29ea52f6cf24b808f5404fc4595625e0195d",
+      "player/intel/frames/gpu_capabilities.json": "a38eaca3509b417cfe23614fe415bd9ccc5622fc682d8623142cdeb7dc3d85cc",
+      "player/intel/command.json": "af6a78223868702ccbcb40ed0ed71197cf32038e43211b90eea0c2ab16594838",
+      "player/intel/runtime.json": "a72780bcb4ab78e822288e728f545427e22476f38876ea8fe3bb90ca09a40c7c",
+      "logs/intel.log": "c702beaba81daaa6b2f467dc5a5fdcb7e71b3b59f9f7db401571fbe1d77409d6",
+      "player/nvidia/results.json": "4dd15bd74b651bd98bacb88c7b527b0623848527a1e606bfb399089880f4ca87",
+      "player/nvidia/pixels.npz": "5e9c539fbf5bf27e0e365852c7a867e5c248908c2cf09fc54576cf6a99860b81",
+      "player/nvidia/frames/capture_manifest.json": "d32f323f83f9f5debb843b34561ff3a81be8c35cdf9acb84e97ba41d04ccfe28",
+      "player/nvidia/frames/gpu_capabilities.json": "93c9fb29461fae11a7e57d4e49112071a71940dee571f1f6696ffbf03c392879",
+      "player/nvidia/command.json": "dbf99192934684eafd4125da089659933b8e3d5783afdfc8a7e620391138bc4e",
+      "player/nvidia/runtime.json": "a72780bcb4ab78e822288e728f545427e22476f38876ea8fe3bb90ca09a40c7c",
+      "logs/nvidia.log": "256b4157fea2d58371f047045a2ac0013913a0e9111aaaac1f0b11d2a3697274",
+      "source/iris-explicit-pixel-filter-candidate.py": "984f342b46879348817a1566d827488c95eaf13514f3d73379f8fe40a388ea1e",
+      "source/iris-intel-base-axis-candidate.py": "69678937e42e14a333bb714f7792b32f18d597980c047042b0fd337f5588d59b",
+      "source/iris-native-decoded-taps.py": "92d6007ca82c48071516b72d88af4cb2f57bd8f54c59af414b523d5ef178cc00",
+      "source/score-iris-native-decode-vs-filter.py": "7ad87ca5693a4b9fa441cd9ef2b97887b49d7c8e292ee9d5a9553a3483042621",
+      "source/iris-native-filter-precision-model.py": "1e4e157aecc02c88a32a6b239f7ab857a7be44892dce176f08695f93230cd8d3",
+      "logs/texels.log": "57122e67e523dd63e0d807a26ac7887b099bdb3c5087bf8ccfa0e354db05068c"
+    }
+  }
+}

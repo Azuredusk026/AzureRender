@@ -1,0 +1,131 @@
+{
+  "status": "quantized animated asset validated in CPU geometry; Player verification pending",
+  "productionAssetAccepted": false,
+  "assembledBodyAsset": {
+    "status": "prepared-in-memory-skinned-mesh-candidate",
+    "scope": "isolated comparison; not a production asset",
+    "variant": "native-body-rig-uint16-source-weights",
+    "sourceBonePalette": 44,
+    "vertexCount": 3289,
+    "activeVertexCount": 3289,
+    "nativeVertexCount": 3289,
+    "triangles": 5679,
+    "identicalOriginalTriangles": 0,
+    "preservedSharedTriangleOrder": 5610,
+    "replacedTriangles": 69,
+    "removedTriangles": 169,
+    "windingEvidence": {
+      "reversed": 5610
+    },
+    "appendedForMissingUv": 31,
+    "appendedForPosition": 3,
+    "boneCorrespondence": {
+      "1": 6,
+      "3": 140,
+      "4": 184,
+      "5": 5,
+      "6": 228,
+      "7": 229,
+      "8": 4
+    },
+    "appendedForDistinctNativeVertices": 1,
+    "maxTriangleUvComponentError": 5.960464477539063e-08,
+    "originalAttributeBytesUnchanged": true,
+    "originalGlb": "b1f9d78053c0e36c966502847c0a90688307a3d98808db93ff8465a620e6e883",
+    "candidateInputHashes": {
+      "POSITION": "ba3a8b490929f76e5033d9884fe9070b5fe25c9058dee0ee4c159f6bb7df38a8",
+      "NORMAL": "b0b98dd8b2e2285353ace6c7d5acd99e2659611b91ed2c7ed3de7e3c76121c22",
+      "TEXCOORD_0": "6b25b0c94baaaa9fd2d0ca21701874124fd39f6de08eafa3408ab1f1a12ca8d9",
+      "TEXCOORD_1": "74a98a2a7f54f99b675e7e1c9a27838d6455f14e3d8b594aa245305d4bcd247f",
+      "JOINTS_0": "3f9e8cebef06037328ea0473529ddea3e7fdc9a0e4a5d7939fc7b4649aa10523",
+      "WEIGHTS_0": "e6d5ccd67a260e2a900df0668e995c8fb806df49807a64658bbd4d648d10dcd4",
+      "TANGENT": "19f49cfa4fee7a8cceba9738d5d361a08a59bd5b3b556311abd5aaecd862c8eb",
+      "INDICES": "87c327a77ccb0d50f38bb087d8682aab02dd603ec88e75d3cc7f2db813e073c4"
+    },
+    "originalWeightCodes": {
+      "65534": 354,
+      "65535": 2517,
+      "65536": 418
+    },
+    "serializedBytes": 29371852,
+    "serializedSha256": "7775d3c775a5446211850f9193460b58b478e419a6ee3d76fd78b3b2ab5de24b",
+    "preservedOriginalBufferBytes": 26733248,
+    "untouchedAnimationCount": 10,
+    "untouchedSkinCount": 1
+  },
+  "fixtureDependencies": {
+    "count": 166,
+    "bytes": 176302389,
+    "sources": {
+      "project": "fc4f59e1ac132cac099346a629e4fa5ce941b8aae1cdd3f25939d664264b7188",
+      "dynamicLevel": "dbc1f99b05fcef84fc4bc3a9285f36072a1bb91fbb8df81bf59ba4840a0749d3",
+      "isolatedLevel": "bdb2f0dadbf2c6b73c6470a18d7552e124840268c24c97892a2205fc35b994e7",
+      "originalAsset": "b1f9d78053c0e36c966502847c0a90688307a3d98808db93ff8465a620e6e883",
+      "candidateAsset": "7775d3c775a5446211850f9193460b58b478e419a6ee3d76fd78b3b2ab5de24b"
+    }
+  },
+  "motion": {
+    "status": "measured CPU deformation from serialized native-precision glTF; Player validation pending",
+    "asset": "7775d3c775a5446211850f9193460b58b478e419a6ee3d76fd78b3b2ab5de24b",
+    "poses": 70,
+    "seams": 245,
+    "worstShift": {
+      "clip": "a_actor_lady_walk_start_l_0_r",
+      "time": 1.6833332777023315,
+      "newDegenerate": 0,
+      "newlyDegenerateVsNormalized": 0,
+      "maxShiftM": 4.516593985949659e-05,
+      "maxSeamM": 0.0,
+      "maxSeamIncreaseM": 0.0,
+      "pointMaxShift": 1749,
+      "worstSeam": [
+        295,
+        299
+      ]
+    },
+    "largestSeam": {
+      "clip": "a_actor_laevat_uiteam_idle_01",
+      "time": 0.01666666753590107,
+      "newDegenerate": 0,
+      "newlyDegenerateVsNormalized": 0,
+      "maxShiftM": 2.2793174265808012e-05,
+      "maxSeamM": 0.0,
+      "maxSeamIncreaseM": 0.0,
+      "pointMaxShift": 3201,
+      "worstSeam": [
+        295,
+        299
+      ]
+    },
+    "worstSeamIncrease": {
+      "clip": "a_actor_laevat_uiteam_idle_01",
+      "time": 0.01666666753590107,
+      "newDegenerate": 0,
+      "newlyDegenerateVsNormalized": 0,
+      "maxShiftM": 2.2793174265808012e-05,
+      "maxSeamM": 0.0,
+      "maxSeamIncreaseM": 0.0,
+      "pointMaxShift": 3201,
+      "worstSeam": [
+        295,
+        299
+      ]
+    },
+    "newDegenerate": 0,
+    "newlyDegenerateVsNormalized": 0
+  },
+  "archive": {
+    "sha256": "2b7db538139830676b7fc5c5a02327dc2095012ac96759e820ff3fa15677efd1",
+    "members": {
+      "animated-body-native-rig-original-weight-codes.json": "176a84b5a8d52159b5fd6475857ec70a28ec928385451ecb561fc98dd23a9e62",
+      "animated-body-serialized-native-weight-clips.json": "4c9835cc2545effd99f50ca5997f7394ea21894eeaa578049fcdd96e9f5569f3",
+      "animated-body-native-weights-fixture.json": "49b02e3d679b199d85289380863a2c0d133debeeb2f5474c808307738ede0f92",
+      "archive-animated-native-weight-candidate.py": "0b3a8daef631bf5299fa7179f2efc337a77e6f6bd55fc6ddc1612e41849f31f7",
+      "build-animated-body-topology-candidate.py": "c040a3f8746d701802af0871d595f811b47ed6972951a00bc70222616d2481ce",
+      "score-serialized-native-body-animated-weights.py": "eb8dabb34e5987b02a3d0d332938d104db68d2c80ebbbb8bd1ef16a92a93d2c8",
+      "score-animated-body-topology-deformation.py": "6d7d7939ad62ac88a383e9543b613d0ae6c4d6125818f529023347013610bd97",
+      "plan-animated-body-topology-fixture.py": "c3279b673c874f0fe14cd12e377d24dcd4742fad802b2b5b59dfb35a717c9562",
+      "run-animated-body-topology-fixture.py": "bb017b4492fc9b5fa36f4050ee7633c4c63acd327d2987236b53839f01dc9339"
+    }
+  }
+}

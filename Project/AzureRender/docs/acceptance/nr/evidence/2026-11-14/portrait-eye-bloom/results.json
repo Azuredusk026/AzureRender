@@ -1,0 +1,49 @@
+{
+  "nvidia": {
+    "referenceSha256": "a5741544d3be8c0aab82bfb3a09239354f57a5cf9ad9cfb5e55676600c4ae81a",
+    "world": {
+      "sha256": "368360534cdf731101794b4af511e91773b6d62ade57cf9203af1ec37767c0cb",
+      "overOne": 418,
+      "maximum": 90,
+      "peakBlue": 109
+    },
+    "bloomDisabled": {
+      "sha256": "de7ea097122de79a2c5aa28571c7c2f5918d91fc6830cee7e22d9cbe6a36afad",
+      "overOne": 0,
+      "maximum": 1,
+      "peakBlue": 19
+    },
+    "isolated": {
+      "sha256": "b4faa0fa3d806b16b12d31234a1eb3082df4eddea730fb96e8fb9a3066e18eeb",
+      "overOne": 0,
+      "maximum": 0,
+      "peakBlue": 19
+    }
+  },
+  "intel": {
+    "referenceSha256": "a5741544d3be8c0aab82bfb3a09239354f57a5cf9ad9cfb5e55676600c4ae81a",
+    "world": {
+      "sha256": "7455d13bda68b4ae8e42280b2c5b2f5ae8d3b1baee4c1fdd8582fb66ffe9f0a6",
+      "overOne": 415,
+      "maximum": 90,
+      "peakBlue": 109
+    },
+    "bloomDisabled": {
+      "sha256": "063d46c5ca9f376a78d4cf11998106af36e71aaaf46d3d5ca32c84c3a9074604",
+      "overOne": 7,
+      "maximum": 13,
+      "peakBlue": 19
+    },
+    "isolated": {
+      "sha256": "b4faa0fa3d806b16b12d31234a1eb3082df4eddea730fb96e8fb9a3066e18eeb",
+      "overOne": 0,
+      "maximum": 0,
+      "peakBlue": 19
+    }
+  },
+  "overallStatus": "failed-user-review",
+  "archive": {
+    "members": 10,
+    "sha256": "70cd484aadc371dbc067f514ca52514df221ec03f1489228673c92a73cd2e835"
+  }
+}

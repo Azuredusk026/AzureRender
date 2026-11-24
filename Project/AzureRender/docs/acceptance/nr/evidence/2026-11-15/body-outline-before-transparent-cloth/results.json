@@ -1,0 +1,478 @@
+{
+  "status": "measured-native-transparent-primitive-order",
+  "nativeThreshold": "unchanged",
+  "source": {
+    "original": "0fa4c4e28ee6eeb16aec32a4470e546f5881889dfaf2708d63e10a93c2082516",
+    "candidate": "a183a03f38d40bc16a954aab92ed4f93f3171f1c54231ae989f9aefa1e2d2605",
+    "parent": "chr_0016_laevat_postmodel",
+    "outline": 331,
+    "cloth": 316,
+    "previousChildren": [
+      313,
+      314,
+      315,
+      316,
+      317,
+      318,
+      319,
+      320,
+      321,
+      322,
+      323,
+      324,
+      325,
+      312,
+      331
+    ],
+    "currentChildren": [
+      331,
+      313,
+      314,
+      315,
+      316,
+      317,
+      318,
+      319,
+      320,
+      321,
+      322,
+      323,
+      324,
+      325,
+      312
+    ],
+    "originalBytes": 95962077,
+    "candidateBytes": 95962077
+  },
+  "reference": "48afd6546c23cfa85099a765cc94ada4813a684538c695faf6d70d6daf2261b5",
+  "devices": {
+    "nvidia": {
+      "frame": "87ceab9ca80473c86708c15f95f8e831b6d1179a23de36061b638a2c169b6993",
+      "original": "9677c040c5498bd3d1f60a7f73413a6b998fc178bdfae62e2cb60dc09e264b8b",
+      "metrics": {
+        "all": {
+          "count": 1184,
+          "changed": 56,
+          "overOne": [
+            1122,
+            1113
+          ],
+          "overEight": [
+            113,
+            62
+          ],
+          "peak": [
+            75,
+            55
+          ]
+        },
+        "outline": {
+          "count": 1112,
+          "changed": 0,
+          "overOne": [
+            1052,
+            1052
+          ],
+          "overEight": [
+            48,
+            48
+          ],
+          "peak": [
+            20,
+            20
+          ]
+        },
+        "cloth": {
+          "count": 57,
+          "changed": 56,
+          "overOne": [
+            57,
+            48
+          ],
+          "overEight": [
+            56,
+            5
+          ],
+          "peak": [
+            75,
+            24
+          ]
+        }
+      },
+      "changedOutside": 0,
+      "newOverOne": 0,
+      "probes": [
+        {
+          "point": [
+            1252,
+            839
+          ],
+          "reference": [
+            139,
+            83,
+            109
+          ],
+          "default": [
+            82,
+            67,
+            67
+          ],
+          "ordered": [
+            140,
+            83,
+            108
+          ],
+          "peak": [
+            57,
+            1
+          ],
+          "simulatedNativeClothOnControl": [
+            140,
+            83,
+            109
+          ]
+        },
+        {
+          "point": [
+            1255,
+            837
+          ],
+          "reference": [
+            131,
+            70,
+            99
+          ],
+          "default": [
+            69,
+            35,
+            24
+          ],
+          "ordered": [
+            132,
+            70,
+            98
+          ],
+          "peak": [
+            75,
+            1
+          ],
+          "simulatedNativeClothOnControl": [
+            132,
+            71,
+            99
+          ]
+        },
+        {
+          "point": [
+            1152,
+            797
+          ],
+          "reference": [
+            134,
+            67,
+            88
+          ],
+          "default": [
+            70,
+            38,
+            29
+          ],
+          "ordered": [
+            130,
+            65,
+            87
+          ],
+          "peak": [
+            64,
+            4
+          ],
+          "simulatedNativeClothOnControl": [
+            135,
+            67,
+            88
+          ]
+        },
+        {
+          "point": [
+            1234,
+            789
+          ],
+          "reference": [
+            119,
+            49,
+            62
+          ],
+          "default": [
+            82,
+            43,
+            61
+          ],
+          "ordered": [
+            82,
+            43,
+            61
+          ],
+          "peak": [
+            37,
+            37
+          ],
+          "simulatedNativeClothOnControl": [
+            120,
+            46,
+            64
+          ]
+        },
+        {
+          "point": [
+            1258,
+            971
+          ],
+          "reference": [
+            95,
+            88,
+            90
+          ],
+          "default": [
+            99,
+            88,
+            89
+          ],
+          "ordered": [
+            99,
+            88,
+            89
+          ],
+          "peak": [
+            4,
+            4
+          ]
+        }
+      ]
+    },
+    "intel": {
+      "frame": "6f133cc93ac4edb5309c5c852c22eee8ec8e05cb48070d49c980b343d7cfac47",
+      "original": "d9e4765f29878ee57f4330a5403ce44bd6d726fdb22f9a8aed08b115c78cb8b9",
+      "metrics": {
+        "all": {
+          "count": 1184,
+          "changed": 56,
+          "overOne": [
+            1122,
+            1116
+          ],
+          "overEight": [
+            114,
+            63
+          ],
+          "peak": [
+            75,
+            55
+          ]
+        },
+        "outline": {
+          "count": 1112,
+          "changed": 0,
+          "overOne": [
+            1052,
+            1052
+          ],
+          "overEight": [
+            49,
+            49
+          ],
+          "peak": [
+            21,
+            21
+          ]
+        },
+        "cloth": {
+          "count": 57,
+          "changed": 56,
+          "overOne": [
+            57,
+            51
+          ],
+          "overEight": [
+            56,
+            5
+          ],
+          "peak": [
+            75,
+            24
+          ]
+        }
+      },
+      "changedOutside": 0,
+      "newOverOne": 0,
+      "probes": [
+        {
+          "point": [
+            1252,
+            839
+          ],
+          "reference": [
+            139,
+            83,
+            109
+          ],
+          "default": [
+            82,
+            67,
+            67
+          ],
+          "ordered": [
+            141,
+            83,
+            108
+          ],
+          "peak": [
+            57,
+            2
+          ],
+          "simulatedNativeClothOnControl": [
+            140,
+            83,
+            109
+          ]
+        },
+        {
+          "point": [
+            1255,
+            837
+          ],
+          "reference": [
+            131,
+            70,
+            99
+          ],
+          "default": [
+            70,
+            34,
+            24
+          ],
+          "ordered": [
+            133,
+            70,
+            98
+          ],
+          "peak": [
+            75,
+            2
+          ],
+          "simulatedNativeClothOnControl": [
+            132,
+            71,
+            99
+          ]
+        },
+        {
+          "point": [
+            1152,
+            797
+          ],
+          "reference": [
+            134,
+            67,
+            88
+          ],
+          "default": [
+            70,
+            38,
+            29
+          ],
+          "ordered": [
+            130,
+            66,
+            87
+          ],
+          "peak": [
+            64,
+            4
+          ],
+          "simulatedNativeClothOnControl": [
+            135,
+            67,
+            88
+          ]
+        },
+        {
+          "point": [
+            1234,
+            789
+          ],
+          "reference": [
+            119,
+            49,
+            62
+          ],
+          "default": [
+            83,
+            43,
+            61
+          ],
+          "ordered": [
+            83,
+            43,
+            61
+          ],
+          "peak": [
+            36,
+            36
+          ],
+          "simulatedNativeClothOnControl": [
+            120,
+            46,
+            64
+          ]
+        },
+        {
+          "point": [
+            1258,
+            971
+          ],
+          "reference": [
+            95,
+            88,
+            90
+          ],
+          "default": [
+            99,
+            87,
+            89
+          ],
+          "ordered": [
+            99,
+            87,
+            89
+          ],
+          "peak": [
+            4,
+            4
+          ]
+        }
+      ]
+    }
+  },
+  "archive": {
+    "sha256": "eaddcd8b7e9def872b06cbf445ea5dfabf67f09761fa21c2758ee8617a4878bd",
+    "members": {
+      "body-outline-before-transparent-cloth.py": "4da3a9a155644b4cffcf369650eaeb0aaeaca48f875bfc49b11469699d44f917",
+      "archive-body-outline-before-cloth.py": "42cd455d5e24fc942a1d20b124cd444eaa2bf9144a0032bcc89f51ce206c1977",
+      "body-outline-before-transparent-cloth/preflight.json": "711d15bd59d802a862395e3d9c29c3435e1c78a8d4abb4db3502a1b3cd060811",
+      "body-outline-before-transparent-cloth/results.json": "b52b7b478d3e27c53946f2a1f4dbb24ca8ba58e4b71477b961da3bba813e8d24",
+      "body-outline-before-transparent-cloth/nvidia/receipt.json": "74da323e81576b78150594ecda571def753e7df6d253d07c8c0b6a608360e618",
+      "body-outline-before-transparent-cloth/nvidia/command.json": "e786f7d056b4cc09582b3ad59f3334dcf471221785c3994905b23386479efa01",
+      "body-outline-before-transparent-cloth/nvidia/runtime.json": "fd2c9542b76bf80901952afda0ba6bd0dac184828575b75c695e7c7c1c16b4ec",
+      "body-outline-before-transparent-cloth/nvidia/player.log": "409e0520a45f5cdf0617601ad25f2479072269ccc5a827f4ef5d1fdf4ad1fab9",
+      "body-outline-before-transparent-cloth/nvidia/frames/capture_manifest.json": "054bb8de6d9c1d7718acddaf10322816112f6d17694df2a78aa684461af0c474",
+      "body-outline-before-transparent-cloth/nvidia/frames/gpu_capabilities.json": "93c9fb29461fae11a7e57d4e49112071a71940dee571f1f6696ffbf03c392879",
+      "body-outline-before-transparent-cloth/intel/receipt.json": "ec59d5daaec25d9cd1d314f985edf1d8561c3ebea103bef3635301292a08643d",
+      "body-outline-before-transparent-cloth/intel/command.json": "f87f81276b5e17e7280ff9923d93ed7bb4f422e4c9662f997600fd0713205aa4",
+      "body-outline-before-transparent-cloth/intel/runtime.json": "fd2c9542b76bf80901952afda0ba6bd0dac184828575b75c695e7c7c1c16b4ec",
+      "body-outline-before-transparent-cloth/intel/player.log": "a7a238ca7000cd6f067e8cda5ba6edd7f3455d5b8fb67d21e610d237a205dc56",
+      "body-outline-before-transparent-cloth/intel/frames/capture_manifest.json": "b30a905dd83cf90ad1c2385dc7f9407be52bb5e1adee22c74b51d0808022121f",
+      "body-outline-before-transparent-cloth/intel/frames/gpu_capabilities.json": "a38eaca3509b417cfe23614fe415bd9ccc5622fc682d8623142cdeb7dc3d85cc"
+    }
+  },
+  "overall": "failed-user-review"
+}

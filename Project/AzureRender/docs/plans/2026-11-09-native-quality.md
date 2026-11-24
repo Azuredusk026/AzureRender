@@ -164,6 +164,7 @@ Intel 的冻结可见量和颜色分别核对设备输入。
 [项目参考可见量算术](../acceptance/nr/project-reference-visibility-profile.md)核对编辑器、Player 和发布配置。
 完整接收分别核对事件 377 的法线与事件 422 的深度。
 Intel 头发颜色继续核对纹理梯度与层级选择。
+[原生头发显式层级](../acceptance/nr/evidence/2026-11-15/native-hair-hardware-explicit-levels/results.json)在两块显卡上核对五个相同图元位置。两处基色及法线层级不同，另外两处层级一致并保留颜色差异。
 
 [原生接收输入来源](../acceptance/nr/native-receiver-producer-replay.md)记录服饰双通道法线和头发外扩写入。
 参考场景外扩深度与服饰法线分别进入生产验证。
@@ -171,6 +172,46 @@ Intel 头发颜色继续核对纹理梯度与层级选择。
 [参考头发近邻层级](../acceptance/nr/reference-hair-mip-boundary.md)完成双配置、双设备和原始四帧回归。NVIDIA 的冻结头发可见量及 RGB 全部满足一字节门槛。Intel 分别有 111 处和 568 处超差，完整接收有 494 处超差。接收附件和着色阶段的纹理采样继续按原门槛核对。
 
 [投影头发主纹理层级](../acceptance/nr/projected-hair-point-mip.md)完成材质接入及生产回归。NVIDIA 冻结 RGB 逐通道满足一字节门槛，Intel 有 32 处超差。剩余颜色、参考可见量和体表法线按实际光栅输入继续核对。
+
+[头发光栅量化与体表法线](../acceptance/nr/reference-raster-source.md)完成两项双设备来源对照。量化对照定位到顶点精度传播，后续隔离量化运算。体表对照确认采样后法线重建的影响，接收深度、法线和图集继续独立核对。
+
+[量化精度隔离与接收输入](../acceptance/nr/reference-raster-isolated.md)核对双设备整帧，Intel 冻结 RGB 有 31 处超差，区域外变化均在一字节内。原生深度、法线和图集的联合输入通过接收门槛，生产输入及共同图元继续验收。
+
+[投影头发参考光栅网格](../acceptance/nr/projected-hair-reference-grid.md)完成可选材质路径的回归。
+全身虹膜和生产接收继续按各自门槛验收。
+
+[虹膜覆盖来源](../acceptance/nr/iris-native-overlay.md)核对原生覆盖对 94 个虹膜位置的影响。
+头部平面主光下的双设备配对采集确认实际眼影覆盖与原生一致，最终虹膜仍分别有 22 处和 30 处超过一字节。
+
+[角色动态重开](../acceptance/nr/evidence/2026-11-15/current-joint-character-reopen/results.json)在 NVIDIA 595.79 下验证已保存场景、11 个动画实例及四个连续采集时点。四帧对旧驱动保留画面分别有 28、48、56、62 处超过一字节，原生连续画面验收保持开放。
+
+[固定姿态眼部阴影几何](../acceptance/nr/iris-overlay-geometry.md)通过双设备虹膜区域门槛，逐像素遮挡与乘色继续验收。
+[虹膜反射贴图梯度](../acceptance/nr/evidence/2026-11-15/iris-vulkan-matcap-gradients/results.json)核对 255 个 Vulkan 样本及原生层级。两种梯度分别在不同位置匹配原生第 7 级，眼部完整颜色继续验收。
+
+[眼部阴影纹理与遮挡](../acceptance/nr/iris-overlay-source.md)核对原生纹理、乘色及完整几何覆盖。
+
+[体表法线原生选层](../acceptance/nr/native-body-explicit-mips.md)核对体表实际选层与解码。
+生产可见量及共同图元按原门槛继续验收。
+
+[体表接收法线小数精度](../acceptance/nr/body-fractional-normal.md)核对生产 Player 及新增可见量超差。
+[体表接收分项](../acceptance/nr/evidence/2026-11-15/body-receiver-operands/results.json)复算 9,116 处深度、法线和图集的作用。原生三项输入在两设备上均进入一字节门槛，生产接收保持待通过。
+
+[体表固定层级与图集纹素](../acceptance/nr/evidence/2026-11-15/body-receiver-normal-and-atlas/results.json)核对 11 层法线和 5 个图集纹素。原生头发写入其中 4 个，衣料写入 1 个。原生片元深度及 Vulkan 图集硬件读回确认五处相差一个 D16 单位。
+
+[虹膜原生硬件梯度](../acceptance/nr/evidence/2026-11-15/iris-native-derivative-lanes/results.json)读回 255 处采样导数。粗粒度计算分别匹配 NVIDIA 的 247 处和 Intel 的全部 255 处。
+[脸部染色与固定环境光](../acceptance/nr/evidence/2026-11-15/face-tint-and-fixed-ambient/results.json)核对六处原生脸部片元和对应照明输入。中庭体积辐照继续按独立场景门槛验收。
+
+[正式遮罩与最近深度发影](../acceptance/nr/evidence/2026-11-15/face-public-mask-and-nearest-shade/results.json)的双设备联合复测各有 34 处脸部像素变化，完整脸部新增超差及脸部范围外变化均为零。两块显卡共有 49 处超过八个色阶的不透明脸缘像素，后续按原生绘制 804 核对。
+
+[冻结四帧差异位置](../acceptance/nr/evidence/2026-11-15/frozen-cross-driver-spatial/results.json)记录天花板区域及高差位置。原始四帧仍按 RGB 零差验收。
+
+[体表描边视口原点](../acceptance/nr/evidence/2026-11-15/body-outline-window-origin/results.json)复现 105 处原生整数取样地址。
+
+[描边与透明衣料提交顺序](../acceptance/nr/evidence/2026-11-15/body-outline-before-transparent-cloth/results.json)完成双设备复测，衣料覆盖区超过八个色阶的像素均由 56 降至 5。覆盖区外逐像素一致。
+
+[原生虹膜层级足迹](../acceptance/nr/evidence/2026-11-15/iris-native-mip-footprints/results.json)按设备的硬件匹配范围复算双设备各 255 处。对角足迹与 NVIDIA 的 255 处 Vulkan 层级查询一致，Player 严格眼部验收继续进行。
+
+[虹膜透视梯度对照](../acceptance/nr/evidence/2026-11-15/iris-projective-bare/results.json)在关闭眼影的固定姿态确认双设备接缝误差降至一个色阶，虹膜外逐像素一致。眼影开启与基色贴图选层继续按同一冻结参考复测。
 
 ## 后续外观
 
@@ -181,6 +222,34 @@ Intel 头发颜色继续核对纹理梯度与层级选择。
 执行顺序与原门禁见 `azure-engine-plan.md`。
 硬依赖以具体输入、负责人和重试条件登记。
 整体完成状态由全部适用门禁共同决定。
+
+[原生地面画面对照](../acceptance/nr/evidence/2026-11-16/joint-scene-native-floor/results.json)核对原生第 3534 帧、辐照体开关和两种屏幕反射路径。中央地面与青色环带继续按 0.95 的门槛验收。
+[投影反射射线步数](../acceptance/nr/scene-material-quality-diagnosis.md#联合场景步数对照)登记 32 步候选的双设备实际帧。中央地面中位亮度及邻区新增超差未通过，反射按历史取样坐标、深度和颜色继续验收。
+[原始反射颜色](../acceptance/nr/evidence/2026-11-16/projected-reflection-shared-hits/results.json)按深度配准区分命中覆盖与共同命中处的颜色误差，用于选择地面反射的后续修复。
+[区域历史取样](../acceptance/nr/evidence/2026-11-20/reflection-regional-cross-address/README.md)复算两区的历史地址和时间增量。最近深度对照记录单帧采用判定。
+[半分辨率深度对照](../acceptance/nr/evidence/2026-11-20/reflection-nearest-depth-candidate/README.md)核对搜索预算及同址深度。
+[接收法线与前景深度](../acceptance/nr/evidence/2026-11-20/reflection-surface-normal-lineage/README.md)定位大厅命中长尾及参考输入条件。
+
+角色固定姿态按[脸部与体表区域验收](../acceptance/nr/face-skin-color-sources.md)记录纹理、照明、描边和透明衣料的来源。
+[固定姿态网格与轮廓](../acceptance/nr/evidence/2026-11-15/fixed-pose-face-and-body-geometry/results.json)核对身体顶点、脸部索引和同机位的覆盖复算。固定姿态的剩余色差及六视图按各自门槛验收。
+[虹膜眼影覆盖](../acceptance/nr/evidence/2026-11-16/iris-projective-covered/results.json)及[原生体表法线取样](../acceptance/nr/evidence/2026-11-16/native-body-normal-raw-samples/results.json)完成双设备实测，完整颜色及可见量继续按原门槛验收。
+[固定姿态材质对照](../acceptance/nr/evidence/2026-11-16/fixed-pose-material-controls/results.json)保存身体主光、衣料和脸部漫反射的实机结果。生产颜色门槛包含可见区域与邻区的新增超差。
+[双层衣料与覆盖](../acceptance/nr/evidence/2026-11-16/native-two-cloth-overlay-controls/results.json)核对两个原生绘制与定向衣料合成，覆盖及新增误差按原门槛验收。
+[动态角色网格](../acceptance/nr/full-body-native-comparison.md#动态角色网格)记录身体与脸部的原生索引和静止顶点对照。身体候选按动态轮廓、接缝及双设备画面验收。
+[完整皮肤区域对照](../acceptance/nr/evidence/2026-11-15/body-skin-coverage-composition/results.json)按原生绘制归属核对 47,458 个位置。描边局部光通过双设备区域结构相似度和中位亮度门槛，完整颜色继续按一字节门槛验收。
+[描边径向参考点](../acceptance/nr/evidence/2026-11-15/body-outline-native-rim-origin/results.json)通过双设备姿态实测，覆盖之外逐像素一致。描边保留区在 NVIDIA 和 Intel 上分别有 48 和 49 处超过八个色阶。
+
+[描边阴影查找表](../acceptance/nr/evidence/2026-11-16/body-outline-native-shadow-response/results.json)核对原生纹理与四个片元的漫反射响应。两设备分别有 20 和 15 处新增超差，完整画面继续按原门槛验收。
+
+[第一层衣料描边网格](../acceptance/nr/evidence/2026-11-15/native-cloth-one-outline-topology/results.json)核对原生绘制 1079 的直接位置、投影偏移和三角形对应关系。20 个皮肤像素与待核对三角形相交，按原生片元继续复测。
+
+[衣料覆盖照明](../acceptance/nr/evidence/2026-11-15/body-late-cloth-native-components/results.json)核对原生四个硬件片元。两处峰差的原生红通道以主光漫反射为主，独立衣料夹具与描边配置继续联合复测。
+
+[脸部正式材质对照](../acceptance/nr/evidence/2026-11-15/public-face-receiver-depth-and-mask/results.json)核对距离场遮罩选层、发影最近片元乘色与同驱动默认四帧。全脸一字节门槛和原始冻结参考保持开放。
+脸部按主光饱和度、视角染色与局部灯光分项核对。
+眼周及发影覆盖按接收类别、遮挡和线性颜色分项核对。
+近景眼部按[乘色与泛光对照](../acceptance/nr/eye-multiply-receiver.md)核对覆盖及颜色。
+冻结四帧保留 592.82 参考，现用驱动的同环境回归单独记录。
 
 ## 公共输出精度
 
@@ -358,3 +427,39 @@ NVIDIA 头发区域有 277 处超差，Intel 有 428 处。
 [原生对象记录标定](../acceptance/nr/native-object-record-calibration.md)使用原生投影和灯向。
 NVIDIA 头发区域与图集单项对照在一字节内一致。
 当前图集和完整颜色继续按原门槛验收。
+
+[反射法线存储域](../acceptance/nr/evidence/2026-11-21/reflection-normal-storage-domain/README.md)核对量化范围和实际材质绑定。
+两区方向差异继续核对几何基底与材质法线的贡献。
+
+[反射几何法线候选](../acceptance/nr/evidence/2026-11-21/reflection-geometric-normal-candidate/README.md)完成控制、成片及恢复核验。
+中央地面 SSIM 为 0.83670，环带为 0.75535。
+两区与邻区门槛未通过，匹配输入及冻结环境继续待验。
+
+[检修站反射法线对照](../acceptance/nr/evidence/2026-11-21/original-normal-contract/README.md)通过冻结输入与实际绑定核对。
+几何法线保留右侧 97 个命中，历史接收仍为零。
+统一几何法线候选淘汰，匹配输入及冻结环境继续待验。
+
+[检修站法线与历史交叉对照](../acceptance/nr/evidence/2026-11-21/original-normal-history-cross/README.md)通过六条实际 GPU 路径。
+三种法线均恢复运动反射，错误深度控制均与原路径一致。
+生产采用继续等待匹配输入及 592.82 冻结环境。
+
+[检修站边缘历史拒绝](../acceptance/nr/evidence/2026-11-21/original-history-edge-rejection/README.md)闭合倾斜路径的单点差异。
+87 个命中包含 86 个有效历史接收和一次背景拒绝。
+世界位置误差约 4.092 米，原拒绝门槛保持有效。
+
+[运动反射生产接入](../acceptance/nr/evidence/2026-11-24/motion-history-production/README.md)通过主配置与实际 Player 配对。
+按 F 的第 4 帧恢复反射，无输入十二帧精确一致。
+动态、法线及双配置回归见[接入计划](../plans/2026-11-24-original-reflection-production.md)。
+匹配参考输入及 592.82 四帧按用户授权延期。
+
+[默认法线来源契约](../acceptance/nr/evidence/2026-11-24/normal-texture-provenance/README.md)通过实际附件与双配置资产检查。
+无贴图的 97 个接收点方向误差为零，显式贴图保留解码。
+光栅化和路径追踪共享来源语义，材质表为版本 23。
+
+[原创反射集中回归](../acceptance/nr/evidence/2026-11-24/final-original-reflection/README.md)通过双配置和双设备检查。
+14 项 CPU、20 条反射路径及 24 项材质视图检查通过。
+十二次 Player 启动和同一路径重开通过，双设备短测满足预算。
+
+[原创反射交付](../acceptance/nr/2026-11-24-original-reflection-delivery.md)完成本轮可执行自动验收。
+运动历史、默认法线、双配置双设备及短测均通过。
+人工项登记为待人工复验，参考输入与 592.82 专项延期。
